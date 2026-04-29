@@ -1,0 +1,13 @@
+2026-03-05T05:54:15.348Z [DEBUG] MDM settings load completed in 0ms
+2026-03-05T05:54:15.352Z [DEBUG] [init] configureGlobalMTLS starting
+2026-03-05T05:54:15.352Z [DEBUG] [init] configureGlobalMTLS complete
+2026-03-05T05:54:15.352Z [DEBUG] [init] configureGlobalAgents starting
+2026-03-05T05:54:15.352Z [DEBUG] [init] configureGlobalAgents complete
+2026-03-05T05:54:15.353Z [ERROR] Failed to save config with lock: Error: EPERM: operation not permitted, rmdir 'mnt/.claude/.claude.json.lock'
+2026-03-05T05:54:15.358Z [DEBUG] Git remote URL: null
+2026-03-05T05:54:15.358Z [DEBUG] No git remote URL found
+2026-03-05T05:54:15.685Z [DEBUG] SSH config check: code=255 configured=false
+2026-03-05T05:54:15.685Z [INFO] SSH not configured for GitHub, using HTTPS for anthropics/knowledge-work-plugins
+2026-03-05T05:54:15.686Z [DEBUG] git pull: cwd=mnt/.claude/cowork_plugins/marketplaces/anthropics-knowledge-work-plugins ref=default
+2026-03-05T05:54:15.690Z [WARN] git pull failed, will re-clone:
+2026-03-05T05:54:15.690Z [DEBUG] git clone: url=https://github.com/anthropics/knowledge-work-plugins.git ref=default timeout=120000ms

@@ -1,18 +1,31 @@
-# Meeting SDK iOS Guide
+# iOS Video SDK Overview
 
-## Scope
+## What this platform skill is for
 
-iOS Meeting SDK integration for init/auth, default/custom UI, meeting join/start, and in-meeting features.
+- Building custom iOS video experiences with UIKit or SwiftUI
+- Managing session state with tokenized join and event callbacks
+- Supporting camera, mic, share, chat, and optional advanced media flows
 
-## Validation Snapshot
+## Primary implementation path
 
-- Docs coverage includes: setup/get-started, default UI and custom UI feature tracks, PKCE/start/join/auth, FAQ/error-code pages.
-- API reference snapshot includes class/protocol maps, file references, and member lists.
-- Local package checked: `zoom-sdk-ios-6.7.5.33005` with `MobileRTCSample` and Objective-C sample presenters.
+1. Backend generates short-lived Video SDK token.
+2. App initializes Video SDK and registers delegates.
+3. App joins session with user identity + token.
+4. App maps participant/media delegate events to UI state.
+5. App handles leave/disconnect with explicit cleanup.
 
-## Practical Guidance
+## Prerequisites
 
-1. Achieve stable default UI join path first.
-2. Add host-start and advanced features after baseline is stable.
-3. Move to custom UI only where UX requires it.
-4. Add explicit permission and audio route diagnostics.
+- iOS project with Video SDK binary integration
+- Backend service for token generation
+- Permissions handling for camera/mic
+
+## Important notes
+
+- Keep SDK key/secret on backend only.
+- Prefer a deterministic session state machine to avoid UI desync.
+
+## Source links
+
+- Docs: https://developers.zoom.us/docs/video-sdk/ios/
+- API reference: https://marketplacefront.zoom.us/sdk/custom/ios/annotated.html

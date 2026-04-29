@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOIZY.AI Ecosystem Command Center</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #0f3460;
+            --highlight: #e94560;
+            --success: #00d4aa;
+            --warning: #ffc107;
+            --light: #f8f9fa;
+            --dark: #0a0a14;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 50%, var(--secondary) 100%);
+            min-height: 100vh;
+            color: var(--light);
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #fff, var(--highlight), #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            letter-spacing: -2px;
+        }
+
+        .header .tagline {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.7);
+            font-style: italic;
+        }
+
+        .header .philosophy {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(233, 69, 96, 0.1);
+            border: 1px solid var(--highlight);
+            border-radius: 12px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .header .philosophy blockquote {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--highlight);
+            box-shadow: 0 20px 40px rgba(233, 69, 96, 0.2);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .card h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .card h3 {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.5);
+            font-weight: 400;
+        }
+
+        .brand-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .brand-item {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .brand-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .brand-item .name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .brand-item .role {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .brand-item.mothership {
+            grid-column: span 2;
+            background: linear-gradient(135deg, var(--highlight), #ff6b8a);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-active { background: var(--success); color: var(--dark); }
+        .status-planning { background: var(--warning); color: var(--dark); }
+        .status-vision { background: var(--accent); color: white; }
+
+        .research-list {
+            list-style: none;
+        }
+
+        .research-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .research-item:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        .research-code {
+            font-family: monospace;
+            background: var(--accent);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .journey-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            position: relative;
+        }
+
+        .journey-flow::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--highlight), var(--success));
+            z-index: 0;
+        }
+
+        .journey-step {
+            text-align: center;
+            z-index: 1;
+            background: var(--primary);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .journey-step .number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--highlight), #ff6b8a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 0 auto 8px;
+        }
+
+        .journey-step .label {
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .journey-step .sublabel {
+            font-size: 0.65rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .catalog-section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .catalog-type {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .catalog-type .icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .catalog-type .name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .digital-assets {
+            display: grid;
+            gap: 8px;
+        }
+
+        .asset-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 12px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+
+        .asset-item a {
+            color: var(--highlight);
+            text-decoration: none;
+        }
+
+        .asset-item a:hover {
+            text-decoration: underline;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .motto {
+            text-align: center;
+            padding: 30px;
+            margin-top: 30px;
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--highlight), var(--success), var(--highlight));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 4px;
+        }
+
+        .memory-files {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 8px;
+            font-size: 0.8rem;
+        }
+
+        .memory-file {
+            padding: 8px 12px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 6px;
+            font-family: monospace;
+            color: var(--success);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+        }
+
+        .stat-box .number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--highlight);
+        }
+
+        .stat-box .label {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2rem; }
+            .dashboard { grid-template-columns: 1fr; }
+            .brand-grid { grid-template-columns: 1fr; }
+            .brand-item.mothership { grid-column: span 1; }
+            .journey-flow { flex-direction: column; gap: 20px; }
+            .journey-flow::before { display: none; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>NOIZY.AI</h1>
+        <p class="tagline">The Music & Sound & Film Dreamspace</p>
+        <div class="philosophy">
+            <blockquote>
+                "People need to know <strong>WHY & WHO</strong> created what that sound was, so they can be <strong>FREE TO THINK WHERE IT WILL GO.</strong>"
+            </blockquote>
+        </div>
+    </header>
+
+    <div class="dashboard">
+        <!-- Ecosystem Brands -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon" style="background: linear-gradient(135deg, var(--highlight), #ff6b8a);">🌐</div>
+                <div>
+                    <h2>The Ecosystem</h2>
+                    <h3>Domains & Brands</h3>
+                </div>
+            </div>
+            <div class="brand-grid">
+                <div class="brand-item mothership">
+                    <div class="name">NOIZY.AI</div>
+                    <div class="role">THE MOTHERSHIP • DREAMSPACE</div>
+                </div>
+                <div class="brand-item">
+                    <div class="name">NOIZYLAB.CA</div>
+                    <div class="role">Tech Services • Revenue</div>
+                    <span class="status-badge status-active">Active</span>
+                </div>
+                <div class="brand-item">
+                    <div class="name">NOIZYFISH.COM</div>
+                    <div class="role">Production Studio</div>
+                    <span class="status-badge status-planning">Planning</span>
+                </div>
+                <div class="brand-item">
+                    <div class="name">FISHMUSICINC.COM</div>
+                    <div class="role">Music Publishing</div>
+                    <span class="status-badge status-planning">Planning</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- The User Journey -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon" style="background: linear-gradient(135deg, #00d4aa, #00f5c4);">✨</div>
+                <div>
+                    <h2>The Dreamspace Journey</h2>
+                    <h3>Know → Understand → Create → Dream</h3>
+                </div>
+            </div>
+            <div class="journey-flow">
+                <div class="journey-step">
+                    <div class="number">1</div>
+                    <div class="label">KNOW</div>
+                    <div class="sublabel">WHO</div>
+                </div>
+                <div class="journey-step">
+                    <div class="number">2</div>
+                    <div class="label">UNDERSTAND</div>
+                    <div class="sublabel">WHY</div>
+                </div>
+                <div class="journey-step">
+                    <div class="number">3</div>
+                    <div class="label">CREATE</div>
+                    <div class="sublabel">WHAT</div>
+                </div>
+                <div class="journey-step">
+                    <div class="number">4</div>
+                    <div class="label">DREAM</div>
+                    <div class="sublabel">WHERE</div>
+                </div>
+            </div>
+            <p style="text-align: center; font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-top: 15px;">
+                Users learn RSP → Access assets → Create sonic works → Marry with video tech → FREE TO DREAM
+            </p>
+        </div>
+
+        <!-- The Composers Vault -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon" style="background: linear-gradient(135deg, #ffc107, #ffdb58);">🎵</div>
+                <div>
+                    <h2>The Composers Vault</h2>
+                    <h3>R.S. Plowman Catalog</h3>
+                </div>
+            </div>
+            <div class="catalog-section">
+                <div class="catalog-type">
+                    <div class="icon">🎼</div>
+                    <div class="name">MUSIC</div>
+                    <div style="font-size: 0.7rem; color: rgba(255,255,255,0.5);">Compositions, Scores, Ambient</div>
+                </div>
+                <div class="catalog-type">
+                    <div class="icon">🔊</div>
+                    <div class="name">SFX</div>
+                    <div style="font-size: 0.7rem; color: rgba(255,255,255,0.5);">Sound Effects Library</div>
+                </div>
+                <div class="catalog-type">
+                    <div class="icon">🎤</div>
+                    <div class="name">VOICE</div>
+                    <div style="font-size: 0.7rem; color: rgba(255,255,255,0.5);">Spoken Word, Narration</div>
+                </div>
+            </div>
+            <p style="text-align: center; font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 15px;">
+                Ready for catalog population • Claude will learn the complete RSP catalog
+            </p>
+        </div>
+
+        <!-- Research Programs -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon" style="background: linear-gradient(135deg, #9c27b0, #e040fb);">🔬</div>
+                <div>
+                    <h2>AUDIO-HUMAN Research</h2>
+                    <h3>For the Betterment of All Humanity</h3>
+                </div>
+            </div>
+            <ul class="research-list">
+                <li class="research-item">
+                    <span class="research-code">SONIC-HEAL</span>
+                    <span>Sonic Therapy • Frequencies & Tones for Healing</span>
+                </li>
+                <li class="research-item">
+                    <span class="research-code">AUTISM-CALM</span>
+                    <span>Calming Research for Autistic Individuals</span>
+                </li>
+                <li class="research-item">
+                    <span class="research-code">SLEEP-TRAIN</span>
+                    <span>Mind Training for Calm & Sleep States</span>
+                </li>
+                <li class="research-item">
+                    <span class="research-code">AUDIO-HUMAN</span>
+                    <span>Umbrella Program • All Auditory Research</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Digital Assets -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon" style="background: linear-gradient(135deg, #2196f3, #64b5f6);">💻</div>
+                <div>
+                    <h2>Digital Infrastructure</h2>
+                    <h3>Platforms & Tools</h3>
+                </div>
+            </div>
+            <div class="digital-assets">
+                <div class="asset-item">
+                    <span>GitHub Organization</span>
+                    <a href="https://github.com/NOIZY-ai" target="_blank">github.com/NOIZY-ai</a>
+                </div>
+                <div class="asset-item">
+                    <span>Slack Workspace</span>
+                    <a href="https://noizyaiworkspace.slack.com" target="_blank">noizyaiworkspace.slack.com</a>
+                </div>
+                <div class="asset-item">
+                    <span>GBP Strategy</span>
+                    <span style="color: var(--success);">✓ Documented</span>
+                </div>
+                <div class="asset-item">
+                    <span>Memory System</span>
+                    <span style="color: var(--success);">✓ Active</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- GBP Status -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon" style="background: linear-gradient(135deg, #4caf50, #8bc34a);">📍</div>
+                <div>
+                    <h2>Google Business Profiles</h2>
+                    <h3>Local SEO Strategy</h3>
+                </div>
+            </div>
+            <div class="digital-assets">
+                <div class="asset-item">
+                    <span>NOIZYLAB.CA</span>
+                    <span class="status-badge status-active">FULLY ELIGIBLE</span>
+                </div>
+                <div class="asset-item">
+                    <span>NOIZY.AI</span>
+                    <span class="status-badge status-planning">Conditional</span>
+                </div>
+                <div class="asset-item">
+                    <span>NOIZYFISH.COM</span>
+                    <span class="status-badge status-planning">Conditional</span>
+                </div>
+                <div class="asset-item">
+                    <span>FISHMUSICINC.COM</span>
+                    <span class="status-badge status-planning">Conditional</span>
+                </div>
+            </div>
+            <p style="font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-top: 12px; text-align: center;">
+                Priority: NOIZYLAB.CA (Computer Repair = Service Area Business)
+            </p>
+        </div>
+
+        <!-- Memory System -->
+        <div class="card full-width">
+            <div class="card-header">
+                <div class="card-icon" style="background: linear-gradient(135deg, #ff5722, #ff8a65);">🧠</div>
+                <div>
+                    <h2>Memory System</h2>
+                    <h3>Nothing Lost • Everything Captured</h3>
+                </div>
+            </div>
+            <div class="memory-files">
+                <div class="memory-file">📄 CLAUDE.md</div>
+                <div class="memory-file">📁 memory/glossary.md</div>
+                <div class="memory-file">📁 memory/catalog/rsp-catalog-index.md</div>
+                <div class="memory-file">📁 memory/context/dreamspace-vision.md</div>
+                <div class="memory-file">📁 memory/context/company-vision.md</div>
+                <div class="memory-file">📁 memory/context/slack-workspace.md</div>
+                <div class="memory-file">📁 memory/context/github-organization.md</div>
+                <div class="memory-file">📁 memory/projects/the-composers-vault.md</div>
+                <div class="memory-file">📁 memory/projects/noizy-ai-mothership.md</div>
+                <div class="memory-file">📁 memory/projects/noizylab-computer-repair.md</div>
+                <div class="memory-file">📁 memory/projects/noizyfish-production.md</div>
+                <div class="memory-file">📁 memory/projects/fishmusic-publishing.md</div>
+                <div class="memory-file">📁 memory/research/sonic-therapy-healing.md</div>
+                <div class="memory-file">📁 memory/research/autism-calming.md</div>
+                <div class="memory-file">📁 memory/research/sleep-training.md</div>
+                <div class="memory-file">📁 memory/research/auditory-humanitarian.md</div>
+                <div class="memory-file">📁 memory/people/rs-plowman.md</div>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="number">4</div>
+                    <div class="label">Domains</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">4</div>
+                    <div class="label">Research Programs</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">17</div>
+                    <div class="label">Memory Files</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">∞</div>
+                    <div class="label">Possibilities</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="motto">GORUNFREE!!</div>
+
+    <script>
+        // Add click animations
+        document.querySelectorAll('.brand-item, .research-item, .catalog-type').forEach(item => {
+            item.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => this.style.transform = '', 150);
+            });
+        });
+    </script>
+</body>
+</html>

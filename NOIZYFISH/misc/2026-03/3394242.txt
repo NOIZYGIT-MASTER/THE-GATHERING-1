@@ -1,0 +1,1056 @@
+Position "Kick" 0 {
+Type Kick
+Coords -20 -80
+StandCoords 0 0
+Angle 3
+BackgroundZ 2
+StandZ 1
+PosColorCorrection 0 0 0
+StandColorCorrection 0 0 0
+Brightness 0 0
+Drum None -1 {
+Background "Kick-unloaded"
+Animation "FeltPedalAnimation_shadow"
+AnimationSpeed 0 1
+AnimationCoords 0 -37
+StateAnimCoords 0 0
+PropButtCoords 0 200
+EdgeDetection 120 7
+CropSmallImage 102 20 420 336
+}
+Drum 22GMS 0 {
+Background "GMS18x22"
+Animation "FeltPedalAnimation_shadow"
+AnimationSpeed 500 1
+AnimationCoords 0 -37
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 102 20 420 336
+Art kickR {
+Hilite "highlight-white"
+GenerateHilite 0
+GenerateHiliteValue 40
+HiliteCoords 200 200
+HitAreaCoords 0 0
+Velocity 1
+}
+}
+Drum 24GMS 1 {
+Background "GMS14x24"
+Animation "FeltPedalAnimation_shadow"
+AnimationSpeed 500 1
+AnimationCoords 0 -37
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 96 15 418 336
+Art kickR {
+Hilite "highlight-white"
+GenerateHilite 0
+GenerateHiliteValue 40
+HiliteCoords 200 200
+HitAreaCoords 0 0
+Velocity 1
+}
+}
+}
+Position "Snare" 1 {
+Type Snare
+Coords -116 27
+StandCoords 0 -40
+Angle 2
+BackgroundZ 5
+StandZ 4
+PosColorCorrection 0 0 0
+StandColorCorrection 0 0 0
+Brightness 0 0
+Drum None -1 {
+Background "Snare-Unloaded"
+Stand "SnareStandForUnloaded"
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 30
+EdgeDetection 120 7
+CropSmallImage 65 0 250 130
+}
+Drum 14TRK 0 {
+Background "Trick"
+Stand "SnareStand"
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 65 0 250 135
+Art snareR {
+Hilite "highlight-black"
+GenerateHilite 0
+GenerateHiliteValue 40
+HiliteCoords 110 15
+HitAreaCoords 0 0
+Velocity 1
+}
+Art snareSL {
+Hilite "Trick_rimshot"
+GenerateHilite 0
+GenerateHiliteValue 40
+HiliteCoords 0 0
+HitAreaCoords 0 0
+Velocity 1
+}
+}
+Drum 14LBB2 1 {
+Background "LudwigBlackBeauty"
+Stand "SnareStand"
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 65 0 250 135
+Art snareR {
+Hilite "highlight-black"
+GenerateHilite 0
+GenerateHiliteValue 40
+HiliteCoords 110 15
+HitAreaCoords 0 0
+Velocity 1
+}
+Art snareSL {
+Hilite "LudwigBlackBeauty_Sidestick"
+GenerateHilite 0
+GenerateHiliteValue 40
+HiliteCoords 0 0
+HitAreaCoords 0 0
+Velocity 1
+}
+}
+Drum 14LBS 2 {
+Background "BlackBrassShell"
+Stand "SnareStand"
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 65 0 250 135
+Art snareR {
+Hilite "highlight-black"
+GenerateHilite 0
+GenerateHiliteValue 40
+HiliteCoords 110 15
+HitAreaCoords 0 0
+Velocity 1
+}
+Art snareSL {
+Hilite "BlackBrassShell-Sidestick"
+GenerateHilite 0
+GenerateHiliteValue 40
+HiliteCoords 0 0
+HitAreaCoords 0 0
+Velocity 1
+}
+}
+Drum 14GMS1 3 {
+Background "GMS_MapleAsh"
+Stand "SnareStand"
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 65 0 250 135
+Art snareR {
+Hilite "highlight-black"
+GenerateHilite 0
+GenerateHiliteValue 40
+HiliteCoords 110 15
+HitAreaCoords 0 0
+Velocity 1
+}
+Art snareSL {
+Hilite "GMS_MapleAsh_Sidestick"
+GenerateHilite 0
+GenerateHiliteValue 40
+HiliteCoords 0 0
+HitAreaCoords 0 0
+Velocity 1
+}
+}
+Drum 14GMS2 4 {
+Background "GMS_MapleAsh"
+Stand "SnareStand"
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 65 0 250 135
+Art snareR {
+Hilite "highlight-black"
+GenerateHilite 0
+GenerateHiliteValue 40
+HiliteCoords 110 15
+HitAreaCoords 0 0
+Velocity 1
+}
+Art snareSL {
+Hilite "GMS_MapleAsh_Sidestick"
+GenerateHilite 0
+GenerateHiliteValue 40
+HiliteCoords 0 0
+HitAreaCoords 0 0
+Velocity 1
+}
+}
+Drum 14GMS4 5 {
+Background "GMS_Wood"
+Stand "SnareStand"
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 65 0 250 135
+Art snareR {
+Hilite "highlight-black"
+GenerateHilite 0
+GenerateHiliteValue 40
+HiliteCoords 110 15
+HitAreaCoords 0 0
+Velocity 1
+}
+Art snareSL {
+Hilite "GMS_Wood_Sidestick"
+GenerateHilite 0
+GenerateHiliteValue 40
+HiliteCoords 0 0
+HitAreaCoords 0 0
+Velocity 1
+}
+}
+Drum 14GMS3 6 {
+Background "GMS_Blue"
+Stand "SnareStand"
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 65 0 250 135
+Art snareR {
+Hilite "highlight-black"
+GenerateHilite 0
+GenerateHiliteValue 40
+HiliteCoords 110 15
+HitAreaCoords 0 0
+Velocity 1
+}
+Art snareSL {
+Hilite "GMS_Blue_Sidestick"
+GenerateHilite 0
+GenerateHiliteValue 40
+HiliteCoords 0 0
+HitAreaCoords 0 0
+Velocity 1
+}
+}
+}
+Position "Hats" 2 {
+Type Hihat
+Coords -201 -49
+StandCoords -8 -40
+Angle 2
+BackgroundZ 8
+StandZ 3
+PosColorCorrection 0 0 0
+StandColorCorrection 0 0 0
+Brightness 0 0
+Drum None -1 {
+Background "Hats-Unloaded"
+Stand "HihatStand"
+StateAnimation "PedalAnimation"
+Animation ""
+SelectionAnimation ""
+AnimationHilite ""
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 16 222
+PropButtCoords -10 60
+EdgeDetection 116 7
+CropSmallImage 0 0 0 0
+}
+Drum 14Sabian6 0 {
+Stand "HihatStand"
+StateAnimation "PedalAnimation"
+Animation "Sabian/HatsAnim1"
+Animation "Sabian/HatsAnim2"
+Animation "Sabian/HatsAnim3"
+Animation "Sabian/HatsAnim4"
+Animation "Sabian/HatsAnim5"
+SelectionAnimation ""
+SelectionAnimation ""
+SelectionAnimation ""
+SelectionAnimation ""
+SelectionAnimation ""
+AnimationHilite ""
+AnimationHilite ""
+AnimationHilite ""
+AnimationHilite ""
+AnimationHilite ""
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 16 222
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 0 0 0 0
+Art hatsCL {
+GenerateHilite 1
+GenerateHiliteValue 40
+HiliteCoords 0 0
+HitAreaCoords 0 0
+Velocity 1
+}
+}
+Drum 15Sabian 1 {
+Stand "HihatStand"
+StateAnimation "PedalAnimation"
+Animation "Sabian/HatsAnim1"
+Animation "Sabian/HatsAnim2"
+Animation "Sabian/HatsAnim3"
+Animation "Sabian/HatsAnim4"
+Animation "Sabian/HatsAnim5"
+SelectionAnimation ""
+SelectionAnimation ""
+SelectionAnimation ""
+SelectionAnimation ""
+SelectionAnimation ""
+AnimationHilite ""
+AnimationHilite ""
+AnimationHilite ""
+AnimationHilite ""
+AnimationHilite ""
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 16 222
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 0 0 0 0
+Art hatsCL {
+GenerateHilite 1
+GenerateHiliteValue 40
+HiliteCoords 0 0
+HitAreaCoords 0 0
+Velocity 1
+}
+}
+}
+Position "RackTom1" 3 {
+Type Tom
+Coords -90 -84
+StandCoords -50 -17
+Angle 2
+BackgroundZ 4
+StandZ 1
+PosColorCorrection 0 0 0
+StandColorCorrection 0 0 0
+Brightness 0 0
+Drum None -1 {
+Background "Tom1-Unloaded"
+Stand "TOM_Stand_Single_L"
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 30
+EdgeDetection 120 7
+CropSmallImage 0 0 0 0
+}
+Drum 10GMS2 0 {
+Background "GMS9x10_Coated"
+Stand "TOM_Stand_Single_L"
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 0 0 0 0
+Art tom1R {
+Hilite "highlight-black"
+GenerateHilite 0
+GenerateHiliteValue 40
+HiliteCoords 12 12
+HitAreaCoords 0 0
+Velocity 1
+}
+}
+Drum 10GMS1 1 {
+Background "GMS9x10_Clear"
+Stand "TOM_Stand_Single_L"
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 0 0 0 0
+Art tom1R {
+Hilite "highlight-white"
+GenerateHilite 0
+GenerateHiliteValue 40
+HiliteCoords 12 12
+HitAreaCoords 0 0
+Velocity 1
+}
+}
+Drum 12GMS3 2 {
+Background "GMS10x12_Coated"
+Stand "TOM_Stand_Single_L"
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 0 0 0 0
+Art tom1R {
+Hilite "highlight-black"
+GenerateHilite 0
+GenerateHiliteValue 40
+HiliteCoords 12 12
+HitAreaCoords 0 0
+Velocity 1
+}
+}
+Drum 12GMS2 3 {
+Background "GMS10x12_Clear"
+Stand "TOM_Stand_Single_L"
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 0 0 0 0
+Art tom1R {
+Hilite "highlight-white"
+GenerateHilite 0
+GenerateHiliteValue 40
+HiliteCoords 12 12
+HitAreaCoords 0 0
+Velocity 1
+}
+}
+}
+Position "FloorTom1" 4 {
+Type Tom
+Coords 92 29
+StandCoords 0 0
+Angle 2
+BackgroundZ 6
+StandZ 1
+PosColorCorrection 0 0 0
+StandColorCorrection 0 0 0
+Brightness 0 0
+Drum None -1 {
+Background "Tom4-Unloaded"
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 60
+EdgeDetection 116 7
+CropSmallImage 79 8 334 263
+}
+Drum 14GMS2 0 {
+Background "GMS14x14_Coated"
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 96 17 318 241
+Art tom4R {
+Hilite "highlight-black"
+GenerateHilite 0
+GenerateHiliteValue 40
+HiliteCoords 160 41
+HitAreaCoords 0 0
+Velocity 1
+}
+}
+Drum 14GMS1 1 {
+Background "GMS14x14_Clear"
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 96 17 318 241
+Art tom4R {
+Hilite "highlight-white"
+GenerateHilite 0
+GenerateHiliteValue 40
+HiliteCoords 160 40
+HitAreaCoords 0 0
+Velocity 1
+}
+}
+}
+Position "FloorTom2" 5 {
+Type Tom
+Coords 160 96
+StandCoords 0 0
+Angle 2
+BackgroundZ 12
+StandZ 1
+PosColorCorrection 0 0 0
+StandColorCorrection 0 0 0
+Brightness 0 0
+Drum None -1 {
+Background "Tom4-Unloaded"
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 60
+EdgeDetection 116 7
+CropSmallImage 79 8 334 263
+}
+Drum 16GMS2 0 {
+Background "GMS16x16_Coated"
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 79 8 334 263
+Art tom5R {
+Hilite "highlight-black"
+GenerateHilite 0
+GenerateHiliteValue 40
+HiliteCoords 155 42
+HitAreaCoords 0 0
+Velocity 1
+}
+}
+Drum 16GMS1 1 {
+Background "GMS16x16_Clear"
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 79 8 334 263
+Art tom5R {
+Hilite "highlight-white"
+GenerateHilite 0
+GenerateHiliteValue 40
+HiliteCoords 155 42
+HitAreaCoords 0 0
+Velocity 1
+}
+}
+}
+Position "Ride4" 6 {
+Type Cymbal
+Coords 168 -45
+StandCoords 0 -25
+Angle 3
+BackgroundZ 19
+StandZ 1
+PosColorCorrection 0 0 0
+StandColorCorrection 0 0 0
+Brightness 0 0
+Drum None -1 {
+Background "Ride-Unloaded"
+Stand "CymbalStand_Short_C"
+Animation ""
+SelectionAnimation ""
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 35
+EdgeDetection 120 15
+CropSmallImage 0 0 0 0
+}
+Drum 22Sg 0 {
+Stand "CymbalStand_Short_C"
+Animation "Sabian/Ride_Animation"
+SelectionAnimation ""
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 0 0 0 0
+Art ride4 {
+GenerateHilite 1
+GenerateHiliteValue 40
+HiliteCoords 0 0
+HitAreaCoords 0 0
+Velocity 1
+}
+Art ride4BL {
+Hilite "Sabian/Ride_Bell"
+GenerateHilite 0
+GenerateHiliteValue 40
+HiliteCoords 0 0
+HitAreaCoords 0 0
+Velocity 0.3
+}
+}
+Drum 20Sabian 1 {
+Stand "CymbalStand_Short_C"
+Animation "Sabian/Ride_Animation"
+SelectionAnimation ""
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 0 0 0 0
+Art ride4 {
+GenerateHilite 1
+GenerateHiliteValue 40
+HiliteCoords 0 0
+HitAreaCoords 0 0
+Velocity 1
+}
+Art ride4BL {
+Hilite "Sabian/Ride_Bell"
+GenerateHilite 0
+GenerateHiliteValue 40
+HiliteCoords 0 0
+HitAreaCoords 0 0
+Velocity 0.3
+}
+}
+}
+Position "Ride2" 7 {
+Type Cymbal
+Coords -232 -201
+StandCoords 0 -30
+Angle 1
+BackgroundZ 19
+StandZ 1
+PosColorCorrection 0 0 0
+StandColorCorrection 0 0 0
+Brightness 0 0
+Drum None -1 {
+Background "CrashBig-Unloaded"
+Stand "CymbalStand_Short_C"
+Animation ""
+SelectionAnimation ""
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 30
+EdgeDetection 120 15
+CropSmallImage 0 0 0 0
+}
+Drum 20Sabian 0 {
+Stand "CymbalStand_Short_C"
+Animation "Sabian/CrashL_Animation"
+SelectionAnimation ""
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 0 0 0 0
+Art ride2 {
+GenerateHilite 1
+GenerateHiliteValue 40
+HiliteCoords 0 0
+HitAreaCoords 0 0
+Velocity 1
+}
+Art ride2BL {
+Hilite "Sabian/Ride_Bell"
+GenerateHilite 0
+GenerateHiliteValue 40
+HiliteCoords -16 -2
+HitAreaCoords 0 0
+Velocity 0.3
+}
+}
+Drum 22Sg 1 {
+Stand "CymbalStand_Short_C"
+Animation "Sabian/CrashL_Animation"
+SelectionAnimation ""
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 0 0 0 0
+Art ride2 {
+GenerateHilite 1
+GenerateHiliteValue 40
+HiliteCoords 0 0
+HitAreaCoords 0 0
+Velocity 1
+}
+Art ride2BL {
+Hilite "Sabian/Ride_Bell"
+GenerateHilite 0
+GenerateHiliteValue 40
+HiliteCoords -16 -2
+HitAreaCoords 0 0
+Velocity 0.3
+}
+}
+}
+Position "Crash1" 8 {
+Type Cymbal
+Coords -272 -110
+StandCoords 0 -25
+Angle 1
+BackgroundZ 20
+StandZ 2
+PosColorCorrection 0 0 0
+StandColorCorrection 0 0 0
+Brightness 0 0
+Drum None -1 {
+Background "Ozone_Unloaded"
+Stand "CymbalStand_Short_L45"
+Animation ""
+SelectionAnimation ""
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 30
+EdgeDetection 113 15
+CropSmallImage 0 0 0 0
+}
+Drum 16Crash3 0 {
+Stand "CymbalStand_Short_L45"
+Animation "Sabian/OzoneCymbal"
+SelectionAnimation ""
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 0 0 0 0
+Art crash1 {
+GenerateHilite 1
+GenerateHiliteValue 40
+HiliteCoords 0 0
+HitAreaCoords 0 0
+Velocity 1
+}
+}
+Drum 19Crash3 1 {
+Stand "CymbalStand_Short_L45"
+Animation "Sabian/OzoneCymbal"
+SelectionAnimation ""
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 0 0 0 0
+Art crash1 {
+GenerateHilite 1
+GenerateHiliteValue 40
+HiliteCoords 0 0
+HitAreaCoords 0 0
+Velocity 1
+}
+}
+}
+Position "Crash2" 9 {
+Type Cymbal
+Coords -56 -215
+StandCoords 0 -25
+Angle 1
+BackgroundZ 10
+StandZ 0
+PosColorCorrection 0 0 0
+StandColorCorrection 0 0 0
+Brightness 0 0
+Drum None -1 {
+Background "Ozone_Unloaded"
+Stand "CymbalStand_Short_L45"
+Animation ""
+SelectionAnimation ""
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 30
+EdgeDetection 115 15
+CropSmallImage 0 0 0 0
+}
+Drum 18Crash6 0 {
+Stand "CymbalStand_Short_L45"
+Animation "Sabian/OzoneCymbal"
+SelectionAnimation ""
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 0 0 0 0
+Art crash2 {
+GenerateHilite 1
+GenerateHiliteValue 40
+HiliteCoords 0 0
+HitAreaCoords 0 0
+Velocity 1
+}
+}
+}
+Position "Crash3" 10 {
+Type Cymbal
+Coords 41 -125
+StandCoords 0 -25
+Angle 3
+BackgroundZ 10
+StandZ 1
+PosColorCorrection 0 0 0
+StandColorCorrection 0 0 0
+Brightness 0 0
+Drum None -1 {
+Background "CrashBig-Unloaded"
+Stand "CymbalStand_Short_R45"
+Animation ""
+SelectionAnimation ""
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 30
+EdgeDetection 120 15
+CropSmallImage 0 0 0 0
+}
+Drum 21Crash2 0 {
+Stand "CymbalStand_Short_R45"
+Animation "Sabian/CrashL_Animation"
+SelectionAnimation ""
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 0 0 0 0
+Art crash3 {
+GenerateHilite 1
+GenerateHiliteValue 40
+HiliteCoords 0 0
+HitAreaCoords 0 0
+Velocity 1
+}
+}
+}
+Position "Crash4" 11 {
+Type Cymbal
+Coords 113 -206
+StandCoords 0 -25
+Angle 3
+BackgroundZ 12
+StandZ -3
+PosColorCorrection 0 0 0
+StandColorCorrection 0 0 0
+Brightness 0 0
+Drum None -1 {
+Background "CrashS-Unloaded"
+Stand "CymbalStand_Short_R45"
+Animation ""
+SelectionAnimation ""
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 30
+EdgeDetection 120 15
+CropSmallImage 0 0 0 0
+}
+Drum 17Crash4 0 {
+Stand "CymbalStand_Short_R45"
+Animation "Sabian/CrashS_Animation"
+SelectionAnimation ""
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 0 0 0 0
+Art crash4 {
+GenerateHilite 1
+GenerateHiliteValue 40
+HiliteCoords 0 0
+HitAreaCoords 0 0
+Velocity 1
+}
+}
+Drum MXSpock 1 {
+Stand "CymbalStand_Short_R45"
+Animation "Sabian/Spock2_Animation"
+SelectionAnimation ""
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 0 0 0 0
+Art crash4 {
+GenerateHilite 1
+GenerateHiliteValue 40
+HiliteCoords 0 0
+HitAreaCoords 0 0
+Velocity 1
+}
+}
+}
+Position "Crash5" 12 {
+Type Cymbal
+Coords 218 -136
+StandCoords 0 -25
+Angle 3
+BackgroundZ 12
+StandZ 1
+PosColorCorrection 0 0 0
+StandColorCorrection 0 0 0
+Brightness 0 0
+Drum None -1 {
+Background "CrashM-Unloaded"
+Stand "CymbalStand_Short_R45"
+Animation ""
+SelectionAnimation ""
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 30
+EdgeDetection 120 15
+CropSmallImage 0 0 0 0
+}
+Drum 18Crash 0 {
+Stand "CymbalStand_Short_R45"
+Animation "Sabian/CrashM_Animation"
+SelectionAnimation ""
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 0 0 0 0
+Art crash5 {
+GenerateHilite 1
+GenerateHiliteValue 40
+HiliteCoords 0 0
+HitAreaCoords 0 0
+Velocity 1
+}
+}
+Drum 16Crash2 1 {
+Stand "CymbalStand_Short_R45"
+Animation "Sabian/CrashM_Animation"
+SelectionAnimation ""
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 0 0 0 0
+Art crash5 {
+GenerateHilite 1
+GenerateHiliteValue 40
+HiliteCoords 0 0
+HitAreaCoords 0 0
+Velocity 1
+}
+}
+}
+Position "Crash6" 13 {
+Type Cymbal
+Coords 271 5
+StandCoords 0 -10
+Angle 3
+BackgroundZ 20
+StandZ 4
+PosColorCorrection 0 0 0
+StandColorCorrection 0 0 0
+Brightness 0 0
+Drum None -1 {
+Background "China_Unloaded"
+Stand "CymbalStand_Short_R45"
+Animation ""
+SelectionAnimation ""
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 30
+EdgeDetection 120 15
+CropSmallImage 0 0 0 0
+}
+Drum 18Crash3 0 {
+Stand "CymbalStand_Short_R45"
+Animation "Sabian/China_Animation"
+SelectionAnimation ""
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 0 0 0 0
+Art crash6 {
+GenerateHilite 1
+GenerateHiliteValue 40
+HiliteCoords 0 0
+HitAreaCoords 0 0
+Velocity 1
+}
+}
+Drum 18Crash4 1 {
+Stand "CymbalStand_Short_R45"
+Animation "Sabian/China_Animation"
+SelectionAnimation ""
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 0 0 0 0
+Art crash6 {
+GenerateHilite 1
+GenerateHiliteValue 40
+HiliteCoords 0 0
+HitAreaCoords 0 0
+Velocity 1
+}
+}
+}
+Position "CountIns" 14 {
+Type Percussion
+Coords 40 94
+StandCoords 0 0
+Angle 2
+BackgroundZ 10
+StandZ 1
+PosColorCorrection 0 0 0
+StandColorCorrection 0 0 0
+Brightness 0 0
+Drum None -1 {
+Background "Sticks-Unloaded"
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 60
+EdgeDetection 120 7
+CropSmallImage 0 0 0 0
+}
+Drum Sticks3 0 {
+Background "Sticks"
+AnimationSpeed 3000 5
+AnimationCoords 0 0
+StateAnimCoords 0 0
+PropButtCoords 0 0
+EdgeDetection 220 7
+CropSmallImage 0 0 0 0
+Art special {
+GenerateHilite 1
+GenerateHiliteValue 40
+HiliteCoords 0 0
+HitAreaCoords 0 0
+Velocity 1
+}
+}
+}
+ColorCorrection 0 0 0 5
+EZXId SL-HITFACTORY

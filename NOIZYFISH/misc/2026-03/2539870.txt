@@ -1,0 +1,604 @@
+Manual
+Disclaimer
+The information in this document is subject to change without notice and does not represent a
+commitment on the part of Native Instruments GmbH. The software described by this docu-
+ment is subject to a License Agreement and may not be copied to other media. No part of this
+publication may be copied, reproduced or otherwise transmitted or recorded, for any purpose,
+without prior written permission by Native Instruments GmbH, hereinafter referred to as Native
+Instruments.
+“Native Instruments”, “NI” and associated logos are (registered) trademarks of Native Instru-
+ments GmbH.
+Mac, Mac OS, GarageBand, Logic, iTunes and iPod are registered trademarks of Apple Inc.,
+registered in the U.S. and other countries.
+Windows, Windows Vista and DirectSound are registered trademarks of Microsoft Corporation
+in the United States and/or other countries.
+All other trade marks are the property of their respective owners and use of them does not im-
+ply any affiliation with or endorsement by them.
+Document authored by: Adam Hanley
+Software version: 1.0 (01/2011)
+Special thanks to the Beta Test Team, who were invaluable not just in tracking down bugs, but
+in making this a better product.
+Contact
+Germany
+Native Instruments GmbH
+Schlesische Str. 29-30
+D-10997 Berlin
+Germany
+www.native-instruments.de
+USA
+Native Instruments North America, Inc.
+6725 Sunset Boulevard
+5th Floor
+Los Angeles, CA 90028
+USA
+www.native-instruments.com
+Japan
+Native Instruments KK
+YO Building 3F
+Jingumae 6-7-15, Shibuya-ku,
+Tokyo 150-0001
+Japan
+www.native-instruments.co.jp
+© Native Instruments GmbH, 2013. All rights reserved.
+Table of Contents
+Table of Contents
+1 Welcome to ACTION STRIKES! ....................................................................................5
+1.1 About ACTION STRIKES ............................................................................................................... 5
+1.2 The Included Instruments ........................................................................................................... 5
+2 Using the Ensemble.nki .............................................................................................6
+2.1 Mapping and Playback ............................................................................................................... 6
+2.2 The Ensemble User Interface ...................................................................................................... 7
+2.2.1 Rhythm Sets (RHYTHM 1-5 and RHYTHM 6-10) ......................................................... 9
+2.2.2 The PLAYBACK Page .................................................................................................. 14
+2.2.3 The ENS & MIXER Page .............................................................................................. 15
+2.3 Controlling Expression and Accents ............................................................................................ 22
+3 Using the Hits.nki ......................................................................................................24
+3.1 Playing the Instrument ............................................................................................................... 24
+3.2 The Hits User Interface ............................................................................................................... 24
+3.2.1 The HIT Page .............................................................................................................. 26
+3.2.2 The EFFECTS Page ..................................................................................................... 27
+4 Using the Instrument.nki ............................................................................................31
+4.1 Mapping and Playback ............................................................................................................... 31
+4.2 Controlling Expression and Accents ............................................................................................ 31
+4.3 The Instrument User Interface .................................................................................................... 33
+4.3.1 Browsing and Loading Instruments ........................................................................... 34
+4.3.2 The Monitor ................................................................................................................ 36
+4.3.3 The PLAYBACK Page .................................................................................................. 36
+4.3.4 The EFFECTS Page ..................................................................................................... 37
+5 Credits ......................................................................................................................40
+ACTION STRIKES - Manual - 4
+Welcome to ACTION STRIKES!
+About ACTION STRIKES
+1 Welcome to ACTION STRIKES!
+Thank you for purchasing ACTION STRIKES. On behalf of the Native Instuments team, we
+hope this new KONTAKT Instrument truly inspires you.
+ACTION STRIKES is a cinematic percussion library for KONTAKT 5 or the free KONTAKT
+PLAYER. The instruments are presented in custom designed interfaces to inspire creativity and
+make the production process quick and easy.
+This manual will give you an overview of the included instruments.
+1.1 About ACTION STRIKES
+ACTION STRIKES continues from where ACTION STRINGS left off, with a similar set of tools
+designed specifically for big screen action and suspense, only now focusing on cinematic per-
+cussion including: orchestral percussion, concert toms, taiko drums, and other ethnic percus-
+sion instruments.
+The included rhythmic patterns are all generated internally using custom KONTAKT scripts.
+Since no audio loops are used, the patterns can be played at any tempo without artifacts. This
+also means that the patterns can make use of alternating samples for the same hit type, giving
+added realism to the library.
+1.2 The Included Instruments
+ACTION STRIKES includes three different nki files, each designed for different production or
+performance styles and with individual interfaces to complement these styles:
+▪ Ensemble - Multiple percussion instruments, complete with pattern playback, a mixer, and
+effects.
+▪ Hits - Individual percussive hits, designed to be played directly from your MIDI keyboard
+or DAW.
+▪ Instrument - Individual Percussion sets, with simple articulations, rhythms, and effects.
+ACTION STRIKES - Manual - 5
+Using the Ensemble.nki
+Mapping and Playback
+2 Using the Ensemble.nki
+The Ensemble instrument is the largest of the included instruments. It includes three sections
+(Low, Mid, and High) that can be triggered individually or together, as well as a large collection
+of preset rhythms crafted for the big screen.
+From the interface you can load one of 12 different drum ensembles, or you can mix and
+match the different sections from these ensembles to create your own custom ensemble.
+2.1 Mapping and Playback
+Each ensemble comes with five preset patterns, which are triggered from MIDI keys. Different
+rhythmic accents can be selected using key switches to create very different feeling variations
+of these patterns.
+The Keyboard mapping for the Ensemble instrument is split into 5 sections:
+▪ C1 - A1 are keyswitches to select from the included accent patterns.
+▪ C2 - B2 trigger all three sections simultaneously.
+▪ C3 - B3 trigger the low section.
+▪ C4 - B4 trigger the mid section.
+▪ C5 - B5 trigger the high section.
+Within each trigger octave the first 5 white keys trigger rhythmic loops based on the selected
+ensemble and accent pattern; the last 2 white keys (A and B) trigger single hits.
+ACTION STRIKES - Manual - 6
+Using the Ensemble.nki
+The Ensemble User Interface
+2.2 The Ensemble User Interface
+The Ensemble User Interface
+At the top of the Performance view, below the usual KONTAKT Instrument header controls, you
+will notice two boxes:
+ACTION STRIKES - Manual - 7
+Using the Ensemble.nki
+The Ensemble User Interface
+▪ EXPRESSION/ACCENT: This box is located to the top left and contains two sliders that
+are linked to the Mod Wheel and Pitch Bend controls, which control the expression and
+accent intensity of the instruments.
+▪ ENSEMBLE: The box to the right displays the currently loaded ensemble.
+You can load an ensemble by either:
+► Clicking on the dropdown menu and selecting the desired ensemble.
+► Using the left and right arrows to cycle through the ensembles.
+Navigation
+The Navigation Tabs
+Four tabs at the bottom of the Performance view enable you to change the contents of the cen-
+tral area:
+▪ PLAYBACK: Displays the controls used to alter the pattern playback behavior.
+▪ RHYTHM 1-5 and RHYTHM 6-10: Display the accent patterns that are assigned to the re-
+spective key-switches. You can also select patterns from these pages.
+ACTION STRIKES - Manual - 8
+Using the Ensemble.nki
+The Ensemble User Interface
+▪ ENS & MIXER: Displays the controls that affect the sound of the instrument (like audio
+effects and microphone position).
+2.2.1 Rhythm Sets (RHYTHM 1-5 and RHYTHM 6-10)
+The Rhythm Sets Page
+Clicking on the tabs RHYTHM 1-5 and RHYTHM 6-10 will not only display the currently load-
+ed accent rhythms, but will also display the controls that allow you to load different rhythm
+sets and individual rhythm patterns.
+RHYTHM 1-5 is the default open page when you first load the instrument.
+The Rhythm Sets Browser
+Rhythm Sets are presets that contain 5 related rhythms. The rhythms are loaded into the first
+5 slots (C1-E1) and the second 5 slots (F1-A1) are left unchanged.
+To load a preset Rhythm Set from the RHYTHM 1-5 page:
+ACTION STRIKES - Manual - 9
+Using the Ensemble.nki
+The Ensemble User Interface
+1. Click on the magnifying glass icon to the right of the Rhythm Sets title, this will open the
+Rhythm Sets Browser.
+2. By default, all themes will be displayed in the browser. To further refine the displayed
+themes, click on any of the category buttons at the top of the browser.
+3. Select a rhythm set by clicking on its name in the browser.
+ACTION STRIKES - Manual - 10
+Using the Ensemble.nki
+The Ensemble User Interface
+4. To load the currently selected rhythm set, click on the Tick button at the top right.
+If you wish to exit the Theme Browser without changing the currently loaded theme or
+phrases, just click on the X button to the top right of the browser.
+► Alternatively, you can cycle through the included Rhythm Sets, without entering the
+browser, by clicking on the left and right arrows to the left of the Rhythm Set title.
+Although you cannot save your own themes, your theme settings are saved with the KON-
+TAKT Instrument and therefore will also be saved with your host project.
+The Rhythm Controls and Browser
+A preset Rhythm Set might not meet your exact needs, you may wish to change a rhythm, or
+load additional rhythms into any of the additional 5 slots.
+On the pages accessed by clicking on the tabs RHYTHM 1-5 and RHYTHM 6-10, you will see
+the musical notations of the accent patterns loaded into these slots; to their left is the name of
+the key-switch to which they are assigned. These musical notations are actually interactive ele-
+ments:
+► To display the information on any rhythm, including the name and meter information,
+hover the mouse cursor over the musical notation of the rhythm.
+Slots 6-10 will initially be empty, and display empty musical staves. These are still interac-
+tive in the same way as the other notations in slots 1-5.
+ACTION STRIKES - Manual - 11
+Using the Ensemble.nki
+The Ensemble User Interface
+► To load a rhythm into a slot, open the Rhythm Browser by clicking on the phrase nota-
+tion/information.
+The Rhythms Browser
+The Rhythms Browser is similar to the Rhythm Set Browser in many ways:
+▪ To the top of the browser are a series of buttons to refine your search.
+▪ To the very top right are the X and Tick buttons used to exit the browser or load a rhythm
+respectively.
+▪ The body of the browser contains a list of the available rhythms.
+ACTION STRIKES - Manual - 12
+Using the Ensemble.nki
+The Ensemble User Interface
+However, the Rhythm Browser has two noticeable differences:
+▪ Clicking on a rhythm will display the score for the phrase in the display box above the
+browser list (in the above capture, the notation displayed is that of the Basic 16th Feel -
+Half Note Accents rhythm).
+▪ Clicking on a rhythm will also play a preview of the selected rhythm.
+Rhythms are loaded in the same manner as loading a Rhythm Set:
+1. Select the desired Rhythm from the list in the Rhythm Browser by clicking on its name.
+2. Confirm the selection by clicking the tick button to the top right of the Browser.
+→ The selected Phrase will now be loaded into the slot you used to access the Phrase
+Browser.
+Rhythm and Mapping Monitor
+► Clicking on the i button in the main rhythm banner will open the Rhythm and Mapping
+Monitor window.
+The Rhythm Monitor
+By default, the first monitor displayed will be the Rhythm Monitor. This shows a notation of
+the currently selected rhythmic pattern.
+► Clicking on the MAPPING button opens the Mapping Monitor.
+ACTION STRIKES - Manual - 13
+Using the Ensemble.nki
+The Ensemble User Interface
+The Mapping Monitor
+The Mapping Monitor displays an illustration of the MIDI keyboard mapping of the Ensemble
+instrument. The white dot highlights currently active key-switches or notes.
+► To close the Monitor, click on the X button to the top right of the window.
+Neither the Rhythm nor the Mapping monitors are interactive. They are for reference only.
+2.2.2 The PLAYBACK Page
+By clicking on the PLAYBACK Tab, you will display the Playback page.
+The Playback Page
+This page contains three settings that affect the way the phrases are played back in the KON-
+TAKT Instrument:
+ACTION STRIKES - Manual - 14
+Using the Ensemble.nki
+The Ensemble User Interface
+▪ TRIGGER MODE: There are two Trigger Modes, selected by clicking on the two buttons.
+These modes are:
+◦ PHRASE SYNC: Newly triggered phrases will have their start position offset to match
+the currently playing phrases, making sure that everything plays in sync.
+◦ FREE TRIGGER: Newly triggered phrases are always triggered from the beginning, ig-
+noring the current playback position of any currently playing loops.
+▪ FEEL: The 16TH SWING knob in this area controls the amount of delay applied to the off-
+beat hits. Increasing this control can make the rhythm feel more laid-back, or even give it
+a triplet feel.
+▪ TEMPO: Here you can select between 3 tempo ratios 1/2 (Half), 1:1 (Normal), or x2 (Dou-
+ble), which affect the phrase playback speed relative to the master (or host) tempo.
+At the top of the Playback page you still have access to the Rhythm Set controls, allowing
+you to browse and load Rhythm Sets without returning to the Rhythm pages.
+2.2.3 The ENS & MIXER Page
+By clicking on the ENS & MIXER Tab, you will display the Ensemble and Mixer page.
+ACTION STRIKES - Manual - 15
+Using the Ensemble.nki
+The Ensemble User Interface
+The Ensemble and Mixer Page
+As suggested by the name, this page has two main functions for controlling the final sound of
+the ensemble:
+▪ Changing the source samples by selecting different ensemble sections.
+▪ Altering and fine-tuning the output using the mixer and effects.
+ACTION STRIKES - Manual - 16
+Using the Ensemble.nki
+The Ensemble User Interface
+Changing the Ensemble Sections
+As mentioned earlier in this manual, it is possible to browse and load any one of 12 ensembles
+from the ENSEMBLE box to the top right of the interface. However, from the Ensemble and
+Mixer page, it is also possible to alter these ensembles by changing the different sections indi-
+vidually.
+To change an ensemble section:
+1. Locate the section you wish to change in the mixer
+2. Click on the dropdown at the top of the mixer channel to display the available sample sets
+3. Select and click on the sample set you wish to load
+→ The sample sets will be exchanged, and the name in the ENSEMBLE dropdown will
+change to CUSTOM
+This custom ensemble is not saved, and will be deleted from the menu when you load a full
+ensemble.
+The Mixer
+The ACTION STRIKES Mixer features:
+ACTION STRIKES - Manual - 17
+Using the Ensemble.nki
+The Ensemble User Interface
+▪ Three channels - one for each of the ensemble sections
+▪ Four insert effects per channel: Filter, EQ, Transient Master, Compressor
+▪ Two send effects: Reverb and Delay
+▪ A Master Bus, featuring the same four insert effects as the channels
+Each ensemble section has its own channel in the mixer.
+The High Section Channel Strip
+Each channel includes the following controls:
+▪ REVERB: controls the amount of signal sent from the channel to the reverb effect.
+▪ DELAY: controls the amount of signal sent from the channel to the delay effect.
+▪ MIC: controls the balance between the close and room microphone sources.
+▪ STEREO: controls the stereo width of the channel. Setting the knob to the left turns the
+channel to mono, a middle setting is the original stereo signal, and moving the knob to
+the right increases the stereo image.
+▪ LEVEL: controls the output level of the channel.
+To the right of the mixer are the two return channels and the master bus.
+ACTION STRIKES - Manual - 18
+Using the Ensemble.nki
+The Ensemble User Interface
+The Master Busses
+▪ REVERB: controls the output level of the reverb effect.
+▪ DELAY: controls the output level of the delay effect.
+▪ MAIN: controls the final output of all channels and effects.
+Channel and Master Effects
+Each channel, including the master bus, has its own effect chain.
+You can select an effect chain to display by:
+► clicking on the tab at the bottom of the channel.
+► The effects and controls available to you are:
+ACTION STRIKES - Manual - 19
+Using the Ensemble.nki
+The Ensemble User Interface
+▪ FILTER - two filters for tonal shaping.
+◦ HIGH PASS: sets the cutoff frequency of the high pass filter, removing all frequencies
+below this point. It can be used to remove bass frequencies and make the sound more
+“thin”.
+◦ LOW PASS: sets the cutoff frequency of the low pass filter, removing frequencies
+above this point. It can be used to remove high frequencies and make the sound more
+“dull” or “warm”.
+▪ EQ - a 2-band parametric equalizer.
+Each band has the same controls:
+◦ GAIN: controls the gain of the frequency band. The gain is at unity when the knob is
+in the middle position.
+◦ FREQ: controls the central frequency of the band.
+◦ BW: controls the width of the frequency band. Higher values give a wider band, and
+lower values make the band narrower.
+ACTION STRIKES - Manual - 20
+Using the Ensemble.nki
+The Ensemble User Interface
+▪ TRANSIENTS - an envelope shaping effect based on the TRANSIENT MASTER effect.
+◦ ATTACK: controls the level of the initial attack of the sound.
+◦ SUSTAIN: controls the level of the sustaining or decaying end of the sound.
+▪ COMPRESSOR - a dynamic leveling effect, used to control and alter changes in volume.
+◦ THRESHOLD: sets the level above which the compressor starts to take effect.
+◦ ATTACK: sets the time it takes for the compressor to take effect after the signal ex-
+ceeds the theshold level.
+◦ RELEASE: sets the time it takes for the compressor to return to normal after the sig-
+nal dips below the theshold.
+Each effect can be toggled on or off by clicking on the switch beside the effect name.
+Send Effects
+The controls for the send effects are accessed by clicking on the SEND FX tab in the mixer.
+ACTION STRIKES - Manual - 21
+Using the Ensemble.nki
+Controlling Expression and Accents
+The Send FX Controls
+There are two send effects with the following controls:
+▪ DELAY - can be thought of as an echo effect that can be used to create rhythmic effects or
+add space to the sound.
+◦ TIME: sets the time between the input signal and the delayed signal.
+◦ FEEDBACK: controls the amount of signal fed from the output back into the input of
+the effect. In other words: controls the number of repeating echoes.
+◦ DAMP: controls the high frequency dampening in the delayed signal.
+▪ REVERB - a space simulation effect. The included reverb is based on a convolution engine
+that uses impulse response samples to give a realistic representation of a space.
+◦ IR Selection: The dropdown menu allows you to select any of 10 different impulse re-
+sponse samples. You can also cycle through the samples using the left and right ar-
+rows.
+2.3 Controlling Expression and Accents
+► To control the dynamics of the phrases in real-time, use the modulation wheel (Mod
+Wheel, MIDI controller 1) of your MIDI keyboard, or move the modulation wheel of KON-
+TAKT's on-screen keyboard.
+► To set the dynamics to a fixed value, use the ModW. slider to the top left of the user in-
+terface.
+ACTION STRIKES - Manual - 22
+Using the Ensemble.nki
+Controlling Expression and Accents
+Note that you cannot automate this control as it could interfere with the Mod Wheel signal.
+You can adjust the intensity of the rhythmic accents by using the MIDI Pitch Bend control:
+▪ Moving the pitch bend up will increase the intensity of the accents.
+▪ Moving the pitch bend down will decrease the intensity of the accents.
+▪ Leaving the pitch bend control in a neutral position will set the intensity of the accents to
+the default value.
+► As with the Mod Wheel, you can also set the accent intensity to a fixed value by using the
+PitchW. slider to the top left of the user interface.
+ACTION STRIKES - Manual - 23
+Using the Hits.nki
+Playing the Instrument
+3 Using the Hits.nki
+The Hits Instrument is the most simple of the ACTION STRIKES instruments. It allows you to
+play the different sounds directly from your MIDI keyboard or DAW. It is most useful if you
+want to compose or perform your own percussive sequences rather than using preset rhythms.
+3.1 Playing the Instrument
+► The Hits Instrument is played by using the MIDI keys C2 to B4
+► Expression (or dynamics) is controlled via the Mod Wheel (MIDI CC1)
+3.2 The Hits User Interface
+The Hits interface features a similar layout to the Ensemble interface, but with a very different
+control set.
+ACTION STRIKES - Manual - 24
+Using the Hits.nki
+The Hits User Interface
+The Hits User Interface
+To the top left is the EXPRESSION box, which features the ModW. slider that mimics the posi-
+tion of the mod wheel. It can also be used to set the expression to a set value.
+The HIT SET box to the top right can be used to browse and load sample sets. You can select
+and load a hit set by either:
+► clicking on the dropdown menu and selecting from the available options,
+ACTION STRIKES - Manual - 25
+Using the Hits.nki
+The Hits User Interface
+► or by cycling through the sets using the left and right arrows.
+3.2.1 The HIT Page
+The Hit Page is the first page you will see when you open the instrument. It contains the main
+controls for the different percussive hits.
+The top banner of the page mimics the HIT SET box, displaying the currently loaded hit set.
+► You can browse through hit sets by clicking on the left and right arrows beside the dis-
+played name.
+HIT SELECTION
+The left side of the page is where you can view or define the selected hit.
+The Hit Selection Controls
+To select a hit either:
+► play the corresponding MIDI note (making sure AUTO FOLLOW INPUT is active),
+► or cycle to the hit using the left and right arrows in the hit selection display
+ACTION STRIKES - Manual - 26
+Using the Hits.nki
+The Hits User Interface
+The AUTO FOLLOW INPUT switch allows you to select whether or not the selected hit should
+respond in incoming MIDI.
+HIT SETTINGS
+In the right side of the page you can find the Hit Settings.
+The Hit Settings Controls
+These control a variety of parameters for each hit:
+▪ VOLUME: controls the volume level of the selected hit.
+▪ PAN: controls the stereo positioning of the selected hit.
+▪ TUNE: controls the tuning of the selected hit.
+▪ MIC: controls the balance between the close and room microphone sources.
+3.2.2 The EFFECTS Page
+You can access the Effects Page by clicking on the EFFECTS tab at the bottom of the inter-
+face.
+ACTION STRIKES - Manual - 27
+Using the Hits.nki
+The Hits User Interface
+The Effects Page
+This page gives you access to simple and intuitive effects to quickly shape the sound of the hit
+set.
+Like the Hit Page, the top banner of the page displays the selected hit set with browsing
+arrows.
+SOUND
+The left side of the page contains the sound controls, which comprise of two effects: MASTER
+EQ and DYNAMICS.
+ACTION STRIKES - Manual - 28
+Using the Hits.nki
+The Hits User Interface
+The Sound Controls
+The MASTER EQ gives you a choice between three EQ settings:
+▪ OFF: a flat response.
+▪ 1: boosts the high frequencies for a brighter sound.
+▪ 2: cuts the mid frequencies, while also boosting both the high and low frequencies. This
+gives a more present and larger sound.
+The DYNAMICS effect features one switch:
+▪ PUMP: activating this switch in turn activates a combination of envelope and compression
+processing to make the output signal sound louder and fatter.
+REVERB
+The right side of the page contains the reverb effect.
+ACTION STRIKES - Manual - 29
+Using the Hits.nki
+The Hits User Interface
+The Reverb Controls
+This is a convolution based effect that uses impulse responses to simulate real acoustic
+spaces.
+► The effect can be switched on or off by using the switch to the right of the main label.
+You can select an impulse response by either:
+► selecting one specifically from the dropdown menu,
+► or by cycling through them using the left and right arrows.
+► The AMOUNT knob controls the level of the reverb effect signal.
+ACTION STRIKES - Manual - 30
+Using the Instrument.nki
+Mapping and Playback
+4 Using the Instrument.nki
+The Instrument.nki can be considered a simplified version of the Ensemble.nki, or a hybrid of
+the Ensemble and Hits Instruments.
+You can use it to load an ensemble, ensemble section, or single instrument, and then play a
+selection of rhythmic patterns and single hits.
+4.1 Mapping and Playback
+The Instrument.nki is used mainly to trigger and play rhythmic patterns, but also contains sin-
+gle hits to accent or end these patterns.
+As such, the Instrument uses the following MIDI mapping:
+▪ C2 and D2 trigger single hits
+▪ E2 to B2 trigger rolls and flams (where applicable - not all instruments include a full set of
+rolls or flams)
+▪ C3 to G5 trigger rhythmic patterns
+4.2 Controlling Expression and Accents
+► To control the dynamics of the rhythms in real-time, use the modulation wheel (Mod
+Wheel, MIDI controller 1) of your MIDI keyboard, or move the modulation wheel of KON-
+TAKT's on-screen keyboard.
+► To set the dynamics to a fixed value, use the ModW. slider to the top left of the user in-
+terface.
+Note that you cannot automate this control as it could interfere with the Mod Wheel signal.
+You can adjust the intensity of the rhythmic accents by using the MIDI Pitch Bend control:
+ACTION STRIKES - Manual - 31
+Using the Instrument.nki
+Controlling Expression and Accents
+▪ moving the pitch bend up will increase the intensity of the accents.
+▪ moving the pitch bend down will decrease the intensity of the accents.
+▪ leaving the pitch bend control in a neutral position will set the intensity of the accents to
+the default value.
+► As with the Mod Wheel, you can also set the accent intensity to a fixed value by using the
+PitchW. slider to the top left of the user interface.
+ACTION STRIKES - Manual - 32
+Using the Instrument.nki
+The Instrument User Interface
+4.3 The Instrument User Interface
+The Instrument User Interface
+ACTION STRIKES - Manual - 33
+Using the Instrument.nki
+The Instrument User Interface
+4.3.1 Browsing and Loading Instruments
+You can cycle though instruments, or open the Instruments Browser from either the INSTRU-
+MENT box in the top right, or from the main banner.
+► Clicking on the arrows in either section will cycle through the available instruments.
+The Instruments Browser
+► The Instruments Browser is accessed by clicking on the magnifying glass button in either
+the INSTRUMENT box or the main banner.
+ACTION STRIKES - Manual - 34
+Using the Instrument.nki
+The Instrument User Interface
+The Instruments Browser
+The Instruments Browser is a lot like the Rhythm Sets Browser from the Ensemble nki:
+▪ You can refine the browser contents using the buttons at the top.
+▪ You select an instrument or ensemble by clicking on its name.
+▪ You load the instrument by clicking on the Tick button, or exit by clicking on the X button.
+▪ The only difference is that this browser is used to select and load sounds, rather than pat-
+terns.
+ACTION STRIKES - Manual - 35
+Using the Instrument.nki
+The Instrument User Interface
+4.3.2 The Monitor
+► The Monitor Window is opened by clicking on the i button in the main banner.
+The Monitor Window displays an illustration of the MIDI Key Mapping, as well as a simplified
+notation of the currently selected rhythmic pattern, represented as dots above the keyboard.
+The Monitor Window
+4.3.3 The PLAYBACK Page
+By clicking on the PLAYBACK Tab, you will display the Playback page.
+The Playback Page
+ACTION STRIKES - Manual - 36
+Using the Instrument.nki
+The Instrument User Interface
+This page contains three settings that affect the way the phrases are played back in the KON-
+TAKT Instrument:
+▪ TRIGGER MODE: There are two Trigger Modes, selected by clicking on the two buttons.
+These modes are:
+◦ PHRASE SYNC: Newly triggered phrases will have their start position offset to match
+the currently playing phrases, making sure that everything plays in sync.
+◦ FREE TRIGGER: Newly triggered phrases are always triggered from the beginning, ig-
+noring the current playback position of any currently playing loops.
+▪ FEEL: The 16TH SWING knob in this area controls the amount of delay applied to the off
+beat hits. Increasing this control can make the rhythm feel more laid-back, or even give it
+a triplet feel.
+▪ TEMPO: Here you can select between 3 tempo ratios 1/2 (Half), 1:1 (Normal), or x2 (Dou-
+ble), which affect the phrase playback speed relative to the master (or host) tempo.
+4.3.4 The EFFECTS Page
+You can access the Effects Page by clicking on the EFFECTS tab at the bottom of the inter-
+face.
+The Effects Page
+ACTION STRIKES - Manual - 37
+Using the Instrument.nki
+The Instrument User Interface
+This page gives you access to simple and intuitive effects to quickly shape the sound of the
+instrument.
+SOUND
+The left side of the page contains the sound controls, which comprise of two effects, MASTER
+EQ and FILTER, as well as a MIC POSITION slider.
+The Sound Controls
+The MASTER EQ gives you a choice between three EQ settings:
+▪ OFF: a flat response.
+▪ 1: boosts the lower frequencies for a heavier sound.
+▪ 2: boosts the higher frequencies for a brighter, more cutting sound.
+The FILTER effect is a band pass filter, which can be used for extreme tonal effects. It has two
+controls:
+▪ The switch turns the effect on or off.
+▪ The slider controls the central frequency of the band pass filter.
+The MIC POSITION slider controls the balance between the close and room microphone sour-
+ces.
+REVERB
+The right side of the page contains the reverb effect.
+ACTION STRIKES - Manual - 38
+Using the Instrument.nki
+The Instrument User Interface
+The Reverb Controls
+This is a convolution based effect that uses impulse responses to simulate real acoustic
+spaces.
+► The effect can be switched on or off by using the switch to the right of the main label.
+You can select an impulse response by either:
+► selecting one specifically from the dropdown menu,
+► or by cycling through them using the left and right arrows.
+► The AMOUNT knob controls the level of the reverb effect signal.
+ACTION STRIKES - Manual - 39
+Credits
+5 Credits
+Product Concept and Design: SONUSCORE - Tilman Sillescu, Pierre Langer, Axel Rohrbach
+Concept and Design: Frank Elting
+Content Creation: Tilman Sillescu
+KONTAKT Scripting: Nils Liberg
+User Interface Design: Cameron Wakal, Gösta Wellmer
+Recording Engineers: Nik Reiff (www.studioconsulting.de), GENUIN Musikproduktion, Holger
+Busse (Leipzig, Germany)
+Performers:
+▪ Ethno Percussion - Can Batman, Dalma Lima, Debora Vilchez (Orchester der Kulturen/The
+Global Symphony www.orchesterderkulturen.de)
+▪ Orchestral Percussion - Rafael Sars, Kevin Anderwaldt (Duesseldorfer Symphoniker)
+▪ Taiko Ensemble - WADOKYO
+▪ Modern Drums - Ralf Schumacher
+Sample Editing: Matthias Wolf, Stefan Kemler, Axel Rohrbach, Christian Wirtz, Armin Haas, Mi-
+chael Chrostek, Patrik Pietschmann
+MIDI-Programming: Tilman Sillescu, Matthias Wolf, Stefan Kemler
+Sound Design Native Instruments: Thanos Kazakos
+Artwork: Maik Siemer
+Quality Assurance: Bymski
+Documentation: Adam Hanley
+Special Thanks: Alex Pfeffer, Alexander Roeder, Benny Oschmann, Matthias Wolf, Marc Rose-
+nberger, David Philipp, David Christiansen, Jochen Flach, Christoph Pichler
+ACTION STRIKES - Manual - 40

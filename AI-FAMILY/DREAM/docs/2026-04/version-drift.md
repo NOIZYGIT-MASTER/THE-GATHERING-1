@@ -1,17 +1,11 @@
 # Version Drift
 
-Electron SDK integrations are sensitive to dependency drift.
+Flutter wrapper, native SDKs, and docs can drift independently.
 
-## Drift vectors
+## Upgrade checklist
 
-- Electron runtime upgrades
-- Node ABI changes
-- Native addon compiler toolchain changes
-- Meeting SDK wrapper package updates
-
-## Control strategy
-
-1. Pin tested Electron + SDK versions.
-2. Keep a compatibility matrix in your project docs.
-3. Rebuild and smoke test on every runtime change.
-4. Run callback/error-code regression tests for join/start/audio/video/share.
+1. Compare wrapper version metadata and changelog with actual package content.
+2. Re-validate API enum names and helper method signatures.
+3. Re-test lifecycle: init -> join -> media -> leave -> cleanup.
+4. Re-check event constants and error handling mappings.
+5. Re-run smoke tests for chat/share/recording/transcription if used.

@@ -1,28 +1,27 @@
 # Deprecated and Contradictions
 
-Observed from crawled docs and provided SDK package context:
+Observed from freshly crawled docs/reference plus local package archive:
 
-## 1. Electron version guidance contradiction
+## 1. Prompt reference was missing/invalid
 
-- Package README mentions installing Electron `33.0.0`.
-- Same README also says sample app currently does not support Electron 10 or above.
+- Input prompt had `reference: o`.
+- Effective Flutter reference source was discovered from docs links and crawled from `sdk/custom/flutter/index.html`.
 
-Action: treat sample README version text as inconsistent and validate against official current compatibility guidance before rollout.
+## 2. Version metadata mismatch in package archive
 
-## 2. Deprecated module flags in API reference
+- Archive filename indicates `2.4.0`.
+- `pubspec.yaml` and changelog content show `2.3.10` references.
 
-Crawled API reference marks deprecations in several areas, including webinar and some setting-related modules.
+Action: treat archive naming and package metadata independently; verify actual package version fields before rollout.
 
-Action: avoid new dependencies on deprecated modules; isolate behind adapter interfaces if legacy support is required.
+## 3. Docs/package age drift indicators
 
-## 3. Feature availability caveats
+- Some docs mention package versions and setup patterns that may lag current wrappers.
+- API reference is very large and highly version-sensitive (helpers, enums, errors).
 
-Multiple module docs include "not supported" notes depending on platform/account/meeting context.
+Action: pin tested versions and maintain an internal compatibility matrix.
 
-Action: gate feature use with runtime capability checks and fail gracefully.
+## 4. Crawl completeness note
 
-## 4. Python/build toolchain caveat in sample notes
-
-Sample package notes mention build issues with newer Python (distutils-related) and suggest older Python versions.
-
-Action: pin build environment versions in CI and document exact toolchain used for your release branch.
+- Reference crawl completed with one page-level error among a very large set.
+- Use targeted recrawl for missing pages if a specific symbol cannot be found.

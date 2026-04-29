@@ -2,17 +2,22 @@
 
 ## How tool references work
 
-Plugin files use `~~category` as a placeholder for whatever tool the user connects in that category. For example, `~~project tracker` might mean Asana, Linear, Jira, or any other project tracker with an MCP server.
+Plugin files use `~~category` as a placeholder for whatever tool the user connects in that category. For example, `~~literature` might mean PubMed, bioRxiv, or any other literature source with an MCP server.
 
-Plugins are **tool-agnostic** — they describe workflows in terms of categories (chat, project tracker, knowledge base, etc.) rather than specific products. The `.mcp.json` pre-configures specific MCP servers, but any MCP server in that category works.
+Plugins are **tool-agnostic** — they describe workflows in terms of categories (literature, clinical trials, chemical database, etc.) rather than specific products. The `.mcp.json` pre-configures specific MCP servers, but any MCP server in that category works.
 
 ## Connectors for this plugin
 
 | Category | Placeholder | Included servers | Other options |
 |----------|-------------|-----------------|---------------|
-| Chat | `~~chat` | Slack | Microsoft Teams, Discord |
-| Email | `~~email` | Microsoft 365 | — |
-| Calendar | `~~calendar` | Microsoft 365 | — |
-| Knowledge base | `~~knowledge base` | Notion | Confluence, Guru, Coda |
-| Project tracker | `~~project tracker` | Asana, Linear, Atlassian (Jira/Confluence), monday.com, ClickUp | Shortcut, Basecamp, Wrike |
-| Office suite | `~~office suite` | Microsoft 365 | — |
+| Literature | `~~literature` | PubMed, bioRxiv | Google Scholar, Semantic Scholar |
+| Scientific illustration | `~~scientific illustration` | BioRender | — |
+| Clinical trials | `~~clinical trials` | ClinicalTrials.gov | EU Clinical Trials Register |
+| Chemical database | `~~chemical database` | ChEMBL | PubChem, DrugBank |
+| Drug targets | `~~drug targets` | Open Targets | UniProt, STRING |
+| Data repository | `~~data repository` | Synapse | Zenodo, Dryad, Figshare |
+| Journal access | `~~journal access` | Wiley Scholar Gateway | Elsevier, Springer Nature |
+| AI research | `~~AI research` | Owkin | — |
+| Lab platform | `~~lab platform` | Benchling\* | — |
+
+\* Placeholder — MCP URL not yet configured

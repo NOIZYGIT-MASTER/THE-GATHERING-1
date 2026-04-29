@@ -1,10 +1,12 @@
 {
-  "name": "REPLACE",
+  "name": "@noizy/cb01-mcp",
   "version": "1.0.0",
-  "scripts": { "deploy": "wrangler deploy", "dev": "wrangler dev" },
-  "devDependencies": {
-    "@cloudflare/workers-types": "^4.20240529.0",
-    "typescript": "^5.4.5",
-    "wrangler": "^3.57.0"
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
   }
 }

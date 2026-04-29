@@ -1,0 +1,475 @@
+Manual
+Disclaimer
+The information in this document is subject to change without notice and does not represent a
+commitment on the part of Native Instruments GmbH. The software described by this docu-
+ment is subject to a License Agreement and may not be copied to other media. No part of this
+publication may be copied, reproduced or otherwise transmitted or recorded, for any purpose,
+without prior written permission by Native Instruments GmbH, hereinafter referred to as Native
+Instruments.
+“Native Instruments”, “NI” and associated logos are (registered) trademarks of Native Instru-
+ments GmbH.
+Mac, Mac OS, GarageBand, Logic, iTunes and iPod are registered trademarks of Apple Inc.,
+registered in the U.S. and other countries.
+Windows, Windows Vista and DirectSound are registered trademarks of Microsoft Corporation
+in the United States and/or other countries.
+All other trade marks are the property of their respective owners and use of them does not im-
+ply any affiliation with or endorsement by them.
+Document authored by: Adam Hanley, Heavyocity Media
+Software version: 02/2012
+Special thanks to the Beta Test Team, who were invaluable not just in tracking down bugs, but
+in making this a better product.
+Contact
+Germany
+Native Instruments GmbH
+Schlesische Str. 29-30
+D-10997 Berlin
+Germany
+www.native-instruments.de
+USA
+Native Instruments North America, Inc.
+6725 Sunset Boulevard
+5th Floor
+Los Angeles, CA 90028
+USA
+www.native-instruments.com
+© Native Instruments GmbH, 2012. All rights reserved.
+Table of Contents
+Table of Contents
+1 Welcome to EVOLVE! .................................................................................................5
+2 About the Library .......................................................................................................6
+2.1 Introduction to EVOLVE’s User Interfaces ................................................................................... 7
+2.1.1 Rhythmic Suites ........................................................................................................ 8
+2.1.2 Arpeggiated Instruments ........................................................................................... 10
+2.1.3 Percussive Kits .......................................................................................................... 11
+2.1.4 Stings and Transitions .............................................................................................. 12
+2.1.5 Tonality and FX .......................................................................................................... 13
+3 Using the Instruments ................................................................................................14
+3.1 Amplitude Envelope .................................................................................................................... 15
+3.2 Filter Controls ............................................................................................................................. 15
+3.3 Effect Controls ............................................................................................................................ 17
+3.3.1 Skreamer ................................................................................................................... 17
+3.3.2 Lo-Fi .......................................................................................................................... 18
+3.3.3 Cabinet ...................................................................................................................... 19
+3.3.4 Delay ......................................................................................................................... 19
+3.3.5 Reverb ....................................................................................................................... 20
+3.4 SEQ and ARP Instruments .......................................................................................................... 22
+3.4.1 3.4.2 The SEQUENCE Controls ............................................................................................ 23
+The PRESET Controls ................................................................................................. 24
+3.5 Trigger FX ................................................................................................................................... 26
+4 Credits ......................................................................................................................28
+EVOLVE - Manual - 4
+Welcome to EVOLVE!
+1 Welcome to EVOLVE!
+The entire Heavyocity team would like to extend our sincere thanks to you for purchasing this
+modern virtual instrument collection. We look forward to hearing about your experiences with
+EVOLVE, and how you are incorporating it into your works. This manual should get you up and
+running quickly. It will guide you through the library as well as outline the incredible features
+of EVOLVE.
+Find your signature and EVOLVE!
+Document Conventions
+This document uses particular formatting to point out special facts and to warn you of poten-
+tial issues. The icons introducing the following notes let you see what kind of information is to
+be expected:
+Whenever this exclamation mark icon appears, you should read the corresponding note care-
+fully and follow the instructions and hints given there if applicable.
+This light bulb icon indicates that a note contains useful extra information. This information
+may often help you to solve a task more efficiently, but does not necessarily apply to the set-
+up or operating system you are using; however, it's always worth a look.
+Furthermore, the following formatting is used:
+▪ Text appearing in (drop-down) menus (such as Open…, Save as… etc.) and paths to loca-
+tions on your hard drive or other storage devices is printed in italics.
+▪ Text appearing elsewhere (labels of buttons, controls, text next to checkboxes etc.) is
+printed in light blue. Whenever you see this formatting applied, you will find the same
+text appearing somewhere on the screen.
+▪ Important names and concepts are printed in bold.
+▪ References to keys on your computer's keyboard you'll find put in square brackets (e.g.,
+"Press [Shift] + [Return]").
+► Single instructions are introduced by this play button type arrow.
+→ Results of actions are introduced by this smaller arrow.
+EVOLVE - Manual - 5
+About the Library
+2 About the Library
+Get ready to enter the next generation in modern virtual instruments. Created by the TV and
+videogame composers of Heavy Melody Music & Sound Design, EVOLVE supercharges creativi-
+ty and streamlines productivity for modern composers and sound designers. EVOLVE doesn’t
+just contain the typical instruments and sounds that form the foundation of most composers’
+setups. Instead, it accentuates them with a powerful combination of diverse percussion, mas-
+sive stings/transitions, and evocative tonalities in ways that have never been heard before.
+There are four main instrument components that make up EVOLVE:
+▪ Rhythmic Suites
+▪ Percussive Kits
+▪ Stings and Transitions
+▪ Tonality and FX
+Each component contains sub-menus of more refined categories of instrument types for you to
+load and play. The browsing system is both simple and intuitive, insuring efficient navigation
+and minimal ‘creative fumbling.’ Below is the sub-category breakdown of the four sound com-
+ponents:
+Rhythmic Suites (nki Preset Prefix: LPS and LPS TL):
+▪ Looped Percussives (LPS — Loop-Suite Percussive)
+▪ Looped Tonals (LPS TL — Loop-Suite Tonal)
+▪ Seq (Sequenced) and Arp (Arpeggiated) Percussives
+▪ Seq (Sequenced) and Arp (Arpeggiated) Tonals (rhythmically musical instruments)
+Percussive Kits (nki Preset Prefix: PERC):
+▪ Drum Like Kits
+▪ Hits
+▪ Metals n Cymbals
+▪ Toolshed And Warehouse
+EVOLVE - Manual - 6
+About the Library
+Introduction to EVOLVE’s User Interfaces
+▪ Traditional
+Stings And Transitions (nki Preset Prefix: STINGS):
+▪ Odd Noise and Build
+▪ Sweeping Atonal Stings
+▪ Sweeping tonal Stings
+▪ Uncaged Piano
+▪ Uncharted Metals
+Tonality and FX (nki Preset Prefixes: AFX, APA, APT, and INST):
+▪ BASS (INST — Instrument)
+▪ Melodic (INST — Instrument)
+▪ Pads and FX (AFX — Ambient FX, APA — Ambient Pad Atonal, APT — Ambient Pad To-
+nal)
+In addition to the individual instruments in EVOLVE, we’ve created 25 Multi-Instruments to
+help acquaint you with the diverse music and sound tools in the library. Each Multi is com-
+prised of 8 single instruments, assigned to midi channels 1 thru 8.
+2.1 Introduction to EVOLVE’s User Interfaces
+Within the four components of EVOLVE, three custom user interfaces have been developed
+around the goal of enhanced creativity and productivity. Specific control features of the inter-
+faces will be explained in detail later in the manual. First, let’s take a look at the interfaces,
+while providing an overview of the massive sound of EVOLVE.
+EVOLVE - Manual - 7
+About the Library
+Introduction to EVOLVE’s User Interfaces
+2.1.1 Rhythmic Suites
+The Rhythmic Suite interface.
+There’s no better place to begin than with the diverse rhythmic loop suites ready to explode
+from EVOLVE. Thunderous walls of driving cinematic percussion, wickedly tricked-out punchy
+beats, odd otherworldly percolations and next-gen tonal elements make up seven genre-based
+instruments. In all, there is well over 600 original tempo-synced beat-sliced loops as well as a
+one massive tonal loop suite (in addition to breakdowns). The genres covered are:
+▪ Dramatic EVOLVED
+▪ Dramatic Techtronic
+▪ Electro Tech
+▪ Industrial Elements
+▪ Industrial Grunge
+EVOLVE - Manual - 8
+About the Library
+Introduction to EVOLVE’s User Interfaces
+▪ Quirky And Cartoony
+▪ RockPop
+▪ Tonal Loop Suites
+The nki preset names are suggestive to the general style of loops that you’ll find within the in-
+dividual suites. Keep in mind that there are NO rules. All of the suites are geared to generally
+work well with one another. Creating dense rhythmic layers that sync tightly to one another is
+incredibly easy with the intuitive key-mapping system Heavyocity has developed.
+HEAVYOCITY's Loop Suite Keymap System.
+On the lower end of the key range (suites are mapped over an 88-key range) larger, deeper,
+darker sounds exists (e.g., full loops, kicks, dumpsters, big toms etc). As you move up the reg-
+ister, the loop-types shift towards higher, wispier types of sounds (hi-hats, shakers etc). Result-
+ing are seemingly limitless combinations of diverse rhythmic power at your fingertips! The to-
+nal loop menu (and combinations therein) utilize the same key-mapping structure: Bass-type
+loops are found on the lower register of the keyboard, while higher frequency sounds are locat-
+ed in the upper ranges of the keyboard, and so on.
+Regarding Tempo-Synced, Beat-Sliced Loop Technology:
+We’ve taken specific care to create very clean beat-sliced content with minimal artifacts. While
+individual loops tend to contain optimal tempo ranges (sweet spots), we’ve tried to put as
+much useful, user friendly flexibility into the loops as possible.
+Generally accepted tempo ranges are anywhere from 80 BPM to 140 BPM and beyond.
+EVOLVE - Manual - 9
+About the Library
+Introduction to EVOLVE’s User Interfaces
+2.1.2 Arpeggiated Instruments
+The Arpeggiated Instruments interface.
+You control the rhythmic and tonal playing fields with EVOLVE’s custom step-sequence arpeg-
+giator. Grab one of the pre-programmed groove maps as you set one of the nearly 60 instru-
+ments loose. Experimental groove creation not only comes easily and quickly, but also produ-
+ces a diverse range of interesting sonic results. We custom-scripted the step sequencer and set
+up intuitive, user friendly controls (velocity, filter, pan to name a few). The end-result introdu-
+ces percolating swirls of percussion and tonality.
+EVOLVE - Manual - 10
+About the Library
+Introduction to EVOLVE’s User Interfaces
+2.1.3 Percussive Kits
+The Percussive Kits interface.
+There are more than 30 modern percussive-type menus and kits in EVOLVE. We took great
+pride in beating droves of inanimate objects senseless to create this powerful array of percus-
+sive elements. Raw sounds were obtained in some strange and unique places. From a huge
+warehouse, to an amusement park midway, to a dark murky stairwell, to the whisper quiet con-
+fines of the New York City’s Heavy Melody Studios, the diversity shines through in these
+unique and eclectic percussion instruments. Whether it’s a massive impacting hit, or a subtly
+hand-crafted rhythm, a truly impacting sonic feast awaits!
+EVOLVE - Manual - 11
+About the Library
+Introduction to EVOLVE’s User Interfaces
+2.1.4 Stings and Transitions
+The Strings and Transitions interface.
+Are you in need of some new creative tools to help captivate the attention of your audience?
+You’ve come to the right place! The stings and transitions of EVOLVE provide what we’ve felt
+has been absent from many of the current virtual instruments. Take no prisoners as you un-
+leash hordes of sonic textures from both tonal and atonal/percussive worlds. The signature
+stings and transitions are set to deepen the emotion of any track. Whether it be a terrifying
+sonic punctuation in a film soundtrack, or an otherworldly gesture in the breakdown of a pop
+song, unique new signatures await!
+EVOLVE - Manual - 12
+About the Library
+Introduction to EVOLVE’s User Interfaces
+2.1.5 Tonality and FX
+The Tonality and FX interface.
+EVOLVE’s percussive tour de force is balanced with a tripped out, mashed up array of music
+and sound design instruments and elements. They tend to stray from the more traditional
+“meat and potatoes” offerings that composers have well-covered in their library collections. In
+turn, EVOLVE fills these overlooked tonal nooks and crannies. From organic otherworldly
+soundscapes, to blistering synthetics and gnarled-out pads, the eclectic vibe of EVOLVE’s ton-
+ality and sound design is sure to inject unique new mood and melody to your next project.
+It is important to point out that the Tonality | FX, Stings | Transitions, and the Percussive Kit
+instruments utilize the same user interface (the colors vary to differentiate the instruments,
+but the control features are identical on all presets in these categories).
+EVOLVE - Manual - 13
+Using the Instruments
+3 Using the Instruments
+A user interface example from the Rhythmic Suites.
+Above is a view of an EVOLVE instrument. User interfaces for EVOLVE will differ from instru-
+ment to instrument. This section will help familiarize you with the general instrument parame-
+ters of EVOLVE.
+A note regarding MIDI Controller assignments
+All of the user parameters built in to EVOLVE are meant to be utilized by you, the user. To that
+end, we have left CC (continuous controller numbers — external midi control sources such as
+modulation wheels or midi-data sliders) unattached. We believe it should be up to you to deter-
+mine how you want to design your control scheme.
+EVOLVE - Manual - 14
+Using the Instruments
+Amplitude Envelope
+3.1 Amplitude Envelope
+An amplitude envelope enables the user to mold the volume of an instrument sound over time.
+User defined attack, decay, sustain and release parameters are built into many of the presets
+of EVOLVE (Percussive, Stings | Transitions, and Tonality | FX instruments). The AMPLITUDE
+ENV. control strip is laid out sensibly for quick adjustment at any time.
+The Amplitude Envelope controls.
+▪ Attack: determines how quickly a sound reaches full volume after it is activated (i.e. the
+key is pressed). ‘Slow attack’ is commonly part of sounds that are more pad-like, whereas
+‘fast attack’ usually occurs in more percussive instruments.
+▪ Decay: determines how quickly the sound drops to the sustain level after the initial peak
+is reached.
+▪ Sustain: corresponds to the “constant” volume that the sound takes after the decay until
+the note is released.
+▪ Release: controls how quickly the sound fades when a note ends (the key is released).
+3.2 Filter Controls
+In relation to sound, filters allow you to select a range of frequencies in a sound (instrument
+preset), and either amplify or reduce those frequencies. Decreasing high frequencies or in-
+creasing low frequencies within a sound makes it seem “darker” or muffled, while increasing
+high frequencies or decreasing low frequencies makes the sound seem “brighter.”
+EVOLVE houses two controllable filters with user definable parameters. Users have the ability
+to assign custom CC (continuous controller) numbers according to his or her personal control
+structure.
+EVOLVE - Manual - 15
+Using the Instruments
+Filter Controls
+Filter Types
+nuated.
+▪ 4-Pole High-pass (HP) filter: High frequencies are passed, while low frequencies are atte-
+▪ 4-Pole Low-pass (LP) filter: Low frequencies are passed, while high frequencies are attenu-
+ated.
+Filter Parameters
+The Filter controls.
+▪ On/Off Switch: Toggles the respective filter on or off. When the filter is active, a red light
+will illuminate beside the switch.
+▪ Cutoff (Cutoff frequency): defines which frequencies are removed from the audio signal.
+In other words, the cutoff frequency setting can either ‘brighten’ or ‘darken’ a sound, de-
+pending on the value.
+▪ Resonance: emphasizes frequencies at the filter’s cutoff point. It can create dramatic ef-
+fects if the percentage is high and the filter cutoff point is changing. This is what’s de-
+scribed as a ‘filter sweep.’
+As with all of the user parameters in the EVOLVE interfaces, user defined CC numbers can be
+attached to both filters along with their respective Cutoff and Res controls.
+EVOLVE - Manual - 16
+Using the Instruments
+Effect Controls
+3.3 Effect Controls
+All instruments in the EVOLVE collection house user programmable effects, designed to sweet-
+en existing instrument sounds. The MASTER EFFECTS panel contains a drop-down menu on
+the left, which enables the user to toggle between the control views of the following included
+effects:
+▪ Skreamer
+▪ Lo-Fi
+▪ Cabinet
+▪ Delay
+▪ Reverb
+Each effect has an on/off switch to either enable or disable the effect. This control is located
+below the effect selection drop-down menu. The three other knobs change their function de-
+pending on the selected effect. The following sections are a guide to these controls.
+3.3.1 Skreamer
+The Skreamer controls.
+The Skreamer effect is a heavy, stomp-box style distortion. Designed mainly with guitars in
+mind, it can be used on any instrument to make them skream.
+Parameters:
+▪ Drive: controls the distortion amount or "crunch factor."
+EVOLVE - Manual - 17
+Using the Instruments
+Effect Controls
+▪ Tone: sets the brightness of the processed signal.
+▪ Bright: provides control over the high frequency tone.
+3.3.2 Lo-Fi
+The Lo-Fi controls.
+This effect adds digital degradation to the sound by reducing the bit-depth and sample rates.
+It can be used to add extreme crunch or the old-school grit of vintage samplers.
+Parameters:
+▪ Bits: controls the sounds resolution. Lower settings will reduce the number of bits and
+thus add digital distortion to the sound.
+▪ S.Rate: controls the sample rate. Reducing the sample rate will remove higher frequen-
+cies and add aliasing.
+▪ Noise: adds a steady noise floor to the signal.
+EVOLVE - Manual - 18
+Using the Instruments
+Effect Controls
+3.3.3 Cabinet
+The Cabinet effect controls.
+The Cabinet effect emulates the sound of a speaker cabinet. This can be used to drastically
+alter the tonality of your instrument.
+Parameters
+▪ Size: controls the size of the speaker. Setting this to a low setting will give you the cheap
+speaker effect.
+▪ Air: controls the size of the virtual room, giving a sense of space to the sound.
+▪ Treble: controls the level of the high frequencies to increase or reduce brightness.
+3.3.4 Delay
+The Delay effect controls.
+EVOLVE - Manual - 19
+Using the Instruments
+Effect Controls
+The delay effect takes the input signal and plays it back after a preset increment of time. It
+can be played back multiple times, creating a repeating, decaying echo. The delay in EVOLVE
+is automatically tempo-synced (in sixteenth note increments, to insure smooth rhythmic results
+with the sound being played.
+Parameters
+▪ Level: determines how strong the delay will playback with the sound. Increased level re-
+sults in louder delay effect.
+▪ Time: determines the tempo-synced note value of the delay. The number value shown rep-
+resents the number of sixteenth notes the sound is delayed. For example:
+◦ 1.0=1/16 note
+◦ 2.0=1/8 note
+◦ 3.0= 3/16 (dotted eighth)
+◦ 4.0=1/4 note
+◦ 5.0=5/16
+◦ 6.0=3/8 (dotted quarter) note
+◦ and so on…
+▪ Feedback: determines the length of the delay tail. Increasing the feedback will create lon-
+ger delay tails.
+3.3.5 Reverb
+The Reverb effect controls.
+EVOLVE - Manual - 20
+Using the Instruments
+Effect Controls
+Reverb simulates the component of sound that results from reflections from surrounding walls
+or objects. Users can introduce different types of emulated environments in which the instru-
+ments can be played in.
+Parameters
+▪ Level: determines how “Wet” the sound is; increasing the level makes a sound more
+washed out (more effect).
+▪ Size: determines the size of the simulated room, and thus the reverb trail; for example,
+larger sizes will give sounds the effect of being set in large hall, or arena. Smaller size
+gives the impression of the sound being played in a tighter space (i.e. studio iso booth).
+▪ Damping: sets the amount of simulated absorption that takes place in rooms due to ob-
+jects affecting the reflection behavior. This parameter will make the ‘wet’ sound of reverb
+less apparent, and more transparent.
+EVOLVE - Manual - 21
+Using the Instruments
+SEQ and ARP Instruments
+3.4 SEQ and ARP Instruments
+An example of an ARP instrument interface.
+The SEQ and ARP instruments work similarly to a classic step sequencer, allowing you to define
+a progression of 16 values playing back at a constant rate. The tempo can be synced to either
+your host or the Master Control tempo.
+EVOLVE - Manual - 22
+Using the Instruments
+SEQ and ARP Instruments
+3.4.1 The SEQUENCE Controls
+Selecting a parameter sequence to edit.
+The sequencer controls three different parameters: Velocity, Filter, and Pan. To the left of the
+sequence edit window is a drop-down menu. In this menu you can select which of the three
+parameters is displayed in the sequence edit window. The Filter knob below the menu controls
+the frequency range of the filter sequence.
+You also have the ability to control the sustain of each step of the sequence. To alter the sus-
+tain, click the number in the Sustain value edit area and drag the mouse up or down to change
+the value. Or double-click and enter a value
+Editing a Sequence
+By clicking and dragging the mouse on the central table, you can change the values of each
+individual step. To draw a linear change across multiple steps, right-click (or Ctrl-click on a
+Mac) and drag the mouse. For a more drastic change in the sequence steps, you can click the
+Randomizer button. This will randomly change each of the 16 values in the displayed parame-
+ter. Also, if you’d like to start fresh, the Reset button will bring all of the bars to a default val-
+ue: The Filter resets to a value of 127, the Velocity to a value of 100, and the Pan to the cen-
+ter position (0).
+EVOLVE - Manual - 23
+Using the Instruments
+SEQ and ARP Instruments
+3.4.2 The PRESET Controls
+The PRESET control area.
+There are twelve chromatic key-switchable preset slots available for you to program and assign
+each of your own unique sequences into.
+The Preset knob represents the key value that you are selected on. The key-switching has been
+preset to A-1 through A0. However, you can change this setting by doing the following:
+1. 2. 3. Click the Learn KS button
+Press the key from which you wish the key-switches to start
+The key-switches will be set to run chromatically up from the selected key.
+Additionally, you can assign a Continuous Controller value to the preset knob to automate
+switching between presets.
+As a template for use, we have copied the 12 factory presets to each of the key-switch preset
+slots. If you really like a sequence that you have created, and would like to copy it to another
+preset slot:
+1. 2. Open the edit drop-down menu and click Copy Preset.
+Then, select a different preset, either by using the key-switch, or by turning the preset
+knob
+3. Select Paste Preset to Knob in the edit pull-down menu.
+You also have the option to choose one of the 12 factory preset sequences from the edit pull-
+down menu. The Tempo knob controls the rate of the steps in the sequencer. Via a drop-down
+menu beside the tempo knob, the input quantize can be set to: no quantize, bar (1 full 16
+step bar), 1/2, 1/4, 1/8, and 1/16.
+EVOLVE - Manual - 24
+Using the Instruments
+SEQ and ARP Instruments
+Setting the input quantize resolution.
+This will quantize any notes you play to the next step according to the host tempo and the se-
+lection made in this menu.
+EVOLVE - Manual - 25
+Using the Instruments
+Trigger FX
+3.5 Trigger FX
+The Trigger FX page.
+Certain instruments will have a second page of controls that contain the Trigger FX. To access
+these controls, click on the Trigger FX tab at the bottom of the instrument, if it is available.
+The Trigger FX allow you to turn effects on and off quickly and conveniently by using MIDI key-
+switches. This allows extended real-time and performance control of the sound of the instru-
+ment.
+There are 12 different effects mapped on MIDI keys C6 — B6:
+▪ Dirt (C6): a heavy distortion effect
+▪ Saturate (C#6): a more subtle, overdriven distortion
+EVOLVE - Manual - 26
+Using the Instruments
+Trigger FX
+▪ Cabinet (D6): a speaker emulation effect
+▪ LoFi (D#6): digital distortion
+▪ Filter (E6): a modulated filter effect
+▪ EQ Sweep (F6): a modulated equalizer
+▪ Panner (F#6): modulates the panorama position of the instrument
+▪ Rotator (G6): a rotating speaker emulation
+▪ Pitch Env (G#6): modulates the pitch of the instrument
+▪ Delay 1 (A6): a fast, slap-back echo
+▪ Glitcher (A#6): modulates the volume and pan at a fast rate to produce a glitch effect
+▪ Delay 2 (B6): a slow, rhythmic echo
+You can activate an effect by pressing the corresponding MIDI key or by clicking on the respec-
+tive switch on the instrument interface. An effect can be deactivated by either releasing the
+MIDI key, or by clicking on the switch again.
+EVOLVE - Manual - 27
+Credits
+4 Credits
+Product Concept and Design: Heavyocity Media — Dave Fraser, Neil Goldberg, Ari Winters
+Content Creation: Heavyocity Media — Neil Goldberg, Dave Fraser, Ari Winters
+Additional Content Creation: Mark Kauffman
+Kontakt Scripting: Adam Hanley, Ari Winters, Josef Natterer
+Sample Editing: Heavyocity Media
+Additional Sample Editing: Mark Kauffman
+Additional Preset Formatting: Justin Wasack, Scott Freiman
+Artwork: Shaun Ellwood, Dave Fraser, Ari Winters
+Performers: Heavyocity Media
+Additional Performances: Mark Kauffman, Robert C. Kelly, Faye Gerbes, Carolyn Rowan, Ste-
+phanie Anne Landers
+EVOLVE - Manual - 28

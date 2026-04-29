@@ -1,45 +1,30 @@
-# Web Lifecycle and Event Model
+# Lifecycle and Events (Web)
 
-## Contact Center App Runtime (Zoom Client)
+## Lifecycle
 
-1. Configure SDK capabilities.
-2. Read running context.
-3. Read engagement context/status.
-4. Subscribe to:
-- `onEngagementContextChange`
-- `onEngagementStatusChange`
-- optional variable change events
-5. Maintain engagement-scoped state.
+1. Inject script with API key and env.
+2. Wait for `zoomCampaignSdk:ready` or `waitForReady()`.
+3. Register event listeners.
+4. Execute control calls (`open`, `close`, `show`, `hide`, `endChat`).
+5. Optionally refresh user variables via `updateUserContext()`.
+6. Remove listeners during page teardown.
 
-## Web Campaign SDK Runtime
+## Event Surface
 
-1. Load script with API key.
-2. Wait for `zoomCampaignSdk:ready`.
-3. Call methods:
 - `open`
 - `close`
 - `show`
 - `hide`
-- `endChat`
-4. Subscribe/unsubscribe to SDK events.
+- `engagement_started`
+- `engagement_ended`
 
-## Video Client Runtime
+## Method Surface
 
-1. Create client.
-2. Initialize with entry identifier and optional metadata.
-3. Start video.
-4. Handle `video-start` and `video-end` events.
-
-## Smart Embed Runtime
-
-1. Load Smart Embed iframe.
-2. Listen for `message` events from iframe.
-3. Respond to init/search/control requests.
-4. Map engagement and contact data to CRM/app entities.
-
-## State Strategy
-
-- Key all session data by `engagementId`.
-- Keep event handlers re-entrant and idempotent.
-- Treat `end` status as cleanup boundary.
-
+- `close()`
+- `endChat()`
+- `hide()`
+- `show()`
+- `ChangeCampaign(id, channel?)`
+- `updateUserContext()`
+- `waitForInit()`
+- `waitForReady()`

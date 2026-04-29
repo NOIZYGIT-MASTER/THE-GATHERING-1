@@ -1,33 +1,14 @@
 # iOS Reference Map
 
-## Sources
+## Core Docs
 
-- Docs: https://developers.zoom.us/docs/meeting-sdk/ios/
-- API Reference: https://marketplacefront.zoom.us/sdk/meeting/ios/annotated.html
+- Get started: https://developers.zoom.us/docs/virtual-agent/ios/get-started/
+- Integration scenarios: https://developers.zoom.us/docs/virtual-agent/ios/integration-scenarios/
+- JavaScript events: https://developers.zoom.us/docs/virtual-agent/ios/javascript-events/
+- Resources: https://developers.zoom.us/docs/virtual-agent/ios/resources/
 
-## Crawl Coverage Snapshot
+## Observed Sample Patterns
 
-- Docs pages captured: `55`
-- API reference pages captured: `643`
-
-## Key API Entry Pages
-
-- `annotated.md`
-- `classes.md`
-- `files.md`
-- `hierarchy.md`
-- `functions*`
-- `globals*`
-- `pages.md`
-
-## Notable API Surface Areas
-
-- `MobileRTCMeetingService` category extensions
-- Protocol-heavy delegate architecture
-- Audio/video/share/raw-data helpers
-- BO/webinar/AI companion interfaces
-
-## Drift Signals to Watch
-
-- New AI Companion and smart summary handlers.
-- Category-level method movement between releases.
+- Objective-C and Swift variants expose equivalent bridge behavior.
+- Message handler constants in sample code still use legacy naming.
+- URL routing policy is split between delegate interception and message-handler command processing.

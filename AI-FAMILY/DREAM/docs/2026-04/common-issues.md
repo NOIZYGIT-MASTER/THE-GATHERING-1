@@ -1,51 +1,25 @@
-# Rivet Common Issues
+# Common Issues (REST API)
 
-## Webhooks never reach handlers
+This complements `common-errors.md` (HTTP codes and Zoom error codes).
 
-Symptoms:
-- `client.start()` succeeds, but no event callbacks fire.
+## Pagination
 
-Checks:
-- Marketplace endpoint URL points to correct module port.
-- Endpoint includes `/zoom/events` suffix.
-- `webhooksSecretToken` matches app configuration.
-- Ngrok forward is active and mapped to the receiver port.
+- Some endpoints use `next_page_token`.
+- Others use `page_number` + `page_size`.
+- For large accounts, always code defensively for partial results.
 
-## OAuth install/callback fails
+## Token Expiry / Scopes
 
-Symptoms:
-- Install page redirects fail or callback errors.
+- `Access token is expired`: refresh or request a new S2S token.
+- `does not contain scopes`: add scopes in Marketplace and re-authorize users (User OAuth).
 
-Checks:
-- `installerOptions.redirectUri` exactly matches Marketplace OAuth redirect.
-- `stateStore` value is configured and stable.
-- Receiver mode supports User OAuth (Lambda receiver caveat).
+## Webhooks
 
-## Multi-module runtime conflicts
+- Webhooks are at-least-once delivery: design idempotent handlers.
+- Verify signatures and handle `endpoint.url_validation`.
 
-Symptoms:
-- One module works, another silently fails.
+## Also See
 
-Checks:
-- Every module uses a unique port.
-- Event subscriptions target the correct module endpoint.
-- Env variables are not accidentally shared with wrong module.
+- `common-errors.md`
+- `token-scope-playbook.md`
 
-## API-only mode confusion
-
-Symptoms:
-- OAuth expectations fail when receiver disabled.
-
-Checks:
-- `disableReceiver: true` disables OAuth flow behavior.
-- For OAuth + API-only behavior, use receiver-compatible configuration and relax webhook verification as documented.
-
-## Sample parity mismatches
-
-Symptoms:
-- Following sample exactly still fails in your environment.
-
-Checks:
-- Normalize env key names to your project standard.
-- Reconcile sample README assumptions with current TypeDoc signatures.
-- Verify module auth type alignment (Client Credentials vs User OAuth vs S2S).

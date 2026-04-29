@@ -1,0 +1,1742 @@
+
+Table of Contents
+1. Disclaimer .................................................................................................................. 1
+2. Welcome to STRAYLIGHT .......................................................................................... 2
+2.1. What's New in STRAYLIGHT 1.5 ....................................................................... 2
+3. Basic Workflows ......................................................................................................... 3
+3.1. Saving and Loading Snapshots ......................................................................... 3
+3.2. Using Browsers ................................................................................................ 4
+3.2.1. Opening and Closing Browsers ............................................................... 4
+3.2.2. Browser Overview .................................................................................. 4
+3.2.3. Limiting the Browser Search in the Results List ........................................ 5
+3.2.4. Snapshots – Sound Types and Tags ........................................................ 6
+3.3. Importing Your Own Samples ............................................................................ 8
+4. An Overview of Creating a Sound .............................................................................. 10
+5. Perform Page Overview ............................................................................................ 12
+5.1. Perform Page Overview .................................................................................. 12
+5.2. Grain Header ................................................................................................. 13
+5.3. Sample Header .............................................................................................. 13
+5.4. Snapshot Browse Controls .............................................................................. 14
+5.5. XY Pad .......................................................................................................... 15
+5.5.1. XY Pad Assignment .............................................................................. 15
+6. Grain Page ............................................................................................................... 17
+6.1. Overview ........................................................................................................ 17
+6.2. Grains ............................................................................................................ 18
+6.3. Cursor ........................................................................................................... 19
+6.4. Range ............................................................................................................ 20
+6.5. Tuning ........................................................................................................... 21
+6.6. Amp ............................................................................................................... 21
+6.7. Envelope ........................................................................................................ 22
+7. Sample Page ............................................................................................................ 23
+7.1. Overview ........................................................................................................ 23
+7.2. Pitch .............................................................................................................. 24
+7.3. Start .............................................................................................................. 24
+7.4. Filter .............................................................................................................. 25
+7.5. Filter Modulation ............................................................................................. 25
+7.6. Amp ............................................................................................................... 26
+8. Effects Page ............................................................................................................. 28
+8.1. Effects Page Overview .................................................................................... 28
+8.1.1. Effects Section Overview ...................................................................... 29
+8.1.2. Effect Selector ...................................................................................... 30
+8.2. Loading Effects into Effect Slots ...................................................................... 30
+8.3. Selecting Effect Modes ................................................................................... 30
+8.4. Moving Effect Slots within the Effect Chain ....................................................... 31
+8.5. Disabling Effect Slots ...................................................................................... 31
+9. Master Page ............................................................................................................. 32
+9.1. Master Page Overview .................................................................................... 32
+9.2. Assigning X and Y Axis to a MIDI Controller ..................................................... 32
+10. Send FX Pane ........................................................................................................ 34
+10.1. Overview ...................................................................................................... 34
+10.2. Grains .......................................................................................................... 34
+10.3. Delay ........................................................................................................... 35
+10.4. XY ............................................................................................................... 35
+10.5. Reverb ......................................................................................................... 36
+10.6. Sample ........................................................................................................ 36
+11. Macros Pane .......................................................................................................... 37
+11.1. Macro and Modulation Assignment ................................................................ 37
+12. Modulation Pane ..................................................................................................... 39
+12.1. Overview ...................................................................................................... 39
+12.2. LFO 1 .......................................................................................................... 40
+12.3. Matrix .......................................................................................................... 40
+12.4. Shaper ......................................................................................................... 42
+12.5. LFO 2 .......................................................................................................... 42
+13. Effect Reference ..................................................................................................... 44
+13.1. Delay ........................................................................................................... 44
+13.2. Drive ............................................................................................................ 45
+13.3. Dyn .............................................................................................................. 47
+13.4. EQ ............................................................................................................... 48
+13.5. Filter ............................................................................................................ 50
+13.6. Gater ........................................................................................................... 54
+13.7. Mod ............................................................................................................. 54
+13.8. Rev .............................................................................................................. 58
+13.9. Util ............................................................................................................... 59
+14. Credits ................................................................................................................... 60
+Disclaimer
+1. DISCLAIMER
+The information in this document is subject to change without notice and does not represent a
+commitment on the part of Native Instruments GmbH. The software described by this document is
+subject to a License Agreement and may not be copied to other media. No part of this publication
+may be copied, reproduced or otherwise transmitted or recorded, for any purpose, without prior
+written permission by Native Instruments GmbH, hereinafter referred to as Native Instruments.
+“Native Instruments”, “NI” and associated logos are (registered) trademarks of Native Instruments
+GmbH.
+Mac, macOS, GarageBand, Logic and iTunes are registered trademarks of Apple Inc., registered
+in the U.S. and other countries.
+Windows and DirectSound are registered trademarks of Microsoft Corporation in the United States
+and/or other countries.
+All other trademarks are the property of their respective owners and use of them does not imply
+any affiliation with or endorsement by them.
+Document authored by: Hannah Lockwood, Christian Schulz, Jan Ola Korte, David Gover
+Software version: 1.5 (11/2019)
+1
+Welcome to STRAYLIGHT
+2. WELCOME TO STRAYLIGHT
+STRAYLIGHT is an instrument that provides unique cinematic soundscapes, transitions, and ambi-
+ent tones. It combines a purpose-built sound library with specialized grain and sample playback
+modules, effects, and a powerful performance-based X-Y modulation matrix.
+STRAYLIGHTS’ bespoke granular engine places the source audio into a powerful and specialized
+easy-to-use interface. The result is lush, organic timbres that can defy time and pitch, yet still re-
+tain the character of the source sounds (strings, glass, stone, membranes, and more), and sonical-
+ly evolve over time. Small sounds can be vastly magnified in size and scope without sacrificing
+their sound quality or character. The granular engine is then paired with a reinforcing sample layer,
+offering the same level of editing and modulation.
+Special attention is given to STRAYLIGHTS’ modulation and effects sections, ensuring a fast, cre-
+ative workflow. The precise X-Y control enables expressive direct-to-picture performance and the
+kind of extremely detailed control over intensity and timing required for cinematic sound design. Up
+to fourteen simultaneous effects can be applied and modulated, taken from ten different catego-
+ries, including specially captured reverb impulse responses designed exclusively for STRAY-
+LIGHT.
+Thank you for choosing STRAYLIGHT.
+2.1. What's New in STRAYLIGHT 1.5
+STRAYLIGHT 1.5 contains the following new features and improvements:
+• You can now import your own samples by dragging and dropping them on to the waveform dis-
+plays. See, Importing Your Own Samples [8].
+• Added high-quality modulation effects using Choral, Flair and Phasis algorithms available in all
+effect slots. See, Mod Effects [54].
+• Added ‘Grain Rate Interval sync’ functionality which allows you to lock the grain generation to
+the tempo of your DAW. See, Grains [18]
+• Added 68 additional presets using the new features of version 1.5 for a total number of 452.
+• Improved the handling of main page waveforms range locators is now easier when the cursor
+reaches the edges
+2
+Basic Workflows
+3. BASIC WORKFLOWS
+The following key features facilitate the STRAYLIGHT workflow:
+• Main Navigation: Selects between the five main pages; Perform, Grain, Sample, Effects, and
+Master.
+• Perform page: The XY pad at the centre of the Performer page works as the key interaction
+for shaping the sound. The main change in the character of the sound will take place using the
+XY pad. This page also hosts four Macros that provide quick access to control and change the
+assigned parameters. For more information, refer to Perform Page Overview.
+• Grain page: The Grain page covers all parameters related to playback within the Grain engine.
+The lower area has separate navigation, displaying either Send FX, Macros or Modulation. For
+more information, refer to Grain Page.
+• Sample page: The Sample page covers all parameters related to playback within the Sample
+engine. For more information, refer to Sample Page.
+• Effects page: The Effects page contains a flexible FX chain for both the Grain engine and
+Sample engine, with a large XY Pad in the middle for mapping effects parameters. For more
+information, refer to Effects Page
+• Master page: The Master page allows for mapping of MIDI CCs to the XY Pad and includes a
+third effects chain which affects the combined Grain and Sample layers. For more information,
+refer to Master Page.
+• Macros: The lower area has a separate navigation, displaying either Send FX, Macros or Mod-
+ulation. For more information, refer to Macros Pane
+• Random: The Random icon is located in the header sections of both the Grain and Sample
+pages. When the icon is pressed, random values are set for all applicable parameters.
+3.1. Saving and Loading Snapshots
+Snapshots are your own personalized user presets, which you can save and recall at a later time.
+Once you have assigned your Macro controls and adjusted your settings, you can save your
+sound.
+The Snapshot menu is displayed by clicking on the camera icon.
+To save a Snapshot as you are working on it:
+1. 2. 3. Click the Save button. The Save button is represented by a floppy disk icon. This will open a
+standard Save dialog which will allow you to save your .nksn file in the User Snapshot Li-
+brary.
+Name your new Snapshot and click ‘Save’.
+Once the Snapshot.nksn file is saved into User Snapshots folder, it will appear in the Snap-
+shot browser accessed by clicking on the name above the five navigation tabs.
+Naming a new Snapshot.
+3
+Basic Workflows
+To load a Snapshot:
+1. 2. 3. Click the arrow next to the Snapshot name field
+Select ‘User’ and browse the menu for your Snapshot.
+Once clicked, the Snapshot will be loaded.
+Loading a Snapshot.
+3.2. Using Browsers
+STRAYLIGHT offers three individual browsers to directly search for Snapshots, Grain Source pre-
+sets and Sample Source presets. In each of these browsers you can limit the search in the Results
+list by selecting tags from several sound categories. Besides limiting the search, you can also
+mark presets as favorites and filter by favorites in the Results list.
+In this section you are provided with an overview of the browser and you will learn how to work
+with the browser.
+The designs and workflows of the individual browsers are identical. The overview
+and workflows are written globally.
+3.2.1. Opening and Closing Browsers
+To open a browser:
+• Click on the Snapshot name, or on the Grain Source label, or on the Sample Source label on
+the pages.
+The corresponding browser opens.
+To close a browser:
+• Click on the cross icon at the top left to close the browser.
+3.2.2. Browser Overview
+Each of the browsers contain the following elements:
+4
+Basic Workflows
+Browser.
+(1) Browser label: Displays the name of the file type you are currently browsing. This can either
+be SNAPSHOT, GRAIN SOURCE, or SAMPLE SOURCE.
+(2) Previous and Next buttons: Loads the previous and next Snapshot or preset from the Results
+list in the browser. If sound category tags are selected for limiting the search in the Results list, the
+buttons appear filled out.
+(3) Snapshot label / Preset label: Displays the name of the loaded Snapshot highlighted in white,
+Grain Source preset or Sample Source preset highlighted in yellow.
+(4) Sound Categories: This area contains different sound categories with several tags each. You
+can use these tags to limit your search in the Results list. For more information, refer to Snapshots
+– Sound Types and Tags.
+(5) Results list: Provides you with the results defined by the search criteria in the sound catego-
+ries. You can also mark Snapshots and presets as favorites and filter the results list by favorites.
+For more information, refer to Marking Snapshots and Presets as Favorites.
+(6) Close icon: Use this icon to close the browser.
+(7) XY Pad: A smaller version of the main XY pad that displays the position for the X and Y param-
+eters of the selected Snapshot. You can also use this XY pad to control the sound of the selected
+Snapshot. For more information, refer to XY Pad.
+For more information on browsing for Snapshots and presets, refer to Limiting the Browser Search
+in the Results List.
+3.2.3. Limiting the Browser Search in the Results List
+In each browser you can limit the search criteria by selecting tags in several sound categories:
+5
+Basic Workflows
+• Select the tag(s) in the sound category of your choice.
+Selected tags are highlighted, and items in the Results list are limited accordingly. You can
+also multi-select tags within or across sound categories to further refine your search.
+Preserved Tag Settings
+After closing the browsers, STRAYLIGHT preserves the tag settings for each browser. After exiting
+a browser, its tag settings are also reflected in the corresponding next preset and previous buttons
+within the headers. The next preset and previous buttons indicate if they step through all available
+items (Snapshots or presets) or if a filtered search is in use:
+• If there are no tags selected in the browser, the next preset and previous buttons appear as
+open brackets:
+• If any tags have been selected, the Results list contains filtered items, the next preset and pre-
+vious buttons appear as filled triangles:
+3.2.4. Snapshots – Sound Types and Tags
+This section gives you an overview of the sound types and a brief explanation of the tags you can
+use to limit your search for Snapshots in the Snapshot browser.
+STRAYLIGHT Snapshots are often designed to cover a wide range of the sonic spectrum, mean-
+ing that they can cover a whole movie scene but have to be thinned out to work in a fuller musical
+arrangement. Thinning can easily be achieved by disabling one of the layers and/or applying the
+High/Low Pass filters, which are setup up on the Macros A and B for the majority of the presets.
+Often the character of the sounds can widely be controlled by the number of notes played and the
+octave range where you play them. STRAYLIGHT is very sensitive to the voicing. Wide chords
+with few notes will often give you better results than a common, narrow keyspacing, which you
+might use to play a standard piano patch.
+Types
+The sound type Types contains the following tags:
+• Atmospheres: The sound is best played using a single note or just a few notes. Try octaves in
+the lower register and one or two additional notes in the higher range. Atmospheres can also
+be atonal or noisy soundscapes and are often more complex than pads.
+• Pads: Sounds playable much like a typical polyphonic synthesizer. Not as “complex” as the At-
+mosphere category but more suitable in typical arrangements with other instruments.
+• Lead: Sounds which can function as lead sounds in a higher octave range.
+• Transistion / Risers: The sound contains a spectral transition or movement, which is either
+scanned through automatically synced to the host clock or the transition is the main parameter
+on the XY pad allowing realtime control of the spectral change.
+• Keys: The sound is based on keyboard instruments like pianos and organs.
+6
+Basic Workflows
+• Effects: All kinds of real time controlled cinematic sound effects. There is some overlap with
+Atmospheres and Transitions here but it still makes sense to look at it as a separate category.
+These sounds are mostly atonal.
+• Sub: Sounds with remarkable subharmonic content. These are best played monophonic or in
+octaves.
+• Pulses: Contain a rhythmi, arpeggiated or gated element. Sometimes the rhythm is bound to
+the host clock in other cases it is more fluid.
+• Showcase: Indicates a representative selection of STRAYLIGHT sounds. Listen to these to get
+a first impression of the product.
+Pitch
+Pitch contains the following tags:
+• Steady: The sounds feature a steady pitch suitable for chords.
+• Varying: The sounds might change to a different note over time (for example, a recording of a
+overtone series) but is steady for the majority of the sample / modulation range.
+• Chaotic: The sound has no dedicated root pitch and can change continuously.
+Character
+Character contains the following tags:
+• Intensity control: The XY pad assignments of the sound is setup to be able to control the ‘in-
+tensity’ of the sounds. Often it means the Snapshot sounds more dramatic when the Y axis
+amount it at the top.
+• Complex: Indicates that a higher amount of spectral change over time occurs in the sound.
+This can be an indicator of how easy it is to combine the preset with other instruments in an
+arrangement.
+• Simple: Indicates that the sound feature a small amount of spectral change over time and is
+easier to integrate with other sounds in a musical arrangement.
+• Unrestricted Voicing: Sounds with this tag can be played with a narrow, piano style voicing.
+You can use this tag to remove Snapshots from the Results list which require a wider voicing or
+sound best with few notes.
+• Wide: Either stereo spread or depth of dimension are extraordinary in sounds featuring this
+tag.
+• Noisy: The sound contains a remarkable noise amount.
+• Impact: The sound contains an attacking element. This can be either at the beginning of the
+note or within a soundscape or pulsating snapshot.
+• Soft: The sound has a damped or soft spectrum and soft volume transition.
+• Distant: The sound has remarkable amount of reverb or delay applied. Attacks might be soft-
+ened or washed out.
+• Hard: The sound has a higher or hard spectrum and might contain dissonant elements.
+• Distorted: The sound features distortion either in the layer sources or applied via the STRAY-
+LIGHT effects chains.
+• Bold: Sounds which cover a wide range of the sonic spectrum and might be the main sound in
+a scene.
+7
+Basic Workflows
+• Rhythmic: The sound contains a rhythmic element, which can be either a repeating spectral
+changes or an attacking or noise-like component.
+• Tempo Sync: The rhythmic element either follows the host tempo or the transition speed is
+synchronized to the DAW’s clock.
+Mood
+Mood contains the following tags:
+• Dark: The sound might be suitable for a sinister scene and often features detuned, modulated,
+distorted aspects.
+• Delicate: The sound is relatively thin and clean.
+• Dreamlike: The sound is beautiful or has an utopian, unreal character to it.
+• Thrilling: Depending on the voicing, the sound can create a thrilling mood. Thrill is not used in
+the context of horror here but rather like excitement.
+• Suspenseful: Depending on the voicing, the sound can create a mood of suspense and uncer-
+tainty.
+• Eerie: Depending on the voicing, the sound can create a scary atmosphere and might contain
+dissonant elements or transitions.
+• Disturbing: The sound contains an unexpected, annoying or impacting element.
+• Dramatic: Depending on the voicing the sound can be used to increase the level drama by rid-
+ing the Macros.
+• Meditativ: The sound has calm, sometimes slightly repetitive mood.
+• Positive: Depending on the voicing, the sound can be used to convey a confident and positive
+vibe.
+• Energetic: Depending on the voicing, the sound has an active, driving mood. Often, a rhythmic
+elements is involved.
+• Peaceful: Depending on the voicing, the sounds create a quite, balanced and beautiful mood.
+• Ethereal: Depending on the voicing, the sounds create a light, mystic or arcane mood.
+• Ambivalent: Some presets can change their mood quite drastically, depending on the played
+voicing and the settings of the macro controllers.
+3.3. Importing Your Own Samples
+STRAYLIGHT allows you to import your own samples. This feature can be used when designing
+your own Snapshots allowing you to utilize the processing power of the specialized grain and sam-
+ple modules, effects, and the powerful performance-based X-Y modulation matrix.
+How to Import Samples
+Samples can be added to STRAYLIGHT by simply dragging and dropping them from your operat-
+ing system or from Files folder in KONTAKT, directly onto the waveform displays in the Perform
+page, the Grain page, or the Sample page.
+Compatible audio file formats are: .wav, aif, and ncw. Compressed files such as .mp3 do not work
+but can be converted to one of the compatible formats using third-party file conversion software.
+To add your own sample:
+8
+Basic Workflows
+1. 2. Using the mouse, click-and-hold the audio file you want to add.
+Drag the file to a waveform display on the Performance page, Grain page or Sample page.
+3. Release the mouse button.
+Once a file has been imported Kontakt will automatically try to detect the root key. You can also set
+the root key of the imported sample manually using the up/down arrows of the Sample Layer Root
+Key in the top right corner of the Grain or Sample Waveform display. For more information, refer to
+Grain Page Overview [17] or Sample Page Overview [23].
+For information on importing files from the KONTAKT File menu, refer to the KONTAKT Manual
+available from the Native Instruments website.
+9
+An Overview of Creating a Sound
+4. AN OVERVIEW OF CREATING A SOUND
+The STRAYLIGHT is built from a custom granular engine with hand-tailored audio sources routed
+through matching effects and modulators. In addition to the primary granular engine, there is also
+a sample layer that can be used for complimentary sonic tasks like background noise, envelope
+attacks, tonal centering or pads.
+To build your own sound and get a feel for the STRAYLIGHT workflows, follow these steps:
+Grain Engine
+1. 2. 3. 4. 5. Select your Grain source and determine the behavior of the Granular engine. Sources for the
+Granular engine can be chosen at the top left of the instrument, and using the Search Icon
+you can browse Presets that are categorized by Origin, Pitch, Style and Character.
+Adjust the Start position and set the Range and Length of the Grain sample playback.
+Introduce some movement into your sound by adjusting the Scan and Jitter parameters in the
+Cursor section. The Scan control will determine the speed and direction in which the cursor
+moves, and the Jitter control will determine the random position of each grain.
+Adjust the envelope section to determine the attack and decay of the Grain source.
+Assign the Detune control to the X axis and apply a subtle Modulation Amount. As you move
+the cursor of the XY pad, you will hear the fine deviations in pitch.
+Modulation and Effects
+1. 2. 3. In the Modulation pane, route an LFO to the Shaper and assign the Shaper to any modulata-
+ble parameter by choosing S1 from the corresponding menu. Adjust the modulation amount
+with the slider underneath the drop down menu.
+Open the Send FX pane and turn up the level of the Delay for the Grain layer. Now select a
+preset from Effect type dropdown until you find a delay character that works with your Grain
+sound. Assign the Time and Feedback parameters to the X and Y axis respectively.
+In the Effect page, select a Filter and assign the Cutoff to the Y axis. Assign the Resonance
+control to the X axis, and move the cursor up and down to hear the filter open as the Delay
+send effect becomes more intense.
+Sample Engine
+1. 2. 3. 4. Sources for the Sampler engine can be chosen at the top right of the instrument. Using the
+Search Icon allows you to browse sample presets that are categorized by Type, Pitch, Origin
+and Style.
+Transpose the Sample layer to -1 octave or use the Tune to finely tune the sample to compli-
+ment the Grain sample source.
+Extend the Filter Modulation and Amp envelopes to create a more expansive sound, then as-
+sign LFO 2 to the Volume parameter to create a tremolo effect.
+In the Modulation pane, set LFO 2 to a fast setting to create the rapid deviations in volume
+that define tremolo.
+10
+An Overview of Creating a Sound
+Master FX
+1. 2. 3. A final Master FX chain applies effects to the combined Grain and Sample layers.
+Explore adding other Effects and assigning their parameters to the XY pad. Using your ears,
+following your intuition and experimenting is the best way to find your own signature sound.
+Note that due to a technical limitation the send effects are not routed through the Master FX
+chain.
+11
+Perform Page Overview
+5. PERFORM PAGE OVERVIEW
+The Perform page is the main view of STRAYLIGHT which gives you direct access to the main
+controls on the other pages. You can use the XY pad at the center of the Perform page for shaping
+the sound. Furthermore, you can instantly switch to another Grain Source and Sample Source,
+and adjust their output levels. The four macro controls below the XY pad are freely configurable
+and provide quick access to control and change the assigned parameters.
+5.1. Perform Page Overview
+The following section provides an overview of the Perform page.
+Perform page overview.
+(1) Snapshot Browse controls: Contains global browse controls to select another Snapshot and
+to access the Snapshot browser. For more information, refer to Snapshot Browse Controls.
+(2) Grain Header: Contains global functions including selection of the source sample, access to
+the Grain Source browser, and overall volume level control for the Grain layer. For more informa-
+tion, refer to Grain Header.
+(3) Top Navigation: Contains buttons to display the other pages of STRAYLIGHT.
+(4) Sample Header: Contains global functions including selection of the source sample, access to
+the Sample Source browser, and overall volume level control for the Sample layer. For more infor-
+mation, refer to Sample Header.
+(5) Sample Waveform display: Displays the Sample Source waveform and visualizes the play-
+head position.
+12
+Perform Page Overview
+(6) Macro controls: These top level parameters can be assigned to multiple targets at the same
+time. You can select the labels corresponding to the parameters. For more information, refer to
+Macros Pane.
+(7) Grain Waveform display: Displays the Grain Source waveform and visualizes the Grain Cur-
+sor position of up to ten notes. You can also directly jump to the Grain page by clicking the within
+the waveform.
+(8) XY Pad: Controls the sound of the current Snapshot in realtime according to the modulation
+assignments for the X and Y parameters. For more information, refer to XY Pad.
+5.2. Grain Header
+The Grain Header contains global functions including selection of the source sample, access to
+the Grain Source browser, and overall volume level control for the Grain layer. The Grain Header
+is available on the Perform page, on the Grain page, and on the Effects page. It contains the fol-
+lowing controls:
+Grain Header.
+(1) Grain Active button: Enables or disables the Grain layer. When enabled the Grain Active but-
+ton is filled out.
+(2) Previous and Next Grain Source buttons: Loads the previous and next Grain Source from
+the Results list in the Grain Source browser. If tags are selected for limiting the results in the
+GRAIN SOURCE browser, the buttons appear filled out. For more information, refer to Limiting the
+Browser Search in the Results List.
+(3) Grain Source label: Displays the name of the loaded Grain Source. Clicking it opens the
+GRAIN SOURCE browser. For more information, refer to Browser Overview.
+(4) Modulation connector: Selects the modulation source to be applied to the parameter.
+(5) Grain layer volume modulation: Sets the amount of modulation applied to the parameter by
+the selected modulation source.
+(6) Grain layer volume control: Sets the master volume for the Grain layer which is applied after
+the Grain Layer effects and before the MASTER FX chain and the Send FX chain.
+(7) Level meter: Displays the current output volume level for the Grain Layer.
+5.3. Sample Header
+The Sample Header contains global functions including selection of the source sample, access to
+the Sample Source browser, and overall volume level control for the Sample layer. The Sample
+Header is available on the Perform page, on the Sample page, and on the Effects page. It contains
+the following controls:
+13
+Perform Page Overview
+Sample Header.
+(1) Level meter: Displays the current output volume level for the Sample layer.
+(2) Sample layer volume control: Sets the master volume for the Sample layer which is applied
+after the Sample Layer effects and before the MASTER FX chain and the Send FX chain.
+(3) Sample layer volume modulation: Sets the amount of modulation applied to the parameter
+by the selected modulation source.
+(4) Modulation connector: Selects the modulation source to be applied to the parameter.
+(5) Sample Source display: Displays the name of the loaded Sample Source. Clicking it opens
+the Sample Source browser. For more information, refer to Browser Overview.
+(6) Sample Active button: Enables or disables the Sample layer. When enabled the Sample Ac-
+tive button is filled out.
+(7) Previous and Next Sample Source buttons: Loads the previous and next Sample Source
+from the Results List in the Sample Source browser. If tags are selected for limiting the results in
+the Sample Source browser, the buttons appear filled out. For more information, refer to Limiting
+the Browser Search in the Results List.
+5.4. Snapshot Browse Controls
+With the Snapshot Browse controls you can load another Snapshot and access the Snapshot
+browser to search for a specific Snapshot. The Snapshot Browse controls are available on any
+page in STRAYLIGHT.
+Snapshot Browse controls.
+Previous and Next Snapshot buttons: Loads the previous and next Snapshot from the Results
+List in the SNAPSHOT browser. If tags are selected for limiting the results in the SNAPSHOT
+browser, the buttons appear filled out. For more information, refer to Browser Overview.
+Snapshot label: Displays the loaded Snapshot name. A Snapshot contains a complete STRAY-
+LIGHT preset. Clicking it opens the SNAPSHOT browser. Snapshots can be saved with KON-
+TAKT's Snapshot functionality in the Instrument header. For more information, refer to Saving and
+Loading Snapshots.
+14
+Perform Page Overview
+5.5. XY Pad
+The XY pad at the center of the Perform page controls the sound of the Snapshot in real-time ac-
+cording to the modulation assignment of the X and Y parameters. The XY pad also appears on
+some of the other pages of STRAYLIGHT as well as in the browsers. The XY pad contains the
+following elements:
+XY pad.
+(1) XY Cursor: Controls the sound of the Snapshot in real-time according to the modulation as-
+signment of the X and Y parameters. For more information, refer to XY Pad Assignment. You can
+also assign MIDI controllers to control the X and Y axis on the Master page. For more information,
+refer to Assigning X and Y Axis to a MIDI Controller.
+(2) Y axis label: Selects a label for the Y axis functionality. For more information, refer to XY Pad
+Assignment.
+(3) X axis label: Selects a label for the X axis functionality. For more information, refer to XY Pad
+Assignment.
+5.5.1. XY Pad Assignment
+The XY pad should operate the most important real time parameters. The main purpose of the Y
+axis should be to control the Intensity. To assign a control to the X or Y axes:
+1. 2. Right-click on the control parameter you want to assign.
+Select the X XY Pad to assign the parameter to the X axis, or the Y XY Pad to assign to the
+Y axis.
+3. The parameter is now assigned to the XY Pad.
+15
+Perform Page Overview
+Assigning the XY pad
+Below are some examples of suitable parameters for the XY pad:
+Grain Settings:
+• Grain Detune
+• Cursor position / Range
+• Scan speed
+• Grain Rate and Volume compensation
+• Grain Fade In/Fade Out
+FX:
+• Filter Cutoffs
+• Dry Wet or FX send levels
+• Delay Feedback
+Sources:
+• Level / Balance control layers
+16
+Grain Page
+6. GRAIN PAGE
+The Grain page controls STRAYLIGHT's Grain layer, which offers unique ways to play and manip-
+ulate the layer's source sample by means of granular synthesis. The result is lush, organic timbres
+that can defy time and pitch, yet still retain the character of the source sounds (strings, glass,
+stone, membranes, and more), and sonically evolve over time. Small sounds can be vastly magni-
+fied in size and scope without sacrificing their sound quality or character.
+Granular synthesis uses an audio sample as the basic sound source and divides it into small seg-
+ments, called grains. The duration, or size of a single grain is typically around a tenth of a second
+and below (< 100 ms). In STRAYLIGHT, you can set grain sizes ranging from 10 ms to 1000 ms. If
+all grains are played consecutively, the result approximates the original sample. The power of
+granular synthesis lies in the flexibility of completely changing the playback order and speed of the
+grains, and apply processing to each individual grain (duration, fades, level, pitch) for dramatic ef-
+fects.
+6.1. Overview
+The following overview shows you all sections on the Grain page.
+Grain page.
+(1) Grain Header: Contains global functions including the selection of the source sample, access
+to the Grain Source browser, and overall volume level control for the Grain layer. For more infor-
+mation, refer to Perform Page Overview.
+(2) Grain Random: Randomizes the Grain page. The drop-down menu next to the Grain Random
+button (dice symbol) selects whether the parameters and the source sample are randomized (S
+Include Source), or only the parameters (P Parameters only). The randomization of the source
+sample is limited by the tags selected in the browser.
+17
+Grain Page
+(3) Grain Waveform display: Displays the source sample's waveform and visualizes the Cursor
+position for up to ten notes simultaneously. You can adjust the Cursor Range by clicking and drag-
+ging the left and right boundaries in the waveform. For more information about the Cursor Range,
+refer to Range. In Scan Sync mode, the display additionally shows the sync anchor (4).
+You can import your own sample by dropping your sound onto the waveform. Kontakt will try to
+detect the root key automatically when the sample is loaded. You can also set the root key of the
+imported sample manually using the up/down arrows of the Grain User Sample Root Key in the
+top right corner of the Waveform display. They allow you to increase or decrease the root key of
+the imported user sample by one octave. Hold down the option key to change the key in semi-
+tones. For more information on adding samples, refer to Importing Your Own Samples [8].
+(4) Sync Anchor: Sets the Cursor's synchronization point in Scan Sync mode. In this mode, the
+Scan control in the CURSOR section adjusts the time it takes the Cursor to move from the Start
+position to the sync anchor. Note that the Sync Anchor can be positioned outside of the cursor
+range. For more information, refer to Cursor.
+(5) GRAINS: Contains controls related to the basic generation of the individual grains and their
+shape. For more information, refer to Grains.
+(6) CURSOR: Contains controls related to the Cursor and how it moves through the source sam-
+ple. The Cursor represents the read-out position of the grains. For more information, refer to Cur-
+sor.
+(7) RANGE: Contains controls related to the Cursor Range, which sets boundaries for the read-out
+position of the grain in the source sample. For more information, refer to Range.
+(8) TUNING: Contains controls related to the pitch of the individual grains. For more information,
+refer to Tuning.
+(9) AMP: Contains controls related to the volume level of the individual grains. For more informa-
+tion, refer to Amp.
+(10) ENVELOPE: Contains controls related to the Grain layer's volume envelope. For more infor-
+mation, refer to Envelope.
+6.2. Grains
+This section contains controls related to the basic generation of the individual grains and their
+shape. This way you can define the basic character of your sound. Interval and Size are funda-
+mental to the way the sound transforms the source sample. High Interval values can be used for
+more consistent and slowly evolving sounds, while low values can create lively or erratic results
+that change at a high rate. Use high values for Size to allow more of the character of the source
+sample to shine through the sound, or dive fully into abstract micro sound with low values. Fade In
+and Fade Out can be used to make the sound smoother at high values, or more textured and an-
+gular at low values.
+18
+Grain Page
+Grain page – GRAINS
+• Voices: Sets the maximum number of voices the Grain layer can play at the same time.
+• Interval: Adjusts the time between the generation of individual grains from the source sample.
+• Grain Interval Sync: Allows you to set the grain interval in relation to the host tempo.
+• Size: Adjusts the duration of each individual grain until it is faded out.
+• KT: Enables key tracking mode for the Size parameter. When enabled, the grain duration is
+compensated according to the pitch of the MIDI note: high pitches result in short-grain dura-
+tions, while low pitches result in long-grain durations.
+• Fade In: Adjusts the fade applied at the beginning of each individual grain. You can use this to
+soften the edges of the grains.
+• Fade Out: Adjusts the fade applied at the end of each individual grain. You can use this to
+smoothen the release of the grains.
+6.3. Cursor
+This section contains controls related to the Cursor and how it moves through the source sample.
+The Cursor represents the read-out position of the grains. By changing the Start position, you can
+explore the source sample for new sonic material to build your sound. Scan and Jitter determine
+the movement of the Cursor during note events. Therefore, they strongly contribute to the charac-
+ter of the sound and how the original sample is transformed. The additional Poly and Free modes
+make it possible to adjust the Cursor's behavior in relation to how the instrument is played via
+MIDI.
+Grain page – CURSOR.
+• Start: Adjusts the position of the Cursor in the source sample. The Cursor represents the read-
+out position of the grains. The position is set as percentage of the range between the left and
+19
+Grain Page
+right boundaries of the Cursor Range. For more information about the Cursor Range, refer to
+Range.
+• Poly: Enables Poly mode. When enabled, each incoming MIDI note has its own dedicated Cur-
+sor. Therefore, each note can play grains from different read-out positions. When disabled, all
+MIDI notes coming in at the same time are locked to the Cursor position of the first played note.
+• Free: Enables Free mode. When enabled, the Cursor position moves freely within the Cursor
+boundaries and according to the Scan parameter once a note event has started. In this case,
+modulation applied to the Cursor boundaries or the Start do not change the Cursor position.
+When disabled, modulation applied to related parameters during a note event change the Cur-
+sor position accordingly.
+• Scan: Adjusts the Cursor's speed and direction as it moves across the source sample during a
+note event. Negative values let it move backwards, positive values let it move forwards. Note
+that related parameters including Bounce Edges, Release direction (option above the enve-
+lope's R stage), Free mode and the Cursor Range boundaries interact with Scan.
+• Scan Sync: Enables Scan Sync mode, which synchronizes the scan speed to the host clock.
+When enabled, Scan is set in musical note divisions relative to the host clock. The note dura-
+tion is the time it takes the Cursor to move from the Start position to the sync anchor as set in
+the waveform display.
+• Jitter: Adjusts the range of random position changes applied to the Cursor position. The maxi-
+mum value corresponds to 40% of the Cursor Range.
+6.4. Range
+This section contains controls related to the Cursor Range, which sets boundaries for the read-out
+position of the grain in the source sample. By setting the range you can generate grains only from
+a specific part of the source sample, or you can apply modulation to the controls to access differ-
+ent parts of the source sample dynamically. Since the source samples contain evolving and dy-
+namic tone colors, you can use this to morph your sound in interesting ways.
+When Free is enabled in the CURSOR section, the Cursor can move past the boun-
+dary's position and bounces back into the Cursor range in a spring-like movement.
+When Free is disabled, the Cursor cannot move past the boundary's position.
+Grain page – RANGE.
+• Min: Adjusts the position of the Cursor Range's left boundary in the source sample.
+20
+Grain Page
+• Length/Max: Adjusts the position of the Cursor Range's right boundary in the source sam-
+ple.When Grain Range Link is enabled, the Length control adjusts the size of the Cursor
+Range. This way you can move the Cursor Range through the source sample at a fixed length
+using the Min control. When Grain Range Link is disabled, the Max control adjusts the abso-
+lute position of the right boundary.
+• Grain Range Link: Sets the behavior of the Length/Max control. When enabled, the control is
+switched to Length. When disabled, the control is switched to Max (see Length/Max for more
+information).
+• Bounce Edges: Sets the Cursor's behavior when hitting the Cursor Range's boundaries. When
+enabled, the Cursor rebounds from the position of the boundaries and continues to move in the
+opposite direction.
+6.5. Tuning
+This section contains controls related to the pitch of the individual grains. By using the Pitch con-
+trol, you can transpose grains in the range of four octaves. This way you can subtly detune the
+source sample or completely change its character. Applying modulation creates interesting vibrato
+effects. The Detune control randomizes the pitch of individual grains and can turn any sample
+source into an otherworldly sound effect.
+Grain page – TUNING.
+• Pitch: Transposes the grains in cent from -2400 cent (-24 semitones, or -2 octaves) to +2400
+cent (+24 semitones, or +2 octaves).
+• Detune: Adjusts the range of random pitch deviations added to each grain in one cent intervals
+from 0 to 50 cents.
+6.6. Amp
+This section contains controls related to the volume level of the individual grains. Using Vol you
+can set a suitable level for the output signal going into the Grain Effects, or apply modulation for
+tremolo effects. Pan Jit randomizes the stereo position of grains and can be used to create a wide
+and lively stereo image.
+21
+Grain Page
+Grain page – AMP.
+• Vol: Adjusts the volume level of the grains.
+• Pan Jit: Adjusts the amount of random panning introduced to each individual grain.
+6.7. Envelope
+This section contains controls related to the Grain layer's volume envelope. It is triggered by in-
+coming MIDI notes and used to dynamically control the amplitude of the Grain layer's output sig-
+nal. By adjusting the envelope stages, you can define the overall character of the sound from
+plucked and percussive to bowed and sustained. The additional Release Direction settings is used
+to define the behavior of the Cursor once a note is released, allowing you to fine-tune the release
+behavior of the sound.
+Grain page – ENVELOPE.
+• Attack Curve: Adjusts the shape of the envelope’s attack stage from a exponential response
+with a slow onset (-100%) to a logarithmic response with a fast onset (100%). At center posi-
+tion (0%), the response is linear, making the attack stage rise evenly for its entire duration.
+• Release Direction: Sets the direction of the Cursor's movement during the release stage.
+When set to Continue, the Cursor maintains its direction. When set to Force Cursor Left, the
+Cursor moves to the left once the MIDI note is released. When set to Force Cursor Right, the
+Cursor moves to the right.
+• Attack (A): Adjusts the duration of the envelope’s attack stage, which is the time the envelope
+takes to rise from zero to peak level.
+• Decay (D): Adjusts the duration of the envelope’s decay stage, which is the time the envelope
+takes to fall from peak to sustain level.
+• Sustain (S): Adjusts the level of the envelope’s sustain stage, at which the envelope stays as
+long as a note is held.
+• Release (R): Adjusts the duration of the envelope's release stage, which is the time the enve-
+lope takes to fall from sustain level to zero.
+22
+Sample Page
+7. SAMPLE PAGE
+The Sample page controls STRAYLIGHT's Sample layer, which provides a range of parameters
+that allow you to shape and manipulate the playback of the selected source sample. When com-
+bined with the Grain layer, results are diverse in their sonic character and effect. Sounds can
+range from moody, dissonant atmospheres to gritty, textured drones. Modulation inputs enable pa-
+rameter adjustments that evolve over time, allowing you to create intricate unfolding soundscapes
+and nuanced timbral effects.
+The Transpose control enables you to pitch the sample an octave higher or lower in relation to the
+Grain layer, creating a full, robust blend. The Tune control allows for subtle detuning when modula-
+ted, to replicate the desired detuning effect found in analog synthesizers. Modulating the Start
+point can also create timbrally captivating effects, that add depth and interest to the sample play-
+back.
+7.1. Overview
+The following overview shows you all sections on the Sample page.
+Sample page.
+(1) Sample Waveform display: Displays the source sample's waveform and visualizes the play-
+back Start position. You can move the Start position by adjusting the Start Offset control. Some
+sample sources can only be played monophonically, indicated by the Mono tag in the top right cor-
+ner of the Waveform display.
+You can import your own sample by dropping your sound onto the waveform. Kontakt will try to
+detect the root key automatically when the sample is loaded. You can also set the root key of the
+imported sample manually using the up/down arrows of the Sample Layer Root Key in the top right
+corner of the Waveform display. They allow you to increase or decrease the root key of the impor-
+ted user sample by one octave. Hold down the option key to change the key in semi-tones. For
+more information on adding samples, refer to Importing Your Own Samples [8].
+23
+Sample Page
+(2) Sample Random: Randomizes the Sample page. The drop-down menu next to the Sample
+Random button (dice symbol) selects whether the parameters and the source sample are random-
+ized (S Include Source), or only the parameters (P Parameters only). The randomization of the
+source sample is limited by the tags selected in the browser.
+(3) Sample Header: Contains global functions including the selection of the source sample, ac-
+cess to the Sample Source browser, and overall volume level control for the Sample layer. For
+more information, refer to Header.
+(4) PITCH: Contains controls related to tuning and transposition. For more information, refer to
+Pitch.
+(5) START: Sets the start point from which the sample will playback. For more information, refer to
+Start.
+(6) FILTER: A tool that removes frequencies as determined by the Filter type and Cutoff frequency.
+For more information, refer to Filter.
+(7) FILTER MODULATION: Contains envelopes that modulate and shape the filter and the Cutoff
+frequency of your sample. For more information, refer to Filter Modulation.
+(8) AMP: Contains envelopes that modulate the Sample layer's volume. For more information, re-
+fer to Amp.
+7.2. Pitch
+The Pitch section relates to the tuning and transposition of the sample playback. Each control has
+its own Modulation source which can be used for classic vibrato effect or more extreme sound de-
+sign. Use the Tune control to fine-tune your sample to the Grain layer.
+Sample page – Pitch.
+• Transpose: Determines the MIDI transposition of the notes before entering the sample layer. It
+can be adjusted within +2 octaves and -2 octaves.
+• Tune: Transposes the sample in cents from -2400 cent (-24 semitones, or -2 octaves) to +2400
+cent (+24 semitones, or +2 octaves).
+7.3. Start
+The Start section sets the point from which the sample will playback. The start point can be modu-
+lated to create more dynamic timbres.
+24
+Sample Page
+Sample page – Start
+• Start Offset: Determines where the sample starts to play when a note is triggered.
+• Start Offset Modulation: Sets the amount of modulation applied to the parameter by the se-
+lected modulation source.
+7.4. Filter
+The Filter takes the raw sample and removes certain frequencies as determined by the Filter type
+and Cutoff frequency. This changes the harmonic content of the signal and shapes the tone of the
+sound. This change can be varied over time using the Filter Envelope or modulated to produce
+more dynamic animated timbres. You can select from 29 different Filter types, including HP, LP,
+BP, Notch and Vowel, for variation in spectral character. For more information on the different Filter
+types, refer to Filter.
+Sample page – Filter.
+• Active: Activates the Filter section in the Sample layer.
+• < >: Browses the different Filter type options.
+• Filter Type: Selects the Filter type used for the Sample layer.
+• Cutoff: Sets the Filter Cutoff frequency of the selected Filter type.
+• Resonance: Sets the Resonance or peak of the selected Filter type.
+• Drive: Sets the amount of Drive for the selected Filter type.
+7.5. Filter Modulation
+The Filter Modulation section contains envelopes that allow you to modulate and shape the filter
+and the Cutoff frequency of your sample. Use the Envelope Amount to determine the intensity of
+the envelope over the Cutoff frequency. Modulating the Envelope Amount can create subtle move-
+ments or dramatic timbral changes.
+25
+Sample Page
+Sample Page – Filter Modulation.
+• Attack (A): Adjusts the duration of the envelope’s attack stage, which is the time the envelope
+takes to rise from zero to peak level.
+• Decay (D): Adjusts the duration of the envelope’s decay stage, which is the time the envelope
+takes to fall from peak to sustain level.
+• Sustain (S): Adjusts the level of the envelope’s sustain stage, at which the envelope stays as
+long as a note is held.
+• Release (R): Adjusts the duration of the envelope's release stage, which is the time the enve-
+lope takes to fall from sustain level to zero.
+• Envelope Amount: Determines to which extent the Filter envelope modulates the Filter fre-
+quency. This works on a polyphonic level.
+7.6. Amp
+The Amp section contains controls related to the Sample layer's volume envelope. It is triggered
+by incoming MIDI notes and used to dynamically control the amplitude of the Sample layer's out-
+put signal. By adjusting the four envelope stages, you can define the overall character of the
+sound, from snappy, percussive plucks to sustained, elongated drones. Modulate the Volume con-
+trol with an LFO to create a classic tremolo effect.
+26
+Sample Page
+Sample page – Amp.
+• Attack Curve: Adjusts the shape of the envelope’s attack stage from a exponential response
+with a slow onset (-100%) to a logarithmic response with a fast onset (100%). At center posi-
+tion (0%), the response is linear, making the attack stage rise evenly for its entire duration.
+• Attack (A): Adjusts the duration of the envelope’s attack stage, which is the time the envelope
+takes to rise from zero to peak level.
+• Decay (D): Adjusts the duration of the envelope’s decay stage, which is the time the envelope
+takes to fall from peak to sustain level.
+• Sustain (S): Adjusts the level of the envelope’s sustain stage, at which the envelope stays as
+long as a note is held.
+• Release (R): Adjusts the duration of the envelope's release stage, which is the time the enve-
+lope takes to fall from sustain level to zero.
+• Sample Volume: Determines the volume of the sample before entering the sample layer ef-
+fects chain.
+27
+Effects Page
+8. EFFECTS PAGE
+On the Effects page, you can apply effects to the audio signals coming from the Grain layer and
+the Sample Layer. For each layer, there is a dedicated Effects section containing an effect chain.
+Each effect chain consists of four effect slots for loading individual effects. You can choose from
+nine effects which can be operated in several modes. Depending on the effect mode, there will be
+different parameters/controls for the select effect.
+This section contains an overview of the Effects page. Here you will learn how to load effects into
+effect slots and how to select an effect mode. You will also learn how to reorder and to disable
+effect slots within the effect chain.
+The procedures for the Effect sections explained here are the same for the Grain
+Layer, the Sample Layer, and the MASTER FX section on the Master page.
+8.1. Effects Page Overview
+The Effects page contains the following elements and controls:
+Effects page overview.
+(1) Grain Header: Contains global functions including selection of the source sample, access to
+the GRAIN SOURCE browser, and overall volume level control for the Grain layer. For more infor-
+mation, refer to Grain Header.
+(2) Sample Header: Contains global functions including selection of the source sample, access to
+the SAMPLE SOURCE browser, and overall volume level control for the Sample layer. For more
+information, refer to Sample Header.
+28
+Effects Page
+(3) Effect sections: The Grain layer and the Sample layer each have a dedicated Effects section.
+Effects for the Grain layer are located on the left side and effects for the Sample layer are located
+on the right side. For more information, refer to Effects Section Overview.
+(4) XY Pad: With the XY Pad you can shape the sound of the Snapshot in realtime according to
+modulation assignment for the X and Y parameters. The axis labels provide a hint of what to ex-
+pect when moving the Cursor. You can assign MIDI CCs for the XY pad on the Master page. For
+more information, refer to Assigning X and Y Axis to a MIDI Controller.
+8.1.1. Effects Section Overview
+The Effects page contains two Effect sections: one for the Grain layer and one for the Sample lay-
+er. The Master page contains another Effect section to further process the audio signal mixed from
+the Grain layer and the Sample layer. Each Effect section contains the same controls and works
+similar. Any Effects section contains the following elements and controls:
+Effects section.
+(1) Effect On / Off button: Switches the effect in the selected effect slot on or off. For more infor-
+mation, refer to Disabling Effect Slots.
+(2) Previous and Next Effect Mode buttons: Selects the previous or next effect mode for the ef-
+fect in the selected effect slot. For more information, refer to Selecting Effect Modes.
+(3) Effect Mode label: Displays the selected effect mode. Clicking it opens a drop-down menu to
+directly select an effect mode for the effect in the selected effect slot. For more information, refer to
+Selecting Effect Modes and Effect Reference.
+(4) Effect selector button: Opens the Effect selector to load one of nine effects into the selected
+effect slot. For more information, refer to Effect Selector.
+(5) Effect parameters: Each effect provides you with up to three individual parameters for adjust-
+ing the effect's sound. For more information, refer to Effect Reference.
+(6) Effect slot: Each effect slot can load one effect. Selecting an effect slot displays the parame-
+ters of the loaded effect. For more information, refer to Loading Effects into Effect Slots .
+29
+Effects Page
+(7) Effect chain: The effect chain contains four effect slots to load individual effects. The effect
+slots can be moved/rearranged within the effect chain. For more information, refer to Moving Effect
+Slots within the Effect Chain.
+8.1.2. Effect Selector
+When clicking the Effect selector button in the Effect section, the Effect selector opens. With the
+Effect selector you can choose one of nine different Effect types for loading it into the selected Ef-
+fect slot. You can also select None to leave the selected Effect slot empty. As soon you select an
+effect the Effect selector closes.
+For more information on the effect types, refer to Effect Reference.
+Effect selector.
+8.2. Loading Effects into Effect Slots
+To load an effect into an effect slot:
+1. 2. 3. Select an effect slot in the effect chain.
+Click the effect selector button to open the effect selector.
+Select an effect to load it.
+The effect is loaded into the effect slot. The effect selector closes. You can now adjust the
+effect's parameters.
+8.3. Selecting Effect Modes
+Any effect can be operated in various modes to change the general behavior of the effect. When
+selecting another effect mode, the behavior of the effect changes, whereas the parameters and
+values may remain.
+To select an effect mode:
+1. 2. Click the Effect preset label to open the effect mode drop-down menu.
+Select the effect mode to your liking.
+The effect mode is changed.
+Alternatively, you can skip to the next or to the previous effect mode using the previous and the
+next effect mode buttons.
+For more information on effect modes, refer to Effect Reference.
+30
+Effects Page
+8.4. Moving Effect Slots within the Effect Chain
+You can move effects slots within the effect chain to change the resulting sound of the effect chain.
+To move effect slots within the effect chain:
+1. 2. Click and hold the bottom middle of the effect slot.
+Drag it left or right within the effect chain and release.
+8.5. Disabling Effect Slots
+You can disable individual effect slots in the effect chain to compare the sound with or without par-
+ticular effects.
+To disable an effect slot:
+1. 2. Select the effect slot you want to disable in the effect chain.
+Click the effect slot active button.
+The effect slot is disabled indicated by the empty effect slot active button and the missing
+frame around the effect slot.
+31
+Master Page
+9. MASTER PAGE
+On the Master page you can further process the mixed audio signal coming from the Grain layer
+and the Sample layer, and you can assign the X and Y axis of the XY Pad to the controls of your
+MIDI controller. For this you have the MASTER FX section on the right side and the XY MIDI CON-
+TROLLER section on the left side.
+In this section you are provided with an overview of the Master page and you will learn how to as-
+sign the X and Y axis to your MIDI controller.
+9.1. Master Page Overview
+The Master page contains the following sections:
+Master page overview.
+(1) XY MIDI CONTROLLER section: Use the Learn buttons to assign MIDI messages of your
+MIDI controller to the X and Y axis of the XY Pad in the middle or directly select the desired MIDI
+CC number. For more information, refer to Assigning X and Y Axis to a MIDI Controller.
+(2) XY Pad: Controls the sound of the current Snapshot in realtime according to the modulation
+assignments for the X and Y parameters. For more information, refer to XY Pad.
+(3) MASTER FX section: The MASTER FX section further processes the audio signal coming
+from the Grain layer and the Sample layer. The MASTER FX section works similar to the effects
+sections on the Effects page. For more information, refer to Effects Section Overview.
+9.2. Assigning X and Y Axis to a MIDI Controller
+You can also control the X and Y axis of the XY Pad with your MIDI controller. For this, you need to
+assign the X and Y axis to your MIDI controller either by directly selecting the MIDI CC number or
+by using the MIDI learn function on the Master page. In this section you will learn both of these
+methods.
+32
+Master Page
+Selecting the MIDI CC Numbers
+To directly select the MIDI CC number for the X or Y axis:
+1. Click the MIDI controller number for the corresponding axis to open the MIDI CC number
+drop-down menu.
+2. Select the desired MIDI CC number.
+The MIDI CC number is assigned to the axis. Repeat these steps for the other axis.
+Using the MIDI Learn Function
+To assign the X and Y axis using the MIDI learn function:
+1. Click the Learn button of the corresponding axis to enable the MIDI learn function.
+The Learn button starts to flash.
+2. Move the control on your MIDI controller you want to assign to the axis.
+The control is assigned to the axis. The Learn button has stopped flashing. Repeat these
+steps for the other axis.
+33
+Send FX Pane
+10. SEND FX PANE
+The Send FX Pane is where the global Delay and Reverb send effects are contained. Each effect
+has parameter controls that determine their behavior and sonic character. Level controls dictate
+the amount of effect signal that is returned. Also located in the Send FX Pane are Level controls
+for the Grain and Sample layers' global effects sends. Use this section to manually adjust the Send
+amount, or apply modulation to change the amount of effect over time. Controls for Delay and Re-
+verb can be modulated in tandem or with disparate modulation sources to create unique interac-
+tions. Note that the send effects are not routed through the master effect chain. If you need to ap-
+ply additional effect such as compressor to your reverb tail, you can use a reverb module in one of
+the master effect chain slots.
+10.1. Overview
+The following overview shows you all sections on the Send FX pane.
+Send FX pane.
+• (1) GRAINS: Contains Send Level controls that determines the amount of the Grain layer out-
+put that is sent to the global Delay and Reverb. For more information, refer to Grains.
+• (2) DELAY: Contains controls that determine the character of the global Delay effect. For more
+information, refer to Delay.
+• (3) XY Pad: Controls the sound of the snapshot according to the modulation assignments for
+the X and Y parameters. For more information, refer to XY.
+• (4) REVERB: Contains controls that determine the character of the global Reverb effect. For
+more information, refer to Reverb.
+• (5) SAMPLE: Contains Send Level controls that determines the amount of the Sample layer
+output that is sent to the global Delay and Reverb. For more information, refer to Sample.
+10.2. Grains
+This section sets the Grain layer's Send Level to the global Delay and Reverb. These sends can
+be individually modulated to create subtle alterations, or wild sweeping effects.
+34
+Send FX Pane
+Send FX pane – Grains.
+• Delay: Sets the amount of the Grain layer output sent to the global Delay send effect.
+• Reverb: Sets the amount of the Grain layer output sent to the global Reverb send effect.
+10.3. Delay
+The global Delay send effect offers 24 different Delay types ranging from the classic sound of Tape
+Delays and BBDs (Bucket Brigade Device) to Diffused spacey delay effects. Modern and Clean
+types provide the tone of contemporary delay, alongside distinctive Ping-pong delay types. Modu-
+lating the Feedback control can create anything from soft, subtle echoes to intense exaggerated
+sonic artifacts, depending on the type and rate of modulation. Syncing the Delay time to the mas-
+ter clock enables you to create precise delay repeats that can be used for creating rhythmically
+complex patches.
+Send FX pane – Delay.
+• Active: Activates the global Delay send effect.
+• < >: Browses the different Delay types.
+• Delay Type: Selects one from 24 Delay types.
+• Time: Determines the Delay time of the global delay send effect. Note that continuous modula-
+tion of this parameter can cause a high CPU load.
+• Sync (crotchet icon): Determines if the Delay time is set in milliseconds, ranging from 0.00ms
+to 2.0k ms, or in relation to the master clock as a musical duration. When the icon is lit, the
+Delay time is set as divisions of musical timing, which are displayed when the Time control is
+adjusted.
+• Feedback: Determines the amount of feedback of the global Delay send effect.
+• Return: Determines the return level of the global Delay send effect.
+10.4. XY
+The XY Pad allows you to control the sound of the snapshot in realtime, according to the modula-
+tion assignments for the X and Y parameters. The axis labels indicate what parameter is being af-
+fected when moving the cursor.
+35
+Send FX Pane
+Send FX pane – XY.
+10.5. Reverb
+The global Reverb send effect offers nine different Reverb types that provide varying spatial and
+sonic effects. Use the Wide Hall Reverb to add vast spaciousness to your Grain and Sample lay-
+ers, or the Plate reverb for its character metallic tone and smooth tail. Room Reverbs can be used
+to add natural liveliness to the sound source, without losing detail in overly dense reverb tails.
+Modulating the reverb level can create interesting effects from soft swells to dramatic bursts of re-
+verberant echo. Note, that the reverb is alternating between different reverb engines depending on
+the selected preset, this leads to different controls in the interface.
+Send FX pane – Reverb.
+• Active: Activates the global Reverb send effect.
+• < >: Browses the different Reverb types.
+• Delay Type: Selects one from nine Reverb types.
+• Time: Determines the time or return (Impulse response mode) of the global Reverb send effect.
+• Size: Determines the room size of the global Reverb send effect.
+• Level: Determines the return level of the global Reverb send effect.
+10.6. Sample
+This section sets the Sample layer's Send Level to the global Delay and Reverb. These send lev-
+els can be individually modulated to create subtle movement or more erratic sonic effects.
+Send FX pane – SAMPLE.
+• Delay: Sets the amount of the Sample layer output sent to the global Delay send effect.
+• Reverb: Sets the amount of the Sample layer output sent to the global Reverb send effect.
+36
+Macros Pane
+11. MACROS PANE
+The Macros are designed to give easy access to settings which are important in production, for
+example an lowpass filter, or controls that may require quick accessibility, like a Send FX.
+Macros pane.
+• (1) Macro A: This top level parameter can be assigned to multiple modulation targets at once.
+• (2) Macro B: This top level parameter can be assigned to multiple modulation targets at once.
+• (3) Macro C: This top level parameter can be assigned to multiple modulation targets at once.
+• (4) Macro D: This top level parameter can be assigned to multiple modulation targets at once.
+• (5) XY Pad: Controls the sound of the snapshot according to the modulation assignments for
+the X and Y parameters. MIDI controllers for the XY pad can be assigned on the Masters page.
+For more information, refer to XY Pad.
+11.1. Macro and Modulation Assignment
+The Macros should be assigned to parameters that give quick access to important production set-
+tings, but do not necessarily require real time control. To assign parameters to a Macro control:
+1. 2. 3. 4. Click on the Modulation Connector of the parameter you wish to assign.
+From the drop down menu, select the Macro control that you want the parameter to be as-
+signed to.
+If you want to assign multiple parameters to the same Macro control, repeat this process.
+The assigned parameter/s will display an A, B, C or D, indicating the Macro they are assigned
+to.
+Assigning a Macro control to a parameter
+37
+Macros Pane
+Assigning a label to the Macros can help quickly determine what the Macro control's primary func-
+tion is. This is particularly useful if you are assigning multiple parameters to create a specific con-
+trol. To assign a label to a Macro control:
+1. In the Macros pane or the Perform page, click on the Macro control that you wish to assign
+to.
+2. 3. From the drop down menu, select the parameter you want to assign to the Macro control.
+The label is now assigned to the Macro control.
+Selecting a Macro label.
+Below is a suggested setup for the Macro controls:
+Macro A - Filter / Bass Control
+• Filter or EQ to quickly control the frequency range (bass)
+• Other parameters mentioned in the XY section can go here when no bass control is required
+Macro B - Filter / Treble Control:
+• Filter or EQ to quickly control the frequency range (treble)
+• Other parameters mentioned in the XY section can go here when no treble Control is required
+Macro C - Motion
+• Anything that creates motion in addition to the XY pad.
+Macro D - FX Amount (Reverb, Delay)
+• FX level control, enabling you to quickly turn down effects levels.
+38
+Modulation Pane
+12. MODULATION PANE
+The Modulation pane is where the STRAYLIGHT comes to life, hosting the modulation sources
+that bring movement and dynamics to your sound. The Modulation pane contains two LFO, two
+Shapers and a Matrix for altering and combining modulation sources. The powerful routing Matrix
+encourages interesting modulation combinations that inspire creativity and foster unique sonic re-
+sults. In this section you can create elaborate modulation sources tailored to your Sample and
+Grain layers. Use the Matrix section to combine multiple modulators, for example an LFO and a
+Macro control, to create a complex chain of modulators that allow for intricate shaping and manip-
+ulation. Due to the option of modulator chaining, all modulators are unipolar.
+The modulation direction can be simply swapped by holding [Option+Shift] whilst clicking on each
+knob. Hold down [Option] on a Modulation knob to adjust the knob value and the modulation range
+simultaneously.
+The signal of the individual voices is mixed down to one stereo stream at the output of the corre-
+sponding layer engine, before the FX chain is entered. Polyphonic modulation is only possible be-
+fore the mix down.
+12.1. Overview
+The following overview shows you all sections on the Modulation pane.
+Modulation pane.
+• (1) LFO 1: A modulation source that can be assigned to adjust parameters of the STRAY-
+LIGHT. For more information, refer to LFO 1.
+• (2) MATRIX: Contains two Buses, which can either work in attenuation or summing mode. For
+more information, refer to Matrix.
+• (3) XY Pad: Controls the sound of the snapshot according to the modulation assignments for
+the X and Y parameters.
+• (4) SHAPER: A Shaper is used to define a new output value for every input value. For more
+information, refer to Shaper.
+• (5) LFO 2: A modulation source that can be assigned to adjust parameters of the STRAY-
+LIGHT. For more information, refer to LFO 2
+• (6) Randomize: Produces random values for all parameters in the Modulation pane.
+39
+Modulation Pane
+12.2. LFO 1
+The Modulation pane provides two LFOs which can be assigned to modulate parameters of the
+STRAYLIGHT. Combining different LFOs in the Bus Matrix can create complex modulation sources
+that unfold slowly over time. Eight different waveforms provide options for intricate modulation ef-
+fects, and five Trigger modes determine the behavior of the LFO.
+Modulation pane – LFO 1.
+• Freq: Sets the oscillation frequency of the LFO. This parameter can by synchronized to the
+master clock.
+• Sync (crotchet icon): Determines if the LFO speed is set in Hertz or in relation to the master
+clock as a musical duration. When the icon is lit, the LFO speed is set as divisions of musical
+timing, which are displayed when the Freq control is adjusted.
+• Waveform Type: Select the Waveform type from Sine, Triangle, Square, Ramp up, Ramp
+down, Random, Seek 1 and Seek 2. Seek 1 and Seek 2 provide smooth, random LFOs.
+• Trigger Mode: Selects one of five modes (Free, First, Retrig, Once, 1st 1x), which determines
+the retrigger behavior of the LFO. Free mode provides polyphonic modulation with random
+start phase. First mode restarts the LFO with the first note only. In Retrig mode, the LFO re-
+starts for each key pressed. Once mode triggers only one LFO cycle. 1st 1x triggers one LFO
+cycle for the first note only.
+12.3. Matrix
+The Matrix section is where you can combine sources to create more complex modulators. The
+Matrix contains two Buses, which can either work in Attenuation or Summing mode. Each Bus fea-
+tures two inputs which are processed and sent to the modulation targets Bus 1 and Bus 2. These
+two Buses can then be individually sent to any assignable parameter. The
+In Attenuation mode, as indicated by an x, the attenuator works as a multiplicator. In Summing
+mode, as indicated by a +, the two modulation sources are added together. Each Bus can be as-
+signed to a different mode and there is also the Sum of both busses available as a modulation
+source. You can monitor the result of each Matrix output with level indicators.
+Attenuation Mode
+The following controls are available in Attenuation mode. Controls are the same for Bus 2.
+40
+Modulation Pane
+Modulation pane – Matrix in Attenuation mode.
+• (1) Modulation Source: Selects the modulation source applied to this parameter. Note that
+some modulations, for example the Grain parameters, are polyphonic and others are mono-
+phonic.
+• (2) Bus 1 Mode: Determines whether the corresponding Matrix Bus works as a modulatable
+attenuverter/multiplicator or as a simple modulation source mixer which adds the two modula-
+tion signals together.
+• (3) Bus 1 Level: Determines if the input value is decreased, amplified or optionally inverted.
+The result is available as Bus 1 in the Modulation source menu. The range spans from -200%
+to 200%.
+Summing Mode
+The following controls are available in Summing mode. Controls are the same for Bus 2.
+Modulation pane – Matrix in Summing mode.
+• (1) Modulation Source: Selects the modulation source applied to this parameter. Note that
+some modulations, for example the Grain parameters, are polyphonic and others are mono-
+phonic.
+• (2) Bus 1 Mix 1: Determines if the input modulation value is decreased or optionally inverted
+and subsequently summed to Matrix Bus 1. The range comprises -100% to 100%.
+• (3) Bus 1 Mix 2: Determines if the input modulation value is decreased or optionally inverted
+and subsequently summed to Matrix Bus 1. The range comprises -100% to 100%.
+• (4) Bus 1 Mode: Determines whether the corresponding Matrix Bus works as a modulatable
+attenuverter/multiplicator or as a simple modulation source mixer which adds the two modula-
+tion signals together.
+41
+Modulation Pane
+12.4. Shaper
+The Modulation pane provides two Shapers that can be used to define a new output value for ev-
+ery input value. By using an LFO as the input of the Shaper and painting in the desired curve, you
+can generate many different types of waveforms. This enables you to create more interesting and
+elaborate modulation sources, that can achieve targeted results. The Shaper also offers different
+options of interpolation, which allows for smooth transition from one step to the next.
+Modulation pane – Shaper 1.
+• 1/2: Toggles between the two available Shapers.
+• Input Source: Selects the modulation source that is applied to the Shaper.
+• Size: Determines how many steps the Shaper provides. The maximum number of steps is 128.
+• Interpolation Mode: Determines how the Shaper interpolates when transitioning from one step
+to the next.
+12.5. LFO 2
+The second LFO provided in the Modulation pane can be assigned to modulate parameters of the
+STRAYLIGHT. Eight different waveforms provide options for varied modulation effects, and five
+Trigger modes offer further control over the behavior of the LFO. Use the Bus Matrix to combine
+multiple LFOs and create elaborate modulation sources that evolve unexpectedly over an exten-
+ded period of time.
+Modulation pane – LFO 2.
+• Freq: Sets the oscillation frequency of the LFO. This parameter can by synchronized to the
+master clock.
+• Sync (crotchet icon): Determines if the LFO speed is set in Hertz or in relation to the master
+clock as a musical duration. When the icon is lit, the LFO speed is set as divisions of musical
+timing, which are displayed when the Freq control is adjusted.
+• Waveform Type: Select the Waveform type from Sine, Triangle, Square, Ramp up, Ramp
+down, Random, Seek 1 and Seek 2. Seek 1 and Seek 2 provide smooth, random LFOs.
+• Trigger Mode: Selects one of five modes (Free, First, Retrig, Once, 1st 1x), which determines
+the retrigger behavior of the LFO. Free mode provides polyphonic modulation with random
+start phase. First mode restarts the LFO with the first note only. In Retrig mode, the LFO re-
+42
+Modulation Pane
+starts for each key pressed. Once mode triggers only one LFO cycle. 1st 1x triggers one LFO
+cycle for the first note only.
+43
+Effect Reference
+13. EFFECT REFERENCE
+In this section you are introduced to all available effects and to all the modes they can be operated
+in.
+13.1. Delay
+This delay module is based on Native Instruments’ dedicated Replika XT delay plug-in. It features
+different modes - Modern, BBD, Tape, Vintage and Diffusion - that add distinct color to your sound.
+All modes offer controls for time, feedback level, a low cut filter, a high cut filter, and ping pong
+effect. Each mode also provides a unique range of parameter controls to tailor the effect to your
+specific needs.
+Delay effect.
+Parameters
+The following parameters are available for all effect modes:
+• Time: Adjusts the delay time in milliseconds. To synchronize the time to your host or Master
+Editor tempo, click the Time control’s unit display [ms] and choose a note length value from the
+drop-down menu.
+• FX Sync: Sets the effect's time based parameter in sync with the master clock.
+• Feedback: Adjusts the level of the signal that is fed back to the delay's input. Increasing Feed-
+back adds delay repeats. Levels above 100% create swelling echo repeats up to self-oscilla-
+tion.
+• Level: The range is from 100 / 0 % to 0 / 100 %.
+Effect Modes
+The following effect modes and its variations are available:
+• Modern (Saturation, Dark, Ping Pong): Modern mode is a clean delay, with saturation and
+filter controls that allow you to add warmth and color to your sound. It is a pristine and transpar-
+ent delay, well-suited to acoustic instruments like guitar and piano. When changing the delay
+time, pitch stays constant.
+• BBD (Clean, Warm, Dark, Grunge, Ping Pong, Vibrato LR): Analog mode offers four Bucket
+Brigade delay models that replicate the character sound of BBD chips. From subtle distortion
+and warmth, to clean, smooth sounds, each model emulates desired characteristics of classic
+analog delay units.
+44
+Effect Reference
+• Tape (Fresh, Vintage, Dark, Dark LR): Tape mode reproduces the sound of tape delay, mod-
+eled on the physical mechanisms that make up early tape machines. Controls for Tape Age,
+Flutter and Saturation allow you manipulate the noise, hiss and color of the effect.
+• Vintage (Ping Pong, Mod, BP): Vintage mode emulates the sound of early digital delay units.
+Select between four quality levels that model the behavior of vintage delays with a limited sam-
+ple memory size. Increasing the delay time causes the sampling rate to decrease, introducing
+audio artifacts. The sample quality and interpolation vary for each of the four quality levels.
+• Diffusion (Dense, Small LR, Gentle, Cloud Pan, 4 Times): Diffusion mode can produce a
+standard delay effect, but it is best used for its huge, diffusion-based reverb sound. Thicken the
+density of delay repeats with the Dense, Modulation and Size controls to create a full sounding
+reverb effect. This mode is ideal for ambient music and sound design.
+13.2. Drive
+The Drive effect can be used to apply specific saturation to the sound. Several effect modes for
+different saturation sounds are available which are explained in more detail below.
+Drive effect.
+Lofi
+This module adds various digital artifacts, like quantization noise or aliasing, to a clean signal. It’s
+great for roughing up sounds that would otherwise be too plain and featureless.
+The following parameters are available:
+• Bits: Re-quantizes the signal to an adjustable bit depth. Fractional bit levels (such as 12.4 bits)
+are possible and can add considerable “grit”. Audio CDs have a quantization depth of 16 bits,
+old samplers frequently used 8 or 12 bits, and 4 bits evoke memories of countless irritating
+children’s toys.
+• Frequency: Adjusts the frequency characteristic of the noise and acts as a low-pass filter.
+• Noiselevel: Adds hiss to the audio signal.
+Tape
+The Tape Saturator emulates the soft compression and distortion of recording to tape. It can be
+used lightly to add warmth and coloring to the sound, or heavily to add aggressive distortion.
+The following parameters are available:
+• Gain: Controls the input gain of the effect. This will increase the amount of tape distortion and
+compression.
+• Warmth: Controls the low frequency boost/cut of the effect.
+45
+Effect Reference
+• Damp: Attenuates high frequencies in the output signal, thereby counteracting the brightness
+caused by the artificial harmonics.
+Jump Treble, Jump Hi Gain
+The Jump effect simulates the classic tone of British guitar amplifiers. It is ideal for creating
+smooth, singing lead sounds. The Jump effect is available on both the Group and Instrument level.
+The following parameters are available:
+• Preamp: Sets the amount of gain added by the preamp. Turning it clockwise adds drive, distor-
+tion and edge to the sound.
+• Treble: Adjusts the high frequency response.
+• Master: Adjusts the amp’s master volume.
+Twang Bright, Twang Bite
+The Twang effect simulates the rich tube sound of classic guitar amps from decades ago. It’s ideal
+for screaming leads and crunchy rhythm guitar sounds, as well as clean sounds with personality.
+The following parameters are available:
+• Gain: Controls the input level. In contrast to the Output knob, which merely adjusts the overall
+level of the module, this knob works like the gain control of a guitar amp and affects the amount
+of distortion.
+• Bass: Adjusts the level of the signal’s low frequency components.
+• Treble: Adjusts the level of the signal’s high frequency components.
+Tube Crunch
+The following parameters are available:
+• Drive: Adjusts the amount of distortion.
+• Treble: Adjusts the level of the signal’s high frequency components.
+• Master: Adjusts the amp’s master volume.
+Tube Creamer
+The following parameters are available:
+• Tone: Controls the brightness of the sound. Turning this knob clockwise will result in a more
+pronounced top-end, which works great on bright, screaming leads and biting rhythms. Turning
+it counter-clockwise results in a mellower, darker sound.
+• Output: Adjusts the module’s output level.
+Enh Shaping
+The following parameters are available:
+• Drive: Adjusts the amount of distortion.
+• Output: Adjusts the module’s output level.
+46
+Effect Reference
+Tube Warming
+The following parameters are available:
+• Drive: Adjusts the amount of distortion.
+• Damp: Attenuates high frequencies in the output signal, thereby counteracting the brightness
+caused by the artificial harmonics.
+• Output: Adjusts the module’s output level.
+AC Box Brilliant, AC Box Trem
+The ACBox models the guitar amplifier sound that powered the British Invasion of pop music.
+There were many versions of this highly original amp made, each having a different character. We
+chose a model that stands out with a unique flavor and includes the famous Top Boost channel!
+The following parameters are available:
+• Gain: Sets the level for the Brilliant channel.
+• Hi Cut: Controls a low-pass filter. By turning the knob clockwise treble in the output of the Nor-
+mal channel is reduced.
+• Output: Adjusts the module's output level.
+13.3. Dyn
+The Dyn (Dynamics) effect can be used, for example, to reduce the level of loud passages in the
+audio signal. The available parameters and effect modes are explained in more detail below.
+Dyn (Dynamics) effect.
+Parameters
+The following parameters are available. Their appearance depend on effect mode:
+• Threshold: Sets a level threshold above which the Compressor starts working. Only levels that
+rise above this threshold will be reduced by the compression; signals that stay below it will be
+left unprocessed.
+• Ratio: Controls the amount of compression, expressed as a ratio of “input level change”
+against “output level change”. A Ratio of 1:1 means that no compression will be happening. For
+example, a Setting of 4 represents the ration 4:1, which means for every 4 decibel increase of
+amplitude above the threshold, the output will increase by only 1 decibel.
+• Makeup: Controls the output gain of the compressed signal. Used to compensate for the gain
+reduction of the effect.
+47
+Effect Reference
+• Input: Controls the input gain to the effect.
+• Attack: Adjusts the time the Compressor will take to reach the full Ratio value after an input
+signal exceeds the Threshold level.
+• Sustain: Controls the scaling of the sustain portion of the input signal’s volume envelope. In-
+creasing this parameter will add more body to the sound and decreasing it will reduce the
+sound’s tail.
+• Release: Adjusts the time the compressor will take to fall back to non-compression after the
+input signal falls below the threshold.
+• Output: Controls the module’s output level.
+Bus Comp Effect Modes
+Compressors are dynamic tools which automatically reduce the level of loud passages in a signal,
+thereby affecting the signal’s dynamic range. The Solid Bus Comp is modeled after a classic ana-
+log bus compressor. It offers a more characteristic dynamic control than KONTAKT’s standard
+compressor.
+Feedback Comp Fast Effect Modes
+Compressors are dynamic tools that automatically reduce the level of loud passages in a signal,
+thereby affecting the signal's dynamic range. A feedback compressor is a type of compressor that
+compares the amplifier's output signal, rather than the input signal, to a threshold level. When the
+threshold level is reached, the compressor reduces the signal's gain level. The Feedback Com-
+pressor is modeled after a classic feedback compressor known for its bright and punchy sound.
+Transient Master
+The Transient Master is an easy to use compressor designed to control the attack and sustain of a
+sound. Instead of following the amplitude of the sound like a traditional compressor, it follows the
+general envelope and is thus not as susceptible to changes of input gain. It is best used on sounds
+with fast attacks, like percussion, pianos or guitars. The Transient Master can also be quite ex-
+treme in some cases, so use it with caution.
+Limiter
+Limiters are actually a special form of compressors with a ratio of one to infinity, a threshold just
+below the maximum level, and a very short attack time. They act as a “safety net” to keep short
+signal peaks from overloading the system, which would result in audio clipping. While compressors
+have a range of artistic applications, limiters are usually used for technical reasons — they can
+tame signals with peaks which would otherwise overload the output, without requiring you to turn
+the signal’s overall volume down.
+13.4. EQ
+Fully parametric peak equalizers allow for a wide range of tonal alterations and corrections. Use
+the EQ to boost or cut selective frequencies of the audio signal. The EQ is mainly a tool to tailor
+your audio signal to taste by cutting out selected frequencies or boosting others. The EQ can be
+operated in a 1 Band EQ and in a 3 Band EQ which are explained in more detail below.
+48
+Effect Reference
+1 Band EQ
+The 1 Band EQ is a simple equalizer.
+1 Band EQ effect.
+The following parameters are available:
+• Freq. (Frequency): Adjusts the center frequency at which the boost or cut will occur.
+• Width (Bandwidth): Adjusts the width of the frequency range that will be affected in octaves
+(bell shape).
+• Gain: Adjusts the amount of boost (positive values) or cut (negative values) at the center fre-
+quency.
+3 Band EQ
+Using up to three EQ bands, you can boost or cut any frequency range throughout the entire spec-
+trum by up to 18 dB, with an adjustable Bandwidth parameter allowing you to choose between
+gentle corrections or very steep edits.
+3 Band EQ effect.
+The following parameters are available:
+• Equalizer Q: Controls the Quality (or Q) of the frequency band. For most EQs, the higher the
+quality, the narrower the frequency band. For most EQs, the higher the quality, the narrower the
+frequency band, but with this EQ the control is reversed to match the hardware it emulates and
+becomes a bandwidth control.
+• Gain: Adjusts the amount of boost (positive values) or cut (negative values) at the center fre-
+quency.
+• Freq. (Frequency): Adjusts the center frequency at which the boost or cut will occur.
+49
+Effect Reference
+13.5. Filter
+A filter is a signal processor which changes the frequency content of a signal that passes through
+it. This means that in contrast to effects like distortion, reverb, or chorus, it only changes the ampli-
+tude and phase of frequency components which are already present in your signal, without creat-
+ing new frequency content.
+Filter effect.
+Parameters
+The following parameters are available depending on the effect mode:
+• Cutoff: Adjusts the frequency below which signals will be attenuated.
+• Reso: With a value greater than 0, this control will boost a small frequency range around the
+cutoff frequency.
+• Width: Controls the gap between the cutoff frequencies of the two filters, with the low-pass fil-
+ter’s cutoff always above that of the high-pass. The gap is generated around a central point
+controlled by the Cutoff control.
+• Drive: Adjusts the amount of distortion.
+• Gain: Controls the amplitude increase after the filter. This control can be used to compensate
+for amplitude reduction due to the filter, or to increase the soft saturation of the effect.
+• HP Cutoff: Controls the cutoff frequency of the High Pass filter.
+• LP Cutoff: Controls the cutoff frequency of the Low Pass filter.
+• Talk: Controls the frequency response of the filter. Can be used to morph between vowel-
+sounds.
+• Sharp: Increases and decreases the peaks and notches in the response respectively, analo-
+gous to the resonance control of the other filters.
+• Size: Controls the center of the frequency response, analogous to the cutoff control of the other
+filters.
+LP Ladder 2 Pole
+Based on the classic ladder circuit used in early synthesizers, these filters would be a first choice
+for synthetic sounds, but can work well on any signal. The LP2 is a 2-pole low-pass, which attenu-
+ates frequencies above the cutoff at a rate of -12 dB/octave.
+50
+Effect Reference
+LP Ladder 4 Pole
+Based on the classic ladder circuit used in early synthesizers, these filters would be a first choice
+for synthetic sounds, but can work well on any signal. The LP4 is a 4-pole low-pass, which attenu-
+ates frequencies above the cutoff at a rate of -24 dB/octave. The Ladder LP4 filter also includes
+the following controls:
+LP SV 2 Pole
+The State Variable (SV) filters have a clean characteristic that can be used for all kinds of audio
+signals. The LP2 is a 2-pole low-pass, which attenuates frequencies above the cutoff at a rate of
+-12 dB/octave.
+LP SV 4 Pole
+The State Variable (SV) filters have a clean characteristic that can be used for all kinds of audio
+signals. The LP4 is a 4-pole low-pass, which attenuates frequencies above the cutoff at a rate of
+-24 dB/octave.
+HP Ladder 2 Pole
+Based on the classic ladder circuit used in early synthesizers, these filters would be a first choice
+for synthetic sounds, but can work well on any signal. The HP2 is a 2-pole high-pass, which at-
+tenuates frequencies below the cutoff at a rate of -12 dB/octave. The Ladder HP2 filter also in-
+cludes the following controls:
+HP Ladder 4 Pole
+Based on the classic ladder circuit used in early synthesizers, these filters would be a first choice
+for synthetic sounds, but can work well on any signal. The HP4 is a 4-pole high-pass, which at-
+tenuates frequencies below the cutoff at a rate of -24 dB/octave. The Ladder HP4 filter also in-
+cludes the following controls:
+HP SV 2 Pole
+The State Variable (SV) filters have a clean characteristic that can be used for all kinds of audio
+signals. The HP2 is a 2-pole high-pass, which attenuates frequencies below the cutoff at a rate of
+-12 dB/octave.
+HP SV 4 Pole
+The State Variable (SV) filters have a clean characteristic that can be used for all kinds of audio
+signals. The HP4 is a 4-pole high-pass, which attenuates frequencies below the cutoff at a rate of
+-24 dB/octave.
+BP Ladder 2 Pole
+Based on the classic ladder circuit used in early synthesizers, these filters would be a first choice
+for synthetic sounds, but can work well on any signal. The BP2 is a 2-pole band-pass, which at-
+tenuates frequencies above and below the cutoff at a rate of -12 dB/octave. The Ladder BP2 filter
+also includes the following controls:
+51
+Effect Reference
+BP Ladder 4 Pole
+Based on the classic ladder circuit used in early synthesizers, these filters would be a first choice
+for synthetic sounds, but can work well on any signal. The BP4 is a 4-pole band-pass, which at-
+tenuates frequencies above and below the cutoff at a rate of -24 dB/octave. The Ladder BP4 filter
+also includes the following controls:
+BP SV 2 Pole
+The State Variable (SV) filters have a clean characteristic that can be used for all kinds of audio
+signals. The BP2 is a 2-pole band-pass, which attenuates frequencies above and below the cutoff
+at a rate of -12 dB/octave.
+BP SV 4 Pole
+The State Variable (SV) filters have a clean characteristic that can be used for all kinds of audio
+signals. The BP4 is a 4-pole band-pass, which attenuates frequencies above and below the cutoff
+at a rate of -24 dB/octave.
+LP HP
+This very clean sounding filter lacks any pronounced resonance and is ideally suited for removal of
+low frequency rumble and high frequency issues like harshness and excessive noise without color-
+ing the filtered signal.
+The HP filter is a 2-pole (12 dB/octave), whereas the 1-pole LP has a more gentle slope of 6 dB/
+octave.
+Phaser
+This effect continually changes the phase relationships in your signal with an all-pass filter. This
+results in a comb filtering effect, which attenuates some frequencies while boosting others. The
+sound is similar to that of a Flanger but in a more subtle manner.
+Vowel A
+This filter simulates the resonant frequencies of the human vocal tract; when forming a vowel, the
+throat and mouth cavities will change their shape in order to create a complex, natural filter which
+emphasizes certain frequencies in the sound created by the vocal chords. These characteristic fre-
+quencies, called formants, allow the human hearing to discern between different vowels, and are
+being replicated by this filter.
+Vowel B
+This filter works similarly to the Vowel A module, but has a slightly different sonic character.
+Formant
+Formants are acoustic resonances. The term often applies to the phonetics of human speech, as
+such, the formant filters are designed to mimic the frequency response of the human vocal tract.
+These filters can be used to emulate the “talk box” effect.
+52
+Effect Reference
+LP Draft
+The Daft filter has been adapted from MASSIVE and is a more aggressive synthesizer filter de-
+sign. The response of the filter is a 2-pole low-pass, which attenuates frequencies above the cutoff
+at a rate of -12 dB/octave. The daft filter also includes a Gain knob that controls the amplitude in-
+crease after the filter. This control can be used to compensate for amplitude reduction due to the
+filter, or to increase the soft saturation of the effect.
+HP Draft
+The Daft filter has been adapted from MASSIVE and is a more aggressive synthesizer filter de-
+sign. The response of the filter is a 2-pole high-pass, which attenuates frequencies below the cut-
+off at a rate of -12 dB/octave. The Daft filters also include the following controls:
+Notch SV4 Pole
+The State Variable (SV) filters have a clean characteristic that can be used for all kinds of audio
+signals. The Notch 4 is a 4-pole notch filter, which attenuates frequencies at the cutoff.
+AR LP 2
+The Adaptive Resonance (AR) filters follow the amplitude of the input signal and adjust the reso-
+nance accordingly. At higher input levels, the resonance will reduce, and for lower levels it will in-
+crease, this avoids unpleasant peaks. These filters work best on full loops or drums. The LP2 is a
+2-pole low-pass, which attenuates frequencies above the cutoff at a rate of -12 dB/octave.
+AR LP 4
+The Adaptive Resonance (AR) filters follow the amplitude of the input signal and adjust the reso-
+nance accordingly. At higher input levels, the resonance will reduce, and for lower levels it will in-
+crease, this avoids unpleasant peaks. These filters work best on full loops or drums. The LP4 is a
+4-pole low-pass, which attenuates frequencies above the cutoff at a rate of -24 dB/octave.
+AR HP 2
+The Adaptive Resonance (AR) filters follow the amplitude of the input signal and adjust the reso-
+nance accordingly. At higher input levels, the resonance will reduce, and for lower levels it will in-
+crease, this avoids unpleasant peaks. These filters work best on full loops or drums. The HP2 is a
+2-pole high-pass, which attenuates frequencies below the cutoff at a rate of -12 dB/octave.
+AR BP 2
+The Adaptive Resonance (AR) filters follow the amplitude of the input signal and adjust the reso-
+nance accordingly. At higher input levels, the resonance will reduce, and for lower levels it will in-
+crease, this avoids unpleasant peaks. These filters work best on full loops or drums. The BP2 is a
+2-pole band-pass, which attenuates frequencies below and above the cutoff at a rate of -12 dB/
+octave.
+HP LP Serial
+The State Variable (SV) filters have a clean characteristic that can be used for all kinds of audio
+signals. The Ser. LP/HP is the combination of a high-pass filter routed serially after a low-pass fil-
+ter. The result is similar to a band-pass filter.
+53
+Effect Reference
+13.6. Gater
+The Gater controls the volume of a sound with the help of two step sequencers. This can be used
+to rhythmically chop the signal and make it stutter or sound staccato. The Gater has two individual
+rhythms A and B which you can crossfade using the applied modulation source.
+The Gater effect can only be used once in STRAYLIGHT.
+Gater effect.
+(1) Modulation Connector: Selects the modulation source to be applied to the parameter.
+(2) Presets: Selects a preset for the Gater effect.
+(3) Rhythm A and B: Switches between the rhythms A and B.
+(4) Stepping area: Adjust the steps for the selected rhythm by dragging the bars up or down.
+(5) Context menu: With the options in this menu you can, for example, copy or swap the rhythms
+from A to B.
+(6) Division of musical timing: Determines how fast the Gater is stepping forward. You can se-
+lect from 1/4 to 1/ 64 of a beat.
+(7) Size: Determines how many steps the Gater provides. You can select between 2 to 32 steps.
+13.7. Mod
+The Mod (Modulation) effect modifies the sound in certain ways. Depending on the selected effect
+mode, the effect can, for example, "thicken" the sound or split the audio signal up and delays one
+version in relation to the original signal. The available effect modes with all parameters are ex-
+plained in more detail below.
+54
+Effect Reference
+Mod (Modulation) effect.
+Chorus and Chorus Phase
+The Chorus module “thickens” the audio signal by splitting it up and detuning one version in rela-
+tion to the original. Separate LFOs with an adjustable phase relationship detune each stereo chan-
+nel independently for creating wide-panorama effects.
+• Speed: Adjusts the LFO speed. To synchronize the speed to your host or Master Editor tempo,
+click the Speed parameter’s unit display and choose a note length value from the drop-down
+list.
+• FX Sync: Sets the effect's time-based parameters in-sync with the master clock.
+• Depth: Adjusts the range of modulated detuning. Higher values give a more pronounced chor-
+using effect.
+• Mix: Adjusts the respective levels of the original and processed signals. Note that the typical
+phasing effect is created by the combination of both signals, so setting these to the same levels
+results in the most pronounced effect.
+Flanger and Flanger Color and Flanger Reso
+This module splits the audio signal up and delays one version in relation to the original signal. By
+modulating the delay time, as well as feeding an adjustable amount of the output signal back into
+the input, the Flanger creates a characteristic “whooshing” sound. Just like the Phaser module, the
+Flanger uses a separate LFO for each stereo channel, with the phase relationship between both
+LFOs being adjustable.
+Phaser Subtle and Phaser Feedback
+This effect continually changes the phase relationships in your signal with an all-pass filter. This
+results in a comb filtering effect, which attenuates some frequencies while boosting others. The
+sound is similar to that of a Flanger but in a more subtle manner.
+FX Sync: Sets the effect's time-based parameters in sync with the master clock.
+• Speed: The LFO modulation speed. To synchronize the speed to your host or Master Editor
+tempo, click the Speed control’s unit display and choose a note length value from the drop-
+down list.
+• FX Sync: Sets the effect's time-based parameters in-sync with the master clock.
+• Depth: The amount of LFO modulation. Higher values cause the Phaser effect to sweep over a
+wider frequency range.
+• Mix: Adjusts the respective levels of the original and processed signals. Note that the typical
+phasing effect is created by the combination of both signals, so setting these to the same levels
+results in the most pronounced effect.
+55
+Effect Reference
+Rotator and Rotator Room and Rotator Slow Acc and Rotator Fast Acc
+The Rotator effect realistically simulates the sound of rotating speaker cabinets, which are com-
+monly associated with drawbar organs that became popular in rock music of the 60s and 70s. Al-
+though the effect is almost intrinsically tied to "the" prototypical drawbar organ sound, it works
+equally well on guitars, synth pads, and a wide range of other sounds.
+• Speed: Although this parameter appears as a knob in order to facilitate automation, it has two
+positions Slow and Fast. A change of this setting realistically simulates the acceleration or
+braking of the rotor.
+• Balance: Controls the relative levels of the cabinet’s treble and bass parts.
+• Wet: Adjusts the level of the original and processed signal.
+Choral Synth, Feedback, Ensemble, Dimension, and Sauce
+Choral features four distinct chorus modes, ranging from the subtle sound of classic studio rack
+processors to the large ensemble sound of early string synthesizers. Choral contains the following
+effects:
+• Synth: This mode is inspired by the choruses of polyphonic synthesizers from the late seven-
+ties and early eighties. Its sound characteristic is dark and vintage. The modulation behavior is
+tuned for rich and dispersed sounds.
+• Ensemble: This mode is inspired by the choruses of string synthesizers from the seventies. Its
+sound characteristic is warm and lush. The modulation behavior is tuned for animated and live-
+ly sounds.
+• Dimension: This mode is inspired by the choruses of studio rack processors from the early
+eighties. Its sound characteristic is bright and transparent. The modulation behavior is tuned for
+wide and consistent sounds.
+• Universal: This mode is a more generic chorus implementation. Its sound characteristic is
+clean and modern. The modulation behavior is tuned for a range of sounds from consistent to
+lively, depending on the number of Voices.
+Choral Parameters
+• Mix: Adjusts the respective levels of the original and processed signals. Note that the typical
+phasing effect is created by the combination of both signals, so setting these to the same levels
+results in the most pronounced effect.
+• Depth: Adjusts the range of modulated detuning. Higher values give a more pronounced chor-
+using effect.
+• Speed: Adjusts the LFO speed. To synchronize the speed to your host or Master Editor tempo,
+click the Speed parameter’s unit display and choose a note length value from the drop-down
+list.
+Flair Standard, Resonance, Unison, Scan on C, Stairways
+Flair features five flanger modes that offer different approaches to a range of effects from flanging
+to harmonization. The effect is produced by up to four comb filters, called Voices. Further expand-
+ing on the original concept of a flanger, the flanger voices have a harmonic relationship based on a
+wide selection of preset chords (Chord parameter).
+56
+Effect Reference
+Flair contains the following effects:
+• Standard: Each flanger voice behaves like a basic flanger effect, creating harmonically related
+peaks and notches in the frequency spectrum
+• Thru Zero: Each flanger voice is duplicated. The duplicated instances of the flanger voices are
+excluded from the modulation and thus rest at their respective base pitch. When modulation is
+introduced, the flanger voices shift against the duplicated instances in time. This creates the
+strong thru zero flanging effect with its characteristic signal cancellation, similar to the flanging
+effect originally created with two tape machines.
+• Scan: Instead of adding the flanger voices to form a chord, the effect scans through them one
+after the other. This is similar to how an arpeggiator on a keyboard plays the notes contained in
+a chord as a sequence.
+• Scan on C: A “ringing” tone is added in the key of C.
+• Stairways: An ascending resonance is created.
+Flair Parameters
+• Speed: The LFO modulation speed. To synchronize the speed to your host or Master Editor
+tempo, click the Speed control’s unit display and choose a note length value from the list.
+• FX Sync: Sets the effect's time-based parameters in-sync with the master clock.
+• Depth: The amount of LFO modulation. Higher values cause the effect to sweep over a wider
+frequency range.
+• Mix: Adjusts the respective levels of the original and processed signals.
+Phasis Animator, 6 Notches, Complex Low, and High Scanner
+Phasis is a new take on the phaser concept with additional features that have been carefully chos-
+en to allow for more sophisticated and extreme sounds than possible with common phasers while
+staying true to the ease of use and clarity associated with these devices.
+Phasis contains the following effects:
+• Animator: classic, subtle two-notch phaser stereo effect.
+• 6 Notches: medium phaser effect with higher resonance.
+• Complex Low: Complex nine-notch phaser with the center frequency in the lower spectrum at
+around 300 Hz.
+• High Scanner: intense four-notch phaser effect in the upper mid-range at 3.2 kHz and obvious
+feedback setting.
+Phasis Parameters
+• Speed: The LFO modulation speed. To synchronize the speed to your host or Master Editor
+tempo, click the Speed control’s unit display and choose a note length value from the list.
+• FX Sync: Sets the effect's time-based parameters in-sync with the master clock.
+• Depth: The amount of LFO modulation. Higher values cause the effect to sweep over a wider
+frequency range.
+• Mix: Adjusts the respective levels of the original and processed signals.
+57
+Effect Reference
+13.8. Rev
+With the Rev (reverb) effect you can adjust the size of the sound.
+Rev (Reverb) effect.
+IRC Flat and Low Cut
+This module simulates the natural reverberation that occurs when a sound source is placed in an
+acoustic environment, thus adding a feeling of spaciousness to the sound.
+The following parameters are available:
+• Level: Adjusts the reverb's output level.
+• Room size menu: Adjusts the size of the simulated room. This affects the duration of the re-
+verb trail.
+ALG Effect Modes
+This algorithmic reverb offers Room and Hall modes. Room mode generates a natural reverb with
+strong initial reflections and a quick decay. You can use this to simulate the natural sound of a
+small acoustic space. With a faster reverberation time, it is particularly suited to drums and guitars.
+Hall mode emulates the immensity of a large hall space, with a warm and rich sounding reverb.
+This can be used to replicate a vast, natural space. The large reverberation and long decay time
+make it a great tool to experiment with on a variety of sounds.
+The following parameters are available:
+• Time: Adjusts the duration of the reverb effect.
+• Size: Adjusts the size of the room simulated by the reverb effect. Higher values replicate larger
+rooms.
+• Level: Adjusts the reverb's output level.
+ALG Plate
+Plate reverb was developed as an early method of generating an artificial reverb effect. A vibrating
+sheet of metal is employed to simulate reflection patterns in acoustical spaces. Since the sheet of
+metal vibrates across a two-dimensional plane, the echo density is higher and more evenly distrib-
+uted than in a three-dimensional space. It is a good choice if you want to brighten a sound source.
+Plate reverb has a smooth reverb tail, allowing you to lengthen a sound without pushing it back in
+the mix. For this reason plate reverbs are most commonly used on vocals and snare drums. The
+Damping control affects the overall tone, so applying it to a bright source warms the sound.
+The following parameters are available:
+58
+Effect Reference
+• Decay: Adjusts the duration of the reverb effect.
+• Low Shelf: Attenuates or amplifies the low-frequency content of the reverb signal.
+• Level: Adjusts the reverb's output level.
+13.9. Util
+With this effect you can control the width of your signal’s stereo base and change the panning.
+Util (Utility) effect.
+The following parameters are available:
+• Width: Collapses or expands the signal’s stereo base. At the far left position, stereo signals will
+be summed to mono. Positive values will result in an artificial widening of stereo sources that
+has a tendency to apparently expand beyond the speakers, but watch out, this tends to cause
+mono incompatibilities in your mix.
+• Pan: This control allows you to place your signal within the stereo field. It works exactly like the
+Pan control of the Amplifier module.
+• Level: Adjusts the effect’s output level.
+59
+Credits
+14. CREDITS
+Product Concept, Design, Programming and Production: Frank Elting
+User Interface Design: Resonant Design
+Production, Sound Design: Stewart Walker, Jonathan Kranz, Frederik Theyssen
+Product Owner: Christian Wachsmuth
+Musicians: Bodek Jahnke, Stephan Braun, Tilman Ehrhorn, and others
+Recording Engineer: Frank Elting, Axel Reinemer, Stephan Rühl
+Documentation: Hannah Lockwood, Christian Schulz, Jan Ola Korte, David Gover
+Library Concept: Frank Elting
+Sound Presets: Arovane, Andreas Koslik, Andre Ettema, Joerg Huettner, Jeremiah Savage, Kse-
+nija Ladic, Noah Pred, Tommaso De Donatis, Kabuki, Stewart Walker, John Valasis, Angelos
+Liaros, Alexander Hacke, Jonathan Kranz, Frank Elting
+Quality Assurance: Konstantin Fichtner, Francesco Sabatini
+Marketing Manager: Alastair Oloo
+Artwork: Yvonne Hartmann
+Finalization and Encoding: Konstantin Fichtner, Francesco Sabatini
+Special Thanks: Paul Haslinger, Philipp Granzin, Sebastian Müller
+60

@@ -1,0 +1,639 @@
+
+Table of Contents
+1. Disclaimer .................................................................................................................. 1
+2. Welcome .................................................................................................................... 2
+3. Key Features .............................................................................................................. 3
+3.1. About KONTAKT / KONTAKT PLAYER .............................................................. 4
+4. Using the Violin .......................................................................................................... 5
+4.1. What Is Included in STRADIVARI VIOLIN ........................................................... 5
+4.2. Main Page ....................................................................................................... 6
+4.3. Articulations ..................................................................................................... 7
+4.3.1. Articulation Slots .................................................................................... 7
+4.3.2. Articulation Browser ................................................................................ 7
+4.3.3. Keyswitch .............................................................................................. 8
+4.3.4. Bow Change .......................................................................................... 9
+4.3.5. Con Sordino ........................................................................................... 9
+4.3.6. Legato Modes ........................................................................................ 9
+4.4. Articulations in Detail ...................................................................................... 10
+4.4.1. Long Articulations ................................................................................. 10
+4.4.2. Short Articulations ................................................................................ 10
+4.4.3. Expressive ............................................................................................ 11
+4.4.4. Dynamic .............................................................................................. 12
+4.4.5. Special ................................................................................................ 12
+4.4.6. Adaptive .............................................................................................. 13
+4.4.7. Legato and Bow Change Controls Available for Each Articulation ............ 13
+4.5. Performance .................................................................................................. 14
+4.5.1. Dynamics ............................................................................................. 15
+4.5.2. Vibrato ................................................................................................. 16
+4.6. Position .......................................................................................................... 17
+4.6.1. Force Open Strings .............................................................................. 18
+4.7. Mixer ............................................................................................................. 19
+4.7.1. Room Noise ......................................................................................... 20
+5. NKS Integration, Host Automation and MIDI CC Mappings .......................................... 21
+5.1. NKS Integration .............................................................................................. 21
+5.1.1. NKS Keyboard Mapping ........................................................................ 21
+5.1.2. NKS Control Mapping in STRADIVARI VIOLIN Multi Mic ......................... 21
+5.1.3. NKS Control Mapping in STRADIVARI VIOLIN ....................................... 22
+5.2. Host Automation ............................................................................................. 23
+5.2.1. Pre-Mapped Host Parameters for STRADIVARI VIOLIN Multi Mic NKI ..... 24
+5.2.2. Pre-Mapped Host Parameters for STRADIVARI VIOLIN NKI ................... 24
+5.3. MIDI CC Mappings ......................................................................................... 24
+6. Snapshots ................................................................................................................ 26
+7. Credits ..................................................................................................................... 28
+Disclaimer
+1. DISCLAIMER
+The information in this document is subject to change without notice and does not represent a
+commitment on the part of Native Instruments GmbH. The software described by this document is
+subject to a License Agreement and may not be copied to other media. No part of this publication
+may be copied, reproduced or otherwise transmitted or recorded, for any purpose, without prior
+written permission by Native Instruments GmbH, hereinafter referred to as Native Instruments.
+“Native Instruments”, “NI” and associated logos are (registered) trademarks of Native Instruments
+GmbH.
+Mac, macOS, GarageBand, Logic and iTunes are registered trademarks of Apple Inc., registered
+in the U.S. and other countries.
+Windows and DirectSound are registered trademarks of Microsoft Corporation in the United States
+and/or other countries.
+All other trademarks are the property of their respective owners and use of them does not imply
+any affiliation with or endorsement by them.
+Document authored by Antti Oikarinen
+Software version: 1.0 (06/2020)
+1
+Welcome
+2. WELCOME
+Thank you for purchasing STRADIVARI VIOLIN. This document provides information about the li-
+brary and a description of all of its functions. We hope that you enjoy using STRADIVARI VIOLIN.
+STRADIVARI VIOLIN is a virtual instrument made with real-world recordings of Antonio Stradivari’s
+“Vesuvius” violin, built in 1727. Until now, only a select few have been granted the right to play this
+precious instrument. The violin itself is practically untouchable, guarded by armed security on dis-
+play in the Museo del Violino in the birthplace of Antonio Stradivari - Cremona, Italy.
+During the meticulous recording process for this virtual instrument, the streets of Cremona ground
+to a halt as the council closed roads, car parks and urged the people of the town to remain as qui-
+et as possible. Meanwhile, inside the Auditorium Giovanni Arvedi, designed by pioneer acoustician
+Yasuhisa Toyota, Hamburg’s e-instruments captured every single note of the violin using 32 care-
+fully selected microphones placed throughout the hall to provide this digital recreation of a historic
+masterpiece.
+The instrument provides 20 different, professionally played articulations, each with up to three le-
+gato transitions. In addition, the innovative, Performance-Captured Vibrato models the natural vi-
+brato technique of a professional player and the Stereo Phase-Aligned Dynamic Crossfades elimi-
+nate phasing between dynamic transitions. These features combine to make STRADIVARI VIOLIN
+arguably the most realistic, true-sounding solo violin there is.
+2
+Key Features
+3. KEY FEATURES
+Chromatic Sampling
+Unlike most other virtual string instruments which often rely on samples of only every other note of
+the instrument, STRADIVARI VIOLIN features chromatic sampling, meaning that every single note
+of the instrument is a true recording. All playing styles and articulations have been sampled chro-
+matically, and therefore are playable with unparalleled realism without the need to stretch notes in
+between.
+Phase-aligned Stereo Samples
+STRADIVARI VIOLIN’s phase-aligned stereo sampling technology allows you to produce natural,
+vivid violin performances. Seamless, phase-aligned velocity crossfades on long articulations elimi-
+nate phasing when transitioning between dynamic layers.
+Performance-Captured Vibrato
+One of STRADIVARI VIOLIN’s highlights are the real-life vibrato performances, performed by the
+best virtuosi. The captured performances are re-applied into the sampled content, allowing you to
+produce highly authentic and dynamic vibrato performances. In many other virtual string instru-
+ments the vibrato has been included within the sample, and therefore it can only be turned on or
+off. STRADIVARI VIOLIN allows you to control vibrato depth and speed dynamically, allowing for
+dynamic and realistic vibrato performances.
+A Comprehensive Range of Articulations
+Utilize 20 different articulations that are divided into Long, Short, Expressive, Dynamic, Special
+and Adaptive articulations. In addition, three different legato transitions can be found within the ar-
+ticulation controls. The Virtuoso articulation intelligently combines multiple articulations depending
+on the velocity, note and pitch bend information you generate through your MIDI controller per-
+formance.
+Intelligent Fingerboard Positioning
+Dial in the perfect timbre for long articulations. Choose the Low String fingerboard position for a
+soft, mellow tone or the High String position for a brighter, more vibrant sound. Or opt for the
+Smart position, which intelligently selects the closest fingerboard position to the other notes
+played, as a real violinist would.
+Multiple Microphones and Blendable Microphone Positions
+A multi-microphone version of the instrument provides mix faders that let you adjust three separate
+mixdowns of the 32 microphones. Mix close, mid, and far mic positions. An included second ver-
+sion of STRADIVARI VIOLIN provides a stereo-only mix that’s lighter on your CPU and RAM for a
+speedier workflow and extra focus when composing.
+The Characteristics Of A Perfect Room
+STRADIVARI VIOLIN was recorded in Auditorium Giovanni Arvedi, in Cremona, Italy. This special
+performance space is part of Italy’s violin museum. The hall has been specifically designed with
+these precious instruments in mind. Blend in the noise floor captured in the Auditorium to place
+your Stradivari in the perfect acoustic space.
+3
+Key Features
+3.1. About KONTAKT / KONTAKT PLAYER
+STRADIVARI VIOLIN is an Instrument powered by KONTAKT; you will, therefore, need KONTAKT
+or the free KONTAKT PLAYER installed on your computer in order to use STRADIVARI VIOLIN.
+Refer to the KONTAKT/KONTAKT PLAYER documentation to learn how to load and configure
+KONTAKT Instruments.
+4
+Using the Violin
+4. USING THE VIOLIN
+4.1. What Is Included in STRADIVARI VIOLIN
+• Click the Instruments banner to show the STRADIVARI VIOLIN NKIs.
+• Load the desired NKI on your KONTAKT or KONTAKT PLAYER browser by double-clicking the
+NKI.
+Multi-microphone and standard stereo version of STRADIVARI VIOLIN as seen in KONTAKT in-
+strument browser.
+STRADIVARI VIOLIN comes with two NKI instruments.
+• STRADIVARI VIOLIN Multi Mic: Use the multi-microphone version of STRADIVARI VIOLIN to
+control and fine-tune the balance between different microphone positions and mixes, as well as
+the Room Noise of the recording space. Read more about the mixer and Room noise controls
+in the Mixer chapter.
+• STRADIVARI VIOLIN: The standard stereo NKI includes only a stereo mix of the violin. The
+stereo version is ideal for saving computer resources and sketching ideas quickly without the
+need to adjust the balance between microphone mixes.
+The only visible difference between the multi-microphone and stereo NKI interfaces
+is the mixer tool, which is not available in the stereo version.
+5
+Using the Violin
+4.2. Main Page
+Main view of the STRADIVARIO VIOLIN Multi Mic NKI.
+The following features and tools can be accessed through the Main Screen of STRADIVARI VIO-
+LIN:
+1. 2. Mixer: Use the Mixer controls to change the balance between different microphone blends,
+and control the amount of Room Noise. Note that the Mixer controls are only available in the
+multi-microphone version of STRADIVARI VIOLIN, and therefore the Mixer icon is not visible
+in the main page of STRADIVARI VIOLIN. To read more about Mixer controls, see the section
+Mixer.
+Performance controls: Control the dynamics of the violin performance with seamless and
+flexible Dynamics and Vibrato controls. To read more about Performance controls, see the
+section Performance.
+6
+Using the Violin
+3. 4. Articulation slots: STRADIVARI VIOLIN comes with 20 different articulation variations. The
+articulations are loaded into eight articulation slots, which can be seen in the bottom center of
+the main page. To read more about articulations and articulation controls, see the section Ar-
+ticulations.
+Position controls: Control the timbre of your performance by choosing notes to be played in
+High String or Low String positions, or opt for the Smart option to let STRADIVARI VIOLIN
+choose the string positioning intelligently. To read more about the position controls, see the
+section Position.
+4.3. Articulations
+4.3.1. Articulation Slots
+STRADIVARI VIOLIN offers eight articulation slots, which can be found in a panel at the bottom of
+the main page.
+Articulations slots are visible in the bottom of the main view.
+• When on the main page, choose the active articulation by clicking the corresponding articula-
+tion slot.
+4.3.2. Articulation Browser
+• Click the ... symbol in the top right corner of an articulation slot to open the Articulation browser.
+7
+Using the Violin
+Articulation browser
+STRADIVARI VIOLIN offers 20 articulations, including Long, Short, Expressive, Dynamic, Special
+and Adaptive articulation types. Read more about available articulation controls for each articula-
+tion in the chapter Articulations in Detail
+4.3.3. Keyswitch
+The articulations can be switched using keyswitches that are assigned to MIDI notes of your
+choosing.
+• Use the Keyswitch selector to choose the desired note for switching to the selected articula-
+tion.
+The Keyswitch selector and MIDI learn button.
+• Alternatively you can also click the MIDI Learn button and set the keyswitch by pressing a key
+on your MIDI keyboard or controller.
+In the main page the active keyswitch is visible in the top-left corner of each articula-
+tion slot.
+8
+Using the Violin
+4.3.4. Bow Change
+STRADIVARI VIOLIN allows you to control and force bow changes when playing certain articula-
+tions.
+• Set the keyswitch for controlling bow changes using the Bow Change selector.
+• Alternatively, you can also click the MIDI Learn button and set the keyswitch by pressing a key
+on your keyboard.
+The active keyswitch for Bow Change is indicated with an illuminated key (default
+color: purple) in the keyboard section located at the bottom of the KONTAKT or
+KONTAKT PLAYER window.
+See the section Legato and Bow Change Controls Available for Each Articulation to see a list of
+articulations that allow Bow Change.
+If you hold a note down long enough when using a longer articulation such as Sus-
+tain or Legato, STRADIVARI VIOLIN performs the bow change automatically in a
+natural-sounding way.
+4.3.5. Con Sordino
+STRADIVARI VIOLIN allows you to play the violin in Sordino (italian for 'muted') style, which pro-
+duces a completely different timbre. Use the Con Sordino switch to enable the damper.
+4.3.6. Legato Modes
+Long articulation styles offer the choice between different Legato modes, which define the transi-
+tion from one note to the next when playing legato.
+• Click the respective switch to choose the desired legato mode.
+9
+Using the Violin
+The Legato Mode selector with the Legato switches.
+Depending on the articulation, up to four legato modes are available:
+• Fingered: Changes the note without changing the direction of the bow, allowing you to play
+multiple notes without rebowing.
+• Bowed: The bow direction is changed simultaneously with the note change.
+• Portamento: The note changes are performed with a glide, simulating how a violinist would
+slide a left-hand finger on the fingerboard to move between two notes.
+• Rebow: Rebow changes the note with a new bow stroke, but without audible finger movement
+of the left hand.
+Legato mode can not be selected in all articulation styles. See the section Legato and Bow
+Change controls available for each articulation for a list of articulations where the legato mode can
+be selected.
+4.4. Articulations in Detail
+This chapter describes the characteristics of each articulation. The available controls for each ar-
+ticulation are also explained after the musical characteristics.
+4.4.1. Long Articulations
+• Sustain: Play long, sustained notes.
+• Choose the desired legato mode using the legato selector.
+The Legato Mode selector with the Legato switches.
+• Marcato: Play accented notes. Notes played in marcato are played with a stronger attack com-
+pared to sustained notes.
+• Choose the desired legato mode with the legato selector.
+• Detaché: Each note is played with a separate bow stroke. Faster bow strokes make detaché
+useful when playing faster passages. The bow changes are smooth and not accented.
+• Choose the desired legato mode with the legato selector.
+4.4.2. Short Articulations
+• Sautillé Single: Alternating bow strokes. The wooden part of the bow jumps or hops up on each
+note change. Compared to the similar spiccato articulation where the whole hair of the bow
+leaves the string, sautillé allows you to play faster passages as the hair of the bow stays on the
+string.
+10
+Using the Violin
+• Spiccatissimo: A shorter and more accented version of the spiccato articulation.
+• Spiccato: Alternating bow strokes. The hair of the bow bounces off the string on each note
+change.
+• Staccato: A short, non-bouncing bow stroke, where the bow does not leave the string.
+• Pizzicato: The string is picked with the index finger of the bowing hand. Pizzicato creates a
+very different, almost percussive sound compared to bowing.
+The loudness and the dynamics of the short articulations can be controlled via play-
+ing MIDI notes at different velocities through your DAW or a MIDI controller.
+4.4.3. Expressive
+• Tremolo: The note is played repeatedly with no specific accent with fast alternating bow
+strokes.
+• Use the Speed control to change the speed of the tremolo strokes.'
+• Use the Bowed Leg. and Rebow selector to change between a bowed legato and rebow
+transitions.
+• Trill: Two notes are alternated in quick succession either on a half note or whole note range.
+• Use the Speed control to change the speed in which the notes are alternating.
+• Interval Vel is the threshold value where the trill range changes from half note to whole
+note. The value implicates the velocity of the MIDI notes played on the DAW or with a MIDI
+controller. For example, if the value is set at 64, MIDI notes below this velocity will trigger a
+half note trill. MIDI notes played at velocity higher than 64 will trigger a whole note trill.
+• Use the Portamento and Rebow selector to change between a portamento and rebow le-
+gato transition
+• Ricochet: Several notes are played with the same bow direction, while the bow is bouncing on
+the string.
+• Use the Speed control to change the speed of the ricochet bounces.
+11
+Using the Violin
+• Sautillé: Sautillé notes played repeatedly.
+• Click the Tempo Sync switch to sync the notes with the tempo of your daw.
+• When Tempo Sync is enabled, click the x 1 switch to play the notes in sync with your
+DAW’s tempo.
+• When Tempo Sync is disabled, use the Speed slider to control the speed of the articulation
+continuously.
+Use the modulation wheel or MIDI CC1 to control the dynamics of the expressive ar-
+ticulations with your MIDI controller or DAW.
+4.4.4. Dynamic
+• Crescendo: The loudness of the bowed note increases gradually.
+• Use the Speed control to adjust the speed of the loudness increase.
+• Diminuendo Short: The loudness of the bowed note decreases gradually.
+• Use the Speed control to adjust the speed of the loudness decrease.
+• Diminuendo Long: The loudness of the bowed note decreases gradually. The loudness decrea-
+ses slower compared to the shorter diminuendo articulation.
+• Use the Speed control to adjust the speed of the loudness decrease.
+4.4.5. Special
+• Sul Pont: Notes are bowed close to the bridge, resulting in a different timbre.
+• Sul Tasto: Notes are bowed near or over the fingerboard, resulting in a very soft, flute-like tim-
+bre.
+• Harmonics: Notes are played by placing fingers gently on the strings, resulting in harmonic
+overtones.
+• Col Legno: Notes are played by striking the string with the wooden part of the bow as opposed
+to the hair of the bow, resulting in percussive notes.
+12
+Using the Violin
+4.4.6. Adaptive
+• Virtuoso: Virtuoso is a performance mode that intelligently combines several articulations. Virtu-
+oso is a great way to perform realistic violin performances on a MIDI keyboard or sketch ideas
+quickly and efficiently without programming keyswitches. Here are some of the features that
+make Virtuoso a unique performance tool.
+• Notes with low velocities (velocities 104 and under) will trigger notes played with sustained
+articulation, while notes with higher velocities (velocities 105 and higher) will result in notes
+played in marcato style.
+• By default, when playing legato notes in lower velocities, the note transitions will be played
+in fingered or bowed legato styles. Legato notes with higher velocities will trigger portamen-
+to transitions.
+• Use the Legato Style selector to change the order of aforementioned styles according
+to the velocity, so that lower velocities will trigger portamento transitions and higher ve-
+locities result in fingered or bowed legato transitions.
+The Legato Style selector for the Virtuoso articulation.
+• Use the Vel control to set the threshold value for the velocity where the legato style is
+changed.
+• Use your MIDI keyboard's or DAW’s pitch bend control to adjust the playing style between
+spiccatissimo and staccato articulations. Turn the control up to play notes in spiccatissimo.
+Turning the control down results in notes to be played in staccato.
+In Virtuoso mode, the spiccatissimo and staccato articulations are controlled via mod
+wheel instead of keyboard velocity.
+4.4.7. Legato and Bow Change Controls Available for Each
+Articulation
+Category Articulation Fingered
+Legato
+Bowed Le-
+gato
+Portamen-
+to
+Rebow Bow Change
+Long Sustain x x x x
+Marcato x x x x
+Detaché x x
+Short Sautillé Single
+Spiccatissimo
+Spiccato
+Staccato
+Pizzicato
+13
+Using the Violin
+Category Articulation Fingered
+Legato
+Bowed Le-
+Portamen-
+gato
+to
+Rebow Bow Change
+Expressive Tremolo x x
+Trill x x
+Ricochet
+Sautillé
+Dynamic Crescendo
+Diminuendo Short
+Diminuendo Long
+Special Sul Pont x
+Sul Tasto x
+Harmonics x
+Col Legno
+Adaptive Virtuoso x x x x
+Detaché articulation has no automatic bow change, so notes end when they are
+played long enough. However, you can change the bow direction manually with the
+Bow Change feature.
+4.5. Performance
+STRADIVARI VIOLIN's state-of-the-art dynamic performance feature and stereo phase-aligned
+samples allow for seamless and natural-sounding transitions and crossfading between notes, dy-
+namic layers and velocities.
+The Performance panel is located on the lower left-hand side of the main screen.
+• When on the main page, open the Performance panel by clicking the ... button on the lower
+left-hand side, next to the Dynamics control.
+The Performance controls are located in the lower left-hand side of the main toolbar.
+The Performance panel is divided into two separate sections, Dynamics and Vibrato.
+14
+Using the Violin
+The Performance controls.
+4.5.1. Dynamics
+The Dynamics controls
+• Use the Dynamics slider to control the volume and the dynamics of the performance. To con-
+trol the dynamic value via your DAW, use MIDI CC1.
+• The position of the slider is indicated in the bottom left-hand corner of the main toolbar. This
+control can also be used to control the Dynamics slider.
+The Dynamics control can be seen and adjusted in the main toolbar.
+15
+Using the Violin
+You can also use a MIDI controller or keyboard (default mapping: mod wheel) to ad-
+just the dynamics seamlessly.
+• Adjust the Expression slider to control the volume of the performance. Use MIDI
+CC11 to control the expression value via your DAW.
+• Use the Short Articulation drop-down menu to assign the short note dynamics
+either to keyboard velocity or MIDI controller. To change this value via your DAW,
+use MIDI CC1.
+4.5.2. Vibrato
+Vibrato is one of the most recognized ways to inject emotion into a violin performance. STRADI-
+VARI VIOLIN features performance captured vibrato performances, which are re-applied into the
+non-vibrato samples. STRADIVARI VIOLIN lets you adjust the speed of the vibrato seamlessly and
+in real time.
+The Vibrato controls.
+• Use the Rate slider to adjust the rate of the vibrato. Use MIDI CC15 to control the vibrato rate
+with your DAW.
+• Use the Vibrato slider to control the depth and intensity of the vibrato. Use MIDI CC14 to con-
+trol the depth of the vibrato with your DAW.
+• Click the Style drop-down menu to choose between various types of vibrato presets. The avail-
+able vibrato styles are Passionate, Intensity, Wide, Evolving, and Narrow. To change the vi-
+brato style via your DAW, use MIDI CC20.
+The depth of the vibrato is also indicated in the bottom left-hand corner of the main
+toolbar. This control can also be used to control the depth of the vibrato.
+16
+Using the Violin
+4.6. Position
+• Click the … button located in the lower right-hand side of the main screen to open the Position
+window.
+The Position feature as seen in the main view.
+As STRADIVARI VIOLIN’s samples have been captured chromatically without re-pitched samples,
+the resulting fingering is as close to real-life as possible. You can choose from three different intel-
+ligent fingering preferences and find the most suitable timbre for your performance.
+The Position controls.
+• Choose the position preference with the Preference selector. The following preferences are
+available:
+• High String: Fingering on higher strings is preferred where possible. Playing passages on
+higher strings result in brighter and metallic timbre.
+• Smart: Enabled by default, STRADIVARI VIOLIN’s Smart fingering mode intelligently choo-
+ses the most realistic fingering for the notes played. As an example, when playing a chro-
+matic passage, the Smart mode chooses to play the notes on the same string when possi-
+ble, just as a real violinist would do, yielding realistic results. In contrast, when playing a
+motif moving around different strings in the same area of the fingerboard, fingering on differ-
+ent strings is preferred intelligently and realistically.
+• Low String: Fingering on lower strings is preferred when possible. Playing passages on
+lower strings results in softer and more delicate timbre.
+17
+Using the Violin
+• Use MIDI CC21 to change the position preference via your DAW controls.
+The fingering is visualized in the fingerboard interface with dots.
+1. 2. 3. When playing notes, the white dots in the fingerboard interface shows the finger and string
+position in real time.
+The dimmed dot shows alternative finger and string positions, which can be forced by ena-
+bling another fingering preference with the Preference selector.
+A dot without a fill indicates that the note can be played on an open string.
+The dots indicating the fingering position.
+When playing notes, the dots can also be seen real time on the Position icon, loca-
+ted in the bottom right-hand side of the main page.
+The fingering position as seen in the main view.
+4.6.1. Force Open Strings
+STRADIVARI VIOLIN’s engine can be forced to use open strings where possible.
+• Select the preferred keyswitch for forcing open strings using the Force Open Strings control.
+The Force Open Strings control and the MIDI learn button.
+• Alternatively, you can also click the MIDI Learn button and set the keyswitch by pressing a key
+on your MIDI keyboard or controller.
+18
+Using the Violin
+The active keyswitch for Force Open Strings is indicated with an illuminated key
+(default color: green) in the keyboard section located in the bottom of the KONTAKT
+or KONTAKT PLAYER window.
+4.7. Mixer
+STRADIVARI VIOLIN comes with two NKI instruments: a standard stereo version and a multi-mi-
+crophone version. STRADIVARI VIOLIN has been recorded with a multi-microphone setup, using
+a total of 32 microphones in close, middle and far positions. These microphone positions can be
+controlled in the Mixer view.
+• Open the mixer by clicking the mixer icon in the top-left corner of the main page.
+The Mixer controls.
+• Deactivate each microphone mix on and off by clicking the respective on/off switch. This will
+also purge the samples from the NKI, ideal for saving system resources.
+On/off switches for the three microphone positions, controllable in the multi-microphone version of STRADI-
+VARI VIOLIN.
+• Use the volume slider to adjust the volume of each microphone mix.
+19
+Using the Violin
+Volume slider control.
+• Use the panning pot to pan each microphone mix to the desired position in the stereo field.
+Panning pot control.
+Note that the standard NKI version of STRADIVARI VIOLIN features a stereo mix-
+down of the 32 microphones used during the recording process. Therefore the mixer
+panel is only available in the multi-microphone instance of STRADIVARI VIOLIN.
+STRADIVARI VIOLIN was recorded and captured as closely and realistically as pos-
+sible to the true sound of the instrument. Therefore the mixer panel does not include
+separate effects controls. However, you can control the reverb and spaciousness of
+the sound by adjusting the Far mic position.
+4.7.1. Room Noise
+At the bottom of the Mixer panel, you can find an adjustment slider for Room Noise.
+Room Noise slider control.
+The room noise, captured in the historical Auditorium Giovanni Arvedi, removes digital silence
+even with longer pauses between notes. This provides a great way to glue a violin performance
+together and give it an extra hint of realism.
+• Use the Room Noise slider to increase or decrease the amount of the noise floor of the audito-
+rium captured during the recording process.
+20
+NKS Integration, Host Automation and MIDI CC Mappings
+5. NKS INTEGRATION, HOST AUTOMATION AND
+MIDI CC MAPPINGS
+5.1. NKS Integration
+5.1.1. NKS Keyboard Mapping
+STRADIVARI VIOLIN supports NKS (Native Kontrol Standard). The default NKS mapping for
+STRADIVARI VIOLIN can be seen in the KONTAKT or KONTAKT PLAYER keyboard:
+Virtual keyboard in KONTAKT indicating the NKS mapping with colors.
+• The red keys are used for switching between different articulation slots. To read more about ar-
+ticulations and articulation slots, see the section Articulation.
+• The purple key is used for the Bow Change feature. For more information, see the section
+Bow Change.
+• The green key is used for the Force Open Strings feature. For more information, see the sec-
+tion Force Open Strings.
+• The blue keys indicate the range of notes playable with STRADIVARI VIOLIN.
+5.1.2. NKS Control Mapping in STRADIVARI VIOLIN Multi Mic
+STRADIVARI VIOLIN Multi Mic NKI comes with pre-mapped NKS controls.
+21
+NKS Integration, Host Automation and MIDI CC Mappings
+STRADIVARI VIOLIN Multi Mic NKI's NKS controls as seen in KOMPLETE KONTROL software.
+The following controls have been pre-mapped:
+• Expression
+• Vibrato Style
+• Vibrato Intensity
+• Vibrato Rate
+• Position Preference
+• Volume, Close Microphone
+• Volume, Mid Microphone
+• Volume, Far Microphone
+5.1.3. NKS Control Mapping in STRADIVARI VIOLIN
+The standard version of STRADIVARI VIOLIN comes with pre-mapped NKS controls.
+22
+NKS Integration, Host Automation and MIDI CC Mappings
+STRADIVARI VIOLIN NKI's NKS controls as seen in KOMPLETE KONTROL software.
+The following controls have been pre-mapped:
+• Expression
+• Vibrato Style
+• Vibrato Intensity
+• Vibrato Rate
+• Position Preference
+5.2. Host Automation
+STRADIVARI VIOLIN has pre-mapped host automations.
+• Click Automation in the top-left side of KONTAKT or KONTAKT PLAYER to show the list of
+mapped parameters.
+23
+NKS Integration, Host Automation and MIDI CC Mappings
+• Click Host Automation to show the list of pre-mapped host controls.
+5.2.1. Pre-Mapped Host Parameters for STRADIVARI VIOLIN
+Multi Mic NKI
+The following parameters have been pre-mapped for STRADIVARI VIOLIN Multi Mic:
+Host parameter Assigned to
+# 000 Expression
+# 001 Vibrato Style
+# 002 Vibrato Intensity
+# 003 Vibrato Rate
+# 004 Position Preference
+# 005 Volume, Close Microphone
+# 006 Volume, Mid Microphone
+# 007 Volume, Far Microphone
+5.2.2. Pre-Mapped Host Parameters for STRADIVARI VIOLIN
+NKI
+The following parameters have been pre-mapped for STRADIVARI VIOLIN’s standard version:
+Host parameter Assigned to
+# 000 Expression
+# 001 Vibrato Style
+# 002 Vibrato Intensity
+# 003 Vibrato Rate
+# 004 Position Preference
+5.3. MIDI CC Mappings
+The following MIDI CCs are either pre-mapped or used internally by STRADIVARI VIOLIN.
+Pre-mapped CCs have the respective parameters written next to them. The unmarked CCs are
+used internally by the STRADIVARI VIOLIN engine. It is suggested to avoid using or remapping
+these CCs to avoid any possible MIDI issues.
+CC Parameter
+1 Dynamic
+2
+3
+4
+11 Expression
+14 Vibration Intensity
+15 Vibrato Rate
+20 Vibrato Style
+21 Position Preference
+24
+NKS Integration, Host Automation and MIDI CC Mappings
+CC Parameter
+35
+40
+41
+42
+43
+45
+50
+51
+52
+102
+103
+104
+105
+106
+107
+108
+109
+25
+Snapshots
+6. SNAPSHOTS
+STRADIVARI VIOLIN comes with pre-made snapshots, which allow you to access different types
+of sounds and panning setups quickly.
+• Click the Load Snapshot button on the KONTAKT or KONTAKT PLAYER to show the list of
+snapshots.
+STRADIVARI VIOLIN Multi Mic comes with the following snapshots:
+1. Stradivari Violin Multi Mic
+2. Orchestral Seating
+3. Longs Multi Mic
+4. Shorts Multi Mic
+5. Orchestral Seating Longs
+6. Orchestral Seating Shorts
+Use the Orchestral Seating snapshots to place STRADIVARI VIOLIN in a conven-
+tional orchestral position, panned to the left side of the stereo field.
+An example of an Orchestral Seating snapshot. The Close and Mid microphone mixes have been panned to the left
+to place the violin a more conventional orchestral position.
+26
+Snapshots
+The standard version of STRADIVARI VIOLIN comes with the following snapshots:
+1. Stradivari Violin
+2. Longs
+3. Shorts
+27
+Credits
+7. CREDITS
+Hamburg
+Thomas Koritke, Alexander Paprotny, Andreas Rogge, Till Weinrich, Lars Dahlke, Sascha Haske,
+Dr. Florian Pfeifle, Martin Bartsch, Martin von Frantzius, Iain Horrocks, Jochen Kux, Ivo Sloman,
+Andreas Barzyk
+Cremona
+Leonardo Tedeschi, Mattia Bersani and Audiozone Studios. Virginia Villa, Fausto Cacciatori, Marco
+Fornasari, Alessandro Bardelli and the team of Museo del Violino. Paolo Bodini and Friends of
+Stradivari. The Musicians: Antonio De Lorenzi, Gabriele Schiavi, Marcello Schiavi, Andrea Noceri-
+no, Wim Jannsen. Donato Masci, Stefano Mistura. Musical Acoustic Lab of Politecnico University
+of Milano. Gianluca Galimberti—City of Cremona.
+Berlin
+Christian Wachsmuth, Frank Elting, Pia Detjen, Francesco Sabatini, Maik Siemer, Sebastian Mül-
+ler, Antti Oikarinen, David Gover, Jan Ola Korte, Anni Kokko, Geoff Wright, Alastair Oloo, Matt Har-
+ris, Thomas Evans, Michael Sohn, Elisabeth Dehlke, Anna Pisarek, Shane Mason, Mark Nickels,
+Georg Wohnsen
+Special Thanks
+Massimo Paradiso, Ludger Böckenhoff, Johannes Waehneldt, Russ Hughes, Townsend Labs,
+HEDD Audio GmbH, The Blink Fish Film and Creativity Factory, The people of Cremona
+28

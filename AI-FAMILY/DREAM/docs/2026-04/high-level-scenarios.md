@@ -1,60 +1,86 @@
-# Rivet High-Level Scenarios
+# High-Level Scenarios
 
-## 1) Team Chat Standup Bot with Channel Intelligence
+## Scenario 1: On-Demand Upload Transcription
 
-- Modules: `ChatbotClient` + `TeamChatClient`
-- Auth: Client Credentials (chatbot) + User OAuth or S2S for Team Chat APIs
-- Flow:
-1. Slash command enters chatbot webhook.
-2. Bot queries channel and member lists via Team Chat endpoints.
-3. Bot posts/updates interactive message cards.
-- Risks:
-- Misaligned scopes cause endpoint failures.
-- Wrong port in Marketplace event subscription prevents callbacks.
+Use fast mode when a user uploads one file and expects a transcript immediately.
 
-## 2) ISV Admin Automation Service
+Flow:
+1. Browser uploads file to your backend.
+2. Backend generates Build JWT.
+3. Backend calls `POST /aiservices/scribe/transcribe`.
+4. Backend returns transcript JSON to the caller.
 
-- Modules: `UsersS2SAuthClient`, `MeetingsS2SAuthClient`, optionally `AccountsS2SAuthClient`
-- Auth: S2S OAuth
-- Flow:
-1. Backend receives internal request to create/update Zoom resources.
-2. Rivet endpoints wrap REST calls.
-3. Webhooks confirm completion state.
-- Risks:
-- Missing `accountId` or stale S2S credentials.
-- Event and API schema mismatch across versions.
+Common downstream uses:
+- post-call summaries
+- ticket enrichment
+- searchable clip libraries
+- internal review or handoff notes
 
-## 3) Video SDK API Operations and Recording Workflow
+## Scenario 2: Batch S3 Archive Transcription
 
-- Module: `VideoSdkClient`
-- Auth: Video SDK JWT
-- Flow:
-1. Create/list/manage sessions.
-2. Manage recording/BYOS/report endpoints.
-3. React to session/recording webhooks.
-- Risks:
-- Wrong credential type (OAuth client vs Video SDK key/secret).
-- Ignoring recording and BYOS endpoint field changes after upgrades.
+Use batch mode when call archives or media libraries already live in S3.
 
-## 4) AWS Lambda Event Receiver Deployment
+Flow:
+1. Build a batch request with input prefix and output prefix.
+2. Submit `POST /aiservices/scribe/jobs`.
+3. Track state by webhook or polling.
+4. Read `/jobs/{jobId}/files` for per-file success/failure.
+5. Ingest outputs into search, analytics, or storage.
 
-- Module: product-specific client + `AwsLambdaReceiver`
-- Flow:
-1. Instantiate client with `receiver: new AwsLambdaReceiver(...)`.
-2. Export Lambda handler that delegates to `await client.start()` handler.
-3. Use API Gateway/serverless-offline for local parity.
-- Risks:
-- User OAuth expectations with unsupported receiver flow.
-- Secret token mismatch across Lambda environments.
+Common downstream uses:
+- compliance and audit logging
+- searchable webinar or podcast archives
+- bulk transcript backfills
+- QA scoring inputs
 
-## 5) Multi-Tenant Event Router
+## Scenario 3: Zoom Recording Export + Re-Transcription
 
-- Modules: one or more, with external token/state stores
-- Flow:
-1. Receive webhook.
-2. Resolve tenant and token context.
-3. Execute routed API action.
-4. Persist audit and retry state.
-- Risks:
-- In-memory token store only (tokens lost on restart).
-- Missing idempotency for retried webhook events.
+Use when you must re-process Zoom-managed recordings with your own transcript settings.
+
+Skill chain:
+- `zoom-rest-api` to fetch/download recordings
+- `scribe` to transcribe exported media
+
+Typical reasons:
+- you need your own retention/search pipeline
+- you need different transcript settings than Zoom-managed defaults
+- you want to enrich recordings with your own summarization or tagging flow
+
+## Scenario 4: Compliance / QA Processing
+
+Use batch mode when transcripts must be generated offline for audits, QA scoring, or archival search.
+
+Prefer:
+- `word_time_offsets=true` when reviewers need precise excerpts
+- `channel_separation=true` for stereo call recordings
+- webhook + queue ingestion instead of synchronous polling for large volumes
+
+## Scenario 5: Customer Support Voice-to-Insights Pipeline
+
+Use when support call recordings should feed operational analytics instead of stopping at raw transcript text.
+
+Flow:
+1. Ingest call recordings from storage or exported meeting assets.
+2. Transcribe with `scribe`.
+3. Store transcript plus speaker/timing metadata.
+4. Run downstream sentiment, keyword, escalation, or QA logic in your own pipeline.
+
+Guardrail:
+- keep `scribe` focused on transcription
+- do sentiment analysis, keyword detection, or scoring in downstream services after transcript generation
+
+## Scenario 6: Browser Microphone Incremental Transcript
+
+Use when a web page should capture microphone audio and show transcript updates every few seconds without switching to RTMS.
+
+Flow:
+1. Browser captures microphone audio with `MediaRecorder`.
+2. Browser flushes one chunk every `5 seconds`.
+3. Backend accepts each chunk as a normal fast-mode upload through the async wrapper.
+4. Frontend polls by request ID and appends transcript chunks in order.
+
+Guardrail:
+- this is pseudo-streaming over repeated file uploads
+- this is best kept as a lightweight demo or constrained fallback
+- do not choose it first for a true live-transcription product
+- if the requirement is truly live media stream ingestion or lower-latency continuous audio, route to `rtms`

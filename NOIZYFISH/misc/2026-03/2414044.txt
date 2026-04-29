@@ -1,0 +1,1354 @@
+
+Disclaimer
+The information in this document is subject to change without notice and does not represent a
+commitment on the part of Native Instruments GmbH. The software described by this docu-
+ment is subject to a License Agreement and may not be copied to other media. No part of this
+publication may be copied, reproduced or otherwise transmitted or recorded, for any purpose,
+without prior written permission by Native Instruments GmbH, hereinafter referred to as Native
+Instruments.
+“Native Instruments”, “NI” and associated logos are (registered) trademarks of Native Instru-
+ments GmbH.
+All other trademarks are the property of their respective owners and use of them does not imply
+any affiliation with or endorsement by them.
+Document authored by: David Gover, Jamil Samad, André Estermann, Tim Exile
+Software version: 1.0 (11/2015)
+Special thanks to the Beta Test Team, who were invaluable not just in tracking down bugs, but
+in making this a better product.
+Contact
+NATIVE INSTRUMENTS GmbH
+Schlesische Str. 29-30
+D-10997 Berlin
+Germany
+www.native-instruments.de
+NATIVE INSTRUMENTS North America, Inc.
+6725 Sunset Boulevard
+5th Floor
+Los Angeles, CA 90028
+USA
+www.native-instruments.com
+NATIVE INSTRUMENTS K.K.
+YO Building 3F
+Jingumae 6-7-15, Shibuya-ku,
+Tokyo 150-0001
+Japan
+www.native-instruments.co.jp
+NATIVE INSTRUMENTS UK Limited
+18 Phipp Street
+London EC2A 4NU
+UK
+www.native-instruments.com
+© NATIVE INSTRUMENTS GmbH, 2015. All rights reserved.
+Table of Contents
+Table of Contents
+1 Welcome to FLESH ....................................................................................................6
+1.1 Foreword by Tim Exile ................................................................................................................. 6
+1.2 Basic Information ....................................................................................................................... 7
+1.3 Manual Conventions ................................................................................................................... 7
+2 What is FLESH ...........................................................................................................9
+3 Installation and Activation .........................................................................................10
+3.1 Installing FLESH ......................................................................................................................... 10
+3.2 Activating FLESH ........................................................................................................................ 10
+4 How to Use FLESH .....................................................................................................12
+4.1 4.2 How to Open FLESH ..................................................................................................................... 12
+Exploring Factory-set Snapshots ................................................................................................ 15
+4.2.1 Loading a Snapshot from the Side Pane .................................................................... 16
+4.2.2 Loading a Snapshot from the Header ........................................................................ 17
+4.3 Saving a Snapshot ..................................................................................................................... 17
+5 Overview of FLESH .....................................................................................................18
+6 Header .....................................................................................................................21
+7 Samples Page ...........................................................................................................23
+7.1 7.2 Adding Samples to the SAMPLES page ....................................................................................... 25
+Copying and Pasting Samples in the SAMPLES page .................................................................. 26
+8 Sound Page ..............................................................................................................28
+8.1 Sound Generators ....................................................................................................................... 31
+8.1.1 Sub Synthesizer ......................................................................................................... 31
+8.1.2 Mono Synthesizer ....................................................................................................... 32
+8.1.3 Sample Player ............................................................................................................ 37
+8.1.4 Poly Synthesizer ......................................................................................................... 39
+FLESH - Manual - 4
+Table of Contents
+8.1.5 FX .............................................................................................................................. 44
+8.2 Mixer ........................................................................................................................................... 45
+8.2.1 8.2.2 8.2.3 Adjusting the Volume of a Sound: .............................................................................. 45
+How to Mute an Engine .............................................................................................. 46
+How to Adjust FX Sends ............................................................................................. 46
+8.3 Macro Controls ........................................................................................................................... 46
+8.4 Configuration Subpages ............................................................................................................. 47
+8.4.1 MOD. (Modulation) Subpage ...................................................................................... 48
+8.4.2 Macros Subpage ........................................................................................................ 51
+8.4.3 Remote Subpage ....................................................................................................... 53
+9 Harmony Page ...........................................................................................................57
+9.1 9.2 9.3 Sub Synthesizer Section .............................................................................................................. 59
+Mono Synthesizer Section ........................................................................................................... 59
+Poly Synthesizer Section ............................................................................................................. 60
+9.4 Chords Section ........................................................................................................................... 60
+9.5 Sequence Section ....................................................................................................................... 61
+10 Credits ......................................................................................................................64
+FLESH - Manual - 5
+Welcome to FLESH
+Foreword by Tim Exile
+1 Welcome to FLESH
+1.1 Foreword by Tim Exile
+The concept for FLESH came to me a few years ago. I’d been touring with the Flow Machine,
+my custom looping, beat making and improvising instrument which I built in REAKTOR. It al-
+ready included THE FINGER and THE MOUTH which gave me plenty of power for live FX man-
+gling and vocal synthesis but I was missing a way to make harmonic and melodic material in a
+live, improvised scenario. I wanted something that would empower me to create expressive and
+dynamic sounds which fitted in perfectly with whatever was going on at the time.
+I wondered if I could create intelligent melodies that responded to the rhythmic feel of a track
+—or intelligent synths that dynamically based their tone on the track’s shifting tone over time.
+I set to work designing new methods for analysis, sequencing and synthesis which would allow
+me to do this. It’s taken a few years to get it right and now I’m very proud to share the results
+of my work with you.
+I’ve been blown away by what these new techniques have come up with. Some of the melodies
+that have emerged have become ear-worms which I still hum a year later. On occasions
+through the development process I’ve been moved to tears by how creative a computer can be
+if you give it the power.
+One of the most fun things has been creating entire tracks with just one loop sample. This is
+FLESH’s ultimate power-move. FLESH is a composition tool and a performance instrument rol-
+led into one. It allows you to create tracks as instruments—a collection of samples, chord pat-
+terns and sound settings—which you can combine and manipulate with physical controls in a
+new way for each performance. And as an extra bonus it has multiple outputs so you can re-
+cord your jams and get as mucky (or crystal clear) as you like in the edit.
+I hope this thing augments your musical horizons like it has mine.
+FLESH - Manual - 6
+Welcome to FLESH
+Basic Information
+1.2 Basic Information
+Thank you very much for downloading this REAKTOR ensemble from Native Instruments. This
+new and exciting synthesizer can be used either with the free REAKTOR 6 PLAYER, or the full
+version of REAKTOR 6 (including subsequent versions). On behalf of the entire NATIVE IN-
+STRUMENTS team, we hope this product will inspire you.
+A full version of REAKTOR 6.0.1 or the free REAKTOR PLAYER 6.0.1 (or subsequent
+versions) is required to use FLESH. You can download the free REAKTOR PLAYER from
+the Native Instruments website.
+1.3 Manual Conventions
+This document uses particular formatting to point out special facts and to warn you of poten-
+tial issues. The icons introducing the following notes let you see what kind of information can
+be expected:
+The speech bubble icon indicates a useful tip that may often help you to solve a task
+more efficiently.
+The exclamation mark icon highlights important information that is essential for the giv-
+en context.
+The red cross icon warns you of serious issues and potential risks that require your full
+attention.
+Furthermore, the following formatting is used:
+▪ Text appearing in (drop-down) menus (such as Open…, Save as… etc.) in the software and
+paths to locations on your hard disk or other storage devices is printed in italics.
+FLESH - Manual - 7
+Welcome to FLESH
+Manual Conventions
+▪ Text appearing elsewhere (labels of buttons, controls, text next to checkboxes etc.) in the
+software is printed in blue. Whenever you see this formatting applied, you will find the
+same text appearing somewhere on the screen.
+▪ Important names and concepts are printed in bold.
+▪ References to keys on your computer’s keyboard you’ll find put in square brackets (e.g.,
+“Press [Shift] + [Enter]”).
+► Single instructions are introduced by this play button type arrow.
+→ Results of actions are introduced by this smaller arrow.
+To get the best from this instrument please read the manual in its entirety.
+FLESH - Manual - 8
+What is FLESH
+2 What is FLESH
+FLESH is an audio-reactive performance synthesizer, which generates harmonic chords and se-
+quences from musically looped samples (like drum loops). FLESH can generate a complete
+track from a single drum loop and can be played like an instrument, using streamlined controls
+to bring in musical elements, tweak them, switch and mute loops, change harmonic structures
+etc. —all in sync with the DAW.
+Conceived and developed by Tim Exile in partnership with Native Instruments, FLESH is a
+unique and creative loop based synthesizer. At the center of the FLESH is the loop engine. By
+drag and dropping a loop into FLESH it will analyze the sample to determine its velocity and
+centroid content. This information is then processed by the Harmony engine which in turn trig-
+gers the Synthesizer and FX sound generators.
+Simple loops can be quickly brought to life. Expect wild and adventurous modern sounds as
+well as intelligently generated melodic lines that build on what you feed it. The beauty of
+FLESH is in its ability to create happy accidents and new sonic ideas for use in modern day
+productions as well as a flexible tool for live performance.
+FLESH - Manual - 9
+Installation and Activation
+Installing FLESH
+3 Installation and Activation
+3.1 Installing FLESH
+The following section explains how to install and activate FLESH. Although this process is
+straightforward, please take a minute to read these instructions, as doing so might prevent
+some common problems.
+► To install FLESH, double-click the installer application and follow the instructions on the
+screen. The installer application automatically places the new ensemble file into a REAK-
+TOR PLAYER directory. Alternatively, during the installation process, choose the directory
+where you would like to have FLESH installed.
+A full version of REAKTOR 6.0.1 or the free REAKTOR PLAYER 6.0.1 (or subsequent versions)
+is required to use FLESH. You can download the free REAKTOR PLAYER from the Native In-
+struments website.
+3.2 Activating FLESH
+When installation is finished, start the Service Center application, which was installed with
+FLESH. It will connect your computer to the Internet and activate your FLESH installation. In
+order to activate your copy of FLESH, you have to perform the following steps within the Serv-
+ice Center:
+Log in: Enter your Native Instruments user account name and password on the initial page.
+This is the same account information you used in the Native Instruments Online Shop, where
+you bought your REAKTOR Instrument, and for other Native Instruments product activations.
+Select products: The Service Center detects all products that have not yet been activated and
+lists them. You can activate multiple products at once—for example, several REAKTOR Instru-
+ments.
+Activate: After proceeding to the next page, the Service Center connects to the Native Instru-
+ments server and activates your products.
+FLESH - Manual - 10
+Installation and Activation
+Activating FLESH
+Download updates: When the server has confirmed the activation, the Service Center automati-
+cally displays the Update Manager with a list of all available updates for your installed prod-
+ucts. Please make sure that you always use the latest version of your Native Instruments prod-
+ucts to ensure they function correctly.
+Downloading updates is optional. After activation is complete, you can always quit the
+Service Center.
+FLESH - Manual - 11
+How to Use FLESH
+How to Open FLESH
+4 How to Use FLESH
+The following sections will give you a brief overview over some basic operations: you will learn
+how to open FLESH, how to explore the factory-set Snapshots and how to load and play FLESH
+Snapshots from the Header and the Side Pane.
+For the latest information on REAKTOR PLAYER files and using Snapshots please refer
+to the REAKTOR Getting Started Guide, available from the REAKTOR Help menu.
+4.1 How to Open FLESH
+This is how to open FLESH in REAKTOR or REAKTOR PLAYER:
+1. 2. Start REAKTOR or REAKTOR PLAYER.
+Click the Browser icon to open the Browser
+FLESH - Manual - 12
+3. 4. How to Use FLESH
+How to Open FLESH
+Click the Player tab to show the REAKTOR PLAYER files (or you can open the browser
+with the [F1] key from your keyboard).
+Click the FLESH folder. The content of the folder will be displayed in the lower section of
+the browser.
+FLESH - Manual - 13
+5. 6. How to Use FLESH
+How to Open FLESH
+Double-click the Flesh.ens file, or drag it into the main screen.
+FLESH will be loaded in REAKTOR/REAKTOR PLAYER:
+FLESH - Manual - 14
+How to Use FLESH
+Exploring Factory-set Snapshots
+4.2 Exploring Factory-set Snapshots
+Play some notes on your MIDI keyboard to get an idea of how FLESH sounds. Pressing notes
+triggers Harmony, Samples, and Sound Remote Octave slots. They use the following key rang-
+es:
+Function Remote Octave Keys
+Select a HARMONY slot C1 to B2
+Select a SAMPLES slot. C2 to B3
+Select a SOUND slot. C3 to B4
+Please refer to the REAKTOR manual for details on configuring your Audio and MIDI
+settings, available from the Help Menu
+Now, let’s change the sound by loading a different Snapshot.
+A Snapshot is REAKTOR’s notion for a sound, preset, or patch. FLESH can hold banks
+of Snapshots, and loading any of these Snapshots will set each control of the Instrument
+to a specific value, and re-create a particular sound.
+The Snapshots of FLESH are accessible from the drop-down menu in REAKTOR PLAYER’s
+Header (Main Bar) or from the Side Pane.
+FLESH - Manual - 15
+How to Use FLESH
+Exploring Factory-set Snapshots
+FLESH interface with Snapshot list in the Side Pane.
+(1) Side Pane button
+(2) Snapshot drop-down menu
+(3) Snapshot button
+(4) Snapshot Banks
+(5) Snapshots
+4.2.1 Loading a Snapshot from the Side Pane
+If it is not already visible after startup, you need to open the Side Pane. The Side Pane holds a
+full overview of the Snapshot Banks and Snapshots from FLESH.
+1. 2. 3. Click the Side Pane button (1) in the Header to open the Side Pane.
+Click the Snapshot button to display Snapshots (3).
+Select a Snapshot Bank (4).
+FLESH - Manual - 16
+How to Use FLESH
+Exploring Factory-set Snapshots
+4. Select the name of a Snapshot entry (5) and double-click it with your mouse to load it.
+⇨ The Snapshot is loaded and ready to play.
+4.2.2 Loading a Snapshot from the Header
+Loading a Snapshot from the REAKTOR PLAYER drop-down menu in the Header is the sim-
+plest way to interact with Snapshots.
+1. Click the Snapshot drop-down menu (2). The menu holds all Snapshots and Banks of the
+Instrument.
+2. Click an entry to select it.
+⇨ The Snapshot is loaded and ready to play.
+4.3 Saving a Snapshot
+Snapshots can be saved using REAKTOR. However, all parameter settings made in FLESH will
+be conveniently saved as part of your host software. Please read the REAKTOR documentation
+for more information on plug-in mode and saving Snapshots.
+When working with FLESH in REAKTOR standalone, save and load your Snapshots as
+Presets (File > Save Preset As / File > Open Preset) instead of saving the Ensemble. If
+you do not follow this method, FLESH will ask for the samples when reloading the saved
+ensemble.
+FLESH - Manual - 17
+Overview of FLESH
+5 Overview of FLESH
+FLESH is great for improvising or building musical sketches which can later be turned into full
+ideas. Its simplistic hands on approach provides the means for all types of musicians to gener-
+ate pitched harmonic melodic material using simple samples. In addition, FLESH is a great
+live tool which can be tweaked in real-time using the four Macro Controls.
+FLESH works by analyzing a sample, and chops it up into slices to extract the transient curves
+based on the spectral content over time, for example, with a drum loop, the frequencies of a
+kick drum slice will be identified as low, a snare as medium, and a hi-hat as high. As the loop
+is played FLESH will use the transient curves to trigger the five sound generators which gener-
+ate pitches, melodies, modulation and effects over time based on your settings.
+The three main pages of FLESH: SAMPLES, SOUND, and HARMONY can be used to define
+your sound and sketch out musical ideas:
+▪ The SAMPLES page is the starting point for musical ideas and is where samples can be
+added. There are placeholders for twelve samples which can be played using the corre-
+sponding MIDI notes of the SAMPLES remote octave. Transients from a sample are used to
+trigger the sound generators. For information on adding samples and using the parameters
+within the SAMPLES page refer to chapter ↑7, Samples Page.
+▪ The SOUND page contains icons for the sound generators, the Mixer, and Macro Controls.
+The icons provide access to the parameters of each sound generator (Sub Synthesizer,
+Mono Synthesizer, Sampler Player, Poly Synthesizer, and the FX engine) which can be edit-
+ed and saved with each Snapshot. The four Macro controls globally control sound settings
+for all sound generators. The Mixer provides visual feedback by displaying the waveform of
+the active sound generators, and allows you to individually mute, or adjust their volume.
+For more information on using the SOUND page refer to ↑8, Sound Page.
+▪ The HARMONY page is the primary page for editing parameters that affect the harmonic
+content of a Snapshot. The Harmony engine takes the incoming transient information from
+a selected sample and processes it into pitch information that is then routed to the Mono
+Synthesizer, and Poly Synthesizer. The Melody control can then be used to affect the how
+melodic phrases are created from the incoming sample loop, utilizing the notes set on the
+Harmony keyboard. For more information on using the HARMONY page refer to chapter
+↑8.4.3, Remote Subpage.
+FLESH - Manual - 18
+Overview of FLESH
+In addition to the main three pages, the SOUND page contains several subpages which provide
+access to modulation levels, macro parameter ranges, and remote control of parameters when
+key switching Samples, Sound, and Harmony Remote Octaves.
+FLESH Section Overview
+FLESH Section Overview
+(1) Header: The header section contains the global settings of FLESH and allows you to adjust
+each value. For more information on the Header refer to section ↑6, Header.
+(2) Sound Generators: From left to right the five sound generator icons; Sub Synthesizer, Mono
+Synthesizer, Sample Player, Poly Synthesizer, and FX provide access to the edit pages. The ed-
+it pages can be used to select preset sound generators, edit timbres, and set tolerances for the
+macro parameters. To access the edit page for each sound generator, click the sound generator
+icons. For more information on the sound generators refer to section ↑8.1, Sound Generators.
+FLESH - Manual - 19
+Overview of FLESH
+(3) Mixer: The Mixer allows you to alter the overall volume and FX send levels, as well as mut-
+ing individual sound generators. To adjust volume for a sound generator, click a circle and drag
+the mouse upwards or downwards. To mute a sound generator, click the center of a Mixer cir-
+cle.
+(4) Macro Controls: The four Macro Controls can be used to collectively adjust the Spectrum,
+Character, Length, and Modulation of all sound generators. To adjust the timbre of the sound
+generators, click a control and drag the mouse upwards or downwards. For more information on
+the Macros Controls refer to section ↑8.3, Macro Controls.
+(5) HOLD: When HOLD is on, the last notes played will continue to sound even after you have
+released them. To hold notes played from your keyboard or MIDI device, click this button.
+(6) HARMONY: Each Snapshot can contain up to twelve harmonies each represented by one
+the twelve slots. To edit the Harmony settings generated by the sound generators, click one of
+the twelve slots. For more information on editing Harmony settings read chapter ↑8.4.3, Re-
+mote Subpage.
+(7) SAMPLES: Each Snapshot can contain up to twelve samples each represented by one of
+the twelve slots. To edit the Sample settings, click one of the twelve slots. For more informa-
+tion on using the Samples page read chapter ↑7, Samples Page.
+(8) SOUND: Each Snapshot can contain up to twelve Sound settings each represented by one
+of the twelve slots. To edit the Sound settings generated by the sound generators, click one of
+the twelve slots. For more information on editing Sound settings read chapter ↑8, Sound Page.
+(9) Configuration pages: The three subpages allow you to configure Modulation, Macros and Re-
+mote Octave settings. Click the icons to access the pages. For more information on configuring
+Modulation, Macros and Remote Octave settings please refer to section ↑8.4, Configuration
+Subpages.
+FLESH - Manual - 20
+Header
+6 Header
+The Header section contains the global settings of the ensemble and allows you to adjust each
+value.
+The header section in FLESH
+(1) STEPS: Select the number of steps per bar. Values range from 4 to 32 steps per bar. To
+adjust the STEPS value, click and drag the mouse upwards or downwards.
+(2) SYNC: This button synchronizes FLESH with the Master Tempo of REAKTOR or the tempo
+of your host sequencer. To enable Sync, click the SYNC button.
+(3) Tempo: This indicates the tempo (beats per minute (BPM)) of playback in standalone mode
+and the tempo of the host software when in (2) SYNC mode. To adjust the BPM, click on the
+value and drag the mouse upwards or downwards. Press [SHIFT] on your computer keyboard
+while moving the mouse to enter more discrete values.
+(4) SWING: This value adds a shuffling effect to the sound. To adjust the SWING value, click
+and drag the mouse upwards or downwards.
+(5) Transport Snap Lock: This button enables or disables the current settings of STEPS, SYNC,
+BPM and SWING to be locked or changed when selecting Snapshots. To enable or disable
+Snap Lock, click this icon.
+(6) TUNE: Use this to adjust the overall fine tuning of the instrument. Turn the knob clockwise
+to set the tuning by +1 semitone, or anti-clockwise by -1 semitone. In the center position tun-
+ing is unaffected. To reset tuning, double-click the TUNE knob
+(7) LEVEL: Use this to set the master output volume level. To adjust the Level, click and drag
+the mouse over the LEVEL knob. To reset FLESH to the default volume level, double-click the
+LEVEL knob.
+FLESH - Manual - 21
+Header
+The parameter values in the Header section can be saved and recalled with each Snap-
+shot. However, to allow this, be sure to unlock the (5) Transport Snap Lock.
+FLESH - Manual - 22
+Samples Page
+7 Samples Page
+The SAMPLES page is the starting point for your ideas and allows you to add up to twelve sam-
+ples which when selected are processed by sample engine and used to trigger the sound gener-
+ators (Sub Synthesizer, Mono Synthesizer, Sample Player, Poly Synthesizer, and FX engine) to
+create musical phrases based on the settings within each sound generator.
+The samples remote octave is used to switch between the loaded samples to change the
+rhythm, pitch and melody of a sound.
+The Samples page is used to add samples and fine tune the available parameters to e.g. modi-
+fy the playback speed, adjust the number of triggers and balance the volume levels between
+the loaded samples.
+FLESH - Manual - 23
+Samples Page
+Overview of the SAMPLES Page
+SAMPLES Page - Overview
+(1) Sample Slots: Each of the twelve sample slots can contain an individual sample. Each sam-
+ple slot recalls unique settings regarding THRESHOLD, BARS, STEPS, OFFSET and GAIN. It
+is possible populate the twelve slots by dragging and dropping samples on your computer into
+the empty slots. The twelve slots can be selected from your MIDI device using keys C2 to B3.
+For more information on adding samples refer to section ↑7.1, Adding Samples to the SAM-
+PLES page.
+(2) Sample Display Area: This area is used to display the waveform of the selected sample and
+updates as each sample slot is selected. The transients of the sample waveform are displayed
+in red and the vertical lines represent where slices will occur relative to the THRESHOLD level.
+FLESH - Manual - 24
+Samples Page
+Adding Samples to the SAMPLES page
+(3) THRESHOLD: Set the THRESHOLD level to adjust the number of slices from the selected
+sample. When the level of audio crossing the threshold triggers the gate, the sound generators
+can be heard. The number of slices affects how the sound generators are triggered; at low lev-
+els the sample will have a greater effect on the sound generators, and at high levels the num-
+ber of slices are decreased, and the sample will have less effect on the sound. To adjust the
+Threshold, click and drag the mouse upwards or downwards over the THRESHOLD value.
+(4) BARS: Select the amount of bars the sample is played within a loop. This changes the
+playback tempo of a loop, for example, if a loop has 2 bars and you set Bars to 1, then the
+playback tempo will be doubled. Values range from 1 to 16 bars. To adjust the amount of
+Bars, click and drag the mouse upwards or downwards over the BARS value.
+(5) STEPS: Select the number of Steps per Bar. This changes the playback tempo of a loop the
+amount of played steps, for example, a loop with 16 steps will play at half tempo when STEPS
+is set to 8. Values range from 4 to 32 steps per bar. To adjust the amount of Steps, click and
+drag the mouse upwards or downwards over the STEPS value.
+(6) OFFSET: Use this to shift the start point of the sample. To adjust the amount of Offset,
+click and drag the mouse upwards or downwards over the OFFSET value.
+(7) GAIN: The Gain parameter is used to balance the volume level of the loaded samples. To
+adjust the amount of gain, click and drag the mouse upwards or downwards over the GAIN val-
+ue.
+(8) SAMPLES: Click this icon to access the SAMPLES page.
+(9) Sample Remote Octave: Drop samples here to load them. Select one of twelve sounds by
+clicking the Remote Octave slots or using the Remote Octave on your keyboard, keys C2 to B3
+(MIDI notes 48 to 59). To copy a Sample, click a slot and drag it to another slot.
+(10) Sample Snap Lock: Enable this to keep the loaded samples and settings when you change
+Snapshots. To toggle this feature on or off, click the Lock icon.
+7.1 Adding Samples to the SAMPLES page
+Samples are added to the Samples page by simply dragging a sample file onto a sample slot.
+By adding different samples it is possible to switch between them to provide rhythmical varia-
+tions to drive the sound generators.
+FLESH - Manual - 25
+Samples Page
+Copying and Pasting Samples in the SAMPLES page
+When working with FLESH in REAKTOR standalone, save and load your Snapshots as
+Presets (File > Save Preset As / File > Open Preset) instead of saving the Ensemble. If
+you do not follow this method, FLESH will ask for the samples when reloading the saved
+ensemble.
+To add a new sample to the Samples page:
+1. 2. Click SAMPLES to open the Samples page.
+Using the file system on your computer or the File menu in REAKTOR, locate the sample
+you want to load into FLESH.
+3. Left-click and hold the mouse button to select the sample, and then drag the sample to a
+sound slot.
+⇨ The new sample is loaded into FLESH and is ready for use.
+Please be aware that adding a new sample that contains to a slot that already contains a
+sample will replace the existing sample in the slot.
+FLESH will only accept audio files in the .aif and .wav format and is optimized for sam-
+ples with a rate of 44.100 Hz.
+7.2 Copying and Pasting Samples in the SAMPLES page
+In addition to adding samples and setting up playback, you can use the SAMPLES page to
+copy and paste loaded samples from one slot to another. This time-saving feature is useful
+when building up sequences which rely on the same sample, for example, when building up a
+musical sequence which uses the same sample to trigger the sound generators, but requires
+different sound settings, or an alternative harmony. You can use the same sample with differ-
+ent samples settings to alter the rhythm and tempo while keeping the same sound and vibe.
+Copying and pasting samples is also good for re-ordering samples within the Remote Octave. A
+sample can be copied and pasted into the many sample slots to be reused and then triggered
+using the Remote Octave.
+FLESH - Manual - 26
+Samples Page
+Copying and Pasting Samples in the SAMPLES page
+You can get different results out of the same sample by manipulating the sample param-
+eters to change tempo or adjust the number of triggers by adjusting the threshold level.
+To copy and paste samples in the Samples page:
+1. 2. 3. Click SAMPLES to open the Samples page.
+Select the sample you want to copy by clicking it.
+Left-click and hold the mouse button and then drag the sample to a new sound slot.
+⇨ The sample is copied to the new location.
+Please be aware the copied sample will overwrite any existing sample in the new slot.
+FLESH - Manual - 27
+Sound Page
+8 Sound Page
+The SOUND page hosts the main mixer view of the instrument accompanied by the four main
+macro parameters. This page is also the access point to the parameters of the sound genera-
+tors and advanced modulation and remote octave options.
+The icons across the top of the page provide access to the parameters of each sound generator;
+Sub Synthesizer, Mono Synthesizer, Sample Player, Poly Synthesizer, and the FX. Here they
+can be edited, and then saved with each Snapshot.
+The SOUND page also contains the four Macro Controls that can be configured to control mul-
+tiple sound parameters overall all sound generators simultaneously. The Mixer provides visual
+feedback of active sound generators and allows you to individually mute, or adjust their vol-
+ume.
+FLESH - Manual - 28
+Sound Page
+SOUND Page - Overview
+(1) Sub Synthesizer: This is a simple synthesizer that can be used to generate bass lines ac-
+companying the Mono and Poly sounds. The Sub Synthesizer can be set to follow the harmonic
+settings of either the Mono Synthesizer or Poly Synthesizer. To toggle between the Sub Synthe-
+sizer parameter page and the SOUND page, click the Sub icon. For more information on the
+Sub Synthesizer refer to section ↑8.1.1, Sub Synthesizer.
+(2) Mono Synthesizer: This is a monophonic wavetable synthesizer best suited for solos and
+lead sounds. The wavetables are created from the active sample used in the SAMPLES section.
+To toggle between the Mono Synthesizer parameter page and the SOUND page, click the Mono
+icon. For more information on the Mono Synthesizer refer to section ↑8.1.2, Mono Synthesizer.
+FLESH - Manual - 29
+Sound Page
+(3) Sample Player: This allows you to load up to twelve samples into FLESH. The samples are
+used to trigger the sound generators which create musical phrases based on the settings within
+the Harmony section. To toggle between the Sample Player parameter page and the SOUND
+page, click the Sample Player icon. For more information on the Sample Player refer to section
+↑8.1.2, Mono Synthesizer.
+(4) Poly Synthesizer: This is a resonator based four voice Polyphonic Synthesizer. This engine is
+best for chords but is well suited to create synth stabs and pad sounds. To toggle between the
+Poly Synthesizer parameter page and the SOUND page, click the Poly Synthesizer icon. For
+more information on the Poly Synthesizer refer to section ↑8.1.4, Poly Synthesizer.
+(5) FX: The effect section hosts a flexible delay section that can be dynamically modulated us-
+ing the high and low triggers as in the sound generators. To toggle between the FX parameter
+page and the SOUND page, click the FX icon. For more information on the FX refer to section
+↑8.1.4, Poly Synthesizer
+(6) Mixer: The Mixer section displays the volume level for each of the five sound generators,
+from left to right; Sub Synthesizer, Mono Synthesizer, Sample Player, Poly Synthesizer, and
+FX. Here you can adjust the volume level, FX send level, and mute individual sound genera-
+tors. Each sound generator subpage also contains LEVEL and FX send level parameters which
+replicates the Mixer controls seen here. To adjust a volume level, click and drag the mouse
+over a mixer display. To toggle mute on or off, click in the center of a display. For information
+on how to use the Mixer refer to section ↑8.2, Mixer.
+(7) Macro Controls: The four main Macro Controls are enable drastic changes to all sound en-
+gines simultaneously. These can be set up in flexible ways and are customized for every single
+Snapshot. Click and drag a Macro Control to alter a sound. For information on how to use the
+Macro Controls refer to section ↑8.3, Macro Controls.
+(8) SOUND: To access the Sound page, click SOUND.
+(9) SOUND Remote Octave: Select one of twelve sounds by clicking the Remote Octave slots or
+using the Remote Octave on your keyboard, keys C3 to B4 (MIDI notes 60 to 72). To copy a
+Sound, click a slot and drag it to another slot.
+(10) PERFORM: In perform mode your carefully crafted sound combinations are protected and
+can be safely altered without losing them. You can recall them by selecting the current Remote
+Octave slot. This allows you to perform without permanently changing your sounds. To toggle
+the Perform feature on or off, click PERFORM
+FLESH - Manual - 30
+Sound Page
+Sound Generators
+(11) Configuration subpages: Available only from the SOUND page, these three icons allow you
+to access the Modulation, Macros and Remote Octave subpages. To toggle the subpages on or
+off, click the MOD., MACROS, or REMOTE icons. For more information on configuring the set-
+tings within the subpages, refer to section ↑8.4, Configuration Subpages.
+8.1 Sound Generators
+8.1.1 Sub Synthesizer
+The Sub Synthesizer is a basic synthesizer to create deep bass lines. It can be set to follow the
+harmonic settings of the Mono or Poly section.
+Sub Synthesizer overview
+(1) HARMONY SOURCE: Select between the Mono Synthesizer and Poly Synthesizer to source
+the pitch for the Sub Synthesizer.
+(2) SPECTRUM: Set the Spectrum Macro Control for the Sub Synthesizer. Higher values give
+higher harmonics, lower values give deeper harmonics.
+(3) CHARACTER: Set the Character Macro Control for the Sub Synthesizer. This controls the
+amount the Sub Synthesizer harmonics are affected by the pitch.
+FLESH - Manual - 31
+Sound Page
+Sound Generators
+(4) LENGTH: Set the Length Macro Control. Higher values give longer, slower sounds and add
+more decay bass.
+(5) SPECTRUM Range Control: Set how much influence the Spectrum Macro Control has over
+the Spectrum Macro Control of the Sub Synthesizer.
+(6) CHARACTER Range Control: Set how much influence the Global Character Control has over
+the Character Control of the Sub Synthesizer.
+(7) LENGTH Range Control: Set how much influence the Global Length Control has over the
+Length Control of the Sub Synthesizer.
+(8) LEVEL: Adjust the Sub Synthesizer volume level, or mute the Sub Synthesizer. To change
+the volume level of the Sub Synthesizer, click and drag the mouse over the circular area. To
+toggle mute on or off, click in the center of the circle.
+8.1.2 Mono Synthesizer
+The Mono Synthesizer rebuilds its wavetables based on the selected sample, and transforms it
+into a monophonic sequence or lead.
+Mono Synthesizer overview
+FLESH - Manual - 32
+Sound Page
+Sound Generators
+(1) Treble/Bass symbol: These symbols set the gate for how the Mono Synthesizer is triggered by
+the sample. By selecting the treble symbol, the Mono Synthesizer is triggered by the high fre-
+quencies of the selected sample, and by selecting the bass symbol, the Mono Synthesizer is
+triggered by low frequencies. To allow the Mono Synthesizer to react to the treble or bass fre-
+quencies select either symbol, to allow it to react to all frequencies select both symbols.
+(2) Mono Synthesizer Preset Selector: Select one of sixteen presets by clicking a dot. Each pre-
+set has its own sound characteristics and introduces specific parameters to the interface (15).
+A list of the preset specific parameters can be found at the end of this section.
+(3) ROOT: Use this to set the root pitch of Mono Synthesizer melody. To adjust the ROOT val-
+ue, click and drag the mouse upwards or downwards.
+(4) MELODY: Set how much melody is introduced from the transient curves of the selected
+sample. At the center position no melody will be introduced, and as a result only a single note
+will be produced. Transpose the melody using the ROOT value, and change the OCTAVE set-
+ting to select a note outside the current octave. The MELODY parameter is bi-polar; turning it
+to the left will create negative modulation of the pitch, and turning to the right will introduce
+positive modulation of the pitch from the transients of the selected sample.
+(5) OCTAVE: Set the overall octave tuning of the Mono Synthesizer in a range of +/– 2 octaves.
+To adjust the Octave range, click and drag the mouse upwards or downwards over the Octave
+value.
+(6) GLIDE: This adjusts the time it takes a sound to glide from the first note pitch to the fol-
+lowing note pitch. When the GLIDE knob is turned to the full left position, there is no glide at
+all, and the pitch will jump from one note to the next. When the GLIDE knob is turned to the
+right, the glide time increases and the transition between notes becomes smoother. Extreme
+amounts of GLIDE can be used for a creative effect.
+(7) SPECTRUM: Macro Control for changing the Spectrum of the Mono Synthesizer. Higher val-
+ues give brighter sounds, lower values give deeper sounds.
+(8) CHARACTER: Macro Control for changing the Character of the Mono Synthesizer. Higher
+values emphasize the unique character of the Mono Synthesizer.
+(9) LENGTH: Macro Control for changing the Release of the Mono Synthesizer. Higher values
+result in longer envelope times for each note or trigger.
+(10) MOD: Macro Control for changing the Modulation of the Mono Synthesizer. Higher values
+give the sound more movement and shape.
+FLESH - Manual - 33
+Sound Page
+Sound Generators
+(11) SPECTRUM Macro Range: Set how much influence the Global Spectrum Control has over
+the Spectrum Control.
+(12) CHARACTER Macro Range: Set how much influence the Global Character Control has over
+the Character Control.
+(13) LENGTH Macro Range: Set how much influence the Global Length Control has over the
+Length Control.
+(14) MOD Macro Range: Set how much influence the Global Modulation Control has over the
+Modulation Control.
+(15) Preset Specific Parameters: Each Mono Synthesizer preset (4) has it's own set of specific
+parameters which appear in this area. A description of each parameter is listed at the end of
+this section.
+(16) LEVEL: Adjust the Mono Synthesizer volume level, or mute the Mono Synthesizer. To
+change the volume level of the Mono Synthesizer, click and drag the mouse over the circular
+area. To toggle mute on or off, click in the center of the circle.
+(17) FX Send: Use this parameter to adjust the amount of signal from the Mono Synthesizer
+sent to the FX. To adjust the FX Send value, click and drag the mouse upwards or downwards
+over the small circular area.
+Preset Specific Parameters
+Preset Name Parameter Description
+MONOBROW CUTOFF +-: Toggle between positive and negative modulation of the
+cutoff.
+VIBRATO: Adjust the amount of regular, pulsating change in the
+pitch of the sound. This can add expression and variation.
+SATURATION: Add warmth and “fatten-up” the sound.
+MONOGAMY CUTOFF
+CURVE:
+Toggle between the Velocity and Centroid curves as the
+modulation source for the filter cutoff frequency.
+CHORUS: Adjust the amount of chorus applied to the sound. This
+can be used to “thicken” the sound and enhance or add
+stereo content.
+FLESH - Manual - 34
+Preset Name MONOMANIAC MONOCYCLE MONOCHROME MONOLITH MONONOM MONONOV Parameter CUTOFF PITCH TYPE PITCH
+AMOUNT
+PITCH SPEED P MOD +/- CUTOFF +/- RESONANCE VIBRATO RESONANCE CHORUS RESONANCE WAVE MOD
+AMOUNT
+WAVE +/- WAVE CURVE Sound Page
+Sound Generators
+Description
+Adjust the frequency at which the filter begins to affect
+harmonic content; frequencies below the cutoff point will
+pass through the filter unchanged. The effect of the filter
+is to reduce high frequency components of the sound.
+Select the type of pitch modulation.
+Adjust the amount of modulation on the pitch of the
+sound.
+Control the speed of the pitch modulation.
+Selects positive or negative modulation of the pitch.
+Select between positive and negative modulation of the
+cutoff frequency.
+Control the amount of signal enhancement at the cutoff
+frequency.
+Adjust the amount of regular, pulsating change in the
+pitch of the sound. This can add expression and variation.
+Control the amount of the signal enhancement at the
+cutoff frequency.
+Control the amount of chorus applied to the sound. This
+can be used to “thicken” the sound and enhance or add
+stereo content.
+Control the amount of the signal enhancement at the
+cutoff frequency.
+Control the amount of modulation of the wave spectrum.
+Toggle between positive and negative modulation of the
+wave spectrum.
+Select the wave frequency modulation source curve.
+Choose between Velocity and Centroid.
+FLESH - Manual - 35
+Preset Name MONONONO MONOCOQUE MONOPOD MONOCULT MONOTONY MONOFFCUTS MONOGRAM Parameter PITCH TYPE PITCH
+AMOUNT
+PITCH SPEED PITCH +/- PITCH TYPE: VIBRATO VIBRATO
+SPEED
+VIBRATO VIBRATO
+SPEED
+CHORUS RESONANCE SATURATION CHORUS
+SPEED
+PITCH TYPE PITCH
+AMOUNT
+PITCH SPEED Sound Page
+Sound Generators
+Description
+Select the type of pitch modulation.
+Adjust the amount of modulation on the pitch of the
+sound.
+Control the speed of the pitch modulation.
+Select between positive or negative modulation of the
+pitch.
+Select the type of pitch modulation.
+Adjust the amount of regular, pulsating change in the
+pitch of the sound. Use it to add expression and variation.
+Adjust the speed of VIBRATO.
+Adjust the amount of regular, pulsating change in the
+pitch of the sound. Use it to add expression and variation.
+Control the speed of VIBRATO.
+Adjust the amount of chorus applied to the sound. This
+can be used to “thicken” the sound and enhance or add
+stereo content.
+Control the amount of the signal enhancement at the
+cutoff frequency.
+Add warmth and “fatten-up” the sound.
+Adjust the speed of the of the chorus effect.
+Select the type of pitch modulation.
+Adjust the amount of modulation on the pitch of the
+sound.
+Adjust the speed of the pitch modulation.
+FLESH - Manual - 36
+Sound Page
+Sound Generators
+Preset Name Parameter Description
+PITCH +/- Toggle between positive or negative modulation of the
+pitch.
+MONOCLE PITCH TYPE Select a type of pitch modulation.
+PITCH
+AMOUNT
+Adjust the amount of modulation on the pitch of the
+sound.
+PITCH SPEED Adjust the speed of the pitch modulation.
+PITCH +/- Toggle between positive or negative modulation of the
+pitch.
+8.1.3 Sample Player
+The Sample Player can change the sonic character of the sample itself. Make it more percus-
+sive by shortening its length, liven up static sounds with a modulated filter. The sample player
+quantizes each slice to the tempo and swing and uses a granular technique to stretch the de-
+cay tails of each slice to allow extreme pitch and time modulation.
+Sample Player overview
+FLESH - Manual - 37
+Sound Page
+Sound Generators
+(1) MIX: Crossfade between low frequency sounds and high frequency sounds of the selected
+sample. To adjust the Mix value, click and drag the mouse upwards or downwards over the Mix
+knob.
+(2) Sample Preset Selector: Select one of sixteen presets. Each preset has its own unique
+sound. To select a Preset, click the dots.
+(3) SPECTRUM: Macro control for changing the Spectrum of the Sample Player. Higher values
+give brighter sounds, lower values give deeper sounds.
+(4) CHARACTER: Macro control for changing the Character of the Sample Player. Higher values
+emphasize the unique character of the sample.
+(5) LENGTH: Macro control for changing the Release of the Sample Player. Higher values re-
+sult in longer envelope times for each note or trigger.
+(6) MOD: Macro control for adding Modulation. Higher values give the sound more movement
+and shape.
+(7) SPECTRUM Macro Range: Set how much influence the Global Spectrum Macro Control has
+over the Spectrum Control.
+(8) CHARACTER Macro Range: Set how much influence the Global Macro Character Control
+has over the Character control.
+(9) LENGTH Macro Range: Set how much influence the Global Length Macro Control has over
+the Length control.
+(10) MOD Macro Range: Set how much influence the Global Modulation Macro Control has
+over the Modulation Control.
+(11) LEVEL: Adjust the Sample Player volume level, or mute the Sample Player. To change the
+volume level of the Sample Player, click and drag the mouse over the circular area. To toggle
+mute on or off, click in the center of the circle.
+(12) FX Send: Use this parameter to adjust the amount of signal from the Sample Player sent to
+the FX. To adjust the FX Send value, click and drag the mouse upwards or downwards over the
+small circular area.
+FLESH - Manual - 38
+Sound Page
+Sound Generators
+8.1.4 Poly Synthesizer
+The Poly Synthesizer is a resonating granular synthesizer that transforms your input signal into
+chords and is great for laying down a harmonic foundation. You can also stack the voices for a
+massive mono synth line.
+Poly Synthesizer overview
+(1) Treble/Bass symbol: These symbols set the gate for how the Poly Synthesizer is triggered by
+the sample. By selecting the treble symbol, the Poly Synthesizer is triggered by the high fre-
+quencies of the selected sample, and by selecting the bass symbol, the Poly Synthesizer is
+triggered by low frequencies. To allow the Poly Synthesizer to react to the treble or bass fre-
+quencies select either symbol, to allow it to react to all frequencies select both symbols.
+(2) ROOT: Use this to set the root pitch of Poly Synthesizer melody. To adjust the ROOT value,
+click and drag the mouse upwards or downwards.
+(3) MELODY: Set how much melody is introduced from the transient curves of the current sam-
+ple. At the center position no melody will be introduced and as a result only a single note or
+chord will be produced depending on the Harmony keyboard and Poly Synthesizer preset. The
+note produced can be changed by selecting a different ROOT value. This parameter is bi-polar
+turning it to the left will introduce negative modulation of the pitch turning to the right will
+FLESH - Manual - 39
+Sound Page
+Sound Generators
+introduce positive modulation of the pitch from the transient of the sample. Transpose the
+melody using the ROOT value, and change the OCTAVE setting to select a note outside the
+current octave.
+(4) OCTAVE: Set the overall octave tuning of the Poly Synthesizer in a range of +/– 2 octaves.
+To adjust the Octave range, click and drag the mouse upwards or downwards over the Octave
+value.
+(5) GLIDE: This adjusts the time it takes a sound to glide from the first note pitch to the fol-
+lowing note pitch. When the GLIDE knob is at full left, there is no glide at all, and the pitch
+will jump from one note to the next. When you turn the GLIDE knob to the right, the glide time
+increases and makes the transition between the notes smoother. Extreme amounts of GLIDE
+can be used for a creative effect.
+(6) Poly Synthesizer Preset Selector: Select one of sixteen presets by clicking a dot. Each preset
+has its own sound characteristics and introduces specific parameters to the interface (15). A
+list of the preset specific parameters can be found at the end of this section.
+(7) SPECTRUM: Macro control for changing the spectrum of the Poly Synthesizer. Higher val-
+ues give brighter sounds, lower values give deeper sounds.
+(8) CHARACTER: Macro control for changing the character of the Poly Synthesizer. Higher val-
+ues emphasize the unique character of the Poly Synthesizer.
+(9) LENGTH: Macro control for changing the release of the Poly Synthesizer. Higher values re-
+sult in longer envelope times for each note or trigger.
+(10) MOD: Higher values give the sound more movement and shape.
+(11) SPECTRUM Macro Range: Set how much influence the Global Spectrum Control has over
+the Spectrum Control.
+(12) CHARACTER Macro Range: Set how much influence the Global Character Control has over
+the Character Control.
+(13) LENGTH Macro Range: Set how much influence the Global Length Control has over the
+Length Control.
+(14) MOD Macro Range: Set how much influence the Global Modulation Control has over the
+Modulation Control.
+FLESH - Manual - 40
+Sound Page
+Sound Generators
+(15) Preset Specific Parameter: Each Poly Synthesizer preset (6) has it's own set of specific pa-
+rameters which appear in this area. A description of each parameter is listed below this sec-
+tion.
+(16) LEVEL: Adjust the Poly Synthesizer volume level, or mute the Poly Synthesizer. To change
+the volume level of the Poly Synthesizer, click and drag the mouse over the circular area. To
+toggle mute on or off, click in the center of the circle.
+(17) FX Send: Use this parameter to adjust the amount of signal from the Poly Synthesizer sent
+to the FX. To adjust the FX Send value, click and drag the mouse upwards or downwards over
+the small circular area.
+Preset Specific Parameters
+Preset Name Parameter Description
+POLYTICKS DETUNE: Detune the four oscillators of the Poly Synthesizer.
+POLYGAMY SPREAD: Spread the oscillators by a fixed interval. The oscillators
+will be snapped to the chord after the spread. This allows
+you to create spread chords which snap to the scale.
+POLYMORPH NOTCH: Increase or decrease the intensity of the notch filter.
+POLYEASE CUTOFF +/-: Toggle between positive and negative modulation of the
+cutoff filter.
+SPREAD: Spread the oscillators by a fixed interval. The oscillators
+will be snapped to the chord after the spread. This allows
+you to create spread chords which snap to the scale.
+POLYTHEIST CUTOFF +/-: Toggle between positive and negative modulation of the
+cutoff filter.
+SPREAD: Spread the oscillators by a fixed interval. The oscillators
+will be snapped to the chord after the spread. This allows
+you to create spread chords which snap to the scale.
+VIBRATO: Adjust the amount of regular, pulsating change in the
+pitch of the sound. Use it to add expression and
+variation.
+FLESH - Manual - 41
+Preset Name POLYPHONEY POLYGON POLIGARCH POLYNOMIAL POLYGLOT Parameter RESONANCE: SATURATION: VIBRATO: VIBRATO
+SPEED:
+CUTOFF +/-: SHIFT +/-: FM: SAT +/-: BOOST +/-: VIBRATO: SATURATION: VIBRATO: CUTOFF +/-: Sound Page
+Sound Generators
+Description
+Control the amount of the signal enhancement at the
+cutoff frequency.
+Add warmth and “fatten-up” the sound.
+Adjust the amount of regular, pulsating change in the
+pitch of the sound. Use it to add expression and
+variation.
+Adjust the speed of Vibrato.
+Toggle between positive and negative modulation of the
+cutoff filter.
+Toggle between positive and negative modulation of
+granular pitch shift.
+Toggle between positive and negative modulation of
+frequency modulation
+Toggle between positive and negative modulation of
+Saturation..
+Toggle between positive and negative modulation of EQ.
+Adjust the amount of regular, pulsating change in the
+pitch of the sound. Use it to add expression and
+variation.
+Add warmth and “fatten-up” the sound.
+Adjust the amount of regular, pulsating change in the
+pitch of the sound. Use it to add expression and
+variation.
+Toggle between positive and negative modulation of the
+cutoff filter.
+FLESH - Manual - 42
+Preset Name POLYFLOWER POLYPHILLA POLYKILLA POLYMER POLLYPARROT POLYNOT Parameter VIBRATO: VIBRATO: DETUNE: PITCH SNAP: SPREAD: SPREAD: VIBRATO: DETUNE: VIBRATO: PITCH SNAP: SPREAD: Sound Page
+Sound Generators
+Description
+Adjust the amount of regular, pulsating change in the
+pitch of the sound. Use it to add expression and
+variation.
+Adjust the amount of regular, pulsating change in the
+pitch of the sound. Use it to add expression and
+variation.
+Control the tuning of the four oscillators.
+Snap voices to scale after SPREAD has been used.
+Spread the oscillators by a fixed interval. The oscillators
+will be snapped to the chord after the spread. This allows
+you to create spread chords which snap to the scale.
+Spread the oscillators by a fixed interval. The oscillators
+will be snapped to the chord after the spread. This allows
+you to create spread chords which snap to the scale.
+Adjust the amount of regular, pulsating change in the
+pitch of the sound. Use it to add expression and
+variation.
+Detune the four oscillators of the Poly Synthesizer.
+Adjust the amount of regular, pulsating change in the
+pitch of the sound. Use it to add expression and
+variation.
+Snap voices to scale after SPREAD has been used.
+Spread the oscillators by a fixed interval. The oscillators
+will be snapped to the chord after the spread. This allows
+you to create spread chords which snap to the scale.
+FLESH - Manual - 43
+Sound Page
+Sound Generators
+8.1.5 FX
+The FX engine could be described as a dub delay on steroids using two tempo-synced delay
+lines, filtering and limiting. The delay times and filter settings can be modulated by the modu-
+lation curves extracted from your samples giving unique and powerful rhythmic and tonal ef-
+fects.
+FX overview
+(1) FX sends: Use these parameter to adjust the amount of signal from the Sound Generators
+sent to the FX. To adjust a value, click and drag the mouse upwards or downwards over the
+small circular areas.
+(2) Treble/Bass Symbol: These symbols set the gate for how the FX is triggered by the sample.
+By selecting the treble symbol, the FX are triggered by the high frequencies of the selected
+sample, and by selecting the bass symbol, the FX are triggered by low frequencies. To allow
+the FX to react to the treble or bass frequencies select either symbol, to allow it to react to all
+frequencies select both symbols.
+(3) FX Preset Selector: Select between sixteen presets by clicking the dots. Each preset has its
+own unique sound.
+(4) SPECTRUM: Macro control for changing the spectrum of the FX. Higher values give bright-
+er sounds, lower values give deeper sounds.
+FLESH - Manual - 44
+Sound Page
+Mixer
+(5) CHARACTER: Macro control for changing the character of the FX. Higher values emphasize
+the unique character of the FX.
+(6) LENGTH: Macro control for changing the release of the FX. Higher values result in longer
+envelope times for each note or trigger.
+(7) MOD: Higher values give the sound more movement and shape.
+(8) SPECTRUM Macro Range: Set how much influence the Global Spectrum Control has over
+the Spectrum Control.
+(9) CHARACTER Macro Range: Set how much influence the Global Character Control has over
+the Character Control.
+(10) LENGTH Macro Range: Set how much influence the Global Length Control has over the
+Length Control.
+(11) MOD Macro Range: Set how much influence the Global Modulation Control has over the
+Modulation Control.
+(12) LEVEL: Adjust the FX volume level, or mute the FX. To change the volume level of the FX,
+click and drag the mouse over the circular area. To toggle mute on or off, click in the center of
+the circle.
+8.2 Mixer
+The SOUND page contains the mixer for the five sound generators, from left to right the large
+circles represent the; Sub Synthesizer, Mono Synthesizer, Sample Player, Poly Synthesizer,
+and FX. Here you can adjust the volume level, FX, and mute individual sound generators. The
+Mixer also visually displays the output of each sound generator with a waveform around the
+edge of the circle.
+Each sound generator subpage also contains the same volume level and FX sends seen
+here in the Mixer.
+8.2.1 Adjusting the Volume of a Sound:
+To adjust the volume of a sound from the Mixer view:
+FLESH - Manual - 45
+Sound Page
+Mixer
+1. 2. 3. Click the SOUND to access the Sound page to access the Mixer view.
+Click the icon of the sound generator if one is open to exit the sound generator view.
+Click and drag the mouse upwards to increase the volume, or drag downwards to decrease
+the volume.
+⇨ The volume is increased or decreased accordingly.
+8.2.2 How to Mute an Engine
+To mute a sound generator from the Mixer view:
+1. 2. Click the SOUND to access the Sound page containing the Mixer view.
+Click in middle of the sound generator you want to mute.
+⇨ The individual sound generator is muted.
+8.2.3 How to Adjust FX Sends
+To adjust the effect send of a sound generator from the Mixer view:
+1. 2. 3. Click the SOUND to access the Sound page to access the Mixer view.
+Click the icon of the sound generator if one is open to exit the sound generator view.
+Click and drag the mouse upwards to increase the volume, or drag downwards to decrease
+the FX level.
+⇨ The FX level is increased or decreased accordingly.
+8.3 Macro Controls
+FLESH contains four global macro controls which are all pre-wired and controlled on the
+SOUND page.
+(1) SPECTRUM: Global macro control for the timbre of all the Sound Generators. Higher values
+give brighter sounds, lower values give deeper sounds. Set how much influence the Spectrum
+Global Macro has on each Sound Generator within its sub-page.
+(2) CHARACTER: Global macro control for the character of all the Sound Generators. Higher
+values give greater emphasis to the unique personality of each engine. Set how much influence
+the Character Global Macro has on each Sound Generator within its sub-page.
+FLESH - Manual - 46
+Sound Page
+Configuration Subpages
+(3) LENGTH: Global macro control for sustain and release of all Sound Generators. Higher val-
+ues result in longer envelope times for each note or trigger. Set how much influence the
+Length Global Macro has on each Sound Generator within its sub-page.
+(4) MOD: Global macro control for the modulation of all Sound Generators. This controls how
+the sound changes over time. Higher values usually result in more emphasized movement. Set
+how much influence the Modulation Global Macro has on each Sound Generator within its sub-
+page.
+8.4 Configuration Subpages
+The three Configuration subpages allow you to configure Modulation, Macros and Remote Oc-
+tave settings. Click the icons to access the pages.
+Configuration Subpages
+(1) MOD. (Modulation): On the Modulation page the LFO, Envelope and Modulation Wheel can
+used to add modulation to selected destination parameters. To show or hide the Modulation
+page click the MOD. icon. For information on how to use the Modulation page refer to ↑8.4.1,
+MOD. (Modulation) Subpage.
+(2) MACROS: The Macro page contains all the instrument macro parameters side by side. This
+page is great to do quick adjustments and fine tuning to the main instrument parameters. To
+show or hide the Macros page click the MACROS icon. For information on how to use the Mac-
+ros page refer to section ↑8.4.2, Macros Subpage.
+FLESH - Manual - 47
+Sound Page
+Configuration Subpages
+(3) REMOTE: The Sound Remote Octave can be set to control all of the Sound engine parame-
+ters or just selected areas. To show or hide the Remote page click the REMOTE icon. For infor-
+mation on how to use the Remote page refer to section ↑8.4.3, Remote Subpage.
+8.4.1 MOD. (Modulation) Subpage
+The Modulation subpage reveals the LFO and ENV modulators and allows to add modulation to
+all parameters of the main Sound page. In order to change the modulation source for a given
+control just click on the modulation label. A full list of modulation destinations is provided at
+the end of this section.
+▪
+MOD. (Modulation) Sub Page - Overview
+(1) Modulation Knob: Use this to adjust the amount of modulation. Turn the knob clockwise to
+enter positive amounts of modulation. Turn the knob counterclockwise to enter negative
+amounts of modulation. Double-click the modulation knob to reset the value to zero modula-
+tion.
+FLESH - Manual - 48
+Sound Page
+Configuration Subpages
+(2) Modulation Type: Set the modulation type here. There are three types of modulation availa-
+ble; LFO (Low Frequency Oscillator), MW (modulation wheel) and ENV (envelope). Click the la-
+bel to toggle the modulation type for each parameter.
+(3) LFO Waveform: Set the waveform of the Low Frequency Oscillator. There are three wave-
+forms available; Triangle, Rising Sawtooth and Falling Sawtooth. To select the type of LFO
+waveform you require to modulate a parameter, click the waveform area to toggle through the
+available waveforms.
+(4) LFO Rate: Set the LFO rate to determine the speed of the LFO. Click and drag the mouse
+over the LFO Rate to adjust the speed of the selected LFO waveform.
+(5) ENV (ADSR) Use these sliders to control the contour of the ENV modulation. A controls the
+attack phase, D controls the Decay, S controls sustain, and R turns on release. When release is
+off, the envelope will remain on the sustain level after releasing the key. The envelope is also
+velocity sensitive, and is scaled according to the velocity of key trigger. To adjust the envelope
+contour levels, click and drag the mouse upwards and downwards over the A, D, S contour lev-
+els
+List of Modulation Destinations
+The LFO, ENV and MW can be used to modulate the following destination parameters:
+▪ Sub Mixer Volume Level
+▪ Mono Mixer Volume Level
+▪ Mono FX Send Level
+▪ Sample Mixer volume, and FX Send Level
+▪ Poly Mixer Volume Level
+▪ Poly FX Send Level
+▪ FX Mixer Volume Level
+▪ Spectrum Macro Global Level
+▪ Character Macro Global Level
+▪ Length Macro Global Level
+▪ Modulation Global Macro Level
+FLESH - Manual - 49
+Sound Page
+Configuration Subpages
+How to Assign Modulation
+To assign modulation to parameter:
+1. Click SOUND to access the Sound page.
+2. Click the MOD. icon (in the bottom right-hand corner) to access the Modulation view.
+3. Click the parameter type button to select the type of modulation you want to apply to a
+parameter. There are three options available. Click the button to toggle all options.
+4. Turn the Modulation knob to set the amount of modulation you want to apply to the pa-
+rameter.
+5. Click the LFO waveform to select the interval at which the LFO will modulate the parame-
+ter.
+FLESH - Manual - 50
+Sound Page
+Configuration Subpages
+6. Hold the left button and drag the mouse over the LFO rate to set the speed at which the
+LFO will modulate the parameter. The range is from 8 bars to 3/64th.
+7. If you chose ENV as the source for modulation be sure to set the (A) Attack, (D) Decay (S)
+Sustain and (R) Release accordingly.
+8. If you choose MW (Modulation Wheel) as the type of modulation, apply the modulation
+wheel to hear the effect. This can also be recorded by your host software.
+⇨ You can hear the modulation applied to the target parameters and control them in real time
+or with your host software.
+8.4.2 Macros Subpage
+The MACROS subpage contains all of the main instrument and FX controls side by side. The
+direct access to all macro parameters is great in live performance situations and convenient to
+fine tune sound combinations while setting up the Sound Remote Octave. The macro parame-
+ters can also be controlled via automation parameters within your host software.
+FLESH - Manual - 51
+Sound Page
+Configuration Subpages
+MACROS Sub Page - Overview
+(1) Sub Synthesizer Macros: This area contains the Sub Synthesizer macros. Here you can set
+the macro ranges for the each parameter and fine tune how the Global Macro Controls affect
+these parameters. The Sub Synthesizer Macro Range controls here are covered in the Sub Syn-
+thesizer overview section, for more information please refer back to section ↑8.1.1, Sub Syn-
+thesizer.
+(2) Mono Synthesizer Macros: This area contains the Mono Synthesizer macros. Here you can
+set the macro ranges for the each parameter and fine tune how the Global Macro Controls af-
+fect these parameters. Mono Synthesizer Macro Range controls here are covered in the Mono
+Synthesizer overview section, for more information please refer back to section ↑8.1.2, Mono
+Synthesizer.
+FLESH - Manual - 52
+Sound Page
+Configuration Subpages
+(3) Sample Player Macros: This area contains the Sample Player macros. Here you can set the
+macro ranges for the each parameter and fine tune how the Global Macro Controls affect these
+parameters. Sample Player Macro Range controls here are covered in the Sample Player over-
+view section, for more information please refer back to section ↑8.1.2, Mono Synthesizer.
+(4) Poly Synthesizer Macros: This area contains the Poly Synthesizer macros. Here you can set
+the macro ranges for the each parameter and fine tune how the Global Macro Controls affect
+these parameters. Poly Synthesizer Macro Range controls here are covered in the Poly Synthe-
+sizer overview section, for more information please refer back to section ↑8.1.4, Poly Synthe-
+sizer.
+(5) FX Macros: This area contains the FX macros. Here you can set the macro ranges for the
+each parameter and fine tune how the Global Macro Controls affect these parameters. FX Mac-
+ro Range controls here are covered in the FX overview section, for more information please re-
+fer back to section ↑8.1.4, Poly Synthesizer.
+8.4.3 Remote Subpage
+The SOUND Remote subpage allows you to configure which sound areas are controlled by the
+sound remote octave. The sound engine parameters, mix and send levels, and main macros
+can be selectively controlled and set by the Sound Remote Octave.
+Remote Octave Key Ranges
+Use the following Remote Octave key ranges to recall slots or control specific feature within
+FLESH.
+Remote Octave Keys Function
+C1 to B2 (MIDI notes 36 to 47) Select a HARMONY slot
+C2 to B3 (MIDI notes 48 to 59) Select a SAMPLES slot.
+C3 to B4 (MIDI notes 60 to 72) Select a SOUND slot.
+Key D4 (MIDI note 74) HOLD on/off
+Key E4 (MIDI note 76) SEQUENCE Play/Stop
+Key A4 (MIDI note 81 PERFORM on/off
+Key F4 (Midi Note 77) HARMONY Snap Lock on/off
+FLESH - Manual - 53
+Sound Page
+Configuration Subpages
+Remote Octave Keys Function
+Key G4 (Midi Note 79) SAMPLES Snap Lock on or off
+Key B4 (Midi Note 83) Swing/Tempo Lock on or off
+Key C5 (Midi Note 84) During press and hold, the Keys C1 to B4 are
+used to switch the snapshots of the actual
+loaded bank.
+The Remote Octave can be configured to affect the parameters listed in the table at the end of
+this section. These settings are saved with each Snapshot providing plenty of options for ma-
+nipulation and control.
+REMOTE Subpage- Overview
+(1) Remote Disabled: A grey icon indicates that the SOUND Remote Octave is disabled for a pa-
+rameter. When Remote Octave is disabled, a parameter will not change when a new SOUND
+slot is selected.
+FLESH - Manual - 54
+Sound Page
+Configuration Subpages
+(2) Remote Enabled: A blue icon indicates that the SOUND Remote Octave is enabled for a pa-
+rameter. When Remote Octave is enabled, a parameter will change when a new SOUND slot is
+selected.
+List of Remote Octave Recall Options
+Remote Octave Recall Option Description
+Sub Synthesizer Enable/disable all Sub Synthesizer parameters to be
+recalled by the Sound Remote Octave.
+Sub Synthesizer Level Enable/disable the Sub Synthesizer volume level to be
+recalled by the Sound Remote Octave.
+Mono Synthesizer Enable/disable all Mono Synthesizer parameters to be
+recalled by the Sound Remote Octave.
+Mono Synthesizer Level Enable/disable the Mono Synthesizer volume level to be
+recalled by the Sound Remote Octave.
+Mono Synthesizer FX Send Level Enable/disable the Mono Synthesizer FX send level to be
+recalled by the Sound Remote Octave.
+Sample Player Enable/disable all Sample Player parameters to be
+recalled by the Sound Remote Octave.
+Sample Player Level Enable/disable the Sample Player volume level to be
+recalled by the Sound Remote Octave.
+Sample Player FX Send Level Enable/disable the Sample Player FX send level to be
+recalled by the Sound Remote Octave.
+Poly Synthesizer Enable/disable all Poly Synthesizer parameters to be
+recalled by the Sound Remote Octave.
+Poly Synthesizer Level Enable/disable the Poly Synthesizer volume level to be
+recalled by the Sound Remote Octave.
+Poly Synthesizer FX Send Level Enable/disable the Poly Synthesizer FX send level to be
+recalled by the Sound Remote Octave.
+FLESH - Manual - 55
+Sound Page
+Configuration Subpages
+Remote Octave Recall Option Description
+FX Enable/disable all FX parameters to be recalled by the
+Sound Remote Octave.
+FX Level Enable/disable the FX level to be recalled by the Sound
+Remote Octave.
+SPECTRUM Enable/disable the Spectrum Global Macro Control to be
+recalled by the Sound Remote Octave.
+CHARACTER Enable/disable the Character Global Macro Control to be
+recalled by the Sound Remote Octave.
+LENGTH Enable/disable the Length Global Macro Control to be
+recalled by the Sound Remote Octave.
+MOD. (Modulation) Enable/disable the Modulation Global Macro Control to
+be recalled by the Sound Remote Octave.
+FLESH - Manual - 56
+Harmony Page
+9 Harmony Page
+The Harmony page is the space where notes and harmonies are defined to be played by the
+high and low triggers generated by the Samples section.
+The Chords section allows the definition of twelve different notes or chords. It offers eight pre-
+set progressions to get started.
+The Sub, Mono and Poly section parameters define how the incoming pitch information is
+processed in the sound engines.
+The Sequence section allows you to record a chord progression that is created by switching the
+Remote Octave slots manually with the mouse or MIDI notes coming from an external device.
+The link option allows you to have individual Sub, Mono and Poly harmony parameters per Re-
+mote Octave slot. If link is disabled these parameters are global.
+FLESH - Manual - 57
+Harmony Page
+HARMONY Page - Overview
+(1) SUB Section: This section contains Harmony settings for the Sub Synthesizer. Here you
+can set the source pitch input for the Sub Synthesizer. For more information refer to ↑9.1, Sub
+Synthesizer Section.
+(2) MONO Section: This section contains Harmony settings for the Mono Synthesizer. Here you
+can set the pitch source, and root note, adjust the Melody and Pitchbend settings for the Mono
+Synthesizer. For more information refer to ↑9.2, Mono Synthesizer Section.
+(3) POLY Section: This section contains Harmony settings for the Poly Synthesizer. Here you
+can set the pitch source, and root note, adjust the Melody and Pitchbend settings for the Poly
+Synthesizer. For more information refer to section ↑9.3, Poly Synthesizer Section.
+FLESH - Manual - 58
+Harmony Page
+Sub Synthesizer Section
+(4) CHORDS Section: This section contains the Preset Chord Selector, the Keyboard, Trans-
+pose Chord buttons, and the All Transpose button for the Harmony. For more information refer
+to section ↑9.4, Chords Section.
+(5) SEQUENCE Section: This section contains the Sequencer settings for the Harmony. Here
+you can record and playback a chord sequence. For more information refer to section ↑9.4,
+Chords Section.
+(6) HARMONY: Click this icon to access the HARMONY page.
+(7) HARMONY Remote Octave: Select one of twelve harmonies by clicking the Remote Octave
+slots or using the Remote Octave on your keyboard, keys C1 to B2 (MIDI notes 36 to 47). Click
+the mouse over a Remote Octave slot and drag from to another slot to copy a Harmony setting.
+(8) HARMONY Sequence Play: This button will playback the recorded Harmony sequence.
+Press the Play button, press [P] on your computer keyboard, or E4 (MIDI note 76) on your key-
+board to hear Sequence playback.
+(9) HARMONY Snap Lock. Enable this for individual Sub, Mono, Poly Synthesizer settings per
+Remote Octave slot. Click the Lock icon to enable or disable this feature.
+9.1 Sub Synthesizer Section
+(1) SOURCE (SUB Pitch Source Select): Select between Mono Synthesizer and Poly synthesiz-
+er to source the pitch of the Sub Synthesizer.
+9.2 Mono Synthesizer Section
+(1) VELOCITY/CENTROID: Select the type of transient curve that drives the modulation sour-
+ces. The curves are created when the samples are analyzed. Each sample slice has its own ve-
+locity (level) and centroid (the balance between low and high frequencies - low frequencies
+give a low result, high frequencies give a high result). When the sample is played back slice by
+slice these values are also played back and create the modulation curves.
+(2) ROOT: This sets the root note of the synthesizer. This feature is best used with the Se-
+quencer to provide chord changes on playback.
+(3) PITCHBEND: Select the amount of pitch bend relative to the ROOT note.
+FLESH - Manual - 59
+Harmony Page
+Poly Synthesizer Section
+(4) MELODY: Increase the amount of Melodic content introduced by the transients.
+(5) PITCHBEND: Select the amount of pitch bend relative to the MELODY.
+9.3 Poly Synthesizer Section
+(1) VELOCITY/CENTROID: Select the type of transient curve that drives the modulation sour-
+ces. The curves are created when the samples are analyzed. Each sample slice has its own ve-
+locity (level) and centroid (the balance between low and high frequencies - low frequencies
+give a low result, high frequencies give a high result). When the sample is played back slice by
+slice these values are also played back and create the modulation curves.
+(2) ROOT: This sets the root note of the synthesizer. This feature is best used with the Se-
+quencer to provide chord changes on playback.
+(3) PITCHBEND: Select the amount of pitch bend relative to the ROOT note.
+(4) MELODY: Increase the amount of Melodic content introduced by the transients.
+(5) PITCHBEND: Select the amount of pitch bend relative to the MELODY.
+9.4 Chords Section
+(1) LINK: Link harmony parameters to chord selection. Click this button to recall individual
+synthesizer parameter settings for each chord. When link is enabled the MELODY and ROOT
+settings for each synthesizer are stored and recalled individually for each note C1 to B2. When
+link is disabled the parameters apply to all chords.
+(2) Chord Presets: Click this button to recall one of eight preset chords. The set of eight chord
+presets contain a mixture of major, minor, intervals, chromatic fifths, and variations of them
+all. The chords are provided as a starting point and can be used for convenience when re-
+quired. After a chord has been selected the transpose buttons (< >) can be used to change the
+root note. A table of all Chord presets is available at the end of this section.
+(3) KEYS: The keyboard displays notes C to B and represent the notes currently playing the
+harmony for each Harmony Remote Octave slot. Click on the keyboard to add single notes or
+build chords. Up to twelve chords can be added to a Snapshot and recalled using the Remote
+FLESH - Manual - 60
+Harmony Page
+Sequence Section
+Octave on your keyboard (C1 to B2) or a MIDI device (MIDI note number 24 to 35). Switch
+between chords manually or record a sequence using the sequencer. For more information on
+building a Sequence refer to ↑9.4, Chords Section.
+(4) < > (Transpose): The < and > buttons transpose the entire keybed one semitone up or
+down.
+(5) ALL: When ALL is on transposition using the < > buttons will affect all the chords in the
+set. When ALL is off transposition only affects the selected chord.
+Chord Presets
+Preset Name Chord Structure
+KEYNIUS Major - Variation 1
+LOWKEY Minor - Variation 1
+KEYTAR Variations of a Major Chord with Extensions
+MONKEYS Variations of a Minor Chord with Extensions
+TURKEYS Minor - Variation 2
+KEYMONO Intervals 1 (Based on major scale)
+KHAKEY Intervals 2 (Based on minor scale)
+KEYPLAYER Chromatic scale with Fifths
+9.5 Sequence Section
+The Sequence section provides the means to record a chord sequence using the Harmony Re-
+mote Octave. The sequencer records increments of one bar up to a maximum of eight bars.
+The Sequence is armed using the record button, and recording is started by a gate on message
+and stopped by the next gate off. This means for multiple chord changes you need to make
+sure to play ‘legato’ - i.e. your note on messages should overlap. Once you finish recording the
+length of the sequence is rounded to the nearest bar. If you play past eight bars recording will
+automatically stop.
+FLESH - Manual - 61
+Harmony Page
+Sequence Section
+Sequence Section overview
+(1) Record: Use this button to initiate the recording process. Recording will begin when the
+first key is pressed.
+(2) Play: Press the Play button, or press [P] on your computer keyboard, or Key E4 (MIDI note
+76) to hear the Sequence playback
+(3) Sequence: A graphical overview of the sequence is displayed here.
+How to Record a Harmony Sequence
+Before you begin recording a sequence be sure enter the notes or chords you require using the
+keyboard in the Chord section on the Harmony page. Prepare the sequence by entering a new
+chord for each Harmony Remote Octave slot.
+To record a harmony sequence:
+1. Click HARMONY to access the Harmony page.
+2. In the SEQUENCE section click the Record button to initiate the recording process, or
+press key E4 (MIDI note 76) on your keyboard.
+FLESH - Manual - 62
+Harmony Page
+Sequence Section
+3. Play your harmony sequence using keys C1 to B2 (MIDI notes 36 to 47) on your keyboard
+or MIDI controller to trigger the Harmony Remote Octave slots. Play the sequence legato,
+with the smooth transitions from note to note and no intervening silence.
+⇨ A sequence is recorded and displayed in the Sequence section. Playback the sequence us-
+ing the Play button or by pressing key E4 (MIDI note 76) on your keyboard.
+FLESH - Manual - 63
+Credits
+10 Credits
+FLESH Instrument by Tim Exile
+Product Design
+Tim Exile, André Estermann, Efflam Le Bivic
+Instrument Development
+Tim Exile, Lazyfish, Dietrich Pank, Igor Shilov
+GUI Design
+Efflam Le Bivic
+Sound Design
+Jamil Samad, Tommaso De Donatis, Antonio de Spirt, John Valasis, Noritaka Ubukata, Jeremy
+Janzen, Balázs Gyutai.
+Quality Assurance
+Tom Scheutzlich, Frank Ellendt
+Documentation
+David Gover, Jamil Samad, André Estermann, Tim Exile
+Project Management
+Linda Klimesch, Marin Vrbica
+©2015 Native Instruments
+FLESH - Manual - 64

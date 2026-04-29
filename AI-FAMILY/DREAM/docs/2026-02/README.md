@@ -1,96 +1,88 @@
-# Productivity Plugin
+# Bio-Research Plugin
 
-A productivity plugin primarily designed for [Cowork](https://claude.com/product/cowork), Anthropic's agentic desktop application — though it also works in Claude Code. Task management, workplace memory, and a visual dashboard — Claude learns your people, projects, and terminology so it can act like a colleague, not a chatbot.
+Connect to preclinical research tools and databases (literature search, genomics analysis, target prioritization) to accelerate early-stage life sciences R&D. Use with [Cowork](https://claude.com/product/cowork) or install directly in Claude Code.
 
-## Installation
+This plugin consolidates 10 MCP server integrations and 6 analysis skills into a single package for life science researchers.
 
-```
-claude plugins add knowledge-work-plugins/productivity
-```
+## What's Included
 
-## What It Does
-
-This plugin gives Claude a persistent understanding of your work:
-
-- **Task management** — A markdown task list (`TASKS.md`) that Claude reads, writes, and executes against. Add tasks naturally, and Claude tracks status, triages stale items, and syncs with external tools.
-- **Workplace memory** — A two-tier memory system that teaches Claude your shorthand, people, projects, and terminology. Say "ask todd to do the PSR for oracle" and Claude knows exactly who, what, and which deal.
-- **Visual dashboard** — A local HTML file that gives you a board view of your tasks and a live view of what Claude knows about your workplace. Edit from the board or the file — they stay in sync.
-
-## Commands
-
-| Command | What it does |
-|---------|--------------|
-| `/start` | Initialize tasks + memory, open the dashboard |
-| `/update` | Triage stale items, check memory for gaps, sync from external tools if applicable |
-| `/update --comprehensive` | Deep scan email, calendar, chat — flag missed todos and suggest new memories |
-
-## Skills
-
-| Skill | Description |
-|-------|-------------|
-| `memory-management` | Two-tier memory system — CLAUDE.md for working memory, memory/ directory for deep storage |
-| `task-management` | Markdown-based task tracking using a shared TASKS.md file |
-
-## Example Workflows
-
-### Getting Started
-
-```
-You: /start
-
-Claude: [Creates TASKS.md, CLAUDE.md, memory/ directory, and dashboard.html]
-        [Opens the dashboard in your browser]
-        [Asks about your role, team, and current priorities to seed memory]
-```
-
-### Adding Tasks Naturally
-
-```
-You: I need to review the budget proposal for Sarah by Friday,
-     draft the Q2 roadmap after syncing with Greg, and follow up
-     on the API spec from the Platform team
-
-Claude: [Adds all three tasks to TASKS.md with context]
-        [Dashboard updates automatically]
-```
-
-### Morning Sync
-
-```
-You: /update --comprehensive
-
-Claude: [Scans email, calendar, and chat for new action items]
-        [Flags: "Budget proposal review is due tomorrow — still open"]
-        [Suggests: "New person mentioned in 3 threads: Jamie Park,
-         Design Lead — add to memory?"]
-        [Updates stale tasks and fills memory gaps]
-```
-
-### Workplace Shorthand
-
-Once memory is populated, Claude decodes your shorthand instantly:
-
-```
-You: ask todd to do the PSR for oracle
-
-Claude: "Ask Todd Martinez (Finance lead) to prepare the Pipeline
-         Status Report for the Oracle Systems deal ($2.3M, closing Q2)"
-```
-
-No clarifying questions. No round trips.
-
-## Data Sources
+### MCP Servers (Data Sources & Tools)
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](CONNECTORS.md).
 
-Connect your communication and project management tools for the best experience. Without them, manage tasks and memory manually.
+| Provider | What It Does | Category/Placeholder |
+|----------|-------------|---------------------|
+| U.S. National Library of Medicine | Search biomedical literature and research articles | `~~literature` |
+| deepsense.ai | Access preprints from bioRxiv and medRxiv | `~~literature` |
+| John Wiley & Sons | Access academic research and publications | `~~journal access` |
+| Sage Bionetworks | Collaborative research data management | `~~data repository` |
+| deepsense.ai | Bioactive drug-like compound database | `~~chemical database` |
+| OpenTargets | Drug target discovery and prioritization | `~~drug targets` |
+| deepsense.ai | NIH/NLM clinical trial registry | `~~clinical trials` |
+| BioRender | Scientific illustration creation | `~~scientific illustration` |
+| Owkin | AI for biology — histopathology and drug discovery | `~~AI research` |
+| Benchling\* | Lab data management platform | `~~lab platform` |
 
-**Included MCP connections:**
-- Chat (Slack) for team context and message scanning
-- Email and calendar (Microsoft 365) for action item discovery
-- Knowledge base (Notion) for reference documents
-- Project tracker (Asana, Linear, Atlassian, monday.com, ClickUp) for task syncing
-- Office suite (Microsoft 365) for documents
+### Optional Binary MCP Servers
 
-**Additional options:**
-- See [CONNECTORS.md](CONNECTORS.md) for alternative tools in each category
+These require a separate binary download:
+
+- **10X Genomics txg-mcp** (`~~genomics platform`) — Cloud analysis data and workflows ([GitHub](https://github.com/10XGenomics/txg-mcp/releases))
+- **ToolUniverse** (`~~tool database`) — AI tools for scientific discovery from Harvard MIMS ([GitHub](https://github.com/mims-harvard/ToolUniverse/releases))
+
+### Skills (Analysis Workflows)
+
+#### Single-Cell RNA QC
+Automated quality control for scRNA-seq data following scverse best practices. Supports `.h5ad` and `.h5` files with MAD-based filtering and comprehensive visualizations.
+
+#### scvi-tools
+Deep learning toolkit for single-cell omics. Covers scVI, scANVI, totalVI, PeakVI, MultiVI, DestVI, veloVI, and sysVI models for integration, batch correction, label transfer, and multi-modal analysis.
+
+#### Nextflow Pipelines
+Run nf-core bioinformatics pipelines on local or public GEO/SRA sequencing data:
+- **rnaseq** — Gene expression and differential expression
+- **sarek** — Germline and somatic variant calling (WGS/WES)
+- **atacseq** — Chromatin accessibility analysis
+
+#### Clinical Trial Protocol
+Generate FDA/NIH-compliant clinical trial protocols for medical devices or drugs. Includes research mode (literature + regulatory analysis) and full protocol generation with waypoint-based architecture.
+
+#### Instrument Data to Allotrope
+Convert laboratory instrument output files (PDF, CSV, Excel, TXT) to Allotrope Simple Model (ASM) format. Supports 40+ instrument types including cell counters, spectrophotometers, plate readers, qPCR, and chromatography systems.
+
+#### Scientific Problem Selection
+Systematic framework for research problem selection based on Fischbach & Walsh's framework. Includes 9 skills covering ideation, risk assessment, optimization, decision trees, adversity planning, and synthesis.
+
+## Getting Started
+
+```bash
+# Install the plugin
+/install anthropics/knowledge-work-plugins bio-research
+
+# Run the start command to see available tools
+/start
+```
+
+## Common Workflows
+
+**Literature Review**
+Search ~~literature database for papers, access full-text through ~~journal access, and create figures with ~~scientific illustration.
+
+**Single-Cell Analysis**
+Run QC on scRNA-seq data, then use scvi-tools for integration, batch correction, and cell type annotation.
+
+**Sequencing Pipeline**
+Download public data from GEO/SRA, run nf-core pipelines (RNA-seq, variant calling, ATAC-seq), and verify outputs.
+
+**Drug Discovery**
+Search ~~chemical database for bioactive compounds, use ~~drug target database for target prioritization, and review clinical trial data.
+
+**Clinical Trial Design**
+Research similar trials and FDA guidance, then generate a complete protocol document with statistical analysis.
+
+**Research Strategy**
+Pitch a new idea, troubleshoot a stuck project, or evaluate strategic decisions using the scientific problem selection framework.
+
+## License
+
+Skills are licensed under Apache 2.0. MCP servers are provided by their respective authors — see individual server documentation for terms.

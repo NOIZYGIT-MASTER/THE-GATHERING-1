@@ -1,0 +1,364 @@
+Manual
+Disclaimer
+The information in this document is subject to change without notice and does not represent a
+commitment on the part of Native Instruments GmbH. The software described by this docu-
+ment is subject to a License Agreement and may not be copied to other media. No part of this
+publication may be copied, reproduced or otherwise transmitted or recorded, for any purpose,
+without prior written permission by Native Instruments GmbH, hereinafter referred to as Native
+Instruments.
+“Native Instruments”, “NI” and associated logos are (registered) trademarks of Native Instru-
+ments GmbH.
+Mac, Mac OS, GarageBand, Logic, iTunes and iPod are registered trademarks of Apple Inc.,
+registered in the U.S. and other countries.
+Windows, Windows Vista and DirectSound are registered trademarks of Microsoft Corporation
+in the United States and/or other countries.
+All other trade marks are the property of their respective owners and use of them does not im-
+ply any affiliation with or endorsement by them.
+Document authored by: Gero Baier
+Software version: 1.0 (02/2015)
+Special thanks to the Beta Test Team, who were invaluable not just in tracking down bugs, but
+in making this a better product.
+Contact
+NATIVE INSTRUMENTS GmbH
+Schlesische Str. 29-30
+D-10997 Berlin
+Germany
+www.native-instruments.de
+NATIVE INSTRUMENTS North America, Inc.
+6725 Sunset Boulevard
+5th Floor
+Los Angeles, CA 90028
+USA
+www.native-instruments.com
+NATIVE INSTRUMENTS K.K.
+YO Building 3F
+Jingumae 6-7-15, Shibuya-ku,
+Tokyo 150-0001
+Japan
+www.native-instruments.co.jp
+NATIVE INSTRUMENTS UK Limited
+18 Phipp Street
+London EC2A 4NU
+UK
+www.native-instruments.com
+© NATIVE INSTRUMENTS GmbH, 2015. All rights reserved.
+Table of Contents
+Table of Contents
+1 Welcome to EMOTIVE STRINGS ..................................................................................5
+1.1 About EMOTIVE STRINGS ............................................................................................................. 5
+1.2 Manual Conventions ................................................................................................................... 5
+2 Using EMOTIVE STRINGS ...........................................................................................7
+2.1 Phrase Selection and Playback ................................................................................................... 7
+2.2 Selecting Different Phrase Modes ............................................................................................... 8
+2.2.1 Single Pitch ............................................................................................................... 8
+2.2.2 Melodic ...................................................................................................................... 9
+2.2.3 Emotives .................................................................................................................... 9
+2.2.4 Arpeggios .................................................................................................................. 11
+2.3 Controlling the Intensity of Phrases ............................................................................................ 11
+3 The EMOTIVE STRINGS User Interface ........................................................................12
+3.1 The SOUND Page ......................................................................................................................... 13
+3.2 Theme and Phrase Controls (SLOTS 1-5 and SLOTS 6-10) .......................................................... 15
+3.2.1 The Theme Browser .................................................................................................... 15
+3.2.2 The Phrase Controls and Browser .............................................................................. 17
+3.3 The PLAYBACK Page ................................................................................................................... 20
+4 Credits ......................................................................................................................22
+EMOTIVE STRINGS - Manual - 4
+Welcome to EMOTIVE STRINGS
+About EMOTIVE STRINGS
+1 Welcome to EMOTIVE STRINGS
+Thank you for purchasing EMOTIVE STRINGS. This document will give you some information
+about the library, as well as instructions and advice on how to use it.
+We hope that you will enjoy using EMOTIVE STRINGS.
+1.1 About EMOTIVE STRINGS
+EMOTIVE STRINGS is a cinematic string library which focuses on the emotional, melodic and
+suspense aspects of a composition. By employing full legato phrases, arpeggios and ostinati,
+the results are highly realistic. You can select different phrases and trigger them at the re-
+quired pitch from your MIDI keyboard in sync with your host project for real time orchestration.
+EMOTIVE STRINGS offers two microphone positions, a wide and narrow Stereo Image setting
+and two Master EQ presets.
+The EMOTIVE STRINGS library contains 175 phrases, which were performed live by a full
+string orchestra and were recorded with two microphone settings: Stage and Far. In addition to
+that, EMOTIVE STRINGS features 64 Themes, each of which represents a selection of up to 5
+phrases that work well together.
+1.2 Manual Conventions
+This manual uses particular formatting to point out special facts and to warn you of potential
+issues. The icons introducing the following notes let you see what kind of information is to be
+expected:
+Whenever this exclamation mark icon appears, you should read the corresponding note careful-
+ly and follow the instructions and hints given there if applicable.
+This light bulb icon indicates that a note contains useful extra information. This informa-
+tion may often help you to solve a task more efficiently, but does not necessarily apply to
+the setup or operating system you are using; however, it's always worth a look.
+Furthermore, the following formatting is used:
+EMOTIVE STRINGS - Manual - 5
+Welcome to EMOTIVE STRINGS
+Manual Conventions
+• Text appearing in (drop-down) menus (such as Open…, Save as… etc.) and paths to loca-
+tions on your hard drive or other storage devices is printed in italics.
+• Text appearing elsewhere (labels of buttons, controls, text next to checkboxes, etc.) is
+printed in light blue. Whenever you see this formatting applied, you will find the same
+text appearing somewhere on the screen.
+• Important names and concepts are printed in bold.
+► Single instructions are introduced by this play button type arrow.
+→ Results of actions are introduced by this smaller arrow.
+EMOTIVE STRINGS - Manual - 6
+Using EMOTIVE STRINGS
+Phrase Selection and Playback
+2 Using EMOTIVE STRINGS
+The EMOTIVE STRINGS instrument is designed to be played using a MIDI keyboard. The loops
+are triggered and selected by MIDI, allowing for fast orchestral scoring.
+Phrases will automatically sync to the master, or host tempo.
+A number of select phrases include the slow build-up of tone (attack), which occurs when
+the player starts bowing the string. Real-life players compensate for the slow attack by
+playing notes slightly ahead of the tick, and including this in EMOTIVE STRINGS adds to
+the realism of the performance. For you, this means you need to either play slightly ahead
+or move MIDI notes ahead of the tick if you feel a phrase sounds too laid back.
+Thanks to the high-quality time-stretching algorithm in KONTAKT 5, the phrases in this library
+can be played at any tempo between 80bpm and 200bpm without any noticeable artifacts.
+While it is possible to use the phrases at tempos below 80bpm or above 200bpm, the au-
+dio quality may start to lessen noticeably at more extreme settings.
+2.1 Phrase Selection and Playback
+Up to 10 phrases can be assigned to the keys from C0 to A0 via the user interface (this proc-
+ess is described in section ↑3.2, Theme and Phrase Controls (SLOTS 1-5 and SLOTS 6-10)).
+These key-switches are displayed as red keys in KONTAKT's on-screen keyboard.
+The KONTAKT on-screen keyboard displaying the active key-switches (in red) and the trigger keys (in blue).
+► Select the phrase assigned to C0 using your MIDI keyboard by pressing the C0 MIDI note.
+► Alternatively, select a phrase from the user interface by clicking on the corresponding note
+name to the left of the phrase.
+EMOTIVE STRINGS - Manual - 7
+Using EMOTIVE STRINGS
+Selecting Different Phrase Modes
+The phrase assigned to C0 is selected. Getting ready to select the phrase on the C#0 key
+► Play a phrase by playing a note.
+2.2 Selecting Different Phrase Modes
+Depending on the phrase type (Single Pitch, Melodic, Emotives or Arpeggios), a great number
+of phrases are available in variations, called Phrase Modes. These can be selected in real time
+from your MIDI keyboard. Here is an overview of the phrase types and the variations available.
+2.2.1 Single Pitch
+Single Pitch phrases give chords and melodies a rhythmic structure for more interesting, lively
+results. Besides straight and triplet patterns, you'll find a selection of Ostinatos here.
+Automatic Divisi
+With a Single Pitch phrase selected, EMOTIVE STRINGS automatically distributes voices to
+the instruments within the string section.
+If you play two notes in a phrase, half the instruments in the string section will play each
+pitch so the number of musicians playing at the same time stays the same. If you play a
+third simultaneous note, it's automatically assigned to one of the sections.
+EMOTIVE STRINGS - Manual - 8
+Using EMOTIVE STRINGS
+Selecting Different Phrase Modes
+2.2.2 Melodic
+The Mode (Major/Minor) of a great number of Melodic phrases can be controlled by velocity.
+Hitting a key hard will trigger the Minor version of the phrase, while playing notes softly trig-
+gers the Major version. This also allows you to control Modes in your audio production software
+via velocity value:
+• Velocity Range 1-69: Major phrase is played back.
+• Velocity Range 70-127: Minor phrase is played back.
+Phrases which allow Mode switching are marked accordingly in the Phrase Browser.
+Selecting a phrase with Major and Minor Modes
+2.2.3 Emotives
+Emotives allow you to construct realistic legato melodies and runs in real-time out of phrases
+which were played legato during recording.
+Major and Minor Modes
+Emotives can be played in Major and Minor variations, which are selected by means of the
+green range of keys. Following are three examples.
+EMOTIVE STRINGS - Manual - 9
+Using EMOTIVE STRINGS
+Selecting Different Phrase Modes
+► Play a C Major chord in the green range of keys. Now every key in the blue range of keys
+will play a Major phrase.
+Playing an Emotive in C Major
+► Play a D Major chord in the green range of keys. All notes outside the D Major scale are
+de-activated. Every key in the blue range of keys will play a Major phrase.
+Only notes within the selected scale are marked blue
+While C and F are de-activated in the blue range of the keyboard now, C# and F#, which
+are part of the D Major scale, are activated.
+► Play an E Minor chord in the green range of keys. Now every key in the blue range of keys
+will play a Minor phrase
+Emotives in E Minor
+Ascending and Descending Modes
+In addition to Major and Minor Modes, you can play most Emotives as either ascending or de-
+scending phrases.
+• Velocity Range 1-69: A downwards phrase is played back.
+EMOTIVE STRINGS - Manual - 10
+Using EMOTIVE STRINGS
+Selecting Different Phrase Modes
+• Velocity Range 70-127: An upwards phrase is played back.
+2.2.4 Arpeggios
+A selection of Arpeggio phrases can be triggered by playing either a Major or Minor chord in
+the blue range of keys. This includes the first and second inversions of chords:
+► Play an A Minor common chord (A2, C3, E3)
+► Now play the first inversion (C3, E3, A3)
+► Then play the second inversion (E3, A3, C4).
+→ You will hear three distinct Arpeggios for the A Minor chord.
+2.3 Controlling the Intensity of Phrases
+► To control the intensity of the phrases in real-time, use the modulation wheel (MIDI con-
+troller 1) of your MIDI keyboard, or move the modulation wheel of KONTAKT's on-screen
+keyboard.
+► To set the intensity to a fixed value, use the EXPRESSION slider to the top left of the
+EMOTIVE STRINGS user interface.
+Note that you cannot record automation from this control. Please use a Mod Wheel instead.
+EMOTIVE STRINGS - Manual - 11
+The EMOTIVE STRINGS User Interface
+3 The EMOTIVE STRINGS User Interface
+The EMOTIVE STRINGS user interface allows you to set up the phrases, load preset themes,
+and alter the sound of the instrument.
+The EMOTIVE STRINGS interface, as it appears when first opened.
+At the top of the Performance view, below the usual KONTAKT Instrument header controls, you
+will notice two boxes:
+EMOTIVE STRINGS - Manual - 12
+The EMOTIVE STRINGS User Interface
+The SOUND Page
+• EXPRESSION: The Expression indicator to the left displays the current Mod Wheel value
+(and thus also the intensity level).
+The Expression/ModWheel Indicator
+• CURRENT PHRASE and VEL: The box to the right displays the current (or most recently
+played) phrase in the CURRENT PHRASE indicator. The Velocity indicator (labeled VEL)
+displays the velocity mode.
+The Current Phrase and Velocity Indicator (Single P. shows that the current phrase does not have Major and Minor varia-
+tions)
+Four tabs at the bottom of the Performance view enable you to change the contents of the cen-
+tral area:
+• SOUND: Displays the controls that affect the sound of the instrument (audio effects and
+microphone position).
+• SLOTS 1-5 and SLOTS 6-10: Display the patterns that are assigned to the respective key-
+switches. You can also load patterns from these pages.
+• PLAYBACK: Displays the controls used to alter the pattern playback behavior.
+3.1 The SOUND Page
+Click on the SOUND Tab to display the Sound page. This page provides controls that you can
+use to adjust the sound of the EMOTIVE STRINGS phrases to your needs.
+EMOTIVE STRINGS - Manual - 13
+The EMOTIVE STRINGS User Interface
+The SOUND Page
+The Sound Page
+Master Settings
+To the left on the Sound page are the Master Settings. These are:
+• Master EQ: Use the three buttons to select from 2 different equalizer settings (I and II)
+for the instrument, or to disable the EQ (Off).
+• Stereo Image: Choose either regular (Normal) or an enhanced (Wide) stereo width.
+• Mic Position: Select the recording distance, either Close or Stage microphone positions,
+by clicking on their respective buttons.
+Changing the microphone position will load the new samples and remove the old ones from
+memory, so some loading time may be required.
+Reverb Settings
+To the right are the Reverb controls, which control a convolution reverb effect that can be used
+to create a greater sense of space for the instrument. The controls and their functions are as
+follows:
+EMOTIVE STRINGS - Manual - 14
+The EMOTIVE STRINGS User Interface
+Theme and Phrase Controls (SLOTS 1-5 and SLOTS 6-10)
+• On: The reverb effect can be turned on or off by clicking on the On button. The reverb is
+active when the button glows yellow.
+• An impulse response (i.e. the reverb character) can be selected from the dropdown menu.
+Alternatively, you can cycle through the included impulse responses by using the left and
+right arrows to the left of the menu. The selected reverb type is displayed in the picture
+below.
+• Amount: Use the Amount knob to control the output level of the reverb signal.
+3.2 Theme and Phrase Controls (SLOTS 1-5 and SLOTS 6-10)
+Clicking on the tabs SLOTS 1-5 and SLOTS 6-10 will not only display the currently loaded
+phrases, but will also display the controls that allow you to load different themes and phrases.
+3.2.1 The Theme Browser
+About Themes
+Themes are collections of up to 5 related phrases, which usually include a Single Pitch phrase
+as an intro, as well as an ending note to end an arrangement with. Load a theme and these
+phrases are assigned to slots 1-5 (key switches C0-E0). Slots 6-10 (key switches F0-A0) retain
+their previous state, so you can keep your favorite phrases loaded while loading themes.
+Browsing Themes
+To load a preset theme from the SLOTS 1-5 page:
+1. Click on the magnifying glass icon to the right of the theme title, this will open the Theme
+Browser.
+EMOTIVE STRINGS - Manual - 15
+The EMOTIVE STRINGS User Interface
+Theme and Phrase Controls (SLOTS 1-5 and SLOTS 6-10)
+2. By default, all themes will be displayed in the browser. You can further refine the results
+by clicking on any of the category buttons at the top of the browser.
+3. 4. Select a theme by clicking on its name in the browser.
+To load the currently selected theme, click on the Tick button.
+Exit the Theme Browser without changing the currently loaded theme or phrases by clicking
+on the X button to the top right of the browser.
+► Alternatively to opening the Browser, you can cycle through the included themes by click-
+ing on the left and right arrows to the right of the magnifying glass.
+You can save your own themes with KONTAKT's Snapshot feature. Select up to five phrases
+in Slots 6-10 and save your own theme by creating a snapshot.
+Saving your Own Theme
+In order to save your own collection of Phrases as a Snapshot:
+EMOTIVE STRINGS - Manual - 16
+The EMOTIVE STRINGS User Interface
+Theme and Phrase Controls (SLOTS 1-5 and SLOTS 6-10)
+1. Click the camera icon in the Instrument Header. This will switch the Header to the Snap-
+shot View.
+Accessing the Snapshot View
+2. Here, click the floppy disk icon to open the Snapshot Saving dialog.
+Saving a Snapshot
+3. Enter a Snapshot name (e.g. Triple Peaks) and click Save.
+Snapshot Saving Dialog
+→ The Snapshot is saved and added to the Snapshot Menu.
+3.2.2 The Phrase Controls and Browser
+A preset Theme may not meet your exact needs, you may wish to change a phrase, or load ad-
+ditional phrases into any of the additional 5 slots.
+On the pages accessed by clicking on the tabs SLOTS 1-5 and SLOTS 6-10, you will see the
+musical notations of the phrases loaded into these slots; to their left is the name of the note to
+which they are assigned. These musical notations are actually interactive elements:
+EMOTIVE STRINGS - Manual - 17
+The EMOTIVE STRINGS User Interface
+Theme and Phrase Controls (SLOTS 1-5 and SLOTS 6-10)
+► To display the information on any phrase, including the name, original tempo and meter
+information, hover the mouse cursor over the musical notation of the phrase.
+Displayed information for the phrase loaded into Slot 1
+Slots 6-10 will initially be empty, and display empty musical staves. These are still interac-
+tive in the same way as the other notations in slots 1-5.
+► To load a phrase into a slot, open the Phrase Browser by clicking on the phrase notation/
+information.
+EMOTIVE STRINGS - Manual - 18
+The EMOTIVE STRINGS User Interface
+Theme and Phrase Controls (SLOTS 1-5 and SLOTS 6-10)
+The Phrase Browser
+The Phrase Browser is similar to the Theme Browser in many ways:
+• To the top of the browser are a series of buttons to refine your search.
+• To the very top right are the X and Tick buttons used to exit the browser or load a phrase
+respectively.
+• The body of the browser contains a list of the available phrases.
+However, the Phrase Browser has two noticeable differences:
+EMOTIVE STRINGS - Manual - 19
+The EMOTIVE STRINGS User Interface
+The PLAYBACK Page
+• Clicking on a phrase will display the score for the phrase in the display box above the brows-
+er list (in the above capture, the notation displayed is that of the Bulgarian Figure 1
+phrase).
+• Clicking on a phrase will also play a preview of the selected phrase.
+• Phrases are loaded in the same manner as loading a Theme:
+1. 2. Select the desired Phrase from the list in the Phrase Browser by clicking on its name.
+Confirm the selection by clicking the tick button to the top right of the Browser.
+→ The selected Phrase will now be loaded into the slot you used to access the Phrase
+Browser.
+3.3 The PLAYBACK Page
+By clicking on the PLAYBACK Tab, you will display the Playback page.
+The Playback Page
+EMOTIVE STRINGS - Manual - 20
+The EMOTIVE STRINGS User Interface
+The PLAYBACK Page
+This page contains three settings that affect the way the phrases are played back in the KON-
+TAKT Instrument:
+• Phrase Release: This knob controls the fade out time of a phrase
+• Legato Transitions: This knob controls the volume of the samples masking the transition
+between two phrases.
+• Tempo: Here you can select between 3 tempo ratios 1/2 (Half), 1:1 (Normal), or 2X (Dou-
+ble), which affect the phrase playback speed relative to the master (or host) tempo.
+EMOTIVE STRINGS - Manual - 21
+Credits
+4 Credits
+Product Concept and Design: SONUSCORE: Tilman Sillescu, Pierre Langer, Axel Rohrbach, Frank
+Elting
+Content Creation: Tilman Sillescu
+KONTAKT Scripting: Nils Liberg
+User Interface Design: Simon Martin
+Recording Studio: Studio 22 Budapest
+String Sections: Budapest Scoring Orchestra
+Orchestrator: David Christiansen
+Sample Editing: Chris Wirtz, Armin Haas, Nicolai Patricio, Matthias Wolf, Stefan Kemler, Dawit
+Khosrovian, Tilman Sillescu
+Documentation: Gero Baier
+Quality Assurance: Bymski
+Artwork: Yvonne Hartmann
+Finalization and Encoding: Thanos Kazakos
+Project Management: Christian Wachsmuth
+EMOTIVE STRINGS - Manual - 22

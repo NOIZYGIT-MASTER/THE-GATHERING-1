@@ -1,0 +1,1346 @@
+padconfversion "Latin Percussion EZX 1.5.7"
+
+mastervolume 1.0
+samplerate 44100
+pack 2
+
+defaultpad {
+	usemic Ambience AmbienceR
+	velvol
+	cycle S
+	maxpoly 4
+}
+
+#TEMPLATES
+
+TEMPLATE BongoBleed
+	usemic Bongo1 Bongo2
+END
+
+TEMPLATE CongaBleed
+	usemic Conga1 Conga2
+END
+
+TEMPLATE TimbaleBleed
+	usemic Timbale1 Timbale2
+END
+
+TEMPLATE Hipoly
+	IF $EZX2
+		maxpoly 8
+	FI
+END
+
+TEMPLATE DefaultMHE
+	IF $EZX2
+		autoattack 1.1
+		autoattackctrl 1
+		autoattacktime 0.07
+		autoattacklevel 0.65
+	FI
+END
+
+TEMPLATE AltMHE
+	IF $EZX2
+		autoattack 1.1
+		autoattackctrl 0
+		autoattacktime 0.07
+		autoattacklevel 0.65
+	FI
+END
+
+TEMPLATE AftertouchMute
+	faderatio	0
+	fade		1
+	fadestart	0
+	blocknoteoff 1
+	fadetime	0.2
+END
+
+
+#PADS
+
+pad {
+	name		Cymbal2CR
+	cycle NOT S L H
+	velvol 0
+}
+
+pad {
+	name		Cymbal1CR
+	cycle NOT S L H
+	velvol 0
+}
+
+pad {
+	name		ShellsCR
+	cycle NOT S L H
+	velvol 0
+}
+
+pad {
+	name		CricketsCR
+	cycle NOT S L H
+	velvol 0
+}
+
+pad {
+	name		BellsCR
+	cycle NOT S L H
+	velvol 0
+}
+
+pad {
+	name		TambCR
+	cycle NOT S L H
+	velvol 0
+	leakvolume Ambience 0.7
+}
+
+
+pad {
+	name		ShekereCR
+	cycle NOT S L H
+	velvol 0
+}
+
+pad {
+	name		BShakerCR
+	cycle NOT S L H
+	velvol 0
+}
+
+pad {
+	name		SShakerCR
+	cycle NOT S L H
+	velvol 0
+}
+
+pad {
+	name		MaracasCR
+	cycle NOT S L H
+	velvol 0
+}
+
+pad {
+	name		CaxixiFX
+	cycle NOT S L H
+	velvol 0
+}
+
+
+pad {
+	name		UduCS
+	cycle NOT S L H
+	velvol 0
+}
+
+pad {
+	name		UduCO
+	cycle NOT S L H
+	velvol 0
+}
+
+pad {
+	name		UduFL
+}
+
+pad {
+	name		UduGTL
+	velvol 0
+}
+
+pad {
+	name		UduGTR
+	velvol 0
+}
+
+pad {
+	name		UduMS
+}
+
+pad {
+	name		UduOS
+}
+
+pad {
+	name		UduOL
+}
+
+
+pad {
+	name		Bongo2CR
+	USE			BongoBleed
+	cycle NOT S L H
+	velvol 0
+}
+
+pad {
+	name		Bongo2FL
+	USE			BongoBleed
+}
+
+
+pad {
+	name		Bongo1CR
+	USE			BongoBleed
+	cycle NOT S L H
+	velvol 0
+}
+
+pad {
+	name		Bongo1FL
+	USE			BongoBleed
+}
+pad {
+	name		Bongo1HFL
+	USE			BongoBleed
+	velvol 0
+}
+
+pad {
+	name		Bongo1HFR
+	USE			BongoBleed
+	velvol 0
+}
+
+
+pad {
+	name		TimbLowFL
+	USE			TimbaleBleed
+	leakvolume Ambience 0.8
+}
+
+pad {
+	name		TimbLowSS
+	USE			TimbaleBleed
+	leakvolume Ambience 0.8
+}
+
+pad {
+	name		TimbLowRS
+	USE			TimbaleBleed
+	leakvolume Ambience 0.8
+}
+
+pad {
+	name		TimbHighRF
+	USE			TimbaleBleed
+}
+pad {
+	name		TimbHighFL
+	USE			TimbaleBleed
+}
+
+pad {
+	name		TimbHighSS
+	USE			TimbaleBleed
+}
+pad {
+	name		TimbHighRS
+	USE			TimbaleBleed
+}
+
+
+pad {
+	name		Conga2FX
+	USE			CongaBleed
+	leakvolume Ambience 0.7	
+	cycle NOT S L H
+	velvol 0
+}
+pad {
+	name		Conga2OC
+	USE			CongaBleed
+	leakvolume Ambience 0.7	
+	cycle NOT S L H
+	velvol 0
+}
+
+pad {
+	name		Conga2FLO
+	USE			CongaBleed
+	leakvolume Ambience 0.7	
+}
+
+pad {
+	name		Conga2BTL
+	USE			CongaBleed
+	leakvolume Ambience 0.7	
+	velvol 0
+}
+
+pad {
+	name		Conga2BTR
+	USE			CongaBleed
+	leakvolume Ambience 0.7	
+	velvol 0
+}
+
+pad {
+	name		Conga2MTL
+	USE			CongaBleed
+	leakvolume Ambience 0.7	
+}
+
+pad {
+	name		Conga2MTR
+	USE			CongaBleed
+	leakvolume Ambience 0.7	
+}
+
+
+pad {
+	name		Conga1FX
+	USE			CongaBleed
+	leakvolume Ambience 0.7	
+	cycle NOT S L H
+	velvol 0
+}
+
+pad {
+	name		Conga1SC
+	USE			CongaBleed
+	leakvolume Ambience 0.7	
+	velvol 0
+}
+
+pad {
+	name		Conga1OC
+	USE			CongaBleed
+	leakvolume Ambience 0.7	
+	cycle NOT S L H
+	velvol 0
+}
+pad {
+	name		Conga1FLS
+	USE			CongaBleed
+	leakvolume Ambience 0.7	
+}
+pad {
+	name		Conga1FLO
+	USE			CongaBleed
+	leakvolume Ambience 0.7	
+}
+
+pad {
+	name		Conga1HFL
+	USE			CongaBleed
+	leakvolume Ambience 0.7	
+	velvol 0
+}
+
+pad {
+	name		Conga1HFR
+	USE			CongaBleed
+	leakvolume Ambience 0.7	
+	velvol 0
+}
+
+pad {
+	name		Conga1CSL
+	USE			CongaBleed
+	leakvolume Ambience 0.7	
+}
+
+pad {
+	name		Conga1CSR
+	USE			CongaBleed
+	leakvolume Ambience 0.7	
+}
+
+pad {
+	name		Conga1OSL
+	USE			CongaBleed
+	leakvolume Ambience 0.7	
+}
+
+pad {
+	name		Conga1OSR
+	USE			CongaBleed
+	leakvolume Ambience 0.7	
+}
+
+pad {
+	name		Conga1BTL
+	USE			CongaBleed
+	leakvolume Ambience 0.7	
+	velvol 0
+}
+
+pad {
+	name		Conga1BTR
+	USE			CongaBleed
+	leakvolume Ambience 0.7	
+	velvol 0
+}
+
+pad {
+	name		Conga1MTL
+	USE			CongaBleed
+	leakvolume Ambience 0.7	
+}
+
+pad {
+	name		Conga1MTR
+	USE			CongaBleed
+	leakvolume Ambience 0.7	
+}
+
+
+pad {
+	name		CajonCRB
+	cycle NOT S L H
+	velvol 0
+}
+
+pad {
+	name		CajonCFL
+}
+
+pad {
+	name		CajonVVL
+	alternate
+	velvol 0
+}
+
+pad {
+	name		CajonVVR
+	alternate
+	velvol 0
+}
+
+pad {
+	name		CajonVIL
+	alternate
+}
+
+pad {
+	name		CajonVIR
+	alternate
+}
+
+pad {
+	name		CajonGSL
+	velvol 0
+}
+
+pad {
+	name		CajonGSR
+	velvol 0
+}
+
+pad {
+	name		CajonSSL
+}
+
+pad {
+	name		CajonSSR
+}
+
+pad {
+	name		CajonSML
+}
+
+pad {
+	name		CajonSMR
+}
+
+pad {
+	name		CajonSNL
+}
+
+pad {
+	name		CajonSNR
+}
+
+
+pad {
+	name		Wood3
+}
+
+pad {
+	name		Wood2
+}
+
+pad {
+	name		Wood1
+}
+
+pad {
+	name		ChimesS
+	cycle NOT S L H
+	velvol 0
+	leakvolume FX 0.4
+}
+
+pad {
+	name		VibraFH
+	leakvolume FX 0.2
+	velvol 0
+}
+
+pad {
+	name		UduOH
+}
+
+pad {
+	name		TriangMT
+	velvol 0
+}
+
+pad {
+	name		TriangOT
+	velvol 0
+}
+
+pad {
+	name		ShellsFH
+	velvol 0
+}
+
+pad {
+	name		GuiroLO
+	velvol 0
+}
+
+pad {
+	name		GuiroR
+	velvol 0
+}
+
+pad {
+	name		CricketsFH
+	velocityknee L 0
+	velvol 0
+}
+
+pad {
+	name		CowbellFH
+}
+
+pad {
+	name		BellsFH
+	velvol 0
+}
+
+pad {
+	name		AfucheFH
+	pvolume 	0.45
+}	
+
+pad {
+	name		TambOT
+	leakvolume Ambience 0.7
+}
+
+pad {
+	name		TambMT
+	leakvolume Ambience 0.7
+}
+
+pad {
+	name		TambSQL
+	velocityknee L 0
+	leakvolume Ambience 0.7
+}
+
+pad {
+	name		TambSQR
+	velocityknee L 0
+	leakvolume Ambience 0.7
+}
+
+pad {
+	name		ShekereFH
+}	
+pad {
+	name		ShekereSQR
+	velocityknee L 0
+}
+
+pad {
+	name		ShekereSQL
+	velocityknee L 0
+}
+
+pad {
+	name		MaracasSQR
+	velocityknee L 0
+}
+
+pad {
+	name		MaracasSQL
+	velocityknee L 0
+}
+
+pad {
+	name		CaxixiFH
+}
+
+pad {
+	name		CaxixiSQR
+	velocityknee L 0
+	velvol 0
+}
+
+pad {
+	name		CaxixiSQL
+	velocityknee L 0	
+	velvol 0
+}
+
+pad {
+	name		BShakerSQR
+	velocityknee L 0
+}
+
+pad {
+	name		BShakerSQL
+	velocityknee L 0
+}						
+
+
+pad {
+	name		SShakerSQR
+	velocityknee L 0
+}
+
+pad {
+	name		SShakerSQL
+	velocityknee L 0
+}						
+
+pad {
+	name		SplashFH
+	USE AftertouchMute
+	USE DefaultMHE
+	USE Hipoly
+}
+
+pad {
+	name		Cymbal2FH
+	USE AftertouchMute
+	USE DefaultMHE
+	USE Hipoly
+}
+
+pad {
+	name		Cymbal1FH
+	USE AftertouchMute
+	USE DefaultMHE
+	USE Hipoly
+}
+
+pad {
+	name		Bongo2OTL
+	USE			BongoBleed
+}
+
+pad {
+	name		Bongo2OTR
+	USE			BongoBleed
+}
+
+pad {
+	name		Bongo1OTL
+	USE			BongoBleed
+}
+
+pad {
+	name		Bongo1OTR
+	USE			BongoBleed
+}
+
+pad {
+	name		TimbLowOTL
+	USE			TimbaleBleed
+	leakvolume Ambience 0.8
+}
+
+pad {
+	name		TimbLowOTR
+	USE			TimbaleBleed
+	leakvolume Ambience 0.8
+}
+
+pad {
+	name		TimbHighOTL
+	USE			TimbaleBleed
+}
+
+pad {
+	name		TimbHighOTR
+	USE			TimbaleBleed
+}
+
+pad {
+	name		Conga2OTL
+	USE			CongaBleed
+	leakvolume Ambience 0.7	
+}
+
+pad {
+	name		Conga2OTR
+	USE			CongaBleed
+	leakvolume Ambience 0.7	
+}
+
+pad {
+	name		Conga1OTL
+	USE			CongaBleed
+	leakvolume Ambience 0.7	
+}
+
+pad {
+	name		Conga1OTR
+	USE			CongaBleed
+	leakvolume Ambience 0.7	
+}
+
+pad {
+	name		CajonBTL
+	alternate
+}
+
+pad {
+	name		CajonBTR
+	alternate
+}
+
+
+#SUBSTITUTES
+
+pad	Bongo1OTR {
+	substitute Bongo2OTR
+}
+pad	Bongo2OTR {
+	substitute Bongo1OTR
+}
+pad	Bongo1OTL {
+	substitute Bongo2OTL
+}
+pad	Bongo2OTL {
+	substitute Bongo1OTL
+}
+pad	Bongo1FL {
+	substitute Bongo2FL
+}
+pad	Bongo2FL {
+	substitute Bongo1FL
+}
+pad	Bongo1CR {
+	substitute Bongo2CR
+}
+pad	Bongo2CR {
+	substitute Bongo1CR
+}
+
+pad	CajonBTL {
+	alternative CajonBTR
+}
+pad	CajonBTR {
+	alternative CajonBTL
+}
+pad	CajonSNL {
+	alternative CajonSNR
+}
+pad	CajonSNR {
+	alternative CajonSNL
+}
+pad	CajonSML {
+	alternative CajonSMR
+}
+pad	CajonSMR {
+	alternative CajonSML
+}
+pad	CajonSSL {
+	alternative CajonSSR
+}
+pad	CajonSSR {
+	alternative CajonSSL
+}
+
+pad	Conga1OTR {
+	substitute Conga2OTR
+}
+pad	Conga2OTR {
+	substitute Conga1OTR
+}
+pad	Conga1OTL {
+	substitute Conga2OTL
+}
+pad	Conga2OTL {
+	substitute Conga1OTL
+}
+pad	Conga1MTR {
+	substitute Conga2MTR
+}
+pad	Conga2MTR {
+	substitute Conga1MTR
+}
+pad	Conga1MTL {
+	substitute Conga2MTL
+}
+pad	Conga2MTL {
+	substitute Conga1MTL
+}
+pad	Conga1BTR {
+	substitute Conga2BTR
+}
+pad	Conga2BTR {
+	substitute Conga1BTR
+}
+pad	Conga1BTL {
+	substitute Conga2BTL
+}
+pad	Conga2BTL {
+	substitute Conga1BTL
+}
+pad	Conga1FLO {
+	substitute Conga2FLO
+}
+pad	Conga2FLO {
+	substitute Conga1FLO
+}
+pad	Conga1OC {
+	substitute Conga2OC
+}
+pad	Conga2OC {
+	substitute Conga1OC
+}
+pad	Conga1FX {
+	substitute Conga2FX
+}
+pad	Conga2FX {
+	substitute Conga1FX
+}
+
+
+pad	TimbHighOTR {
+	substitute TimbLowOTR
+}
+pad	TimbLowOTR {
+	substitute TimbHighOTR
+}
+pad	TimbHighOTL {
+	substitute TimbLowOTL
+}
+pad	TimbLowOTL {
+	substitute TimbHighOTL
+}
+pad	TimbHighRS {
+	substitute TimbLowRS
+}
+pad	TimbLowRS {
+	substitute TimbHighRS
+}
+pad	TimbHighSS {
+	substitute TimbLowSS
+}
+pad	TimbLowSS {
+	substitute TimbHighSS
+}
+pad	TimbHighFL {
+	substitute TimbLowFL
+}
+pad	TimbLowFL {
+	substitute TimbHighFL
+}
+
+pad	Cymbal1CR {
+	substitute Cymbal2CR
+}
+pad	Cymbal2CR {
+	substitute Cymbal1CR
+}
+pad	Cymbal1FH {
+	substitute Cymbal2FH
+}
+pad	Cymbal2FH {
+	substitute Cymbal1FH
+}
+pad	SplashFH {
+	substitute Cymbal2FH
+}
+
+pad	SShakerSQR {
+	substitute BShakerSQR
+}
+pad	BShakerSQR {
+	substitute SShakerSQR
+}
+pad	SShakerSQL {
+	substitute BShakerSQL
+}
+pad	BShakerSQL {
+	substitute SShakerSQL
+}
+pad	SShakerCR {
+	substitute BShakerCR
+}
+pad	BShakerCR {
+	substitute SShakerCR
+}
+pad	ShekereSQR {
+	substitute BShakerSQR
+}
+pad	ShekereSQL {
+	substitute BShakerSQL
+}
+pad	ShekereCR {
+	substitute BShakerCR
+}
+pad	ShekereFH {
+	substitute ShekereSQR
+}
+pad	MaracasSQR {
+	substitute BShakerSQR
+}
+pad	MaracasSQL {
+	substitute BShakerSQL
+}
+pad	MaracasCR {
+	substitute BShakerCR
+}
+pad	CaxixiSQR {
+	substitute SShakerSQR
+}
+pad	CaxixiSQL {
+	substitute SShakerSQL
+}
+pad	CaxixiFX {
+	substitute SShakerCR
+}
+pad	CaxixiFH {
+	substitute CaxixiSQR
+}
+pad	AfucheFH {
+	substitute ShekereFH
+}
+
+pad	Wood3 {
+	substitute Wood2
+}
+pad	Wood2 {
+	substitute Wood1
+}
+pad	Wood1 {
+	substitute Wood3
+}
+
+
+#MAPPING
+
+alias TambCR	118
+alias TambMT	25
+alias TambOT	24 54
+alias TambSQL	27 3
+alias TambSQR	26
+
+alias SShakerCR	 79
+alias SShakerSQL 49 2
+alias SShakerSQR 50 48
+
+alias BShakerCR	 78
+alias BShakerSQL 45
+alias BShakerSQR 44 46
+
+alias MaracasCR	5
+alias MaracasSQL 70 1
+alias MaracasSQR 69 4
+
+alias ShekereCR	127
+alias ShekereFH	124
+alias ShekereSQL 126
+alias ShekereSQR 125
+
+alias CaxixiFH	9
+alias CaxixiFX	8
+alias CaxixiSQL	7
+alias CaxixiSQR	6
+
+alias ShellsCR	121
+alias ShellsFH	68
+
+alias AfucheFH	47
+
+alias Conga1BTL	64
+alias Conga1BTR	91
+alias Conga1CSL	94
+alias Conga1CSR	95
+alias Conga1FLO	99
+alias Conga1FLS	100
+alias Conga1FX	101
+alias Conga1HFL	96
+alias Conga1HFR	97
+alias Conga1MTL	62
+alias Conga1MTR	89
+alias Conga1OC	98
+alias Conga1OSL	92
+alias Conga1OSR	93
+alias Conga1OTL	63
+alias Conga1OTR	90
+alias Conga1SC	88
+
+alias Conga2OTL	102
+alias Conga2OTR	103
+alias Conga2MTL	104
+alias Conga2MTR	105
+alias Conga2BTL	106 111
+alias Conga2BTR	107 112
+alias Conga2OC	108 113
+alias Conga2FLO	109
+alias Conga2FX	110
+
+alias Bongo1CR	31
+alias Bongo1FL	32
+alias Bongo1HFL	29
+alias Bongo1HFR	30
+alias Bongo1OTL	60
+alias Bongo1OTR	28
+
+alias Bongo2CR	52
+alias Bongo2FL	53
+alias Bongo2OTL	51
+alias Bongo2OTR	61
+
+alias CajonBTL
+alias CajonBTR	84 10
+alias CajonGSL	11
+alias CajonGSR	12
+alias CajonSSL	13
+alias CajonSSR	14
+alias CajonSNL	40
+alias CajonSNR	41
+alias CajonSML	42
+alias CajonSMR	43
+
+alias CajonCFL	82
+alias CajonCRB	115 83
+alias CajonVIR	85
+alias CajonVIL
+alias CajonVVR	114 87 86
+alias CajonVVL
+
+alias TimbHighOTL 65
+alias TimbHighOTR 19
+alias TimbHighRS 18
+alias TimbHighSS 17
+alias TimbHighFL 16
+alias TimbHighRF 15
+
+alias TimbLowOTL 21
+alias TimbLowOTR 66
+alias TimbLowRS  20
+alias TimbLowSS  23
+alias TimbLowFL  22
+
+alias Cymbal1CR	120
+alias Cymbal1FH	57
+alias Cymbal2CR	122
+alias Cymbal2FH	59
+
+alias SplashFH	55
+
+alias CricketsCR 123
+alias CricketsFH 71
+
+alias CowbellFH	56
+
+alias BellsCR	119
+alias BellsFH	67
+
+alias ChimesS	72
+
+alias GuiroLO	74
+alias GuiroR	73
+
+alias Wood1		75
+alias Wood2		76
+alias Wood3		77
+
+alias UduCO		117
+alias UduCS		116
+alias UduFL		39
+alias UduGTL	33
+alias UduGTR	34
+alias UduOH		35
+alias UduOL		36
+alias UduMS		37
+alias UduOS		38
+
+alias TriangMT	80
+alias TriangOT	81
+
+alias VibraFH	58
+
+
+#MUTEGROUPS
+
+SET	UDUFADE	0.1
+group TRANSMUTE TransUdu {
+	crossfade	$UDUFADE
+	member UduOH
+	member UduOL
+}
+group RECEIVER UduToMute {
+	member UduCS
+	member UduCO
+	member UduFL
+}
+group SENDER UduThatMute {
+	member UduOS
+	member UduMS
+	member UduGTL
+	member UduGTR
+	member UduOH
+	member UduOL
+	member UduCS
+	member UduCO
+	member UduFL
+}
+group MUTE UduToMute {
+	fade	$UDUFADE
+	member UduToMute
+	member UduThatMute
+}
+
+
+TEMPLATE CongaMute
+group TRANSMUTE TransCongasL$1 {
+	crossfade	$2
+      member Conga$1OTL
+      member Conga$1MTL
+}
+group TRANSMUTE TransCongasR$1 {
+	crossfade	$2
+      member Conga$1OTR
+      member Conga$1MTR
+}
+group BUNDLE CongasOpen$1 {
+      member Conga$1FLO
+}
+group SENDER CongasOpenS$1 {
+      member Conga$1OC
+      member CongasOpen$1
+}
+group BUNDLE CongasBass$1 {
+      member Conga$1BTL
+      member Conga$1BTR
+}
+group SENDER CongasMutedS$1 {
+      member CongasBass$1
+}
+group TRANSMUTE TransControl$1 {
+      member CongasOpenS$1
+      member CongasMutedS$1
+}
+group BEAT SuperCongas$1 {
+      member TransCongasL$1
+      member TransCongasR$1
+      member TransControl$1
+}
+group RECEIVER CongasToMute$1 {
+      member CongasOpen$1
+}
+group SENDER CongasThatMute$1 {
+      member CongasMutedS$1
+      member Conga$1MTL
+      member Conga$1MTR
+}
+group MUTE CongaMute$1 {
+	fade	$2
+      member CongasToMute$1
+      member CongasThatMute$1
+}
+group SENDER CongasOTS$1 {
+      member Conga$1OTL
+      member Conga$1OTR
+}
+group MUTE CongaCrescendoMute$1 {
+	all
+	fade	0.05
+      member Conga$1OC
+      member CongasOTS$1
+      member CongasOpenS$1
+      member CongasThatMute$1
+}
+group SENDER CongasMuteBass$1 {
+      member CongasOpenS$1
+      member Conga$1OTL
+      member Conga$1OTR
+      member Conga$1MTL
+      member Conga$1MTR
+}
+group RECEIVER CongasBassR$1 {
+      member CongasBass$1
+}
+group MUTE CongaBassMute$1 {
+	fade	$2
+      member CongasBassR$1
+      member CongasMuteBass$1
+}
+END
+
+SET CONGAFADE 0.1
+USE CongaMute 2 $CONGAFADE
+group CongaCrescendoMute2 {
+      member Conga2FX
+}
+group CongasMutedS2 {
+      member Conga2FX
+}
+group CongasMuteBass2 {
+      member Conga2FX
+}
+USE CongaMute 1 $CONGAFADE
+group CongaCrescendoMute1 {
+      member Conga1FX
+      member Conga1SC
+}
+group CongasOpen1 {
+      member Conga1OSL
+      member Conga1OSR
+      member Conga1FLS
+}
+group CongasMutedS1 {
+      member Conga1CSL
+      member Conga1CSR
+      member Conga1HFL
+      member Conga1HFR
+      member Conga1FX
+}
+group CongasMuteBass1 {
+      member Conga1HFL
+      member Conga1HFR
+      member Conga1FX
+}
+
+
+
+group TRANSMUTE Triangel {
+	crossfade 0.05
+	member TriangOT
+	member TriangMT
+}
+
+group MUTE Guiro {
+	all
+	fade 0.05
+	member GuiroR
+	member GuiroLO
+}
+
+
+group TRANSMUTE Tambs {
+	crossfade 0.1
+	member TambCR
+	member TambMT
+	member TambOT
+	member TambSQL
+	member TambSQR
+}
+
+
+TEMPLATE ShakeMuteNB
+group SENDER $1ThatMute {
+	member $1SQL
+	member $1SQR
+}
+group MUTE $1ShakeMute {
+	fade	0.1
+	member $1$2
+	member $1ThatMute
+} 
+END
+TEMPLATE ShakeMute
+	USE ShakeMuteNB $1 $2
+group $1ThatMute {
+	member $1FH
+}
+END
+IF 0
+group SENDER $1ShakesThatMute {
+	member $1FH
+	member $1SQL
+	member $1SQR
+}
+group MUTE $1ShakeMute {
+	fade	0.1
+	member $1CR
+	member $1ThatMute
+} 
+END
+FI
+
+USE ShakeMuteNB SShaker CR
+USE ShakeMuteNB BShaker CR
+USE ShakeMute Shekere CR
+USE ShakeMute Caxixi FX
+USE ShakeMuteNB Maracas CR
+
+
+TEMPLATE CrescendoMute
+group SENDER $1ThatMuteCR {
+	member	$1FH
+}
+group MUTE $1MuteCR {
+	fade	$2
+	member	$1CR
+	member	$1ThatMuteCR
+}
+END
+
+USE CrescendoMute Shells 0.7
+USE CrescendoMute Bells 0.5
+USE CrescendoMute Cymbal1 0.1
+USE CrescendoMute Cymbal2 0.1
+USE CrescendoMute Crickets 0.2
+
+SET BONGOFADE 0.05
+group SENDER Bongo1ThatMute {
+	member	Bongo1OTL
+	member	Bongo1OTR
+	member	Bongo1HFL
+	member	Bongo1HFR
+	member	Bongo1FL
+}
+group MUTE Bongo1Mute {
+	fade	$BONGOFADE
+	member	Bongo1CR
+	member	Bongo1ThatMute
+}
+group SENDER Bongo2ThatMute {
+	member	Bongo2OTL
+	member	Bongo2OTR
+	member	Bongo2FL
+}
+group MUTE Bongo2Mute {
+	fade	$BONGOFADE
+	member	Bongo2CR
+	member	Bongo2ThatMute
+}
+
+group SENDER CajonThatMute {
+	member	CajonCFL
+	member	CajonGSL
+	member	CajonGSR
+	member	CajonBTL
+	member	CajonBTR
+	member	CajonSNL
+	member	CajonSNR
+	member	CajonSML
+	member	CajonSMR
+	member	CajonSSL
+	member	CajonSSR
+	member	CajonVIL
+	member	CajonVIR
+	member	CajonVVL
+	member	CajonVVR
+}			     
+group MUTE CajonMute {     
+	fade	0.1	     
+	member	CajonCRB
+	member	CajonThatMute
+}

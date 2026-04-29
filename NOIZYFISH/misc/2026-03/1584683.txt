@@ -1,0 +1,3751 @@
+"Albino" {
+combinedpreset "Albino"
+drums {
+sticks  "Drumsticks"
+kicktool "Felt"
+crmat 1
+"Kick" "Kick3"
+"Snare" "Snare3"
+"Rim" "Rim1"
+"Perc1" "Perc3"
+"Perc2" "Perc4"
+"Perc3" "Perc1"
+"Perc4" "Perc14"
+"Tom1" "Tom1_1"
+"Tom2" "Tom1_2"
+"Tom3" "Tom1_3"
+"Tom4" "Tom1_4"
+"ClosedHats" "HH10"
+"OpenHats" "OH11"
+"Claps" "Claps2"
+"Snaps" "Snap9"
+"FilterLoop1" "Filterloop1-9"
+"FilterLoop2" "Filterloop2-9"
+"Crash1" "Crash1-1"
+"Crash2" "Crash4"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-8"
+"FX2" "FX2-11"
+"FX3" "FX3-12"
+"FX4" "FX4-13"
+"Metal" "Metal1"
+"Shake" "Shake7"
+"Crescendos" "Cresc3"
+"Chromatic" "chromatic9"
+}
+knob 0 {
+name "Distortion"
+desc "Sets the level of LFO distortion"
+def 0.56
+target 0 eff mics {
+ix1 88
+}
+}
+knob 1 {
+name "Bitcrush"
+desc "Sets the level of LFO bitcrush"
+def 0.225
+target 0 eff mics {
+ix1 88
+ix3 1
+}
+}
+knob 2 {
+name "Reverb"
+desc "Sets the level of reverbs"
+def 0.2
+target 0 eff mics {
+ix1 88
+ix3 2
+}
+}
+knob 3 {
+name "Time"
+desc "Sets delay time"
+def 0.200001
+target 0 eff mics {
+ix1 90
+}
+}
+knob 4 {
+name "Feedback"
+desc "Controls feedback"
+def 0.18
+target 0 eff mics {
+ix1 90
+ix3 1
+}
+}
+knob 5 {
+name "The Dream In"
+desc "Sets the send level from The Dream channel to the Delay channel"
+target 0 send micsrel {
+ix1 88
+ix2 13
+}
+}
+knob 6 {
+name "Attack"
+desc "Controls the envelope attack time"
+target 0 padattack spads {
+together 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+knob 7 {
+name "Release"
+desc "Controls the envelope release time"
+def 1
+target 0 padrelease spads {
+together 1
+loner 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+iknob 0 {
+name "Enable Envelope"
+def 1
+target 0 envenable spads {
+together 1
+loner 1
+select 32767 0 0 0
+micselect 0 0 0 0
+}
+}
+knobgroup 0 {
+name "THE DREAM"
+kind 8
+range 0 2
+}
+knobgroup 1 {
+name "DELAY"
+kind 2
+range 3 5
+}
+knobgroup 2 {
+name "ENVELOPE"
+kind 9
+range 6 7
+}
+}
+"Anchorwood" {
+combinedpreset "Anchorwood"
+drums {
+sticks  "Drumsticks"
+kicktool "Felt"
+crmat 1
+"Kick" "Kick18"
+"Snare" "Snare18"
+"Rim" "Rim9"
+"Perc1" "Perc15"
+"Perc2" "Perc16"
+"Perc3" "Perc17"
+"Perc4" "Perc26"
+"Tom1" "Tom1Loop"
+"Tom2" "Tom2Loop"
+"Tom3" "Tom3Loop"
+"Tom4" "80tom1_4"
+"ClosedHats" "ClosedHatLoop2"
+"OpenHats" "OpenHatLoop1"
+"Claps" "Claps8"
+"Snaps" "Snap4"
+"FilterLoop1" "Filterloop1-8"
+"FilterLoop2" "Filterloop2-4"
+"Crash1" "CrashLoop1"
+"Crash2" "CrashFoley1"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-16"
+"FX2" "FX2-17"
+"FX3" "FX3-18"
+"FX4" "FX4-3"
+"Metal" "Metal1"
+"Shake" "Shake6"
+"Crescendos" "Cresc3"
+"Chromatic" "chromatic9"
+}
+knob 0 {
+name "Distortion"
+desc "Sets the level of LFO distortion"
+def 0.56
+target 0 eff mics {
+ix1 88
+}
+}
+knob 1 {
+name "Bitcrush"
+desc "Sets the level of LFO bitcrush"
+def 0.225
+target 0 eff mics {
+ix1 88
+ix3 1
+}
+}
+knob 2 {
+name "Reverb"
+desc "Sets the level of reverbs"
+def 0.2
+target 0 eff mics {
+ix1 88
+ix3 2
+}
+}
+knob 3 {
+name "Time"
+desc "Sets delay time"
+def 0.200001
+target 0 eff mics {
+ix1 90
+}
+}
+knob 4 {
+name "Feedback"
+desc "Controls feedback"
+def 0.18
+target 0 eff mics {
+ix1 90
+ix3 1
+}
+}
+knob 5 {
+name "The Dream In"
+desc "Sets the send level from The Dream channel to the Delay channel"
+target 0 send micsrel {
+ix1 88
+ix2 13
+}
+}
+knob 6 {
+name "Attack"
+desc "Controls the envelope attack time"
+target 0 padattack spads {
+together 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+knob 7 {
+name "Release"
+desc "Controls the envelope release time"
+def 1
+target 0 padrelease spads {
+together 1
+loner 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+iknob 0 {
+name "Enable Envelope"
+def 1
+target 0 envenable spads {
+together 1
+loner 1
+select 32767 0 0 0
+micselect 0 0 0 0
+}
+}
+knobgroup 0 {
+name "THE DREAM"
+kind 8
+range 0 2
+}
+knobgroup 1 {
+name "DELAY"
+kind 2
+range 3 5
+}
+knobgroup 2 {
+name "ENVELOPE"
+kind 9
+range 6 7
+}
+}
+"Bitcrush" {
+combinedpreset "Bitcrush"
+drums {
+sticks  "Drumsticks"
+kicktool "Felt"
+crmat 1
+"Kick" "KickLoop5"
+"Snare" "SnareLoop5"
+"Rim" "Rim1"
+"Perc1" "Perc14"
+"Perc2" "Perc1"
+"Perc3" "Perc11"
+"Perc4" "Perc19"
+"Tom1" "Tom1_1"
+"Tom2" "Tom1_2"
+"Tom3" "Tom1_3"
+"Tom4" "Tom1_4"
+"ClosedHats" "HH11"
+"OpenHats" "OH11"
+"Claps" "Claps3"
+"Snaps" "Snap1"
+"FilterLoop1" "Filterloop1-1"
+"FilterLoop2" "Filterloop2-3"
+"Crash1" "Crash1-1"
+"Crash2" "Crash4"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-3"
+"FX2" "FX2-6"
+"FX3" "FX3-7"
+"FX4" "FX4-10"
+"Metal" "Metal1"
+"Shake" "Shake8"
+"Crescendos" "Cresc4"
+"Chromatic" "chromatic5"
+}
+knob 0 {
+name "Distortion"
+desc "Sets the level of LFO distortion"
+def 0.712871
+target 0 eff mics {
+ix1 88
+}
+}
+knob 1 {
+name "Bitcrush"
+desc "Sets the level of LFO bitcrush"
+def 0.524752
+target 0 eff mics {
+ix1 88
+ix3 1
+}
+}
+knob 2 {
+name "Reverb"
+desc "Sets the level of reverbs"
+target 0 eff mics {
+ix1 88
+ix3 2
+}
+}
+knob 3 {
+name "Time"
+desc "Sets delay time"
+def 0.257426
+target 0 eff mics {
+ix1 90
+}
+}
+knob 4 {
+name "Feedback"
+desc "Controls feedback"
+def 0.39604
+target 0 eff mics {
+ix1 90
+ix3 1
+}
+}
+knob 5 {
+name "The Dream In"
+desc "Sets the send level from The Dream channel to the Delay channel"
+target 0 send micsrel {
+ix1 88
+ix2 13
+}
+}
+knob 6 {
+name "Attack"
+desc "Controls the envelope attack time"
+target 0 padattack spads {
+together 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+knob 7 {
+name "Release"
+desc "Controls the envelope release time"
+def 0.8
+target 0 padrelease spads {
+together 1
+loner 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+iknob 0 {
+name "Enable Envelope"
+def 1
+target 0 envenable spads {
+together 1
+loner 1
+select 32767 0 0 0
+micselect 0 0 0 0
+}
+}
+knobgroup 0 {
+name "THE DREAM"
+kind 8
+range 0 2
+}
+knobgroup 1 {
+name "DELAY"
+kind 2
+range 3 5
+}
+knobgroup 2 {
+name "ENVELOPE"
+kind 9
+range 6 7
+}
+}
+"Blige" {
+combinedpreset "Blige"
+drums {
+sticks  "Drumsticks"
+kicktool "Felt"
+crmat 1
+"Kick" "KickLoop7"
+"Snare" "SnareLoop7"
+"Rim" "Rim4"
+"Perc1" "Perc25"
+"Perc2" "Perc26"
+"Perc3" "Perc22"
+"Perc4" "Perc24"
+"Tom1" "Tom03_1"
+"Tom2" "Tom03_2"
+"Tom3" "Tom03_3"
+"Tom4" "Tom03_4"
+"ClosedHats" "ClosedHatLoop2"
+"OpenHats" "OpenHatLoop4"
+"Claps" "Claps11"
+"Snaps" "Snap9"
+"FilterLoop1" "Filterloop1-7"
+"FilterLoop2" "Filterloop2-1"
+"Crash1" "FoleyCrash1"
+"Crash2" "CrashFoley1"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-9"
+"FX2" "FX2-2"
+"FX3" "FX3-12"
+"FX4" "FX4-6"
+"Metal" "Metal1"
+"Shake" "Shake10"
+"Crescendos" "Cresc4"
+"Chromatic" "chromatic1"
+}
+knob 0 {
+name "Distortion"
+desc "Sets the level of LFO distortion"
+def 0.712871
+target 0 eff mics {
+ix1 88
+}
+}
+knob 1 {
+name "Bitcrush"
+desc "Sets the level of LFO bitcrush"
+def 0.524752
+target 0 eff mics {
+ix1 88
+ix3 1
+}
+}
+knob 2 {
+name "Reverb"
+desc "Sets the level of reverbs"
+target 0 eff mics {
+ix1 88
+ix3 2
+}
+}
+knob 3 {
+name "Time"
+desc "Sets delay time"
+def 0.257426
+target 0 eff mics {
+ix1 90
+}
+}
+knob 4 {
+name "Feedback"
+desc "Controls feedback"
+def 0.39604
+target 0 eff mics {
+ix1 90
+ix3 1
+}
+}
+knob 5 {
+name "The Dream In"
+desc "Sets the send level from The Dream channel to the Delay channel"
+target 0 send micsrel {
+ix1 88
+ix2 13
+}
+}
+knob 6 {
+name "Attack"
+desc "Controls the envelope attack time"
+target 0 padattack spads {
+together 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+knob 7 {
+name "Release"
+desc "Controls the envelope release time"
+def 0.8
+target 0 padrelease spads {
+together 1
+loner 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+iknob 0 {
+name "Enable Envelope"
+def 1
+target 0 envenable spads {
+together 1
+loner 1
+select 32767 0 0 0
+micselect 0 0 0 0
+}
+}
+knobgroup 0 {
+name "THE DREAM"
+kind 8
+range 0 2
+}
+knobgroup 1 {
+name "DELAY"
+kind 2
+range 3 5
+}
+knobgroup 2 {
+name "ENVELOPE"
+kind 9
+range 6 7
+}
+}
+"Body" {
+combinedpreset "Body"
+drums {
+sticks  "Drumsticks"
+kicktool "Felt"
+crmat 1
+"Kick" "KickLoop3"
+"Snare" "SnareLoop3"
+"Rim" "Rim8"
+"Perc1" "Perc28"
+"Perc2" "Perc16"
+"Perc3" "Perc17"
+"Perc4" "Perc18"
+"Tom1" "Tom5_1"
+"Tom2" ""
+"Tom3" "Tom5_3"
+"Tom4" ""
+"ClosedHats" "HH11"
+"OpenHats" "OH11"
+"Claps" "Claps2"
+"Snaps" "Snap9"
+"FilterLoop1" "Filterloop1-9"
+"FilterLoop2" "Filterloop2-13"
+"Crash1" "Crash1"
+"Crash2" "Crash2"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-3"
+"FX2" "FX2-6"
+"FX3" "FX3-7"
+"FX4" "FX4-10"
+"Metal" "Metal1"
+"Shake" "Shake7"
+"Crescendos" "Cresc4"
+"Chromatic" "chromatic7"
+}
+knob 0 {
+name "Distortion"
+desc "Sets the level of LFO distortion"
+def 0.712871
+target 0 eff mics {
+ix1 88
+}
+}
+knob 1 {
+name "Bitcrush"
+desc "Sets the level of LFO bitcrush"
+def 0.524752
+target 0 eff mics {
+ix1 88
+ix3 1
+}
+}
+knob 2 {
+name "Reverb"
+desc "Sets the level of reverbs"
+target 0 eff mics {
+ix1 88
+ix3 2
+}
+}
+knob 3 {
+name "Time"
+desc "Sets delay time"
+def 0.257426
+target 0 eff mics {
+ix1 90
+}
+}
+knob 4 {
+name "Feedback"
+desc "Controls feedback"
+def 0.39604
+target 0 eff mics {
+ix1 90
+ix3 1
+}
+}
+knob 5 {
+name "The Dream In"
+desc "Sets the send level from The Dream channel to the Delay channel"
+target 0 send micsrel {
+ix1 88
+ix2 13
+}
+}
+knob 6 {
+name "Attack"
+desc "Controls the envelope attack time"
+target 0 padattack spads {
+together 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+knob 7 {
+name "Release"
+desc "Controls the envelope release time"
+def 1
+target 0 padrelease spads {
+together 1
+loner 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+iknob 0 {
+name "Enable Envelope"
+def 1
+target 0 envenable spads {
+together 1
+loner 1
+select 32767 0 0 0
+micselect 0 0 0 0
+}
+}
+knobgroup 0 {
+name "THE DREAM"
+kind 8
+range 0 2
+}
+knobgroup 1 {
+name "DELAY"
+kind 2
+range 3 5
+}
+knobgroup 2 {
+name "ENVELOPE"
+kind 9
+range 6 7
+}
+}
+"Deep" {
+combinedpreset "Deep"
+drums {
+sticks  "Drumsticks"
+kicktool "Felt"
+crmat 1
+"Kick" "Kick4"
+"Snare" "Snare4"
+"Rim" "Rim6"
+"Perc1" "Perc22"
+"Perc2" "Perc23"
+"Perc3" "Perc24"
+"Perc4" "Perc25"
+"Tom1" "Tom95"
+"Tom2" ""
+"Tom3" "Tom95_2"
+"Tom4" ""
+"ClosedHats" "HH12"
+"OpenHats" "OH12"
+"Claps" "Claps5"
+"Snaps" "Snap7"
+"FilterLoop1" "Filterloop1-10"
+"FilterLoop2" "Filterloop2-8"
+"Crash1" "FoleyCrash1"
+"Crash2" "Crash3"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-14"
+"FX2" "FX2-1"
+"FX3" "FX3-2"
+"FX4" "FX4-4"
+"Metal" "Metal1"
+"Shake" "Shake3"
+"Crescendos" "Cresc5"
+"Chromatic" "chromatic8"
+}
+knob 0 {
+name "Distortion"
+desc "Sets the level of LFO distortion"
+def 0.56
+target 0 eff mics {
+ix1 88
+}
+}
+knob 1 {
+name "Bitcrush"
+desc "Sets the level of LFO bitcrush"
+def 0.225
+target 0 eff mics {
+ix1 88
+ix3 1
+}
+}
+knob 2 {
+name "Reverb"
+desc "Sets the level of reverbs"
+def 0.2
+target 0 eff mics {
+ix1 88
+ix3 2
+}
+}
+knob 3 {
+name "Time"
+desc "Sets delay time"
+def 0.200001
+target 0 eff mics {
+ix1 90
+}
+}
+knob 4 {
+name "Feedback"
+desc "Controls feedback"
+def 0.18
+target 0 eff mics {
+ix1 90
+ix3 1
+}
+}
+knob 5 {
+name "The Dream In"
+desc "Sets the send level from The Dream channel to the Delay channel"
+target 0 send micsrel {
+ix1 88
+ix2 13
+}
+}
+knob 6 {
+name "Attack"
+desc "Controls the envelope attack time"
+target 0 padattack spads {
+together 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+knob 7 {
+name "Release"
+desc "Controls the envelope release time"
+def 1
+target 0 padrelease spads {
+together 1
+loner 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+iknob 0 {
+name "Enable Envelope"
+def 1
+target 0 envenable spads {
+together 1
+loner 1
+select 32767 0 0 0
+micselect 0 0 0 0
+}
+}
+knobgroup 0 {
+name "THE DREAM"
+kind 8
+range 0 2
+}
+knobgroup 1 {
+name "DELAY"
+kind 2
+range 3 5
+}
+knobgroup 2 {
+name "ENVELOPE"
+kind 9
+range 6 7
+}
+}
+"Dirt" {
+combinedpreset "Dirt"
+drums {
+sticks  "Drumsticks"
+kicktool "Felt"
+crmat 1
+"Kick" "Kick1"
+"Snare" "Snare1"
+"Rim" "Rim6"
+"Perc1" "Perc21"
+"Perc2" "Perc13"
+"Perc3" "Perc12"
+"Perc4" "Perc12"
+"Tom1" "Tom03_1"
+"Tom2" "Tom03_2"
+"Tom3" "Tom03_3"
+"Tom4" "Tom03_4"
+"ClosedHats" "HH10"
+"OpenHats" "OH11"
+"Claps" "Claps6"
+"Snaps" "Snap1"
+"FilterLoop1" "Filterloop1-11"
+"FilterLoop2" "Filterloop2-13"
+"Crash1" "FoleyCrash1"
+"Crash2" "CrashFoley1"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-18"
+"FX2" "FX2-16"
+"FX3" "FX3-17"
+"FX4" "FX4-16"
+"Metal" "Metal1"
+"Shake" "Shake10"
+"Crescendos" "Cresc5"
+"Chromatic" "chromatic1"
+}
+knob 0 {
+name "Distortion"
+desc "Sets the level of LFO distortion"
+def 0.56
+target 0 eff mics {
+ix1 88
+}
+}
+knob 1 {
+name "Bitcrush"
+desc "Sets the level of LFO bitcrush"
+def 0.225
+target 0 eff mics {
+ix1 88
+ix3 1
+}
+}
+knob 2 {
+name "Reverb"
+desc "Sets the level of reverbs"
+def 0.2
+target 0 eff mics {
+ix1 88
+ix3 2
+}
+}
+knob 3 {
+name "Time"
+desc "Sets delay time"
+def 0.200001
+target 0 eff mics {
+ix1 90
+}
+}
+knob 4 {
+name "Feedback"
+desc "Controls feedback"
+def 0.18
+target 0 eff mics {
+ix1 90
+ix3 1
+}
+}
+knob 5 {
+name "The Dream In"
+desc "Sets the send level from The Dream channel to the Delay channel"
+target 0 send micsrel {
+ix1 88
+ix2 13
+}
+}
+knob 6 {
+name "Attack"
+desc "Controls the envelope attack time"
+target 0 padattack spads {
+together 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+knob 7 {
+name "Release"
+desc "Controls the envelope release time"
+def 1
+target 0 padrelease spads {
+together 1
+loner 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+iknob 0 {
+name "Enable Envelope"
+def 1
+target 0 envenable spads {
+together 1
+loner 1
+select 32767 0 0 0
+micselect 0 0 0 0
+}
+}
+knobgroup 0 {
+name "THE DREAM"
+kind 8
+range 0 2
+}
+knobgroup 1 {
+name "DELAY"
+kind 2
+range 3 5
+}
+knobgroup 2 {
+name "ENVELOPE"
+kind 9
+range 6 7
+}
+}
+"Dream-Hop" {
+combinedpreset "Dream-Hop"
+drums {
+sticks  "Drumsticks"
+kicktool "Felt"
+crmat 1
+"Kick" "Kick13"
+"Snare" "Snare13"
+"Rim" "Rim1"
+"Perc1" "Perc3"
+"Perc2" "Perc4"
+"Perc3" "Perc1"
+"Perc4" "Perc14"
+"Tom1" "Tom2_1"
+"Tom2" "Tom2_2"
+"Tom3" "Tom2_3"
+"Tom4" "Tom2_4"
+"ClosedHats" "HH11"
+"OpenHats" "OH11"
+"Claps" "Claps3"
+"Snaps" "Snap9"
+"FilterLoop1" "Filterloop1-8"
+"FilterLoop2" "Filterloop2-12"
+"Crash1" "CrashLoop1"
+"Crash2" "CrashFoley1"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-5"
+"FX2" "FX2-4"
+"FX3" "FX3-14"
+"FX4" "FX4-8"
+"Metal" "Metal1"
+"Shake" "Shake6"
+"Crescendos" "Cresc6"
+"Chromatic" "chromatic9"
+}
+knob 0 {
+name "Distortion"
+desc "Sets the level of LFO distortion"
+def 0.712871
+target 0 eff mics {
+ix1 88
+}
+}
+knob 1 {
+name "Bitcrush"
+desc "Sets the level of LFO bitcrush"
+def 0.524752
+target 0 eff mics {
+ix1 88
+ix3 1
+}
+}
+knob 2 {
+name "Reverb"
+desc "Sets the level of reverbs"
+target 0 eff mics {
+ix1 88
+ix3 2
+}
+}
+knob 3 {
+name "Time"
+desc "Sets delay time"
+def 0.257426
+target 0 eff mics {
+ix1 90
+}
+}
+knob 4 {
+name "Feedback"
+desc "Controls feedback"
+def 0.39604
+target 0 eff mics {
+ix1 90
+ix3 1
+}
+}
+knob 5 {
+name "The Dream In"
+desc "Sets the send level from The Dream channel to the Delay channel"
+target 0 send micsrel {
+ix1 88
+ix2 13
+}
+}
+knob 6 {
+name "Attack"
+desc "Controls the envelope attack time"
+target 0 padattack spads {
+together 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+knob 7 {
+name "Release"
+desc "Controls the envelope release time"
+def 1
+target 0 padrelease spads {
+together 1
+loner 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+iknob 0 {
+name "Enable Envelope"
+def 1
+target 0 envenable spads {
+together 1
+loner 1
+select 32767 0 0 0
+micselect 0 0 0 0
+}
+}
+knobgroup 0 {
+name "THE DREAM"
+kind 8
+range 0 2
+}
+knobgroup 1 {
+name "DELAY"
+kind 2
+range 3 5
+}
+knobgroup 2 {
+name "ENVELOPE"
+kind 9
+range 6 7
+}
+}
+"Garage 1" {
+combinedpreset "Garage 1"
+drums {
+sticks  "Drumsticks"
+kicktool "Felt"
+crmat 1
+"Kick" "KickLoop2"
+"Snare" "SnareLoop2"
+"Rim" "Rim2"
+"Perc1" "Perc6"
+"Perc2" "Perc7"
+"Perc3" "Perc8"
+"Perc4" "Perc9"
+"Tom1" "Tom03_1"
+"Tom2" "Tom03_2"
+"Tom3" "Tom03_3"
+"Tom4" "Tom03_4"
+"ClosedHats" "ClosedHats2"
+"OpenHats" "OH11"
+"Claps" "Claps4"
+"Snaps" "Snap6"
+"FilterLoop1" "Filterloop1-13"
+"FilterLoop2" "Filterloop2-2"
+"Crash1" "Crash1"
+"Crash2" "Crash2"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-3"
+"FX2" "FX2-6"
+"FX3" "FX3-7"
+"FX4" "FX4-10"
+"Metal" "Metal1"
+"Shake" "Shake2"
+"Crescendos" "Cresc4"
+"Chromatic" "chromatic3"
+}
+knob 0 {
+name "Distortion"
+desc "Sets the level of LFO distortion"
+def 0.712871
+target 0 eff mics {
+ix1 88
+}
+}
+knob 1 {
+name "Bitcrush"
+desc "Sets the level of LFO bitcrush"
+def 0.524752
+target 0 eff mics {
+ix1 88
+ix3 1
+}
+}
+knob 2 {
+name "Reverb"
+desc "Sets the level of reverbs"
+target 0 eff mics {
+ix1 88
+ix3 2
+}
+}
+knob 3 {
+name "Time"
+desc "Sets delay time"
+def 0.257426
+target 0 eff mics {
+ix1 90
+}
+}
+knob 4 {
+name "Feedback"
+desc "Controls feedback"
+def 0.39604
+target 0 eff mics {
+ix1 90
+ix3 1
+}
+}
+knob 5 {
+name "The Dream In"
+desc "Sets the send level from The Dream channel to the Delay channel"
+target 0 send micsrel {
+ix1 88
+ix2 13
+}
+}
+knob 6 {
+name "Attack"
+desc "Controls the envelope attack time"
+target 0 padattack spads {
+together 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+knob 7 {
+name "Release"
+desc "Controls the envelope release time"
+def 1
+target 0 padrelease spads {
+together 1
+loner 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+iknob 0 {
+name "Enable Envelope"
+def 1
+target 0 envenable spads {
+together 1
+loner 1
+select 32767 0 0 0
+micselect 0 0 0 0
+}
+}
+knobgroup 0 {
+name "THE DREAM"
+kind 8
+range 0 2
+}
+knobgroup 1 {
+name "DELAY"
+kind 2
+range 3 5
+}
+knobgroup 2 {
+name "ENVELOPE"
+kind 9
+range 6 7
+}
+}
+"Garage 2" {
+combinedpreset "Garage 2"
+drums {
+sticks  "Drumsticks"
+kicktool "Felt"
+crmat 1
+"Kick" "KickLoop4"
+"Snare" "SnareLoop4"
+"Rim" "Rim8"
+"Perc1" "Perc28"
+"Perc2" "Perc16"
+"Perc3" "Perc17"
+"Perc4" "Perc18"
+"Tom1" "Tom5_1"
+"Tom2" ""
+"Tom3" "Tom5_3"
+"Tom4" ""
+"ClosedHats" "HH11"
+"OpenHats" "OH11"
+"Claps" "Claps2"
+"Snaps" "Snap9"
+"FilterLoop1" "Filterloop1-9"
+"FilterLoop2" "Filterloop2-13"
+"Crash1" "Crash1"
+"Crash2" "Crash2"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-3"
+"FX2" "FX2-6"
+"FX3" "FX3-7"
+"FX4" "FX4-10"
+"Metal" "Metal1"
+"Shake" "Shake7"
+"Crescendos" "Cresc4"
+"Chromatic" "chromatic3"
+}
+knob 0 {
+name "Distortion"
+desc "Sets the level of LFO distortion"
+def 0.712871
+target 0 eff mics {
+ix1 88
+}
+}
+knob 1 {
+name "Bitcrush"
+desc "Sets the level of LFO bitcrush"
+def 0.524752
+target 0 eff mics {
+ix1 88
+ix3 1
+}
+}
+knob 2 {
+name "Reverb"
+desc "Sets the level of reverbs"
+target 0 eff mics {
+ix1 88
+ix3 2
+}
+}
+knob 3 {
+name "Time"
+desc "Sets delay time"
+def 0.257426
+target 0 eff mics {
+ix1 90
+}
+}
+knob 4 {
+name "Feedback"
+desc "Controls feedback"
+def 0.39604
+target 0 eff mics {
+ix1 90
+ix3 1
+}
+}
+knob 5 {
+name "The Dream In"
+desc "Sets the send level from The Dream channel to the Delay channel"
+target 0 send micsrel {
+ix1 88
+ix2 13
+}
+}
+knob 6 {
+name "Attack"
+desc "Controls the envelope attack time"
+target 0 padattack spads {
+together 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+knob 7 {
+name "Release"
+desc "Controls the envelope release time"
+def 0.8
+target 0 padrelease spads {
+together 1
+loner 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+iknob 0 {
+name "Enable Envelope"
+def 1
+target 0 envenable spads {
+together 1
+loner 1
+select 32767 0 0 0
+micselect 0 0 0 0
+}
+}
+knobgroup 0 {
+name "THE DREAM"
+kind 8
+range 0 2
+}
+knobgroup 1 {
+name "DELAY"
+kind 2
+range 3 5
+}
+knobgroup 2 {
+name "ENVELOPE"
+kind 9
+range 6 7
+}
+}
+"Gretsch Mute" {
+combinedpreset "Gretsch Mute"
+drums {
+sticks  "Drumsticks"
+kicktool "Felt"
+crmat 1
+"Kick" "Kick10"
+"Snare" "Snare10"
+"Rim" "Rim8"
+"Perc1" "Perc22"
+"Perc2" "Perc23"
+"Perc3" "Perc25"
+"Perc4" "Perc24"
+"Tom1" "Tom5_1"
+"Tom2" ""
+"Tom3" "Tom5_3"
+"Tom4" ""
+"ClosedHats" "ClosedHatLoop3"
+"OpenHats" "OpenHatLoop1"
+"Claps" "Claps7"
+"Snaps" "Snap1"
+"FilterLoop1" "Filterloop1-4"
+"FilterLoop2" "Filterloop2-5"
+"Crash1" "Crash1"
+"Crash2" "Crash2"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-3"
+"FX2" "FX2-4"
+"FX3" "FX3-6"
+"FX4" "FX4-13"
+"Metal" "Metal1"
+"Shake" "Shake7"
+"Crescendos" "Cresc2"
+"Chromatic" "chromatic9"
+}
+knob 0 {
+name "Distortion"
+desc "Sets the level of LFO distortion"
+def 0.56
+target 0 eff mics {
+ix1 88
+}
+}
+knob 1 {
+name "Bitcrush"
+desc "Sets the level of LFO bitcrush"
+def 0.225
+target 0 eff mics {
+ix1 88
+ix3 1
+}
+}
+knob 2 {
+name "Reverb"
+desc "Sets the level of reverbs"
+def 0.2
+target 0 eff mics {
+ix1 88
+ix3 2
+}
+}
+knob 3 {
+name "Time"
+desc "Sets delay time"
+def 0.200001
+target 0 eff mics {
+ix1 90
+}
+}
+knob 4 {
+name "Feedback"
+desc "Controls feedback"
+def 0.18
+target 0 eff mics {
+ix1 90
+ix3 1
+}
+}
+knob 5 {
+name "The Dream In"
+desc "Sets the send level from The Dream channel to the Delay channel"
+target 0 send micsrel {
+ix1 88
+ix2 13
+}
+}
+knob 6 {
+name "Attack"
+desc "Controls the envelope attack time"
+target 0 padattack spads {
+together 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+knob 7 {
+name "Release"
+desc "Controls the envelope release time"
+def 1
+target 0 padrelease spads {
+together 1
+loner 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+iknob 0 {
+name "Enable Envelope"
+def 1
+target 0 envenable spads {
+together 1
+loner 1
+select 32767 0 0 0
+micselect 0 0 0 0
+}
+}
+knobgroup 0 {
+name "THE DREAM"
+kind 8
+range 0 2
+}
+knobgroup 1 {
+name "DELAY"
+kind 2
+range 3 5
+}
+knobgroup 2 {
+name "ENVELOPE"
+kind 9
+range 6 7
+}
+}
+"Gretsch Open" {
+combinedpreset "Gretsch Open"
+drums {
+sticks  "Drumsticks"
+kicktool "Felt"
+crmat 1
+"Kick" "Kick11"
+"Snare" "Snare11"
+"Rim" "Rim8"
+"Perc1" "Perc22"
+"Perc2" "Perc23"
+"Perc3" "Perc25"
+"Perc4" "Perc24"
+"Tom1" "Tom3_1"
+"Tom2" ""
+"Tom3" "Tom4_3"
+"Tom4" ""
+"ClosedHats" "ClosedHatLoop3"
+"OpenHats" "OpenHatLoop1"
+"Claps" "Claps6"
+"Snaps" "Snap2"
+"FilterLoop1" "Filterloop1-10"
+"FilterLoop2" "Filterloop2-8"
+"Crash1" "Crash1"
+"Crash2" "Crash2"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-3"
+"FX2" "FX2-10"
+"FX3" "FX3-6"
+"FX4" "FX4-13"
+"Metal" "Metal1"
+"Shake" "Shake5"
+"Crescendos" "Cresc2"
+"Chromatic" "chromatic9"
+}
+knob 0 {
+name "Distortion"
+desc "Sets the level of LFO distortion"
+def 0.56
+target 0 eff mics {
+ix1 88
+}
+}
+knob 1 {
+name "Bitcrush"
+desc "Sets the level of LFO bitcrush"
+def 0.225
+target 0 eff mics {
+ix1 88
+ix3 1
+}
+}
+knob 2 {
+name "Reverb"
+desc "Sets the level of reverbs"
+def 0.2
+target 0 eff mics {
+ix1 88
+ix3 2
+}
+}
+knob 3 {
+name "Time"
+desc "Sets delay time"
+def 0.200001
+target 0 eff mics {
+ix1 90
+}
+}
+knob 4 {
+name "Feedback"
+desc "Controls feedback"
+def 0.18
+target 0 eff mics {
+ix1 90
+ix3 1
+}
+}
+knob 5 {
+name "The Dream In"
+desc "Sets the send level from The Dream channel to the Delay channel"
+target 0 send micsrel {
+ix1 88
+ix2 13
+}
+}
+knob 6 {
+name "Attack"
+desc "Controls the envelope attack time"
+target 0 padattack spads {
+together 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+knob 7 {
+name "Release"
+desc "Controls the envelope release time"
+def 1
+target 0 padrelease spads {
+together 1
+loner 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+iknob 0 {
+name "Enable Envelope"
+def 1
+target 0 envenable spads {
+together 1
+loner 1
+select 32767 0 0 0
+micselect 0 0 0 0
+}
+}
+knobgroup 0 {
+name "THE DREAM"
+kind 8
+range 0 2
+}
+knobgroup 1 {
+name "DELAY"
+kind 2
+range 3 5
+}
+knobgroup 2 {
+name "ENVELOPE"
+kind 9
+range 6 7
+}
+}
+"Gretsch Regular" {
+combinedpreset "Gretsch Regular"
+drums {
+sticks  "Drumsticks"
+kicktool "Felt"
+crmat 1
+"Kick" "Kick9"
+"Snare" "Snare9"
+"Rim" "Rim8"
+"Perc1" "Perc22"
+"Perc2" "Perc23"
+"Perc3" "Perc25"
+"Perc4" "Perc24"
+"Tom1" "Tom3_1"
+"Tom2" ""
+"Tom3" "Tom4_3"
+"Tom4" ""
+"ClosedHats" "ClosedHatLoop3"
+"OpenHats" "OpenHatLoop1"
+"Claps" "Claps7"
+"Snaps" "Snap1"
+"FilterLoop1" "Filterloop1-4"
+"FilterLoop2" "Filterloop2-5"
+"Crash1" "Crash1"
+"Crash2" "Crash2"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-3"
+"FX2" "FX2-4"
+"FX3" "FX3-6"
+"FX4" "FX4-13"
+"Metal" "Metal1"
+"Shake" "Shake7"
+"Crescendos" "Cresc2"
+"Chromatic" "chromatic1"
+}
+knob 0 {
+name "Distortion"
+desc "Sets the level of LFO distortion"
+def 0.56
+target 0 eff mics {
+ix1 88
+}
+}
+knob 1 {
+name "Bitcrush"
+desc "Sets the level of LFO bitcrush"
+def 0.225
+target 0 eff mics {
+ix1 88
+ix3 1
+}
+}
+knob 2 {
+name "Reverb"
+desc "Sets the level of reverbs"
+def 0.2
+target 0 eff mics {
+ix1 88
+ix3 2
+}
+}
+knob 3 {
+name "Time"
+desc "Sets delay time"
+def 0.200001
+target 0 eff mics {
+ix1 90
+}
+}
+knob 4 {
+name "Feedback"
+desc "Controls feedback"
+def 0.18
+target 0 eff mics {
+ix1 90
+ix3 1
+}
+}
+knob 5 {
+name "The Dream In"
+desc "Sets the send level from The Dream channel to the Delay channel"
+target 0 send micsrel {
+ix1 88
+ix2 13
+}
+}
+knob 6 {
+name "Attack"
+desc "Controls the envelope attack time"
+target 0 padattack spads {
+together 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+knob 7 {
+name "Release"
+desc "Controls the envelope release time"
+def 1
+target 0 padrelease spads {
+together 1
+loner 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+iknob 0 {
+name "Enable Envelope"
+def 1
+target 0 envenable spads {
+together 1
+loner 1
+select 32767 0 0 0
+micselect 0 0 0 0
+}
+}
+knobgroup 0 {
+name "THE DREAM"
+kind 8
+range 0 2
+}
+knobgroup 1 {
+name "DELAY"
+kind 2
+range 3 5
+}
+knobgroup 2 {
+name "ENVELOPE"
+kind 9
+range 6 7
+}
+}
+"Happy" {
+combinedpreset "Happy"
+drums {
+sticks  "Drumsticks"
+kicktool "Felt"
+crmat 1
+"Kick" "KickLoop1"
+"Snare" "SnareLoop1"
+"Rim" "Rim7"
+"Perc1" "Perc19"
+"Perc2" "Perc14"
+"Perc3" "Perc7"
+"Perc4" "Perc28"
+"Tom1" "Tom03_1"
+"Tom2" "Tom03_2"
+"Tom3" "Tom03_3"
+"Tom4" "Tom03_4"
+"ClosedHats" "ClosedHatsMorg"
+"OpenHats" "OpenHatLoop2"
+"Claps" "Claps4"
+"Snaps" "Snap4"
+"FilterLoop1" "Filterloop1-10"
+"FilterLoop2" "Filterloop2-4"
+"Crash1" "Crash1"
+"Crash2" "Crash4"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-16"
+"FX2" "FX2-17"
+"FX3" "FX3-18"
+"FX4" "FX4-1"
+"Metal" "Metal1"
+"Shake" "Shake10"
+"Crescendos" "Cresc4"
+"Chromatic" "chromatic8"
+}
+knob 0 {
+name "Distortion"
+desc "Sets the level of LFO distortion"
+def 0.712871
+target 0 eff mics {
+ix1 88
+}
+}
+knob 1 {
+name "Bitcrush"
+desc "Sets the level of LFO bitcrush"
+def 0.524752
+target 0 eff mics {
+ix1 88
+ix3 1
+}
+}
+knob 2 {
+name "Reverb"
+desc "Sets the level of reverbs"
+target 0 eff mics {
+ix1 88
+ix3 2
+}
+}
+knob 3 {
+name "Time"
+desc "Sets delay time"
+def 0.257426
+target 0 eff mics {
+ix1 90
+}
+}
+knob 4 {
+name "Feedback"
+desc "Controls feedback"
+def 0.39604
+target 0 eff mics {
+ix1 90
+ix3 1
+}
+}
+knob 5 {
+name "The Dream In"
+desc "Sets the send level from The Dream channel to the Delay channel"
+target 0 send micsrel {
+ix1 88
+ix2 13
+}
+}
+knob 6 {
+name "Attack"
+desc "Controls the envelope attack time"
+target 0 padattack spads {
+together 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+knob 7 {
+name "Release"
+desc "Controls the envelope release time"
+def 1
+target 0 padrelease spads {
+together 1
+loner 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+iknob 0 {
+name "Enable Envelope"
+def 1
+target 0 envenable spads {
+together 1
+loner 1
+select 32767 0 0 0
+micselect 0 0 0 0
+}
+}
+knobgroup 0 {
+name "THE DREAM"
+kind 8
+range 0 2
+}
+knobgroup 1 {
+name "DELAY"
+kind 2
+range 3 5
+}
+knobgroup 2 {
+name "ENVELOPE"
+kind 9
+range 6 7
+}
+}
+"Hard" {
+combinedpreset "Hard"
+drums {
+sticks  "Drumsticks"
+kicktool "Felt"
+crmat 1
+"Kick" "Kick5"
+"Snare" "Snare5"
+"Rim" "Rim2"
+"Perc1" "Perc20"
+"Perc2" "Perc28"
+"Perc3" "Perc8"
+"Perc4" "Perc15"
+"Tom1" "80tom1_1"
+"Tom2" "80tom1_2"
+"Tom3" "80tom1_3"
+"Tom4" "80tom1_4"
+"ClosedHats" "ClosedHatLoop3"
+"OpenHats" "OpenHatLoop2"
+"Claps" "Claps4"
+"Snaps" "Snap2"
+"FilterLoop1" "Filterloop1-7"
+"FilterLoop2" "Filterloop2-1"
+"Crash1" "Crash1"
+"Crash2" "Crash2"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-2"
+"FX2" "FX2-14"
+"FX3" "FX3-16"
+"FX4" "FX4-17"
+"Metal" "Metal1"
+"Shake" "Shake10"
+"Crescendos" "Cresc2"
+"Chromatic" "chromatic1"
+}
+knob 0 {
+name "Distortion"
+desc "Sets the level of LFO distortion"
+def 0.56
+target 0 eff mics {
+ix1 88
+}
+}
+knob 1 {
+name "Bitcrush"
+desc "Sets the level of LFO bitcrush"
+def 0.225
+target 0 eff mics {
+ix1 88
+ix3 1
+}
+}
+knob 2 {
+name "Reverb"
+desc "Sets the level of reverbs"
+def 0.2
+target 0 eff mics {
+ix1 88
+ix3 2
+}
+}
+knob 3 {
+name "Time"
+desc "Sets delay time"
+def 0.200001
+target 0 eff mics {
+ix1 90
+}
+}
+knob 4 {
+name "Feedback"
+desc "Controls feedback"
+def 0.18
+target 0 eff mics {
+ix1 90
+ix3 1
+}
+}
+knob 5 {
+name "The Dream In"
+desc "Sets the send level from The Dream channel to the Delay channel"
+target 0 send micsrel {
+ix1 88
+ix2 13
+}
+}
+knob 6 {
+name "Attack"
+desc "Controls the envelope attack time"
+target 0 padattack spads {
+together 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+knob 7 {
+name "Release"
+desc "Controls the envelope release time"
+def 1
+target 0 padrelease spads {
+together 1
+loner 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+iknob 0 {
+name "Enable Envelope"
+def 1
+target 0 envenable spads {
+together 1
+loner 1
+select 32767 0 0 0
+micselect 0 0 0 0
+}
+}
+knobgroup 0 {
+name "THE DREAM"
+kind 8
+range 0 2
+}
+knobgroup 1 {
+name "DELAY"
+kind 2
+range 3 5
+}
+knobgroup 2 {
+name "ENVELOPE"
+kind 9
+range 6 7
+}
+}
+"Hybrid" {
+combinedpreset "Hybrid"
+drums {
+sticks  "Drumsticks"
+kicktool "Felt"
+crmat 1
+"Kick" "Kick12"
+"Snare" "Snare12"
+"Rim" "Rim1"
+"Perc1" "Perc3"
+"Perc2" "Perc4"
+"Perc3" "Perc1"
+"Perc4" "Perc14"
+"Tom1" "Tom1Loop"
+"Tom2" "Tom2Loop"
+"Tom3" "Tom3Loop"
+"Tom4" ""
+"ClosedHats" "ClosedHats3"
+"OpenHats" "OpenHat1"
+"Claps" "Claps9"
+"Snaps" "Snap9"
+"FilterLoop1" "Filterloop1-4"
+"FilterLoop2" "Filterloop2-7"
+"Crash1" "FoleyCrash1"
+"Crash2" "CrashFoley1"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-9"
+"FX2" "FX2-13"
+"FX3" "FX3-14"
+"FX4" "FX4-16"
+"Metal" "Metal1"
+"Shake" "Shake2"
+"Crescendos" "Cresc6"
+"Chromatic" "chromatic1"
+}
+knob 0 {
+name "Distortion"
+desc "Sets the level of LFO distortion"
+def 0.712871
+target 0 eff mics {
+ix1 88
+}
+}
+knob 1 {
+name "Bitcrush"
+desc "Sets the level of LFO bitcrush"
+def 0.524752
+target 0 eff mics {
+ix1 88
+ix3 1
+}
+}
+knob 2 {
+name "Reverb"
+desc "Sets the level of reverbs"
+target 0 eff mics {
+ix1 88
+ix3 2
+}
+}
+knob 3 {
+name "Time"
+desc "Sets delay time"
+def 0.257426
+target 0 eff mics {
+ix1 90
+}
+}
+knob 4 {
+name "Feedback"
+desc "Controls feedback"
+def 0.39604
+target 0 eff mics {
+ix1 90
+ix3 1
+}
+}
+knob 5 {
+name "The Dream In"
+desc "Sets the send level from The Dream channel to the Delay channel"
+target 0 send micsrel {
+ix1 88
+ix2 13
+}
+}
+knob 6 {
+name "Attack"
+desc "Controls the envelope attack time"
+target 0 padattack spads {
+together 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+knob 7 {
+name "Release"
+desc "Controls the envelope release time"
+def 1
+target 0 padrelease spads {
+together 1
+loner 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+iknob 0 {
+name "Enable Envelope"
+def 1
+target 0 envenable spads {
+together 1
+loner 1
+select 32767 0 0 0
+micselect 0 0 0 0
+}
+}
+knobgroup 0 {
+name "THE DREAM"
+kind 8
+range 0 2
+}
+knobgroup 1 {
+name "DELAY"
+kind 2
+range 3 5
+}
+knobgroup 2 {
+name "ENVELOPE"
+kind 9
+range 6 7
+}
+}
+"Jessie" {
+combinedpreset "Jessie"
+drums {
+sticks  "Drumsticks"
+kicktool "Felt"
+crmat 1
+"Kick" "Kick2"
+"Snare" "Snare2"
+"Rim" "Rim6"
+"Perc1" "Perc6"
+"Perc2" "Perc7"
+"Perc3" "Perc9"
+"Perc4" "Perc10"
+"Tom1" "80tom1_1"
+"Tom2" "80tom1_2"
+"Tom3" "80tom1_3"
+"Tom4" "80tom1_4"
+"ClosedHats" "ClosedHatFelt"
+"OpenHats" "OpenHatFelt"
+"Claps" "Claps4"
+"Snaps" "Snap9"
+"FilterLoop1" "Filterloop1-11"
+"FilterLoop2" "Filterloop2-12"
+"Crash1" "Crash1"
+"Crash2" "Crash2"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-15"
+"FX2" "FX2-7"
+"FX3" "FX3-3"
+"FX4" "FX4-6"
+"Metal" "Metal1"
+"Shake" "Shake2"
+"Crescendos" "Cresc"
+"Chromatic" "chromatic6"
+}
+knob 0 {
+name "Distortion"
+desc "Sets the level of LFO distortion"
+def 0.56
+target 0 eff mics {
+ix1 88
+}
+}
+knob 1 {
+name "Bitcrush"
+desc "Sets the level of LFO bitcrush"
+def 0.225
+target 0 eff mics {
+ix1 88
+ix3 1
+}
+}
+knob 2 {
+name "Reverb"
+desc "Sets the level of reverbs"
+def 0.2
+target 0 eff mics {
+ix1 88
+ix3 2
+}
+}
+knob 3 {
+name "Time"
+desc "Sets delay time"
+def 0.200001
+target 0 eff mics {
+ix1 90
+}
+}
+knob 4 {
+name "Feedback"
+desc "Controls feedback"
+def 0.18
+target 0 eff mics {
+ix1 90
+ix3 1
+}
+}
+knob 5 {
+name "The Dream In"
+desc "Sets the send level from The Dream channel to the Delay channel"
+target 0 send micsrel {
+ix1 88
+ix2 13
+}
+}
+knob 6 {
+name "Attack"
+desc "Controls the envelope attack time"
+target 0 padattack spads {
+together 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+knob 7 {
+name "Release"
+desc "Controls the envelope release time"
+def 1
+target 0 padrelease spads {
+together 1
+loner 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+iknob 0 {
+name "Enable Envelope"
+def 1
+target 0 envenable spads {
+together 1
+loner 1
+select 32767 0 0 0
+micselect 0 0 0 0
+}
+}
+knobgroup 0 {
+name "THE DREAM"
+kind 8
+range 0 2
+}
+knobgroup 1 {
+name "DELAY"
+kind 2
+range 3 5
+}
+knobgroup 2 {
+name "ENVELOPE"
+kind 9
+range 6 7
+}
+}
+"Keys" {
+combinedpreset "Keys"
+drums {
+sticks  "Drumsticks"
+kicktool "Felt"
+crmat 1
+"Kick" "Kick6"
+"Snare" "Snare6"
+"Rim" "Rim6"
+"Perc1" "Perc23"
+"Perc2" "Perc24"
+"Perc3" "Perc25"
+"Perc4" "Perc26"
+"Tom1" "Tom5_1"
+"Tom2" ""
+"Tom3" "Tom5_3"
+"Tom4" ""
+"ClosedHats" "ClosedHatsMorg"
+"OpenHats" "OpenHatFelt"
+"Claps" "Claps10"
+"Snaps" "Snap1"
+"FilterLoop1" "Filterloop1-5"
+"FilterLoop2" "Filterloop2-6"
+"Crash1" "Crash1"
+"Crash2" "Crash2"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-3"
+"FX2" "FX2-6"
+"FX3" "FX3-7"
+"FX4" "FX4-15"
+"Metal" "Metal1"
+"Shake" "Shake9"
+"Crescendos" "Cresc"
+"Chromatic" "chromatic5"
+}
+knob 0 {
+name "Distortion"
+desc "Sets the level of LFO distortion"
+def 0.56
+target 0 eff mics {
+ix1 88
+}
+}
+knob 1 {
+name "Bitcrush"
+desc "Sets the level of LFO bitcrush"
+def 0.225
+target 0 eff mics {
+ix1 88
+ix3 1
+}
+}
+knob 2 {
+name "Reverb"
+desc "Sets the level of reverbs"
+def 0.2
+target 0 eff mics {
+ix1 88
+ix3 2
+}
+}
+knob 3 {
+name "Time"
+desc "Sets delay time"
+def 0.200001
+target 0 eff mics {
+ix1 90
+}
+}
+knob 4 {
+name "Feedback"
+desc "Controls feedback"
+def 0.18
+target 0 eff mics {
+ix1 90
+ix3 1
+}
+}
+knob 5 {
+name "The Dream In"
+desc "Sets the send level from The Dream channel to the Delay channel"
+target 0 send micsrel {
+ix1 88
+ix2 13
+}
+}
+knob 6 {
+name "Attack"
+desc "Controls the envelope attack time"
+target 0 padattack spads {
+together 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+knob 7 {
+name "Release"
+desc "Controls the envelope release time"
+def 1
+target 0 padrelease spads {
+together 1
+loner 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+iknob 0 {
+name "Enable Envelope"
+def 1
+target 0 envenable spads {
+together 1
+loner 1
+select 32767 0 0 0
+micselect 0 0 0 0
+}
+}
+knobgroup 0 {
+name "THE DREAM"
+kind 8
+range 0 2
+}
+knobgroup 1 {
+name "DELAY"
+kind 2
+range 3 5
+}
+knobgroup 2 {
+name "ENVELOPE"
+kind 9
+range 6 7
+}
+}
+"Rim" {
+combinedpreset "Rim"
+drums {
+sticks  "Drumsticks"
+kicktool "Felt"
+crmat 1
+"Kick" "KickLoop6"
+"Snare" "SnareLoop6"
+"Rim" "Rim3"
+"Perc1" "Perc14"
+"Perc2" "Perc1"
+"Perc3" "Perc11"
+"Perc4" "Perc19"
+"Tom1" "Tom2_1"
+"Tom2" "Tom2_2"
+"Tom3" "Tom2_3"
+"Tom4" "Tom2_4"
+"ClosedHats" "HH12"
+"OpenHats" "OH12"
+"Claps" "Claps6"
+"Snaps" "Snap3"
+"FilterLoop1" "Filterloop1-9"
+"FilterLoop2" "Filterloop2-10"
+"Crash1" "FoleyCrash1"
+"Crash2" "CrashFoley1"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-18"
+"FX2" "FX2-17"
+"FX3" "FX3-16"
+"FX4" "FX4-11"
+"Metal" "Metal1"
+"Shake" "Shake1"
+"Crescendos" "Cresc4"
+"Chromatic" "chromatic9"
+}
+knob 0 {
+name "Distortion"
+desc "Sets the level of LFO distortion"
+def 0.712871
+target 0 eff mics {
+ix1 88
+}
+}
+knob 1 {
+name "Bitcrush"
+desc "Sets the level of LFO bitcrush"
+def 0.524752
+target 0 eff mics {
+ix1 88
+ix3 1
+}
+}
+knob 2 {
+name "Reverb"
+desc "Sets the level of reverbs"
+target 0 eff mics {
+ix1 88
+ix3 2
+}
+}
+knob 3 {
+name "Time"
+desc "Sets delay time"
+def 0.257426
+target 0 eff mics {
+ix1 90
+}
+}
+knob 4 {
+name "Feedback"
+desc "Controls feedback"
+def 0.39604
+target 0 eff mics {
+ix1 90
+ix3 1
+}
+}
+knob 5 {
+name "The Dream In"
+desc "Sets the send level from The Dream channel to the Delay channel"
+target 0 send micsrel {
+ix1 88
+ix2 13
+}
+}
+knob 6 {
+name "Attack"
+desc "Controls the envelope attack time"
+target 0 padattack spads {
+together 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+knob 7 {
+name "Release"
+desc "Controls the envelope release time"
+def 0.8
+target 0 padrelease spads {
+together 1
+loner 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+iknob 0 {
+name "Enable Envelope"
+def 1
+target 0 envenable spads {
+together 1
+loner 1
+select 32767 0 0 0
+micselect 0 0 0 0
+}
+}
+knobgroup 0 {
+name "THE DREAM"
+kind 8
+range 0 2
+}
+knobgroup 1 {
+name "DELAY"
+kind 2
+range 3 5
+}
+knobgroup 2 {
+name "ENVELOPE"
+kind 9
+range 6 7
+}
+}
+"Sauna" {
+combinedpreset "Sauna"
+drums {
+sticks  "Drumsticks"
+kicktool "Felt"
+crmat 1
+"Kick" "Kick17"
+"Snare" "Snare17"
+"Rim" "Rim4"
+"Perc1" "Perc6"
+"Perc2" "Perc7"
+"Perc3" "Perc9"
+"Perc4" "Perc8"
+"Tom1" "Tom03_1"
+"Tom2" "Tom03_2"
+"Tom3" "Tom03_3"
+"Tom4" "Tom03_4"
+"ClosedHats" "ClosedHats2"
+"OpenHats" "OpenHatLoop2"
+"Claps" "Claps8"
+"Snaps" "Snap6"
+"FilterLoop1" "Filterloop1-3"
+"FilterLoop2" "Filterloop2-5"
+"Crash1" "FoleyCrash1"
+"Crash2" "Crash4"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-7"
+"FX2" "FX2-16"
+"FX3" "FX3-17"
+"FX4" "FX4-18"
+"Metal" "Metal1"
+"Shake" "Shake10"
+"Crescendos" "Cresc6"
+"Chromatic" "chromatic8"
+}
+knob 0 {
+name "Distortion"
+desc "Sets the level of LFO distortion"
+def 0.56
+target 0 eff mics {
+ix1 88
+}
+}
+knob 1 {
+name "Bitcrush"
+desc "Sets the level of LFO bitcrush"
+def 0.225
+target 0 eff mics {
+ix1 88
+ix3 1
+}
+}
+knob 2 {
+name "Reverb"
+desc "Sets the level of reverbs"
+def 0.2
+target 0 eff mics {
+ix1 88
+ix3 2
+}
+}
+knob 3 {
+name "Time"
+desc "Sets delay time"
+def 0.200001
+target 0 eff mics {
+ix1 90
+}
+}
+knob 4 {
+name "Feedback"
+desc "Controls feedback"
+def 0.18
+target 0 eff mics {
+ix1 90
+ix3 1
+}
+}
+knob 5 {
+name "The Dream In"
+desc "Sets the send level from The Dream channel to the Delay channel"
+target 0 send micsrel {
+ix1 88
+ix2 13
+}
+}
+knob 6 {
+name "Attack"
+desc "Controls the envelope attack time"
+target 0 padattack spads {
+together 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+knob 7 {
+name "Release"
+desc "Controls the envelope release time"
+def 1
+target 0 padrelease spads {
+together 1
+loner 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+iknob 0 {
+name "Enable Envelope"
+def 1
+target 0 envenable spads {
+together 1
+loner 1
+select 32767 0 0 0
+micselect 0 0 0 0
+}
+}
+knobgroup 0 {
+name "THE DREAM"
+kind 8
+range 0 2
+}
+knobgroup 1 {
+name "DELAY"
+kind 2
+range 3 5
+}
+knobgroup 2 {
+name "ENVELOPE"
+kind 9
+range 6 7
+}
+}
+"Scrapyard" {
+combinedpreset "Scrapyard"
+drums {
+sticks  "Drumsticks"
+kicktool "Felt"
+crmat 1
+"Kick" "Kick14"
+"Snare" "Snare14"
+"Rim" "Rim6"
+"Perc1" "Perc25"
+"Perc2" "Perc26"
+"Perc3" "Perc28"
+"Perc4" "Perc23"
+"Tom1" "Tom1_1"
+"Tom2" "Tom1_2"
+"Tom3" "Tom1_3"
+"Tom4" "Tom1_4"
+"ClosedHats" "HH12"
+"OpenHats" "OH12"
+"Claps" "Claps9"
+"Snaps" "Snap7"
+"FilterLoop1" "Filterloop1-12"
+"FilterLoop2" "Filterloop2-13"
+"Crash1" "FoleyCrash1"
+"Crash2" "CrashFoley1"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-11"
+"FX2" "FX2-12"
+"FX3" "FX3-15"
+"FX4" "FX4-3"
+"Metal" "Metal1"
+"Shake" "Shake4"
+"Crescendos" "Cresc6"
+"Chromatic" "chromatic8"
+}
+knob 0 {
+name "Distortion"
+desc "Sets the level of LFO distortion"
+def 0.56
+target 0 eff mics {
+ix1 88
+}
+}
+knob 1 {
+name "Bitcrush"
+desc "Sets the level of LFO bitcrush"
+def 0.225
+target 0 eff mics {
+ix1 88
+ix3 1
+}
+}
+knob 2 {
+name "Reverb"
+desc "Sets the level of reverbs"
+def 0.2
+target 0 eff mics {
+ix1 88
+ix3 2
+}
+}
+knob 3 {
+name "Time"
+desc "Sets delay time"
+def 0.200001
+target 0 eff mics {
+ix1 90
+}
+}
+knob 4 {
+name "Feedback"
+desc "Controls feedback"
+def 0.18
+target 0 eff mics {
+ix1 90
+ix3 1
+}
+}
+knob 5 {
+name "The Dream In"
+desc "Sets the send level from The Dream channel to the Delay channel"
+target 0 send micsrel {
+ix1 88
+ix2 13
+}
+}
+knob 6 {
+name "Attack"
+desc "Controls the envelope attack time"
+target 0 padattack spads {
+together 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+knob 7 {
+name "Release"
+desc "Controls the envelope release time"
+def 1
+target 0 padrelease spads {
+together 1
+loner 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+iknob 0 {
+name "Enable Envelope"
+def 1
+target 0 envenable spads {
+together 1
+loner 1
+select 32767 0 0 0
+micselect 0 0 0 0
+}
+}
+knobgroup 0 {
+name "THE DREAM"
+kind 8
+range 0 2
+}
+knobgroup 1 {
+name "DELAY"
+kind 2
+range 3 5
+}
+knobgroup 2 {
+name "ENVELOPE"
+kind 9
+range 6 7
+}
+}
+"Softmoss" {
+combinedpreset "Softmoss"
+drums {
+sticks  "Drumsticks"
+kicktool "Felt"
+crmat 1
+"Kick" "Kick16"
+"Snare" "Snare16"
+"Rim" "Rim7"
+"Perc1" "Perc1"
+"Perc2" "Perc3"
+"Perc3" "Perc4"
+"Perc4" "Perc14"
+"Tom1" "Tom03_1"
+"Tom2" "Tom03_2"
+"Tom3" "Tom03_3"
+"Tom4" "Tom03_4"
+"ClosedHats" "ClosedHats3"
+"OpenHats" "OpenHat1"
+"Claps" "Claps10"
+"Snaps" "Snap8"
+"FilterLoop1" "Filterloop1-4"
+"FilterLoop2" "Filterloop2-12"
+"Crash1" "Crash1"
+"Crash2" "Crash3"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-14"
+"FX2" "FX2-1"
+"FX3" "FX3-2"
+"FX4" "FX4-7"
+"Metal" "Metal1"
+"Shake" "Shake6"
+"Crescendos" "Cresc2"
+"Chromatic" "chromatic1"
+}
+knob 0 {
+name "Distortion"
+desc "Sets the level of LFO distortion"
+def 0.56
+target 0 eff mics {
+ix1 88
+}
+}
+knob 1 {
+name "Bitcrush"
+desc "Sets the level of LFO bitcrush"
+def 0.225
+target 0 eff mics {
+ix1 88
+ix3 1
+}
+}
+knob 2 {
+name "Reverb"
+desc "Sets the level of reverbs"
+def 0.2
+target 0 eff mics {
+ix1 88
+ix3 2
+}
+}
+knob 3 {
+name "Time"
+desc "Sets delay time"
+def 0.200001
+target 0 eff mics {
+ix1 90
+}
+}
+knob 4 {
+name "Feedback"
+desc "Controls feedback"
+def 0.18
+target 0 eff mics {
+ix1 90
+ix3 1
+}
+}
+knob 5 {
+name "The Dream In"
+desc "Sets the send level from The Dream channel to the Delay channel"
+target 0 send micsrel {
+ix1 88
+ix2 13
+}
+}
+knob 6 {
+name "Attack"
+desc "Controls the envelope attack time"
+target 0 padattack spads {
+together 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+knob 7 {
+name "Release"
+desc "Controls the envelope release time"
+def 1
+target 0 padrelease spads {
+together 1
+loner 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+iknob 0 {
+name "Enable Envelope"
+def 1
+target 0 envenable spads {
+together 1
+loner 1
+select 32767 0 0 0
+micselect 0 0 0 0
+}
+}
+knobgroup 0 {
+name "THE DREAM"
+kind 8
+range 0 2
+}
+knobgroup 1 {
+name "DELAY"
+kind 2
+range 3 5
+}
+knobgroup 2 {
+name "ENVELOPE"
+kind 9
+range 6 7
+}
+}
+"Softpants" {
+combinedpreset "Softpants"
+drums {
+sticks  "Drumsticks"
+kicktool "Felt"
+crmat 1
+"Kick" "Kick8"
+"Snare" "Snare8"
+"Rim" "Rim9"
+"Perc1" "Perc3"
+"Perc2" "Perc14"
+"Perc3" "Perc11"
+"Perc4" "Perc20"
+"Tom1" "Tom4_1"
+"Tom2" "Tom3_2"
+"Tom3" "Tom3_3"
+"Tom4" "Tom3_4"
+"ClosedHats" "ClosedHatFelt"
+"OpenHats" "OpenHatFelt"
+"Claps" "Claps6"
+"Snaps" "Snap7"
+"FilterLoop1" "Filterloop1-13"
+"FilterLoop2" "Filterloop2-12"
+"Crash1" "Crash1"
+"Crash2" "Crash2"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-4"
+"FX2" "FX2-11"
+"FX3" "FX3-12"
+"FX4" "FX4-13"
+"Metal" "Metal1"
+"Shake" "Shake7"
+"Crescendos" "Cresc"
+"Chromatic" "chromatic4"
+}
+knob 0 {
+name "Distortion"
+desc "Sets the level of LFO distortion"
+def 0.56
+target 0 eff mics {
+ix1 88
+}
+}
+knob 1 {
+name "Bitcrush"
+desc "Sets the level of LFO bitcrush"
+def 0.225
+target 0 eff mics {
+ix1 88
+ix3 1
+}
+}
+knob 2 {
+name "Reverb"
+desc "Sets the level of reverbs"
+def 0.2
+target 0 eff mics {
+ix1 88
+ix3 2
+}
+}
+knob 3 {
+name "Time"
+desc "Sets delay time"
+def 0.200001
+target 0 eff mics {
+ix1 90
+}
+}
+knob 4 {
+name "Feedback"
+desc "Controls feedback"
+def 0.18
+target 0 eff mics {
+ix1 90
+ix3 1
+}
+}
+knob 5 {
+name "The Dream In"
+desc "Sets the send level from The Dream channel to the Delay channel"
+target 0 send micsrel {
+ix1 88
+ix2 13
+}
+}
+knob 6 {
+name "Attack"
+desc "Controls the envelope attack time"
+target 0 padattack spads {
+together 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+knob 7 {
+name "Release"
+desc "Controls the envelope release time"
+def 1
+target 0 padrelease spads {
+together 1
+loner 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+iknob 0 {
+name "Enable Envelope"
+def 1
+target 0 envenable spads {
+together 1
+loner 1
+select 32767 0 0 0
+micselect 0 0 0 0
+}
+}
+knobgroup 0 {
+name "THE DREAM"
+kind 8
+range 0 2
+}
+knobgroup 1 {
+name "DELAY"
+kind 2
+range 3 5
+}
+knobgroup 2 {
+name "ENVELOPE"
+kind 9
+range 6 7
+}
+}
+"Stomp" {
+combinedpreset "Stomp"
+drums {
+sticks  "Drumsticks"
+kicktool "Felt"
+crmat 1
+"Kick" "Kick19"
+"Snare" "Snare19"
+"Rim" "Rim5"
+"Perc1" "Perc23"
+"Perc2" "Perc20"
+"Perc3" "Perc21"
+"Perc4" "Perc16"
+"Tom1" "Tom4_1"
+"Tom2" "Tom3_2"
+"Tom3" "Tom3_3"
+"Tom4" "Tom3_4"
+"ClosedHats" "ClosedHatLoop4"
+"OpenHats" "OpenHatLoop3"
+"Claps" "Claps5"
+"Snaps" "Snap8"
+"FilterLoop1" "Filterloop1-4"
+"FilterLoop2" "Filterloop2-5"
+"Crash1" "Crash1"
+"Crash2" "Crash2"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-16"
+"FX2" "FX2-17"
+"FX3" "FX3-18"
+"FX4" "FX4-1"
+"Metal" "Metal1"
+"Shake" "Shake10"
+"Crescendos" "Cresc"
+"Chromatic" "chromatic1"
+}
+knob 0 {
+name "Distortion"
+desc "Sets the level of LFO distortion"
+def 0.56
+target 0 eff mics {
+ix1 88
+}
+}
+knob 1 {
+name "Bitcrush"
+desc "Sets the level of LFO bitcrush"
+def 0.225
+target 0 eff mics {
+ix1 88
+ix3 1
+}
+}
+knob 2 {
+name "Reverb"
+desc "Sets the level of reverbs"
+def 0.2
+target 0 eff mics {
+ix1 88
+ix3 2
+}
+}
+knob 3 {
+name "Time"
+desc "Sets delay time"
+def 0.200001
+target 0 eff mics {
+ix1 90
+}
+}
+knob 4 {
+name "Feedback"
+desc "Controls feedback"
+def 0.18
+target 0 eff mics {
+ix1 90
+ix3 1
+}
+}
+knob 5 {
+name "The Dream In"
+desc "Sets the send level from The Dream channel to the Delay channel"
+target 0 send micsrel {
+ix1 88
+ix2 13
+}
+}
+knob 6 {
+name "Attack"
+desc "Controls the envelope attack time"
+target 0 padattack spads {
+together 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+knob 7 {
+name "Release"
+desc "Controls the envelope release time"
+def 1
+target 0 padrelease spads {
+together 1
+loner 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+iknob 0 {
+name "Enable Envelope"
+def 1
+target 0 envenable spads {
+together 1
+loner 1
+select 32767 0 0 0
+micselect 0 0 0 0
+}
+}
+knobgroup 0 {
+name "THE DREAM"
+kind 8
+range 0 2
+}
+knobgroup 1 {
+name "DELAY"
+kind 2
+range 3 5
+}
+knobgroup 2 {
+name "ENVELOPE"
+kind 9
+range 6 7
+}
+}
+"The Morg" {
+combinedpreset "The Morg"
+drums {
+sticks  "Drumsticks"
+kicktool "Felt"
+crmat 1
+"Kick" "KickMorg1"
+"Snare" "SnareMorg1"
+"Rim" "Rim7"
+"Perc1" "Perc4"
+"Perc2" "Perc7"
+"Perc3" "Perc14"
+"Perc4" "Perc20"
+"Tom1" "Tom95"
+"Tom2" ""
+"Tom3" "Tom95_2"
+"Tom4" ""
+"ClosedHats" "ClosedHatsMorg"
+"OpenHats" "OpenHatLoop2"
+"Claps" "Claps7"
+"Snaps" "Snap1"
+"FilterLoop1" "Filterloop1-11"
+"FilterLoop2" "Filterloop2-12"
+"Crash1" "Crash1"
+"Crash2" "Crash2"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-11"
+"FX2" "FX2-12"
+"FX3" "FX3-3"
+"FX4" "FX4-9"
+"Metal" "Metal1"
+"Shake" "Shake2"
+"Crescendos" "Cresc2"
+"Chromatic" "chromatic6"
+}
+knob 0 {
+name "Distortion"
+desc "Sets the level of LFO distortion"
+def 0.56
+target 0 eff mics {
+ix1 88
+}
+}
+knob 1 {
+name "Bitcrush"
+desc "Sets the level of LFO bitcrush"
+def 0.225
+target 0 eff mics {
+ix1 88
+ix3 1
+}
+}
+knob 2 {
+name "Reverb"
+desc "Sets the level of reverbs"
+def 0.2
+target 0 eff mics {
+ix1 88
+ix3 2
+}
+}
+knob 3 {
+name "Time"
+desc "Sets delay time"
+def 0.200001
+target 0 eff mics {
+ix1 90
+}
+}
+knob 4 {
+name "Feedback"
+desc "Controls feedback"
+def 0.18
+target 0 eff mics {
+ix1 90
+ix3 1
+}
+}
+knob 5 {
+name "The Dream In"
+desc "Sets the send level from The Dream channel to the Delay channel"
+target 0 send micsrel {
+ix1 88
+ix2 13
+}
+}
+knob 6 {
+name "Attack"
+desc "Controls the envelope attack time"
+target 0 padattack spads {
+together 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+knob 7 {
+name "Release"
+desc "Controls the envelope release time"
+def 1
+target 0 padrelease spads {
+together 1
+loner 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+iknob 0 {
+name "Enable Envelope"
+def 1
+target 0 envenable spads {
+together 1
+loner 1
+select 32767 0 0 0
+micselect 0 0 0 0
+}
+}
+knobgroup 0 {
+name "THE DREAM"
+kind 8
+range 0 2
+}
+knobgroup 1 {
+name "DELAY"
+kind 2
+range 3 5
+}
+knobgroup 2 {
+name "ENVELOPE"
+kind 9
+range 6 7
+}
+}
+"Twig" {
+combinedpreset "Twig"
+drums {
+sticks  "Drumsticks"
+kicktool "Felt"
+crmat 1
+"Kick" "Kick15"
+"Snare" "Snare15"
+"Rim" "Rim7"
+"Perc1" "Perc21"
+"Perc2" "Perc20"
+"Perc3" "Perc12"
+"Perc4" "Perc13"
+"Tom1" "Tom5_1"
+"Tom2" ""
+"Tom3" "Tom5_3"
+"Tom4" ""
+"ClosedHats" "ClosedHats3"
+"OpenHats" "OpenHat1"
+"Claps" "Claps7"
+"Snaps" "Snap8"
+"FilterLoop1" "Filterloop1-2"
+"FilterLoop2" "Filterloop2-5"
+"Crash1" "FoleyCrash1"
+"Crash2" "CrashFoley1"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-16"
+"FX2" "FX2-17"
+"FX3" "FX3-18"
+"FX4" "FX4-11"
+"Metal" "Metal1"
+"Shake" "Shake10"
+"Crescendos" "Cresc4"
+"Chromatic" "chromatic4"
+}
+knob 0 {
+name "Distortion"
+desc "Sets the level of LFO distortion"
+def 0.712871
+target 0 eff mics {
+ix1 88
+}
+}
+knob 1 {
+name "Bitcrush"
+desc "Sets the level of LFO bitcrush"
+def 0.524752
+target 0 eff mics {
+ix1 88
+ix3 1
+}
+}
+knob 2 {
+name "Reverb"
+desc "Sets the level of reverbs"
+target 0 eff mics {
+ix1 88
+ix3 2
+}
+}
+knob 3 {
+name "Time"
+desc "Sets delay time"
+def 0.257426
+target 0 eff mics {
+ix1 90
+}
+}
+knob 4 {
+name "Feedback"
+desc "Controls feedback"
+def 0.39604
+target 0 eff mics {
+ix1 90
+ix3 1
+}
+}
+knob 5 {
+name "The Dream In"
+desc "Sets the send level from The Dream channel to the Delay channel"
+target 0 send micsrel {
+ix1 88
+ix2 13
+}
+}
+knob 6 {
+name "Attack"
+desc "Controls the envelope attack time"
+target 0 padattack spads {
+together 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+knob 7 {
+name "Release"
+desc "Controls the envelope release time"
+def 1
+target 0 padrelease spads {
+together 1
+loner 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+iknob 0 {
+name "Enable Envelope"
+def 1
+target 0 envenable spads {
+together 1
+loner 1
+select 32767 0 0 0
+micselect 0 0 0 0
+}
+}
+knobgroup 0 {
+name "THE DREAM"
+kind 8
+range 0 2
+}
+knobgroup 1 {
+name "DELAY"
+kind 2
+range 3 5
+}
+knobgroup 2 {
+name "ENVELOPE"
+kind 9
+range 6 7
+}
+}
+"White" {
+combinedpreset "White"
+drums {
+sticks  "Drumsticks"
+kicktool "Felt"
+crmat 1
+"Kick" "Kick20"
+"Snare" "Snare20"
+"Rim" "Rim6"
+"Perc1" "Perc11"
+"Perc2" "Perc5"
+"Perc3" "Perc14"
+"Perc4" "Perc27"
+"Tom1" "Tom4_1"
+"Tom2" "Tom3_2"
+"Tom3" "Tom3_3"
+"Tom4" "Tom3_4"
+"ClosedHats" "HH10"
+"OpenHats" "OH11"
+"Claps" "Claps11"
+"Snaps" "Snap4"
+"FilterLoop1" "Filterloop1-7"
+"FilterLoop2" "Filterloop2-2"
+"Crash1" "FoleyCrash1"
+"Crash2" "Crash4"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-18"
+"FX2" "FX2-7"
+"FX3" "FX3-10"
+"FX4" "FX4-16"
+"Metal" "Metal1"
+"Shake" "Shake7"
+"Crescendos" "Cresc3"
+"Chromatic" "chromatic4"
+}
+knob 0 {
+name "Distortion"
+desc "Sets the level of LFO distortion"
+def 0.56
+target 0 eff mics {
+ix1 88
+}
+}
+knob 1 {
+name "Bitcrush"
+desc "Sets the level of LFO bitcrush"
+def 0.225
+target 0 eff mics {
+ix1 88
+ix3 1
+}
+}
+knob 2 {
+name "Reverb"
+desc "Sets the level of reverbs"
+def 0.2
+target 0 eff mics {
+ix1 88
+ix3 2
+}
+}
+knob 3 {
+name "Time"
+desc "Sets delay time"
+def 0.200001
+target 0 eff mics {
+ix1 90
+}
+}
+knob 4 {
+name "Feedback"
+desc "Controls feedback"
+def 0.18
+target 0 eff mics {
+ix1 90
+ix3 1
+}
+}
+knob 5 {
+name "The Dream In"
+desc "Sets the send level from The Dream channel to the Delay channel"
+target 0 send micsrel {
+ix1 88
+ix2 13
+}
+}
+knob 6 {
+name "Attack"
+desc "Controls the envelope attack time"
+target 0 padattack spads {
+together 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+knob 7 {
+name "Release"
+desc "Controls the envelope release time"
+def 1
+target 0 padrelease spads {
+together 1
+loner 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+iknob 0 {
+name "Enable Envelope"
+def 1
+target 0 envenable spads {
+together 1
+loner 1
+select 32767 0 0 0
+micselect 0 0 0 0
+}
+}
+knobgroup 0 {
+name "THE DREAM"
+kind 8
+range 0 2
+}
+knobgroup 1 {
+name "DELAY"
+kind 2
+range 3 5
+}
+knobgroup 2 {
+name "ENVELOPE"
+kind 9
+range 6 7
+}
+}
+"Yezus" {
+combinedpreset "Yezus"
+drums {
+sticks  "Drumsticks"
+kicktool "Felt"
+crmat 1
+"Kick" "Kick7"
+"Snare" "Snare7"
+"Rim" "Rim3"
+"Perc1" "Perc4"
+"Perc2" "Perc9"
+"Perc3" "Perc2"
+"Perc4" "Perc7"
+"Tom1" "Tom3_1"
+"Tom2" ""
+"Tom3" "Tom4_3"
+"Tom4" ""
+"ClosedHats" "ClosedHatLoop6"
+"OpenHats" "OpenHatLoop2"
+"Claps" "Claps11"
+"Snaps" "Snap2"
+"FilterLoop1" "Filterloop1-1"
+"FilterLoop2" "Filterloop2-2"
+"Crash1" "FoleyCrash1"
+"Crash2" "CrashFoley1"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-16"
+"FX2" "FX2-6"
+"FX3" "FX3-10"
+"FX4" "FX4-18"
+"Metal" "Metal1"
+"Shake" "Shake7"
+"Crescendos" "Cresc3"
+"Chromatic" "chromatic9"
+}
+knob 0 {
+name "Distortion"
+desc "Sets the level of LFO distortion"
+def 0.56
+target 0 eff mics {
+ix1 88
+}
+}
+knob 1 {
+name "Bitcrush"
+desc "Sets the level of LFO bitcrush"
+def 0.225
+target 0 eff mics {
+ix1 88
+ix3 1
+}
+}
+knob 2 {
+name "Reverb"
+desc "Sets the level of reverbs"
+def 0.2
+target 0 eff mics {
+ix1 88
+ix3 2
+}
+}
+knob 3 {
+name "Time"
+desc "Sets delay time"
+def 0.200001
+target 0 eff mics {
+ix1 90
+}
+}
+knob 4 {
+name "Feedback"
+desc "Controls feedback"
+def 0.18
+target 0 eff mics {
+ix1 90
+ix3 1
+}
+}
+knob 5 {
+name "The Dream In"
+desc "Sets the send level from The Dream channel to the Delay channel"
+target 0 send micsrel {
+ix1 88
+ix2 13
+}
+}
+knob 6 {
+name "Attack"
+desc "Controls the envelope attack time"
+target 0 padattack spads {
+together 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+knob 7 {
+name "Release"
+desc "Controls the envelope release time"
+def 1
+target 0 padrelease spads {
+together 1
+loner 1
+select 100794367 0 0 0
+micselect 0 0 0 0
+}
+}
+iknob 0 {
+name "Enable Envelope"
+def 1
+target 0 envenable spads {
+together 1
+loner 1
+select 32767 0 0 0
+micselect 0 0 0 0
+}
+}
+knobgroup 0 {
+name "THE DREAM"
+kind 8
+range 0 2
+}
+knobgroup 1 {
+name "DELAY"
+kind 2
+range 3 5
+}
+knobgroup 2 {
+name "ENVELOPE"
+kind 9
+range 6 7
+}
+}
+"Original Mix" "Raw Tweaks" {
+combinedpreset "Original Mix"
+drums {
+sticks  "Drumsticks"
+kicktool "Felt"
+crmat 1
+"Kick" "Kick3"
+"Snare" "Snare3"
+"Rim" "Rim1"
+"Perc1" "Perc3"
+"Perc2" "Perc4"
+"Perc3" "Perc1"
+"Perc4" "Perc14"
+"Tom1" "Tom1_1"
+"Tom2" "Tom1_2"
+"Tom3" "Tom1_3"
+"Tom4" "Tom1_4"
+"ClosedHats" "HH10"
+"OpenHats" "OH11"
+"Claps" "Claps2"
+"Snaps" "Snap9"
+"FilterLoop1" "Filterloop1-9"
+"FilterLoop2" "Filterloop2-9"
+"Crash1" "Crash1-1"
+"Crash2" "Crash4"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-8"
+"FX2" "FX2-11"
+"FX3" "FX3-12"
+"FX4" "FX4-13"
+"Metal" "Metal1"
+"Shake" "Shake7"
+"Crescendos" "Cresc3"
+"Chromatic" "chromatic9"
+}
+}

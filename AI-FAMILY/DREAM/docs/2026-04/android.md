@@ -1,19 +1,32 @@
-# Meeting SDK Android Guide
+# Android Video SDK Overview
 
-## Scope
+## What this platform skill is for
 
-Android Meeting SDK integration for default UI, custom UI, auth, start/join, and in-meeting feature modules.
+- Building fully custom Android video session UI (not Zoom Meeting UI)
+- Managing join/leave and participant state via Video SDK events
+- Handling camera, mic, share, chat, command, and optional raw data paths
 
-## Validation Snapshot
+## Primary implementation path
 
-- Crawled docs path includes: `get-started`, `integrate`, `start-join-mtg-webinar`, `default-ui`, `custom-ui`, `resource/error-codes`.
-- API reference snapshot includes class/interface/function maps from `index.html`, `annotated.html`, `classes.html`, `files.html`, and `functions*` pages.
-- Local package checked: `zoom-sdk-android-6.7.5.37500` (contains `mobilertc.aar`, sample apps, dynamic sample modules).
+1. Backend generates short-lived Video SDK token using Video SDK Key/Secret.
+2. Android initializes SDK and joins a session by `sessionName` + token.
+3. App binds SDK events to UI state (user join/leave, video/audio/share changes).
+4. App starts/stops media explicitly and cleans up SDK resources on leave.
 
-## Practical Guidance
+## Prerequisites
 
-1. Initialize and authenticate SDK.
-2. Get first successful join in default UI.
-3. Add feature flags/settings and error handling.
-4. Move to custom UI only for required UX control.
-5. Add observability for meeting status and SDK callback failures.
+- Android Studio + supported Gradle/AGP stack
+- Video SDK Android package (`mobilertc.aar`)
+- Backend token endpoint for Video SDK JWT generation
+- Camera/microphone permissions flow and runtime handling
+
+## Important notes
+
+- Video SDK session auth is token-based and server-generated.
+- Do not use Meeting SDK payload fields (`meetingNumber`, `passWord`) in Video SDK flows.
+- Keep token generation and key/secret handling server-side only.
+
+## Source links
+
+- Docs: https://developers.zoom.us/docs/video-sdk/android/
+- API reference: https://marketplacefront.zoom.us/sdk/custom/android/index.html

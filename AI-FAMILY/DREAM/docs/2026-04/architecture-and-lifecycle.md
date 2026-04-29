@@ -1,82 +1,57 @@
-# Rivet Architecture and Lifecycle
+# Zoom Phone Architecture and Lifecycle
 
-## What Rivet Provides
-
-Rivet wraps three concerns into one module client:
-- Auth/token orchestration
-- Webhook receiver + event dispatch
-- Typed REST API endpoint wrappers
-
-## Architecture Model
+## Architecture
 
 ```text
-+--------------------+        +------------------------------+
-| Zoom Marketplace   |        | Your Rivet App               |
-| App Config         |        | (Node.js/TypeScript)         |
-+----------+---------+        +---------------+--------------+
-           |                                  |
-           | OAuth install / token exchange   |
-           |--------------------------------->|
-           |                                  |
-           | Webhooks (POST /zoom/events)     |
-           |--------------------------------->|
-           |                                  v
-           |                        +------------------------+
-           |                        | Rivet Module Clients   |
-           |                        | - ChatbotClient        |
-           |                        | - TeamChatClient       |
-           |                        | - Meetings*Client      |
-           |                        | - Users*Client         |
-           |                        | - Phone*Client         |
-           |                        | - VideoSdkClient       |
-           |                        +-----+------------+-----+
-           |                              |            |
-           |                              |            +--> webEventConsumer
-           |                              |
-           |                              +--> endpoints.* (REST wrappers)
-           |                                           |
-           |                                           v
-           |                                  +------------------+
-           +--------------------------------> | Zoom APIs        |
-                                              +------------------+
+User/Agent UI
+  |
+  | (A) Smart Embed postMessage events
+  v
+Smart Embed Iframe (applications.zoom.us)
+  |
+  | event stream + call controls
+  v
+CRM Web App (event bridge + UI state)
+  |
+  | OAuth token on server only
+  v
+Backend API Layer
+  |\
+  | \-- Zoom Phone REST APIs (call history, call handling, contacts)
+  |
+  \---- Webhook endpoint (phone.* events)
 ```
 
 ## Lifecycle Workflow
 
-1. Select module(s):
-- Example: `ChatbotClient` + `TeamChatClient` for bot + channel lookup.
-- Example: `UsersS2SAuthClient` + `MeetingsS2SAuthClient` for admin automation.
+1. Provision:
+- Account has Zoom Phone and optional SMS enablement.
 
-2. Pick auth model by module:
-- Chatbot: Client Credentials
-- Team Chat/Meetings/Phone/Accounts/Users: User OAuth or S2S OAuth
-- Video SDK: JWT auth for Video SDK API
+2. Authorize:
+- OAuth app installed and scoped for required Phone operations.
 
-3. Configure client options:
-- Required: `clientId`, `clientSecret`
-- Often required: `webhooksSecretToken`
-- Conditional: `accountId`, `installerOptions`, `receiver`, `port`, `tokenStore`
+3. Initialize UI:
+- Load Smart Embed iframe/script.
+- Wait for `onZoomPhoneIframeApiReady`.
+- Send `zp-init-config` and register event handlers.
 
-4. Register listeners:
-- Generic: `webEventConsumer.event("event_name", handler)`
-- Shortcuts where available: `onSlashCommand`, `onButtonClick`, `onChannelMessagePosted`
+4. Engage:
+- Start calls/SMS via `zp-make-call` or `zp-input-sms`.
+- Receive events (`zp-call-*`, `zp-sms-log-event`, optional AI/contact/notes events).
 
-5. Start server(s):
-- `await client.start()` returns server handler/address
-- For multi-module apps, assign unique ports
+5. Persist:
+- Save event snapshots keyed by `callId`.
+- Reconcile to call history/call element records after completion.
 
-6. Wire Marketplace subscriptions:
-- Endpoint URL must target each module's receiver port
-- Endpoint path should include `/zoom/events`
+6. Post-call:
+- Save call notes/disposition and optional recording/voicemail links.
 
-7. Process API + events:
-- API calls via `client.endpoints.*`
-- Event-driven actions via callback handlers
+7. Operate:
+- Track deprecations and apply endpoint/event mapping updates.
 
-8. Operate and upgrade:
-- Persist OAuth tokens/state for stable restarts
-- Use changelog + TypeDoc workflow for version upgrades
+## Version Drift Strategy
 
-## Why Multi-Client Port Strategy Matters
-
-In sample patterns, each module runs its own receiver port. If multiple modules share one port by mistake, webhook routing and verification behavior can break in non-obvious ways.
+- Normalize inbound payloads in one adapter layer.
+- Keep endpoint constants centralized by version target.
+- Feature-flag optional payload fields.
+- Keep webhook + Smart Embed event handlers tolerant to added fields and enum expansion.

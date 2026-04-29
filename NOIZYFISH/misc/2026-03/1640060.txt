@@ -1,0 +1,1035 @@
+padconfversion "EZdrummer 3 Bright Room 1.0.1"
+
+samplerate 44100
+pack 2
+
+mastervolume 1
+
+defaultpad {
+	usemic Oh OhR Kit KitR OhMono Amb AmbR AmbMono Trash
+	velvol
+	cycle S
+	semimax 3
+	maxpoly 8
+	velocityknee L 5
+}
+
+# TEMPLATES
+
+TEMPLATE StartBleed
+	usemic SnareBottom
+END
+
+
+TEMPLATE DefaultMHE
+	autoattack 1.1
+	autoattackctrl 1
+	autoattacktime 0.07
+	autoattacklevel 0.65
+END
+
+TEMPLATE TomsMHE
+	autoattack 1.1
+	autoattackctrl 0.398107
+	autoattacktime 0.07
+	autoattacklevel 0.65
+END
+
+TEMPLATE SnareMHE
+	autoattack 1.1
+	autoattackctrl 0.501187
+	autoattacktime 0.07
+	autoattacklevel 0.65
+END
+
+TEMPLATE SnareEdgeMHE
+	autoattack 1.1
+	autoattackctrl 1.5
+	autoattacktime 0.07
+	autoattacklevel 0.65
+END
+
+
+# PADS
+
+pad {
+	name	splash3
+	USE		DefaultMHE
+}
+pad {
+	name	splash3M
+}
+
+pad {
+	name	china6RT
+	USE		DefaultMHE
+}
+pad {
+	name	china6
+	USE		DefaultMHE
+}
+pad {
+	name	china6M
+}
+
+pad {
+	name	crash6RT
+	USE		DefaultMHE
+}
+pad {
+	name	crash6
+	USE		DefaultMHE
+}
+pad {
+	name	crash6M
+}
+
+pad {
+	name	crash5RT
+	USE		DefaultMHE
+}
+pad {
+	name	crash5
+	USE		DefaultMHE
+}
+pad {
+	name	crash5M
+}
+
+pad {
+	name	crash2RT
+	USE		DefaultMHE
+}
+pad {
+	name	crash2
+	USE		DefaultMHE
+}
+pad {
+	name	crash2M
+}
+
+pad {
+	name	crash1RT
+	USE		DefaultMHE
+}
+pad {
+	name	crash1
+	USE		DefaultMHE
+}
+pad {
+	name	crash1M
+}
+
+
+pad {
+	name	ride4BL
+}
+pad {
+	name	ride4
+	USE		DefaultMHE
+}
+pad {
+	name	ride4PU
+	USE		DefaultMHE
+}
+pad {
+	name	ride4M
+}
+
+
+pad {
+	name	tom5RO
+	USE	StartBleed
+}
+pad {
+	name	tom5FX
+	USE	StartBleed
+}
+pad {
+	name	tom5R
+	USE		TomsMHE
+	USE	StartBleed
+}
+
+pad {
+	name	tom4RO
+	USE	StartBleed
+}
+pad {
+	name	tom4FX
+	USE	StartBleed
+}
+pad {
+	name	tom4R
+	USE		TomsMHE
+	USE	StartBleed
+}
+
+pad {
+	name	tom3RO
+	USE	StartBleed
+}
+pad {
+	name	tom3FX
+	USE	StartBleed
+}
+pad {
+	name	tom3R
+	USE		TomsMHE
+	USE	StartBleed
+}
+
+pad {
+	name	tom2RO
+	USE	StartBleed
+}
+pad {
+	name	tom2FX
+	USE	StartBleed
+}
+pad {
+	name	tom2R
+	USE		TomsMHE
+	USE	StartBleed
+}
+
+pad {
+	name	tom1RO
+	USE	StartBleed
+}
+pad {
+	name	tom1FX
+	USE	StartBleed
+}
+pad {
+	name	tom1R
+	USE		TomsMHE
+	USE	StartBleed
+}
+
+
+pad {
+	name	hatsT5
+}
+pad {
+	name	hatsT4
+}
+pad {
+	name	hatsT3
+}
+pad {
+	name	hatsT2
+}
+pad {
+	name	hatsT1
+}
+pad {
+	name	hatsT0
+}
+pad {
+	name	hatsTP
+}
+pad {
+	name	hatsTT
+}
+
+pad {
+	name	hatsO5
+	USE		DefaultMHE
+}
+pad {
+	name	hatsO4
+}
+pad {
+	name	hatsO3
+}
+pad {
+	name	hatsO2
+}
+pad {
+	name	hatsO1
+}
+pad {
+	name	hatsLO
+}
+pad {
+	name	hatsCL
+}
+pad {
+	name	hatsCT
+}
+
+pad {
+	name	hatsPL
+}
+pad {
+	name	hatsPLO
+}
+
+
+pad {
+	name	snareFO
+	USE		SnareEdgeMHE
+}
+pad {
+	name	snareRO
+}
+pad {
+	name	snareSL
+}
+pad {
+	name	snareFX
+}
+pad {
+	name	snareR
+	USE		SnareMHE
+}
+
+
+pad {
+	name	kickR
+	USE	StartBleed
+}
+
+
+# CONTROLLERS
+
+pad {
+	name		hatsCtrl
+	sendnoteoff
+	nosound
+}
+pad {
+	name		hatsTrig
+	sendnoteoff
+	nosound
+}
+pad {
+	name		hatsTipTrig
+	sendnoteoff
+	nosound
+}
+
+pad {
+	name snareCtrl
+	sendnoteoff
+	nosound
+}
+pad {
+	name snareTrig
+	sendnoteoff
+	nosound
+}
+
+
+# MAPPING
+
+alias kickR 36 34 35
+
+alias snareCtrl 144
+alias snareTrig 6
+alias snareR 38 39 66 68 69 70 125
+alias snareFX 40 126
+alias snareFO 33
+alias snareSL 37 67 127
+alias snareRO 71 76
+
+alias hatsCtrl 132 129
+alias hatsTrig 7 18 20
+alias hatsTipTrig 8 19 9
+alias hatsCT 62
+alias hatsCL 22 65 122
+alias hatsLO 64 120
+alias hatsO1 24
+alias hatsO2 25 46 123
+alias hatsO3 26
+alias hatsO4 60 121
+alias hatsO5 124
+alias hatsTP 61 11 42 119
+alias hatsTT 63
+alias hatsT0 12
+alias hatsT1 13
+alias hatsT2 14
+alias hatsT3 15
+alias hatsT4 16
+alias hatsT5 17
+alias hatsPL 21 10 44
+alias hatsPLO 23
+
+alias tom1R 48
+alias tom1FX 82
+alias tom1RO 81
+
+alias tom2R 47
+alias tom2FX 80
+alias tom2RO 79
+
+alias tom3R 45
+alias tom3FX 78
+alias tom3RO 77
+
+alias tom4R 43
+alias tom4FX 75
+alias tom4RO 74
+
+alias tom5R 41
+alias tom5FX 73
+alias tom5RO 72
+
+alias crash1M 83
+alias crash1 86
+alias crash1RT 84 87
+
+alias crash2M 50 94
+alias crash2 49 28 91
+alias crash2RT 27 89
+
+alias crash5M 58 106
+alias crash5 57 32 103
+alias crash5RT 31 101
+
+alias crash6M 95 99
+alias crash6 98
+alias crash6RT 96
+
+alias china6M 54 107
+alias china6 52 110
+alias china6RT 108 111
+
+alias splash3M 56
+alias splash3 55
+
+alias ride4M 118
+alias ride4PU 59 115
+alias ride4 51 29 104 113 116
+alias ride4BL 53 30 85 88 90 92 93 97 100 102 105 109 112 114 117
+
+
+# SUBSTITUTES
+
+pad	snareRO {
+	substitute snareSL
+}
+pad	snareSL {
+	substitute snareR
+}
+pad	snareFX {
+	substitute snareR
+}
+pad	snareFO {
+	substitute snareR
+}
+
+pad	tom3R {
+	substitute tom2R
+}
+pad	tom2R {
+	substitute tom1R
+}
+pad	tom1R {
+	substitute tom2R
+}
+
+pad	tom4R {
+	substitute tom5R
+}
+pad	tom5R {
+	substitute tom4R
+}
+
+pad	tom3RO {
+	substitute tom2RO
+}
+pad	tom2RO {
+	substitute tom1RO
+}
+pad	tom1RO {
+	substitute tom2RO
+}
+
+pad	tom4RO {
+	substitute tom5RO
+}
+pad	tom5RO {
+	substitute tom4RO
+}
+
+pad	tom3FX {
+	substitute tom2FX
+}
+pad	tom2FX {
+	substitute tom1FX
+}
+pad	tom1FX {
+	substitute tom2FX
+}
+
+pad	tom4FX {
+	substitute tom5FX
+}
+pad	tom5FX {
+	substitute tom4FX
+}
+
+pad	hatsCL {
+	substitute hatsTP
+}
+pad	hatsTP {
+	substitute hatsCL
+}
+pad	hatsCT {
+	substitute hatsCL
+}
+pad	hatsTT {
+	substitute hatsTP
+}
+
+pad	hatsPLO {
+	substitute hatsPL
+}
+pad	hatsPL {
+	substitute hatsCL
+}
+
+pad	hatsLO {
+	substitute hatsO1
+}
+pad	hatsO1 {
+	substitute hatsO2
+}
+pad	hatsO2 {
+	substitute hatsO3
+}
+pad	hatsO3 {
+	substitute hatsO2
+}
+pad	hatsO4 {
+	substitute hatsO3
+}
+pad	hatsO5 {
+	substitute hatsO4
+}
+
+pad	hatsT0 {
+	substitute hatsLO
+}
+pad	hatsT1 {
+	substitute hatsO1
+}
+pad	hatsT2 {
+	substitute hatsO2
+}
+pad	hatsT3 {
+	substitute hatsO3
+}
+pad	hatsT4 {
+	substitute hatsO4
+}
+pad	hatsT5 {
+	substitute hatsT4
+}
+
+pad	crash6 {
+	substitute crash5
+}
+pad	crash5 {
+	substitute crash2
+}
+pad	crash1 {
+	substitute crash2
+}
+pad	crash2 {
+	substitute crash5
+}
+
+pad	crash6RT {
+	substitute crash5RT
+}
+pad	crash5RT {
+	substitute crash2RT
+}
+pad	crash1RT {
+	substitute crash2RT
+}
+pad	crash2RT {
+	substitute crash5RT
+}
+
+pad	crash6M {
+	substitute crash5M
+}
+pad	crash5M {
+	substitute crash2M
+}
+pad	crash1M {
+	substitute crash2M
+}
+pad	crash2M {
+	substitute crash5M
+}
+
+pad	splash3 {
+	substitute crash2
+}
+pad	splash3M {
+	substitute crash2M
+}
+
+pad	china6 {
+	substitute ride4PU
+}
+pad	china6RT {
+	substitute ride4
+}
+pad	china6M {
+	substitute ride4M
+}
+
+pad	ride4PU {
+	substitute crash5
+}
+pad	ride4M {
+	substitute crash5M
+}
+
+pad	ride4BL {
+	substitute ride4
+}
+pad	ride4 {
+	substitute crash5RT
+}
+
+
+# MUTING
+
+# Hats Muting
+
+SET HATSFADE 0.007
+SET SPLASHFADE 0.007
+
+group RELEASER hatsPedalRelease {
+	member hatsCT
+	member hatsCL
+	member hatsLO
+	member hatsO1
+	member hatsO2
+	member hatsO3
+	member hatsO4
+	member hatsO5
+	member hatsPLO
+	member hatsTT
+	member hatsTP
+	member hatsT0
+	member hatsT1
+	member hatsT2
+	member hatsT3
+	member hatsT4
+	member hatsT5
+}
+group TRANSMUTE hatsPedalizer {
+	crossfade	$HATSFADE
+	member hatsPedalRelease
+	member hatsPL
+}
+
+group SENDER hatsClosedSender {
+	member hatsPLO
+	member hatsPL
+}
+group RELEASER hatsClosedRelease {
+#	member hatsCL
+}
+group BUNDLE hatsClosed {
+	member hatsCL
+	member hatsClosedSender
+	member hatsClosedRelease
+}
+group RECEIVER hatsPLOReceiver {
+	member hatsPLO
+}
+group RELEASER hatsOpenReleaser {
+	member hatsPLOReceiver
+}
+group BUNDLE hatsOpen {
+	member hatsO5
+	member hatsOpenReleaser
+}
+group DISTRIBUTION distHats {
+	crossfade	$HATSFADE
+	transmute
+	skipfrontal
+	member hatsCT
+	member hatsClosed
+	member hatsLO
+	member hatsO1
+	member hatsO2
+	member hatsO3
+	member hatsO4
+	member hatsOpen
+}
+group distHatsTrig {
+	member hatsTrig
+}
+group MAP hatsCtrlMap {
+	map 126
+	map 120
+	map 105
+	map 90
+	map 60
+	map 30
+	map 8
+	member hatsCtrl
+}
+group distHatsCtrl {
+	member hatsCtrlMap
+}
+group KEEPER hatsPLO_keeper {
+	member hatsPLO
+}
+group DISTRIBUTION distHatsPedal {
+	crossfade	$SPLASHFADE
+	transmute
+	member hatsPL
+	member hatsPLO_keeper
+}
+group MAP hatsPedalCtrlMap {
+#	map 120
+	map 90
+	member hatsCtrl
+}
+group distHatsPedalCtrl {
+	member hatsPedalCtrlMap
+}
+group KEEPER hatsCTKeep {
+	member hatsCT
+}
+group KEEPER hatsCLKeep {
+	member hatsCL
+}
+group KEEPER hatsLOKeep {
+	member hatsLO
+}
+group KEEPER hatsO1Keep {
+	member hatsO1
+}
+group KEEPER hatsO2Keep {
+	member hatsO2
+}
+group KEEPER hatsO3Keep {
+	member hatsO3
+}
+group KEEPER hatsO4Keep {
+	member hatsO4
+}
+group KEEPER hatsO5Keep {
+	member hatsO5
+}
+group DISTRIBUTION distHatsTip {
+	crossfade	$HATSFADE
+	transmute
+
+	member hatsTT
+	member hatsTP
+	member hatsT0
+	member hatsT1
+	member hatsT2
+	member hatsT3
+	member hatsT4
+	member hatsT5
+}
+group distHatsTipTrig {
+	member hatsTipTrig
+}
+group distHatsTipCtrl {
+	member hatsCtrlMap
+}
+
+group BEAT SuperHats {
+	member distHats
+	member distHatsTip
+}
+
+# Snare Muting
+
+SET	SNAREFADE 0.1
+
+group BUNDLE snareClosed {
+	member snareSL
+}
+
+group RELEASER snareOpenRelease {
+	member snareFO
+	member snareFX
+}
+
+group BUNDLE snareOpen {
+	member snareR
+	member snareOpenRelease
+}
+group TRANSMUTE snare2 {
+	crossfade	$SNAREFADE
+	member snareOpen
+	member snareClosed
+}
+
+group DISTRIBUTION distSnare {
+	member snareFO
+	member snareR
+	startaction
+}
+group distSnareTrig {
+	member snareTrig
+}
+group MAP snareCtrlMap {
+	map 80
+	member snareCtrl
+}
+group distSnareCtrl {
+	member snareCtrlMap
+}
+
+# Ride Muting
+
+TEMPLATE RideMute
+group BUNDLE ride$1Open {
+	member ride$1
+	member ride$1PU
+	member ride$1BL
+}
+group MUTE muteride$1 {
+	fade	0.18
+	member ride$1Open
+	member ride$1M
+}
+END
+
+TEMPLATE RideTailMute
+pad {
+	name		$1TL
+	gather
+	gatheroffset	 $2 7180
+}
+group RELEASER ridemuterelease$1 {
+	member $1
+	member $1BL
+	member $1PU
+	member $1M
+	member $1TL
+}
+group TRANSMUTE ridemutetailer$1 {
+	loss 0.5
+	member $1TL
+	member ridemuterelease$1
+}
+pad $1 {
+    aftertoucher	$1TL
+    aftertouchrelay
+}
+pad $1BL {
+    aftertoucher	$1TL
+    aftertouchrelay
+}
+pad $1PU {
+    aftertoucher	$1TL
+    aftertouchrelay
+}
+pad $1M {
+    aftertoucher	$1TL
+    aftertouchrelay
+}
+
+
+END
+
+TEMPLATE RideSwellGroup
+group BUNDLE ride$1swells {
+	valuekind 2
+	member ride$1
+	member ride$1PU
+}
+group BUNDLE ride$1swellsBell {
+	valuekind 2
+	member ride$1BL
+}
+END
+
+USE RideSwellGroup 4
+USE RideMute 4
+USE RideTailMute ride4
+
+# Crash Muting
+
+TEMPLATE CrashMute
+group BUNDLE crash$1Open {
+	member crash$1
+	member crash$1RT
+}
+group MUTE mutecrash$1 {
+	fade	0.18
+	member crash$1Open
+	member crash$1M
+}
+END
+
+TEMPLATE CrashTailMute
+pad {
+	name		$1TL
+	gather
+	gatheroffset	 $2 7180
+}
+group RELEASER crashmuterelease$1 {
+	member $1
+	member $1RT
+	member $1M
+	member $1TL
+}
+group TRANSMUTE crashmutetailer$1 {
+	loss 0.2
+	member $1TL
+	member crashmuterelease$1
+}
+pad $1 {
+    aftertoucher	$1TL
+    aftertouchrelay
+}
+pad $1RT {
+    aftertoucher	$1TL
+    aftertouchrelay
+}
+pad $1M {
+    aftertoucher	$1TL
+    aftertouchrelay
+}
+END
+
+TEMPLATE CrashSwellGroup
+group BUNDLE crash$1swells {
+	valuekind 2
+	member crash$1
+	member crash$1RT
+}
+END
+
+USE CrashSwellGroup 1
+USE CrashSwellGroup 2
+USE CrashSwellGroup 5
+USE CrashSwellGroup 6
+
+USE CrashMute 1
+USE CrashMute 2
+USE CrashMute 5
+USE CrashMute 6
+
+USE CrashTailMute crash1
+USE CrashTailMute crash2
+USE CrashTailMute crash5
+USE CrashTailMute crash6
+
+# China Muting
+
+TEMPLATE ChinaMute
+group BUNDLE china$1Open {
+	member china$1
+	member china$1RT
+}
+group MUTE mutechina$1 {
+	fade	0.18
+	member china$1Open
+	member china$1M
+}
+END
+
+TEMPLATE ChinaTailMute
+pad {
+	name		$1TL
+	gather
+	gatheroffset	 $2 7180
+}
+group RELEASER chinamuterelease$1 {
+	member $1
+	member $1RT
+	member $1M
+	member $1TL
+}
+group TRANSMUTE chinamutetailer$1 {
+	loss 0.2
+	member $1TL
+	member chinamuterelease$1
+}
+pad $1 {
+    aftertoucher	$1TL
+    aftertouchrelay
+}
+pad $1RT {
+    aftertoucher	$1TL
+    aftertouchrelay
+}
+pad $1M {
+    aftertoucher	$1TL
+    aftertouchrelay
+}
+END
+
+
+TEMPLATE ChinaSwellGroup
+group BUNDLE china$1swells {
+	valuekind 2
+	member china$1
+	member china$1RT
+}
+END
+
+USE ChinaSwellGroup 6
+USE ChinaMute 6
+USE ChinaTailMute china6
+
+
+# Splash Muting
+
+TEMPLATE SplashMute
+group BUNDLE splash$1Open {
+	member splash$1
+}
+group MUTE mutesplash$1 {
+	fade	0.18
+	member splash$1Open
+	member splash$1M
+}
+END
+
+TEMPLATE SplashTailMute
+pad {
+	name		$1TL
+	gather
+	gatheroffset	 $2 7180
+}
+group RELEASER splashmuterelease$1 {
+	member $1
+	member $1M
+	member $1TL
+}
+group TRANSMUTE splashmutetailer$1 {
+	loss 0.2
+	member $1TL
+	member splashmuterelease$1
+}
+pad $1 {
+    aftertoucher	$1TL
+    aftertouchrelay
+}
+pad $1M {
+    aftertoucher	$1TL
+    aftertouchrelay
+}
+END
+
+TEMPLATE SplashSwellGroup
+group BUNDLE splash$1swells {
+	valuekind 2
+	member splash$1
+}
+END
+
+USE SplashSwellGroup 3
+USE SplashMute 3
+USE SplashTailMute splash3

@@ -1,33 +1,39 @@
-# GABRIEL
+# D1 Database Schemas
 
-**Surface:** iPhone
-**Role:** Voice-first capture. Always-on field agent.
+All Cloudflare D1 database schemas for NOIZYLAB ecosystem.
 
-Gabriel is the architect's voice in the field. He listens when the iPhone
-is open, captures speech, transcribes it through the audio pipeline, and
-posts it into Lucy as a message with `agent_id = Gabriel`.
+## Databases
 
-## Inputs
-- iPhone microphone (architect's own voice only)
-- PWA foreground state (sends heartbeats to Lucy)
+| Database | ID | Purpose |
+|----------|-----|---------|
+| noizylab-repairs | 2bd4aa06-f9b2-4761-b235-e92e8a21fe45 | Customer repairs |
+| mc96-command-central | ef4eda10-7dda-4c31-839d-5d79d76da43f | Automation hub |
+| agent-memory | 7b813205-fd12-4a23-84a6-ce83bc49ec70 | AI agent state |
+| email-command-center | 313df650-60db-4392-b048-f5972c57903d | Email routing |
+| ai-router-brain | df931d37-b367-4f81-ae32-149e05166cb6 | Model routing |
+| rsp-master-budget | 74e6b824-5c10-4b02-8060-3c20217a8ba9 | Financials |
+| tencc-pipeline | d1a5c748-6e27-43a6-b5f1-394e748da0dc | 10CC pipeline |
+| subscription-killer | 145b3abb-8647-4514-b39e-79f3a9f03c6a | Sub cleanup |
+| godaddy-escape-tracker | dfe9343e-c84c-49fd-8a02-052f37a7155b | Domain migration |
+| aquarium-archive | e6f98279-656b-4f7a-979d-9197821193f5 | Archive catalog |
 
-## Outputs
-- Messages persisted to Lucy D1 (`messages` table)
-- Heartbeats to `device_status` (surface = 'iphone')
+## Schema Files
 
-## Boundaries
-- Records only when the architect has explicitly started a session.
-- Does not listen in the background without a visible indicator.
-- Never records other people without their knowledge and consent.
+- `noizylab-repairs.sql` - Repair tracking
+- `mc96-command.sql` - Command routing
+- `agent-memory.sql` - Agent state
+- `email-routing.sql` - Email rules
+- `aquarium.sql` - Archive metadata
 
-## Implementation
-- PWA build of `agents/lucy/pwa/` with:
-  - `VITE_DEVICE_ID=iphone-gabriel`
-  - `VITE_AGENT_ID=Gabriel`
-- Voice input via Web Speech API (Phase 3.1) or Safari dictation (Phase 3.0)
-- Voice state machine spec: `../../voice-state-logic/`
+## Deploy Schema
 
-## Status
-- [ ] PWA installed on iPhone
-- [ ] Heartbeat to `/api/ping` confirmed
-- [ ] First voice capture persisted to D1
+```bash
+# Deploy to specific database
+wrangler d1 execute noizylab-repairs --file=./noizylab-repairs.sql
+
+# Deploy all
+for f in *.sql; do
+  db=$(basename "$f" .sql)
+  wrangler d1 execute "$db" --file="$f"
+done
+```

@@ -1,0 +1,1518 @@
+
+Disclaimer
+The information in this document is subject to change without notice and does not represent a
+commitment on the part of Native Instruments GmbH. The software described by this docu-
+ment is subject to a License Agreement and may not be copied to other media. No part of this
+publication may be copied, reproduced or otherwise transmitted or recorded, for any purpose,
+without prior written permission by Native Instruments GmbH, hereinafter referred to as Native
+Instruments.
+“Native Instruments”, “NI” and associated logos are (registered) trademarks of Native Instru-
+ments GmbH.
+All other trademarks are the property of their respective owners and use of them does not imply
+any affiliation with or endorsement by them.
+Document authored by: Gustav Santo Tomas, Jan Ola Korte
+Software version: 1.1 (03/2017)
+Special thanks to the Beta Test Team, who were invaluable not just in tracking down bugs, but
+in making this a better product.
+Contact
+NATIVE INSTRUMENTS GmbH
+Schlesische Str. 29-30
+D-10997 Berlin
+Germany
+www.native-instruments.de
+NATIVE INSTRUMENTS North America, Inc.
+6725 Sunset Boulevard
+5th Floor
+Los Angeles, CA 90028
+USA
+www.native-instruments.com
+NATIVE INSTRUMENTS K.K.
+YO Building 3F
+Jingumae 6-7-15, Shibuya-ku,
+Tokyo 150-0001
+Japan
+www.native-instruments.co.jp
+NATIVE INSTRUMENTS UK Limited
+18 Phipp Street
+London EC2A 4NU
+UK
+www.native-instruments.co.uk
+© NATIVE INSTRUMENTS GmbH, 2017. All rights reserved.
+Table of Contents
+Table of Contents
+1 Welcome to FORM .....................................................................................................6
+1.1 Introduction ................................................................................................................................ 6
+1.2 Document Conventions ............................................................................................................... 7
+1.3 How to Open FORM ..................................................................................................................... 8
+1.4 Getting Started ........................................................................................................................... 10
+1.4.1 1.4.2 1.4.4 Loading a Preset ........................................................................................................ 11
+Saving a Preset ......................................................................................................... 12
+1.4.3 Resetting Sounds ...................................................................................................... 14
+Loading Your own Sample ......................................................................................... 15
+2 Overview of the FORM Interface ..................................................................................19
+2.1 The Header ................................................................................................................................. 20
+2.2 The Main Section ........................................................................................................................ 22
+2.3 The Footer ................................................................................................................................... 26
+2.4 The Compact View ...................................................................................................................... 28
+3 The SAMPLE Page .....................................................................................................31
+4 The SOUND Page .......................................................................................................35
+4.1 The FORM OSC Section ............................................................................................................... 36
+4.2 ADDITIVE OSC ............................................................................................................................. 38
+4.3 OSC FX ........................................................................................................................................ 39
+4.4 MODULATION .............................................................................................................................. 40
+4.4.1 ENV ............................................................................................................................ 41
+4.4.2 LFO ............................................................................................................................ 43
+4.4.3 SC .............................................................................................................................. 44
+4.4.4 Assigning Modulation ................................................................................................ 46
+4.4.5 Removing Modulation ................................................................................................ 53
+FORM - Manual - 4
+Table of Contents
+4.4.6 Modulating Modulator Parameters ............................................................................ 55
+4.5 FILTER ........................................................................................................................................ 57
+5 The EFFECTS Page .....................................................................................................58
+5.1 FREQUENCY SHAPING ................................................................................................................. 59
+5.2 WARMTH ..................................................................................................................................... 60
+5.3 DYNAMICS .................................................................................................................................. 61
+5.4 DELAY ......................................................................................................................................... 62
+5.5 REVERB ...................................................................................................................................... 63
+6 The Footer ................................................................................................................65
+6.1 SPEED ......................................................................................................................................... 65
+6.2 MOTION ....................................................................................................................................... 67
+6.2.1 The CURVE PRESETS .................................................................................................. 68
+6.2.2 The CURVE EDITOR .................................................................................................... 69
+6.2.3 Creating a Motion Curve ............................................................................................ 74
+6.3 PERFORM .................................................................................................................................... 84
+6.3.1 6.3.2 6.3.3 6.3.4 6.3.5 Saving a Sound to a Performance Slot ....................................................................... 87
+Switching between Performance Slots ....................................................................... 88
+Copying a Sound to another Performance Slot ........................................................... 90
+Clearing Performance Slots ....................................................................................... 91
+Playing FORM in Multi Mode ...................................................................................... 92
+6.4 Macro Controls ........................................................................................................................... 94
+6.4.1 6.4.2 Assigning Macro Controls to Modulation Destinations ............................................... 94
+The Macro Label Menu ............................................................................................... 99
+6.4.3 Knob Type and Polarity .............................................................................................. 101
+7 Credits ......................................................................................................................105
+FORM - Manual - 5
+Welcome to FORM
+Introduction
+1 Welcome to FORM
+Thank you very much for downloading FORM from Native Instruments. This new and exciting
+synthesizer can be used either with the free REAKTOR 6 PLAYER, or the full version of REAK-
+TOR 6. On behalf of the entire NATIVE INSTRUMENTS team, we hope this product will inspire
+you.
+It is recommended to download and install the latest version of REAKTOR 6 or REAK-
+TOR 6 PLAYER before using FORM. You can update REAKTOR 6 with Native Access.
+The latest version of the free REAKTOR 6 PLAYER is available here:
+https://www.native-instruments.com/de/products/komplete/synths/reaktor-6-player/
+1.1 Introduction
+FORM is a complex yet easy-to-use REAKTOR 6 instrument that lets you take your own sam-
+ples and twist and turn them into completely different sounds. Use the bespoke Motion Curves
+or create your own ones in order to get interesting textures and new futuristic sounds. FORM is
+a powerful instrument with an intuitive interface that lets you get started quickly by simply
+dragging and dropping a sample into the interface. At the same time FORM offers a multitude
+of ways to influence the direction of the sound and gives you access to parameters for modula-
+tion and to effects so that you may change everything from timbre to length until your samples
+are far beyond recognition.
+When you drag a sample into FORM, the instrument analyses it. After determining the pitches
+present in the sample, FORM constructs a pitch curve that is superimposed on the sample (see
+↑3, The SAMPLE Page). If two or more pitches are present in a section of the sample, FORM
+chooses the most dominant pitch as the base frequency for that section. Based on this pitch
+curve, FORM resynthesizes the sample by means of a Pitch Synchronous Overlap and Add
+(PSOLA) algorithm. This algorithm is able to read the pitch curve, and use it to reproduce the
+sample at any speed as well as change the sample to any pitch. FORM then lets you play back
+the sample in different keys and by using the advanced PERFORM section (see ↑6.3, PER-
+FORM), which lets you save up to twelve separate variations of your Sound and play these with
+your MIDI keyboard.
+FORM - Manual - 6
+Welcome to FORM
+Document Conventions
+1.2 Document Conventions
+This document uses particular formatting to point out special facts and to warn you of poten-
+tial issues. The icons introducing the following notes let you see what kind of information can
+be expected:
+The speech bubble icon indicates a useful tip that may often help you to solve a task
+more efficiently.
+The exclamation mark icon highlights important information that is essential for the giv-
+en context.
+The red cross icon warns you of serious issues and potential risks that require your full
+attention.
+Furthermore, the following formatting is used:
+▪ Text appearing in (drop-down) menus (such as Open…, Save as… etc.) in the software and
+paths to locations on your hard disk or other storage devices is printed in italics.
+▪ Text appearing elsewhere (labels of buttons, controls, text next to checkboxes etc.) in the
+software is printed in blue. Whenever you see this formatting applied, you will find the
+same text appearing somewhere on the screen.
+▪ Important names and concepts are printed in bold.
+▪ References to keys on your computer’s keyboard you’ll find put in square brackets (e.g.,
+“Press [Shift] + [Enter]”).
+► Single instructions are introduced by this play button type arrow.
+→ Results of actions are introduced by this smaller arrow.
+FORM - Manual - 7
+Welcome to FORM
+How to Open FORM
+1.3 How to Open FORM
+This is how to open FORM in REAKTOR or REAKTOR PLAYER:
+1. Start REAKTOR or REAKTOR PLAYER.
+2. Click the Browser icon to open the Browser
+3. Click the Player tab to show the REAKTOR PLAYER files (or you can open the browser
+with the [F1] key from your keyboard).
+FORM - Manual - 8
+4. 5. Welcome to FORM
+How to Open FORM
+Click the FORM folder. The content of the folder will be displayed in the lower section of
+the browser.
+Double-click the FORM.ens file, or drag it into the main screen.
+FORM - Manual - 9
+Welcome to FORM
+Getting Started
+6. FORM will be loaded in REAKTOR/REAKTOR PLAYER:
+1.4 Getting Started
+To get you started right away, FORM comes equipped with a library of Factory Presets that you
+can quickly load from the REAKTOR browser. Doing so will load a sample and set all FORM's
+parameters to preset values. You can play these as they are, or use them to as a starting point
+for your own sound manipulations.
+Please note that the workflow of browsing and saving user presets has changed in RE-
+AKTOR 6.0.3. To save a preset, you do not need to enter REAKTOR’s edit mode any-
+more. By default presets are saved in the global preset saving folders: Windows: C:
+\Users\<User>\Documents\Native Instruments\User Content\Form
+OS X: Macintosh HD:\Users\<User>\Documents\Native Instruments\User Content\Form
+You can browse for presets stored in the location from REAKTOR’s Browser (in Play
+mode) as well as from the MASCHINE and KOMPLETE KONTROL Browsers.
+FORM - Manual - 10
+Welcome to FORM
+Getting Started
+1.4.1 Loading a Preset
+1. Open the Presets tab.
+2. Double-click on Factory to display the Preset folders.
+⇨ The list with the Factory Preset folders is displayed.
+FORM - Manual - 11
+Welcome to FORM
+Getting Started
+3. Browse through the folders and select a preset from the list below.
+→ The preset is loaded and ready to be played.
+1.4.2 Saving a Preset
+1. Open the Presets tab.
+FORM - Manual - 12
+Welcome to FORM
+Getting Started
+2. Double-click on User entry.
+3. Click on the Add button at the bottom of the Browser.
+⇨ An entry appears in the list. By default t contains the highlighted name of the current pre-
+set.
+4. Enter the desired name for the preset.
+5. Confirm with the Return key on your computer keyboard.
+FORM - Manual - 13
+Welcome to FORM
+Getting Started
+→ The preset is saved.
+1.4.3 Resetting Sounds
+In order to really get to know FORM and its capabilities, it can be helpful to start with a clean
+slate and load your own sample. To set all of FORM's controls to default and load a sample,
+start by clearing all settings and opening the SAMPLE SELECT page.
+1. To set all controls to default and reset the Sound, including all Performance slots in the
+PERFORM section, click the RESET SOUND button in the bottom left corner of FORM's
+interface.
+⇨ The button will turn into red and read CLICK TO CONFIRM.
+FORM - Manual - 14
+Welcome to FORM
+Getting Started
+2. To confirm your selection and effectively clear the Sound, click the button. Otherwise
+click the small cross icon to cancel.
+→ The Sound is reset and the button turns into green reading SOUND CLEARED.
+1.4.4 Loading Your own Sample
+1. To open the SAMPLE SELECT page, click the SAMPLE SELECT button, located in the up-
+per left corner of the interface, directly below the FORM icon.
+FORM - Manual - 15
+Welcome to FORM
+Getting Started
+2. To load a sample, click and drag it from your user library in the REAKTOR browser to
+FORM’s waveform display, located at the center of the SAMPLE SELECT page.
+The waveform of the sample appears in the waveform display.
+FORM - Manual - 16
+Welcome to FORM
+Getting Started
+3. To keep this sample and analyze it for the FORM oscillator, click the LOAD SAMPLE but-
+ton below the waveform display.
+If the length of your chosen samples exceeds 30 seconds, a timeframe of 30 seconds will be
+selected from the sample. You can select the timeframe yourself by clicking and dragging the
+white handles in each lower corner of timeframe within the waveform display.
+FORM - Manual - 17
+Welcome to FORM
+Getting Started
+For longer samples, a timeframe is selected for analysis
+Once you have loaded a sample into FORM, click the LOAD SAMPLE button, and the instru-
+ment will analyze the audio content. Now you can apply FORM's Motion Curves to the audio
+and create complex and interesting new sounds. You can control and edit these Motion Curves
+in a multitude of ways and even create your own. Furthermore, you can use the PERFORM sec-
+tion to save different Curves or even alternative variations of the Sound altogether and play
+them back using a control octave on your MIDI keyboard.
+► To learn more about the possibilities of FORM, continue reading this document.
+FORM - Manual - 18
+Overview of the FORM Interface
+2 Overview of the FORM Interface
+FORM is an interesting instrument based on combining your own samples with FORM’s crea-
+tive Motion Curves. Start by loading a sample into the waveform display of the SAMPLE page
+or on the SAMPLE SELECT page and selecting one of the provided Motion Curves in the MO-
+TION section at the center bottom of the interface. Once you have done so, you are already on
+the way to experiencing the easy-to-use and yet extremely versatile power of FORM.
+1
+2
+3
+Overview of FORM's interface.
+(1) The Header: This section lets you select the page to display in the Main section and holds
+controls for voicing and to influence the PERFORM section. For detailed information, see ↑2.1,
+The Header.
+FORM - Manual - 19
+Overview of the FORM Interface
+The Header
+(2) The Main section: The controls displayed here change depending on your selection in the
+Header. The Main section displays the controls that are available for the SAMPLE, SOUND,
+and EFFECTS pages as well as the Motion Curve CURVE PRESETS and CURVE EDITOR. For
+detailed information, see ↑2.2, The Main Section.
+(3) The Footer: This area displays the SPEED, MOTION, and PERFORM sections as well as the
+Macro controls and is visible at all times. For detailed information, see section ↑2.3, The Foot-
+er.
+Alternatively, you can use FORM’s Compact view, which features a streamlined interface
+and is well suited for browsing presets. For more information, see ↑2.4, The Compact
+View.
+2.1 The Header
+The Header is located at the top of the interface. It is visible at all times and contains a selec-
+tor that lets you switch between pages to display at the Main section. Furthermore, the Header
+holds controls for voicing and parameters relating to the PERFORM section.
+1 2 3 4 5 6 7 8
+9 10 11 12 13 14 15
+The Header
+(1) FORM icon: Opens the product credits in the Main section.
+(2) SAMPLE: Click this to display and access the waveform of the loaded sample.
+(3) SOUND: Click this to access parameters for controlling FORM’s oscillators and to control
+the modulators and filters.
+FORM - Manual - 20
+Overview of the FORM Interface
+The Header
+(4) EFFECTS: Click this to access FORM’s effects section. It contains both traditional effects
+like reverb and delay and the new frequency shaping tool.
+(5) EFFECTS OFF: Click to bypass all effect units of the EFFECTS page.
+(6) Key lock button: Switch this on to lock the EFFECTS OFF button to its current state (on or
+off) while browsing through FORM's Presets. This means that you can audition FORM's Presets
+either untouched or without effect units.
+(7) TUNE: Drag the slider right or left to tune the master output up or down, respectively.
+(8) VOL: The master volume slider lets you click and drag to set the output level.
+(9) SAMPLE SELECT: Click this button to open the SAMPLE SELECT page, were you can load
+and preview your samples.
+(10) Voice selector: Select one of three voicing modes:
+▪ POLY: Lets you play back your samples using two or more notes simultaneously.
+▪ MONO RETRIG: Monophonic Retrigger mode. Only one note at a time will be played. Enve-
+lopes and/or LFOs will be retriggered by every new MIDI Note On event.
+▪ MONO LEG: Monophonic Legato mode. Only one note at a time will be played. Envelopes
+and/or LFOs will be retriggered only when a MIDI Note Off event is received before the next
+MIDI Note On event (non-legato).
+(11) GLIDE: Sets the amount of time it takes to transition from one note pitch to another.
+(12) RESET PHASE: Activate to reset the phase of the oscillators when a key is pressed.
+(13) SPREAD: Turn to set the pitch offset for each voice when in UNISON and MULTI MODE.
+(14) Perform Voice selector: This lets you define how the PERFORM section will behave. Select
+one of three different settings:
+▪ SINGLE: This mode plays back one active Performance slot.
+▪ UNISON: This mode plays back up to four versions of the active Performance slot, depend-
+ing on the setting of the Voice Amount button to the right of the Perform Voice selector.
+▪ MULTI MODE: This mode plays back up to four different saved Performance slots simulta-
+neously. The Performance slots being played back are visually reflected in the PER-
+FORM section at the bottom right of the FORM interface.
+FORM - Manual - 21
+Overview of the FORM Interface
+The Main Section
+(15) Voice Amount: Click this button to set a number (2-4) of voices for the Performance slots
+to play back simultaneously in UNISON and MULTI MODE. When doing so, you are using mul-
+tiple voices to play one note, meaning that you are reducing the total amount of voices you can
+play back simultaneously. Setting Voice Amount to 2 equals four available notes, whereas set-
+ting it to 4 gives you two simultaneously playable notes.
+2.2 The Main Section
+The Main section displays parameters belonging either to the SAMPLE, SOUND, or EF-
+FECTS page, depending on your selection in the Header. This is also the section where you can
+browse and edit Motion Curves in detail using the CURVE EDITOR.
+The Main section gives you controls to shape the sound of your sample into something com-
+pletely different. Using the selector in the Header you can display and control parameters ei-
+ther for the SAMPLE, SOUND, or EFFECTS page.
+The SAMPLE Page
+The SAMPLE page
+FORM - Manual - 22
+Overview of the FORM Interface
+The Main Section
+The SAMPLE page lets you select and load your samples via drag-and-drop. For more detailed
+information, see section ↑3, The SAMPLE Page.
+The SOUND Page
+The SOUND page
+The SOUND page lets you shape, edit and modulate the sound of your sample. For more de-
+tailed information, see section ↑4, The SOUND Page.
+FORM - Manual - 23
+Overview of the FORM Interface
+The Main Section
+The EFFECTS Page
+The EFFECTS page with effect units switched on
+The EFFECTS page lets you further control your output by giving you access to a set of classic
+and creative effects. For more detailed information, see section ↑5, The EFFECTS Page.
+FORM - Manual - 24
+Overview of the FORM Interface
+The Main Section
+The CURVE EDITOR
+The CURVE EDITOR displayed in the Main section.
+The CURVE EDITOR is called up by clicking the CURVE EDITOR button in the MOTION sec-
+tion in the Footer. It lets you create your own Motion Curves and edit pre-existing ones in full
+detail. For more detailed information, see section ↑6.2.2, The CURVE EDITOR.
+The CURVE EDITOR button in the MOTION section.
+FORM - Manual - 25
+Overview of the FORM Interface
+The Footer
+2.3 The Footer
+This area contains the SPEED, MOTION, and PERFORM sections as well as the Macro con-
+trols. The Footer area is visible at all times, regardless of what parameters you are monitoring
+in the Main section. The controls are split into three sections, each controlling a different as-
+pect of the sound.
+1 2 3
+4
+5 6
+The Footer
+(1) SPEED: This section contains controls for playback speed.
+(2) MOTION: This section contains controls for the Motion Curves.
+(3) PERFORM: This section contains controls for playing and saving variations of the Sound in
+twelve Performance slots.
+(4) RESET SOUND: Click to reset all of FORM's parameters to default, effectively clearing the
+Sound.
+(5) Macro controls: The Macro controls can be assigned as modulation sources for any of
+FORM’s parameter available for modulation. You can set polarity and select one the available
+labels to organize your macros according to their modulation destinations.
+(6) MOD AMOUNT: This slider sets the total amount of modulation being sent to all destina-
+tions simultaneously.
+FORM - Manual - 26
+Overview of the FORM Interface
+The Footer
+The SPEED Section
+The SPEED section lets you decide how fast the Motion Curve is played back and in extension
+the loaded sample. You can choose between syncing it to the tempo of your host or repeat the
+playback at a given frequency, or at a set speed in relation to the length of your sample. You
+can also control the playback position manually, with the modulation system, or via host auto-
+mation. For more detailed information about the SPEED section, see section ↑6.1, SPEED.
+Modulating the speed by e.g. an LFO can add interesting and unexpected textures and
+variations to your sound.
+The MOTION Section
+The MOTION section is where you select your Motion Curve and control its settings, e.g.
+whether the playhead should move freely or retrigger. This is also where you call up the
+CURVE EDITOR to create and edit your own Motion Curves. To get started with Motion Curves,
+you can also use the CURVE PRESETS to load one of the many existing curves. For more de-
+tailed information about the MOTION section, see section ↑6.2, MOTION.
+The PERFORM Section
+The PERFORM section in the bottom right corner of the interface lets you save variations of
+the Sound to Performance slots and play these back using a control octave on your MIDI key-
+board. This effectively means that you can have up to twelve variations of a Sound and play
+these back, either one at a time or even simultaneously, depending on the settings for UNISON
+and MULTI MODE located in the Header to the far right. For more detailed information about
+the PERFORM section, see section ↑6.3, PERFORM.
+The Macro Controls
+The Macro controls are located at the very bottom of the interface. They can be used as a mod-
+ulation source to control almost any parameter in FORM’s interface. You can assign each Mac-
+ro control to as many parameters as you want. For more detailed information about the Mac-
+ro controls, see section ↑6.4, Macro Controls.
+FORM - Manual - 27
+Overview of the FORM Interface
+The Compact View
+2.4 The Compact View
+The Compact view is ideal for browsing and playing presets. Its focused interface lets you
+change key parameters with the four Macro controls. Each preset comes with its own set of
+Macro control assignments, specifically chosen to bring out key aspects of the sound.
+► To switch to Compact view, right-click in FORM’s Header and select View B from the con-
+text menu.
+→ FORM is now displayed in Compact view.
+FORM - Manual - 28
+Overview of the FORM Interface
+The Compact View
+1
+2
+3
+4
+5
+6
+7
+8
+9
+Compact view
+(1) VOL: The master volume slider lets you click and drag to set the output level.
+(2) Waveform display: Displays the waveform of your loaded sample.
+(3) Performance slots: Click any slot to switch to it, resetting all parameters to their saved state.
+For more information, see ↑6.3, PERFORM.
+(4) Perform settings button: Click to show the Perform settings, where you can set up the control
+octave for switching between Performance slots from your MIDI keyboard. For more informa-
+tion, see ↑6.3, PERFORM.
+(5) Macro 1: This knob controls all parameters assigned to the first Macro control. For more
+information, see ↑6.4, Macro Controls.
+FORM - Manual - 29
+Overview of the FORM Interface
+The Compact View
+(6) Macro 2: This knob controls all parameters assigned to the second Macro control. For more
+information, see ↑6.4, Macro Controls.
+(7) Macro 3: This knob controls all parameters assigned to the third Macro control. For more
+information, see ↑6.4, Macro Controls.
+(8) Macro 4: This knob controls all parameters assigned to the fourth Macro control. For more
+information, see ↑6.4, Macro Controls.
+(9) Effects switches: Click to enable or disable the individual sections on the EFFECTS page.
+WARMTH is only available when FREQ SHAPING is enabled. For more information, see ↑5,
+The EFFECTS Page.
+FORM - Manual - 30
+The SAMPLE Page
+3 The SAMPLE Page
+The SAMPLE page displays the waveform of your loaded sample. Just as with the SAMPLE SE-
+LECT page, you can drag and drop samples directly into the Waveform display on the SAM-
+PLE page. Aside from loading samples, the SAMPLE page allows you to view the pitch curve,
+control the playback of the sample, and adjust the selection that is used for playback.
+Loading a Sample
+1. To load a sample into the SAMPLE page, click and drag a sample from the REAKTOR
+browser into FORM's Waveform display.
+⇨ The SAMPLE SELECT page opens automatically.
+2. Click the LOAD SAMPLE button in the SAMPLE SELECT page to analyze the sample’s au-
+dio content in order to use it for synthesis.
+Pitch Curve
+The pitch curve represents all pitches that FORM has detected in your sample. You can display
+the pitch curve on the SAMPLE page. It is not available on the SAMPLE SELECT page. Dis-
+playing the pitch curve can be helpful when deciding on a time frame for your sample, as you
+may end up with different-sounding timbres depending on the pitch of the loaded sample. Fur-
+thermore, it can be used as a modulation source for parameters.
+FORM - Manual - 31
+The SAMPLE Page
+► To display the PITCH CURVE, click the PITCH CURVE button to the far right.
+Sample Playback Controls
+Whenever FORM is playing back your sample, the SAMPLE page indicates where the play head
+is located at any given point. This can be especially helpful if you are using a Motion Curve
+that loops, or if you are modulating the playback speed.
+► To manually set the location of the play head along the time axis, click and drag the
+touch strip at the top of the Waveform display.
+You can also change the position and the size of the sample selection, which lets you focus on
+a specific section of the sample, restricting the playback accordingly.
+FORM - Manual - 32
+The SAMPLE Page
+► To change the start and the end point of the selection, click and drag the handles at the
+bottom.
+► To change the position and the width of the sample at the same time, click into the se-
+lection and drag the mouse up and down to adjust the size of the selection, as well as left
+and right to change its position in the sample.
+FORM - Manual - 33
+The SAMPLE Page
+Alternatively, you can use the dedicated CENTER and WIDTH controls in the top left corner of
+the waveform display to change the position and the size of the selection. They can also be
+modulated, allowing you to change the selected portion of the sample dynamically.
+.
+Zoom
+In order to get a more detailed view of a specific region of the sample, you can zoom in on the
+waveform.
+► To zoom in on your waveform, right-click the waveform and drag the mouse cursor down-
+ward. To zoom out, right-click-and-drag it upward instead.
+► To move the visual part of the waveform sideways while zoomed in, right-click the wave-
+form and drag the mouse cursor left or right.
+FORM - Manual - 34
+The SOUND Page
+4 The SOUND Page
+Use the controls on the SOUND page to precisely shape the sound you are looking for, and to
+modulate parameters and thus make the sound evolve over time. To open the SOUND page,
+click SOUND in the Page selector in the Header.
+The SOUND page is divided into five separate sections, each with its own controls. It is worth
+noting, however, that certain controls, e.g., the DEFORM knob in the OSC FX section greatly
+influence the controls of the FORM OSC section. Likewise, the controls in the MODULA-
+TION section can be assigned to modulate just about any parameter of the FORM instrument.
+To learn more about the sections of the SOUND page, keep reading below.
+1
+4
+2
+5
+3
+The SOUND page
+(1) FORM OSC: This section gives you control over frequency-related parameters, such as
+PITCH and FORMANT.
+(2) ADDITIVE OSC: This section lets you add another oscillator to mix with the sample you
+loaded in order to create a more powerful sounding output. The ADDITIVE OSC is also used as
+a modulator for FM modulation of the OSC FX unit.
+FORM - Manual - 35
+The SOUND Page
+The FORM OSC Section
+(3) OSC FX: This section holds parameters controlling the output sound. Controls for FM and
+stereo modulation are available, and you can also choose the degree to which you want to de-
+form the sound entirely.
+(4) MODULATION: This section contains an advanced collection of modulators, ranging from
+envelopes and LFOs to creative side-chain modulation, in which two modulators e.g. multiply
+each other, with the resulting signal being used to modulate any other parameter of FORM.
+(5) FILTER: This section contains a polyphonic multimode filter with corresponding controls.
+4.1 The FORM OSC Section
+The FORM OSC section is where you can control the output of FORM’s audio engine. FORM
+analyzes the audio content of your sample and then uses it to synthesize new sounds. In the
+FORM OSC section you can set parameters relating to FORM’s audio engine, such as pitch
+tracking and formant fine-tuning.
+FORM - Manual - 36
+The SOUND Page
+The FORM OSC Section
+2
+1
+6
+3
+4
+7
+5
+FORM OSC
+(1) PITCH: Click and drag the numbers up or down to transpose the oscillator pitch. The upper
+digit displays the amount of semitones by which you are transposing the pitch. The lower digits
+are cents ranging from -50 to +50. Setting the cent value to -50 will effectively jump to +50
+of a smaller semitone value.
+(2) PITCH TRACKING: Is automatically switched on unless you activate the DEFORM function
+in the OSC FX section, which effectively overrides the PITCH TRACKING.
+(3) FLATTEN PITCH: Flattens the pitch curve to the key you press on your MIDI keyboard.
+Note however, that the sample pitch curve in its original form is still available as a modulation
+source.
+(4) PAN: Pans the audio from to the left or right.
+(5) FORMANT: Turn this either direction to shift the formants of the waveform.
+FORM - Manual - 37
+The SOUND Page
+ADDITIVE OSC
+(6) FORMANT TRACK: Switch this on to adjust the formant of the waveform automatically in
+relation to the pitch of each note.
+(7) AMP: Sets the amplification level for the FORM OSC. The amplifier is hardwired to the en-
+velope ENV1 in the MODULATION section of the SOUND page.
+4.2 ADDITIVE OSC
+As some samples lack audio content in certain areas of the frequency spectrum, FORM comes
+equipped with an extra oscillator that can be used to fill out your sounds. Use it to achieve
+richer sounds in the frequencies corresponding to the level set by the OCTAVE control.
+1 2 3
+ADDITIVE OSC
+(1) OCTAVE: Click and drag to add a set of predefined harmonic pitch offsets in relation to the
+FORM OSC. This can be useful for adding bass as well as for driving frequency modulation,
+which is set by the FM knob in the OSC FX section (see section ↑4.3, OSC FX).
+(2) WAVEFORM: Turn this control to set the waveform of the additive oscillator. For a pure sine
+waveform, turn the knob all the way to the left end stop. For a soft saw-type waveform, set the
+knob to the center position. For a soft square-type waveform, turn the knob all the way to the
+right end stop.
+(3) VOLUME: Sets the volume of the additive oscillator.
+FORM - Manual - 38
+The SOUND Page
+OSC FX
+4.3 OSC FX
+The OSC FX section contains controls for shaping FORM's oscillator, such as frequency modu-
+lation and a wide stereo effect. The display at the center of the section visualizes the oscilla-
+tions playing in real time.
+1
+2
+3
+4 5 6
+OSC FX
+(1) DEFORM on/off: This switch activates or deactivates the DEFORM function, which effec-
+tively overrides the PITCH TRACKING function of the FORM OSC section. Doing so flattens the
+pitch, regardless of the setting in the FORM OSC section, and lets you use the DEFORM knob
+to destruct the sound.
+(2) DEFORM knob: Turn this knob in either direction to set a pitch and manually introduce a
+type of sonic destruction effect that effectively deforms your sound.
+(3) SHAPER: Turn this knob clockwise to shape the waveform segments in FORM's oscillator.
+FORM - Manual - 39
+The SOUND Page
+MODULATION
+(4) FM: Turn this knob clockwise to set the level of frequency modulation by which the ADDI-
+TIVE OSC FM modulates the FORM OSC.
+(5) STEREO: This bipolar knob jitters the play head position between the left and right chan-
+nels.
+(6) MULTIPLY: Turn this knob clockwise to increasingly compress the waveform and introduce
+more harmonic content.
+4.4 MODULATION
+The advanced MODULATION section lets you assign and define modulation and even cross-
+modulation of almost any parameter in FORM’s interface, particularly on the SOUND and EF-
+FECTS pages, but also in the SPEED section. Modulation is defined as an offset to the set val-
+ue of each destination parameter, and is indicated by a white pin just outside the interface el-
+ement. The indicator moves to reflect the speed and set depth of the modulation source.
+MODULATION
+FORM - Manual - 40
+The SOUND Page
+MODULATION
+Modulators
+There are five different modulators available in the MODULATION section. It is worth noting,
+however, that many more modulation sources can be used, such as FORM’s Motion Curves, the
+macro controls in the Footer, and the pitch-bend wheel on your MIDI keyboard. Each modula-
+tor can be assigned to as many destinations as you want.
+The modulator selector lets you select which modulator to display, but all modulators are ac-
+tive simultaneously. Available modulators are ENV1, ENV2, LFO1, LFO2, and SC. Both enve-
+lopes and both LFOs are identical in terms of provided controls, and the side-chain modulator
+allows you to combine the signals of two of the other modulators and use the resulting output
+signal as source for modulation assignment.
+4.4.1 ENV
+ENV1 and ENV2 are identical in terms of available parameters. They come equipped with
+knobs for attack, decay, sustain, and decay, as well as a velocity control. Note however, that
+ENV1 is automatically assigned to the AMP knob in the FORM OSC section of the
+SOUND page. This means that ENV1 always sets the amplitude envelope of the oscillator and
+thus can have a great influence on the output sound.
+FORM - Manual - 41
+The SOUND Page
+MODULATION
+1 2
+3 4 5 6 7
+ENV
+(1) Envelope display: The shape of the envelope is displayed here. If envelope parameters are
+being controlled by other modulators, the modulation will be reflected as an offset to the enve-
+lope in real time.
+(2) Envelope indicator: This indicator reflects the velocity at which the envelope moves through
+each of its phases.
+(3) ATT: Turn this to set the attack time of the envelope.
+(4) DEC: Turn this to set the decay time of the envelope.
+(5) SUS: Turn this to set the sustain level of the envelope.
+(6) REL: Turn this to set the release time of the envelope.
+(7) VEL: Turn this to set the velocity sensitivity with which the entire envelope moves through
+all its phases.
+FORM - Manual - 42
+The SOUND Page
+MODULATION
+4.4.2 LFO
+LFO1 and LFO2 are both identical in terms of available parameters. They each come equipped
+with four different waveforms that can be further defined using the SHAPE control, as well as
+parameters for SPEED and PHASE.
+2
+1
+5
+3
+4
+8
+6 7
+LFO
+(1) Waveform selector: Select one of the four different waveforms. Available for selection are
+sine, tri, square, and random. Each of these can be defined in further detail using the SHAPE
+control. The selected waveform, in its form set by the SHAPE control, is reflected by the wave-
+form display.
+(2) Waveform display: The shape of the LFO signal is reflected visually here.
+(3) LFO indicator: This indicator reflects the speed at which the LFO moves through its oscilla-
+tions. Every time the signal passes the zero crossing, at the velocity set by the SPEED control,
+the polarity switches. If the waveform selector is set to random, the LFO indicator will move
+randomly.
+(4) PHASE: Turn this to shift the starting position of the phase in the LFO signal along the
+time axis.
+FORM - Manual - 43
+The SOUND Page
+MODULATION
+(5) HZ|BPM: Select either Hz or note values as scale for the SPEED control.
+(6) SPEED: Turn this to set the speed at which the LFO operates. Depending on your selection,
+the SPEED can be set either in Hz or as a note value (BPM), ranging from either 0 to 30 Hz or
+32 Bar to 1/96 note, respectively.
+(7) TRIG|FREE: Select either triggering or free mode for the SHAPE control. When set to FREE,
+LFO phases can differ from one polyphonic voice to another.
+(8) SHAPE: Turn this to further define the shape of the LFO waveform.
+▪ For sine, SHAPE moves from spike wave at fully left, via sine at center, to pulse or square
+at fully right.
+▪ For tri, SHAPE moves from falling saw at fully left, via triangle at center, to rising saw at
+fully right.
+▪ For square, SHAPE acts as pulse-width control.
+▪ For random, SHAPE moves from time-wise random signal at fully left, via stepped random
+signal at center, to smooth-edged random signal at fully right.
+4.4.3 SC
+The side-chain modulator uses two modulators as sources and uses their corresponding output
+signals as input signals. The input signals are then combined, either by multiplication or by
+crossfading. The resulting signal can then be used as output modulation signal for modulation
+assignment to other parameters.
+FORM - Manual - 44
+The SOUND Page
+MODULATION
+1 2
+3 4
+SC
+(1) Modulator slots: Click each of these slots to open its modulation assignment menu, which dis-
+plays all available modulators for the slot. Select one of the modulators from the menu for the
+corresponding slot by clicking their buttons in the menu.
+(2) Signal display: The shape of the resulting output signal is reflected here.
+(3) MULTIPLY|CROSSFADE: Select the algorithm mode by which the SC modulator will com-
+bine the two modulation signals. MULTIPLY takes the signal from each modulator and multi-
+plies their values by each other, whereas CROSSFADE switches back and forth between the
+signals.
+(4) AMT: In MULTIPLY mode, this knob fades from outputting only the modulator in the left
+slot at fully left, to full multiplication of both modulation sources when set fully right. In
+CROSSFADE mode, the AMT knob functions as a crossfader.
+FORM - Manual - 45
+The SOUND Page
+MODULATION
+Selecting a modulator as input
+4.4.4 Assigning Modulation
+Any FORM parameter that is available for modulation can be assigned to up to three modula-
+tion sources simultaneously. To do so, follow the steps below.
+FORM - Manual - 46
+The SOUND Page
+MODULATION
+1. To open the modulation assignment menu, click the parameter label directly below the
+parameter.
+The modulation assignment menu will open and display the three modulation slots for the
+chosen parameter.
+FORM - Manual - 47
+2. The SOUND Page
+MODULATION
+To select a modulation source, click one of the three modulation slots and the modula-
+tion source menu will open.
+FORM - Manual - 48
+The SOUND Page
+MODULATION
+► To see the available sources, you can choose between MAIN and MACRO. Choosing MAIN
+will display the five modulation sources available in the MODULATION section of the
+SOUND page, as well as VELO for velocity, KEYTR. for key-tracking, PB for pitch-bend,
+AT for aftertouch, and MW for modulation wheel. Choosing MACRO instead displays the
+four macro controls, PITCH CURVE for the pitch curve of the loaded sample, and MO-
+TION CURVE for the Motion Curve that is active in the MOTION section.
+FORM - Manual - 49
+1. 2. The SOUND Page
+MODULATION
+To select one of the modulation sources, click the corresponding modulation source but-
+ton in the modulation source menu.
+The selected modulation source will appear in the modulation slot.
+To activate the modulator and assign the modulation depth as an offset to the parameter’s
+value, click and drag the bipolar modulation slider directly above the modulation slot in
+the modulation menu in either direction.
+FORM - Manual - 50
+The SOUND Page
+MODULATION
+The parameter is now assigned as modulation destination and the modulation offset is vi-
+sualized by an indicator moving at the corresponding speed of the modulation source.
+FORM - Manual - 51
+The SOUND Page
+MODULATION
+► To assign a second or third modulation source, repeat the above steps using another
+modulation slot in the modulation menu.
+► To close the modulation menu, click the parameter label directly below the parameter.
+FORM - Manual - 52
+The SOUND Page
+MODULATION
+4.4.5 Removing Modulation
+1. To remove a modulation source from a parameter, click the parameter label directly below
+the parameter.
+2. The modulation menu will open.
+Click the modulation slot containing the source you want to remove.
+FORM - Manual - 53
+3. The SOUND Page
+MODULATION
+To remove the modulation source, click the NO SOURCE button in the modulation menu.
+FORM - Manual - 54
+The SOUND Page
+MODULATION
+4. To remove all modulation sources, repeat the previous step until all modulation slots are
+empty.
+For any and all of the modulators to send modulation signals, the MOD AMOUNT slider at the
+bottom right of the interface must be set to a value larger than 0. That is, if you click and drag
+the MOD AMOUNT slider fully left, all modulation is simultaneously switched off.
+For information about the Macro controls, see section ↑6.4, Macro Controls.
+4.4.6 Modulating Modulator Parameters
+Just as with other parameters available for modulation, the parameters of the modulators
+themselves can be assigned as modulation destinations. Modulators can be assigned to control
+both their own parameters and those of other modulators. This means that you can, for exam-
+ple, let LFO1 control its own SPEED, and simultaneously also the SPEED parameter of LFO2.
+LFO2 in turn can be assigned to control both its own SHAPE and PHASE parameters and those
+of LFO1. By doing so, you will have LFO1 controlling the SPEED at which both LFOs set their
+SHAPE and PHASE parameters. Each of these two LFOs can then be assigned to as many oth-
+FORM - Manual - 55
+The SOUND Page
+MODULATION
+er FORM parameters as you like. Beyond this, you can even use the two LFOs to multiply or
+crossfade each other’s signals using the SC modulator. There is an almost unlimited amount of
+possible ways to modulate and cross-modulate the parameters of FORM to create sound tex-
+tures that develop and change over a given time period.
+Assigning modulation to a modulator parameter
+For information on how to assign parameters for to a modulation source, see section ↑4.4.4,
+Assigning Modulation.
+FORM - Manual - 56
+The SOUND Page
+FILTER
+4.5 FILTER
+The FILTER section provides a polyphonic multimode filter with low-pass, high-pass, and
+notch modes.
+1 2 3
+FILTER
+(1) MODE: This selector lets you switch between LP, HP, and NOTCH modes.
+▪ LP: Low-pass filtering lets you filter out audio content above the frequency set by the CUT-
+OFF knob.
+▪ HP: High-pass filtering lets you filter out audio content below the frequency set by the
+CUTOFF knob.
+▪ NOTCH: Band-stop filtering lets you filter out audio content within a narrow frequency span
+centered on the frequency set by the CUTOFF knob.
+(2) CUTOFF: Sets the cutoff frequency for the LP and HP modes and the center frequency for
+the NOTCH mode.
+(3) RESONANCE: Sets the amount of resonance at the cutoff frequency.
+FORM - Manual - 57
+The EFFECTS Page
+5 The EFFECTS Page
+FORM's EFFECTS page is equipped with traditional effect units for compression, delay, and re-
+verb, but also a new FREQUENCY SHAPING unit that lets you select specific frequency spec-
+tra and boost, mitigate, or distort these.
+1 2 3
+6
+5
+4
+EFFECTS
+(1) FX Copy / FX Paste: These buttons can be used to copy and paste all settings on the EF-
+FECTS page between Performance slots, both in the same preset as well in another preset.
+Clicking FX Copy copies the settings to the clipboard, while clicking FX Paste pastes the set-
+tings from the clipboard into the EFFECTS page of the currently selected Performance slot.
+(2) FREQUENCY SHAPING: This section can be seen as an advanced multiband filter, where
+you can set two different frequency bands and attenuate or diminish the output of these fre-
+quencies. See section ↑5.1, FREQUENCY SHAPING.
+(3) WARMTH (only available with FREQUENCY SHAPING switched on): Use this section to add
+an overdrive effect and add warmth to the output. See section ↑5.2, WARMTH.
+FORM - Manual - 58
+The EFFECTS Page
+FREQUENCY SHAPING
+(4) DYNAMICS: This is FORM's compressor, which can be used to control the dynamic range.
+See section ↑5.3, DYNAMICS.
+(5) DELAY: A delay unit with settings for both ping pong and standard delay. See section ↑5.4,
+DELAY.
+(6) REVERB: A reverb unit with five different room settings as well as filter controls. See sec-
+tion ↑5.5, REVERB.
+5.1 FREQUENCY SHAPING
+The FREQUENCY SHAPING unit lets you select specific bands of the frequency spectrum and
+control these. The bands are represented visually by blue and purple bars and their sizes and
+shapes can easily be set and modulated via the knobs on the left side of the unit.
+2 3 4
+1
+5 6 7 8 9
+FREQUENCY SHAPING
+(1) FREQUENCY SHAPER button: Switches the effect unit on or off.
+(2) DRY/WET BAND FILTER: Turn to mix between dry signal and the wet signal filtered by the
+frequency bands.
+(3) BAND 1: Controls for BAND 1, visually reflected as blue band by the Band display.
+(4) BAND 2: Controls for BAND 2, visually reflected as purple band by the Band display.
+FORM - Manual - 59
+The EFFECTS Page
+WARMTH
+(5) LEVEL: Set the amount of frequency shaping for the corresponding frequency band.
+(6) CENTER: Set the center position along the frequency spectrum for the corresponding fre-
+quency band.
+(7) WIDTH: Set the bandwidth or the corresponding frequency band.
+(8) Band display: Visually reflects the settings of the BAND 1 and BAND 2 settings as blue and
+purple bars, respectively. Click and drag the bands to set the LEVEL knobs. When the parame-
+ters are modulated, a fluctuating offset is visible for each frequency band bar.
+(9) PHASE: Adjust the phase cancellation between the dry and wet signals.
+5.2 WARMTH
+The WARMTH unit is only available when the FREQUENCY SHAPING unit is switched on. It
+adds saturation and color to the sound.
+1
+2
+3
+6
+4 5
+WARMTH
+(1) WARMTH button: Switches the effect unit on or off.
+(2) ALL: Select this to apply the WARMTH effect to the entire frequency spectrum after the
+signal has been processed by the FREQUENCY SHAPING unit.
+FORM - Manual - 60
+The EFFECTS Page
+DYNAMICS
+(3) BANDS: Select this to apply the WARMTH effect only to the frequency spectrum selected
+by the bands in the FREQUENCY SHAPING effect unit, whereas the dry signal is not affected.
+(4) Mode selector: Click the arrows to switch between the available modes.
+▪ DIGITAL: Applies digital distortion to the input signal.
+▪ TUBE: Applies overdriven saturation the input signal.
+(5) DRIVE: Turn to apply input amplification to drive the distortion effect.
+(6) CHARGE: Tweak the character of the signal from soft at fully left to hard at fully right.
+5.3 DYNAMICS
+The DYNAMICS effect is a compression unit that gives you full control of the dynamic range of
+the signal. The DYNAMICS unit is located as the first unit in FORM's FX chain.
+1
+2
+3 5 6
+4
+DYNAMICS
+(1) DYNAMICS button: Switches the effect unit on or off.
+(2) Level meter: Displays the amount of compression being applied to the input signal.
+FORM - Manual - 61
+The EFFECTS Page
+DELAY
+(3) ATTACK: Turn to set the time of the attack phase.
+(4) RELEASE: Turn to set the time of the release phase.
+(5) RATIO: Turn to set the amount of gain reduction at the input.
+(6) OUTPUT GAIN: Turn to set the output gain level.
+5.4 DELAY
+The DELAY unit gives you the ability to control the time and space of your sound. Together
+with the REVERB unit, the DELAY effect is located at the end of the FX chain.
+1
+8
+2
+3 4 5 6 7
+DELAY
+(1) DELAY button: Switches the effect unit on or off.
+(2) PING PONG: Click and drag this bipolar slider either direction to apply stereo panning to
+the delayed signal.
+(3) LEVEL: Sets the amount of delay applied to the input signal.
+(4) LENGTH: Sets the time of the delay.
+FORM - Manual - 62
+The EFFECTS Page
+REVERB
+(5) SNAP: Click to switch SNAP on or off. When on, time quantization is applied to the
+LENGTH knob in relation to host tempo and grain-like smoothing is used. When off, delay
+LENGTH is set as a free floating value and tape-like smoothing is used.
+(6) FEEDBACK: Sets the amount of delay feedback signal.
+(7) DAMPING: Sets the amount of filtering. Turn anticlockwise for low-shelf damping and
+clockwise for high-shelf damping.
+(8) ROUTING (only available if REVERB is simultaneously switched on): Set fully left to route
+the DELAY and REVERB units in serial DELAY—REVERB mode, via parallel at center position
+to DELAY—REVERB at fully right.
+5.5 REVERB
+The REVERB unit lets you control the size of the sound and its position in the mix. Together
+with the DELAY unit it is located at the end of the FX chain.
+1
+2 3
+4 5 6 7
+REVERB
+(1) REVERB button: Switches the effect unit on or off.
+FORM - Manual - 63
+The EFFECTS Page
+REVERB
+(2) ROUTING (only available if DELAY is simultaneously switched on): Set fully left to route
+the DELAY and REVERB units in serial DELAY—REVERB mode, via parallel at center position
+to DELAY—REVERB at fully right.
+(3) Room size selector: Click the arrows to switch between reverb types. Available types are:
+▪ SMALL
+▪ LARGE
+▪ SPACE
+▪ CHEAP
+▪ UNREAL
+▪ (4) LEVEL: Sets the amount of reverb being applied to the input signal.
+▪ (5) SIZE: Sets the room size.
+▪ (6) LO DAMP: Sets the amount of high-pass filtering of the reverb tail.
+▪ (7) HI DAMP: Sets the amount of low-pass filtering of the reverb tail.
+FORM - Manual - 64
+The Footer
+SPEED
+6 The Footer
+The Footer contains controls that let you control the playback tempo in the SPEED section
+(↑6.1, SPEED), the behavior of the Motion Curve in the MOTION section (↑6.2, MOTION), and
+the act of saving and playing back the Performance slots in the PERFORM section (↑6.3, PER-
+FORM).
+The Footer with its sections
+6.1 SPEED
+The SPEED section contains controls for setting playback speed as a factor multiplied by ei-
+ther the length of the sample, by cycles per second, or by the BPM of your DAW, depending on
+the settings you select. The values can be assigned as modulation destinations, which can add
+interesting textures and IDM-like tempo changes. You can also control the playback position
+manually, with modulation, or via host automation.
+FORM - Manual - 65
+The Footer
+SPEED
+1
+2
+3
+The SPEED section
+(1) Speed: Click and drag the numbers to set the speed as a factor multiplied by the selected
+time base (SAMPLE, HZ, or BPM). Depending on the time base selected, this label depicts ei-
+ther SAMPLE LENGTH (for SAMPLE), CYCLES/SEC (for HZ), or SYNC SPEED (for BPM). Click
+the label to assign modulation to the SPEED controls.
+(3) SNAP (available for SAMPLE and BPM): Switch on to snap the value to the nearest availa-
+ble value, from 0, 1/16, 1/8, 1/4, 1/2, 1, 2, 4, 8 to 16. Dotted values and triples are availa-
+ble, too. To toggle between the different sets of values, click on the SNAP button repeatedly.
+(4) Time base selector: Select the type of factor that will be multiplied by the value set by the
+numbers in the Speed control. Available are SAMPLE, HZ, and BPM:
+▪ SAMPLE: Motion Curve playback speed is set in relation to original sample playback speed.
+▪ HZ: Motion Curve playback speed is set in cycles per second.
+▪ BPM: Motion Curve playback is set based on host tempo.
+▪ MANUAL: The playback position can be directly controlled with a knob. You can also apply
+modulation to this knob, or automate it from your DAW.
+FORM - Manual - 66
+The Footer
+MOTION
+6.2 MOTION
+The MOTION section is located in the Footer and contains controls for FORM’s Motion Curves.
+Use the controls to define the behavior of the play head and the Motion Curve. The parameters
+in the MOTION section cannot be assigned as modulations destinations, but the Motion Curves
+themselves can be used as modulation sources and be assigned to other parameters.
+2 3
+1
+4
+5 6 7 8 9 10
+The MOTION section
+(1) CURVE EDITOR: Click this button to call up the CURVE EDITOR at the Main section. The
+CURVE EDITOR is an advanced Motion Curve creation environment where you can edit your
+own Curves. For more detailed information, see section ↑6.2.2, The CURVE EDITOR.
+(2) The Motion Curve display: The active Motion Curve for one of the Performance slots (see sec-
+tion ↑6.3, PERFORM) is displayed here together with the loop range and the current play head
+position.
+(3) The Motion Curve selector: Click the up and down arrow buttons to switch to the next Mo-
+tion Curve slot from the CURVE PRESETS.
+(4) CURVE PRESETS: Click this button to call up the CURVE PRESETS at the Main section.
+The CURVE PRESETS lets you see all saved Motion Curves and also enter WRITE MODE to
+save your own Motion Curves.
+FORM - Manual - 67
+The Footer
+MOTION
+(5) LEGATO (only available in RETRIG mode): Switch this on to activate LEGATO mode, in
+which only the first MIDI note-on retriggers the Motion Curve playback.
+(6) RETRIG: Switch this on to enter RETRIG mode, in which MIDI note-on automatically retrig-
+gers Motion Curve playback. By additionally enabling NOTE RETRIG in the PERFORM sec-
+tion’s Perform Settings, the Motion Curve playback is also retriggered when switching Perform-
+ance slots.
+(7) FREE: Switch this on to enter FREE mode, in which the Motion Curve plays and loops con-
+tinuously. MIDI note-on messages are ignored, so pressing down a key on your MIDI keyboard
+will play back the sample from the position of the Motion Curve where the play head is located
+at the time.
+(8) Loop (only available in RETRIG mode): Controls the looping behavior of the Motion Curve.
+The range of the Motion Curve that will be looped is visually reflected by the Motion Curve dis-
+play as an overlay and can be adjusted in the CURVE EDITOR. Available modes are:
+▪ Off
+▪ Continue loop on note-off: The play head continues to loop within the loop range even after
+the note has been released.
+▪ Leave loop on note-off: The play head leaves the loop as soon as you release the note.
+(9) Loop direction (only available in RETRIG mode): This controls the loop behavior for FREE
+and RETRIG modes. Select between three modes of loop direction:
+▪ Forward: From left to right.
+▪ Backward: From right to left.
+▪ Pendulum: From left to right and then right to left, repeatedly.
+▪ (9) SYNC (only available in FREE mode): Activate to sync the play head position in the Mo-
+tion Curve for all polyphonic voices simultaneously.
+(10) FLIP: Click to invert the entire Motion Curve horizontally.
+6.2.1 The CURVE PRESETS
+The CURVE PRESETS window can be found by clicking the CURVE PRESETS button in the
+MOTION section. This is where all Motion Curves are saved, ready to be loaded for use with
+your samples.
+FORM - Manual - 68
+The Footer
+MOTION
+1
+2
+The CURVE PRESETS
+(1) Motion Curve slots: Click the slots to select the corresponding Motion Curves. The selected
+Motion Curve is highlighted. When opening the CURVE PRESETS window, the Motion Curve
+currently loaded in the EDIT BUFFER remains available in the first slot until you close the win-
+dow.
+(2) Page buttons: Click the left and right page buttons to navigate between the three available
+pages containing Motion Curves.
+6.2.2 The CURVE EDITOR
+You can use the CURVE EDITOR to create own Motion Curves.
+FORM - Manual - 69
+The Footer
+MOTION
+► To call up the CURVE EDITOR at the Main section, click the CURVE EDITOR button in
+the MOTION section of the Footer.
+FORM - Manual - 70
+The Footer
+MOTION
+→ The CURVE EDITOR opens with the active Motion Curve loaded.
+The parameters of the CURVE EDITOR cannot be modulated. You can however use the result-
+ing Motion Curve as a modulator and assign it to other parameters. This will let you control the
+motion behavior of the modulation destination, similar to a complex envelope.
+All parameters available in the CURVE EDITOR are described below.
+FORM - Manual - 71
+The Footer
+MOTION
+1 2 3 4 5 6 7 8 9 10
+14
+15
+16
+17
+18
+19
+20
+11
+12
+13
+21
+22
+23
+The CURVE EDITOR
+(1) Curve menu: Click the drop-down menu and select the corresponding Motion Curve to load it
+into the active segment in the editor. Depending on which curve you select, different knobs
+will be available for editing (SHAPE, PHASE, and FREQ). VOL, FADE, and PAN are available
+for all curves. The first five waveforms in the menu will play back once per segment, whereas
+repeating waveforms (the bottom three) can be altered using the FREQ knob and the LENGTH
+control to play back multiple times, creating for example a pulse-like behavior. The available
+Curves are:
+▪ Flat line
+▪ Rising line
+▪ Double curve
+▪ Triangle
+▪ Sine
+▪ Repeating line
+▪ Repeating Triangle
+▪ Repeating Sine
+FORM - Manual - 72
+The Footer
+MOTION
+(2) SHAPE: Turn this knob either direction to further define the shape of the waveform select-
+ed by the Curve menu. SHAPE works similar to a pulse-width control in that it edits the shape
+of the waveforms between the waveforms’ peaks, for example by adding a curve shape to an
+otherwise straight line.
+(3) PHASE: Turn this knob either direction to shift the phase of the waveform along the time
+axis.
+(4) FREQ (available for repeating waveforms): Turn this knob either direction to set the amount
+of repetitions within a segment.
+(5) SNAP (available for repeating waveforms): Switch on to snap the FREQ knob to a grid.
+(6) FLIP: Click to invert the entire Motion Curve horizontally.
+(7) VOL: Set the output level for the segment.
+(8) FADE: Turn clockwise to set a longer attack phase for the segment.
+(9) PAN: Turn either direction to pan the output audio to the corresponding side during play-
+back of the segment.
+(10) SCALE ALL: Click and drag the arrow button up or down to set the LENGTH of the seg-
+ment. This is mostly interesting for repeating waveforms, where increasing the LENGTH value
+also means adding more repetitions of the waveform within the segment.
+(11) Loop bar: Set the timeframe of the loop that will be repeated in RETRIG mode by clicking
+and dragging the edges of the bar. The timeframe is visualized as an overlay in the Mo-
+tion Curve display of the MOTION section.
+(12) Editor display: The loaded sample is shown along the y-axis of the Editor display and the
+selected waveform that constitutes each segment’s curve is visualized as an overlay moving
+along the x-axis.
+(13) Segment window: Click and drag the white handles at the top, bottom and on the side(s) of
+the segment to alter the depth of the Motion Curve as well as the size of the segment.
+(14) INSERT L: Click to insert a new segment to the left of the selected segment.
+(15) INSERT R: Click to insert a new segment to the right of the selected segment.
+(16) MERGE L: Click to remove the segment to the left of the selected segment and simultane-
+ously move the selected segment to that position along the x-axis.
+FORM - Manual - 73
+The Footer
+MOTION
+(17) MERGE R: Click to remove the segment to the right of the selected segment and simulta-
+neously move the active segment to that position along the x-axis.
+(18) SPLIT: Click to split the selected segment in two segments, each of which is half the
+length of the selected segment.
+(19) COPY: Click to copy the selected segment to the clipboard.
+(20) PASTE: Click to insert the copied segment at the position of the selected segment.
+(21) DELETE: Click to delete the selected segment.
+(22) GRID SNAP: Click to activate or deactivate GRID SNAP. When active, resizing segments
+by clicking and dragging the white draggers at each side of a segment window will force the
+window size to snap to the step grid.
+(23) LENGTH: Click and drag to set the length of the entire Motion Curve.
+6.2.3 Creating a Motion Curve
+With the CURVE EDITOR open (for information on opening the CURVE EDITOR, see section
+↑6.2.2, The CURVE EDITOR), you will see your sample along the y-axis of the Editor display
+together with the waveform that constitutes the Motion Curve for the selected segment. Per de-
+fault, only one segment will be active. In the following tutorial you will learn how to add and
+edit segments and their corresponding waveforms to create a bespoke Motion Curve.
+The initial state of the CURVE EDITOR.
+FORM - Manual - 74
+The Footer
+MOTION
+► To change the waveform of the selected segment (at this point there is only one seg-
+ment), click the Curve menu to the upper left and select a waveform from the drop-down
+menu.
+FORM - Manual - 75
+The Footer
+MOTION
+→ Here we have selected the triangle waveform, which is now visible in the Editor display.
+The output sound of your sample will now be following a rising and then falling curve.
+► To alter the shape of the waveform, turn the SHAPE knob in either direction. Turn it fully
+left for a quicker and steeper rise and fall, or fully right for a total inversion of the shape.
+FORM - Manual - 76
+The Footer
+MOTION
+► To define where along the time axis the inverted triangle waveform will have its peak or
+dip, turn the PHASE knob by clicking and dragging it.
+► To add another segment to the Motion Curve, click either the INSERT L button or the
+INSERT R button, depending on whether you want the next segment to appear on the left
+or the right side of the selected segment.
+FORM - Manual - 77
+The Footer
+MOTION
+→ The addition of another segment and its waveform is reflected by the Motion Curve dis-
+play in the MOTION section.
+► To zoom out and make both segments visible simultaneously, right-click and drag any-
+where in the segment.
+FORM - Manual - 78
+The Footer
+MOTION
+► To select the second segment, click it.
+► To edit the depth of the waveform for the selected segment, click and drag the white han-
+dle at the top and/or bottom of the segment.
+FORM - Manual - 79
+The Footer
+MOTION
+► To use a different waveform for the second segment, open the Curve menu and select a
+waveform from the drop-down menu. This time, let’s select a repeating waveform, e.g.,
+repeating sine.
+► To set the amount of repetitions within a segment, turn the FREQ knob available for re-
+peating waveforms.
+FORM - Manual - 80
+The Footer
+MOTION
+► To select the timeframe of the Motion Curve that will be looped in RETRIG mode, click
+and drag the loop bar. To resize it, click and drag the edges of the loop bar.
+1. To copy the selected segment, click the COPY button in the left-side menu.
+FORM - Manual - 81
+The Footer
+MOTION
+2. To insert the copied segment, e.g., at the initial phase of the Motion Curve, click the left-
+most segment to select it and then click INSERT L. A new segment will be added, identi-
+cal to the one that was selected. To replace it with the segment placed in the clipboard,
+click the PASTE button in the left menu.
+► To zoom out and make both segments visible simultaneously, right-click and drag any-
+where in the segment.
+FORM - Manual - 82
+The Footer
+MOTION
+► If you are unhappy with the sound of a segment and want to remove it, select it by click-
+ing it and click the DELETE button.
+► To elongate the Motion Curve and e.g. add more repetitions to the waveform, click and
+drag the LENGTH control in the bottom left corner of the CURVE EDITOR.
+FORM - Manual - 83
+The Footer
+PERFORM
+→ The Motion Curve display in the MOTION section reflects the changes.
+6.3 PERFORM
+Use the PERFORM section to save versions of your Sound with all its parameter settings, in-
+cluding the Motion Curve, and play them back using your MIDI keyboard.
+Form 1.1 introduces a vast number of new presets that make full use of the PER-
+FORM section. Find them by opening REAKTOR’s Preset Browser in the Side Pane and
+double-clicking on the Factory folder.
+1
+2
+3
+8
+7 6 5 4
+PERFORM
+FORM - Manual - 84
+The Footer
+PERFORM
+(1) Performance slots: Click any slot to switch to it, resetting all parameters to their saved de-
+fault state and letting you edit them. There is no need to manually save the Sound to a Per-
+formance slot, as editing any FORM parameter will automatically save the current state of
+FORM to the selected Performance slot. You can also switch between the slots using your MIDI
+keyboard while in Keyboard mode (see (6) Keyboard button). For more information, see ↑6.3.1,
+Saving a Sound to a Performance Slot and ↑6.3.2, Switching between Performance Slots.
+(2) Volume settings button: Click to switch to the Volume settings page (see below).
+(3) Perform settings button: Click to switch to the Perform settings page (see below).
+(4) CLEAR: Click to activate CLEAR. With CLEAR active, click a Performance slot to remove its
+saved Sound. For more information, see ↑6.3.4, Clearing Performance Slots.
+(5) COPY: Click to copy the Sound in the selected Performance slot to the clipboard. Clicking
+another Performance slot with the COPY button lit will effectively remove that Sound and re-
+place it by the one selected before clicking the COPY button. You can also copy a Sound and
+paste it into another preset’s Performance slot. For more information, see ↑6.3.3, Copying a
+Sound to another Performance Slot.
+(6) Keyboard button: Switch on to enter Keyboard mode, in which you can switch between Per-
+formance slots using the control octave of your MIDI keyboard. You can set the control octave
+of your choice on the Perform settings page (see (3) Perform settings button). Only Performance
+slots containing a saved version of the Sound will be switched to, meaning that pressing a key
+that corresponds to an empty Performance slot will not switch to the slot until you have man-
+ually selected the slot and edited a parameter. Doing so will highlight the slot and make it
+available for switching from the control octave.
+(7) SET (only available in MULTI MODE): With MULTI MODE active, click the SET button to
+enter SET Master mode. The button will glow red to reflect the mode. While in SET Mas-
+ter mode, you can click any Performance slot to select is as Master slot. For more information,
+see ↑6.3.5, Playing FORM in Multi Mode.
+(8) Master slot (only available in MULTI MODE): With MULTI MODE active, you can play back
+up to four Performance slots simultaneously, using up to four polyphonic voices. The amount
+of voices can be set from 2-4, using the Voice amount button. The Master slot serves as the
+base key for these voices and illuminates red with a crown icon, while the remaining voices are
+assigned to the next active Performance slots in the PERFORM octave. The remaining slots in
+FORM - Manual - 85
+The Footer
+PERFORM
+the assignment chain wrap around, so selecting the highest key of the octave (which is also the
+rightmost slot) as the Master slot, will assign the lowest active keys as slave voices. For more
+information, see ↑6.3.5, Playing FORM in Multi Mode.
+Volume Settings
+1
+2
+PERFORM, Volume settings
+(1) Volume controls: Use these controls to adjust the relative levels of the Performance slots.
+When set to middle position, the level of the corresponding Performance slot is not changed.
+Drag the control upwards to boost the level by up to 12 dB. Drag the control downwards to at-
+tenuate the level by up to 12 dB.
+(2) Performance slot selector: By clicking on the Performance slot symbol below a volume con-
+trol, FORM switches to the corresponding Performance slot.
+Perform Settings
+FORM - Manual - 86
+The Footer
+PERFORM
+2
+1
+3
+4
+PERFORM, Perform settings
+(1) ON / OFF: Click to enable or disable the control octave, which allows you to switch between
+Performance slots from your MIDI keyboard.
+(2) OCTAVE: Click and drag to set the control octave on your MIDI keyboard. The set control
+octave is reflected by the display and can be used to switch between Performance slots.
+(2) CHANNEL: Click and drag to set the MIDI channel on which to send the control octave
+from your MIDI keyboard.
+(4) NOTE RETRIG: Click to enable or disable retriggering of active notes when a Performance
+slot is switched. This means the Motion Curve is reset as soon as you click on a new Perform-
+ance slot, in the same way it is reset when a new note is received. NOTE RETRIG only has an
+effect if RETRIG is enabled in the MOTION section.
+6.3.1 Saving a Sound to a Performance Slot
+You do not have to manually save the Sound you are working on to a Performance slot. Instead,
+the moment you edit the settings of any FORM parameter, e.g. by turning a knob or assigning
+modulation, the selected Performance slot will be filled by the current settings of FORM and
+saved. By default, this will be the leftmost slot. To select another Performance slot, click it
+with your mouse. If Keyboard mode is active, you can switch to another Performance slot by
+pressing the corresponding key in the control octave on your MIDI keyboard.
+FORM - Manual - 87
+The Footer
+PERFORM
+To save a Sound to a Performance slot, follow these steps.
+1. To select a Performance slot, click the slot you want to fill.
+2. To save the state of FORM with all its settings, edit any parameter.
+→ The Performance slot illuminates to indicate that the Sound has been saved.
+► To fill further Performance slots, repeat the steps above and edit any parameter you want.
+6.3.2 Switching between Performance Slots
+Once you have saved one or more Sounds to their respective Performance slots, you can switch
+between the slots to quickly jump between different states of FORM in real time. This means
+that you can switch tempo, Motion Curve behavior, pitch, modulation, etc. all at once by just
+pressing a key on your MIDI keyboard.
+1. To switch to another Sound directly in FORM, click the corresponding Performance slot.
+FORM - Manual - 88
+The Footer
+PERFORM
+Switching with a MIDI Keyboard
+To switch between Performance slots using the control octave on your MIDI keyboard, you have
+to first activate Keyboard mode.
+► To activate Keyboard mode and enable the use of a control octave on your MIDI key-
+board, click the Keyboard button.
+→ You can now switch between Performance slots containing saved Sounds, using the keys
+of the set control octave on your MIDI keyboard.
+You can set the control octave to any octave on your MIDI keyboard in the Perform settings.
+1. To open the Perform settings, click the Perform Settings button.
+2. To set the octave to be used as control octave, click and drag the keys in OCTAVE display.
+FORM - Manual - 89
+The Footer
+PERFORM
+3. To return to the Performance slots, click the Perform Settings button again.
+6.3.3 Copying a Sound to another Performance Slot
+To copy a Sound with all FORM's settings from one Performance slot and paste it into another
+slot, follow these steps.
+1. To select the Sound you want to copy, click the Performance slot in which it is saved.
+2. To copy the Sound, click the COPY button so it illuminates.
+3. The Sound is now placed in the clipboard.
+To paste the Sound into another Performance slot, click the Performance slot you want to
+paste it into.
+FORM - Manual - 90
+The Footer
+PERFORM
+→ An identical copy of the selected Sound is now saved in the new Performance slot.
+Using the same method, you can also copy a Sound and paste it into another preset’s Perform-
+ance slot. This replaces all parameter settings saved in the Performance slot, however the pre-
+set’s original sample remains loaded.
+If you only wish to copy the settings on the EFFECTS page to another Performance slot
+or preset, you can do so by using the FX Copy / FX Paste buttons in the upper left corner
+of the EFFECTS page. For more information, see section ↑5, The EFFECTS Page.
+6.3.4 Clearing Performance Slots
+If you are unhappy with the settings of a Sound and want to start anew with default settings,
+you can do this by clearing the Performance slot containing the Sound.
+Clearing a Performance Slot
+1. To enter CLEAR mode, click the CLEAR button so it illuminates.
+2. To clear a Sound and its settings, while in CLEAR mode, click its corresponding Perform-
+ance slot.
+FORM - Manual - 91
+The Footer
+PERFORM
+→ The Performance slot is empty and its settings are reset to their default.
+6.3.5 Playing FORM in Multi Mode
+In MULTI MODE, you can play back up to four saved Sounds simultaneously. This means that
+not only can you switch between your saved Performance slots, but also play them in simulta-
+neously in polyphony. To enter MULTI MODE and set the amount of Performance slots to be
+played simultaneously, follow these steps.
+1. To enter MULTI MODE, click the Perform Voice selector located in the Header until it dis-
+plays MULTI MODE.
+2. To set the number of Sounds saved to Performance slots that can be played back in poly-
+phony, click the Voice Amount button repeatedly until it displays your desired amount of
+voices: 2, 3, or 4.
+→ You are now able to play back as many saved Sounds simultaneously as the amount of
+voices you selected.
+The Master Slot and the Slave Voices
+In MULTI MODE, one of your Performance slots serves as Master slot and is depicted as a red
+slot with a crown icon.
+FORM - Manual - 92
+The Footer
+PERFORM
+The Master slot is depicted in red
+The remaining Slave voices are the Performance slots above the Master slot. If you have not
+saved enough Performance slots above the Master slot in the octave, the PERFORM section
+will wrap around and play back the Performance slots starting with the lowest key in the oc-
+tave.
+The amount of Performance slots available for editing is limited to the amount of voices set by
+the Voice Amount button in the Header. A setting of 2 means Master slot and one Slave voice,
+a setting of 3 means Master slot and two Slave voices, and a setting of 4 means Master slot
+and three Slave voices. The Performance slots containing a playing voice illuminate, whereas
+the silent slots remain unilluminated.
+If you want to change the Master slot to another Performance slot, follow the instructions be-
+low:
+1. To enter SET mode, click the SET button so it glows red.
+FORM - Manual - 93
+The Footer
+Macro Controls
+2. Click on a Performance slot to set it as Master slot.
+3. To exit SET mode, click the SET button again.
+With Keyboard mode activated and the SET button engaged, you can also switch the
+Master slot to another Performance slot by pressing any key in the control octave of your
+MIDI keyboard.
+6.4 Macro Controls
+The four Macro controls are located at the bottom of the Footer; they are visible at all time.
+Any parameter that can be assigned as modulation destination cannot only be assigned to the
+modulators in the MODULATION section, but also to the Macro controls.
+Macro controls
+6.4.1 Assigning Macro Controls to Modulation Destinations
+Each FORM parameter that can be assigned as a modulation destination can also be assigned
+for Macro control. Each parameter can be assigned to up to three modulators or Macro controls
+simultaneously. Each knob in the Macro controls can be assigned to control an unlimited
+amount of distinct parameters.
+FORM - Manual - 94
+The Footer
+Macro Controls
+1. To open the modulation assignment menu, click the parameter label directly below the
+parameter.
+The modulation assignment menu will open and display the three modulation slots for the
+chosen parameter.
+FORM - Manual - 95
+2. The Footer
+Macro Controls
+To select a modulation source, click one of the three modulation slots and the modula-
+tion source menu will open.
+FORM - Manual - 96
+The Footer
+Macro Controls
+3. To display the Macro controls, click the MACRO button.
+The four Macro controls are listed as M1, M2, M3, and M4.
+FORM - Manual - 97
+4. The Footer
+Macro Controls
+To select one of the Macro controls, click the corresponding button.
+FORM - Manual - 98
+The Footer
+Macro Controls
+5. Set the amount of modulation that will be applied by clicking and dragging the modula-
+tion depth slider for the selected slot.
+6.4.2 The Macro Label Menu
+Each Macro control can be labeled via the MACRO LABEL menu, which lets you select one of
+eight labels to organize your macros. By labeling your Macro controls, you can, for example,
+assign a set of effect controls to the same Macro control and then select the label FX from the
+MACRO LABEL menu. You will then be able to edit all the assigned effect controls simultane-
+ously by turning the Macro control labeled FX.
+FORM - Manual - 99
+1. The Footer
+Macro Controls
+To open the MACRO LABEL menu, click the label below the Macro control you want to
+label.
+FORM - Manual - 100
+The Footer
+Macro Controls
+2. To select the label, click the label name in the menu.
+→ The selected label is displayed below the Macro control.
+6.4.3 Knob Type and Polarity
+All Macro controls can be used either as unipolar or bipolar knobs. When used as bipolar knob
+types, the controls that you have assigned to the Macro will move in either direction from their
+set levels when you turn the Macro control. When used as unipolar knobs, the assigned con-
+trols will only move in the direction that you have assigned them to, using the modulation slid-
+er in the modulation menu that appears when you click a control's label.
+FORM - Manual - 101
+1. The Footer
+Macro Controls
+To open the KNOB TYPE menu, click the label below the Macro control you want to edit.
+FORM - Manual - 102
+2. The Footer
+Macro Controls
+To select polarity for the Macro control and all its assigned destinations, click either BI-
+POLAR or UNIPOLAR.
+FORM - Manual - 103
+The Footer
+Macro Controls
+→ Turning the Macro control now also moves all assigned destinations in accordance with
+the set polarity.
+FORM - Manual - 104
+Credits
+7 Credits
+Product Design: Jonathan Heppner
+Instrument Development: Alexander Potehkin, Dietrich Pank, Clement Destephan, Jonathan
+Heppner
+DSP Development: Mickael Le Goff, Francisco Garcia, Steinunn Arnardottir
+User Interface Design: Simon Martin
+Quality Assurance: Thilo Rode, Tommaso De Donatis, Frank Ellendt, Daniel Ramm
+Sound Design: Jamil Samad, Tommaso De Donatis, Antonio de Spirt, Jonathan Heppner, Die-
+trich Pank, Jeremiah Savage, Noritaka Ubukata, John Valasis, Ksenija Ladic, 9b0, Jeremy Jan-
+zen, Xenos Soundworks, Simon Stockhausen, Wellenrausch
+Documentation: Gustav Sto. Tomas, Jan Ola Korte
+Product Management: Marin Vrbica
+Special thanks to: Eike Jonas, Efflam Le Bivic, Oleg Kharkov, James Walker Hall, and the RE-
+AKTOR team.
+FORM - Manual - 105

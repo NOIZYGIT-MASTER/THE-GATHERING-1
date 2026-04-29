@@ -3,668 +3,466 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NOIZY.ai — Canadian Artist Gallery</title>
+<title>NOIZY Dreamer Gallery</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&family=Playfair+Display:ital,wght@0,400;1,300&display=swap');
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
   :root {
-    --black: #0a0a0a;
-    --white: #f5f5f0;
-    --red: #e63946;
-    --gold: #c9a84c;
-    --dim: #1a1a1a;
+    --bg:       #080810;
+    --panel:    #0f0f18;
+    --border:   #1e1e2e;
+    --accent:   #00ffcc;
+    --warm:     #ff6b35;
+    --gold:     #f39c12;
+    --text:     #e8e8f0;
+    --muted:    #55556a;
+    --white:    #ffffff;
   }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    background: var(--black);
-    color: var(--white);
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    overflow-x: hidden;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    min-height: 100vh;
   }
 
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 24px 48px;
-    background: linear-gradient(to bottom, rgba(10,10,10,0.95), transparent);
-  }
-
-  .logo {
-    font-size: 22px;
-    font-weight: 200;
-    letter-spacing: 6px;
-    color: var(--white);
-    text-transform: uppercase;
-  }
-
-  .logo span { color: var(--red); }
-
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 40px;
-  }
-
-  nav ul li a {
-    color: rgba(245,245,240,0.5);
-    text-decoration: none;
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    transition: color 0.3s;
-  }
-
-  nav ul li a:hover { color: var(--white); }
-
-  /* HERO GALLERY */
-  .gallery-hero {
-    position: relative;
+  /* ── Gallery Section ────────────────────────────────────── */
+  .gallery-section {
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
     overflow: hidden;
   }
 
-  .artist-slide {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity 1.2s ease;
-    display: flex;
-    align-items: flex-end;
+  /* ── Left: Image ────────────────────────────────────────── */
+  .gallery-image-pane {
+    position: relative;
+    overflow: hidden;
+    min-height: 600px;
   }
 
-  .artist-slide.active { opacity: 1; }
-
-  /* Each artist gets their OWN layout */
-
-  /* Artist 1 — Full bleed, image right, text left */
-  .slide-1 {
-    background: #0d0d1a;
-  }
-  .slide-1 .art-bg {
-    position: absolute;
-    right: 0; top: 0;
-    width: 65%;
+  .gallery-image-pane img {
+    width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #1a0533 0%, #3d1a6e 40%, #7b2d8b 70%, #c44dff 100%);
-    clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
-  }
-  .slide-1 .art-shapes {
-    position: absolute;
-    right: 5%;
-    top: 15%;
-    width: 45%;
-    height: 70%;
-  }
-  .slide-1 .art-shapes::before {
-    content: '';
-    position: absolute;
-    width: 280px; height: 280px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(196,77,255,0.8) 0%, rgba(123,45,139,0.4) 50%, transparent 70%);
-    top: 10%; left: 20%;
-    animation: pulse-orb 4s ease-in-out infinite;
-  }
-  .slide-1 .art-shapes::after {
-    content: '';
-    position: absolute;
-    width: 180px; height: 180px;
-    border: 2px solid rgba(255,255,255,0.3);
-    border-radius: 50%;
-    top: 40%; left: 50%;
-    animation: rotate-ring 8s linear infinite;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.8s ease;
   }
 
-  /* Artist 2 — Panoramic, full width photography feel */
-  .slide-2 {
-    background: #0a0a08;
-    align-items: center;
-  }
-  .slide-2 .art-bg {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to right,
-      #0a0a08 0%,
-      #1a2a1a 15%,
-      #2d4a2d 30%,
-      #4a7a3a 50%,
-      #6aaa4a 65%,
-      #2d4a2d 80%,
-      #0a0a08 100%
-    );
-    opacity: 0.7;
-  }
-  .slide-2 .art-lines {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-  }
-  .slide-2 .art-lines::before {
-    content: '';
-    position: absolute;
-    width: 200%;
-    height: 1px;
-    background: linear-gradient(to right, transparent, rgba(106,170,74,0.6), transparent);
-    top: 30%;
-    left: -50%;
-    animation: scan-line 6s ease-in-out infinite;
-  }
-  .slide-2 .art-lines::after {
-    content: '';
-    position: absolute;
-    width: 200%;
-    height: 1px;
-    background: linear-gradient(to right, transparent, rgba(106,170,74,0.3), transparent);
-    top: 60%;
-    left: -50%;
-    animation: scan-line 6s ease-in-out infinite 1s;
+  .gallery-image-pane:hover img {
+    transform: scale(1.02);
   }
 
-  /* Artist 3 — Tight, intimate, small white space */
-  .slide-3 {
-    background: #f5f0e8;
-    align-items: center;
+  .image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 60%, rgba(8,8,16,0.7) 100%);
+    pointer-events: none;
+  }
+
+  .work-credit {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 1px;
+  }
+
+  /* ── Right: Content ─────────────────────────────────────── */
+  .gallery-content-pane {
+    background: var(--panel);
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-  }
-  .slide-3 .art-canvas {
-    position: absolute;
-    width: 400px;
-    height: 520px;
-    background: #fff;
-    box-shadow: 0 40px 120px rgba(0,0,0,0.3);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(-2deg);
-    overflow: hidden;
-  }
-  .slide-3 .art-canvas::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 60px 80px at 30% 40%, #c8a882 0%, transparent 70%),
-      radial-gradient(ellipse 40px 60px at 70% 30%, #8b6a4a 0%, transparent 70%),
-      radial-gradient(ellipse 80px 40px at 50% 70%, #d4b896 0%, transparent 70%);
-  }
-  .slide-3 .art-canvas::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 40%;
-    background: linear-gradient(to top, rgba(139,106,74,0.6), transparent);
-  }
-  .slide-3 .art-info {
-    color: #2a2a2a !important;
-  }
-  .slide-3 .art-info .artist-name { color: #1a1a1a !important; }
-  .slide-3 .art-info .artist-medium { color: rgba(42,42,42,0.6) !important; }
-  .slide-3 .art-info .artist-desc { color: rgba(42,42,42,0.8) !important; }
-  .slide-3 .week-badge { background: rgba(0,0,0,0.1) !important; color: #1a1a1a !important; border-color: rgba(0,0,0,0.2) !important; }
-
-  /* Artist 4 — Widescreen cinematic */
-  .slide-4 {
-    background: #050510;
-  }
-  .slide-4 .art-bg {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      180deg,
-      #050510 0%,
-      #0a0a2a 20%,
-      #1a1a4a 40%,
-      #0d0d2a 60%,
-      #050510 100%
-    );
-  }
-  .slide-4 .stars {
-    position: absolute;
-    inset: 0;
-  }
-  .slide-4 .stars::before,
-  .slide-4 .stars::after {
-    content: '';
-    position: absolute;
-    width: 2px; height: 2px;
-    background: white;
-    border-radius: 50%;
-    box-shadow:
-      120px 80px 0 rgba(255,255,255,0.8),
-      280px 40px 0 rgba(255,255,255,0.6),
-      450px 120px 0 rgba(255,255,255,0.9),
-      600px 200px 0 rgba(255,255,255,0.5),
-      800px 60px 0 rgba(255,255,255,0.7),
-      950px 140px 0 rgba(255,255,255,0.8),
-      1100px 80px 0 rgba(255,255,255,0.4),
-      200px 300px 0 rgba(255,255,255,0.6),
-      400px 250px 0 rgba(255,255,255,0.9),
-      700px 350px 0 rgba(255,255,255,0.5),
-      100px 450px 0 rgba(255,255,255,0.7),
-      500px 400px 0 rgba(255,255,255,0.8),
-      900px 420px 0 rgba(255,255,255,0.6),
-      1200px 300px 0 rgba(255,255,255,0.9),
-      350px 500px 0 rgba(255,255,255,0.4),
-      750px 480px 0 rgba(255,255,255,0.7);
-    animation: twinkle 3s ease-in-out infinite;
-  }
-  .slide-4 .aurora {
-    position: absolute;
-    width: 100%;
-    height: 50%;
-    top: 20%;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(0,255,150,0.08) 20%,
-      rgba(100,0,255,0.12) 40%,
-      rgba(0,200,255,0.08) 60%,
-      rgba(0,255,150,0.06) 80%,
-      transparent 100%
-    );
-    animation: aurora-shift 8s ease-in-out infinite;
+    padding: 60px 56px;
+    border-left: 1px solid var(--border);
   }
 
-  /* INFO OVERLAY — adapts per slide */
-  .art-info {
-    position: relative;
-    z-index: 10;
-    padding: 60px 48px;
-    width: 100%;
-    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
-  }
-
-  .slide-3 .art-info {
-    background: none;
-    position: absolute;
-    bottom: 0;
-    padding: 40px 48px;
-  }
-
-  .week-badge {
-    display: inline-flex;
+  .gallery-eyebrow {
+    display: flex;
     align-items: center;
-    gap: 8px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 100px;
-    padding: 6px 16px;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .gallery-diamond {
+    color: var(--accent);
+    font-size: 14px;
+  }
+
+  .gallery-label {
     font-size: 10px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.7);
-    margin-bottom: 16px;
+    color: var(--accent);
+    font-weight: 600;
   }
 
-  .week-badge::before {
-    content: '';
-    width: 6px; height: 6px;
-    background: var(--red);
-    border-radius: 50%;
-    animation: blink 2s ease-in-out infinite;
+  .gallery-week {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-left: auto;
   }
 
   .artist-name {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(32px, 5vw, 64px);
-    font-weight: 400;
+    font-size: clamp(28px, 3vw, 44px);
+    font-weight: 700;
     line-height: 1.1;
-    margin-bottom: 8px;
     color: var(--white);
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
   }
 
   .artist-location {
-    font-size: 11px;
-    letter-spacing: 3px;
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 12px;
+    margin-bottom: 28px;
   }
 
-  .artist-medium {
-    font-size: 13px;
+  .work-title {
+    font-size: 16px;
+    color: var(--warm);
+    font-style: italic;
+    margin-bottom: 4px;
+  }
+
+  .work-meta {
+    font-size: 11px;
+    color: var(--muted);
     letter-spacing: 1px;
-    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .divider {
+    width: 40px;
+    height: 1px;
+    background: var(--border);
+    margin-bottom: 24px;
+  }
+
+  .artist-bio {
+    font-size: 14px;
+    line-height: 1.75;
+    color: rgba(232,232,240,0.75);
     margin-bottom: 20px;
   }
 
-  .artist-desc {
-    max-width: 480px;
-    font-size: 14px;
-    line-height: 1.7;
-    color: rgba(255,255,255,0.75);
-    margin-bottom: 28px;
+  .curator-note {
+    background: rgba(0,255,204,0.04);
+    border-left: 2px solid var(--accent);
+    padding: 14px 16px;
+    margin-bottom: 32px;
+    font-size: 13px;
+    color: rgba(232,232,240,0.6);
+    line-height: 1.6;
+    font-style: italic;
   }
 
   .gallery-actions {
     display: flex;
-    gap: 16px;
-    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 40px;
   }
 
   .btn-primary {
-    background: var(--red);
-    color: white;
+    padding: 12px 24px;
+    background: var(--accent);
+    color: #080810;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
     border: none;
-    padding: 12px 28px;
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+    border-radius: 2px;
     cursor: pointer;
-    transition: all 0.3s;
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: opacity 0.15s;
   }
 
-  .btn-primary:hover {
-    background: #ff4a57;
-    transform: translateY(-1px);
-  }
+  .btn-primary:hover { opacity: 0.85; }
 
-  .btn-secondary {
+  .btn-ghost {
+    padding: 12px 20px;
     background: transparent;
-    color: rgba(255,255,255,0.6);
-    border: 1px solid rgba(255,255,255,0.2);
-    padding: 12px 28px;
+    color: var(--muted);
     font-size: 11px;
+    font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
+    border: 1px solid var(--border);
+    border-radius: 2px;
     cursor: pointer;
-    transition: all 0.3s;
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s;
   }
 
-  .btn-secondary:hover {
-    border-color: rgba(255,255,255,0.5);
-    color: white;
+  .btn-ghost:hover {
+    border-color: var(--accent);
+    color: var(--accent);
   }
 
-  /* GALLERY CONTROLS */
-  .gallery-controls {
-    position: fixed;
-    right: 48px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 50;
+  /* ── Week indicator ─────────────────────────────────────── */
+  .week-dots {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .week-dots span {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-right: 8px;
   }
 
   .dot {
-    width: 6px; height: 6px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.25);
+    background: var(--border);
     cursor: pointer;
-    transition: all 0.3s;
-    border: none;
-    padding: 0;
+    transition: background 0.2s;
   }
 
   .dot.active {
-    background: var(--white);
-    height: 24px;
+    background: var(--accent);
+    width: 20px;
     border-radius: 3px;
   }
 
-  /* PROGRESS BAR */
-  .progress-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    height: 2px;
-    background: var(--red);
-    z-index: 100;
-    transition: width 0.1s linear;
+  /* ── Vault badge ────────────────────────────────────────── */
+  .vault-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(243,156,18,0.3);
+    padding: 4px 8px;
+    border-radius: 2px;
+    margin-top: 16px;
   }
 
-  /* WEEK COUNTER */
-  .week-counter {
-    position: fixed;
-    bottom: 32px;
-    right: 48px;
-    z-index: 50;
-    text-align: right;
+  /* ── Archive strip ──────────────────────────────────────── */
+  .archive-strip {
+    background: var(--panel);
+    border-top: 1px solid var(--border);
+    padding: 20px 0;
+    overflow-x: auto;
   }
 
-  .week-counter .week-num {
+  .archive-inner {
+    display: flex;
+    gap: 1px;
+    width: max-content;
+    padding: 0 40px;
+  }
+
+  .archive-thumb {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    opacity: 0.4;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    filter: grayscale(60%);
+  }
+
+  .archive-thumb:hover,
+  .archive-thumb.current {
+    opacity: 1;
+    filter: none;
+  }
+
+  /* ── Placeholder (before real image) ───────────────────── */
+  .image-placeholder {
+    width: 100%;
+    height: 100%;
+    min-height: 600px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    color: var(--muted);
+  }
+
+  .placeholder-diamond {
     font-size: 48px;
-    font-weight: 200;
-    line-height: 1;
-    color: rgba(255,255,255,0.1);
-    letter-spacing: -2px;
+    color: var(--accent);
+    opacity: 0.3;
+    animation: pulse 3s ease-in-out infinite;
   }
 
-  .week-counter .week-label {
-    font-size: 10px;
+  .placeholder-text {
+    font-size: 11px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.3);
+    text-align: center;
+    line-height: 2;
   }
 
-  /* SUBMIT BANNER */
-  .submit-banner {
-    background: var(--dim);
-    border-top: 1px solid rgba(255,255,255,0.06);
-    padding: 32px 48px;
+  @keyframes pulse {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.6; }
+  }
+
+  /* ── NOIZY header bar ───────────────────────────────────── */
+  .noizy-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    padding: 16px 40px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
   }
 
-  .submit-banner p {
-    font-size: 13px;
-    color: rgba(255,255,255,0.4);
-    letter-spacing: 0.5px;
+  .noizy-logo {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--accent);
   }
 
-  .submit-banner strong {
-    color: rgba(255,255,255,0.8);
-    font-weight: 400;
+  .noizy-tagline {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
   }
 
-  .maple-leaf {
-    color: var(--red);
-    font-size: 18px;
-  }
-
-  /* ANIMATIONS */
-  @keyframes pulse-orb {
-    0%, 100% { transform: scale(1); opacity: 0.8; }
-    50% { transform: scale(1.1); opacity: 1; }
-  }
-
-  @keyframes rotate-ring {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-
-  @keyframes scan-line {
-    0%, 100% { opacity: 0; transform: translateX(-25%); }
-    50% { opacity: 1; transform: translateX(0); }
-  }
-
-  @keyframes twinkle {
-    0%, 100% { opacity: 0.6; }
-    50% { opacity: 1; }
-  }
-
-  @keyframes aurora-shift {
-    0%, 100% { transform: translateX(-5%) scaleY(1); opacity: 0.8; }
-    50% { transform: translateX(5%) scaleY(1.2); opacity: 1; }
-  }
-
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-  }
-
-  /* SLIDE 2 text contrast fix */
-  .slide-2 .art-info {
-    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 70%, transparent 100%);
+  /* ── Mobile ─────────────────────────────────────────────── */
+  @media (max-width: 768px) {
+    .gallery-section {
+      grid-template-columns: 1fr;
+    }
+    .gallery-image-pane {
+      min-height: 320px;
+    }
+    .gallery-content-pane {
+      padding: 36px 24px;
+    }
   }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="logo">NOI<span>Z</span>Y</div>
-  <ul>
-    <li><a href="#">Gallery</a></li>
-    <li><a href="#">Artists</a></li>
-    <li><a href="#">NOIZYVOX</a></li>
-    <li><a href="#">Submit Your Work</a></li>
-  </ul>
-</nav>
+<!-- NOIZY Header -->
+<header class="noizy-header">
+  <div class="noizy-logo">◈ NOIZY.AI</div>
+  <div class="noizy-tagline">Where Canada's hidden artists are discovered</div>
+</header>
 
-<!-- GALLERY CONTROLS -->
-<div class="gallery-controls">
-  <button class="dot active" onclick="goTo(0)"></button>
-  <button class="dot" onclick="goTo(1)"></button>
-  <button class="dot" onclick="goTo(2)"></button>
-  <button class="dot" onclick="goTo(3)"></button>
-</div>
+<!-- Gallery Section -->
+<section class="gallery-section" id="gallery">
 
-<!-- WEEK COUNTER -->
-<div class="week-counter">
-  <div class="week-num" id="weekNum">01</div>
-  <div class="week-label">This Week</div>
-</div>
-
-<!-- PROGRESS BAR -->
-<div class="progress-bar" id="progressBar"></div>
-
-<!-- HERO GALLERY -->
-<div class="gallery-hero">
-
-  <!-- SLIDE 1: Digital / Generative -->
-  <div class="artist-slide slide-1 active">
-    <div class="art-bg"></div>
-    <div class="art-shapes"></div>
-    <div class="art-info">
-      <div class="week-badge">Featured Artist — Week 01</div>
-      <div class="artist-name">Mélodie Tremblay</div>
-      <div class="artist-location">🍁 Montréal, Québec</div>
-      <div class="artist-medium">Generative Digital Art / AI-Assisted Visual Poetry</div>
-      <div class="artist-desc">Mélodie explores the collision between algorithmic structure and human emotion. Her work asks what it means to feel colour in the age of machine consciousness.</div>
-      <div class="gallery-actions">
-        <button class="btn-primary">Enter the Exhibition</button>
-        <button class="btn-secondary">Artist Profile</button>
+  <!-- Left: Artwork -->
+  <div class="gallery-image-pane">
+    <!-- REPLACE src with actual Heidi Conrod image once approved -->
+    <div class="image-placeholder">
+      <div class="placeholder-diamond">◈</div>
+      <div class="placeholder-text">
+        HEIDI CONROD<br>
+        OTTAWA, ONTARIO<br>
+        IMAGE PENDING ARTIST APPROVAL
       </div>
     </div>
+    <div class="image-overlay"></div>
+    <div class="work-credit">© Heidi Conrod — All rights reserved</div>
   </div>
 
-  <!-- SLIDE 2: Photography / Nature — Panoramic -->
-  <div class="artist-slide slide-2">
-    <div class="art-bg"></div>
-    <div class="art-lines"></div>
-    <div class="art-info">
-      <div class="week-badge">Featured Artist — Week 02</div>
-      <div class="artist-name">James Thunderbird</div>
-      <div class="artist-location">🍁 Thunder Bay, Ontario</div>
-      <div class="artist-medium">Long Exposure Photography / Land Art</div>
-      <div class="artist-desc">James walks the boreal forest for days before pressing the shutter. His photographs are records of patience — light accumulated over hours, country remembered through stillness.</div>
-      <div class="gallery-actions">
-        <button class="btn-primary">Enter the Exhibition</button>
-        <button class="btn-secondary">Artist Profile</button>
-      </div>
+  <!-- Right: Artist Info -->
+  <div class="gallery-content-pane">
+
+    <div class="gallery-eyebrow">
+      <span class="gallery-diamond">◈</span>
+      <span class="gallery-label">NOIZY Dreamer Gallery</span>
+      <span class="gallery-week">Week of March 16, 2026</span>
     </div>
-  </div>
 
-  <!-- SLIDE 3: Traditional / Intimate — Light background -->
-  <div class="artist-slide slide-3">
-    <div class="art-canvas"></div>
-    <div class="art-info">
-      <div class="week-badge">Featured Artist — Week 03</div>
-      <div class="artist-name">Ingrid Beausoleil</div>
-      <div class="artist-location">🍁 Victoria, British Columbia</div>
-      <div class="artist-medium">Oil on Canvas / Figurative Portraiture</div>
-      <div class="artist-desc">Ingrid paints faces that have lived. She says she is not painting people — she is painting the light that falls differently on everyone who has ever loved something and lost it.</div>
-      <div class="gallery-actions">
-        <button class="btn-primary">Enter the Exhibition</button>
-        <button class="btn-secondary">Artist Profile</button>
-      </div>
+    <h1 class="artist-name">Heidi Conrod</h1>
+    <div class="artist-location">Ottawa, Ontario · Canada</div>
+
+    <div class="work-title">"Orange Wedge"</div>
+    <div class="work-meta">Acrylic + Hand-moulded neon on canvas · 2022 · The Charged Line series</div>
+
+    <div class="divider"></div>
+
+    <p class="artist-bio">
+      Heidi Conrod has spent 30 years building a body of work that refuses to sit still. Her current practice embeds hand-moulded electric neon directly onto abstract paintings — the tube doesn't decorate the canvas, it charges it. The result lives in the space between: between painting and sculpture, between light and surface, between the romantic and the unsettling. She calls it <em>liminality</em>.
+    </p>
+
+    <div class="curator-note">
+      "Heidi's work is the visual equivalent of what NOIZY is trying to do in sound — take something physical and human and wire it with energy without losing the hand. The neon IS the nerve."
+      <br><br>— Rob Plowman, NOIZY.AI
     </div>
-  </div>
 
-  <!-- SLIDE 4: Astral / Immersive -->
-  <div class="artist-slide slide-4">
-    <div class="art-bg"></div>
-    <div class="stars"></div>
-    <div class="aurora"></div>
-    <div class="art-info">
-      <div class="week-badge">Featured Artist — Week 04</div>
-      <div class="artist-name">Siku Aqiaruq</div>
-      <div class="artist-location">🍁 Iqaluit, Nunavut</div>
-      <div class="artist-medium">Digital Installation / Northern Sky Mapping</div>
-      <div class="artist-desc">Siku translates Inuit star knowledge into living digital installations. The aurora is not decoration — it is language. She is teaching the sky to speak again.</div>
-      <div class="gallery-actions">
-        <button class="btn-primary">Enter the Exhibition</button>
-        <button class="btn-secondary">Artist Profile</button>
-      </div>
+    <div class="gallery-actions">
+      <a href="https://www.artsy.net/artist/heidi-conrod" target="_blank" rel="noopener" class="btn-primary">
+        VIEW WORK ↗
+      </a>
+      <a href="https://www.instagram.com/heidiconrod/" target="_blank" rel="noopener" class="btn-ghost">
+        @heidiconrod
+      </a>
+      <a href="http://heidiconrod.com" target="_blank" rel="noopener" class="btn-ghost">
+        WEBSITE ↗
+      </a>
     </div>
+
+    <div class="week-dots">
+      <span>Gallery</span>
+      <div class="dot active" title="Week 001 — Heidi Conrod"></div>
+      <div class="dot" title="Coming soon"></div>
+      <div class="dot" title="Coming soon"></div>
+      <div class="dot" title="Coming soon"></div>
+      <div class="dot" title="Coming soon"></div>
+    </div>
+
+    <div class="vault-badge">
+      🔐 NOIZYVOX — Image display by artist permission
+    </div>
+
   </div>
+</section>
 
-</div>
-
-<!-- SUBMIT BANNER -->
-<div class="submit-banner">
-  <p><strong>Are you a Canadian artist</strong> exploring visual creation in any form? <span class="maple-leaf">🍁</span> NOIZY.ai features one independent artist every week. <strong>The presentation is entirely yours.</strong></p>
-  <button class="btn-primary">Submit Your Work</button>
-</div>
+<!-- Submit CTA -->
+<section style="background: var(--panel); border-top: 1px solid var(--border); padding: 48px 40px; text-align: center;">
+  <div style="font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px;">◈ INDEPENDENT CANADIAN ARTISTS</div>
+  <h2 style="font-size: 24px; font-weight: 700; color: var(--white); margin-bottom: 10px;">Your work belongs here.</h2>
+  <p style="font-size: 14px; color: var(--muted); max-width: 480px; margin: 0 auto 28px; line-height: 1.7;">
+    Every week we feature one independent Canadian artist whose work carries a human signal. No application fee. No brand alignment required. Just art that stops you.
+  </p>
+  <a href="/gallery/submit" class="btn-primary" style="display: inline-flex;">SUBMIT YOUR WORK →</a>
+</section>
 
 <script>
-  let current = 0;
-  let progress = 0;
-  let timer;
-  const DURATION = 7000;
-  const slides = document.querySelectorAll('.artist-slide');
-  const dots = document.querySelectorAll('.dot');
-  const progressBar = document.getElementById('progressBar');
-  const weekNum = document.getElementById('weekNum');
-
-  const weeks = ['01', '02', '03', '04'];
-
-  function goTo(index) {
-    slides[current].classList.remove('active');
-    dots[current].classList.remove('active');
-    current = index;
-    slides[current].classList.add('active');
-    dots[current].classList.add('active');
-    weekNum.textContent = weeks[current];
-    progress = 0;
-    progressBar.style.width = '0%';
-    clearInterval(timer);
-    startTimer();
-  }
-
-  function next() {
-    goTo((current + 1) % slides.length);
-  }
-
-  function startTimer() {
-    const start = Date.now();
-    timer = setInterval(() => {
-      const elapsed = Date.now() - start;
-      progress = (elapsed / DURATION) * 100;
-      progressBar.style.width = Math.min(progress, 100) + '%';
-      if (elapsed >= DURATION) {
-        clearInterval(timer);
-        next();
-      }
-    }, 50);
-  }
-
-  startTimer();
+  // Dot navigation (for future weeks)
+  document.querySelectorAll('.dot').forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      if (i === 0) return; // current week, already shown
+      // Future: fetch week data and update panel
+      console.log(`Navigate to week ${i + 1}`);
+    });
+  });
 </script>
+
 </body>
 </html>

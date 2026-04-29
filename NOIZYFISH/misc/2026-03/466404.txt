@@ -1,0 +1,543 @@
+Manual
+Disclaimer
+The information in this document is subject to change without notice and does not represent
+a commitment on the part of Native Instruments GmbH. The software described by
+this document is subject to a License Agreement and may not be copied to other media.
+No part of this publication may be copied, reproduced or otherwise transmitted or recorded,
+for any purpose, without prior written permission by Native Instruments GmbH, hereinafter
+referred to as Native Instruments. All product and company names are ™ or ® trademarks
+of their respective owners.
+Document authored by: Adam Hanley
+Editing by: Christoph Laue, Patryk Korman
+Product Version: 1.5 (02/2019)
+Document version: 1.0 (06/2010
+Special thanks to the Beta Test Team, who were invaluable not just in tracking down bugs,
+but in making this a better product.
+Contact
+Germany
+Native Instruments GmbH
+Schlesische Str. 28
+D-10997 Berlin
+Germany
+info@native-instruments.de
+www.native-instruments.de
+USA
+Native Instruments North America, Inc.
+5631 Hollywood Boulevard
+Los Angeles, CA 90028
+USA
+sales@native-instruments.com
+www.native-instruments.com
+© Native Instruments GmbH, 2010. All rights reserved.
+Table of Contents
+Table of Contents
+1 Welcome to VINTAGE ORGANS 6
+2 Quick-Start 7
+2.1 Navigating the Instruments 7
+2.2 Altering the Sound 8
+2.3 Keyswitches and Presets 9
+2.4 Setting Up for Performance 9
+3 About the Organs 11
+3.1 The Hammond B3, C3 and M3 11
+3.2 The Vox Continental 14
+3.3 The Farfisa Compact 14
+4 Interface Overview 16
+4.1 Organ Page 16
+4.1.1 Tonewheel Organs B3 and C3 16
+4.1.2 Tonewheel Organ M3 19
+4.1.3 The Transistor Continental 20
+4.1.4 The Transistor Compact 22
+4.2 Amp Page 23
+4.2.1 Organ Controls 24
+4.2.2 Tube Amplifier 24
+4.2.3 Rotor 25
+4.2.4 Cabinets 26
+4.2.5 Reverb 27
+4.3 Settings Page 27
+4.3.1 Controller Options 28
+4.3.2 Drawbar Options 29
+Vintage Organs - Manual - 4
+Table of Contents
+4.3.3 Manuals 30
+5 Credits 31
+Vintage Organs - Manual - 5
+Welcome to VINTAGE ORGANS
+1 Welcome to VINTAGE ORGANS
+Thank you very much for purchasing VINTAGE ORGANS. This KONTAKT library adds five
+extensively sampled electric organs to your collection. Furthermore, the sounds have been
+augmented by powerful performance views, which allow you to easily tweak KONTAKT's
+on-board effects and parameters.
+This documentation will help you use your new KONTAKT library. The Quick-start contains
+a very brief overview of the layout as well as short tutorials for how to perform common
+tasks. The successive chapters will give you information about the instruments recorded as
+well as a more in-depth look at the controls and features of the library.
+On behalf of the entire Native Instruments team, we hope that this product will truly inspire
+you.
+Vintage Organs - Manual - 6
+Quick-Start
+2 Quick-Start
+2.1 Navigating the Instruments
+Each of the instruments provided in this library has three to four pages of controls that allow
+you to alter different aspects of the instrument. You can navigate between these pages
+by clicking on the tabs at the bottom of the instrument's performance view. The different
+pages and their uses are as follows:
+1. Model page: Here you can see the model of organ you are playing. There are no controls
+on this page (see figure 2.1).
+2. Organ page: This is where you control the sound of the organ. It is designed to mirror
+the controls of the sampled instrument as authentically as possible (↑4.1, Organ
+Page).
+3. Amp page: This page contains the controls related to the processing of the organ
+sound, with models for amplifiers, cabinets and vintage reverbs (↑4.2, Amp Page).
+4. Settings page: On this page you can set up advanced performance options related to
+the control of the instrument (↑4.3, Settings Page). This page is not provided for the
+Transistor Compact Instruments.
+Vintage Organs - Manual - 7
+Quick-Start
+Altering the Sound
+Fig. 2.1 Tonewheel Organ B3 user interface with Model page selected from the Page tabs
+2.2 Altering the Sound
+The sound altering controls are found on the Amp and Organ pages of all instruments. If
+you are looking to alter drawbar settings or the character of the organ in an authentic way,
+you can do this on the Organ page. If you are looking to alter the instruments effects, like
+EQ and distortion, you can do this on the Amp page.
+Vintage Organs - Manual - 8
+Quick-Start
+Keyswitches and Presets
+2.3 Keyswitches and Presets
+All of the instruments provided in this library have a selection of twelve organ presets,
+which are selectable with either the preset knob or using the C0-B0 octave of keys on a
+MIDI keyboard. The keyswitch control method is activated or deactivated using the C0-B0
+button.
+The organ presets only affect the controls on the Organ page. This is to emulate the preset
+control of the original B3 and C3 organs, but has been expanded to control percussion and
+vibrato settings for more variation during performance.
+It is important to note that the stored organ settings are loaded when the Preset knob is
+touched or when the keyswitch is pressed. If you make adjustments to a preset and want to
+store them, simply press the Save button and the changes will be stored into the preset slot.
+You also need to save the .nki (the KONTAKT instrument file) to make the changes to presets
+permanent in the instrument.
+2.4 Setting Up for Performance
+Since four of the five instruments sampled for this library have two manuals, we have provided
+a number of control options which are accessible between the Organ page and Settings
+page.
+On the Organ page you can select the main mode of control between lower manual only,
+key-split, MIDI channel split and upper manual only with the MODE knob. You can even
+switch between these settings during a performance, so you can, for example, flip between
+the upper and lower manual for different parts of a song while still using the same MIDI
+channel and key range.
+On the Settings page you can further define this control by selecting the MIDI channels
+from which you will play the manuals (if control is set to MIDI SPLIT), or the point at which
+the key-split occurs. In order for the MIDI channel split to work, the instrument MIDI
+channel must be set to Omni.
+Vintage Organs - Manual - 9
+Quick-Start
+Setting Up for Performance
+Setup for Users of Doepfer Organ Controllers
+When using the Doepfer d3c controller, it is possible to load a controller preset on the Settings
+page that instantly maps the correct MIDI controls on the hardware to the relevant
+controls in the software. Simply go to the Controller Preset dropdown on the Settings page
+and select Doepfer d3c. All controls will function as expected, except “Keyclick” and
+“Perc. Harm.”, which have no function as there is no relevant control in Vintage Organs to
+connect them to. The “Body” and “Bright” controls are mapped to the Mid and High EQ
+Gain respectively.
+If you are using the full Doepfer Organ control system (the d3c and two d3m keyboards)
+you can also set up the MIDI split function to further emulate a real organ feel. Simply
+select MIDI SPLIT with the MODE knob on the Organ page and set the main instrument MIDI
+channel to omni. The default setting is that the upper manual is on MIDI channel 1 and
+the lower manual is on MIDI channel 2, which should also be the default setup of the
+Doepfer controllers. If this is not the case, just go to the Settings page and select the desired
+MIDI channels for your setup.
+Vintage Organs - Manual - 10
+About the Organs
+3 About the Organs
+3.1 The Hammond B3, C3 and M3
+Arguably the most famous of all electric organ manufacturers, the Hammond organ sound
+can be heard in a wide variety of genres, from classic rock to gospel and jazz.
+Originally a clock-maker, Laurens Hammond applied his developments in mechanics to try
+to reproduce the sound of a church organ. Within every Hammond Organ are a series of
+rotating cogs (tonewheels), each with a different number of teeth. As the cogs spin, these
+teeth pass by a magnetic pickup and induce an alternating current, which can then be
+sent to a speaker to produce sound. Drawbars could then be used to control the mix of
+these tones, allowing the player to control the tonality of the organ by mixing harmonics
+(See section “Drawbar Theory” below for more information).
+The B3 and C3 models were the first Hammond Organs specifically built to contain two
+sets of tonewheels to allow for vibrato and chorus sounds. Although different in style (the
+C3 being deigned for churches and the B3 for homes, studios and touring), the B3 and C3
+were mechanically identical and had the same controls. We have sampled both for this
+pack, due to their electro-mechanical nature, as well as general, unique wear and tear that
+comes with age, no two Hammond organs will sound perfectly identical, even if they are
+the same model. In this case you can listen to the two side by side and decide which has
+the character you prefer for your music.
+The M3, however, is a different case. Although powered by the same tonewheel technology,
+the M3 is a spinet organ, with less keys and less drawbars. Again the character of this
+sampled organ is unique, but you will notice some other tonal differences due to the lack
+of fold-back in the M3.
+Fold-back was used in the B3 and C3 models to compensate for the mechanical restrictions
+of the tonewheels. The tonewheels produced at the time could only create tones in a
+limited range, so for the higher and lower tones, the octaves wrapped around to fill in the
+space left. In the M3 no such wrap around occurs, so the brightness will decrease in the
+higher octave and the bass will decrease in the lower octave.
+Vintage Organs - Manual - 11
+About the Organs
+The Hammond B3, C3 and M3
+Drawbar Theory
+Drawbar organs operate under the same sound generation principals as additive synthesis.
+In additive synthesis complex tones are generated by combining sine waves (a waveform
+with only one partial) of different frequencies and amplitudes.
+For the Hammond organs, the frequencies of these waves follow a pattern based on the
+harmonic series. In this series a fundamental frequency acts as the first harmonic, the
+second harmonic (or first overtone) is twice the frequency of the fundamental (one octave
+above), the third is three times the fundamental (an octave plus a perfect 5th above), and
+so on.
+The first eight natural harmonics of middle C are:
+Fig. 3.1 The first eight harmonics of middle C
+The terms used for describing the harmonic content of organs historically comes from pipe
+organs, where the use of various lengths of pipe determines the tonal characteristics (so a
+pipe of half the length of another would produce a tone at twice the frequency). Hence,
+organs have come to use “pipe length” rather than harmonic number to describe sound
+settings.
+On the tonewheel organ, the brown drawbars provide tones that are not natural harmonics
+of the fundamental frequency, but belong to the harmonic series starting one octave below.
+That’s why they are often called sub-harmonics.
+The “pipe length” settings, and their relationship to the natural harmonics, are illustrated
+below:
+Vintage Organs - Manual - 12
+About the Organs
+The Hammond B3, C3 and M3
+Fig. 3.2 Drawbars and their Harmonics
+As we can see in the illustration, drawbars also have a series of numbers marked along
+each bar. These numbers show the amplitude of each harmonic (the second important part
+of additive synthesis). In the Hammond organs we have sampled and emulated, the drawbars
+have nine discreet volume settings from 0 (off) to 8. It is common practice, when
+writing for drawbar organs, to notate the drawbar settings with a series of numbers representing
+the volume level of each drawbar, in the format 88-8888-888 (this example would
+be all of the bars at full volume).
+Vintage Organs - Manual - 13
+About the Organs
+The Vox Continental
+3.2 The Vox Continental
+Introduced in 1962, the Continental was one of the first and remains one of the most famous
+combo organs. It was designed originally as a low-cost, low-weight touring alternative
+for the larger Hammond organs, but had a unique character that was popularized by 60s
+pop acts such as The Doors, The Monkees and The Animals.
+The original Vox Continental had one manual, six drawbars and a vibrato on/off switch,
+though later models would contain additional manuals and percussion controls. For this library
+we have sampled a Vox Continental II, with two manuals and no percussion.
+The sound of the Continental (and most other combo organs) was not produced in any
+electro-mechanical way, like with the Hammond tonewheel organs, but with transistor
+based circuitry. This not only decreased the size and weight, but altered the characteristics
+of the sound produced. The tone generation of these combo organs were produced by
+filtering a square wave, with each key having its own oscillator and filter circuitry.
+The drawbars of the continental work differently from those of the tonewheel organs. Four
+of the six drawbars control the harmonics 16', 8', 4', IV (with IV representing a mixture of
+the 3rd, 4th, 5th and 8th harmonics). The remaining two drawbars, labelled ~ and M, control
+the different timbres for the harmonics. The two tone types you have control over are
+flute (a sine wave) and reed (with a more buzzy character, somewhere between a triangle
+or square wave) respectively.
+The Vox Continental II offered one extra drawbar for the upper manual to better control the
+higher harmonics, the lower manual kept the standard six drawbars. So if you desire the
+original, single-manual continental sound, it is recommended to use the lower manual only
+in your setup.
+3.3 The Farfisa Compact
+Italian Accordion manufacturer Farfisa released their fist combo organ in 1964, after the
+success of the Vox Continental. It was used by many as a cheap alternative to the Continental,
+but has also made appearances in recordings by high profile artists such as Pink
+Floyd, Elton John and Led Zeppelin.
+Vintage Organs - Manual - 14
+About the Organs
+The Farfisa Compact
+The Compact series differs from the other organs in this pack in that it has no drawbars;
+all of the timbre and tonal control is done via switches.
+Like the original Continental, the Farfisa Compact only has one manual, but, unlike other
+organs, the lowest octave of the manual was designed to produce its own tone, to mimic
+the pedals of a larger organ. The bass octave had no tonal controls, only volume switches.
+Many variations of the Compact were made, but for this library we have sampled an original
+standard model. This model contained a tube pre-amp to drive an internal spring reverb
+unit. The reverb settings were controlled with two switches that sat beside the three
+vibrato control switches. The Compact is also the only single manual organ sampled for
+this library.
+Vintage Organs - Manual - 15
+Interface Overview
+4 Interface Overview
+4.1 Organ Page
+The Organ page is where you can find all of the controls found on the original organs we
+have sampled. Here you can control the drawbars and other sound controls. This page differs
+from organ to organ. See the following sub-chapters for a description of the individual
+organs' Organ pages.
+4.1.1 Tonewheel Organs B3 and C3
+The B3 and C3 share the same Organ page controls.
+Fig. 4.1 The Organ page for the B3
+▪ Along the top you will find the drawbars. These control the volume levels of their respective
+tonewheels (see section “Drawbar Theory” in chapter ↑3.1, The Hammond
+B3, C3 and M3 for more information). If Mute Inactive on the Settings page is turned
+Vintage Organs - Manual - 16
+Interface Overview
+Organ Page
+on, the drawbars will not work in real-time when going from a value of 0 (off) to another
+value. However, they will work in real-time in all cases when the drawbar is
+starting from any value other than 0.
+▪ To the bottom left of the page is the Rotator switch, which controls the rotator speed.
+The Rotator effect emulates the sound and control of a Leslie speaker and has two
+states: Fast and Slow. By default, this switch can also be controlled by the modwheel.
+Additional Rotator controls can be found on the Amp page. This control will not
+change the sound if the Rotator effect is turned off.
+Fig. 4.2 The lower section of controls.
+▪ In the Vibrato section of the page, the VIBRATO LOWER and VIBRATO UPPER switches activate
+or deactivate the vibrato for their respective manuals and the V-C selector sets up
+the depth and style of vibrato for both. Turning on vibrato for the lower manual also
+activates vibrato for the pedal sounds as well. The numeric values of the V-C knob represent
+the depth of the pitch modulation and the letters V and C stand for Vibrato and
+Chorus, respectively. Vibrato settings mean that you only get the pitch modulated signal
+and Chorus settings give you this signal mixed with a steady tone, producing an
+ensemble type effect. The vibrato controls are affected in a similar way to the drawbars
+if MUTE INACTIVE DRAWBARS from the Drawbar options section in the Settings page
+(↑4.3.2, Drawbar Options) is turned on.
+▪ The PRESETS knob selects and loads twelve different presets for the organ controls (this
+includes all drawbars as well as the Vibrato and Percussion controls). The C0–B0 button
+activates the keyswitch control of this knob. If you make changes to a preset and
+want to store this into the knob, just press the save button after you have finished editing.
+Vintage Organs - Manual - 17
+Interface Overview
+Organ Page
+Note that the .nki (the KONTAKT instrument file) will also need to be saved to make these
+changes permanent for the next time you open the instrument.
+▪ The Percussion switches for the B3, C3 and M3 effect only the upper manual, as was
+the case with the original organs. When active, the percussion adds a monophonic envelope
+either to the 2nd or 3rd harmonic, depending on the setting of the PERCUS HARMON
+(Percussion Harmonic) switch on the right. The depth and speed of the envelope
+are controlled by the PERCUS VOLUME (Percussion Volume) and PERCUS DECAY (Percussion
+Decay) switches. In the real B3 and C3, the percussion would deactivate the highest
+(1') drawbar. You have the option of enabling this behavior in the Settings page.
+▪ The MODE selector lets you specify how you play the instrument. Setting it to LOWER or
+UPPER will make your MIDI keyboard or sequencer control only the Lower or Upper
+manual. MIDI SPLIT allows you to use different MIDI channels to play the two manuals
+(you can specify the channels in the Settings page). KEY SPLIT sends the notes below
+the split key to the lower manual and notes including or above the split key to the upper
+manual.
+▪ The final control is the SWELL slider. This is designed to mimic the volume/expression
+pedal of the original B3 and C3. It is hard-wired to MIDI controller 11.
+Fig. 4.3 Pedal Bass controls for the C3
+If you select the Pedal view using the PEDAL button to the left of the drawbars, you will see
+the PEDAL BASS controls replacing the drawbars for the lower manual. There are two drawbars
+that control the harmonics of the pedal bass sound. The DIRECT button allows you to
+Vintage Organs - Manual - 18
+Interface Overview
+Organ Page
+route the pedal bass so that it can bypass the effects of the instrument. You can specify
+which of KONTAKT's outputs it will be routed to from the dropdown menu to the right of
+the button.
+The SUSTAIN knob adjusts the decay time of the pedal bass and, when set to any value other
+than 0, will make the bass monophonic.
+4.1.2 Tonewheel Organ M3
+The M3 Organ page is similar in many ways to the B3 and C3 pages, but with two main
+differences: the lower manual drawbars and the lack of pedal controls.
+Fig. 4.4 The lower manual drawbar controls for the M3
+The lower manual for the M3 has only eight drawbar controls, but still these controls manage
+the amplitude of nine tonewheels. This is because the highest drawbar (labelled II) actually
+controls the amplitude of the two highest harmonics.
+Vintage Organs - Manual - 19
+Interface Overview
+Organ Page
+4.1.3 The Transistor Continental
+Fig. 4.5 The Organ page of the Transistor Continental
+The top portion of the Transistor Continental's Organ page is where you find the drawbars,
+which control the tonality and timbre of the two manuals. The dark drawbars control the
+main volume levels of the two oscillator types, with ~ controlling a sine wave type sound
+(flute) and M controlling a more buzzy sound (reed). The harmonics for both of these oscillator
+shapes are controlled with the lighter drawbars.
+If MUTE INACTIVE DRAWBARS on the Settings page is turned on (see ↑4.3, Settings Page and
+↑4.3.2, Drawbar Options), the drawbars will not work in real-time when going from a value
+of 0 (off) to another value. However, they will work in real-time in all cases when the drawbar
+is starting from any value other than 0.
+Like the original Vox Continental models, this instrument has only one VIBRATO ON/OFF
+switch (0/1). Beside this is the BASS Volume knob, which controls the volume of the lower
+octave of the instrument (this octave is not connected to any drawbars, vibrato or envelope
+controls).
+Vintage Organs - Manual - 20
+Interface Overview
+Organ Page
+The PRESETS knob selects and loads twelve different presets for the organ controls, which
+includes all drawbars as well as the vibrato controls). The C0–B0 button activates keyswitch
+control of this knob. If you make changes to a preset and want to store this into the knob,
+just press the save button after you have finished editing (please note that the nki will also
+need saved to make these changes permanent for the next time you open the instrument).
+The MODE selector knob lets you specify how you play the instrument. Setting it to LOWER or
+UPPER will make your MIDI keyboard or sequencer control only the Lower or Upper manual
+respectively. MIDI SPLIT allows you to use different MIDI channels to play the two manuals
+(you can specify the channels in the Settings page, see ↑4.3, Settings Page). KEY SPLIT
+sends the notes below the split key to the lower manual and notes including or above the
+split key to the upper manual.
+The final control is the swell slider. This is designed to mimic a volume/expression pedal.
+It is hard-wired to MIDI controller 11.
+Vintage Organs - Manual - 21
+Interface Overview
+Organ Page
+4.1.4 The Transistor Compact
+Fig. 4.6 The Transistor Compact Organ controls.
+The Farfisa Compact is unique in this library in that it has no drawbar controls, almost all
+of the organ parameters are controlled by switches. However, like the other organs, the top
+row of controls effects different harmonics and sounds produced by the instrument.
+Fig. 4.7 The voice control switches
+Vintage Organs - Manual - 22
+Interface Overview
+Amp Page
+The most important switch of the voice controls is the MULTI-TONE BOOSTER. When this is set
+to ON, the green switches to the left become active, if it is set to OFF, the grey switches to
+the right become active. The grey switches are basic in operation and simply activate or
+deactivate certain sounds for the three different harmonics. The green, multi-tone controls
+work in a slightly different manner. The three controls labelled 16, 8, and 4 activate (or deactivate
+respectively) the different harmonics. The fourth switch, ALL BOOSTER, opens/closes
+the filter on these harmonics. Because of the nature of this operation, turning the ALL BOOSTER
+on or off can cause a change in volume as well as spectrum.
+Again, the Mute Inactive function works for this organ as it does with the other organs.
+For the Vibrato there are three switches: one for speed (SLOW or FAST), one for depth (LIGHT
+or HEAVY) and one ON/OFF switch.
+Beside the VIBRATO controls are the REVERB controls. Here you can select the length of the
+reverb (MEDium or LONG) and activate or deactivate it using the ON/OFF switch. Further reverb
+controls can be found on the Amp page for fine tuning of the sound. Note that the reverb
+length controls on the Organ and Amp pages are linked.
+The BASS knob controls the volume of the lowest octave of notes. This octave is unaffected
+by the top row of switches.
+The PRESETS knob selects and loads twelve different presets for the organ controls (this includes
+all switches as well as the Bass volume). The C0–B0 button activates keyswitch control
+of this knob. If you make changes to a preset and want to store this into the knob, just
+press the save button after you have finished editing.
+Please note that the .nki will also need to be saved to make these changes permanent for the
+next time you open the instrument.
+The final control is the SWELL slider. This is designed to mimic a volume/expression pedal.
+It is hard-wired to MIDI controller 11.
+4.2 Amp Page
+On the Amp page you can find all of the controls related to the processing of the organ
+sound.
+Vintage Organs - Manual - 23
+Interface Overview
+Amp Page
+4.2.1 Organ Controls
+Fig. 4.8 The Organ Controls
+The Organ Controls give you options that were not available on the original organ models,
+but are standard in most virtual instruments. With the VELOCITY control you can specify the
+velocity sensitivity of the instrument. The ATTACK and RELEASE knobs alter the attack and release
+times of the volume envelope respectively. In the first 10-20% of the control, the
+ATTACK and RELEASE reduce the volume of the key-click sound of the organ without adding
+too much of a fade in or out. This can be nice to soften the sound of the organ without
+changing the envelope completely.
+4.2.2 Tube Amplifier
+Fig. 4.9 The Tube Amplifier Controls
+The TUBE AMPLIFIER section gives you a selection of controls you would expect to find on an
+instrument pre-amp or amp head.
+The first row of controls let you shape the overdrive emulation.
+Vintage Organs - Manual - 24
+Interface Overview
+Amp Page
+▪ The VINTAGE/MODERN switch allows you to select between a modern or vintage overdrive
+style, with modern being a heavier, more distorted character, and the vintage being a
+mellow, saturation overdrive.
+▪ The DRIVE knob then controls the overdrive amount
+▪ The TONE knob alters the tonal character of the drive. Turning the TONE knob to the
+right increases high frequency distortion and lowers the low frequencies, turning it to
+the left increases the low end, but decreases the high end. A central setting is neutral.
+▪ For better control over the tonal character, there is also a fixed 3-band EQ (BASS, MID,
+TREBLE), which allows you to increase or decrease the gain of the low, mid and high
+frequencies.
+4.2.3 Rotor
+Fig. 4.10 The Rotor controls of the Vox and Farfisa
+The ROTOR effect comes after the TUBE AMPLIFIER and simulates the rotary effect of the Leslie
+speaker. These are advanced controls that are normally not available on a real Leslie cabinet.
+▪ On the Vox and Farfisa instruments, the rotor speed switch is available here (FAST/
+SLOW). It works in the same way as the ROTATOR control on the B3, C3 and M3 Organ
+pages.
+▪ For all organ models there is an ON/OFF switch, acceleration control for both the top
+(treble) and low (bass) speakers (the acceleration defines the rate at which the rotor
+goes from its slow setting to the fast setting, or vice versa, when the Speed switch
+state is changed).
+Vintage Organs - Manual - 25
+Interface Overview
+Amp Page
+▪ The BALANCE knob then sets the volume balance between the high and low speakers.
+When the control is all the way to the left, only the bass speaker is heard, when it is
+set to the far right, only the high speaker is heard, and a middle setting is a 50/50
+mix of the two.
+4.2.4 Cabinets
+Fig. 4.11 The Cabinet Controls
+The CABINET area allows you to select from a collection of modeled cabinets. Setting the
+cabinet to D.I. bypasses the cabinet effect, giving you the clean signal from the Amplifier
+and Rotor.
+The AIR control adds a simulated distance between the microphones and the cabinet.
+Note that the AIR control will not have any effect if the cabinet is set to D.I..
+Vintage Organs - Manual - 26
+Interface Overview
+Settings Page
+4.2.5 Reverb
+Fig. 4.12 The Reverb Controls
+In this area you can control the reverb settings of the instrument. The reverbs used in the
+Vintage Organs library are impulse responses taken from real vintage equipment: a large
+plate and a spring.
+▪ The reverb type (PLATE/SPRING) and size (LONG/SHORT) are selected with two switches (in
+the Farfisa instruments the size selector switch is duplicated on the main Organ
+page).
+▪ The AMOUNT control sets the volume level of the effect signal.
+4.3 Settings Page
+The Settings page for the organs contains advanced controls for setting up control of the
+instruments.
+Vintage Organs - Manual - 27
+Interface Overview
+Settings Page
+4.3.1 Controller Options
+Fig. 4.13 B3, C3 and M3 Controller Options
+In this area you can specify how the MIDI controllers interact with the instrument.
+MIDI controller 11 is hard-wired to the swell control.
+The MOD WHEEL, SUSTAIN PEDAL and AFTERTOUCH can be routed to various destinations selected
+from their respective drop-down menus.
+The PITCHBEND WHEEL drop-down, which is only available on the Tonewheel organs, has two
+unique options for how it interacts with the instruments:
+▪ Selecting Rotor Speed allows you to switch the rotor speed when you move the pitchbend
+control to either apex. Unlike the sustain pedal, aftertouch and modwheel, moving
+the pitchbend acts as a toggle, so when you release it and let it return to the central
+value, the rotor speed remains at whichever rate you last selected. This can be a
+nice option to use if your MIDI controller has a spring-loaded modwheel.
+Vintage Organs - Manual - 28
+Interface Overview
+Settings Page
+▪ Selecting Adjust Drawbars means that the pitchbend control will affect the amplitude
+of all active drawbars. Sending positive pitchbend values will increase the amplitude
+of the active drawbars and sending negative values will decrease the amplitude of the
+active drawbars. This can act as a nice expressive tonal or amplitude modulator.
+There are also preset controller setups available if you own a dedicated organ controller
+like Native Instruments discontinued B4D or the Doepfer d3c. These controller setups will
+not affect the other controller options you have selected (see chapter ↑2.4, Setting Up for
+Performance for more information).
+4.3.2 Drawbar Options
+Fig. 4.14 Drawbar Options for the B3, C3 and M3
+For the B3, C3 and M3, the drawbar options are the same.
+▪ Here you have the option to make the percussion polyphonic (which is not the case in
+the original instruments).
+▪ You can also change the behavior of the interaction between the percussion and the
+highest (1') drawbar. In the original organs the percussion would deactivate the top
+drawbar, but here you have the option to deactivate this behavior.
+▪ A Mute Inactive control is available on all organs (though in the Farfisa instruments it
+is positioned on the Organ page). This control, when active, deactivates the playback
+of samples that have their drawbars set to 0. The advantage of this is that it reduces
+the strain on your computer's hard disc; the disadvantage is that some real-time control
+over the drawbars is not available while playing.
+Vintage Organs - Manual - 29
+Interface Overview
+Settings Page
+4.3.3 Manuals
+Fig. 4.15 Manual settings for the B3 and C3
+The MANUALS area of the Settings page is for specifying the options of the MODE knob from
+the Organ page of the instruments with more than one manual.
+If the MODE is set to KEY SPLIT, then this key is specified here. Any note above or including
+this note will play the upper manual, any note below this one will play the lower manual.
+If MODE is set to MIDI SPLIT, then the MIDI channels of the different manuals can be set
+here. Please make sure that the main instrument MIDI channel is set to omni before using
+the MIDI split options.
+Vintage Organs - Manual - 30
+Credits
+5 Credits
+Product Design: Nikolas Jeroma
+Sound Design: Jojo Büld, Nikolas Jeroma
+Graphic Design: Efflam Le Bivic, Gösta Wellmer
+KSP Programming: Nikolas Jeroma, Adam Hanley
+Documentation: Adam Hanley
+All samples recorded by Native Instruments
+Vintage Organs - Manual - 31

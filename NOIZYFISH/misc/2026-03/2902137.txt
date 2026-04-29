@@ -1,0 +1,752 @@
+MANUAL
+The information in this document is subject to change without notice and does not represent a
+commitment on the part of Native Instruments GmbH. The software described by this document is
+subject to a License Agreement and may not be copied to other media. No part of this publication
+may be copied, reproduced or otherwise transmitted or recorded, for any purpose, without prior
+written permission by Native Instruments GmbH, hereinafter referred to as Native Instruments. All
+product and company names are ™ or ® trademarks of their respective owners.
+Manual written by Aleksander Rebane
+Document Version: 1.1 (06/2010)
+Product Version: 1.0.1
+Special thanks to the Beta Test Team, who were invaluable not just in tracking down bugs, but in
+making this a better product.
+Germany
+Native Instruments GmbH
+Schlesische Str. 28
+D-10997 Berlin
+Germany
+info@native-instruments.de
+www.native-instruments.de
+USA
+Native Instruments North America, Inc.
+5631 Hollywood Boulevard
+Los Angeles, CA 90028
+USA
+sales@native-instruments.com
+www.native-instruments.com
+© Native Instruments GmbH, 2010. All rights reserved.
+Table Of Contents
+1 Welcome to REAKTOR SPARK!............................................................................................5
+2 Interface Overview. ............................................................................................................6
+3 Using REAKTOR SPARK. ......................................................................................................7
+3.1 Signal Flow. .............................................................................................................7
+3.2 Tutorial. ................................................................................................................. 10
+4 Control Reference. ........................................................................................................... 19
+4.1 Oscillators Section. ................................................................................................20
+4.2 Ring Mod/Filter Section. .........................................................................................22
+4.3 Shaper Section......................................................................................................24
+4.4 Special Section . ....................................................................................................25
+4.5 Mixer Section .......................................................................................................26
+4.6 Cabinet Section.....................................................................................................27
+4.7 8-Pole Filter Section..............................................................................................28
+4.8 Mod Delay Section . ...............................................................................................29
+4.9 Reverb Section......................................................................................................30
+4.10 Oscillator Envelope Section.................................................................................... 31
+4.11 Modulation Envelope Section. .................................................................................33
+4.12 4.13 Modulation Envelope Amounts Section. ...................................................................34
+Modulation Macro Controller Section. .....................................................................35
+4.14 LFO Section ..........................................................................................................36
+5 Credits............................................................................................................................38
+REAKTOR SPARK – IV
+1 Welcome to REAKTOR SPARK!
+Thank you very much for purchasing REAKTOR SPARK. On behalf of the entire Native
+Instruments team, we hope this instrument will truly inspire you.
+REAKTOR SPARK puts a large collection of production-ready sounds for contemporary music
+production directly under your fingertips: REAKTOR SPARK has it all, from pad to lead sounds,
+from percussive keyboards to floating soundscapes.
+It is a diverse collection of dynamic and expressive sounds based on the innovative SPARK
+ensemble: saucy synth leads, vibrant percussive sounds, and quasi-chaotically evolving pads,
+readily responding to your individual way of playing. In either a studio environment or a live
+performance situation, the sounds included can be used in Rock, Jazz, Industrial, Psychedelic,
+Sound Tracks, and various electronic genres ranging from Electro to IDM, but the musical
+genre is actually not important. It’s all up to you...
+We hope you enjoy this fine instrument as much as we do.
+- The team at Native Instruments
+REAKTOR SPARK – 5
+2 Interface Overview
+The SPARK Ensemble in REAKTOR
+SPARK takes full advantage of the far-reaching capabilities of REAKTOR. The main concept
+behind SPARK is to allow dramatic real-time influence on the sound source. Like a natural
+instrument, it needs to be played expressively in order to reach its full potential. SPARK’s
+secret lies in the way it uses various feedback loops to generate its own input, enabling you
+to influence the sound with relatively few, but carefully chosen parameters.
+REAKTOR SPARK – 6
+3 Using REAKTOR SPARK
+It is exactly because of SPARK’s unconventional signal routing that SPARK achieves its ex-
+pressive sonic character. Not only SPARK’s sonic capabilities set it apart from other more
+conventional synthesizers, but also the way it is used. To help you get familiar with the be-
+haviour of SPARK’s controls, we will briefly discuss the signal flow within the ensemble and
+then proceed to demonstrate the most prominent aspects of SPARK in a step-by-step tutorial.
+3.1 Signal Flow
+SPARK’s control panel features the access to parameters that cannot be intuitively under-
+stood without knowledge of the signal flow. According to the figure on the following page, we
+will go through the main aspects of SPARK’s signal flow. The names of the different parts of
+the signal flow that directly correspond to the labels in the control panel are capitalized and
+given the name sections.
+The sound generation in the instrument happens by two oscillators, Pulse and Sine, in the
+Oscillators section. Here we see how the output of two simple oscillators is more than just
+simple static waveforms: SPARK’s signal routing makes it possible to create complex and
+evolving waveforms by letting the feedback signal control both oscillators by frequency modu-
+lation and/or the Pulse oscillator by hard synchronization. In the figure on the next page, the
+bold lines illustrate the path of the feedback signal.
+REAKTOR SPARK – 7
+This diagram shows SPARK’s feedback signal flow
+The output of the Oscillators section is the mixed with the feedback signal by the crossfader
+marked as “Filter FB” and fed as the carrier signal to an amplitude modulator, the first ele-
+ment in the Ringmod/Filters section. Again, the modulating signal again is the feedback signal.
+Amplitude modulation reduces the presence of the carrier signal harmonics, but adds the
+harmonics of the modulation signal into the mix in a more complex manner than just adding
+the two signals together.
+The amplitude modulated signal is then ring modulated by the output of the Oscillators sec-
+tion. Ring modulation causes the harmonics to be mixed in a manner similar to amplitude
+REAKTOR SPARK – 8
+modulation with the difference that the harmonics of the incoming signals are not left intact.
+This often causes inharmonic spectra. The signal from the ring modulator is then fed to the
+filter, and subsequently to the shaper.
+The voice delay in the Special section is a key element in the creating the feedback signal, it
+determines which frequencies are excited in the feedback loop. The frequency shifter is the
+last structure that allows direct manipulation of the frequency content of the spectra.
+In the Mixer section, the signals from different points along the described path can be tapped
+and mixed together to be processed by the Effects section. The effects are always running
+and the degree that the output of the Mixer section is processed by a certain effect unit is
+controlled by the unit´s Mix Knob.
+The feedback signal is put together in the Special section using the “FB Mono” and “Int –
+Ext” crossfaders, where turning the knobs to the right increasingly crossfades to the signal
+that is represented on the right side of the crossfader in the figure. By now it is fairly obvious
+that the sound that reaches the instrument output at the end of the effects chain can have a
+wide range of timbres and evolving behaviours made possible by manipulating the feedback
+loop. Even with good knowledge of the signal flow the effects of changing the parameters can
+often be quite surprising, but that is also part of the fun when exploring SPARK’s capabilities.
+REAKTOR SPARK – 9
+3.2 Tutorial
+In this tutorial we will use a sound from the REAKTOR SPARK SOUNDPACK and manipulate
+it using the SPARK control panel with the goal to create a new sound with certain character-
+istics. We want to make use of some of the special qualities of SPARK and for that reason
+we will opt for two main characteristics: first, the sound should exhibit a full, warm character
+that responds to the way notes are played and second, we want to implement SPARK’s feed-
+back loop to create interesting self-oscillating ripples that accompany the sound. The sound
+should have a definite pitch and have behaviour predictable enough that melodies can be
+played with it at both slow and fast speeds.
+The universal Value Display in the SPARK Ensemble
+To see the exact values of the currently handled controller, use the orange Value Display located
+above the Cabinet saturator unit. If you just want to check what value a controller has, click
+on it, and press the up or down arrow key on your keyboard. The value of that controller will
+appear in the universal Value Display.
+To start off, we load the “Paddikk” REAKTOR Snapshot by Denis Gökdag. Play around with
+the sound a bit and note the slow attack time and the periodic chorus-like effect induced by
+the LFO. For further playback of the sound during this tutorial, we will stick to the MIDI note
+C4 (MIDI value 72), as the timbre of the sound can significantly differ in different registers.
+First, we remember that, instead of a slowly evolving pad, we are looking for a synth lead type
+of sound, and we shouldn’t have to wait after pressing the key to hear the sound. We see that
+the amplitude envelope in the Oscillators section shows a long attack time. Turn the knob
+with the label A to the value -4 and hear that playing a note will yield a sound right away.
+REAKTOR SPARK – 10
+Set an Attack time value of -4 by clicking the Knob labelled A and dragging the mouse downwards.
+Also notice how even such a small change can drastically influence the feel of the sound. The
+Vel to Level Fader is important to how our sound responds to the hardness we play the notes
+with (velocity): right now we see it have a value of 1. This means that the peak amplitude of
+the oscillators, as determined by the envelope, responds linearly to the velocity. Playing the
+MIDI keys softly yields a different sound than hitting the keys hard. See the Control Reference
+section for more information on this.
+Next we want to find out how the chorus-type effect is created and how we can change its
+timing. As we play the note we notice that the movement of the horizontal fader labelled
+MC3 on the top part of the screen coincides with the effect. MC3 is one of the three macro
+controllers that can be assigned to modulate a number of parameters within SPARK by the
+menus and sliders to the right of the macro controllers. Note that you need to hit the MIDI
+keys with a certain velocity to hear the chorus-type effect.
+The MC3 Fader’s settings are currently being modulated by an LFO.
+The lit LED left of the controller MC3 indicates that the LFO, which is controlled by the knobs
+in the top left part of the screen, is currently modulating this parameter. We can change the
+LFO Rate to make the effect happen more frequently, or increase the LFO Amount to make
+the effect stronger.
+REAKTOR SPARK – 11
+Turning the LFO Rate and Amount Knobs changes the character of the chorus effect.
+For now let us turn off the LFO modulation of MC3 by clicking on the button left of the MC3
+Fader. While playing the note we can also manually move MC3 by clicking and dragging the
+MC3 Fader with the mouse. We see that the movement of the Time Knob in the Special section
+of SPARK’s control panel coincides with the movement of the MC3 Fader. We see also that to
+the right of the MC3 Fader in the menu the item Delay Time has been chosen. Also, the slider
+on the right of the menu determines the extent of the change of the Delay Time Parameter
+with a movement of the MC3 Fader. Setting the slider to its midpoint causes the MC3 Fader
+to have no effect on the corresponding parameter. For now we don’t want to manipulate the
+parameters by the macro controllers but directly. We turn our attention to the Delay Time Knob
+in the Special section and turn it all the way to the left.
+While turning the Delay Time Knob, you hear a chorus effect.
+Next, we move on to the Oscillators section, where the sound generators of SPARK lie.
+REAKTOR SPARK – 12
+The sound generation in SPARK is controlled with the Oscillators section.
+To acquaint ourselves with the sound of the two oscillators and to hear the effects of our
+manipulations of the oscillator parameters in the direction of a slightly harsher sound, we
+can use the Pulse and Sine Knobs in the Mixer section below the Oscillators section. Turn up
+the Sine Knob and turn the Sine FM Knob to its vertical, zero position. We hear that the less
+FM modulation we have of the Sine oscillator, the softer the sound gets. Turning the Sine FM
+Knob to either side adds harmonics to the sound. The FM Knobs determine how much of the
+feedback signal frequency modulates the respective oscillator, and depending on what the
+feedback signal is, the effect can be more pronounced. After you have heard the effect of
+this knob, set Sine FM to around 0.8.
+Now we turn the Sine Knob down again and turn up the Pulse Knob. A characteristic parameter
+for the Pulse waveform is the Pulse Width. As we turn the PW Knob to its vertical position we
+hear some of the buzziness leave the sound and get replaced by the sound of a symmetric
+Pulse oscillator. With PW at 0.4 we should have a good balance between buzziness and the
+odd overtones of the Pulse oscillator. Changing the Pulse FM Knob we can hear additional
+subtle differences in timbre similar to what we heard before with the Sine FM Parameter.
+Again, the effect depends on the feedback signal. Leaving Pulse FM at -1.0 will result in a
+subtle influence on the sound.
+Now that we know the sounds of our pure oscillators, you can turn the Pulse Knob down
+again. If we want to change the mix between the Pulse and Sine oscillator signals leaving
+the Oscillators section, we use the Pls – Sine Knob. We want to have a fuller sound, so we
+turn that knob to have a value of 0.7, which means that we are mixing more of the frequency
+REAKTOR SPARK – 13
+modulated Pulse signal to the output. When we play the notes a bit longer, we noticed slight
+oscillations in the timbre. This is partly the result of the feedback loop and our settings for
+the FM Knobs. From a psychoacoustic perspective these slight modulations in the timbre go
+a long way to make the human ear perceive sounds as full and dynamic, especially when the
+pitches of the oscillators are not the same.
+With the right ‘P’ Value Edit you can adjust the pitch of the Sine oscillator; with the left ‘P’ Value Edit you can
+adjust the pitch of the Pulse oscillator.
+Now we will see if what we said was true and transpose the pitch of the Pulse oscillator up 7 semitones by clicking
+and dragging the Pitch Value Edit that is to the left of the PW Knob to 67.01. Clicking and dragging in front of the
+decimal point transposes the pitch in semitones, clicking and draggin behind the decimal point transposes the pitch
+in cents. So, we can also detune the Sine oscillator by dragging the digits behind the decimal point in the Pitch Value
+Edit to the right of the PW Knob. When transposing the Sine pitch from 60.00 to 59.88, oscillations of the amplitude
+appear from the interference of the detuned pitches. Notice though, that although the oscillators have two different
+pitches, only one pitch is readily perceived and the two oscillators merge together to create one sound. The detun-
+ing and modulation of pitches is a psychoacoustic trick to make sounds merge together and have a “fatter” timbre.
+The Shaper section allows you to fatten up the sound.
+This is a good moment to inspect the shaper effect. This nonlinear effect is very powerful if
+used within a feedback loop. If you turn up the Drive Parameter and play with the Sat-Sine
+and 2NDH Knobs you can see the potential for fat and funky sounds. For now we leave the
+Sat-Sine and 2NDH Knobs in their zero position and set the Drive Knob to 14.
+REAKTOR SPARK – 14
+With the controls of the Ringmod/Filter section you can strongly influence the effect of the feedback signal on the
+sound.
+Now we turn our attention to the Ringmod/Filter section. The Filter Feedback Knob in the top
+left of this section is a key element to the feedback loop. Turning it all the way to the left we
+get a taste for self-oscillating behaviour in the feedback loop. This often works well in combina-
+tion with the ring modulation unit, the amount of which is determined by the Ring Modulation
+Mix Knob. The Amplitude Modulation Parameter is more subtle in its effect. Turning it either
+to the positive or negative will spread the harmonics out and usually reduce the loudness of
+the sound, but with high feedback settings surprising changes to the sound can take place.
+To make use of the feedback signal, turn the Filter Feedback Knob to 0.4, since too much
+feedback can cause strong resonances that completely change the character of the sound,
+away from what we are working towards. To smooth the sound, turn the Amplitude Modulation
+Parameter to 0.3. Now play around with the Ring Modulation Mix. Notice that with the feed-
+back activated, the sound gains complexity and substance as more ring modulation is mixed.
+Also, setting the Pls – Sine Knob to 0.35 adds more of the Pulse oscillator’s harmonics to the
+sound. Set the Ring Modulation Mix Knob to 0.6, because we like the way the ring modulation
+adds force to our sound.
+The Static Filter CutoFF and Filter Resonance Knobs give you direct access to the frequency
+content of the sound. Depending on the setting of the Filter Type Knob, different frequencies
+get filtered out of the signal, the main reference being to the cutoff frequency set by the Static
+Filter CutoFF Knob. For more details on the Filter Type Parameter and the filter types associ-
+ated with its different settings see the Control Reference section. The Filter Resonance Knob
+determines the amount the frequencies around the cutoff frequency are enhanced. Within a
+feedback loop the resonance can have a very drastic effect, creating ringing or strongly self-
+oscillating sounds, so it should be used with care. This is a good moment to play around with
+REAKTOR SPARK – 15
+the filter and shaper settings to get a feel for the filters behaviour within the feedback loop
+and its interaction with the shaper.
+Once you have had your fun with that, leave the Static Filter CutoFF at 24.0, the Filter
+Resonance at 0.8, and the Filter Type at 0.3. The last parameter gives us all the lower fre-
+quencies below the cutoff frequency, with a slight amount of the frequencies above the cutoff
+frequency thrown into the mix. The cutoff frequency is chosen so that we still have quite a
+soft, warm, but not dull sound and the resonance setting gives us quite a lot of frequency
+excitation in the feedback loop (especially with the action of the shaper) that is still not out
+of control.
+The controls in the Mixer section allow you to selectively choose the spectral components in the sound.
+We can also tap into the filter outputs directly and selectively, using the Mixer section. The
+knobs labelled lp-2, lp-4, bp-2, bp-4, hp-2, and hp-4 determine the amount of signal from
+the 2-pole lowpass, 4-pole lowpass, 2-pole bandpass, 4-pole bandpass, 2-pole highpass, and
+4-pole highpass filters in the mix that gets routed to the Effects section. The “pole-number”
+is a measure for the strength of the filter. A 4-pole lowpass filter suppresses the frequencies
+above the cutoff frequency twice as much as a 2-pole lowpass filter. A bandpass filter sup-
+presses all frequencies beyond a certain distance from the cutoff frequency and the highpass
+filter suppresses frequencies below the cutoff frequency. See the Control Reference section
+on more information on the filters. We want to add the fundamental Sine tone to our mix for
+the low end and turn up the knobs for the bandpass and highpass filters to add the higher
+frequencies, so set the knobs in the Mixer section as shown in the figure above.
+REAKTOR SPARK – 16
+In the Modulation Envelope Amounts section you can adjust how much the modulation envelope affects SPARK’s
+most important parameters.
+Right now our sound has good substance and structure, but something is still quite flat about
+it. It’s time to get our hands on the Modulation Envelope Amounts section. This will allow
+us to make the sound have more liveliness by responding to the hardness with which the
+MIDI keys are struck and have the timbres evolve from the moment the note is played. The
+shape of the modulation envelope is given in the Modulation Envelope section to the left of
+the Modulation Envelope Amounts section. The modulation amount knobs determine how
+the parameters corresponding to the knob labels are modulated by the envelope. The knobs
+that have a plus and minus sign can also cause an inverse modulation. Turning the CutoFF
+Modulation Knob, for example, to the very left, will yield a low cutoff value for the modulation
+envelope peak, whereas when turned to the right, the cutoff will be higher for the envelope
+peak. In most natural instruments the higher frequencies are excited a bit after the attack
+phase and decay first. Following that observation we set the Cutoff Modulation Knob to 11
+and the Drive Modulation Knob to 8 (since a higher drive causes higher frequencies to be
+excited). Modulation amount knobs without the plus and minus signs always cause a positive
+modulation, that is, the modulation envelope peak causes the modulated parameter also to
+be increased. We may remember, that for most natural instruments, it takes a certain amount
+of time for the resonances characteristic to that instrument to build up. For that matter we
+might also want to set the ring modulation amount to follow the modulation envelope by
+turning the RM Knob all the way up. This gives a nice resonance to our sustained sound. We
+notice that the FB Filt Knob is turned all the way up. This means that the feedback signal to
+the filter input is suppressed by the modulation envelope, also suppressing resonances that
+might be interesting to our sound. Turning the FB Filt Knob down to the value 0.3 gives us a
+longer lasting ring and further adds to the substance of the sound.
+REAKTOR SPARK – 17
+The LFO modulates the MC2 Fader which is assigned to change the Static Filter CutoFF Parameter.
+We remember that we liked to have a rippling effect as part of our synth lead, and until now
+we have only been working on the core substance of the sound. How could we add a periodic
+rippling into the mix? The key lies in the word period, for that is exactly what we started out
+with in this tutorial, looking at periodic movements of the Delay Time Knob, controlled by the
+Macro Controller 3, which in turn was controlled by the LFO.
+In order to add a rippling effect, we will use the Macro Controller 2. Activate the LFO control
+of MC2 by clicking the button left of the MC2 Fader and turn the LFO Amount Knob to 0.5 to
+have a substantial modulation of MC2 by the LFO. You should be able to see the MC2 Fader
+move as it is modulated by the LFO. Now we will set the destination parameter that should
+be controlled by the LFO, hence by MC2. Now go to the CutoFF Slider that is in the same
+row as MC2 and on the very right of the screen. Move it about halfway to the right, as seen
+in the figure, to determine the amount of modulation that the Filter CutoFF Parameter should
+receive from MC2. Moving the slider to the left of its mid-point will cause negative modula-
+tions. Now we are ready to speed up the LFO, causing a rippling sound: while you play a note
+to hear the effect of this change, increase the LFO Rate Knob by the LFO controls to almost
+maximum value.
+Congratulations! You have just created your first SPARK sound by using SPARK’s unique
+feedback capabilities and without even having laid your hands on the Effects section. Now
+that you have become familiar with SPARK’s new controls, you can start having fun with your
+own sonic explorations – and the effects section. For more details and ideas to the use of all
+controls, including the ones not discussed in this tutorial, be sure to check out the SPARK
+Control Reference section.
+REAKTOR SPARK – 18
+4 Control Reference
+The exact value of the currently selected controller is seen in the orange Value Display. You can see the global tuning
+properties of the instrument placed next to the Value Display.
+To see the exact values of the currently handled controller, use the orange universal Value
+Display. If you just want to check what value a controller has, click on it, and press the up or
+down arrow key on your keyboard. The value of that controller will appear in the Value Display.
+To transpose SPARK from the notes it receives from the host sequencer or MIDI keyboard, use
+the Tune Value Edit. Clicking and dragging the whole number in the Tune Value Edit changes
+the transposition in semitones. To fine tune the transposition, click and drag the digits after
+the decimal point. This changes the transposition in cents.
+The Voices Value shows the number of voices that are used for one note to create the unison
+effect. The left number denotes the maximum number of polyphonic voices and the right
+number shows the number of unison voices of the instrument. When the number of available
+voices is exceeded by polyphonic playing, that is, the number of keys that are simultaneously
+pressed, then the actual number of unison voices will be reduced automatically. These num-
+bers are set in the header or the Properties of the instrument.
+If the number of unison voices is more than one, the SprD Controller can be used to spread
+out the tuning of the individual voices around the note pitch, creating a fatter sound. You can
+change the number of unison voices with the Max Unison V and Min Unison V parameters in
+the Instrument Properties Page. For more details see the REAKTOR User Manual.
+For small values the ranD Parameter adds a more analog feel to the sound, for large values
+it creates a chaotic behaviour of the synthesizer. The ranD Parameter controls the amount
+of random detuning applied to each voice when a note is played by the host sequencer or a
+key is pressed on the MIDI controller. This is called a note-on event.
+With the pb Value Edit you change how much the pitchbend controller on your MIDI keyboard
+or host sequencer can change the pitch.
+REAKTOR SPARK – 19
+4.1 Oscillators Section
+The main source of waveforms in SPARK is controlled with the Oscillators section.
+The Amplitude Knob controls the amplitude of the output signal of the Oscillator section. This
+applies to both the mixed signal and the Sine output signal that goes directly to the Mixer
+section.
+The Pls-Sine Mix Knob determines the main characteristic of the sound source. It acts as a
+crossfader between the Pulse and Sine Oscillators for the mixed output signal. Turning the
+Pls-Sine Mix Knob to the right yields a sound with a softer character typical of a sinus tone.
+Turning the Pls-Sine Mix Knob to the left mixes more of the Pulse signal to the output, result-
+ing in a brighter timbre.
+The Static PW Knob you can use to further change the timbre of the Pulse signal. It controls
+the static amount of the Pulse width of the Pulse oscillator. With the Knob set in its vertical
+position, a symmetrical Pulse signal with only odd harmonics is generated. Turning the Static
+PW Knob either to the right or to the left, the Pulse becomes more asymmetrical, adding even
+harmonics to the spectrum. The difference between turning to the left or to the right can be
+very strong if the PW Knob is not set to zero.
+The Pitch Value Edit found on the left of the Static PW Knob and Amplitude Knob controls the
+pitch of the Pulse and Sine Oscillator, respectively, when the Note C3 is played. Clicking and
+dragging the Pitch Value Edit to the left of the decimal point transposes the oscillator pitch in
+semitones. To fine tune the oscillators, click and drag to the left of the decimal point in the
+Pitch Value Edit. Slightly detuning one oscillator from the other yields a fatter sound. Below
+the Pitch Value Edit lies the Pitch Tracking Value Edit for the corresponding oscillator pitch.
+This controls the response of the oscillator pitch to the MIDI note that is played. When set
+REAKTOR SPARK – 20
+to 0.0, the note displayed in the Pitch Value Edit is played regardless of the MIDI note. A
+setting of 1.0 yields equally tempered tuning.
+In order to make the sinus signal have a brighter character, the Sine FM Knob is used. It sets
+the amount of frequency modulation of the Sine Oscillator by the feedback signal. When the
+Pls – Sine Mix Knob is completely set to Sine, setting the Sine FM Knob to a nonzero value
+results in a kind of sawtooth sound.
+Similarly, nonzero settings of the Pulse FM Knob can strongly alter the character waveform of
+the signal exiting the Pulse Oscillator. The Pulse FM Knob controls the amount of frequency
+modulation of the Pulse Oscillator by the feedback signal.
+The Key Sync Button is a parameter that determines the reproducabilty of sounds when the
+same notes are successively played. With the Key Sync Button turned on, the Sine and Pulse
+Oscillators restart at zero with each note-on event received from the MIDI keyboard or host
+sequencer. See ranD Parameter for a description of the note-on event.
+Setting the Sync Button to + or – often leads to chaotic behaviour, sometimes with pitch
+drifting or a crackling timbre. The Sync Button activates the hard sync of the Pulse Oscillator,
+restarting the waveform with each zero crossing of the feedback signal. The Sync Button
+settings + and - restart the Pulse with positive or negative zero crossings of the feedback
+signal, respectively. The setting of the PW Knob has a strong influence on the effect of the
+hard synchronization. With the Sync Button in the OFF position, the Pulse Oscillator can be
+synced to note-on events if the Key Sync Button is in the On position. See ranD Parameter
+for a description of the note-on event.
+REAKTOR SPARK – 21
+4.2 Ring Mod/Filter Section
+With the controls of the Ringmod/Filter section you can strongly influence the effect of the feedback signal on the
+sound.
+One can very drastically change the character of the sound by turning the Filter FB Knob con-
+trol only slightly. The result can be self-oscillating sounds with a pitch that is only dependent
+on the cutoff frequency of the filter, or sounds resembling acoustic feedbacks of microphones,
+speakers, or guitar amps. The Filter FB Knob controls the amount of feedback signal mixed
+to the Oscillator section output before it gets routed to the Ring Mod/Filter section.
+The AM Knob enables you to add additional harmonics to the signal from the Oscillators sec-
+tion entering the Ring Modulator. This parameter usually has a subtle effect. With the AM
+Knob you control the amount of amplitude modulation applied to the mixed outputs of the
+Oscillators section and the feedback signal. The mixed output is amplitude modulated by the
+feedback signal.
+With the RM Mix Knob you can change the characteristic of the sound by adding inharmonic
+components to the signal. This parameter determines the amount of ring modulation the am-
+plitude modulated signal receives. The modulating signal comes directly from the Oscillators
+section.
+The source signal for the ring modulator is controlled by the RM Pls-Sine Knob. Turning the
+knob to the left yields a harsher sound, turning it to the right a softer sound. The RM Pls-Sine
+Knob determines how much of the modulating signal comes from the Pulse Oscillator and
+how much from the Sine Oscillator. The modulating signal from the Oscillators section is not
+affected by the Oscillator Envelope.
+REAKTOR SPARK – 22
+The Static CutoFF Knob is a main parameter of the Filter section. It determines which frequen-
+cies are filtered out of the signal and which ones are passed on to the output of this section.
+The Static CutoFF Knob is used as a reference value for the cutoff frequency of both parts
+of the multi-mode filter. The difference between the cutoff frequencies of the two filters is
+controlled by the Split Knob.
+Filters not only filter out frequencies, but also enhance others. The Resonance Knob controls
+the amount of resonance of both filters, that is, the amount of the signal enhancement at
+cutoff frequency. High values yield a sound that resembles a sinus tone.
+Depending on the setting of the Filter Type Knob, one can filter out different frequencies in
+relation to the cutoff frequency. A lowpass filter (LP) lets frequencies below the cutoff fre-
+quency pass, a highpass filter (HP) lets frequencies above the cutoff frequency pass, and a
+bandpass filter (BP) lets frequencies within a certain distance from the cutoff frequency pass.
+The setting of the Filter Type Knob determines the type for both filters.
+The Filter Slope Knob controls how much the frequencies outside of the filter’s “pass”-interval
+are damped before the signal is passed to the Shaper section. Turn the Filter Slope Knob to
+the left for weaker filtering, to the right for stronger filtering. The Filter section consists of
+two serially connected filters, each damping 12 dB/octave. The Filter Slope Knob determines
+if the output signal of only one or both filters is used for the Shaper section input.
+The Filter Track Knob sets the tracking amount of the filter cutoffs. Since digital instruments
+seem to sound too bright when notes in the higher registers are played, using the Filter Track
+Knob helps you counteract that so the cutoff frequency of the filter depends on the note that
+is played. When the Filter Track Knob set to 0.0, no tracking with the key position takes place,
+and when set to 1.0, the key position relative to C3 is fully added to the filter cutoff. For
+sounds that don’t exhibit an excessively bright timbre in the upper registers, turn the Filter
+Track Knob to a value between 0.0 and 1.0.
+The color of the Filter section’s output signal can be further controlled with the Filter FM
+Knob. This parameter controls how much the filter cutoff frequency is modulated by the filter
+input signal.
+REAKTOR SPARK – 23
+4.3 Shaper Section
+The Shaper section allows you to fatten up the sound.
+Wave-shaping adds interesting amplitude-dependent sound colors. The amount of distortion
+and harmonics added to the signal is controlled by the Shaper Drive Knob. It determines the
+input gain of the Shaper section.
+The Sat - Sine Knob lets you crossfade between two characteristic sounds resulting from two
+wave-shaping curves: a parabolic saturation curve and a Sine curve, which folds back the
+waveform of larger signals.
+Similarly, the 2ndH Knob lets you change the harmonic content of the signal resulting from
+the wave-shaping. At zero the shaping curves are symmetric, creating mainly odd harmonics.
+With larger values the curve gets increasingly asymmetric and the amount of the 2nd and
+other even harmonics is increased.
+REAKTOR SPARK – 24
+4.4 Special Section
+The special section houses key parameters that determine the composition of the feedback signal.
+The first unit encountered by the signal entering the Special section is the polyphonic Voice
+Delay. The delay time of the voice delay is set with the Delay Time Knob. It has a big influence
+on which frequencies will be excited in the feedback path. You can use the delay also in the
+forward signal, just mix it with the other output signals by using the Del/Fs Knob and you get
+a coloring or chorusing effect. The Delay Time of the polyphonic delay is set in milliseconds.
+When Delay Track is not zero the actual delay time depends on the note that is being played.
+When the Delay Track Knob is set to 0.0 there is no tracking, when it is set to 1.0 the delay
+time is the reciprocal of the frequency (oscillating period) of the note.
+The Frequency Shift Amount Knob causes all frequencies entering the Frequency Shifter unit to
+be changed by that amount. This usually results in an inharmonic or phasing sound. Depending
+on the setting of the Frequency Shift Amount Knob the frequencies get shifted by 0.2 Hz to
+10000Hz. If the Neg Button is in the on position, the frequencies get shifted down instead of
+up. Negative frequencies resulting from the shift get mirrored back into the positive spectrum.
+The Color Knob adjusts the internal feedback signal, higher values create higher harmonics
+and stronger phasing effects. Use this to brighten up the sound at higher shift frequencies or
+to create a stronger phasing effect at lower shift frequencies. The Frequency Shifter Mix Knob
+controls the amount of frequency shifted (wet) signal mixed to the non-frequency shifted (dry)
+signal before it gets sent to the output of this unit.
+The FB Mono and FB Int - Ext Knobs are key parameters controlling the mix of the feedback
+signal. The FB Mono Knob acts as a crossfader between the polyphonic Delay unit’s output
+and the monophonic signal mixed together from the Frequency Shifter unit’s output and the
+REAKTOR SPARK – 25
+output of the Effects section. The mix of the monophonic signal is determined by the FB Int
+- Ext Knob. Here possibilities arise for very interesting effects like cross-talk between the indi-
+vidual voices. This arises when a nonzero setting of the FB Mono Knob causes the monophonic
+feedback signal to be distributed among all the voices of the polyphonic feedback signal.
+4.5 Mixer Section
+The controls in the Mixer section allow you to selectively choose the spectral components in the sound.
+The Mixer section dictates what gets routed to the Effects section and its various knobs give
+easy access to controlling the overall spectral characteristics of the sound. The Pulse and
+Sine controls determine how much of the unprocessed Sine and Pulse Oscillator outputs get
+added to the mix (see Oscillators section for sound characteristic of each). The Oscillator
+Envelope modulates the amplitude of the oscillator signals before they enter the Mixer section.
+The lp-2, lp-4, bp-2, bp-4, hp-2, and hp-4 Knobs control the amounts of the various filter
+outputs coming from the Ringmod/Filter section. lp-2 and LP-4 determine how much of the
+12 dB/octave and 24/dB octave lowpass filter outputs, respectively, get mixed to the Effects
+section’s input. The same applies for the bp-2 and bp-4, hp-2 and HP-4 Knobs, where BP
+stands for the bandpass and HP stands for high the pass filter. Similar to the filter controls
+in the Mixer section, the Shaper Knob controls the amount of the Shaper unit’s output signal,
+and the Del/Fs Knob controls the amount of the Frequency Shifter unit’s output signal enter-
+ing the Effects section. The Output Controller determines the overall signal level sent from
+the Mixer section to the Effects section. The left Level Meter in the output unit shows the
+level behind the Output Controller.
+The Ceiling Knob is used to control the maximum output level of SPARK. The Ceiling Knob
+should be set a bit below 0 dB to prevent clipping at the soundcard. It functions as a control
+for the signal level that comes from the ouput of the limiter unit placed behind the Effects
+section. The right Level Meter in the output unit shows the amount that the synthesizer output
+signal is reduced by the limiter.
+REAKTOR SPARK – 26
+4.6 Cabinet Section
+The cabinet saturator works as an amp/speaker simulator.
+The Cabinet saturator effect works as an amp/speaker simulator. The Drive Knob controls
+the amount of distortion applied to the input signal. It sets the amount of gain for the input
+signal. The core parameter of the Cabinet saturator effect is controlled by the Tilt Knob. This
+parameter determines which frequencies get distorted: turn the Tilt Knob to the right for distor-
+tion at lower frequencies and to the left for distortion at higher frequencies. The frequencies
+entering and exiting the Cabinet saturator effect are modified by this parameter and hence
+the character of the effect dramatically depends on the setting of the Tilt Knob. The Lo Cut
+Freq Knob is useful to avoid a mess with the bass frequencies. It determines the cutoff fre-
+quency below which the frequencies of the input signal are significantly damped. Lo Cut Res
+determines the enhancement of the frequencies around the cutoff frequency. Similarly, the
+Hi Cut Freq Knob determines whether the sound is soft or brilliant. It determines the cutoff
+frequency of the lowpass filter placed at the output of the Cabinet Saturator Structure. Hi
+Cut Res determines the enhancement of the frequencies around the cutoff frequency of that
+lowpass filter.
+The mixing of the output signal of the Cabinet Saturator happens with the Cab Level and
+Cabinet Mix Knobs. Cab Level determines the output level of the saturation effect before it
+gets mixed to the dry, unaffected signal. The balance between the two signals is set with the
+Cabinet Mix Knob.
+REAKTOR SPARK – 27
+4.7 8-Pole Filter Section
+With the 8-pole Filter you can filter the overall signal before it reaches the instrument output.
+The 8-Pole Filter effect comprises four 4-pole filters: each stereo channel has a 4-pole lowpass
+filter and a 4-pole highpass filter. The cutoff frequencies of the lowpass and highpass filters
+are offset from a reference cutoff frequency. This offset is controlled by the Gap Knob. Since
+the two filters are running in parallel and their output signals are mixed, the result of a positive
+Gap is a band rejection. With a negative Gap the pass bands of both filters are overlapping
+so that all frequencies can pass and the resonances emphasize the cutoff frequencies. The
+difference between the reference cutoff frequencies of the two channels is controlled by the
+lr OFFSet Knob. The Center Knob is used to set the mean value of the cutoff frequencies of
+the two channels.
+REAKTOR SPARK – 28
+4.8 Mod Delay Section
+With the modulation delay you can add echo or chorus effects to the instrument.
+The Mod Delay effect is a tempo synchronizable stereo delay with LFO, cross-feedback, high-
+pass and lowpass filters.
+The Time Knob sets the delay time in milliseconds. This is the mean delay time since there
+can be a delay time offset between the left and right channel. This offset is controlled by the
+Delay lr OFFSet Knob. It sets the ratio between the delay times of the left and of the right
+channel.
+When Delay Feedback is nonzero and the Delay Time value is small, changing the Delay lr
+OFFSet Knob changes the distribution of the sound in the stereo field. In order to synchronize
+the Delay Time to the tempo specified by the host or by REAKTOR, the Delay Sync Button
+can be activated. When Delay Sync is on, the value display will display the rate of the echoes
+as a multiple of the BPM tempo. The strength and longevity of the echoes are controlled with
+the Delay FB Knob. It sets the amount of feedback from the delay output to its input. Turning
+on the Invert Button inverts the feedback signal. At short delays it makes a big difference
+to the sound of the mixed signal if the feedback signal is inverted. The In Knob controls the
+amount of input signal entering the Mod Delay effect. If an echo is sounding at the output of
+the delay, turning the In Knob down will not turn down the echo, but let it naturally fade out.
+The X Amt Controller determines the amount of the feedback that is routed crosswise from
+the right delay output to the left delay input and vice versa. Use this to diffuse the sound
+in the stereo field, for a reverb-like effect with short Delay Time settings. The Mod Delay ef-
+fect has a stereo LFO as its delay time modulation source. Chorus effects can be achieved
+when the Depth Knob value is not too large. Depth controls the amount of LFO modulation
+applied to the delay time. The rate of the LFO is determined by the setting of the Rate Knob.
+REAKTOR SPARK – 29
+For additional stereo manipulation, the relative phase between the LFOs applied to the right
+and left stereo channels can be controlled by the Phase Knob. Setting the Phase Knob to 0.0
+yields the same phase for both channels, 0.5 yields a 90 degree phase shift and 1.0 yields
+a 180 degree phase shift. The lower frequencies of the delayed signal can be damped using
+the Delay Lo Cut Controller. It determines the cutoff frequency of the highpass filter placed
+after the delay. Similarly, the Delay Hi Cut Controller sets the cutoff frequency above which
+the higher frequencies are damped.
+4.9 Reverb Section
+With reverb you can add more spatial depth to your sound.
+The Size Controller of the Reverb effect controls both main characteristics of the reverb effect:
+the room size and the reverb decay time. Higher settings of the Size Knob will make the reverb
+sound longer and stimulate a bigger space. Moving the Size Knob creates a chorus-like effect.
+Reverb Lo Cut and Reverb Hi Cut determine the sound color of the reverberation signal. The
+lower frequencies of the delayed signal are damped using the Reverb Lo Cut Controller. It
+determines the cutoff frequency of the highpass filter placed after the reverb. Similarly, the
+Reverb Hi Cut Controller sets the cutoff frequency above which the higher frequencies are
+damped. The Reverb Mix Knob acts as a crossfader between the dry signal entering the Reverb
+effect and wet signal at the output of the reverb effect. Turning the Reverb Mix Knob to the
+right crossfades the output to the wet signal.
+REAKTOR SPARK – 30
+4.10 Oscillator Envelope Section
+The Oscillator Envelope section determines the amplitude evolution of the Pulse and Sine oscillators.
+The Oscillator Envelope section produces the modulating signal for the Sine and Pulse os-
+cillator amplitudes. The Attack, Decay1, Breakpoint, Decay2, Sustain, and Release Parameters
+of the oscillator amplitude envelope determine how the amplitude of the sound evolves over
+time when a note is played. The time that the modulated oscillator amplitude takes before it
+reaches its maximum value (determined by the Amplitude Knob), is called the attack time. The
+attack time is controlled by the Attack Knob. Similarly, the time that the amplitude level takes
+before it reaches its breakpoint value (determined by the Breakpoint Knob) is determined by
+the Decay1 Knob. The Decay 2 Knob controls the time that the amplitude level takes to reach
+the sustain level from the breakpoint level. The sustain level is the final, amplitude level of the
+oscillator envelope that stays constant as long as the key remains pressed. You can change
+it by using the Sustain Knob. The time that the amplitude level takes to go from the sustain
+level to zero after the key has been released, is called the release time and is controlled by
+the Release Knob.
+To change the sensitivity of the overall amplitude level of the envelope to the key velocity, the
+Vel to Level Fader is used. It determines the influence of the key velocity on the peak and
+sustain levels of the envelope. If set to 0, there is no influence and these levels are constant
+over all ranges of key velocity.
+When set in the interval between 0 and 1, the linear velocity curve is used with the influence
+to the levels increasing with the Vel to Level Value. The dynamic range for the highest linear
+key velocity influence with the Vel to Level Value equal to 1 is 43 dB. For values between 1
+and 2 the parabolic velocity curve is used with the influence to the levels increasing with the
+Vel to Level Value. The parabolic velocity curve exhibits higher velocity sensitivity at higher
+REAKTOR SPARK – 31
+velocity values. The dynamic range for the highest parabolic key velocity influence with the
+Vel to Level Value equal to 2 is 86 dB. Vel to Level settings higher than 1 are especially use-
+ful for sounds saturated by the Cabinet saturator effect by compensating the compression
+effect of saturation.
+The sensitivity of the attack time to the key velocity can also be set. For longer attack times
+when playing with high velocity give the Vel to Attack Value a positive, for shorter attack times
+give the the Vel to Attack Value a negative value. Most acoustic instruments have shorter at-
+tack times when played louder.
+Just as the peak and sustain levels of the envelope can be made sensitive to the key veloc-
+ity, they can also be made to depend on the note that is being played. Set the Level Scale
+Fader to positive values for higher levels at higher notes. When set to +1.0, the amplification
+is 12 dB per octave. For negative values of the Level Scale lower notes receive higher levels.
+When set to -1.0, the attenuation of higher notes is 12 dB per octave. The level of the note
+C3 stays the same as the scaling intervals are counted from that note.
+The attack, decay, and release times can be scaled to the notes that are being played. Set the
+Time Scale Fader to positive values for longer times for higher notes. A setting of +0.5 causes
+the times to be doubled, a setting of +1.0 causes the times to be quadrupled for each octave
+higher than the note C3. For negative values of the Time Scale Fader the times become shorter
+for higher values. A setting of +0.5 causes the times to be halved, a setting of +1.0 causes
+the times to be multiplied by one-fourth for each octave higher than the note C3.
+REAKTOR SPARK – 32
+4.11 Modulation Envelope Section
+The Modulation Envelope section modulates key parameters in the instrument to liven up the sound.
+8 key parameters of SPARK can be modulated by the Modulation Envelope section. This
+envelope and its controls work in the same way as the oscillator amplitude envelope, except
+that instead of modulating the oscillator amplitudes, the modulation envelope modulates the
+8 parameters in ways determined in the Modulation Envelope Amounts section. For the details
+on how the envelope parameters in the Modulation Envelope section influence the envelope
+evolution see the Oscillator Envelope section.
+REAKTOR SPARK – 33
+4.12 Modulation Envelope Amounts Section
+In the Modulation Envelope Amounts section you can adjust how much the modulation envelope affects SPARK’s
+most important parameters.
+The Modulation Envelope Amounts section allows you to significantly affect the way the sound
+evolves over time and give it a more lively character. The modulation envelope determines
+how the 8 parameters of SPARK are modulated by the Modulation Envelope section.
+The – PW + Knob controls the amount of the modulation envelope signal that is added to
+the Pulse width of the Pulse oscillator. When the knob is in the vertical position, no envelope
+modulation of the Pulse width takes place.
+With the FB Osc Knob you control how much the modulation envelope influences the feedback
+to the FM inputs of the two oscillators.
+The FB Filt Knob is the most influential parameter of this section. It has great control over the
+self-oscillation of the synthesizer. When FB Filt is set to zero, self-oscillations would continue
+independent from the playing of notes. If you want feedback oscillations only when a note is
+played, you have to turn up the FB Filt Knob. The modulation envelope then will damp the
+feedback loop to its time-variant output. The FB Filt Knob is a crossfader between a constant
+1 and the modulation envelope signal as a multiplier for the feedback signal at the input of
+the Ringmod/Filter section.
+The amount of envelope modulation applied to the ring modulator is set with the RM Knob.
+The – Cut + Knob determines the amount of the modulation envelope signal that is added to
+the cutoff frequency in the Ringmod/Filter section.
+The drive parameter of the Shaper unit is also important in feedback loops, since high input
+gains before the saturator suppress the signal level and with it self-oscillations. For this pur-
+REAKTOR SPARK – 34
+pose you can use the – Drive + Knob to set the amount of the modulation envelope signal
+that is added to the drive input of the Shaper unit.
+With the – Del + Knob you control the amount of envelope modulation signal applied to the
+Voice Delay unit’s delay time input. The values for – Del + are exponentially scaling with
+base 10. This means that the range for an envelope amplitude of 1, a – Del + setting of -1.0
+causes the static delay time to be multiplied by 0.1 and with a setting of +1.0 the delay time
+is multiplied by 10.
+In addition to manipulating the feedback structure, you can use the modulation envelope to
+control the content of higher harmonics in the sound, by using the Mixer Knob. This parameter
+determines the amount of envelope modulation applied to the HP-2 and Del/FS signals in the
+Mixer section. A Mixer setting of 0.0 means that no modulation takes place and a setting of
+1.0 means that the HP-2 and Del/FS signals are multiplied by the modulation envelope signal.
+4.13 Modulation Macro Controller Section
+The Modulation Macro Controllers modulate the parameters assigned to the right of the respective faders. You can
+assign the modulation depth with the brown faders.
+SPARK has three Modulation Macro Controllers that are most conveniently used with remote
+controllers, in a keyboard setting roughly corresponding to a volume pedal, an expression
+pedal, and the modulation wheel. Each Modulation Macro controls four parameters inside
+SPARK, two of which can be freely selected from inside a menu.
+The menu selection varies between the different macro controllers. On the SPARK graphical
+user interface these Modulation Macro Controllers are faders labeled as MC1, MC2, and MC3.
+They have already been assigned to the MIDI control numbers of the volume pedal (Ctrl 7),
+the expression pedal (Ctrl 11), and the modulation wheel (Ctrl 1), for MC1, MC2, and MC3,
+respectively.
+REAKTOR SPARK – 35
+MC1 has as its modulation destination in addition to the Amplitude and Drive Parameters two
+parameters which can be chosen from the two drop-down menus. The modulation amount
+for these modulation controls can be set by the corresponding faders. Sliding the fader to the
+right causes positive, sliding it to the left, negative modulation amounts. This means that for
+positive modulation amounts the destination parameter is increased as the Macro Controller
+is increased in value. For negative modulation amounts the destination parameter would be
+reduced as the Macro Controller is increased in value.
+As with MC1, the Modulation Controller 2 has two preset modulation destinations: the filter
+cutoff frequency and the filter resonance parameters of the Ringmod/Filter section. Two ad-
+ditional parameters can be chosen as the modulation destination for MC2 from the drop-down
+menus. The preset modulation destinations of the Modulation Controller 3 are the amount
+of the feedback signal at the input of the Ringmod/Filter section and the Cabinet Mix, as are
+the two parameters that can be selected from the drop-down menus.
+4.14 LFO Section
+With these controls you can adjust the main LFO parameters.
+SPARK also has an LFO with a triangle waveform with adjustable symmetry and clipping as
+an internal source of periodic controller movements. It can replace the automation of the host
+sequencer or the pedal movements and lets you get your hands free for sound modifications.
+The LFO can have four destinations: the Modulation Controllers 1, 2, and 3, and the Velocity
+Controller. The routing of the modulation signal to each destination can be switched on or
+off with the To Vel, To MC1, To MC2, and To MC3 Buttons for the Velocity Controller, MC1,
+MC2, and MC3, respectively. These buttons are located on the left of the corresponding
+controller’s fader.
+REAKTOR SPARK – 36
+When the button is alight, it means that the controller destination is receiving the LFO modu-
+lation signal. How the LFO modulates the controller is reflected graphically in the fader’s
+movements. The amount of LFO modulation to the destinations is dictated by the LFO Amount
+Knob. It controls the peak to peak amplitude of the LFO signal. If the destination is positioned
+in the middle of its full range, an LFO Amount setting of 1.0 would move the controller over
+its entire range.
+The LFO Rate Knob controls the frequency of the LFO. The units of the LFO Rate depend on
+the state of the LFO Sync Button. If LFO Sync is off, LFO Rate is given in Hz. If LFO Sync is
+on, the LFO Rate is given in oscillations per beat. The Key Sync Button causes the LFO to
+be reset to zero at every note-on event. If Key Sync is off and LFO Sync is on, the LFO phase
+also is synchronized to the song position. See ranD Parameter for a description of the note-
+on event. The static phase of the LFO is controlled by the LFO Phase Knob. It shifts the LFO
+phase in relation to the song position when Key Sync is off. When Key Sync is off, the LFO
+Phase Knob determines the phase of the LFO at a note-on event. An LFO Phase of -1 corre-
+sponds to the zero crossing of the waveform’s falling ramp. Similarly, -0.5 corresponds to the
+lower peak of the LFO waveform, 0 to the zero crossing of the rising ramp, +0.5 to the upper
+peak, and +1 again to the zero crossing the falling ramp.
+To give you more control over the shape of the LFO waveform, the Clip, Clip Sym, and Tri Sym
+Parameters are can be manipulated. The qualitative effect that the latter two parameters have
+on the LFO waveform can be seen in the Clip Sym and Tri Sym FielDS.
+The original waveform of the LFO is a triangle. The symmetry of the two ramps of the triangle
+can be set using the Tri Sym Field. Positive values increase the speed of the rising ramp which
+yields a falling sawtooth for a value of +1, a symmetric triangle for 0, and a rising sawtooth
+for -1 as the Tri Sym value.
+The Clip Knob dictates the amount of clipping of the LFO waveform. At zero it’s a triangle
+waveform and with increasing values it becomes more like a rectangular waveform. The ef-
+fect of the clipping on the LFO waveform can further be manipulated by changing the clip-
+ping symmetry. This is done with the Clip Sym Field. At positive values the upper part of the
+waveform, for negative values the lower part of the waveform is clipped harder. When Clip
+Sym is set to +1 there is no clipping at the negative part of the waveform, and for -1 there is
+no clipping at the positive part of the waveform.
+REAKTOR SPARK – 37
+5 Credits
+Sound Design: Alex Hofmann, Denis Gökdag (Surround SFX), Dietrich Pank, Ema Jolly, Eoin
+Rossney, Gustavo Bravetti, Jörg Hüttner, Jeremiah Savage, Martin Backes, Matthias Fuchs
+(Visophon), Stephan Schmitt, Thomas Binek (Tasmodia), Thomas Koot, Tobias Menguser
+SPARK Ensemble created by Stephan Schmitt.
+Graphics Design for SPARK by Phirol.
+REAKTOR SPARK – 38

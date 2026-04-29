@@ -1,0 +1,1457 @@
+Manual
+Disclaimer
+The information in this document is subject to change without notice and does not represent a
+commitment on the part of Native Instruments GmbH. The software described by this docu-
+ment is subject to a License Agreement and may not be copied to other media. No part of this
+publication may be copied, reproduced or otherwise transmitted or recorded, for any purpose,
+without prior written permission by Native Instruments GmbH, hereinafter referred to as Native
+Instruments.
+“Native Instruments”, “NI” and associated logos are (registered) trademarks of Native Instru-
+ments GmbH.
+Mac, Mac OS, GarageBand, Logic, iTunes and iPod are registered trademarks of Apple Inc.,
+registered in the U.S. and other countries.
+Windows, Windows Vista and DirectSound are registered trademarks of Microsoft Corporation
+in the United States and/or other countries.
+All other trade marks are the property of their respective owners and use of them does not im-
+ply any affiliation with or endorsement by them.
+Document authored by: musicandtext.com Dimitrov Popow
+Software version: 1.0 (05/2014)
+Special thanks to the Beta Test Team, who were invaluable not just in tracking down bugs, but
+in making this a better product.
+Contact
+Germany
+Native Instruments GmbH
+Schlesische Str. 29-30
+D-10997 Berlin
+Germany
+www.native-instruments.de
+USA
+Native Instruments North America, Inc.
+6725 Sunset Boulevard
+5th Floor
+Los Angeles, CA 90028
+USA
+www.native-instruments.com
+Japan
+Native Instruments KK
+YO Building 3F
+Jingumae 6-7-15, Shibuya-ku,
+Tokyo 150-0001
+Japan
+www.native-instruments.co.jp
+© Native Instruments GmbH, 2014. All rights reserved.
+Table of Contents
+Table of Contents
+1 Welcome to SESSION HORNS PRO ..............................................................................7
+2 SESSION HORNS PRO Key Features .............................................................................9
+2.1 External Sequencer Automation .................................................................................................. 10
+2.2 About KONTAKT / KONTAKT PLAYER ............................................................................................. 10
+3 SESSION HORNS PRO Controls ...................................................................................11
+3.1 Basic Control Types .................................................................................................................... 11
+3.1.1 Buttons ...................................................................................................................... 11
+3.1.2 Selector Switches ...................................................................................................... 11
+3.1.3 Knobs ........................................................................................................................ 12
+3.1.4 Faders ....................................................................................................................... 12
+3.1.5 Drop-Down Menus .................................................................................................... 12
+3.1.6 Spin Controls ............................................................................................................. 13
+4 The Twelve KONTAKT Instruments (.nki Files) .............................................................14
+5 SESSION HORNS PRO – Performance.nki ....................................................................16
+5.1 Main Window View ...................................................................................................................... 16
+5.1.1 Section Setup ............................................................................................................ 17
+5.1.2 Section Preset Drop-Down Menu ................................................................................ 19
+5.1.3 Voicing Assistant Drop-Down Menu ........................................................................... 19
+5.1.4 Smart Chord .............................................................................................................. 20
+5.2 Animator View ............................................................................................................................ 22
+5.3 Animator View – Elements .......................................................................................................... 23
+5.3.1 Tempo ........................................................................................................................ 23
+5.3.2 Swing ........................................................................................................................ 24
+5.3.3 Genre Drop-Down Menu ............................................................................................. 24
+5.3.4 Song Drop-Down Menu .............................................................................................. 24
+5.3.5 Animator Song Editor and Phrase Browser ................................................................ 24
+Session Horns Pro - Manual - 4
+Table of Contents
+5.3.6 Dynamic Fader ........................................................................................................... 27
+5.3.7 Phrase Selector Switch and Spin Controls ................................................................. 27
+5.3.8 Harmony or Unison Selector ....................................................................................... 27
+5.3.9 Mode Buttons ............................................................................................................ 28
+5.3.10 Humanize Knob .......................................................................................................... 28
+5.3.11 Progress Bar .............................................................................................................. 28
+5.3.12 Link Preset to Song Button ........................................................................................ 29
+5.4 Articulation View ........................................................................................................................ 29
+5.5 Articulation View Elements ......................................................................................................... 30
+5.5.1 Main Drop-Down Menu .............................................................................................. 30
+5.5.2 Threshold Fader and Display ..................................................................................... 30
+5.5.3 Velocity Switch Drop-Down Menu ............................................................................... 31
+5.5.4 Humanize Knob .......................................................................................................... 32
+5.6 Sound Window View .................................................................................................................... 33
+5.6.1 Individual Level Faders .............................................................................................. 34
+5.6.2 Solo and Mute Buttons .............................................................................................. 34
+5.6.3 Panning Knob ............................................................................................................ 35
+5.6.4 Drop Button ............................................................................................................... 35
+5.6.5 Individual Instrument Effects .................................................................................... 35
+5.6.6 Compressor Controls ................................................................................................. 35
+5.6.7 EQ Controls ................................................................................................................ 37
+5.6.8 Reverb and Delay Send Knobs ................................................................................... 39
+5.6.9 Global Send FX .......................................................................................................... 39
+5.6.10 Delay ......................................................................................................................... 40
+5.6.11 Reverb ....................................................................................................................... 41
+5.6.12 Global Master FX Chain ............................................................................................. 41
+5.6.13 Master Compressor (Comp) ....................................................................................... 43
+5.6.14 Master Equalizer (EQ) ................................................................................................ 45
+Session Horns Pro - Manual - 5
+Table of Contents
+5.6.15 Tape Saturation (Tape) .............................................................................................. 46
+5.6.16 Twang ........................................................................................................................ 47
+5.6.17 LP2 ............................................................................................................................ 47
+5.7 Control Window View .................................................................................................................. 49
+5.7.1 Dynamic Control ........................................................................................................ 50
+5.7.2 Pitch Wheel ................................................................................................................ 51
+5.7.3 Samples .................................................................................................................... 52
+6 SESSION HORNS PRO – Key Switch.nki .......................................................................54
+6.1 Main Window View ...................................................................................................................... 55
+6.1.1 Section Setup ............................................................................................................ 56
+6.1.2 Section Preset Drop-Down Menu ................................................................................ 57
+6.1.3 Voicing Assistant Drop-Down Menu ........................................................................... 57
+6.1.4 Smart Chord .............................................................................................................. 59
+6.2 Keyswitches View ........................................................................................................................ 60
+6.2.1 Key switch Drop-Down Menus .................................................................................... 60
+6.2.2 Applying the Articulations ......................................................................................... 61
+6.2.3 Humanize Knob .......................................................................................................... 62
+7 SESSION HORNS PRO Solo.nki ...................................................................................63
+7.1 Main Window View ...................................................................................................................... 64
+7.2 Keyswitches View ........................................................................................................................ 65
+7.2.1 Key switch Drop-Down Menus .................................................................................... 65
+7.2.2 Applying the Articulations ......................................................................................... 66
+7.2.3 Humanize Knob .......................................................................................................... 67
+8 Credits ......................................................................................................................68
+Session Horns Pro - Manual - 6
+Welcome to SESSION HORNS PRO
+1 Welcome to SESSION HORNS PRO
+Thank you for choosing SESSION HORNS PRO.
+SESSION HORNS PRO is a highly expressive and versatile horn section that lets you quickly
+achieve great results. Woodwind and brass are among the most dynamic and expressive acous-
+tic instruments and the interaction between the individual players of a horn section can be
+very complex both harmonically and rhythmically.
+SESSION HORNS PRO combines outstanding sound quality, an intuitive interface and innova-
+tive functionality not only to provide you with a truly musical workflow, but also to recreate the
+magic that a soulful Horn section can add to your music.
+We hope you enjoy using SESSION HORNS PRO and we would be delighted to hear your feed-
+back and ideas! You can find e-instruments on the web under http://www.e-instruments.com.
+Thomas Koritke
+e-instruments
+Manual Conventions
+This manual uses particular formatting to point out special facts and to warn you of potential
+issues. The icons introducing the following notes let you see what kind of information is to be
+expected:
+Whenever this exclamation mark icon appears, you should read the corresponding note
+carefully and follow the instructions and hints given there if applicable.
+This light bulb icon indicates that a note contains useful extra information. This informa-
+tion may often help you to solve a task more efficiently, but does not necessarily apply to
+the setup or operating system you are using; however, it's always worth a look.
+Furthermore, the following formatting is used:
+▪ Text appearing in (drop-down) menus (such as Open…, Save as… etc.) and paths to loca-
+tions on your hard drive or other storage devices is printed in italics.
+Session Horns Pro - Manual - 7
+Welcome to SESSION HORNS PRO
+▪ Text appearing elsewhere (labels of buttons, controls, text next to checkboxes, etc.) is
+printed in light blue. Whenever you see this formatting applied, you will find the same
+text appearing somewhere on the screen.
+Manual Structure
+SESSION HORNS PRO includes three.nki file types with different functionality:
+SESSION HORNS PRO – Performance, SESSION HORNS PRO – Key Switch and SES-
+SION HORNS PRO – Solo. Two of the three main window views in these three .nki files types
+contain exactly the same functions. To help you save time and paper, these are only described
+once – in section ↑5, SESSION HORNS PRO – Performance.nki.
+So, if you work with the Key Switch or Solo.nki and have questions about the Sound or Control
+window views, please read the corresponding manual sections (↑5.6, Sound Window View and
+↑5.7, Control Window View) in section ↑5, SESSION HORNS PRO – Performance.nki.
+Session Horns Pro - Manual - 8
+SESSION HORNS PRO Key Features
+2 SESSION HORNS PRO Key Features
+SESSION HORNS PRO delivers the sound of a tight, modern brass section and is aimed at
+Soul and Pop producers. Brass found in genres such as R&B, Latin, Indie, Nu-Jazz and Reggae
+can also easily be created.
+▪ The SESSION HORNS PRO sounds were recorded with utmost precision and are designed
+for maximum flexibility.
+▪ SESSION HORNS PRO features authentic phrases and sound settings for a variety of dif-
+ferent genres. Its intuitive approach lets you quickly produce excellent brass phrases and
+arrangements, even if you don’t have prior detailed knowledge of brass arrangement.
+▪ SESSION HORNS PRO contains a collection of ten multi-sampled brass instrument types
+which you can either use as a solo instrument or as sections of up to six instruments per
+opened .nki instance.
+The following single instruments or instrument combinations are available to you for as-
+sembling the desired horns sections:
+Single Instruments Instrument Combinations
+Trumpet 1 Bass and Tenor Trombones
+Trumpet 2 Bass Trombone and Baritone Saxophone
+Muted Trumpet Tenor and Baritone Saxophone
+Flugelhorn Tenor Trombone and Tenor Saxophone
+Tenor Saxophone Alto and Tenor Saxophones
+Alto Saxophone Tenor Saxophone and Muted Trumpet
+Baritone Saxophone Trumpets 1 and 2
+Tenor Trombone Alto Saxophone and Trumpet 1
+Bass Trombone Tenor Saxophone and Trumpet 1
+Tuba Tenor Trombone and Trumpet 1
+▪ SESSION HORNS PRO’s unique Smart Voice Split allocates each note of a chord to the
+corresponding brass instrument.
+Session Horns Pro - Manual - 9
+SESSION HORNS PRO Key Features
+External Sequencer Automation
+▪ The Animator turns chords into authentic brass phrases while maintaining real-time con-
+trol-ability. The Animator always follows the played chord and adjusts the brass phrase to
+proper voicing.
+▪ A Smart Chord mode lets you play authentic brass chords and voicings with just one or
+two fingers.
+▪ Dedicated Performance, Key Switch and Solo.nki's for live performance and production
+work of any kind.
+▪ A variety of creative mix and mastering presets provides a scope of inspiring sound im-
+ages.
+2.1 External Sequencer Automation
+Most knobs and faders in SESSION HORNS PRO can be controlled by external MIDI or host
+automation.
+► Simply open the KONTAKT automation window and drag the automation ID to the desired
+knob or fader.
+For further information on automation assignment please refer to the KONTAKT manual.
+2.2 About KONTAKT / KONTAKT PLAYER
+SESSION HORNS PRO is an Instrument powered by KONTAKT; you will, therefore, have to
+have KONTAKT or the free KONTAKT PLAYER installed on your computer in order to use SES-
+SION HORNS PRO. Refer to the KONTAKT/KONTAKT PLAYER documentation to learn how to
+load and configure KONTAKT Instruments.
+Session Horns Pro - Manual - 10
+SESSION HORNS PRO Controls
+Basic Control Types
+3 SESSION HORNS PRO Controls
+This chapter introduces you to SESSION HORNS PRO’s specific controls, which are part of the
+of each SESSION HORNS PRO.nki within your KONTAKT/KONTAKT PLAYER software.
+The Instrument Header
+To learn how to operate the Instrument Header’s controls, please refer to the documentation of
+your KONTAKT or KONTAKT PLAYER software.
+3.1 Basic Control Types
+SESSION HORNS PRO includes six basic types of controls: buttons, switches, knobs, faders,
+drop-down menus, and spin controls.
+3.1.1 Buttons
+These can have different shapes (“LED” or square) and are all toggles.
+► Click once to turn on, again to turn off.
+All buttons change their background color when actuated, which reflects the new state.
+3.1.2 Selector Switches
+Selector switches can also have different shapes and are used to select one of several options.
+► Either click the round “LED” next to the desired option or the square option button to
+select it.
+Session Horns Pro - Manual - 11
+SESSION HORNS PRO Controls
+Basic Control Types
+3.1.3 Knobs
+► To change a knob value, click on it and drag up to move the knob clockwise, or down to
+move it counter-clockwise.
+► Knobs can be fine-tuned by holding down your computer keyboard’s [Shift] key as you
+move the knob.
+► [Ctrl] + Click (Mac: [Cmd] + Click) resets a knob to its default value
+3.1.4 Faders
+SESSION HORNS PRO has two vertically or horizontally aligned fader types:
+▪ The Dynamic fader in the Animator view of the Performance NKI, which lets you set up
+what controls the dynamics of Animator phrases; the velocity with which you hit the keys
+and/or the dynamics preprogrammed in the respective Animator phrase.
+▪ The Threshold fader in the Articulation view of the Performance NKI, which lets you set
+up a velocity threshold point at which articulation changes between the two available op-
+tions.
+▪ The individual instrument volume faders in the Sound views of all SES-
+SION HORNS PRO .nki files, used to set up individual instrument volumes in an assem-
+bled brass section.
+► Click the respective fader handle and drag up or down, left or right.
+3.1.5 Drop-Down Menus
+These menus can usually be recognized by a small downward pointing arrow. To access a drop-
+down menu’s entries, click on the menu. A list holding several entries drops down.
+► To select one of the entries, move the mouse to the corresponding entry so that it gets
+highlighted, then release the mouse button. The Instrument takes whatever action you’ve
+requested, then closes the menu.
+Session Horns Pro - Manual - 12
+SESSION HORNS PRO Controls
+Basic Control Types
+3.1.6 Spin Controls
+Spin controls are pairs of two small horizontal arrows which provide a second option for select-
+ing items; for instance drop-down menu entries.
+► Click on either arrow to step through the available item list.
+▪ The left arrow lets you step backwards through the list.
+▪ The right arrow lets you step forward through the list.
+Session Horns Pro - Manual - 13
+The Twelve KONTAKT Instruments (.nki Files)
+4 The Twelve KONTAKT Instruments (.nki Files)
+SESSION HORNS PRO provides you with twelve separate KONTAKT *.nki files:
+SESSION HORNS PRO – Performance, SESSION HORNS PRO – Key Switch and a SES-
+SION HORNS PRO – Solo.nki for each solo instrument. Each .nki file holds all the relevant
+controls for shaping the instrument sound. The controls are accessible in three main window
+views called Main, Sound and Control. These can be made visible by clicking the correspond-
+ing buttons at the bottom of the .nki-window. The SESSION HORNS PRO – Performance.nki
+has two additional tabs which let you switch between its Animator and Articulation views.
+▪ The SESSION HORNS PRO – Performance.nki is designed for real-time performance of the
+horns section that you assemble. It features pre-programmed yet very flexible brass phras-
+es using SESSION HORNS PRO’s unique Animator function as well as a ‘standard’ key-
+board mode, where you can choose two from 14 available different articulations for veloci-
+ty switching.
+▪ The SESSION HORNS PRO – Key Switch.nki lets you predefine up to nine from sixteen avail-
+able different articulations for the assembled horns section. These can then be activated
+in real-time using keys in the C-1 octave of your keyboard.
+▪ The SESSION HORNS PRO – Solo.nki files offer similar functionality as the Key Switch.nki,
+but for one single brass instrument only—ideal for production and sequencing work.
+Session Horns Pro - Manual - 14
+The Twelve KONTAKT Instruments (.nki Files)
+SESSION HORNS PRO - Performance.nki with Animator view open
+Session Horns Pro - Manual - 15
+SESSION HORNS PRO – Performance.nki
+Main Window View
+5 SESSION HORNS PRO – Performance.nki
+The SESSION HORNS PRO – Performance.nki offers three different main window views; Main,
+Sound, and Control. These and the additional ANIMATOR and ARTICULATION views are de-
+scribed in detail in this chapter.
+5.1 Main Window View
+Performance.nki Main view with Articulation view open
+► Click the Main button at the bottom to bring up the Main window view.
+Using the functions in the Main window view you can:
+Session Horns Pro - Manual - 16
+SESSION HORNS PRO – Performance.nki
+Main Window View
+▪ Select individual instruments and instrument combinations to assemble the horns section
+you want. The maximum number of instruments in one instance of the Performance.nki is
+six: two individual instruments and two combinations of two instruments. If you need
+more, simply open another Performance.nki and use it together with the first. Several
+Section presets are available in the Section Preset drop-down menu, located in the top
+left corner of the window.
+▪ Determine a second articulation that is used via velocity switching; i.e. when you press
+the keys harder. This is done in the ARTICULATION window view that appears when you
+deactivate the ANIMATOR and is not available for Animator playback, which already in-
+cludes the use of articulations in its song presets.
+▪ Use the Voicing Assistant to control how the individual voices are distributed among the
+instruments in the horns section that you have assembled.
+▪ Set up and use the unique ANIMATOR to play back pre-programmed yet flexible phrases
+or just use the pre-programmed rhythm of the phrase for your own chords.
+5.1.1 Section Setup
+Two methods are available for horns section setup:
+▪ You can select a section preset in the Section Preset drop-down menu located top left in
+the window. This is described under the following heading.
+▪ You can select a maximum of six instruments for the four instrument slots in the central
+part of the Master window view (two individual instruments and two instrument combina-
+tions, each consisting of two instruments).
+Session Horns Pro - Manual - 17
+SESSION HORNS PRO – Performance.nki
+Main Window View
+Selecting a single instrument
+To assemble a horns section from scratch, do this:
+1. 2. 3. Click Slot A; the first slot on the left side.
+Click Single or Combi and select the single instrument or instrument combination by
+clicking on it.
+If desired, repeat the process for all four instrument slots.
+If the instrument slots do already contain instruments, which will probably be the case, we
+recommend that you first click each slot and remove the instrument(s) it contains by se-
+lecting the No Instrument item. This is useful as it is not possible to select an instrument
+that has already been selected in another slot (as a single instrument or part of a combi). If
+you use several instances of the same SESSION HORNS PRO.nki file, you can of course
+select the same instrument several times – once in each instance.
+Which single or combi instruments are available for a slot depends on their pitch range. In-
+struments with a lower pitch can be select in slot A, instruments with the highest pitches
+can be used in slot D.
+Session Horns Pro - Manual - 18
+SESSION HORNS PRO – Performance.nki
+Main Window View
+5.1.2 Section Preset Drop-Down Menu
+You can use this drop-down menu to select a horn section preset.
+► Open the Section Setup menu by clicking on the downward pointing arrow and select one
+of the available section presets. Your choice will be reflected by the instrument images
+on screen.
+The Link Preset to Song option is described in section 5.1.3.1 Animator Elements.
+5.1.3 Voicing Assistant Drop-Down Menu
+The Voicing Assistant lets you select one of five available voicing modes. Its drop-down menu
+is located top right in the Main window view. Using the options on this menu, you determine
+how the individual instruments are distributed among the keys you press on your keyboard.
+This has considerable impact on how your horns section sounds. These are the available Voic-
+ing modes:
+Polyphonic
+Each note you play triggers all instruments currently selected in Section Setup.
+Smart Voice Split
+The voices selected in Section Setup are realistically distributed among the keys you press.
+The order and number of available voices is always consistent and happens realistically from
+bottom to top, no matter in which order you press the keys. Voices can therefore jump between
+notes when you press additional notes or release notes.
+With a full section selected in Section Setup and playing a chord with four notes, the lowest
+controls the instrument(s) with the lowest pitch range (e.g. Bass Trombone or Tuba), the next
+higher one the controls the instrument(s) with the next higher pitch range etc. If you add a
+fifth note, the new one will replace one of the sounding notes. Which note this is depends on
+the pitch of the newly pressed note.
+Smart Voice Split features true polyphonic legato which lets you create naturally-sounding le-
+gato phrases.
+Session Horns Pro - Manual - 19
+SESSION HORNS PRO – Performance.nki
+Main Window View
+If you use a sustain pedal, you will always get a consistent section sound, no matter how
+many keys you press, as SESSION HORNS PRO provides dedicated legato transition sam-
+ples for legato play.
+Voicing Assistant drop-down menu
+Legato
+Legato is an Italian word and means tied together. SESION HORNS PRO provides dedicated
+legato transition samples for legato play. Use this mode to generate a monophonic legato melo-
+dy. To make it legato, overlay the currently sounding note with the next. Each note you play
+triggers all instruments currently selected in Section Setup.
+Chord + Legato
+Use this mode to simultaneously play chords and a monophonic legato melody. To generate a
+legato melody, you must overlay within an octave the currently sounding note with the next.
+Each note you play triggers all instruments currently selected in Section Setup. Example: If
+you play a chord triad with a full Section selected in Section Setup, each note in the chord is
+played by all instruments. This mode does not affect the selected Velocity Switch articulation.
+Animator
+Select this to activate the Animator and use the available Animator phrases, see Animator be-
+low.
+5.1.4 Smart Chord
+The Smart Chord function lets you play four-voice chords by pressing one or two keys on your
+external MIDI controller keyboard.
+Session Horns Pro - Manual - 20
+SESSION HORNS PRO – Performance.nki
+Main Window View
+► To activate the Smart Chord function, click the small round button next to the text Smart
+Chord.
+Now you can set up the Smart Chord function:
+► Open the Smart Chord setup dialog by clicking the small cog wheel icon. Then select a
+root note and chord map from the two drop-down menus to the left in the Smart Chord
+dialog.
+Smart Chord setup dialog
+The chords defined by root note and chord map will automatically be assigned to the (“white”)
+keys on your controller keyboard, starting with the C key.
+If you select “F” as root note and “major” as gender, pressing the C key on your keyboard will
+therefore create an F major chord.
+Now you can play the resulting chords by pressing the respective key on your external keyboard
+controller. If you don't additionally press a modifier key, the degrees of the selected scale are
+used. These already include chord inversions.
+Session Horns Pro - Manual - 21
+SESSION HORNS PRO – Performance.nki
+Animator View
+By additionally pressing a modifier key—the “black” keys—you can further modify the result-
+ing chords. These chord voicings have been created by a professional brass arranger.
+Additionally pressing this key Can have this result (depending on the nature of the chord used)
+C# (Warm) Mostly adds 7/9 notes to the chord.
+D# (Colour) Option notes 9/11/13 are added.
+F# (Crunch) Altered scale notes are used as option notes.
+G# (Cinematic) Uses open quartal harmony.
+Bb (Tension) Creates altered scale notes such as #9, b13, b9.
+If you use Smart Chord in conjunction with the Animator (see below), it may sometimes
+happen that pressing a modifier key yields no or only a slight change. This depends on the
+harmonic structure of the Animator phrase that you want to modify.
+If you use Smart Chords without the Animator, the resulting chords do not use the root note
+as bass note in order to create more brass-like chords. You can use a solo instrument (e.g.
+Tuba, Bass Trombone or other) to create the root note separately, if you wish.
+5.2 Animator View
+Animator view in the SESSION HORNS PRO – Performance.nki
+The Animator view is located at the lower end of the Main window view. It appears when you
+activate the Animator as described in the next paragraph. The Animator is an adaptable MIDI
+horns phrase player. It offers a selection of authentic horns phrases for different musical styles
+(genres). The phrases are grouped by genre, song and phrase. Each genre folder holds several
+Session Horns Pro - Manual - 22
+SESSION HORNS PRO – Performance.nki
+Animator View – Elements
+songs. Each song contains six phrases. Each phrase comes with a harmonic progression which
+you can shape by playing your own chords. You can also disable the harmonic progression in
+the phrases altogether and just use their rhythm.
+► To activate the Animator, click the “LED” next to the word Animator on the left side, so
+that it lights up. This brings up the Animator view in the lower part of the window. As an
+alternative, you can also select the Animator item on the Voicing Assistant drop-down
+menu.
+► Press a key or a chord on your controller keyboard. The currently selected phrase will play
+back for as long as you hold down the key or chord. The progress bar below the Phrase
+spin controls informs you about the current playback position within the phrase.
+If you use a sustain pedal, you can hold Animator playback without having to keep the keys
+pressed.
+► You can switch to another phrase in the song by clicking its phrase selector key, one of
+the spin controls (two horizontally aligned dark arrows) or any of the “white” keys in the
+C-1 octave of your external controller keyboard.
+Read the following paragraphs to find out what you can do with the individual controls in the
+Animator section.
+5.3 Animator View – Elements
+From left to right, the Animator contains the following controls:
+5.3.1 Tempo
+This selector switch to the left in the Animator lets you select a phrase playback speed. No
+matter which speed you select here, it has no impact on the phrase pitch.
+► Select ½ to play back the phrase with half of the original tempo.
+► Select 1:1 to play back the phrase with the tempo currently set in your host application
+or in KONTAKT.
+Session Horns Pro - Manual - 23
+SESSION HORNS PRO – Performance.nki
+Animator View – Elements
+► Select x2 to play back the phrase with double speed.
+5.3.2 Swing
+The SWING knob is located to the right of the TEMPO selector switch.
+► If you wish, use this knob to apply a swing factor to the Animator phrases. Experiment to
+find a fitting swing setting for the type of music you are creating.
+5.3.3 Genre Drop-Down Menu
+The genre menu is located to the right of the SWING knob. You use it to preselect the genre of
+the song.
+► Open the drop-down menu and select the desired genre.
+5.3.4 Song Drop-Down Menu
+This drop-down menu is located to the right of the Genre menu. The menu drops down when
+you click the white downward pointing arrow. It is used to load one of the Animator songs
+available for the preselected genre. When you select an Animator song, all its phrases are auto-
+matically opened and you can use the “white” keys in the C-1 octave of your keyboard to select
+the individual phrases.
+► Open the drop-down menu and select one of the songs by clicking its name.
+5.3.5 Animator Song Editor and Phrase Browser
+In the Phrase Browser, you can open genre folders to display their song content and open song
+folders to select individual Animator phrases. In the Song Editor, you can then assign individu-
+al phrases from the same or different songs to keys in the C-1 octave of your MIDI controller
+keyboard, the phrase selector keys and the spin controls on-screen.
+► To open the Song Editor and Phrase Browser in the central part of the window, click the
+wrench tool icon, located to the right of the Song drop-down.
+Session Horns Pro - Manual - 24
+SESSION HORNS PRO – Performance.nki
+Animator View – Elements
+Clicking the wrench tool opens the Animator Song Editor and Phrase Browser
+► Click genre folders to display the song folders they contain in the middle column.
+► Click the desired song folder icon in the middle column to display all phrases available
+here in the right column.
+► To assign a phrase to any of the “white” keys in the C-1 octave, select the desired key by
+clicking on it in the vertically aligned octave to the left in the Song Editor. The selected
+key is highlighted. Now double click the phrase that you want to assign to the selected
+key.
+Session Horns Pro - Manual - 25
+SESSION HORNS PRO – Performance.nki
+Animator View – Elements
+Start and Length
+You can also edit both the starting point of a phrase and its length. This happens in sixteenth
+note steps and is done in the Start and Length fields, located below the Phrase Browser col-
+umns.
+► To change the starting point of a phrase in sixteenth note steps, move the mouse pointer
+over the currently set numerical value. Small vertical spin controls get visible. You can
+now either click these to change the starting point or hold down the mouse button and
+drag upwards or downwards.
+Changing the starting point of a phrase will not change its length.
+► To change the length of a phrase in sixteenth note steps move the mouse cursor over the
+currently set value and use the spin controls or click and drag as described above.
+Sixth Note
+The Sixth Minor and Major selector switches in the Song Editor are used to determine how
+sixth notes are used in a phrase:
+▪ If an Animator phrase includes a sixth note and you play it using a normal minor chord,
+you can convert the normal minor sixth to a major (dorian) sixth by activating the Major
+button. This can e.g. be useful in R&B or Jazz music which, instead of using the natural
+minor scale, often in fact introduces a dorian mode by playing minor with a major sixth.
+▪ If you use the Animator phrase playing a major chord, you can activate the Minor button
+to turn the major into a minor sixth note. The resulting scale—harmonic major—is less
+commonly used.
+► Click the Minor or Major button to activate the desired function. The selected button is
+highlighted in light grey. The buttons also work like a selector switch. If one button has
+already been selected, clicking the other will deactivate the previously active button.
+If the Animator phrase does not use a sixth note, activating the Minor or Major button will
+have no effect.
+Session Horns Pro - Manual - 26
+SESSION HORNS PRO – Performance.nki
+Animator View – Elements
+5.3.6 Dynamic Fader
+You find the Dynamic fader below the genre drop-down menu. It is used to define what deter-
+mines the dynamics in the Animator phrase; the velocity with which you hit the keys and/or the
+dynamics preprogrammed in the phrase.
+► Drag the Dynamic fader handle up or down to determine how these two factors influence
+the phrase dynamics.
+5.3.7 Phrase Selector Switch and Spin Controls
+These phrase selection tools are located below the Song drop-down menu.
+Several options to select a phrase are available:
+► Press any of the phrase selector keys C-1 to A-1 on your controller keyboard or the KON-
+TAKT on-screen keyboard, where they are shown in pink.
+► Click any of the “white” keys in the Phrase selector of the Animator.
+► Use the Phrase spin controls below the Phrase selector.
+Selecting a phrase in the Phrase selector
+5.3.8 Harmony or Unison Selector
+This switch is located below the wrench tool icon. You can use it to quickly set Animator
+phrase playback voicing between harmony (all instruments play their own voice) and unison
+(all instruments play the same voice).
+Session Horns Pro - Manual - 27
+SESSION HORNS PRO – Performance.nki
+Animator View – Elements
+► Click to select the desired voicing. As an alternative, use the Modulation wheel on your
+external MIDI controller to achieve the same.
+5.3.9 Mode Buttons
+These two buttons are located to the right of the Harmony or Unison Selector.
+► If you activate the One Shot button and just briefly press the desired chord, the full
+phrase will be played back once. You can still change harmony during phrase playback by
+changing chords on your keyboard.
+► If you activate the Rhythm only button, only the rhythm and the articulation of the re-
+spective phrase will be used to play back the chords you press.
+Mode buttons and Humanize knob
+5.3.10 Humanize Knob
+This knob is located to the right of the Mode buttons. You can use the Humanize knob to con-
+trol the timing, tuning and velocity accuracy of the instruments in your horns section.
+► If you turn this knob down fully, all instruments in the horns section will have the exact
+same timing and velocity as well as perfect tuning.
+► The further you turn this knob up, the more timing, tuning and velocity offsets will be-
+come clearly audible between the individual instruments in the section, just like real horn
+players would sound.
+5.3.11 Progress Bar
+This is located below the Phrase spin controls. When you trigger a phrase, the progress bar in-
+forms you about the current playback position within the phrase.
+Session Horns Pro - Manual - 28
+SESSION HORNS PRO – Performance.nki
+Animator View – Elements
+Animator Progress Bar
+5.3.12 Link Preset to Song Button
+This button is only available in the Performance.nki. It is a part of the animator functionality
+and located below the Section Preset drop-down menu.
+Link Preset to Song button
+▪ Each Animator song contains tailored Section, Sound Mix and FX presets. If you activate
+the Link Preset button, these presets are automatically used and when you select another
+song, the preset Section, Sound Mix and FX settings of that song will automatically be
+used.
+5.4 Articulation View
+The Articulation view uses the same window area as the Animator. It appears at the lower end
+of the Main window view when you deactivate the Animator or select any voicing but "Anima-
+tor" in the Voicing Assistant drop-down menu.
+Articulation view
+Session Horns Pro - Manual - 29
+SESSION HORNS PRO – Performance.nki
+Articulation View Elements
+Using the controls in the Articulation view, you can set up the Performance.nki to switch be-
+tween two selected articulations when velocity exceeds or falls below a definable velocity val-
+ue.
+Velocity switching is not available when you use the Animator, as Animator phrases do al-
+ready contain articulation switch programming.
+► To set up velocity switching, you select the desired articulation types in the MAIN and
+VELOCITY SWITCH drop-down menus and define a THRESHOLD value. If you play with a
+velocity lower than the set Threshold, the Main articulation is used. Playing with a veloci-
+ty higher than the set THRESHOLD lets you use the VELOCITY SWITCH articulation.
+5.5 Articulation View Elements
+The Articulation view contains the MAIN and VELOCITY SWITCH drop-down menus, the veloci-
+ty THRESHOLD fader and numerical display as well as the HUMANIZE knob.
+5.5.1 Main Drop-Down Menu
+This drop-down menu is located on the left side of the Articulation view. The menu drops down
+when you click the white downward pointing arrow. Here you can select the articulation intend-
+ed for main use. The menu contains the following articulation types:
+Articulation Explanation
+Non Vibrato All notes are held straight for as long as you press the keys.
+Vibrato All notes are held for as long as you press the keys. A vibrato starts after a short time.
+► Open the Main drop-down menu and select one of the available items.
+5.5.2 Threshold Fader and Display
+This horizontally aligned fader next to the Main drop-down menu lets you set up the velocity
+value at which the articulation switches back and forth between the two selected articulation
+options. It also displays the current velocity when you play.
+Session Horns Pro - Manual - 30
+SESSION HORNS PRO – Performance.nki
+Articulation View Elements
+► Drag the fader handle left or right to set up the velocity value at which the articulation
+should change. The currently selected velocity switch value is shown in the numerical
+display below the fader.
+5.5.3 Velocity Switch Drop-Down Menu
+VELOCITY SWITCH, located to the right of the THRESHOLD fader, is the second drop-down
+menu in the Articulation view. Use this to select a second articulation which is used when you
+play with stronger velocity.
+► Open the VELOCITY SWITCH drop-down menu and select one of the available items.
+The following articulation types are available:
+Articulation Explanation
+Rips A glide at the beginning of a sustained note. Woodwind and brass variation of
+a Glissando (Italian: glide).
+Grace A continuous change between the (very briefly-sounding) grace note and the
+longer lasting main note. Distance between the two notes: one whole tone.
+Grace Vibrato Same as above, but here the longer lasting main note has a vibrato.
+FoPiCre 2Beat Short for Forte-Piano-Crescendo (Italian: loud/quiet/growing). This articulation
+starts with a loud attack, gets quiet very quickly, then increases volume and
+finally ends abruptly. The dynamic process is based on a tempo of 120 bpm
+(beats per minute) and has a length of two beats.
+If you activate Time Stretching in the Control view, the dynamic process will
+be stretched so that it always matches the tempo you have set in your host se-
+quencer or in the KONTAKT Master Editor.
+FoPiCre 4Beat Same as above, but the dynamic process has a length of four beats.
+Growl Guttural, gritty timbre
+Growl Vibrato Same as above, but followed by a vibrato using the same technique.
+Marcato Long (Italian: marked) Accentuated note or chord with a sharp attack followed by
+the decaying sound.
+Marcato Medium Same as above, but shorter.
+Session Horns Pro - Manual - 31
+SESSION HORNS PRO – Performance.nki
+Articulation View Elements
+Articulation Explanation
+Staccato Italian: separated.
+Staccato is an articulation technique characterized by an accented start of
+each pitch and a short, truncated end resulting in detached and briefly played
+notes.
+Staccatissimo Same as above, but extremely truncated.
+Sax Trill Semi Rapid alteration between two adjacent notes; in this case the notes are a sem-
+itone apart. For saxophone only.
+Sax Trill Whole Same as above, but here the two notes are a whole note apart.
+Brass Shake Sounds like a coarse trill. Note: For physical reasons, a saxophone can't create
+a shake.
+5.5.4 Humanize Knob
+This knob is located to the right of the Mode buttons. You can use the HUMANIZE knob to
+control the timing, tuning and velocity accuracy of the instruments in your horns section in a
+way that they sound like real human horn players.
+► If you turn this knob down fully, all instruments in the horns section will have the exact
+same timing and velocity as well as perfect tuning.
+► The further you turn this knob up, the more timing, tuning and velocity offsets will be-
+come clearly audible between the individual instruments in the section, just like real horn
+players would sound.
+Session Horns Pro - Manual - 32
+SESSION HORNS PRO – Performance.nki
+Sound Window View
+5.6 Sound Window View
+Sound window view
+► Click the Sound button at the bottom of the window to bring up the Sound window view.
+Session Horns Pro - Manual - 33
+SESSION HORNS PRO – Performance.nki
+Sound Window View
+This window view displays the same instrument slots as in the Main window view and addition-
+ally adds individual mixer channel strips (including a level fader, a panning knob, a solo and a
+mute button) for each instrument. Slots containing a combination of two instruments (combi)
+have individual mixer channel strips for each instrument. A Drop button in each mixer channel
+strip lets you individually transpose each instrument downwards by one octave.
+The effects section below the instruments is used to set up individual compressor and equaliz-
+er settings for each instrument in your assembled horns section. You can also set up the indi-
+vidual instrument's send levels to the global effects reverb and delay.
+A Global Send FX section helps you set up the available delay and reverb parameters.
+Finally, there's a Global Master FX section where you can control the parameters of a master
+effect chain, consisting of compressor, equalizer, tape saturation, twang and a low pass filter.
+5.6.1 Individual Level Faders
+These faders can be used to control the level of each individual instrument in the horns sec-
+tion that you have assembled. This is where you mix your section and set up the balance be-
+tween the individual instruments.
+► Position the mouse pointer over the fader handle and drag it up or down.
+5.6.2 Solo and Mute Buttons
+To mute an individual instrument means to silence it. To solo an instrument means that all
+instruments, except for those already set to solo, are muted. This is done by using the M and S
+buttons at the top of the mixer channel strips.
+► To mute an instrument, click its M button so that it gets highlighted. To unmute it, click
+the M button again. In the Main and Control views, muted instrument slots display this
+icon:
+► To solo an instrument, click its S button. Unless you have done the same for other indi-
+vidual horns, all other instruments will be muted. To deactivate solo for an instrument,
+click its S button again.
+Session Horns Pro - Manual - 34
+SESSION HORNS PRO – Performance.nki
+Sound Window View
+5.6.3 Panning Knob
+Each instrument's individual mixer channel strip contains a panning knob, located directly be-
+low the solo and mute buttons. You can use it to position the instrument in the stereo panora-
+ma.
+► Position the mouse pointer over the knob and drag up or down.
+5.6.4 Drop Button
+This button is located at the bottom of each instrument's individual mixer channel strip. You
+can use it to transpose the respective instrument downwards by one octave.
+► To activate downward transposition for an instrument, click the Drop button so that it
+gets highlighted.
+► To deactivate downward transposition, click the Drop button again.
+5.6.5 Individual Instrument Effects
+All compressor and EQ settings as well as the reverb and delay send level settings can be set
+up separately for individual instruments. Proceed as follows to do this:
+► Click the desired instrument in one of the instrument slots so that it gets selected. Its
+name will now be displayed in the top left button of the effects section.
+► You need to click this button to display the individual instrument effects, should the ef-
+fects section currently show the Global Send FX or Global Master FX.
+5.6.6 Compressor Controls
+A compressor is a device used to reduce the level of loud signal peaks. It does this by narrow-
+ing the dynamic range. The resulting loss in overall level can be compensated by raising it us-
+ing a makeup gain control.
+Remember that you can make separate settings for each instrument in your selected horns
+section!
+Session Horns Pro - Manual - 35
+SESSION HORNS PRO – Performance.nki
+Sound Window View
+Proceed as follows to bring up the compressor controls:
+► Click the Comp button (not the “LED”) so that it gets highlighted in light grey. Now all
+compressor controls get visible in the centre of the effects section.
+► Activate the compressor by clicking its “LED” so that it lights up.
+Compressor controls
+Threshold Knob
+This knob lets you set the level at which compression starts. Signals below the set Threshold
+pass unaffected. Signals above Threshold level are compressed. You can select a value be-
+tween -20dB and +20dB. The current value gets visible when you set up the Threshold or
+when you click the knob.
+► Position the mouse pointer over the knob and drag up or down.
+Ratio Knob
+The Ratio knob is used to control the amount of gain reduction applied to the signal above
+Threshold level. The Ratio can be set between 1:1.5 and 1:10. The current value gets visible
+when you set up the Ratio or when you click the knob.
+► Position the mouse pointer over the knob and drag up or down.
+Attack Knob
+Use this knob to set up the time it takes for the compressor to react when the signal rises
+above the set Threshold level. A number of fixed Attack times between 0.1ms and 30ms can
+be used. The current value gets visible when you set up the Attack time or when you click the
+knob.
+Session Horns Pro - Manual - 36
+SESSION HORNS PRO – Performance.nki
+Sound Window View
+► Position the mouse pointer over the knob and drag up or down.
+Release Knob
+Using the Release knob, you determine the time it takes for the compressor to let the signal
+through unaffected after signal level has dropped below the set Threshold value. You can set
+up Release times between 100ms and 1600ms. When you turn the knob up fully, Release
+time is handled automatically. The current value gets visible when you set up the Release time
+or when you click the knob.
+► Position the mouse pointer over the knob and drag up or down.
+Make Up (Gain) Knob
+Compression levels out audio signal peaks. The Make Up Gain knob is used to compensate for
+the resulting volume loss. Available value range: -5.0db to 20.0dB. The current value gets visi-
+ble when you use or click the knob.
+► Position the mouse pointer over the knob and drag up or down.
+Mix Knob
+Using this knob, you can control the balance between the original (uncompressed) and com-
+pressed signal in the output signal. The current value gets visible when you use or click the
+knob.
+► Position the mouse pointer over the knob and drag up or down.
+5.6.7 EQ Controls
+Proceed as follows to bring up the EQ controls:
+► Click the Eq button (not the “LED”) so that it gets highlighted in light grey. Now all EQ
+controls are visible in the centre of the effects section.
+► Activate the Equalizer by clicking its “LED” so that it lights up.
+Session Horns Pro - Manual - 37
+SESSION HORNS PRO – Performance.nki
+Sound Window View
+An Equalizer (short: EQ) is used to alter the frequency response of an audio signal. The EQ used in SESSION HORNS PRO
+has controls to filter four partly overlapping frequency ranges; low. mid1, mid2 and high. Depending on the filter type used,
+filtering is done by first selecting the corner or center frequency of the frequency range to be edited and then adjusting its
+gain and thereby level up or down. You can switch the filter type used for the high and/or low frequency ranges between
+shelving filter and bell filter.
+Remember that you can make separate settings for each instrument in your selected horns
+section!
+The following table lists up the frequency and gain ranges of all four filters in the EQ:
+Name Gain Range Name Frequency Range Filter Type
+Low Gain -20dB - +20dB (Low) Freq(uencies) 40Hz - 600Hz Shelving, Bell
+Mid1 Gain -20dB - +20dB (Lower Mid) Freq(uencies) 200Hz - 2.5 kHz Bell
+MID2 Gain -20dB - +20dB (Upper Mid) Freq(uencies) 600Hz - 7kHz Bell
+High Gain -20dB - +20dB (High) Freq(uencies) 1.5kHz - 22kHz Shelving, Bell
+► Position the mouse pointer over a Freq knob and drag up or down to select the filter's
+corner or center frequency. The current value gets visible during editing and when you
+click the knob.
+► Position the mouse pointer over a Gain knob and drag up or down to boost or reduce gain.
+The current value gets visible during editing and when you click the knob.
+► To change the filter type used for the high and/or low frequency range from shelving to
+bell filter, click the small "bell" button next to the respective Freq knob so that it lights
+up. If you want to go back to the shelving filter, click the "bell" button again.
+Session Horns Pro - Manual - 38
+SESSION HORNS PRO – Performance.nki
+Sound Window View
+5.6.8 Reverb and Delay Send Knobs
+If you want to use these effect sends, make sure that Delay and/or Reverb are switched on
+in the Global Send FX section.
+Use the Rev Send and Del Send knobs to define the level of the instrument signal that is sent
+to the built-in global effects Reverb and Delay.
+► To set the Send level for the selected instrument, position the mouse pointer over the de-
+sired Send knob and drag up or down.
+Remember that you can make separate settings for each instrument in your selected horns sec-
+tion!
+The available Delay and Reverb master parameters are described below in the Global Send Ef-
+fects section.
+5.6.9 Global Send FX
+► Click the Global Send FX button, located to the left in the effects section, to bring up the
+Global Send FX master parameters.
+Opening the Global Send FX master parameters
+The controls available in this effects section view are used to set up the master parameters for
+each of the two master effects Delay and Reverb. The signals that you send from the individual
+instruments via their Reverb and Delay Send knobs is processed according to the settings you
+make in this view and then returned to the output stage.
+Session Horns Pro - Manual - 39
+SESSION HORNS PRO – Performance.nki
+Sound Window View
+5.6.10 Delay
+This effect is used to create single or multiple echoes of the input signal.
+► To activate Delay, click the “LED” button in the top left corner so that it lights up.
+Time Knob and Sync Button
+The Time knob is used to define the time span until the first echo gets audible. What time
+span this is depends on the Sync button setting:
+▪ When the Sync button has been activated, this will be a note value and synced to your
+host sequencer tempo or the tempo you have set up in KONTAKT stand-alone.
+▪ If Sync is not active, it will be a time value in milliseconds.
+The current value gets visible during editing and when you click the knob.
+► To edit the Time parameter, position the mouse pointer over the knob and drag up or
+down.
+► To activate Sync, click the Sync button so that it gets highlighted. If you click again,
+Sync will be deactivated.
+Feedback Knob
+Use this knob to set up the number of echo repeats.
+► Position the mouse pointer over the knob and drag up or down.
+Damp Knob
+Using this function has two effects:
+▪ The high frequencies in the original signal are gradually degraded in each repeated echo.
+▪ The number of echo repeats decreases.
+► Position the mouse pointer over the knob and drag up or down.
+Session Horns Pro - Manual - 40
+SESSION HORNS PRO – Performance.nki
+Sound Window View
+Return Level Knob (Rtn Lvl)
+This knob is used to determine echo volume.
+► Position the mouse pointer over the knob and drag up or down.
+5.6.11 Reverb
+SESSION HORNS PRO includes a high-end convolution reverb that lets you place the horns
+section in a variety of different rooms and ambiences. You can choose from a great number of
+presets.
+► To activate Reverb, click the “LED” button to the left of the word REVERB so that it
+lights up.
+Reverb Drop-Down Menu
+This is located to the left in the Reverb section.
+► Click on the name of the currently selected reverb preset to open the menu where you
+can select another preset.
+Return Level Knob (Rtn Lvl)
+This knob is used to determine reverb volume.
+► Position the mouse pointer over the knob and drag up or down.
+5.6.12 Global Master FX Chain
+► Click the Global Master FX button, located to the left in the effects section, to bring up
+the Global Master FX chain.
+Session Horns Pro - Manual - 41
+SESSION HORNS PRO – Performance.nki
+Sound Window View
+Opening the Global Master FX chain
+This section contains with five master effects arranged as a signal chain, where the second ef-
+fect receives its signal from the first, the third receives it from the second and so on. In con-
+trast to the effects that you select for an individual instrument, the Global Master effects proc-
+ess the signal of all instruments and they do that directly before the audio output stage.
+Keep in mind that one of these master effects (Twang) has level controls on its inputs and
+outputs and another (Tape) has an output knob. As the Global Master FX chain is posi-
+tioned directly before the final audio signal outputs, fully turning down one of these level
+controlling knobs will prevent that your audio signal reaches the audio outputs. If you use
+Tape and/or Twang, make sure that the level and output knobs are not fully turned down!
+When you deactivate Tape or Twang, the signal will bypass these controls.
+The following effects are available here:
+Effect Name Explanation
+Comp A compressor used to process the bundled output signal of all instruments in
+your horn section.
+EQ An Equalizer that lets you filter the bundled output signal of all instruments in
+your horn section.
+Tape (Saturation) An effect that introduces a natural sounding harmonic distortion as it occurs
+when recording on magnetic tape.
+Twang An effect that sounds as if the horns signal is put though an amplifier, which
+can give it more punch, add distortion and may change its frequency range.
+LP2 A filter with a resonance control, e.g. usable for wah-wah and resonance ef-
+fects.
+Session Horns Pro - Manual - 42
+SESSION HORNS PRO – Performance.nki
+Sound Window View
+Selecting and Activating Global Master Effects
+Each master effect can separately be selected and activated /deactivated.
+► To select a master effect, so that its controls get visible in the Effects section, click its
+rectangular button.
+► To activate a master effect, click its “LED” button so that it lights up.
+Activating a master effect does not display its controls; you need to click both buttons to
+activate and edit its settings. It is an advantage of this design that you can quickly activate
+or deactivate effects without losing sight of another effect's controls.
+5.6.13 Master Compressor (Comp)
+This compressor has the same control types and value ranges as its earlier described brother:
+Threshold Knob
+This knob lets you set the level at which compression starts. Signals below the set Threshold
+pass unaffected. Signals above Threshold level are compressed. You can select a value be-
+tween -20dB and +20dB. The current value gets visible when you set up the Threshold or
+when you click the knob.
+► Position the mouse pointer over the knob and drag up or down.
+Session Horns Pro - Manual - 43
+SESSION HORNS PRO – Performance.nki
+Sound Window View
+Ratio Knob
+The Ratio knob is used to control the amount of gain reduction applied to the signal above
+Threshold level. The Ratio can be set between 1:1.5 and 1:10. The current value gets visible
+when you set up the Ratio or when you click the knob.
+► Position the mouse pointer over the knob and drag up or down.
+Attack Knob
+Use this knob to set up the time it takes for the compressor to react when the signal rises
+above the set Threshold level. A number of fixed Attack times between 0.1ms and 30ms can
+be used. The current value gets visible when you set up the Attack time or when you click the
+knob.
+► Position the mouse pointer over the knob and drag up or down.
+Release Knob
+Using the Release knob, you determine the time it takes for the compressor to let the signal
+through unaffected after signal level has dropped below the set Threshold value. You can set
+up Release times between 100ms and 1600ms. When you turn the knob up fully, Release
+time is handled automatically. The current value gets visible when you set up the Release time
+or when you click the knob.
+► Position the mouse pointer over the knob and drag up or down.
+Make Up (Gain) Knob
+Compression levels out audio signal peaks. The Make Up Gain knob is used to compensate for
+the resulting volume loss. Available value range: -5.0db to 20.0dB. The current value gets visi-
+ble when you use or click the knob.
+► Position the mouse pointer over the knob and drag up or down.
+Session Horns Pro - Manual - 44
+SESSION HORNS PRO – Performance.nki
+Sound Window View
+Mix Knob
+Using this knob, you can control the balance between the original (uncompressed) and com-
+pressed signal in the output signal. The current value gets visible when you use or click the
+knob.
+► Position the mouse pointer over the knob and drag up or down.
+5.6.14 Master Equalizer (EQ)
+The Master Equalizer EQ works the same way and has the same controls as its earlier descri-
+bed brother. Here's the recap: An Equalizer (short: EQ) is used to alter the frequency response
+of an audio signal. The EQ to filter four partly overlapping frequency ranges; low. mid1, mid2
+and high. Depending on the filter type used, filtering is done by first selecting the corner or
+center frequency of the frequency range to be edited and then adjusting its gain and thereby
+level up or down. You can switch the filter type used for the high and/or low frequency ranges
+between shelving filter and bell filter.
+The following table lists up the frequency and gain ranges of all four filters in the EQ:
+Name Gain Range Name Frequency Range Filter Type
+Low Gain -20dB - +20dB (Low) Freq(uencies) 40Hz - 600Hz Shelving, Bell
+Mid1 Gain -20dB - +20dB (Lower Mid) Freq(uencies) 200Hz - 2.5 kHz Bell
+MID2 Gain -20dB - +20dB (Upper Mid) Freq(uencies) 600Hz - 7kHz Bell
+High Gain -20dB - +20dB (High) Freq(uencies) 1.5kHz - 22kHz Shelving, Bell
+► Position the mouse pointer over a Freq knob and drag up or down to select the filter's
+corner or center frequency. The current value gets visible during editing and when you
+click the knob.
+► Position the mouse pointer over a Gain knob and drag up or down to boost or reduce gain.
+The current value gets visible during editing and when you click the knob.
+► To change the filter type used for the high and/or low frequency range from shelving to
+bell filter, click the small “bell” button next to the respective Freq knob so that it lights
+up. If you want to go back to the shelving filter, click the “bell” button again.
+Session Horns Pro - Manual - 45
+SESSION HORNS PRO – Performance.nki
+Sound Window View
+5.6.15 Tape Saturation (Tape)
+This master effect is the digital version of a truly analog phenomenon, which occurred when
+recording on multi-track tape machines was the best technology available. In contrast to to-
+day's digital technology, a signal recorded on tape, slightly louder than 0dB, would not pro-
+duce nasty distortions but instead produce a pleasing harmonic distortion, a slight compres-
+sion of the higher frequencies and a fatter bass. This was loved and used by many contempo-
+rary artists.
+Now you can apply this effect to your horns section. Here are its controls (remember that the
+parameter values get visible when you edit the parameter or click the knob):
+Gain Knob
+This parameter lets you add gain to the signal and thus creates distortion. It has a value range
+of 0dB to +48dB and should therefore be used with care, unless you want real distortion.
+► Position the mouse pointer over the knob and drag up or down.
+Warmth Knob
+The knob does what its name implies; it adds warmth to the sound and slightly fattens the
+bass frequencies. It can be set to values between -3db and +3dB.
+► Position the mouse pointer over the knob and drag up or down.
+HF Roll-Off Knob
+The HF Roll-Off knob controls a filter and you can use it to gradually dampen the high fre-
+quency range starting from the cutoff frequency that you select using this knob.
+► Position the mouse pointer over the knob and drag up or down.
+Output Knob
+This knob is of course used to control the level of the output signal.
+Keep in mind that turning this knob fully down prevents that the signal reaches the output
+stage. In other words: you will hear nothing.
+Session Horns Pro - Manual - 46
+SESSION HORNS PRO – Performance.nki
+Sound Window View
+► Position the mouse pointer over the knob and drag up or down.
+5.6.16 Twang
+This effect works similar to a guitar amplifier. Distortion will occur when you crank up its Vol-
+ume knob. Using Volume and Output more subtly will give the signal more punch and room.
+The Bass, Mid and Treble filters can help to give the instrument its distinctive space within a
+mix. Experiment!
+Volume Knob
+This knob is used to control the level of the signal that comes in from the previous effect in the
+chain.
+► Position the mouse pointer over the knob and drag up or down.
+Keep in mind that turning this knob fully down will prevent that the signal reaches the output
+stage. In other words: you will hear nothing.
+Bass, Mid and Treble Knobs
+These knobs let you filter the signal.
+► Position the mouse pointer over the respective knob and drag up or down.
+Output Knob
+This knob is used to control the level of the signal that goes out to the next effect in the chain.
+► Position the mouse pointer over the knob and drag up or down.
+Keep in mind that turning this knob fully down will prevent that the signal reaches the output
+stage. In other words: you will hear nothing.
+5.6.17 LP2
+This is a low-pass filter with a static slope and a resonance control that you can use for crea-
+tive sound processing.
+Session Horns Pro - Manual - 47
+SESSION HORNS PRO – Performance.nki
+Sound Window View
+Cutoff Knob
+The LP2 filter has a frequency range from 21.8 kHz to 43.6 Hz. You can e.g. use it to create
+filter sweeps. Fully turning up the cutoff frequency knob will let the signal pass unaffected.
+Gradually turning it down will increasingly attenuate the frequencies above the set corner fre-
+quency.
+Except when using instruments that can produce very low frequencies, such as Tuba, Bass
+Trombone etc., fully turning down Cutoff may give you the impression that something is
+wrong as you hear nothing, while it is in fact the instrument that doesn't produce sounds
+below the set cutoff frequency.
+► Position the mouse pointer over the knob and drag up or down.
+Resonance Knob
+Using this knob induces a feedback at the current cutoff frequency which creates a response
+peak. You can e.g. create a nice expressive Wah-Wah by first setting up Resonance and then
+turning the Cutoff knob up and down.
+► Position the mouse pointer over the knob and drag up or down.
+Session Horns Pro - Manual - 48
+SESSION HORNS PRO – Performance.nki
+Control Window View
+5.7 Control Window View
+Control Window View
+Session Horns Pro - Manual - 49
+SESSION HORNS PRO – Performance.nki
+Control Window View
+The Control window view appears below the instrument slots when you click the Control button
+at the bottom of the window. Here you can select and set up a number of parameters that you
+can control using external MIDI controllers or by the way you play. In addition, you can activate
+or deactivate a few important sample management functions.
+5.7.1 Dynamic Control
+You can select one of two available methods—Velocity or Expression (MIDI Controller Change
+#11)—to control the SESSION HORNS PRO dynamics.
+Velocity
+If you select this option, you control the dynamics by playing the keys on your controller key-
+board harder or softer (i.e. with more or less velocity).
+MIDI CC11 (Expression)
+If you select this option, you control the dynamics by using the Expression MIDI Controller
+Change #11 (CC#11). Use this mode for dynamic changes that should occur after you have
+pressed the keys. One common use for this controller type is to generate crescendos or decre-
+scendos. Note that the Velocity switch articulation is still available here. It can be activated as
+usual by pressing the keys harder.
+The Expression controller type can only be used if your keyboard supports it.
+► Click one of the two “LED” buttons to select the desired option.
+Velocity Drop-Down Menu
+This menu lets you select one of three available Velocity curves. These can be used to adjust
+the overall Velocity response of SESSION HORNS PRO to your controller keyboard’s character-
+istics:
+Session Horns Pro - Manual - 50
+SESSION HORNS PRO – Performance.nki
+Control Window View
+Soft Velocity This setting is useful for “heavy” master keyboards as they respond more easily to your
+playing.
+Linear velocity The input velocity values are passed on unprocessed.
+Hard Velocity This is useful if you happen to use a “light” master keyboard (which outputs higher ve-
+locity values even when you play rather softly) as this transforms higher input velocities
+to relatively low ones.
+This menu is only available when select Velocity for dynamic control.
+► Open the drop-down menu and select the desired curve.
+5.7.2 Pitch Wheel
+Here you can select one of three available options and thereby define what happens when you
+use the Pitch Wheel on your controller keyboard. These are the options:
+Normal
+As the name implies, the Pitch Wheel will behave normally when you selected this option. That
+means, you can use it to continuously bend the pitch of the sound by +/- two semitones.
+Doits/Falls on Note
+Select this option to use the Pitch Wheel for controlling Doits and Falls on Note start. Doits
+and Falls are typical brass articulations.
+► Turn the Pitch Wheel fully up and play a chord or note which ends with quick Doits.
+► Turn the Pitch Wheel up just a bit to get slower Doits.
+► Turn the Pitch Wheel fully down and play a chord or note which ends with quick Falls.
+► Turn the Pitch Wheel half down to get the slower Falls.
+► Turn the Pitch Wheel down just a bit to get the slowest Falls.
+Session Horns Pro - Manual - 51
+SESSION HORNS PRO – Performance.nki
+Control Window View
+Doits/Falls on release
+Select this option to use the Pitch Wheel for controlling Doits and Falls on key release. This
+lets you play a chord for as long as you want and end it with Doits or Falls as soon as you let go
+of the keys on your controller keyboard.
+► Turn the Pitch Wheel fully up and play a chord or note which ends with quick Doits when
+you release the keys.
+► Turn the Pitch Wheel up just a bit to get slower Doits when you release the keys.
+► Turn the Pitch Wheel fully down and play a chord or note which ends with quick Falls
+when you release the keys.
+► Turn the Pitch Wheel half down and play a chord or note which ends with slower Falls
+when you release the keys.
+► Turn the Pitch Wheel down just a bit to get the slowest Falls.
+With this option selected, you can also use the Pitch Wheel after Note On.
+5.7.3 Samples
+The three functions available in this section help you create an even more realistic horns sec-
+tion sound. As this may also increase your computer's workload, these functions are optional.
+► Click the respective "LED" button to activate the desired function. To deactivate it, click
+again.
+Release Samples
+If you activate this function, special release samples, which reflect natural instrument release
+behavior, are applied at the end of played notes.
+Session Horns Pro - Manual - 52
+SESSION HORNS PRO – Performance.nki
+Control Window View
+Round Robin
+If you activate this function, various slightly different samples (instead of one) become availa-
+ble for each note of each instrument you play. These samples are used randomly which creates
+a much more lively and realistic acoustic picture.
+Time Stretching
+The two articulations FoPiCre 2Beat and FoPiCre 4Beat each have a defined length: 2 beats or
+4 beats and the dynamic process has a length that is based on a tempo of 120 bpm (beats per
+minute). If you activate the Time Stretching option, the dynamic process will be stretched so
+that it always matches the tempo you have set in your host sequencer or in the KONTAKT Mas-
+ter Editor.
+Session Horns Pro - Manual - 53
+SESSION HORNS PRO – Key Switch.nki
+6 SESSION HORNS PRO – Key Switch.nki
+This .nki file lets you assemble the horns section of your choice, select up to nine from sixteen
+available articulations and switch between them by pressing keys in the C-1 octave of your
+controller keyboard. It can be used both for composition and performance work. Same as the
+Performance.nki, the Key Switch.nki has three main window views – Main, Sound and Control.
+Main is described in detail in this chapter. For information about the Sound and Control win-
+dow views, see sections ↑5.6, Sound Window View and ↑5.7, Control Window View.
+Session Horns Pro - Manual - 54
+SESSION HORNS PRO – Key Switch.nki
+Main Window View
+6.1 Main Window View
+Key Switch.nki Main Window view
+► Click the Main button at the bottom to bring up the Main window view.
+Using the functions in the Main window view you can:
+Session Horns Pro - Manual - 55
+SESSION HORNS PRO – Key Switch.nki
+Main Window View
+▪ Select individual instruments and instrument combinations to assemble the horns section
+you want. The maximum number of instruments in one instance of the Key Switch.nki is
+six - two individual instruments and two combinations of two instruments. If you need
+more, simply open another Key Switch.nki and use it together with the first. Several Sec-
+tion presets are available in the Section Preset drop-down menu, located in the top left
+corner of the window.
+▪ Select up to nine from sixteen available articulation types and thereby automatically as-
+sign them to buttons on the screen and keys in the C-1 octave of your external keyboard.
+Once you have done this, you can quickly change between the articulations by clicking a
+button or pressing a key on your keyboard.
+▪ Use the Voicing Assistant to control how the individual voices are distributed among the
+instruments in the horns section that you have assembled.
+6.1.1 Section Setup
+Two methods are available for horns section setup:
+▪ You can select a section preset in the Section Preset drop-down menu located top left in
+the window. This is described under the following heading.
+▪ You can select a maximum of six instruments for the four instrument slots in the central
+part of the Master window view (two individual instruments and two instrument combina-
+tions, each consisting of two instruments).
+If the instrument slots do already contain instruments, which will probably be the case, we
+recommend that you first click each slot and remove the instrument(s) it contains by se-
+lecting the No Instrument item. This is useful as it is not possible to select an instrument
+that has already been selected in another slot (as a single instrument or part of a combi). If
+you use several instances of the same SESSION HORNS PRO.nki file, you can of course
+select the same instrument several times – once in each instance.
+To assemble a horns section from scratch, do this:
+1. 2. 3. Click slot A; the first slot on the left side.
+Click SINGLE or COMBI and select the single instrument or instrument combination by
+clicking on it.
+If desired, repeat the process for all four instrument slots.
+Session Horns Pro - Manual - 56
+SESSION HORNS PRO – Key Switch.nki
+Main Window View
+Which single or combi instruments are available for a slot depends on their pitch range. In-
+struments with a lower pitch can be select in slot A, instruments with the highest pitches
+can be used in slot D.
+Selecting a Combi for slot C
+6.1.2 Section Preset Drop-Down Menu
+You can use this drop-down menu to select a horn section preset.
+► Open the Section Setup menu by clicking on the downward pointing arrow and select one
+of the available section presets. Your choice will be reflected by the instrument images
+on screen.
+6.1.3 Voicing Assistant Drop-Down Menu
+The Voicing Assistant lets you select one of five available voicing modes. Its drop-down menu
+is located top right in the Main window view. Using the options on this menu, you determine
+how the individual instruments are distributed among the keys you press on your keyboard.
+This has considerable impact on how your horns section sounds. These are the available Voic-
+ing modes:
+Session Horns Pro - Manual - 57
+SESSION HORNS PRO – Key Switch.nki
+Main Window View
+Polyphonic
+Each note you play triggers all instruments currently selected in Section Setup.
+Smart Voice Split
+The voices selected in Section Setup are realistically distributed among the keys you press.
+The order and number of available voices is always consistent and happens realistically from
+bottom to top, no matter in which order you press the keys. Voices can therefore jump between
+notes when you press additional notes or release notes.
+With a full section selected in Section Setup and playing a chord with four notes, the lowest
+controls the instrument(s) with the lowest pitch range (e.g. Bass Trombone or Tuba), the next
+higher one the controls the instrument(s) with the next higher pitch range etc. If you add a
+fifth note, the new one will replace one of the sounding notes. Which note this is depends on
+the newly pressed note's pitch. Note that Smart Voice Split features true polyphonic legato
+which lets you create naturally-sounding legato phrases.
+Tip: If you use a sustain pedal, you will always get a consistent section sound, no matter
+how many keys you press, as SESSION HORNS PRO provides dedicated legato transition
+samples for legato play.
+Legato
+Legato is an Italian word and means tied together. SESSION HORNS PRO provides dedicated le-
+gato transition samples for legato play. Use this mode to generate a monophonic legato melo-
+dy. To make it legato, overlay the currently sounding note with the next. Each note you play
+triggers all instruments currently selected in Section Setup.
+Chord + Legato
+Use this mode to simultaneously play chords and a monophonic legato melody. To generate a
+legato melody, you must overlay within an octave the currently sounding note with the next.
+Each note you play triggers all instruments currently selected in Section Setup. Example: If
+you play a chord triad with a full Section selected in Section Setup, each note in the chord is
+played by all instruments. This mode does not affect the selected Velocity Switch articulation.
+Session Horns Pro - Manual - 58
+SESSION HORNS PRO – Key Switch.nki
+Main Window View
+6.1.4 Smart Chord
+The Smart Chord function lets you play four-voice chords by pressing one or two keys on your
+external MIDI controller keyboard.
+► To activate the Smart Chord function, click the small round button next to the text Smart
+Chord.
+Now you can set up the Smart Chord function:
+► Open the Smart Chord setup dialog by clicking the small cog wheel icon. Then select a
+root note and chord map from the two drop-down menus to the left in the Smart Chord
+dialog.
+▪ The chords defined by root note and chord map will automatically be assigned to the
+(“white”) keys on your controller keyboard, starting with the C key.
+If you select “F” as root note and “major” as gender, pressing the C key on your keyboard will
+therefore create an F major chord.
+Now you can play the resulting chords by pressing the respective key on your external keyboard
+controller. If you don't additionally press a modifier key, the degrees of the selected scale are
+used. These already include chord inversions.
+By additionally pressing a modifier key—the "black" keys—you can further modify the resulting
+chords. These chord voicings have been created by a professional brass arranger.
+Additionally pressing this key... ...can have this result (depending on the nature of the chord used)
+C# (Warm) Mostly adds 7/9 notes to the chord.
+D# (Colour) Option notes 9/11/13 are added.
+F# (Crunch) Altered scale notes are used as option notes.
+G# (Cinematic) Uses open quartal harmony.
+Bb (Tension) Creates altered scale notes such as #9, b13, b9.
+In order to create more brass-like chords, the root note is not used as bass note. You can use a
+solo instrument (e.g. Tuba, Bass Trombone or other) to create the root note separately, if you
+wish.
+Session Horns Pro - Manual - 59
+SESSION HORNS PRO – Key Switch.nki
+Keyswitches View
+6.2 Keyswitches View
+Keyswitches view
+The KEYSWITCHES view contains nine drop-down menus, each with a button on its left side,
+and the HUMANIZE knob. Each button displays the name of the key in the C-1 octave of your
+keyboard that you must press to select the assigned articulation. These are described below.
+6.2.1 Key switch Drop-Down Menus
+The Key switch drop-down menus are used to pre-select different articulations for quick
+switching. Each menu drops down when you click its white downward pointing arrow. Here you
+can select the desired articulation. The menu contains the following articulation types:
+Articulation Explanation
+Non Vibrato All notes are held straight for as long as you press the corresponding keys.
+Vibrato All notes are held for as long as you press the corresponding keys. A vibrato starts after
+a short time.
+Marcato Long (Italian: marked) Accentuated note or chord with a sharp attack followed by the decay-
+ing sound.
+Marcato Medium Same as above, but shorter.
+Staccato Italian: separated.
+Staccato is an articulation technique characterized by an accented start of each pitch
+and a short, truncated end resulting in detached and briefly played notes.
+Staccatissimo Same as above, but extremely truncated.
+Session Horns Pro - Manual - 60
+SESSION HORNS PRO – Key Switch.nki
+Keyswitches View
+Articulation Explanation
+Rips A glide at the beginning of a sustained note. Woodwind and brass variation of a Glis-
+sando (Italian: glide).
+Grace A continuous change between the (very briefly-sounding) grace note and the longer
+lasting main note. Distance between the two notes: one whole tone.
+Grace Vibrato Same as above, but here the longer lasting main note has a vibrato.
+FoPiCre 2Beats Short for Forte-Piano-Crescendo (Italian: loud/quiet/growing). This articulation starts
+with a loud attack, gets quiet very quickly, then increases volume and finally ends
+abruptly. The dynamic process is based on a tempo of 120 bpm (beats per minute) and
+has a length of two beats.
+If you activate Time Stretching in the Control view, the dynamic process will be stretch-
+ed so that it always matches the tempo you have set in your host sequencer or in the
+KONTAKT Master Editor.
+FoPiCre 4Beats Same as above, but the dynamic process has a length of four beats.
+Growl Guttural, gritty timbre
+Growl Vibrato Same as above, but followed by a vibrato using the same technique.
+Brass Shake Sounds like a coarse trill. Note: For physical reasons, a saxophone can't create a shake.
+Sax Trill Semi Rapid alteration between two adjacent notes; in this case the notes are a semitone
+apart. For saxophone only.
+Sax Trill Whole Same as above, but here the two notes are a whole note apart.
+Empty You can select this item in drop-down menus that you don't use. This frees up memory
+space on your computer.
+► Open the desired drop-down menu and select one of the available items.
+6.2.2 Applying the Articulations
+Two methods are available to apply an articulation or to switch to another articulation.
+A key name button is visible to the left of each Key switch drop-down menu. These key name
+buttons refer to keys in the C-1 octave of your external controller keyboard.
+► To select the assigned articulation, press the respective key on your keyboard.
+Alternatively:
+Session Horns Pro - Manual - 61
+SESSION HORNS PRO – Key Switch.nki
+Keyswitches View
+► Click the key name button on the screen.
+The name of currently selected articulation is displayed below the Section Preset drop-down
+menu, top left in the SESSION HORNS PRO window.
+Selecting another articulation on-screen
+6.2.3 Humanize Knob
+This HUMANIZE knob is located in the lower right corner of the window. You can use it to con-
+trol the timing, tuning and velocity accuracy of the instruments in your horns section.
+► If you turn this knob down fully, all instruments in the horns section will have the exact
+same timing and velocity as well as perfect tuning.
+► The further you turn this knob up, the more timing, tuning and velocity offsets will be-
+come clearly audible between the individual instruments in the section, just like real horn
+players would sound.
+Session Horns Pro - Manual - 62
+SESSION HORNS PRO Solo.nki
+7 SESSION HORNS PRO Solo.nki
+For good reason, the Solo.nki files feature only one instrument at a time and are therefore just
+right for detailed composition and production work. Each available .nki file bears its instru-
+ment name.
+Same as the Performance and Key Switch.nki's, a Solo.nki has three main window views –
+Main, Sound, and Control. Main is described in detail in this chapter. For information about
+the Sound and Control window views, please refer to the respective sections in the Perform-
+ance.nki chapter. Note that the Solo instruments are strictly monophonic, just as real horns.
+Session Horns Pro - Manual - 63
+SESSION HORNS PRO Solo.nki
+Main Window View
+7.1 Main Window View
+Solo.nki Main Window view
+► Click the Main button at the bottom to bring up the Main window view.
+Using the functions in the Main window view you can:
+Session Horns Pro - Manual - 64
+SESSION HORNS PRO Solo.nki
+Keyswitches View
+▪ Select up to nine from sixteen available articulation types and thereby automatically as-
+sign them to buttons on the screen and keys in the C-1 octave of your external keyboard.
+Once you have done this, you can quickly change between the articulations by clicking a
+button or pressing a key on your keyboard.
+7.2 Keyswitches View
+The KEYSWITCHES view contains nine drop-down menus, each with a button on its left side,
+and the HUMANIZE knob. Each button displays the name of the key in the C-1 octave of your
+keyboard that you must press to select the assigned articulation. These are described below.
+Keyswitches view
+7.2.1 Key switch Drop-Down Menus
+The Key switch drop-down menus are used to select different articulations for quick switching.
+Each menu drops down when you click the white downward pointing arrow. Here you can se-
+lect the desired articulation. The menu contains the following articulation types:
+Articulation Explanation
+Non Vibrato Notes are held straight for as long as you press the key. True legato transitions are used
+for legato play.
+Vibrato Notes are held for as long as you press the key. A vibrato starts after a short time. True
+legato transitions are used for legato play.
+Marcato Long (Italian: marked) Accentuated note or chord with a sharp attack followed by the decay-
+ing sound.
+Marcato Medium Same as above, but shorter.
+Session Horns Pro - Manual - 65
+SESSION HORNS PRO Solo.nki
+Keyswitches View
+Articulation Explanation
+Staccato Italian: separated.
+Staccato is an articulation technique characterized by an accented start of each pitch
+and a short, truncated end resulting in detached and briefly played notes.
+Staccatissimo Same as above, but extremely truncated.
+Rips A glide at the beginning of a sustained note. Woodwind and brass variation of a Glis-
+sando (Italian: glide).
+Grace A continuous change between the (very briefly-sounding) grace note and the longer
+lasting main note. Distance between the two notes: one whole tone.
+Grace Vibrato Same as above, but here the longer lasting main note has a vibrato.
+FoPiCre 2Beats Short for Forte-Piano-Crescendo (Italian: loud/quiet/growing). This articulation starts
+with a loud attack, gets quiet very quickly, then increases volume and finally ends
+abruptly. The dynamic process is based on a tempo of 120 bpm (beats per minute) and
+has a length of two beats.
+If you activate Time Stretching in the Control view, the dynamic process will be stretch-
+ed so that it always matches the tempo you have set in your host sequencer or in the
+KONTAKT Master Editor.
+FoPiCre 4Beats Same as above, but the dynamic process has a length of four beats.
+Growl Guttural, gritty timbre
+Growl Vibrato Same as above, but followed by a vibrato using the same technique..
+Brass Shake Sounds like a coarse trill. Note: For physical reasons, a saxophone can't create a shake.
+Sax Trill Semi Rapid alteration between two adjacent notes; in this case the notes are a semitone
+apart. For saxophone only.
+Sax Trill Whole Same as above, but here the two notes are a whole note apart.
+Empty You can select this item in drop-down menus that you don't use.
+► Open the desired drop-down menu and select one of the available items.
+7.2.2 Applying the Articulations
+Two methods are available to apply an articulation or to switch to another articulation.
+Session Horns Pro - Manual - 66
+SESSION HORNS PRO Solo.nki
+Keyswitches View
+A key name button is visible to the left of each Key switch drop-down menu. These key name
+buttons refer to keys in the C-1 octave of your external controller keyboard.
+► To select the assigned articulation, press the respective key on your keyboard.
+Alternatively:
+► Click the key name button on the screen.
+The name of currently selected articulation is displayed below the Section Preset drop-down
+menu, top left in the SESSION HORNS PRO window.
+7.2.3 Humanize Knob
+The HUMANIZE knob is located in the lower right corner of the window. You can use it to con-
+trol the timing, tuning and velocity accuracy of the solo instrument.
+► If you turn this knob down fully, the instrument will have the exact timing and velocity as
+well as perfect tuning.
+► The further you turn this knob up, the more timing, tuning and velocity offsets will be-
+come audible.
+Session Horns Pro - Manual - 67
+Credits
+8 Credits
+Produced, engineered and mixed by Thomas Koritke
+Concept: Thomas Koritke, Sebastian Bretschneider, Frank Elting
+Sound Design / Sample Editing: Sascha Haske, Holger Brauns, Lars Dahlke
+Script Programming / Product Development: Sebastian Bretschneider, Martin von Frantzius, Mar-
+tin Keil
+GUI Design: Max Mondon, Simon Martin
+Animator: Paul Lawley, Sebastian Bretschneider, Martin von Frantzius, Lars Dahlke
+Impulse Responses: Native Instruments, e-instruments, Studiotools
+Musicians: Jonas Schoen-Philbert, Michael Leuschner, Jan-Peter Klöpfel, Sebastian Hoffman,
+Claas Ueberschär, Markus Hötzel
+Manual: musicandtext.com Dimitrov Popow
+Native Instruments QA: Bymski
+Special thanks to: Jürgen Klever, Gerhard Groth, Johannes Waehneldt, Thanos Kazakos, Tobias
+Menguser, Robert Linke, Alexander Stamm, Philipp Dransfeld, Nadine Raihani, Gustav
+Sto. Tomas, Christian Wachsmuth, and all the fantastic musicians for their patience and devo-
+tion.
+Session Horns Pro - Manual - 68

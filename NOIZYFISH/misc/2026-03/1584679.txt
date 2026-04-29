@@ -1,0 +1,1345 @@
+autofix
+nocaching
+forcedrumkit 2
+
+products {
+	"DREAM POP EZX"
+}
+
+padconfigs {
+	EZX2	padconf
+}
+
+sticks {
+	Drumsticks	DS
+}
+
+kicktools {
+	Felt		FK
+}
+
+positions {
+	Kick 01 {
+		description "Kick"
+		close	Kick
+
+		Kick3		KD03	"Albino Kick"
+		Kick18		KD18	"Anchorwood Kick"
+		Kick21		KD21	"Bashing Kick"
+		KickLoop5	KD55	"Bitcrush Kick"
+		KickLoop7	KD57	"Blige Kick"
+		KickLoop3	KD53	"Body Kick"
+		Kick4		KD04	"Deep Kick"
+		Kick1		KD01	"Dirt Kick"
+		Kick13		KD13	"Dream-Hop Kick"
+		KickLoop2	KD52	"Garage Kick 1"
+		KickLoop4	KD54	"Garage Kick 2"
+		Kick10		KD10	"Gretsch Muted Kick"
+		Kick11		KD11	"Gretsch Open Kick"
+		Kick9		KD09	"Gretsch Regular Kick"
+		KickLoop1	KD51	"Happy Kick"
+		Kick5		KD05	"Hard Kick"
+		Kick12		KD12	"Hybrid Kick"
+		Kick2		KD02	"Jessie Kick"
+		Kick6		KD06	"Keys Kick"
+		KickLoop6	KD56	"Rim Kick"
+		Kick17		KD17	"Sauna Kick"
+		Kick14		KD14	"Scrapyard Kick"
+		Kick16		KD16	"Softmoss Kick"
+		Kick8		KD08	"Softpants Kick"
+		Kick19		KD19	"Stomp Kick"
+		KickMorg1	KD93	"The Morg Kick"
+		Kick15		KD15	"Twig Kick"
+		Kick20		PR01	"White Kick"
+		Kick7		KD07	"Yezus Kick"
+		ModularKD1	KD28	"Modular Kick 1"
+		ModularKD2	KD29	"Modular Kick 2"
+		ModularKD3	KD30	"Modular Kick 3"
+		ModularKD4	KD31	"Modular Kick 4"
+		ModularKD5	KD32	"Modular Kick 5"
+		ModularKD6	KD33	"Modular Kick 6"
+		ModularKD7	KD34	"Modular Kick 7"
+		ModularKD8	KD35	"Modular Kick 8"
+		ModularKD9	KD36	"Modular Kick 9"
+		ModularKD10	KD37	"Modular Kick 10"
+		ModularKD11	KD38	"Modular Kick 11"
+
+		pads {
+			Kick	FH_R	"Hit"		
+		}
+	}
+
+	Snare 01 {
+		description "Snare"
+		close	Snare
+
+		Snare3		SD03	"Albino Snare"
+		Snare45		SD45	"Alpha Snare"
+		Snare18		SD18	"Anchorwood Snare"
+		SnareLoop5	SD55	"Bitcrush Snare"
+		SnareLoop7	SD57	"Blige Snare"
+		SnareLoop3	SD53	"Body Snare"
+		Snare4		SD04	"Deep Snare"
+		Snare1		SD01	"Dirt Snare"
+		Snare13		SD13	"Dream-Hop Snare"
+		Snare66		SD66	"Fullmoon Snare"
+		SnareLoop2	SD52	"Garage Snare 1"
+		SnareLoop4	SD54	"Garage Snare 2"
+		Snare10		SD10	"Gretsch Muted Snare"
+		Snare11		SD11	"Gretsch Open Snare"
+		Snare9		SD09	"Gretsch Regular Snare"
+		SnareFelt1	SD95	"Gretsch Felt Snare 1"
+		SnareFelt2	SD96	"Gretsch Felt Snare 2"
+		SnareLoop1	SD51	"Happy Snare"
+		Snare5		SD05	"Hard Snare"
+		Snare12		SD12	"Hybrid Snare"
+		Snare2		SD02	"Jessie Snare"
+		Snare6		SD06	"Keys Snare"
+		Snare65		SD65	"Louie Snare"
+		SnareLoop8	SD58	"Neat Snare"
+		SnareLoop6	SD56	"Rim Snare"
+		Snare17		SD17	"Sauna Snare"
+		Snare14		SD14	"Scrapyard Snare"
+		Snare16		SD16	"Softmoss Snare"
+		Snare8		SD08	"Softpants Snare"
+		Snare19		SD19	"Stomp Snare"
+		SnareMorg1	SD93	"The Morg Snare 1"
+		SnareMorg2	SD94	"The Morg Snare 2"
+		Snare49		SD49	"Tight Snare"
+		Snare15		SD15	"Twig Snare"
+		Snare20		SD33	"White Snare"
+		Snare7		SD07	"Yezus Snare"
+
+		pads {
+			Snare	FH_R	"Center"		
+		}
+	}
+
+	ClosedHats 01 {
+		description "Closed Hats"
+		close	ClosedHats
+
+		ClosedHatLoop1	HH51	"Breakbeat Closed 1"
+		ClosedHatLoop2	HH53	"Breakbeat Closed 2"
+		ClosedHatLoop3	HH54	"Breakbeat Closed 3"
+		ClosedHatLoop4	HH55	"Breakbeat Closed 4"
+		ClosedHatLoop5	HH56	"Breakbeat Closed 5"
+		ClosedHatLoop6	HH57	"Breakbeat Closed 6"
+		ClosedHatLoop7	HH58	"Breakbeat Closed 7"
+		HH11			HH11	"909 Closed"
+		HH12			HH12	"Atlantis Closed"
+		ClosedHats3		HH04	"BMW Closed"
+		ClosedHatFelt	HH95	"Mattias Closed"
+		ClosedHats1		HH03	"Modular Closed"
+		ClosedHats2		PR19	"Light Closed"
+		HH10			HH10	"White Closed"
+		ClosedHatsMorg	HH94	"The Morg Closed"
+
+		pads {
+			closedhats	FH_R	"Closed"		
+		}
+	}
+
+	OpenHats 01 {
+		description "Open Hats"
+		close	OpenHats
+
+		OpenHatLoop1	OH51	"Breakbeat Open 1"
+		OpenHatLoop2	OH52	"Breakbeat Open 2"
+		OpenHatLoop3	OH55	"Breakbeat Open 3"
+		OpenHatLoop4	OH57	"Breakbeat Open 4"
+		OH11			OH11	"909 Open"
+		OH12			OH12	"Atlantis Open"
+		OpenHat1		OH04	"BMW Open"
+		OpenHatFelt		OH95	"Mattias Open"
+
+		pads {
+			openhats	FH_R	"Open"		
+		}
+	}
+
+	Tom1 01 {
+		description "Tom 1"
+		close	Tom1
+
+		Tom1_1		TO06	"Electro Tom 1"
+		Tom4_1		PR21	"Hybrid Tom 1"
+		Tom2_1		TO14	"Modular Tom 1"
+		Tom03_1 	TO03	"Reggae Tom 1"
+		80tom1_1	TO80	"80s Tom 1"
+		Tom1Loop	TO57	"Box Tom 1"
+		Tom5_1		TO91	"Gretsch Damped Tom 1"
+		Tom3_1		TO90	"Gretsch Open Tom 1"
+		Tom95 		TO95	"Gretsch Felt Tom 1"
+
+		pads {
+			tom1	FH_R	"Hit"		
+		}
+	}
+
+	Tom2 02 {
+		description "Tom 2"
+		close	Tom2
+
+		Tom1_2		TO06	"Electro Tom 2"
+		Tom3_2		PR21	"Hybrid Tom 2"
+		Tom2_2		TO14	"Modular Tom 2"
+		Tom03_2 	TO03	"Reggae Tom 2"
+		80tom1_2	TO80	"80s Tom 2"
+		Tom2Loop	TO57	"Box Tom 2"
+
+		pads {
+			tom2	FH_R	"Hit"		
+		}
+	}
+
+	Tom3 03 {
+		description "Tom 3"
+		close	Tom3
+
+		Tom1_3		TO06	"Electro Tom 3"
+		Tom3_3		PR21	"Hybrid Tom 3"
+		Tom2_3		TO14	"Modular Tom 3"
+		Tom03_3 	TO03	"Reggae Tom 3"
+		80tom1_3	TO80	"80s Tom 3"
+		Tom3Loop	TO57	"Box Tom 3"
+		Tom5_3		TO91	"Gretsch Damped Tom 3"
+		Tom4_3		TO90	"Gretsch Open Tom 3"
+		Tom95_2 	TO95	"Gretsch Felt Tom 3"
+
+		pads {
+			tom3	FH_R	"Hit"		
+		}
+	}
+
+	Tom4 04 {
+		description "Tom 4"
+		close	Tom4
+
+		Tom1_4		TO06	"Electro Tom 4"
+		Tom3_4		PR21	"Hybrid Tom 4"
+		Tom2_4		TO14	"Modular Tom 4"
+		Tom03_4 	TO03	"Reggae Tom 4"
+		80tom1_4	TO80	"80s Tom 4"
+
+		pads {
+			tom4	FH_R	"Hit"		
+		}
+	}
+
+	Ride 01 {
+		description "Ride"
+		close	Ride
+
+		Ride		CR01	"Mattias Ride"
+
+		pads {
+			rideTP	TP_R	"Bow Tip"
+			ride	RD_R	"Bow Shank"
+		}
+	}
+
+	Crash1 01 {
+		description "Cymbal 1"
+		close	Crash1
+
+		Crash1		CR01	"Mattias Crash 1"
+		Crash1-1	CM01	"White Crash 1"
+		FoleyCrash1	PR47	"Twig Crash"
+		CrashLoop1	CR51	"Breakbeat Crash"
+
+		pads {
+			crash1	FH_R	"Crash"	
+		}
+	}
+
+	Crash2 01 {
+		description "Cymbal 2"
+		close	Crash2
+
+		Crash2		CR02	"Mattias Crash 2"
+		Crash4		FX02	"White Crash 2"
+		CrashFoley1	PR49	"Branch Crash"
+ 		Crash3		CR03	"Mallet Crash"
+
+		pads {
+			crash2	FH_R	"Crash"	
+		}
+	}
+
+	MalletCrash 01 {
+		description "Cymbal 3"
+		close	Crash2
+		
+		Crash3		CR03	"Mallet Crash Wash"
+
+		pads {
+			malletcrash	FH_R "Crash"	
+		}
+	}
+
+	Crescendos 01 {
+		description "Crescendos"
+		close	Crescendos
+
+		Cresc		CR01	"Mattias Crescendo 1"
+		Cresc2		CR02	"Mattias Crescendo 2"
+		Cresc3		CR10	"Modular Crescendo 1"
+		Cresc4		CR11	"Modular Crescendo 2"
+		Cresc5		CR12	"Modular Crescendo 3"
+		Cresc6		CR13	"Modular Crescendo 4"
+
+		pads {
+			crescendo	CS_C "Crescendo"
+		}
+	}
+
+	Metal 01 {
+		description "Tambourine"
+		close	Metal
+
+		Metal1		TM01	"Table Tambourine"
+
+		pads {
+			metal	FH_R	"Hit"
+		}
+	}
+
+	Shake 01 {
+		description "Shaker"
+		close	Shake
+
+		Shake8		PR52	"Basmati Shake"
+		Shake4		PR44	"Clip Shake"
+		Shake3		PR31	"Grain Shake"
+		Shake2		SH02	"Grass Shake"
+		Shake6		PR46	"Gravel Shake"
+		Shake1		SH01	"Ice Shake 1"
+		Shake9		PR54	"Ice Shake 2"
+		Shake5		PR45	"Kenya Shake"
+		Shake7		PR50	"Snake Shake"
+		Shake10		PR69	"Twig Shake"
+
+		pads {
+			shake	FH_R	Shake
+		}
+	}
+
+	Claps 01 {
+		description "Claps"
+		close	Claps
+
+		Claps9		CL07	"Bread Clap"
+		Claps4		CL04	"Crowd Clap"
+		Claps5		CL05	"Flam Clap"
+		Claps10		PR53	"Ice Clap"
+		Claps2		CL02	"Slap Clap"
+		Claps8		PR30	"Stomp Clap"
+		Claps6		CL06	"Stone Clap"
+		Claps1		CL01	"Stright Clap"
+		Claps7		PR28	"Twig Clap"
+		Claps11		PR66	"Wharf Clap"
+		Claps3		CL03	"Wood Clap"
+
+		pads {
+			claps	FH_R	"Hit"
+		}
+	}
+
+	Snaps 01 {
+		description "Snaps"
+		close	Snaps
+
+		Snap4		SN04	"Button Snap"
+		Snap5		SN05	"Cap Snap"
+		Snap8		PR02	"Clarke Snap"
+		Snap1		SN01	"Clean Snap"
+		Snap2		SN02	"Dirt Snap"
+		Snap3		SN03	"Gloss Snap"
+		Snap6		SN06	"Pick Snap"
+		Snap9		SN08	"Plastic Snap"
+		Snap7		SN07	"Wine Snap"
+
+		pads {
+			snaps	FH_R	"Hit"	
+		}
+	}
+
+	Rim 01 {
+		description "Trig"
+		close	Rim
+
+		Rim1		RM01	"Cardboard"
+		Rim3		RM04	"Clave"
+		Rim9		PR11	"Pipe"
+		Rim4		RM05	"Plank"
+		Rim2		RM02	"Spike"
+		Rim5		FX07	"Spring"
+		Rim6		TO04	"Tube"
+		Rim7		RM06	"Woodpecker 1"
+		Rim8		PR05	"Woodpecker 2"
+
+		pads {
+			rim		FH_R "Hit"		
+		}
+	}
+
+	Perc1 01 {
+		description "Perc 1"
+		close	Perc
+
+		Perc25		PR63	"Anchor Perc 1"
+		Perc26		PR64	"Anchor Perc 2"
+		Perc22		PR60	"Bridge Perc 1"
+		Perc23		PR61	"Bridge Perc 2"
+		Perc24		PR62	"Bridge Perc 3"
+		Perc27		PR65	"Caps Perc"
+		Perc11		PR18	"Drop Perc"	
+		Perc19		PR40	"Dull Perc"
+		Perc20		PR51	"Fir Perc"
+		Perc12		PR32	"Gravel Perc 1"
+		Perc13		PR33	"Gravel Perc 2"
+		Perc28		PR68	"Hull Perc"
+		Perc3		PR08	"Nut Perc"
+		Perc2		PR07	"Oar Perc"
+		Perc4		PR09	"Pipe Perc"
+		Perc1		TO02	"Plop Perc"
+		Perc15		PR35	"Rod Perc"
+		Perc6		PR13	"Sauna Perc 1"	
+		Perc7		PR14	"Sauna Perc 2"		
+		Perc8		PR15	"Sauna Perc 3"		
+		Perc9		PR16	"Sauna Perc 4"	
+		Perc10		PR17	"Sauna Perc 5"	
+		Perc14		PR34	"Skidoo Seat Perc"
+		Perc16		PR36	"Table Perc 1"
+		Perc17		PR37	"Table Perc 2"
+		Perc18		PR38	"Table Perc 3"
+		Perc5		PR10	"Tube Perc"
+		Perc21		PR56	"Twig Perc"
+
+		pads {
+			perc1	FH_R	"Hit"	
+		}
+	}
+
+	Perc2 01 {
+		description "Perc 2"
+		close	Perc
+
+		Perc25		PR63	"Anchor Perc 1"
+		Perc26		PR64	"Anchor Perc 2"
+		Perc22		PR60	"Bridge Perc 1"
+		Perc23		PR61	"Bridge Perc 2"
+		Perc24		PR62	"Bridge Perc 3"
+		Perc27		PR65	"Caps Perc"
+		Perc11		PR18	"Drop Perc"	
+		Perc19		PR40	"Dull Perc"
+		Perc20		PR51	"Fir Perc"
+		Perc12		PR32	"Gravel Perc 1"
+		Perc13		PR33	"Gravel Perc 2"
+		Perc28		PR68	"Hull Perc"
+		Perc3		PR08	"Nut Perc"
+		Perc2		PR07	"Oar Perc"
+		Perc4		PR09	"Pipe Perc"
+		Perc1		TO02	"Plop Perc"
+		Perc15		PR35	"Rod Perc"
+		Perc6		PR13	"Sauna Perc 1"	
+		Perc7		PR14	"Sauna Perc 2"		
+		Perc8		PR15	"Sauna Perc 3"		
+		Perc9		PR16	"Sauna Perc 4"	
+		Perc10		PR17	"Sauna Perc 5"	
+		Perc14		PR34	"Skidoo Seat Perc"
+		Perc16		PR36	"Table Perc 1"
+		Perc17		PR37	"Table Perc 2"
+		Perc18		PR38	"Table Perc 3"
+		Perc5		PR10	"Tube Perc"
+		Perc21		PR56	"Twig Perc"
+
+		pads {
+			perc2	FH_R	"Hit"	
+		}
+	}
+
+	Perc3 01 {
+		description "Perc 3"
+		close	Perc
+
+		Perc25		PR63	"Anchor Perc 1"
+		Perc26		PR64	"Anchor Perc 2"
+		Perc22		PR60	"Bridge Perc 1"
+		Perc23		PR61	"Bridge Perc 2"
+		Perc24		PR62	"Bridge Perc 3"
+		Perc27		PR65	"Caps Perc"
+		Perc11		PR18	"Drop Perc"	
+		Perc19		PR40	"Dull Perc"
+		Perc20		PR51	"Fir Perc"
+		Perc12		PR32	"Gravel Perc 1"
+		Perc13		PR33	"Gravel Perc 2"
+		Perc28		PR68	"Hull Perc"
+		Perc3		PR08	"Nut Perc"
+		Perc2		PR07	"Oar Perc"
+		Perc4		PR09	"Pipe Perc"
+		Perc1		TO02	"Plop Perc"
+		Perc15		PR35	"Rod Perc"
+		Perc6		PR13	"Sauna Perc 1"	
+		Perc7		PR14	"Sauna Perc 2"		
+		Perc8		PR15	"Sauna Perc 3"		
+		Perc9		PR16	"Sauna Perc 4"	
+		Perc10		PR17	"Sauna Perc 5"	
+		Perc14		PR34	"Skidoo Seat Perc"
+		Perc16		PR36	"Table Perc 1"
+		Perc17		PR37	"Table Perc 2"
+		Perc18		PR38	"Table Perc 3"
+		Perc5		PR10	"Tube Perc"
+		Perc21		PR56	"Twig Perc"
+
+		pads {
+			perc3	FH_R	"Hit"	
+		}
+	}
+
+	Perc4 01 {
+		description "Perc 4"
+		close	Perc
+
+		Perc25		PR63	"Anchor Perc 1"
+		Perc26		PR64	"Anchor Perc 2"
+		Perc22		PR60	"Bridge Perc 1"
+		Perc23		PR61	"Bridge Perc 2"
+		Perc24		PR62	"Bridge Perc 3"
+		Perc27		PR65	"Caps Perc"
+		Perc11		PR18	"Drop Perc"	
+		Perc19		PR40	"Dull Perc"
+		Perc20		PR51	"Fir Perc"
+		Perc12		PR32	"Gravel Perc 1"
+		Perc13		PR33	"Gravel Perc 2"
+		Perc28		PR68	"Hull Perc"
+		Perc3		PR08	"Nut Perc"
+		Perc2		PR07	"Oar Perc"
+		Perc4		PR09	"Pipe Perc"
+		Perc1		TO02	"Plop Perc"
+		Perc15		PR35	"Rod Perc"
+		Perc6		PR13	"Sauna Perc 1"	
+		Perc7		PR14	"Sauna Perc 2"		
+		Perc8		PR15	"Sauna Perc 3"		
+		Perc9		PR16	"Sauna Perc 4"	
+		Perc10		PR17	"Sauna Perc 5"	
+		Perc14		PR34	"Skidoo Seat Perc"
+		Perc16		PR36	"Table Perc 1"
+		Perc17		PR37	"Table Perc 2"
+		Perc18		PR38	"Table Perc 3"
+		Perc5		PR10	"Tube Perc"
+		Perc21		PR56	"Twig Perc"
+
+		pads {
+			perc4	FH_R	"Hit"		
+		}
+	}
+
+	FilterLoop1 01 {
+		description "Filter 1"
+		close	FilterLoop1
+
+		Filterloop1-1	FX36	"Velocity Filter 1"
+		Filterloop1-2	FX37	"Velocity Filter 2"
+		Filterloop1-3	FX38	"Velocity Filter 3"
+		Filterloop1-4	FX39	"Velocity Filter 4"
+		Filterloop1-5	FX40	"Velocity Filter 5"
+		Filterloop1-6	FX41	"Velocity Filter 6"
+		Filterloop1-7	FX42	"Velocity Filter 7"
+		Filterloop1-8	FX43	"Velocity Filter 8"
+		Filterloop1-9	RM13	"Velocity Filter 9"
+		Filterloop1-10	FX44	"Velocity Filter 10"
+		Filterloop1-11	FL10	"Velocity Filter 11"
+		Filterloop1-12	FL11	"Velocity Filter 12"
+		Filterloop1-13	FL12	"Velocity Filter 13"
+
+		pads {
+			filter1		FH_R	"Hit"	
+		}
+	}
+
+	FilterLoop2 02 {
+		description "Filter 2"
+		close	FilterLoop2
+
+		Filterloop2-1	FX36	"Velocity Filter 1"
+		Filterloop2-2	FX37	"Velocity Filter 2"
+		Filterloop2-3	FX38	"Velocity Filter 3"
+		Filterloop2-4	FX39	"Velocity Filter 4"
+		Filterloop2-5	FX40	"Velocity Filter 5"
+		Filterloop2-6	FX41	"Velocity Filter 6"
+		Filterloop2-7	FX42	"Velocity Filter 7"
+		Filterloop2-8	FX43	"Velocity Filter 8"
+		Filterloop2-9	RM13	"Velocity Filter 9"
+		Filterloop2-10	FX44	"Velocity Filter 10"
+		Filterloop2-11	FL10	"Velocity Filter 11"
+		Filterloop2-12	FL11	"Velocity Filter 12"
+		Filterloop2-13	FL12	"Velocity Filter 13"
+
+		pads {
+			filter2		FH_R	"Hit"	
+		}
+	}
+
+	FX1 01 {
+		description "FX 1"
+		close	FX
+
+		FX1-4			FX09	"Big Drop FX"
+		FX1-11			FX16	"Broken Radio FX 1"
+		FX1-12			FX17	"Broken Radio FX 2"
+		FX1-13			FX18	"Broken Radio FX 3"
+		FX1-14			FX23	"Church Bell FX"
+		FX1-15			TO01	"Church Tom FX"
+		FX1-9			FX14	"Deep Noise FX"
+		FX1-10			FX15	"Deep Noise Short FX"
+		FX1-2			FX06	"Dragon Breath FX"
+		FX1-8			FX13	"Dragon Fart FX"
+		FX1-7			FX12	"Dragon Sneak FX"
+		FX1-3			FX08	"Dragon Step FX 1"
+		FX1-6			FX11	"Dragon Step FX 2"
+		FX1-1			FX04	"Dragon Whiff FX"
+		FX1-16			PR04	"Ice FX 1"
+		FX1-17			PR55	"Ice FX 2"
+		FX1-18			PR59	"Ice FX 3"
+		FX1-5			FX10	"Stretch Drop FX"
+
+		pads {
+			FX1			FH_R	"FX"
+		}
+	}
+
+	FX2 01 {
+		description "FX 2"
+		close	FX
+
+		FX2-4			FX09	"Big Drop FX"
+		FX2-11			FX16	"Broken Radio FX 1"
+		FX2-12			FX17	"Broken Radio FX 2"
+		FX2-13			FX18	"Broken Radio FX 3"
+		FX2-14			FX23	"Church Bell FX"
+		FX2-15			TO01	"Church Tom FX"
+		FX2-9			FX14	"Deep Noise FX"
+		FX2-10			FX15	"Deep Noise Short FX"
+		FX2-2			FX06	"Dragon Breath FX"
+		FX2-8			FX13	"Dragon Fart FX"
+		FX2-7			FX12	"Dragon Sneak FX"
+		FX2-3			FX08	"Dragon Step FX 1"
+		FX2-6			FX11	"Dragon Step FX 2"
+		FX2-1			FX04	"Dragon Whiff FX"
+		FX2-16			PR04	"Ice FX 1"
+		FX2-17			PR55	"Ice FX 2"
+		FX2-18			PR59	"Ice FX 3"
+		FX2-5			FX10	"Stretch Drop FX"
+
+		pads {
+			FX2			FH_R	"FX"
+		}
+	}
+
+	FX3 01 {
+		description "FX 3"
+		close	FX
+
+		FX3-4			FX09	"Big Drop FX"
+		FX3-11			FX16	"Broken Radio FX 1"
+		FX3-12			FX17	"Broken Radio FX 2"
+		FX3-13			FX18	"Broken Radio FX 3"
+		FX3-14			FX23	"Church Bell FX"
+		FX3-15			TO01	"Church Tom FX"
+		FX3-9			FX14	"Deep Noise FX"
+		FX3-10			FX15	"Deep Noise Short FX"
+		FX3-2			FX06	"Dragon Breath FX"
+		FX3-8			FX13	"Dragon Fart FX"
+		FX3-7			FX12	"Dragon Sneak FX"
+		FX3-3			FX08	"Dragon Step FX 1"
+		FX3-6			FX11	"Dragon Step FX 2"
+		FX3-1			FX04	"Dragon Whiff FX"
+		FX3-16			PR04	"Ice FX 1"
+		FX3-17			PR55	"Ice FX 2"
+		FX3-18			PR59	"Ice FX 3"
+		FX3-5			FX10	"Stretch Drop FX"
+
+		pads {
+			FX3			FH_R	"FX"
+		}
+	}
+
+	FX4 01 {
+		description "FX 4"
+		close	FX
+
+		FX4-4			FX09	"Big Drop FX"
+		FX4-11			FX16	"Broken Radio FX 1"
+		FX4-12			FX17	"Broken Radio FX 2"
+		FX4-13			FX18	"Broken Radio FX 3"
+		FX4-14			FX23	"Church Bell FX"
+		FX4-15			TO01	"Church Tom FX"
+		FX4-9			FX14	"Deep Noise FX"
+		FX4-10			FX15	"Deep Noise Short FX"
+		FX4-2			FX06	"Dragon Breath FX"
+		FX4-8			FX13	"Dragon Fart FX"
+		FX4-7			FX12	"Dragon Sneak FX"
+		FX4-3			FX08	"Dragon Step FX 1"
+		FX4-6			FX11	"Dragon Step FX 2"
+		FX4-1			FX04	"Dragon Whiff FX"
+		FX4-16			PR04	"Ice FX 1"
+		FX4-17			PR55	"Ice FX 2"
+		FX4-18			PR59	"Ice FX 3"
+		FX4-5			FX10	"Stretch Drop FX"
+
+		pads {
+			FX4			FH_R	"FX"
+		}
+	}
+
+	Chromatic 01 {
+
+		description "FX Chromatic"
+		close	Chromatic
+
+		chromatic9	NO09	"Chromatic Kick"
+		chromatic8	NO08	"Boomhackers"
+		chromatic3	NO03	"Clean Pad"
+		chromatic4	NO04	"Detune Pad"
+		chromatic5	NO05	"Dreamy Pad"
+		chromatic6	NO06	"Drop Pad"
+		chromatic1	NO01	"Mute Guitar"
+		chromatic7	NO07	"Sigur Pad"
+
+		pads {
+			C84			84_R	"C Low"
+			Cup85		85_R	"C# Low"
+			D86			86_R	"D Low"
+			Dup87		87_R	"D# Low"
+			E88			88_R	E
+			F89			89_R	F
+			Fup90		90_R	F#
+			G91			91_R	G
+			Gup92		92_R	G#
+			A93			93_R	A
+			Aup94		94_R	A#
+			B95			95_R	B
+			C96			96_R	"C Hi"
+			Cup97		97_R	"C# Hi"
+			D98			98_R	"D Hi"
+			Dup99		99_R	"D# Hi"
+			kickMute	none	"Mute"
+		}
+	}
+}
+
+drumsets {
+
+"Empty Kit" {
+}
+
+"Default Kit" {
+"Kick" "Kick3"
+"Snare" "Snare3"
+"Rim" "Rim1"
+"Perc1" "Perc3"
+"Perc2" "Perc4"
+"Perc3" "Perc1"
+"Perc4" "Perc14"
+"Tom1" "Tom1_1"
+"Tom2" "Tom1_2"
+"Tom3" "Tom1_3"
+"Tom4" "Tom1_4"
+"ClosedHats" "HH10"
+"OpenHats" "OH11"
+"Claps" "Claps2"
+"Snaps" "Snap9"
+"FilterLoop1" "Filterloop1-9"
+"FilterLoop2" "Filterloop2-9"
+"Crash1" "Crash1-1"
+"Crash2" "Crash4"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-8"
+"FX2" "FX2-11"
+"FX3" "FX3-12"
+"FX4" "FX4-13"
+"Metal" "Metal1"
+"Shake" "Shake7"
+"Crescendos" "Cresc3"
+"Chromatic" "chromatic9"
+}
+
+"Albino" {
+"Kick" "Kick3"
+"Snare" "Snare3"
+"Rim" "Rim1"
+"Perc1" "Perc3"
+"Perc2" "Perc4"
+"Perc3" "Perc1"
+"Perc4" "Perc14"
+"Tom1" "Tom1_1"
+"Tom2" "Tom1_2"
+"Tom3" "Tom1_3"
+"Tom4" "Tom1_4"
+"ClosedHats" "HH10"
+"OpenHats" "OH11"
+"Claps" "Claps2"
+"Snaps" "Snap9"
+"FilterLoop1" "Filterloop1-9"
+"FilterLoop2" "Filterloop2-9"
+"Crash1" "Crash1-1"
+"Crash2" "Crash4"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-8"
+"FX2" "FX2-11"
+"FX3" "FX3-12"
+"FX4" "FX4-13"
+"Metal" "Metal1"
+"Shake" "Shake7"
+"Crescendos" "Cresc3"
+"Chromatic" "chromatic9"
+}
+
+"Anchorwood" {
+"Kick" "Kick18"
+"Snare" "Snare18"
+"Rim" "Rim9"
+"Perc1" "Perc15"
+"Perc2" "Perc16"
+"Perc3" "Perc17"
+"Perc4" "Perc26"
+"Tom1" "Tom1Loop"
+"Tom2" "Tom2Loop"
+"Tom3" "Tom3Loop"
+"Tom4" "80tom1_4"
+"ClosedHats" "ClosedHatLoop2"
+"OpenHats" "OpenHatLoop1"
+"Claps" "Claps8"
+"Snaps" "Snap4"
+"FilterLoop1" "Filterloop1-8"
+"FilterLoop2" "Filterloop2-4"
+"Crash1" "CrashLoop1"
+"Crash2" "CrashFoley1"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-16"
+"FX2" "FX2-17"
+"FX3" "FX3-18"
+"FX4" "FX4-3"
+"Metal" "Metal1"
+"Shake" "Shake6"
+"Crescendos" "Cresc3"
+"Chromatic" "chromatic9"
+}
+
+"Deep" {
+"Kick" "Kick4"
+"Snare" "Snare4"
+"Rim" "Rim6"
+"Perc1" "Perc22"
+"Perc2" "Perc23"
+"Perc3" "Perc24"
+"Perc4" "Perc25"
+"Tom1" "Tom95"
+"Tom2" ""
+"Tom3" "Tom95_2"
+"Tom4" ""
+"ClosedHats" "HH12"
+"OpenHats" "OH12"
+"Claps" "Claps5"
+"Snaps" "Snap7"
+"FilterLoop1" "Filterloop1-10"
+"FilterLoop2" "Filterloop2-8"
+"Crash1" "FoleyCrash1"
+"Crash2" "CrashFoley1"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-14"
+"FX2" "FX2-1"
+"FX3" "FX3-2"
+"FX4" "FX4-4"
+"Metal" "Metal1"
+"Shake" "Shake3"
+"Crescendos" "Cresc5"
+"Chromatic" "chromatic8"
+}
+
+"Dirt" {
+"Kick" "Kick1"
+"Snare" "Snare1"
+"Rim" "Rim6"
+"Perc1" "Perc21"
+"Perc2" "Perc13"
+"Perc3" "Perc12"
+"Perc4" "Perc12"
+"Tom1" "Tom03_1"
+"Tom2" "Tom03_2"
+"Tom3" "Tom03_3"
+"Tom4" "Tom03_4"
+"ClosedHats" "HH10"
+"OpenHats" "OH11"
+"Claps" "Claps6"
+"Snaps" "Snap1"
+"FilterLoop1" "Filterloop1-11"
+"FilterLoop2" "Filterloop2-13"
+"Crash1" "FoleyCrash1"
+"Crash2" "CrashFoley1"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-18"
+"FX2" "FX2-16"
+"FX3" "FX3-17"
+"FX4" "FX4-16"
+"Metal" "Metal1"
+"Shake" "Shake10"
+"Crescendos" "Cresc5"
+"Chromatic" "chromatic1"
+}
+
+"Gretsch Mute" {
+"Kick" "Kick9"
+"Snare" "Snare9"
+"Rim" "Rim8"
+"Perc1" "Perc22"
+"Perc2" "Perc23"
+"Perc3" "Perc25"
+"Perc4" "Perc24"
+"Tom1" "Tom3_1"
+"Tom2" ""
+"Tom3" "Tom4_3"
+"Tom4" ""
+"ClosedHats" "ClosedHatLoop3"
+"OpenHats" "OpenHatLoop1"
+"Claps" "Claps7"
+"Snaps" "Snap1"
+"FilterLoop1" "Filterloop1-4"
+"FilterLoop2" "Filterloop2-5"
+"Crash1" "Crash1"
+"Crash2" "Crash2"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-3"
+"FX2" "FX2-4"
+"FX3" "FX3-6"
+"FX4" "FX4-13"
+"Metal" "Metal1"
+"Shake" "Shake7"
+"Crescendos" "Cresc2"
+"Chromatic" "chromatic9"
+}
+
+"Gretsch Open" {
+"Kick" "Kick11"
+"Snare" "Snare11"
+"Rim" "Rim8"
+"Perc1" "Perc22"
+"Perc2" "Perc23"
+"Perc3" "Perc25"
+"Perc4" "Perc24"
+"Tom1" "Tom3_1"
+"Tom2" ""
+"Tom3" "Tom4_3"
+"Tom4" ""
+"ClosedHats" "ClosedHatLoop3"
+"OpenHats" "OpenHatLoop1"
+"Claps" "Claps6"
+"Snaps" "Snap2"
+"FilterLoop1" "Filterloop1-10"
+"FilterLoop2" "Filterloop2-8"
+"Crash1" "Crash1"
+"Crash2" "Crash2"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-3"
+"FX2" "FX2-10"
+"FX3" "FX3-6"
+"FX4" "FX4-13"
+"Metal" "Metal1"
+"Shake" "Shake5"
+"Crescendos" "Cresc2"
+"Chromatic" "chromatic9"
+}
+
+"Gretsch Regular" {
+"Kick" "Kick9"
+"Snare" "Snare9"
+"Rim" "Rim8"
+"Perc1" "Perc22"
+"Perc2" "Perc23"
+"Perc3" "Perc25"
+"Perc4" "Perc24"
+"Tom1" "Tom3_1"
+"Tom2" ""
+"Tom3" "Tom4_3"
+"Tom4" ""
+"ClosedHats" "ClosedHatLoop3"
+"OpenHats" "OpenHatLoop1"
+"Claps" "Claps7"
+"Snaps" "Snap1"
+"FilterLoop1" "Filterloop1-4"
+"FilterLoop2" "Filterloop2-5"
+"Crash1" "Crash1"
+"Crash2" "Crash2"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-3"
+"FX2" "FX2-4"
+"FX3" "FX3-6"
+"FX4" "FX4-13"
+"Metal" "Metal1"
+"Shake" "Shake7"
+"Crescendos" "Cresc2"
+"Chromatic" "chromatic1"
+}
+
+"Hard" {
+"Kick" "Kick5"
+"Snare" "Snare5"
+"Rim" "Rim2"
+"Perc1" "Perc20"
+"Perc2" "Perc28"
+"Perc3" "Perc8"
+"Perc4" "Perc15"
+"Tom1" "80tom1_1"
+"Tom2" "80tom1_2"
+"Tom3" "80tom1_3"
+"Tom4" "80tom1_4"
+"ClosedHats" "ClosedHatLoop3"
+"OpenHats" "OpenHatLoop2"
+"Claps" "Claps4"
+"Snaps" "Snap2"
+"FilterLoop1" "Filterloop1-7"
+"FilterLoop2" "Filterloop2-1"
+"Crash1" "Crash1"
+"Crash2" "Crash2"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-2"
+"FX2" "FX2-14"
+"FX3" "FX3-16"
+"FX4" "FX4-17"
+"Metal" "Metal1"
+"Shake" "Shake10"
+"Crescendos" "Cresc2"
+"Chromatic" "chromatic1"
+}
+
+"Jessie" {
+"Kick" "Kick2"
+"Snare" "Snare2"
+"Rim" "Rim6"
+"Perc1" "Perc6"
+"Perc2" "Perc7"
+"Perc3" "Perc9"
+"Perc4" "Perc10"
+"Tom1" "80tom1_1"
+"Tom2" "80tom1_2"
+"Tom3" "80tom1_3"
+"Tom4" "80tom1_4"
+"ClosedHats" "ClosedHatFelt"
+"OpenHats" "OpenHatFelt"
+"Claps" "Claps4"
+"Snaps" "Snap9"
+"FilterLoop1" "Filterloop1-11"
+"FilterLoop2" "Filterloop2-12"
+"Crash1" "Crash1"
+"Crash2" "Crash2"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-15"
+"FX2" "FX2-7"
+"FX3" "FX3-3"
+"FX4" "FX4-6"
+"Metal" "Metal1"
+"Shake" "Shake2"
+"Crescendos" "Cresc"
+"Chromatic" "chromatic6"
+}
+
+"Keys" {
+"Kick" "Kick6"
+"Snare" "Snare6"
+"Rim" "Rim6"
+"Perc1" "Perc23"
+"Perc2" "Perc24"
+"Perc3" "Perc25"
+"Perc4" "Perc26"
+"Tom1" "Tom5_1"
+"Tom2" ""
+"Tom3" "Tom5_3"
+"Tom4" ""
+"ClosedHats" "ClosedHatsMorg"
+"OpenHats" "OpenHatFelt"
+"Claps" "Claps10"
+"Snaps" "Snap1"
+"FilterLoop1" "Filterloop1-5"
+"FilterLoop2" "Filterloop2-6"
+"Crash1" "Crash1"
+"Crash2" "Crash2"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-3"
+"FX2" "FX2-6"
+"FX3" "FX3-7"
+"FX4" "FX4-15"
+"Metal" "Metal1"
+"Shake" "Shake9"
+"Crescendos" "Cresc"
+"Chromatic" "chromatic5"
+}
+
+"Sauna" {
+"Kick" "Kick17"
+"Snare" "Snare17"
+"Rim" "Rim4"
+"Perc1" "Perc6"
+"Perc2" "Perc7"
+"Perc3" "Perc9"
+"Perc4" "Perc8"
+"Tom1" "Tom03_1"
+"Tom2" "Tom03_2"
+"Tom3" "Tom03_3"
+"Tom4" "Tom03_4"
+"ClosedHats" "ClosedHats2"
+"OpenHats" "OpenHatLoop2"
+"Claps" "Claps8"
+"Snaps" "Snap6"
+"FilterLoop1" "Filterloop1-3"
+"FilterLoop2" "Filterloop2-5"
+"Crash1" "FoleyCrash1"
+"Crash2" "Crash4"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-7"
+"FX2" "FX2-16"
+"FX3" "FX3-17"
+"FX4" "FX4-18"
+"Metal" "Metal1"
+"Shake" "Shake10"
+"Crescendos" "Cresc6"
+"Chromatic" "chromatic8"
+}
+
+"Scrapyard" {
+"Kick" "Kick14"
+"Snare" "Snare14"
+"Rim" "Rim6"
+"Perc1" "Perc25"
+"Perc2" "Perc26"
+"Perc3" "Perc28"
+"Perc4" "Perc23"
+"Tom1" "Tom1_1"
+"Tom2" "Tom1_2"
+"Tom3" "Tom1_3"
+"Tom4" "Tom1_4"
+"ClosedHats" "HH12"
+"OpenHats" "OH12"
+"Claps" "Claps9"
+"Snaps" "Snap7"
+"FilterLoop1" "Filterloop1-12"
+"FilterLoop2" "Filterloop2-13"
+"Crash1" "FoleyCrash1"
+"Crash2" "CrashFoley1"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-11"
+"FX2" "FX2-12"
+"FX3" "FX3-15"
+"FX4" "FX4-3"
+"Metal" "Metal1"
+"Shake" "Shake4"
+"Crescendos" "Cresc6"
+"Chromatic" "chromatic8"
+}
+
+"Softmoss" {
+"Kick" "Kick16"
+"Snare" "Snare16"
+"Rim" "Rim7"
+"Perc1" "Perc1"
+"Perc2" "Perc3"
+"Perc3" "Perc4"
+"Perc4" "Perc14"
+"Tom1" "Tom03_1"
+"Tom2" "Tom03_2"
+"Tom3" "Tom03_3"
+"Tom4" "Tom03_4"
+"ClosedHats" "ClosedHats3"
+"OpenHats" "OpenHat1"
+"Claps" "Claps10"
+"Snaps" "Snap8"
+"FilterLoop1" "Filterloop1-4"
+"FilterLoop2" "Filterloop2-12"
+"Crash1" "Crash1"
+"Crash2" "Crash2"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-14"
+"FX2" "FX2-1"
+"FX3" "FX3-2"
+"FX4" "FX4-7"
+"Metal" "Metal1"
+"Shake" "Shake6"
+"Crescendos" "Cresc2"
+"Chromatic" "chromatic1"
+}
+
+"Softpants" {
+"Kick" "Kick8"
+"Snare" "Snare8"
+"Rim" "Rim9"
+"Perc1" "Perc3"
+"Perc2" "Perc14"
+"Perc3" "Perc11"
+"Perc4" "Perc20"
+"Tom1" "Tom4_1"
+"Tom2" "Tom3_2"
+"Tom3" "Tom3_3"
+"Tom4" "Tom3_4"
+"ClosedHats" "ClosedHatFelt"
+"OpenHats" "OpenHatFelt"
+"Claps" "Claps6"
+"Snaps" "Snap7"
+"FilterLoop1" "Filterloop1-13"
+"FilterLoop2" "Filterloop2-12"
+"Crash1" "Crash1"
+"Crash2" "Crash2"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-4"
+"FX2" "FX2-11"
+"FX3" "FX3-12"
+"FX4" "FX4-13"
+"Metal" "Metal1"
+"Shake" "Shake7"
+"Crescendos" "Cresc"
+"Chromatic" "chromatic4"
+}
+
+"Stomp" {
+"Kick" "Kick19"
+"Snare" "Snare19"
+"Rim" "Rim5"
+"Perc1" "Perc20"
+"Perc2" "Perc20"
+"Perc3" "Perc20"
+"Perc4" "Perc20"
+"Tom1" "Tom4_1"
+"Tom2" "Tom3_2"
+"Tom3" "Tom3_3"
+"Tom4" "Tom3_4"
+"ClosedHats" "ClosedHatLoop4"
+"OpenHats" "OpenHatLoop3"
+"Claps" "Claps5"
+"Snaps" "Snap8"
+"FilterLoop1" "Filterloop1-4"
+"FilterLoop2" "Filterloop2-5"
+"Crash1" "Crash1"
+"Crash2" "Crash2"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-17"
+"FX2" "FX2-17"
+"FX3" "FX3-18"
+"FX4" "FX4-18"
+"Metal" "Metal1"
+"Shake" "Shake10"
+"Crescendos" "Cresc"
+"Chromatic" "chromatic1"
+}
+
+"The Morg" {
+"Kick" "KickMorg1"
+"Snare" "SnareMorg1"
+"Rim" "Rim7"
+"Perc1" "Perc4"
+"Perc2" "Perc7"
+"Perc3" "Perc14"
+"Perc4" "Perc20"
+"Tom1" "Tom95"
+"Tom2" ""
+"Tom3" "Tom95_2"
+"Tom4" ""
+"ClosedHats" "ClosedHatsMorg"
+"OpenHats" "OpenHatLoop2"
+"Claps" "Claps7"
+"Snaps" "Snap1"
+"FilterLoop1" "Filterloop1-11"
+"FilterLoop2" "Filterloop2-12"
+"Crash1" "Crash1"
+"Crash2" "Crash2"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-11"
+"FX2" "FX2-12"
+"FX3" "FX3-3"
+"FX4" "FX4-9"
+"Metal" "Metal1"
+"Shake" "Shake2"
+"Crescendos" "Cresc2"
+"Chromatic" "chromatic6"
+}
+
+"White" {
+"Kick" "Kick20"
+"Snare" "Snare20"
+"Rim" "Rim6"
+"Perc1" "Perc11"
+"Perc2" "Perc5"
+"Perc3" "Perc14"
+"Perc4" "Perc27"
+"Tom1" "Tom4_1"
+"Tom2" "Tom3_2"
+"Tom3" "Tom3_3"
+"Tom4" "Tom3_4"
+"ClosedHats" "HH10"
+"OpenHats" "OH11"
+"Claps" "Claps11"
+"Snaps" "Snap4"
+"FilterLoop1" "Filterloop1-7"
+"FilterLoop2" "Filterloop2-2"
+"Crash1" "FoleyCrash1"
+"Crash2" "Crash4"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-18"
+"FX2" "FX2-7"
+"FX3" "FX3-10"
+"FX4" "FX4-16"
+"Metal" "Metal1"
+"Shake" "Shake7"
+"Crescendos" "Cresc3"
+"Chromatic" "chromatic4"
+}
+
+"Yezus" {
+"Kick" "Kick7"
+"Snare" "Snare7"
+"Rim" "Rim3"
+"Perc1" "Perc4"
+"Perc2" "Perc9"
+"Perc3" "Perc2"
+"Perc4" "Perc7"
+"Tom1" "Tom3_1"
+"Tom2" ""
+"Tom3" "Tom4_3"
+"Tom4" ""
+"ClosedHats" "ClosedHatLoop6"
+"OpenHats" "OpenHatLoop2"
+"Claps" "Claps11"
+"Snaps" "Snap2"
+"FilterLoop1" "Filterloop1-1"
+"FilterLoop2" "Filterloop2-2"
+"Crash1" "FoleyCrash1"
+"Crash2" "CrashFoley1"
+"MalletCrash" "Crash3"
+"Ride" "Ride"
+"FX1" "FX1-16"
+"FX2" "FX2-6"
+"FX3" "FX3-10"
+"FX4" "FX4-18"
+"Metal" "Metal1"
+"Shake" "Shake7"
+"Crescendos" "Cresc3"
+"Chromatic" "chromatic9"
+}
+}

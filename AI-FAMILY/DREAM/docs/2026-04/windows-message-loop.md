@@ -1,122 +1,97 @@
-# Windows Message Loop Requirement
+# Windows Message Loop
 
-## Critical Issue: SDK Callbacks Not Firing
+## The #1 Cause of "Callbacks Don't Fire"
 
-### The Problem
+If your SDK callbacks aren't firing (onSessionJoin, onUserJoin, etc.), you're almost certainly missing the Windows message loop.
 
-**Symptom**: Authentication times out, callbacks never execute
 ```
-[AUTH] Calling SDKAuth...
-[AUTH] Waiting for callback...
-[Still waiting after 30 seconds...]
-ERROR: Authentication timeout
+┌─────────────────────────────────────────────────────────────────┐
+│  SYMPTOM                        │  CAUSE                        │
+├─────────────────────────────────────────────────────────────────┤
+│  joinSession() returns success  │                               │
+│  but onSessionJoin() never      │  Missing Windows message loop │
+│  fires                          │                               │
+└─────────────────────────────────────────────────────────────────┘
 ```
-
-**Root Cause**: The Zoom Windows SDK uses the **Windows message pump** to dispatch callbacks. Without processing Windows messages, callbacks are queued but never delivered.
 
 ---
 
-## Why This Happens
+## Why It's Required
 
-The SDK uses COM/Windows messaging for asynchronous operations:
+The Zoom Video SDK uses **Windows messaging** to dispatch callbacks. When an event occurs (user joins, video starts, etc.), the SDK posts a message to your thread's message queue. If you never process those messages, the callbacks never fire.
 
-1. **SDK Thread**: Receives response from Zoom servers
-2. **Posts Windows Message**: To application's message queue  
-3. **Application Must Process**: Via `GetMessage()` or `PeekMessage()`
-4. **Message Dispatched**: Callback function finally invoked
+```
+SDK Event Occurs
+      ↓
+SDK posts message to your thread's queue
+      ↓
+Your message loop calls PeekMessage/GetMessage
+      ↓
+Message is dispatched
+      ↓
+Your callback fires
+```
 
-**Without message processing**: Messages queue up → Never dispatched → Callbacks never fire → Timeout
+**Without the message loop, step 3 never happens.**
 
 ---
 
-## The Solution
+## The Fix
 
-### Pattern 1: Non-Blocking with PeekMessage() (Recommended)
-
-Use when you need to check conditions or implement timeouts:
+### Console Application (No GUI)
 
 ```cpp
-bool WaitForAuthentication() {
-    auto startTime = std::chrono::steady_clock::now();
+int main() {
+    // Initialize SDK
+    IZoomVideoSDK* sdk = CreateZoomVideoSDKObj();
+    sdk->initialize(params);
+    sdk->addListener(new MyDelegate());
+    sdk->joinSession(context);
     
-    while (!g_authenticated && !g_exit) {
-        // CRITICAL: Process Windows messages for SDK callbacks!
+    // ═══════════════════════════════════════════════════════════════
+    // CRITICAL: Windows message loop
+    // ═══════════════════════════════════════════════════════════════
+    bool running = true;
+    while (running) {
         MSG msg;
         while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
+            if (msg.message == WM_QUIT) {
+                running = false;
+                break;
+            }
             TranslateMessage(&msg);
             DispatchMessage(&msg);
         }
         
-        // Check timeout
-        auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(
-            std::chrono::steady_clock::now() - startTime).count();
-        if (elapsed >= 30) {
-            return false; // Timeout
-        }
-        
-        // Small sleep to avoid CPU spinning
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    }
-    
-    return g_authenticated;
-}
-```
-
-### Pattern 2: Blocking with GetMessage()
-
-Use for main application loop:
-
-```cpp
-int main() {
-    // ... initialize SDK, authenticate, join meeting ...
-    
-    // Main message loop
-    MSG msg;
-    while (GetMessage(&msg, nullptr, 0, 0)) {
-        if (msg.message == WM_QUIT) {
-            break;
-        }
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
+        // Small sleep to avoid 100% CPU
+        Sleep(10);
     }
     
     // Cleanup
-    CleanUPSDK();
+    sdk->leaveSession(false);
+    sdk->cleanup();
+    
     return 0;
 }
 ```
 
-### Pattern 3: Hybrid Approach (Our Solution)
+### GUI Application (WinMain)
 
-Combines non-blocking message processing with custom exit conditions:
+GUI applications using standard WinMain already have a message loop, but make sure it's running:
 
 ```cpp
-// During authentication wait
-while (!g_authenticated && !g_exit) {
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, 
+                   LPSTR lpCmdLine, int nCmdShow) {
+    // Create window, initialize SDK, etc.
+    
+    // Standard message loop
     MSG msg;
-    while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
-    }
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
-}
-
-// Main application loop
-while (!g_exit) {
-    MSG msg;
-    while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
-        if (msg.message == WM_QUIT) {
-            g_exit = true;
-            break;
-        }
+    while (GetMessage(&msg, NULL, 0, 0)) {
         TranslateMessage(&msg);
         DispatchMessage(&msg);
     }
     
-    // Do other work here
-    ProcessVideoFrames();
-    
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    return (int)msg.wParam;
 }
 ```
 
@@ -124,278 +99,156 @@ while (!g_exit) {
 
 ## Common Mistakes
 
-### ❌ Wrong: Just Sleeping
+### Mistake 1: No Message Loop At All
 
 ```cpp
-// This will NEVER work - callbacks never dispatched!
-while (!g_authenticated) {
-    std::this_thread::sleep_for(std::chrono::seconds(1));
-}
-```
-
-### ❌ Wrong: Using std::condition_variable Without Messages
-
-```cpp
-// Callbacks won't fire - no message processing!
-std::unique_lock<std::mutex> lock(mutex);
-cv.wait(lock, []{ return g_authenticated; });
-```
-
-### ✅ Correct: Message Loop with Condition Check
-
-```cpp
-while (!g_authenticated) {
-    MSG msg;
-    while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
-    }
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
-}
-```
-
----
-
-## Where Message Processing is Required
-
-You MUST process Windows messages in these scenarios:
-
-### 1. Authentication
-```cpp
-authService->SDKAuth(authContext);
-
-// MUST process messages while waiting
-while (!authenticated) {
-    ProcessMessages();
-}
-```
-
-### 2. Joining Meeting
-```cpp
-meetingService->Join(joinParam);
-
-// MUST process messages while waiting
-while (meetingStatus != IN_MEETING) {
-    ProcessMessages();
-}
-```
-
-### 3. Main Application Loop
-```cpp
-// MUST continuously process messages
-while (!exit) {
-    ProcessMessages();
-}
-```
-
-### 4. Waiting for Any SDK Callback
-Any time you're waiting for:
-- `onAuthenticationReturn()`
-- `onMeetingStatusChanged()`
-- `onRawDataFrameReceived()`
-- Any other SDK callback
-
-You MUST be processing Windows messages!
-
----
-
-## Debugging Tips
-
-### How to Tell if Message Loop is Missing
-
-**Symptoms**:
-- Callbacks never fire
-- Timeouts after 10-30 seconds
-- No error messages from SDK
-- Debug output shows "waiting..." but nothing happens
-
-**Quick Test**:
-Add logging in your callback:
-```cpp
-void onAuthenticationReturn(AuthResult ret) {
-    std::cout << "CALLBACK FIRED!" << std::endl;  // Does this ever print?
-}
-```
-
-If you never see "CALLBACK FIRED!", you're not processing messages.
-
-### Debug Helper Function
-
-```cpp
-void ProcessMessagesWithDebug() {
-    MSG msg;
-    int messageCount = 0;
-    while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
-        messageCount++;
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
-    }
-    if (messageCount > 0) {
-        std::cout << "Processed " << messageCount << " messages" << std::endl;
-    }
-}
-```
-
----
-
-## PeekMessage vs GetMessage
-
-| Feature | PeekMessage | GetMessage |
-|---------|-------------|------------|
-| **Blocking** | No | Yes |
-| **Returns if no messages** | Immediately | Waits |
-| **Good for** | Timeouts, conditions | Main message loop |
-| **CPU Usage** | Can spin (add sleep) | Efficient |
-| **Flexibility** | High | Low |
-
-### When to Use Each
-
-**PeekMessage**: 
-- When waiting for SDK callbacks with timeout
-- When you need to check other conditions
-- When combining with other work
-
-**GetMessage**:
-- Main application message loop
-- When you want efficient CPU usage
-- Standard Windows application pattern
-
----
-
-## Complete Example
-
-```cpp
-#include <windows.h>
-#include <zoom_sdk.h>
-#include <auth_service_interface.h>
-#include <iostream>
-#include <chrono>
-#include <thread>
-
-using namespace ZOOM_SDK_NAMESPACE;
-
-bool g_authenticated = false;
-bool g_exit = false;
-
-class MyAuthListener : public IAuthServiceEvent {
-public:
-    void onAuthenticationReturn(AuthResult ret) override {
-        std::cout << "Auth callback received!" << std::endl;
-        if (ret == AUTHRET_SUCCESS) {
-            g_authenticated = true;
-        }
-    }
-    // ... other required methods ...
-};
-
-bool AuthenticateWithMessageLoop(IAuthService* authService, const wchar_t* jwt) {
-    authService->SetEvent(new MyAuthListener());
+// WRONG - callbacks will never fire
+int main() {
+    sdk->joinSession(context);
     
-    AuthContext context;
-    context.jwt_token = jwt;
-    
-    if (authService->SDKAuth(context) != SDKERR_SUCCESS) {
-        return false;
+    // Waiting forever, but callbacks never fire
+    while (!g_joined) {
+        Sleep(100);  // No message processing!
     }
-    
-    // Wait for callback with message processing
-    auto startTime = std::chrono::steady_clock::now();
-    while (!g_authenticated && !g_exit) {
-        // Process Windows messages - CRITICAL!
-        MSG msg;
-        while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
-        }
-        
-        // Check timeout (30 seconds)
-        auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(
-            std::chrono::steady_clock::now() - startTime).count();
-        if (elapsed >= 30) {
-            std::cerr << "Authentication timeout" << std::endl;
-            return false;
-        }
-        
-        // Small sleep to avoid CPU spinning
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    }
-    
-    return g_authenticated;
+}
+```
+
+### Mistake 2: Message Loop in Wrong Thread
+
+```cpp
+// WRONG - SDK callbacks are tied to the thread that called joinSession
+void WorkerThread() {
+    sdk->joinSession(context);  // Callbacks tied to this thread
 }
 
 int main() {
-    // Initialize SDK
-    InitParam initParam;
-    initParam.strWebDomain = L"https://zoom.us";
-    InitSDK(initParam);
+    std::thread worker(WorkerThread);
     
-    // Create auth service
-    IAuthService* authService = nullptr;
-    CreateAuthService(&authService);
+    // Message loop on main thread won't help worker thread's callbacks
+    MSG msg;
+    while (GetMessage(&msg, NULL, 0, 0)) {
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+    }
+}
+```
+
+**Fix**: Run message loop on the same thread that calls SDK methods.
+
+### Mistake 3: Blocking the Message Loop
+
+```cpp
+// WRONG - blocking call prevents message processing
+void onSessionJoin() override {
+    // This blocks the message loop!
+    std::this_thread::sleep_for(std::chrono::seconds(10));
     
-    // Authenticate with message loop
-    if (!AuthenticateWithMessageLoop(authService, L"your-jwt-token")) {
-        std::cerr << "Authentication failed" << std::endl;
-        return 1;
+    // Or this:
+    while (waiting) { }  // Infinite loop blocks everything
+}
+```
+
+**Fix**: Keep callbacks fast. Use async/threading for long operations.
+
+---
+
+## Diagnostic Checklist
+
+If callbacks aren't firing:
+
+1. **Is there a message loop?**
+   - Look for `PeekMessage` or `GetMessage` in your code
+   - Must be on the same thread that calls `joinSession()`
+
+2. **Is the message loop running?**
+   - Add logging: `std::cout << "Processing messages..." << std::endl;`
+   - Should print continuously
+
+3. **Is the delegate registered?**
+   - `sdk->addListener(delegate)` must be called BEFORE `joinSession()`
+
+4. **Are all delegate methods implemented?**
+   - Missing pure virtual methods = compile error
+   - Wrong signature = callback not called
+
+5. **Is the SDK initialized?**
+   - Check return value of `initialize()`
+
+---
+
+## Minimal Working Example
+
+```cpp
+#include <windows.h>
+#include <iostream>
+#include "zoom_video_sdk_api.h"
+#include "zoom_video_sdk_interface.h"
+#include "zoom_video_sdk_delegate_interface.h"
+
+USING_ZOOM_VIDEO_SDK_NAMESPACE
+
+bool g_joined = false;
+
+class TestDelegate : public IZoomVideoSDKDelegate {
+public:
+    void onSessionJoin() override {
+        std::cout << "*** onSessionJoin fired! ***" << std::endl;
+        g_joined = true;
     }
     
-    std::cout << "Authenticated successfully!" << std::endl;
+    void onError(ZoomVideoSDKErrors err, int detail) override {
+        std::cout << "*** onError: " << err << " ***" << std::endl;
+    }
     
-    // Main application loop with message processing
-    while (!g_exit) {
+    // ... implement all other methods as empty
+};
+
+int main() {
+    IZoomVideoSDK* sdk = CreateZoomVideoSDKObj();
+    
+    ZoomVideoSDKInitParams params;
+    params.domain = L"https://zoom.us";
+    sdk->initialize(params);
+    
+    sdk->addListener(new TestDelegate());
+    
+    ZoomVideoSDKSessionContext ctx;
+    ctx.sessionName = L"test";
+    ctx.userName = L"Bot";
+    ctx.token = L"your-jwt";
+    ctx.audioOption.connect = false;
+    
+    sdk->joinSession(ctx);
+    
+    std::cout << "Starting message loop..." << std::endl;
+    
+    // THE CRITICAL PART
+    while (!g_joined) {
         MSG msg;
         while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
-            if (msg.message == WM_QUIT) {
-                g_exit = true;
-                break;
-            }
             TranslateMessage(&msg);
             DispatchMessage(&msg);
         }
-        
-        // Do other work
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        Sleep(10);
     }
     
-    // Cleanup
-    CleanUPSDK();
+    std::cout << "Joined! Exiting..." << std::endl;
+    
+    sdk->leaveSession(false);
+    sdk->cleanup();
+    
     return 0;
 }
 ```
 
 ---
 
-## Why SDK Documentation Doesn't Mention This
+## Related Documentation
 
-1. **Assumed knowledge**: Windows developers are expected to know about message pumps
-2. **Sample code uses it**: But in different patterns that might not be obvious
-3. **Not explicitly required**: Works fine if you already have a message loop
-4. **Platform-specific**: Only affects Windows SDK
-
----
-
-## Key Takeaways
-
-1. **Always process Windows messages** when waiting for SDK callbacks
-2. **Use PeekMessage()** for non-blocking with timeout
-3. **Use GetMessage()** for main application loop
-4. **Add sleep** to avoid CPU spinning with PeekMessage()
-5. **Test callbacks** to verify message loop is working
-6. **This is not optional** - SDK will not work without it
+- [Session Join Pattern](../examples/session-join-pattern.md) - Complete working code
+- [Common Issues](common-issues.md) - Other troubleshooting
+- [SDK Architecture Pattern](../concepts/sdk-architecture-pattern.md) - Event-driven design
 
 ---
 
-## Related Issues
-
-- **Authentication timeout**: Usually caused by missing message loop
-- **Meeting join timeout**: Same issue
-- **No video frames**: Check message loop in main application loop
-- **Callbacks delayed**: Ensure message processing is frequent enough
-
----
-
-## See Also
-
-- [Authentication Flow Pattern](../examples/authentication-pattern.md)
-- [Common Build Errors](build-errors.md)
-- [SDK Initialization](../SKILL.md#initialization)
+**TL;DR**: Add `PeekMessage`/`TranslateMessage`/`DispatchMessage` loop on the same thread that calls `joinSession()`. This is NOT optional.

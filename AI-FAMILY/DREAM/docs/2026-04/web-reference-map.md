@@ -1,54 +1,14 @@
 # Web Reference Map
 
-Primary docs:
-- https://developers.zoom.us/docs/contact-center/web/get-started/
-- https://developers.zoom.us/docs/contact-center/web/chat/
-- https://developers.zoom.us/docs/contact-center/web/video/
-- https://developers.zoom.us/docs/contact-center/web/campaigns/
-- https://developers.zoom.us/docs/contact-center/web/sdk-reference/
-- https://developers.zoom.us/docs/contact-center/smart-embed/
+## Core Docs
 
-## Engagement APIs/Events (Contact Center App)
+- Get started: https://developers.zoom.us/docs/virtual-agent/web/get-started/
+- Chat embed: https://developers.zoom.us/docs/virtual-agent/web/chat/
+- Campaign controls: https://developers.zoom.us/docs/virtual-agent/web/campaigns/
+- SDK reference: https://developers.zoom.us/docs/virtual-agent/web/reference/
 
-- `getEngagementContext`
-- `getEngagementStatus`
-- `onEngagementContextChange`
-- `onEngagementStatusChange`
-- `onEngagementVariableValueChange`
+## Operational Notes
 
-## Campaign SDK Events
-
-- `open`
-- `close`
-- `show`
-- `hide`
-- `engagement_started`
-- `engagement_ended`
-
-## Campaign SDK Methods
-
-- `open()`
-- `close()`
-- `show()`
-- `hide()`
-- `endChat()`
-- `waitForInit()`
-- `waitForReady()`
-- `updateUserContext()`
-
-## Video Client Events
-
-- `video-start`
-- `video-end`
-- `notification-join-call`
-- `video-click-end`
-- `video-force-end`
-- `task-created`
-
-## Smart Embed Event Surface
-
-- init/config events (`zcc-init-config-request`, `zcc-init-config-response`)
-- engagement and channel events
-- contact search request/response patterns
-- resize and interaction events
-
+- Campaign mode supports central admin routing and lower app-code churn.
+- Entry ID mode can increase friction and should be selective.
+- Keep script host, CSP, and environment alignment (`us01`/`eu01`) in preflight checks.

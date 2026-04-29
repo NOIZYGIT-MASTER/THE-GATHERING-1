@@ -1,0 +1,1702 @@
+Manual
+Disclaimer
+The information in this document is subject to change without notice and does not represent a
+commitment on the part of Native Instruments GmbH. The software described by this docu-
+ment is subject to a License Agreement and may not be copied to other media. No part of this
+publication may be copied, reproduced or otherwise transmitted or recorded, for any purpose,
+without prior written permission by Native Instruments GmbH, hereinafter referred to as Native
+Instruments.
+“Native Instruments”, “NI” and associated logos are (registered) trademarks of Native Instru-
+ments GmbH.
+Abbey Road is a trade mark of EMI (IP) Limited used under licence.
+Mac, Mac OS, GarageBand, Logic, iTunes and iPod are registered trademarks of Apple Inc.,
+registered in the U.S. and other countries.
+Windows, Windows Vista and DirectSound are registered trademarks of Microsoft Corporation
+in the United States and/or other countries.
+All other trade marks are the property of their respective owners and use of them does not im-
+ply any affiliation with or endorsement by them.
+Document authored by: Mirek Stiles, Paul Maurer
+Software version: 1.0 (04/2013)
+Special thanks to the Beta Test Team, who were invaluable not just in tracking down bugs, but
+in making this a better product.
+Contact
+Germany
+Native Instruments GmbH
+Schlesische Str. 29-30
+D-10997 Berlin
+Germany
+www.native-instruments.de
+USA
+Native Instruments North America, Inc.
+6725 Sunset Boulevard
+5th Floor
+Los Angeles, CA 90028
+USA
+www.native-instruments.com
+Japan
+Native Instruments KK
+YO Building 3F
+Jingumae 6-7-15, Shibuya-ku,
+Tokyo 150-0001
+Japan
+www.native-instruments.co.jp
+© Native Instruments GmbH, 2013. All rights reserved.
+Table of Contents
+Table of Contents
+1 Introduction ..............................................................................................................6
+2 About ABBEY ROAD 50S DRUMMER ............................................................................8
+2.1 The Studio .................................................................................................................................. 8
+2.2 The Team .................................................................................................................................... 9
+2.3 The Kits ...................................................................................................................................... 10
+2.3.1 Gretsch Cadillac Green Nitron Kit with Calf Skin Heads ............................................ 11
+2.3.2 WFL Kit ...................................................................................................................... 12
+2.4 The Recording Equipment ........................................................................................................... 14
+3 Quickstart .................................................................................................................19
+3.1 Basic Navigation ........................................................................................................................ 19
+3.2 Editing the Drums ...................................................................................................................... 19
+3.2.1 Fine-Controlling Individual Drums and Articulations ................................................. 19
+3.2.2 Changing the Snare Drum ......................................................................................... 20
+3.2.3 Creating a Mix ........................................................................................................... 21
+3.2.4 Adding and Removing Drums .................................................................................... 22
+3.2.5 Preset Handling ......................................................................................................... 23
+4 The Performance View ...............................................................................................25
+4.1 Kit Page ...................................................................................................................................... 25
+4.1.1 OH and ROOM MIX Knobs ........................................................................................... 27
+4.1.2 TUNE Knob ................................................................................................................. 28
+4.1.3 ATTACK, HOLD and DECAY Knobs ............................................................................... 28
+4.2 Mixer Page .................................................................................................................................. 29
+4.2.1 Common Mixer Controls ............................................................................................. 30
+4.2.2 CLOSE MICS Area ....................................................................................................... 31
+4.2.3 KIT MICS/BUSES Area ................................................................................................ 31
+4.2.4 Effects ....................................................................................................................... 32
+ABBEY ROAD 50S DRUMMER - Manual - 4
+Table of Contents
+4.2.5 Channel Settings ....................................................................................................... 36
+4.2.6 FX Preset Handling .................................................................................................... 37
+4.3 Grooves Page .............................................................................................................................. 39
+4.4 Options Page .............................................................................................................................. 43
+4.4.1 VELOCITY Settings ..................................................................................................... 44
+4.4.2 MIDI Mapping ............................................................................................................ 45
+4.4.3 KIT VIEW Settings ...................................................................................................... 46
+4.4.4 RANDOMIZE Settings ................................................................................................. 47
+5 Kit Selection .............................................................................................................48
+5.1 5.2 5.3 5.4 Autumn Kit – Default Mapping ................................................................................................... 49
+Autumn Kit – Brushes Mapping .................................................................................................. 53
+Spring Kit – Default Mapping ..................................................................................................... 57
+Spring Kit – Brushes Mapping .................................................................................................... 61
+6 Credits ......................................................................................................................65
+ABBEY ROAD 50S DRUMMER - Manual - 5
+Introduction
+1 Introduction
+ABBEY ROAD 50S DRUMMER is an acoustic drum library featuring premium drum kits, world
+famous studio sound, full mixing control with high quality effects and a huge selection of MIDI
+grooves covering a variety of popular music genres: everything you need to create perfect drum
+tracks for all kinds of productions.
+Two beautiful and historic kits were chosen for the ABBEY ROAD 50S DRUMMER project. Just
+about every articulation possible was played on each of the drums and cymbals and recorded
+at up to 25 velocity layers, with up to six variations per velocity hit. Up to 15 microphones
+were used on each kit, including many direct mics, a mono overhead, a stereo overhead pair,
+and mono and stereo room mics (to capture the ambient sound of the recording space), with
+each microphone able to be mixed separately in the software.
+The drums were all recorded at Abbey Road Studios, the world’s first ever purpose build re-
+cording studios. Opened on 12th November 1931, the studios have been at the heart of the
+UK music industry for more than 80 years and have been the location of countless landmark
+recordings and pioneering developments in recording technology. Today, Abbey Road Studios
+is one of the most technically advanced recording, mixing and post-production complexes in
+the world. For many years, Abbey Road benefited from the talents of EMI’s research and devel-
+opment division, which custom-built mixing consoles, microphones and outboard gear to meet
+the demands and ambitions of the studio engineers and the artists they worked with. Most of
+this equipment was only available to EMI studios and was never sold commercially. This equip-
+ment, combined with the expertise of the engineers and the unique acoustic properties of the
+studios, engendered what has come to be known as the ‘Abbey Road Sound’ which can be
+heard on some of the most popular recordings of all time.
+Abbey Road and Native Instruments joined forces in 2009 to create outstanding musical in-
+struments based on Abbey Road’s legendary equipment, engineering expertise and studio
+acoustics. Combined with the development and design expertise of Native Instruments, musi-
+cians can experience a new level of versatility and musicality.
+Document Conventions
+This document uses particular formatting to point out special facts and to warn you of poten-
+tial issues. The icons introducing the following notes let you see what kind of information can
+be expected:
+ABBEY ROAD 50S DRUMMER - Manual - 6
+Introduction
+Whenever this exclamation mark icon appears, you should read the corresponding note
+carefully and follow the instructions and hints given there if applicable.
+This light bulb icon indicates that a note contains useful extra information. This informa-
+tion may often help you to solve a task more efficiently, but does not necessarily apply to
+the setup or operating system you are using; however, it's always worth a look.
+Furthermore, the following formatting is used:
+▪ Text appearing in (drop-down) menus (such as Open…, Save as… etc.) and paths to loca-
+tions on your hard drive or other storage devices is printed in italics.
+▪ Text appearing elsewhere on the screen (labels of buttons, controls, text next to checkbox-
+es etc.) is printed in light blue. Whenever you see this formatting applied, you will find
+the same text appearing on the screen.
+▪ Important names and concepts are printed in bold.
+▪ References to keys on your computer's keyboard you'll find put in square brackets (e.g.,
+"Press [Shift] + [Return]").
+► Single instructions are introduced by this play button type arrow.
+→ Results of actions are introduced by this smaller arrow.
+About KONTAKT / KONTAKT PLAYER
+ABBEY ROAD 50S DRUMMER is a KONTAKT Instrument; you will, therefore, have to have
+KONTAKT or the free KONTAKT PLAYER installed on your computer in order to use this instru-
+ment. Refer to the KONTAKT / KONTAKT PLAYER documentation to learn how to load and
+configure KONTAKT Instruments.
+ABBEY ROAD 50S DRUMMER - Manual - 7
+About ABBEY ROAD 50S DRUMMER
+The Studio
+2 About ABBEY ROAD 50S DRUMMER
+2.1 The Studio
+Abbey Road's Studio Two
+Studio Two, arguably the most famous recording studio in the world, has a unique design, a
+peerless acoustic and an unparalleled history of recording. The thick solid wooden parquet
+floor, irregularly laid painted brick walls, hanging acoustic ‘cabot’s quilt’ drapes, bass traps
+and a false dropped ceiling give Studio Two a sound like no other. The studio is so fantastic at
+handling any style of music, from rock and roll sessions through to mid-sized orchestras, that it
+has remained more or less unchanged since the early 1960s.
+Artists who have recorded in Studio Two include Pink Floyd, Kate Bush, The Beatles, Nick
+Cave and the Bad Seeds, Cliff Richard and the Shadows, Green Day, Groove Armada, Idlewild,
+Muse, Oasis, Underworld, U2, Radiohead and Kanye West along with a wealth of film scores.
+ABBEY ROAD 50S DRUMMER - Manual - 8
+About ABBEY ROAD 50S DRUMMER
+The Team
+A 50's kit in Studio 2
+Studio Statistics
+Dimensions
+Height 24ft / 7.31m
+Width 38ft 3in / 11.65m
+Length 60ft 2in / 18.35m
+Floor Area 2131sq ft / 198sq m
+Reverberation Time 1.2 sec
+2.2 The Team
+ABBEY ROAD 50S DRUMMER was recorded by Chris Bolster and executively produced by Mir-
+ek Stiles. Drumming duties were performed by Paul Clarvis.
+Mirek Stiles joined Abbey Road Studios in 1997 and has worked as an engineer on a multitude
+of pop/rock sessions as well as many different film scores. Projects include: Fiona Apple, Jon
+Brion, The Beatles: Yellow Submarine Songtrack, The Beatles Anthology 5.1 Remix, The Beat-
+les Love, Nick Cave and the Bad Seeds, Mick Jagger, John Lennon back catalogue remix al-
+bums, Muse, Paul McCartney, Dave Stewart, Kanye West and The Lord of the Rings trilogy.
+ABBEY ROAD 50S DRUMMER - Manual - 9
+About ABBEY ROAD 50S DRUMMER
+The Kits
+Chris Bolster joined Abbey Road Studios in 1998, after leaving his homeland of New Zealand.
+He had already enjoyed three years at Auckland based York Street Studios, working with a host
+of the country's top local talent. Since joining Abbey Road, Chris has worked on a rich and di-
+verse range of projects with many different producers, engineers and artists including: Oasis,
+Star Sailor, The Beatles, Jon Brion, Texas, Stereophonics, Lamb, The Divine Comedy, Kate
+Bush, Paul McCartney, Maroon 5 and many episodes of the TV series Live from Abbey Road.
+Paul Clarvis is renowned for his ability to bring his unique playing style to a wide range of gen-
+res. As one of London’s most requested musicians, Paul can be heard on recordings by Mick
+Jagger, Elvis Costello, Elton John, Paul McCartney, Annie Lennox, Sting, Bryan Ferry, McFly,
+The Orb, Michael Nyman, Maurice Jarre and John Williams. Paul is not only a highly sought-
+after musician, but also an avid collector of rare and vintage drum kits, cymbals, snare drums
+and percussion. Paul was kind enough to offer some of the finest parts of his personal instru-
+ment collection for use on the ABBEY ROAD 50S DRUMMER sessions.
+2.3 The Kits
+Two very special drum kits from the 1950s were chosen for the ABBEY ROAD 50S DRUMMER
+project. In contrast to modern drum kits where the wood used is young and grown specifically
+for the purpose, the timber used to make these vintage drums has matured over many years,
+giving an unparalleled tonal quality. In much the same way that a concert violinist would use
+an instrument that is at least 60 or 70 years of age, discerning drummers are attracted to
+these rare vintage drums for their beautiful and unique tone. These instruments have defined
+recording history and shaped popular culture and are now almost sacrosanct in the drumming
+world.
+These instruments will provide a unique package, reminiscent of early Doo Wop and R&B re-
+cords that have been sampled time and time again by engineers and producers. The sounds
+will also be of interest to anyone looking for something a little different, from film scores and
+rock right through to electronica and urban styles. Such a comprehensive collection of rare in-
+struments is hard to come by and some have not been available to the general public before.
+A note on the overall kit sound—due to technical advances and typical recording spaces, the
+drums from this era were generally starting to cut through the mix a little more than in the
+1940s. The sound tended to come across as more defined and punchy than the swing and big
+band sounds of the previous decade. To help achieve this effect, carpet and screens were used
+in Studio Two. This created a vastly different recording space to the one used for the previous
+ABBEY ROAD 50S DRUMMER - Manual - 10
+About ABBEY ROAD 50S DRUMMER
+The Kits
+Abbey Road Drummer series, paying homage to the huge curtain used in the early decades of
+Studio Two that would literally halve the size of the room (long since removed). The resulting
+sound is more intimate and upfront. ABBEY ROAD 50S DRUMMER also has the ability to
+blend in distant ambient microphones, so users can still create the classic huge Studio Two
+drum sound if desired.
+The two original 1950s kits chosen for this project are:
+2.3.1 Gretsch Cadillac Green Nitron Kit with Calf Skin Heads
+The Gretsch Cadillac Green Nitron Kit with Calf Skin Heads
+This kit has a thick, full and chunky sound.
+▪ 2" Tom
+▪ 14" Floor Tom
+▪ 20" Kick Drum
+Over the years very few of these drums have survived, meaning that this could very well be the
+most desirable and rarest of all the Gretsch kits ever made. There was a limited run of different
+nitron finishes for only a few years; Cadillac nitron green is the most highly sought-after and is
+the only color that comes with gold-plated hardware.
+ABBEY ROAD 50S DRUMMER - Manual - 11
+About ABBEY ROAD 50S DRUMMER
+The Kits
+2.3.2 WFL Kit
+The WFL Kit
+This kit has a clean and open sound, which is far less complex than the Gretsch.
+▪ 12” Tom
+▪ 13” Tom
+▪ 14” Floor Tom
+▪ 20” Kick Drum
+Ludwig had been making drum products since the early 1900s. For a brief period, after an ac-
+quisition of the Ludwig company, founder William F. Ludwig broke away to manufacture his
+own line of drums named WFL between 1937 and 1955, before gaining control of the Ludwig
+name again. This kit is a rare example of WFL from the 1950s.
+ABBEY ROAD 50S DRUMMER - Manual - 12
+About ABBEY ROAD 50S DRUMMER
+The Kits
+Snare Drums:
+Gretsch BroadKaster 6.5 x 14 - 1950s. Originally marketed as a super sensitive separate ten-
+sion orchestral snare drum, this was used by Shelly Manne, Louie Bellson and many other
+high-profile artists who liked its sharper tone and faster action.
+Gretsch 'Max Roach' 14 x 4 – 1950s. This is a narrower model than the Broadkaster and was
+designed for the legendary Max Roach to give a crisper and faster response.
+Leedy Professional 14 x 5 - 1920s. An extremely rare piece of kit, this solid maple snare drum
+is from the Leedy Professional range, manufactured between 1925 and 1929.
+Gladstone 14x 6.5 - 1950s. This Billy Gladstone snare drum is one of only fifty ever made and
+is considered the Holy Grail amongst the vintage drum collecting community. Billy was consid-
+ered a master craftsman. Each snare drum was built to perfection and included a unique three
+way tuning system, minimal hardware and multi-positional internal mufflers—all of these fea-
+tures were game changers in the 1950s. This is a very rare snare drum indeed.
+WFL 14 x 8 - 1950s. This mahogany snare drum from the 1950s has a huge heavy sound due
+to the 8” depth of the shell. This is another fantastic and rare example of the WFL range.
+WFL 13 x 3 - 1950s. In the late 1940s, WFL signed Buddy Rich as their endorser to compete
+with the Slingerland/Gene Krupa range. By 1949, the Buddy Rich ‘Bebop’ snare drum became
+available.
+Cymbals
+A selection of hand hammered A & K Zildjian cymbals from the 1950s.
+By the early 1960s, Zildjian stopped hand hammering their cymbals and switched to machine
+hammer, resulting in a different sound and appearance. This was mainly to keep up with de-
+mand after the huge rise in pop music in the 60s. The collection used for ABBEY ROAD
+50S DRUMMER is the last example of completely unique cymbals produced in that decade.
+Percussion
+A selection of period percussion instruments from the Paul Clarvis collection was also used on
+these sessions, including spoons, tambourines, woodblocks, shakers and cowbells.
+ABBEY ROAD 50S DRUMMER - Manual - 13
+About ABBEY ROAD 50S DRUMMER
+The Recording Equipment
+2.4 The Recording Equipment
+By the 1950s, recording started to evolve rapidly. Tape machines and fully fledged mixing con-
+soles with EQ on each channel arrived, along with the ability to mix increasing numbers of mi-
+crophone sources. This resulted in clearer, more focused recordings than those from previous
+decades. EMI and Abbey Road Studios were at the forefront of this recording transformation,
+and for many years built their own equipment from a large research and manufacturing facility
+in Hayes (just outside London). The BTR (British Tape Recorder) is one such piece of equip-
+ment. Made of iron and steel, the BTR was a brute of a machine, weighing in at almost 600
+pounds. These machines were used all over the Abbey Road building from 1948 onwards. Ini-
+tially, they worked simultaneously with the older disc-cutting equipment, which was the stu-
+dios’ only recording method before the advent of tape. It was quite a success, with hundreds of
+units being built and used worldwide by EMI studios and the BBC. It was the workhorse ma-
+chine for most Abbey Road recordings from the 1950s and '60s. Unfortunately Abbey Road no
+longer owns a working BTR, but for this project a similar valve tape machine from the early
+60s was used with original EMI tape from the decade.
+Another major development was the REDD.17 recording console (REDD stands for Recording
+Engineering Development Department). This all-valve console first made an appearance at Ab-
+bey Road in 1957 and is still used at the studios today for special sessions. The console was
+the first to look and feel like the modern consoles we know today and was very powerful for its
+time, due to the individual treble and bass EQ on each channel. The REDD desks were both
+sleek and robust, designed to be used as either portable or permanent installations. Only four
+REDD.17 consoles were manufactured before the more powerful REDD.37/51s made an ap-
+pearance.
+ABBEY ROAD 50S DRUMMER - Manual - 14
+About ABBEY ROAD 50S DRUMMER
+The Recording Equipment
+The REDD.17 recording console
+Vintage microphones are extremely valuable and prized by any studio. Abbey Road's unique
+collection comprises a large number of originals, spanning many decades. It is a working col-
+lection, and the microphones used on recording sessions today are often the very ones used by
+legendary artists throughout the studios’ long history.
+Vintage Channels
+Period microphones via the REDD.17 and tape machine:
+Mono Overhead and Mono Room
+RCA 44-BX – This figure of 8 ribbon microphone was introduced in 1931 and remains a popu-
+lar choice among Abbey Road engineers to this day. As with any ribbon microphone, the prox-
+imity effect will exaggerate bass sounds the closer the microphone is moved to the source. This
+was often seen as an advantage to make sounds appear bigger and fuller.
+Kick Out
+AKG D12 - Introduced in 1953, the AKG D12 was one of the world's first dynamic cardioid mi-
+crophones, designed to reduce the pick-up of extraneous sounds. The large diaphragm, cardi-
+oid pattern and the transducer’s special ‘bass chamber’ that boosts the lower frequencies in
+the 60-120 Hz range make it a very popular choice for bass drums and bass guitars.
+ABBEY ROAD 50S DRUMMER - Manual - 15
+About ABBEY ROAD 50S DRUMMER
+The Recording Equipment
+The channels below are more traditional recording techniques used at Abbey Road Studios to
+supplement the vintage channels.
+Kick In
+Neumann U 47 fet (also called FET47) – Production of the tube-based U47 microphone came to
+an end in 1965, largely due to the fact the VF14 tube used inside the microphone was no lon-
+ger being manufactured. The FET47 was released to the world in the late ’60s and was intend-
+ed as a replacement to the U 47. Although it is generally accepted as sounding very different
+to the U 47, the FET47 has a character all of its own and is still in great demand. The micro-
+phone contains no less than 7 transistors, one of these being FET based. The FET47 is still a
+firm favorite at Abbey Road for many applications including kick drum.
+Kick Sub
+Yamaha NS10 – The Yamaha NS10 is in fact a monitor loudspeaker introduced in 1978 for do-
+mestic use. It quickly found its way into studios as a ‘real world’ reference monitor. Although
+they are no longer in production, NS10s can still be found in most professional recording stu-
+dios around the world. Another popular use for the NS10 is to take the white bass cone out of
+the monitor enclosure and wire it up as a microphone. Suspended in front of a kick drum, the
+large surface area of the diaphragm is great for picking up sub bass frequencies while rejecting
+high frequencies. This natural mechanical filtering results in a pleasing sub-frequency kick
+drum sound.
+Hi-hat
+Neumann KM 56 – This microphone was introduced to the world in 1956 and is still a popular
+choice at Abbey Road. A selection of three polar patterns makes it an extremely versatile valve
+condenser microphone.
+Snare Top
+Neumann KM 84 and Shure SM57 – Introduced in 1967, the SM57 is still one of the world's
+biggest selling microphones. A dynamic cardioid microphone with a rugged construction, it was
+used to provide the ‘body’ of the snare drum with the KM84 providing the ‘top end.’
+ABBEY ROAD 50S DRUMMER - Manual - 16
+About ABBEY ROAD 50S DRUMMER
+The Recording Equipment
+Snare Bottom
+Neumann KM 84 – The KM 84 microphone is a small capsule cardioid condenser and one of
+the world’s first microphones made with 48v phantom power technology. In the mid-60s mi-
+crophone design was starting to replace valves with transistors, with results like the KM 84 and
+FET series microphones. The KM is German for ‘Kleines Mikrofon’ (small microphone). Very
+popular at Abbey Road in the 70s for drums in general, the microphone is still used on a daily
+basis in the studios.
+Toms
+All rack and floor toms for this project were mic'ed from the top and from below. The signals
+were then mixed together to create a single tom channel (the phase of the bottom signal re-
+versed by 180 degrees). The idea behind this is that the top microphone provides the attack,
+while the bottom microphone provides the resonance of the shell. This technique can make a
+massive difference to the overall tom tone of a recording.
+Tom Top
+Neumann KM 56 – This microphone was introduced to the world in 1956 and is still a popular
+choice at Abbey Road. A selection of three polar patterns makes it an extremely versatile valve
+condenser microphone.
+Tom Bottom
+AKG D12
+For details, see above.
+Stereo Overhead
+Neumann KM 56
+For details, see above.
+ABBEY ROAD 50S DRUMMER - Manual - 17
+About ABBEY ROAD 50S DRUMMER
+The Recording Equipment
+Stereo Room
+Neumann M 50 – The classic Neumann M 50 was first introduced to the world in 1952. The
+valve omni-directional M 50 was always considered an orchestral microphone at Abbey Road
+during the 60s. It is still used at Abbey Road on practically every orchestral session that takes
+place and is perfect for capturing the ambience of a room, be that a string section or a drum
+kit.
+ABBEY ROAD 50S DRUMMER - Manual - 18
+Quickstart
+Basic Navigation
+3 Quickstart
+In this chapter, you will find a quick guide to navigating the controls of ABBEY ROAD
+50S DRUMMER, as well as step by step guides to certain functions.
+3.1 Basic Navigation
+The interface has four main pages of control. You can navigate among these pages by clicking
+on the tabs at the bottom of the instrument's Performance View. The different pages and their
+uses are as follows:
+▪ Grooves page: On this page is a browser of many genre-separated MIDI grooves and fills
+with variations that can be dragged to your host for immediate song creation.
+▪ Options page: This page has options for technical kit settings such as kit mapping and ve-
+locity options, as well as randomization parameters.
+▪ Kit page: You can select each drum on this page to adjust the overhead and room mixes,
+tuning, and volume envelopes for those drums. You can also select which snare you want
+to use, as well as load and unload the separate kit pieces.
+▪ Mixer page: This page has all of the standard controls for an audio mixer, including levels,
+panning, solo, mute, send levels and channel routing. This is also where all effect settings
+and effect routing options are edited.
+The four navigation tabs at the bottom of the Performance View
+3.2 Editing the Drums
+3.2.1 Fine-Controlling Individual Drums and Articulations
+To change the individual kit piece's sound settings and articulations:
+1. Click on the Kit tab.
+ABBEY ROAD 50S DRUMMER - Manual - 19
+Quickstart
+Editing the Drums
+2. 3. 4. 5. To edit the settings for a particular drum or cymbal, just click on its picture. Percussion is
+selected from a sub-menu of icons next to the drum kit image.
+To change the overhead and room mix amounts for each piece, adjust the corresponding
+OH MIX and ROOM MIX knobs.
+To alter the tuning, adjust the TUNE knob.
+To change the volume envelope of the selected piece, you can adjust the ATTACK, HOLD
+and DECAY with the respective knobs.
+A typical drum's control panel
+3.2.2 Changing the Snare Drum
+Each kit has alternate snares to choose from. To change the snare:
+1. 2. Click on the Kit tab.
+Click on the snare drum image.
+ABBEY ROAD 50S DRUMMER - Manual - 20
+Quickstart
+Editing the Drums
+3. Click on the A, B, or C button to select the snare you want to use.
+→ The graphical representation of the snare drum will change to indicate the newly selected
+snare.
+3.2.3 Creating a Mix
+To create a mix of the kit, click on the Mixer tab. This will give you a virtual mixing console
+with many of the same controls you would find on a real mixing desk. Here you can control the
+volume, pan, mute, solo, and routing of the various tracks. You can also add many customiza-
+ble effects to all channels.
+A typical channel on the Mixer page
+ABBEY ROAD 50S DRUMMER - Manual - 21
+Quickstart
+Editing the Drums
+You can also adjust the levels of the in, out mics on the kick, the top and bottom mic on the
+snare, and the amount of snare mic bleed when the kick and toms play.
+Additional controls for the Kick and Snare channels
+3.2.4 Adding and Removing Drums
+If you will not be using a particular drum, cymbal or percussion instrument, you can remove it
+from the kit, thus freeing up more computer memory. To do this:
+1. 2. 3. Click on the Kit tab.
+Select the instrument that you want to remove.
+Click on the small memory chip icon above the instrument name at the bottom left of the
+page.
+4. A drop-down menu will appear, giving you the option to add or remove the instrument
+from the kit with Load Instrument and Unload Instrument options. When an instrument is
+unloaded, a darkened version of it will replace the original image.
+If you unload an instrument, you can always load it back again using the same method.
+Unloading an instrument on the Kit page.
+ABBEY ROAD 50S DRUMMER - Manual - 22
+Quickstart
+Editing the Drums
+3.2.5 Preset Handling
+► To step through the presets, simply click on the right and left arrows.
+► To load a preset, simply select the preset from the drop-down menu.
+Saving User Presets
+You can save presets for the settings of the whole mixer on the Mixer page, as well as kit map-
+ping layouts on the Options page. Each of these preset menus contains a selection of factory
+presets and allows you to save your own custom presets. Factory presets cannot be overwritten
+(indicated by the darkened Ø icon), but they can be adjusted and saved as a new user preset.
+To save a user preset:
+1. 2. Adjust the settings you want to save and recall for your preset.
+Click in the text area on the preset drop-down menu.
+ABBEY ROAD 50S DRUMMER - Manual - 23
+Quickstart
+Editing the Drums
+3. Type in the name for the new preset and click on the Save icon above the drop-down
+menu.
+→ The new preset will now appear at the bottom of the drop-down menu and is ready to be
+used when opening the kit again.
+If you save a user preset without changing the name, it will overwrite the current user pre-
+set.
+There are 30 slots available for saving user presets. Once you have filled all 30 slots, you
+must delete a user preset in order to save a new one.
+Removing User Presets
+To remove a user preset:
+1. 2. Select the preset in the drop-down menu.
+Click on the Ø icon above the drop-down menu.
+→ The user preset will be deleted and not be available when opening the kit again.
+ABBEY ROAD 50S DRUMMER - Manual - 24
+The Performance View
+Kit Page
+4 The Performance View
+This chapter describes the Performance View interface of ABBEY ROAD 50S DRUMMER.
+Learn how to use the functions and controls of the four pages: Kit, Mixer, Grooves and Options.
+4.1 Kit Page
+The Kit page has a view of the drum kit where you can select each drum and adjust:
+▪ the tuning
+▪ the volume envelope
+▪ the overhead microphone mix
+▪ the room microphone mix
+You can also choose which snare you want to use, as well as load or unload the selected drum.
+ABBEY ROAD 50S DRUMMER - Manual - 25
+The Performance View
+Kit Page
+Kit page Performance View of the Spring Kit
+To select a drum or cymbal for editing, click on it with the mouse. To select a percussion in-
+strument, click on its icon at the right of the drum kit image. For details on editing the instru-
+ment settings on the Kit page, see section ↑3.2, Editing the Drums.
+Clicking on an instrument will also play the sound of that instrument, giving you a quick
+preview of the sound. For instructions on how to disable (or enable) sound playback on
+mouse click, see section ↑4.4.3, KIT VIEW Settings.
+ABBEY ROAD 50S DRUMMER - Manual - 26
+The Performance View
+Kit Page
+After selecting an instrument, its name and controls will appear in the panel at the bottom of
+the page. Editing the sound of a selected instrument will edit all articulations of that instru-
+ment.
+Each kit has two snare drums to choose from. You can select the snare drum you want to use
+by clicking on the A and B buttons below the snare image. Switching between the snares will
+unload the current snare from memory and load the other one, and will change the image of
+the snare drum.
+When the SELECT BY MIDI icon at the upper right of the Kit page is activated, the drums will
+be selected depending on the notes played with your MIDI input device.
+This function is automatically turned off during host playback, or while the file player of
+the KONTAKT stand-alone application is running (e.g. playing back a MIDI groove).
+You can also select the kit pieces by using the INSTRUMENT drop-down menu at the left
+of the panel at the bottom.
+You can remove the selected instrument from the kit (and thus unload it from memory) by
+clicking on the small memory chip icon to the right of the INSTRUMENT header, as described
+in section ↑3.2.4, Adding and Removing Drums. Removing unused kit pieces is useful for free-
+ing up computer memory. You can always load the kit pieces back at any time. When a kit
+piece is unloaded, its image turns dark.
+The rest of the panel contains the controls for the Overhead (OH) and Room microphone mix-
+es, the drum Tuning control, and the volume envelope of the drum with controls for the Attack,
+Hold, and Decay (AHD envelope). For more information on these controls, see sections ↑4.1.1,
+OH and ROOM MIX Knobs, ↑4.1.2, TUNE Knob, and ↑4.1.3, ATTACK, HOLD and DECAY
+Knobs.
+4.1.1 OH and ROOM MIX Knobs
+OH MIX and ROOM MIX knobs
+ABBEY ROAD 50S DRUMMER - Manual - 27
+The Performance View
+Kit Page
+The OH MIX and ROOM MIX knobs adjust the volume levels of the Overhead microphone(s)
+and the Room microphone(s) of the selected drum, cymbal, or percussion instrument. This al-
+lows you to create your own custom mix of those microphones for each individual drum, which
+is not possible in a traditional studio recording.
+Please note that this is a separate control from the overall level of the OH and Room mics.
+These levels can be adjusted on the Mixer page.
+4.1.2 TUNE Knob
+TUNE knob
+The TUNE knob changes the pitch of the selected kit piece. The pitch changes for all micro-
+phones and all articulations of that piece. The range of the TUNE knob is limited to values that
+are relatively realistic.
+4.1.3 ATTACK, HOLD and DECAY Knobs
+ATTACK, HOLD and DECAY knobs
+The ATTACK, HOLD and DECAY knobs are controls for a typical AHD volume envelope for each
+selected drum.
+▪ Increasing the ATTACK value adds more of a fade-in to the beginning of the sound.
+▪ The HOLD knob adjusts how long the sound stays at maximum volume.
+▪ The DECAY knob adjusts how quickly the sound fades out after the HOLD time has
+passed.
+ABBEY ROAD 50S DRUMMER - Manual - 28
+The Performance View
+Mixer Page
+For the most natural drum sound, the default setting is the best (ATTACK is off, and HOLD is
+at maximum). Adjusting these controls is only necessary if you want to shape the sound in an
+“unnatural” way.
+4.2 Mixer Page
+The Mixer page has the same microphone level and panning controls as a real mixing board, as
+well as a large selection of effects and routing controls. You can save and load all mixer set-
+tings by using the MIXER panel at the upper left of the page. This panel appears on every page
+of ABBEY ROAD 50S DRUMMER, in order to select different mixer page presets while using
+other parts of the interface.
+As each kit has a very different sound, mixer presets can only be used for the kit that they
+are saved with.
+ABBEY ROAD 50S DRUMMER - Manual - 29
+The Performance View
+Mixer Page
+Mixer page Performance View
+4.2.1 Common Mixer Controls
+▪ The channel faders on the Mixer page control the volume level of the various microphones.
+The faders in the CLOSE MICS area control the volume of the individual direct micro-
+phones, and the KIT MICS faders control the volume of the overhead and room micro-
+phones.
+ABBEY ROAD 50S DRUMMER - Manual - 30
+The Performance View
+Mixer Page
+The levels of each instrument within the overhead and room microphones can be adjusted
+separately, but this is done on the Kit page (see section ↑4.1, Kit Page above).
+▪ Each close mic and mono kit mic has a PAN knob to change the left and right location of
+that mic in the stereo field.
+▪ Each stereo kit mic has a WIDTH knob, ranging from MONO to STEREO. STEREO is the
+standard setting, where the left and right channels are independent on the left and right
+sides. As the knob is turned towards MONO, the left and right channels are combined un-
+til they become a single central sound source when the knob is turned all the way to the
+left.
+▪ The S and M buttons allow you to solo (S) and mute (M) the individual channels. When a
+track has the Solo button pressed, all other channels are silent and only the soloed chan-
+nel can be heard. Putting additional channels into solo mode will add those channels into
+the mix, but still keep all other channels silent. When the mute button is pressed, the se-
+lected track can no longer be heard. Mute has a higher “ranking” than solo, so if a track
+has both buttons pressed, the track will be muted.
+▪ The SEND knob at the top of each channel controls the amount of reverb effect to be in-
+cluded in the mix for that channel. The global reverb level is adjusted with the reverb fad-
+er in the BUSES area.
+4.2.2 CLOSE MICS Area
+The CLOSE MICS area takes up the left portion of the Mixer page. As the name suggests, this
+area contains the channel controls for the close microphones. The close microphones (also
+known as “direct” mics) are placed very close to the drums. There are close microphones for
+the kick, snare, hi-hat, toms, and some percussion.
+4.2.3 KIT MICS/BUSES Area
+The right portion of the Mixer page displays the controls for either the kit microphones or the
+busses:
+The Kit Microphones view includes controls for the overhead and room microphones. These mi-
+crophones are placed in such a way to record the sound of the entire kit, either with a stereo
+pair or with a single mono microphone.
+ABBEY ROAD 50S DRUMMER - Manual - 31
+The Performance View
+Mixer Page
+The controls in the Buses view are used to adjust the levels of the master output, master pan-
+ning and reverb return level.
+► To switch between the Kit Microphones and Buses view, click on the BUSES or KIT MICS
+button, respectively, both of which are located at the top-right of the Mixer page.
+► You can also switch the left and right position of the master out with the L↔R button on
+the MASTER channel. All channels are labeled at the bottom, and the labels are high-
+lighted when editing the channels.
+4.2.4 Effects
+Several new high quality effects are included with ABBEY ROAD 50S DRUMMER, specifically
+tailored for acoustic drum production. These effects are Convolution Reverb, Solid G-EQ, Solid
+Bus Comp, Tape Saturation, and the Transient Master. Each of these effects can be turned on or
+off for any of the channels by clicking on the LED next to each effect name at the bottom of
+the page.
+Convolution Reverb
+Convolution Reverb effect
+The Convolution Reverb includes many impulse samples of some of the best acoustic spaces
+for acoustic drum production.
+► To select an acoustic space, click the BUSES button and then click on the REVERB tab.
+The various spaces will then appear at the bottom of the screen.
+► To shift the selection over to reveal more room types, click on the room images to the right
+and left of the selected image.
+ABBEY ROAD 50S DRUMMER - Manual - 32
+The Performance View
+Mixer Page
+► To select the room type, click on the drop-down menu above the selected room image. The
+drop-down menu below the room image allows you to select a specific room preset within
+that room type.
+► To adjust the overall level of the reverb, move the fader on the Reverb channel. The
+amount of reverb in each channel is adjusted with the SEND knobs at the top of each
+microphone channel.
+Solid G-EQ
+Solid G-EQ effect
+The SOLID G-EQ is a uniquely musical EQ. Up to four frequency ranges can be adjusted with
+high precision.
+▪ The HZ/KHZ knobs set the center frequency that is being adjusted with the EQ.
+▪ For the two mid frequency ranges, there are Q knobs to adjust the width of the bell curve
+for the adjusted frequency range.
+▪ The DB knobs adjust the gain boost or gain reduction of the selected frequencies.
+▪ The low and the high frequencies can switch between bell curve and shelf modes by click-
+ing on the BELL button.
+▪ The OUTPUT knob on the right side adjusts the overall output level.
+ABBEY ROAD 50S DRUMMER - Manual - 33
+The Performance View
+Mixer Page
+Solid Bus Comp
+Solid B-Compression effect
+Also available as a fully-fledged product in its own right, this virtual reproduction of a legen-
+dary compressor adds presence and drive to your drums without blurring the detail.
+▪ The ATTACK knob adjusts the amount of time in milliseconds that it takes for the com-
+pressor to reach the ratio after the input signal exceeds the threshold level.
+▪ The RELEASE knob adjusts the amount of time in milliseconds that the compressor will
+take to stop affecting the sound after the input signal falls below the threshold.
+▪ The THRESHOLD knob adjusts the level in dB that the input signal must exceed before
+the compressor starts affecting the sound.
+▪ The RATIO knob controls the amount of compression expressed as a ratio of “input level”
+to “output level change”. The higher the RATIO knob is set, the more the output level will
+be reduced as the sound goes beyond the threshold.
+▪ The MIX knob allows you to add the dry signal to the mix as well, for a parallel compres-
+sion sound.
+▪ The MAKEUP knob allows you to increase the overall output level of the compressed
+sound.
+▪ The OUTPUT knob on the right side adjusts the overall output level.
+ABBEY ROAD 50S DRUMMER - Manual - 34
+The Performance View
+Mixer Page
+Tape Saturator
+Tape Saturator effect
+The Tape Saturator adds the simulated warmth of sound that comes from an analog tape ma-
+chine.
+▪ The WARMTH knob manipulates the frequencies of the audio to give a “warming” tone to
+the sound.
+▪ The GAIN knob adjusts the amount that the input signal is boosted with the saturated
+sound.
+▪ The HF knob takes away the highest frequencies in a similar way that analog tape rolls off
+those high frequencies.
+▪ The OUTPUT knob on the right side adjusts the overall output level.
+Transient Master
+Transient Master effect
+The Transient Master can subtly or drastically change the sound of the drums, depending on
+how you want to use it.
+▪ The INPUT knob adjusts the level of the input signal going into the effect.
+ABBEY ROAD 50S DRUMMER - Manual - 35
+The Performance View
+Mixer Page
+▪ The ATTACK knob adjusts the level of the attack of the signal.
+▪ The SUSTAIN knob adjusts how long the sound will ring out, which can effectively sound
+like changing the dampening or the size of the various drums, or even changing the size
+of the room that the drums are in.
+▪ The OUTPUT knob on the right side adjusts the overall output level.
+4.2.5 Channel Settings
+Each channel has its own settings for effect routing and channel output routing, and each mic
+channel can also be unloaded from memory if not in use.
+Channel Settings view for the Kick Drum
+▪ In the FX ROUTING area, there are four different effect routing presets to choose from.
+These change the order of which effect comes before the other, depending on your prefer-
+ence in a mix (for example, some engineers prefer to use EQ before compression, while
+others prefer to use it after compression). The signal chain of the effects goes from left to
+right according to the image, and you can step through the different order presets using
+the right and left arrows.
+▪ The CHANNEL area gives an OUTPUT drop-down menu to select which output that chan-
+nel will be routed to. Please note that the channel outputs must first be setup in KON-
+TAKT before being able to route them here. To unload a channel that is currently not in
+use from your computer's memory, select it from the drop-down menu (represented by a
+memory chip icon) in the top-right corner of the CHANNEL area. You can always load that
+channel back at any time.
+ABBEY ROAD 50S DRUMMER - Manual - 36
+The Performance View
+Mixer Page
+Additional Kick and Snare Controls
+The Kick and Snare close microphones have additional controls to adjust multiple direct mi-
+crophone levels:
+▪ For the Kick close mic, there is an additional area on the left where you can adjust the
+separate levels of the Direct In mic (placed inside the kick drum pointing towards the
+front head) and the Direct Out mic (placed a short distance outside of the kick drum).
+▪ For the Snare close mic, there is an additional area on the left where you can adjust the
+separate levels of the Direct Top mic (placed over the snare drum pointing down), the Di-
+rect Bottom mic (placed under the snare drum pointing up), and the Snare Bleed. The
+Snare Bleed fader adjusts the amount of the “buzzing” sound that the bottom of a snare
+produces when resonated by the Kick and Toms.
+4.2.6 FX Preset Handling
+► To step through the presets, simply click on the right and left arrows.
+► To load a preset, simply select the preset from the drop-down menu.
+Saving User Presets
+You can save presets for the settings of the whole mixer on the Mixer page, as well as kit map-
+ping layouts on the Options page. Each of these preset menus contains a selection of factory
+presets and allows you to save your own custom presets. Factory presets cannot be overwritten
+(indicated by the darkened Ø icon), but they can be adjusted and saved as a new user preset.
+To save a user preset:
+1. Adjust the settings you want to save and recall for your preset.
+ABBEY ROAD 50S DRUMMER - Manual - 37
+The Performance View
+Mixer Page
+2. Click in the text area on the preset drop-down menu.
+3. Type in the name for the new preset and click on the Save icon next to the drop-down
+menu.
+→ The new preset will now appear at the bottom of the drop-down menu and is ready to be
+used when opening the kit again.
+If you save a user preset without changing the name, it will overwrite the current user pre-
+set.
+There are 30 slots available for saving user presets. Once you have filled all 30 slots, you
+must delete a user preset in order to save a new one.
+Removing User Presets
+To remove a user preset:
+1. 2. Select the preset in the drop-down menu.
+Click on the Ø icon next to the drop-down menu.
+→ The user preset will be deleted and not be available when opening the kit again.
+ABBEY ROAD 50S DRUMMER - Manual - 38
+The Performance View
+Grooves Page
+4.3 Grooves Page
+The Grooves page is a browser with a huge library of organized MIDI grooves that can be used
+to quickly create drum parts for a song or production. You can edit several parameters to
+change the beats, and all grooves can be dragged into your host.
+The GROOVE panel at the top right of the page allows you to play the groove with the play but-
+ton, and select through the variations of that groove with the right and left arrow buttons. This
+panel is available on every page of ABBEY ROAD 50S DRUMMER so you can play the grooves
+when using any of the other pages.
+► To use a groove in your host, click in the area of the groove name and drag the groove to
+your track in the host. A MIDI file of the groove will be created in your track.
+ABBEY ROAD 50S DRUMMER - Manual - 39
+The Performance View
+Grooves Page
+Grooves page Performance View
+The GROOVE BROWSER has a total of three columns:
+▪ The leftmost column shows a list of Genre folders, each with its own set of customized
+Grooves, Fills and Variations.
+ABBEY ROAD 50S DRUMMER - Manual - 40
+The Performance View
+Grooves Page
+▪ The middle column shows the list of Grooves and Fills available for that Genre. The stand-
+ard time signature is 4/4, unless otherwise shown in the name of the Groove or Fill. And
+the end of each Groove, there is a suggested BPM (beats per minute) tempo to use, but
+the grooves can be used at any tempo.
+▪ The rightmost column is a list of all Variations for the selected Groove or Fill. To select a
+Variation, double click on the variation name. After selecting one variation, you can use
+the up and down arrows on your computer keyboard to select among the variations, or the
+right and left arrows in the GROOVE panel.
+Available Grooves
+The 7 Genres included with ABBEY ROAD 50S DRUMMER are:
+▪ Rock’n’Roll
+▪ Blues
+▪ Traditional Pop
+▪ Country
+▪ Jazz
+▪ Soul – Funk
+▪ Indie
+A Groove for a particular Genre is a typical beat that would be used for that genre. Similarly, a
+Fill for a particular Genre is a drum fill that would be used in music for that genre. A Variation
+has the same general sound and feel of the main Groove or Fill, but has some small changes,
+ranging from different hi-hat rates to additions of ghost notes to changes of drums used, etc.
+The different Variations have key words in their names to identify the changes made in a par-
+ticular variation, which are listed below:
+▪ 4th, 8th, 16th, etc.: This represents the note division on which the tempo of the groove is
+played or felt. This is usually based on the instrument that is keeping the time, such as
+the hi-hat or ride cymbal.
+▪ Hat/Ride/Other: This is the instrument that is keeping the time of the groove, typically a
+hi-hat or ride cymbal.
+ABBEY ROAD 50S DRUMMER - Manual - 41
+The Performance View
+Grooves Page
+▪ Closed/Open/Both: This term is used when a hi-hat is keeping the time, and describes
+whether the hi-hat is always closed, always open, or uses both closed and open hits. This
+term will not be used if a ride cymbal or other instrument is keeping the time.
+▪ “Extra”: Sometimes an extra word is added at the end to classify the sound of the groove:
+◦ Ghost: This is used when there are additional ghost notes added to the groove, such
+as snare or kick ghost hits.
+◦ Side: This term is used if a snare sidestick is used instead of a center hit.
+◦ Toms: When additional toms are included in the groove, this term will appear.
+◦ Perc: If additional percussion sounds are used, which includes extra percussion such
+as cowbells or hand claps, as well as “rim only” articulations, then this term will be
+used.
+◦ Multi: If more than one of the above sounds or techniques is used, then the term at
+the end will be Multi to represent multiple types.
+Groove Controls
+▪ The TIGHTNESS knob changes the amount of “groove” in the beat. The center value is
+the original sounding played beat. When turned all the way to the right, the beat is com-
+pletely quantized and “machine-like”. As the knob is turned to the left, the beat gets
+more and more loose until it sounds very “sloppy” when turned all the way to the left. De-
+pending on the type of music, all knob positions can be useful for different styles.
+▪ The SWING knob adjusts the amount of swing in the beat. Swing allows for rhythmic
+shifting of a groove where the first note in a series plays longer than the one that follows.
+When the knob is all the way to the right, the swing is the most severe. When all the way
+to the left, a “negative” swing is applied, where the first note in the series is actually
+shorter than the one that follows. Different time signatures affect the swing in different
+ways, so it is often best just to try the SWING knob to see how it sounds with the selected
+groove.
+▪ The GRID selector allows you to select different quantization timings for the TIGHTNESS
+and SWING knobs. For example, selecting 1/8 will push the grooves towards or away from
+the 8th notes of the beat when using the TIGHTNESS knob.
+ABBEY ROAD 50S DRUMMER - Manual - 42
+The Performance View
+Options Page
+▪ The VELOCITY knob changes the range of the velocities in the grooves. At the center posi-
+tion, the groove plays with the same velocities that were recorded with it. As the knob is
+turned to the right, the range is “compressed” to the high range so that all velocity values
+increase until they are all at maximum when the knob is all the way to the right. Similarly,
+when the knob is turned to the left the velocities are “compressed” to the low range until
+all velocities are the lowest when turning the knob all the way to the left.
+▪ The TEMPO selection buttons allow you to immediately change the tempo of the groove or
+fill to be half the speed or double the speed of the originals. This can be useful when a
+song is recorded at a high BPM tempo, but the feel of the song is actually half of that
+speed (or vice versa).
+4.4 Options Page
+The Options page is where additional “technical” parameters of a kit are adjusted, such as the
+MIDI note mapping and velocity ranges. There is also a RANDOMIZE section where various
+sound parameters have random values applied.
+ABBEY ROAD 50S DRUMMER - Manual - 43
+The Performance View
+Options Page
+Options page Performance View
+4.4.1 VELOCITY Settings
+The VELOCITY area at the top allows you to fine-tune the way ABBEY ROAD 50S DRUMMER
+responds to MIDI input:
+▪ In the CURVE section you can select a curve for incoming MIDI note velocities. The de-
+fault is a linear curve, but many MIDI input devices have different levels of sensitivity,
+making a convex or concave curve more appropriate. There is also an option to select a
+constant “fixed” velocity (represented by a horizontal line).
+ABBEY ROAD 50S DRUMMER - Manual - 44
+The Performance View
+Options Page
+▪ Utilizing the RANGE controls, you can change the lowest and highest velocity values. This
+is useful for preventing the quietest and/or the loudest sounds from playing, and instead
+be limited to the specified minimum and maximum. Different MIDI input devices, such as
+MIDI keyboards and electronic drum kits, will also need their own velocity setting adjust-
+ments to match your playing style.
+4.4.2 MIDI Mapping
+The MIDI MAPPING area contains all of the controls for changing the mapping layout of the
+kits. Each articulation can be assigned to one or more MIDI notes, allowing for your own cus-
+tomized mapping. This is very useful for adjusting the mapping to the way that suits you best
+when playing the drums with a MIDI keyboard, or for adjusting the mapping to a custom elec-
+tronic drum setup.
+To assign the MIDI notes manually by entering or selecting the note in the NOTE selector:
+1. Select the INSTRUMENT and the ARTICULATION in the drop-down menus.
+2. Click on the checkbox next to the APPLY CHANGES? label.
+→ The changes will be applied.
+You can also click the SELECT BY MIDI icon to change to the NOTE value by playing the
+MIDI note, and then following the procedure above to assign the note.
+All custom MIDI mappings can be saved and loaded from the mapping preset menu.
+Mapping Presets
+ABBEY ROAD 50S DRUMMER also comes with a selection of mapping presets that are set up
+to work with popular software and electronic drum setups. These include:
+▪ Brushes
+▪ GM (General MIDI)
+▪ V-Drums (two options)
+▪ DrumIt Five
+▪ EZDrummer
+▪ Superior Drummer
+ABBEY ROAD 50S DRUMMER - Manual - 45
+The Performance View
+Options Page
+▪ BFD
+▪ iMap
+▪ Addictive Drums
+These mappings can be selected from the PRESET drop-down menu in the MIDI MAPPING
+area. If you want to make changes to these mappings, you can always do so and save the map-
+ping preset under a different name.
+Mapping presets in the Options tab.
+Please keep in mind that every e-drum setup is different, and almost every drum kit has
+some particularities to it. Therefore the mapping presets will not fully match your e-drum
+setup without any adjustments. These mapping presets have been included to provide you
+with the best possible starting point. You can make additional changes to these mappings
+and save a new preset to fit your e-drum needs.
+4.4.3 KIT VIEW Settings
+The KIT VIEW area holds the properties of the Kit page:
+▪ TRIGGER ON MOUSE CLICK: This option defines if the sound of an instrument is played
+back when the instrument’s image on the Kit page is clicked on with the mouse.
+▪ SHOW TRIGGER STATES: This option defines whether the drum kit view on the Kit page
+displays a real-time animation when instruments are triggered (played) during song or
+MIDI groove playback.
+ABBEY ROAD 50S DRUMMER - Manual - 46
+The Performance View
+Options Page
+It is recommended to deactivate the SHOW TRIGGER STATES option when computing
+power is scarce, e.g. when working on projects with high track counts. Switching off the
+user interface animations may considerably reduce the CPU load.
+4.4.4 RANDOMIZE Settings
+The controls in the RANDOMIZE area add custom levels of humanization and variation in the
+sound output. The higher the value of a knob, the higher the range of randomization for the
+relevant control. The randomized parameters are:
+▪ VOLUME: The volume level of the played drum increases or decreases by a random
+amount with each hit.
+▪ VELOCITY: The velocity of the played drum will increase or decrease slightly, which can
+trigger different samples above or below the one at the original velocity.
+▪ TIME: This will add a slight random amount of delay to each hit.
+▪ PITCH: The pitch of the played drum will be higher or lower by a slight amount with each
+hit.
+▪ TONE: This will slightly change the frequency curve of each hit. Different drums have dif-
+ferent frequency ranges, specific to the sound of each drum.
+A good way to add even more subtle variation to the sounds in the kit is to change the ran-
+domization parameters just slightly, especially the PITCH, TONE and VOLUME knobs. For
+all knobs, turning them a maximum of a quarter of the way up will allow the effect to re-
+main subtle. Turning these knobs up to a high value can be used for a more experimental
+sound.
+ABBEY ROAD 50S DRUMMER - Manual - 47
+Kit Selection
+5 Kit Selection
+There are a total of four main instrument NKIs included with ABBEY ROAD 50s DRUMMER:
+▪ Autumn Kit Full: This is the full version of the Ebony Kit with all samples and microphones
+included.
+▪ Autumn Kit Lite: This is a version of the Ebony Kit that includes all velocity layers, but has
+no sound variations for same velocity hits. This kit has a smaller memory footprint as well
+as a faster loading time than the full kit.
+▪ Spring Kit Full: This is the full version of the Ivory Kit with all samples and microphones
+included.
+▪ Spring Kit Lite: This is a version of the Ivory Kit that includes all velocity layers, but has no
+sound variations for same velocity hits. This kit has a smaller memory footprint as well as
+a faster loading time than the full kit.
+ABBEY ROAD 50S DRUMMER - Manual - 48
+Kit Selection
+Autumn Kit – Default Mapping
+5.1 Autumn Kit – Default Mapping
+Drum Articulation Default Key / MIDI Number
+Kick Drum Dampened
+Half Open
+C3 / 60 (D#7 / 111)
+C1 / 36 (A#4 / 82)
+Snare Drum
+A, B & C
+Center Left Hand
+Center Right Hand
+Center Right/Left Alternating *
+Halfway Left Hand
+Halfway Right Hand
+Halfway Right/Left Alternating *
+Rimshot
+Sidestick
+Flam
+Roll***
+Wires Off
+Rim Only
+Brush Tap Left Hand
+Brush Tap Right Hand
+Brush Dig In
+Brush Swish
+F6 / 101
+G6 / 103
+D1 / 38
+A6 / 105
+B6 / 107
+E1 / 40
+D#1 / 39
+C#1 / 37
+D3 / 62
+D#3 / 63
+E3 / 64
+C#3 / 61
+A4 / 81
+B4 / 83
+C5 / 84
+D5 / 86
+ABBEY ROAD 50S DRUMMER - Manual - 49
+Drum Hi-hat Tom 1 (Rack Tom) Kit Selection
+Autumn Kit – Default Mapping
+Articulation Default Key / MIDI Number
+Closed Tight Tip Right Hand
+Closed Tight Tip Left Hand
+Closed Tight Tip Right/Left Alternating *
+Closed Tip Right Hand
+Closed Tip Left Hand
+Closed Tip Right/Left Alternating *
+Closed Shank Right Hand
+Closed Shank Left Hand
+Closed Shank Right/Left Alternating *
+Closed Pedal
+Open Pedal
+Open Quarter
+Open Half
+Open Three-Quarters
+Open Loose
+Open Full
+Open Controller **
+Brush Open
+Brush Closed Tip
+Brush Half Open
+D#6 / 99
+C#6 / 97
+F#3 / 66
+G#6 / 104
+F#6 / 102
+F#1 / 42
+C#7 / 109
+A#6 / 106
+G#3 / 68
+G#1 / 44
+A#3 / 70
+E4 / 76
+F4 / 77
+F#4 / 78
+G4 / 79
+G#4 / 80
+A#1 / 46
+C#5 / 85
+D#5 / 87
+F#5 / 90
+Center Right Hand
+Center Left Hand
+Center Right/Left Alternating *
+Rimshot
+Rim Only
+Brush Tap
+Brush Dig
+A7 / 117
+G7 / 115
+B1 / 47
+B3 / 71
+D#4 / 75
+B5 / 95
+C6 / 96
+ABBEY ROAD 50S DRUMMER - Manual - 50
+Drum Tom 2 (Rack Tom) Tom 3 (Rack Tom) Cymbal 1 (Crash 1) Cymbal 2 (Crash 2) Kit Selection
+Autumn Kit – Default Mapping
+Articulation Default Key / MIDI Number
+Center Right Hand
+Center Left Hand
+Center Right/Left Alternating *
+Rimshot
+Rim Only
+Brush Tap
+Brush Dig
+F7/ 113
+E7 / 112
+A1 / 45
+A3 / 69
+C#4 / 73
+E5 / 88
+A5 / 93
+Center Right Hand
+Center Left Hand
+Center Right/Left Alternating *
+Rimshot
+Rim Only
+Brush Tap
+Brush Dig
+D7 / 110
+C7 / 108
+F1 / 41 (G1 / 43)
+F3 / 65 (G3 / 67)
+C4 / 72 (D4 / 74)
+E5 / 88
+F5 / 89
+Edge
+Tip
+Bell
+Choke
+Brush
+A#2 / 58
+C2 / 48 (A2 / 57)
+D2 / 50 (B2 / 59)
+A#-1 / 22 (C#0 / 25)
+G#5 / 92
+Edge
+Tip
+Bell
+Choke
+Brush
+G2 / 55
+F#2 / 54
+G#2 / 56
+C0 / 24
+A#5 / 94
+ABBEY ROAD 50S DRUMMER - Manual - 51
+Drum Cymbal 3 (Ride) Kick Shell Clap Sticks Triangle Woodblock Kit Selection
+Autumn Kit – Default Mapping
+Articulation Default Key / MIDI Number
+Tip
+Bell
+Edge
+Choke
+Brush Tip
+Brush Sweep
+B2 / 59
+A2 / 57
+A#2 / 58
+B-1 / 23
+B5 / 95
+C6 / 96
+Hit G0 / 31 (G#0 / 32)
+Solo
+Multi
+A0 / 33
+A#0 / 34
+Hit B0 / 35
+Open
+Muted
+E0 / 26 (F#0 / 30)
+F0 / 29
+Hit D0 / 26 (D#0 / 37)
+ABBEY ROAD 50S DRUMMER - Manual - 52
+Kit Selection
+Autumn Kit – Brushes Mapping
+5.2 Autumn Kit – Brushes Mapping
+Drum Articulation Default Key / MIDI Number
+Kick Drum Dampened
+Half Open
+C3 / 60 (D#7 / 111)
+C1 / 36 (A#4 / 82)
+Snare Drum
+A, B & C
+Center Left Hand
+Center Right Hand
+Center Right/Left Alternating *
+Halfway Left Hand
+Halfway Right Hand
+Halfway Right/Left Alternating *
+Rimshot
+Sidestick
+Flam
+Roll***
+Wires Off
+Rim Only
+Brush Tap Left Hand
+Brush Tap Right Hand
+Brush Dig In
+Brush Swish
+F6 / 101
+G6 / 103
+A4 / 81
+A6 / 105
+B6 / 107
+B4 / 83
+C5 / 84
+C#1 / 37
+D5 / 86
+D#3 / 63
+E3 / 64
+C#3 / 61
+D1 / 38
+E1 / 40
+D#1 / 39
+C#1 / 37
+ABBEY ROAD 50S DRUMMER - Manual - 53
+Drum Hi-hat Tom 1 (Rack Tom) Kit Selection
+Autumn Kit – Brushes Mapping
+Articulation Default Key / MIDI Number
+Closed Tight Tip Right Hand
+Closed Tight Tip Left Hand
+Closed Tight Tip Right/Left Alternating *
+Closed Tip Right Hand
+Closed Tip Left Hand
+Closed Tip Right/Left Alternating *
+Closed Shank Right Hand
+Closed Shank Left Hand
+Closed Shank Right/Left Alternating *
+Closed Pedal
+Open Pedal
+Open Quarter
+Open Half
+Open Three-Quarters
+Open Loose
+Open Full
+Open Controller **
+Brush Open
+Brush Closed Tip
+Brush Half Open
+D#6 / 99
+C#6 / 97
+F#3 / 66
+G#6 / 104
+F#6 / 102
+F#1 / 42
+C#7 / 109
+A#6 / 106
+G#3 / 68
+G#1 / 44
+A#3 / 70
+E4 / 76
+F4 / 77
+F#4 / 78
+G4 / 79
+G#4 / 80
+A#1 / 46
+D6 / 98
+E6 / 100
+A#1 / 46
+Center Right Hand
+Center Left Hand
+Center Right/Left Alternating *
+Rimshot
+Rim Only
+Brush Tap
+Brush Dig
+E7 / 112
+F7 / 113
+G5 / 91 (A5 / 93)
+A3 / 69 (B3 / 71)
+C#4 / 73 (D#4 / 75)
+C2 / 48
+D2 / 50
+ABBEY ROAD 50S DRUMMER - Manual - 54
+Drum Tom 2 (Rack Tom) Tom 3 (Floor Tom) Cymbal 1 (Crash 1) Cymbal 2 (Crash 2) Kit Selection
+Autumn Kit – Brushes Mapping
+Articulation Default Key / MIDI Number
+Center Right Hand
+Center Left Hand
+Center Right/Left Alternating *
+Rimshot
+Rim Only
+Brush Tap
+Brush Dig
+D7 / 110
+C7 / 108
+E5 / 88 (F5 / 89)
+G3 / 67
+D4 / 74
+A1 / 45
+B1 / 47
+Center Right Hand
+Center Left Hand
+Center Right/Left Alternating *
+Rimshot
+Rim Only
+Brush Tap
+Brush Dig
+D7 / 110
+C7 / 108
+E5 / 88 (F5 / 89)
+F3 / 65
+C4 / 72
+F1 / 41
+G1 / 43
+Edge
+Tip
+Bell
+Choke
+Brush
+A#2 / 58
+C2 / 48 (A2 / 57)
+D2 / 50 (B2 / 59)
+A#-1 / 22 (C#0 / 25)
+C#2 / 49
+Edge
+Tip
+Bell
+Choke
+Brush
+G2 / 55
+F#2 / 54
+G#2 / 56
+C0 / 24
+D#2 / 51
+ABBEY ROAD 50S DRUMMER - Manual - 55
+Drum Cymbal 3 (Ride) Kick Shell Clap Sticks Triangle Woodblock Kit Selection
+Autumn Kit – Brushes Mapping
+Articulation Default Key / MIDI Number
+Tip
+Bell
+Edge
+Choke
+Brush Tip
+Brush Sweep
+B2 / 59
+A2 / 57
+A#2 / 58
+B-1 / 23
+E2 / 52
+F2 / 53
+Hit G0 / 31 (G#0 / 32)
+Solo
+Multi
+A0 / 33
+A#0 / 34
+Hit B0 / 35
+Open
+Muted
+E0 / 26 (F#0 / 30)
+F0 / 29
+Hit D0 / 26 (D#0 / 37)
+ABBEY ROAD 50S DRUMMER - Manual - 56
+Kit Selection
+Spring Kit – Default Mapping
+5.3 Spring Kit – Default Mapping
+Drum Articulation Default Key / MIDI Number
+Kick Drum Dampened
+Open
+C1 / 36 (A#4 / 82)
+C3 / 60 (D#7 / 111)
+Snare Drum
+A, B & C
+Center Left Hand
+Center Right Hand
+Center Right/Left Alternating *
+Halfway Left Hand
+Halfway Right Hand
+Halfway Right/Left Alternating *
+Rimshot
+Sidestick
+Flam
+Roll***
+Wires Off
+Rim Only
+Brush Tap Left Hand
+Brush Tap Right Hand
+Brush Dig In
+Brush Swish
+F6 / 101
+G6 / 103
+D1 / 38
+A6 / 105
+B6 / 107
+E1 / 40
+D#1 / 39
+C#1 / 37
+D3 / 62
+D#3 / 63
+E3 / 64
+C#3 / 61
+A4 / 81
+B4 / 83
+C5 / 84
+D5 / 86
+ABBEY ROAD 50S DRUMMER - Manual - 57
+Drum Hi-hat Tom 1 (Rack Tom) Kit Selection
+Spring Kit – Default Mapping
+Articulation Default Key / MIDI Number
+Closed Tight Tip Right Hand
+Closed Tight Tip Left Hand
+Closed Tight Tip Right/Left Alternating *
+Closed Tip Right Hand
+Closed Tip Left Hand
+Closed Tip Right/Left Alternating *
+Closed Shank Right Hand
+Closed Shank Left Hand
+Closed Shank Right/Left Alternating *
+Closed Pedal
+Open Pedal
+Open Quarter
+Open Half
+Open Three-Quarters
+Open Loose
+Open Full
+Open Controller **
+Brush Closed Bell
+Brush Closed Tip
+Brush Open
+D#6 / 99
+C#6 / 97
+F#3 / 66
+G#6 / 104
+F#6 / 102
+F#1 / 42
+C#7 / 109
+A#6 / 106
+G#3 / 68
+G#1 / 44
+A#3 / 70
+E4 / 76
+F4 / 77
+F#4 / 78
+G4 / 79
+G#4 / 80
+A#1 / 46
+C#5 / 85
+D#5 / 87
+F#5 / 90
+Center Right Hand
+Center Left Hand
+Center Right/Left Alternating *
+Rimshot
+Rim Only
+Brush Tap
+Brush Dig
+E7 / 112
+F7 / 113
+A1 / 45 (B1 / 47)
+A3 / 69 (B3 / 71)
+C#4 / 73 (D#4 / 75)
+G5 / 91
+A5 / 93
+ABBEY ROAD 50S DRUMMER - Manual - 58
+Drum Tom 2 (Floor Tom) Cymbal 1 (Crash 1) Cymbal 2 (Crash 2) Cymbal 3 (Ride) Tambourine Claps Kit Selection
+Spring Kit – Default Mapping
+Articulation Default Key / MIDI Number
+Center Right Hand
+Center Left Hand
+Center Right/Left Alternating *
+Rimshot
+Rim Only
+Brush Tap
+Brush Dig
+D7 / 110
+C7 / 108
+F1 / 41 (G1 / 43)
+F3 / 65 (G3 / 67)
+C4 / 72 (C#4 / 73)
+E5 / 88
+F5 / 89
+Edge
+Tip
+Bell
+Choke
+Brush
+C#2 / 49 (A#2 / 58)
+C2 / 48 (A2 / 57)
+D2 / 50 (B2 / 59)
+A#-1 / 22 (C#0 / 25)
+G#5 / 92
+Edge
+Tip
+Bell
+Choke
+Brush
+G2 / 55
+F#2 / 54
+G#2 / 56
+C0 / 24
+A#5 / 94
+Tip
+Bell
+Edge
+Choke
+Brush Tip
+Brush Sweep
+D#2 / 51
+F2 / 53
+E2 / 52
+B-1 / 23
+B5 / 95
+C6 / 96
+Tap
+Shake
+G0 / 31
+G#0 / 32
+Solo
+Multi
+A0 / 33
+A#0 / 34
+ABBEY ROAD 50S DRUMMER - Manual - 59
+Kit Selection
+Spring Kit – Default Mapping
+Drum Articulation Default Key / MIDI Number
+Sticks Hit B0 / 35
+Cowbell Hit F0 / 29 (F#0 / 30)
+Bongo Low
+High Muted
+High Open
+D0 / 26
+D#0 / 27
+E0 / 28
+ABBEY ROAD 50S DRUMMER - Manual - 60
+Kit Selection
+Spring Kit – Brushes Mapping
+5.4 Spring Kit – Brushes Mapping
+Drum Articulation Default Key / MIDI Number
+Kick Drum Dampened
+Half Open
+C3 / 60 (D#7 / 111)
+C1 / 36 (A#4 / 82)
+Snare Drum
+A, B & C
+Center Left Hand
+Center Right Hand
+Center Right/Left Alternating *
+Halfway Left Hand
+Halfway Right Hand
+Halfway Right/Left Alternating *
+Rimshot
+Sidestick
+Flam
+Roll***
+Wires Off
+Rim Only
+Brush Tap Left Hand
+Brush Tap Right Hand
+Brush Dig In
+Brush Swish
+F6 / 101
+G6 / 103
+A4 / 81
+A6 / 105
+B6 / 107
+B4 / 83
+C5 / 84
+C#1 / 37
+D5 / 86
+D#3 / 63
+E3 / 64
+C#3 / 61
+D1 / 38
+E1 / 40
+D#1 / 39
+C#1 / 37
+ABBEY ROAD 50S DRUMMER - Manual - 61
+Drum Hi-hat Tom 1 (Rack Tom) Kit Selection
+Spring Kit – Brushes Mapping
+Articulation Default Key / MIDI Number
+Closed Tight Tip Right Hand
+Closed Tight Tip Left Hand
+Closed Tight Tip Right/Left Alternating *
+Closed Tip Right Hand
+Closed Tip Left Hand
+Closed Tip Right/Left Alternating *
+Closed Shank Right Hand
+Closed Shank Left Hand
+Closed Shank Right/Left Alternating *
+Closed Pedal
+Open Pedal
+Open Quarter
+Open Half
+Open Three-Quarters
+Open Loose
+Open Full
+Open Controller **
+Brush Open
+Brush Closed Tip
+Brush Half Open
+D#6 / 99
+C#6 / 97
+F#3 / 66
+G#6 / 104
+F#6 / 102
+F#1 / 42
+C#7 / 109
+A#6 / 106
+G#3 / 68
+G#1 / 44
+A#3 / 70
+E4 / 76
+F4 / 77
+F#4 / 78
+G4 / 79
+G#4 / 80
+A#1 / 46
+D6 / 98
+E6 / 100
+A#1 / 46
+Center Right Hand
+Center Left Hand
+Center Right/Left Alternating *
+Rimshot
+Rim Only
+Brush Tap
+Brush Dig
+E7 / 112
+F7 / 113
+G5 / 91 (A5 / 93)
+A3 / 69 (B3 / 71)
+C#4 / 73 (D#4 / 75)
+C2 / 48 (G1 / 43)
+D2 / 50
+ABBEY ROAD 50S DRUMMER - Manual - 62
+Drum Tom 2 (Floor Tom) Cymbal 1 (Crash 1) Cymbal 2 (Crash 2) Cymbal 3 (Ride) Tambourine Claps Kit Selection
+Spring Kit – Brushes Mapping
+Articulation Default Key / MIDI Number
+Center Right Hand
+Center Left Hand
+Center Right/Left Alternating *
+Rimshot
+Rim Only
+Brush Tap
+Brush Dig
+D7 / 110
+C7 / 108
+E5 / 88 (F5 / 89)
+F3 / 65 (G3 / 67)
+C4 / 72 (D4 / 74)
+A1 / 45 (F1 / 41)
+B1 / 47
+Edge
+Tip
+Bell
+Choke
+Brush
+A#2 / 58
+C2 / 48 (A2 / 57)
+D2 / 50 (B2 / 59)
+A#-1 / 22 (C#0 / 25)
+C#2 / 49
+Edge
+Tip
+Bell
+Choke
+Brush
+G2 / 55
+F#2 / 54
+G#2 / 56
+C0 / 24
+D#2 / 51
+Tip
+Bell
+Edge
+Choke
+Brush Tip
+Brush Sweep
+B2 / 59
+A2 / 57
+A#2 / 58
+B-1 / 23
+E2 / 52
+F2 / 53
+Tap
+Shake
+G0 / 31
+G#0 / 32
+Solo
+Multi
+A0 / 33
+A#0 / 34
+ABBEY ROAD 50S DRUMMER - Manual - 63
+Kit Selection
+Spring Kit – Brushes Mapping
+Drum Articulation Default Key / MIDI Number
+Sticks Hit B0 / 35
+Cowbell Hit F0 / 29 (F#0 / 30)
+Bongo Low
+High Muted
+High Open
+D0 / 26
+D#0 / 27
+E0 / 28
+* There is a separate note assignment that alternates between the left and right hand samples
+of the center snare, center tom, and closed hi-hat articulations when playing faster than a cer-
+tain speed. This adds a realistic sound to faster playing, as a drummer would also switch to
+using both hands at fast speeds.
+** There is a separate note assignment for the open hi-hat that controls the amount of hi-hat
+openness depending on the position of the Modwheel controller (CC1) or a hi-hat foot control-
+ler (CC4). At the 0 position of the controller, the open hi-hat control key plays the fully open
+hi-hat. As the controller sends higher values, playing the open hi-hat control key will trigger hi-
+hat samples that gradually become more closed.
+*** There is a separate note assignment for the snare roll (Note D#3 / MIDI Number 63) that
+controls the volume of the snare roll depending on the position of the Pitch controller (CC0). If
+you have a MIDI device with a Pitch bend lever and move it to the left position the snare roll
+will be softer, if you move it to the right the snare roll will be louder when the articulation is
+played. Alternatively, if you have a Pitch bend wheel, moving it downwards into negative values
+will make the snare roll softer and pushing it up into positive values will make the snare roll
+louder when the articulation is played.
+ABBEY ROAD 50S DRUMMER - Manual - 64
+Credits
+6 Credits
+Product Design: Dinos Vallianatos, Frank Elting
+Sound Design: Thanos Kazakos, Julian Laping, Sebastian Müller
+Sample Editing: e-Instruments
+Graphic Design: Gösta Wellmer, Florian Poschlod, Efflam Le Bivic
+Kontakt Scripting: Dinos Vallianatos, Thanos Kazakos, Adam Hanley
+QA for Instruments powered by KONTAKT: Bymski, Achim Siebert
+MIDI Grooves: Simon Baumann, Ludger Kleff, Julian Laping
+Mixer Preset Design: Sebastian Müller, Chuck Zwicky, Peter Funke
+Session Leader: Julian Laping
+Executive Producer: Mirek Stiles
+Recording Engineer: Chris Bolster
+Assistant engineer: Toby Hulbert, Matthew Mysko
+Drummer: Paul Clarvis
+Drum Technician: Dave Payne
+Documentation: Mirek Stiles, Paul Maurer
+All Drums Provided by: Paul Clarvis
+ABBEY ROAD 50S DRUMMER - Manual - 65

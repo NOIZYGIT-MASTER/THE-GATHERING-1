@@ -1,65 +1,89 @@
-# General Skill 5-Minute Preflight Runbook
+# REST API 5-Minute Preflight Runbook
 
-Use this before deep debugging.
+Use this before deep debugging. It catches common Zoom REST API integration failures fast.
 
 ## Skill Doc Standard Note
 
-- Skill entrypoint is `SKILL.md`.
+- Agent-skill standard entrypoint is `SKILL.md`.
 - This runbook is an operational convention (recommended), not a required skill file.
-- SDK/API names can drift by version; validate current names against docs/raw-docs before release.
+- `SKILL.md` is also a navigation convention for larger skill docs.
 
-## 1) Confirm Integration Surface
+## 1) Confirm Auth Flow and Endpoint
 
-- Use `general` as the routing hub for cross-product intent selection.
-- Confirm each use-case links to the correct product skill chain.
-- Use this runbook before troubleshooting multi-product integrations.
+- Choose matching OAuth flow for use case (S2S/User/PKCE/Device).
+- Use token URL `https://zoom.us/oauth/token`.
 
-## 2) Confirm Required Credentials
+Wrong flow or token endpoint causes immediate auth failures.
 
-- Validate OAuth model selection (User OAuth vs Server-to-Server OAuth) before implementation.
-- Ensure required scopes are documented in each use-case.
-- Keep credential storage server-side; only expose short-lived tokens to clients.
+## 2) Confirm Scope and Account Context
 
-## 3) Confirm Lifecycle Order
+- Verify token contains required scopes.
+- For admin/account-level operations, verify app/account permissions.
+- Re-authorize after scope changes.
 
-1. Pick product path (`REST`, `Meeting SDK`, `Video SDK`, `Apps SDK`, `Phone`, `Contact Center`, etc.).
-2. Map auth flow and required scopes.
-3. Define event model (`webhooks` or `websockets`) and correlation IDs.
-4. Validate deployment model and operational monitoring requirements.
+## 3) Confirm ID Semantics
 
-## 4) Confirm Event/State Handling
+- Distinguish Meeting ID vs Meeting UUID.
+- Apply required URL encoding (double-encoding for UUID where needed).
 
-- Keep use-case assumptions explicit when combining multiple products.
-- Store cross-system identifiers (meeting/session/call/engagement IDs) for traceability.
-- Document fallback behavior when API names/fields drift between versions.
+### ID Sanity Rules
 
-## 5) Confirm Cleanup + Upgrade Posture
+- Use numeric Meeting ID for many standard meeting operations.
+- Use Meeting UUID for some past-instance/recording/report operations.
+- If endpoint docs mention UUID and your value contains `/` or `+`, encode carefully.
 
-- Remove stale route links whenever skills are renamed or moved.
-- Keep `.env` key references centralized in environment variable reference docs.
-- Refresh compatibility notes after each major SDK/API update cycle.
+If a resource "exists" in UI but API returns not found, ID type/encoding mismatch is a top cause.
+
+## 4) Confirm Pagination and Rate Limits
+
+- Handle `next_page_token` where applicable.
+- Implement retry/backoff on 429 and transient 5xx.
+
+### Minimal Retry Policy
+
+- 429 or 5xx: exponential backoff with jitter.
+- Respect retry headers when provided.
+- Put high-volume endpoints behind queue/batch workers.
+
+## 5) Confirm Webhook-Driven Workflows
+
+- If pipeline is event-driven, validate webhook signatures and retry behavior.
+- Respond quickly and process asynchronously.
 
 ## 6) Quick Probes
 
-- Routing matrix still points to existing `SKILL.md` files.
-- Use-cases include at least one concrete implementation chain.
-- OAuth/scopes guidance matches current Marketplace app model.
+- `GET /v2/users/me` succeeds with current token.
+- Representative endpoint (e.g., list meetings) returns expected schema.
+- Error payload includes actionable code/details (not HTML response).
+
+### Copy/Paste Validation Commands
+
+```bash
+# 1) Get S2S access token
+curl -X POST "https://zoom.us/oauth/token" \
+  -H "Authorization: Basic $(printf '%s:%s' "$ZOOM_CLIENT_ID" "$ZOOM_CLIENT_SECRET" | base64)" \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "grant_type=account_credentials&account_id=$ZOOM_ACCOUNT_ID"
+
+# 2) Validate token can access account context
+curl -X GET "https://api.zoom.us/v2/users/me" \
+  -H "Authorization: Bearer $ZOOM_ACCESS_TOKEN"
+
+# 3) List meetings for current user (quick schema sanity)
+curl -X GET "https://api.zoom.us/v2/users/me/meetings?page_size=30" \
+  -H "Authorization: Bearer $ZOOM_ACCESS_TOKEN"
+```
+
+Expected: JSON responses with HTTP 200 (or clear JSON error codes), not HTML error pages.
 
 ## 7) Fast Decision Tree
 
-- Unsure between Meeting SDK and Video SDK -> route by UX model (Zoom meeting UI vs fully custom session).
-- Need lowest-latency events -> use websockets; otherwise webhooks are acceptable.
-- Scope/auth failures in execution -> pause and re-authorize with correct app type and scopes.
+- **401/invalid token** -> wrong flow, expired token, or scope mismatch.
+- **404-like behavior** -> wrong endpoint path/version or wrong resource ID.
+- **429 spikes** -> missing backoff/queue strategy.
 
-## 8) Source Checkpoints
+## 8) Common Integration Mixups
 
-### Official docs
-
-- https://developers.zoom.us/
-- https://marketplace.zoom.us/
-- https://devforum.zoom.us/
-
-### Raw docs in repo
-
-- `raw-docs/developers.zoom.us/docs/`
-- `raw-docs/marketplacefront.zoom.us/sdk/`
+- REST `join_url` is a browser link, not a Meeting SDK join payload.
+- REST API creates/manages Zoom resources; Meeting SDK and Video SDK are separate integration surfaces.
+- If auth works but operation fails, check scope and resource ownership before endpoint debugging.

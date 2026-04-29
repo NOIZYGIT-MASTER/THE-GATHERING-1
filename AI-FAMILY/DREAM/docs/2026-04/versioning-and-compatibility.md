@@ -1,32 +1,24 @@
-# Rivet Versioning and Compatibility
+# Probe SDK Versioning and Compatibility
 
 ## Upgrade Strategy
 
 Use the standard upgrade workflow:
 - [../../general/references/sdk-upgrade-workflow.md](../../general/references/sdk-upgrade-workflow.md)
 
-For Rivet, treat upgrades as three parallel checks:
-1. `@zoom/rivet` package release changes
-2. Underlying Zoom API/event payload changes
-3. Marketplace app config and scope changes
-
 ## Compatibility Risks
 
-- Module/auth behavior drift across versions.
-- Type alias or endpoint wrapper signature changes.
-- Event payload shape differences for webhook types.
-- Receiver behavior changes in Node runtime/Lambda environments.
-
-## Version Signals
-
-- `@zoom/rivet` package version in `package.json`.
-- TypeDoc module/classes/type aliases under `zoom.github.io/rivet-javascript`.
-- Changelog updates under https://developers.zoom.us/changelog/.
+- Renderer option naming drift (`type` vs `rendererType`) across docs/examples.
+- Report object field naming drift (`basicInfo` vs `basicInfoEntries`, `supportedFeatures` vs `featureEntries`).
+- Browser support table age vs current browser versions.
+- Runtime JS/WASM URL override mismatches.
 
 ## Safe Upgrade Checklist
 
-- Pin current and target `@zoom/rivet` versions.
-- Compare TypeDoc module pages for changed constructor options and endpoints.
-- Validate event names and payload fields used by your handlers.
-- Revalidate OAuth install/callback flow and token persistence.
-- Revalidate per-module port and `/zoom/events` mapping.
+- Pin and record current/target `@zoom/probesdk` version.
+- Compare get-started docs, API reference, and sample repo behavior.
+- Validate all renderer targets in your browser matrix.
+- Validate both full diagnostic completion and early stop path.
+- Validate report schema adapter and downstream consumers.
+- Pin JS/WASM assets to the same Probe SDK release and prevent mixed-version loading.
+- Add cache-busting strategy for JS/WASM updates (asset fingerprinting or versioned URLs).
+- Confirm CDN/browser cache invalidation behavior before production rollout.

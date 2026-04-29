@@ -1,0 +1,737 @@
+<root>
+    <BFD2KitInfo name="kit_info" info_inhrt="false" info_path="C:\Users\adminmike\Desktop\BFD3 Presets For Older Packs\Deluxe\Kits\Backyard Kit.bfd3kit" info_library="FXDLX" info_librarylong="BFD Deluxe" info_photo="C:\Users\adminmike\Desktop\BFD3 Presets For Older Packs\Deluxe\Kits\Backyard Kit.png" info_usersaved="true" info_name="Backyard Kit" SourceEngine="BFD3" MergeLoad="false">
+        <VString name="kit_text" string="" />
+        <VString name="kit_user_text" string="" />
+        <VString name="kit_slot_0">DLX Backyard\Kick Rubber</VString>
+        <VString name="kit_slot_1">DLX Backyard\Snare</VString>
+        <VString name="kit_slot_2">DLX Zildjian\Hihat 14 Hybrid</VString>
+        <VString name="kit_slot_3">DLX Backyard\Tom Floor</VString>
+        <VString name="kit_slot_4">DLX Backyard\Tom Hi</VString>
+        <VString name="kit_slot_5">DLX Backyard\Tom Hi</VString>
+        <VString name="kit_slot_6">DLX Zildjian\Crash 19A Brill</VString>
+        <VString name="kit_slot_7">DLX Zildjian\Splash 10K</VString>
+        <VString name="kit_slot_8">DLX Zildjian\Ride 20K CustDark</VString>
+        <VString name="kit_slot_9" string="" />
+        <VString name="kit_slot_10" string="" />
+        <VString name="kit_slot_11" string="" />
+        <VString name="kit_slot_12" string="" />
+        <VString name="kit_slot_13" string="" />
+        <VString name="kit_slot_14" string="" />
+        <VString name="kit_slot_15" string="" />
+        <VString name="kit_slot_16" string="" />
+        <VString name="kit_slot_17" string="" />
+        <VString name="kit_slot_18" string="" />
+        <VString name="kit_slot_19" string="" />
+        <VString name="kit_slot_20" string="" />
+        <VString name="kit_slot_21" string="" />
+        <VString name="kit_slot_22" string="" />
+        <VString name="kit_slot_23" string="" />
+        <VString name="kit_slot_24" string="" />
+        <VString name="kit_slot_25" string="" />
+        <VString name="kit_slot_26" string="" />
+        <VString name="kit_slot_27" string="" />
+        <VString name="kit_slot_28" string="" />
+        <VString name="kit_slot_29" string="" />
+        <VString name="kit_slot_30" string="" />
+        <VString name="kit_slot_31" string="" />
+        <VString name="kit_slot_32" string="" />
+        <VString name="kit_slot_33" string="" />
+        <VString name="kit_slot_34" string="" />
+        <VString name="kit_slot_35" string="" />
+        <VString name="kit_slot_36" string="" />
+        <VString name="kit_slot_37" string="" />
+        <VString name="kit_slot_38" string="" />
+        <VString name="kit_slot_39" string="" />
+        <VString name="kit_slot_40" string="" />
+        <VString name="kit_slot_41" string="" />
+        <VString name="kit_slot_42" string="" />
+        <VString name="kit_slot_43" string="" />
+        <VString name="kit_slot_44" string="" />
+        <VString name="kit_slot_45" string="" />
+        <VString name="kit_slot_46" string="" />
+        <VString name="kit_slot_47" string="" />
+        <VString name="kit_slot_48" string="" />
+        <VString name="kit_slot_49" string="" />
+        <VString name="kit_slot_50" string="" />
+        <VString name="kit_slot_51" string="" />
+        <VString name="kit_slot_52" string="" />
+        <VString name="kit_slot_53" string="" />
+        <VString name="kit_slot_54" string="" />
+        <VString name="kit_slot_55" string="" />
+        <VString name="kit_slot_56" string="" />
+        <VString name="kit_slot_57" string="" />
+        <VString name="kit_slot_58" string="" />
+        <VString name="kit_slot_59" string="" />
+        <VString name="kit_slot_60" string="" />
+        <VString name="kit_slot_61" string="" />
+        <VString name="kit_slot_62" string="" />
+        <VString name="kit_slot_63" string="" />
+    </BFD2KitInfo>
+    <BFD2Kit name="kit_meta_info" SourceEngine="BFD3" masterDynamics="0.5">
+        <BFD2KitPiece name="kp_slot_0" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="0.63" amb_master_gain="0.735" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="true" guiFocusedArtic="-1" chokeGroup="0">
+            <BFD2Artic name="artic_0_Hit" v2d="0.5" v2p="0.5" aTrim="0.5" artic_name="Hit" artic_load_state="false" AMGVarDepth="1" />
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" sourceMic="OH" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" sourceMic="Room" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" sourceMic="Amb3" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_1" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="0.51" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="true" guiFocusedArtic="-1" chokeGroup="1">
+            <BFD2Artic name="artic_0_Hit" v2d="0.5" v2p="0.5" aTrim="0.5" artic_name="Hit" artic_load_state="false" AMGVarDepth="1" />
+            <BFD2Artic name="artic_1_Drag" v2d="0.5" v2p="0.5" aTrim="0.5" artic_name="Drag" artic_load_state="false" AMGVarDepth="1" />
+            <BFD2Artic name="artic_2_Flam" v2d="0.5" v2p="0.5" aTrim="0.5" artic_name="Flam" artic_load_state="false" AMGVarDepth="1" />
+            <BFD2Artic name="artic_3_Rim" v2d="0.5" v2p="0.5" aTrim="0.5" artic_name="Rim" artic_load_state="false" AMGVarDepth="1" />
+            <BFD2Artic name="artic_4_SS" v2d="0.5" v2p="0.5" aTrim="0.5" artic_name="SS" artic_load_state="false" AMGVarDepth="1" />
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" sourceMic="OH" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" sourceMic="Room" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" sourceMic="Amb3" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_2" pan="0.5" trim="0.75" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="true" guiFocusedArtic="-1" chokeGroup="2">
+            <BFD2Artic name="artic_0_OpenT" v2d="0.5" v2p="0.5" aTrim="0.5" artic_name="OpenT" artic_load_state="false" AMGVarDepth="1" />
+            <BFD2Artic name="artic_2_ThreeqT" v2d="0.5" v2p="0.5" aTrim="0.5" artic_name="ThreeqT" artic_load_state="false" AMGVarDepth="1" />
+            <BFD2Artic name="artic_3_ThreeqS" v2d="0.5" v2p="0.5" aTrim="0.5" artic_name="ThreeqS" artic_load_state="false" AMGVarDepth="1" />
+            <BFD2Artic name="artic_4_HalfT" v2d="0.5" v2p="0.5" aTrim="0.5" artic_name="HalfT" artic_load_state="false" AMGVarDepth="1" />
+            <BFD2Artic name="artic_5_HalfS" v2d="0.5" v2p="0.5" aTrim="0.5" artic_name="HalfS" artic_load_state="false" AMGVarDepth="1" />
+            <BFD2Artic name="artic_6_QuarterT" v2d="0.5" v2p="0.5" aTrim="0.5" artic_name="QuarterT" artic_load_state="false" AMGVarDepth="1" />
+            <BFD2Artic name="artic_7_QuarterS" v2d="0.5" v2p="0.5" aTrim="0.5" artic_name="QuarterS" artic_load_state="false" AMGVarDepth="1" />
+            <BFD2Artic name="artic_8_ClosedT" v2d="0.5" v2p="0.5" aTrim="0.5" artic_name="ClosedT" artic_load_state="false" AMGVarDepth="1" />
+            <BFD2Artic name="artic_9_ClosedS" v2d="0.5" v2p="0.5" aTrim="0.5" artic_name="ClosedS" artic_load_state="false" AMGVarDepth="1" />
+            <BFD2Artic name="artic_10_Pedal" v2d="0.5" v2p="0.5" aTrim="0.5" artic_name="Pedal" artic_load_state="false" AMGVarDepth="1" />
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" sourceMic="OH" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" sourceMic="Room" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" sourceMic="Amb3" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.13" energyTransfer="0" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default Hihat" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_3" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="true" guiFocusedArtic="-1" chokeGroup="3">
+            <BFD2Artic name="artic_0_Hit" v2d="0.5" v2p="0.5" aTrim="0.5" artic_name="Hit" artic_load_state="false" AMGVarDepth="1" />
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" sourceMic="OH" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" sourceMic="Room" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" sourceMic="Amb3" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_4" pan="0.4" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.425" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="true" guiFocusedArtic="-1" chokeGroup="4">
+            <BFD2Artic name="artic_0_Hit" v2d="0.5" v2p="0.5" aTrim="0.5" artic_name="Hit" artic_load_state="false" AMGVarDepth="1" />
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" sourceMic="OH" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" sourceMic="Room" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" sourceMic="Amb3" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_5" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="true" guiFocusedArtic="-1" chokeGroup="5">
+            <BFD2Artic name="artic_0_Hit" v2d="0.5" v2p="0.5" aTrim="0.5" artic_name="Hit" artic_load_state="false" AMGVarDepth="1" />
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" sourceMic="OH" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" sourceMic="Room" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" sourceMic="Amb3" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_6" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="true" guiFocusedArtic="-1" chokeGroup="6">
+            <BFD2Artic name="artic_0_Hit" v2d="0.5" v2p="0.5" aTrim="0.5" artic_name="Hit" artic_load_state="false" AMGVarDepth="1" />
+            <BFD2Artic name="artic_2_Edge" v2d="0.5" v2p="0.5" aTrim="0.5" artic_name="Edge" artic_load_state="false" AMGVarDepth="1" />
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" sourceMic="OH" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" sourceMic="Room" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" sourceMic="Amb3" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_7" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="true" guiFocusedArtic="-1" chokeGroup="7">
+            <BFD2Artic name="artic_0_Hit" v2d="0.5" v2p="0.5" aTrim="0.5" artic_name="Hit" artic_load_state="false" AMGVarDepth="1" />
+            <BFD2Artic name="artic_2_Edge" v2d="0.5" v2p="0.5" aTrim="0.5" artic_name="Edge" artic_load_state="false" AMGVarDepth="1" />
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" sourceMic="OH" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" sourceMic="Room" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" sourceMic="Amb3" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_8" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="true" guiFocusedArtic="-1" chokeGroup="8">
+            <BFD2Artic name="artic_0_Hit" v2d="0.5" v2p="0.5" aTrim="0.5" artic_name="Hit" artic_load_state="false" AMGVarDepth="1" />
+            <BFD2Artic name="artic_1_Bell" v2d="0.5" v2p="0.5" aTrim="0.5" artic_name="Bell" artic_load_state="false" AMGVarDepth="1" />
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" sourceMic="OH" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" sourceMic="Room" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" sourceMic="Amb3" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_9" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="true" guiFocusedArtic="-1" chokeGroup="9">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_10" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="10">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_11" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="11">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_12" pan="0.2" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="12">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_13" pan="0.4" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="13">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_14" pan="0.6" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="14">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_15" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="15">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_16" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="16">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_17" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="17">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_18" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="18">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_19" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="19">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_20" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="20">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_21" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="21">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_22" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="22">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_23" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="23">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_24" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="24">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_25" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="25">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_26" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="26">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_27" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="27">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_28" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="28">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_29" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="29">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_30" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="30">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_31" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="31">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_32" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="32">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_33" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="33">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_34" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="34">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_35" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="35">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_36" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="36">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_37" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="37">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_38" pan="0.2" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="38">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_39" pan="0.2" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="39">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_40" pan="0.2" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="40">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_41" pan="0.4" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="41">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_42" pan="0.4" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="42">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_43" pan="0.4" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="43">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_44" pan="0.6" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="44">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_45" pan="0.6" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="45">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_46" pan="0.6" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="46">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_47" pan="0.7" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="47">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_48" pan="0.7" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="48">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_49" pan="0.7" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="49">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_50" pan="0.45" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="50">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_51" pan="0.45" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="51">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_52" pan="0.45" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="52">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_53" pan="0.15" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="53">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_54" pan="0.15" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="54">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_55" pan="0.15" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="55">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_56" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="56">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_57" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="57">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_58" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="58">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_59" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="59">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_60" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="60">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_61" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="61">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_62" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="62">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_63" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" dampRatio="1" tune="0.5" dyn="0.5" loudnessCurve="0" loudnessNorm="false" loudnessDynRange="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" bleed_send="1" bleed_return="1" amb_master_gain="0.8" amb_master_gain_link="false" mute="false" solo="false" micBlend="0.5" isVisible="false" guiFocusedArtic="-1" chokeGroup="63">
+            <VObjectArray name="ambSends" count="3">
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="OH" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Room" />
+                <BFD2KitPieceAmbSend gain="0.8" active="true" destChan="Amb3" />
+            </VObjectArray>
+            <BFD2KitPieceModel name="model" chokeFade_active="false" chokeFade_base="1" chokeFade_range="1" hihatTighten_damp="0" hihatTighten_pitch="0" tomRes_active="false" resTrim="0.5" spillTrim="0.5">
+                <BFD3SwellModel name="swell" energyHalfLife="0.9" energyTransfer="0.19" impactSmudgeTime="0.19" active="false" amount="0.7" presetName="Default" bowAmount="0" />
+            </BFD2KitPieceModel>
+        </BFD2KitPiece>
+    </BFD2Kit>
+</root>

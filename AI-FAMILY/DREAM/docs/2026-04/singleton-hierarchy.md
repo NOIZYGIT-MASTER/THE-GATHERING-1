@@ -2,165 +2,231 @@
 
 ## Overview
 
-The Zoom Windows Meeting SDK uses a **service locator pattern** - a tree of singletons where you navigate from root services down to specific features. You don't construct objects; you traverse to them.
+The Zoom Video SDK uses a **service locator pattern** - a tree of singletons where you navigate from the root SDK object down to specific features. You don't construct objects; you traverse to them.
 
 ```
 You want to...              You navigate to...
 ─────────────────────────────────────────────────────
-Mute audio                  IMeetingService → IMeetingAudioController
-Create breakout rooms       IMeetingService → IMeetingBOController → IBOCreator
-Control remote camera       IMeetingService → IMeetingVideoController → IMeetingCameraHelper
-Start live stream           IMeetingService → IMeetingLiveStreamController
-Add Q&A questions           IMeetingService → IMeetingQAController
-Enable interpretation       IMeetingService → IMeetingInterpretationController
-Batch invite contacts       IAuthService → INotificationServiceHelper → IPresenceHelper → IBatchRequestContactHelper
+Start your camera           IZoomVideoSDK → IZoomVideoSDKVideoHelper
+Mute a user                 IZoomVideoSDK → IZoomVideoSDKAudioHelper
+Subscribe to video          IZoomVideoSDKUser → IZoomVideoSDKCanvas
+Get raw YUV frames          IZoomVideoSDKUser → IZoomVideoSDKRawDataPipe
+Send chat message           IZoomVideoSDK → IZoomVideoSDKChatHelper
+Start screen share          IZoomVideoSDK → IZoomVideoSDKShareHelper
+Subscribe to remote share   IZoomVideoSDKShareAction → subscribeWithView()
 ```
 
 ---
 
-## Complete Hierarchy (4 Levels Deep)
+## Complete Hierarchy (5 Levels Deep)
 
 ```
-Level 0: Global Factory Functions (zoom_sdk.h)
+Level 0: Global Factory Function
 │
-├─► Level 1: IAuthService
-│   ├─► Level 2: IDirectShareServiceHelper                              [LEAF]
-│   └─► Level 2: INotificationServiceHelper
-│       └─► Level 3: IPresenceHelper
-│           └─► Level 4: IBatchRequestContactHelper                     [LEAF - MAX DEPTH]
-│
-├─► Level 1: IMeetingService
-│   │
-│   │   ══════════════════════════════════════════════════════════════
-│   │   CROSS-PLATFORM CONTROLLERS (All platforms)
-│   │   ══════════════════════════════════════════════════════════════
-│   │
-│   ├─► Level 2: IMeetingVideoController
-│   │   ├─► Level 3: IMeetingCameraHelper                               [LEAF]
-│   │   ├─► Level 3: ISetVideoOrderHelper                               [LEAF - Windows]
-│   │   └─► Level 3: ICameraController                                  [LEAF - Windows]
-│   │
-│   ├─► Level 2: IMeetingAudioController                                [LEAF]
-│   ├─► Level 2: IMeetingShareController                                [LEAF]
-│   ├─► Level 2: IMeetingChatController                                 [LEAF]
-│   ├─► Level 2: IMeetingRecordingController                            [LEAF]
-│   ├─► Level 2: IMeetingParticipantsController                         [LEAF]
-│   ├─► Level 2: IMeetingWaitingRoomController                          [LEAF]
-│   ├─► Level 2: IMeetingWebinarController                              [LEAF]
-│   ├─► Level 2: IMeetingRawArchivingController                         [LEAF]
-│   ├─► Level 2: IMeetingReminderController                             [LEAF]
-│   ├─► Level 2: IMeetingEncryptionController                           [LEAF]
-│   ├─► Level 2: IMeetingConfiguration                                  [LEAF]
-│   ├─► Level 2: IListFactory                                           [LEAF - utility]
-│   │
-│   ├─► Level 2: IMeetingBOController (Breakout Rooms)
-│   │   ├─► Level 3: IBOCreator
-│   │   │   └─► Level 4: IBatchCreateBOHelper                           [LEAF - MAX DEPTH]
-│   │   ├─► Level 3: IBOAdmin                                           [LEAF]
-│   │   ├─► Level 3: IBOAssistant                                       [LEAF]
-│   │   ├─► Level 3: IBOAttendee                                        [LEAF]
-│   │   └─► Level 3: IBOData                                            [LEAF]
-│   │
-│   ├─► Level 2: IMeetingAICompanionController
-│   │   ├─► Level 3: IMeetingSmartSummaryHelper                         [LEAF - DEPRECATED]
-│   │   ├─► Level 3: IMeetingAICompanionSmartSummaryHelper              [LEAF]
-│   │   └─► Level 3: IMeetingAICompanionQueryHelper                     [LEAF]
-│   │
-│   │   ══════════════════════════════════════════════════════════════
-│   │   WINDOWS-ONLY CONTROLLERS (#if defined(WIN32))
-│   │   ══════════════════════════════════════════════════════════════
-│   │
-│   ├─► Level 2: IMeetingUIController                                   [LEAF - Windows]
-│   │
-│   ├─► Level 2: IAnnotationController
-│   │   └─► Level 3: ICustomizedAnnotationController                    [LEAF - Custom UI]
-│   │
-│   ├─► Level 2: IMeetingRemoteController                               [LEAF - Windows]
-│   ├─► Level 2: IMeetingH323Helper                                     [LEAF - Windows]
-│   ├─► Level 2: IMeetingPhoneHelper                                    [LEAF - Windows]
-│   ├─► Level 2: IMeetingLiveStreamController                           [LEAF - Windows]
-│   ├─► Level 2: IClosedCaptionController                               [LEAF - Windows]
-│   ├─► Level 2: IZoomRealNameAuthMeetingHelper                         [LEAF - Windows]
-│   ├─► Level 2: IMeetingQAController                                   [LEAF - Windows]
-│   ├─► Level 2: IMeetingInterpretationController                       [LEAF - Windows]
-│   ├─► Level 2: IMeetingSignInterpretationController                   [LEAF - Windows]
-│   ├─► Level 2: IEmojiReactionController                               [LEAF - Windows]
-│   ├─► Level 2: IMeetingAANController                                  [LEAF - Windows]
-│   ├─► Level 2: IMeetingWhiteboardController                           [LEAF - Windows]
-│   ├─► Level 2: IMeetingDocsController                                 [LEAF - Windows]
-│   ├─► Level 2: IMeetingPollingController                              [LEAF - Windows]
-│   ├─► Level 2: IMeetingRemoteSupportController                        [LEAF - Windows]
-│   ├─► Level 2: IMeetingIndicatorController                            [LEAF - Windows]
-│   ├─► Level 2: IMeetingProductionStudioController                     [LEAF - Windows]
-│   │
-│   └─► Level 2: ICustomImmersiveController
-│       └─► Level 3: ICustomImmersivePreLayoutHelper                    [LEAF]
-│
-├─► Level 1: ISettingService
-│   ├─► Level 2: IGeneralSettingContext                                 [LEAF]
-│   ├─► Level 2: IAudioSettingContext                                   [LEAF]
-│   ├─► Level 2: IVideoSettingContext                                   [LEAF]
-│   ├─► Level 2: IRecordingSettingContext                               [LEAF]
-│   ├─► Level 2: IShareSettingContext                                   [LEAF]
-│   ├─► Level 2: IStatisticSettingContext                               [LEAF]
-│   └─► Level 2: IWallpaperSettingContext                               [LEAF]
-│
-├─► Level 1: INetworkConnectionHelper                                   [LEAF]
-│
-└─► Level 1: ICustomizedUIMgr (Custom UI Mode)
-    ├─► Level 2: ICustomizedVideoContainer (factory-created)
-    ├─► Level 2: ICustomizedShareRender (factory-created)
-    └─► Level 2: ICustomizedImmersiveContainer (factory-created)
+└─► CreateZoomVideoSDKObj() ──────────────────────────────────► IZoomVideoSDK*
+    │
+    ├─► Level 1: Session & Lifecycle
+    │   ├── initialize(params)           → ZoomVideoSDKErrors
+    │   ├── joinSession(context)         → IZoomVideoSDKSession*
+    │   ├── leaveSession(end)            → ZoomVideoSDKErrors
+    │   ├── addListener(delegate)        → void
+    │   ├── getSessionInfo()             → IZoomVideoSDKSession*
+    │   └── isInSession()                → bool
+    │
+    ├─► Level 1: Core Helpers (Control YOUR streams)
+    │   ├── getVideoHelper()             → IZoomVideoSDKVideoHelper*
+    │   │   ├── startVideo() / stopVideo()
+    │   │   ├── switchCamera(deviceId)
+    │   │   ├── getCameraList()          → IVideoSDKVector<IZoomVideoSDKCameraDevice*>*
+    │   │   │   └─► Level 4: IZoomVideoSDKCameraDevice
+    │   │   │       ├── getDeviceId()
+    │   │   │       ├── getDeviceName()
+    │   │   │       └── isSelectedDevice()
+    │   │   └── startVideoCanvasPreview(hwnd, aspect, resolution)
+    │   │
+    │   ├── getAudioHelper()             → IZoomVideoSDKAudioHelper*
+    │   │   ├── startAudio() / stopAudio()
+    │   │   ├── muteAudio(user) / unmuteAudio(user)
+    │   │   ├── getMicList()             → IVideoSDKVector<IZoomVideoSDKMicDevice*>*
+    │   │   │   └─► Level 4: IZoomVideoSDKMicDevice
+    │   │   ├── getSpeakerList()         → IVideoSDKVector<IZoomVideoSDKSpeakerDevice*>*
+    │   │   │   └─► Level 4: IZoomVideoSDKSpeakerDevice
+    │   │   └── selectMic() / selectSpeaker()
+    │   │
+    │   ├── getShareHelper()             → IZoomVideoSDKShareHelper*
+    │   │   ├── startShareScreen(monitorId)
+    │   │   ├── startShareView(hwnd)
+    │   │   ├── startShareComputerAudio()
+    │   │   ├── startSharingExternalSource(source)
+    │   │   ├── stopShare()
+    │   │   ├── isOtherSharing() / isSharingOut()
+    │   │   ├── lockShare(lock) / isShareLocked()
+    │   │   ├── enableMultiShare(enable)
+    │   │   └── getWhiteboardHelper()    → IZoomVideoSDKWhiteboardHelper*
+    │   │
+    │   ├── getChatHelper()              → IZoomVideoSDKChatHelper*
+    │   │   ├── sendChatToAll(message)
+    │   │   └── sendChatToUser(user, message)
+    │   │
+    │   ├── getUserHelper()              → IZoomVideoSDKUserHelper*
+    │   │   ├── removeUser(user)
+    │   │   ├── makeHost(user)
+    │   │   ├── makeManager(user)
+    │   │   └── changeName(user, name)
+    │   │
+    │   ├── getRecordingHelper()         → IZoomVideoSDKRecordingHelper*
+    │   │
+    │   ├── getCmdChannel()              → IZoomVideoSDKCmdChannel*
+    │   │   ├── sendCommand(user, cmd)
+    │   │   └── sendCommandToAll(cmd)
+    │   │
+    │   ├── getLiveStreamHelper()        → IZoomVideoSDKLiveStreamHelper*
+    │   │
+    │   ├── getPhoneHelper()             → IZoomVideoSDKPhoneHelper*
+    │   │
+    │   └── getLiveTranscriptionHelper() → IZoomVideoSDKLiveTranscriptionHelper*
+    │
+    ├─► Level 1: Settings Helpers (Configure devices & behavior)
+    │   ├── getAudioSettingHelper()      → IZoomVideoSDKAudioSettingHelper*
+    │   │   ├── enableAutoAdjustMicVolume()
+    │   │   ├── enableStereoAudio()
+    │   │   └── setEchoCancellationLevel()
+    │   │
+    │   ├── GetAudioDeviceTestHelper()   → IZoomVideoSDKTestAudioDeviceHelper*
+    │   │   ├── startMicTest() / stopMicTest()
+    │   │   ├── startSpeakerTest() / stopSpeakerTest()
+    │   │   └── playMicTest()
+    │   │
+    │   ├── getVideoSettingHelper()      → IZoomVideoSDKVideoSettingHelper*
+    │   │   ├── enableHDVideo()
+    │   │   ├── enableMirrorEffect()
+    │   │   └── setVideoQualityPreference()
+    │   │
+    │   └── getShareSettingHelper()      → IZoomVideoSDKShareSettingHelper*
+    │       ├── enableGreenBorderWhenSharing()
+    │       └── setShareScreenSetting()
+    │
+    ├─► Level 1: Advanced Helpers (Special features)
+    │   ├── getNetworkConnectionHelper() → IZoomVideoSDKNetworkConnectionHelper*
+    │   │   └── getNetworkType()
+    │   │
+    │   ├── getCRCHelper()               → IZoomVideoSDKCRCHelper*
+    │   │   └── callCRCDevice(address, protocol)
+    │   │
+    │   ├── getSubSessionHelper()        → IZoomVideoSDKSubSessionHelper*
+    │   │   ├── createSubSession(name)
+    │   │   ├── joinSubSession(id)
+    │   │   ├── leaveSubSession()
+    │   │   └── getSubSessionList()
+    │   │
+    │   ├── getIncomingLiveStreamHelper()→ IZoomVideoSDKIncomingLiveStreamHelper*
+    │   │   ├── bindIncomingLiveStream(streamKeyId)
+    │   │   ├── unbindIncomingLiveStream(streamKeyId)
+    │   │   └── startIncomingLiveStream(streamKeyId)
+    │   │
+    │   ├── getBroadcastStreamingController() → IZoomVideoSDKBroadcastStreamingController*
+    │   │   ├── startBroadcast()
+    │   │   └── stopBroadcast()
+    │   │
+    │   ├── getBroadcastStreamingViewer()→ IZoomVideoSDKBroadcastStreamingViewer*
+    │   │   └── joinBroadcast(channelId)
+    │   │
+    │   └── getRealTimeMediaStreamsHelper() → IZoomVideoSDKRTMSHelper* (RTMS)
+    │       ├── startRealTimeMediaStream()
+    │       └── stopRealTimeMediaStream()
+    │
+    └─► Level 1: Session Object
+        │
+        └── getSessionInfo()             → IZoomVideoSDKSession*
+            ├── getSessionName()
+            ├── getSessionID()
+            ├── getSessionHost()         → IZoomVideoSDKUser*
+            ├── getMyself()              → IZoomVideoSDKUser*
+            │   │
+            │   └─► Level 3: IZoomVideoSDKUser (LOCAL - yourself)
+            │       ├── getUserID() / getUserName()
+            │       ├── isHost() / isManager()
+            │       ├── getVideoStatus()     → ZoomVideoSDKVideoStatus
+            │       ├── getAudioStatus()     → ZoomVideoSDKAudioStatus
+            │       │
+            │       ├── GetVideoCanvas()     → IZoomVideoSDKCanvas*           [SDK RENDERING]
+            │       │   └─► Level 4: Canvas API
+            │       │       ├── subscribeWithView(hwnd, aspect, resolution)
+            │       │       ├── unSubscribeWithView(hwnd)
+            │       │       ├── setAspectMode(aspect)
+            │       │       └── setResolution(resolution)
+            │       │
+            │       ├── GetVideoPipe()       → IZoomVideoSDKRawDataPipe*      [RAW DATA]
+            │       │   └─► Level 4: Raw Data Pipe
+            │       │       ├── subscribe(resolution, delegate)
+            │       │       ├── unSubscribe(delegate)
+            │       │       ├── getVideoStatus()
+            │       │       │
+            │       │       └─► Level 5: IZoomVideoSDKRawDataPipeDelegate (your callback)
+            │       │           ├── onRawDataFrameReceived(YUVRawDataI420*)
+            │       │           └── onRawDataStatusChanged(status)
+            │       │
+            │       ├── getShareActionList() → IVideoSDKVector<IZoomVideoSDKShareAction*>*
+            │       │   └─► Level 4: IZoomVideoSDKShareAction (for share subscription)
+            │       │       ├── getShareCanvas()        → IZoomVideoSDKCanvas*
+            │       │       ├── getSharePipe()          → IZoomVideoSDKRawDataPipe*
+            │       │       ├── getShareStatus()        → ZoomVideoSDKShareStatus
+            │       │       ├── getShareType()          → ZoomVideoSDKShareType
+            │       │       ├── getShareSourceId()
+            │       │       ├── isAnnotationPrivilegeEnabled()
+            │       │       └── getRemoteControlHelper() → IZoomVideoSDKRemoteControlHelper* (Win/Mac)
+            │       │
+            │       └── getRemoteCameraControlHelper() → IZoomVideoSDKRemoteCameraControlHelper*
+            │
+            └── getRemoteUsers()         → IVideoSDKVector<IZoomVideoSDKUser*>*
+                │
+                └─► Level 3: IZoomVideoSDKUser (REMOTE - other participants)
+                    ├── [Same methods as local user]
+                    ├── GetVideoCanvas()     → Subscribe to their video
+                    └── GetVideoPipe()       → Get their raw frames
+
+    ┌─────────────────────────────────────────────────────────────────────────┐
+    │  CALLBACK PATH (from IZoomVideoSDKDelegate)                             │
+    │                                                                         │
+    │  ⚠️ CRITICAL: Share subscription uses IZoomVideoSDKShareAction from     │
+    │  callback, NOT user->GetShareCanvas()!                                  │
+    │                                                                         │
+    │  onUserShareStatusChanged(pShareHelper, pUser, pShareAction)            │
+    │      │                                                                  │
+    │      └─► IZoomVideoSDKShareAction* (received in callback)               │
+    │          ├── getShareCanvas()      → IZoomVideoSDKCanvas*               │
+    │          │   └── subscribeWithView(hwnd, aspect)                        │
+    │          │   └── unSubscribeWithView(hwnd)                              │
+    │          ├── getSharePipe()        → IZoomVideoSDKRawDataPipe*          │
+    │          │   └── subscribe(resolution, delegate)                        │
+    │          │   └── unSubscribe(delegate)                                  │
+    │          ├── getShareStatus()      → ZoomVideoSDKShareStatus            │
+    │          ├── getShareType()        → ZoomVideoSDKShareType              │
+    │          ├── getShareSourceId()                                         │
+    │          ├── getShareSourceContentSize() → ZoomVideoSDKViewSize         │
+    │          ├── isAnnotationPrivilegeEnabled()                             │
+    │          └── getRemoteControlHelper() → IZoomVideoSDKRemoteControlHelper│
+    │                                                                         │
+    │  Pattern: Subscribe to share in onUserShareStatusChanged callback       │
+    │  void onUserShareStatusChanged(..., IZoomVideoSDKShareAction* action) { │
+    │      if (action->getShareStatus() == ZoomVideoSDKShareStatus_Start) {   │
+    │          action->getShareCanvas()->subscribeWithView(hwnd, aspect);     │
+    │      }                                                                  │
+    │  }                                                                      │
+    └─────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Controller Reference by Feature Domain
+## Key Difference from Meeting SDK
 
-### Cross-Platform Controllers
-
-| Controller | Getter Method | Purpose |
-|------------|---------------|---------|
-| `IMeetingVideoController` | `GetMeetingVideoController()` | Video on/off, spotlight, pin, virtual background |
-| `IMeetingAudioController` | `GetMeetingAudioController()` | Mute/unmute, VoIP, audio device selection |
-| `IMeetingShareController` | `GetMeetingShareController()` | Screen/app sharing, share settings |
-| `IMeetingChatController` | `GetMeetingChatController()` | In-meeting chat, file transfer |
-| `IMeetingRecordingController` | `GetMeetingRecordingController()` | Local/cloud recording control |
-| `IMeetingParticipantsController` | `GetMeetingParticipantsController()` | User list, rename, remove, roles |
-| `IMeetingWaitingRoomController` | `GetMeetingWaitingRoomController()` | Admit/deny users, waiting room settings |
-| `IMeetingWebinarController` | `GetMeetingWebinarController()` | Webinar-specific controls, panelists |
-| `IMeetingRawArchivingController` | `GetMeetingRawArchivingController()` | Raw archiving for compliance |
-| `IMeetingReminderController` | `GetMeetingReminderController()` | Meeting reminders and notifications |
-| `IMeetingEncryptionController` | `GetInMeetingEncryptionController()` | E2E encryption status |
-| `IMeetingConfiguration` | `GetMeetingConfiguration()` | Meeting behavior configuration |
-| `IMeetingBOController` | `GetMeetingBOController()` | Breakout rooms (has Level 3 helpers) |
-| `IMeetingAICompanionController` | `GetMeetingAICompanionController()` | AI Companion features (has Level 3 helpers) |
-| `IListFactory` | `GetListFactory()` | Factory for creating SDK list objects |
-
-### Windows-Only Controllers
-
-| Controller | Getter Method | Purpose |
-|------------|---------------|---------|
-| `IMeetingUIController` | `GetUIController()` | SDK UI window control, toolbar customization |
-| `IAnnotationController` | `GetAnnotationController()` | Drawing/annotation on shared content |
-| `IMeetingRemoteController` | `GetMeetingRemoteController()` | Remote control of shared content |
-| `IMeetingH323Helper` | `GetH323Helper()` | H.323/SIP room system integration |
-| `IMeetingPhoneHelper` | `GetMeetingPhoneHelper()` | PSTN dial-in/dial-out |
-| `IMeetingLiveStreamController` | `GetMeetingLiveStreamController()` | YouTube/Facebook/custom RTMP streaming |
-| `IClosedCaptionController` | `GetMeetingClosedCaptionController()` | Closed captions, live transcription |
-| `IZoomRealNameAuthMeetingHelper` | `GetMeetingRealNameAuthController()` | China real-name authentication |
-| `IMeetingQAController` | `GetMeetingQAController()` | Webinar Q&A feature |
-| `IMeetingInterpretationController` | `GetMeetingInterpretationController()` | Language interpretation channels |
-| `IMeetingSignInterpretationController` | `GetMeetingSignInterpretationController()` | Sign language interpretation |
-| `IEmojiReactionController` | `GetMeetingEmojiReactionController()` | Emoji reactions (👍 🎉 etc.) |
-| `IMeetingAANController` | `GetMeetingAANController()` | Advanced Audio Networking |
-| `ICustomImmersiveController` | `GetMeetingImmersiveController()` | Immersive view/scenes (has Level 3 helper) |
-| `IMeetingWhiteboardController` | `GetMeetingWhiteboardController()` | Collaborative whiteboard |
-| `IMeetingDocsController` | `GetMeetingDocsController()` | In-meeting document sharing |
-| `IMeetingPollingController` | `GetMeetingPollingController()` | Polls and quizzes |
-| `IMeetingRemoteSupportController` | `GetMeetingRemoteSupportController()` | Remote support features |
-| `IMeetingIndicatorController` | `GetMeetingIndicatorController()` | UI indicators and status |
-| `IMeetingProductionStudioController` | `GetMeetingProductionStudioController()` | Production studio/broadcast features |
+| Aspect | Meeting SDK | Video SDK |
+|--------|-------------|-----------|
+| **Root Object** | `IMeetingService` | `IZoomVideoSDK` |
+| **Feature Access** | Controllers (`GetMeetingAudioController()`) | Helpers (`getAudioHelper()`) |
+| **Video Subscription** | Per-user renderers | Per-user Canvas/Pipe |
+| **Share Subscription** | Via callback's `IZoomVideoSDKShareAction` | Via callback's `IZoomVideoSDKShareAction` |
+| **Depth** | 4 levels max | 5 levels max |
 
 ---
 
@@ -168,237 +234,259 @@ Level 0: Global Factory Functions (zoom_sdk.h)
 
 | Level | When | Example |
 |-------|------|---------|
-| **Level 1** | App startup, before joining | `CreateMeetingService()`, `CreateAuthService()` |
-| **Level 2** | After joining meeting, for features | `meetingService->GetMeetingAudioController()` |
-| **Level 3** | For specialized sub-features | `boController->GetBOCreatorHelper()` |
-| **Level 4** | For batch/bulk operations | `boCreator->GetBatchCreateBOHelper()` |
+| **Level 1** | After SDK init, control YOUR streams | `sdk->getVideoHelper()->startVideo()` |
+| **Level 2** | After session join, get session info | `sdk->getSessionInfo()->getMyself()` |
+| **Level 3** | Get user objects | `session->getRemoteUsers()` |
+| **Level 4** | Subscribe to video/share | `user->GetVideoCanvas()->subscribeWithView()` |
+| **Level 5** | Receive raw frames | `pipe->subscribe(res, myDelegate)` |
 
 ---
 
-## How to Use (Universal Pattern)
+## Two Rendering Paths
 
-Every feature follows the **same 3-step pattern**:
+The SDK provides **two distinct paths** for video rendering:
+
+### Path A: Canvas API (SDK-Rendered)
+
+```
+IZoomVideoSDKUser
+    └── GetVideoCanvas()
+        └── IZoomVideoSDKCanvas
+            └── subscribeWithView(HWND, aspect, resolution)
+                └── SDK renders directly to your window
+```
+
+**Pros**: Best quality, no CPU overhead, automatic scaling
+**Use for**: Standard video conferencing UI
+
+### Path B: Raw Data Pipe (Self-Rendered)
+
+```
+IZoomVideoSDKUser
+    └── GetVideoPipe()
+        └── IZoomVideoSDKRawDataPipe
+            └── subscribe(resolution, delegate)
+                └── Your IZoomVideoSDKRawDataPipeDelegate
+                    └── onRawDataFrameReceived(YUVRawDataI420*)
+                        └── You convert YUV→RGB and render
+```
+
+**Pros**: Full control over frames, can process/filter/record
+**Use for**: Custom effects, AI processing, recording
+
+---
+
+## Universal Pattern (3 Steps)
+
+Every feature follows the **same pattern**:
 
 ```cpp
-// Step 1: Navigate to the controller (singleton)
-IMeetingAudioController* audioCtrl = meetingService->GetMeetingAudioController();
+// Step 1: Navigate to the helper (singleton)
+IZoomVideoSDKVideoHelper* videoHelper = sdk->getVideoHelper();
 
-// Step 2: Register event listener (observer pattern)
-audioCtrl->SetEvent(new MyAudioEventListener());
+// Step 2: Use it
+videoHelper->startVideo();
 
-// Step 3: Call methods
-audioCtrl->MuteAudio(userId, true);
+// For subscriptions, get user first:
+IZoomVideoSDKUser* user = sdk->getSessionInfo()->getMyself();
+IZoomVideoSDKCanvas* canvas = user->GetVideoCanvas();
+canvas->subscribeWithView(hwnd, aspect, resolution);
+```
+
+For **event-driven features**, implement `IZoomVideoSDKDelegate`:
+
+```cpp
+// Step 1: Implement delegate
+class MyDelegate : public IZoomVideoSDKDelegate {
+    void onUserVideoStatusChanged(...) override {
+        // React to video status changes
+    }
+    // ... all 80+ callbacks
+};
+
+// Step 2: Register
+sdk->addListener(new MyDelegate());
+
+// Step 3: Events arrive automatically
 ```
 
 ---
 
-## Examples by Depth
+## Navigation by Feature
 
-### Level 2 - Basic Feature (Audio)
-
-```cpp
-// Get controller
-IMeetingAudioController* audioCtrl = meetingService->GetMeetingAudioController();
-
-// Use it
-audioCtrl->JoinVoip();
-audioCtrl->MuteAudio(0, true);  // 0 = self
-```
-
-### Level 3 - Sub-Feature (Breakout Room Creation)
-
-```cpp
-// Navigate: Level 1 → Level 2 → Level 3
-IMeetingBOController* boCtrl = meetingService->GetMeetingBOController();
-IBOCreator* creator = boCtrl->GetBOCreatorHelper();
-
-// Use it
-creator->CreateBreakoutRoom(L"Room 1");
-creator->AssignUserToBO(strUserID, strBOID);
-```
-
-### Level 4 - Batch Operations (Bulk Room Creation)
-
-```cpp
-// Navigate: Level 1 → Level 2 → Level 3 → Level 4
-IMeetingBOController* boCtrl = meetingService->GetMeetingBOController();
-IBOCreator* creator = boCtrl->GetBOCreatorHelper();
-IBatchCreateBOHelper* batch = creator->GetBatchCreateBOHelper();
-
-// Use it (transaction pattern)
-batch->CreateBOTransactionBegin();
-batch->AddNewBoToList(L"Room 1");
-batch->AddNewBoToList(L"Room 2");
-batch->AddNewBoToList(L"Room 3");
-batch->CreateBoTransactionCommit();  // Creates all 3 at once
-```
+| Feature | Navigation Path |
+|---------|-----------------|
+| **Start camera** | `sdk->getVideoHelper()->startVideo()` |
+| **Stop camera** | `sdk->getVideoHelper()->stopVideo()` |
+| **Switch camera** | `sdk->getVideoHelper()->switchCamera(deviceId)` |
+| **Camera list** | `sdk->getVideoHelper()->getCameraList()` |
+| **Mute audio** | `sdk->getAudioHelper()->muteAudio(user)` |
+| **Unmute audio** | `sdk->getAudioHelper()->unmuteAudio(user)` |
+| **Start audio** | `sdk->getAudioHelper()->startAudio()` |
+| **Mic list** | `sdk->getAudioHelper()->getMicList()` |
+| **Speaker list** | `sdk->getAudioHelper()->getSpeakerList()` |
+| **Test mic** | `sdk->GetAudioDeviceTestHelper()->startMicTest()` |
+| **Test speaker** | `sdk->GetAudioDeviceTestHelper()->startSpeakerTest()` |
+| **Send chat** | `sdk->getChatHelper()->sendChatToAll(msg)` |
+| **Start share** | `sdk->getShareHelper()->startShareScreen(monitorId)` |
+| **Stop share** | `sdk->getShareHelper()->stopShare()` |
+| **Subscribe video** | `user->GetVideoCanvas()->subscribeWithView(hwnd, ...)` |
+| **Get raw frames** | `user->GetVideoPipe()->subscribe(res, delegate)` |
+| **Subscribe share** | `shareAction->getShareCanvas()->subscribeWithView(hwnd, aspect)` ⚠️ From callback! |
+| **Get raw share** | `shareAction->getSharePipe()->subscribe(res, delegate)` ⚠️ From callback! |
+| **Kick user** | `sdk->getUserHelper()->removeUser(user)` |
+| **Make host** | `sdk->getUserHelper()->makeHost(user)` |
+| **Send command** | `sdk->getCmdChannel()->sendCommandToAll(cmd)` |
+| **Get myself** | `sdk->getSessionInfo()->getMyself()` |
+| **Get remote users** | `sdk->getSessionInfo()->getRemoteUsers()` |
+| **Join subsession** | `sdk->getSubSessionHelper()->joinSubSession(id)` |
+| **Start broadcast** | `sdk->getBroadcastStreamingController()->startBroadcast()` |
+| **Transcription** | `sdk->getLiveTranscriptionHelper()->startLiveTranscription()` |
 
 ---
 
-## Why the Hierarchy Exists
+## Critical Timing Rules
 
-| Depth | Design Purpose |
-|-------|----------------|
-| **Level 1** (Services) | Lifecycle management - created once, destroyed at cleanup |
-| **Level 2** (Controllers) | Feature grouping - one controller per domain |
-| **Level 3** (Helpers) | Role-based access - different helpers for host vs attendee |
-| **Level 4** (Batch) | Performance optimization - bulk ops instead of N individual calls |
+### 1. Helpers Control YOUR Streams Only
+
+```cpp
+// videoHelper controls YOUR camera, not others'
+sdk->getVideoHelper()->startVideo();  // Starts YOUR camera
+sdk->getVideoHelper()->stopVideo();   // Stops YOUR camera
+
+// To SEE other users' video, subscribe via their Canvas/Pipe
+IZoomVideoSDKUser* remoteUser = ...;
+remoteUser->GetVideoCanvas()->subscribeWithView(hwnd, ...);
+```
+
+### 2. Subscribe in onUserVideoStatusChanged, NOT onUserJoin
+
+```cpp
+// WRONG - user's video may not be ready yet
+void onUserJoin(..., userList) {
+    user->GetVideoCanvas()->subscribeWithView(hwnd, ...);  // Error 2!
+}
+
+// CORRECT - wait for video status change
+void onUserVideoStatusChanged(..., userList) {
+    for (auto user : userList) {
+        if (user->GetVideoPipe()->getVideoStatus().isOn) {
+            user->GetVideoCanvas()->subscribeWithView(hwnd, ...);  // Works!
+        }
+    }
+}
+```
+
+### 3. ShareAction Comes from Callback (CRITICAL!)
+
+⚠️ **Share subscription is DIFFERENT from video subscription!**
+
+```cpp
+// WRONG - Don't use user->GetShareCanvas() for remote share!
+user->GetShareCanvas()->subscribeWithView(hwnd, ...);  // Won't work!
+
+// CORRECT - Use IZoomVideoSDKShareAction from the callback
+void onUserShareStatusChanged(IZoomVideoSDKShareHelper* pShareHelper,
+                               IZoomVideoSDKUser* pUser,
+                               IZoomVideoSDKShareAction* pShareAction) {
+    if (!pShareAction) return;
+    
+    ZoomVideoSDKShareStatus status = pShareAction->getShareStatus();
+    
+    if (status == ZoomVideoSDKShareStatus_Start || 
+        status == ZoomVideoSDKShareStatus_Resume) {
+        // Canvas API (SDK-rendered)
+        IZoomVideoSDKCanvas* shareCanvas = pShareAction->getShareCanvas();
+        if (shareCanvas) {
+            shareCanvas->subscribeWithView(shareHwnd, ZoomVideoSDKVideoAspect_Original);
+        }
+        
+        // OR Raw Data Pipe (self-rendered)
+        // IZoomVideoSDKRawDataPipe* sharePipe = pShareAction->getSharePipe();
+        // sharePipe->subscribe(ZoomVideoSDKResolution_720P, myDelegate);
+    }
+    else if (status == ZoomVideoSDKShareStatus_Stop) {
+        // Unsubscribe when share stops
+        IZoomVideoSDKCanvas* shareCanvas = pShareAction->getShareCanvas();
+        if (shareCanvas) {
+            shareCanvas->unSubscribeWithView(shareHwnd);
+        }
+    }
+}
+```
+
+**Why?** The `IZoomVideoSDKShareAction` represents a specific share stream and is only valid within the callback context. You cannot navigate to it via user objects.
+
+### 4. Check nullptr Before Use
+
+```cpp
+IZoomVideoSDKCanvas* canvas = user->GetVideoCanvas();
+if (canvas) {
+    canvas->subscribeWithView(hwnd, aspect, resolution);
+}
+```
 
 ---
 
 ## Practical Rules
 
-### 1. Don't Cache Too Early
-
-Controllers return `nullptr` if not in meeting:
+### 1. Get Helpers After Initialize
 
 ```cpp
-// WRONG - cached before meeting joined
-IMeetingAudioController* audioCtrl = meetingService->GetMeetingAudioController();
-meetingService->Join(joinParam);
-audioCtrl->MuteAudio(0, true);  // audioCtrl might be nullptr!
+// WRONG - SDK not initialized
+IZoomVideoSDKVideoHelper* helper = sdk->getVideoHelper();  // nullptr!
+sdk->initialize(params);
 
-// RIGHT - get after joining
-meetingService->Join(joinParam);
-// ... wait for MEETING_STATUS_INMEETING callback ...
-IMeetingAudioController* audioCtrl = meetingService->GetMeetingAudioController();
-if (audioCtrl) {
-    audioCtrl->MuteAudio(0, true);
+// CORRECT
+sdk->initialize(params);
+IZoomVideoSDKVideoHelper* helper = sdk->getVideoHelper();  // Valid
+```
+
+### 2. Get Session/Users After Join
+
+```cpp
+// WRONG - not in session yet
+IZoomVideoSDKSession* session = sdk->getSessionInfo();  // nullptr!
+sdk->joinSession(context);
+
+// CORRECT - wait for onSessionJoin callback
+void onSessionJoin() {
+    IZoomVideoSDKSession* session = sdk->getSessionInfo();  // Valid
+    IZoomVideoSDKUser* myself = session->getMyself();       // Valid
 }
 ```
 
-### 2. Re-get After State Changes
-
-After joining/leaving meeting, get controllers again - previous pointers may be invalid.
-
-### 3. Check for nullptr
-
-Some helpers only available for hosts:
+### 3. One HWND Per Video Stream
 
 ```cpp
-IBOCreator* creator = boCtrl->GetBOCreatorHelper();
-if (creator) {
-    // Only hosts get a valid creator
-    creator->CreateBreakoutRoom(L"Room 1");
-}
-```
+// Each user needs their own window
+HWND selfWindow = CreateWindow(...);
+HWND user1Window = CreateWindow(...);
+HWND user2Window = CreateWindow(...);
 
-### 4. Batch When Possible
-
-Level 4 helpers exist specifically for performance:
-
-```cpp
-// SLOW - 10 individual calls
-for (int i = 0; i < 10; i++) {
-    creator->CreateBreakoutRoom(roomNames[i]);
-}
-
-// FAST - 1 batch call
-IBatchCreateBOHelper* batch = creator->GetBatchCreateBOHelper();
-batch->CreateBOTransactionBegin();
-for (int i = 0; i < 10; i++) {
-    batch->AddNewBoToList(roomNames[i]);
-}
-batch->CreateBoTransactionCommit();
+myself->GetVideoCanvas()->subscribeWithView(selfWindow, ...);
+user1->GetVideoCanvas()->subscribeWithView(user1Window, ...);
+user2->GetVideoCanvas()->subscribeWithView(user2Window, ...);
 ```
 
 ---
 
-## Deepest Paths (Maximum Depth = 4)
+## Deepest Paths (Maximum Depth = 5)
 
 | Path | Use Case |
 |------|----------|
-| `IMeetingService` → `IMeetingBOController` → `IBOCreator` → `IBatchCreateBOHelper` | Bulk breakout room creation |
-| `IAuthService` → `INotificationServiceHelper` → `IPresenceHelper` → `IBatchRequestContactHelper` | Bulk contact operations |
-
----
-
-## Quick Reference: Common Navigation Paths
-
-### Core Meeting Features
-
-| Feature | Navigation Path |
-|---------|-----------------|
-| Audio control | `IMeetingService` → `GetMeetingAudioController()` |
-| Video control | `IMeetingService` → `GetMeetingVideoController()` |
-| Screen sharing | `IMeetingService` → `GetMeetingShareController()` |
-| Chat | `IMeetingService` → `GetMeetingChatController()` |
-| Recording | `IMeetingService` → `GetMeetingRecordingController()` |
-| Participants | `IMeetingService` → `GetMeetingParticipantsController()` |
-| Waiting room | `IMeetingService` → `GetMeetingWaitingRoomController()` |
-| Breakout rooms | `IMeetingService` → `GetMeetingBOController()` → `GetBO*Helper()` |
-| AI Companion | `IMeetingService` → `GetMeetingAICompanionController()` |
-| AI Smart Summary | `IMeetingService` → `GetMeetingAICompanionController()` → `GetMeetingAICompanionSmartSummaryHelper()` |
-| AI Query | `IMeetingService` → `GetMeetingAICompanionController()` → `GetMeetingAICompanionQueryHelper()` |
-| Remote camera | `IMeetingService` → `GetMeetingVideoController()` → `GetMeetingCameraHelper()` |
-| Video order (gallery) | `IMeetingService` → `GetMeetingVideoController()` → `GetSetVideoOrderHelper()` |
-| Local camera device | `IMeetingService` → `GetMeetingVideoController()` → `GetMyCameraController()` |
-
-### Windows-Only Features
-
-| Feature | Navigation Path |
-|---------|-----------------|
-| Live streaming | `IMeetingService` → `GetMeetingLiveStreamController()` |
-| Q&A (webinars) | `IMeetingService` → `GetMeetingQAController()` |
-| Interpretation | `IMeetingService` → `GetMeetingInterpretationController()` |
-| Sign language | `IMeetingService` → `GetMeetingSignInterpretationController()` |
-| Closed captions | `IMeetingService` → `GetMeetingClosedCaptionController()` |
-| Annotations | `IMeetingService` → `GetAnnotationController()` |
-| Annotations (Custom UI) | `IMeetingService` → `GetAnnotationController()` → `GetCustomizedAnnotationController()` |
-| Emoji reactions | `IMeetingService` → `GetMeetingEmojiReactionController()` |
-| Polling | `IMeetingService` → `GetMeetingPollingController()` |
-| Whiteboard | `IMeetingService` → `GetMeetingWhiteboardController()` |
-| Docs | `IMeetingService` → `GetMeetingDocsController()` |
-| H.323/SIP | `IMeetingService` → `GetH323Helper()` |
-| Phone dial-in/out | `IMeetingService` → `GetMeetingPhoneHelper()` |
-| Remote control | `IMeetingService` → `GetMeetingRemoteController()` |
-| Immersive view | `IMeetingService` → `GetMeetingImmersiveController()` |
-| UI control | `IMeetingService` → `GetUIController()` |
-
-### Settings & Pre-Meeting
-
-| Feature | Navigation Path |
-|---------|-----------------|
-| Audio settings | `ISettingService` → `GetAudioSettings()` |
-| Video settings | `ISettingService` → `GetVideoSettings()` |
-| Recording settings | `ISettingService` → `GetRecordingSettings()` |
-| Share settings | `ISettingService` → `GetShareSettings()` |
-| Presence/contacts | `IAuthService` → `GetNotificationServiceHelper()` → `GetPresenceHelper()` |
-
----
-
-## Deprecated Controllers & Helpers
-
-| Deprecated | Replacement |
-|------------|-------------|
-| `IMeetingSmartSummaryController` | Use `IMeetingAICompanionController` |
-| `IMeetingSmartSummaryHelper` | Use `IMeetingAICompanionSmartSummaryHelper` via `GetMeetingAICompanionSmartSummaryHelper()` |
-
----
-
-## Platform Availability Summary
-
-| Category | Count | Platform |
-|----------|-------|----------|
-| Cross-platform controllers | 15 | Windows, macOS, Linux |
-| Windows-only controllers | 20 | Windows only (`#if defined(WIN32)`) |
-| **Total** | **35** | — |
-
-> **Note**: When developing cross-platform apps, use `#if defined(WIN32)` guards around Windows-only controller access.
+| `IZoomVideoSDK` → `getVideoHelper()` → `getCameraList()` → `IZoomVideoSDKCameraDevice` → `getDeviceId()` | Enumerate cameras |
+| `IZoomVideoSDK` → `getSessionInfo()` → `getMyself()` → `GetVideoPipe()` → `subscribe(delegate)` | Raw self video |
+| `IZoomVideoSDK` → `getSessionInfo()` → `getRemoteUsers()` → `user->GetVideoCanvas()` → `subscribeWithView()` | Remote video display |
 
 ---
 
 ## Related Documentation
 
-- [SDK Architecture Pattern](sdk-architecture-pattern.md) - The universal 3-step pattern
-- [Custom UI Architecture](custom-ui-architecture.md) - Custom UI specific hierarchy
-- [Breakout Rooms Example](../examples/breakout-rooms.md) - Level 3 helpers in action
-- [Chat Example](../examples/chat.md) - IMeetingChatController usage
-- [Captions/Transcription Example](../examples/captions-transcription.md) - IClosedCaptionController usage
-- [Local Recording Example](../examples/local-recording.md) - IMeetingRecordingController usage
-- [Video Advanced Example](../examples/video-advanced.md) - Camera control, video order (Level 3 helpers)
-- [AI Companion Example](../examples/ai-companion.md) - Smart Summary, AI Query (Level 3 helpers)
+- [API Reference](../references/windows-reference.md) - Complete method signatures
+- [SKILL.md](../SKILL.md) - Main skill overview with code examples
+- [Video Rendering Guide](../SKILL.md#video-rendering---two-approaches) - Canvas vs Raw Data comparison
 
 ---
 
-**TL;DR**: The hierarchy is your navigation map. Start at a service, drill down to the feature you need, then call methods. Deeper levels = more specialized operations. Windows has 20 additional controllers not available on other platforms.
+**TL;DR**: Start at `IZoomVideoSDK`, navigate to helpers for YOUR streams, navigate to users for THEIR streams. Subscribe to video in `onUserVideoStatusChanged`, not `onUserJoin`.

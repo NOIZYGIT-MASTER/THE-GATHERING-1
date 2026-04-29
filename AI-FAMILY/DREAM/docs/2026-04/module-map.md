@@ -1,33 +1,20 @@
 # Module Map
 
-## Bootstrap and auth
+## Core
 
-- `module-zoom_electron_sdk.md`
-- `module-zoom_auth.md`
-- `module-zoom_meeting.md`
+- `native_zoom_videosdk` (session join/leave/init)
+- `native_zoom_videosdk_event_listener` (EventType constants)
 
-## Core meeting controls
+## Media and session helpers
 
-- `module-zoom_meeting_audio.md`
-- `module-zoom_meeting_video.md`
-- `module-zoom_meeting_share.md`
-- `module-zoom_meeting_participants_ctrl.md`
-- `module-zoom_meeting_chat.md`
-- `module-zoom_meeting_recording.md`
+- audio/video/share helpers
+- chat helper and command channel
+- user/session helpers
+- recording/live stream/live transcription helpers
+- subsession, whiteboard, virtual background, phone/CRC helpers
 
-## Settings
+## Models / enums
 
-- `module-zoom_setting.md`
-- `module-zoom_setting_audio.md`
-- `module-zoom_setting_video.md`
-- `module-zoom_setting_share.md`
-- `module-zoom_setting_recording.md`
-
-## Advanced/optional
-
-- `module-zoom_rawdata.md`
-- `module-zoom_meeting_webinar.md`
-- `module-zoom_meeting_ai_companion.md`
-- `module-zoom_meeting_whiteboard.md`
-- `module-zoom_meeting_polling.md`
-- `module-zoom_meeting_qa.md`
+- status enums (recording, live stream, network, device)
+- error enums and failure reasons
+- session quality/statistics objects

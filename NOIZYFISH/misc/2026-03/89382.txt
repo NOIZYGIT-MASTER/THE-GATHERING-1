@@ -1,0 +1,1641 @@
+Manual
+Disclaimer
+The information in this document is subject to change without notice and does not represent a
+commitment on the part of Native Instruments GmbH. The software described by this docu-
+ment is subject to a License Agreement and may not be copied to other media. No part of this
+publication may be copied, reproduced or otherwise transmitted or recorded, for any purpose,
+without prior written permission by Native Instruments GmbH, hereinafter referred to as Native
+Instruments.
+“Native Instruments”, “NI” and associated logos are (registered) trademarks of Native Instru-
+ments GmbH.
+Mac, Mac OS, GarageBand, Logic, iTunes and iPod are registered trademarks of Apple Inc.,
+registered in the U.S. and other countries.
+Windows, Windows Vista and DirectSound are registered trademarks of Microsoft Corporation
+in the United States and/or other countries.
+All other trade marks are the property of their respective owners and use of them does not im-
+ply any affiliation with or endorsement by them.
+Document authored by: Native Instruments
+Software version: 1.0 (07/2013)
+Special thanks to the Beta Test Team, who were invaluable not just in tracking down bugs, but
+in making this a better product.
+Contact
+Germany
+Native Instruments GmbH
+Schlesische Str. 29-30
+D-10997 Berlin
+Germany
+www.native-instruments.de
+USA
+Native Instruments North America, Inc.
+6725 Sunset Boulevard
+5th Floor
+Los Angeles, CA 90028
+USA
+www.native-instruments.com
+Japan
+Native Instruments KK
+YO Building 3F
+Jingumae 6-7-15, Shibuya-ku,
+Tokyo 150-0001
+Japan
+www.native-instruments.co.jp
+© Native Instruments GmbH, 2013. All rights reserved.
+Table of Contents
+Table of Contents
+1 Welcome to DRUMLAB ...............................................................................................6
+2 Quick Start ................................................................................................................8
+2.1 Basic Navigation ........................................................................................................................ 8
+2.1.1 Header ....................................................................................................................... 9
+2.1.2 Pages and Page Tabs ................................................................................................ 10
+2.2 Selecting Tiles to Edit DRUMLAB Instruments and Effects ......................................................... 12
+2.2.1 Selecting Instrument Layers ...................................................................................... 13
+2.2.2 Fine-Controlling the Sound of an Instrument ............................................................. 15
+2.2.3 Adding Effects to an Instrument ................................................................................ 17
+2.3 Handling Grooves and Sound Presets ......................................................................................... 23
+2.3.1 Selecting a Groove ..................................................................................................... 23
+2.3.2 Selecting a Sound Preset ........................................................................................... 26
+2.3.3 Saving User Presets ................................................................................................... 27
+2.3.4 Removing User Presets .............................................................................................. 28
+3 Kit Page ....................................................................................................................29
+3.1 Microphones ............................................................................................................................... 32
+3.1.1 Stereo Overhead ........................................................................................................ 33
+3.1.2 Mono Overhead & Mono Room ................................................................................... 35
+3.2 Reverb ........................................................................................................................................ 38
+3.3 Drum Kit Instruments ................................................................................................................. 40
+3.3.1 Kick ........................................................................................................................... 41
+3.3.2 Snare ......................................................................................................................... 46
+3.3.3 Hi-hat ........................................................................................................................ 51
+3.3.4 Tom 1, 2, and 3 ......................................................................................................... 55
+3.3.5 Crashes 1 & 2 and Ride ............................................................................................. 60
+3.4 Ornamental Percussion Instruments .......................................................................................... 62
+Drum Lab - Manual - 4
+Table of Contents
+3.5 Close-Mic Percussion Instruments ............................................................................................. 64
+3.6 Master ........................................................................................................................................ 68
+4 Grooves Page ............................................................................................................71
+5 Options Page .............................................................................................................75
+5.1 MIDI SETTINGS ............................................................................................................................ 76
+5.1.1 MIDI Mapping ............................................................................................................ 76
+5.1.2 Velocity Settings ........................................................................................................ 79
+5.2 Memory Usage ............................................................................................................................ 80
+6 Using Single Instrument NKIs .....................................................................................82
+6.1 Overview of the Interface ............................................................................................................ 82
+6.1.1 Drum Tile and Options ............................................................................................... 83
+6.1.2 Footer ........................................................................................................................ 84
+6.2 Editing DRUMLAB Instruments ................................................................................................... 85
+6.2.1 Selecting Instrument Layers ...................................................................................... 85
+6.2.2 Changing an Instrument's Articulation ..................................................................... 87
+6.2.3 Controlling the Kit Mics ............................................................................................. 88
+6.2.4 Fine-Controlling the Sound of an Instrument ............................................................. 93
+6.2.5 Adding Effects to an Instrument ................................................................................ 94
+6.2.6 Editing Key Range ..................................................................................................... 97
+6.2.7 Editing Velocity .......................................................................................................... 98
+7 Credits ......................................................................................................................99
+Drum Lab - Manual - 5
+Welcome to DRUMLAB
+1 Welcome to DRUMLAB
+Thank you for purchasing DRUMLAB. On behalf of the Native Instruments team, we hope this
+new KONTAKT library truly inspires you.
+DRUMLAB adds a selection of exclusively sampled drums and percussion instruments as well
+as electronic sounds that can be mixed together for the most well-rounded drum sounds availa-
+ble. You also have full access to top-tier quality effects and a huge collection of professionally
+crafted MIDI grooves to create drum tracks for your music projects. The DRUMLAB library inte-
+grates seamlessly into the latest versions of KONTAKT 5 and the free KONTAKT PLAYER.
+This manual will introduce you to all instruments and effects contained in the library as well as
+give you step-by-step instructions on how to get the most of your product.
+DRUMLAB Document Overview
+▪ For a quick introduction to DRUMLAB's interface and step-by-step guides to basic func-
+tions, see section ↑2, Quick Start.
+▪ For detailed information about the controls available for DRUMLAB's instruments and ef-
+fects and how to edit these, see section ↑3, Kit Page.
+▪ For information about the MIDI patterns included to play back the drums, see section ↑4,
+Grooves Page.
+▪ For information about "technical" settings, e.g. MIDI mapping, see section ↑5, Options
+Page.
+▪ For detailed information about the use of single DRUMLAB instruments in KONTAKT, see
+section ↑6, Using Single Instrument NKIs.
+Document Conventions
+This document uses particular formatting to point out special facts and to warn you of poten-
+tial issues. The icons introducing the following notes let you see what kind of information can
+be expected:
+Whenever this exclamation mark icon appears, you should read the corresponding note
+carefully and follow the instructions and hints given there if applicable.
+Drum Lab - Manual - 6
+Welcome to DRUMLAB
+This light bulb icon indicates that a note contains useful extra information. This informa-
+tion may often help you to solve a task more efficiently, but does not necessarily apply to
+the setup or operating system you are using; however, it's always worth a look.
+Furthermore, the following formatting is used:
+▪ Text appearing in (drop-down) menus (such as Open…, Save as… etc.) and paths to loca-
+tions on your hard drive or other storage devices is printed in italics.
+▪ Text appearing elsewhere on the screen (labels of buttons, controls, text next to checkbox-
+es etc.) is printed in light blue. Whenever you see this formatting applied, you will find
+the same text appearing on the screen.
+▪ Important names and concepts are printed in bold.
+▪ References to keys on your computer's keyboard you'll find put in square brackets (e.g.,
+"Press [Shift] + [Return]").
+► Single instructions are introduced by this play button type arrow.
+→ Results of actions are introduced by this smaller arrow.
+Drum Lab - Manual - 7
+Quick Start
+Basic Navigation
+2 Quick Start
+In this chapter, you will find a quick guide to navigating the controls of DRUMLAB, as well as
+step-by-step guides to certain functions.
+2.1 Basic Navigation
+DRUMLAB's interface consists of three major sections:
+DRUMLAB's main interface
+(1) Header: This section will always appear at the top of the interface, regardless of which page
+is selected. Use the header to select sound presets and MIDI grooves.
+Drum Lab - Manual - 8
+Quick Start
+Basic Navigation
+(2) Pages: This section displays the content of the selected page. The DRUMLAB interface has
+three control pages: Grooves, Options, and Kit Page. Use the settings on each page to interact
+with the drums and grooves.
+(3) Page tabs: Use these tabs to navigate to the Grooves, Options and Kit Page.
+2.1.1 Header
+DRUMLAB's header gives you quick access to its sound presets and grooves. Independently of
+the page selected, this header will always be visible at the top of the interface, allowing you to
+quickly browse through available sound presets and grooves.
+DRUMLAB’s header
+Drum Lab - Manual - 9
+Quick Start
+Basic Navigation
+2.1.2 Pages and Page Tabs
+DRUMLAB has three different control pages: Grooves, Options, and Kit Page. You can select a
+page by clicking the corresponding tab at the bottom of the interface. The different pages and
+their uses are as follows:
+▪ Grooves page: On this page is a browser of many genre-separated MIDI grooves and fills
+with variations that can be dragged to your host for immediate song creation. Above the
+GROOVE BROWSER is a visual representation of the selected groove, where each MIDI
+event is displayed as a beat on a rhythmic grid. For details on the Grooves page, see sec-
+tion ↑4, Grooves Page.
+Drum Lab - Manual - 10
+Quick Start
+Basic Navigation
+▪ Options page: Use this page to edit options for technical kit settings such as MIDI note
+mapping and velocity ranges. For details on the Options page, see section ↑5, Options
+Page.
+Drum Lab - Manual - 11
+Quick Start
+Selecting Tiles to Edit DRUMLAB Instruments and Effects
+▪ Kit Page: Use this page to select drums and adjust settings for each instrument, e.g. se-
+lecting acoustic and electronic layers, adjusting microphone mixes, and adding effects.
+For details on the Kit Page, see section ↑3, Kit Page.
+2.2 Selecting Tiles to Edit DRUMLAB Instruments and Effects
+This section contains step-by-step instructions to DRUMLAB's basic functions and workflows
+to help you get started. Use the Kit Page to select drums, microphones, and effects and to edit
+their parameters. For detailed information about the instruments and their controls, see sec-
+tion ↑3, Kit Page.
+Drum Lab - Manual - 12
+Quick Start
+Selecting Tiles to Edit DRUMLAB Instruments and Effects
+2.2.1 Selecting Instrument Layers
+Each instrument comes with a number of acoustic layers that can be selected and edited.
+Some instruments come with both acoustic and electronic layers, which can be combined for
+well-rounded drum sounds.
+Selecting an Acoustic Layer
+To change an instrument's acoustic layer:
+1. 2. Click on the Kit Page tab at the bottom of the interface.
+Select an instrument by clicking its tile.
+3. 4. Click on the SOURCE tab in the instrument's footer.
+Open the list of available acoustic layers by clicking in the middle of the Acoustic layer
+selector.
+5. Change the layer by selecting an acoustic layer from the drop-down menu.
+Drum Lab - Manual - 13
+Quick Start
+Selecting Tiles to Edit DRUMLAB Instruments and Effects
+6. If an instrument also has an electronic layer, you can mix the two layers by clicking and
+dragging the crossfader.
+You can adjust the balance between the layers of all instruments simultaneously by holding
+and pressing [Alt] on your computer keyboard while clicking and dragging the crossfader.
+Selecting an Electronic Layer
+To change an instrument's electronic layer:
+1. 2. Click on the Kit Page tab at the bottom of the interface.
+Select an instrument by clicking its tile.
+3. Click on the SOURCE tab in the instrument's footer.
+Drum Lab - Manual - 14
+Quick Start
+Selecting Tiles to Edit DRUMLAB Instruments and Effects
+4. Open the list of available electronic layers by clicking in the middle of the Electronic layer
+selector.
+5. 6. Change the layer by selecting an item from the drop-down menu.
+Mix the electronic layer with the acoustic layer by clicking and dragging the crossfader.
+You can adjust the balance between the layers of all instruments simultaneously by holding
+and pressing [Alt] on your computer keyboard while clicking and dragging the crossfader.
+2.2.2 Fine-Controlling the Sound of an Instrument
+To adjust an individual instrument's (or even a single sample layer's) sound settings:
+Drum Lab - Manual - 15
+Quick Start
+Selecting Tiles to Edit DRUMLAB Instruments and Effects
+1. 2. Click on the Kit Page tab at the bottom of the interface.
+Select an instrument by clicking its tile.
+3. Click on the SOURCE tab in the instrument's footer.
+► Alter the pitch by adjusting the Tune knob.
+You can adjust the pitch of the current layer (acoustic or electronic) for all instruments si-
+multaneously by holding and pressing [Alt] on your computer keyboard while turning the
+Tune knob.
+► Change the overhead and room mix amounts for each instrument by adjusting the corre-
+sponding OH/Room knob.
+Drums recorded with additional microphones, e.g. Out & Sub microphones and Top & Bot-
+tom microphones, have the additional parameters: Trash, Out/Sub and Top/Btm. These can
+be used to adjust the corresponding microphone levels.
+Drum Lab - Manual - 16
+Quick Start
+Selecting Tiles to Edit DRUMLAB Instruments and Effects
+► Edit the volume envelope by adjusting the Attack, Hold and Decay with the respective
+knobs.
+► Add a low-pass filter to an instrument's electronic layer by turning the Filter knob coun-
+terclockwise.
+► Add a high-pass filter to an instrument's electronic layer by turning the Filter knob clock-
+wise.
+► Delay the triggering of an instrument's electronic layer by turning the Tr. Offset knob
+clockwise. A delay of up to 50 ms can be applied.
+2.2.3 Adding Effects to an Instrument
+The kick, snare, hi-hat, toms and some percussion instruments can be processed by designat-
+ed effect units. You can use effects to enhance the sound of your drums or to refine certain
+frequencies. For detailed information on each instrument's effect parameters, refer to the cor-
+responding sections in chapter ↑3, Kit Page.
+Drum Lab - Manual - 17
+Quick Start
+Selecting Tiles to Edit DRUMLAB Instruments and Effects
+The EFFECTS tab
+Editing the Transients
+To change TRANSIENTS settings:
+1. 2. Click on the Kit Page tab at the bottom of the interface.
+Select an instrument by clicking its tile.
+3. 4. Click on the EFFECTS tab in the instrument's footer.
+Activate the effect by clicking the switch left of the effect’s label so it lights up.
+5. Fine-tune the effect by adjusting the Attack and Release knobs.
+Drum Lab - Manual - 18
+Quick Start
+Selecting Tiles to Edit DRUMLAB Instruments and Effects
+Editing the Compressor
+To change COMPRESSOR settings:
+1. 2. Click on the Kit Page tab at the bottom of the interface.
+Select an instrument by clicking its tile.
+3. 4. Click on the EFFECTS tab in the instrument's footer.
+Activate the effect by clicking the switch left of the effect’s label so it lights up.
+5. Fine-tune the effect by adjusting the Amount and Attack knobs.
+Editing the Saturator
+To change SATURATOR settings:
+1. Click on the Kit Page tab at the bottom of the interface.
+Drum Lab - Manual - 19
+Quick Start
+Selecting Tiles to Edit DRUMLAB Instruments and Effects
+2. Select an instrument by clicking its tile.
+3. 4. Click on the EFFECTS tab in the instrument's footer.
+Activate the effect by clicking the switch left of the effect’s label so it lights up.
+5. Fine-tune the effect by adjusting the Gain and Level knobs.
+Editing the Equalizer
+To change EQUALIZER settings:
+1. 2. Click on the Kit Page tab at the bottom of the interface.
+Select an instrument by clicking its tile.
+3. Click on the EFFECTS tab in the instrument's footer.
+Drum Lab - Manual - 20
+Quick Start
+Selecting Tiles to Edit DRUMLAB Instruments and Effects
+4. Activate the effect by clicking the switch left of the effect’s label so it lights up.
+5. Fine-tune the effect by adjusting the Low, Mid, and High EQ bands and their correspond-
+ing Gain knobs.
+Editing the Reverb
+To adjust the amount to which the selected instrument is processed by the REVERB effect:
+1. 2. Click on the Kit Page tab at the bottom of the interface.
+Select an instrument by clicking its tile.
+3. 4. Click on the EFFECTS tab in the instrument's footer.
+Adjust the amount of reverb by turning the Send Level knob.
+To select a reverb space for the entire kit:
+Drum Lab - Manual - 21
+1. 2. 3. Quick Start
+Selecting Tiles to Edit DRUMLAB Instruments and Effects
+Select the Reverb effect by clicking the Reverb tile in the upper right corner so that a se-
+lection of available spaces appears in the footer.
+Scroll though the available spaces by clicking the images to the right or the left of the
+currently selected reverb space.
+Open the list of available subtypes for each space by clicking the drop-down menu.
+Drum Lab - Manual - 22
+Quick Start
+Handling Grooves and Sound Presets
+4. Select a subtype by clicking one of the items in the menu.
+5. Set the level of the reverb for the entire kit by clicking and dragging the fader on the Re-
+verb tile.
+The settings of the Reverb tile are not instrument-specific. Selecting another reverb space
+adjusts the reverb settings for all instruments simultaneously.
+2.3 Handling Grooves and Sound Presets
+2.3.1 Selecting a Groove
+DRUMLAB comes with a vast selection of MIDI grooves to play back your drums with authentic
+rhythms used in popular music genres. For detailed information on the Grooves page, refer to
+section ↑4, Grooves Page. To select and play back a MIDI groove:
+1. Click on the Grooves tab at the bottom of the interface.
+Drum Lab - Manual - 23
+2. 3. Quick Start
+Handling Grooves and Sound Presets
+Select a sound genre by clicking an item in the left column of the GROOVE BROWSER.
+Select a groove by clicking an item in the middle column of the GROOVE BROWSER.
+Drum Lab - Manual - 24
+Quick Start
+Handling Grooves and Sound Presets
+4. Select and load a variation by double-clicking an item in the right column of the GROOVE
+BROWSER.
+→ A visual representation of the groove you selected is displayed in the form of a piano roll
+above the GROOVE BROWSER. The current position is marked by a playhead.
+Drum Lab - Manual - 25
+Quick Start
+Handling Grooves and Sound Presets
+2.3.2 Selecting a Sound Preset
+On the left side of DRUMLAB's header, you find a section dedicated to sound presets. Loading
+a sound preset will adjust microphone settings, select instruments and turn effects on or off.
+To load a sound preset:
+1. Select a genre of sound presets by clicking the upper drop-down menu and selecting one
+of the items from the appearing list.
+2. Load a sound preset by clicking the lower drop-down menu and selecting one of the items
+from the appearing list.
+→ Notice how the controls on the Kit Page change to reflect the settings of the loaded
+sound preset.
+Drum Lab - Manual - 26
+Quick Start
+Handling Grooves and Sound Presets
+► Quickly step between sound presets of the same type group by clicking the left and right
+buttons next to the drop-down menu.
+2.3.3 Saving User Presets
+You can save your own sound presets for the settings of the drums by using the drop-down me-
+nus in the header while viewing the Kit Page, and save MIDI mapping layouts on the Options
+page (for details on MIDI mapping presets, refer to section ↑5.1.1, MIDI Mapping). Each of
+these preset menus contains a selection of factory presets and also allows you to save your own
+custom presets. Factory presets cannot be overwritten (indicated by the darkened Ø button),
+but they can be adjusted and saved as a new user preset.
+To save a user preset:
+1. Click on the Kit Page tab at the bottom of the itnerface.
+2. Adjust the settings you want to save and recall for your preset.
+In order for a smooth saving process, it is important that you stop playback of any of
+DRUMLAB's MIDI grooves currently playing in your host software while saving user presets.
+3. Click in the text area of the lower drop-down menu so a cursor appears.
+4. Save the user preset by typing in a new name and clicking the save button to the right of
+the drop-down menu.
+Drum Lab - Manual - 27
+Quick Start
+Handling Grooves and Sound Presets
+→ The upper drop-down menu will now change to display the USER presets and your new
+preset will appear at the bottom of the list in the lower drop-down menu.
+If you save a user preset without changing the name, it will overwrite the current user pre-
+set.
+2.3.4 Removing User Presets
+1. 2. To remove a user preset:
+Select the preset in the lower drop-down menu.
+3. Delete the user preset by clicking the Ø button to the right of the drop-down menu.
+→ The user preset will be deleted and not be available when opening the kit again.
+You cannot delete factory presets.
+Drum Lab - Manual - 28
+Kit Page
+3 Kit Page
+This section contains an extensive overview of the interface of the Kit Page. Use the Kit Page
+to view the instruments and their controls. It is separated in two main sections:
+DRUMLAB’s Kit Page
+(1) Tile matrix: Use the upper section of the Kit Page to select instruments and microphones as
+well as a master channel strip.
+(2) Footer: Use the lower section of the Kit Page to access a footer containing effects and con-
+trols for fine-tuning each instrument. This section changes to reflect the available controls for
+the selected instrument.
+Drum Lab - Manual - 29
+Kit Page
+Tile Matrix
+The tiles of the tile matrix can be further categorized in six types:
+Tile matrix and its different tile types (kick drum selected in this image)
+(1) Microphones (Stereo Overhead, Mono Overhead, and Mono Room), see section ↑3.1, Micro-
+phones.
+(2) Reverb, see section ↑3.2, Reverb.
+(3) Drum kit instruments (Kick, Snare, Hi-hat, Toms 1-3, Crashes 1, 2 and Ride), see section
+↑3.3, Drum Kit Instruments.
+(4) Ornamental percussion instruments (Cowbell, Conga, Bongo, Cabasa, Sticks, Finger Cymbal,
+Shaker, Agogo, Triangle, and Pandeiro), see section ↑3.4, Ornamental Percussion Instruments.
+(5) Close-mic percussion instruments (Claps, Woodblocks, Snaps, Triangle, Tambourine, and
+Shaker), see section ↑3.5, Close-Mic Percussion Instruments.
+(6) Master channel strip, see section ↑3.6, Master.
+As soon as you select an instrument in the tile matrix, you will hear the corresponding sound
+being played back and the tile changes color to indicate selection. Additionally, the tile con-
+trols and a level meter become visible on the right-hand side of the tile:
+Drum Lab - Manual - 30
+Kit Page
+The kick's tile in default state (left) and after selection with tile controls and level meter (right)
+Crashes, ride and ornamental percussion instruments do not have any tile controls.
+Deselected tiles will still indicate activated solo and mute options by displaying an illuminated
+S or M respectively.
+Activated solo (left) and mute (right) options on deselected kick drum.
+Footer
+The footer below the tile matrix changes depending on the tile selected. It can display three
+different views: the SOURCE tab, the EFFECTS tab and the Reverb footer. Learn more about
+instrument-specific footers in the following sections.
+Drum Lab - Manual - 31
+Kit Page
+Microphones
+The three different possible views of the footer section: SOURCE, EFFECTS, and reverb.
+3.1 Microphones
+Microphones in the tile matrix
+Every acoustic drum sample was recorded with a set of different microphones. The top row of
+the tile matrix contains tiles for the following three microphone types:
+▪ Stereo Overhead
+▪ Mono Overhead
+▪ Mono Room
+Drum Lab - Manual - 32
+Kit Page
+Microphones
+Use each microphone tile to control the sum of all instruments' outputs sent to the correspond-
+ing microphone: Stereo Overhead, Mono Overhead, and/or Mono Room. Adjust the send level
+of a microphone for each instrument in the SOURCE tab of the respective instrument's footer
+on the Kit Page.
+3.1.1 Stereo Overhead
+As soon as you select the Stereo Overhead tile its tile controls become visible:
+Stereo Overhead tile controls
+(1) Solo and Mute (S/M): Use these buttons to solo and mute single microphone types in the
+master mix.
+(2) Width: Turn this knob to set the stereo width.
+(3) Volume: Turn this knob to set the volume of all summed Stereo Overhead microphones in
+the master mix.
+(4) Channel: Click this button to set an output channel. If you select a channel other than the
+master, the signal will bypass the master's effects settings.
+Additionally, when selected, the Stereo Overhead’s EFFECTS tab is displayed in the tile footer.
+The Stereo Overhead's EFFECTS Tab
+► Activate an effect by clicking the button left of the effect's label so it lights up:
+Not activated effect (left), activated effect (right)
+The Mono Overhead and Mono Room microphones' corresponding EFFECTS tabs contain the
+following five effects:
+Drum Lab - Manual - 33
+Kit Page
+Microphones
+The Stereo Overhead's EFFECTS tab
+(1) TRANSIENTS: This effect compresses the signal based on its volume envelope.
+▪ The Attack knob controls the scaling of the attack phase of the input signal’s volume en-
+velope. Increasing this parameter will add more punch and decreasing it will reduce sharp
+attacks.
+▪ The Release controls the scaling of the release phase of the input signal’s volume enve-
+lope. Increasing this parameter will add more body to the sound and decreasing it will re-
+duce the sound’s tail.
+(2) COMPRESSOR: This feedback compressor uses the amplifier's output signal, rather than
+the input signal, which is the case for most compressors, to a threshold level. When the thresh-
+old level is reached, the compressor reduces the signal's gain level.
+▪ The Amount knob lets you change the percentage of signal being compressed.
+▪ The Attack knob adjusts the time in milliseconds which the compressor needs to reach
+full effect after the input signal exceeds the threshold level.
+(3) SATURATOR: This effect adds the simulated warmth of sound that comes from an analog
+tape machine.
+▪ The Gain knob adjusts the amount to which the input signal is boosted with the saturated
+sound.
+▪ The Level knob adjusts the overall output.
+Drum Lab - Manual - 34
+Kit Page
+Microphones
+(4) EQUALIZER: This musical EQ allows you to adjust three frequency bands with high preci-
+sion.
+▪ Low: Sets a frequency in the range of 40 Hz - 600 Hz below which the signal responds to
+the increase or decrease in volume assigned by the corresponding Gain knob below.
+▪ Mid: Sets an upper frequency to define a notch in the range of 600 Hz - 7 kHz. The level
+of this band can be controlled by the corresponding Gain knob below.
+▪ High: Sets an upper frequency to define a high band in the range of 7 kHz - 22 kHz. The
+level of this band can be controlled by the corresponding Gain knob below.
+(5) REVERB: The reverb includes many impulse samples of some of the best acoustic spaces
+for drum production.
+▪ Send Level: Defines the amount to which the post-FX signal is sent to the reverb effect.
+You don't need to activate the REVERB effect separately. Use the Send Level knob to con-
+trol the amount to which the signal of the selected instrument is sent to the reverb. You
+can set the overall volume of all REVERB sends in the Reverb tile controls. For details, see
+the relevant sections ↑2.2.3, Adding Effects to an Instrument and ↑3.2, Reverb.
+The REVERB send of each instrument is a post-FX signal, i.e. all EFFECTS settings of the
+corresponding instrument will influence the sound of the reverb.
+3.1.2 Mono Overhead & Mono Room
+As soon as you select Mono Overhead or Mono Room the corresponding tile controls become
+visible:
+Mono Overhead and Mono Room tile controls
+(1) Solo and Mute (S/M): Use these buttons to solo and mute single microphone types in the
+master mix.
+Drum Lab - Manual - 35
+Kit Page
+Microphones
+(2) Pan: Turn this knob to set the panorama position of a microphone type.
+(3) Volume: Turn this knob to set the volume of all summed Mono Overhead or Mono Room mi-
+crophones in the master mix.
+(4) Channel: Click this button to set an output channel. If you select a channel other than Mas-
+ter, the signal will bypass the master's effects settings.
+Additionally, when selected, the tile's corresponding EFFECTS tab is displayed in the footer.
+The Mono Overhead's and Mono Room's EFFECTS Tab
+► In order to activate an effect, click the button left of the effect’s label:
+Not activated Effect (left), activated effect (right)
+The Mono Overhead and Mono Room microphones' corresponding EFFECTS tabs contain the
+following five effects:
+The Mono Overhead's and Mono Rooms EFFECTS tab
+(1) TRANSIENTS: This effect compresses the signal based on its volume envelope.
+▪ The Attack knob controls the scaling of the attack phase of the input signal’s volume en-
+velope. Increasing this parameter will add more punch and decreasing it will reduce sharp
+attacks.
+Drum Lab - Manual - 36
+Kit Page
+Microphones
+▪ The Release controls the scaling of the release phase of the input signal’s volume enve-
+lope. Increasing this parameter will add more body to the sound and decreasing it will re-
+duce the sound’s tail.
+(2) COMPRESSOR: This feedback compressor uses the amplifier's output signal, rather than
+the input signal, which is the case for most compressors, to a threshold level. When the thresh-
+old level is reached, the compressor reduces the signal's gain level.
+▪ The Amount knob lets you change the percentage of signal being compressed.
+▪ The Attack knob adjusts the time in milliseconds which the compressor needs to reach
+full effect after the input signal exceeds the threshold level.
+(3) SATURATOR: This effect adds the simulated warmth of sound that comes from an analog
+tape machine.
+▪ The Gain knob adjusts the amount to which the input signal is boosted with the saturated
+sound.
+▪ The Level knob adjusts the overall output.
+(4) EQUALIZER: This musical EQ allows you to adjust three frequency bands with high preci-
+sion.
+▪ Low: Sets a frequency in the range of 40 Hz - 600 Hz below which the signal responds to
+the increase or decrease in volume assigned by the corresponding Gain knob below.
+▪ Mid: Sets an upper frequency to define a notch in the range of 600 Hz - 7 kHz. The level
+of this band can be controlled by the corresponding Gain knob below.
+▪ High: Sets an upper frequency to define a high band in the range of 7 kHz - 22 kHz. The
+level of this band can be controlled by the corresponding Gain knob below.
+(5) REVERB: The reverb includes many impulse samples of some of the best acoustic spaces
+for drum production.
+▪ Send Level: Defines the amount to which the post-FX signal is sent to the reverb effect.
+You don't need to activate the REVERB effect separately. Use the Send Level knob to con-
+trol the amount to which the signal of the selected instrument is sent to the reverb. You
+can set the overall volume of all REVERB sends in the Reverb tile controls. For details, see
+the relevant sections ↑2.2.3, Adding Effects to an Instrument and ↑3.2, Reverb.
+Drum Lab - Manual - 37
+Kit Page
+Reverb
+The REVERB send of each instrument is a post-FX signal, i.e. all EFFECTS settings of the
+corresponding instrument will influence the sound of the reverb.
+3.2 Reverb
+Reverb in the tile matrix
+The Reverb effect includes many impulse samples of some of the best acoustic spaces for
+drum production. As soon as you select the Reverb tile its tile controls become visible:
+Reverb tile and its tile controls
+(1) Solo and Mute (S/M): Use these buttons to solo and/or mute the Reverb.
+(2) Volume: Click and drag this fader to set the volume of the Reverb in the master mix.
+When selected, the tile footer switches to display preview images of available rooms:
+Drum Lab - Manual - 38
+Kit Page
+Reverb
+The Reverb's Footer
+The Reverb's footer displaying images of available spaces
+► To shift the selection over to reveal more room types, click on the room images to the
+right and left of the selected image.
+► To select the room type, click on the drop-down menu above the selected room image.
+The drop-down menu below the room image allows you to select a specific room preset
+within that room type.
+► To adjust the overall level of the reverb, use the fader on the Reverb tile.
+► To adjust the reverb of a single instrument, use the Send Level knob in its SOURCE tab.
+Drum Lab - Manual - 39
+Kit Page
+Drum Kit Instruments
+3.3 Drum Kit Instruments
+Drum kit in the tile matrix
+These tiles include instruments of a standard drum kit: Kick, Snare, Toms, Hi-hat, Crashes,
+and Ride. The Kick, the Snare, Tom 1, 2, and 3, as well as the Hi-hat can be layered with
+recordings of electronic sounds. As soon as you select one of these tiles, you hear the corre-
+sponding drum sound, the tile controls become visible and the tile footer at the bottom of the
+interface changes to display two tabs: a SOURCE tab and an EFFECTS tab.
+▪ For detailed information about the kick drum's controls, see section ↑3.3.1, Kick.
+▪ For detailed information about the snare drum's controls, see section ↑3.3.2, Snare.
+▪ For detailed information about the hi-hat's controls, see section ↑3.3.3, Hi-hat.
+▪ For detailed information about the toms' controls, see section ↑3.3.4, Tom 1, 2, and 3.
+▪ For detailed information about the cymbals' controls, see section ↑3.3.5, Crashes 1 & 2
+and Ride.
+Drum Lab - Manual - 40
+Kit Page
+Drum Kit Instruments
+3.3.1 Kick
+The Kick's tile controls are the following:
+The kick drum's tile controls
+(1) Solo and Mute (S/M): Use these buttons to solo and mute single instruments.
+(2) Pan: Turn this knob to set the panorama position of the instrument.
+(3) Volume: Click and drag this fader to set the volume of the kick drum's combined close mi-
+crophones (Out/Sub and Trash) and electronic layer in the master mix.
+(4) Channel: Click this button to set an output channel. If you select a channel other than the
+master, the signal will bypass the master's effects settings.
+Additionally, when selected, the tile's SOURCE and EFFECTS tabs will be displayed in the
+footer.
+The Kick's SOURCE Tab
+The kick drums SOURCE tab contains controls for both an acoustic drum layer and an elec-
+tronic one. The controls in the upper section of the SOURCE tab can be used to edit settings
+for the acoustic layer and the lower section for the electronic layer.
+Drum Lab - Manual - 41
+Kit Page
+Drum Kit Instruments
+The kick drum's SOURCE tab
+(1) Mix: Crossfades between the Acoustic and the Electronic layer.
+You can adjust the balance between the layers of all instruments simultaneously by holding
+and pressing [Alt] on your computer keyboard while clicking and dragging the crossfader.
+Acoustic layer:
+(2) Acoustic layer selector: Allows you to select an acoustic sample layer.
+(3) Tune: Controls the pitch of the selected acoustic layer.
+You can adjust the pitch of the current layer (acoustic or electronic) for all instruments si-
+multaneously by holding and pressing [Alt] on your computer keyboard while turning the
+Tune knob.
+(4) Microphone controls:
+▪ Out/Sub: Controls the balance between two close microphones positioned inside and out-
+side the drum.
+▪ OH/Room: Controls the summed send level of the overhead and room microphones for the
+selected acoustic instrument.
+Drum Lab - Manual - 42
+Kit Page
+Drum Kit Instruments
+▪ Trash: Controls the level of a close lo-fi microphone for the selected acoustic instrument.
+(5) Envelope controls:
+▪ Attack: Increasing this value adds more of a fade-in to the beginning of the sound.
+▪ Hold: Turning this knob adjusts how long the sound stays at maximum volume.
+▪ Decay: Turning this knob adjusts how quickly the sound fades out after the Hold time has
+passed.
+Electronic layer:
+(6) Electronic layer selector: Allows you to select an electronic sample layer.
+(7) Tune: Controls the pitch of the selected electronic layer.
+You can adjust the pitch of the current layer (acoustic or electronic) for all instruments si-
+multaneously by holding and pressing [Alt] on your computer keyboard while turning the
+Tune knob.
+(8) Filter: Turning this knob counterclockwise adjusts the cutoff frequency of the low-pass fil-
+ter. Turning this knob clockwise adjusts the cutoff frequency for the high-pass filter.
+(9) Tr. Offset (Trigger Offset): Turning this knob clockwise introduces a delay to the triggering
+of the electronic layer. A delay of up to 50 ms can be applied.
+(10) Envelope controls:
+▪ Attack: Increasing this value adds more of a fade-in to the beginning of the sound.
+▪ Hold: Turning this knob adjusts how long the sound stays at maximum volume
+▪ Decay: Turning this knob adjusts how quickly the sound fades out after the Hold time has
+passed.
+The Kick's EFFECTS Tab
+The EFFECTS tab of the Kick contains five editable effects, identical to all instruments.
+► Activate an effect by clicking the button left of the effect's label:
+Effect off (left), effect on (right)
+Drum Lab - Manual - 43
+Kit Page
+Drum Kit Instruments
+The five available effects for the Kick are the following:
+The kick drum's EFFECTS tab
+(1) TRANSIENTS: This effect compresses the signal based on its volume envelope.
+▪ The Attack knob controls the scaling of the attack phase of the input signal’s volume en-
+velope. Increasing this parameter will add more punch and decreasing it will reduce sharp
+attacks.
+▪ The Release controls the scaling of the release phase of the input signal’s volume enve-
+lope. Increasing this parameter will add more body to the sound and decreasing it will re-
+duce the sound’s tail.
+(2) COMPRESSOR: This feedback compressor uses the amplifier's output signal, rather than
+the input signal, which is the case for most compressors, to a threshold level. When the thresh-
+old level is reached, the compressor reduces the signal's gain level.
+▪ The Amount knob lets you change the percentage of signal being compressed.
+▪ The Attack knob adjusts the time in milliseconds which the compressor needs to reach
+full effect after the input signal exceeds the threshold level.
+(3) SATURATOR: This effect adds the simulated warmth of sound that comes from an analog
+tape machine.
+▪ The Gain knob adjusts the amount to which the input signal is boosted with the saturated
+sound.
+Drum Lab - Manual - 44
+Kit Page
+Drum Kit Instruments
+▪ The Level knob adjusts the overall output.
+(4) EQUALIZER: This musical EQ allows you to adjust three frequency bands with high preci-
+sion.
+▪ Low: Sets a frequency in the range of 40 Hz - 600 Hz below which the signal responds to
+the increase or decrease in volume assigned by the corresponding Gain knob below.
+▪ Mid: Sets an upper frequency to define a notch in the range of 600 Hz - 7 kHz. The level
+of this band can be controlled by the corresponding Gain knob below.
+▪ High: Sets an upper frequency to define a high band in the range of 7 kHz - 22 kHz. The
+level of this band can be controlled by the corresponding Gain knob below.
+(5) REVERB: The reverb includes many impulse samples of some of the best acoustic spaces
+for drum production.
+▪ Send Level: Defines the amount to which the post-FX signal is send to the REVERB ef-
+fect.
+You don't need to activate the REVERB effect separately. Use the Send Level knob to con-
+trol the amount to which the signal of the selected instrument is sent to the reverb. You
+can set the overall volume of all REVERB sends in the Reverb tile controls. For details, see
+the relevant sections ↑2.2.3, Adding Effects to an Instrument and ↑3.2, Reverb.
+The REVERB send of each instrument is a post-FX signal, i.e. all EFFECTS settings of the
+corresponding instrument will influence the sound of the reverb.
+Drum Lab - Manual - 45
+Kit Page
+Drum Kit Instruments
+3.3.2 Snare
+The Snare's tile controls are the following:
+The snare drum's tile controls
+(1) Solo and Mute (S/M): Use these buttons to solo and mute single instruments.
+(2) Pan: Turn this knob to set the panorama position of the instrument.
+(3) Volume: Click and drag this fader to set the volume of the snare drum's combined close mi-
+crophones (Top/Btm and Trash) and electronic layer in the master mix.
+(4) Channel: Click this button to set an output channel. If you select a channel other than the
+master, the signal will bypass the master's effects settings.
+The Snare's SOURCE Tab
+The snare drums SOURCE tab contains controls for both an acoustic drum layer and an elec-
+tronic one. The controls in the upper section of the SOURCE tab can be used to edit settings
+for the acoustic layer and the lower section for the electronic layer.
+Drum Lab - Manual - 46
+Kit Page
+Drum Kit Instruments
+SOURCE tab of the snare drum
+(1) Mix: Crossfades between the Acoustic and the Electronic layer.
+You can adjust the balance between the layers of all instruments simultaneously by holding
+and pressing [Alt] on your computer keyboard while clicking and dragging the crossfader.
+Acoustic layer:
+(2) Acoustic layer selector: Allows you to select an acoustic sample layer.
+(3) Tune: Controls the pitch of the selected acoustic layer.
+You can adjust the pitch of the current layer (acoustic or electronic) for all instruments si-
+multaneously by holding and pressing [Alt] on your computer keyboard while turning the
+Tune knob.
+(4) Microphone controls:
+▪ Top/Btm: Controls the balance between a close top and a close bottom microphone for the
+selected acoustic instrument.
+▪ OH/Room: Controls the summed send level of the Overhead and Room microphones for
+the selected acoustic instrument.
+Drum Lab - Manual - 47
+Kit Page
+Drum Kit Instruments
+▪ Trash: Controls the level of a close lo-fi microphone for the selected acoustic instrument.
+(5) Envelope controls:
+▪ Attack: Increasing this value adds more of a fade-in to the beginning of the sound.
+▪ Hold: Turning this knob adjusts how long the sound stays at maximum volume.
+▪ Decay: Turning this knob adjusts how quickly the sound fades out after the Hold time has
+passed.
+Electronic layer:
+(6) Electronic layer selector: Allows you to select an electronic sample layer.
+(7) Tune: Controls the pitch of the selected electronic layer.
+You can adjust the pitch of the current layer (acoustic or electronic) for all instruments si-
+multaneously by holding and pressing [Alt] on your computer keyboard while turning the
+Tune knob.
+(8) Filter: Turning this knob counterclockwise adjusts the cutoff frequency of the low-pass fil-
+ter. Turning this knob clockwise adjusts the cutoff frequency for the high-pass filter.
+(9) Tr. Offset (Trigger Offset): Turning this knob clockwise introduces a delay to the triggering
+of the electronic layer. A delay of up to 50 ms can be applied.
+(10) Envelope controls:
+▪ Attack: Increasing this value adds more of a fade-in to the beginning of the sound.
+▪ Hold: Turning this knob adjusts how long the sound stays at maximum volume
+▪ Decay: Turning this knob adjusts how quickly the sound fades out after the Hold time has
+passed.
+The Snare's EFFECTS Tab
+The EFFECTS tab of the Snare contains five editable effects, identical to all instruments.
+► Activate an effect by clicking the button left of the effect's label:
+Effect off (left) and effect on (right)
+Drum Lab - Manual - 48
+Kit Page
+Drum Kit Instruments
+The five available effects for the Snare are the following:
+The snare drum's EFFECTS tab
+(1) TRANSIENTS: This effect compresses the signal based on its volume envelope.
+▪ The Attack knob controls the scaling of the attack phase of the input signal’s volume en-
+velope. Increasing this parameter will add more punch and decreasing it will reduce sharp
+attacks.
+▪ The Release controls the scaling of the release phase of the input signal’s volume enve-
+lope. Increasing this parameter will add more body to the sound and decreasing it will re-
+duce the sound’s tail.
+(2) COMPRESSOR: This feedback compressor uses the amplifier's output signal, rather than
+the input signal, which is the case for most compressors, to a threshold level. When the thresh-
+old level is reached, the compressor reduces the signal's gain level.
+▪ The Amount knob lets you change the percentage of signal being compressed.
+▪ The Attack knob adjusts the time in milliseconds which the compressor needs to reach
+full effect after the input signal exceeds the threshold level.
+(3) SATURATOR: This effect adds the simulated warmth of sound that comes from an analog
+tape machine.
+▪ The Gain knob adjusts the amount to which the input signal is boosted with the saturated
+sound.
+Drum Lab - Manual - 49
+Kit Page
+Drum Kit Instruments
+▪ The Level knob adjusts the overall output.
+(4) EQUALIZER: This musical EQ allows you to adjust three frequency bands with high preci-
+sion.
+▪ Low: Sets a frequency in the range of 40 Hz - 600 Hz below which the signal responds to
+the increase or decrease in volume assigned by the corresponding Gain knob below.
+▪ Mid: Sets an upper frequency to define a notch in the range of 600 Hz - 7 kHz. The level
+of this band can be controlled by the corresponding Gain knob below.
+▪ High: Sets an upper frequency to define a high band in the range of 7 kHz - 22 kHz. The
+level of this band can be controlled by the corresponding Gain knob below.
+(5) REVERB: The reverb includes many impulse samples of some of the best acoustic spaces
+for drum production.
+▪ Send Level: Defines the amount to which the post-FX signal is sent to the reverb effect.
+You don't need to activate the REVERB effect separately. Use the Send Level knob to con-
+trol the amount to which the signal of the selected instrument is sent to the reverb. You
+can set the overall volume of all REVERB sends in the Reverb tile controls. For details, see
+the relevant sections ↑2.2.3, Adding Effects to an Instrument and ↑3.2, Reverb.
+The REVERB send of each instrument is a post-FX signal, i.e. all EFFECTS settings of the
+corresponding instrument will influence the sound of the reverb.
+Drum Lab - Manual - 50
+Kit Page
+Drum Kit Instruments
+3.3.3 Hi-hat
+The Hi-hat's tile controls are the following:
+The Hi-hat's tile controls
+(1) Solo and Mute (S/M): Use these buttons to solo and mute single instruments.
+(2) Pan: Turn this knob to set the panorama position of the instrument.
+(3) Volume: Click and drag this fader to set the volume of the hi-hat's close microphone and
+electronic layer in the master mix.
+(4) Channel: Click this button to set an output channel. If you select a channel other than the
+master, the signal will bypass the master's effects settings.
+The Hi-hat's SOURCE Tab
+The hi-hat's SOURCE tab contains controls for both an acoustic drum layer and an electronic
+one. The controls in the upper section of the SOURCE tab can be used to edit settings for the
+acoustic layer and the lower section for the electronic layer.
+Drum Lab - Manual - 51
+Kit Page
+Drum Kit Instruments
+The hi-hat's SOURCE tab
+(1) Mix: Crossfades between the Acoustic and the Electronic layer.
+You can adjust the balance between the layers of all instruments simultaneously by holding
+and pressing [Alt] on your computer keyboard while clicking and dragging the crossfader.
+Acoustic layer:
+(2) Acoustic layer selector: Allows you to select an acoustic sample layer.
+(3) Tune: Controls the pitch of the selected acoustic layer.
+You can adjust the pitch of the current layer (acoustic or electronic) for all instruments si-
+multaneously by holding and pressing [Alt] on your computer keyboard while turning the
+Tune knob.
+(4) Microphone controls:
+▪ OH/Room: Controls the summed level of the Overhead and Room microphones for the se-
+lected acoustic instrument.
+(5) Envelope controls:
+▪ Attack: Increasing this value adds more of a fade-in to the beginning of the sound.
+Drum Lab - Manual - 52
+Kit Page
+Drum Kit Instruments
+▪ Hold: Turning this knob adjusts how long the sound stays at maximum volume.
+▪ Decay: Turning this knob adjusts how quickly the sound fades out after the Hold time has
+passed.
+Electronic layer:
+(6) Electronic layer selector: Allows you to select an electronic sample layer.
+(7) Tune: Controls the pitch of the selected electronic layer.
+You can adjust the pitch of the current layer (acoustic or electronic) for all instruments si-
+multaneously by holding and pressing [Alt] on your computer keyboard while turning the
+Tune knob.
+(8) Filter: Turning this knob counterclockwise adjusts the cutoff frequency of the low-pass fil-
+ter. Turning this knob clockwise adjusts the cutoff frequency for the high-pass filter.
+(9) Tr. Offset (Trigger Offset): Turning this knob clockwise introduces a delay to the triggering
+of the electronic layer. A delay of up to 50 ms can be applied.
+(10) Envelope controls:
+▪ Attack: Increasing this value adds more of a fade-in to the beginning of the sound.
+▪ Hold: Turning this knob adjusts how long the sound stays at maximum volume
+▪ Decay: Turning this knob adjusts how quickly the sound fades out after the Hold time has
+passed.
+The Hi-hat's EFFECTS tab
+The EFFECTS tab of the Kick contains five editable effects, identical to all instruments.
+► In order to activate an effect, click the button left of the effect's label:
+Effect off (left), Effect on (right)
+Drum Lab - Manual - 53
+Kit Page
+Drum Kit Instruments
+The Hi-hat's five available effects are the following:
+The hi-hat's EFFECTS tab
+(1) TRANSIENTS: This effect compresses the signal based on its volume envelope.
+▪ The Attack knob controls the scaling of the attack phase of the input signal’s volume en-
+velope. Increasing this parameter will add more punch and decreasing it will reduce sharp
+attacks.
+▪ The Release controls the scaling of the release phase of the input signal’s volume enve-
+lope. Increasing this parameter will add more body to the sound and decreasing it will re-
+duce the sound’s tail.
+(2) COMPRESSOR: This feedback compressor uses the amplifier's output signal, rather than
+the input signal, which is the case for most compressors, to a threshold level. When the thresh-
+old level is reached, the compressor reduces the signal's gain level.
+▪ The Amount knob lets you change the percentage of signal being compressed.
+▪ The Attack knob adjusts the time in milliseconds which the compressor needs to reach
+full effect after the input signal exceeds the threshold level.
+(3) SATURATOR: This effect adds the simulated warmth of sound that comes from an analog
+tape machine.
+▪ The Gain knob adjusts the amount to which the input signal is boosted with the saturated
+sound.
+Drum Lab - Manual - 54
+Kit Page
+Drum Kit Instruments
+▪ The Level knob adjusts the overall output.
+(4) EQUALIZER: This musical EQ allows you to adjust three frequency bands with high preci-
+sion.
+▪ Low: Sets a frequency in the range of 40 Hz - 600 Hz below which the signal responds to
+the increase or decrease in volume assigned by the corresponding Gain knob below.
+▪ Mid: Sets an upper frequency to define a notch in the range of 600 Hz - 7 kHz. The level
+of this band can be controlled by the corresponding Gain knob below.
+▪ High: Sets an upper frequency to define a high band in the range of 7 kHz - 22 kHz,
+whose level can be controlled by the corresponding Gain knob below.
+(5) REVERB: The reverb includes many impulse samples of some of the best acoustic spaces
+for drum production.
+▪ Send Level: Defines the amount to which the post-FX signal is sent to the reverb effect.
+You don't need to activate the REVERB effect separately. Use the Send Level knob to con-
+trol the amount to which the signal of the selected instrument is sent to the reverb. You
+can set the overall volume of all REVERB sends in the Reverb tile controls. For details, see
+the relevant sections ↑2.2.3, Adding Effects to an Instrument and ↑3.2, Reverb.
+The REVERB send of each instrument is a post-FX signal, i.e. all EFFECTS settings of the
+corresponding instrument will influence the sound of the reverb.
+3.3.4 Tom 1, 2, and 3
+The Toms' tile controls are the following:
+The toms' tile controls
+(1) Solo and Mute (S/M): Use these buttons to solo and mute single instruments.
+(2) Pan: Turn this knob to set the panorama position of the instrument.
+Drum Lab - Manual - 55
+Kit Page
+Drum Kit Instruments
+(3) Volume: Turn this knob to set the volume of the tom's close microphone and electronic lay-
+er in the master mix.
+(4) Channel: Click this button to set an output channel. If you select a channel other than the
+master, the signal will bypass the master's effects settings.
+The Toms' SOURCE Tab
+The toms' SOURCE tab contains controls for both an acoustic drum layer and an electronic
+one. The controls in the upper section of the SOURCE tab can be used to edit settings for the
+acoustic layer and the lower section for the electronic layer.
+The toms' SOURCE tabs
+(1) Mix: Crossfades between the Acoustic and the Electronic layer.
+You can adjust the balance between the layers of all instruments simultaneously by holding
+and pressing [Alt] on your computer keyboard while clicking and dragging the crossfader.
+Acoustic layer:
+(2) Acoustic layer selector: Allows you to select an acoustic sample layer.
+(3) Tune: Controls the pitch of the selected acoustic layer.
+Drum Lab - Manual - 56
+Kit Page
+Drum Kit Instruments
+You can adjust the pitch of the current layer (acoustic or electronic) for all instruments si-
+multaneously by holding and pressing [Alt] on your computer keyboard while turning the
+Tune knob.
+(4) Microphone controls:
+▪ OH/Room: Controls the summed level of the Overhead and Room microphones for the se-
+lected acoustic instrument.
+(5) Envelope controls:
+▪ Attack: Increasing this value adds more of a fade-in to the beginning of the sound.
+▪ Hold: Turning this knob adjusts how long the sound stays at maximum volume.
+▪ Decay: Turning this knob adjusts how quickly the sound fades out after the Hold time has
+passed.
+Electronic layer:
+(6) Electronic layer selector: Allows you to select an electronic sample layer.
+(7) Tune: Controls the pitch of the selected electronic layer.
+You can adjust the pitch of the current layer (acoustic or electronic) for all instruments si-
+multaneously by holding and pressing [Alt] on your computer keyboard while turning the
+Tune knob.
+(8) Filter: Turning this knob counterclockwise adjusts the cutoff frequency of the low-pass fil-
+ter. Turning this knob clockwise adjusts the cutoff frequency for the high-pass filter.
+(9) Tr. Offset (Trigger Offset): Turning this knob clockwise introduces a delay to the triggering
+of the electronic layer. A delay of up to 50 ms can be applied.
+(10) Envelope controls:
+▪ Attack: Increasing this value adds more of a fade-in to the beginning of the sound.
+▪ Hold: Turning this knob adjusts how long the sound stays at maximum volume
+▪ Decay: Turning this knob adjusts how quickly the sound fades out after the Hold time has
+passed.
+Drum Lab - Manual - 57
+Kit Page
+Drum Kit Instruments
+The Toms' EFFECTS Tab
+The Tom's EFFECTS tab contains five editable effects, identical to all instruments.
+► In order to activate an effect, click the button left of the effect's label:
+Effect off (left), Effect on (right)
+The five available effects for Kick, Snare, Hi-hat and Tom 1, 2, and 3 are the following:
+The toms' EFFECTS tabs
+(1) TRANSIENTS: This effect compresses the signal based on its volume envelope.
+▪ The Attack knob controls the scaling of the attack phase of the input signal’s volume en-
+velope. Increasing this parameter will add more punch and decreasing it will reduce sharp
+attacks.
+▪ The Release controls the scaling of the release phase of the input signal’s volume enve-
+lope. Increasing this parameter will add more body to the sound and decreasing it will re-
+duce the sound’s tail.
+(2) COMPRESSOR: This feedback compressor uses the amplifier's output signal, rather than
+the input signal, which is the case for most compressors, to a threshold level. When the thresh-
+old level is reached, the compressor reduces the signal's gain level.
+Drum Lab - Manual - 58
+Kit Page
+Drum Kit Instruments
+▪ The Amount knob lets you change the percentage of signal being compressed.
+▪ The Attack knob adjusts the time in milliseconds which the compressor needs to reach
+full effect after the input signal exceeds the threshold level.
+(3) SATURATOR: This effect adds the simulated warmth of sound that comes from an analog
+tape machine.
+▪ The Gain knob adjusts the amount to which the input signal is boosted with the saturated
+sound.
+▪ The Level knob adjusts the overall output.
+(4) EQUALIZER: This musical EQ allows you to adjust three frequency bands with high preci-
+sion.
+▪ Low: Sets a frequency in the range of 40 Hz - 600 Hz below which the signal responds to
+the increase or decrease in volume assigned by the corresponding Gain knob below.
+▪ Mid: Sets an upper frequency to define a notch in the range of 600 Hz - 7 kHz. The level
+of this band can be controlled by the corresponding Gain knob below.
+▪ High: Sets an upper frequency to define a high band in the range of 7 kHz - 22 kHz. The
+level of this band can be controlled by the corresponding Gain knob below.
+(5) REVERB: The reverb includes many impulse samples of some of the best acoustic spaces
+for drum production.
+▪ Send Level: Defines the amount to which the post-FX signal is send to the reverb effect.
+You don't need to activate the REVERB effect separately. Use the Send Level knob to con-
+trol the amount to which the signal of the selected instrument is sent to the reverb. You
+can set the overall volume of all REVERB sends in the Reverb tile controls. For details, see
+the relevant sections ↑2.2.3, Adding Effects to an Instrument and ↑3.2, Reverb.
+The REVERB send of each instrument is a post-FX signal, i.e. all EFFECTS settings of the
+corresponding instrument will influence the sound of the reverb.
+Drum Lab - Manual - 59
+Kit Page
+Drum Kit Instruments
+3.3.5 Crashes 1 & 2 and Ride
+These instruments were recorded exclusively through the Room and Overhead microphones. As
+a consequence they do not have any tile controls. Instead you can adjust the level of the Over-
+head and Room microphones in the master mix using the Volume knob in the SOURCE tab.
+The Crashes' and the Ride's tiles:
+Crashes and Ride tiles (Ride selected in this image)
+For each Crash and the Ride tile you can choose between two different acoustic layers.
+The cymbals do not have EFFECTS tabs. To add effects to these instruments, use the ef-
+fects of the Master tile.
+Drum Lab - Manual - 60
+Kit Page
+Drum Kit Instruments
+Crashes' and Ride's SOURCE Tab
+The Crash 1 and 2, and the Ride's SOURCE tab controls are the following:
+The Crashes' and Ride's SOURCE tab
+(1) Acoustic layer selector: Allows you to select an acoustic sample layer.
+(2) Tune: Controls the pitch of the selected acoustic layer.
+You can adjust the pitch of the current layer (acoustic or electronic) for all instruments si-
+multaneously by holding and pressing [Alt] on your computer keyboard while turning the
+Tune knob.
+(3) Microphone controls:
+▪ Volume: Controls the summed level of the Overhead and Room microphones in the master
+mix.
+(4) Envelope controls:
+▪ Attack: Increasing this value adds more of a fade-in to the beginning of the sound.
+▪ Hold: Turning this knob adjusts how long the sound stays at maximum volume.
+▪ Decay: Turning this knob adjusts how quickly the sound fades out after the Hold time has
+passed.
+Drum Lab - Manual - 61
+Kit Page
+Ornamental Percussion Instruments
+3.4 Ornamental Percussion Instruments
+Ornamental percussion instruments
+These tiles include eleven different percussion types: Conga, Bongo, Cowbell, Cabasa, Sticks,
+Finger Cymbal, Shaker, Agogo, Triangle, and Pandeiro. Every tile can be assigned to four dif-
+ferent types of percussion.
+Due to the fact that these instruments are mostly functioning as ornamental percussion rather
+than solo instruments, they were recorded exclusively over the Room and Overhead micro-
+phones and not through close microphones. As a consequence they do not have any tile con-
+trols. Instead you can adjust the level of Overhead and Room microphones in the master mix
+through the controls in the SOURCE tab.
+The ornamental percussion instruments do not have EFFECTS tabs. To add effects to these
+instruments, use the effects available on the three microphone tiles: Stereo Overhead,
+Mono Overhead, and Mono Room.
+The volume of these instruments can only be adjusted over the microphone-relevant knobs
+in the SOURCE tab, i.e. if you turn down all sends in the SOURCE tab you will effectively
+mute these instruments.
+Drum Lab - Manual - 62
+Kit Page
+Ornamental Percussion Instruments
+The SOURCE Tab of Ornamental Percussion Instruments:
+SOURCE tab of ornamental percussion instruments
+(1) Acoustic layer selector: Allows you to select an acoustic sample layer.
+(2) Tune: Controls the pitch of the selected acoustic layer.
+You can adjust the pitch of the current layer (acoustic or electronic) for all instruments si-
+multaneously by holding and pressing [Alt] on your computer keyboard while turning the
+Tune knob.
+(3) Microphone controls:
+▪ Volume: Controls the level of the Mono and Stereo Overhead microphones in the master
+mix.
+▪ Plate: Controls the level of the Mono Room microphone in the master mix.
+(4) Envelope controls:
+▪ Attack: Increasing this value adds more of a fade-in to the beginning of the sound.
+▪ Hold: Turning this knob adjusts how long the sound stays at maximum volume.
+▪ Decay: Turning this knob adjusts how quickly the sound fades out after the Hold time has
+passed.
+Drum Lab - Manual - 63
+Kit Page
+Close-Mic Percussion Instruments
+3.5 Close-Mic Percussion Instruments
+Close-mic percussion instruments
+These tiles contain six different percussion types: Woodblock, Snaps, Triangle, Claps, Shaker,
+and Tambourine. In contrast to DRUMLAB's ornamental percussion instruments these instru-
+ments were recorded through a separate close microphone. You can adjust the volume of this
+microphone through the volume knob in the tile controls. Additionally these tiles are fully edita-
+ble through effects.
+The Close-Mic Percussions' tile controls are the following:
+Tile controls of close-mic percussion instruments
+(1) Solo and Mute (S/M): Use these buttons to solo and mute single instruments.
+(2) Pan: Turn this knob to set the panorama position of the instrument.
+Drum Lab - Manual - 64
+Kit Page
+Close-Mic Percussion Instruments
+(3) Volume: Turn this knob to set the volume of the close-mic percussion instruments in the
+master mix.
+(4) Channel: Click this button to set an output channel. If you select a channel other than the
+master, the signal will bypass the master's effects settings.
+The SOURCE Tab of Close-Mic Percussion Instruments
+The SOURCE tab of close-mic percussion instruments
+(1) Acoustic layer selector: Allows you to select an acoustic sample layer.
+(2) Tune: Controls the pitch of the selected acoustic layer.
+You can adjust the pitch of the current layer (acoustic or electronic) for all instruments si-
+multaneously by holding and pressing [Alt] on your computer keyboard while turning the
+Tune knob.
+(3) Microphone controls:
+▪ Volume: Controls the level of the Mono and Stereo Overhead microphones in the master
+mix.
+▪ Plate: Controls the level of the Mono Room microphone in the master mix.
+(4) Envelope controls:
+▪ Attack: Increasing this value adds more of a fade-in to the beginning of the sound.
+▪ Hold: Turning this knob adjusts how long the sound stays at maximum volume.
+Drum Lab - Manual - 65
+Kit Page
+Close-Mic Percussion Instruments
+▪ Decay: Turning this knob adjusts how quickly the sound fades out after the Hold time has
+passed.
+The EFFECTS Tab of Close-Mic Percussion Instruments
+The EFFECTS tab holds five effects, identical to all the other instruments.
+► Activate an effect by clicking the button left of the effect's label:
+Not activated effect (left), activated effect (right)
+The five available effects are the following:
+EFFECTS tab of close-mic percussion instruments
+(1) TRANSIENTS: This effect compresses the signal based on its volume envelope.
+▪ The Attack knob controls the scaling of the attack phase of the input signal’s volume en-
+velope. Increasing this parameter will add more punch and decreasing it will reduce sharp
+attacks.
+▪ The Release controls the scaling of the release phase of the input signal’s volume enve-
+lope. Increasing this parameter will add more body to the sound and decreasing it will re-
+duce the sound’s tail.
+Drum Lab - Manual - 66
+Kit Page
+Close-Mic Percussion Instruments
+(2) COMPRESSOR: This feedback compressor uses the amplifier's output signal, rather than
+the input signal, which is the case for most compressors, to a threshold level. When the thresh-
+old level is reached, the compressor reduces the signal's gain level.
+▪ The Amount knob lets you change the percentage of signal being compressed.
+▪ The Attack knob adjusts the time in milliseconds which the compressor needs to reach
+full effect after the input signal exceeds the threshold level.
+(3) SATURATOR: This effect adds the simulated warmth of sound that comes from an analog
+tape machine.
+▪ The Gain knob adjusts the amount to which the input signal is boosted with the saturated
+sound.
+▪ The Level knob adjusts the overall output.
+(4) EQUALIZER: This musical EQ allows you to adjust three frequency bands with high preci-
+sion.
+▪ Low: Sets a frequency in the range of 40 Hz - 600 Hz below which the signal responds to
+the increase or decrease in volume assigned by the corresponding Gain knob below.
+▪ Mid: Sets an upper frequency to define a notch in the range of 600 Hz - 7 kHz. The level
+of this band can be controlled by the corresponding Gain knob below.
+▪ High: Sets an upper frequency to define a high band in the range of 7 kHz - 22 kHz. The
+level of this band can be controlled by the corresponding Gain knob below.
+(5) REVERB: The reverb includes many impulse samples of some of the best acoustic spaces
+for drum production.
+▪ Send Level: Defines the amount to which the post-FX signal is send to the reverb effect.
+You don't need to activate the REVERB effect separately. Use the Send Level knob to con-
+trol the amount to which the signal of the selected instrument is sent to the reverb. You
+can set the overall volume of all REVERB sends in the Reverb tile controls. For details, see
+the relevant sections ↑2.2.3, Adding Effects to an Instrument and ↑3.2, Reverb.
+The REVERB send of each instrument is a post-FX signal, i.e. all EFFECTS settings of the
+corresponding instrument will influence the sound of the reverb.
+Drum Lab - Manual - 67
+Kit Page
+Master
+3.6 Master
+The Master tile
+The Master controls the output of all instruments and their effects. You can edit the output of
+the master channel via three controls located on the Master tile. Additionally you can add ef-
+fects to the master mix on the EFFECTS tab.
+The Master tile controls are the following:
+The Master tile controls
+Drum Lab - Manual - 68
+Kit Page
+Master
+(1) Left and Right (L/R): Use these buttons to swap the left and the right channel.
+(2) Width: Turn this knob to set the stereo width.
+(3) Master Volume: Click and drag this fader to set the Master output volume.
+The Master EFFECTS Tab
+The Master EFFECTS controls
+(1) TRANSIENTS: This effect compresses the signal based on its volume envelope.
+▪ The Attack knob controls the scaling of the attack phase of the input signal’s volume en-
+velope. Increasing this parameter will add more punch and decreasing it will reduce sharp
+attacks.
+▪ The Release controls the scaling of the release phase of the input signal’s volume enve-
+lope. Increasing this parameter will add more body to the sound and decreasing it will re-
+duce the sound’s tail.
+(2) COMPRESSOR: The compressor unit available for the Master is perfect for "gluing" drums
+together and making them "sit" more naturally in the mix.
+▪ The Threshold knob adjusts the level in dB that the input signal must exceed before the
+compressor starts affecting the sound.
+▪ The Attack knob adjusts the time in milliseconds which the compressor needs to reach
+the ratio after the input signal exceeds the threshold level.
+Drum Lab - Manual - 69
+Kit Page
+Master
+▪ The Ratio knob controls the amount of compression expressed as a ratio of “input level to
+output level decrease.” The higher the Ratio knob is set, the more the output level will be
+reduced as the sound goes beyond the threshold.
+▪ The Makeup knob allows you to increase the overall output level of the compressed sound.
+(3) SATURATOR: This effect adds the simulated warmth of sound that comes from an analog
+tape machine.
+▪ The Gain knob adjusts the amount to which the input signal is boosted with the saturated
+sound.
+▪ The Level knob adjusts the overall output.
+(4) EQUALIZER: This musical EQ allows you to adjust three frequency bands with high preci-
+sion.
+▪ Low: Sets a frequency in the range of 40 Hz - 600 Hz below which the signal responds to
+the increase or decrease in volume assigned by the corresponding Gain knob below.
+▪ Mid: Sets an upper frequency to define a notch in the range of 600 Hz - 7 kHz. The level
+of this band can be controlled by the corresponding Gain knob below.
+▪ High: Sets an upper frequency to define a high band in the range of 7 kHz - 22 kHz. The
+level of this band can be controlled by the corresponding Gain knob below.
+Drum Lab - Manual - 70
+Grooves Page
+4 Grooves Page
+The Grooves page contains a browser with a huge library of organized MIDI Grooves that can be
+used to quickly create drum parts for a song or production. You can edit several parameters to
+change the beats, and all grooves can be dragged into your host.
+On the Grooves page you will also find a visual representation of the groove. Every dot repre-
+sents a rhythmical event in a beat. All adjustments made to Tightness, Swing, Grid or Velocity
+are visually reflected by the grid.
+Drum Lab - Manual - 71
+Grooves Page
+The Grooves page
+The GROOVE section on the right-hand side of the header allows you to play back a groove
+with the play button, and quickly select any of the variations of that groove with the right and
+left arrow buttons. The header is available at the top of every page of DRUMLAB, so you can
+play the grooves even when using any of the other pages.
+► To export a groove to your host software, click in the area of the groove name and drag
+the groove to your track in the host. A MIDI file of the groove will be created in your
+track.
+Drum Lab - Manual - 72
+Grooves Page
+The GROOVE BROWSER has a total of three columns:
+▪ The leftmost column shows a list of genre folders, each with its own set of pattern folders.
+▪ The middle column shows a list of groove folders available for the selected genre. The
+standard time signature is 4/4, unless otherwise shown in the name of the groove. At the
+end of each groove's name, there is a suggested BPM (beats per minute) tempo to use,
+but the patterns can be used at any tempo. Each groove folder in turn contains a set of
+MIDI patterns.
+▪ The rightmost column contains a list of all MIDI patterns for the selected genre and
+groove. To select a MIDI pattern, double-click the pattern's name. After selecting a pat-
+tern, you can use the up and down arrows on your computer keyboard to browse among
+the patterns, or the right and left arrows in the far right of the header.
+Available Grooves
+The 6 sound genres included with DRUMLAB are Smooth, Tight, Fat, Dirty, Special, and Raw. A
+groove for a particular genre is a beat that would be used to achieve the sound of that genre.
+All MIDI patterns included in the same groove folder have the same general sound and feel,
+but all have unique changes, ranging from different hi-hat rates to additions of ghost notes to
+changes of drums used, etc. The different patterns have key words in their names to identify
+the most significant drums being used, with the exception of the kick drum, which is being
+used in almost all patterns.
+Groove Controls
+▪ The Tightness knob changes the amount of “groove” in the beat. The center value is the
+original sounding played beat. When turned all the way to the right, the beat is completely
+quantized and “machine-like.” As the knob is turned to the left, the beat gets increasingly
+looser until it sounds very “sloppy” when turned all the way to the left. Depending on the
+type of music, all knob positions can be useful for different styles.
+▪ The Grid selector allows you to select different quantization timings for the Tightness and
+Swing knobs. For example, selecting 1/8 will push the grooves towards or away from the
+8th notes of the beat when using the Tightness knob.
+▪ The Swing knob adjusts the amount of swing in the beat. Swing allows for rhythmic shift-
+ing of a Groove where the first note in a series plays longer than the one that follows.
+When the knob is all the way to the right, the swing is the most severe. When all the way
+Drum Lab - Manual - 73
+Grooves Page
+to the left, a “negative” swing is applied, where the first note in the series is actually
+shorter than the one that follows. Different time signatures affect the swing in different
+ways, so it is often best just to try the Swing knob to see how it sounds with the selected
+groove.
+▪ The Velocity knob changes the range of the velocities in the grooves. At the center posi-
+tion, the groove plays with the same velocities that were recorded with it. As the knob is
+turned to the right, the range is “compressed” to the high range so that all velocity values
+increase until they are all at maximum when the knob is all the way to the right. Similarly,
+when the knob is turned to the left the velocities are “compressed” to the low range until
+all velocities are the lowest when turning the knob all the way to the left.
+▪ The Tempo selection buttons allow you to immediately change the tempo of the groove or
+fill to be half the speed or double the speed of the originals. This can be useful when a
+song is recorded at a high BPM tempo, but the feel of the song is actually half of that
+speed (or vice versa).
+Additionally you can assign every groove to a key on your MIDI keyboard. You can access the
+corresponding controls after clicking the Map to Note… button in the upper right corner of the
+GROOVE BROWSER.
+MAP TO NOTE controls
+► Remove all key-assigned MIDI grooves by pressing and holding the [Alt] key on your com-
+puter keyboard while clicking the Map to Note... button.
+Drum Lab - Manual - 74
+Options Page
+5 Options Page
+At the Options page you can adjust MIDI and memory related settings.
+The Options page
+Drum Lab - Manual - 75
+Options Page
+MIDI SETTINGS
+5.1 MIDI SETTINGS
+In the MIDI SETTINGS you can change the mapping of your MIDI keyboard and adjust velocity
+settings.
+5.1.1 MIDI Mapping
+Each articulation available in the ARTICULATION selector can be assigned to one or more
+MIDI notes, allowing for your own customized mapping. This is very useful for adjusting the
+mapping in a way that suits you best when playing the drums with a MIDI keyboard, or for ad-
+justing the mapping to a custom electronic drum setup.
+To assign a MIDI note:
+1. Select an octave by clicking the arrows left and right of the virtual keyboard.
+2. Select a note by clicking the corresponding key on the virtual keyboard.
+Drum Lab - Manual - 76
+Options Page
+MIDI SETTINGS
+3. Select an INSTRUMENT and/or an ARTICULATION by clicking an item in the correspond-
+ing drop-down menus.
+All custom MIDI mappings can be saved and loaded from the mapping preset menu to up-
+per left of the MIDI SETTINGS.
+Drum Lab - Manual - 77
+Options Page
+MIDI SETTINGS
+Mapping Presets
+DRUMLAB's default MIDI mapping is the following:
+Default MIDI mapping
+DRUMLAB also comes with a selection of mapping presets that are set up to work with popular
+software and electronic drum setups. These include:
+▪ GM (General MIDI)
+Drum Lab - Manual - 78
+Options Page
+MIDI SETTINGS
+▪ V-Drums (two options)
+▪ DrumIt Five
+▪ EZDrummer
+▪ Superior Drummer
+▪ BFD
+▪ iMap
+▪ Addictive Drums
+These mappings can be selected from the preset drop-down menu to the upper left of the MIDI
+SETTINGS area. If you want to make changes to these mappings, you can always do so and
+save the mapping preset under a different name.
+Please keep in mind that every setup is different, and almost every drum kit has some particu-
+larities to it. Therefore the mapping presets will not fully match your setup without any adjust-
+ments. These mapping presets have been included to provide you with the best possible start-
+ing point. You can make additional changes to these mappings and save a new preset to fit
+your needs.
+5.1.2 Velocity Settings
+The Velocity area at the right side of the MIDI SETTINGS allows you to fine-tune the way
+DRUMLAB responds to MIDI input:
+The Velocity settings
+Drum Lab - Manual - 79
+Options Page
+Memory Usage
+The settings for the CURVE and RANGE controls are per key. This way, each instrument
+can be adjusted to your liking. Should you need to apply a setting to all keys simultaneous-
+ly, you can do this by pressing and hold the [Alt] key on your computer keyboard while ad-
+justing the setting. The adjustment will now be active for the entire keyboard.
+▪ In the CURVE section you can select a curve for incoming MIDI note velocities. The de-
+fault is a positive exponential curve, but many MIDI input devices have different levels of
+sensitivity, making a linear or negative exponential curve more appropriate. There is also
+an option to select a constant “fixed” velocity (represented by a horizontal line).
+▪ Utilizing the RANGE controls, you can change the lowest and highest velocity values. This
+is useful for preventing the quietest and/or the loudest sounds from playing, and instead
+be limited to the specified minimum and maximum. Different MIDI input devices, such as
+MIDI keyboards and electronic drum kits, will also need their own velocity setting adjust-
+ments to match your playing style.
+5.2 Memory Usage
+The MEMORY USAGE options
+At the bottom of the page, you can edit settings for how DRUMLAB will be using your comput-
+er's memory resources. There are two options here:
+All samples always loaded: This option is good if you are still experimenting to find the right
+sound samples for your drum setup. As soon as you start DRUMLAB all available samples are
+loaded into the memory. As a consequence you will have a faster tile response after exchanging
+instrument samples.
+Drum Lab - Manual - 80
+Options Page
+Memory Usage
+Unused samples are not loaded: This option is good if you already have all your sound samples
+chosen and just want to work on fine-tuning your sounds. Unused samples are not loaded into
+the memory when you have activated this option, leaving more system resources for currently
+executed tasks. On the other hand, if you decide to select another sound sample, it will take a
+little moment until it is loaded into the drum kit.
+The settings in this area are specifically important if your computer has a lesser amount of
+RAM. As a natural consequence, settings made in this area will be less influencing your
+workflow if you have a faster computer.
+Drum Lab - Manual - 81
+Using Single Instrument NKIs
+Overview of the Interface
+6 Using Single Instrument NKIs
+If you prefer to use individual drum sounds on separate channels in your host software, DRUM-
+LAB allows you to load each instrument as a single instrument within KONTAKT.
+6.1 Overview of the Interface
+This section gives you an overview of the single instrument interface and its controls.
+A kick drum loaded as a single instrument
+(1) Drum tile and Options: Use this section to edit settings corresponding to settings found on
+the Options page.
+(2) Footer: Use this section to edit controls corresponding to the footer on the Kit Page, i.e. the
+SOURCE and EFFECTS tabs (cymbals and some percussive instruments do not have an EF-
+FECTS tab).
+Drum Lab - Manual - 82
+Using Single Instrument NKIs
+Overview of the Interface
+6.1.1 Drum Tile and Options
+A single instrument kick drum and its options
+(1) KEY RANGE controls:
+▪ LEARN: When activated, this button lets you select the key range by pressing the lowest
+and the highest note on the keyboard. The keys within the key range all play back the in-
+strument at a different pitch. These keys illuminate pink. Keys that are not included in
+the key range are muted and not lit.
+▪ Low key range: Controls the lowest note of the playable key range.
+▪ High key range: Controls the highest note of the playable key range.
+(2) VELOCITY curve selector (listed left to right):
+▪ Linear velocity curve: Sets the velocity behavior to a linear response.
+▪ Exponential velocity curve: +: Sets the velocity behavior to a positive exponential re-
+sponse.
+▪ Exponential velocity curve -: Sets the velocity behavior to a negative exponential response.
+▪ Fixed velocity: Sets all played velocities to 127.
+Drum Lab - Manual - 83
+Using Single Instrument NKIs
+Overview of the Interface
+(3) Articulation: Selects the articulation used to play back the instrument.
+(4) Drum tile: Visualizes the selected instrument. The instrument is played back when the tile
+is clicked.
+(5) Kit Mics:
+▪ Stereo OH: When illuminated, the stereo overhead microphone is muted.
+▪ Mono OH: When illuminated, the mono overhead microphone is muted.
+▪ Mono Room: When illuminated, the mono room microphone is muted.
+6.1.2 Footer
+The tabs and controls displayed in the footer are specific to each instrument. For detailed in-
+formation on each instrument's controls, refer to section ↑3, Kit Page.
+SOURCE Tab
+The SOURCE tab of a single instrument
+The SOURCE tab available for each instrument is identical to the SOURCE tab of the corre-
+sponding instrument on the Kit Page when the entire tile matrix is loaded (for details, refer to
+each individual instrument in section ↑3, Kit Page).
+Drum Lab - Manual - 84
+Using Single Instrument NKIs
+Editing DRUMLAB Instruments
+EFFECTS Tab
+The EFFECTS tab of a kick drum loaded as a single instrument
+The EFFECTS tab available for certain single instruments is identical to the EFFECTS tab of
+the Master tile on the Kit Page when the entire tile matrix is loaded (see section ↑3.6, Master).
+6.2 Editing DRUMLAB Instruments
+This section contains step-by-step guides designed to walk you through the basic functions of
+DRUMLAB's single instrument NKIs. For information on workflows for using DRUMLAB's tile
+matrix on the Kit Page, refer to section ↑2.2, Selecting Tiles to Edit DRUMLAB Instruments
+and Effects.
+6.2.1 Selecting Instrument Layers
+Each instrument comes with a number of selectable acoustic layers. Some instruments also
+have a second, electronic layer that can be selected from the vast DRUMLAB library, giving
+you the possibility of layering your drums for a richer, well-rounded sound.
+Selecting an Acoustic Layer
+To change an instrument's acoustic layer:
+1. Click on the SOURCE tab.
+Drum Lab - Manual - 85
+Using Single Instrument NKIs
+Editing DRUMLAB Instruments
+2. Open the list of available acoustic layers by clicking in the middle of the Acoustic layer
+selector.
+3. 4. Change the layer by selecting an acoustic layer from the drop-down menu.
+If an instrument also has an electronic layer, you can mix the two layers by clicking and
+dragging the crossfader.
+Selecting an Electronic Layer
+To change an instrument's electronic layer:
+1. Click on the SOURCE tab.
+Drum Lab - Manual - 86
+Using Single Instrument NKIs
+Editing DRUMLAB Instruments
+2. Open the list of available electronic layers by clicking in the middle of the Electronic layer
+selector.
+3. 4. Change the layer by selecting an item from the drop-down menu.
+Mix the electronic layer with the acoustic layer by clicking and dragging the crossfader.
+6.2.2 Changing an Instrument's Articulation
+Each instrument can be played using a number of articulations. Selecting another articulation
+can abruptly change the way for example your snare drum sounds.
+To change the articulation:
+Drum Lab - Manual - 87
+Using Single Instrument NKIs
+Editing DRUMLAB Instruments
+1. Open the list of available articulations by clicking the Articulation menu.
+2. Change the articulation used to play back the instrument by selecting an item from the
+drop-down menu.
+6.2.3 Controlling the Kit Mics
+For detailed information on the Kit Mics, refer to section ↑3.1, Microphones. To adjust the out-
+put level of single instruments:
+Kick and Snare
+1. Click on the SOURCE tab.
+Drum Lab - Manual - 88
+Using Single Instrument NKIs
+Editing DRUMLAB Instruments
+2. Adjust the single instrument's send level to the Kit Mics by turning the OH/Room knob in
+either direction.
+► Mute the instrument's output for each of the individual Kit Mics by clicking the corre-
+sponding button.
+→ The button illuminates to reflect that the microphone is muted.
+Selecting all three Kit Mics will mute all output for the Kit Mics. However, the output from
+the close mics as well as the Electronic layer will still be audible.
+Hi-hat and Toms
+1. 2. Click on the SOURCE tab.
+Adjust the single instrument's send level to the Kit Mics by turning the OH/Room knob in
+either direction.
+Drum Lab - Manual - 89
+Using Single Instrument NKIs
+Editing DRUMLAB Instruments
+► Mute the instrument's output for each of the individual Kit Mics by clicking the corre-
+sponding button.
+→ The button illuminates to reflect that the microphone is muted.
+Selecting all three Kit Mics will mute all output for the Kit Mics. However, the output from
+the close mics as well as the Electronic layer will still be audible.
+Crash and Ride Cymbals
+► On the SOURCE tab, adjust the single instrument's send level to the Kit Mics by turning
+the Volume knob in either direction.
+► Mute the instrument's output for each of the individual Kit Mics by clicking the corre-
+sponding button.
+Drum Lab - Manual - 90
+Using Single Instrument NKIs
+Editing DRUMLAB Instruments
+→ The button illuminates to reflect that the microphone is muted.
+Selecting all three Kit Mics will effectively mute crash and ride cymbals.
+Ornamental Percussion Instruments
+These instruments include eleven different percussion types: Conga, Bongo, Cowbell, Caba-
+sa, Sticks, Finger Cymbal, Shaker, Agogo, Triangle, and Pandeiro.
+► On the SOURCE tab, adjust the single instrument's send level to the Stereo OH and
+Mono OH microphones by turning the Volume knob in either direction.
+► On the SOURCE tab, adjust the single instrument's send level to the Mono Room micro-
+phone by turning the Plate knob in either direction.
+Drum Lab - Manual - 91
+Using Single Instrument NKIs
+Editing DRUMLAB Instruments
+► Mute the instrument's output for each of the individual Kit Mics by clicking the corre-
+sponding button.
+→ The button illuminates to reflect that the microphone is muted.
+Selecting all three Kit Mics will effectively mute ornamental percussion.
+Close-Mic Percussion Instruments
+These instruments include six different percussion types: Woodblock, Snaps, Triangle,
+Claps, Shaker, and Tambourine.
+► On the SOURCE tab, adjust the single instrument's send level to the Stereo OH and
+Mono OH microphones by turning the Volume knob in either direction.
+Drum Lab - Manual - 92
+Using Single Instrument NKIs
+Editing DRUMLAB Instruments
+► On the SOURCE tab, adjust the single instrument's send level to the Mono Room micro-
+phone by turning the Plate knob in either direction.
+► Mute the instrument's output for each of the individual Kit Mics by clicking the corre-
+sponding button.
+→ The button illuminates to reflect that the microphone is muted.
+Selecting all three Kit Mics will mute all output for the Kit Mics. However, the output from
+the close mics will still be audible.
+6.2.4 Fine-Controlling the Sound of an Instrument
+To adjust a single instrument's (or even a single sample layer's) sound settings:
+1. Click on the SOURCE tab in the instrument's footer.
+► Alter the pitch by adjusting the Tune knob.
+Drum Lab - Manual - 93
+Using Single Instrument NKIs
+Editing DRUMLAB Instruments
+► Edit the volume envelope by adjusting the Attack, Hold and Decay with the respective
+knobs.
+► Add a low-pass filter to an instrument's electronic layer by turning the Filter knob coun-
+terclockwise.
+► Add a high-pass filter to an instrument's electronic layer by turning the Filter knob clock-
+wise.
+► Delay the triggering of an instrument's electronic layer by turning the Tr. Offset knob
+clockwise. A delay of up to 50 ms can be applied.
+6.2.5 Adding Effects to an Instrument
+The kick, snare, hi-hat, toms, and some percussion instruments can be processed by designat-
+ed effect units. You can use effects to enhance the sound of your drums or to refine certain
+frequencies. For detailed information on the effect units, refer to the corresponding section of
+chapter ↑3.6, Master.
+Drum Lab - Manual - 94
+Using Single Instrument NKIs
+Editing DRUMLAB Instruments
+The EFFECTS tab of a kick drum loaded as a single instrument
+Editing the Transients
+To change TRANSIENTS settings:
+1. 2. Click on the EFFECTS tab.
+Activate the effect by clicking the switch left of the effect’s label so it lights up.
+3. Fine-tune the effect by adjusting the Attack and Release knobs.
+Editing the Compressor
+To change COMPRESSOR settings:
+1. Click on the EFFECTS tab.
+Drum Lab - Manual - 95
+Using Single Instrument NKIs
+Editing DRUMLAB Instruments
+2. Activate the effect by clicking the switch left of the effect’s label so it lights up.
+3. Fine-tune the effect by adjusting the Threshold, Attack, Ratio, and Makeup knobs.
+Editing the Saturator
+To change SATURATOR settings:
+1. 2. Click on the EFFECTS tab.
+Activate the effect by clicking the switch left of the effect’s label so it lights up.
+3. Fine-tune the effect by adjusting the Gain and Level knobs.
+Editing the Equalizer
+To change EQUALIZER settings:
+1. Click on the EFFECTS tab.
+Drum Lab - Manual - 96
+Using Single Instrument NKIs
+Editing DRUMLAB Instruments
+2. Activate the effect by clicking the switch left of the effect’s label so it lights up.
+3. Fine-tune the effect by adjusting the Low, Mid, High EQ bands and their corresponding
+Gain knobs.
+6.2.6 Editing Key Range
+Setting the key range lets you play a single instrument in different pitches along the selected
+range of keys on the keyboard or your MIDI device.
+Setting the Key Range Using Learn
+To set the KEY RANGE using the keyboard or a connected MIDI device:
+1. Activate KEY RANGE by clicking the LEARN button to the upper left so it illuminates.
+2. 3. Set the lowest note of the key range by pressing the corresponding key on the keyboard.
+Set the highest note of the key range by pressing the corresponding key on the keyboard.
+→ The KEY RANGE will be visible by being illuminated pink, while the keys not included
+are muted and unlit.
+Drum Lab - Manual - 97
+Using Single Instrument NKIs
+Editing DRUMLAB Instruments
+Setting the Key Range Using Selectors
+To set the KEY RANGE using the KEY RANGE selectors:
+1. Set the lowest note of the KEY RANGE by selecting a note in the left selector.
+2. Set the highest not of the KEY RANGE by selecting a note in the right selector.
+→ The KEY RANGE will be visible by being illuminated pink, while the keys not included
+are muted and unlit.
+6.2.7 Editing Velocity
+Selecting a different velocity behavior for an instrument can drastically change e.g. the per-
+ceived size of both the instrument and the room.
+To change the velocity curve:
+► Select one of the four available velocity curves by clicking the corresponding button.
+Drum Lab - Manual - 98
+Credits
+7 Credits
+Product Design: Dinos Vallianatos
+Sound Design: Thanos Kazakos, Julian Laping, Sebastian Müller, Justin Myracks, Cemil Yurderi
+Graphic Design: Cameron Wakal, Gösta Wellmer
+KONTAKT Scripting: Thanos Kazakos
+Recording Studio: Welcome to 1979
+Engineers: Chris Mara, Brad Bowden, Greg Thompson
+Drummer: Derico Watson
+Additional playing: Justin Levenson, Brad Bowden, Julian Laping, Thanos Kazakos
+MIDI Grooves: Akil Thompson, Brad Bowden
+Sound Presets Design: Brad Bowden, Julian Laping, Sebastian Müller
+Consulting/Oversight: Kenneth Bartolomei
+Quality Assurance: Achim Siebert, Frank Stempka, Bill Youngman
+Documentation: Helena Lingor, Gustav Sto. Tomas
+Drum Lab - Manual - 99

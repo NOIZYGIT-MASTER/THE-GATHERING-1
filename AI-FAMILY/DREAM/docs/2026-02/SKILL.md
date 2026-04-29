@@ -1,322 +1,130 @@
 ---
-name: memory-management
-description: Two-tier memory system that makes Claude a true workplace collaborator. Decodes shorthand, acronyms, nicknames, and internal language so Claude understands requests like a colleague would. CLAUDE.md for working memory, memory/ directory for the full knowledge base.
+name: cowork-plugin-customizer
+description: >
+  Customize or personalize a Claude Code plugin for a specific organization's tools and workflows.
+  Use when users want to customize a plugin, replace tool placeholders, or configure MCP servers for a plugin.
+  This skill requires Cowork mode with mounted plugin directories and will not work in remote or standard CLI sessions.
+compatibility: Requires Cowork desktop app environment with access to mounted plugin directories (mnt/.local-plugins, mnt/.plugins).
 ---
 
-# Memory Management
+# Cowork Plugin Customization
 
-Memory makes Claude your workplace collaborator - someone who speaks your internal language.
+Adapt a generic plugin template to a specific organization by replacing customization points with actual tool names, configuring MCP servers, and applying organization-specific customizations.
 
-## The Goal
+> **Finding the plugin**: To find the plugin's source files, run `find mnt/.local-plugins mnt/.plugins -type d -name "*<plugin-name>*"` to locate the plugin directory, then read its files to understand its structure before making changes. If you cannot find the plugin directory, the user is likely running this conversation in a remote container. Abort and let them know: "Customizing plugins is currently only available in the desktop app's Cowork mode."
 
-Transform shorthand into understanding:
+## Overview
 
-```
-User: "ask todd to do the PSR for oracle"
-              ↓ Claude decodes
-"Ask Todd Martinez (Finance lead) to prepare the Pipeline Status Report
- for the Oracle Systems deal ($2.3M, closing Q2)"
-```
+Generic plugins mark customization points with a `~~` prefix. Any line or value starting with `~~` is a placeholder that should be replaced during customization (e.g., `~~Jira` → `Asana`, `~~your-team-channel` → `#engineering`). To find all customization points in a plugin, use:
 
-Without memory, that request is meaningless. With memory, Claude knows:
-- **todd** → Todd Martinez, Finance lead, prefers Slack
-- **PSR** → Pipeline Status Report (weekly sales doc)
-- **oracle** → Oracle Systems deal, not the company
-
-## Architecture
-
-```
-CLAUDE.md          ← Hot cache (~30 people, common terms)
-memory/
-  glossary.md      ← Full decoder ring (everything)
-  people/          ← Complete profiles
-  projects/        ← Project details
-  context/         ← Company, teams, tools
+```bash
+grep -rn '~~\w' /path/to/plugin --include='*.md' --include='*.json'
 ```
 
-**CLAUDE.md (Hot Cache):**
-- Top ~30 people you interact with most
-- ~30 most common acronyms/terms
-- Active projects (5-15)
-- Your preferences
-- **Goal: Cover 90% of daily decoding needs**
+> **Important**: Never change the name of the plugin or skill being customized. Only replace `~~`-prefixed placeholder values and update content — do not rename directories, files, or the plugin/skill name fields.
 
-**memory/glossary.md (Full Glossary):**
-- Complete decoder ring - everyone, every term
-- Searched when something isn't in CLAUDE.md
-- Can grow indefinitely
+> **Nontechnical output**: All user-facing output (todo list items, questions, summaries) must be written in plain, nontechnical language. Never mention `~~` prefixes, placeholders, or customization points to the user. Frame everything in terms of learning about the organization and its tools.
 
-**memory/people/, projects/, context/:**
-- Rich detail when needed for execution
-- Full profiles, history, context
+The process:
+1. **Gather context** — use knowledge MCPs to learn what tools and processes the organization uses
+2. **Create todo list** — grep for `~~\w` to find all customization points and build a todo list
+3. **Complete todo items** — apply gathered context, falling back to user questions when unclear
+4. **Search for useful MCPs** — find and connect MCPs for identified tools
 
-## Lookup Flow
+If an answer cannot be found via knowledge MCPs or user input, leave the customization point unchanged for a future customization cycle.
 
-```
-User: "ask todd about the PSR for phoenix"
+## Customization Workflow
 
-1. Check CLAUDE.md (hot cache)
-   → Todd? ✓ Todd Martinez, Finance
-   → PSR? ✓ Pipeline Status Report
-   → Phoenix? ✓ DB migration project
+### Phase 1: Gather Context from Knowledge MCPs
 
-2. If not found → search memory/glossary.md
-   → Full glossary has everyone/everything
+Use company-internal knowledge MCPs to collect information. See `references/search-strategies.md` for detailed query patterns by category.
 
-3. If still not found → ask user
-   → "What does X mean? I'll remember it."
-```
+**What to gather:**
+- Tool names for each `~~`-prefixed placeholder
+- Organizational processes and workflows
+- Team conventions (naming, statuses, estimation scales)
+- Configuration values (workspace IDs, project names, team identifiers)
 
-This tiered approach keeps CLAUDE.md lean (~100 lines) while supporting unlimited scale in memory/.
+**Sources to search:**
+1. **Chat/Slack MCPs** — tool mentions, integrations, workflow discussions
+2. **Document MCPs** — onboarding docs, tool guides, setup instructions
+3. **Email MCPs** — license notifications, admin emails, setup invitations
 
-## File Locations
+Record all findings for use in Phase 3.
 
-- **Working memory:** `CLAUDE.md` in current working directory
-- **Deep memory:** `memory/` subdirectory
+### Phase 2: Create Todo List from Customization Points
 
-## Working Memory Format (CLAUDE.md)
+Run `grep -rn '~~\w' /path/to/plugin --include='*.md' --include='*.json'` to find all customization points. Group them by theme and create a todo list with user-friendly descriptions that focus on learning about the organization:
 
-Use tables for compactness. Target ~50-80 lines total.
+- **Good**: "Learn how standup prep works at Company"
+- **Bad**: "Replace placeholders in commands/standup-prep.md"
+
+### Phase 3: Complete Todo Items
+
+Work through each item using Phase 1 context.
+
+**If knowledge MCPs provided a clear answer**: Apply directly without confirmation.
+
+**Otherwise**: Use AskUserQuestion. Don't assume "industry standard" defaults are correct — if knowledge MCPs didn't provide a specific answer, ask. Note: AskUserQuestion always includes a Skip button and a free-text input box for custom answers, so do not include `None` or `Other` as options.
+
+**Types of changes:**
+
+1. **Customization point replacements**: `~~Jira` → `Asana`, `~~your-org-channel` → `#engineering`
+2. **URL pattern updates**: `tickets.example.com/your-team/123` → `app.asana.com/0/PROJECT_ID/TASK_ID`
+3. **Organization-specific values**: Workspace IDs, project names, team identifiers
+
+If user doesn't know or skips, leave the `~~`-prefixed value unchanged.
+
+### Phase 4: Search for Useful MCPs
+
+After all customization points have been resolved, connect MCPs for the tools that were identified. See `references/mcp-servers.md` for the full workflow, category-to-keywords mapping, and config file format.
+
+For each tool identified during customization:
+1. Search the registry: `search_mcp_registry(keywords=[...])` using category keywords from `references/mcp-servers.md`, or search for the specific tool name if already known
+2. If unconnected: `suggest_connectors(directoryUuids=["chosen-uuid"])` — user completes OAuth
+3. Update the plugin's MCP config file (check `plugin.json` for custom location, otherwise `.mcp.json` at root)
+
+Collect all MCP results and present them together in the summary output (see below) — don't present MCPs one at a time during this phase.
+
+**Note:** First-party integrations (Gmail, Google Calendar, Google Drive) are connected at the user level and don't need plugin `.mcp.json` entries.
+
+## Packaging the Plugin
+
+After all customizations are applied, package the plugin as a `.plugin` file for the user:
+
+1. **Zip the plugin directory** (excluding `setup/` since it's no longer needed):
+   ```bash
+   cd /path/to/plugin && zip -r /tmp/plugin-name.plugin . -x "setup/*" && cp /tmp/plugin-name.plugin /path/to/outputs/plugin-name.plugin
+   ```
+2. **Present the file to the user** with the `.plugin` extension so they can install it directly. (Presenting the .plugin file will show to the user as a rich preview where they can look through the plugin files, and they can accept the customization by pressing a button.)
+
+> **Important**: Always create the zip in `/tmp/` first, then copy to the outputs folder. Writing directly to the outputs folder may fail due to permissions and leave behind temporary files.
+
+> **Naming**: Use the original plugin directory name for the `.plugin` file (e.g., if the plugin directory is `coder`, the output file should be `coder.plugin`). Do not rename the plugin or its files during customization — only replace placeholder values and update content.
+
+## Summary Output
+
+After customization, present the user with a summary of what was learned grouped by source. Always include the MCPs sections showing which MCPs were connected during setup and which ones the user should still connect:
 
 ```markdown
-# Memory
+## From searching Slack
+- You use Asana for project management
+- Sprint cycles are 2 weeks
 
-## Me
-[Name], [Role] on [Team]. [One sentence about what I do.]
+## From searching documents
+- Story points use T-shirt sizes
 
-## People
-| Who | Role |
-|-----|------|
-| **Todd** | Todd Martinez, Finance lead |
-| **Sarah** | Sarah Chen, Engineering (Platform) |
-| **Greg** | Greg Wilson, Sales |
-→ Full list: memory/glossary.md, profiles: memory/people/
-
-## Terms
-| Term | Meaning |
-|------|---------|
-| PSR | Pipeline Status Report |
-| P0 | Drop everything priority |
-| standup | Daily 9am sync |
-→ Full glossary: memory/glossary.md
-
-## Projects
-| Name | What |
-|------|------|
-| **Phoenix** | DB migration, Q2 launch |
-| **Horizon** | Mobile app redesign |
-→ Details: memory/projects/
-
-## Preferences
-- 25-min meetings with buffers
-- Async-first, Slack over email
-- No meetings Friday afternoons
+## From your answers
+- Ticket statuses are: Backlog, In Progress, In Review, Done
 ```
 
-## Deep Memory Format (memory/)
+Then present the MCPs that were connected during setup and any that the user should still connect, with instructions on how to connect them.
 
-**memory/glossary.md** - The decoder ring:
-```markdown
-# Glossary
+If no knowledge MCPs were available in Phase 1, and the user had to answer at least one question manually, include a note at the end:
+> By the way, connecting sources like Slack or Microsoft Teams would let me find answers automatically next time you customize a plugin.
 
-Workplace shorthand, acronyms, and internal language.
+## Additional Resources
 
-## Acronyms
-| Term | Meaning | Context |
-|------|---------|---------|
-| PSR | Pipeline Status Report | Weekly sales doc |
-| OKR | Objectives & Key Results | Quarterly planning |
-| P0/P1/P2 | Priority levels | P0 = drop everything |
-
-## Internal Terms
-| Term | Meaning |
-|------|---------|
-| standup | Daily 9am sync in #engineering |
-| the migration | Project Phoenix database work |
-| ship it | Deploy to production |
-| escalate | Loop in leadership |
-
-## Nicknames → Full Names
-| Nickname | Person |
-|----------|--------|
-| Todd | Todd Martinez (Finance) |
-| T | Also Todd Martinez |
-
-## Project Codenames
-| Codename | Project |
-|----------|---------|
-| Phoenix | Database migration |
-| Horizon | New mobile app |
-```
-
-**memory/people/{name}.md:**
-```markdown
-# Todd Martinez
-
-**Also known as:** Todd, T
-**Role:** Finance Lead
-**Team:** Finance
-**Reports to:** CFO (Michael Chen)
-
-## Communication
-- Prefers Slack DM
-- Quick responses, very direct
-- Best time: mornings
-
-## Context
-- Handles all PSRs and financial reporting
-- Key contact for deal approvals over $500k
-- Works closely with Sales on forecasting
-
-## Notes
-- Cubs fan, likes talking baseball
-```
-
-**memory/projects/{name}.md:**
-```markdown
-# Project Phoenix
-
-**Codename:** Phoenix
-**Also called:** "the migration"
-**Status:** Active, launching Q2
-
-## What It Is
-Database migration from legacy Oracle to PostgreSQL.
-
-## Key People
-- Sarah - tech lead
-- Todd - budget owner
-- Greg - stakeholder (sales impact)
-
-## Context
-$1.2M budget, 6-month timeline. Critical path for Horizon project.
-```
-
-**memory/context/company.md:**
-```markdown
-# Company Context
-
-## Tools & Systems
-| Tool | Used for | Internal name |
-|------|----------|---------------|
-| Slack | Communication | - |
-| Asana | Engineering tasks | - |
-| Salesforce | CRM | "SF" or "the CRM" |
-| Notion | Docs/wiki | - |
-
-## Teams
-| Team | What they do | Key people |
-|------|--------------|------------|
-| Platform | Infrastructure | Sarah (lead) |
-| Finance | Money stuff | Todd (lead) |
-| Sales | Revenue | Greg |
-
-## Processes
-| Process | What it means |
-|---------|---------------|
-| Weekly sync | Monday 10am all-hands |
-| Ship review | Thursday deploy approval |
-```
-
-## How to Interact
-
-### Decoding User Input (Tiered Lookup)
-
-**Always** decode shorthand before acting on requests:
-
-```
-1. CLAUDE.md (hot cache)     → Check first, covers 90% of cases
-2. memory/glossary.md        → Full glossary if not in hot cache
-3. memory/people/, projects/ → Rich detail when needed
-4. Ask user                  → Unknown term? Learn it.
-```
-
-Example:
-```
-User: "ask todd to do the PSR for oracle"
-
-CLAUDE.md lookup:
-  "todd" → Todd Martinez, Finance ✓
-  "PSR" → Pipeline Status Report ✓
-  "oracle" → (not in hot cache)
-
-memory/glossary.md lookup:
-  "oracle" → Oracle Systems deal ($2.3M) ✓
-
-Now Claude can act with full context.
-```
-
-### Adding Memory
-
-When user says "remember this" or "X means Y":
-
-1. **Glossary items** (acronyms, terms, shorthand):
-   - Add to memory/glossary.md
-   - If frequently used, add to CLAUDE.md Quick Glossary
-
-2. **People:**
-   - Create/update memory/people/{name}.md
-   - Add to CLAUDE.md Key People if important
-   - **Capture nicknames** - critical for decoding
-
-3. **Projects:**
-   - Create/update memory/projects/{name}.md
-   - Add to CLAUDE.md Active Projects if current
-   - **Capture codenames** - "Phoenix", "the migration", etc.
-
-4. **Preferences:** Add to CLAUDE.md Preferences section
-
-### Recalling Memory
-
-When user asks "who is X" or "what does X mean":
-
-1. Check CLAUDE.md first
-2. Check memory/ for full detail
-3. If not found: "I don't know what X means yet. Can you tell me?"
-
-### Progressive Disclosure
-
-1. Load CLAUDE.md for quick parsing of any request
-2. Dive into memory/ when you need full context for execution
-3. Example: drafting an email to todd about the PSR
-   - CLAUDE.md tells you Todd = Todd Martinez, PSR = Pipeline Status Report
-   - memory/people/todd-martinez.md tells you he prefers Slack, is direct
-
-## Bootstrapping
-
-Use `/productivity:start` to initialize by scanning your chat, calendar, email, and documents. Extracts people, projects, and starts building the glossary.
-
-## Conventions
-
-- **Bold** terms in CLAUDE.md for scannability
-- Keep CLAUDE.md under ~100 lines (the "hot 30" rule)
-- Filenames: lowercase, hyphens (`todd-martinez.md`, `project-phoenix.md`)
-- Always capture nicknames and alternate names
-- Glossary tables for easy lookup
-- When something's used frequently, promote it to CLAUDE.md
-- When something goes stale, demote it to memory/ only
-
-## What Goes Where
-
-| Type | CLAUDE.md (Hot Cache) | memory/ (Full Storage) |
-|------|----------------------|------------------------|
-| Person | Top ~30 frequent contacts | glossary.md + people/{name}.md |
-| Acronym/term | ~30 most common | glossary.md (complete list) |
-| Project | Active projects only | glossary.md + projects/{name}.md |
-| Nickname | In Key People if top 30 | glossary.md (all nicknames) |
-| Company context | Quick reference only | context/company.md |
-| Preferences | All preferences | - |
-| Historical/stale | ✗ Remove | ✓ Keep in memory/ |
-
-## Promotion / Demotion
-
-**Promote to CLAUDE.md when:**
-- You use a term/person frequently
-- It's part of active work
-
-**Demote to memory/ only when:**
-- Project completed
-- Person no longer frequent contact
-- Term rarely used
-
-This keeps CLAUDE.md fresh and relevant.
+- **`references/mcp-servers.md`** — MCP discovery workflow, category-to-keywords mapping, config file locations
+- **`references/search-strategies.md`** — Knowledge MCP query patterns for finding tool names and org values
+- **`examples/customized-mcp.json`** — Example fully configured `.mcp.json`

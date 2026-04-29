@@ -1,41 +1,45 @@
-# Rivet Sample Validation and Observed Drift
+# Samples Validation
 
-Validated sources:
-- `zoom/rivet-javascript-sample`
-- `zoom/isv-rivet-starter`
-- `zoom/Rivet-Server-Sample`
-- `zoom/rivet-javascript`
+Validated against:
+- https://github.com/zoom/scribe-quickstart/
+- official docs pages under `docs/ai-services/`
+- AI Services OpenAPI inventory at `api-hub/ai-services/methods/endpoints.json`
+- Zoom blog context:
+  - `introducing-zoom-ai-services`
+  - `voice-insights-modernize-customer-support-with-scribe`
 
-## Lifecycle Patterns Confirmed
+## What the official quickstart confirms
 
-- Module clients are instantiated with auth + receiver options.
-- Handlers are registered before or near startup.
-- `client.start()` bootstraps receiver/server.
-- Multi-module samples use unique ports per module.
-- `/zoom/events` endpoint suffix is required for webhook callbacks.
+- Node/Express proxy architecture is a valid implementation model.
+- Fast mode can be proxied as multipart upload handling on your server even though the docs show JSON examples.
+- Batch mode commonly injects AWS credentials into request payloads.
+- Webhook verification uses `x-zm-signature` + `x-zm-request-timestamp` with HMAC-SHA256 and `sha256=` prefix.
+- The quickstart uses `ZOOM_API_KEY` / `ZOOM_API_SECRET` naming.
 
-## Architecture Patterns Confirmed
+## Useful implementation details from the sample
 
-- Rivet acts as an orchestration layer:
-- Typed endpoint wrappers for API operations.
-- Webhook consumer methods for events.
-- OAuth helper behavior embedded in client lifecycle.
+- `multer` memory storage is enough for a small fast-mode demo.
+- Batch helper routes are naturally expressed as:
+  - `POST /batch/jobs`
+  - `GET /batch/jobs`
+  - `GET /batch/jobs/:jobId`
+  - `GET /batch/jobs/:jobId/files`
+  - `DELETE /batch/jobs/:jobId`
+- It is practical to keep one `generateJWT()` helper and inject the bearer token per request.
 
-## Useful Additions Incorporated into Skill
+## Caveats from the sample
 
-- Multi-module port segregation and webhook endpoint mapping.
-- Distinct auth patterns by module.
-- Sample-derived operational gotchas for ngrok and OAuth install.
+- It assumes Node `>=24`, which is stricter than many deployment environments actually need. Verify your runtime before copying that constraint unchanged.
+- It uses environment-injected AWS credentials. Production pipelines may prefer pre-signed URLs or short-lived STS credentials only.
+- The sample is an app demo, not a complete production reference for job retry policy, durable queues, or transcript storage.
 
-## Contradictions and Drift Notes
+## What the blog posts add
 
-- Some docs/samples reference older Team Chat doc paths (`team-chat-apps`) while current docs may use updated routing.
-- Sample env variable naming is inconsistent across repos (`StS_*`, `WEBHOOK_SECRET_TOKEN`, per-module keys). This skill standardizes names in `environment-variables.md`.
-- Some sample README commands imply one port while module receivers may actually use `base+1` or per-module ports.
-- User OAuth behavior depends on receiver choice; `AwsLambdaReceiver` limitations must be handled explicitly.
-
-## Recommendations
-
-- Keep a local compatibility table: `rivet_version` x `modules_used` x `auth_flows` x `receiver_type`.
-- Treat sample repos as patterns, not strict source of truth.
-- Re-check TypeDoc and changelog before each release.
+- They reinforce the highest-value downstream use cases:
+  - post-call summaries
+  - ticket enrichment
+  - compliance/audit logging
+  - searchable archives
+  - customer-support QA workflows
+- They are useful for scenario framing, but not as authoritative API surface documentation.
+- Keep endpoint and request-shape decisions anchored to the AI Services docs and API Hub inventory, not the blog wording.

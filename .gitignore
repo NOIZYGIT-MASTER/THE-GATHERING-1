@@ -140,3 +140,35 @@ MC96/
 **/*.key
 **/id_rsa*
 **/id_ed25519*
+
+# === VENDOR WEBPACK CHUNKS + AUTH CODE (added 2026-04-29 — pre-commit hook noise) ===
+# These directories had .js webpack chunks + python auth modules whose variable
+# names (variable-name patterns) tripped the pre-commit secret pattern check.
+# The patterns are not actual secrets, but rather than tune the hook, we exclude
+# the noisy trees. Original empire code lives at /repos/* and openclaw-36/*.
+AI-FAMILY/DREAM/code/
+NOIZYVOX/code/
+
+# All AI-FAMILY/*/code/ subtrees — vendor JS chunks + code copies trip the
+# pre-commit hook on variable-name patterns ("<pwd>=" / "<key>=" / etc).
+# Original empire code lives at /repos/* and openclaw-36/* and landing/*.
+AI-FAMILY/*/code/
+
+# Brand- and persona-level /code/ subtrees — vendor noise + variable-name false positives
+NOIZYFISH/code/
+NOIZYKIDZ/code/
+NOIZYLAB/code/
+THE-AQUARIUM/code/
+THE-WISDOM-PROJECT/code/
+AI-FAMILY/GABRIEL/code/
+AI-FAMILY/ENGR_KEITH/code/
+AI-FAMILY/POPS/code/
+AI-FAMILY/LUCY/code/
+AI-FAMILY/SHIRL/code/
+AI-FAMILY/SHIRLEY/code/
+AI-FAMILY/CB01/code/
+AI-FAMILY/NOIZYARMY/code/
+AI-FAMILY/VOICE_SPECIALIST/code/
+AI-FAMILY/CONSENT_AUDITOR/code/
+AI-FAMILY/ALEX_WARD/code/
+AI-FAMILY/AVA/code/

@@ -1,19 +1,28 @@
-# Rivet Source Map
+# Zoom Phone Source Map
 
-## Crawled Docs (local raw-docs)
+Crawled docs source:
+- `https://developers.zoom.us/docs/phone/`
+- Crawl config used: depth `10`, concurrency `10`, Android excluded.
 
-- `tools/zoom-crawler/raw-docs/developers.zoom.us/docs/rivet/javascript.md`
-- `tools/zoom-crawler/raw-docs/developers.zoom.us/docs/rivet/javascript/get-started.md`
-- `tools/zoom-crawler/raw-docs/developers.zoom.us/docs/rivet/javascript/authorization.md`
-- `tools/zoom-crawler/raw-docs/developers.zoom.us/docs/rivet/javascript/apis-events.md`
-- `tools/zoom-crawler/raw-docs/developers.zoom.us/docs/rivet/javascript/config-options.md`
-- `tools/zoom-crawler/raw-docs/developers.zoom.us/docs/rivet/javascript/deployment.md`
-- `tools/zoom-crawler/raw-docs/developers.zoom.us/docs/rivet/javascript/event-shortcuts.md`
-- `tools/zoom-crawler/raw-docs/zoom.github.io/rivet-javascript/` (TypeDoc crawl)
+## Processed pages
 
-## External Validation Repos
+- `call-data.md`
+- `call-handling.md`
+- `create-app.md`
+- `first-app.md`
+- `integrate-with-zoom-phone.md`
+- `migrate.md`
+- `outbound-call.md`
+- `outbound-sms.md`
+- `smart-embed-guide.md`
+- `smart-embed.md`
+- `start.md`
+- `webhook-migrate.md`
 
-- `zoom/rivet-javascript-sample`
-- `zoom/isv-rivet-starter`
-- `zoom/Rivet-Server-Sample`
-- `zoom/rivet-javascript`
+## Mapping to skill docs
+
+- App setup + OAuth -> [../SKILL.md](../SKILL.md), [environment-variables.md](environment-variables.md)
+- Smart Embed lifecycle/events -> `examples/smart-embed-postmessage-bridge.md`, `references/smart-embed-event-contract.md`
+- Call handling admin API -> `references/call-handling-patterns.md`
+- API/webhook migration timeline -> `references/deprecations-and-migrations.md`
+- CRM sample validation -> `references/crm-sample-validation.md`
