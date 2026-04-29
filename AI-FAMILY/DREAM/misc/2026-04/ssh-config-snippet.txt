@@ -1,0 +1,21 @@
+# Drop this into ~/.ssh/config on the M2 Ultra, then `ssh mickey-p`
+# works from anywhere instead of retyping the IP.
+
+Host mickey-p
+  HostName 10.90.90.100
+  User rsp
+  # Uncomment if you want a reusable connection (faster after first login):
+  # ControlMaster auto
+  # ControlPath ~/.ssh/cm-%r@%h:%p
+  # ControlPersist 10m
+  # Catalina is old; give it a gentle cipher fallback if needed:
+  KexAlgorithms +diffie-hellman-group14-sha1
+  HostKeyAlgorithms +ssh-rsa
+  PubkeyAcceptedKeyTypes +ssh-rsa
+
+Host mickey-p-fish
+  HostName 10.90.90.100
+  User fish
+  KexAlgorithms +diffie-hellman-group14-sha1
+  HostKeyAlgorithms +ssh-rsa
+  PubkeyAcceptedKeyTypes +ssh-rsa

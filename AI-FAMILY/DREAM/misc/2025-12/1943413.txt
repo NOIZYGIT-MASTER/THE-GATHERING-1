@@ -1,0 +1,18 @@
+<root>
+    <CtrlPanelStyle name="SmallStyle" colBorder="[r:107 g:107 b:107 a:255]" colBorderAlt="[r:107 g:107 b:107 a:255]" colFill="[r:0 g:0 b:0 a:255]" intSmartTileEdgeSize="20" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="7" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlImageViewStyle name="KitPieceViewStyleSmall" optBorder="false" optBackground="false" optMouseHandle="true" optHQResizing="true" colBackground="[r:150 g:150 b:150 a:255]" intRoundedRectRadius="0">
+        <VFont name="font" vSize="9" fontName="Arial" />
+    </CtrlImageViewStyle>
+    <CtrlPanelStyle name="ClickPanelStyle" colBorder="[r:0 g:0 b:0 a:0]" colBorderAlt="[r:0 g:0 b:0 a:0]" colFill="[r:255 g:255 b:255 a:0]" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="14" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlPanel name="KitPieceChooserSmallPanel" style="SmallStyle" rect="[x:0 y:0 w:93 h:60]" id="0">
+        <CtrlPanel name="ClickPanel" style="ClickPanelStyle" rect="[x:0 y:0 w:93 h:60]" id="100000" />
+        <CtrlLabel name="NameLabel" style="BFD2LabelCentered" rect="[x:1 y:1 w:91 h:18]" id="1" text="Name Label" />
+        <CtrlImageView name="KitPieceImage" style="KitPieceViewStyleSmall" rect="[x:21 y:17 w:48 h:40]" id="2" />
+        <CtrlButton name="GoToDemoPackButton" rect="[x:100 y:30 w:100 h:20]" id="100000" zorder="2" text="Show/Buy..." />
+        <CtrlImageView name="DemoImage" style="BrowserDemoImageStyle" rect="[x:4 y:42 w:45 h:15]" id="2" zorder="2" />
+    </CtrlPanel>
+</root>

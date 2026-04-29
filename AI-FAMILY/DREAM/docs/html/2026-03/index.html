@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>NOIZY — Coming Soon</title>
+<meta name="description" content="NOIZY — Where voice meets vision. Four brands, one mission: protect creators, empower artists, and build the future of ethical sound.">
+<meta property="og:title" content="NOIZY — Coming Soon">
+<meta property="og:description" content="Where voice meets vision. Four brands, one mission.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://noizy.ai">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --night: #0a0c14;
+    --deep-ocean: #0d1b2a;
+    --twilight: #1b2838;
+    --forest-shadow: #0f1e1a;
+    --golden-hour: #d4943a;
+    --sunset-rose: #c77d6e;
+    --aurora-teal: #4ecdc4;
+    --starlight: #e8dfd0;
+    --mist: rgba(232, 223, 208, 0.6);
+    --cream: #f0e8dc;
+    --warm-white: #faf6f1;
+    --deep-rose: #8b4a5e;
+    --forest-green: #2d5a47;
+    --ocean-blue: #1a4a6e;
+  }
+
+  html { font-size: 16px; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--night);
+    color: var(--cream);
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    cursor: default;
+  }
+
+  /* ═══ CANVAS WORLD ═══ */
+  #world {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+  }
+
+  /* ═══ CONTENT SCROLL LAYER ═══ */
+  .scroll-layer {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+  }
+
+  /* ═══ HERO SECTION — THE ARRIVAL ═══ */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+  }
+
+  /* Soft vignette overlay */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 30%, rgba(10,12,20,0.5) 100%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+  }
+
+  /* Floating particles of light */
+  .firefly {
+    position: absolute;
+    width: 4px; height: 4px;
+    background: var(--golden-hour);
+    border-radius: 50%;
+    box-shadow: 0 0 8px 2px rgba(212, 148, 58, 0.4);
+    animation: float var(--dur) ease-in-out infinite alternate;
+    opacity: 0;
+    animation-delay: var(--delay);
+  }
+
+  @keyframes float {
+    0% { transform: translate(0, 0) scale(1); opacity: 0; }
+    20% { opacity: 0.8; }
+    80% { opacity: 0.6; }
+    100% { transform: translate(var(--dx), var(--dy)) scale(0.6); opacity: 0; }
+  }
+
+  /* ─── Logo ─── */
+  .logo-wrap {
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: breatheIn 2.5s ease 0.5s forwards;
+  }
+
+  .logo {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(4rem, 12vw, 8.5rem);
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    color: var(--warm-white);
+    line-height: 1;
+    text-shadow: 0 0 60px rgba(212, 148, 58, 0.15),
+                 0 0 120px rgba(78, 205, 196, 0.06);
+  }
+
+  .logo .ai {
+    font-weight: 500;
+    background: linear-gradient(135deg, var(--golden-hour), var(--aurora-teal));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ─── Tagline ─── */
+  .tagline {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(1.1rem, 3vw, 1.6rem);
+    font-weight: 300;
+    font-style: italic;
+    letter-spacing: 0.06em;
+    color: var(--sunset-rose);
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: breatheIn 2s ease 1.2s forwards;
+  }
+
+  /* ─── Coming Soon Badge ─── */
+  .badge {
+    display: inline-block;
+    padding: 0.5rem 2rem;
+    border: 1px solid rgba(212, 148, 58, 0.25);
+    border-radius: 100px;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--golden-hour);
+    backdrop-filter: blur(10px);
+    background: rgba(212, 148, 58, 0.05);
+    opacity: 0;
+    animation: breatheIn 2s ease 1.8s forwards;
+  }
+
+  /* ─── Scroll Indicator ─── */
+  .scroll-hint {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: breatheIn 2s ease 2.5s forwards;
+  }
+
+  .scroll-hint span {
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(232, 223, 208, 0.3);
+  }
+
+  .scroll-arrow {
+    width: 1px;
+    height: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scroll-arrow::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, var(--golden-hour));
+    animation: scrollDown 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollDown {
+    0% { top: -100%; }
+    100% { top: 100%; }
+  }
+
+  /* ═══ BRANDS SECTION ═══ */
+  .brands-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 2rem;
+    position: relative;
+  }
+
+  .brands-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+      transparent 0%,
+      rgba(10,12,20,0.4) 20%,
+      rgba(10,12,20,0.6) 50%,
+      rgba(10,12,20,0.4) 80%,
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+
+  .section-content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    width: 100%;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 300;
+    text-align: center;
+    color: var(--warm-white);
+    margin-bottom: 1rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease;
+  }
+
+  .section-title.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .section-subtitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    font-weight: 300;
+    font-style: italic;
+    text-align: center;
+    color: var(--sunset-rose);
+    margin-bottom: 4rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 1s ease 0.2s;
+  }
+
+  .section-subtitle.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .brands-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .brand-card {
+    padding: 3rem 1.5rem;
+    text-align: center;
+    background: rgba(13, 27, 42, 0.6);
+    backdrop-filter: blur(30px);
+    border: 1px solid rgba(232, 223, 208, 0.04);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease, background 0.4s ease;
+  }
+
+  .brand-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .brand-card:nth-child(1) { transition-delay: 0.1s; }
+  .brand-card:nth-child(2) { transition-delay: 0.2s; }
+  .brand-card:nth-child(3) { transition-delay: 0.3s; }
+  .brand-card:nth-child(4) { transition-delay: 0.4s; }
+
+  /* Glow line on hover */
+  .brand-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--glow);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .brand-card:hover { background: rgba(27, 40, 56, 0.7); }
+  .brand-card:hover::after { opacity: 1; }
+
+  .brand-card:nth-child(1) { --glow: linear-gradient(to right, #c44b3f, #d4943a); }
+  .brand-card:nth-child(2) { --glow: linear-gradient(to right, #d4943a, #e8b86d); }
+  .brand-card:nth-child(3) { --glow: linear-gradient(to right, #4ecdc4, #2d5a47); }
+  .brand-card:nth-child(4) { --glow: linear-gradient(to right, #7b6b8a, #1a4a6e); }
+
+  .brand-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 1.2rem;
+    filter: drop-shadow(0 0 12px rgba(212, 148, 58, 0.15));
+  }
+
+  .brand-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.15rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--warm-white);
+    margin-bottom: 0.6rem;
+  }
+
+  .brand-tagline {
+    font-size: 0.72rem;
+    font-weight: 200;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(232, 223, 208, 0.45);
+    line-height: 1.7;
+  }
+
+  /* ═══ MISSION + SIGNUP ═══ */
+  .closing-section {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 2rem;
+    position: relative;
+  }
+
+  .closing-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 80%, rgba(212, 148, 58, 0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .closing-content {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    text-align: center;
+  }
+
+  .mission {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+    font-weight: 300;
+    line-height: 2;
+    color: rgba(232, 223, 208, 0.65);
+    margin-bottom: 4rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1.2s ease;
+  }
+
+  .mission.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mission em {
+    font-style: italic;
+    color: var(--golden-hour);
+    font-weight: 400;
+  }
+
+  /* ─── Email Signup ─── */
+  .signup {
+    width: 100%;
+    max-width: 460px;
+    margin: 0 auto 4rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 1s ease 0.3s;
+  }
+
+  .signup.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .signup-label {
+    display: block;
+    text-align: center;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--golden-hour);
+    margin-bottom: 1.2rem;
+  }
+
+  .signup-form {
+    display: flex;
+    border-radius: 60px;
+    overflow: hidden;
+    background: rgba(232, 223, 208, 0.04);
+    border: 1px solid rgba(232, 223, 208, 0.08);
+    transition: all 0.4s ease;
+  }
+
+  .signup-form:focus-within {
+    border-color: rgba(212, 148, 58, 0.3);
+    box-shadow: 0 0 40px rgba(212, 148, 58, 0.06);
+  }
+
+  .signup-form input[type="email"] {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    background: transparent;
+    border: none;
+    color: var(--warm-white);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 300;
+    letter-spacing: 0.03em;
+    outline: none;
+    min-width: 0;
+  }
+
+  .signup-form input::placeholder {
+    color: rgba(232, 223, 208, 0.2);
+  }
+
+  .signup-form button {
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, var(--golden-hour), var(--sunset-rose));
+    border: none;
+    color: var(--warm-white);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    border-radius: 0 60px 60px 0;
+  }
+
+  .signup-form button:hover {
+    background: linear-gradient(135deg, #e8b86d, var(--golden-hour));
+    box-shadow: 0 4px 20px rgba(212, 148, 58, 0.2);
+  }
+
+  .signup-success {
+    display: none;
+    text-align: center;
+    padding: 1.2rem;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--aurora-teal);
+  }
+
+  /* ─── Footer ─── */
+  .footer {
+    text-align: center;
+    padding-bottom: 3rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 1s ease 0.5s;
+  }
+
+  .footer.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .footer-line {
+    font-size: 0.65rem;
+    font-weight: 200;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(232, 223, 208, 0.18);
+  }
+
+  .footer-line + .footer-line { margin-top: 0.4rem; }
+
+  .footer-line .heart {
+    color: var(--sunset-rose);
+    display: inline-block;
+    animation: heartbeat 3s ease-in-out infinite;
+  }
+
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    15% { transform: scale(1.2); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.15); }
+  }
+
+  /* ═══ ANIMATIONS ═══ */
+  @keyframes breatheIn {
+    from { opacity: 0; transform: translateY(30px) scale(0.98); filter: blur(4px); }
+    to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  }
+
+  /* ═══ RESPONSIVE ═══ */
+  @media (max-width: 700px) {
+    .brands-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .brand-card { padding: 2rem 1rem; }
+    .signup-form {
+      flex-direction: column;
+      border-radius: 12px;
+    }
+    .signup-form button {
+      border-radius: 0 0 12px 12px;
+      padding: 1rem;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .brands-grid { grid-template-columns: 1fr; }
+  }
+
+  ::selection {
+    background: rgba(212, 148, 58, 0.25);
+    color: var(--warm-white);
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ GENERATIVE CANVAS WORLD ═══ -->
+<canvas id="world"></canvas>
+
+<!-- ═══ CONTENT ═══ -->
+<div class="scroll-layer">
+
+  <!-- HERO: THE ARRIVAL -->
+  <section class="hero" id="hero">
+
+    <!-- Fireflies -->
+    <div class="firefly" style="top:15%;left:20%;--dur:6s;--delay:0s;--dx:30px;--dy:-40px"></div>
+    <div class="firefly" style="top:35%;left:75%;--dur:8s;--delay:1s;--dx:-20px;--dy:-30px"></div>
+    <div class="firefly" style="top:60%;left:40%;--dur:7s;--delay:2s;--dx:25px;--dy:20px"></div>
+    <div class="firefly" style="top:25%;left:55%;--dur:9s;--delay:0.5s;--dx:-35px;--dy:-25px"></div>
+    <div class="firefly" style="top:70%;left:15%;--dur:6.5s;--delay:1.5s;--dx:20px;--dy:-35px"></div>
+    <div class="firefly" style="top:50%;left:85%;--dur:7.5s;--delay:3s;--dx:-15px;--dy:30px"></div>
+    <div class="firefly" style="top:80%;left:60%;--dur:8.5s;--delay:2.5s;--dx:30px;--dy:-20px"></div>
+    <div class="firefly" style="top:10%;left:45%;--dur:10s;--delay:0.8s;--dx:-25px;--dy:35px"></div>
+
+    <div class="hero-content">
+      <div class="logo-wrap">
+        <h1 class="logo">NOIZY<span class="ai">.ai</span></h1>
+      </div>
+      <p class="tagline">Where voice meets vision</p>
+      <div class="badge">Coming Soon</div>
+    </div>
+
+    <div class="scroll-hint">
+      <span>Discover</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- BRANDS: THE FOUR PATHS -->
+  <section class="brands-section" id="brands">
+    <div class="section-content">
+      <h2 class="section-title" data-reveal>Four Brands, One Mission</h2>
+      <p class="section-subtitle" data-reveal>Protecting creators. Empowering artists. Honouring every voice.</p>
+
+      <div class="brands-grid">
+        <div class="brand-card" data-reveal>
+          <span class="brand-icon">🎙</span>
+          <div class="brand-name">NOIZYVOX</div>
+          <div class="brand-tagline">Voice Consent<br>& Protection</div>
+        </div>
+        <div class="brand-card" data-reveal>
+          <span class="brand-icon">🧒</span>
+          <div class="brand-name">NOIZYKIDZ</div>
+          <div class="brand-tagline">Next Generation<br>Stories & Sound</div>
+        </div>
+        <div class="brand-card" data-reveal>
+          <span class="brand-icon">🔬</span>
+          <div class="brand-name">NOIZYLAB</div>
+          <div class="brand-tagline">Creative<br>Technology</div>
+        </div>
+        <div class="brand-card" data-reveal>
+          <span class="brand-icon">🐟</span>
+          <div class="brand-name">NOIZYFISH</div>
+          <div class="brand-tagline">Music<br>Publishing</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING: THE PROMISE -->
+  <section class="closing-section" id="closing">
+    <div class="closing-content">
+      <p class="mission" data-reveal>
+        We're building something that matters&thinsp;&mdash;&thinsp;a family of brands
+        dedicated to <em>protecting creators</em>, <em>empowering artists</em>,
+        and ensuring that every voice is heard, honoured,
+        and never used without consent.
+      </p>
+
+      <div class="signup" data-reveal>
+        <label class="signup-label" for="email">Be the first to know</label>
+        <form class="signup-form" id="signupForm">
+          <input type="email" id="email" name="email" placeholder="your@email.com" required autocomplete="email" aria-label="Email address">
+          <button type="submit">Notify Me</button>
+        </form>
+        <div class="signup-success" id="signupSuccess">
+          Welcome to the family. We'll be in touch&thinsp;✨
+        </div>
+      </div>
+
+      <footer class="footer" data-reveal>
+        <div class="footer-line">
+          Built with <span class="heart">♥</span> by Robert Stephen Plowman
+        </div>
+        <div class="footer-line">
+          &copy; 2026 Fish Music Inc. &middot; All rights reserved
+        </div>
+      </footer>
+    </div>
+  </section>
+
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+// GENERATIVE CANVAS — LIVING LANDSCAPE
+// Inspired by Contact's cosmic shoreline and What Dreams May Come's
+// painted dreamscapes. A living world of stars, aurora light, and
+// gentle waves of colour.
+// ═══════════════════════════════════════════════════════════════════
+
+const canvas = document.getElementById('world');
+const ctx = canvas.getContext('2d');
+let W, H, time = 0;
+const stars = [];
+const particles = [];
+const waves = [];
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+// Generate stars
+for (let i = 0; i < 200; i++) {
+  stars.push({
+    x: Math.random() * 2000,
+    y: Math.random() * 1000,
+    r: Math.random() * 1.5 + 0.3,
+    twinkle: Math.random() * Math.PI * 2,
+    speed: Math.random() * 0.005 + 0.002,
+  });
+}
+
+// Generate aurora particles
+for (let i = 0; i < 40; i++) {
+  particles.push({
+    x: Math.random() * 2000,
+    y: Math.random() * 600 + 100,
+    vx: (Math.random() - 0.5) * 0.3,
+    vy: (Math.random() - 0.5) * 0.15,
+    r: Math.random() * 60 + 20,
+    hue: Math.random() * 60 + 160, // teal to blue-green
+    alpha: Math.random() * 0.04 + 0.01,
+  });
+}
+
+// Wave layers
+for (let i = 0; i < 5; i++) {
+  waves.push({
+    y: H * 0.65 + i * 40,
+    amplitude: 15 + i * 5,
+    frequency: 0.002 - i * 0.0002,
+    speed: 0.008 + i * 0.002,
+    alpha: 0.06 - i * 0.008,
+    hue: 200 + i * 15,
+  });
+}
+
+function drawSky() {
+  const scrollY = window.scrollY || 0;
+  const scrollFactor = Math.min(scrollY / (H * 2), 1);
+
+  // Sky gradient shifts with scroll — night → twilight → deep ocean
+  const grad = ctx.createLinearGradient(0, 0, 0, H);
+  grad.addColorStop(0, `rgba(10, 12, 20, 1)`);
+  grad.addColorStop(0.3, `rgba(13, 27, 42, ${0.9 + scrollFactor * 0.1})`);
+  grad.addColorStop(0.65, `rgba(15, 30, 26, ${0.7 + scrollFactor * 0.2})`);
+  grad.addColorStop(1, `rgba(10, 15, 22, 1)`);
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, W, H);
+}
+
+function drawStars() {
+  const scrollY = window.scrollY || 0;
+  const parallax = scrollY * 0.1;
+
+  stars.forEach(s => {
+    const twinkle = Math.sin(time * s.speed + s.twinkle);
+    const alpha = 0.3 + twinkle * 0.4;
+    const px = ((s.x - parallax * 0.05) % W + W) % W;
+    const py = ((s.y - parallax * 0.02) % (H * 0.7) + H * 0.7) % (H * 0.7);
+
+    ctx.beginPath();
+    ctx.arc(px, py, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(232, 223, 208, ${Math.max(0, alpha)})`;
+    ctx.fill();
+
+    // Glow for brighter stars
+    if (s.r > 1) {
+      ctx.beginPath();
+      ctx.arc(px, py, s.r * 3, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(212, 148, 58, ${alpha * 0.1})`;
+      ctx.fill();
+    }
+  });
+}
+
+function drawAurora() {
+  particles.forEach(p => {
+    p.x += p.vx + Math.sin(time * 0.01 + p.y * 0.01) * 0.2;
+    p.y += p.vy + Math.cos(time * 0.008 + p.x * 0.005) * 0.1;
+
+    // Wrap around
+    if (p.x > W + 100) p.x = -100;
+    if (p.x < -100) p.x = W + 100;
+    if (p.y > H * 0.7) p.y = 100;
+    if (p.y < 50) p.y = H * 0.6;
+
+    const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
+    grad.addColorStop(0, `hsla(${p.hue + Math.sin(time * 0.005) * 20}, 60%, 50%, ${p.alpha})`);
+    grad.addColorStop(1, `hsla(${p.hue}, 60%, 30%, 0)`);
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fill();
+  });
+}
+
+function drawHorizon() {
+  const scrollY = window.scrollY || 0;
+  const horizonY = H * 0.68 - scrollY * 0.05;
+
+  // Horizon glow
+  const glow = ctx.createRadialGradient(W * 0.5, horizonY, 0, W * 0.5, horizonY, W * 0.6);
+  glow.addColorStop(0, `rgba(212, 148, 58, 0.06)`);
+  glow.addColorStop(0.5, `rgba(199, 125, 110, 0.03)`);
+  glow.addColorStop(1, 'transparent');
+  ctx.fillStyle = glow;
+  ctx.fillRect(0, 0, W, H);
+
+  // Water/ground — gentle waves
+  waves.forEach(w => {
+    ctx.beginPath();
+    ctx.moveTo(0, H);
+
+    for (let x = 0; x <= W; x += 4) {
+      const y = horizonY + w.amplitude * Math.sin(x * w.frequency + time * w.speed)
+                + w.amplitude * 0.5 * Math.sin(x * w.frequency * 1.7 + time * w.speed * 0.7);
+      ctx.lineTo(x, y);
+    }
+
+    ctx.lineTo(W, H);
+    ctx.closePath();
+    ctx.fillStyle = `hsla(${w.hue}, 30%, 8%, ${w.alpha})`;
+    ctx.fill();
+  });
+
+  // Reflection shimmer on water
+  for (let i = 0; i < 12; i++) {
+    const rx = W * 0.3 + Math.sin(time * 0.01 + i * 0.5) * W * 0.2;
+    const ry = horizonY + 20 + i * 12 + Math.sin(time * 0.02 + i) * 5;
+    const rw = 30 + Math.sin(time * 0.015 + i * 0.3) * 15;
+
+    ctx.beginPath();
+    ctx.ellipse(rx, ry, rw, 1, 0, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(212, 148, 58, ${0.04 - i * 0.003})`;
+    ctx.fill();
+  }
+}
+
+function animate() {
+  time++;
+  ctx.clearRect(0, 0, W, H);
+  drawSky();
+  drawStars();
+  drawAurora();
+  drawHorizon();
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+// ═══ SCROLL REVEAL ═══
+const reveals = document.querySelectorAll('[data-reveal]');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+reveals.forEach(el => observer.observe(el));
+
+// ═══ EMAIL SIGNUP ═══
+const form = document.getElementById('signupForm');
+const success = document.getElementById('signupSuccess');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('email').value;
+
+  try {
+    await fetch('/api/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, ts: new Date().toISOString() })
+    });
+  } catch (err) {
+    // Endpoint not yet configured — graceful degradation
+  }
+
+  form.style.display = 'none';
+  success.style.display = 'block';
+});
+
+// ═══ REDUCED MOTION ═══
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('.firefly').forEach(f => f.style.animation = 'none');
+  // Canvas still runs but at lower intensity
+}
+</script>
+
+</body>
+</html>

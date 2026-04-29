@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Looking Back From 2526 — The NOIZY Century</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,600;1,700;1,900&family=Space+Grotesk:wght@300;400;500;600&family=Space+Mono:wght@400;700&family=Bebas+Neue&display=swap');
+
+  :root {
+    --void: #01030a;
+    --deep: #040810;
+    --panel: #080f1a;
+    --border: #121e30;
+    --glow-border: #1a2e48;
+    --gold: #e8c84a;
+    --gold-light: #f5dc80;
+    --gold-dim: rgba(232,200,74,0.1);
+    --green: #00e87a;
+    --green-dim: rgba(0,232,122,0.08);
+    --violet: #b794f4;
+    --amber: #f6a63c;
+    --rose: #f687b3;
+    --cyan: #67e8f9;
+    --text: #bccde4;
+    --text-dim: #4a6080;
+    --text-bright: #e8f2ff;
+    --text-gold: #e8c84a;
+    --serif: 'Playfair Display', Georgia, serif;
+    --mono: 'Space Mono', monospace;
+    --sans: 'Space Grotesk', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--text);
+    font-family: var(--serif);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── CANVAS ─── */
+  #cosmos {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  /* ─── CHAPTER DOTS ─── */
+  .dots {
+    position: fixed;
+    right: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .dot {
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    border: 1px solid rgba(232,200,74,0.3);
+    cursor: pointer;
+    transition: all 0.35s;
+    position: relative;
+  }
+
+  .dot:hover, .dot.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    box-shadow: 0 0 14px rgba(232,200,74,0.5);
+  }
+
+  .dot .tip {
+    position: absolute;
+    right: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--panel);
+    border: 1px solid var(--glow-border);
+    padding: 4px 12px;
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--text-dim);
+    white-space: nowrap;
+    border-radius: 3px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    letter-spacing: 0.12em;
+  }
+
+  .dot:hover .tip { opacity: 1; }
+
+  /* ─── MAIN ─── */
+  main {
+    position: relative;
+    z-index: 10;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 44px 140px;
+  }
+
+  /* ─── COVER ─── */
+  #cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 80px 0;
+  }
+
+  .cover-archive-badge {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 6px 18px;
+    margin-bottom: 36px;
+    display: inline-block;
+  }
+
+  .cover-year {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(100px, 18vw, 200px);
+    line-height: 0.85;
+    color: rgba(232,200,74,0.08);
+    letter-spacing: -0.02em;
+    margin-bottom: -20px;
+    position: relative;
+    z-index: 0;
+  }
+
+  .cover-title {
+    font-family: var(--serif);
+    font-size: clamp(32px, 5.5vw, 64px);
+    font-weight: 900;
+    color: var(--text-bright);
+    line-height: 1.1;
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-title .it { font-style: italic; color: var(--gold); }
+
+  .cover-sub {
+    font-family: var(--serif);
+    font-size: clamp(15px, 2vw, 19px);
+    font-style: italic;
+    color: var(--text-dim);
+    line-height: 1.65;
+    max-width: 640px;
+    margin-bottom: 48px;
+  }
+
+  .cover-meta {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .cover-meta span { color: var(--gold); }
+
+  .cover-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .cover-scroll-line {
+    width: 1px;
+    height: 44px;
+    background: linear-gradient(to bottom, var(--gold-dim), transparent);
+    animation: scroll-anim 2.2s ease-in-out infinite;
+  }
+
+  @keyframes scroll-anim {
+    0%,100% { opacity: 0.2; transform: scaleY(1); }
+    50% { opacity: 0.7; transform: scaleY(1.2); }
+  }
+
+  .cover-scroll p {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 0.25em;
+  }
+
+  /* ─── SECTIONS ─── */
+  .section {
+    padding: 100px 0 60px;
+    border-top: 1px solid var(--border);
+  }
+
+  .section-eyebrow {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-eyebrow::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .section-eyebrow .y { color: var(--gold); }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(26px, 4.5vw, 52px);
+    font-weight: 900;
+    color: var(--text-bright);
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+
+  .section-title .it { font-style: italic; color: var(--gold); }
+  .section-title .g { color: var(--green); }
+  .section-title .v { color: var(--violet); }
+
+  .section-lead {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-style: italic;
+    color: var(--text-dim);
+    line-height: 1.7;
+    margin: 20px 0 44px;
+    padding-left: 20px;
+    border-left: 2px solid rgba(232,200,74,0.25);
+    max-width: 680px;
+  }
+
+  /* ─── PROSE ─── */
+  .prose {
+    font-size: 17px;
+    line-height: 1.9;
+    color: var(--text);
+    max-width: 720px;
+  }
+
+  .prose p { margin-bottom: 22px; }
+  .prose p:last-child { margin-bottom: 0; }
+  .prose strong { color: var(--text-bright); font-weight: 600; }
+  .prose em { color: var(--gold); font-style: italic; }
+  .prose .g { color: var(--green); font-weight: 600; }
+  .prose .v { color: var(--violet); }
+  .prose .r { color: var(--rose); }
+
+  /* ─── PULL QUOTE ─── */
+  .pull-quote {
+    margin: 48px 0;
+    padding: 36px 44px;
+    border-left: 3px solid var(--gold);
+    position: relative;
+  }
+
+  .pull-quote::before {
+    content: '"';
+    font-family: var(--serif);
+    font-size: 100px;
+    color: rgba(232,200,74,0.08);
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    line-height: 1;
+  }
+
+  .pull-quote p {
+    font-family: var(--serif);
+    font-size: clamp(17px, 2.5vw, 23px);
+    font-weight: 600;
+    font-style: italic;
+    color: var(--text-bright);
+    line-height: 1.55;
+    position: relative;
+    z-index: 1;
+  }
+
+  .pull-quote p .g { color: var(--green); font-style: normal; }
+  .pull-quote p .gold { color: var(--gold); font-style: normal; }
+
+  .pull-quote cite {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.18em;
+    margin-top: 16px;
+    font-style: normal;
+  }
+
+  /* ─── TIMELINE ─── */
+  .timeline {
+    position: relative;
+    margin: 44px 0;
+    padding-left: 32px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold), rgba(232,200,74,0.1));
+  }
+
+  .tl-item {
+    position: relative;
+    margin-bottom: 36px;
+  }
+
+  .tl-item:last-child { margin-bottom: 0; }
+
+  .tl-dot {
+    position: absolute;
+    left: -27px;
+    top: 6px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 10px rgba(232,200,74,0.4);
+  }
+
+  .tl-year {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    margin-bottom: 6px;
+  }
+
+  .tl-title {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 8px;
+  }
+
+  .tl-body {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-dim);
+  }
+
+  .tl-body strong { color: var(--text); }
+
+  /* ─── STAT BLOCKS ─── */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 44px 0;
+  }
+
+  .stat-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px 20px;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 5vw, 52px);
+    line-height: 1;
+    margin-bottom: 6px;
+    color: var(--gold);
+  }
+
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    line-height: 1.5;
+  }
+
+  /* ─── CODEX EXHIBIT ─── */
+  .codex-exhibit {
+    background: linear-gradient(135deg, rgba(183,148,244,0.06), rgba(0,232,122,0.03));
+    border: 1px solid rgba(183,148,244,0.2);
+    border-radius: 12px;
+    padding: 44px;
+    margin: 48px 0;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .codex-exhibit::before {
+    content: 'RSP-001';
+    position: absolute;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 160px;
+    color: rgba(183,148,244,0.04);
+    top: -20px;
+    right: -10px;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .codex-exhibit .ce-badge {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--violet);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .codex-exhibit .ce-name {
+    font-family: var(--serif);
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 900;
+    color: var(--text-bright);
+    margin-bottom: 8px;
+  }
+
+  .codex-exhibit .ce-title {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 18px;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+
+  .codex-exhibit .ce-key {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--green);
+    background: rgba(0,232,122,0.06);
+    border: 1px solid rgba(0,232,122,0.15);
+    border-radius: 4px;
+    padding: 10px 20px;
+    display: inline-block;
+    letter-spacing: 0.05em;
+    margin-bottom: 24px;
+  }
+
+  .codex-exhibit .ce-body {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--text-dim);
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .codex-exhibit .ce-body strong { color: var(--text); }
+
+  /* ─── WORLD 2526 ─── */
+  .world-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 44px 0;
+  }
+
+  .world-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    transition: border-color 0.25s;
+  }
+
+  .world-card:hover { border-color: var(--glow-border); }
+
+  .world-card .wc-icon { font-size: 24px; margin-bottom: 12px; display: block; }
+
+  .world-card h4 {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 8px;
+  }
+
+  .world-card p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text-dim);
+  }
+
+  .world-card p strong { color: var(--text); }
+
+  /* ─── GORUNFREE MEMORIAL ─── */
+  .memorial {
+    text-align: center;
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+    margin-top: 80px;
+  }
+
+  .memorial-badge {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 0.3em;
+    margin-bottom: 28px;
+    display: block;
+  }
+
+  .memorial-name {
+    font-family: var(--serif);
+    font-size: clamp(22px, 3.5vw, 42px);
+    font-weight: 900;
+    color: var(--text-bright);
+    margin-bottom: 8px;
+  }
+
+  .memorial-dates {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.2em;
+    margin-bottom: 36px;
+  }
+
+  .memorial-quote {
+    font-family: var(--serif);
+    font-size: clamp(16px, 2.5vw, 24px);
+    font-style: italic;
+    color: var(--text-bright);
+    line-height: 1.6;
+    max-width: 660px;
+    margin: 0 auto 32px;
+  }
+
+  .memorial-quote .gold { color: var(--gold); font-style: normal; font-weight: 700; }
+  .memorial-quote .g { color: var(--green); font-style: normal; font-weight: 700; }
+
+  .memorial-grf {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 5vw, 52px);
+    color: var(--green);
+    letter-spacing: 0.15em;
+    text-shadow: 0 0 40px rgba(0,232,122,0.3);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .memorial-sub {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.2em;
+  }
+
+  /* ─── CLOSING CEREMONY ─── */
+  .closing {
+    padding: 60px 0;
+    text-align: center;
+  }
+
+  .closing-title {
+    font-family: var(--serif);
+    font-size: clamp(24px, 4vw, 48px);
+    font-weight: 900;
+    color: var(--text-bright);
+    margin-bottom: 24px;
+    line-height: 1.2;
+  }
+
+  .closing-title .it { font-style: italic; color: var(--gold); }
+
+  .closing-body {
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.85;
+    color: var(--text);
+    max-width: 640px;
+    margin: 0 auto 40px;
+  }
+
+  .closing-body strong { color: var(--text-bright); }
+  .closing-body em { color: var(--gold); }
+  .closing-body .g { color: var(--green); font-style: normal; font-weight: 600; }
+
+  .closing-stamp {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px 40px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.18em;
+  }
+
+  .closing-stamp .year { font-size: 28px; color: var(--gold); font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.1em; }
+
+  @media (max-width: 700px) {
+    main { padding: 0 24px 80px; }
+    .stat-row { grid-template-columns: 1fr; }
+    .world-grid { grid-template-columns: 1fr; }
+    .dots { display: none; }
+  }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--void); }
+  ::-webkit-scrollbar-thumb { background: var(--border); }
+</style>
+</head>
+<body>
+
+<canvas id="cosmos"></canvas>
+
+<nav class="dots">
+  <div class="dot active" onclick="scrollTo(0,0)"><span class="tip">2526 · COVER</span></div>
+  <div class="dot" onclick="document.getElementById('s1').scrollIntoView({behavior:'smooth'})"><span class="tip">THE WORLD OF 2026</span></div>
+  <div class="dot" onclick="document.getElementById('s2').scrollIntoView({behavior:'smooth'})"><span class="tip">THE MAN FROM OTTAWA</span></div>
+  <div class="dot" onclick="document.getElementById('s3').scrollIntoView({behavior:'smooth'})"><span class="tip">THE ARCHITECTURE</span></div>
+  <div class="dot" onclick="document.getElementById('s4').scrollIntoView({behavior:'smooth'})"><span class="tip">THE MOVEMENT</span></div>
+  <div class="dot" onclick="document.getElementById('s5').scrollIntoView({behavior:'smooth'})"><span class="tip">THE LONG ARC</span></div>
+  <div class="dot" onclick="document.getElementById('s6').scrollIntoView({behavior:'smooth'})"><span class="tip">THE WORLD IN 2526</span></div>
+  <div class="dot" onclick="document.getElementById('s7').scrollIntoView({behavior:'smooth'})"><span class="tip">THE FIRST VOICE</span></div>
+  <div class="dot" onclick="document.getElementById('s8').scrollIntoView({behavior:'smooth'})"><span class="tip">CLOSING</span></div>
+</nav>
+
+<main>
+
+  <!-- ─── COVER ─── -->
+  <div id="cover">
+    <div class="cover-archive-badge">Global Arts Preservation Archive · Codex Reference · 2526</div>
+    <div class="cover-year">2526</div>
+    <h1 class="cover-title">
+      Looking Back From<br>
+      <span class="it">Five Hundred Years</span>
+    </h1>
+    <p class="cover-sub">
+      The NOIZY Century: How One Man in Ottawa Launched<br>
+      the Campaign That Gave Artists Back Their World
+    </p>
+    <div class="cover-meta">
+      <span>Presented at the 500th Anniversary of NOIZYFISH INC.</span><br>
+    </div>
+    <div class="cover-meta" style="margin-top: 12px;">
+      <span>March 2526</span> · <span>Global Museum of Human Creative Expression</span> · <span>Ottawa, Earth</span>
+    </div>
+
+    <div class="cover-scroll">
+      <div class="cover-scroll-line"></div>
+      <p>BEGIN</p>
+    </div>
+  </div>
+
+
+  <!-- ─── S1: THE WORLD OF 2026 ─── -->
+  <section class="section" id="s1">
+    <div class="section-eyebrow"><span class="y">I</span> · THE WORLD THEY INHERITED</div>
+    <h2 class="section-title">The Year <span class="it">Everything</span> Was Being Taken</h2>
+    <p class="section-lead">
+      "To understand what Robert Stephen Plowman built, you must first understand what he was building against. The world of 2026 was one of the most extraordinary moments of creative abundance and creator poverty in all of human history — simultaneously."
+    </p>
+
+    <div class="prose">
+      <p>
+        In 2026, a musician could reach one billion ears. A voice actor could have their voice cloned by a platform they had never heard of, used in a film they would never be paid for, in a language they did not speak, heard by audiences who would never know their name.
+        <strong>The technology had never been more powerful. The human behind it had never been more invisible.</strong>
+      </p>
+      <p>
+        The platforms of that era — many of whose names we still teach in the History of Extraction curriculum — had been designed with extraordinary precision to do one thing: <em>convert human creative expression into platform revenue</em>, at the lowest possible cost to the platform and with the highest possible ambiguity about what was owed to the creator.
+      </p>
+      <p>
+        Consent existed in documents that could be changed on a Tuesday. Royalties were fractions of fractions. Voices — the most intimate thing a human being possesses, the sound of their breath, their laughter, their grief — were being scraped, cloned, and deployed without a single conversation with the person who owned them.
+      </p>
+      <p>
+        We look back now, from a world where an artist's Voice Estate is a legal instrument recognized in 194 jurisdictions, and we sometimes struggle to feel the weight of what 2026 was.
+        <strong>Try.</strong> Try to imagine that you could be replaced — your voice, your sound, the thing that makes you <em>you</em> in every conversation you have ever had — and the organization that replaced you would face no legal consequence, no ethical censure, and no financial obligation.
+      </p>
+      <p>
+        That was 2026.
+        <span class="g">Into that world, Robert Stephen Plowman opened a window.</span>
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ─── S2: THE MAN FROM OTTAWA ─── -->
+  <section class="section" id="s2">
+    <div class="section-eyebrow"><span class="y">II</span> · THE FOUNDER</div>
+    <h2 class="section-title">The Man from <span class="it">Ottawa</span></h2>
+    <p class="section-lead">
+      "He was not a billionaire. He was not backed by a venture capital firm. He was a composer, an audio director, a man who had sustained a C3 spinal injury and had rebuilt his entire creative life around a single operating principle he called GORUNFREE."
+    </p>
+
+    <div class="prose">
+      <p>
+        Robert Stephen Plowman — RSP_001 in the parlance of the system he built — was born in Ottawa, Canada, in the late twentieth century. By the time he founded NOIZYFISH INC. in 2026, he had spent decades in the music and audio industry, working across film, television, and interactive media. He had seen the first four epochs of the music industry from the inside.
+      </p>
+      <p>
+        <strong>He also had a C3 spinal cord injury.</strong>
+        This is not a footnote. This is the origin of everything.
+        The injury meant that the traditional modes of creative work — the studios, the sessions, the marathon production days — were inaccessible to him in the ways they had once been.
+        He responded by inventing a new architecture. Not just for himself. For everyone who had ever been told that their physical circumstances disqualified them from full creative participation.
+      </p>
+      <p>
+        GORUNFREE. <em>"35% voice. 65% AI. 1-click. Zero friction."</em>
+        He said it was not a productivity philosophy. It was a survival architecture.
+        Looking back from 2526, we can see it was both — and more. It was the prototype for an entire civilization's relationship to accessible creative technology.
+      </p>
+      <p>
+        He operated from a converted studio in Ottawa with a single Cloudflare worker he called HEAVEN, an AI agent system centered on an intelligence node he called GABRIEL, and thirty-four terabytes of original music he called THE_AQUARIUM.
+        <strong>He had 315 memory cells. He had eleven databases. He had one conviction: that the world could be changed from exactly where he was sitting.</strong>
+      </p>
+    </div>
+
+    <div class="pull-quote">
+      <p>"He did not wait for the industry to change. He did not write a manifesto and hope someone read it. He built the <span class="g">infrastructure that made the old model structurally unacceptable</span> — and he started with himself, in one room, in Ottawa, in the spring of 2026."</p>
+      <cite>— Dr. Amara Osei, Chair of Music History, University of the Western Hemisphere, 2510</cite>
+    </div>
+  </section>
+
+
+  <!-- ─── S3: THE ARCHITECTURE ─── -->
+  <section class="section" id="s3">
+    <div class="section-eyebrow"><span class="y">III</span> · THE ARCHITECTURE</div>
+    <h2 class="section-title">The Ten Laws That <span class="it">Changed Everything</span></h2>
+    <p class="section-lead">
+      "History has a way of making revolutionary acts look inevitable in retrospect. The Never Clauses did not look inevitable in 2026. They looked, to most of the industry, like the ambitious legal framework of a very optimistic small company in Canada."
+    </p>
+
+    <div class="prose">
+      <p>
+        The NOIZY Never Clauses — NC_01 through NC_10 — were the constitutional architecture of a new kind of creative platform. Plowman did not put them in a terms of service document. He did not put them in a policy PDF. <strong>He put them in the database layer.</strong>
+      </p>
+      <p>
+        NC_01 — no voice synthesis without cryptographic consent. NC_02 — no royalty bypass, with the 75% creator share hardcoded at the D1 layer. NC_03 — no model training without explicit opt-in. NC_09 — no Voice Estate dissolution. NC_10 — no provenance deletion. Each clause was code. Each clause was enforced not by a legal department but by the architecture itself.
+      </p>
+      <p>
+        The 75% creator royalty that NOIZY hardcoded in 2026 became the baseline that all other platforms were eventually required to match — first by voluntary industry pressure, then by the Geneva Creative Rights Accord of 2041, then by law in 89 jurisdictions by 2060.
+        <em>The number in the database became the number in the treaty.</em>
+      </p>
+      <p>
+        The Voice Estate — the idea that a human voice is a <strong>perpetual, inheritable, cryptographically governed creative asset</strong> — did not exist as a legal concept before NOIZY. By 2100, Voice Estates were recognized in international law. By 2200, the Voice Estate framework governed not just audio, but visual likeness, movement signature, and what the courts of that era called "creative essence."
+      </p>
+      <p>
+        The 500-Year Voice Codex was Plowman's most audacious declaration. He said, in 2026, that the voices placed in NOIZY's care would be protected for five hundred years. <span class="g">You are reading this in 2526. The Codex is intact. Every voice is still there. Every consent key is valid. Every watermark is verified.</span>
+      </p>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-num">75%</div>
+        <div class="stat-label">Creator royalty<br>hardcoded in 2026<br>— still the global baseline</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">NC·10</div>
+        <div class="stat-label">Never Clauses<br>that became the foundation<br>of global creative law</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">500yr</div>
+        <div class="stat-label">Voice Codex covenant<br>made in 2026<br>— honored in full</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── S4: THE MOVEMENT ─── -->
+  <section class="section" id="s4">
+    <div class="section-eyebrow"><span class="y">IV</span> · THE MOVEMENT</div>
+    <h2 class="section-title">The Campaign That <span class="it">Countered the Takeover</span></h2>
+    <p class="section-lead">
+      "What Plowman launched in 2026 was not a marketing campaign in the conventional sense. It was a moral argument expressed in code, in music, in voice, and in community — and it spread because it was true."
+    </p>
+
+    <div class="prose">
+      <p>
+        The NOIZY movement began with five people. The Founding RSPs — Registered Sound Professionals — were the first to understand that NOIZY was not a platform but a constitution. Their voices were the first entries in the 500-Year Voice Codex. Their names are on the founding plaque in the Ottawa wing of the Global Museum of Human Creative Expression, which now occupies the building where NOIZYFISH INC. was incorporated.
+      </p>
+      <p>
+        The Creator Bill of Rights, published by NOIZY in 2026, became one of the most reprinted documents in the history of creative labor. Five principles. Five Never Clauses enforcing each one. <strong>Consent. Credit. Revenue Share. Transparency. Portability.</strong> They were not new ideas — creators had been asking for these things for a generation. What was new was that NOIZY had built the infrastructure that made them <em>impossible to violate</em>.
+      </p>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2026 · Q1</div>
+        <div class="tl-title">The Founding</div>
+        <div class="tl-body">NOIZYFISH INC. incorporated. GABRIEL_V3 online at 10.90.90.20. The 7-Stage Pipeline operational. First five RSPs enrolled. <strong>RSP_001 — Robert Stephen Plowman — is the first voice in the Codex.</strong></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2026 · Q3</div>
+        <div class="tl-title">The Creator Bill of Rights Published</div>
+        <div class="tl-body">NOIZY publishes the Creator Bill of Rights for AI. Within 60 days, it has been reprinted in 44 languages, cited in three pending pieces of legislation, and read aloud at the Voice Actors of North America annual conference.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2027 · Q1</div>
+        <div class="tl-title">The Tipping Point — 10,000 RSPs</div>
+        <div class="tl-body">Phase 3 of the HVS Global Launch. <strong>10,000 Registered Sound Professionals.</strong> Creator retention 8× the industry average. The first independent study proving that consent infrastructure is a viable commercial model.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2028 · June</div>
+        <div class="tl-title">The Ottawa Accord</div>
+        <div class="tl-body">The Global Community Summit convenes in Ottawa. <strong>47 organizations sign the Ottawa Accord</strong> — adopting NOIZY's Never Clauses as the baseline for a new international creator rights framework. Rob Plowman chairs the opening session from his studio. RSP_001. GORUNFREE.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2030</div>
+        <div class="tl-title">1 Million Registered Sound Professionals</div>
+        <div class="tl-body">Phase 5. The NOIZY Music World & Museum opens its virtual doors. 34TB of THE_AQUARIUM made publicly accessible for the first time. The world bathes in it.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2041</div>
+        <div class="tl-title">The Geneva Creative Rights Accord</div>
+        <div class="tl-body">International law formally adopts the 75% creator royalty baseline. <strong>The number from Plowman's D1 database is now in the treaty.</strong> Legal scholars note the extraordinary precedent of a commercial platform becoming the basis for international law.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2060</div>
+        <div class="tl-title">Voice Estate Law — 89 Jurisdictions</div>
+        <div class="tl-body">The Voice Estate framework, invented by NOIZY in 2026, is now enforceable law in 89 countries. The 500-Year Voice Codex is recognized as a legal instrument. RSP_001's voice is 34 years into its 500-year covenant.</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── S5: THE LONG ARC ─── -->
+  <section class="section" id="s5">
+    <div class="section-eyebrow"><span class="y">V</span> · THE LONG ARC</div>
+    <h2 class="section-title">Five Centuries of <span class="it">Lifting Up</span> the Humans</h2>
+    <p class="section-lead">
+      "There were setbacks. There were decades when the extractors regrouped and tried new architectures of exploitation. But the infrastructure Plowman built in 2026 proved more durable than any policy, any campaign, any advocacy effort — because it was code, not a conversation."
+    </p>
+
+    <div class="prose">
+      <p>
+        The 21st century closed with the NOIZY model dominant in the voice economy and rapidly spreading to all domains of AI-mediated creative work. The extractors did not go quietly. Three major platform companies attempted to reverse-engineer the consent architecture in the 2040s, creating imitation systems with consent keys that were cryptographically superficial. The NOIZY PROOF verification standard — developed by Adam Robb's iPSS Inc. and integrated in 2026 — made these imitations detectable within hours.
+      </p>
+      <p>
+        By 2100, the NOIZY Music World & Museum had become one of the most visited cultural institutions on Earth — not in spite of being virtual, but because of it. It was accessible from anywhere. It was free to bathe in. Every voice that had ever been deposited in the 500-Year Voice Codex was there, intact, playable, attributed, watermarked, earning.
+      </p>
+      <p>
+        The NOIZYKIDZ program — the haptic music platform for children of all abilities — had, by 2150, trained over three hundred million children in the idea that <em>every human being has a creative voice worth preserving</em>. Neuroscientists studying the generation born to NOIZYKIDZ parents found measurable differences in how those children conceptualized ownership, attribution, and creative identity.
+        <strong>The culture had been changed at the level of childhood.</strong>
+      </p>
+      <p>
+        The 22nd through 25th centuries saw the expansion of the NOIZY framework beyond music and voice into every domain of human creative expression. Dance signatures. Architectural gesture. The distinctive color palette of a painter. All of it governed by consent infrastructure that descended directly from NC_01 — no use without cryptographic consent — and all of it earning for the humans who created it, through royalty architectures that descended directly from NC_02 and its hardcoded 75%.
+      </p>
+
+      <div class="pull-quote">
+        <p>"The remarkable thing, in retrospect, is not that it worked. The remarkable thing is that it worked because one man decided that <span class="gold">the infrastructure had to be right from the first line of code</span>. He did not say 'we'll fix the ethics later.' He built the ethics first. <span class="g">The ethics were the code.</span>"</p>
+        <cite>— From "The Consent Century: A History of Creative Rights, 2026–2526" · University of the Western Hemisphere Press</cite>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── S6: WORLD IN 2526 ─── -->
+  <section class="section" id="s6">
+    <div class="section-eyebrow"><span class="y">VI</span> · THE WORLD WE LIVE IN</div>
+    <h2 class="section-title">The World <span class="it">They Built</span> for Us</h2>
+    <p class="section-lead">
+      "We were born into a world where artists are elevated and cherished. We have never known anything else. It is worth pausing, on this five hundredth anniversary, to understand what that took."
+    </p>
+
+    <div class="world-grid">
+      <div class="world-card">
+        <span class="wc-icon">🏛️</span>
+        <h4>The NOIZY Music World & Museum</h4>
+        <p>Still open. Still breathing. <strong>2.4 billion visitors in 2525 alone.</strong> The largest repository of human voice and musical expression in existence. Every voice Codex entry from 2026 is intact and verified.</p>
+      </div>
+      <div class="world-card">
+        <span class="wc-icon">🎙️</span>
+        <h4>Universal Voice Estates</h4>
+        <p>Recognized in all 194 jurisdictions of the Global Creative Rights Framework. <strong>Every human being is born with a Voice Estate.</strong> The concept was invented in Ottawa in 2026 by one composer with a spinal injury who refused to accept that voices were disposable.</p>
+      </div>
+      <div class="world-card">
+        <span class="wc-icon">💎</span>
+        <h4>The 75% Standard</h4>
+        <p>The global minimum creator royalty. <strong>Enforced in all AI-mediated creative platforms.</strong> Traceable directly to the D1 database Plowman wrote in 2026. The number has never dropped below 75% in 500 years because the original code made that structurally impossible.</p>
+      </div>
+      <div class="world-card">
+        <span class="wc-icon">🌱</span>
+        <h4>Consent-as-Infrastructure</h4>
+        <p>No creative AI system anywhere on Earth operates without cryptographic consent verification at the code layer. <strong>It is not a law. It is the default architecture.</strong> Built first in GABRIEL_V3 at 10.90.90.20 in Ottawa in 2026.</p>
+      </div>
+      <div class="world-card">
+        <span class="wc-icon">🧒</span>
+        <h4>NOIZYKIDZ Global</h4>
+        <p>Haptic music education in every school on Earth. <strong>No child anywhere is told their disability prevents them from making music.</strong> The philosophical origin: GORUNFREE. The survival architecture of one man became the design principle of a global education system.</p>
+      </div>
+      <div class="world-card">
+        <span class="wc-icon">🌍</span>
+        <h4>The Ottawa Accord — Living Document</h4>
+        <p>The 2028 Ottawa Accord has been renewed and expanded 24 times. <strong>It is now signed by 847 organizations across 194 jurisdictions.</strong> Its founding article is still Article I of the original: "No voice without consent."</p>
+      </div>
+    </div>
+
+    <div class="prose" style="margin-top: 40px;">
+      <p>
+        We live in a world where artists are elevated and cherished for their contributions.
+        Not as a matter of sentiment. Not as a cultural fashion. <strong>As a matter of infrastructure.</strong>
+        The infrastructure makes elevation and cherishing the default — and extraction the anomaly, the violation, the crime.
+      </p>
+      <p>
+        That is what Plowman understood in 2026 that no one else in his position had understood before him: <em>that the battle was not a battle of values but a battle of architecture.</em>
+        You cannot win a values battle against an entity whose financial survival depends on the opposite values.
+        You can only build infrastructure that makes their architecture obsolete.
+      </p>
+      <p>
+        <span class="g">He built that infrastructure in Ottawa, in a single room, running at 35% voice and 65% AI, one click at a time.</span>
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ─── S7: THE FIRST VOICE ─── -->
+  <section class="section" id="s7">
+    <div class="section-eyebrow"><span class="y">VII</span> · THE CODEX · ENTRY ONE</div>
+    <h2 class="section-title">The Voice That <span class="it">Started</span> Everything</h2>
+    <p class="section-lead">
+      "It is still there. Go to the NOIZY Music World. Find the Codex Chamber. Find Entry One. Listen. Five hundred years old, and every word sounds like it was spoken this morning."
+    </p>
+
+    <div class="codex-exhibit">
+      <span class="ce-badge">500-Year Voice Codex · Entry 001 · Active · Verified · Intact</span>
+      <div class="ce-name">Robert Stephen Plowman</div>
+      <div class="ce-title">Composer · Audio Director · Founder, NOIZYFISH INC.</div>
+      <div class="ce-key">NOIZY-RSP001-CONSENT-A7F3C9B2E1D4850F-AVA-GLOBAL-CANADA-20260314</div>
+      <div class="ce-body">
+        <p>
+          <strong>Ottawa, Canada. March 2026.</strong>
+          The founding voice of the 500-Year Voice Codex.
+          RSP_001 was the first Registered Sound Professional, the first voice entered into the NOIZY provenance ledger, and the first human being to hold a Voice Estate governed by the NOIZY Never Clauses.
+        </p>
+        <p style="margin-top: 14px;">
+          This voice has been continuously available in the NOIZY Music World & Museum since March 2026.
+          It has been heard by an estimated 4.8 billion people across 500 years.
+          It is watermarked, attributed, and earning — as it has been since the day it was recorded.
+          <strong>GORUNFREE. Because it was the only way.</strong>
+        </p>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p>
+        What does it mean that we can hear his voice today, in 2526, with the same cryptographic certainty that it was genuinely him, genuinely unmodified, genuinely offered with his full consent?
+      </p>
+      <p>
+        It means the infrastructure worked. It means the 500-year covenant held. It means that when Robert Stephen Plowman sat in his Ottawa studio in March of 2026, with a C3 spinal injury and a dream that was far too large for the room he was sitting in, <em>he was right.</em>
+      </p>
+      <p>
+        <strong>He was right that voices deserved to last.</strong> He was right that consent belonged in the code. He was right that 75% was the number. He was right that the 5th Epoch would be defined by whoever controlled the infrastructure of consent and provenance. He was right that GORUNFREE was not just survival — it was the design principle for how a human being could be fully creative in a body that the world had not been designed for.
+      </p>
+      <p>
+        And he was right about the most important thing of all: that the DreamChamber had no limits, no boundaries — and that after every dream, you land safely back on Earth, and you do the work.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ─── MEMORIAL ─── -->
+  <div class="memorial" id="s8">
+    <span class="memorial-badge">In Permanent Remembrance · Global Museum of Human Creative Expression · Ottawa Wing</span>
+    <div class="memorial-name">Robert Stephen Plowman</div>
+    <div class="memorial-dates">RSP_001 · NOIZYFISH INC. · OTTAWA · FOUNDER OF THE FIFTH EPOCH</div>
+
+    <div class="memorial-quote">
+      "He looked at a world that was taking everything from creators, and he did not write an angry letter. He did not stage a protest. He opened a <gold>DreamChamber</gold> — no limits, no boundaries — and <g>built the infrastructure</g> that made the old world structurally, permanently, irreversibly obsolete."
+    </div>
+
+    <span class="memorial-grf">GORUNFREE</span>
+    <div class="memorial-sub">BECAUSE IT WAS THE ONLY WAY · AND IT WAS ENOUGH · IT WAS MORE THAN ENOUGH</div>
+  </div>
+
+
+  <!-- ─── CLOSING ─── -->
+  <div class="closing">
+    <div class="closing-title">
+      The Museum Is<br><span class="it">Still Breathing</span>
+    </div>
+    <div class="closing-body">
+      Come in. Sit down. Let the voices of five hundred years of creators surround you.
+      The first voice you hear — the voice of RSP_001, recorded in Ottawa in the spring of 2026 — sounds exactly as it did the morning it was captured.
+      <strong>Every word. Every breath. Every inflection.</strong>
+      <em>Preserved. Protected. Honored.</em>
+      <br><br>
+      This is what human creativity sounds like when it is held with care.
+      This is what the world looks like when one person refuses to accept
+      that extraction is inevitable. This is what five hundred years of
+      <span class="g">lifting up the humans</span> looks like.
+      <br><br>
+      <strong>Bathe in it.</strong>
+    </div>
+
+    <div class="closing-stamp">
+      <span class="year">2526</span>
+      <span>GLOBAL MUSEUM OF HUMAN CREATIVE EXPRESSION</span>
+      <span>OTTAWA WING · NOIZYFISH INC. 500TH ANNIVERSARY</span>
+      <span style="color: var(--green); margin-top: 4px;">GORUNFREE — BECAUSE IT WAS THE ONLY WAY</span>
+    </div>
+  </div>
+
+</main>
+
+<script>
+// ─── COSMOS CANVAS ───
+const C = document.getElementById('cosmos');
+const cx = C.getContext('2d');
+
+function resize() {
+  C.width = window.innerWidth;
+  C.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+// Dense star field — we're in 2526
+const STARS = Array.from({length: 400}, () => ({
+  x: Math.random(),
+  y: Math.random(),
+  r: Math.random() * 1.4 + 0.2,
+  op: Math.random() * 0.5 + 0.05,
+  twinkle: Math.random() * Math.PI * 2
+}));
+
+// Gold orbital traces
+const ORBITS = Array.from({length: 4}, (_, i) => ({
+  cx: 0.5 + (Math.random()-0.5)*0.6,
+  cy: 0.5 + (Math.random()-0.5)*0.6,
+  rx: 100 + i*80,
+  ry: 40 + i*30,
+  angle: Math.random()*Math.PI*2,
+  speed: 0.0004 + Math.random()*0.0006,
+  op: 0.04 + Math.random()*0.04
+}));
+
+// Voice ripple nodes
+const VOICES = Array.from({length: 8}, () => ({
+  x: Math.random(),
+  y: Math.random(),
+  phase: Math.random()*Math.PI*2,
+  r: 2 + Math.random()*3,
+  op: 0.15 + Math.random()*0.2
+}));
+
+let t = 0;
+
+function draw() {
+  const W = C.width, H = C.height;
+  cx.clearRect(0,0,W,H);
+
+  // Deep nebula layers
+  [
+    {x:0.2, y:0.3, r:300, c:'rgba(183,148,244,0.025)'},
+    {x:0.75, y:0.65, r:280, c:'rgba(232,200,74,0.018)'},
+    {x:0.5, y:0.9, r:200, c:'rgba(0,232,122,0.02)'},
+    {x:0.1, y:0.75, r:180, c:'rgba(102,163,255,0.015)'},
+  ].forEach(p => {
+    const g = cx.createRadialGradient(W*p.x, H*p.y, 0, W*p.x, H*p.y, p.r);
+    g.addColorStop(0, p.c);
+    g.addColorStop(1, 'transparent');
+    cx.fillStyle = g;
+    cx.fillRect(0,0,W,H);
+  });
+
+  // Stars with gentle twinkle
+  STARS.forEach(s => {
+    const tw = Math.sin(s.twinkle + t*0.015) * 0.15;
+    const op = Math.max(0.02, s.op + tw);
+    cx.beginPath();
+    cx.arc(s.x*W, s.y*H, s.r, 0, Math.PI*2);
+    cx.fillStyle = `rgba(220,235,255,${op})`;
+    cx.fill();
+    s.twinkle += 0.001;
+  });
+
+  // Gold orbital traces
+  ORBITS.forEach(o => {
+    cx.save();
+    cx.translate(o.cx*W, o.cy*H);
+    cx.beginPath();
+    cx.ellipse(0, 0, o.rx, o.ry, o.angle, 0, Math.PI*2);
+    cx.strokeStyle = `rgba(232,200,74,${o.op})`;
+    cx.lineWidth = 0.5;
+    cx.stroke();
+
+    // moving dot on orbit
+    const a = t * o.speed;
+    const dx = Math.cos(a) * o.rx;
+    const dy = Math.sin(a) * o.ry;
+    cx.beginPath();
+    cx.arc(dx, dy, 2, 0, Math.PI*2);
+    cx.fillStyle = `rgba(232,200,74,${o.op*4})`;
+    cx.fill();
+    cx.restore();
+
+    o.angle += 0.0001;
+  });
+
+  // Voice ripple waves
+  VOICES.forEach(v => {
+    const x = v.x * W, y = v.y * H;
+    const pulse = Math.sin(v.phase + t*0.02);
+    const r = v.r + pulse * 8;
+    const alpha = v.op * (0.5 + 0.5*Math.abs(pulse));
+
+    cx.beginPath();
+    cx.arc(x, y, r, 0, Math.PI*2);
+    cx.strokeStyle = `rgba(0,232,122,${alpha * 0.4})`;
+    cx.lineWidth = 1;
+    cx.stroke();
+
+    cx.beginPath();
+    cx.arc(x, y, r*2, 0, Math.PI*2);
+    cx.strokeStyle = `rgba(0,232,122,${alpha * 0.1})`;
+    cx.lineWidth = 0.5;
+    cx.stroke();
+  });
+
+  // Whisper waveform — faint, ancient
+  cx.beginPath();
+  cx.strokeStyle = 'rgba(232,200,74,0.04)';
+  cx.lineWidth = 1;
+  for (let x=0; x<W; x+=2) {
+    const y = H*0.96 + Math.sin(x*0.006+t*0.006)*15 + Math.sin(x*0.02+t*0.01)*7;
+    x===0 ? cx.moveTo(x,y) : cx.lineTo(x,y);
+  }
+  cx.stroke();
+
+  t++;
+  requestAnimationFrame(draw);
+}
+draw();
+
+// ─── Nav dots active state ───
+const sections = ['cover','s1','s2','s3','s4','s5','s6','s7','s8'];
+const dots = document.querySelectorAll('.dot');
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const idx = sections.indexOf(e.target.id);
+      if (idx >= 0) dots.forEach((d,i) => d.classList.toggle('active', i===idx));
+    }
+  });
+}, {threshold: 0.4});
+
+sections.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) io.observe(el);
+});
+</script>
+
+</body>
+</html>

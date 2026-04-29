@@ -1,0 +1,47 @@
+<root>
+    <CtrlMenuItemStyle name="menu_style" seperator_selection="true" sub_menu_selection="true" selection_colour="[r:255 g:255 b:0 a:255]" accessories_colour="[r:0 g:0 b:255 a:255]" />
+    <CtrlLabelStyle name="SetupWizardLabelStyle1">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlPanelStyle name="WizardRimStyle" colFill="[r:0 g:0 b:0 a:255]" intSmartTileEdgeSize="5" intRoundedRectRadius="0">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="WizardBackStyle" colFill="[r:149 g:149 b:149 a:255]" intSmartTileEdgeSize="5" intRoundedRectRadius="0">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlButtonStyle name="WizardButtonStyleMom" optDrawText="true" optSmartTile="true" colFillOff="[r:75 g:75 b:75 a:255]">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="WizardCheckStyle" optMomentary="false" imDown="prefcheck_down.tga" imUp="prefcheck_up.tga">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlTextBoxStyle name="WizardComboStyle" optSmartTile="true" imBackground="..\com_combo_back.tga" colBackground="[r:29 g:29 b:29 a:255]" colText="[r:150 g:150 b:150 a:255]" colTextSelected="[r:150 g:150 b:150 a:255]">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlTextBoxStyle>
+    <CtrlLabelStyle name="SetupWizardBigStyle">
+        <VFont name="font" vSize="25" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlPanel name="MyOPanel" style="WizardRimStyle" rect="[x:68 y:102 w:600 h:403]" id="0">
+        <CtrlPanel name="CtrlPanel" style="DefaultPanelLight" rect="[x:4 y:3 w:592 h:397]" id="0">
+            <CtrlLabel name="CtrlLabel" style="SetupWizardBigStyle" rect="[x:92 y:9 w:404 h:25]" id="100001" text="Welcome to the BFD Eco setup wizard!" />
+            <CtrlLabel name="CtrlLabel" style="SetupWizardLabelStyle1" rect="[x:52 y:39 w:508 h:22]" id="100001" text="This wizard will guide you through the process of setting up BFD Eco to your personal preferences." />
+            <CtrlLabel name="CtrlLabel" style="SetupWizardLabelStyle1" rect="[x:52 y:63 w:476 h:22]" id="100001" text="Please answer the questions below. Once finished, hit the &apos;Do it!&apos; button to setup BFD Eco." />
+            <CtrlLabel name="CtrlLabel" style="SetupWizardLabelStyle1" rect="[x:80 y:96 w:220 h:22]" id="100001" text="Amplitude scaled response" />
+            <CtrlButton name="VAButton" style="WizardCheckStyle" rect="[x:313 y:100 w:20 h:15]" id="100003" />
+            <CtrlLabel name="CtrlLabel" style="SetupWizardLabelStyle1" rect="[x:80 y:128 w:220 h:22]" id="100001" text="This computer is connected to the internet" />
+            <CtrlButton name="NetButton" style="WizardCheckStyle" rect="[x:313 y:132 w:20 h:15]" id="100003" />
+            <CtrlLabel name="CtrlLabel" style="SetupWizardLabelStyle1" rect="[x:80 y:162 w:220 h:22]" id="100001" text="I like to use tool-tips" />
+            <CtrlButton name="TTButton" style="WizardCheckStyle" rect="[x:313 y:164 w:20 h:15]" id="100003" />
+            <CtrlLabel name="CtrlLabel" style="SetupWizardLabelStyle1" rect="[x:80 y:194 w:220 h:22]" id="100001" text="When moving a control I like to drag..." />
+            <CtrlComboBox name="DragCombo" style="WizardComboStyle" rect="[x:313 y:194 w:200 h:22]" id="100004" />
+            <CtrlComboBox name="HostCombo" style="WizardComboStyle" rect="[x:313 y:225 w:200 h:22]" id="100004" />
+            <CtrlLabel name="CtrlLabel" style="SetupWizardLabelStyle1" rect="[x:80 y:226 w:220 h:22]" id="100001" text="My main host application is..." />
+            <CtrlLabel name="CtrlLabel" style="SetupWizardLabelStyle1" rect="[x:80 y:258 w:220 h:22]" id="100001" text="I am a..." />
+            <CtrlComboBox name="UsingCombo" style="WizardComboStyle" rect="[x:313 y:258 w:200 h:22]" id="100004" />
+            <CtrlLabel name="ControllerLabel" style="SetupWizardLabelStyle1" rect="[x:80 y:290 w:220 h:22]" id="100001" text="I use a..." />
+            <CtrlComboBox name="ControllerCombo" style="WizardComboStyle" rect="[x:313 y:290 w:200 h:22]" id="100004" />
+            <CtrlButton name="CancelButton" style="BFD2ShinyTextButtonMomentary" rect="[x:452 y:359 w:60 h:29]" id="100002" text="Cancel" />
+            <CtrlButton name="DoItButton" style="BFD2ShinyTextButtonMomentary" rect="[x:517 y:359 w:60 h:29]" id="100002" text="Do It!" />
+        </CtrlPanel>
+    </CtrlPanel>
+</root>

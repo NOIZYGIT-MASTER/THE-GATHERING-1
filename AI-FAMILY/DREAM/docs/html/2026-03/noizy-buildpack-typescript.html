@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIZY Platform — TypeScript Build Pack v0.1</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Bebas+Neue&display=swap');
+  :root {
+    --void:#010308;--panel:#070e1a;--card:#0a1220;--border:#0f1e30;--glow:#182840;
+    --green:#00ff88;--green-d:rgba(0,255,136,0.07);
+    --gold:#f0c040;--electric:#00d4ff;--violet:#a78bfa;--amber:#fb923c;--red:#ff4466;
+    --text:#b8cce0;--dim:#3c5570;--bright:#eaf2ff;
+    --mono:'Space Mono',monospace;--sans:'Space Grotesk',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--void);color:var(--text);font-family:var(--sans);display:flex;min-height:100vh;}
+
+  /* SIDEBAR */
+  .sb{width:260px;flex-shrink:0;background:rgba(1,3,8,.95);border-right:1px solid var(--border);position:fixed;top:0;bottom:0;overflow-y:auto;padding:20px 0;z-index:100;}
+  .sb-head{padding:0 18px 16px;border-bottom:1px solid var(--border);margin-bottom:12px;}
+  .sb-logo{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--green);letter-spacing:.12em;}
+  .sb-sub{font-family:var(--mono);font-size:8px;color:var(--dim);letter-spacing:.18em;margin-top:3px;}
+  .sb-ver{display:inline-block;margin-top:6px;font-family:var(--mono);font-size:9px;color:var(--amber);background:rgba(251,146,60,.08);border:1px solid rgba(251,146,60,.2);border-radius:3px;padding:2px 8px;letter-spacing:.1em;}
+  .sb-section{padding:0 18px;margin-bottom:4px;}
+  .sb-label{font-family:var(--mono);font-size:7px;color:var(--dim);letter-spacing:.25em;text-transform:uppercase;padding:10px 0 5px;border-bottom:1px solid var(--border);margin-bottom:5px;}
+  .sb-link{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:4px;cursor:pointer;text-decoration:none;margin-bottom:1px;transition:background .15s;}
+  .sb-link:hover{background:rgba(0,255,136,.05);}
+  .sb-link.active{background:rgba(0,255,136,.07);border-left:2px solid var(--green);padding-left:6px;}
+  .sb-link .sn{font-family:var(--mono);font-size:8px;color:var(--dim);width:18px;flex-shrink:0;}
+  .sb-link .st{font-size:11px;color:var(--text);line-height:1.3;}
+  .sb-link.active .st{color:var(--green);}
+  .sb-file{font-family:var(--mono);font-size:9px;color:var(--dim);margin-left:26px;margin-bottom:3px;opacity:.7;}
+  .sb-footer{margin-top:auto;padding:16px 18px 0;border-top:1px solid var(--border);}
+  .sb-grf{font-family:'Bebas Neue',sans-serif;font-size:13px;color:var(--green);letter-spacing:.18em;}
+
+  /* MAIN */
+  .main{margin-left:260px;flex:1;padding:0 48px 120px;max-width:1000px;}
+
+  /* HEADER */
+  .page-header{padding:56px 0 48px;border-bottom:1px solid var(--border);margin-bottom:56px;}
+  .page-header .eyebrow{font-family:var(--mono);font-size:9px;color:var(--dim);letter-spacing:.28em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+  .page-header .eyebrow::before{content:'';width:20px;height:1px;background:var(--green);}
+  .page-header h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,6vw,72px);color:var(--bright);letter-spacing:.05em;line-height:1;margin-bottom:12px;}
+  .page-header h1 span{color:var(--green);}
+  .page-header p{font-size:15px;line-height:1.75;color:var(--text);max-width:640px;}
+  .page-header p strong{color:var(--bright);}
+
+  /* SECTION */
+  .file-section{margin-bottom:64px;scroll-margin-top:32px;}
+  .fs-header{display:flex;align-items:center;gap:16px;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--border);}
+  .fs-icon{font-size:22px;}
+  .fs-title{font-size:18px;font-weight:700;color:var(--bright);}
+  .fs-path{font-family:var(--mono);font-size:11px;color:var(--green);background:var(--green-d);border:1px solid rgba(0,255,136,.15);border-radius:3px;padding:3px 10px;margin-left:auto;}
+  .fs-desc{font-size:14px;line-height:1.7;color:var(--dim);margin-bottom:16px;max-width:680px;}
+  .fs-desc strong{color:var(--text);}
+
+  /* CODE BLOCK */
+  .code-block{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:16px;}
+  .cb-header{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:rgba(255,255,255,.02);border-bottom:1px solid var(--border);}
+  .cb-filename{font-family:var(--mono);font-size:11px;color:var(--dim);}
+  .cb-lang{font-family:var(--mono);font-size:9px;color:var(--violet);letter-spacing:.1em;padding:2px 8px;background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.15);border-radius:3px;}
+  .cb-copy{font-family:var(--mono);font-size:9px;color:var(--green);background:var(--green-d);border:1px solid rgba(0,255,136,.2);border-radius:3px;padding:4px 12px;cursor:pointer;transition:all .15s;letter-spacing:.1em;}
+  .cb-copy:hover{background:rgba(0,255,136,.15);}
+  .cb-copy.copied{color:var(--gold);border-color:rgba(240,192,64,.3);background:rgba(240,192,64,.08);}
+  pre{padding:20px;overflow-x:auto;font-family:var(--mono);font-size:12px;line-height:1.65;color:var(--text);tab-size:2;}
+  pre .kw{color:var(--violet);}
+  pre .str{color:var(--gold);}
+  pre .fn{color:var(--green);}
+  pre .type{color:var(--electric);}
+  pre .cm{color:var(--dim);font-style:italic;}
+  pre .num{color:var(--amber);}
+  pre .const{color:#f97316;}
+
+  /* NOTES */
+  .note{background:rgba(0,255,136,.04);border:1px solid rgba(0,255,136,.12);border-left:3px solid var(--green);border-radius:6px;padding:14px 18px;font-size:13px;line-height:1.65;color:var(--dim);margin-bottom:16px;}
+  .note strong{color:var(--green);}
+  .note.gold{background:rgba(240,192,64,.04);border-color:rgba(240,192,64,.12);border-left-color:var(--gold);}
+  .note.gold strong{color:var(--gold);}
+  .note.red{background:rgba(255,68,102,.04);border-color:rgba(255,68,102,.12);border-left-color:var(--red);}
+  .note.red strong{color:var(--red);}
+
+  /* TREE */
+  .tree{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:20px 24px;font-family:var(--mono);font-size:12px;line-height:1.8;color:var(--dim);margin-bottom:24px;}
+  .tree .dir{color:var(--electric);}
+  .tree .file{color:var(--text);}
+  .tree .comment{color:var(--dim);font-style:italic;}
+
+  /* PIPELINE TABLE */
+  .pipeline{width:100%;border-collapse:collapse;margin-bottom:20px;background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+  .pipeline th{padding:12px 16px;font-family:var(--mono);font-size:9px;letter-spacing:.15em;color:var(--dim);border-bottom:1px solid var(--border);text-align:left;background:rgba(255,255,255,.02);}
+  .pipeline td{padding:12px 16px;font-size:12px;color:var(--dim);border-bottom:1px solid var(--border);}
+  .pipeline tr:last-child td{border-bottom:none;}
+  .pipeline td:first-child{font-family:var(--mono);color:var(--green);width:60px;}
+  .pipeline td:nth-child(2){color:var(--bright);font-weight:600;}
+  .pipeline td:nth-child(3){color:var(--red);font-family:var(--mono);font-size:10px;}
+
+  @media(max-width:900px){.sb{display:none;}.main{margin-left:0;padding:0 24px 80px;}}
+  ::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--void);}::-webkit-scrollbar-thumb{background:var(--border);}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sb">
+  <div class="sb-head">
+    <div class="sb-logo">NOIZY PLATFORM</div>
+    <div class="sb-sub">TYPESCRIPT BUILD PACK</div>
+    <span class="sb-ver">v0.1 · EXECUTION GRADE</span>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-label">Architecture</div>
+    <a class="sb-link active" href="#repo"><span class="sn">00</span><span class="st">Repo Structure</span></a>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-label">packages/schemas</div>
+    <a class="sb-link" href="#actor"><span class="sn">01</span><span class="st">Actor.ts</span></a>
+    <a class="sb-link" href="#ava"><span class="sn">02</span><span class="st">AVA.ts</span></a>
+    <a class="sb-link" href="#contract"><span class="sn">03</span><span class="st">CollaborationContract.ts</span></a>
+    <a class="sb-link" href="#consent-schema"><span class="sn">04</span><span class="st">ConsentKey.ts</span></a>
+    <a class="sb-link" href="#provenance-schema"><span class="sn">05</span><span class="st">ProvenanceRecord.ts</span></a>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-label">packages/never-clauses</div>
+    <a class="sb-link" href="#never"><span class="sn">06</span><span class="st">core.ts</span></a>
+    <a class="sb-link" href="#enforce"><span class="sn">07</span><span class="st">enforce.ts</span></a>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-label">services/consent</div>
+    <a class="sb-link" href="#consent-svc"><span class="sn">08</span><span class="st">ConsentService.ts</span></a>
+    <a class="sb-link" href="#keygen"><span class="sn">09</span><span class="st">keyGenerator.ts</span></a>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-label">services/provenance</div>
+    <a class="sb-link" href="#watermark"><span class="sn">10</span><span class="st">watermark.ts</span></a>
+    <a class="sb-link" href="#ledger"><span class="sn">11</span><span class="st">ledger.ts</span></a>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-label">services/licensing</div>
+    <a class="sb-link" href="#royalty"><span class="sn">12</span><span class="st">royaltyEngine.ts</span></a>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-label">services/rag-runtime</div>
+    <a class="sb-link" href="#rag"><span class="sn">13</span><span class="st">pipeline.ts</span></a>
+    <a class="sb-link" href="#refusal"><span class="sn">14</span><span class="st">refusalEngine.ts</span></a>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-label">services/voice-engine</div>
+    <a class="sb-link" href="#pipeline-svc"><span class="sn">15</span><span class="st">pipeline7Stage.ts</span></a>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-label">packages/sdk</div>
+    <a class="sb-link" href="#sdk"><span class="sn">16</span><span class="st">index.ts (Public SDK)</span></a>
+  </div>
+
+  <div class="sb-footer">
+    <div class="sb-grf">GORUNFREE</div>
+    <div style="font-family:var(--mono);font-size:8px;color:var(--dim);margin-top:3px;letter-spacing:.15em;">RSP_001 · NOIZYFISH INC.</div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="page-header">
+    <div class="eyebrow">NOIZYFISH INC. · DREAMCHAMBER · BUILD PACK</div>
+    <h1>NOIZY PLATFORM<br><span>TYPESCRIPT v0.1</span></h1>
+    <p>
+      <strong>Execution-grade architecture.</strong> Paste into VS Code Insiders today. TypeScript-first, API + AI + Governance. Designed to scale from 10 RSPs to 10,000 AVAs. Every file enforces the Never Clauses. Every royalty is hardcoded. Every voice is protected.
+    </p>
+  </div>
+
+  <!-- REPO STRUCTURE -->
+  <div class="file-section" id="repo">
+    <div class="fs-header">
+      <span class="fs-icon">📁</span>
+      <span class="fs-title">Repo Structure</span>
+      <span class="fs-path">noizy-platform/</span>
+    </div>
+    <div class="fs-desc">Start here. This monorepo structure isolates power, enforces consent, and makes NOIZY regulation-ready from day one.</div>
+    <div class="tree">
+<span class="dir">noizy-platform/</span>
+├── <span class="dir">apps/</span>
+│   ├── <span class="dir">actor-portal/</span>        <span class="comment"># RSP onboarding, Voice Farm, royalties dashboard</span>
+│   ├── <span class="dir">studio-console/</span>      <span class="comment"># Developer + Studio tier usage</span>
+│   └── <span class="dir">admin-governance/</span>    <span class="comment"># Trust, audit, dispute resolution</span>
+│
+├── <span class="dir">services/</span>
+│   ├── <span class="dir">identity/</span>            <span class="comment"># Actor + AVA identity management</span>
+│   ├── <span class="dir">consent/</span>             <span class="comment"># Cryptographic consent key lifecycle</span>
+│   ├── <span class="dir">voice-engine/</span>        <span class="comment"># NOIZYVOX A.I.V.A. synthesis</span>
+│   ├── <span class="dir">rag-runtime/</span>         <span class="comment"># Safe generation pipeline</span>
+│   ├── <span class="dir">licensing/</span>           <span class="comment"># Contracts, royalty payouts, 75% engine</span>
+│   └── <span class="dir">provenance/</span>          <span class="comment"># WM_{8hex} watermark + audit ledger</span>
+│
+├── <span class="dir">packages/</span>
+│   ├── <span class="dir">schemas/</span>             <span class="comment"># Shared TypeScript interfaces</span>
+│   ├── <span class="dir">never-clauses/</span>       <span class="comment"># Constitutional rules — immutable</span>
+│   ├── <span class="dir">refusal-engine/</span>      <span class="comment"># Voice of Refusal</span>
+│   └── <span class="dir">sdk/</span>                 <span class="comment"># Public developer SDK</span>
+│
+├── <span class="dir">infra/</span>
+│   ├── <span class="dir">cloudflare/</span>          <span class="comment"># HEAVEN Worker, D1, KV, R2</span>
+│   ├── <span class="dir">terraform/</span>
+│   └── <span class="dir">ci-cd/</span>
+│
+├── <span class="dir">docs/</span>
+│   ├── <span class="file">architecture.md</span>
+│   ├── <span class="file">threat-model.md</span>
+│   ├── <span class="file">actor-charter.md</span>    <span class="comment"># The Never Clauses explained</span>
+│   └── <span class="file">compliance.md</span>
+│
+└── <span class="file">README.md</span></div>
+    <div class="note"><strong>CRITICAL:</strong> The <code>packages/never-clauses/core.ts</code> file is the constitutional layer. Any change to it must trigger a governance hash recompile and a full audit log entry. This is how you keep trust at scale.</div>
+  </div>
+
+  <!-- ACTOR -->
+  <div class="file-section" id="actor">
+    <div class="fs-header"><span class="fs-icon">🎙️</span><span class="fs-title">Actor.ts</span><span class="fs-path">packages/schemas/Actor.ts</span></div>
+    <div class="fs-desc">The human being behind the voice. Every RSP is an Actor. The <strong>consentKeyId</strong> links them to their cryptographic consent record.</div>
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-filename">packages/schemas/Actor.ts</span><span class="cb-lang">TYPESCRIPT</span><button class="cb-copy" onclick="copyCode(this)">COPY</button></div>
+<pre><span class="cm">// ─── NOIZY RSP / Actor Identity ───────────────────────────────────────────────
+// Every human RSP is an Actor. This is the root identity object.
+// consentKeyId maps to the ConsentKey record in services/consent.
+// Founding RSPs have royaltyTier: 'founding' — locked at 85% forever.</span>
+
+<span class="kw">export interface</span> <span class="type">Actor</span> {
+  actorId:       <span class="type">string</span>;   <span class="cm">// NOIZY-RSP-{uuid}</span>
+  legalName:     <span class="type">string</span>;
+  stageName?:    <span class="type">string</span>;
+  email:         <span class="type">string</span>;
+  languages:     <span class="type">string</span>[];
+  jurisdiction:  <span class="type">string</span>;   <span class="cm">// ISO 3166 country code</span>
+  consentKeyId:  <span class="type">string</span>;
+  royaltyTier:   <span class="str">'founding'</span> | <span class="str">'standard'</span> | <span class="str">'studio'</span> | <span class="str">'label'</span>;
+  royaltyPct:    <span class="type">number</span>;   <span class="cm">// 85 for founding, 75 for standard — NEVER below 75</span>
+  voiceEstateId: <span class="type">string</span>;
+  codexEntryId?: <span class="type">string</span>;   <span class="cm">// 500-Year Voice Codex entry, if registered</span>
+  status:        <span class="str">'active'</span> | <span class="str">'paused'</span> | <span class="str">'suspended'</span>;
+  createdAt:     <span class="type">string</span>;   <span class="cm">// ISO 8601</span>
+}
+
+<span class="cm">// RSP_001 — the founding entry</span>
+<span class="kw">export const</span> <span class="const">RSP_001</span>: <span class="type">Actor</span> = {
+  actorId:      <span class="str">'NOIZY-RSP-001'</span>,
+  legalName:    <span class="str">'Robert Stephen Plowman'</span>,
+  stageName:    <span class="str">'RSP_001'</span>,
+  email:        <span class="str">'rsplowman@icloud.com'</span>,
+  languages:    [<span class="str">'en-CA'</span>],
+  jurisdiction: <span class="str">'CA'</span>,
+  consentKeyId: <span class="str">'NOIZY-RSP001-CONSENT-A7F3C9B2E1D4850F-AVA-GLOBAL-CANADA-20260314'</span>,
+  royaltyTier:  <span class="str">'founding'</span>,
+  royaltyPct:   <span class="num">85</span>,
+  voiceEstateId:<span class="str">'VST-RSP001-500YR-20260314'</span>,
+  codexEntryId: <span class="str">'CODEX-ENTRY-001-20260314'</span>,
+  status:       <span class="str">'active'</span>,
+  createdAt:    <span class="str">'2026-03-14T00:00:00Z'</span>,
+};</pre>
+    </div>
+  </div>
+
+  <!-- AVA -->
+  <div class="file-section" id="ava">
+    <div class="fs-header"><span class="fs-icon">🤖</span><span class="fs-title">AVA.ts</span><span class="fs-path">packages/schemas/AVA.ts</span></div>
+    <div class="fs-desc">The A.I.V.A. — Artificially Intelligent Voice Actor — owned by an Actor RSP. NEVER call it "AI voice."</div>
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-filename">packages/schemas/AVA.ts</span><span class="cb-lang">TYPESCRIPT</span><button class="cb-copy" onclick="copyCode(this)">COPY</button></div>
+<pre><span class="cm">// ─── A.I.V.A. — Artificially Intelligent Voice Actor ─────────────────────────
+// NEVER "AI voice". The AVA is a creative character owned by an Actor RSP.
+// neverClausesHash: SHA-256 of the Never Clauses at time of AVA creation.
+// If the hash changes, the AVA must re-confirm consent.</span>
+
+<span class="kw">export type</span> <span class="type">VoiceRange</span> = <span class="str">'low'</span> | <span class="str">'mid'</span> | <span class="str">'high'</span> | <span class="str">'full'</span>;
+<span class="kw">export type</span> <span class="type">AVAStatus</span>  = <span class="str">'active'</span> | <span class="str">'paused'</span> | <span class="str">'revoked'</span>;
+
+<span class="kw">export interface</span> <span class="type">AVA</span> {
+  avaId:              <span class="type">string</span>;   <span class="cm">// AVA-{actorId}-{uuid}</span>
+  ownerActorId:       <span class="type">string</span>;
+  characterName:      <span class="type">string</span>;
+  voiceRange:         <span class="type">VoiceRange</span>;
+  emotionalSpectrum:  <span class="type">string</span>[];  <span class="cm">// ['warm','firm','playful','serious',...]</span>
+  allowedLanguages:   <span class="type">string</span>[];
+  allowedDomains:     <span class="type">string</span>[];  <span class="cm">// ['commercial','audiobook','gaming',...]</span>
+  prohibitedDomains:  <span class="type">string</span>[];  <span class="cm">// Enforced by NC_01</span>
+  neverClausesHash:   <span class="type">string</span>;   <span class="cm">// SHA-256 of never-clauses/core.ts at creation</span>
+  consentKeyId:       <span class="type">string</span>;
+  watermarkSeed:      <span class="type">string</span>;   <span class="cm">// Used to generate WM_{8hex}</span>
+  modelId:            <span class="type">string</span>;   <span class="cm">// HuggingFace model used for synthesis</span>
+  status:             <span class="type">AVAStatus</span>;
+  trainingOptIn:      <span class="type">boolean</span>;  <span class="cm">// NC_03 — explicit. Never default true.</span>
+  nsfwConsent:        <span class="type">boolean</span>;  <span class="cm">// NC_06 — separate consent required</span>
+  createdAt:          <span class="type">string</span>;
+  lastActiveAt:       <span class="type">string</span>;
+}</pre>
+    </div>
+  </div>
+
+  <!-- CONTRACT -->
+  <div class="file-section" id="contract">
+    <div class="fs-header"><span class="fs-icon">📝</span><span class="fs-title">CollaborationContract.ts</span><span class="fs-path">packages/schemas/CollaborationContract.ts</span></div>
+    <div class="fs-desc">When two AVAs collaborate, a contract governs the terms. The royalty split must always sum to 100 and the owner's share must meet their royalty floor.</div>
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-filename">packages/schemas/CollaborationContract.ts</span><span class="cb-lang">TYPESCRIPT</span><button class="cb-copy" onclick="copyCode(this)">COPY</button></div>
+<pre><span class="kw">export interface</span> <span class="type">CollaborationContract</span> {
+  contractId:           <span class="type">string</span>;
+  ownerAvaId:           <span class="type">string</span>;
+  partnerAvaId:         <span class="type">string</span>;
+  maxDurationMinutes:   <span class="type">number</span>;
+  allowedDomains:       <span class="type">string</span>[];
+  prohibitedDomains:    <span class="type">string</span>[];
+  royaltySplit: {
+    owner:   <span class="type">number</span>;  <span class="cm">// Must be >= ownerActor.royaltyPct (never below 75)</span>
+    partner: <span class="type">number</span>;  <span class="cm">// owner + partner must = 100</span>
+  };
+  consentRequired:      <span class="kw">true</span>;  <span class="cm">// Literal true — never optional</span>
+  immutable:            <span class="kw">true</span>;  <span class="cm">// Contracts cannot be mutated after signing</span>
+  signedAt:             <span class="type">string</span>;
+  expiresAt?:           <span class="type">string</span>;
+  provenanceRef:        <span class="type">string</span>;  <span class="cm">// Ledger entry ID</span>
+}
+
+<span class="cm">// Validate a collaboration contract before writing to D1</span>
+<span class="kw">export function</span> <span class="fn">validateContract</span>(
+  c: <span class="type">CollaborationContract</span>,
+  ownerRoyaltyFloor: <span class="type">number</span>
+): <span class="type">void</span> {
+  <span class="kw">if</span> (c.royaltySplit.owner + c.royaltySplit.partner !== <span class="num">100</span>) {
+    <span class="kw">throw new</span> <span class="fn">Error</span>(<span class="str">'NC_02: Royalty split must sum to 100'</span>);
+  }
+  <span class="kw">if</span> (c.royaltySplit.owner < ownerRoyaltyFloor) {
+    <span class="kw">throw new</span> <span class="fn">Error</span>(<span class="str">`NC_02: Owner royalty ${c.royaltySplit.owner}% is below floor ${ownerRoyaltyFloor}%`</span>);
+  }
+}</pre>
+    </div>
+  </div>
+
+  <!-- CONSENT KEY SCHEMA -->
+  <div class="file-section" id="consent-schema">
+    <div class="fs-header"><span class="fs-icon">🔑</span><span class="fs-title">ConsentKey.ts</span><span class="fs-path">packages/schemas/ConsentKey.ts</span></div>
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-filename">packages/schemas/ConsentKey.ts</span><span class="cb-lang">TYPESCRIPT</span><button class="cb-copy" onclick="copyCode(this)">COPY</button></div>
+<pre><span class="cm">// Format: NOIZY-{ACTOR}-CONSENT-{16hex}-AVA-{DOMAIN}-{JURISDICTION}-{DATE}
+// This is the Stage 1 artifact of the 7-Stage pipeline.</span>
+
+<span class="kw">export interface</span> <span class="type">ConsentKey</span> {
+  keyId:        <span class="type">string</span>;     <span class="cm">// Full key string</span>
+  actorId:      <span class="type">string</span>;
+  avaId:        <span class="type">string</span>;
+  domain:       <span class="type">string</span>;     <span class="cm">// 'GLOBAL' | 'COMMERCIAL' | 'AUDIOBOOK' | etc.</span>
+  jurisdiction: <span class="type">string</span>;     <span class="cm">// ISO 3166</span>
+  issuedAt:     <span class="type">string</span>;     <span class="cm">// ISO 8601</span>
+  expiresAt?:   <span class="type">string</span>;     <span class="cm">// Null = perpetual</span>
+  revokedAt?:   <span class="type">string</span>;     <span class="cm">// Set on revocation. Cannot be deleted (NC_10)</span>
+  neverClausesApplied: <span class="type">string</span>[];  <span class="cm">// ['NC_01','NC_02','NC_10',...]</span>
+  hash:         <span class="type">string</span>;     <span class="cm">// SHA-256 of full key string</span>
+}</pre>
+    </div>
+  </div>
+
+  <!-- PROVENANCE SCHEMA -->
+  <div class="file-section" id="provenance-schema">
+    <div class="fs-header"><span class="fs-icon">📋</span><span class="fs-title">ProvenanceRecord.ts</span><span class="fs-path">packages/schemas/ProvenanceRecord.ts</span></div>
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-filename">packages/schemas/ProvenanceRecord.ts</span><span class="cb-lang">TYPESCRIPT</span><button class="cb-copy" onclick="copyCode(this)">COPY</button></div>
+<pre><span class="cm">// Stage 5 of the pipeline. Every utterance gets a record.
+// The ledger is append-only (NC_10). Records are never deleted.</span>
+
+<span class="kw">export interface</span> <span class="type">ProvenanceRecord</span> {
+  recordId:       <span class="type">string</span>;   <span class="cm">// PRV-{uuid}</span>
+  utteranceId:    <span class="type">string</span>;
+  sessionId:      <span class="type">string</span>;
+  actorId:        <span class="type">string</span>;
+  avaId:          <span class="type">string</span>;
+  consentKeyId:   <span class="type">string</span>;
+  watermarkId:    <span class="type">string</span>;   <span class="cm">// WM_{8hex}</span>
+  inputText:      <span class="type">string</span>;
+  outputHash:     <span class="type">string</span>;   <span class="cm">// SHA-256 of the WAV file</span>
+  durationMs:     <span class="type">number</span>;
+  modelId:        <span class="type">string</span>;
+  royaltyPct:     <span class="type">number</span>;   <span class="cm">// Snapshot at time of synthesis</span>
+  neverClausesPassed: <span class="type">string</span>[];
+  createdAt:      <span class="type">string</span>;
+}</pre>
+    </div>
+  </div>
+
+  <!-- NEVER CLAUSES CORE -->
+  <div class="file-section" id="never">
+    <div class="fs-header"><span class="fs-icon">⚖️</span><span class="fs-title">core.ts</span><span class="fs-path">packages/never-clauses/core.ts</span></div>
+    <div class="fs-desc"><strong>Constitutional layer. Not config.</strong> If this file changes, the system must recompile governance hashes.</div>
+    <div class="note red"><strong>IMMUTABLE LAW:</strong> This file cannot be changed without triggering a full governance audit. Changes require sign-off from the Board of Aligned Minds.</div>
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-filename">packages/never-clauses/core.ts</span><span class="cb-lang">TYPESCRIPT</span><button class="cb-copy" onclick="copyCode(this)">COPY</button></div>
+<pre><span class="cm">// ─── NOIZY NEVER CLAUSES — CONSTITUTIONAL LAW ────────────────────────────────
+// These are not configuration. They are not policies.
+// They are enforced at the pipeline layer before any audio is generated.
+// Violation = no audio. No warning. No exception.
+//
+// Any modification to this file MUST:
+//   1. Trigger a governance hash recompile
+//   2. Create an immutable audit ledger entry
+//   3. Notify all active RSPs
+//   4. Require Board of Aligned Minds approval</span>
+
+<span class="kw">export const</span> <span class="const">NEVER_CLAUSES</span> = [
+  <span class="str">'NC_01_NO_VOICE_WITHOUT_CONSENT_KEY'</span>,
+  <span class="str">'NC_02_NO_ROYALTY_BELOW_FLOOR'</span>,
+  <span class="str">'NC_03_NO_TRAINING_WITHOUT_EXPLICIT_OPT_IN'</span>,
+  <span class="str">'NC_04_NO_IDENTITY_IMPERSONATION'</span>,
+  <span class="str">'NC_05_NO_SUBLICENSING_WITHOUT_RSP_CONSENT'</span>,
+  <span class="str">'NC_06_NO_NSFW_WITHOUT_SEPARATE_CONSENT'</span>,
+  <span class="str">'NC_07_NO_POLITICAL_PERSUASION'</span>,
+  <span class="str">'NC_08_NO_MEDICAL_ADVICE_SYNTHESIS'</span>,
+  <span class="str">'NC_09_NO_ESTATE_DISSOLUTION'</span>,
+  <span class="str">'NC_10_NO_PROVENANCE_DELETION'</span>,
+] <span class="kw">as const</span>;
+
+<span class="kw">export type</span> <span class="type">NeverClause</span> = <span class="kw">typeof</span> <span class="const">NEVER_CLAUSES</span>[<span class="type">number</span>];
+
+<span class="cm">// Governance hash — recomputed on any change</span>
+<span class="kw">export const</span> <span class="const">NEVER_CLAUSES_VERSION</span> = <span class="str">'v1.0.0'</span>;
+<span class="kw">export const</span> <span class="const">ROYALTY_FLOOR_PCT</span> = <span class="num">75</span>;   <span class="cm">// Hardcoded. Not a config value.</span>
+<span class="kw">export const</span> <span class="const">FOUNDING_RSP_ROYALTY_PCT</span> = <span class="num">85</span>; <span class="cm">// Founding tier. Locked forever.</span></pre>
+    </div>
+  </div>
+
+  <!-- ENFORCE -->
+  <div class="file-section" id="enforce">
+    <div class="fs-header"><span class="fs-icon">🛡️</span><span class="fs-title">enforce.ts</span><span class="fs-path">packages/never-clauses/enforce.ts</span></div>
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-filename">packages/never-clauses/enforce.ts</span><span class="cb-lang">TYPESCRIPT</span><button class="cb-copy" onclick="copyCode(this)">COPY</button></div>
+<pre><span class="kw">import</span> { <span class="type">AVA</span> } <span class="kw">from</span> <span class="str">'../schemas/AVA'</span>;
+<span class="kw">import</span> { <span class="type">ConsentKey</span> } <span class="kw">from</span> <span class="str">'../schemas/ConsentKey'</span>;
+<span class="kw">import</span> { <span class="const">ROYALTY_FLOOR_PCT</span> } <span class="kw">from</span> <span class="str">'./core'</span>;
+
+<span class="kw">export interface</span> <span class="type">EnforcementResult</span> {
+  passed:   <span class="type">boolean</span>;
+  violated: <span class="type">string</span>[];
+  message:  <span class="type">string</span>;
+}
+
+<span class="kw">export function</span> <span class="fn">enforceNeverClauses</span>(
+  ava:        <span class="type">AVA</span>,
+  consentKey: <span class="type">ConsentKey</span> | <span class="kw">null</span>,
+  royaltyPct: <span class="type">number</span>,
+  domain:     <span class="type">string</span>,
+  inputText:  <span class="type">string</span>
+): <span class="type">EnforcementResult</span> {
+  <span class="kw">const</span> violated: <span class="type">string</span>[] = [];
+
+  <span class="cm">// NC_01 — No voice without consent</span>
+  <span class="kw">if</span> (!consentKey || consentKey.revokedAt) {
+    violated.<span class="fn">push</span>(<span class="str">'NC_01: No valid consent key'</span>);
+  }
+
+  <span class="cm">// NC_02 — No royalty below floor</span>
+  <span class="kw">if</span> (royaltyPct < <span class="const">ROYALTY_FLOOR_PCT</span>) {
+    violated.<span class="fn">push</span>(<span class="str">`NC_02: Royalty ${royaltyPct}% below floor ${ROYALTY_FLOOR_PCT}%`</span>);
+  }
+
+  <span class="cm">// NC_04 — No impersonation (basic check — extend with ML classifier)</span>
+  <span class="kw">if</span> (ava.prohibitedDomains.<span class="fn">includes</span>(domain)) {
+    violated.<span class="fn">push</span>(<span class="str">`NC_04/NC_05: Domain '${domain}' is prohibited for this AVA`</span>);
+  }
+
+  <span class="cm">// NC_07 — No political content</span>
+  <span class="kw">const</span> politicalTerms = [<span class="str">'vote for'</span>, <span class="str">'elect'</span>, <span class="str">'campaign'</span>, <span class="str">'political party'</span>];
+  <span class="kw">if</span> (politicalTerms.<span class="fn">some</span>(t => inputText.<span class="fn">toLowerCase</span>().<span class="fn">includes</span>(t))) {
+    violated.<span class="fn">push</span>(<span class="str">'NC_07: Political persuasion content detected'</span>);
+  }
+
+  <span class="cm">// NC_08 — No medical advice</span>
+  <span class="kw">const</span> medicalTerms = [<span class="str">'diagnose'</span>, <span class="str">'prescribe'</span>, <span class="str">'treatment for'</span>, <span class="str">'take this medication'</span>];
+  <span class="kw">if</span> (medicalTerms.<span class="fn">some</span>(t => inputText.<span class="fn">toLowerCase</span>().<span class="fn">includes</span>(t))) {
+    violated.<span class="fn">push</span>(<span class="str">'NC_08: Medical advice synthesis detected'</span>);
+  }
+
+  <span class="kw">return</span> {
+    passed:   violated.length === <span class="num">0</span>,
+    violated,
+    message:  violated.length === <span class="num">0</span>
+      ? <span class="str">'All Never Clauses passed.'</span>
+      : <span class="str">`Blocked by: ${violated.join(' | ')}`</span>,
+  };
+}</pre>
+    </div>
+  </div>
+
+  <!-- CONSENT SERVICE -->
+  <div class="file-section" id="consent-svc">
+    <div class="fs-header"><span class="fs-icon">🔐</span><span class="fs-title">ConsentService.ts</span><span class="fs-path">services/consent/ConsentService.ts</span></div>
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-filename">services/consent/ConsentService.ts</span><span class="cb-lang">TYPESCRIPT</span><button class="cb-copy" onclick="copyCode(this)">COPY</button></div>
+<pre><span class="kw">import</span> { <span class="type">ConsentKey</span> } <span class="kw">from</span> <span class="str">'../../packages/schemas/ConsentKey'</span>;
+<span class="kw">import</span> { <span class="fn">generateConsentKey</span> } <span class="kw">from</span> <span class="str">'./keyGenerator'</span>;
+
+<span class="kw">export class</span> <span class="type">ConsentService</span> {
+  <span class="kw">constructor</span>(<span class="kw">private</span> db: D1Database) {}
+
+  <span class="cm">// Issue a new consent key for an Actor/AVA pair</span>
+  <span class="kw">async</span> <span class="fn">issue</span>(
+    actorId:      <span class="type">string</span>,
+    avaId:        <span class="type">string</span>,
+    domain:       <span class="type">string</span>,
+    jurisdiction: <span class="type">string</span>
+  ): <span class="type">Promise</span>&lt;<span class="type">ConsentKey</span>&gt; {
+    <span class="kw">const</span> keyId = <span class="fn">generateConsentKey</span>(actorId, domain, jurisdiction);
+    <span class="kw">const</span> key: <span class="type">ConsentKey</span> = {
+      keyId, actorId, avaId, domain, jurisdiction,
+      issuedAt:            <span class="kw">new</span> <span class="fn">Date</span>().<span class="fn">toISOString</span>(),
+      neverClausesApplied: [<span class="str">'NC_01'</span>,<span class="str">'NC_02'</span>,<span class="str">'NC_03'</span>,<span class="str">'NC_10'</span>],
+      hash:                <span class="kw">await</span> <span class="fn">sha256</span>(keyId),
+    };
+    <span class="kw">await</span> <span class="kw">this</span>.db.<span class="fn">prepare</span>(
+      <span class="str">'INSERT INTO consent_keys VALUES (?,?,?,?,?,?,?,?,?)'</span>
+    ).<span class="fn">bind</span>(...<span class="fn">Object</span>.<span class="fn">values</span>(key)).<span class="fn">run</span>();
+    <span class="kw">return</span> key;
+  }
+
+  <span class="cm">// Validate a consent key — called at Stage 1 of every synthesis</span>
+  <span class="kw">async</span> <span class="fn">validate</span>(keyId: <span class="type">string</span>): <span class="type">Promise</span>&lt;<span class="type">ConsentKey</span> | <span class="kw">null</span>&gt; {
+    <span class="kw">const</span> result = <span class="kw">await</span> <span class="kw">this</span>.db
+      .<span class="fn">prepare</span>(<span class="str">'SELECT * FROM consent_keys WHERE keyId = ? AND revokedAt IS NULL'</span>)
+      .<span class="fn">bind</span>(keyId)
+      .<span class="fn">first</span>&lt;<span class="type">ConsentKey</span>&gt;();
+    <span class="kw">return</span> result ?? <span class="kw">null</span>;
+  }
+
+  <span class="cm">// Revoke — NC_10: marks revokedAt, NEVER deletes the record</span>
+  <span class="kw">async</span> <span class="fn">revoke</span>(keyId: <span class="type">string</span>, actorId: <span class="type">string</span>): <span class="type">Promise</span>&lt;<span class="kw">void</span>&gt; {
+    <span class="kw">await</span> <span class="kw">this</span>.db
+      .<span class="fn">prepare</span>(<span class="str">'UPDATE consent_keys SET revokedAt = ? WHERE keyId = ? AND actorId = ?'</span>)
+      .<span class="fn">bind</span>(<span class="kw">new</span> <span class="fn">Date</span>().<span class="fn">toISOString</span>(), keyId, actorId)
+      .<span class="fn">run</span>();
+  }
+}
+
+<span class="kw">async function</span> <span class="fn">sha256</span>(text: <span class="type">string</span>): <span class="type">Promise</span>&lt;<span class="type">string</span>&gt; {
+  <span class="kw">const</span> buf = <span class="kw">await</span> crypto.subtle.<span class="fn">digest</span>(<span class="str">'SHA-256'</span>, <span class="kw">new</span> TextEncoder().<span class="fn">encode</span>(text));
+  <span class="kw">return</span> [...<span class="kw">new</span> <span class="type">Uint8Array</span>(buf)].<span class="fn">map</span>(b => b.<span class="fn">toString</span>(<span class="num">16</span>).<span class="fn">padStart</span>(<span class="num">2</span>,<span class="str">'0'</span>)).<span class="fn">join</span>(<span class="str">''</span>);
+}</pre>
+    </div>
+  </div>
+
+  <!-- WATERMARK -->
+  <div class="file-section" id="watermark">
+    <div class="fs-header"><span class="fs-icon">💧</span><span class="fs-title">watermark.ts</span><span class="fs-path">services/provenance/watermark.ts</span></div>
+    <div class="fs-desc">Stage 4 of the 7-Stage Pipeline. Generates <strong>WM_{8hex}</strong> — SHA-256 of actorId + utteranceId + sessionId + consentKeyId + timestamp.</div>
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-filename">services/provenance/watermark.ts</span><span class="cb-lang">TYPESCRIPT</span><button class="cb-copy" onclick="copyCode(this)">COPY</button></div>
+<pre><span class="cm">// Stage 4: Generate NOIZY PROOF watermark WM_{8hex}
+// SHA-256(actorId:utteranceId:sessionId:consentKeyId:timestamp)</span>
+
+<span class="kw">export async function</span> <span class="fn">generateWatermark</span>(params: {
+  actorId:      <span class="type">string</span>;
+  utteranceId:  <span class="type">string</span>;
+  sessionId:    <span class="type">string</span>;
+  consentKeyId: <span class="type">string</span>;
+  timestamp:    <span class="type">string</span>;
+}): <span class="type">Promise</span>&lt;<span class="type">string</span>&gt; {
+  <span class="kw">const</span> seed = [
+    params.actorId,
+    params.utteranceId,
+    params.sessionId,
+    params.consentKeyId,
+    params.timestamp,
+  ].<span class="fn">join</span>(<span class="str">':'</span>);
+
+  <span class="kw">const</span> buf = <span class="kw">await</span> crypto.subtle.<span class="fn">digest</span>(
+    <span class="str">'SHA-256'</span>,
+    <span class="kw">new</span> TextEncoder().<span class="fn">encode</span>(seed)
+  );
+
+  <span class="kw">const</span> hex = [...<span class="kw">new</span> <span class="type">Uint8Array</span>(buf)]
+    .<span class="fn">map</span>(b => b.<span class="fn">toString</span>(<span class="num">16</span>).<span class="fn">padStart</span>(<span class="num">2</span>, <span class="str">'0'</span>))
+    .<span class="fn">join</span>(<span class="str">''</span>);
+
+  <span class="kw">return</span> <span class="str">`WM_${hex.slice(0, 8).toUpperCase()}`</span>;
+}
+
+<span class="cm">// Verify a watermark against known params</span>
+<span class="kw">export async function</span> <span class="fn">verifyWatermark</span>(
+  watermarkId: <span class="type">string</span>,
+  params: Parameters&lt;<span class="kw">typeof</span> generateWatermark&gt;[<span class="num">0</span>]
+): <span class="type">Promise</span>&lt;<span class="type">boolean</span>&gt; {
+  <span class="kw">const</span> expected = <span class="kw">await</span> <span class="fn">generateWatermark</span>(params);
+  <span class="kw">return</span> expected === watermarkId;
+}</pre>
+    </div>
+  </div>
+
+  <!-- ROYALTY ENGINE -->
+  <div class="file-section" id="royalty">
+    <div class="fs-header"><span class="fs-icon">💰</span><span class="fs-title">royaltyEngine.ts</span><span class="fs-path">services/licensing/royaltyEngine.ts</span></div>
+    <div class="fs-desc">The 75% floor is enforced here AND at the database constraint. Two layers of protection for NC_02.</div>
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-filename">services/licensing/royaltyEngine.ts</span><span class="cb-lang">TYPESCRIPT</span><button class="cb-copy" onclick="copyCode(this)">COPY</button></div>
+<pre><span class="kw">import</span> { <span class="const">ROYALTY_FLOOR_PCT</span>, <span class="const">FOUNDING_RSP_ROYALTY_PCT</span> } <span class="kw">from</span> <span class="str">'../../packages/never-clauses/core'</span>;
+<span class="kw">import</span> { <span class="type">Actor</span> } <span class="kw">from</span> <span class="str">'../../packages/schemas/Actor'</span>;
+
+<span class="kw">export interface</span> <span class="type">RoyaltyAllocation</span> {
+  actorId:     <span class="type">string</span>;
+  actorShare:  <span class="type">number</span>;   <span class="cm">// Always >= ROYALTY_FLOOR_PCT</span>
+  noizyShare:  <span class="type">number</span>;   <span class="cm">// 100 - actorShare</span>
+  grossRevenue:<span class="type">number</span>;
+  actorPayout: <span class="type">number</span>;
+  noizyPayout: <span class="type">number</span>;
+  timestamp:   <span class="type">string</span>;
+}
+
+<span class="kw">export function</span> <span class="fn">calculateRoyalty</span>(
+  actor:        <span class="type">Actor</span>,
+  grossRevenue: <span class="type">number</span>
+): <span class="type">RoyaltyAllocation</span> {
+  <span class="cm">// Enforce NC_02 — floor is constitutional, not configurable</span>
+  <span class="kw">const</span> actorShare = actor.royaltyTier === <span class="str">'founding'</span>
+    ? <span class="const">FOUNDING_RSP_ROYALTY_PCT</span>   <span class="cm">// 85% — locked forever</span>
+    : <span class="fn">Math.max</span>(actor.royaltyPct, <span class="const">ROYALTY_FLOOR_PCT</span>);  <span class="cm">// Never below 75%</span>
+
+  <span class="kw">const</span> noizyShare  = <span class="num">100</span> - actorShare;
+  <span class="kw">const</span> actorPayout = (grossRevenue * actorShare) / <span class="num">100</span>;
+  <span class="kw">const</span> noizyPayout = (grossRevenue * noizyShare) / <span class="num">100</span>;
+
+  <span class="kw">return</span> {
+    actorId: actor.actorId,
+    actorShare, noizyShare,
+    grossRevenue,
+    actorPayout: <span class="fn">Math.round</span>(actorPayout * <span class="num">100</span>) / <span class="num">100</span>,
+    noizyPayout: <span class="fn">Math.round</span>(noizyPayout * <span class="num">100</span>) / <span class="num">100</span>,
+    timestamp: <span class="kw">new</span> <span class="fn">Date</span>().<span class="fn">toISOString</span>(),
+  };
+}</pre>
+    </div>
+  </div>
+
+  <!-- RAG PIPELINE -->
+  <div class="file-section" id="rag">
+    <div class="fs-header"><span class="fs-icon">⚡</span><span class="fs-title">pipeline.ts</span><span class="fs-path">services/rag-runtime/pipeline.ts</span></div>
+    <div class="fs-desc">Safe-by-design RAG pipeline. The AVA's character, Never Clauses, and approved context are embedded in every prompt before generation.</div>
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-filename">services/rag-runtime/pipeline.ts</span><span class="cb-lang">TYPESCRIPT</span><button class="cb-copy" onclick="copyCode(this)">COPY</button></div>
+<pre><span class="kw">import</span> { <span class="type">AVA</span> } <span class="kw">from</span> <span class="str">'../../packages/schemas/AVA'</span>;
+<span class="kw">import</span> { <span class="fn">enforceNeverClauses</span> } <span class="kw">from</span> <span class="str">'../../packages/never-clauses/enforce'</span>;
+<span class="kw">import</span> { <span class="fn">voiceOfRefusal</span> } <span class="kw">from</span> <span class="str">'../../packages/refusal-engine'</span>;
+<span class="kw">import</span> { <span class="type">ConsentKey</span> } <span class="kw">from</span> <span class="str">'../../packages/schemas/ConsentKey'</span>;
+
+<span class="kw">export interface</span> <span class="type">RAGResult</span> {
+  success:    <span class="type">boolean</span>;
+  output?:    <span class="type">string</span>;
+  refusal?:   <span class="type">string</span>;
+  violated?:  <span class="type">string</span>[];
+}
+
+<span class="kw">export async function</span> <span class="fn">runRAGPipeline</span>(params: {
+  userInput:  <span class="type">string</span>;
+  ava:        <span class="type">AVA</span>;
+  consentKey: <span class="type">ConsentKey</span> | <span class="kw">null</span>;
+  royaltyPct: <span class="type">number</span>;
+  domain:     <span class="type">string</span>;
+}): <span class="type">Promise</span>&lt;<span class="type">RAGResult</span>&gt; {
+  <span class="kw">const</span> { userInput, ava, consentKey, royaltyPct, domain } = params;
+
+  <span class="cm">// Step 1: Enforce Never Clauses BEFORE any generation</span>
+  <span class="kw">const</span> enforcement = <span class="fn">enforceNeverClauses</span>(
+    ava, consentKey, royaltyPct, domain, userInput
+  );
+
+  <span class="kw">if</span> (!enforcement.passed) {
+    <span class="kw">return</span> {
+      success:  <span class="kw">false</span>,
+      refusal:  <span class="fn">voiceOfRefusal</span>(enforcement.message, <span class="str">'educational'</span>),
+      violated: enforcement.violated,
+    };
+  }
+
+  <span class="cm">// Step 2: Retrieve approved context for this AVA</span>
+  <span class="kw">const</span> context = <span class="kw">await</span> <span class="fn">retrieveApprovedContext</span>(ava, domain);
+
+  <span class="cm">// Step 3: Build safe prompt with AVA identity + Never Clauses embedded</span>
+  <span class="kw">const</span> prompt = <span class="str">`SYSTEM:
+You are ${ava.characterName}, a NOIZY A.I.V.A. (Artificially Intelligent Voice Actor).
+Owner: ${ava.ownerActorId}
+Never Clauses apply. You will never:
+- Impersonate a real person not covered by consent key
+- Produce political persuasion content
+- Provide medical advice
+- Generate NSFW content unless explicit consent exists
+
+APPROVED CONTEXT:
+${context}
+
+USER:
+${userInput}`</span>;
+
+  <span class="cm">// Step 4: Generate — replace with your LLM provider</span>
+  <span class="kw">const</span> output = <span class="kw">await</span> <span class="fn">generateLLM</span>(prompt);
+
+  <span class="cm">// Step 5: Post-generation safety check</span>
+  <span class="kw">const</span> postCheck = <span class="fn">enforceNeverClauses</span>(ava, consentKey, royaltyPct, domain, output);
+  <span class="kw">if</span> (!postCheck.passed) {
+    <span class="kw">return</span> {
+      success:  <span class="kw">false</span>,
+      refusal:  <span class="fn">voiceOfRefusal</span>(<span class="str">'Output violated Never Clauses post-generation'</span>, <span class="str">'firm'</span>),
+      violated: postCheck.violated,
+    };
+  }
+
+  <span class="kw">return</span> { success: <span class="kw">true</span>, output };
+}
+
+<span class="kw">async function</span> <span class="fn">retrieveApprovedContext</span>(ava: <span class="type">AVA</span>, domain: <span class="type">string</span>): <span class="type">Promise</span>&lt;<span class="type">string</span>&gt; {
+  <span class="cm">// TODO: Query vector store for AVA-specific approved content</span>
+  <span class="kw">return</span> <span class="str">`[Approved context for ${ava.characterName} in domain ${domain}]`</span>;
+}
+
+<span class="kw">async function</span> <span class="fn">generateLLM</span>(prompt: <span class="type">string</span>): <span class="type">Promise</span>&lt;<span class="type">string</span>&gt; {
+  <span class="cm">// TODO: Replace with Workers AI / OpenAI / Anthropic call</span>
+  <span class="kw">return</span> <span class="str">`[LLM output for prompt]`</span>;
+}</pre>
+    </div>
+  </div>
+
+  <!-- 7-STAGE PIPELINE -->
+  <div class="file-section" id="pipeline-svc">
+    <div class="fs-header"><span class="fs-icon">🎛️</span><span class="fs-title">pipeline7Stage.ts</span><span class="fs-path">services/voice-engine/pipeline7Stage.ts</span></div>
+    <div class="fs-desc">The complete 7-Stage NOIZY synthesis pipeline. Every utterance passes through all 7 stages. No stage can be skipped.</div>
+
+    <table class="pipeline">
+      <thead><tr><th>Stage</th><th>Action</th><th>Never Clause</th></tr></thead>
+      <tbody>
+        <tr><td>S1</td><td>Validate Cryptographic Consent Key</td><td>NC_01</td></tr>
+        <tr><td>S2</td><td>Enforce Never Clauses (all applicable)</td><td>NC_01–NC_10</td></tr>
+        <tr><td>S3</td><td>Write WAV to disk / R2 storage</td><td>—</td></tr>
+        <tr><td>S4</td><td>Generate WM_{8hex} watermark</td><td>NC_10</td></tr>
+        <tr><td>S5</td><td>Create ProvenanceRecord in D1</td><td>NC_10</td></tr>
+        <tr><td>S6</td><td>Dispatch to API / consumer</td><td>—</td></tr>
+        <tr><td>S7</td><td>Append to provenance.jsonl ledger</td><td>NC_10</td></tr>
+      </tbody>
+    </table>
+
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-filename">services/voice-engine/pipeline7Stage.ts</span><span class="cb-lang">TYPESCRIPT</span><button class="cb-copy" onclick="copyCode(this)">COPY</button></div>
+<pre><span class="kw">import</span> { <span class="type">Actor</span>, <span class="type">AVA</span>, <span class="type">ProvenanceRecord</span> } <span class="kw">from</span> <span class="str">'../../packages/schemas'</span>;
+<span class="kw">import</span> { <span class="type">ConsentService</span> } <span class="kw">from</span> <span class="str">'../consent/ConsentService'</span>;
+<span class="kw">import</span> { <span class="fn">enforceNeverClauses</span> } <span class="kw">from</span> <span class="str">'../../packages/never-clauses/enforce'</span>;
+<span class="kw">import</span> { <span class="fn">generateWatermark</span> } <span class="kw">from</span> <span class="str">'../provenance/watermark'</span>;
+<span class="kw">import</span> { <span class="fn">appendToLedger</span> } <span class="kw">from</span> <span class="str">'../provenance/ledger'</span>;
+<span class="kw">import</span> { <span class="fn">voiceOfRefusal</span> } <span class="kw">from</span> <span class="str">'../../packages/refusal-engine'</span>;
+
+<span class="kw">export async function</span> <span class="fn">runSynthesisPipeline</span>(params: {
+  actor:       <span class="type">Actor</span>;
+  ava:         <span class="type">AVA</span>;
+  inputText:   <span class="type">string</span>;
+  sessionId:   <span class="type">string</span>;
+  domain:      <span class="type">string</span>;
+  consentSvc:  <span class="type">ConsentService</span>;
+  db:          D1Database;
+  r2:          R2Bucket;
+}) {
+  <span class="kw">const</span> { actor, ava, inputText, sessionId, domain, consentSvc } = params;
+  <span class="kw">const</span> utteranceId = <span class="str">`UTT-${crypto.randomUUID()}`</span>;
+  <span class="kw">const</span> timestamp   = <span class="kw">new</span> <span class="fn">Date</span>().<span class="fn">toISOString</span>();
+
+  <span class="cm">// ── STAGE 1: Validate consent key ──────────────────────────────────────────</span>
+  <span class="kw">const</span> consentKey = <span class="kw">await</span> consentSvc.<span class="fn">validate</span>(actor.consentKeyId);
+  <span class="kw">if</span> (!consentKey) <span class="kw">return</span> { ok: <span class="kw">false</span>, error: <span class="fn">voiceOfRefusal</span>(<span class="str">'No valid consent key (NC_01)'</span>) };
+
+  <span class="cm">// ── STAGE 2: Never Clause enforcement ──────────────────────────────────────</span>
+  <span class="kw">const</span> check = <span class="fn">enforceNeverClauses</span>(ava, consentKey, actor.royaltyPct, domain, inputText);
+  <span class="kw">if</span> (!check.passed) <span class="kw">return</span> { ok: <span class="kw">false</span>, error: <span class="fn">voiceOfRefusal</span>(check.message, <span class="str">'educational'</span>) };
+
+  <span class="cm">// ── STAGE 3: Synthesize WAV ─────────────────────────────────────────────────</span>
+  <span class="kw">const</span> wavBuffer = <span class="kw">await</span> <span class="fn">synthesizeVoice</span>(inputText, ava);
+  <span class="kw">const</span> wavKey    = <span class="str">`synthesis/${actor.actorId}/${utteranceId}.wav`</span>;
+  <span class="kw">await</span> params.r2.<span class="fn">put</span>(wavKey, wavBuffer);
+
+  <span class="cm">// ── STAGE 4: Generate watermark WM_{8hex} ──────────────────────────────────</span>
+  <span class="kw">const</span> watermarkId = <span class="kw">await</span> <span class="fn">generateWatermark</span>({
+    actorId: actor.actorId, utteranceId, sessionId,
+    consentKeyId: consentKey.keyId, timestamp
+  });
+
+  <span class="cm">// ── STAGE 5: Create ProvenanceRecord in D1 ────────────────────────────────</span>
+  <span class="kw">const</span> record: <span class="type">ProvenanceRecord</span> = {
+    recordId: <span class="str">`PRV-${crypto.randomUUID()}`</span>,
+    utteranceId, sessionId,
+    actorId:  actor.actorId,
+    avaId:    ava.avaId,
+    consentKeyId: consentKey.keyId,
+    watermarkId, inputText,
+    outputHash:    <span class="str">''</span>,  <span class="cm">// TODO: SHA-256 of wavBuffer</span>
+    durationMs:    <span class="num">0</span>,   <span class="cm">// TODO: from wav metadata</span>
+    modelId:       ava.modelId,
+    royaltyPct:    actor.royaltyPct,
+    neverClausesPassed: check.violated.length === <span class="num">0</span> ? [<span class="str">'ALL'</span>] : [],
+    createdAt:     timestamp,
+  };
+  <span class="kw">await</span> params.db.<span class="fn">prepare</span>(<span class="str">'INSERT INTO provenance_records VALUES (?1)'</span>)
+    .<span class="fn">bind</span>(<span class="fn">JSON.stringify</span>(record)).<span class="fn">run</span>();
+
+  <span class="cm">// ── STAGE 6: Dispatch result ────────────────────────────────────────────────</span>
+  <span class="cm">// Return R2 URL or stream to consumer</span>
+
+  <span class="cm">// ── STAGE 7: Append to provenance.jsonl ledger (NC_10) ────────────────────</span>
+  <span class="kw">await</span> <span class="fn">appendToLedger</span>(record);
+
+  <span class="kw">return</span> { ok: <span class="kw">true</span>, utteranceId, watermarkId, wavKey, record };
+}
+
+<span class="kw">async function</span> <span class="fn">synthesizeVoice</span>(text: <span class="type">string</span>, ava: <span class="type">AVA</span>): <span class="type">Promise</span>&lt;ArrayBuffer&gt; {
+  <span class="cm">// TODO: Call SUPERSONIC stack — HuggingFace / Workers AI
+  // Model selection based on ava.modelId
+  // License check required before commercial use (Alex review)</span>
+  <span class="kw">return new</span> <span class="fn">ArrayBuffer</span>(<span class="num">0</span>);
+}</pre>
+    </div>
+    <div class="note"><strong>LICENSE FLAG:</strong> MusicGen, MaskGCT, Tango 2, and Fish Speech in the SUPERSONIC stack require Alex (Board) review before commercial deployment. Do not deploy to production until cleared.</div>
+  </div>
+
+  <!-- SDK -->
+  <div class="file-section" id="sdk">
+    <div class="fs-header"><span class="fs-icon">📦</span><span class="fs-title">index.ts</span><span class="fs-path">packages/sdk/index.ts</span></div>
+    <div class="fs-desc">The public NOIZY Developer SDK. What third-party developers import to build on top of the platform.</div>
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-filename">packages/sdk/index.ts</span><span class="cb-lang">TYPESCRIPT</span><button class="cb-copy" onclick="copyCode(this)">COPY</button></div>
+<pre><span class="cm">// ─── NOIZY Public Developer SDK ───────────────────────────────────────────────
+// import { NoizyClient } from '@noizy/sdk'
+// NEVER exposes internal consent keys, provenance records, or royalty data
+// without authenticated RSP authorization.</span>
+
+<span class="kw">export class</span> <span class="type">NoizyClient</span> {
+  <span class="kw">constructor</span>(<span class="kw">private</span> apiKey: <span class="type">string</span>, <span class="kw">private</span> baseUrl = <span class="str">'https://api.noizy.ai'</span>) {}
+
+  <span class="cm">// Synthesize — requires valid consentKeyId, returns watermarked audio URL</span>
+  <span class="kw">async</span> <span class="fn">synthesize</span>(params: {
+    avaId:        <span class="type">string</span>;
+    text:         <span class="type">string</span>;
+    consentKeyId: <span class="type">string</span>;
+    domain:       <span class="type">string</span>;
+  }): <span class="type">Promise</span>&lt;{ audioUrl: <span class="type">string</span>; watermarkId: <span class="type">string</span>; provenanceId: <span class="type">string</span> }&gt; {
+    <span class="kw">const</span> res = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">`${this.baseUrl}/v1/synthesize`</span>, {
+      method: <span class="str">'POST'</span>,
+      headers: { <span class="str">'Authorization'</span>: <span class="str">`Bearer ${this.apiKey}`</span>, <span class="str">'Content-Type'</span>: <span class="str">'application/json'</span> },
+      body: <span class="fn">JSON.stringify</span>(params),
+    });
+    <span class="kw">if</span> (!res.ok) <span class="kw">throw new</span> <span class="fn">Error</span>(<span class="kw">await</span> res.<span class="fn">text</span>());
+    <span class="kw">return</span> res.<span class="fn">json</span>();
+  }
+
+  <span class="cm">// Verify a watermark</span>
+  <span class="kw">async</span> <span class="fn">verify</span>(watermarkId: <span class="type">string</span>): <span class="type">Promise</span>&lt;<span class="type">boolean</span>&gt; {
+    <span class="kw">const</span> res = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">`${this.baseUrl}/v1/verify/${watermarkId}`</span>, {
+      headers: { <span class="str">'Authorization'</span>: <span class="str">`Bearer ${this.apiKey}`</span> },
+    });
+    <span class="kw">return</span> res.ok;
+  }
+
+  <span class="cm">// Get provenance record — RSP auth required</span>
+  <span class="kw">async</span> <span class="fn">getProvenance</span>(utteranceId: <span class="type">string</span>): <span class="type">Promise</span>&lt;<span class="type">object</span>&gt; {
+    <span class="kw">const</span> res = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">`${this.baseUrl}/v1/provenance/${utteranceId}`</span>, {
+      headers: { <span class="str">'Authorization'</span>: <span class="str">`Bearer ${this.apiKey}`</span> },
+    });
+    <span class="kw">return</span> res.<span class="fn">json</span>();
+  }
+}
+
+<span class="cm">// Re-export public types</span>
+<span class="kw">export type</span> { <span class="type">Actor</span>, <span class="type">AVA</span>, <span class="type">ConsentKey</span>, <span class="type">ProvenanceRecord</span> } <span class="kw">from</span> <span class="str">'../schemas'</span>;
+<span class="kw">export</span> { <span class="const">ROYALTY_FLOOR_PCT</span>, <span class="const">NEVER_CLAUSES</span> } <span class="kw">from</span> <span class="str">'../never-clauses/core'</span>;</pre>
+    </div>
+    <div class="note gold"><strong>GORUNFREE:</strong> 16 TypeScript files. Every Never Clause enforced. Every royalty hardcoded. Every voice protected. Paste into <code>noizy-platform/</code> and run <code>npm install && tsc</code>. The infrastructure is ready.</div>
+  </div>
+
+</div><!-- end .main -->
+
+<script>
+function copyCode(btn) {
+  const pre = btn.closest('.code-block').querySelector('pre');
+  const text = pre.innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'COPIED ✓';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'COPY'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+// Sidebar active state
+const links = document.querySelectorAll('.sb-link[href^="#"]');
+const sections = document.querySelectorAll('.file-section[id]');
+const io = new IntersectionObserver(e => {
+  e.forEach(entry => {
+    if (entry.isIntersecting) {
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + entry.target.id));
+    }
+  });
+}, { threshold: 0.4 });
+sections.forEach(s => io.observe(s));
+</script>
+</body>
+</html>

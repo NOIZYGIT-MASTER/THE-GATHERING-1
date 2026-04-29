@@ -1,0 +1,550 @@
+<root>
+    <CtrlPanelStyle name="BigBlackNoteStyle" colFill="[r:0 g:0 b:0 a:255]" intSmartTileEdgeSize="5" intRoundedRectRadius="0">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="BigWhiteNoteStyle" intSmartTileEdgeSize="5" intRoundedRectRadius="0">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlLabelStyle name="WhiteNoteLabelStyle">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlLabelStyle name="BlackNoteLabelStyle" colText="[r:255 g:255 b:255 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlPanel name="CtrlPanel" rect="[x:0 y:0 w:175 h:3000]" id="0">
+        <CtrlPanel name="CtrlPanel" rect="[x:0 y:0 w:175 h:200]" id="511" zorder="5000">
+            <CtrlPanel name="Note_127" style="BigWhiteNoteStyle" rect="[x:0 y:0 w:175 h:40]" id="127" zorder="10">
+                <CtrlLabel name="OctaveLabel_127" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:30 h:20]" id="127" text="G10" />
+                <CtrlLabel name="ArticLabel_127" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="127" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_125" style="BigWhiteNoteStyle" rect="[x:0 y:40 w:175 h:40]" id="125" zorder="10">
+                <CtrlLabel name="OctaveLabel_125" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:30 h:20]" id="125" text="F10" />
+                <CtrlLabel name="ArticLabel_125" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="125" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_124" style="BigWhiteNoteStyle" rect="[x:0 y:80 w:175 h:40]" id="124" zorder="10">
+                <CtrlLabel name="OctaveLabel_124" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:30 h:20]" id="124" text="E10" />
+                <CtrlLabel name="ArticLabel_124" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="124" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_122" style="BigWhiteNoteStyle" rect="[x:0 y:120 w:175 h:40]" id="122" zorder="10">
+                <CtrlLabel name="OctaveLabel_122" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:30 h:20]" id="122" text="D10" />
+                <CtrlLabel name="ArticLabel_122" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="122" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_120" style="BigWhiteNoteStyle" rect="[x:0 y:160 w:175 h:40]" id="120" zorder="10">
+                <CtrlLabel name="OctaveLabel_120" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:30 h:20]" id="120" text="C10" />
+                <CtrlLabel name="ArticLabel_120" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="120" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_126" style="BigBlackNoteStyle" rect="[x:0 y:30 w:145 h:20]" id="126" zorder="500">
+                <CtrlLabel name="OctaveLabel_126" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="126" text="F#10" />
+                <CtrlLabel name="ArticLabel_126" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="126" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_123" style="BigBlackNoteStyle" rect="[x:0 y:110 w:145 h:20]" id="123" zorder="500">
+                <CtrlLabel name="OctaveLabel_123" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="123" text="D#10" />
+                <CtrlLabel name="ArticLabel_123" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="123" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_121" style="BigBlackNoteStyle" rect="[x:0 y:150 w:145 h:20]" id="121" zorder="500">
+                <CtrlLabel name="OctaveLabel_121" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="121" text="C#10" />
+                <CtrlLabel name="ArticLabel_121" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="121" text=" " />
+            </CtrlPanel>
+        </CtrlPanel>
+        <CtrlPanel name="CtrlPanel" rect="[x:0 y:200 w:200 h:280]" id="510" zorder="5000">
+            <CtrlPanel name="Note_119" style="BigWhiteNoteStyle" rect="[x:0 y:0 w:175 h:40]" id="119" zorder="10">
+                <CtrlLabel name="OctaveLabel_119" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="119" text="B9" />
+                <CtrlLabel name="ArticLabel_119" style="WhiteNoteLabelStyle" rect="[x:20 y:10 w:145 h:20]" id="119" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_117" style="BigWhiteNoteStyle" rect="[x:0 y:40 w:175 h:40]" id="117" zorder="10">
+                <CtrlLabel name="OctaveLabel_117" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="117" text="A9" />
+                <CtrlLabel name="ArticLabel_117" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="117" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_115" style="BigWhiteNoteStyle" rect="[x:0 y:80 w:175 h:40]" id="115" zorder="10">
+                <CtrlLabel name="OctaveLabel_115" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="115" text="G9" />
+                <CtrlLabel name="ArticLabel_115" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="115" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_113" style="BigWhiteNoteStyle" rect="[x:0 y:120 w:175 h:40]" id="113" zorder="10">
+                <CtrlLabel name="OctaveLabel_113" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="113" text="F9" />
+                <CtrlLabel name="ArticLabel_113" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="113" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_112" style="BigWhiteNoteStyle" rect="[x:0 y:160 w:175 h:40]" id="112" zorder="10">
+                <CtrlLabel name="OctaveLabel_112" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="112" text="E9" />
+                <CtrlLabel name="ArticLabel_112" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="112" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_110" style="BigWhiteNoteStyle" rect="[x:0 y:200 w:175 h:40]" id="110" zorder="10">
+                <CtrlLabel name="OctaveLabel_110" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="110" text="D9" />
+                <CtrlLabel name="ArticLabel_110" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="110" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_108" style="BigWhiteNoteStyle" rect="[x:0 y:240 w:175 h:40]" id="108" zorder="10">
+                <CtrlLabel name="OctaveLabel_108" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:30 h:20]" id="108" text="C9" />
+                <CtrlLabel name="ArticLabel_108" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="108" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_118" style="BigBlackNoteStyle" rect="[x:0 y:30 w:145 h:20]" id="118" zorder="500">
+                <CtrlLabel name="OctaveLabel_118" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="118" text="A#9" />
+                <CtrlLabel name="ArticLabel_118" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="118" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_116" style="BigBlackNoteStyle" rect="[x:0 y:70 w:145 h:20]" id="116" zorder="500">
+                <CtrlLabel name="OctaveLabel_116" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="116" text="G#9" />
+                <CtrlLabel name="ArticLabel_116" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="116" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_114" style="BigBlackNoteStyle" rect="[x:0 y:110 w:145 h:20]" id="114" zorder="500">
+                <CtrlLabel name="OctaveLabel_114" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="114" text="F#9" />
+                <CtrlLabel name="ArticLabel_114" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="114" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_111" style="BigBlackNoteStyle" rect="[x:0 y:190 w:145 h:20]" id="111" zorder="500">
+                <CtrlLabel name="OctaveLabel_111" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="111" text="D#9" />
+                <CtrlLabel name="ArticLabel_111" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="111" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_109" style="BigBlackNoteStyle" rect="[x:0 y:230 w:145 h:20]" id="109" zorder="500">
+                <CtrlLabel name="OctaveLabel_109" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="109" text="C#9" />
+                <CtrlLabel name="ArticLabel_109" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="109" text=" " />
+            </CtrlPanel>
+        </CtrlPanel>
+        <CtrlPanel name="CtrlPanel" rect="[x:0 y:480 w:200 h:280]" id="509" zorder="5000">
+            <CtrlPanel name="Note_107" style="BigWhiteNoteStyle" rect="[x:0 y:0 w:175 h:40]" id="107" zorder="10">
+                <CtrlLabel name="OctaveLabel_107" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="107" text="B8" />
+                <CtrlLabel name="ArticLabel_107" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="107" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_105" style="BigWhiteNoteStyle" rect="[x:0 y:40 w:175 h:40]" id="105" zorder="10">
+                <CtrlLabel name="OctaveLabel_105" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="105" text="A8" />
+                <CtrlLabel name="ArticLabel_105" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="105" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_103" style="BigWhiteNoteStyle" rect="[x:0 y:80 w:175 h:40]" id="103" zorder="10">
+                <CtrlLabel name="OctaveLabel_103" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="103" text="G8" />
+                <CtrlLabel name="ArticLabel_103" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="103" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_101" style="BigWhiteNoteStyle" rect="[x:0 y:120 w:175 h:40]" id="101" zorder="10">
+                <CtrlLabel name="OctaveLabel_101" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="101" text="F8" />
+                <CtrlLabel name="ArticLabel_101" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="101" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_100" style="BigWhiteNoteStyle" rect="[x:0 y:160 w:175 h:40]" id="100" zorder="10">
+                <CtrlLabel name="OctaveLabel_100" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="100" text="E8" />
+                <CtrlLabel name="ArticLabel_100" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="100" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_98" style="BigWhiteNoteStyle" rect="[x:0 y:200 w:175 h:40]" id="98" zorder="10">
+                <CtrlLabel name="OctaveLabel_98" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="98" text="D8" />
+                <CtrlLabel name="ArticLabel_98" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="98" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_96" style="BigWhiteNoteStyle" rect="[x:0 y:240 w:175 h:40]" id="96" zorder="10">
+                <CtrlLabel name="OctaveLabel_96" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:30 h:20]" id="96" text="C8" />
+                <CtrlLabel name="ArticLabel_96" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="96" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_106" style="BigBlackNoteStyle" rect="[x:0 y:30 w:145 h:20]" id="106" zorder="500">
+                <CtrlLabel name="OctaveLabel_106" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="106" text="A#8" />
+                <CtrlLabel name="ArticLabel_106" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="106" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_104" style="BigBlackNoteStyle" rect="[x:0 y:70 w:145 h:20]" id="104" zorder="500">
+                <CtrlLabel name="OctaveLabel_104" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="104" text="G#8" />
+                <CtrlLabel name="ArticLabel_104" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="104" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_102" style="BigBlackNoteStyle" rect="[x:0 y:110 w:145 h:20]" id="102" zorder="500">
+                <CtrlLabel name="OctaveLabel_102" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="102" text="F#8" />
+                <CtrlLabel name="ArticLabel_102" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="102" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_99" style="BigBlackNoteStyle" rect="[x:0 y:190 w:145 h:20]" id="99" zorder="500">
+                <CtrlLabel name="OctaveLabel_99" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="99" text="D#8" />
+                <CtrlLabel name="ArticLabel_99" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="99" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_97" style="BigBlackNoteStyle" rect="[x:0 y:230 w:145 h:20]" id="97" zorder="500">
+                <CtrlLabel name="OctaveLabel_97" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="97" text="C#8" />
+                <CtrlLabel name="ArticLabel_97" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="97" text=" " />
+            </CtrlPanel>
+        </CtrlPanel>
+        <CtrlPanel name="CtrlPanel" rect="[x:0 y:760 w:200 h:280]" id="508" zorder="5000">
+            <CtrlPanel name="Note_95" style="BigWhiteNoteStyle" rect="[x:0 y:0 w:175 h:40]" id="95" zorder="10">
+                <CtrlLabel name="OctaveLabel_95" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="95" text="B7" />
+                <CtrlLabel name="ArticLabel_95" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="95" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_93" style="BigWhiteNoteStyle" rect="[x:0 y:40 w:175 h:40]" id="93" zorder="10">
+                <CtrlLabel name="OctaveLabel_93" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="93" text="A7" />
+                <CtrlLabel name="ArticLabel_93" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="93" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_91" style="BigWhiteNoteStyle" rect="[x:0 y:80 w:175 h:40]" id="91" zorder="10">
+                <CtrlLabel name="OctaveLabel_91" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="91" text="G7" />
+                <CtrlLabel name="ArticLabel_91" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="91" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_89" style="BigWhiteNoteStyle" rect="[x:0 y:120 w:175 h:40]" id="89" zorder="10">
+                <CtrlLabel name="OctaveLabel_89" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="89" text="F7" />
+                <CtrlLabel name="ArticLabel_89" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="89" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_88" style="BigWhiteNoteStyle" rect="[x:0 y:160 w:175 h:40]" id="88" zorder="10">
+                <CtrlLabel name="OctaveLabel_88" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="88" text="E7" />
+                <CtrlLabel name="ArticLabel_88" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="88" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_86" style="BigWhiteNoteStyle" rect="[x:0 y:200 w:175 h:40]" id="86" zorder="10">
+                <CtrlLabel name="OctaveLabel_86" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="86" text="D7" />
+                <CtrlLabel name="ArticLabel_86" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="86" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_84" style="BigWhiteNoteStyle" rect="[x:0 y:240 w:175 h:40]" id="84" zorder="10">
+                <CtrlLabel name="OctaveLabel_84" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:30 h:20]" id="84" text="C7" />
+                <CtrlLabel name="ArticLabel_84" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="84" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_94" style="BigBlackNoteStyle" rect="[x:0 y:30 w:145 h:20]" id="94" zorder="500">
+                <CtrlLabel name="OctaveLabel_94" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="94" text="A#7" />
+                <CtrlLabel name="ArticLabel_94" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:120 h:20]" id="94" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_92" style="BigBlackNoteStyle" rect="[x:0 y:70 w:145 h:20]" id="92" zorder="500">
+                <CtrlLabel name="OctaveLabel_92" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="92" text="G#7" />
+                <CtrlLabel name="ArticLabel_92" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="92" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_90" style="BigBlackNoteStyle" rect="[x:0 y:110 w:145 h:20]" id="90" zorder="500">
+                <CtrlLabel name="OctaveLabel_90" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="90" text="F#7" />
+                <CtrlLabel name="ArticLabel_90" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="90" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_87" style="BigBlackNoteStyle" rect="[x:0 y:190 w:145 h:20]" id="87" zorder="500">
+                <CtrlLabel name="OctaveLabel_87" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="87" text="D#7" />
+                <CtrlLabel name="ArticLabel_87" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="87" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_85" style="BigBlackNoteStyle" rect="[x:0 y:230 w:145 h:20]" id="85" zorder="500">
+                <CtrlLabel name="OctaveLabel_85" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="85" text="C#7" />
+                <CtrlLabel name="ArticLabel_85" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="85" text=" " />
+            </CtrlPanel>
+        </CtrlPanel>
+        <CtrlPanel name="CtrlPanel" rect="[x:0 y:1040 w:200 h:280]" id="507" zorder="5000">
+            <CtrlPanel name="Note_83" style="BigWhiteNoteStyle" rect="[x:0 y:0 w:175 h:40]" id="83" zorder="10">
+                <CtrlLabel name="OctaveLabel_83" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="83" text="B6" />
+                <CtrlLabel name="ArticLabel_83" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="83" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_81" style="BigWhiteNoteStyle" rect="[x:0 y:40 w:175 h:40]" id="81" zorder="10">
+                <CtrlLabel name="OctaveLabel_81" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="81" text="A6" />
+                <CtrlLabel name="ArticLabel_81" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="81" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_79" style="BigWhiteNoteStyle" rect="[x:0 y:80 w:175 h:40]" id="79" zorder="10">
+                <CtrlLabel name="OctaveLabel_79" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="79" text="G6" />
+                <CtrlLabel name="ArticLabel_79" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="79" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_77" style="BigWhiteNoteStyle" rect="[x:0 y:120 w:175 h:40]" id="77" zorder="10">
+                <CtrlLabel name="OctaveLabel_77" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="77" text="F6" />
+                <CtrlLabel name="ArticLabel_77" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="77" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_76" style="BigWhiteNoteStyle" rect="[x:0 y:160 w:175 h:40]" id="76" zorder="10">
+                <CtrlLabel name="OctaveLabel_76" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="76" text="E6" />
+                <CtrlLabel name="ArticLabel_76" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="76" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_74" style="BigWhiteNoteStyle" rect="[x:0 y:200 w:175 h:40]" id="74" zorder="10">
+                <CtrlLabel name="OctaveLabel_74" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="74" text="D6" />
+                <CtrlLabel name="ArticLabel_74" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="74" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_72" style="BigWhiteNoteStyle" rect="[x:0 y:240 w:175 h:40]" id="72" zorder="10">
+                <CtrlLabel name="OctaveLabel_72" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:30 h:20]" id="72" text="C6" />
+                <CtrlLabel name="ArticLabel_72" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="72" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_82" style="BigBlackNoteStyle" rect="[x:0 y:30 w:145 h:20]" id="82" zorder="500">
+                <CtrlLabel name="OctaveLabel_82" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="82" text="A#6" />
+                <CtrlLabel name="ArticLabel_82" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="82" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_80" style="BigBlackNoteStyle" rect="[x:0 y:70 w:145 h:20]" id="80" zorder="500">
+                <CtrlLabel name="OctaveLabel_80" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="80" text="G#6" />
+                <CtrlLabel name="ArticLabel_80" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="80" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_78" style="BigBlackNoteStyle" rect="[x:0 y:110 w:145 h:20]" id="78" zorder="500">
+                <CtrlLabel name="OctaveLabel_78" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="78" text="F#6" />
+                <CtrlLabel name="ArticLabel_78" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="78" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_75" style="BigBlackNoteStyle" rect="[x:0 y:190 w:145 h:20]" id="75" zorder="500">
+                <CtrlLabel name="OctaveLabel_75" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="75" text="D#6" />
+                <CtrlLabel name="ArticLabel_75" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="75" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_73" style="BigBlackNoteStyle" rect="[x:0 y:230 w:145 h:20]" id="73" zorder="500">
+                <CtrlLabel name="OctaveLabel_73" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="73" text="C#6" />
+                <CtrlLabel name="ArticLabel_73" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="73" text=" " />
+            </CtrlPanel>
+        </CtrlPanel>
+        <CtrlPanel name="CtrlPanel" rect="[x:0 y:1320 w:200 h:280]" id="506" zorder="5000">
+            <CtrlPanel name="Note_71" style="BigWhiteNoteStyle" rect="[x:0 y:0 w:175 h:40]" id="71" zorder="10">
+                <CtrlLabel name="OctaveLabel_71" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="71" text="B5" />
+                <CtrlLabel name="ArticLabel_71" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="71" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_69" style="BigWhiteNoteStyle" rect="[x:0 y:40 w:175 h:40]" id="69" zorder="10">
+                <CtrlLabel name="OctaveLabel_69" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="69" text="A5" />
+                <CtrlLabel name="ArticLabel_69" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="69" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_67" style="BigWhiteNoteStyle" rect="[x:0 y:80 w:175 h:40]" id="67" zorder="10">
+                <CtrlLabel name="OctaveLabel_67" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="67" text="G5" />
+                <CtrlLabel name="ArticLabel_67" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="67" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_65" style="BigWhiteNoteStyle" rect="[x:0 y:120 w:175 h:40]" id="65" zorder="10">
+                <CtrlLabel name="OctaveLabel_65" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="65" text="F5" />
+                <CtrlLabel name="ArticLabel_65" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="65" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_64" style="BigWhiteNoteStyle" rect="[x:0 y:160 w:175 h:40]" id="64" zorder="10">
+                <CtrlLabel name="OctaveLabel_64" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="64" text="E5" />
+                <CtrlLabel name="ArticLabel_64" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="64" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_62" style="BigWhiteNoteStyle" rect="[x:0 y:200 w:175 h:40]" id="62" zorder="10">
+                <CtrlLabel name="OctaveLabel_62" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="62" text="D5" />
+                <CtrlLabel name="ArticLabel_62" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="62" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_60" style="BigWhiteNoteStyle" rect="[x:0 y:240 w:175 h:40]" id="60" zorder="10">
+                <CtrlLabel name="OctaveLabel_60" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:30 h:20]" id="60" text="C5" />
+                <CtrlLabel name="ArticLabel_60" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="60" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_70" style="BigBlackNoteStyle" rect="[x:0 y:30 w:145 h:20]" id="70" zorder="500">
+                <CtrlLabel name="OctaveLabel_70" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="70" text="A#5" />
+                <CtrlLabel name="ArticLabel_70" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="70" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_68" style="BigBlackNoteStyle" rect="[x:0 y:70 w:145 h:20]" id="68" zorder="500">
+                <CtrlLabel name="OctaveLabel_68" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="68" text="G#5" />
+                <CtrlLabel name="ArticLabel_68" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="68" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_66" style="BigBlackNoteStyle" rect="[x:0 y:110 w:145 h:20]" id="66" zorder="500">
+                <CtrlLabel name="OctaveLabel_66" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="66" text="F#5" />
+                <CtrlLabel name="ArticLabel_66" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="66" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_63" style="BigBlackNoteStyle" rect="[x:0 y:190 w:145 h:20]" id="63" zorder="500">
+                <CtrlLabel name="OctaveLabel_63" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="63" text="D#5" />
+                <CtrlLabel name="ArticLabel_63" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="63" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_61" style="BigBlackNoteStyle" rect="[x:0 y:230 w:145 h:20]" id="61" zorder="500">
+                <CtrlLabel name="OctaveLabel_61" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="61" text="C#5" />
+                <CtrlLabel name="ArticLabel_61" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="61" text=" " />
+            </CtrlPanel>
+        </CtrlPanel>
+        <CtrlPanel name="CtrlPanel" rect="[x:0 y:1600 w:200 h:280]" id="505" zorder="5000">
+            <CtrlPanel name="Note_59" style="BigWhiteNoteStyle" rect="[x:0 y:0 w:175 h:40]" id="59" zorder="10">
+                <CtrlLabel name="OctaveLabel_59" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="59" text="B4" />
+                <CtrlLabel name="ArticLabel_59" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="59" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_57" style="BigWhiteNoteStyle" rect="[x:0 y:40 w:175 h:40]" id="57" zorder="10">
+                <CtrlLabel name="OctaveLabel_57" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="57" text="A4" />
+                <CtrlLabel name="ArticLabel_57" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="57" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_55" style="BigWhiteNoteStyle" rect="[x:0 y:80 w:175 h:40]" id="55" zorder="10">
+                <CtrlLabel name="OctaveLabel_55" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="55" text="G4" />
+                <CtrlLabel name="ArticLabel_55" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="55" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_53" style="BigWhiteNoteStyle" rect="[x:0 y:120 w:175 h:40]" id="53" zorder="10">
+                <CtrlLabel name="OctaveLabel_53" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="53" text="F4" />
+                <CtrlLabel name="ArticLabel_53" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="53" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_52" style="BigWhiteNoteStyle" rect="[x:0 y:160 w:175 h:40]" id="52" zorder="10">
+                <CtrlLabel name="OctaveLabel_52" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="52" text="E4" />
+                <CtrlLabel name="ArticLabel_52" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="52" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_50" style="BigWhiteNoteStyle" rect="[x:0 y:200 w:175 h:40]" id="50" zorder="10">
+                <CtrlLabel name="OctaveLabel_50" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="50" text="D4" />
+                <CtrlLabel name="ArticLabel_50" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="50" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_48" style="BigWhiteNoteStyle" rect="[x:0 y:240 w:175 h:40]" id="48" zorder="10">
+                <CtrlLabel name="OctaveLabel_48" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:30 h:20]" id="48" text="C4" />
+                <CtrlLabel name="ArticLabel_48" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="48" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_58" style="BigBlackNoteStyle" rect="[x:0 y:30 w:145 h:20]" id="58" zorder="500">
+                <CtrlLabel name="OctaveLabel_58" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="58" text="A#4" />
+                <CtrlLabel name="ArticLabel_58" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="58" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_56" style="BigBlackNoteStyle" rect="[x:0 y:70 w:145 h:20]" id="56" zorder="500">
+                <CtrlLabel name="OctaveLabel_56" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="56" text="G#4" />
+                <CtrlLabel name="ArticLabel_56" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="56" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_54" style="BigBlackNoteStyle" rect="[x:0 y:110 w:145 h:20]" id="54" zorder="500">
+                <CtrlLabel name="OctaveLabel_54" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="54" text="F#4" />
+                <CtrlLabel name="ArticLabel_54" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="54" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_51" style="BigBlackNoteStyle" rect="[x:0 y:190 w:145 h:20]" id="51" zorder="500">
+                <CtrlLabel name="OctaveLabel_51" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="51" text="D#4" />
+                <CtrlLabel name="ArticLabel_51" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="51" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_49" style="BigBlackNoteStyle" rect="[x:0 y:230 w:145 h:20]" id="49" zorder="500">
+                <CtrlLabel name="OctaveLabel_49" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="49" text="C#4" />
+                <CtrlLabel name="ArticLabel_49" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="49" text=" " />
+            </CtrlPanel>
+        </CtrlPanel>
+        <CtrlPanel name="CtrlPanel" rect="[x:0 y:1880 w:200 h:280]" id="504" zorder="5000">
+            <CtrlPanel name="Note_47" style="BigWhiteNoteStyle" rect="[x:0 y:0 w:175 h:40]" id="47" zorder="10">
+                <CtrlLabel name="OctaveLabel_47" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="47" text="B3" />
+                <CtrlLabel name="ArticLabel_47" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="47" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_45" style="BigWhiteNoteStyle" rect="[x:0 y:40 w:175 h:40]" id="45" zorder="10">
+                <CtrlLabel name="OctaveLabel_45" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="45" text="A3" />
+                <CtrlLabel name="ArticLabel_45" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="45" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_43" style="BigWhiteNoteStyle" rect="[x:0 y:80 w:175 h:40]" id="43" zorder="10">
+                <CtrlLabel name="OctaveLabel_43" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="43" text="G3" />
+                <CtrlLabel name="ArticLabel_43" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="43" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_41" style="BigWhiteNoteStyle" rect="[x:0 y:120 w:175 h:40]" id="41" zorder="10">
+                <CtrlLabel name="OctaveLabel_41" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="41" text="F3" />
+                <CtrlLabel name="ArticLabel_41" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="41" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_40" style="BigWhiteNoteStyle" rect="[x:0 y:160 w:175 h:40]" id="40" zorder="10">
+                <CtrlLabel name="OctaveLabel_40" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="40" text="E3" />
+                <CtrlLabel name="ArticLabel_40" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="40" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_38" style="BigWhiteNoteStyle" rect="[x:0 y:200 w:175 h:40]" id="38" zorder="10">
+                <CtrlLabel name="OctaveLabel_38" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="38" text="D3" />
+                <CtrlLabel name="ArticLabel_38" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="38" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_36" style="BigWhiteNoteStyle" rect="[x:0 y:240 w:175 h:40]" id="36" zorder="10">
+                <CtrlLabel name="OctaveLabel_36" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:30 h:20]" id="36" text="C3" />
+                <CtrlLabel name="ArticLabel_36" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="36" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_46" style="BigBlackNoteStyle" rect="[x:0 y:30 w:145 h:20]" id="46" zorder="500">
+                <CtrlLabel name="OctaveLabel_46" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="46" text="A#3" />
+                <CtrlLabel name="ArticLabel_46" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="46" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_44" style="BigBlackNoteStyle" rect="[x:0 y:70 w:145 h:20]" id="44" zorder="500">
+                <CtrlLabel name="OctaveLabel_44" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="44" text="G#3" />
+                <CtrlLabel name="ArticLabel_44" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="44" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_42" style="BigBlackNoteStyle" rect="[x:0 y:110 w:145 h:20]" id="42" zorder="500">
+                <CtrlLabel name="OctaveLabel_42" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="42" text="F#3" />
+                <CtrlLabel name="ArticLabel_42" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="42" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_39" style="BigBlackNoteStyle" rect="[x:0 y:190 w:145 h:20]" id="39" zorder="500">
+                <CtrlLabel name="OctaveLabel_39" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="39" text="D#3" />
+                <CtrlLabel name="ArticLabel_39" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="39" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_37" style="BigBlackNoteStyle" rect="[x:0 y:230 w:145 h:20]" id="37" zorder="500">
+                <CtrlLabel name="OctaveLabel_37" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="37" text="C#3" />
+                <CtrlLabel name="ArticLabel_37" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="37" text=" " />
+            </CtrlPanel>
+        </CtrlPanel>
+        <CtrlPanel name="CtrlPanel" rect="[x:0 y:2160 w:200 h:280]" id="503" zorder="5000">
+            <CtrlPanel name="Note_35" style="BigWhiteNoteStyle" rect="[x:0 y:0 w:175 h:40]" id="35" zorder="10">
+                <CtrlLabel name="OctaveLabel_35" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="35" text="B2" />
+                <CtrlLabel name="ArticLabel_35" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="35" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_33" style="BigWhiteNoteStyle" rect="[x:0 y:40 w:175 h:40]" id="33" zorder="10">
+                <CtrlLabel name="OctaveLabel_33" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="33" text="A2" />
+                <CtrlLabel name="ArticLabel_33" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="33" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_31" style="BigWhiteNoteStyle" rect="[x:0 y:80 w:175 h:40]" id="31" zorder="10">
+                <CtrlLabel name="OctaveLabel_31" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="31" text="G2" />
+                <CtrlLabel name="ArticLabel_31" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="31" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_29" style="BigWhiteNoteStyle" rect="[x:0 y:120 w:175 h:40]" id="29" zorder="10">
+                <CtrlLabel name="OctaveLabel_29" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="29" text="F2" />
+                <CtrlLabel name="ArticLabel_29" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="29" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_28" style="BigWhiteNoteStyle" rect="[x:0 y:160 w:175 h:40]" id="28" zorder="10">
+                <CtrlLabel name="OctaveLabel_28" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="28" text="E2" />
+                <CtrlLabel name="ArticLabel_28" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="28" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_26" style="BigWhiteNoteStyle" rect="[x:0 y:200 w:175 h:40]" id="26" zorder="10">
+                <CtrlLabel name="OctaveLabel_26" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="26" text="D2" />
+                <CtrlLabel name="ArticLabel_26" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="26" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_24" style="BigWhiteNoteStyle" rect="[x:0 y:240 w:175 h:40]" id="24" zorder="10">
+                <CtrlLabel name="OctaveLabel_24" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:30 h:20]" id="24" text="C2" />
+                <CtrlLabel name="ArticLabel_24" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="24" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_34" style="BigBlackNoteStyle" rect="[x:0 y:30 w:145 h:20]" id="34" zorder="500">
+                <CtrlLabel name="OctaveLabel_34" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="34" text="A#2" />
+                <CtrlLabel name="ArticLabel_34" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="34" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_32" style="BigBlackNoteStyle" rect="[x:0 y:70 w:145 h:20]" id="32" zorder="500">
+                <CtrlLabel name="OctaveLabel_32" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="32" text="G#2" />
+                <CtrlLabel name="ArticLabel_32" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="32" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_30" style="BigBlackNoteStyle" rect="[x:0 y:110 w:145 h:20]" id="30" zorder="500">
+                <CtrlLabel name="OctaveLabel_30" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="30" text="F#2" />
+                <CtrlLabel name="ArticLabel_30" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="30" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_27" style="BigBlackNoteStyle" rect="[x:0 y:190 w:145 h:20]" id="27" zorder="500">
+                <CtrlLabel name="OctaveLabel_27" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="27" text="D#2" />
+                <CtrlLabel name="ArticLabel_27" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="27" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_25" style="BigBlackNoteStyle" rect="[x:0 y:230 w:145 h:20]" id="25" zorder="500">
+                <CtrlLabel name="OctaveLabel_25" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="25" text="C#2" />
+                <CtrlLabel name="ArticLabel_25" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="25" text=" " />
+            </CtrlPanel>
+        </CtrlPanel>
+        <CtrlPanel name="CtrlPanel" rect="[x:0 y:2440 w:200 h:280]" id="502" zorder="5000">
+            <CtrlPanel name="Note_23" style="BigWhiteNoteStyle" rect="[x:0 y:0 w:175 h:40]" id="23" zorder="10">
+                <CtrlLabel name="OctaveLabel_23" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="23" text="B1" />
+                <CtrlLabel name="ArticLabel_23" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="23" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_21" style="BigWhiteNoteStyle" rect="[x:0 y:40 w:175 h:40]" id="21" zorder="10">
+                <CtrlLabel name="OctaveLabel_21" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="21" text="A1" />
+                <CtrlLabel name="ArticLabel_21" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="21" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_19" style="BigWhiteNoteStyle" rect="[x:0 y:80 w:175 h:40]" id="19" zorder="10">
+                <CtrlLabel name="OctaveLabel_19" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="19" text="G1" />
+                <CtrlLabel name="ArticLabel_19" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="19" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_17" style="BigWhiteNoteStyle" rect="[x:0 y:120 w:175 h:40]" id="17" zorder="10">
+                <CtrlLabel name="OctaveLabel_17" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="17" text="F1" />
+                <CtrlLabel name="ArticLabel_17" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="17" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_16" style="BigWhiteNoteStyle" rect="[x:0 y:160 w:175 h:40]" id="16" zorder="10">
+                <CtrlLabel name="OctaveLabel_16" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="16" text="E1" />
+                <CtrlLabel name="ArticLabel_16" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="16" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_14" style="BigWhiteNoteStyle" rect="[x:0 y:200 w:175 h:40]" id="14" zorder="10">
+                <CtrlLabel name="OctaveLabel_14" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="14" text="D1" />
+                <CtrlLabel name="ArticLabel_14" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="14" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_12" style="BigWhiteNoteStyle" rect="[x:0 y:240 w:175 h:40]" id="12" zorder="10">
+                <CtrlLabel name="OctaveLabel_12" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:30 h:20]" id="12" text="C1" />
+                <CtrlLabel name="ArticLabel_12" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="12" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_22" style="BigBlackNoteStyle" rect="[x:0 y:30 w:145 h:20]" id="22" zorder="500">
+                <CtrlLabel name="OctaveLabel_22" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="22" text="A#1" />
+                <CtrlLabel name="ArticLabel_22" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="22" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_20" style="BigBlackNoteStyle" rect="[x:0 y:70 w:145 h:20]" id="20" zorder="500">
+                <CtrlLabel name="OctaveLabel_20" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="20" text="G#1" />
+                <CtrlLabel name="ArticLabel_20" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="20" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_18" style="BigBlackNoteStyle" rect="[x:0 y:110 w:145 h:20]" id="18" zorder="500">
+                <CtrlLabel name="OctaveLabel_18" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="18" text="F#1" />
+                <CtrlLabel name="ArticLabel_18" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="18" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_15" style="BigBlackNoteStyle" rect="[x:0 y:190 w:145 h:20]" id="15" zorder="500">
+                <CtrlLabel name="OctaveLabel_15" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="15" text="D#1" />
+                <CtrlLabel name="ArticLabel_15" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="15" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_13" style="BigBlackNoteStyle" rect="[x:0 y:230 w:145 h:20]" id="13" zorder="500">
+                <CtrlLabel name="OctaveLabel_13" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="13" text="C#1" />
+                <CtrlLabel name="ArticLabel_13" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="13" text=" " />
+            </CtrlPanel>
+        </CtrlPanel>
+        <CtrlPanel name="CtrlPanel" rect="[x:0 y:2720 w:200 h:280]" id="501" zorder="5000">
+            <CtrlPanel name="Note_11" style="BigWhiteNoteStyle" rect="[x:0 y:0 w:175 h:40]" id="11" zorder="10">
+                <CtrlLabel name="OctaveLabel_11" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="11" text="B0" />
+                <CtrlLabel name="ArticLabel_11" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="11" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_9" style="BigWhiteNoteStyle" rect="[x:0 y:40 w:175 h:40]" id="9" zorder="10">
+                <CtrlLabel name="OctaveLabel_9" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="9" text="A0" />
+                <CtrlLabel name="ArticLabel_9" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="9" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_7" style="BigWhiteNoteStyle" rect="[x:0 y:80 w:175 h:40]" id="7" zorder="10">
+                <CtrlLabel name="OctaveLabel_7" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="7" text="G0" />
+                <CtrlLabel name="ArticLabel_7" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="7" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_5" style="BigWhiteNoteStyle" rect="[x:0 y:120 w:175 h:40]" id="5" zorder="10">
+                <CtrlLabel name="OctaveLabel_5" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="5" text="F0" />
+                <CtrlLabel name="ArticLabel_5" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="5" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_4" style="BigWhiteNoteStyle" rect="[x:0 y:160 w:175 h:40]" id="4" zorder="10">
+                <CtrlLabel name="OctaveLabel_4" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="4" text="E0" />
+                <CtrlLabel name="ArticLabel_4" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="4" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_2" style="BigWhiteNoteStyle" rect="[x:0 y:200 w:175 h:40]" id="2" zorder="10">
+                <CtrlLabel name="OctaveLabel_2" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:20 h:20]" id="2" text="D0" />
+                <CtrlLabel name="ArticLabel_2" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="2" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_0" style="BigWhiteNoteStyle" rect="[x:0 y:240 w:175 h:40]" id="0" zorder="10">
+                <CtrlLabel name="OctaveLabel_0" style="WhiteNoteLabelStyle" rect="[x:2 y:10 w:30 h:20]" id="0" text="C0" />
+                <CtrlLabel name="ArticLabel_0" style="WhiteNoteLabelStyle" rect="[x:30 y:10 w:143 h:20]" id="0" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_10" style="BigBlackNoteStyle" rect="[x:0 y:30 w:145 h:20]" id="10" zorder="500">
+                <CtrlLabel name="OctaveLabel_10" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="10" text="A#0" />
+                <CtrlLabel name="ArticLabel_10" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="10" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_8" style="BigBlackNoteStyle" rect="[x:0 y:70 w:145 h:20]" id="8" zorder="500">
+                <CtrlLabel name="OctaveLabel_8" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="8" text="G#0" />
+                <CtrlLabel name="ArticLabel_8" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="8" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_6" style="BigBlackNoteStyle" rect="[x:0 y:110 w:145 h:20]" id="6" zorder="500">
+                <CtrlLabel name="OctaveLabel_6" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="6" text="F#0" />
+                <CtrlLabel name="ArticLabel_6" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="6" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_3" style="BigBlackNoteStyle" rect="[x:0 y:190 w:145 h:20]" id="3" zorder="500">
+                <CtrlLabel name="OctaveLabel_3" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="3" text="D#0" />
+                <CtrlLabel name="ArticLabel_3" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="3" text=" " />
+            </CtrlPanel>
+            <CtrlPanel name="Note_1" style="BigBlackNoteStyle" rect="[x:0 y:230 w:145 h:20]" id="1" zorder="500">
+                <CtrlLabel name="OctaveLabel_1" style="BlackNoteLabelStyle" rect="[x:2 y:0 w:30 h:20]" id="1" text="C#0" />
+                <CtrlLabel name="ArticLabel_1" style="BlackNoteLabelStyle" rect="[x:30 y:0 w:143 h:20]" id="1" text=" " />
+            </CtrlPanel>
+        </CtrlPanel>
+    </CtrlPanel>
+</root>

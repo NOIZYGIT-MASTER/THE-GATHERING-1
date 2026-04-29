@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HVS Economics — How the Money Flows</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg:#0A0E17;--panel:#0F1420;--card:#141926;--hover:#1A2030;
+  --amber:#D4A017;--amber-dim:rgba(212,160,23,0.12);
+  --teal:#0D9488;--teal-dim:rgba(13,148,136,0.12);
+  --red:#FF4D6D;--red-dim:rgba(255,77,109,0.1);
+  --green:#00FFB3;--green-dim:rgba(0,255,179,0.1);
+  --blue:#3B82F6;--purple:#A855F7;
+  --text:#E2E8F0;--dim:#64748B;--muted:#475569;
+  --border:rgba(212,160,23,0.1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{background:var(--bg);color:var(--text);font-family:'IBM Plex Mono',monospace;min-height:100vh;}
+
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(212,160,23,0.015) 2px,rgba(212,160,23,0.015) 4px);pointer-events:none;z-index:1000;}
+
+.header{padding:40px 48px 28px;border-bottom:1px solid var(--border);text-align:center;}
+.header h1{font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-weight:300;color:var(--amber);letter-spacing:0.1em;}
+.header .sub{font-size:0.7rem;color:var(--dim);letter-spacing:0.2em;text-transform:uppercase;margin-top:6px;}
+
+/* North Star */
+.north-star{margin:28px 48px;padding:20px 28px;background:var(--amber-dim);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;}
+.north-star .principle{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--amber);font-weight:600;}
+.north-star .detail{font-size:0.7rem;color:var(--text);margin-top:6px;line-height:1.6;}
+
+/* Stats Row */
+.stats-row{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:24px 48px;}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;text-align:center;}
+.stat-value{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;line-height:1;}
+.stat-label{font-size:0.55rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--dim);margin-top:6px;}
+
+/* Money Flow */
+.flow-section{margin:32px 48px;}
+.section-title{font-size:0.65rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--dim);padding-bottom:12px;border-bottom:1px solid var(--border);margin-bottom:20px;}
+
+.money-flow{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;padding:24px 0;}
+.flow-node{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 24px;text-align:center;min-width:160px;transition:all 0.3s;}
+.flow-node:hover{border-color:var(--amber-glow);transform:translateY(-2px);}
+.flow-node-name{font-size:0.8rem;font-weight:600;margin-bottom:4px;}
+.flow-node-detail{font-size:0.58rem;color:var(--dim);line-height:1.4;}
+.flow-arrow{font-size:1.5rem;color:var(--amber);padding:0 8px;flex-shrink:0;}
+
+.flow-node.licensee{border-color:var(--blue);}
+.flow-node.licensee .flow-node-name{color:var(--blue);}
+.flow-node.platform{border-color:var(--amber);}
+.flow-node.platform .flow-node-name{color:var(--amber);}
+.flow-node.artist{border-color:var(--green);}
+.flow-node.artist .flow-node-name{color:var(--green);}
+.flow-node.union{border-color:var(--purple);}
+.flow-node.union .flow-node-name{color:var(--purple);}
+
+/* Split Visualization */
+.split-viz{display:flex;align-items:stretch;height:60px;border-radius:10px;overflow:hidden;margin:20px 0;}
+.split-bar{display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:600;color:white;transition:width 0.5s;}
+
+/* Tier Cards */
+.tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:20px 0;}
+.tier-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;position:relative;overflow:hidden;}
+.tier-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.tier-community::before{background:var(--teal);}
+.tier-standard::before{background:var(--amber);}
+.tier-premium::before{background:var(--purple);}
+.tier-name{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;margin-bottom:8px;}
+.tier-community .tier-name{color:var(--teal);}
+.tier-standard .tier-name{color:var(--amber);}
+.tier-premium .tier-name{color:var(--purple);}
+.tier-detail{font-size:0.62rem;color:var(--dim);line-height:1.6;}
+.tier-rate{font-size:0.68rem;color:var(--text);font-weight:500;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);}
+.tier-rate strong{color:var(--green);}
+.tier-zero{display:inline-block;margin-top:8px;padding:3px 10px;background:var(--green-dim);border-radius:10px;font-size:0.58rem;color:var(--green);font-weight:600;}
+
+/* Union Contribution */
+.union-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0;}
+.union-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;text-align:center;}
+.union-tier-name{font-size:0.75rem;font-weight:600;color:var(--text);margin-bottom:6px;}
+.union-pct{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--purple);}
+.union-keeps{font-size:0.6rem;color:var(--green);margin-top:4px;font-weight:500;}
+.union-detail{font-size:0.55rem;color:var(--dim);margin-top:8px;line-height:1.4;}
+
+/* Rate Table */
+.rate-table{width:100%;border-collapse:collapse;margin:20px 0;}
+.rate-table th{font-size:0.58rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--dim);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border);}
+.rate-table td{font-size:0.65rem;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.03);color:var(--text);}
+.rate-table tr:hover td{background:var(--hover);}
+.rate-event{color:var(--teal);font-weight:500;}
+.rate-amount{color:var(--green);font-weight:600;}
+.rate-split{color:var(--amber);font-size:0.58rem;}
+
+/* Kill Switch Economics */
+.kill-section{margin:24px 48px;padding:24px;background:var(--red-dim);border:1px solid rgba(255,77,109,0.2);border-radius:12px;}
+.kill-title{font-size:0.8rem;color:var(--red);font-weight:600;margin-bottom:8px;}
+.kill-detail{font-size:0.65rem;color:var(--dim);line-height:1.6;}
+.kill-detail strong{color:var(--red);}
+
+/* Descendant */
+.descendant-section{margin:24px 48px;padding:24px;background:var(--card);border:1px solid var(--border);border-radius:12px;}
+.descendant-name{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--amber);font-weight:600;}
+.descendant-lineage{font-size:0.65rem;color:var(--teal);margin-top:4px;}
+.descendant-desc{font-size:0.68rem;color:var(--dim);margin-top:10px;line-height:1.6;font-style:italic;}
+
+/* Footer */
+.footer{margin:40px 48px;padding:24px;text-align:center;border-top:1px solid var(--border);}
+.footer-text{font-size:0.6rem;color:var(--muted);line-height:1.6;}
+.footer-text strong{color:var(--amber);}
+
+@media(max-width:1024px){
+  .stats-row{grid-template-columns:1fr 1fr;}
+  .tier-grid{grid-template-columns:1fr;}
+  .union-grid{grid-template-columns:1fr 1fr;}
+  .money-flow{flex-direction:column;}
+  .flow-arrow{transform:rotate(90deg);}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>HVS ECONOMICS</h1>
+  <div class="sub">Human Voice Symphony &mdash; How the Money Flows</div>
+</div>
+
+<div class="north-star">
+  <div class="principle">This system protects all but favours the artists.</div>
+  <div class="detail">AI voices are Descendants, not clones. The artist pays $0. The licensee pays all. 75% flows to the artist. 25% to NOIZY.AI. Union contributions come from the artist's share, dynamically calculated from their Tracked &amp; Stacked profile data.</div>
+</div>
+
+<!-- STATS ROW -->
+<div class="stats-row">
+  <div class="stat-card">
+    <div class="stat-value" style="color:var(--green);">75%</div>
+    <div class="stat-label">Artist Share</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value" style="color:var(--amber);">25%</div>
+    <div class="stat-label">NOIZY.AI Share</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value" style="color:var(--green);">$0</div>
+    <div class="stat-label">Artist Cost (Always)</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value" style="color:var(--purple);">2&ndash;10%</div>
+    <div class="stat-label">Union Contribution</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value" style="color:var(--red);">$0</div>
+    <div class="stat-label">Revocation Cost to Artist</div>
+  </div>
+</div>
+
+<!-- MONEY FLOW -->
+<div class="flow-section">
+  <div class="section-title">The Flow &mdash; Every Dollar Traced</div>
+  <div class="money-flow">
+    <div class="flow-node licensee">
+      <div class="flow-node-name">LICENSEE</div>
+      <div class="flow-node-detail">Pays 100% of all fees<br>Access, per-utterance, monthly, broadcast</div>
+    </div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-node platform">
+      <div class="flow-node-name">NOIZY.AI</div>
+      <div class="flow-node-detail">Receives 25%<br>Hosting, infrastructure, improvements</div>
+    </div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-node artist">
+      <div class="flow-node-name">ARTIST</div>
+      <div class="flow-node-detail">Receives 75%<br>Pays $0 in. Earns from every utterance.</div>
+    </div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-node union">
+      <div class="flow-node-name">UNION FUND</div>
+      <div class="flow-node-detail">Receives 2&ndash;10% from artist share<br>Pension, health, collective protection</div>
+    </div>
+  </div>
+
+  <!-- Split Visualization -->
+  <div style="margin-top:24px;">
+    <div style="font-size:0.6rem;color:var(--dim);margin-bottom:8px;text-align:center;">Example: $1,000 Licensee Payment &mdash; Legend Tier Artist (10% union)</div>
+    <div class="split-viz">
+      <div class="split-bar" style="width:65%;background:var(--green);">$650 Artist</div>
+      <div class="split-bar" style="width:10%;background:var(--purple);">$100 Union</div>
+      <div class="split-bar" style="width:25%;background:var(--amber);">$250 NOIZY.AI</div>
+    </div>
+    <div style="font-size:0.6rem;color:var(--dim);margin-top:8px;text-align:center;">Example: $1,000 Licensee Payment &mdash; Emerging Artist (2% union)</div>
+    <div class="split-viz">
+      <div class="split-bar" style="width:73%;background:var(--green);">$730 Artist</div>
+      <div class="split-bar" style="width:2%;background:var(--purple);font-size:0.5rem;">$20</div>
+      <div class="split-bar" style="width:25%;background:var(--amber);">$250 NOIZY.AI</div>
+    </div>
+  </div>
+</div>
+
+<!-- DESCENDANT TIERS -->
+<div class="flow-section">
+  <div class="section-title">Descendant Tiers &mdash; How Licensees Access Voice</div>
+  <div class="tier-grid">
+    <div class="tier-card tier-community">
+      <div class="tier-name">Community Descendant</div>
+      <div class="tier-detail">Indie creators, students, podcasters, non-commercial projects. Low barrier, full protection. Every Descendant is watermarked and tracked.</div>
+      <div class="tier-rate">Licensee pays: <strong>from $25/project</strong></div>
+      <div class="tier-rate">Per utterance: <strong>$0.01</strong> &bull; Per second: <strong>$0.01</strong></div>
+      <div class="tier-zero">Artist cost: $0</div>
+    </div>
+    <div class="tier-card tier-standard">
+      <div class="tier-name">Standard Descendant</div>
+      <div class="tier-detail">Commercial voiceover, regional ads, corporate video, apps, e-learning. Union minimums enforced. Per-use consent required.</div>
+      <div class="tier-rate">Licensee pays: <strong>from $500/project</strong></div>
+      <div class="tier-rate">Per utterance: <strong>$0.05</strong> &bull; Per second: <strong>$0.02</strong> &bull; Monthly: <strong>$99</strong></div>
+      <div class="tier-zero">Artist cost: $0</div>
+    </div>
+    <div class="tier-card tier-premium">
+      <div class="tier-name">Premium Descendant</div>
+      <div class="tier-detail">National broadcast, major games, film, streaming, brand voice. Custom terms. Union oversight. Exclusivity available at 3x.</div>
+      <div class="tier-rate">Licensee pays: <strong>from $5,000/term</strong></div>
+      <div class="tier-rate">Per utterance: <strong>$0.10</strong> &bull; Per second: <strong>$0.05</strong> &bull; Monthly: <strong>$499</strong></div>
+      <div class="tier-zero">Artist cost: $0</div>
+    </div>
+  </div>
+</div>
+
+<!-- UNION CONTRIBUTION TIERS -->
+<div class="flow-section">
+  <div class="section-title">Union Contribution &mdash; Tracked &amp; Stacked Profile Data</div>
+  <div class="union-grid">
+    <div class="union-card">
+      <div class="union-tier-name">Emerging</div>
+      <div class="union-pct">2%</div>
+      <div class="union-keeps">Artist keeps 73%</div>
+      <div class="union-detail">New to platform. Building profile. Lowest contribution to encourage growth.</div>
+    </div>
+    <div class="union-card">
+      <div class="union-tier-name">Established</div>
+      <div class="union-pct">5%</div>
+      <div class="union-keeps">Artist keeps 70%</div>
+      <div class="union-detail">3+ years, $10K+ earned, 2+ Descendants. Consistent contributor.</div>
+    </div>
+    <div class="union-card">
+      <div class="union-tier-name">Veteran</div>
+      <div class="union-pct">8%</div>
+      <div class="union-keeps">Artist keeps 67%</div>
+      <div class="union-detail">10+ years, $50K+ earned, 5+ Descendants. Guild backbone.</div>
+    </div>
+    <div class="union-card">
+      <div class="union-tier-name">Legend</div>
+      <div class="union-pct">10%</div>
+      <div class="union-keeps">Artist keeps 65%</div>
+      <div class="union-detail">20+ years, $100K+ earned, 10+ Descendants. Their success protects everyone.</div>
+    </div>
+  </div>
+</div>
+
+<!-- RATE TABLE -->
+<div class="flow-section">
+  <div class="section-title">Complete Rate Schedule &mdash; All Fees Licensee-Facing</div>
+  <table class="rate-table">
+    <thead>
+      <tr>
+        <th>Rate</th>
+        <th>Trigger</th>
+        <th>Amount</th>
+        <th>Split</th>
+        <th>Frequency</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Descendant Access</td><td class="rate-event">License granted</td><td class="rate-amount">$500+</td><td class="rate-split">75/25</td><td>Per project</td></tr>
+      <tr><td>Per-Utterance Royalty</td><td class="rate-event">Audio generated</td><td class="rate-amount">$0.01&ndash;$0.10</td><td class="rate-split">75/25</td><td>Per event</td></tr>
+      <tr><td>Per-Second Audio</td><td class="rate-event">Audio generated</td><td class="rate-amount">$0.01&ndash;$0.05</td><td class="rate-split">75/25</td><td>Per event</td></tr>
+      <tr><td>Monthly Active</td><td class="rate-event">Month start</td><td class="rate-amount">$99&ndash;$499</td><td class="rate-split">75/25</td><td>Monthly</td></tr>
+      <tr><td>Broadcast License</td><td class="rate-event">License granted</td><td class="rate-amount">$5,000+</td><td class="rate-split">75/25</td><td>Per term</td></tr>
+      <tr><td>Community Access</td><td class="rate-event">License granted</td><td class="rate-amount">$25+</td><td class="rate-split">75/25</td><td>Per project</td></tr>
+      <tr><td>Exclusivity Buyout</td><td class="rate-event">Exclusivity granted</td><td class="rate-amount">3x base</td><td class="rate-split">75/25</td><td>Per term</td></tr>
+      <tr><td style="color:var(--red);">Revocation Fee</td><td class="rate-event">Consent revoked</td><td class="rate-amount">$1,000</td><td class="rate-split" style="color:var(--red);">50/50 platform/union</td><td>One-time</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- KILL SWITCH -->
+<div class="kill-section">
+  <div class="kill-title">Kill Switch Economics</div>
+  <div class="kill-detail">When an artist revokes consent, the <strong>$1,000 revocation fee is charged to the LICENSEE</strong> &mdash; not the artist. The artist pays $0 to say no. Ever. 50% of the revocation fee covers NOIZY.AI's decommissioning costs. 50% goes to the union fund. The cost of saying no falls on the entity that profited from the Descendant.</div>
+</div>
+
+<!-- FOUNDING DESCENDANT -->
+<div class="descendant-section">
+  <div style="font-size:0.55rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--dim);margin-bottom:8px;">Founding Descendant</div>
+  <div class="descendant-name">RSP Descendant Alpha</div>
+  <div class="descendant-lineage">Generation 1 &bull; Direct Lineage &bull; VOX_MC96_UNIVERSE_001 &bull; Consent: Jan 6, 2026</div>
+  <div class="descendant-desc">The founding Descendant of Robert Stephen Plowman &mdash; 40 years of composition, sound design, and voice artistry carried forward into the AI epoch with full consent, full ownership, full dignity.</div>
+</div>
+
+<div class="footer">
+  <div class="footer-text"><strong>HVS &mdash; Human Voice Symphony</strong><br>A consent-native voice system where artists control the terms, and value accrues to the creator every time the identity is used.<br>Designed by <strong>Robert Stephen Plowman</strong> &bull; Built on <strong>NOIZY.AI</strong> &bull; Powered by <strong>GABRIEL</strong></div>
+</div>
+
+</body>
+</html>

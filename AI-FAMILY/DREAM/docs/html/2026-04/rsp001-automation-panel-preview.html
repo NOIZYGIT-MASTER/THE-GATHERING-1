@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RSP_001 Automation Panel — NOIZY HEAVEN17 Console</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<style>
+  :root {
+    --bg: #030306;
+    --surface: #0d0d14;
+    --card: #111119;
+    --border: #1a1a28;
+    --gold: #c9a84c;
+    --gold-dim: #7a6830;
+    --text: #e0ddd5;
+    --text-dim: #6b6862;
+    --green: #4ade80;
+    --red: #ef4444;
+    --blue: #60a5fa;
+    --yellow: #fbbf24;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); }
+  .mono { font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace; }
+
+  /* Header */
+  .header { border-bottom: 1px solid var(--border); padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
+  .header h1 { font-size: 1.1em; font-weight: 600; }
+  .header h1 .brand { color: var(--gold); }
+  .header h1 .sub { color: var(--text-dim); font-weight: 400; }
+  .header .meta { font-size: 0.7em; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.12em; margin-top: 2px; }
+  .live-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 20px; background: rgba(74,222,128,0.08); border: 1px solid rgba(74,222,128,0.2); color: var(--green); font-size: 0.72em; font-weight: 600; }
+  .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+  /* Tabs */
+  .tabs { display: flex; border-bottom: 1px solid var(--border); padding: 0 24px; overflow-x: auto; }
+  .tab { padding: 12px 16px; font-size: 0.82em; color: var(--text-dim); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: all 0.2s; }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+  /* Main */
+  .main { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+  /* Cards */
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-bottom: 16px; }
+  .card h3 { font-size: 0.78em; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; font-weight: 600; }
+
+  /* Stats */
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 20px; }
+  .stat { border-radius: 8px; padding: 16px; border: 1px solid; }
+  .stat .val { font-size: 1.6em; font-weight: 700; display: block; }
+  .stat .lbl { font-size: 0.72em; color: var(--text-dim); margin-top: 4px; }
+  .stat-gold { background: rgba(201,168,76,0.06); border-color: rgba(201,168,76,0.15); }
+  .stat-gold .val { color: var(--gold); }
+  .stat-green { background: rgba(74,222,128,0.06); border-color: rgba(74,222,128,0.15); }
+  .stat-green .val { color: var(--green); }
+  .stat-blue { background: rgba(96,165,250,0.06); border-color: rgba(96,165,250,0.15); }
+  .stat-blue .val { color: var(--blue); }
+  .stat-red { background: rgba(239,68,68,0.06); border-color: rgba(239,68,68,0.15); }
+  .stat-red .val { color: var(--red); }
+
+  /* Status badges */
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 0.7em; font-weight: 600; border: 1px solid; }
+  .badge-green { background: rgba(74,222,128,0.1); border-color: rgba(74,222,128,0.25); color: var(--green); }
+  .badge-yellow { background: rgba(251,191,36,0.1); border-color: rgba(251,191,36,0.25); color: var(--yellow); }
+  .badge-red { background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.25); color: var(--red); }
+  .badge-blue { background: rgba(96,165,250,0.1); border-color: rgba(96,165,250,0.25); color: var(--blue); }
+
+  /* Token cards */
+  .token-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-bottom: 12px; }
+  .token-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+  .token-header h4 { font-size: 0.95em; font-weight: 600; }
+  .token-header .id { font-size: 0.72em; color: var(--text-dim); margin-top: 2px; }
+  .token-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; font-size: 0.85em; }
+  .token-grid .label { display: block; font-size: 0.75em; color: var(--text-dim); margin-bottom: 2px; }
+  .token-actions { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); display: flex; gap: 8px; }
+
+  /* Buttons */
+  .btn { padding: 6px 14px; border-radius: 6px; font-size: 0.78em; font-weight: 600; cursor: pointer; border: 1px solid; transition: all 0.2s; }
+  .btn-gold { background: rgba(201,168,76,0.1); border-color: rgba(201,168,76,0.3); color: var(--gold); }
+  .btn-gold:hover { background: rgba(201,168,76,0.2); }
+  .btn-red { background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.3); color: var(--red); }
+  .btn-red:hover { background: rgba(239,68,68,0.2); }
+  .btn-red-solid { background: var(--red); border-color: var(--red); color: #fff; }
+  .btn-red-solid:hover { background: #dc2626; }
+  .btn-ghost { background: transparent; border-color: var(--border); color: var(--text-dim); }
+  .btn-ghost:hover { background: var(--surface); color: var(--text); }
+
+  /* Never Clause dots */
+  .clause-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .clause { display: flex; align-items: center; gap: 8px; font-size: 0.78em; padding: 4px 0; }
+  .clause-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
+
+  /* Info rows */
+  .info-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 0.85em; border-bottom: 1px solid rgba(255,255,255,0.03); }
+  .info-row .k { color: var(--text-dim); }
+
+  /* Table */
+  .table { width: 100%; border-collapse: collapse; font-size: 0.82em; }
+  .table th { text-align: left; padding: 10px 16px; font-size: 0.72em; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; border-bottom: 1px solid var(--border); }
+  .table td { padding: 10px 16px; border-bottom: 1px solid rgba(255,255,255,0.03); }
+  .table tr:hover td { background: rgba(201,168,76,0.02); }
+  .text-right { text-align: right; }
+
+  /* Vault layers */
+  .layers { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+  .layer { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 14px; }
+  .layer .layer-label { font-size: 0.68em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+
+  /* Kill switch zone */
+  .kill-zone { background: rgba(239,68,68,0.03); border: 1px solid rgba(239,68,68,0.15); border-radius: 8px; padding: 24px; }
+  .kill-zone h3 { color: var(--red); font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+  .radio-item { display: flex; align-items: center; gap: 10px; padding: 10px 14px; margin-bottom: 6px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 6px; cursor: pointer; transition: border-color 0.2s; }
+  .radio-item:hover { border-color: rgba(239,68,68,0.3); }
+  .radio-item input { accent-color: var(--red); }
+  .radio-item .r-name { font-size: 0.88em; font-weight: 600; flex: 1; }
+  .radio-item .r-meta { font-size: 0.72em; color: var(--text-dim); }
+
+  .confirm-box { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.3); border-radius: 6px; padding: 16px; margin-top: 12px; }
+  .confirm-box p { font-size: 0.82em; color: rgba(239,68,68,0.7); margin-bottom: 10px; }
+  .confirm-box .strong { color: var(--red); font-weight: 600; }
+
+  /* Alert banner */
+  .alert-banner { background: rgba(239,68,68,0.08); border-bottom: 1px solid rgba(239,68,68,0.2); padding: 10px 24px; font-size: 0.82em; color: rgba(239,68,68,0.8); display: flex; align-items: center; gap: 8px; }
+  .alert-banner strong { color: var(--red); }
+
+  /* Detection cards */
+  .detection-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-bottom: 12px; }
+  .detection-card.confirmed { border-color: rgba(239,68,68,0.3); }
+
+  /* Footer */
+  .footer { border-top: 1px solid var(--border); padding: 16px 24px; display: flex; justify-content: space-between; font-size: 0.7em; color: var(--text-dim); margin-top: 40px; }
+
+  /* Panel hidden */
+  .panel { display: none; }
+  .panel.visible { display: block; }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .clause-grid { grid-template-columns: 1fr; }
+    .token-grid { grid-template-columns: 1fr 1fr; }
+    .layers { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div>
+    <h1><span class="brand">NOIZY</span> <span class="sub">/ RSP_001 Automation Panel</span></h1>
+    <div class="meta">Heaven17 Console &mdash; Founding Actor Command Center</div>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="live-badge"><span class="live-dot"></span>HEAVEN17 LIVE</span>
+    <span style="font-size:0.75em;color:var(--text-dim);" class="mono">RSP_001</span>
+  </div>
+</div>
+
+<!-- Alert Banner (hidden by default) -->
+<div class="alert-banner" id="alertBanner" style="display:none;">
+  <strong>KILL SWITCH ACTIVATED</strong> &mdash; Token revoked. All future syntheses blocked. Licensee notified. Ledger updated.
+</div>
+
+<!-- Tabs -->
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('overview')">Overview</div>
+  <div class="tab" onclick="switchTab('tokens')">Consent Tokens</div>
+  <div class="tab" onclick="switchTab('voicedna')">Voice DNA</div>
+  <div class="tab" onclick="switchTab('royalties')">Royalties</div>
+  <div class="tab" onclick="switchTab('enforcement')">Enforcement</div>
+  <div class="tab" onclick="switchTab('killswitch')">Kill Switch</div>
+</div>
+
+<div class="main">
+
+  <!-- OVERVIEW -->
+  <div class="panel visible" id="panel-overview">
+    <div class="stats-grid">
+      <div class="stat stat-gold"><span class="val" id="stat-tokens">2</span><span class="lbl">Active Tokens</span></div>
+      <div class="stat stat-blue"><span class="val">2,950</span><span class="lbl">Total Syntheses</span></div>
+      <div class="stat stat-green"><span class="val">$11,700</span><span class="lbl">Artist Revenue (MTD)</span></div>
+      <div class="stat stat-red"><span class="val">2</span><span class="lbl">Detection Alerts</span></div>
+    </div>
+
+    <div class="card">
+      <h3>Voice DNA Vault</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;font-size:0.85em;">
+        <div><span style="color:var(--text-dim);display:block;font-size:0.8em;">Actor ID</span><span class="mono">RSP_001</span></div>
+        <div><span style="color:var(--text-dim);display:block;font-size:0.8em;">Sessions</span>47</div>
+        <div><span style="color:var(--text-dim);display:block;font-size:0.8em;">Reference Hours</span>28.5h</div>
+        <div><span style="color:var(--text-dim);display:block;font-size:0.8em;">Match Threshold</span>95%</div>
+        <div><span style="color:var(--text-dim);display:block;font-size:0.8em;">Status</span><span class="badge badge-green">active</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="color:var(--red);">Constitutional Never Clauses</h3>
+      <div class="clause-grid">
+        <div class="clause"><span class="clause-dot"></span><span class="mono" style="font-size:0.75em;">NO_VOICE_EXPORT_WITHOUT_CONSENT_KEY</span></div>
+        <div class="clause"><span class="clause-dot"></span><span class="mono" style="font-size:0.75em;">NO_MODEL_TRAINING_OUTSIDE_APPROVED_SCOPE</span></div>
+        <div class="clause"><span class="clause-dot"></span><span class="mono" style="font-size:0.75em;">NO_IDENTITY_IMPERSONATION</span></div>
+        <div class="clause"><span class="clause-dot"></span><span class="mono" style="font-size:0.75em;">NO_SUBLICENSING</span></div>
+        <div class="clause"><span class="clause-dot"></span><span class="mono" style="font-size:0.75em;">NO_NSFW</span></div>
+        <div class="clause"><span class="clause-dot"></span><span class="mono" style="font-size:0.75em;">NO_POLITICAL_PERSUASION</span></div>
+        <div class="clause"><span class="clause-dot"></span><span class="mono" style="font-size:0.75em;">NO_MEDICAL_ADVICE</span></div>
+      </div>
+      <p style="font-size:0.72em;color:var(--text-dim);margin-top:12px;">Immutable. Constitutional-level law. If this list changes, governance hashes must recompile.</p>
+    </div>
+  </div>
+
+  <!-- CONSENT TOKENS -->
+  <div class="panel" id="panel-tokens">
+    <div class="token-card" id="token-meridian">
+      <div class="token-header"><div><h4>Meridian Studios</h4><div class="id mono">hvs_tk_001</div></div><span class="badge badge-green">active</span></div>
+      <div class="token-grid">
+        <div><span class="label">Scope</span>commercial broadcast</div>
+        <div><span class="label">Territory</span>USA_CA_NY</div>
+        <div><span class="label">Expires</span>2026-12-25</div>
+        <div><span class="label">Syntheses</span>847</div>
+      </div>
+      <div class="token-actions">
+        <button class="btn btn-gold">Pause Token</button>
+        <button class="btn btn-red" onclick="armKillSwitch('hvs_tk_001','Meridian Studios')">Revoke (Kill Switch)</button>
+      </div>
+    </div>
+
+    <div class="token-card" id="token-neonwave">
+      <div class="token-header"><div><h4>NeonWave Records</h4><div class="id mono">hvs_tk_002</div></div><span class="badge badge-green">active</span></div>
+      <div class="token-grid">
+        <div><span class="label">Scope</span>personal podcast</div>
+        <div><span class="label">Territory</span>GLOBAL</div>
+        <div><span class="label">Expires</span>2027-03-15</div>
+        <div><span class="label">Syntheses</span>2,103</div>
+      </div>
+      <div class="token-actions">
+        <button class="btn btn-gold">Pause Token</button>
+        <button class="btn btn-red" onclick="armKillSwitch('hvs_tk_002','NeonWave Records')">Revoke (Kill Switch)</button>
+      </div>
+    </div>
+
+    <div class="token-card">
+      <div class="token-header"><div><h4>Apex Media Group</h4><div class="id mono">hvs_tk_003</div></div><span class="badge badge-yellow">paused</span></div>
+      <div class="token-grid">
+        <div><span class="label">Scope</span>enterprise film</div>
+        <div><span class="label">Territory</span>EU_UK</div>
+        <div><span class="label">Expires</span>2026-09-30</div>
+        <div><span class="label">Syntheses</span>156</div>
+      </div>
+    </div>
+
+    <div class="token-card">
+      <div class="token-header"><div><h4>SynthLab AI</h4><div class="id mono">hvs_tk_004</div></div><span class="badge badge-red">revoked</span></div>
+      <div class="token-grid">
+        <div><span class="label">Scope</span>commercial broadcast</div>
+        <div><span class="label">Territory</span>APAC</div>
+        <div><span class="label">Expires</span>2026-06-01</div>
+        <div><span class="label">Syntheses</span>0</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VOICE DNA -->
+  <div class="panel" id="panel-voicedna">
+    <div class="card">
+      <h3>Biometric Profile</h3>
+      <div class="info-row"><span class="k">Actor ID</span><span class="mono">RSP_001</span></div>
+      <div class="info-row"><span class="k">Voice DNA Hash</span><span class="mono" style="font-size:0.78em;">sha256:7f4a9e2c8b1d3f6a...</span></div>
+      <div class="info-row"><span class="k">Registered</span>June 15, 2025</div>
+      <div class="info-row"><span class="k">Last Certified</span>March 25, 2026</div>
+      <div class="info-row"><span class="k">Match Threshold</span>95% (legal threshold for prosecution)</div>
+      <div class="info-row"><span class="k">Sessions Recorded</span>47</div>
+      <div class="info-row"><span class="k">Hours of Reference</span>28.5h</div>
+      <div class="info-row"><span class="k">Encryption</span>AES-256 (migrating to ML-KEM Q3 2026)</div>
+      <div class="info-row"><span class="k">Training Access</span><span style="color:var(--red);">LOCKED — Never used for fine-tuning</span></div>
+      <div class="info-row"><span class="k">Next Re-Certification</span>June 15, 2026</div>
+    </div>
+    <div class="card">
+      <h3>Three-Layer Watermarking Architecture</h3>
+      <div class="layers">
+        <div class="layer"><div class="layer-label" style="color:var(--green);">Spectral Layer</div><p style="font-size:0.82em;color:var(--text-dim);">DWPT watermark. Inaudible. &lt;0.2dB SNR loss. Survives MP3/AAC/Opus. Encodes consent_token, date, territory.</p></div>
+        <div class="layer"><div class="layer-label" style="color:var(--blue);">C2PA Layer</div><p style="font-size:0.82em;color:var(--text-dim);">v2.2 manifest. Cryptographic signing via HEAVEN17. Full provenance chain. Tamper-evident hash chain.</p></div>
+        <div class="layer"><div class="layer-label" style="color:var(--gold);">Ledger Layer</div><p style="font-size:0.82em;color:var(--text-dim);">Append-only hash chain. Indexed by output SHA-256. Forensic evidence grade. Court-admissible.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROYALTIES -->
+  <div class="panel" id="panel-royalties">
+    <div class="stats-grid" style="grid-template-columns:repeat(3,1fr);">
+      <div class="stat stat-green"><span class="val">$11,700</span><span class="lbl">Artist Share (MTD)</span></div>
+      <div class="stat stat-gold"><span class="val">$15,600</span><span class="lbl">Gross Revenue (MTD)</span></div>
+      <div class="stat stat-blue"><span class="val">75 / 25</span><span class="lbl">Split Integrity</span></div>
+    </div>
+    <div class="card" style="padding:0;overflow:hidden;">
+      <table class="table">
+        <thead>
+          <tr><th>Date</th><th>Licensee</th><th class="text-right">Gross</th><th class="text-right">Your 75%</th><th class="text-right">NOIZY 25%</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="mono" style="font-size:0.8em;">2026-04-02</td><td>Meridian Studios</td><td class="text-right mono">$3,200</td><td class="text-right mono" style="color:var(--green);">$2,400</td><td class="text-right mono" style="color:var(--text-dim);">$800</td><td><span class="badge badge-green">paid</span></td></tr>
+          <tr><td class="mono" style="font-size:0.8em;">2026-04-03</td><td>NeonWave Records</td><td class="text-right mono">$1,800</td><td class="text-right mono" style="color:var(--green);">$1,350</td><td class="text-right mono" style="color:var(--text-dim);">$450</td><td><span class="badge badge-green">paid</span></td></tr>
+          <tr><td class="mono" style="font-size:0.8em;">2026-04-04</td><td>Apex Media Group</td><td class="text-right mono">$8,500</td><td class="text-right mono" style="color:var(--green);">$6,375</td><td class="text-right mono" style="color:var(--text-dim);">$2,125</td><td><span class="badge badge-yellow">scheduled</span></td></tr>
+          <tr><td class="mono" style="font-size:0.8em;">2026-04-05</td><td>Meridian Studios</td><td class="text-right mono">$2,100</td><td class="text-right mono" style="color:var(--green);">$1,575</td><td class="text-right mono" style="color:var(--text-dim);">$525</td><td><span class="badge badge-blue">pending</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:0.72em;color:var(--text-dim);margin-top:12px;">75/25 split burned into code at database level. Creator Council cannot change without 75% Guild Assembly supermajority. T+3 automatic payout.</p>
+  </div>
+
+  <!-- ENFORCEMENT -->
+  <div class="panel" id="panel-enforcement">
+    <div class="detection-card">
+      <div class="token-header">
+        <div><h4>C2PA Mismatch &mdash; YouTube</h4><div class="id">April 5, 2026 &mdash; 08:12 UTC</div></div>
+        <span class="badge badge-yellow">investigating</span>
+      </div>
+      <div class="token-grid">
+        <div><span class="label">Similarity Score</span><span style="color:var(--red);font-weight:700;">97.0%</span></div>
+        <div><span class="label">Platform</span>YouTube</div>
+        <div><span class="label">Evidence</span><span class="mono" style="color:var(--blue);font-size:0.82em;">det_001</span></div>
+      </div>
+    </div>
+
+    <div class="detection-card confirmed">
+      <div class="token-header">
+        <div><h4>Community Report &mdash; TikTok</h4><div class="id">April 4, 2026 &mdash; 22:45 UTC</div></div>
+        <span class="badge badge-red">confirmed</span>
+      </div>
+      <div class="token-grid">
+        <div><span class="label">Similarity Score</span><span style="color:var(--yellow);font-weight:700;">91.0%</span></div>
+        <div><span class="label">Platform</span>TikTok</div>
+        <div><span class="label">Evidence</span><span class="mono" style="color:var(--blue);font-size:0.82em;">det_002</span></div>
+      </div>
+      <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border);">
+        <p style="font-size:0.78em;color:rgba(239,68,68,0.7);margin-bottom:10px;">Similarity &gt; 85%: Probable match. Expert review required. Escalation recommended.</p>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-red">Issue Cease & Desist</button>
+          <button class="btn btn-gold">DMCA Takedown</button>
+          <button class="btn btn-ghost">Escalate to Litigation</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KILL SWITCH -->
+  <div class="panel" id="panel-killswitch">
+    <p style="font-size:0.88em;color:var(--text-dim);margin-bottom:20px;">Instant, irreversible consent token revocation. All future syntheses under the target token will fail. Licensees notified by webhook. Ledger records immutable revocation event.</p>
+
+    <div class="kill-zone">
+      <h3>Select Token to Revoke</h3>
+      <div id="killTargets"></div>
+      <div id="killConfirm" style="display:none;"></div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <h3 style="color:var(--text-dim);">Kill Switch Protocol</h3>
+      <p class="mono" style="font-size:0.82em;color:var(--gold);margin-bottom:8px;">POST /heaven17.noizylab.workers.dev/tokens/{token_id}/revoke</p>
+      <p style="font-size:0.82em;color:var(--text-dim);">Once revoked: All future syntheses fail (Covenant Validator rejects). Platform webhooks fire. Licensee notified. Ledger records immutable revocation. C2PA credential marked "consent revoked."</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <span>NOIZY / HEAVEN17 Console v1.0 &mdash; The Plowman Standard</span>
+  <span>RSP_001 &mdash; Robert Stephen Plowman &mdash; April 5, 2026</span>
+</div>
+
+<script>
+// State
+let activeTokens = [
+  { id: 'hvs_tk_001', name: 'Meridian Studios', syntheses: 847 },
+  { id: 'hvs_tk_002', name: 'NeonWave Records', syntheses: 2103 }
+];
+let killTarget = null;
+
+function switchTab(tabId) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('visible'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + tabId).classList.add('visible');
+  event.target.classList.add('active');
+  if (tabId === 'killswitch') renderKillTargets();
+}
+
+function renderKillTargets() {
+  const container = document.getElementById('killTargets');
+  if (activeTokens.length === 0) {
+    container.innerHTML = '<p style="font-size:0.85em;color:var(--text-dim);font-style:italic;">No active tokens to revoke.</p>';
+    return;
+  }
+  container.innerHTML = activeTokens.map(t => `
+    <div class="radio-item" onclick="selectKillTarget('${t.id}','${t.name}')">
+      <input type="radio" name="killTarget" ${killTarget === t.id ? 'checked' : ''}>
+      <span class="r-name">${t.name}</span>
+      <span class="mono r-meta">${t.id}</span>
+      <span class="r-meta">${t.syntheses.toLocaleString()} syntheses</span>
+    </div>
+  `).join('') + (killTarget ? `<button class="btn btn-red" style="margin-top:12px;" onclick="showConfirm()">Arm Kill Switch for ${killTarget}</button>` : '');
+}
+
+function selectKillTarget(id, name) {
+  killTarget = id;
+  document.getElementById('killConfirm').style.display = 'none';
+  renderKillTargets();
+}
+
+function showConfirm() {
+  const token = activeTokens.find(t => t.id === killTarget);
+  document.getElementById('killConfirm').style.display = 'block';
+  document.getElementById('killConfirm').innerHTML = `
+    <div class="confirm-box">
+      <p class="strong">CONFIRM REVOCATION</p>
+      <p>This will immediately revoke <span class="mono">${killTarget}</span> (${token.name}). All future syntheses will fail. Licensee receives instant webhook notification. This action is logged to the immutable ledger and cannot be undone.</p>
+      <div style="display:flex;gap:8px;margin-top:12px;">
+        <button class="btn btn-red-solid" onclick="fireKillSwitch()">FIRE KILL SWITCH</button>
+        <button class="btn btn-ghost" onclick="standDown()">Stand Down</button>
+      </div>
+    </div>
+  `;
+}
+
+function fireKillSwitch() {
+  activeTokens = activeTokens.filter(t => t.id !== killTarget);
+  document.getElementById('alertBanner').style.display = 'flex';
+  document.getElementById('stat-tokens').textContent = activeTokens.length;
+  killTarget = null;
+  document.getElementById('killConfirm').style.display = 'none';
+  renderKillTargets();
+  setTimeout(() => { document.getElementById('alertBanner').style.display = 'none'; }, 4000);
+}
+
+function standDown() {
+  killTarget = null;
+  document.getElementById('killConfirm').style.display = 'none';
+  renderKillTargets();
+}
+
+function armKillSwitch(id, name) {
+  killTarget = id;
+  switchTab('killswitch');
+  // Re-set tab active state
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab')[5].classList.add('active');
+  renderKillTargets();
+  showConfirm();
+}
+</script>
+</body>
+</html>

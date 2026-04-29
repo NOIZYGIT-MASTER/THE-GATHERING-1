@@ -1,0 +1,18 @@
+<root>
+    <CtrlImageViewStyle name="ArticImageViewStyle" optMouseHandle="true" optDragNDrop="true" optHQResizing="true" colBackground="[r:105 g:105 b:105 a:255]" intRoundedRectRadius="0">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlImageViewStyle>
+    <CtrlPanelStyle name="ArticPanelStyleMidi" optSmartTile="true" colBorder="[r:152 g:152 b:152 a:255]" colFill="[r:152 g:152 b:152 a:255]" intSmartTileEdgeSize="20" intRoundedRectRadius="0">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlLabelStyle name="ArticLabelStyle">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlListBoxStyle name="ArticListBox" noDefaultDrawing="true" colText="[r:255 g:255 b:255 a:255]" colHighlight="[r:64 g:72 b:84 a:255]" intRoundedRectRadius="0">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlListBoxStyle>
+    <CtrlPanel name="MidiArticPanel" style="BFD2InvisiblePanel" rect="[x:0 y:0 w:178 h:242]" id="0">
+        <CtrlLabel name="ArticLabel" style="BFD2Label14Black" rect="[x:20 y:9 w:129 h:18]" id="100004" text="Articulations" />
+        <CtrlListBox name="ArticNameList" style="ArticListBox" rect="[x:17 y:38 w:147 h:189]" id="100000" />
+    </CtrlPanel>
+</root>

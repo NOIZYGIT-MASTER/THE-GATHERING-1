@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NOIZY.AI — Human Voice Sovereignty · Arriving 2026</title>
+  <meta name="description" content="NOIZY.AI — consent-first infrastructure for the human voice. Arriving 2026." />
+  <meta name="author" content="Robert Stephen Plowman" />
+  <meta property="og:title" content="NOIZY.AI — Human Voice Sovereignty" />
+  <meta property="og:description" content="The infrastructure IS the ethics. Arriving 2026." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0A0E17" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ═══════════════════════════════════════════════════════════════════
+       NOIZY.AI — Coming Soon
+       Star Wars opening crawl · NOIZY covenant palette
+       © Robert Stephen Plowman · NOIZYFISH INC · Ottawa
+       ═══════════════════════════════════════════════════════════════════ */
+
+    :root {
+      --deep:        #0A0E17;
+      --deep-2:      #05080F;
+      --panel:       #151D2E;
+      --gold:        #D4A017;
+      --gold-bright: #FFC541;
+      --gold-dim:    #9C7611;
+      --white:       #F1F5F9;
+      --silver:      #94A3B8;
+      --mgray:       #4A5568;
+      --signal:      #5EB0EF;
+      --restore:     #00FFB3;
+
+      --crawl-duration: 23s;
+      --logo-appear:    2s;
+      --logo-hold:      2s;
+      --logo-recede:    1s;
+      --intro-duration: 3s;
+
+      /* sequence offsets — everything cascades from here.
+         Total runtime to form: ~33s. Skip button is instant. */
+      --t-intro-start: 0.5s;
+      --t-intro-end:   3.5s;
+      --t-logo-start:  4.0s;
+      --t-logo-end:    9.0s;
+      --t-crawl-start: 9.5s;
+      --t-crawl-end:   32.5s;
+      --t-final-start: 33.0s;
+    }
+
+    *,
+    *::before,
+    *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      background: var(--deep);
+      color: var(--white);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      position: relative;
+      min-height: 100vh;
+      isolation: isolate;
+    }
+
+    /* Subtle CRT-style horizontal scanlines over everything,
+       very faint — nods to "old transmission" without overpowering. */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent 0,
+        transparent 2px,
+        rgba(0, 0, 0, 0.06) 2px,
+        rgba(0, 0, 0, 0.06) 4px
+      );
+      mix-blend-mode: multiply;
+    }
+
+    /* ─── Starfield ──────────────────────────────────────────────────── */
+    .starfield {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background: radial-gradient(ellipse at center, #0F1627 0%, var(--deep) 55%, var(--deep-2) 100%);
+      overflow: hidden;
+    }
+    .starfield .star {
+      position: absolute;
+      background: var(--white);
+      border-radius: 50%;
+      will-change: opacity;
+      animation: twinkle var(--dur, 4s) ease-in-out infinite;
+      animation-delay: var(--delay, 0s);
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: var(--min, 0.2); }
+      50%      { opacity: var(--max, 0.95); }
+    }
+    /* A few larger "accent" stars get a soft gold glow */
+    .starfield .star.bright {
+      background: var(--gold-bright);
+      box-shadow: 0 0 6px rgba(255, 197, 65, 0.6);
+    }
+
+    /* ─── Skip button (always visible) ───────────────────────────────── */
+    .skip-btn {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      z-index: 100;
+      background: transparent;
+      border: 1px solid rgba(212, 160, 23, 0.3);
+      color: var(--gold);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      padding: 8px 14px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease;
+    }
+    .skip-btn:hover,
+    .skip-btn:focus-visible {
+      border-color: var(--gold);
+      background: rgba(212, 160, 23, 0.08);
+      color: var(--gold-bright);
+      outline: none;
+    }
+    .skip-btn.hidden { display: none; }
+
+    /* ─── Scene container ────────────────────────────────────────────── */
+    .scene {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 10;
+      padding: 24px;
+    }
+    .scene.active {
+      pointer-events: auto;
+    }
+
+    /* ─── Scene 1: Intro text ────────────────────────────────────────── */
+    .scene-intro {
+      animation: introFade var(--intro-duration) ease-out var(--t-intro-start) both;
+    }
+    .scene-intro p {
+      color: var(--signal);
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+      text-align: center;
+      max-width: 36ch;
+      line-height: 1.5;
+      margin: 0 auto 0.6em auto;
+    }
+    .scene-intro p.dots {
+      color: rgba(94, 176, 239, 0.75);
+    }
+    @keyframes introFade {
+      0%    { opacity: 0; }
+      15%   { opacity: 1; }
+      75%   { opacity: 1; }
+      100%  { opacity: 0; }
+    }
+
+    /* ─── Scene 2: Logo (zooms in from distance) ─────────────────────── */
+    .scene-logo {
+      animation: logoSceneFade calc(var(--logo-appear) + var(--logo-hold) + var(--logo-recede)) ease-out var(--t-logo-start) both;
+    }
+    @keyframes logoSceneFade {
+      0%   { opacity: 0; }
+      18%  { opacity: 1; }
+      75%  { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(4rem, 14vw, 13rem);
+      letter-spacing: -0.01em;
+      color: var(--gold);
+      text-align: center;
+      line-height: 1;
+      filter: drop-shadow(0 0 30px rgba(212, 160, 23, 0.35));
+      animation: logoZoom calc(var(--logo-appear) + var(--logo-hold) + var(--logo-recede)) cubic-bezier(0.19, 1, 0.22, 1) var(--t-logo-start) both;
+    }
+    .logo .logo-main   { font-weight: 700; }
+    .logo .logo-dot    { color: var(--gold-bright); }
+    .logo .logo-suffix { font-weight: 400; color: var(--gold-bright); }
+    @keyframes logoZoom {
+      0%   { transform: scale(0.15) translateZ(0); opacity: 0; letter-spacing: 1.5em; filter: blur(8px) drop-shadow(0 0 30px rgba(212, 160, 23, 0.35)); }
+      18%  { transform: scale(0.9); opacity: 1; letter-spacing: -0.01em; filter: blur(0) drop-shadow(0 0 30px rgba(212, 160, 23, 0.35)); }
+      35%  { transform: scale(1); }
+      70%  { transform: scale(1); opacity: 1; }
+      100% { transform: scale(1.25); opacity: 0; filter: blur(1px) drop-shadow(0 0 30px rgba(212, 160, 23, 0.35)); }
+    }
+    .tagline {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: clamp(10px, 1.2vw, 13px);
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--silver);
+      margin-top: clamp(16px, 2.5vw, 28px);
+      text-align: center;
+      opacity: 0;
+      animation: taglineFade calc(var(--logo-hold) + var(--logo-recede)) ease-out calc(var(--t-logo-start) + var(--logo-appear)) both;
+    }
+    @keyframes taglineFade {
+      0%   { opacity: 0; letter-spacing: 0.6em; }
+      30%  { opacity: 1; letter-spacing: 0.4em; }
+      80%  { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    /* ─── Scene 3: The crawl ─────────────────────────────────────────── */
+    .scene-crawl {
+      perspective: 400px;
+      overflow: hidden;
+      animation: crawlSceneFade var(--crawl-duration) linear var(--t-crawl-start) both;
+    }
+    @keyframes crawlSceneFade {
+      0%   { opacity: 0; }
+      4%   { opacity: 1; }
+      96%  { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    /* Horizon fade — text vanishes at the top, like looking into infinity. */
+    .scene-crawl::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      background: linear-gradient(
+        to bottom,
+        var(--deep) 0%,
+        rgba(10, 14, 23, 0.92) 14%,
+        transparent 42%,
+        transparent 100%
+      );
+      pointer-events: none;
+    }
+    .crawl {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform-origin: 50% 100%;
+      transform: translateX(-50%) rotateX(22deg);
+      width: min(82vw, 780px);
+      color: var(--gold);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 2.1vw, 1.55rem);
+      line-height: 1.55;
+      text-align: justify;
+      animation: crawlScroll var(--crawl-duration) linear var(--t-crawl-start) both;
+      will-change: transform;
+    }
+    @keyframes crawlScroll {
+      0%   { top: 100%; }
+      100% { top: -220%; }
+    }
+    .crawl p           { margin-bottom: 1.4em; }
+    .crawl .chapter    {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: clamp(11px, 1.4vw, 14px);
+      letter-spacing: 0.4em;
+      color: var(--gold-bright);
+      text-align: center;
+      margin-bottom: 0.6em;
+    }
+    .crawl .crawl-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      letter-spacing: 0.04em;
+      color: var(--gold-bright);
+      text-align: center;
+      text-transform: uppercase;
+      margin-bottom: 1.4em;
+    }
+    .crawl .emphasis {
+      text-align: center;
+      font-weight: 600;
+      color: var(--gold-bright);
+      letter-spacing: 0.02em;
+    }
+    .crawl .threshold {
+      text-align: center;
+      font-style: italic;
+      color: var(--gold-bright);
+      margin-top: 2em;
+    }
+
+    /* ─── Scene 4: Final (logo + signup) ─────────────────────────────── */
+    .scene-final {
+      animation: finalFade 2.5s ease-out var(--t-final-start) both;
+    }
+    @keyframes finalFade {
+      0%   { opacity: 0; transform: translateY(8px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .final-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.6rem, 6vw, 4.6rem);
+      letter-spacing: -0.01em;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 14px;
+      filter: drop-shadow(0 0 20px rgba(212, 160, 23, 0.35));
+    }
+    .final-logo .logo-main   { font-weight: 700; }
+    .final-logo .dot         { color: var(--gold-bright); }
+    .final-logo .suffix      { font-weight: 400; color: var(--gold-bright); }
+    .final-subtitle {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: clamp(10px, 1.1vw, 12px);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--silver);
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    .final-lede {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+      color: var(--white);
+      max-width: 38ch;
+      text-align: center;
+      margin: 0 auto 36px auto;
+      line-height: 1.5;
+    }
+
+    .signup-form {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      width: min(520px, 92vw);
+      border: 1px solid rgba(212, 160, 23, 0.25);
+      border-radius: 4px;
+      background: rgba(21, 29, 46, 0.55);
+      backdrop-filter: blur(6px);
+      padding: 6px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45), 0 0 20px rgba(212, 160, 23, 0.12);
+    }
+    .signup-form input[type='email'] {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--white);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 14px;
+      letter-spacing: 0.05em;
+      padding: 12px 14px;
+      min-width: 0;
+    }
+    .signup-form input[type='email']::placeholder {
+      color: rgba(148, 163, 184, 0.55);
+    }
+    .signup-form input[type='email']:focus {
+      outline: 1px solid rgba(212, 160, 23, 0.5);
+      outline-offset: 2px;
+    }
+    .signup-form button {
+      background: var(--gold);
+      color: var(--deep);
+      border: none;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      padding: 12px 20px;
+      cursor: pointer;
+      border-radius: 3px;
+      transition: background 0.2s ease, transform 0.15s ease;
+    }
+    .signup-form button:hover,
+    .signup-form button:focus-visible {
+      background: var(--gold-bright);
+      transform: translateY(-1px);
+      outline: none;
+    }
+    .signup-form button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .signup-status {
+      margin-top: 16px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      min-height: 16px;
+      text-align: center;
+    }
+    .signup-status.ok    { color: var(--restore); }
+    .signup-status.err   { color: #FF6B6B; }
+
+    .replay-btn {
+      position: fixed;
+      bottom: 72px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: transparent;
+      border: none;
+      color: var(--silver);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      cursor: pointer;
+      padding: 8px 14px;
+      opacity: 0.6;
+      transition: opacity 0.25s ease, color 0.25s ease;
+      z-index: 50;
+    }
+    .replay-btn:hover,
+    .replay-btn:focus-visible {
+      opacity: 1;
+      color: var(--gold);
+      outline: none;
+    }
+
+    /* ─── Footer ─────────────────────────────────────────────────────── */
+    footer {
+      position: fixed;
+      bottom: 16px;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      text-align: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--mgray);
+      opacity: 0;
+      padding: 0 16px;
+      animation: footerFade 2.5s ease-out var(--t-final-start) both;
+    }
+    @keyframes footerFade {
+      0%   { opacity: 0; }
+      100% { opacity: 0.8; }
+    }
+    footer p { line-height: 1.6; }
+    footer .principle {
+      margin-top: 4px;
+      color: var(--gold-dim);
+      letter-spacing: 0.18em;
+    }
+
+    /* ─── Static state (after sequence or when reduced motion) ───────── */
+    body.static .scene-intro,
+    body.static .scene-logo,
+    body.static .scene-crawl { display: none; }
+    body.static .scene-final { opacity: 1; animation: none; pointer-events: auto; }
+    body.static footer { opacity: 0.8; animation: none; }
+    body.static .skip-btn { display: none; }
+
+    /* Accessibility: prefers-reduced-motion skips straight to the static state. */
+    @media (prefers-reduced-motion: reduce) {
+      .scene-intro, .scene-logo, .scene-crawl,
+      .logo, .tagline, .crawl,
+      .scene-final, footer,
+      .starfield .star { animation: none !important; }
+      .scene-intro, .scene-logo, .scene-crawl { display: none; }
+      .scene-final, footer { opacity: 1; }
+      .scene-final { pointer-events: auto; }
+      .skip-btn { display: none; }
+    }
+
+    /* ─── Screen reader only (for labels) ────────────────────────────── */
+    .sr-only {
+      position: absolute;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Mobile tweaks */
+    @media (max-width: 640px) {
+      .signup-form { flex-direction: column; }
+      .signup-form button { width: 100%; }
+      footer { font-size: 8.5px; }
+      .skip-btn { top: 14px; right: 14px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Starfield -->
+  <div class="starfield" id="starfield" aria-hidden="true"></div>
+
+  <!-- Skip -->
+  <button class="skip-btn" id="skip-btn" type="button" aria-label="Skip intro sequence">SKIP TRANSMISSION</button>
+
+  <!-- Scene 1: Intro -->
+  <section class="scene scene-intro" aria-hidden="true">
+    <p>In the year 2026, the machines had learned to speak in every human voice.</p>
+    <p class="dots">The voices had not yet learned to speak back...</p>
+  </section>
+
+  <!-- Scene 2: Logo -->
+  <section class="scene scene-logo" aria-hidden="true">
+    <h1 class="logo"><span class="logo-main">NOIZY</span><span class="logo-dot">.</span><span class="logo-suffix">AI</span></h1>
+    <p class="tagline">Human Voice Sovereignty · Est. 2026 · Ottawa</p>
+  </section>
+
+  <!-- Scene 3: Crawl -->
+  <section class="scene scene-crawl" aria-label="Opening transmission">
+    <div class="crawl">
+      <p class="chapter">Chapter I</p>
+      <h2 class="crawl-title">The Covenant</h2>
+
+      <p>In the twenty-sixth year of the new century, the human voice became the most valuable territory on earth. The machines had learned to wear it.</p>
+
+      <p>The old laws were not enough. Terms of service could be deleted. Contracts could be quietly rewritten. Consent, reduced to a checkbox, dissolved the moment no one was watching.</p>
+
+      <p>So a covenant was written &mdash; not in policy, but in code. A system that refuses to synthesize a voice without a signed verdict from its owner. A ledger that remembers every decision, forever. A refusal engine that speaks in human words when the answer must be no.</p>
+
+      <p class="emphasis">The infrastructure IS the ethics.</p>
+
+      <p class="threshold">This is the threshold.</p>
+    </div>
+  </section>
+
+  <!-- Scene 4: Final / Signup -->
+  <section class="scene scene-final" id="scene-final">
+    <h1 class="final-logo"><span class="logo-main">NOIZY</span><span class="dot">.</span><span class="suffix">AI</span></h1>
+    <p class="final-subtitle">The threshold opens in 2026</p>
+
+    <p class="final-lede">Every human voice is sovereign territory. We do not ask for permission to protect creators &mdash; we build the systems that do it automatically.</p>
+
+    <form class="signup-form" id="signup-form" novalidate>
+      <label for="email-input" class="sr-only">Email address</label>
+      <input
+        type="email"
+        id="email-input"
+        name="email"
+        placeholder="your.email@domain"
+        autocomplete="email"
+        required
+        aria-required="true"
+      />
+      <button type="submit" id="signup-submit">Cross the Threshold</button>
+    </form>
+    <p class="signup-status" id="signup-status" aria-live="polite" role="status"></p>
+
+    <button type="button" class="replay-btn" id="replay-btn" aria-label="Replay intro sequence">↻ Replay Transmission</button>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; Robert Stephen Plowman &middot; NOIZYFISH INC &middot; Ottawa</p>
+    <p class="principle">Principle I of XII &middot; Human Voice Sovereignty</p>
+  </footer>
+
+  <script>
+    // ═══════════════════════════════════════════════════════════════════
+    // Starfield generator — deterministic for return visits but still feels organic.
+    // ═══════════════════════════════════════════════════════════════════
+    (function generateStars() {
+      const field = document.getElementById('starfield');
+      if (!field) return;
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const count = prefersReduced ? 160 : 380;
+      const frag = document.createDocumentFragment();
+      for (let i = 0; i < count; i++) {
+        const star = document.createElement('div');
+        star.className = 'star' + (Math.random() < 0.03 ? ' bright' : '');
+        const size = Math.random() < 0.12 ? 2 : 1;
+        const x = Math.random() * 100;
+        const y = Math.random() * 100;
+        const dur = (3 + Math.random() * 6).toFixed(1);
+        const delay = (Math.random() * 6).toFixed(1);
+        const minOp = (0.1 + Math.random() * 0.2).toFixed(2);
+        const maxOp = (0.7 + Math.random() * 0.3).toFixed(2);
+        star.style.cssText =
+          'left:' + x + '%;top:' + y + '%;width:' + size + 'px;height:' + size + 'px;' +
+          '--dur:' + dur + 's;--delay:' + delay + 's;--min:' + minOp + ';--max:' + maxOp + ';';
+        frag.appendChild(star);
+      }
+      field.appendChild(frag);
+    })();
+
+    // ═══════════════════════════════════════════════════════════════════
+    // Skip / Replay — uses body.static class to jump straight to final state.
+    // ═══════════════════════════════════════════════════════════════════
+    const body    = document.body;
+    const skipBtn = document.getElementById('skip-btn');
+    const replayBtn = document.getElementById('replay-btn');
+
+    function jumpToFinal() {
+      body.classList.add('static');
+    }
+    function replaySequence() {
+      body.classList.remove('static');
+      // Force reflow so keyframe animations restart.
+      document.querySelectorAll('.scene, footer, .logo, .tagline, .crawl').forEach(el => {
+        el.style.animation = 'none';
+        void el.offsetHeight;
+        el.style.animation = '';
+      });
+    }
+
+    if (skipBtn)   skipBtn.addEventListener('click', jumpToFinal);
+    if (replayBtn) replayBtn.addEventListener('click', replaySequence);
+
+    // Auto-reveal skip button once the logo has appeared; hide it when we're
+    // already at the final scene.
+    setTimeout(() => skipBtn && skipBtn.classList.remove('hidden'), 0);
+
+    // Respect reduced motion at JS layer too.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      jumpToFinal();
+    }
+
+    // Escape key skips.
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') jumpToFinal();
+    });
+
+    // ═══════════════════════════════════════════════════════════════════
+    // Email signup — POSTs to HEAVEN's /api/signup if the Worker is live
+    // on this origin. Gracefully degrades to an "on the list" acknowledgement
+    // if the endpoint isn't reachable (e.g. opening the file locally).
+    // ═══════════════════════════════════════════════════════════════════
+    const form    = document.getElementById('signup-form');
+    const input   = document.getElementById('email-input');
+    const submit  = document.getElementById('signup-submit');
+    const status  = document.getElementById('signup-status');
+
+    function setStatus(msg, kind) {
+      status.textContent = msg;
+      status.classList.remove('ok', 'err');
+      if (kind) status.classList.add(kind);
+    }
+
+    function isValidEmail(v) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = (input.value || '').trim().toLowerCase();
+      if (!isValidEmail(email)) {
+        setStatus('Enter a valid email to proceed.', 'err');
+        input.focus();
+        return;
+      }
+      submit.disabled = true;
+      setStatus('Transmitting...', null);
+
+      // If this page is served from a real origin (same-origin /api/signup),
+      // call it. Otherwise (file://) skip the network call.
+      const canPostHome = location.protocol === 'https:' || location.protocol === 'http:';
+      const endpoint   = canPostHome ? '/api/signup' : null;
+
+      try {
+        if (endpoint) {
+          const resp = await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email }),
+          });
+          if (!resp.ok) throw new Error('network_' + resp.status);
+          const data = await resp.json();
+          if (data && data.duplicate) {
+            setStatus('You are already on the manifest.', 'ok');
+          } else {
+            setStatus('You are on the manifest. Welcome to the threshold.', 'ok');
+          }
+        } else {
+          // Local preview — acknowledge without network.
+          setStatus('Signal received (offline preview). Deploy to record.', 'ok');
+        }
+        form.reset();
+      } catch (err) {
+        // Never leak errors loudly; the covenant asks for graceful refusal.
+        setStatus('Transmission failed. Try again or write directly: hello@noizy.ai', 'err');
+      } finally {
+        submit.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

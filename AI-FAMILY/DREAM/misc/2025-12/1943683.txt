@@ -1,0 +1,59 @@
+<root>
+    <CtrlPanelStyle name="GrooveBrowserPanelStyle1" optSmartTile="true" imBackground="..\com_panel_tile_light.tga" colBorder="[r:255 g:255 b:255 a:255]" colFill="[r:55 g:55 b:55 a:255]" intSmartTileEdgeSize="20" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlButtonStyle name="GrooveSearchDeleteButtonStyle1" optNoGraphics="true">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="GrooveShowBrowserButtonStyle" optSendOnMouseDown="true">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="GrooveShowEditorButtonStyle" optSendOnMouseDown="true">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlPanelStyle name="SsearchPanelStyle1" noDefaultDrawing="true" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlLabelStyle name="SimpleSearchLabelStyle1" colText="[r:200 g:200 b:200 a:255]">
+        <VFont name="font" vSize="10" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlPanelStyle name="GrooveResultsFooterPanelStyle" noDefaultDrawing="true" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlButtonStyle name="GrooveLibResultsLedButtonStyle1" optMomentary="false" imDown="..\Mixer\mixer_LED_on.tga" imUp="..\Mixer\mixer_LED_off.tga">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlLabelStyle name="GrooveLibResultsLabelStyle1" colText="[r:200 g:200 b:200 a:255]">
+        <VFont name="font" vSize="10" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlPanelStyle name="CtrlPanelStyle1" colFill="[r:0 g:0 b:0 a:255]" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlButtonStyle name="GrvBrowserShinyTextButtonMomentary" optDrawText="true" optSmartTile="true" colFillOn="[r:185 g:227 b:232 a:255]" colFillOff="[r:183 g:183 b:183 a:255]" colTextOn="[r:0 g:0 b:0 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="GrvBrowserShinyTextButtonLatching" optMomentary="false" optDrawText="true" optSmartTile="true" colFillOn="[r:185 g:227 b:232 a:255]" colFillOff="[r:183 g:183 b:183 a:255]" colTextOn="[r:0 g:0 b:0 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlPanelStyle name="CtrlPanelStyle2" noDefaultDrawing="true" imBackground="gl_bfd2perf_background.tga" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlTextBoxStyle name="GrooveSearchBox" noDefaultDrawing="true" optEditable="true" optSingleClickEdit="true" intRoundedRectRadius="0" textOffset="[x:0 y:0]" colText="[r:255 g:255 b:255 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlTextBoxStyle>
+    <CtrlButtonStyle name="gl_autoplay" noDefaultDrawing="true" activeAreaRect="[x:7 y:7 w:52 h:22]" imDown="gl_autoplay_on.tga">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlPanel name="main_panel" style="CtrlPanelStyle2" rect="[x:0 y:0 w:935 h:230]" id="0" displayName="main_panel">
+        <CtrlButton name="Preview" style="gl_autoplay" rect="[x:226 y:-2 w:68 h:37]" id="100000" text="Preview" />
+        <CtrlPanel name="SimpleSearchPanel" style="SsearchPanelStyle1" rect="[x:26 y:2 w:219 h:26]" id="100001">
+            <CtrlButton name="ClearSearchButton" style="GrooveSearchDeleteButtonStyle1" rect="[x:182 y:4 w:18 h:19]" id="100000" displayName="Clear the Search field" />
+            <CtrlTextBox name="SearchTextBox" style="GrooveSearchBox" rect="[x:32 y:5 w:149 h:17]" id="100000" displayName="Enter search string here" />
+        </CtrlPanel>
+        <CtrlPanel name="ResultsPanel" style="BFD2InvisiblePanel" rect="[x:294 y:9 w:346 h:210]" id="100003" />
+        <CtrlPanel name="FilterPanel0" style="BFD2InvisiblePanel" rect="[x:6 y:35 w:133 h:88]" id="100002" />
+        <CtrlPanel name="FilterPanel1" style="BFD2InvisiblePanel" rect="[x:149 y:35 w:133 h:88]" id="100002" />
+        <CtrlPanel name="FilterPanel2" style="BFD2InvisiblePanel" rect="[x:6 y:134 w:133 h:87]" id="100002" />
+        <CtrlPanel name="FilterPanel3" style="BFD2InvisiblePanel" rect="[x:149 y:134 w:133 h:87]" id="100002" />
+    </CtrlPanel>
+</root>

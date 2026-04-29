@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIZYVOX — Artist Portal</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg: #0A0E17;
+  --panel: #0F1420;
+  --card: #141926;
+  --hover: #1A2030;
+  --amber: #D4A017;
+  --amber-dim: rgba(212,160,23,0.12);
+  --amber-glow: rgba(212,160,23,0.25);
+  --teal: #0D9488;
+  --teal-dim: rgba(13,148,136,0.12);
+  --red: #FF4D6D;
+  --red-dim: rgba(255,77,109,0.1);
+  --green: #00FFB3;
+  --green-dim: rgba(0,255,179,0.1);
+  --blue: #3B82F6;
+  --purple: #A855F7;
+  --text: #E2E8F0;
+  --dim: #64748B;
+  --muted: #475569;
+  --border: rgba(212,160,23,0.1);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'IBM Plex Mono', monospace;
+  min-height: 100vh;
+}
+
+body::after {
+  content:'';
+  position:fixed;
+  inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(212,160,23,0.015) 2px,rgba(212,160,23,0.015) 4px);
+  pointer-events:none;
+  z-index:1000;
+}
+
+/* ═══ LAYOUT ═══ */
+.app { display: flex; min-height: 100vh; }
+
+.sidebar {
+  width: 260px;
+  background: var(--panel);
+  border-right: 1px solid var(--border);
+  padding: 24px 0;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.main { flex: 1; padding: 32px 40px; overflow-y: auto; }
+
+/* ═══ SIDEBAR ═══ */
+.logo {
+  padding: 0 24px 24px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+
+.logo h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: var(--amber);
+  letter-spacing: 0.08em;
+}
+
+.logo .tagline {
+  font-size: 0.55rem;
+  color: var(--dim);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.nav-section {
+  padding: 0 12px;
+  margin-bottom: 16px;
+}
+
+.nav-label {
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  padding: 0 12px 8px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.72rem;
+  color: var(--dim);
+}
+
+.nav-item:hover { background: var(--hover); color: var(--text); }
+.nav-item.active { background: var(--amber-dim); color: var(--amber); }
+
+.nav-icon {
+  width: 20px;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+/* ═══ ARTIST PROFILE CARD ═══ */
+.profile-card {
+  margin: 0 12px 20px;
+  padding: 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.profile-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.profile-id {
+  font-size: 0.58rem;
+  color: var(--teal);
+  margin-top: 2px;
+}
+
+.profile-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  font-size: 0.6rem;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 6px rgba(0,255,179,0.4);
+}
+
+.profile-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.profile-stat {
+  text-align: center;
+  padding: 8px;
+  background: var(--panel);
+  border-radius: 6px;
+}
+
+.profile-stat-val {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--amber);
+}
+
+.profile-stat-label {
+  font-size: 0.5rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 2px;
+}
+
+/* ═══ MAIN SECTIONS ═══ */
+.section { margin-bottom: 32px; }
+
+.section-title {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--dim);
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 16px;
+}
+
+/* ═══ CONSENT VAULT ═══ */
+.consent-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.consent-stat {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+}
+
+.consent-stat-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.consent-stat-label {
+  font-size: 0.55rem;
+  color: var(--dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 6px;
+}
+
+.val-green { color: var(--green); }
+.val-amber { color: var(--amber); }
+.val-red { color: var(--red); }
+.val-teal { color: var(--teal); }
+
+/* ═══ NEVER CLAUSES ═══ */
+.never-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.never-clause {
+  background: var(--red-dim);
+  border: 1px solid rgba(255,77,109,0.2);
+  border-radius: 8px;
+  padding: 14px 16px;
+  position: relative;
+}
+
+.never-clause::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--red);
+  border-radius: 8px 8px 0 0;
+}
+
+.never-icon {
+  font-size: 1.2rem;
+  margin-bottom: 6px;
+}
+
+.never-category {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--red);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.never-desc {
+  font-size: 0.6rem;
+  color: var(--dim);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+/* ═══ LICENSE TIERS ═══ */
+.tier-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.tier-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.tier-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+}
+
+.tier-indie::before { background: var(--teal); }
+.tier-commercial::before { background: var(--amber); }
+.tier-premium::before { background: var(--purple); }
+
+.tier-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.tier-indie .tier-name { color: var(--teal); }
+.tier-commercial .tier-name { color: var(--amber); }
+.tier-premium .tier-name { color: var(--purple); }
+
+.tier-desc {
+  font-size: 0.6rem;
+  color: var(--dim);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.tier-features { list-style: none; }
+
+.tier-features li {
+  font-size: 0.62rem;
+  color: var(--dim);
+  padding: 5px 0;
+  padding-left: 16px;
+  position: relative;
+  border-bottom: 1px solid rgba(255,255,255,0.02);
+}
+
+.tier-features li::before {
+  content: '+';
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+}
+
+.tier-indie .tier-features li::before { color: var(--teal); }
+.tier-commercial .tier-features li::before { color: var(--amber); }
+.tier-premium .tier-features li::before { color: var(--purple); }
+
+/* ═══ EARNINGS ═══ */
+.earnings-header {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.earnings-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.earnings-label {
+  font-size: 0.55rem;
+  color: var(--dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.earnings-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--green);
+  margin-top: 4px;
+}
+
+.earnings-sub {
+  font-size: 0.55rem;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* ═══ VOICE GUARDIAN ═══ */
+.guardian-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.guardian-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+}
+
+.guardian-icon {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.guardian-title {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.guardian-status {
+  font-size: 0.6rem;
+  padding: 3px 12px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.gs-active { background: var(--green-dim); color: var(--green); }
+.gs-scanning { background: var(--amber-dim); color: var(--amber); }
+
+.guardian-detail {
+  font-size: 0.58rem;
+  color: var(--dim);
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+/* ═══ LEGACY VAULT ═══ */
+.legacy-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.legacy-section h4 {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--amber);
+  margin-bottom: 12px;
+}
+
+.legacy-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  font-size: 0.68rem;
+}
+
+.legacy-item:last-child { border-bottom: none; }
+
+.legacy-key { color: var(--dim); }
+.legacy-val { color: var(--text); font-weight: 500; }
+
+.legacy-toggle {
+  width: 36px;
+  height: 20px;
+  background: var(--green);
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+}
+
+.legacy-toggle::after {
+  content: '';
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  transition: 0.2s;
+}
+
+.legacy-toggle.off {
+  background: var(--muted);
+}
+
+.legacy-toggle.off::after {
+  right: auto;
+  left: 2px;
+}
+
+/* ═══ KILL SWITCH ═══ */
+.kill-switch-area {
+  margin-top: 24px;
+  padding: 20px 24px;
+  background: var(--red-dim);
+  border: 1px solid rgba(255,77,109,0.25);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.kill-info h4 {
+  font-size: 0.8rem;
+  color: var(--red);
+  font-weight: 600;
+}
+
+.kill-info p {
+  font-size: 0.6rem;
+  color: var(--dim);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+.kill-btn {
+  padding: 10px 24px;
+  background: transparent;
+  border: 2px solid var(--red);
+  border-radius: 8px;
+  color: var(--red);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+
+.kill-btn:hover {
+  background: var(--red);
+  color: white;
+}
+
+/* ═══ UNION BADGE ═══ */
+.union-badge {
+  margin-top: 20px;
+  padding: 16px 20px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.union-shield {
+  width: 48px;
+  height: 48px;
+  background: var(--amber-dim);
+  border: 1px solid var(--amber);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.union-info h4 {
+  font-size: 0.75rem;
+  color: var(--amber);
+  font-weight: 600;
+}
+
+.union-info p {
+  font-size: 0.6rem;
+  color: var(--dim);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+@media (max-width: 1024px) {
+  .app { flex-direction: column; }
+  .sidebar { width: 100%; height: auto; position: relative; }
+  .consent-summary { grid-template-columns: 1fr 1fr; }
+  .tier-cards { grid-template-columns: 1fr; }
+  .legacy-card { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="logo">
+      <h2>NOIZYVOX</h2>
+      <div class="tagline">Artist-First Voice Platform</div>
+    </div>
+
+    <div class="profile-card">
+      <div class="profile-name">Robert Stephen Plowman</div>
+      <div class="profile-id">RSP_001 &bull; VOX_MC96_UNIVERSE_001</div>
+      <div class="profile-status">
+        <div class="status-dot"></div>
+        <span style="color:var(--green);font-weight:500;">ACTIVE</span>
+        <span style="color:var(--muted);margin-left:auto;">Founding Artist</span>
+      </div>
+      <div class="profile-stats">
+        <div class="profile-stat">
+          <div class="profile-stat-val">75%</div>
+          <div class="profile-stat-label">Your Split</div>
+        </div>
+        <div class="profile-stat">
+          <div class="profile-stat-val">7</div>
+          <div class="profile-stat-label">Never Clauses</div>
+        </div>
+        <div class="profile-stat">
+          <div class="profile-stat-val">Jan 6</div>
+          <div class="profile-stat-label">Consent Date</div>
+        </div>
+        <div class="profile-stat">
+          <div class="profile-stat-val">40yr</div>
+          <div class="profile-stat-label">Career</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">Dashboard</div>
+      <div class="nav-item active"><span class="nav-icon">&#9632;</span> Overview</div>
+      <div class="nav-item"><span class="nav-icon">&#9670;</span> Consent Vault</div>
+      <div class="nav-item"><span class="nav-icon">&#9674;</span> License Manager</div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">Protection</div>
+      <div class="nav-item"><span class="nav-icon">&#9711;</span> Voice Guardian</div>
+      <div class="nav-item"><span class="nav-icon">&#9830;</span> Never Clauses</div>
+      <div class="nav-item"><span class="nav-icon">&#9733;</span> Legacy Vault</div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">Earnings</div>
+      <div class="nav-item"><span class="nav-icon">&#9650;</span> Royalty Dashboard</div>
+      <div class="nav-item"><span class="nav-icon">&#9644;</span> Usage Tracker</div>
+      <div class="nav-item"><span class="nav-icon">&#9654;</span> Receipts</div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">Guild</div>
+      <div class="nav-item"><span class="nav-icon">&#9816;</span> Guild Council</div>
+      <div class="nav-item"><span class="nav-icon">&#9814;</span> Union Compliance</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main">
+
+    <!-- CONSENT VAULT OVERVIEW -->
+    <div class="section">
+      <div class="section-title">Consent Vault &mdash; Where Can My Voice Go?</div>
+      <div class="consent-summary">
+        <div class="consent-stat">
+          <div class="consent-stat-value val-green">1</div>
+          <div class="consent-stat-label">Active Consent</div>
+        </div>
+        <div class="consent-stat">
+          <div class="consent-stat-value val-red">7</div>
+          <div class="consent-stat-label">Never Clauses</div>
+        </div>
+        <div class="consent-stat">
+          <div class="consent-stat-value val-amber">0</div>
+          <div class="consent-stat-label">Pending Requests</div>
+        </div>
+        <div class="consent-stat">
+          <div class="consent-stat-value val-teal">0</div>
+          <div class="consent-stat-label">Active Licenses</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEVER CLAUSES -->
+    <div class="section">
+      <div class="section-title">Never Clauses &mdash; What My Voice Can Never Do</div>
+      <div class="never-grid">
+        <div class="never-clause">
+          <div class="never-icon">&#128683;</div>
+          <div class="never-category">Political</div>
+          <div class="never-desc">No political endorsements, campaigns, or election-related content</div>
+        </div>
+        <div class="never-clause">
+          <div class="never-icon">&#128683;</div>
+          <div class="never-category">NSFW</div>
+          <div class="never-desc">No erotic, pornographic, or sexually explicit content</div>
+        </div>
+        <div class="never-clause">
+          <div class="never-icon">&#128683;</div>
+          <div class="never-category">Hate Speech</div>
+          <div class="never-desc">No content promoting hatred, discrimination, or violence</div>
+        </div>
+        <div class="never-clause">
+          <div class="never-icon">&#128683;</div>
+          <div class="never-category">Impersonation</div>
+          <div class="never-desc">No unauthorized impersonation of real persons</div>
+        </div>
+        <div class="never-clause">
+          <div class="never-icon">&#128683;</div>
+          <div class="never-category">Weapons</div>
+          <div class="never-desc">No weapons advocacy, military recruitment, or violence promotion</div>
+        </div>
+        <div class="never-clause">
+          <div class="never-icon">&#128683;</div>
+          <div class="never-category">Medical</div>
+          <div class="never-desc">No medical advice or pharmaceutical endorsements without approval</div>
+        </div>
+        <div class="never-clause">
+          <div class="never-icon">&#128683;</div>
+          <div class="never-category">Sublicensing</div>
+          <div class="never-desc">No transfer of voice rights to third parties</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LICENSE TIERS -->
+    <div class="section">
+      <div class="section-title">License Tiers &mdash; How My Voice Gets Licensed</div>
+      <div class="tier-cards">
+        <div class="tier-card tier-indie">
+          <div class="tier-name">Community / Indie</div>
+          <div class="tier-desc">Non-commercial projects, student films, podcasts, indie games</div>
+          <ul class="tier-features">
+            <li>Short-term, non-commercial use</li>
+            <li>Nominal one-time fee or revenue share</li>
+            <li>Strict attribution required</li>
+            <li>Kill-switch revocation available</li>
+            <li>Never clauses enforced automatically</li>
+            <li>Platform-enforced rate floor</li>
+          </ul>
+        </div>
+        <div class="tier-card tier-commercial">
+          <div class="tier-name">Standard Commercial</div>
+          <div class="tier-desc">Regional broadcasts, online ads, corporate videos, apps</div>
+          <ul class="tier-features">
+            <li>Union-scale pay minimum enforced</li>
+            <li>Limited duration (e.g. 6-month term)</li>
+            <li>Auto-residuals on extension/reuse</li>
+            <li>Per-placement consent required</li>
+            <li>Pension + health auto-contributions</li>
+            <li>Category pre-approval available</li>
+          </ul>
+        </div>
+        <div class="tier-card tier-premium">
+          <div class="tier-name">Premium / Broadcast</div>
+          <div class="tier-desc">National TV, major games, film characters, long-term use</div>
+          <ul class="tier-features">
+            <li>Custom-negotiated terms</li>
+            <li>Union oversight and review</li>
+            <li>Exclusivity clauses with buyout fees</li>
+            <li>13-week residual schedules</li>
+            <li>Amended contract for any scope changes</li>
+            <li>Agent/union rep involved in negotiation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- EARNINGS -->
+    <div class="section">
+      <div class="section-title">Earnings Dashboard &mdash; Real-Time Royalties</div>
+      <div class="earnings-header">
+        <div class="earnings-card">
+          <div class="earnings-label">Total Earned</div>
+          <div class="earnings-value">$0.00</div>
+          <div class="earnings-sub">Platform is pre-launch</div>
+        </div>
+        <div class="earnings-card">
+          <div class="earnings-label">This Month</div>
+          <div class="earnings-value" style="color:var(--amber);">$0.00</div>
+          <div class="earnings-sub">No active licenses yet</div>
+        </div>
+        <div class="earnings-card">
+          <div class="earnings-label">Revenue Split</div>
+          <div class="earnings-value" style="color:var(--teal);">75/25</div>
+          <div class="earnings-sub">Artist / Platform</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VOICE GUARDIAN -->
+    <div class="section">
+      <div class="section-title">Voice Guardian &mdash; Protection Status</div>
+      <div class="guardian-grid">
+        <div class="guardian-card">
+          <div class="guardian-icon">&#128737;</div>
+          <div class="guardian-title">Deepfake Protection</div>
+          <div class="guardian-status gs-active">ACTIVE</div>
+          <div class="guardian-detail">AI-powered scanning for unauthorized voice clones across major platforms</div>
+        </div>
+        <div class="guardian-card">
+          <div class="guardian-icon">&#127760;</div>
+          <div class="guardian-title">Web Scanning</div>
+          <div class="guardian-status gs-active">ACTIVE</div>
+          <div class="guardian-detail">Continuous monitoring for unauthorized use of your voice signature online</div>
+        </div>
+        <div class="guardian-card">
+          <div class="guardian-icon">&#129516;</div>
+          <div class="guardian-title">Voice DNA</div>
+          <div class="guardian-status gs-active">EMBEDDED</div>
+          <div class="guardian-detail">Unique audio watermark embedded in all licensed outputs for provenance tracking</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LEGACY VAULT -->
+    <div class="section">
+      <div class="section-title">Legacy Vault &mdash; Beyond Your Lifetime</div>
+      <div class="legacy-card">
+        <div class="legacy-section">
+          <h4>Vault Settings</h4>
+          <div class="legacy-item">
+            <span class="legacy-key">Posthumous Use Allowed</span>
+            <div class="legacy-toggle off"></div>
+          </div>
+          <div class="legacy-item">
+            <span class="legacy-key">Kill Switch Enabled</span>
+            <div class="legacy-toggle"></div>
+          </div>
+          <div class="legacy-item">
+            <span class="legacy-key">Royalty Continuation</span>
+            <div class="legacy-toggle"></div>
+          </div>
+          <div class="legacy-item">
+            <span class="legacy-key">Archive Voice Model</span>
+            <div class="legacy-toggle"></div>
+          </div>
+        </div>
+        <div class="legacy-section">
+          <h4>Designated Beneficiaries</h4>
+          <div class="legacy-item">
+            <span class="legacy-key">Primary Heir</span>
+            <span class="legacy-val">(Not yet designated)</span>
+          </div>
+          <div class="legacy-item">
+            <span class="legacy-key">Secondary Heir</span>
+            <span class="legacy-val">(Not yet designated)</span>
+          </div>
+          <div class="legacy-item">
+            <span class="legacy-key">Estate Executor</span>
+            <span class="legacy-val">(Not yet designated)</span>
+          </div>
+          <div class="legacy-item">
+            <span class="legacy-key">Governing Law</span>
+            <span class="legacy-val">Canada (Ontario)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KILL SWITCH -->
+    <div class="kill-switch-area">
+      <div class="kill-info">
+        <h4>Emergency Kill Switch</h4>
+        <p>Instantly suspend all active licenses and block new voice generation. This cannot be undone without your explicit reauthorization.</p>
+      </div>
+      <button class="kill-btn" onclick="if(confirm('This will IMMEDIATELY suspend ALL active licenses and block ALL voice generation. Are you sure?')) alert('Kill switch activated. All licenses suspended. Voice model locked.')">ACTIVATE</button>
+    </div>
+
+    <!-- UNION COMPLIANCE -->
+    <div class="union-badge">
+      <div class="union-shield">&#9816;</div>
+      <div class="union-info">
+        <h4>Union Compliance Active</h4>
+        <p>SAG-AFTRA scale enforced as minimum rate. Pension and health contributions auto-calculated. ACTRA (Canada) and Equity (UK) templates available. EU AI Act Article 50 transparency compliant.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

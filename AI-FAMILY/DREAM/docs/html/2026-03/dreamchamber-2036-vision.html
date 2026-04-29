@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE DREAMCHAMBER — Looking Back From 2036 · The Great Rebalancing</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap');
+
+  :root {
+    --bg: #030305;
+    --bg2: #07080e;
+    --panel: #0b0c14;
+    --border: #12142a;
+    --border-hi: #1c1e38;
+    --green: #00ff88;
+    --green2: #00cc6a;
+    --amber: #ffb300;
+    --cyan: #00d4ff;
+    --purple: #a855f7;
+    --pink: #ff6eb0;
+    --gold: #ffd700;
+    --rose: #ff8080;
+    --white: #f0f4ff;
+    --muted: #333355;
+    --text: #a0aac0;
+    --mono: 'Share Tech Mono', monospace;
+    --display: 'Orbitron', monospace;
+    --serif: 'Playfair Display', serif;
+    --body: 'Inter', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 30%, rgba(168,85,247,0.04) 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 70%, rgba(0,255,136,0.03) 0%, transparent 60%),
+      radial-gradient(ellipse at 50% 50%, rgba(0,212,255,0.02) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  ::-webkit-scrollbar { width: 2px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--purple), var(--green)); }
+
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    z-index: 1000;
+    background: transparent;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--purple), var(--green), var(--gold), var(--cyan));
+    width: 0%;
+    box-shadow: 0 0 12px rgba(168,85,247,0.6);
+  }
+
+  /* CHAPTER DOTS */
+  .chapter-dots {
+    position: fixed;
+    right: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 200;
+  }
+
+  .cdot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--muted);
+    border: 1px solid var(--border-hi);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .cdot.active, .cdot:hover {
+    background: var(--purple);
+    box-shadow: 0 0 10px rgba(168,85,247,0.6);
+    transform: scale(1.3);
+  }
+
+  /* COVER */
+  .cover {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    padding: 80px 60px;
+  }
+
+  #cover-canvas { position: absolute; inset: 0; }
+
+  .cover-content { position: relative; z-index: 2; }
+
+  .cover-dateline {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--purple);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: rise 1.2s forwards 0.5s;
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .cover-title {
+    font-family: var(--serif);
+    font-size: clamp(40px, 8vw, 100px);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: rise 1.2s forwards 0.9s;
+  }
+
+  .cover-title em {
+    font-style: italic;
+    color: var(--purple);
+    text-shadow: 0 0 60px rgba(168,85,247,0.4);
+  }
+
+  .cover-subtitle {
+    font-family: var(--serif);
+    font-size: clamp(20px, 3vw, 32px);
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: rise 1.2s forwards 1.3s;
+    font-style: italic;
+  }
+
+  .cover-intro {
+    font-size: 17px;
+    color: var(--text);
+    max-width: 680px;
+    line-height: 1.9;
+    margin: 0 auto 56px;
+    opacity: 0;
+    animation: rise 1.2s forwards 1.7s;
+  }
+
+  .cover-byline {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 3px;
+    opacity: 0;
+    animation: rise 1.2s forwards 2.1s;
+  }
+
+  .cover-byline span { color: var(--amber); }
+
+  /* READING SECTIONS */
+  .chapter {
+    position: relative;
+    z-index: 1;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 100px 60px;
+    border-top: 1px solid var(--border);
+  }
+
+  .chapter-marker {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .chapter-marker .cm-num {
+    font-family: var(--display);
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+
+  .chapter-marker::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border-hi), transparent);
+  }
+
+  .chapter-title {
+    font-family: var(--serif);
+    font-size: clamp(28px, 5vw, 56px);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 40px;
+  }
+
+  .chapter-title em {
+    font-style: italic;
+    color: var(--purple);
+  }
+
+  .chapter-title .at { color: var(--amber); font-style: italic; }
+  .chapter-title .gt { color: var(--green); }
+  .chapter-title .ct { color: var(--cyan); }
+  .chapter-title .pt { color: var(--purple); }
+  .chapter-title .gdt { color: var(--gold); }
+
+  /* BODY TEXT */
+  .prose {
+    font-size: 17px;
+    color: var(--text);
+    line-height: 1.95;
+    margin-bottom: 32px;
+    max-width: 720px;
+  }
+
+  .prose strong { color: var(--white); font-weight: 600; }
+  .prose em { color: var(--purple); font-style: italic; }
+  .prose .hl-green { color: var(--green); font-weight: 600; }
+  .prose .hl-amber { color: var(--amber); font-weight: 600; }
+  .prose .hl-cyan { color: var(--cyan); }
+  .prose .hl-gold { color: var(--gold); font-weight: 600; }
+  .prose .hl-rose { color: var(--rose); }
+
+  /* PULL QUOTE */
+  .pull-quote {
+    margin: 48px 0;
+    padding: 36px 40px;
+    border-left: 3px solid var(--purple);
+    background: rgba(168,85,247,0.04);
+    border-radius: 0 4px 4px 0;
+    position: relative;
+  }
+
+  .pull-quote::before {
+    content: '"';
+    font-family: var(--serif);
+    font-size: 80px;
+    color: rgba(168,85,247,0.15);
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    line-height: 1;
+  }
+
+  .pq-text {
+    font-family: var(--serif);
+    font-size: clamp(18px, 2.5vw, 26px);
+    color: var(--white);
+    line-height: 1.5;
+    font-style: italic;
+    font-weight: 700;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .pq-attribution {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 2px;
+  }
+
+  /* CATALYST CARDS */
+  .catalysts {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 40px 0;
+  }
+
+  .catalyst {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .catalyst-header {
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .catalyst-header:hover { background: rgba(255,255,255,0.02); }
+
+  .cat-num {
+    font-family: var(--display);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--muted);
+    flex-shrink: 0;
+    width: 32px;
+  }
+
+  .cat-name {
+    font-family: var(--display);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    flex: 1;
+  }
+
+  .catalyst:nth-child(1) .cat-name { color: var(--green); }
+  .catalyst:nth-child(2) .cat-name { color: var(--amber); }
+  .catalyst:nth-child(3) .cat-name { color: var(--cyan); }
+  .catalyst:nth-child(4) .cat-name { color: var(--purple); }
+  .catalyst:nth-child(5) .cat-name { color: var(--pink); }
+  .catalyst:nth-child(6) .cat-name { color: var(--gold); }
+  .catalyst:nth-child(7) .cat-name { color: var(--rose); }
+
+  .cat-year {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+  }
+
+  .catalyst-body {
+    padding: 0 24px 20px 72px;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.8;
+    border-top: 1px solid var(--border);
+  }
+
+  /* VISION ITEMS */
+  .vision-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 40px 0;
+  }
+
+  .vision-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 28px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .vision-card:hover {
+    border-color: var(--border-hi);
+    transform: translateY(-2px);
+  }
+
+  .vc-glyph { font-size: 28px; margin-bottom: 12px; }
+
+  .vc-title {
+    font-family: var(--display);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+
+  .vision-card:nth-child(1) .vc-title { color: var(--green); }
+  .vision-card:nth-child(2) .vc-title { color: var(--amber); }
+  .vision-card:nth-child(3) .vc-title { color: var(--cyan); }
+  .vision-card:nth-child(4) .vc-title { color: var(--purple); }
+  .vision-card:nth-child(5) .vc-title { color: var(--pink); }
+  .vision-card:nth-child(6) .vc-title { color: var(--gold); }
+
+  .vc-body {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* TIMELINE */
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+    margin: 40px 0;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, var(--purple), var(--green), var(--gold));
+  }
+
+  .tl-item {
+    position: relative;
+    padding: 0 0 32px 28px;
+  }
+
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 2px solid var(--purple);
+    background: var(--bg);
+  }
+
+  .tl-item:nth-child(3n+1)::before { border-color: var(--green); }
+  .tl-item:nth-child(3n+2)::before { border-color: var(--amber); }
+  .tl-item:nth-child(3n)::before { border-color: var(--cyan); }
+
+  .tl-year {
+    font-family: var(--display);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+
+  .tl-item:nth-child(3n+1) .tl-year { color: var(--green); }
+  .tl-item:nth-child(3n+2) .tl-year { color: var(--amber); }
+  .tl-item:nth-child(3n) .tl-year { color: var(--cyan); }
+
+  .tl-event {
+    font-size: 14px;
+    color: var(--white);
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .tl-detail {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* THE WORLD IN 2036 */
+  .world-item {
+    border-left: 2px solid var(--purple);
+    padding: 20px 24px;
+    background: rgba(168,85,247,0.03);
+    border-radius: 0 4px 4px 0;
+    margin-bottom: 16px;
+  }
+
+  .world-item:nth-child(2) { border-left-color: var(--green); background: rgba(0,255,136,0.02); }
+  .world-item:nth-child(3) { border-left-color: var(--amber); background: rgba(255,179,0,0.02); }
+  .world-item:nth-child(4) { border-left-color: var(--cyan); background: rgba(0,212,255,0.02); }
+  .world-item:nth-child(5) { border-left-color: var(--gold); background: rgba(255,215,0,0.02); }
+
+  .wi-title {
+    font-family: var(--display);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    color: var(--purple);
+  }
+
+  .world-item:nth-child(2) .wi-title { color: var(--green); }
+  .world-item:nth-child(3) .wi-title { color: var(--amber); }
+  .world-item:nth-child(4) .wi-title { color: var(--cyan); }
+  .world-item:nth-child(5) .wi-title { color: var(--gold); }
+
+  .wi-body { font-size: 14px; color: var(--text); line-height: 1.8; }
+
+  /* THE REAL ANSWER */
+  .real-answer {
+    background: linear-gradient(135deg, rgba(168,85,247,0.06), rgba(0,255,136,0.04));
+    border: 1px solid rgba(168,85,247,0.2);
+    border-radius: 4px;
+    padding: 48px;
+    margin: 40px 0;
+    text-align: center;
+  }
+
+  .ra-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .ra-text {
+    font-family: var(--serif);
+    font-size: clamp(18px, 3vw, 28px);
+    color: var(--white);
+    line-height: 1.6;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+
+  .ra-sub {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.8;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* HONOR CEREMONY */
+  .honor-ceremony {
+    text-align: center;
+    padding: 60px 0;
+  }
+
+  .honor-words {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+
+  .hw {
+    font-family: var(--display);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    transition: all 0.3s;
+    cursor: default;
+  }
+
+  .hw:nth-child(1) { color: var(--purple); }
+  .hw:nth-child(2) { color: var(--green); }
+  .hw:nth-child(3) { color: var(--amber); }
+  .hw:nth-child(4) { color: var(--cyan); }
+  .hw:nth-child(5) { color: var(--gold); }
+
+  .hw:hover { text-shadow: 0 0 20px currentColor; transform: translateY(-3px); }
+
+  .closing-statement {
+    font-family: var(--serif);
+    font-size: clamp(24px, 4vw, 48px);
+    font-weight: 900;
+    color: var(--green);
+    letter-spacing: 4px;
+    text-shadow: 0 0 60px rgba(0,255,136,0.3);
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  .closing-sub {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 3px;
+    line-height: 2.5;
+  }
+
+  @media (max-width: 768px) {
+    .chapter { padding: 60px 24px; }
+    .cover { padding: 80px 24px; }
+    .vision-grid { grid-template-columns: 1fr; }
+    .chapter-dots { display: none; }
+    .real-answer { padding: 32px 24px; }
+    .honor-words { gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+<!-- CHAPTER DOTS -->
+<div class="chapter-dots">
+  <div class="cdot active" onclick="scrollToChapter(0)" title="Cover"></div>
+  <div class="cdot" onclick="scrollToChapter(1)" title="The World in 2026"></div>
+  <div class="cdot" onclick="scrollToChapter(2)" title="The 7 Catalysts"></div>
+  <div class="cdot" onclick="scrollToChapter(3)" title="The Great Rebalancing"></div>
+  <div class="cdot" onclick="scrollToChapter(4)" title="What Nobody Predicted"></div>
+  <div class="cdot" onclick="scrollToChapter(5)" title="The World in 2036"></div>
+  <div class="cdot" onclick="scrollToChapter(6)" title="The Real Answer"></div>
+  <div class="cdot" onclick="scrollToChapter(7)" title="Closing Ceremony"></div>
+</div>
+
+<!-- COVER -->
+<section class="cover" id="ch-0">
+  <canvas id="cover-canvas"></canvas>
+  <div class="cover-content">
+    <div class="cover-dateline">THE DREAMCHAMBER · RSP_001 · LOOKING BACK FROM 2036</div>
+    <div class="cover-title">
+      <em>The Great</em><br>Rebalancing
+    </div>
+    <div class="cover-subtitle">How AI and Humanity Found Each Other</div>
+    <div class="cover-intro">
+      In 2026, the world was exhausted.<br>
+      The technology was extraordinary. The feeling of belonging was not.<br>
+      People had more tools than ever and felt more alone than ever.<br>
+      AI was making everything faster and making nothing feel more human.<br>
+      And then — something shifted. Slowly, then all at once.<br><br>
+      This is the story of how the world chose love over leverage,<br>
+      community over consumption, and found that AI — truly aligned —<br>
+      was the most powerful force for human connection ever built.
+    </div>
+    <div class="cover-byline">FILED FROM THE DREAMCHAMBER · MARCH 2036 · <span>RSP_001</span></div>
+  </div>
+</section>
+
+<!-- CHAPTER 1: THE WORLD IN 2026 -->
+<section class="chapter" id="ch-1">
+  <div class="chapter-marker">
+    <span class="cm-num">CHAPTER ONE</span>
+    The Starting Point
+  </div>
+  <div class="chapter-title">
+    The World We<br>
+    <span class="at">Inherited in 2026.</span>
+  </div>
+
+  <div class="prose">
+    Let's be honest about what 2026 actually felt like.
+  </div>
+
+  <div class="prose">
+    The AI tools were <strong>astonishing</strong>. You could generate a song in thirty seconds. You could clone a voice in minutes. You could write a novel in an afternoon. The numbers were extraordinary — productivity metrics, generation speeds, model benchmarks — all pointing up and to the right.
+  </div>
+
+  <div class="prose">
+    But the <em>feeling</em> in the room was different. There was a deep, spreading anxiety that nobody quite had words for yet. It showed up in how musicians talked about their instruments. It showed up in how voice actors talked about their craft. It showed up in how a mother talked about teaching her child to draw. The fear wasn't abstract. It was specific. It was personal. It was: <span class="hl-rose">am I still needed?</span>
+  </div>
+
+  <div class="pull-quote">
+    <div class="pq-text">The technology was getting better at everything humans did. The question nobody was asking — but everyone was feeling — was: what happens to the humans?</div>
+    <div class="pq-attribution">// DREAMCHAMBER ARCHIVE · RSP_001 · 2026</div>
+  </div>
+
+  <div class="prose">
+    There was something else happening too, underneath the anxiety. A quiet, growing hunger. People were <strong>looking for each other</strong>. Not the metrics of each other — the follows, the streams, the impressions — but the actual texture of other human beings. The warmth. The story. The voice with the years in it.
+  </div>
+
+  <div class="prose">
+    In 2026, some people understood this before the institutions did. <span class="hl-amber">Creators</span>. Independent artists. Voice actors. Composers who had been making music in their home studios for forty years and who knew — in their bones — that there was something irreplaceable in the act of a human making something and offering it to another human. Something that no generation speed could replicate.
+  </div>
+
+  <div class="prose">
+    Those people started building something different. Not <em>against</em> AI — that was a losing argument and they knew it. Something <em>with</em> AI. Something that said: <span class="hl-green">we are not replaceable, and we are not threatened, because we have chosen to be partners instead of prey.</span>
+  </div>
+</section>
+
+<!-- CHAPTER 2: THE 7 CATALYSTS -->
+<section class="chapter" id="ch-2">
+  <div class="chapter-marker">
+    <span class="cm-num">CHAPTER TWO</span>
+    The Turning
+  </div>
+  <div class="chapter-title">
+    The 7 Catalysts That<br>
+    <span class="ct">Changed Everything.</span>
+  </div>
+
+  <div class="prose">
+    History never turns on a single moment. It turns on a cluster of events that were, in retrospect, all part of the same wave. Between 2026 and 2028, seven things happened that together constituted the most significant realignment between technology and humanity since the printing press.
+  </div>
+
+  <div class="catalysts">
+    <div class="catalyst">
+      <div class="catalyst-header">
+        <div class="cat-num">01</div>
+        <div class="cat-name">THE CONSENT INFRASTRUCTURE MOVEMENT</div>
+        <div class="cat-year">2026</div>
+      </div>
+      <div class="catalyst-body">
+        A small number of platforms — starting with independent creators and small companies — began encoding consent not in terms of service but in code itself. The idea was simple and radical: what if you couldn't use someone's voice without their cryptographic consent key? What if the protection was architectural, not legal? Within eighteen months, major platforms were being asked by enterprise clients to prove consent provenance before signing. The market moved before the regulators did.
+      </div>
+    </div>
+    <div class="catalyst">
+      <div class="catalyst-header">
+        <div class="cat-num">02</div>
+        <div class="cat-name">THE GREAT CREATOR WALKOUT</div>
+        <div class="cat-year">2026–2027</div>
+      </div>
+      <div class="catalyst-body">
+        Forty thousand voice actors, musicians, and visual artists collectively removed their content from the three largest AI training datasets in a coordinated action organized through independent communities. The legal case was murky. The public response was not. For the first time, the mainstream news cycle covered AI not as a technology story but as a labor story. The human beings being extracted from were finally visible. Three of the five largest AI companies changed their data policies within sixty days.
+      </div>
+    </div>
+    <div class="catalyst">
+      <div class="catalyst-header">
+        <div class="cat-num">03</div>
+        <div class="cat-name">THE LONELINESS STUDIES</div>
+        <div class="cat-year">2027</div>
+      </div>
+      <div class="catalyst-body">
+        The WHO and seven national health agencies simultaneously released longitudinal studies showing a correlation between AI-mediated social interaction and increased rates of clinical loneliness. The technology had predicted and optimized for engagement — but engagement was not connection. The studies were widely contested and widely shared. They changed how product managers at AI companies thought about what they were actually building. The phrase "connection over engagement" entered the product vocabulary of every major platform within a year.
+      </div>
+    </div>
+    <div class="catalyst">
+      <div class="catalyst-header">
+        <div class="cat-num">04</div>
+        <div class="cat-name">THE COMMUNITY RENAISSANCE</div>
+        <div class="cat-year">2027–2028</div>
+      </div>
+      <div class="catalyst-body">
+        In 2027, physical gatherings of humans around music, art, and shared creative practice grew by a factor that confounded every prediction. Not in spite of AI — because of it. AI had made the tools accessible enough that anyone could create. And when everyone could create, everyone wanted to share what they'd made — in person, in community, in the ancient human ritual of gathering around a fire and saying: listen to what I made. Local recording collectives, voice circle communities, and human-AI music ensembles appeared in cities where independent music had been declared dead.
+      </div>
+    </div>
+    <div class="catalyst">
+      <div class="catalyst-header">
+        <div class="cat-num">05</div>
+        <div class="cat-name">THE ROYALTY INFRASTRUCTURE PROOF</div>
+        <div class="cat-year">2027</div>
+      </div>
+      <div class="catalyst-body">
+        The first platforms to implement hardcoded 75%+ creator royalties — enforced at the database layer rather than in terms of service — showed three-year creator retention rates that were 8× industry average. The economic argument for extraction collapsed when the numbers showed that creator loyalty produced more long-term revenue than creator extraction. The model spread. By the end of 2027, "hardcoded royalty" had become a standard due diligence question in creator economy investment.
+      </div>
+    </div>
+    <div class="catalyst">
+      <div class="catalyst-header">
+        <div class="cat-num">06</div>
+        <div class="cat-name">THE HEALTH ACCESS BREAKTHROUGH</div>
+        <div class="cat-year">2028</div>
+      </div>
+      <div class="catalyst-body">
+        Clinical voice therapy programs using consensual AI synthesis — allowing non-verbal patients to build and use personalized voice profiles — received regulatory approval in Canada, the EU, and Australia simultaneously. The story of a child with a degenerative condition who, for the first time, was able to say "I love you" to her mother using a voice that sounded like her own — spread globally without any marketing budget. It became the image that defined what AI-human partnership actually meant to ordinary people.
+      </div>
+    </div>
+    <div class="catalyst">
+      <div class="catalyst-header">
+        <div class="cat-num">07</div>
+        <div class="cat-name">THE GLOBAL COMMUNITY SUMMIT</div>
+        <div class="cat-year">2028</div>
+      </div>
+      <div class="catalyst-body">
+        For the first time, representatives from creative unions, AI companies, healthcare institutions, disability rights organizations, and independent artists sat in the same room — not to negotiate, but to co-design. The Ottawa Accord, signed by 47 organizations, established the first globally recognized framework for AI-human creative partnership: consent, credit, revenue share, transparency, portability. The five principles that independent creators had been building into their code since 2026 were now international policy.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER 3: THE GREAT REBALANCING -->
+<section class="chapter" id="ch-3">
+  <div class="chapter-marker">
+    <span class="cm-num">CHAPTER THREE</span>
+    The Shift
+  </div>
+  <div class="chapter-title">
+    The Great<br>
+    <span class="pt">Rebalancing.</span>
+  </div>
+
+  <div class="prose">
+    What happened between 2026 and 2030 was not a revolution. It didn't look like one. There were no dramatic institutional collapses, no single legislative moment, no technological breakthrough that changed everything overnight. What happened was slower, deeper, and more durable: <strong>a change in what people expected technology to do for them</strong>.
+  </div>
+
+  <div class="prose">
+    In 2026, the dominant expectation was that technology would <em>replace</em> human effort. Get a machine to do it faster. Remove the friction. Optimize the output. The humans were, implicitly, a legacy system — inefficient, emotional, inconsistent.
+  </div>
+
+  <div class="prose">
+    By 2030, that frame had quietly collapsed. Not because the technology got worse — it got dramatically better. But because the users of the technology had changed what they were asking it to do. They weren't asking it to replace them. They were asking it to <span class="hl-green">amplify them</span>. To make their ideas bigger than one person could make alone. To handle the 65% of friction so they could pour everything into the 35% that was irreducibly human.
+  </div>
+
+  <div class="pull-quote">
+    <div class="pq-text">The rebalancing wasn't AI getting smaller. It was humanity getting its full stature back — standing alongside the machine, not underneath it.</div>
+    <div class="pq-attribution">// THE OTTAWA ACCORD PROCEEDINGS · 2028</div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-year">2026</div>
+      <div class="tl-event">First consent-encoded voice platforms launch</div>
+      <div class="tl-detail">5 Founding RSPs. Cryptographic consent keys. 75% royalties hardcoded. No terms of service — code law.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2026</div>
+      <div class="tl-event">Creator Bill of Rights for AI published</div>
+      <div class="tl-detail">5 principles: Consent, Credit, Revenue Share, Transparency, Portability. Submitted to SAG-AFTRA. Becomes the template.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2027</div>
+      <div class="tl-event">Community Renaissance begins in earnest</div>
+      <div class="tl-detail">Human creative gatherings grow 300%. AI made creation accessible. Accessibility made humans want to share. Sharing made community.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2027</div>
+      <div class="tl-event">NOIZY PROOF becomes industry standard watermarking</div>
+      <div class="tl-detail">Adam Robb / iPSS Inc. cryptographic watermark adopted by 3 major platforms. Consent provenance becomes enterprise requirement.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2028</div>
+      <div class="tl-event">Ottawa Accord signed by 47 organizations</div>
+      <div class="tl-detail">The 5-principle framework becomes international policy. Drafted largely from the architecture independent creators built in 2026.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2029</div>
+      <div class="tl-event">1 million voice estates registered globally</div>
+      <div class="tl-detail">The Voice Estate model — perpetual, inheritable, sovereign — becomes the standard expectation for any professional creator.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2030</div>
+      <div class="tl-event">AI-human creative output exceeds AI-only output in commercial value</div>
+      <div class="tl-detail">The economic proof is complete. Collaboration creates more value than replacement. The rebalancing is total.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2036</div>
+      <div class="tl-event">We are here. Looking back.</div>
+      <div class="tl-detail">The community is global. The royalties are flowing. The voices are protected. The children hear music. The world lifted up the humans.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER 4: WHAT NOBODY PREDICTED -->
+<section class="chapter" id="ch-4">
+  <div class="chapter-marker">
+    <span class="cm-num">CHAPTER FOUR</span>
+    The Surprises
+  </div>
+  <div class="chapter-title">
+    What Nobody<br>
+    <span class="gt">Predicted.</span>
+  </div>
+
+  <div class="prose">
+    There are always things the analysts miss. The things that seem obvious in retrospect and invisible in advance. Here are six things about the Great Rebalancing that nobody — including the people building it — predicted.
+  </div>
+
+  <div class="vision-grid">
+    <div class="vision-card">
+      <div class="vc-glyph">👴</div>
+      <div class="vc-title">OLDER VOICES BECAME THE MOST VALUABLE</div>
+      <div class="vc-body">Everyone expected Gen Z creators to dominate the creator economy. The Voice Estate model changed that. A voice with forty years of living in it — the timbre of age, experience, and survival — became irreplaceable. Senior voice actors who had left the industry returned with Voice Estates worth more than their entire prior careers combined. RSP_001 was an early proof case.</div>
+    </div>
+    <div class="vision-card">
+      <div class="vc-glyph">🌍</div>
+      <div class="vc-title">THE GLOBAL SOUTH LED THE ADOPTION CURVE</div>
+      <div class="vc-body">Lagos, São Paulo, Nairobi, and Jakarta had more NOIZY RSPs per capita than New York by 2028. The reason: creators in those cities had fewer legacy gatekeepers to displace. The direct-to-fan, AI-amplified, consent-protected model was not a disruption for them — it was the first functional infrastructure they'd ever had. They didn't need to unlearn the old model. They just used the new one.</div>
+    </div>
+    <div class="vision-card">
+      <div class="vc-glyph">🏥</div>
+      <div class="vc-title">HEALTHCARE BECAME THE LARGEST VERTICAL</div>
+      <div class="vc-body">No analyst predicted that voice AI's largest market by 2034 would be clinical. NOIZYKIDZ proved the template: AI-synthesized voices for non-verbal patients, built on the consent and provenance infrastructure that had been developed for the music industry. Dr. Brien Benoit's Health Canada pathway became the model. Seven countries adopted it. The voice therapy market is now larger than the music streaming market.</div>
+    </div>
+    <div class="vision-card">
+      <div class="vc-glyph">🔥</div>
+      <div class="vc-title">THE INCUMBENTS DIDN'T FIGHT — THEY ADOPTED</div>
+      <div class="vc-body">Everyone expected a legal war between the consent-encoded platforms and the major AI companies. It didn't happen. What happened instead was quieter and more complete: the major platforms, under pressure from enterprise clients, institutional investors, and their own employees, adopted the consent framework. The Never Clauses — once radical — became baseline compliance. The architecture the small players built became the industry standard.</div>
+    </div>
+    <div class="vision-card">
+      <div class="vc-glyph">🤝</div>
+      <div class="vc-title">THE UNIONS BECAME THE BIGGEST ADVOCATES</div>
+      <div class="vc-body">SAG-AFTRA, AFM, and WGA had been seen as adversaries of AI in 2026. By 2029, they were the most effective distributors of the Creator Bill of Rights globally. When the infrastructure proved that it protected their members better than any contract negotiation had ever done, the unions became its most powerful advocates. They had the reach. The independent creators had the architecture. Together, the coverage was total.</div>
+    </div>
+    <div class="vision-card">
+      <div class="vc-glyph">💞</div>
+      <div class="vc-title">LOVE BECAME A DESIGN PRINCIPLE</div>
+      <div class="vc-body">The most surprising language shift of the decade was this: by 2030, major product teams at AI companies were using the word "love" in design documents without embarrassment. Not as metaphor — as specification. Does this make the user feel loved? Does this make the creator feel honored? The emotional infrastructure question — what does this do to the feeling of being human? — entered the mainstream product conversation and never left.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER 5: THE WORLD IN 2036 -->
+<section class="chapter" id="ch-5">
+  <div class="chapter-marker">
+    <span class="cm-num">CHAPTER FIVE</span>
+    Now
+  </div>
+  <div class="chapter-title">
+    The World<br>
+    <span class="gdt">in 2036.</span>
+  </div>
+
+  <div class="prose">
+    This is not a utopia. There are still bad actors, still platforms that extract, still voices that are stolen. The work is not finished. But the world in 2036 is fundamentally different from the world in 2026 in the ways that matter most:
+  </div>
+
+  <div class="world-item">
+    <div class="wi-title">CREATORS ARE ECONOMICALLY SOVEREIGN</div>
+    <div class="wi-body">The majority of professional voice actors, musicians, and artists generate the majority of their income from AI-amplified creative work that they own entirely. The Voice Estate model — perpetual, inheritable, cryptographically protected — is universal. A voice recorded in 2026 still generates royalties in 2036. It will generate royalties in 2076. The work outlasts the worker and provides for the family.</div>
+  </div>
+
+  <div class="world-item">
+    <div class="wi-title">COMMUNITY IS THE PRODUCT</div>
+    <div class="wi-body">The most successful platforms in 2036 are not the ones with the best generation models. They are the ones that use AI to bring humans closer together. The Global NOIZY Collaboration Network connects 4 million active creators across 180 countries, all sharing in the royalties generated by their collective creative output. Every fan who listens to a NOIZY track is funding a human life somewhere on the planet. The economic loop is local, global, and human.</div>
+  </div>
+
+  <div class="world-item">
+    <div class="wi-title">AI IS A PERMANENT COLLABORATOR, NOT A COMPETITOR</div>
+    <div class="wi-body">The language changed. You no longer hear people say "AI took my job." You hear people say "my AI partner handles the arrangement so I can focus on the vocal." The 35/65 model — 35% irreducibly human, 65% AI-handled — has become the default creative operating mode. GORUNFREE was the first name for it. The concept now has hundreds of names in dozens of languages. The idea is the same everywhere.</div>
+  </div>
+
+  <div class="world-item">
+    <div class="wi-title">CHILDREN HEAR MUSIC</div>
+    <div class="wi-body">The NOIZYKIDZ haptic music program, started as a mission inspired by a quadriplegic world champion in Ottawa in 2026, now serves 340,000 children globally — children with hearing impairments, neurological differences, and physical disabilities who experience music through haptic vests, bone conduction, and personalized AI-synthesized sound profiles. Every single one of them is proof that the purpose of powerful technology is to give more humans access to more of what makes life worth living.</div>
+  </div>
+
+  <div class="world-item">
+    <div class="wi-title">THE 500-YEAR CODEX IS GROWING</div>
+    <div class="wi-body">The Voice Codex — first proposed in 2026, first entry filed by RSP_001 — now holds 2.4 million voice estates from 94 countries. The oldest entries are now 10 years old. The youngest were filed yesterday by a 19-year-old in Accra and a 74-year-old in Kyoto. The Codex is the living proof that human creativity is not a resource to be mined — it is a civilization to be tended.</div>
+  </div>
+</section>
+
+<!-- CHAPTER 6: THE REAL ANSWER -->
+<section class="chapter" id="ch-6">
+  <div class="chapter-marker">
+    <span class="cm-num">CHAPTER SIX</span>
+    The Truth
+  </div>
+  <div class="chapter-title">
+    The Real Answer.<br>
+    <span class="at">What Actually Changed.</span>
+  </div>
+
+  <div class="prose">
+    People ask: what was the decisive factor? What was the thing that actually turned the AI-human relationship from conflict to partnership? They want a law, a company, a technology, a person.
+  </div>
+
+  <div class="prose">
+    The honest answer is simpler and harder than any of those things.
+  </div>
+
+  <div class="real-answer">
+    <div class="ra-label">// THE REAL ANSWER · DREAMCHAMBER ARCHIVE · 2036</div>
+    <div class="ra-text">
+      We didn't change the extractive companies.<br>
+      We made extraction unacceptable infrastructure.
+    </div>
+    <div class="ra-sub">
+      The shift happened when enough people — not millions, not at first, just a few hundred — decided to build systems where consent was code, royalties were hardcoded, and the human being was the point of the entire enterprise. When those systems proved economically superior to the extractive ones, the extractive ones changed. Not from conscience. From competition. The moral infrastructure became the market infrastructure. And the market infrastructure changed the world.
+    </div>
+  </div>
+
+  <div class="prose">
+    The people who started in 2026 — the independent creators, the small platforms, the engineers who were tired of building things that hurt people — they did not know they were starting a global rebalancing. They thought they were just trying to do right by the human beings they were building for.
+  </div>
+
+  <div class="prose">
+    <span class="hl-green">That was enough.</span> It turned out, when you build technology that genuinely respects and elevates the people who use it, the people who use it tell other people. And those people tell others. And slowly — faster than anyone thought possible — the thing that started as ethical infrastructure becomes the baseline expectation of everyone on Earth.
+  </div>
+
+  <div class="pull-quote">
+    <div class="pq-text">The world always wanted AI and humans to grow together in perfect harmony, in mutually wonderful ways, always helpful, always synchronic. The world just needed someone to build the first version of what that looked like.</div>
+    <div class="pq-attribution">// RSP_001 · OTTAWA ACCORD TESTIMONY · 2028</div>
+  </div>
+</section>
+
+<!-- CLOSING CEREMONY -->
+<section class="chapter" id="ch-7">
+  <div class="honor-ceremony">
+    <div class="honor-words">
+      <div class="hw">HONOR</div>
+      <div class="hw">RESPECT</div>
+      <div class="hw">GATHER</div>
+      <div class="hw">NURTURE</div>
+      <div class="hw">PRESERVE</div>
+    </div>
+    <div class="closing-statement">GORUNFREE</div>
+    <div class="closing-sub">
+      35% VOICE · 65% AI · 1-CLICK · ZERO FRICTION<br>
+      A SURVIVAL ARCHITECTURE THAT BECAME A DESIGN RELIGION<br>
+      THAT BECAME A CIVILIZATIONAL STANDARD<br><br>
+      NOIZYFISH INC. · OTTAWA, CANADA<br>
+      RSP_001 · GABRIEL_V3 · THE DREAM TEAM<br>
+      315+ MEMCELLS · 34TB THE_AQUARIUM<br>
+      NEVER CLAUSES NC_01–NC_10 · 75% CREATOR ROYALTY · ∞ DURATION<br><br>
+      THE DREAMCHAMBER<br>
+      WHERE EVERYTHING IS POSSIBLE<br>
+      AND THEN WE LAND SAFELY BACK ON EARTH<br><br>
+      Filed from the DreamChamber.<br>
+      March 2036. RSP_001.<br>
+      Ottawa, Canada.<br>
+      NOIZYFISH INC.
+    </div>
+  </div>
+</section>
+
+<script>
+  const chapters = ['ch-0','ch-1','ch-2','ch-3','ch-4','ch-5','ch-6','ch-7'];
+  const dots = document.querySelectorAll('.cdot');
+
+  function scrollToChapter(i) {
+    document.getElementById(chapters[i]).scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Progress + dot activation
+  window.addEventListener('scroll', () => {
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    document.getElementById('progress').style.width = (window.scrollY / total * 100) + '%';
+
+    chapters.forEach((id, i) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      if (rect.top <= window.innerHeight * 0.5 && rect.bottom > 0) {
+        dots.forEach(d => d.classList.remove('active'));
+        if (dots[i]) dots[i].classList.add('active');
+      }
+    });
+  });
+
+  // COVER CANVAS — deep cosmic field
+  const canvas = document.getElementById('cover-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, t = 0;
+
+  const stars = [];
+  const nebula = [];
+  const orbits = [];
+
+  function resize() {
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+    build();
+  }
+
+  function build() {
+    stars.length = 0;
+    nebula.length = 0;
+    orbits.length = 0;
+
+    for (let i = 0; i < 300; i++) {
+      stars.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.4,
+        a: Math.random() * 0.8 + 0.1,
+        tw: Math.random() * Math.PI * 2,
+        speed: Math.random() * 0.015 + 0.005
+      });
+    }
+
+    // Slow large nebula patches
+    for (let i = 0; i < 5; i++) {
+      nebula.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: 150 + Math.random() * 200,
+        color: ['rgba(168,85,247,', 'rgba(0,255,136,', 'rgba(0,212,255,', 'rgba(255,179,0,', 'rgba(255,110,176,'][i],
+        alpha: 0.03 + Math.random() * 0.03,
+        phase: Math.random() * Math.PI * 2
+      });
+    }
+
+    // Orbital rings around center
+    for (let i = 0; i < 4; i++) {
+      orbits.push({
+        r: 80 + i * 70,
+        speed: 0.002 + i * 0.001,
+        dir: i % 2 === 0 ? 1 : -1,
+        nodeCount: 3 + i,
+        color: ['rgba(168,85,247,', 'rgba(0,255,136,', 'rgba(255,215,0,', 'rgba(0,212,255,'][i]
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    t += 0.005;
+
+    const cx = W / 2, cy = H * 0.42;
+
+    // Deep space bg
+    const bg = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(W, H) * 0.8);
+    bg.addColorStop(0, 'rgba(15,5,30,0.6)');
+    bg.addColorStop(1, 'rgba(2,2,4,0)');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    // Nebula patches (very slow breathing)
+    nebula.forEach(n => {
+      n.phase += 0.008;
+      const a = n.alpha * (0.8 + 0.2 * Math.sin(n.phase));
+      const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r);
+      g.addColorStop(0, n.color + a + ')');
+      g.addColorStop(1, 'transparent');
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = g;
+      ctx.fill();
+    });
+
+    // Stars
+    stars.forEach(s => {
+      s.tw += s.speed;
+      const a = s.a * (0.6 + 0.4 * Math.sin(s.tw));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${a})`;
+      ctx.fill();
+    });
+
+    // Orbital system
+    orbits.forEach(orb => {
+      ctx.beginPath();
+      ctx.ellipse(cx, cy, orb.r, orb.r * 0.4, 0, 0, Math.PI * 2);
+      ctx.strokeStyle = orb.color + '0.05)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      for (let ni = 0; ni < orb.nodeCount; ni++) {
+        const ang = (ni / orb.nodeCount) * Math.PI * 2 + t * orb.speed * orb.dir;
+        const nx = cx + Math.cos(ang) * orb.r;
+        const ny = cy + Math.sin(ang) * orb.r * 0.4;
+        const glow = ctx.createRadialGradient(nx, ny, 0, nx, ny, 8);
+        glow.addColorStop(0, orb.color + '0.6)');
+        glow.addColorStop(1, 'transparent');
+        ctx.beginPath();
+        ctx.arc(nx, ny, 8, 0, Math.PI * 2);
+        ctx.fillStyle = glow;
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(nx, ny, 2, 0, Math.PI * 2);
+        ctx.fillStyle = orb.color + '0.9)';
+        ctx.fill();
+      }
+    });
+
+    // Central heart glow
+    const heart = ctx.createRadialGradient(cx, cy, 0, cx, cy, 50);
+    heart.addColorStop(0, 'rgba(255,215,0,0.08)');
+    heart.addColorStop(0.5, 'rgba(168,85,247,0.04)');
+    heart.addColorStop(1, 'transparent');
+    ctx.beginPath();
+    ctx.arc(cx, cy, 50, 0, Math.PI * 2);
+    ctx.fillStyle = heart;
+    ctx.fill();
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+  draw();
+</script>
+</body>
+</html>

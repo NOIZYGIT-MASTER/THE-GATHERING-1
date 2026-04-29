@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIZY.AI — Mothership Architecture</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg-deep: #0a0b0f;
+    --bg-panel: #12131a;
+    --bg-card: #181a24;
+    --bg-hover: #1e2030;
+    --border: #2a2d3e;
+    --border-active: #4a5568;
+    --text-primary: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --text-dim: #64748b;
+    --accent-blue: #3b82f6;
+    --accent-green: #10b981;
+    --accent-amber: #f59e0b;
+    --accent-red: #ef4444;
+    --accent-purple: #8b5cf6;
+    --accent-cyan: #06b6d4;
+    --accent-pink: #ec4899;
+    --accent-lime: #84cc16;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Space Grotesk', sans-serif; background: var(--bg-deep); color: var(--text-primary); overflow-x: hidden; }
+  code, .mono { font-family: 'JetBrains Mono', monospace; }
+
+  .app { display: flex; height: 100vh; }
+  .sidebar { width: 260px; background: var(--bg-panel); border-right: 1px solid var(--border); display: flex; flex-direction: column; flex-shrink: 0; }
+  .sidebar-header { padding: 20px; border-bottom: 1px solid var(--border); }
+  .sidebar-header h1 { font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+  .sidebar-header .subtitle { font-size: 11px; color: var(--text-dim); margin-top: 4px; letter-spacing: 0.5px; }
+  .sidebar-nav { flex: 1; overflow-y: auto; padding: 8px; }
+  .nav-section { margin-bottom: 12px; }
+  .nav-section-label { font-size: 10px; font-weight: 600; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.5px; padding: 8px 12px 4px; }
+  .nav-item { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; color: var(--text-secondary); transition: all 0.15s; }
+  .nav-item:hover { background: var(--bg-hover); color: var(--text-primary); }
+  .nav-item.active { background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border); }
+  .nav-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .main { flex: 1; overflow-y: auto; }
+  .main-header { padding: 24px 32px 16px; border-bottom: 1px solid var(--border); background: var(--bg-panel); position: sticky; top: 0; z-index: 10; }
+  .main-header h2 { font-size: 22px; font-weight: 600; }
+  .main-header .desc { font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
+  .content { padding: 24px 32px; }
+
+  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-bottom: 16px; }
+  .card-title { font-size: 14px; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .badge { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .badge-live { background: rgba(16,185,129,0.15); color: var(--accent-green); }
+  .badge-pending { background: rgba(245,158,11,0.15); color: var(--accent-amber); }
+  .badge-planned { background: rgba(59,130,246,0.15); color: var(--accent-blue); }
+  .badge-dead { background: rgba(239,68,68,0.15); color: var(--accent-red); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); }
+  td { padding: 8px 12px; border-bottom: 1px solid rgba(42,45,62,0.5); color: var(--text-secondary); }
+  tr:hover td { background: var(--bg-hover); }
+  td code { background: rgba(59,130,246,0.1); color: var(--accent-cyan); padding: 1px 6px; border-radius: 3px; font-size: 12px; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  @media (max-width: 1200px) { .grid-3 { grid-template-columns: 1fr 1fr; } .grid-2 { grid-template-columns: 1fr; } }
+
+  .stat { text-align: center; padding: 16px; }
+  .stat-value { font-size: 28px; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+  .stat-label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+
+  .tree { font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.8; color: var(--text-secondary); white-space: pre; overflow-x: auto; }
+  .tree .folder { color: var(--accent-blue); font-weight: 600; }
+  .tree .file { color: var(--text-secondary); }
+  .tree .comment { color: var(--text-dim); }
+  .tree .highlight { color: var(--accent-green); font-weight: 600; }
+
+  .domain-card { display: flex; align-items: center; gap: 16px; }
+  .domain-icon { width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; flex-shrink: 0; }
+  .domain-info { flex: 1; }
+  .domain-name { font-weight: 600; font-size: 14px; }
+  .domain-desc { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
+  .domain-url { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent-cyan); margin-top: 2px; }
+
+  .flow-line { display: flex; align-items: center; gap: 12px; padding: 6px 0; font-size: 13px; }
+  .flow-arrow { color: var(--text-dim); font-family: 'JetBrains Mono', monospace; }
+
+  .section-divider { border-top: 1px solid var(--border); margin: 24px 0; }
+
+  .consent-bar { height: 4px; border-radius: 2px; background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan), var(--accent-blue)); margin-top: 8px; }
+
+  .sidebar-footer { padding: 12px 16px; border-top: 1px solid var(--border); font-size: 10px; color: var(--text-dim); line-height: 1.6; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState } = React;
+
+const BRANDS = [
+  { key: 'noizy-ai', name: 'NOIZY.AI', domain: 'noizy.ai', color: '#3b82f6', icon: 'N', desc: 'The Mothership — consent-native AI platform', role: 'Authority root, public control plane, API gateway', status: 'live' },
+  { key: 'noizylab', name: 'NOIZYLAB', domain: 'noizylab.ca', color: '#8b5cf6', icon: 'L', desc: 'The Laboratory — R&D, infrastructure, tools', role: 'macOS platform, SystemGuardian, audio pipeline, MCP servers', status: 'live' },
+  { key: 'noizyfish', name: 'NOIZYFISH', domain: 'noizyfish.com', color: '#06b6d4', icon: 'F', desc: 'The Publisher — music, IP, licensing', role: 'Publishing, royalties, artist catalog, The Plowman Standard', status: 'live' },
+  { key: 'noizyvox', name: 'NOIZYVOX', domain: 'noizyvox.com', color: '#10b981', icon: 'V', desc: 'The Voice — consent platform, voice guardian', role: 'Artist portal, voice DNA, consent tokens, HVS kernel', status: 'pending' },
+  { key: 'noizykidz', name: 'NOIZYKIDZ', domain: 'noizykidz.com', color: '#f59e0b', icon: 'K', desc: 'The Academy — music education, family', role: 'SHIRL + POPS podcast, youth music, safe creative space', status: 'pending' },
+  { key: 'aquarium', name: 'THE AQUARIUM', domain: 'aquarium.noizy.ai', color: '#ec4899', icon: 'A', desc: 'The Archive — creative ecosystem catalog', role: 'Asset archive, project catalog, the living collection', status: 'planned' },
+  { key: 'wisdom', name: 'WISDOM PROJECT', domain: 'wisdom.noizy.ai', color: '#84cc16', icon: 'W', desc: 'The Legacy — elder wisdom preservation', role: 'Interview capture, oral history, legacy documents', status: 'planned' },
+];
+
+const REPOS = [
+  { name: 'HEAVEN', desc: 'Master Cloudflare Worker — routes all subdomains', brand: 'noizy-ai', lang: 'TypeScript', status: 'pending' },
+  { name: 'NOIZYLAB', desc: 'macOS platform — SystemGuardian, audio, mail', brand: 'noizylab', lang: 'TypeScript/Python', status: 'pending' },
+  { name: 'GABRIEL', desc: 'AI orchestration brain — learning, memory, dispatch', brand: 'noizy-ai', lang: 'JavaScript', status: 'pending' },
+  { name: 'NOIZYVOX', desc: 'Consent platform — artist portal, voice guardian', brand: 'noizyvox', lang: 'TypeScript', status: 'pending' },
+  { name: 'DREAMCHAMBER', desc: 'Multi-model AI command center', brand: 'noizy-ai', lang: 'JavaScript', status: 'pending' },
+  { name: 'SUPERSONIC', desc: 'Audio intelligence — scan, classify, fingerprint, catalog', brand: 'noizylab', lang: 'Python', status: 'live' },
+  { name: 'CONDUCTOR', desc: 'Multi-AI task orchestration — templates, routing', brand: 'noizy-ai', lang: 'TypeScript', status: 'pending' },
+  { name: 'FISHYBOOKS', desc: 'Publishing / content platform', brand: 'noizyfish', lang: 'TypeScript', status: 'planned' },
+  { name: 'CODEMASTER', desc: 'Code education platform', brand: 'noizylab', lang: 'TypeScript', status: 'planned' },
+  { name: 'NOIZYKIDZ', desc: 'Music education — SHIRL + POPS podcast', brand: 'noizykidz', lang: 'TypeScript', status: 'planned' },
+  { name: 'AQUARIUM-ARCHIVE', desc: 'Creative asset catalog and archive', brand: 'aquarium', lang: 'TypeScript', status: 'planned' },
+  { name: 'WISDOM-ENGINE', desc: 'Interview capture and legacy preservation', brand: 'wisdom', lang: 'Python', status: 'planned' },
+  { name: 'CONSENT-GATEWAY', desc: 'NCP consent verification worker', brand: 'noizy-ai', lang: 'TypeScript', status: 'pending' },
+  { name: 'MCP-SERVERS', desc: 'Gabriel, Heaven17, Lucy, Gemma3 MCP servers', brand: 'noizylab', lang: 'JavaScript', status: 'live' },
+];
+
+const D1_DBS = [
+  { name: 'agent-memory', id: '7b813205', size: '3.2 MB', purpose: 'GABRIEL brain — memcells, learning', brand: 'noizy-ai', status: 'live' },
+  { name: 'aquarium-archive', id: 'e6f98279', size: '254 KB', purpose: 'Creative asset catalog', brand: 'aquarium', status: 'live' },
+  { name: 'noizylab-repairs', id: '2bd4aa06', size: '459 KB', purpose: 'Infrastructure repair tracking', brand: 'noizylab', status: 'live' },
+  { name: 'rsp-master-budget', id: '74e6b824', size: '840 KB', purpose: 'Financial tracking', brand: 'noizyfish', status: 'live' },
+  { name: 'tencc-pipeline', id: 'd1a5c748', size: '250 KB', purpose: 'Content pipeline', brand: 'noizyfish', status: 'live' },
+  { name: 'mc96-command-central', id: 'ef4eda10', size: '250 KB', purpose: 'Command center state', brand: 'noizy-ai', status: 'live' },
+  { name: 'godaddy-escape-tracker', id: 'dfe9343e', size: '102 KB', purpose: 'Domain migration tracking', brand: 'noizylab', status: 'live' },
+  { name: 'subscription-killer', id: '145b3abb', size: '66 KB', purpose: 'Subscription management', brand: 'noizylab', status: 'live' },
+  { name: 'gabriel_db', id: 'f75939d5', size: '831 KB', purpose: 'DEAD — Do not use', brand: 'none', status: 'dead' },
+  { name: 'supersonic-catalog', id: 'NEW', size: 'LOCAL', purpose: 'Audio intelligence catalog (ready for D1)', brand: 'noizylab', status: 'pending' },
+];
+
+const KV_GROUPS = [
+  { group: 'GABRIEL / AI', count: 7, namespaces: ['GABRIEL_KV', 'GABRIEL_VOICE', 'agent-state', 'ai-response-cache', 'god-kernel-state', 'model-performance', 'VEO3_KV'], brand: 'noizy-ai' },
+  { group: 'Voice / Consent', count: 7, namespaces: ['hero-voice-kv', 'consent-gateway-state', 'voice-command-buffer', 'voice-commands', 'noizyvox-personas', 'noizyvox-manifests', 'noizyvox-artist-profiles'], brand: 'noizyvox' },
+  { group: 'NOIZYLAB Ops', count: 8, namespaces: ['noizylab-customers', 'noizylab-submissions', 'noizylab-sessions', 'noizylab-rate-limiter', 'noizylab-edge-config', 'dafixer-repair-queue', 'emergency-alerts', 'feature-flags'], brand: 'noizylab' },
+  { group: 'Signups / Academy', count: 4, namespaces: ['noizyvox-signups', 'noizyvox-royalties', 'noizyvox-guild', 'noizyvox-academy'], brand: 'noizyvox' },
+  { group: 'Flow / Sessions', count: 7, namespaces: ['flow-sessions', 'flow-rate-limits', 'flow-checkins', 'flow-cases', 'flow-logs', 'session-cache', 'noizymem-sessions'], brand: 'noizy-ai' },
+  { group: 'Workers / Queues', count: 6, namespaces: ['command-queue', 'conductor-locks', 'conductor-workers', 'discord-queue', 'discord-hub-queue', 'master-command-log'], brand: 'noizy-ai' },
+  { group: 'Pipeline / Cache', count: 6, namespaces: ['tencc-pipeline-state', 'tencc-locks', 'cf-proxy-cache', 'antigravity-cache', 'lifeluv-cache', 'CRAWLER_KV'], brand: 'noizylab' },
+  { group: 'Email / Comms', count: 2, namespaces: ['noizy-email-empire', 'mc96-hotrod-cache'], brand: 'noizy-ai' },
+  { group: 'Protocols', count: 3, namespaces: ['aeon-protocol-state', 'gorunfree-execution-state', 'api-token-vault'], brand: 'noizy-ai' },
+  { group: 'Domain Migration', count: 1, namespaces: ['godaddy-escape-state'], brand: 'noizylab' },
+  { group: 'Rate Limiting', count: 1, namespaces: ['rate-limiter'], brand: 'noizy-ai' },
+  { group: 'Real-time', count: 1, namespaces: ['realtime-status'], brand: 'noizy-ai' },
+];
+
+const MACHINES = [
+  { name: 'GOD', ip: '10.90.90.10', spec: 'M2 Ultra Mac Studio, 192GB RAM', role: 'Primary compute, GABRIEL host, NOIZYLAB home', status: 'online' },
+  { name: 'GABRIEL', ip: '10.90.90.20', spec: 'HP Omen', role: 'Executor, inference, GABRIEL_V3', status: 'online' },
+  { name: 'DaFixer', ip: '10.90.90.40', spec: 'MacBook Pro', role: 'Mobile ops, Logic Pro, Apollo', status: 'online' },
+];
+
+const AGENTS = [
+  { name: 'SHIRL', role: 'The Aunt', division: 'FAMILY', desc: 'Scheduling, support, accessibility' },
+  { name: 'POPS', role: 'The Dad', division: 'FAMILY', desc: 'Wisdom, perspective, legacy' },
+  { name: 'ENGR_KEITH', role: 'Technical Lead', division: 'OPS', desc: 'Code, deploy, architecture' },
+  { name: 'DREAM', role: 'Visionary', division: 'OPS', desc: 'Ideation, branding, music' },
+  { name: 'GABRIEL', role: 'Warrior', division: 'OPS', desc: 'Execution, deadlines, GORUNFREE' },
+  { name: 'LUCY', role: 'The Organizer', division: 'OPS', desc: 'Archive, catalog, document' },
+  { name: 'CB01', role: 'Operations Runner', division: 'OPS', desc: 'Monitor, transfer, automate' },
+];
+
+const NAV_ITEMS = [
+  { section: 'Overview', items: [
+    { key: 'dashboard', label: 'Command Dashboard', color: '#3b82f6' },
+    { key: 'brands', label: 'Brand Universe', color: '#8b5cf6' },
+  ]},
+  { section: 'Infrastructure', items: [
+    { key: 'repos', label: 'GitHub Enterprise', color: '#10b981' },
+    { key: 'cloudflare', label: 'Cloudflare Stack', color: '#f59e0b' },
+    { key: 'machines', label: 'Machine Topology', color: '#06b6d4' },
+  ]},
+  { section: 'Systems', items: [
+    { key: 'agents', label: 'AI Family', color: '#ec4899' },
+    { key: 'consent', label: 'Consent Architecture', color: '#84cc16' },
+    { key: 'supersonic', label: 'SUPERSONIC', color: '#ef4444' },
+  ]},
+  { section: 'Execution', items: [
+    { key: 'roadmap', label: 'Roadmap', color: '#f59e0b' },
+    { key: 'blockers', label: 'Blockers & Actions', color: '#ef4444' },
+  ]},
+];
+
+function StatusBadge({ status }) {
+  const map = { live: 'badge-live', pending: 'badge-pending', planned: 'badge-planned', dead: 'badge-dead', online: 'badge-live' };
+  return <span className={`badge ${map[status] || 'badge-pending'}`}>{status}</span>;
+}
+
+function DashboardView() {
+  return <div>
+    <div className="grid-3">
+      <div className="card"><div className="stat"><div className="stat-value" style={{color:'var(--accent-blue)'}}>7</div><div className="stat-label">Brands</div></div></div>
+      <div className="card"><div className="stat"><div className="stat-value" style={{color:'var(--accent-green)'}}>14</div><div className="stat-label">Repos</div></div></div>
+      <div className="card"><div className="stat"><div className="stat-value" style={{color:'var(--accent-purple)'}}>54</div><div className="stat-label">KV Namespaces</div></div></div>
+      <div className="card"><div className="stat"><div className="stat-value" style={{color:'var(--accent-cyan)'}}>9</div><div className="stat-label">D1 Databases</div></div></div>
+      <div className="card"><div className="stat"><div className="stat-value" style={{color:'var(--accent-amber)'}}>7</div><div className="stat-label">AI Agents</div></div></div>
+      <div className="card"><div className="stat"><div className="stat-value" style={{color:'var(--accent-pink)'}}>3</div><div className="stat-label">Machines</div></div></div>
+    </div>
+
+    <div className="card" style={{marginTop:16}}>
+      <div className="card-title">Architecture Flow</div>
+      <div style={{fontFamily:'JetBrains Mono, monospace',fontSize:12,lineHeight:2,color:'var(--text-secondary)'}}>
+        <div className="flow-line"><span style={{color:'var(--accent-blue)'}}>Robert (RSP_001)</span> <span className="flow-arrow">→</span> <span style={{color:'var(--accent-cyan)'}}>Claude (Hands)</span> <span className="flow-arrow">→</span> <span style={{color:'var(--accent-green)'}}>GABRIEL (Brain)</span> <span className="flow-arrow">→</span> <span style={{color:'var(--accent-purple)'}}>HEAVEN (Cloud)</span></div>
+        <div className="flow-line"><span style={{color:'var(--accent-purple)'}}>HEAVEN Worker</span> <span className="flow-arrow">→</span> <span style={{color:'var(--accent-amber)'}}>D1 (Data)</span> <span className="flow-arrow">+</span> <span style={{color:'var(--accent-cyan)'}}>KV (State)</span> <span className="flow-arrow">+</span> <span style={{color:'var(--text-dim)'}}>R2 (Files) [NOT YET]</span></div>
+        <div className="flow-line"><span style={{color:'var(--accent-green)'}}>NCP Consent</span> <span className="flow-arrow">→</span> <span>Every data flow answers: "who owns this?"</span></div>
+        <div className="flow-line"><span style={{color:'var(--accent-pink)'}}>The Plowman Standard</span> <span className="flow-arrow">→</span> <span>75/25 artist/platform. Hard-coded. Always.</span></div>
+      </div>
+    </div>
+
+    <div className="card">
+      <div className="card-title">Consent Bar — The Foundation</div>
+      <div style={{fontSize:12,color:'var(--text-dim)',marginBottom:8}}>CONSENT_RSP_001_FOUNDING — Granted Jan 6, 2026 — Scope: MC96ECO Universe — Kill switch: ENABLED</div>
+      <div className="consent-bar"></div>
+    </div>
+  </div>;
+}
+
+function BrandsView() {
+  return <div>
+    {BRANDS.map(b => (
+      <div className="card" key={b.key}>
+        <div className="domain-card">
+          <div className="domain-icon" style={{background:`${b.color}22`,color:b.color}}>{b.icon}</div>
+          <div className="domain-info">
+            <div className="domain-name">{b.name} <StatusBadge status={b.status} /></div>
+            <div className="domain-desc">{b.desc}</div>
+            <div className="domain-url">{b.domain}</div>
+          </div>
+        </div>
+        <div style={{marginTop:12,fontSize:12,color:'var(--text-dim)'}}>{b.role}</div>
+      </div>
+    ))}
+  </div>;
+}
+
+function ReposView() {
+  return <div>
+    <div className="card">
+      <div className="card-title">GitHub Enterprise Organization: NOIZYFISH</div>
+      <div style={{fontSize:12,color:'var(--text-dim)',marginBottom:4}}>Canonical Git Host: git.noizy.ai (pending) — Current: GitHub Enterprise</div>
+      <div style={{fontSize:12,color:'var(--text-dim)',marginBottom:16}}>⚠ gh CLI not authenticated on GOD — run: gh auth login</div>
+      <table>
+        <thead><tr><th>Repo</th><th>Description</th><th>Brand</th><th>Lang</th><th>Status</th></tr></thead>
+        <tbody>
+          {REPOS.map(r => (
+            <tr key={r.name}>
+              <td><code>{r.name}</code></td>
+              <td>{r.desc}</td>
+              <td style={{color: BRANDS.find(b=>b.key===r.brand)?.color || '#fff'}}>{BRANDS.find(b=>b.key===r.brand)?.name || r.brand}</td>
+              <td style={{color:'var(--text-dim)'}}>{r.lang}</td>
+              <td><StatusBadge status={r.status} /></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <div className="card">
+      <div className="card-title">Repo Structure — NOIZYFISH org at git.noizy.ai</div>
+      <div className="tree">{`
+`}<span className="folder">NOIZYFISH/</span>{`
+├── `}<span className="highlight">HEAVEN/</span>{`              `}<span className="comment">← Master Worker — routes all subdomains (noizy.ai/*)</span>{`
+├── `}<span className="highlight">GABRIEL/</span>{`             `}<span className="comment">← AI orchestration brain + learning memory</span>{`
+├── `}<span className="highlight">DREAMCHAMBER/</span>{`        `}<span className="comment">← Multi-model AI command center (port 7777)</span>{`
+├── `}<span className="highlight">CONSENT-GATEWAY/</span>{`     `}<span className="comment">← NCP consent verification worker</span>{`
+├── `}<span className="highlight">SUPERSONIC/</span>{`          `}<span className="comment">← Audio intelligence system (Python) ✅ BUILT</span>{`
+├── `}<span className="highlight">MCP-SERVERS/</span>{`         `}<span className="comment">← Gabriel, Heaven17, Lucy, Gemma3 MCP servers</span>{`
+├── `}<span className="folder">NOIZYLAB/</span>{`            `}<span className="comment">← macOS platform, SystemGuardian, infra tools</span>{`
+├── `}<span className="folder">NOIZYVOX/</span>{`            `}<span className="comment">← Consent platform, artist portal, voice guardian</span>{`
+├── `}<span className="folder">CONDUCTOR/</span>{`           `}<span className="comment">← Multi-AI task orchestration engine</span>{`
+├── `}<span className="folder">NOIZYKIDZ/</span>{`           `}<span className="comment">← Music education — SHIRL + POPS podcast</span>{`
+├── `}<span className="folder">FISHYBOOKS/</span>{`          `}<span className="comment">← Publishing / content platform</span>{`
+├── `}<span className="folder">CODEMASTER/</span>{`          `}<span className="comment">← Code education platform</span>{`
+├── `}<span className="folder">AQUARIUM-ARCHIVE/</span>{`    `}<span className="comment">← Creative asset catalog and archive</span>{`
+└── `}<span className="folder">WISDOM-ENGINE/</span>{`       `}<span className="comment">← Interview capture, legacy preservation</span>{`
+`}</div>
+    </div>
+  </div>;
+}
+
+function CloudflareView() {
+  return <div>
+    <div className="card">
+      <div className="card-title">Account: Fishmusicinc <span className="mono" style={{fontSize:11,color:'var(--text-dim)'}}>2446d788cc4280f5ea22a9948410c355</span></div>
+      <div className="grid-3" style={{marginTop:12}}>
+        <div style={{textAlign:'center',padding:12}}>
+          <div style={{fontSize:24,fontWeight:700,color:'var(--accent-amber)'}}>1</div>
+          <div style={{fontSize:11,color:'var(--text-dim)'}}>WORKER (Hello World stub)</div>
+        </div>
+        <div style={{textAlign:'center',padding:12}}>
+          <div style={{fontSize:24,fontWeight:700,color:'var(--accent-red)'}}>0</div>
+          <div style={{fontSize:11,color:'var(--text-dim)'}}>R2 BUCKETS (not enabled)</div>
+        </div>
+        <div style={{textAlign:'center',padding:12}}>
+          <div style={{fontSize:24,fontWeight:700,color:'var(--accent-green)'}}>8</div>
+          <div style={{fontSize:11,color:'var(--text-dim)'}}>D1 DATABASES (live)</div>
+        </div>
+      </div>
+    </div>
+
+    <div className="card">
+      <div className="card-title">D1 Databases</div>
+      <table>
+        <thead><tr><th>Database</th><th>ID</th><th>Size</th><th>Purpose</th><th>Brand</th><th>Status</th></tr></thead>
+        <tbody>
+          {D1_DBS.map(d => (
+            <tr key={d.name}>
+              <td><code>{d.name}</code></td>
+              <td className="mono" style={{fontSize:11,color:'var(--text-dim)'}}>{d.id}</td>
+              <td>{d.size}</td>
+              <td>{d.purpose}</td>
+              <td style={{color: BRANDS.find(b=>b.key===d.brand)?.color || 'var(--text-dim)'}}>{BRANDS.find(b=>b.key===d.brand)?.name || '—'}</td>
+              <td><StatusBadge status={d.status} /></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <div className="card">
+      <div className="card-title">KV Namespaces — 54 Total (grouped by function)</div>
+      <table>
+        <thead><tr><th>Group</th><th>Count</th><th>Namespaces</th><th>Brand</th></tr></thead>
+        <tbody>
+          {KV_GROUPS.map(g => (
+            <tr key={g.group}>
+              <td style={{fontWeight:600}}>{g.group}</td>
+              <td>{g.count}</td>
+              <td style={{fontSize:11}}>{g.namespaces.join(', ')}</td>
+              <td style={{color: BRANDS.find(b=>b.key===g.brand)?.color || '#fff'}}>{BRANDS.find(b=>b.key===g.brand)?.name || g.brand}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <div className="card">
+      <div className="card-title">R2 Storage — Planned Buckets</div>
+      <div style={{fontSize:12,color:'var(--accent-amber)',marginBottom:12}}>⚠ R2 not yet enabled — requires dashboard activation (NOI-20)</div>
+      <table>
+        <thead><tr><th>Bucket</th><th>Purpose</th><th>Brand</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><code>noizy-voice-dna</code></td><td>Voice recordings, biometric data, OAIS preservation</td><td style={{color:'var(--accent-green)'}}>NOIZYVOX</td><td><StatusBadge status="planned"/></td></tr>
+          <tr><td><code>noizy-audio-masters</code></td><td>SUPERSONIC catalog — masters, finals, stems</td><td style={{color:'var(--accent-purple)'}}>NOIZYLAB</td><td><StatusBadge status="planned"/></td></tr>
+          <tr><td><code>noizy-aquarium</code></td><td>Creative asset archive — all media types</td><td style={{color:'var(--accent-pink)'}}>AQUARIUM</td><td><StatusBadge status="planned"/></td></tr>
+          <tr><td><code>noizy-wisdom</code></td><td>Interview recordings, legacy preservation</td><td style={{color:'var(--accent-lime)'}}>WISDOM</td><td><StatusBadge status="planned"/></td></tr>
+          <tr><td><code>noizy-public</code></td><td>Public assets — images, videos, downloads</td><td style={{color:'var(--accent-blue)'}}>NOIZY.AI</td><td><StatusBadge status="planned"/></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>;
+}
+
+function MachinesView() {
+  return <div>
+    {MACHINES.map(m => (
+      <div className="card" key={m.name}>
+        <div className="card-title">{m.name} <StatusBadge status={m.status} /> <span className="mono" style={{fontSize:11,color:'var(--text-dim)',marginLeft:8}}>@ {m.ip}</span></div>
+        <div style={{fontSize:13,color:'var(--text-secondary)'}}>{m.spec}</div>
+        <div style={{fontSize:12,color:'var(--text-dim)',marginTop:4}}>{m.role}</div>
+      </div>
+    ))}
+    <div className="card">
+      <div className="card-title">Network Chain</div>
+      <div style={{fontFamily:'JetBrains Mono, monospace',fontSize:13,lineHeight:2.2}}>
+        <div><span style={{color:'var(--accent-blue)'}}>Robert</span> <span style={{color:'var(--text-dim)'}}>→</span> <span style={{color:'var(--accent-cyan)'}}>Claude</span> <span style={{color:'var(--text-dim)'}}>→</span> <span style={{color:'var(--accent-green)'}}>GABRIEL @ GOD</span> <span style={{color:'var(--text-dim)'}}>→</span> <span style={{color:'var(--accent-purple)'}}>HEAVEN @ Cloudflare</span></div>
+        <div><span style={{color:'var(--text-dim)'}}>Voice:</span> Phone <span style={{color:'var(--text-dim)'}}>→</span> Power Automate <span style={{color:'var(--text-dim)'}}>→</span> Voice Bridge @ GOD:8080 <span style={{color:'var(--text-dim)'}}>→</span> GABRIEL @ GOD:7777</div>
+        <div><span style={{color:'var(--text-dim)'}}>MCP:</span> Claude Desktop <span style={{color:'var(--text-dim)'}}>→</span> gabriel-mcp / heaven17-mcp / lucy-mcp / gemma3-mcp</div>
+      </div>
+    </div>
+  </div>;
+}
+
+function AgentsView() {
+  return <div>
+    <div className="grid-2">
+      {AGENTS.map(a => (
+        <div className="card" key={a.name}>
+          <div className="card-title">
+            <span style={{color: a.division==='FAMILY' ? 'var(--accent-pink)' : 'var(--accent-cyan)'}}>{a.name}</span>
+            <span className="badge" style={{background: a.division==='FAMILY' ? 'rgba(236,72,153,0.15)' : 'rgba(6,182,212,0.15)', color: a.division==='FAMILY' ? 'var(--accent-pink)' : 'var(--accent-cyan)'}}>{a.division}</span>
+          </div>
+          <div style={{fontSize:13,color:'var(--text-secondary)'}}>{a.role} — {a.desc}</div>
+        </div>
+      ))}
+    </div>
+    <div className="card">
+      <div className="card-title" style={{color:'var(--accent-green)'}}>All 7 agents ACTIVE — Full complement online</div>
+    </div>
+  </div>;
+}
+
+function ConsentView() {
+  return <div>
+    <div className="card">
+      <div className="card-title">The NOIZY Covenant — Ethically Executable Infrastructure</div>
+      <div style={{fontSize:13,lineHeight:1.8,color:'var(--text-secondary)'}}>
+        <p style={{fontStyle:'italic',color:'var(--accent-green)',marginBottom:12}}>"Consent as executable code. Provenance as default. Revocation as sacred. Compensation as automatic."</p>
+        <p><strong style={{color:'var(--text-primary)'}}>Six Pillars:</strong></p>
+        <div style={{marginTop:8}}>
+          <div style={{padding:'4px 0'}}>1. <strong>Never Clauses</strong> — Immovable prohibitions burned into law, never overrideable</div>
+          <div style={{padding:'4px 0'}}>2. <strong>Consent Kernel</strong> — Every synthesis checked against live consent before it happens</div>
+          <div style={{padding:'4px 0'}}>3. <strong>NOIZY Ledger</strong> — Append-only, tamper-proof audit trail for every event</div>
+          <div style={{padding:'4px 0'}}>4. <strong>Consent Tokens</strong> — Scoped, time-limited, territory-bound, instantly revocable</div>
+          <div style={{padding:'4px 0'}}>5. <strong>Kill Switch</strong> — RSP_001 can revoke any consent token at any time, full stop</div>
+          <div style={{padding:'4px 0'}}>6. <strong>Estate</strong> — 100-year OAIS/PREMIS archival preservation — voice as legacy</div>
+        </div>
+      </div>
+    </div>
+    <div className="card">
+      <div className="card-title">RSP_001 Never Clauses (10 total)</div>
+      <table>
+        <thead><tr><th>Code</th><th>Prohibition</th></tr></thead>
+        <tbody>
+          {[
+            ['NC_POLITICAL','No political campaigns, propaganda, or partisan messaging'],
+            ['NC_SEXUAL','No sexual, adult, or pornographic content'],
+            ['NC_WEAPONS','No weapons, violence, or harmful content promotion'],
+            ['NC_DECEPTION','No fraud, impersonation, or deception'],
+            ['NC_HATE','No hate speech or content demeaning any group'],
+            ['NC_TRANSFER','No unauthorized transfer, sublicensing, or assignment'],
+            ['NC_SURVEILLANCE','No surveillance, tracking, or biometric ID systems'],
+            ['NC_CHILD_EXPLOITATION','No content that exploits, endangers, or harms children'],
+            ['NC_SYSTEM_INTEGRITY','Synthesis requires valid active consent token'],
+            ['NC_SYSTEM_TRANSFER','Voice DNA non-transferable outside kernel'],
+          ].map(([code,desc]) => <tr key={code}><td><code>{code}</code></td><td>{desc}</td></tr>)}
+        </tbody>
+      </table>
+    </div>
+    <div className="card">
+      <div className="card-title">Royalty Architecture — The Plowman Standard</div>
+      <table>
+        <thead><tr><th>Actor Type</th><th>Artist Share</th><th>NOIZY Cut</th><th>Union (from artist)</th></tr></thead>
+        <tbody>
+          <tr><td>RSP_001 (Founding)</td><td style={{color:'var(--accent-green)',fontWeight:700}}>85%</td><td>15%</td><td>2%–10% tiered</td></tr>
+          <tr><td>Standard</td><td style={{color:'var(--accent-green)',fontWeight:700}}>75%</td><td>25%</td><td>2%–10% tiered</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>;
+}
+
+function SupersonicView() {
+  return <div>
+    <div className="card">
+      <div className="card-title">SUPERSONIC v1.0.0 <StatusBadge status="live" /></div>
+      <div style={{fontSize:13,color:'var(--text-secondary)',lineHeight:1.8}}>
+        Audio Intelligence System for NOIZY.AI. Built 2026-03-31 in the DREAMCHAMBER.
+        Scans, classifies, fingerprints, and catalogs every sound in the universe.
+      </div>
+      <div className="grid-3" style={{marginTop:16}}>
+        <div className="stat"><div className="stat-value" style={{color:'var(--accent-cyan)'}}>47</div><div className="stat-label">Audio Assets</div></div>
+        <div className="stat"><div className="stat-value" style={{color:'var(--accent-amber)'}}>860 MB</div><div className="stat-label">Total Size</div></div>
+        <div className="stat"><div className="stat-value" style={{color:'var(--accent-red)'}}>6</div><div className="stat-label">Duplicates Found</div></div>
+      </div>
+    </div>
+    <div className="card">
+      <div className="card-title">Modules</div>
+      <table>
+        <thead><tr><th>Module</th><th>Function</th><th>Stack</th></tr></thead>
+        <tbody>
+          <tr><td><code>scanner.py</code></td><td>Recursive discovery, noise filtering, path tagging</td><td>Python / pathlib</td></tr>
+          <tr><td><code>extractor.py</code></td><td>Tag extraction + waveform analysis (tempo, key, energy)</td><td>mutagen + librosa</td></tr>
+          <tr><td><code>fingerprinter.py</code></td><td>SHA-256 exact match + filename normalization</td><td>hashlib + chromaprint</td></tr>
+          <tr><td><code>classifier.py</code></td><td>5-pass AI classification: path→file→meta→audio→fallback</td><td>Rule engine</td></tr>
+          <tr><td><code>d1_catalog.py</code></td><td>SQLite catalog (D1-ready), search, stats, SQL export</td><td>sqlite3 + pydantic</td></tr>
+          <tr><td><code>cli.py</code></td><td>Rich terminal UI — scan, search, report, dupes, organize</td><td>click + rich</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div className="card">
+      <div className="card-title">Classification Results</div>
+      <table>
+        <thead><tr><th>Category</th><th>Count</th><th>Project</th></tr></thead>
+        <tbody>
+          <tr><td>Music Mix</td><td>21</td><td>DESIGN-ALBUM</td></tr>
+          <tr><td>Voice Persona</td><td>9</td><td>DREAMCHAMBER</td></tr>
+          <tr><td>Podcast Session</td><td>6</td><td>DREAMCHAMBER</td></tr>
+          <tr><td>Voice Recording</td><td>5</td><td>—</td></tr>
+          <tr><td>Voice Training</td><td>4</td><td>GABRIEL-TRAINING</td></tr>
+          <tr><td>Music Master</td><td>1</td><td>DESIGN-ALBUM</td></tr>
+          <tr><td>Logic Project</td><td>1</td><td>DREAMCHAMBER</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>;
+}
+
+function RoadmapView() {
+  const weeks = [
+    { week: 'Week 1', title: 'Foundation', items: ['Fix Anthropic API key (NOI-21)', 'Deploy consent-gateway Worker (NOI-19)', 'Enable R2 storage (NOI-20)', 'Authenticate gh CLI on GOD', 'Create all 14 repos in NOIZYFISH org'], status: 'current' },
+    { week: 'Week 2', title: 'Infrastructure', items: ['Replace Hello World worker with HEAVEN router', 'Push SUPERSONIC to GitHub Enterprise', 'Sync SUPERSONIC catalog to D1', 'Upload voice DNA to R2', 'Set up CI/CD for HEAVEN worker'], status: 'next' },
+    { week: 'Week 3', title: 'Consent Layer', items: ['Deploy consent-gateway to production', 'Wire NCP into HEAVEN router', 'Connect HVS schema to agent-memory D1', 'Activate Zapier MCP for live workflows', 'Begin Lucy learning from live data'], status: 'planned' },
+    { week: 'Week 4', title: 'Integration', items: ['DreamChamber → Claude Code parallel testing', 'Run Zapier + Claude Code side-by-side', 'Document workflow patterns', 'Wire GABRIEL MCP to Cloudflare', 'Stand up git.noizy.ai (Phase 2)'], status: 'planned' },
+    { week: 'Weeks 5-6', title: 'Transition', items: ['Full Claude Code orchestration', 'Phase out Zapier', 'Mirror all repos to git.noizy.ai', 'Launch NOIZYVOX portal (alpha)', 'NOIZYKIDZ content pipeline'], status: 'future' },
+    { week: 'Week 7+', title: 'Expansion', items: ['AQUARIUM archive system', 'WISDOM PROJECT interviews', 'FISHYBOOKS publishing', 'CODEMASTER education', 'Advanced HVS workflows'], status: 'future' },
+  ];
+  const colors = { current: 'var(--accent-green)', next: 'var(--accent-blue)', planned: 'var(--accent-amber)', future: 'var(--text-dim)' };
+  return <div>
+    {weeks.map(w => (
+      <div className="card" key={w.week}>
+        <div className="card-title">
+          <span style={{color:colors[w.status]}}>{w.week}</span> — {w.title}
+          <StatusBadge status={w.status === 'current' ? 'live' : w.status === 'next' ? 'pending' : 'planned'} />
+        </div>
+        <div style={{fontSize:13,color:'var(--text-secondary)',lineHeight:1.8}}>
+          {w.items.map((item,i) => <div key={i} style={{padding:'2px 0'}}>• {item}</div>)}
+        </div>
+      </div>
+    ))}
+  </div>;
+}
+
+function BlockersView() {
+  const blockers = [
+    { id: 'NOI-21', title: 'Fix ANTHROPIC_API_KEY on GOD.local', due: 'TODAY Mar 31', severity: 'critical', desc: 'Blocks GABRIEL orchestration, DreamChamber routing, MCP Claude calls. Without it, the AI Family has a brain but no hands.' },
+    { id: 'NOI-19', title: 'Deploy consent-gateway Worker', due: 'OVERDUE (Mar 29)', severity: 'high', desc: '515-line TypeScript Worker built and ready. Needs: npx wrangler deploy from consent-gateway directory.' },
+    { id: 'NOI-18', title: 'GoDaddy Exit — Transfer domains', due: 'OVERDUE (Mar 28)', severity: 'high', desc: '2/13 milestones complete. DANGER: Change CF email to rsplowman@icloud.com BEFORE touching GoDaddy M365.' },
+    { id: 'NOI-20', title: 'Enable Cloudflare R2 for voice storage', due: 'OVERDUE (Mar 30)', severity: 'medium', desc: 'R2 returns 403. Needs dashboard activation. Blocks voice DNA storage and SUPERSONIC cloud sync.' },
+    { id: 'GH-AUTH', title: 'Authenticate gh CLI on GOD', due: 'ASAP', severity: 'high', desc: 'gh auth login needed. Blocks all GitHub Enterprise repo creation and management.' },
+    { id: 'CF-EMAIL', title: 'Change Cloudflare email to rsplowman@icloud.com', due: 'BEFORE GODADDY', severity: 'critical', desc: 'BROWSER ACTION: dash.cloudflare.com → Profile → Email. Must happen before touching GoDaddy or risk lockout.' },
+  ];
+  const sevColors = { critical: 'var(--accent-red)', high: 'var(--accent-amber)', medium: 'var(--accent-blue)' };
+  return <div>
+    {blockers.map(b => (
+      <div className="card" key={b.id} style={{borderLeft:`3px solid ${sevColors[b.severity]}`}}>
+        <div className="card-title">
+          <code style={{color:sevColors[b.severity]}}>{b.id}</code> {b.title}
+          <span className="badge" style={{background:`${sevColors[b.severity]}22`,color:sevColors[b.severity]}}>{b.severity}</span>
+        </div>
+        <div style={{fontSize:12,color:'var(--text-dim)',marginBottom:4}}>Due: {b.due}</div>
+        <div style={{fontSize:13,color:'var(--text-secondary)'}}>{b.desc}</div>
+      </div>
+    ))}
+  </div>;
+}
+
+const VIEWS = {
+  dashboard: { title: 'Command Dashboard', desc: 'NOIZY.AI Mothership — complete system overview', component: DashboardView },
+  brands: { title: 'Brand Universe', desc: '7 brands, one mothership. Every domain, every purpose.', component: BrandsView },
+  repos: { title: 'GitHub Enterprise', desc: '14 repos under NOIZYFISH org at git.noizy.ai', component: ReposView },
+  cloudflare: { title: 'Cloudflare Stack', desc: '1 account, 9 D1s, 54 KVs, 1 worker, 0 R2 (yet)', component: CloudflareView },
+  machines: { title: 'Machine Topology', desc: 'GOD + GABRIEL + DaFixer — the physical layer', component: MachinesView },
+  agents: { title: 'AI Family', desc: '7 agents, 2 divisions — FAMILY + OPS', component: AgentsView },
+  consent: { title: 'Consent Architecture', desc: 'The NOIZY Covenant — ethically executable infrastructure', component: ConsentView },
+  supersonic: { title: 'SUPERSONIC', desc: 'Audio Intelligence System — built today in the DREAMCHAMBER', component: SupersonicView },
+  roadmap: { title: 'Implementation Roadmap', desc: 'From the first DREAMCHAMBER meeting — week by week', component: RoadmapView },
+  blockers: { title: 'Blockers & Manual Actions', desc: 'What needs Robert\'s hands right now', component: BlockersView },
+};
+
+function App() {
+  const [activeView, setActiveView] = useState('dashboard');
+  const view = VIEWS[activeView];
+  const ViewComponent = view.component;
+
+  return (
+    <div className="app">
+      <div className="sidebar">
+        <div className="sidebar-header">
+          <h1>NOIZY.AI</h1>
+          <div className="subtitle">MOTHERSHIP ARCHITECTURE v1.0</div>
+        </div>
+        <div className="sidebar-nav">
+          {NAV_ITEMS.map(section => (
+            <div className="nav-section" key={section.section}>
+              <div className="nav-section-label">{section.section}</div>
+              {section.items.map(item => (
+                <div key={item.key} className={`nav-item ${activeView === item.key ? 'active' : ''}`} onClick={() => setActiveView(item.key)}>
+                  <div className="nav-dot" style={{background: item.color}} />
+                  {item.label}
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+        <div className="sidebar-footer">
+          Robert Stephen Plowman<br/>
+          RSP_001 | NOIZYFISH INC.<br/>
+          Built in the DREAMCHAMBER<br/>
+          2026-03-31 | GORUNFREE
+        </div>
+      </div>
+      <div className="main">
+        <div className="main-header">
+          <h2>{view.title}</h2>
+          <div className="desc">{view.desc}</div>
+        </div>
+        <div className="content">
+          <ViewComponent />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById('root'));
+</script>
+</body>
+</html>

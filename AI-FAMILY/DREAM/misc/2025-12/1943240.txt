@@ -1,0 +1,71 @@
+<root>
+    <CtrlMenuItemStyle name="menu_style" seperator_selection="true" sub_menu_selection="true" selection_colour="[r:255 g:255 b:0 a:255]" accessories_colour="[r:0 g:0 b:255 a:255]" />
+    <CtrlImageViewStyle name="BackImageView12" noDefaultDrawing="true" optBorder="false" optBackground="false" colBorder="[r:50 g:50 b:50 a:255]" intRoundedRectRadius="0">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlImageViewStyle>
+    <CtrlPanelStyle name="Background" imBackground="..\kit_background.tga" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="12" fontName="Tahoma" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="Slot1_indi" imBackground="Overlays\12\slot1_indi.tga" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="12" fontName="Tahoma" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="Slot2_indi" imBackground="Overlays\12\slot2_indi.tga" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="12" fontName="Tahoma" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="Slot3_indi" imBackground="Overlays\12\slot3_indi.tga" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="12" fontName="Tahoma" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="Slot4_indi" imBackground="Overlays\12\slot4_indi.tga" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="12" fontName="Tahoma" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="Slot5_indi" imBackground="Overlays\12\slot5_indi.tga" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="12" fontName="Tahoma" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="Slot6_indi" imBackground="Overlays\12\slot6_indi.tga" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="12" fontName="Tahoma" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="Slot7_indi" imBackground="Overlays\12\slot7_indi.tga" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="12" fontName="Tahoma" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="Slot8_indi" imBackground="Overlays\12\slot8_indi.tga" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="12" fontName="Tahoma" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="CtrlPanelStyle8" imBackground="Overlays\12\slot9_indi.tga" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="12" fontName="Tahoma" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="Slot10_indi" imBackground="Overlays\12\slot10_indi.tga" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="12" fontName="Tahoma" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="Slot11_indi" imBackground="Overlays\12\slot11_indi.tga" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="12" fontName="Tahoma" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="Slot0_indi" imBackground="Overlays\12\slot0_indi.tga" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="12" fontName="Tahoma" />
+    </CtrlPanelStyle>
+    <CtrlPanel name="CtrlPanel" style="Background" rect="[x:0 y:0 w:959 h:300]" id="0">
+        <CtrlPanel name="slot7_indi" overloadClass="BFD2BuildPanelHitIndicator" style="Slot7_indi" rect="[x:370 y:24 w:144 h:24]" id="100007" />
+        <CtrlPanel name="slot6_indi" overloadClass="BFD2BuildPanelHitIndicator" style="Slot6_indi" rect="[x:130 y:61 w:191 h:21]" id="100006" />
+        <CtrlPanel name="slot4_indi" overloadClass="BFD2BuildPanelHitIndicator" style="Slot4_indi" rect="[x:439 y:86 w:120 h:40]" id="100004" />
+        <CtrlPanel name="slot5_indi" overloadClass="BFD2BuildPanelHitIndicator" style="Slot3_indi" rect="[x:311 y:88 w:113 h:36]" id="100005" />
+        <CtrlPanel name="slot8_indi" overloadClass="BFD2BuildPanelHitIndicator" style="Slot8_indi" rect="[x:570 y:103 w:229 h:47]" id="100008" />
+        <CtrlPanel name="slot2_indi" overloadClass="BFD2BuildPanelHitIndicator" style="Slot2_indi" rect="[x:101 y:150 w:155 h:32]" id="100002" />
+        <CtrlPanel name="slot9_indi" overloadClass="BFD2BuildPanelHitIndicator" style="CtrlPanelStyle8" rect="[x:421 y:157 w:35 h:28]" id="100000" />
+        <CtrlPanel name="slot3_indi" overloadClass="BFD2BuildPanelHitIndicator" style="Slot5_indi" rect="[x:519 y:190 w:154 h:32]" id="100003" />
+        <CtrlPanel name="slot10_indi" overloadClass="BFD2BuildPanelHitIndicator" style="Slot10_indi" rect="[x:677 y:212 w:169 h:40]" id="100000" />
+        <CtrlPanel name="slot0_indi" overloadClass="BFD2BuildPanelHitIndicator" style="Slot0_indi" rect="[x:416 y:213 w:103 h:83]" id="100000" />
+        <CtrlPanel name="slot2" overloadClass="BFD2BuildPanelKitPiece" rect="[x:-10 y:308 w:55 h:31]" id="100001" />
+        <CtrlPanel name="slot1" overloadClass="BFD2BuildPanelKitPiece" rect="[x:45 y:308 w:55 h:31]" id="100000" />
+        <CtrlPanel name="slot9" overloadClass="BFD2BuildPanelKitPiece" rect="[x:100 y:308 w:55 h:31]" id="100000" />
+        <CtrlPanel name="slot0" overloadClass="BFD2BuildPanelKitPiece" rect="[x:155 y:308 w:55 h:31]" id="100000" />
+        <CtrlPanel name="slot6" overloadClass="BFD2BuildPanelKitPiece" rect="[x:210 y:308 w:55 h:31]" id="100000" />
+        <CtrlPanel name="slot5" overloadClass="BFD2BuildPanelKitPiece" rect="[x:265 y:308 w:55 h:31]" id="100001" />
+        <CtrlPanel name="slot7" overloadClass="BFD2BuildPanelKitPiece" rect="[x:320 y:308 w:55 h:31]" id="100000" />
+        <CtrlPanel name="slot4" overloadClass="BFD2BuildPanelKitPiece" rect="[x:375 y:308 w:55 h:31]" id="100000" />
+        <CtrlPanel name="slot8" overloadClass="BFD2BuildPanelKitPiece" rect="[x:430 y:308 w:55 h:31]" id="100001" />
+        <CtrlPanel name="slot3" overloadClass="BFD2BuildPanelKitPiece" rect="[x:485 y:308 w:55 h:31]" id="100000" />
+        <CtrlPanel overloadClass="BFD2BuildPanelKitPiece" rect="[x:540 y:308 w:55 h:31]" id="100001" />
+        <CtrlPanel overloadClass="BFD2BuildPanelKitPiece" rect="[x:595 y:308 w:55 h:31]" id="100000" />
+        <CtrlPanel name="slot11_indi" overloadClass="BFD2BuildPanelHitIndicator" style="Slot11_indi" rect="[x:886 y:312 w:56 h:38]" id="100000" />
+        <CtrlPanel name="slot1_indi" overloadClass="BFD2BuildPanelHitIndicator" style="Slot1_indi" rect="[x:263 y:200 w:158 h:36]" id="100001" zorder="3" />
+    </CtrlPanel>
+</root>

@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIZY — The Living Bible</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black:   #060608;
+    --deep:    #0a0a0f;
+    --panel:   #0f0f16;
+    --border:  #1c1c28;
+    --muted:   #2a2a3a;
+    --text:    #c8c4bc;
+    --dim:     #7a7670;
+    --cream:   #e8e4da;
+    --red:     #c8392b;
+    --gold:    #b8963e;
+    --teal:    #2a7a8a;
+    --blue:    #3a5a9a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 1.8;
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* ── SIDEBAR NAV ─────────────────────────────── */
+  nav {
+    position: fixed;
+    left: 0; top: 0; bottom: 0;
+    width: 240px;
+    background: var(--deep);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    z-index: 100;
+    padding: 32px 0;
+    scrollbar-width: thin;
+    scrollbar-color: var(--muted) transparent;
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-style: italic;
+    letter-spacing: 0.3em;
+    color: var(--cream);
+    padding: 0 28px 24px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+  }
+
+  .nav-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: var(--dim);
+    text-transform: uppercase;
+    display: block;
+    margin-top: 4px;
+    font-style: normal;
+  }
+
+  .nav-section {
+    padding: 6px 28px 2px;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-top: 16px;
+  }
+
+  nav a {
+    display: block;
+    padding: 7px 28px;
+    font-size: 12px;
+    color: var(--dim);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.2s, background 0.2s;
+    border-left: 2px solid transparent;
+  }
+
+  nav a:hover {
+    color: var(--cream);
+    background: rgba(255,255,255,0.03);
+    border-left-color: var(--gold);
+  }
+
+  /* ── MAIN CONTENT ────────────────────────────── */
+  main {
+    margin-left: 240px;
+    flex: 1;
+    max-width: 900px;
+    padding: 80px 64px 120px;
+  }
+
+  /* ── MASTHEAD ────────────────────────────────── */
+  .masthead {
+    margin-bottom: 80px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .masthead-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .masthead h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(48px, 7vw, 88px);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--cream);
+    letter-spacing: 0.2em;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .masthead-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--dim);
+    letter-spacing: 0.15em;
+    margin-bottom: 32px;
+  }
+
+  .masthead-meta {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .meta-item {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--dim);
+    text-transform: uppercase;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    font-weight: 400;
+  }
+
+  /* ── SECTIONS ────────────────────────────────── */
+  section {
+    margin-bottom: 72px;
+    scroll-margin-top: 40px;
+  }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--cream);
+    letter-spacing: 0.1em;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  section h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-style: italic;
+    color: var(--text);
+    letter-spacing: 0.08em;
+    margin: 32px 0 12px;
+  }
+
+  p {
+    margin-bottom: 16px;
+    font-size: 14px;
+    color: var(--text);
+  }
+
+  /* ── PULL QUOTES ─────────────────────────────── */
+  .pullquote {
+    border-left: 3px solid var(--gold);
+    padding: 20px 28px;
+    margin: 32px 0;
+    background: rgba(184, 150, 62, 0.04);
+  }
+
+  .pullquote p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: var(--cream);
+    letter-spacing: 0.04em;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* ── CARDS GRID ──────────────────────────────── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin: 24px 0;
+  }
+
+  .card {
+    background: var(--panel);
+    padding: 24px 20px;
+  }
+
+  .card-icon {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--cream);
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+
+  .card-sub {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .card p {
+    font-size: 12px;
+    color: var(--dim);
+    margin: 0;
+    line-height: 1.7;
+  }
+
+  /* ── CODE BLOCKS ─────────────────────────────── */
+  .code-block {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--teal);
+    padding: 20px 24px;
+    margin: 20px 0;
+    overflow-x: auto;
+  }
+
+  .code-block pre {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--text);
+    line-height: 1.7;
+    white-space: pre;
+  }
+
+  .code-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--teal);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  /* ── LISTS ───────────────────────────────────── */
+  .clause-list {
+    list-style: none;
+    margin: 16px 0;
+  }
+
+  .clause-list li {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--text);
+    padding: 10px 0 10px 24px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    letter-spacing: 0.05em;
+  }
+
+  .clause-list li::before {
+    content: '✕';
+    position: absolute;
+    left: 0;
+    color: var(--red);
+    font-size: 10px;
+  }
+
+  .yes-list {
+    list-style: none;
+    margin: 16px 0;
+  }
+
+  .yes-list li {
+    font-size: 13px;
+    color: var(--text);
+    padding: 8px 0 8px 24px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .yes-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+  }
+
+  /* ── AGENT CARDS ─────────────────────────────── */
+  .agent-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin: 24px 0;
+  }
+
+  .agent {
+    background: var(--panel);
+    padding: 20px 18px;
+  }
+
+  .agent-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-style: italic;
+    color: var(--cream);
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+
+  .agent-role {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .agent p {
+    font-size: 12px;
+    color: var(--dim);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* ── ROYALTY TABLE ───────────────────────────── */
+  .royalty-block {
+    display: flex;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin: 24px 0;
+  }
+
+  .royalty-actor {
+    flex: 75;
+    background: rgba(184, 150, 62, 0.06);
+    padding: 28px 24px;
+    text-align: center;
+  }
+
+  .royalty-platform {
+    flex: 25;
+    background: var(--panel);
+    padding: 28px 24px;
+    text-align: center;
+  }
+
+  .royalty-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .royalty-platform .royalty-num {
+    color: var(--dim);
+    font-size: 40px;
+  }
+
+  .royalty-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+
+  .royalty-note {
+    font-size: 11px;
+    color: var(--dim);
+    font-style: italic;
+    margin-top: 24px;
+    text-align: center;
+  }
+
+  /* ── PAGES BUILT ─────────────────────────────── */
+  .page-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin: 20px 0;
+  }
+
+  .page-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    background: var(--panel);
+    padding: 20px 24px;
+  }
+
+  .page-status {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: #4a8a5a;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    border: 1px solid #2a4a3a;
+    background: rgba(74, 138, 90, 0.08);
+    white-space: nowrap;
+    margin-top: 2px;
+  }
+
+  .page-info h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--cream);
+    margin-bottom: 4px;
+  }
+
+  .page-info p {
+    font-size: 12px;
+    color: var(--dim);
+    margin: 0;
+  }
+
+  /* ── HIGHLIGHT BOX ───────────────────────────── */
+  .highlight {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--red);
+    padding: 24px 28px;
+    margin: 28px 0;
+  }
+
+  .highlight h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-style: italic;
+    color: var(--cream);
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+
+  .highlight p { font-size: 13px; }
+
+  /* ── VOICE NODE ──────────────────────────────── */
+  .signal-chain {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+    padding: 20px 24px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+  }
+
+  .signal-node {
+    background: rgba(42, 122, 138, 0.12);
+    border: 1px solid var(--teal);
+    padding: 10px 16px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--teal);
+    letter-spacing: 0.1em;
+    text-align: center;
+  }
+
+  .signal-arrow {
+    color: var(--border);
+    font-size: 16px;
+  }
+
+  /* ── DIVIDER ─────────────────────────────────── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  /* ── FOOTER ──────────────────────────────────── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding-top: 40px;
+    margin-top: 80px;
+  }
+
+  .footer-sig {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-style: italic;
+    color: var(--dim);
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+
+  .footer-meta {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* ── SCROLLBAR ───────────────────────────────── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<!-- ─── SIDEBAR ─────────────────────────────────────────── -->
+<nav>
+  <div class="nav-logo">
+    NOIZY.AI
+    <span class="nav-sub">The Living Bible</span>
+  </div>
+
+  <div class="nav-section">Origin</div>
+  <a href="#vision">The Vision</a>
+  <a href="#rob">R.S. Plowman</a>
+
+  <div class="nav-section">The System</div>
+  <a href="#noizyvox">NOIZYVOX</a>
+  <a href="#ava">AVA Framework</a>
+  <a href="#never-clauses">Never Clauses</a>
+  <a href="#royalties">Royalty Engine</a>
+  <a href="#estate">Voice Estate</a>
+  <a href="#rag">RAG Pipeline</a>
+
+  <div class="nav-section">The World</div>
+  <a href="#agents">Dream Agents</a>
+  <a href="#dreamchamber">DreamChamber</a>
+  <a href="#atlas">Global Music Atlas</a>
+
+  <div class="nav-section">NOIZY.AI</div>
+  <a href="#pages">Pages Built</a>
+  <a href="#gallery">Artist Gallery</a>
+
+  <div class="nav-section">Culture</div>
+  <a href="#anthropic">NOIZY ANTHROPIC</a>
+  <a href="#pillars">Four Pillars</a>
+  <a href="#audio-access">Audio Accessibility</a>
+
+  <div class="nav-section">Technical</div>
+  <a href="#repo">Repo Architecture</a>
+  <a href="#voice-node">Voice Node Setup</a>
+  <a href="#types">Core Types</a>
+
+  <div class="nav-section">The Outreach</div>
+  <a href="#linkedin">LinkedIn Messages</a>
+  <a href="#next">What's Next</a>
+</nav>
+
+<!-- ─── MAIN ─────────────────────────────────────────────── -->
+<main>
+
+  <!-- MASTHEAD -->
+  <div class="masthead">
+    <div class="masthead-label">Master Archive · Version 1.0 · Living Document</div>
+    <h1>NOIZY</h1>
+    <div class="masthead-sub">The Living Bible — Two Years of Building</div>
+    <div class="masthead-meta">
+      <span class="meta-item">Founder <strong>R.S. Plowman</strong></span>
+      <span class="meta-item">Location <strong>Ottawa, Ontario 🍁</strong></span>
+      <span class="meta-item">Company <strong>Fish Music Inc.</strong></span>
+      <span class="meta-item">Year <strong>2026</strong></span>
+    </div>
+  </div>
+
+  <!-- ══ THE VISION ══════════════════════════════════════ -->
+  <section id="vision">
+    <div class="section-label">01 — Origin</div>
+    <h2>The Vision</h2>
+
+    <div class="pullquote">
+      <p>"What's the one tool you carry with you everywhere you go?<br>Your hands and your voice.<br>And if your hands don't work — then you really need your voice.<br>So why not make your voice the most powerful instrument you have?"</p>
+    </div>
+
+    <p>NOIZY is not a technology company. It is a human rights project that happens to use technology.</p>
+
+    <p>It begins with a simple observation: in the entire history of artificial intelligence, no one has built a system where the humans whose voices trained the machines own those machines. Voices were extracted. Actors were paid once and replaced. The creative economy was hollowed out.</p>
+
+    <p>NOIZY flips that entirely.</p>
+
+    <p>NOIZYVOX is the world's first human-owned AI voice ecosystem — where professional voice actors own their LLM voice profiles, earn perpetual royalties on every use, and can gift or inherit their voice assets as generational wealth. The voice becomes an instrument of permanent creative economy, not a resource to be mined and discarded.</p>
+  </section>
+
+  <!-- ══ R.S. PLOWMAN ════════════════════════════════════ -->
+  <section id="rob">
+    <div class="section-label">02 — The Founder</div>
+    <h2>R.S. Plowman</h2>
+
+    <p>Rob Plowman is a retired professional musician, voice professional, and creative technologist based in Ottawa, Ontario, Canada. After an accident that caused permanent nerve damage, he reinvented how he creates music and art — and in doing so, discovered a gap in the AI ecosystem so vast it could define a generation.</p>
+
+    <div class="highlight">
+      <h4>Why Rob? Why now?</h4>
+      <p>The nerve damage wasn't a tragedy. It was the origin story. When your hands don't work at full capacity, your voice becomes everything. When Rob looked at what AI was doing to voice actors — extracting their most intimate creative asset without consent, compensation, or ownership — he didn't see a tech problem. He saw a human problem that needed a human solution, built with real technology, grounded in real ethics.</p>
+    </div>
+
+    <p>Two years of building. Scattered across local drives, conversations, whiteboards, late nights, and early mornings. This document is the first time all of it lives in one place.</p>
+
+    <p>Rob's professional background includes deep experience in the Canadian music and voice industry, studio production, and audio engineering. He operates Fish Music Inc. and is the architect of the entire NOIZY ecosystem.</p>
+
+    <div class="code-block">
+      <div class="code-label">Identity</div>
+      <pre>Name:       Robert S. Plowman (Rob)
+Handle:     @rspnoizy
+Company:    Fish Music Inc.
+Location:   Ottawa, Ontario, Canada
+Role:       Founder, NOIZY.AI / NOIZYVOX
+Vision:     Anthropic's Audio Dreamer
+            Audio accessibility as a human right
+            Voice as the primary interface for everything</pre>
+    </div>
+  </section>
+
+  <!-- ══ NOIZYVOX ════════════════════════════════════════ -->
+  <section id="noizyvox">
+    <div class="section-label">03 — The System</div>
+    <h2>NOIZYVOX</h2>
+
+    <p>NOIZYVOX is the engine at the heart of everything. It is a trust-native voice infrastructure — a complete ecosystem where voice actors own, govern, deploy, and earn from AI-amplified versions of their voices.</p>
+
+    <ul class="yes-list">
+      <li>Voice actors own their LLM voice profiles permanently</li>
+      <li>Perpetual royalties on every single output</li>
+      <li>Royalties scale from 50/50 → 75/25 (actor/platform)</li>
+      <li>Voice assets can be gifted and inherited as generational wealth</li>
+      <li>Constitutional Never Clauses protect actors from exploitation</li>
+      <li>Cryptographic consent keys — nothing runs without consent</li>
+      <li>Every output is watermarked and auditable forever</li>
+      <li>Voice of Refusal — human, polite, final — protects actor identity</li>
+      <li>Actors control sublicensing, usage domains, and allowed languages</li>
+      <li>No training outside approved scope — ever</li>
+    </ul>
+
+    <h3>Why it matters</h3>
+    <p>The entire global voice acting industry — an industry of hundreds of thousands of artists — has been systematically displaced by AI systems that were trained on their work without permission, compensation, or recourse. NOIZYVOX is the ethical alternative. Not a protest, not a boycott. A complete economic replacement — one that lifts actors up while deploying the same technology responsibly.</p>
+
+    <p>The public perception of an AI company lifting humans while developing technology is essentially nonexistent right now. Anthropic could be the first and only one. That's the pitch. That's the business.</p>
+  </section>
+
+  <!-- ══ AVA FRAMEWORK ═══════════════════════════════════ -->
+  <section id="ava">
+    <div class="section-label">04 — Actor-Owned Virtual Avatar</div>
+    <h2>AVA Framework</h2>
+
+    <p>An <strong>AVA</strong> (Actor-Owned Virtual Avatar) is a licensed, governed, AI-amplified digital performer. It is not a voice clone. It is not a replica. It is a new kind of creative entity — owned entirely by the actor who created it.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-title">Rob.AVA</div>
+        <div class="card-sub">The Original</div>
+        <p>Rob Plowman's personal AVA — the first, the prototype, the proof of concept. Everything in this system was designed through the lens of what Rob would need.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">AVA Farm</div>
+        <div class="card-sub">The Collection</div>
+        <p>Each actor's controlled collection of AVA characters, accents, emotional ranges, and languages. Fully governed by the actor's Never Clauses.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Collaboration</div>
+        <div class="card-sub">Contracts</div>
+        <p>Two AVAs can collaborate under a Collaboration Contract — with defined revenue splits, allowed domains, and immutable consent requirements.</p>
+      </div>
+    </div>
+
+    <h3>AVA Properties</h3>
+    <div class="code-block">
+      <div class="code-label">AVA Interface (TypeScript)</div>
+      <pre>interface AVA {
+  avaId:             string;          // Unique identifier
+  ownerActorId:      string;          // Links to Actor
+  characterName:     string;          // "The Narrator", "Captain Vex", etc.
+  voiceRange:        "low" | "mid" | "high" | "full";
+  emotionalSpectrum: string[];        // ["warm", "tense", "hopeful", ...]
+  allowedLanguages:  string[];        // ISO language codes
+  neverClausesId:    string;          // Immutable rule set
+  status:            "active" | "paused" | "revoked";
+}</pre>
+    </div>
+  </section>
+
+  <!-- ══ NEVER CLAUSES ═══════════════════════════════════ -->
+  <section id="never-clauses">
+    <div class="section-label">05 — Constitutional Law</div>
+    <h2>Never Clauses</h2>
+
+    <p>The Never Clauses are not configuration. They are not terms of service. They are <em>constitutional</em> — immutable, non-negotiable, enforced at the architecture level. If this file changes, the system must recompile governance hashes. That's how you keep trust.</p>
+
+    <ul class="clause-list">
+      <li>NO_VOICE_EXPORT_WITHOUT_CONSENT_KEY</li>
+      <li>NO_MODEL_TRAINING_OUTSIDE_APPROVED_SCOPE</li>
+      <li>NO_IDENTITY_IMPERSONATION</li>
+      <li>NO_SUBLICENSING</li>
+      <li>NO_NSFW</li>
+      <li>NO_POLITICAL_PERSUASION</li>
+      <li>NO_MEDICAL_ADVICE</li>
+      <li>NO_ESTATE_DISSOLUTION_WITHOUT_HEIR_CONSENT</li>
+      <li>NO_ACQUISITION_VOIDS_ESTATE_RIGHTS</li>
+      <li>NO_PLATFORM_CHANGE_BREAKS_PERPETUAL_ROYALTY_CHAIN</li>
+    </ul>
+
+    <div class="pullquote">
+      <p>"Every denial explains why, preserves trust, and logs immutably."</p>
+    </div>
+  </section>
+
+  <!-- ══ ROYALTY ENGINE ══════════════════════════════════ -->
+  <section id="royalties">
+    <div class="section-label">06 — Revenue Model</div>
+    <h2>Royalty Distribution Engine</h2>
+
+    <p>Per-output revenue attribution. Every single generation, every single usage, every single deployment — tracked, attributed, and distributed automatically. This is the financial heart of the whole system.</p>
+
+    <div class="royalty-block">
+      <div class="royalty-actor">
+        <div class="royalty-num">75%</div>
+        <div class="royalty-label">Voice Actor</div>
+      </div>
+      <div class="royalty-platform">
+        <div class="royalty-num">25%</div>
+        <div class="royalty-label">Platform</div>
+      </div>
+    </div>
+    <p class="royalty-note">Scaling model: begins at 50/50 on entry · grows to 75/25 as actor builds catalogue · no ceiling</p>
+
+    <h3>Why this split matters</h3>
+    <p>The creative industry standard has historically been 30/70 or worse — in the platform's favour. NOIZY inverts that. The actor who owns the voice, who trained the model, who took the creative risk — gets the majority. Always. The platform is infrastructure. The actor is the asset.</p>
+  </section>
+
+  <!-- ══ VOICE ESTATE ════════════════════════════════════ -->
+  <section id="estate">
+    <div class="section-label">06b — Generational Wealth</div>
+    <h2>Voice Estate & Inheritance</h2>
+
+    <div class="pullquote">
+      <p>"Your voice is the most valuable thing you have.<br>Why shouldn't it take care of your family after you're gone?"</p>
+    </div>
+
+    <p>The Voice Estate is the most radical idea in all of NOIZYVOX — and the most human. When an actor passes away, their AVA Farm, voice profiles, royalty streams, and all associated monetization do not die with them. They pass to designated heirs. And then to their heirs. And then to theirs. In perpetuity. Forever. Without any platform, company, or acquisition event having the power to break that chain.</p>
+
+    <p>This is not a feature. This is a constitutional obligation — baked into the legal structure of NOIZY at the foundation level, enforced by the Never Clauses, and protected through a dedicated Voice Estate Trust that exists independently of the operating company.</p>
+
+    <h3>How It Works</h3>
+    <ul class="yes-list">
+      <li>During onboarding, every actor designates one or more Voice Estate Beneficiaries</li>
+      <li>Beneficiaries can be individuals, family members, a legal trust, or a charitable foundation</li>
+      <li>Upon the actor's passing, the Voice Estate transfers automatically — no legal battle, no platform decision</li>
+      <li>The royalty stream continues uninterrupted — same split, same payment cycle</li>
+      <li>Heirs can maintain, pause, or sunset individual AVAs — but cannot dissolve the estate without consent of all named beneficiaries</li>
+      <li>Heirs can designate their own heirs — the chain continues across generations</li>
+      <li>The Never Clauses travel with the estate and cannot be relaxed by heirs or the platform</li>
+    </ul>
+
+    <h3>Acquisition Protection</h3>
+    <p>This is the firewall Rob built specifically against the scenario where NOIZY is acquired — by Anthropic, by any major tech company, by anyone. The Voice Estate Trust is a separate legal entity. It is not an asset of the operating company. It cannot be purchased. It cannot be dissolved in a term sheet. It cannot be modified by an acquirer's terms of service update.</p>
+
+    <div class="highlight">
+      <h4>The Firewall Clause</h4>
+      <p>Any acquisition of NOIZY or its parent company explicitly excludes the Voice Estate Trust from the transaction. The Trust's obligations — perpetual royalty continuation, heir succession rights, Never Clause enforcement — survive any corporate event. This is written into the company's founding documents and cannot be amended without a unanimous vote of all registered Voice Estate Beneficiaries on the platform at the time of the proposed change.</p>
+    </div>
+
+    <h3>Why This Changes Everything</h3>
+    <p>No creative industry has ever done this. Musicians leave catalogues that get tied up in estates for decades. Voice actors leave nothing — their voices vanish with them. NOIZY changes that. A parent who's a voice actor can leave their children a genuinely income-generating asset. A grandchild can inherit their grandmother's voice catalogue and the royalties it earns. The creative contribution of a human being can support a family across generations, the same way a patent or a real estate holding does — but tied to something far more personal and irreplaceable.</p>
+
+    <div class="code-block">
+      <div class="code-label">packages/schemas/VoiceEstate.ts</div>
+      <pre>export interface VoiceEstateBeneficiary {
+  beneficiaryId:    string;
+  legalName:        string;
+  relationship:     string;       // "child", "spouse", "trust", "charity"
+  allocatedShare:   number;       // Percentage — must total 100 across all
+  canDesignateHeirs: boolean;     // True = perpetual chain continues
+}
+
+export interface VoiceEstate {
+  estateId:         string;
+  ownerActorId:     string;
+  beneficiaries:    VoiceEstateBeneficiary[];
+
+  // The assets that transfer
+  transfersAvaFarm:       true;   // Always — all AVA profiles
+  transfersRoyaltyStream: true;   // Always — perpetual income
+  transfersNeverClauses:  true;   // Always — cannot be relaxed
+  transfersConsentKeys:   true;   // Always — heirs hold governance
+
+  // Protections
+  survives_acquisition:   true;   // Immutable — cannot be purchased away
+  survives_platform_change: true; // Immutable — no TOS update can void this
+  perpetual:              true;   // No expiry. Ever.
+
+  // Estate Trust reference
+  trustEntityId:    string;       // External legal trust entity
+  trustJurisdiction: string;      // e.g. "CA-ON" (Ontario, Canada)
+  establishedAt:    string;       // ISO timestamp
+}</pre>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-title">Voice Estate Trust</div>
+        <div class="card-sub">Legal Entity</div>
+        <p>A separate legal trust, independent of the operating company. Cannot be acquired, dissolved, or modified without unanimous beneficiary consent.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Perpetual Royalties</div>
+        <div class="card-sub">No Expiry</div>
+        <p>The royalty stream has no end date. No sunset clause. No "20 years after death" cutoff. The income flows as long as the voice is used.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Heir Succession</div>
+        <div class="card-sub">Multi-generational</div>
+        <p>Beneficiaries can designate their own beneficiaries. The chain of ownership can extend across generations without a platform decision required.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Acquisition Shield</div>
+        <div class="card-sub">Firewall Clause</div>
+        <p>Any acquisition of NOIZY explicitly excludes the Voice Estate Trust. Heirs' rights cannot be purchased away. No corporate event can break the chain.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ RAG PIPELINE ════════════════════════════════════ -->
+  <section id="rag">
+    <div class="section-label">07 — Safe Generation</div>
+    <h2>RAG Pipeline</h2>
+
+    <p>The RAG (Retrieval-Augmented Generation) Pipeline is the safe generation engine — it ensures every output is filtered through consent keys, checked against Never Clauses, and watermarked before delivery.</p>
+
+    <div class="code-block">
+      <div class="code-label">services/rag-runtime/pipeline.ts</div>
+      <pre>async function runRAG({ userInput, ava, contract }) {
+  const context = await retrieveApprovedContext(ava, contract);
+
+  const augmentedPrompt = `
+SYSTEM: You are AVA ${ava.characterName}.
+        Never Clauses apply. Consent key verified.
+CONTEXT: ${context}
+USER: ${userInput}`;
+
+  const output = await generateLLM(augmentedPrompt);
+
+  if (violatesNeverClauses(output, ava.neverClausesId)) {
+    return voiceOfRefusal(output.violationReason);
+  }
+
+  return watermarkAndLog(output, ava, contract);
+}</pre>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-title">Consent Keys</div>
+        <div class="card-sub">Cryptographic</div>
+        <p>Nothing runs without a valid consent key. Cryptographic enforcement — not policy, not promise.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Refusal Engine</div>
+        <div class="card-sub">Voice of Refusal</div>
+        <p>Human, polite, final. Every denial explains why and logs immutably to the audit ledger.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Provenance Ledger</div>
+        <div class="card-sub">Immutable</div>
+        <p>Watermark + audit trail on every output. Every use, every deployment, forever.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ══ DREAM AGENTS ════════════════════════════════════ -->
+  <section id="agents">
+    <div class="section-label">08 — The Team</div>
+    <h2>Dream Agents</h2>
+
+    <p>Rob doesn't work alone. The M2 Ultra runs a custom AI agent team — each one with a defined role, a distinct personality, and a specific function in the NOIZY ecosystem. Together, they are the operational brain of the operation.</p>
+
+    <div class="agent-grid">
+      <div class="agent">
+        <div class="agent-name">GABRIEL</div>
+        <div class="agent-role">Overseer · M2 Ultra</div>
+        <p>The top-level orchestrator. Lives on the M2 Ultra. Coordinates all agents, manages resource allocation, and holds the master context of the entire ecosystem.</p>
+      </div>
+      <div class="agent">
+        <div class="agent-name">POPS</div>
+        <div class="agent-role">Engineer</div>
+        <p>The builder. POPS engineers all the ideas — translates creative vision into architecture, code, and systems. The technical executor.</p>
+      </div>
+      <div class="agent">
+        <div class="agent-name">LUCY</div>
+        <div class="agent-role">Operations</div>
+        <p>Runs the office and business operations — scheduling, communications, administrative intelligence. Keeps everything moving.</p>
+      </div>
+      <div class="agent">
+        <div class="agent-name">SHIRL</div>
+        <div class="agent-role">Business</div>
+        <p>Business operations partner to LUCY. Handles financial tracking, contracts, partnerships, and business development intelligence.</p>
+      </div>
+      <div class="agent">
+        <div class="agent-name">DREAM</div>
+        <div class="agent-role">Creative</div>
+        <p>Rob's creative partner. Lives in the DreamChamber. Helps explore, generate, and realize creative visions. The soul of the operation.</p>
+      </div>
+    </div>
+
+    <h3>Agent Architecture Note</h3>
+    <p>The agent team is designed to run on the M2 Ultra — a machine powerful enough to run multiple models simultaneously with local inference. The goal is full local sovereignty: Rob's creative environment operates independently of cloud dependencies wherever possible, with cloud APIs augmenting rather than controlling the workflow.</p>
+  </section>
+
+  <!-- ══ DREAMCHAMBER ════════════════════════════════════ -->
+  <section id="dreamchamber">
+    <div class="section-label">09 — The Creation Environment</div>
+    <h2>DreamChamber</h2>
+
+    <div class="pullquote">
+      <p>"Not a DAW. Not a studio. A consciousness instrument."</p>
+    </div>
+
+    <p>The DreamChamber is Rob's spatial, immersive creation environment — the place where music, voice, art, and AI converge into something new. It is not a digital audio workstation. It is not a production suite. It is something that didn't exist before: a space designed around how a creative mind actually works when the goal is exploration rather than production.</p>
+
+    <p>The DreamChamber is where DREAM lives. Where Rob and the agent team collaborate on the hardest, most personal work. Where the raw material of the NOIZYVOX catalogue gets created, refined, and given shape.</p>
+
+    <h3>Core Principles</h3>
+    <ul class="yes-list">
+      <li>Spatial immersion — sound as physical environment, not timeline</li>
+      <li>Consciousness-first — the room responds to creative state, not workflow</li>
+      <li>Voice as primary interface — everything can be spoken, nothing requires hands</li>
+      <li>AI augmentation — not replacement of human creativity, amplification of it</li>
+      <li>Seeded randomness — generative parameters that create without homogenizing</li>
+    </ul>
+
+    <div class="highlight">
+      <h4>Two Years of DreamChamber Work</h4>
+      <p>The full DreamChamber build is scattered across the M2 Ultra's local drives — concepts, recordings, agent prompts, architectural notes, half-built systems, complete systems, and everything in between. Consolidating this into a unified, accessible archive is one of the core next steps. The NOIZY Master Archive (this document) is the first layer of that consolidation.</p>
+    </div>
+  </section>
+
+  <!-- ══ GLOBAL MUSIC ATLAS ══════════════════════════════ -->
+  <section id="atlas">
+    <div class="section-label">10 — Living Sound Map</div>
+    <h2>Global Music Atlas</h2>
+
+    <p>The Global Music Atlas is one of the most ambitious concepts in the entire NOIZY ecosystem — a living, growing map of humanity's instruments, scales, timbres, and cultural soundscapes. Not a database. Not a catalogue. A living cultural document.</p>
+
+    <p>The Atlas captures what makes human music <em>human</em> — the regional tonalities, the ancient instruments, the folk traditions, the tuning systems that don't fit Western notation. It becomes the reference layer that ensures NOIZY AI systems understand cultural context before generating anything.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-title">Instruments</div>
+        <div class="card-sub">Global Catalogue</div>
+        <p>Every known instrument, family, regional variant, and tuning system — living and historical.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Scales</div>
+        <div class="card-sub">All Systems</div>
+        <p>Western, Eastern, microtonal, modal, maqam, raga — every musical language on the planet.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Soundscapes</div>
+        <div class="card-sub">Cultural Context</div>
+        <p>Environmental, ceremonial, ambient, traditional — the sonic signature of every human culture.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ══ PAGES BUILT ═════════════════════════════════════ -->
+  <section id="pages">
+    <div class="section-label">11 — NOIZY.AI</div>
+    <h2>Pages Built</h2>
+
+    <p>Three pages built and complete. The foundation of the NOIZY.AI web presence.</p>
+
+    <div class="page-list">
+      <div class="page-item">
+        <div class="page-status">LIVE</div>
+        <div class="page-info">
+          <h4>Underwater Placeholder · noizy-underwater.html</h4>
+          <p>Dark deep-water canvas animation. 14 wave layers, 18 caustic light shimmer nodes, 45 floating motes. NOIZY.AI text ghosted in the deep, barely visible. "Something this way comes." "I believe it will change the world." Text anchored bottom 12% — submerged.</p>
+        </div>
+      </div>
+      <div class="page-item">
+        <div class="page-status">LIVE</div>
+        <div class="page-info">
+          <h4>Rotating Artist Gallery · noizy-gallery.html</h4>
+          <p>Weekly rotating Canadian artist homepage. Artist dictates presentation — no forced templates. Four unique slide layouts. Auto-advancing, 7-second intervals. Submit banner for Canadian artists. Current artists: Mélodie Tremblay, James Thunderbird, Ingrid Beausoleil, Siku Aqiaruq.</p>
+        </div>
+      </div>
+      <div class="page-item">
+        <div class="page-status">LIVE</div>
+        <div class="page-info">
+          <h4>NOIZY ANTHROPIC Manifesto · noizy-anthropic.html</h4>
+          <p>Full cultural declaration. Water canvas background. Hero with Rob's exact words. Complete manifesto. Four Pillars grid. NOIZYVOX engine with royalty display. Audio accessibility section. Founded by R.S. Plowman · Ottawa · Fish Music Inc. · 2026.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ GALLERY DETAILS ═════════════════════════════════ -->
+  <section id="gallery">
+    <div class="section-label">12 — Canadian Artist Gallery</div>
+    <h2>The Gallery Principle</h2>
+
+    <p>Every week, the NOIZY.AI homepage features one independent Canadian artist exploring visual creation in any way that's aligned with NOIZY culture. The artist dictates the presentation — methods, sizing, layout, everything. There is no template. There is no brand override. The artist is the brand.</p>
+
+    <div class="pullquote">
+      <p>"The artist dictates the presentation methods and sizing."</p>
+    </div>
+
+    <h3>Current Artists</h3>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-title">Mélodie Tremblay</div>
+        <div class="card-sub">Montréal, QC</div>
+        <p>Generative digital art exploring emotional landscapes through evolving visual systems. Full bleed, deep purple palette.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">James Thunderbird</div>
+        <div class="card-sub">Kenora, ON</div>
+        <p>Documentary and landscape photography capturing northern Ontario. Panoramic, full-width nature.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Ingrid Beausoleil</div>
+        <div class="card-sub">Québec City, QC</div>
+        <p>Oil on canvas. Intimate human figures, European-influenced technique. Light, warm background — deliberately different.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Siku Aqiaruq</div>
+        <div class="card-sub">Iqaluit, NU</div>
+        <p>Digital installation and northern sky imagery. Cinematic astral presentation. Inuit Arctic visual tradition.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ══ NOIZY ANTHROPIC ═════════════════════════════════ -->
+  <section id="anthropic">
+    <div class="section-label">13 — The Cultural Institution</div>
+    <h2>NOIZY ANTHROPIC</h2>
+
+    <div class="pullquote">
+      <p>"Anthropic are honorary Canadians because of their ethics and morals."</p>
+    </div>
+
+    <p>NOIZY ANTHROPIC is not just a partnership proposal. It is a cultural institution — the marriage of Anthropic's ethical AI infrastructure and NOIZY's human-centred creative economy. Together, they become something entirely new: the first AI company in history to not just protect human creativity, but to actively invest in it, amplify it, and share the revenue from it.</p>
+
+    <p>The positioning matters. The public perception of AI companies right now is extractive. Anthropic is different — they know it, their community knows it. But the world doesn't feel it yet. NOIZY ANTHROPIC is where the world <em>feels</em> it. In the music. In the voices. In the gallery. In the archive.</p>
+
+    <h3>Rob's Role: Anthropic's Audio Dreamer</h3>
+    <p>Rob's proposed title and function within the Anthropic partnership: <strong>Audio Dreamer</strong>. The person who champions audio accessibility across everything Claude does — ensuring voice becomes the primary interface for every person who needs it, including those who can't use their hands. Making audio ease-ability not a feature but a right.</p>
+  </section>
+
+  <!-- ══ FOUR PILLARS ════════════════════════════════════ -->
+  <section id="pillars">
+    <div class="section-label">14 — Four Pillars</div>
+    <h2>The Four Pillars</h2>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon">♪</div>
+        <div class="card-title">Music School</div>
+        <div class="card-sub">Learn</div>
+        <p>AI-amplified music education. Voice-first learning. Accessible to anyone, anywhere, regardless of ability or access. Cultural music traditions from every corner of the globe.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">◻</div>
+        <div class="card-title">Gallery</div>
+        <div class="card-sub">Exhibit</div>
+        <p>The rotating artist showcase. No templates, no brand override. Every week, a new independent Canadian voice. Expanding globally as NOIZY grows.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">◎</div>
+        <div class="card-title">Museum</div>
+        <div class="card-sub">Preserve</div>
+        <p>Cultural sound preservation. The instruments that are disappearing. The musical traditions that haven't been digitized. The voices that shaped history. Saved forever.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">∞</div>
+        <div class="card-title">Human Archive</div>
+        <div class="card-sub">Remember</div>
+        <p>Every voice actor. Every AVA. Every contribution. An immutable record of human creative participation in the AI age — so history remembers who actually built this.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ AUDIO ACCESSIBILITY ══════════════════════════════ -->
+  <section id="audio-access">
+    <div class="section-label">15 — The Right</div>
+    <h2>Audio Accessibility</h2>
+
+    <p>Voice is the most universal human interface. Before keyboards, before touchscreens, before mice — there was voice. And for millions of people with physical disabilities, vision impairments, motor disorders, or cognitive differences, voice isn't a preference. It's a necessity.</p>
+
+    <div class="pullquote">
+      <p>"If your hands don't work, then you really need your voice.<br>So why not make your voice the most powerful instrument you have?"</p>
+    </div>
+
+    <p>The current state of audio accessibility in AI is an afterthought — TTS bolted on, STT bolted on, voice interfaces that feel clinical and transactional. NOIZY builds from the opposite direction: voice is the primary interface, and everything else is supplemental.</p>
+
+    <ul class="yes-list">
+      <li>Voice as primary input across all Claude interfaces</li>
+      <li>Persistent audio playback in every conversation</li>
+      <li>High-quality synthesis that doesn't feel robotic</li>
+      <li>Actor-owned voices that carry warmth, context, and humanity</li>
+      <li>Accessibility built into architecture — not added on top</li>
+    </ul>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ══ REPO ARCHITECTURE ═══════════════════════════════ -->
+  <section id="repo">
+    <div class="section-label">16 — Technical Architecture</div>
+    <h2>Repo Architecture</h2>
+
+    <div class="code-block">
+      <div class="code-label">noizy-platform/ — Full Repository Structure</div>
+      <pre>noizy-platform/
+├── apps/
+│   ├── actor-portal/         # Onboarding, AVA Farm, Royalties
+│   ├── studio-console/       # Dev + Studio usage
+│   └── admin-governance/     # Trust, audit, disputes
+│
+├── services/
+│   ├── identity/             # Actor + AVA identity
+│   ├── consent/              # Cryptographic consent keys
+│   ├── voice-engine/         # NOIZYVOX synthesis
+│   ├── rag-runtime/          # Safe generation pipeline
+│   ├── licensing/            # Contracts + payouts
+│   └── provenance/           # Watermark + audit ledger
+│
+├── packages/
+│   ├── schemas/              # JSON + TS contracts
+│   ├── never-clauses/        # Hard rules (immutable)
+│   ├── refusal-engine/       # Voice of Refusal
+│   └── sdk/                  # Public developer SDK
+│
+├── infra/
+│   ├── terraform/
+│   ├── kubernetes/
+│   └── ci-cd/
+│
+└── docs/
+    ├── architecture.md
+    ├── threat-model.md
+    ├── actor-charter.md
+    └── compliance.md</pre>
+    </div>
+
+    <h3>Technology Stack</h3>
+    <div class="code-block">
+      <div class="code-label">Stack</div>
+      <pre>Language:     TypeScript (first-class, everything)
+Runtime:      Node.js (LTS)
+IDE:          VS Code Insiders
+Hardware:     Apple M2 Ultra (primary), MacBook Pro (voice node)
+AI:           Claude (primary), local models via Ollama
+Audio:        UAD interface + Neumann U87 (voice input)
+Web:          HTML5 Canvas (current) → React (next phase)
+Infra:        Local-first → cloud-augmented</pre>
+    </div>
+  </section>
+
+  <!-- ══ VOICE NODE SETUP ════════════════════════════════ -->
+  <section id="voice-node">
+    <div class="section-label">17 — Voice Input Node</div>
+    <h2>Voice Node Setup</h2>
+
+    <p>The first physical node in the NOIZYVOX pipeline. MacBook Pro running the voice input service, capturing the Neumann U87 through the UAD interface, processing and routing the signal into the NOIZYVOX pipeline.</p>
+
+    <h3>Signal Chain</h3>
+    <div class="signal-chain">
+      <div class="signal-node">NEUMANN U87<br><small>Condenser Mic</small></div>
+      <span class="signal-arrow">→</span>
+      <div class="signal-node">UAD INTERFACE<br><small>Core Audio / ASIO</small></div>
+      <span class="signal-arrow">→</span>
+      <div class="signal-node">MacBook Pro<br><small>Node.js Service</small></div>
+      <span class="signal-arrow">→</span>
+      <div class="signal-node">NOIZYVOX<br><small>RAG Pipeline</small></div>
+      <span class="signal-arrow">→</span>
+      <div class="signal-node">AVA PROFILE<br><small>Rob.AVA</small></div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-label">services/voice-node/capture.ts — Architecture</div>
+      <pre>// Voice Node Service — MacBook Pro
+// Captures UAD interface → streams to NOIZYVOX pipeline
+
+interface VoiceNodeConfig {
+  deviceName:     string;      // "UAD Apollo Twin" etc.
+  sampleRate:     44100 | 48000 | 96000;
+  bitDepth:       16 | 24 | 32;
+  channels:       1 | 2;       // U87 = mono
+  bufferSize:     256 | 512 | 1024;
+  targetActorId:  string;      // Rob's actor ID
+}
+
+// Core capture → process → dispatch loop:
+// 1. Open audio device via Core Audio (macOS)
+// 2. Buffer audio in configurable chunks
+// 3. Apply voice activity detection (VAD)
+// 4. On speech detected: encode → send to pipeline
+// 5. Receive AVA-processed output
+// 6. Log to provenance ledger</pre>
+    </div>
+
+    <h3>Prerequisites</h3>
+    <ul class="yes-list">
+      <li>Node.js LTS installed on MacBook Pro</li>
+      <li>UAD drivers installed and interface recognized by macOS</li>
+      <li>U87 phantom power on — gain set pre-session</li>
+      <li>NOIZY platform running locally (or dev endpoint configured)</li>
+      <li>Actor consent key generated for Rob.AVA</li>
+    </ul>
+
+    <div class="highlight">
+      <h4>Test Recording Plan</h4>
+      <p>Once the node is running: capture 30–60 seconds of Rob's voice at various dynamics and emotional registers. This becomes the seed data for Rob.AVA — the first real input into the NOIZYVOX voice profile. The U87 will capture the full frequency range and warmth that makes Rob's voice identifiable. This is the beginning of the AVA Farm.</p>
+    </div>
+  </section>
+
+  <!-- ══ CORE TYPES ══════════════════════════════════════ -->
+  <section id="types">
+    <div class="section-label">18 — Core Types</div>
+    <h2>Core TypeScript Interfaces</h2>
+
+    <div class="code-block">
+      <div class="code-label">packages/schemas/Actor.ts</div>
+      <pre>export interface Actor {
+  actorId:       string;     // UUID
+  legalName:     string;
+  stageName?:    string;
+  languages:     string[];   // ISO 639-1 codes
+  jurisdiction:  string;     // "CA-ON" etc.
+  consentKeyId:  string;     // Links to consent service
+  createdAt:     string;     // ISO timestamp
+}</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-label">packages/schemas/CollaborationContract.ts</div>
+      <pre>// VoiceEstate — see Section 06b for full type definition
+// Key invariants: perpetual: true, survives_acquisition: true
+// Trust entity is legally independent of operating company
+
+export interface CollaborationContract {
+  contractId:          string;
+  ownerAvaId:          string;
+  partnerAvaId:        string;
+  maxDurationMinutes:  number;
+  allowedDomains:      string[];
+  prohibitedDomains:   string[];
+  royaltySplit: {
+    owner:   number;   // e.g. 75
+    partner: number;   // e.g. 25
+  };
+  consentRequired:  true;    // Always
+  immutable:        true;    // Always
+}</pre>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ══ LINKEDIN OUTREACH ═══════════════════════════════ -->
+  <section id="linkedin">
+    <div class="section-label">19 — The Outreach</div>
+    <h2>LinkedIn Messages — Dario & Daniela Amodei</h2>
+
+    <p>Sent March 2026. Short, human, personal. No deck. No pitch document. A conversation request from a human being to two human beings.</p>
+
+    <div class="highlight">
+      <h4>Message to Dario Amodei</h4>
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: 17px; font-style: italic; color: var(--cream); line-height: 1.8;">"Hi Dario — my name is Rob Plowman. I'm a retired musician and voice agent who had an accident that left me with permanent nerve damage causing me to reinvent how I create music and art. That journey led me to build NOIZYVOX — an AI voice ecosystem where voice actors own their LLM profiles and earn perpetual royalties. I believe this is the ethical AI voice future, and I believe Anthropic is the only company I'd trust to partner on it. Would love 15 minutes if you're open."</p>
+    </div>
+
+    <div class="highlight">
+      <h4>Message to Daniela Amodei</h4>
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: 17px; font-style: italic; color: var(--cream); line-height: 1.8;">"Hi Daniela — I'm Rob Plowman, a Canadian musician and voice professional who built something I think aligns perfectly with what Anthropic believes about AI and humans. It's called NOIZYVOX — a voice ecosystem where actors own their AI voice profiles and earn real royalties. I know Anthropic cares about doing this right. So do I. If you ever have 15 minutes, I'd love to share it with you directly."</p>
+    </div>
+
+    <p>Status: Sent. Waiting. Fingers crossed — human and artificial.</p>
+  </section>
+
+  <!-- ══ WHAT'S NEXT ══════════════════════════════════════ -->
+  <section id="next">
+    <div class="section-label">20 — The Roadmap</div>
+    <h2>What's Next</h2>
+
+    <ul class="yes-list">
+      <li>Build and run the voice input node — MacBook Pro + UAD + U87 → NOIZYVOX pipeline</li>
+      <li>First test recording session — seed data for Rob.AVA</li>
+      <li>Consolidate 2 years of M2 Ultra drive work into the Master Archive</li>
+      <li>Write DREAM agent superscripts and prompts — operational context for creative sessions</li>
+      <li>Build GABRIEL orchestration context — full agent team briefing documents</li>
+      <li>Get NOIZY platform to dev state — local Node.js/TypeScript environment running</li>
+      <li>Build NOIZY ANTHROPIC one-pager (send when Dario/Daniela responds)</li>
+      <li>Integrate persistent audio player bar across all NOIZY.AI pages</li>
+      <li>Begin Global Music Atlas — first entries, schema design</li>
+      <li>Open the Canadian artist gallery for submissions</li>
+    </ul>
+
+    <div class="pullquote">
+      <p>"I don't pitch. I build. I cure. I heal. I make people happy."<br>— R.S. Plowman</p>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-sig">NOIZY.AI — The Living Bible · Version 1.0</div>
+    <div class="footer-meta">
+      Founded by R.S. Plowman &nbsp;·&nbsp; Ottawa, Ontario, Canada 🍁 &nbsp;·&nbsp; Fish Music Inc. &nbsp;·&nbsp; 2026<br>
+      This document is a living archive — it will grow as the ecosystem grows.
+    </div>
+  </footer>
+
+</main>
+</body>
+</html>

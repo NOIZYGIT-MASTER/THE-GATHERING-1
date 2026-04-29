@@ -1,0 +1,47 @@
+<root>
+    <CtrlPanel style="MixerFXPanel" rect="[x:0 y:0 w:228 h:228]" id="0">
+        <CtrlPanel name="MixerFXTitlePanel" rect="[x:0 y:0 w:228 h:50]" id="0" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:63 y:67 w:10 h:10]" id="100000" text="50" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:159 y:67 w:10 h:10]" id="100000" text="50" />
+        <CtrlPanel name="CtrlPanel" style="MixerFXIndicatorPanel" rect="[x:36 y:74 w:63 h:54]" id="100000" />
+        <CtrlPanel name="CtrlPanel" style="MixerFXIndicatorPanel" rect="[x:132 y:74 w:63 h:54]" id="100000" />
+        <CtrlKnob name="TinCanVerb_Size" style="MixerFXKnobLarge" rect="[x:49 y:87 w:53 h:53]" id="1000" />
+        <CtrlKnob name="TinCanVerb_Decay-Time" style="MixerFXKnobLarge" rect="[x:145 y:87 w:53 h:53]" id="1001" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:40 y:125 w:8 h:10]" id="100000" text="0" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:88 y:125 w:15 h:10]" id="100000" text="100" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:136 y:125 w:8 h:10]" id="100000" text="0" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:186 y:125 w:15 h:10]" id="100000" text="100" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:64 y:126 w:8 h:10]" id="100000" text="%" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:160 y:126 w:8 h:10]" id="100000" text="%" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:57 y:133 w:24 h:15]" id="2000" text="Size" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:139 y:133 w:56 h:15]" id="2001" text="Decay time" />
+        <CtrlPanel name="CtrlPanel" style="MixerFXGroupBox" rect="[x:65 y:148 w:151 h:67]" id="100000">
+            <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:23 y:1 w:10 h:10]" id="100000" text="50" />
+            <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:74 y:1 w:10 h:10]" id="100000" text="50" />
+            <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:122 y:1 w:10 h:10]" id="100000" text="50" />
+            <CtrlPanel name="CtrlPanel" style="MixerFXMiniKnobNotches" rect="[x:11 y:10 w:32 h:32]" id="100000">
+                <CtrlKnob name="TinCanVerb_Damp" style="MixerFXKnobSmall" rect="[x:5 y:4 w:29 h:29]" id="1002" />
+            </CtrlPanel>
+            <CtrlPanel name="CtrlPanel" style="MixerFXMiniKnobNotches" rect="[x:62 y:10 w:32 h:32]" id="100000">
+                <CtrlKnob name="TinCanVerb_Pinch" style="MixerFXKnobSmall" rect="[x:5 y:4 w:29 h:29]" id="1002" />
+            </CtrlPanel>
+            <CtrlPanel name="CtrlPanel" style="MixerFXMiniKnobNotches" rect="[x:110 y:10 w:32 h:32]" id="100000">
+                <CtrlKnob name="TinCanVerb_Squeeze" style="MixerFXKnobSmall" rect="[x:5 y:4 w:29 h:29]" id="1002" />
+            </CtrlPanel>
+            <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:10 y:35 w:8 h:10]" id="100000" text="0" />
+            <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:38 y:35 w:15 h:11]" id="100000" text="100" />
+            <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:61 y:35 w:8 h:10]" id="100000" text="0" />
+            <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:89 y:35 w:14 h:10]" id="100000" text="100" />
+            <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:109 y:35 w:8 h:10]" id="100000" text="0" />
+            <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:137 y:35 w:14 h:10]" id="100000" text="100" />
+            <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:23 y:38 w:10 h:10]" id="100000" text="%" />
+            <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:75 y:38 w:10 h:10]" id="100000" text="%" />
+            <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:122 y:38 w:10 h:10]" id="100000" text="%" />
+            <CtrlLabel style="MixerFXLabelDark" rect="[x:13 y:47 w:30 h:15]" id="2002" text="Damp" />
+            <CtrlLabel style="MixerFXLabelDark" rect="[x:66 y:48 w:27 h:15]" id="2003" text="Pinch" />
+            <CtrlLabel style="MixerFXLabelDark" rect="[x:105 y:48 w:48 h:15]" id="2004" text="Squeeze" />
+        </CtrlPanel>
+        <CtrlButton name="TinCanVerb_Freeze" style="MixerFXButton" rect="[x:29 y:167 w:15 h:15]" id="1007" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:18 y:194 w:37 h:15]" id="2005" text="Freeze" />
+    </CtrlPanel>
+</root>

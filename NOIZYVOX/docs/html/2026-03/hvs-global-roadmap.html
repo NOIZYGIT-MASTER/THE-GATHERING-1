@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HVS Global Launch Roadmap — 2026 → 2030</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=IBM+Plex+Mono:wght@300;400;500&display=swap');
+
+  :root {
+    --void: #020204;
+    --void2: #06070d;
+    --void3: #0b0d16;
+    --amber: #c49a38;
+    --amber-dim: #7a5e1e;
+    --amber-glow: rgba(196,154,56,0.1);
+    --cyan: #2aa4be;
+    --cyan-dim: rgba(42,164,190,0.15);
+    --green: #3dba72;
+    --green-dim: rgba(61,186,114,0.12);
+    --purple: #8b6bbf;
+    --red: #e05a5a;
+    --text: #cdc8c0;
+    --text-dim: #6e6962;
+    --border: rgba(196,154,56,0.15);
+    --border-mid: rgba(196,154,56,0.3);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--text);
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+  }
+
+  /* ── PROGRESS ────────────────────────────────────────────────── */
+  #bar { position:fixed; top:0; left:0; right:0; height:2px; background:rgba(255,255,255,0.04); z-index:300; }
+  #bar-fill { height:100%; background:linear-gradient(to right, var(--amber-dim), var(--amber)); width:0%; transition:width .1s; }
+
+  /* ── TOP NAV ─────────────────────────────────────────────────── */
+  #nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 48px;
+    background: rgba(2,2,4,0.94);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+  }
+
+  .nav-brand {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+  }
+
+  .nav-phases {
+    display: flex;
+    gap: 0;
+    list-style: none;
+  }
+
+  .nav-phase {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.52rem;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    padding: 0 0.8rem;
+    cursor: pointer;
+    transition: color .2s;
+    border-right: 1px solid var(--border);
+    line-height: 48px;
+  }
+
+  .nav-phase:last-child { border-right: none; }
+  .nav-phase:hover, .nav-phase.active { color: var(--amber); }
+
+  @media (max-width: 700px) { .nav-phases { display:none; } }
+
+  body { padding-top: 50px; }
+
+  /* ── COVER ───────────────────────────────────────────────────── */
+  #cover {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+
+  #cover-canvas { position:absolute; inset:0; width:100%; height:100%; }
+
+  .cover-body {
+    position: relative;
+    z-index: 10;
+    max-width: 860px;
+    padding: 3rem 2rem;
+  }
+
+  .cover-system {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.28em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+  }
+  .cover-system::before, .cover-system::after { content:''; display:block; width:50px; height:1px; background:var(--amber-dim); }
+
+  .cover-acronym {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: clamp(4rem, 12vw, 10rem);
+    letter-spacing: 0.1em;
+    color: var(--amber);
+    line-height: 1;
+    font-weight: 300;
+    margin-bottom: 0.3rem;
+  }
+
+  .cover-full {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: clamp(0.55rem, 1.2vw, 0.75rem);
+    letter-spacing: 0.22em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+  }
+
+  .cover-title {
+    font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.2;
+    color: #fff;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+  }
+
+  .cover-sub {
+    font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+    font-weight: 300;
+    line-height: 1.85;
+    color: var(--text-dim);
+    max-width: 620px;
+    margin: 0 auto 3.5rem;
+  }
+
+  .cover-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 600px) { .cover-stats { grid-template-columns: repeat(2, 1fr); } }
+
+  .cover-stat {
+    background: rgba(2,2,4,0.85);
+    padding: 1.4rem 1rem;
+  }
+
+  .stat-val {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 300;
+    color: var(--amber);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .stat-lbl {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.52rem;
+    letter-spacing: 0.14em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  /* ── PILLARS ─────────────────────────────────────────────────── */
+  #pillars {
+    background: var(--void2);
+    border-bottom: 1px solid var(--border);
+    padding: 5rem 0;
+  }
+
+  .pillars-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .sec-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.28em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1.5rem;
+  }
+  .sec-label::before { content:''; display:block; width:28px; height:1px; background:var(--amber-dim); }
+
+  .sec-title {
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: #fff;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.2rem;
+  }
+  .sec-title em { font-style:italic; color:var(--amber); }
+
+  .sec-sub {
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.85;
+    color: var(--text-dim);
+    max-width: 680px;
+    margin-bottom: 3rem;
+  }
+
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  @media (max-width: 800px) { .pillar-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .pillar-grid { grid-template-columns: 1fr; } }
+
+  .pillar {
+    background: var(--void);
+    padding: 2rem 1.8rem;
+    position: relative;
+    overflow: hidden;
+    transition: background .3s;
+  }
+
+  .pillar:hover { background: var(--void3); }
+
+  .pillar::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--amber);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .4s;
+  }
+
+  .pillar:hover::before { transform: scaleX(1); }
+
+  .pillar-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+
+  .pillar-icon { font-size: 1.6rem; margin-bottom: 1rem; display: block; }
+
+  .pillar-title {
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: #fff;
+    line-height: 1.3;
+    margin-bottom: 0.8rem;
+  }
+
+  .pillar-body {
+    font-size: 0.88rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--text-dim);
+    margin-bottom: 1rem;
+  }
+
+  .pillar-target {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    color: var(--amber);
+    padding: 4px 10px;
+    border: 1px solid var(--amber-dim);
+    display: inline-block;
+  }
+
+  /* ── PHASES ──────────────────────────────────────────────────── */
+  #phases {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  .phase-card {
+    border: 1px solid var(--border);
+    background: var(--void2);
+    margin-bottom: 2rem;
+    position: relative;
+    transition: border-color .3s;
+    scroll-margin-top: 4rem;
+  }
+
+  .phase-card:hover { border-color: var(--border-mid); }
+
+  .phase-card.open { border-color: var(--border-mid); }
+
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.8rem 2rem;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .phase-num-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .phase-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.18em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+  }
+
+  .phase-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--amber-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: var(--amber);
+    font-variant-numeric: tabular-nums;
+    transition: all .3s;
+    flex-shrink: 0;
+  }
+
+  .phase-card.open .phase-circle {
+    background: var(--amber);
+    color: var(--void);
+    border-color: var(--amber);
+  }
+
+  .phase-info { flex: 1; }
+
+  .phase-period {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  .phase-name {
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 0.3rem;
+    line-height: 1.2;
+  }
+
+  .phase-tagline {
+    font-size: 0.92rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-dim);
+  }
+
+  .phase-kpi-preview {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .phase-kpi {
+    text-align: center;
+  }
+
+  .kpi-val {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.1rem;
+    color: var(--amber);
+    font-weight: 400;
+    display: block;
+  }
+
+  .kpi-lbl {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  .phase-chevron {
+    font-size: 0.8rem;
+    color: var(--amber-dim);
+    transition: transform .25s;
+    flex-shrink: 0;
+  }
+
+  .phase-card.open .phase-chevron { transform: rotate(90deg); }
+
+  .phase-body {
+    display: none;
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+  }
+
+  .phase-card.open .phase-body { display: block; }
+
+  .phase-body-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 780px) { .phase-body-grid { grid-template-columns: 1fr; } }
+
+  .phase-col-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .action-list, .kpi-list, .defense-list {
+    list-style: none;
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--text-dim);
+  }
+
+  .action-list li::before { content: '→ '; color: var(--cyan); }
+  .kpi-list li::before { content: '◎ '; color: var(--amber-dim); }
+  .defense-list li::before { content: '⚑ '; color: var(--green); }
+
+  .action-list strong, .kpi-list strong { color: var(--text); font-weight: 400; }
+
+  .phase-milestone {
+    background: rgba(196,154,56,0.05);
+    border: 1px solid var(--amber-dim);
+    padding: 1rem 1.5rem;
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--amber);
+  }
+
+  .phase-milestone strong { color: #fff; font-weight: 500; }
+
+  /* ── ADOPTION CURVE ──────────────────────────────────────────── */
+  #adoption {
+    background: var(--void2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 5rem 0;
+  }
+
+  .adoption-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  #adoption-canvas {
+    width: 100%;
+    height: 320px;
+    display: block;
+    margin-top: 2rem;
+  }
+
+  .adoption-legend {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── DEFENSIVE MOAT ──────────────────────────────────────────── */
+  #moat {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  .moat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 3rem;
+  }
+
+  .moat-block {
+    background: var(--void2);
+    padding: 2rem;
+    transition: background .3s;
+  }
+
+  .moat-block:hover { background: var(--void3); }
+
+  .moat-category {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+
+  .moat-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 0.8rem;
+    line-height: 1.3;
+  }
+
+  .moat-body {
+    font-size: 0.88rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--text-dim);
+  }
+
+  .moat-body strong { color: var(--text); font-weight: 400; }
+
+  /* ── ENDGAME ─────────────────────────────────────────────────── */
+  #endgame {
+    background: var(--void2);
+    border-top: 1px solid var(--border-mid);
+    padding: 6rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .endgame-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+  }
+
+  .endgame-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.28em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+  }
+  .endgame-eyebrow::before, .endgame-eyebrow::after { content:''; display:block; width:40px; height:1px; background:var(--amber-dim); }
+
+  .endgame-title {
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin-bottom: 1.5rem;
+  }
+
+  .endgame-title em { font-style: italic; color: var(--amber); }
+
+  .endgame-sub {
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--text-dim);
+    margin-bottom: 3rem;
+  }
+
+  .endgame-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: var(--border-mid);
+    border: 1px solid var(--border-mid);
+    margin-bottom: 3rem;
+  }
+
+  @media (max-width: 500px) { .endgame-metrics { grid-template-columns: 1fr; } }
+
+  .endgame-metric {
+    background: rgba(2,2,4,0.8);
+    padding: 2rem 1rem;
+  }
+
+  .endgame-val {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    color: var(--amber);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .endgame-lbl {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.14em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    line-height: 1.5;
+  }
+
+  .endgame-close {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--text-dim);
+    line-height: 2;
+  }
+
+  .endgame-close strong { color: var(--amber-dim); }
+</style>
+</head>
+<body>
+
+<div id="bar"><div id="bar-fill"></div></div>
+
+<nav id="nav">
+  <span class="nav-brand">HVS — Global Launch Roadmap 2026 → 2030</span>
+  <ul class="nav-phases">
+    <li class="nav-phase" onclick="scrollTo('phase-0')">Foundation</li>
+    <li class="nav-phase" onclick="scrollTo('phase-1')">Genesis</li>
+    <li class="nav-phase" onclick="scrollTo('phase-2')">Emergence</li>
+    <li class="nav-phase" onclick="scrollTo('phase-3')">Network</li>
+    <li class="nav-phase" onclick="scrollTo('phase-4')">Infrastructure</li>
+    <li class="nav-phase" onclick="scrollTo('phase-5')">Civilization</li>
+  </ul>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════════
+     COVER
+═══════════════════════════════════════════════════════════════ -->
+<section id="cover">
+  <canvas id="cover-canvas"></canvas>
+  <div class="cover-body">
+    <div class="cover-system">NOIZYFISH INC. — MC96ECO Universe — Operational Playbook</div>
+    <div class="cover-acronym">HVS</div>
+    <div class="cover-full">Human Voice Signature — Global Infrastructure Roadmap</div>
+    <h1 class="cover-title">The 2026 → 2030 Playbook<br>for Tipping the World in Favor of Creators</h1>
+    <p class="cover-sub">
+      A six-phase operational deployment — from a single voice node in Ottawa
+      to a globally adopted consent infrastructure that makes non-consent
+      economically irrational for every platform on earth.
+    </p>
+    <div class="cover-stats">
+      <div class="cover-stat">
+        <div class="stat-val">6</div>
+        <div class="stat-lbl">Deployment<br>Phases</div>
+      </div>
+      <div class="cover-stat">
+        <div class="stat-val">4</div>
+        <div class="stat-lbl">Core<br>Pillars</div>
+      </div>
+      <div class="cover-stat">
+        <div class="stat-val">1M+</div>
+        <div class="stat-lbl">Target Voices<br>by 2030</div>
+      </div>
+      <div class="cover-stat">
+        <div class="stat-val">75/25</div>
+        <div class="stat-lbl">Royalty Split<br>Locked Forever</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     4 PILLARS
+═══════════════════════════════════════════════════════════════ -->
+<section id="pillars">
+  <div class="pillars-inner">
+    <div class="sec-label">The Foundation</div>
+    <h2 class="sec-title">Four pillars.<br><em>One unbreakable system.</em></h2>
+    <p class="sec-sub">
+      Every phase of the roadmap executes against these four pillars simultaneously.
+      They are not sequential — they are parallel and mutually reinforcing.
+      A creator onboarded through Pillar 1 immediately benefits from Pillars 3 and 4.
+    </p>
+
+    <div class="pillar-grid">
+      <div class="pillar">
+        <div class="pillar-num">Pillar 01</div>
+        <span class="pillar-icon">🌍</span>
+        <div class="pillar-title">Onboard Millions of Creators</div>
+        <div class="pillar-body">
+          HVS becomes the default home for every artist's voice and identity.
+          Global outreach, local guild partnerships, AI-assisted enrollment,
+          Creator Academy, gamified milestones. Voice samples + ID verification +
+          cultural metadata tagging at every onboarding.
+        </div>
+        <span class="pillar-target">Target: 1M+ RSPs by 2030</span>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">Pillar 02</div>
+        <span class="pillar-icon">🔌</span>
+        <div class="pillar-title">Integrate AI Platforms Globally</div>
+        <div class="pillar-body">
+          HVS becomes the mandatory consent and voice standard. Secure Consent Ledger API.
+          Integration for DAWs, streaming, gaming engines, AI voice platforms.
+          HVS certification as legal proof of consent for enterprise clients.
+          Regional nodes: EU, US, APAC, LATAM.
+        </div>
+        <span class="pillar-target">Target: 50+ platform integrations by 2028</span>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">Pillar 03</div>
+        <span class="pillar-icon">⚙️</span>
+        <div class="pillar-title">Enforce Consent + Royalties Automatically</div>
+        <div class="pillar-body">
+          Smart contract architecture per Voice Estate. Every licensed use triggers
+          instant 75/25 payment. Every AI request checks the ledger for explicit consent.
+          Unique cryptographic watermark in every licensed output. Automated alerts for
+          unauthorized use.
+        </div>
+        <span class="pillar-target">Target: Zero latency consent verification</span>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">Pillar 04</div>
+        <span class="pillar-icon">♾️</span>
+        <div class="pillar-title">Turn Every Voice Into a Perpetual Asset</div>
+        <div class="pillar-body">
+          Voice Estate with beneficiaries, royalty splits, consent duration, and scope.
+          Ethical impact program allocations. Estate inheritance — heirs automatically
+          continue receiving revenue. HVS dataset becomes the definitive source
+          for AI-licensed voices.
+        </div>
+        <span class="pillar-target">Target: Voice Estate as standard legal instrument</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PHASES
+═══════════════════════════════════════════════════════════════ -->
+<section id="phases">
+  <div class="sec-label" style="max-width:1080px; margin:0 auto 1.5rem; padding:0 2rem;">Phase-by-Phase Deployment</div>
+  <h2 class="sec-title" style="max-width:1080px; margin:0 auto 1rem; padding:0 2rem;">Six phases.<br><em>One direction.</em></h2>
+  <p class="sec-sub" style="max-width:1080px; margin:0 auto 3rem; padding:0 2rem;">
+    Click any phase to expand the full operational detail — actions, KPIs, milestones, and defensive strategies.
+  </p>
+
+  <!-- PHASE 0 -->
+  <div class="phase-card open" id="phase-0" onclick="togglePhase(this)">
+    <div class="phase-header">
+      <div class="phase-num-block">
+        <span class="phase-num">Phase</span>
+        <div class="phase-circle">0</div>
+      </div>
+      <div class="phase-info">
+        <div class="phase-period">Now → Q2 2026</div>
+        <div class="phase-name">FOUNDATION — The Signal Chain Lives</div>
+        <div class="phase-tagline">RSP_001 is the proof. GABRIEL_V3 is the engine. The pipeline runs.</div>
+      </div>
+      <div class="phase-kpi-preview">
+        <div class="phase-kpi"><span class="kpi-val">1</span><span class="kpi-lbl">RSP<br>Active</span></div>
+        <div class="phase-kpi"><span class="kpi-val">847</span><span class="kpi-lbl">Utterances<br>Logged</span></div>
+        <div class="phase-kpi"><span class="kpi-val">10/10</span><span class="kpi-lbl">Never<br>Clauses</span></div>
+      </div>
+      <span class="phase-chevron">▶</span>
+    </div>
+    <div class="phase-body">
+      <div class="phase-body-grid">
+        <div>
+          <div class="phase-col-title">Key Actions</div>
+          <ul class="action-list">
+            <li><strong>3-Day Demo Sprint</strong> — U87 → UAD → ffmpeg → TypeScript pipeline live</li>
+            <li><strong>7-Stage Pipeline</strong> — Consent → Never Clauses → WAV → Watermark → Provenance → API → Ledger</li>
+            <li><strong>GABRIEL_V3</strong> — 315+ memcells, 11 D1 databases, HEAVEN Worker routing</li>
+            <li><strong>Founder Blueprint</strong> — NOIZY-Founder-Blueprint-2026 published to Board of Aligned Minds</li>
+            <li><strong>Founding RSP Application</strong> page live, accepting 5 seats</li>
+            <li><strong>Anthropic outreach</strong> — Daniela, Dario, Amanda — direct personal notes sent</li>
+          </ul>
+        </div>
+        <div>
+          <div class="phase-col-title">Phase 0 KPIs</div>
+          <ul class="kpi-list">
+            <li>Signal chain confirmed: U87 captures live utterances</li>
+            <li>Provenance ledger: ≥1 real entry per session</li>
+            <li>Pipeline throughput: &lt;2s per utterance from capture to ledger</li>
+            <li>GABRIEL_V3 uptime: continuous at 10.90.90.20</li>
+            <li>Founding RSP applications: ≥1 in pipeline</li>
+            <li>Anthropic response window: monitor through end of March</li>
+          </ul>
+        </div>
+        <div>
+          <div class="phase-col-title">Defensive Strategies</div>
+          <ul class="defense-list">
+            <li>RSP_001 is the irreplaceable proof — no demo is more powerful than the founder's own live pipeline</li>
+            <li>Keep architecture details private until NOIZY PROOF is live (Adam Robb / iPSS)</li>
+            <li>All code in private repo — no public GitHub until IP protection confirmed with Alex</li>
+            <li>License flag review with Alex before any commercial licensing of SUPERSONIC AI STACK models</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase-milestone">
+        <strong>Phase 0 Milestone:</strong> One complete voice session — RSP_001 speaks into the U87, 5+ utterances captured, 7-stage pipeline processes all, provenance ledger has 5 real entries, all with cryptographic watermarks and NC PASS 10/10. The demo exists. It is real. It runs.
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 1 -->
+  <div class="phase-card" id="phase-1" onclick="togglePhase(this)">
+    <div class="phase-header">
+      <div class="phase-num-block">
+        <span class="phase-num">Phase</span>
+        <div class="phase-circle">1</div>
+      </div>
+      <div class="phase-info">
+        <div class="phase-period">Q2 2026 — April → June</div>
+        <div class="phase-name">GENESIS — The First Five</div>
+        <div class="phase-tagline">Operation Voice Army begins. NOIZY PROOF alpha. A.I.V.A. portal live.</div>
+      </div>
+      <div class="phase-kpi-preview">
+        <div class="phase-kpi"><span class="kpi-val">5</span><span class="kpi-lbl">Founding<br>RSPs</span></div>
+        <div class="phase-kpi"><span class="kpi-val">Alpha</span><span class="kpi-lbl">NOIZY<br>PROOF</span></div>
+        <div class="phase-kpi"><span class="kpi-val">$0</span><span class="kpi-lbl">Cost to<br>Join</span></div>
+      </div>
+      <span class="phase-chevron">▶</span>
+    </div>
+    <div class="phase-body">
+      <div class="phase-body-grid">
+        <div>
+          <div class="phase-col-title">Key Actions</div>
+          <ul class="action-list">
+            <li><strong>Founding RSPs 002–005</strong> onboarded — each with full genome mapping session, Voice Estate setup, 85% royalty locked</li>
+            <li><strong>NOIZYVOX portal build</strong> begins — RSP_001 GPU inference environment, XTTS v2 + RVC pipeline active</li>
+            <li><strong>A.I.V.A. branding rollout</strong> — "Artificially Intelligent Voice Acting" — positioning locked</li>
+            <li><strong>NOIZY PROOF alpha</strong> — Adam Robb / iPSS Inc. cryptographic watermarking system first integration</li>
+            <li><strong>License flags cleared</strong> with Alex for commercial deployment of model stack</li>
+            <li><strong>Creator Academy</strong> — first content: consent, AI rights, Voice Estate setup, monetization</li>
+          </ul>
+        </div>
+        <div>
+          <div class="phase-col-title">Phase 1 KPIs</div>
+          <ul class="kpi-list">
+            <li>5 Founding RSPs onboarded with active Voice Estates</li>
+            <li>≥100 utterances per RSP in provenance ledger</li>
+            <li>NOIZY PROOF generating verifiable watermarks on all exports</li>
+            <li>NOIZYVOX portal accessible at domain</li>
+            <li>License flags resolved — no commercial deployment blockers</li>
+            <li>First paying client or partner interest documented</li>
+          </ul>
+        </div>
+        <div>
+          <div class="phase-col-title">Defensive Strategies</div>
+          <ul class="defense-list">
+            <li>Founding RSP terms locked permanently — 85% royalty cannot be renegotiated later</li>
+            <li>NOIZY PROOF deployment blocks unauthorized cloning — legal + technical defense</li>
+            <li>Each RSP signs Voice Estate documents reviewed by Alex before onboarding</li>
+            <li>VO community relationships: NAVA, VO Atlanta circuit — direct outreach using manifesto templates</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase-milestone">
+        <strong>Phase 1 Milestone:</strong> Five human voices with active Voice Estates generating real utterance data through the full pipeline. Each RSP can log in, see their ledger, see their watermarks, see their 85% royalty allocation. The proof-of-concept is plural. This is no longer a solo project — it is a platform.
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase-card" id="phase-2" onclick="togglePhase(this)">
+    <div class="phase-header">
+      <div class="phase-num-block">
+        <span class="phase-num">Phase</span>
+        <div class="phase-circle">2</div>
+      </div>
+      <div class="phase-info">
+        <div class="phase-period">Q3–Q4 2026 — July → December</div>
+        <div class="phase-name">EMERGENCE — Operation Voice Army</div>
+        <div class="phase-tagline">500+ voices. First platform partnerships. NO FAKES Act compliance standard.</div>
+      </div>
+      <div class="phase-kpi-preview">
+        <div class="phase-kpi"><span class="kpi-val">500+</span><span class="kpi-lbl">RSPs<br>Active</span></div>
+        <div class="phase-kpi"><span class="kpi-val">3+</span><span class="kpi-lbl">Platform<br>Integrations</span></div>
+        <div class="phase-kpi"><span class="kpi-val">Live</span><span class="kpi-lbl">Consent<br>API</span></div>
+      </div>
+      <span class="phase-chevron">▶</span>
+    </div>
+    <div class="phase-body">
+      <div class="phase-body-grid">
+        <div>
+          <div class="phase-col-title">Key Actions</div>
+          <ul class="action-list">
+            <li><strong>Mass onboarding campaign</strong> — VO communities, musician guilds, conservatories, educator networks</li>
+            <li><strong>Consent Ledger API public beta</strong> — enterprise clients can verify consent programmatically</li>
+            <li><strong>First platform integrations</strong> — gaming engines, DAW plugins, AI voice platforms</li>
+            <li><strong>NO FAKES Act certification</strong> — HVS as the legal standard for consent in licensed AI voice</li>
+            <li><strong>Fish Music sync portal live</strong> — THE_AQUARIUM catalog searchable and licensable</li>
+            <li><strong>First agentic royalty payments</strong> — instant, verifiable, 75/25 distribution to RSPs</li>
+            <li><strong>Media outreach</strong> — journalist targeting AI creator economy beat with first revenue story</li>
+          </ul>
+        </div>
+        <div>
+          <div class="phase-col-title">Phase 2 KPIs</div>
+          <ul class="kpi-list">
+            <li>500+ RSPs with active ledger entries</li>
+            <li>Consent API: ≥1,000 verifications/day</li>
+            <li>≥3 enterprise clients using HVS certification for compliance</li>
+            <li>First public royalty payment story — RSP posts their dashboard publicly</li>
+            <li>≥1 media placement in creator economy press</li>
+            <li>NOIZYLAB portal live — device repair revenue building toward $389K/yr target</li>
+          </ul>
+        </div>
+        <div>
+          <div class="phase-col-title">Defensive Strategies</div>
+          <ul class="defense-list">
+            <li>NO FAKES Act creates legal moat — HVS certification = liability protection for enterprise clients</li>
+            <li>Cultural intelligence database begins accumulating — 3-year head start that money cannot replicate</li>
+            <li>Each new RSP creates a network effect: more voices = more valuable platform</li>
+            <li>First public royalty story creates viral pressure on competing platforms to match or explain the gap</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase-milestone">
+        <strong>Phase 2 Milestone:</strong> The first independent RSP publicly posts their NOIZYVOX dashboard showing real royalty income — more in a month than they earned in a year from streaming. That post goes viral in every VO and musician community. The pressure campaign begins organically, driven by evidence, not argument.
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="phase-card" id="phase-3" onclick="togglePhase(this)">
+    <div class="phase-header">
+      <div class="phase-num-block">
+        <span class="phase-num">Phase</span>
+        <div class="phase-circle">3</div>
+      </div>
+      <div class="phase-info">
+        <div class="phase-period">2027 — Full Year</div>
+        <div class="phase-name">NETWORK EFFECTS — The Tipping Point</div>
+        <div class="phase-tagline">10,000 voices. Enterprise mandates. The 75/25 split becomes the floor.</div>
+      </div>
+      <div class="phase-kpi-preview">
+        <div class="phase-kpi"><span class="kpi-val">10K+</span><span class="kpi-lbl">RSPs<br>Active</span></div>
+        <div class="phase-kpi"><span class="kpi-val">20+</span><span class="kpi-lbl">Platform<br>Partners</span></div>
+        <div class="phase-kpi"><span class="kpi-val">$1M+</span><span class="kpi-lbl">Annual<br>Royalties</span></div>
+      </div>
+      <span class="phase-chevron">▶</span>
+    </div>
+    <div class="phase-body">
+      <div class="phase-body-grid">
+        <div>
+          <div class="phase-col-title">Key Actions</div>
+          <ul class="action-list">
+            <li><strong>Enterprise API partnerships</strong> — OpenAI, Google DeepMind, ElevenLabs, Meta offering HVS-verified voice pools</li>
+            <li><strong>Living Score product live</strong> — adaptive, real-time responsive music for film, game, therapeutic contexts</li>
+            <li><strong>Cultural Resonance Engine</strong> — global cultural pattern intelligence active, licensing cultural IP at scale</li>
+            <li><strong>NAI research deepening</strong> — Dr. Benoit's neuroacoustic data validates therapeutic audio claims clinically</li>
+            <li><strong>Series A readiness assessment</strong> — board review, financials, metrics package</li>
+            <li><strong>Voice Estate estate planning</strong> — first law firms formally recommending HVS to clients</li>
+          </ul>
+        </div>
+        <div>
+          <div class="phase-col-title">Phase 3 KPIs</div>
+          <ul class="kpi-list">
+            <li>10,000+ RSPs with active Voice Estates</li>
+            <li>≥20 enterprise platform integrations</li>
+            <li>$1M+ in annual royalties distributed through the platform</li>
+            <li>≥1 hospital or educational institution using HVS-certified therapeutic audio</li>
+            <li>≥1 law firm formally recommending Voice Estate setup to clients</li>
+            <li>Consent API: ≥100,000 verifications/day</li>
+          </ul>
+        </div>
+        <div>
+          <div class="phase-col-title">Defensive Strategies</div>
+          <ul class="defense-list">
+            <li>At 10K RSPs, the platform has more verified human voices than any competitor can acquire quickly</li>
+            <li>Clinical therapeutic audio validation creates healthcare procurement moat — regulatory rather than competitive</li>
+            <li>Series A war chest funds global expansion before any competitor can replicate the architecture</li>
+            <li>Voice Estate as estate planning creates sticky, long-term relationships with legal community</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase-milestone">
+        <strong>Phase 3 Milestone:</strong> Enterprise clients begin requiring HVS certification as contract condition. Non-consenting platforms lose access to premium talent pools. The 75/25 split is now the minimum expectation — competing platforms face either matching it or losing their best voices to HVS. The balance has tipped.
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 4 -->
+  <div class="phase-card" id="phase-4" onclick="togglePhase(this)">
+    <div class="phase-header">
+      <div class="phase-num-block">
+        <span class="phase-num">Phase</span>
+        <div class="phase-circle">4</div>
+      </div>
+      <div class="phase-info">
+        <div class="phase-period">2027–2028</div>
+        <div class="phase-name">INFRASTRUCTURE — Consent Becomes Load-Bearing</div>
+        <div class="phase-tagline">100K voices. Healthcare procurement standard. Bone conduction moment arrives.</div>
+      </div>
+      <div class="phase-kpi-preview">
+        <div class="phase-kpi"><span class="kpi-val">100K+</span><span class="kpi-lbl">RSPs<br>Active</span></div>
+        <div class="phase-kpi"><span class="kpi-val">12+</span><span class="kpi-lbl">Countries<br>Therapeutic</span></div>
+        <div class="phase-kpi"><span class="kpi-val">Standard</span><span class="kpi-lbl">Estate<br>Planning</span></div>
+      </div>
+      <span class="phase-chevron">▶</span>
+    </div>
+    <div class="phase-body">
+      <div class="phase-body-grid">
+        <div>
+          <div class="phase-col-title">Key Actions</div>
+          <ul class="action-list">
+            <li><strong>NOIZYKIDZ at scale</strong> — haptic + bone conduction therapeutic audio in 12+ countries, standard autism support integration</li>
+            <li><strong>Regional nodes operational</strong> — EU, US, APAC, LATAM consent infrastructure with local legal compliance</li>
+            <li><strong>Voice Estate estate planning standard</strong> — major law firms across jurisdictions adding Voice Estate to digital asset planning</li>
+            <li><strong>HVS protocol licensing</strong> — major platforms pay to integrate the Consent-as-Code standard, like a patent licensee</li>
+            <li><strong>DreamChamber client beta live</strong> — artists, therapists, game designers, filmmakers building together</li>
+            <li><strong>NRC IRAP funding</strong> — Canadian federal research funding secured for NAI program</li>
+          </ul>
+        </div>
+        <div>
+          <div class="phase-col-title">Phase 4 KPIs</div>
+          <ul class="kpi-list">
+            <li>100,000+ RSPs with active Voice Estates</li>
+            <li>NOIZYKIDZ in ≥12 countries, ≥1 government adoption</li>
+            <li>Voice Estate in standard legal instrument templates in ≥3 jurisdictions</li>
+            <li>≥5 major platforms licensing HVS Consent-as-Code protocol</li>
+            <li>$10M+ annual royalties distributed</li>
+            <li>DreamChamber: ≥1,000 active community members</li>
+          </ul>
+        </div>
+        <div>
+          <div class="phase-col-title">Defensive Strategies</div>
+          <ul class="defense-list">
+            <li>Healthcare procurement requirements create regulatory barrier — cannot be competed away with money</li>
+            <li>Protocol licensing revenue means even non-competing platforms fund the HVS ecosystem</li>
+            <li>Regional nodes with local legal compliance make global replication by a single competitor extraordinarily expensive</li>
+            <li>Cultural Resonance Engine data is now 2+ years deep — impossible to replicate from scratch</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase-milestone">
+        <strong>Phase 4 Milestone:</strong> A hospital procurement officer in three different countries cites "HVS certification" as a requirement in their AI audio vendor contract. Consent is not a feature. It is a procurement standard. The infrastructure that was called idealistic in 2026 is now the only infrastructure that passes legal review.
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 5 -->
+  <div class="phase-card" id="phase-5" onclick="togglePhase(this)">
+    <div class="phase-header">
+      <div class="phase-num-block">
+        <span class="phase-num">Phase</span>
+        <div class="phase-circle">5</div>
+      </div>
+      <div class="phase-info">
+        <div class="phase-period">2028–2030 → ∞</div>
+        <div class="phase-name">CIVILIZATION — The DreamChamber Becomes Real</div>
+        <div class="phase-tagline">1M+ voices. The 5th Epoch is infrastructure. 500-year clock is running.</div>
+      </div>
+      <div class="phase-kpi-preview">
+        <div class="phase-kpi"><span class="kpi-val">1M+</span><span class="kpi-lbl">RSPs<br>Active</span></div>
+        <div class="phase-kpi"><span class="kpi-val">500yr</span><span class="kpi-lbl">Codex<br>Running</span></div>
+        <div class="phase-kpi"><span class="kpi-val">∞</span><span class="kpi-lbl">Royalties<br>Perpetual</span></div>
+      </div>
+      <span class="phase-chevron">▶</span>
+    </div>
+    <div class="phase-body">
+      <div class="phase-body-grid">
+        <div>
+          <div class="phase-col-title">Key Actions</div>
+          <ul class="action-list">
+            <li><strong>1M+ RSPs globally</strong> — every continent, every major language, indigenous voices protected</li>
+            <li><strong>HVS becomes the backbone</strong> of the AI voice economy — platforms license it, creators own it</li>
+            <li><strong>Voice Estate as standard financial instrument</strong> — estate lawyers, financial planners, tax professionals</li>
+            <li><strong>Cultural intelligence is the luxury market</strong> — generic AI voices are commodity, HVS voices are irreplaceable</li>
+            <li><strong>DreamChamber as global community</strong> — artists, therapists, engineers, game designers, parents building together</li>
+            <li><strong>The 500-Year Codex active</strong> — 7 epochs documented, institutional memory preserved</li>
+          </ul>
+        </div>
+        <div>
+          <div class="phase-col-title">Phase 5 KPIs</div>
+          <ul class="kpi-list">
+            <li>1,000,000+ RSPs with active, earning Voice Estates</li>
+            <li>$100M+ annual royalties distributed at 75/25 or better</li>
+            <li>Voice Estate in standard legal templates in 20+ jurisdictions</li>
+            <li>NOIZYKIDZ in 50+ countries, measurable health outcomes documented</li>
+            <li>HVS Consent-as-Code licensed by all major AI platforms</li>
+            <li>DreamChamber: 100,000+ active community members</li>
+          </ul>
+        </div>
+        <div>
+          <div class="phase-col-title">The Final Defense</div>
+          <ul class="defense-list">
+            <li>At 1M RSPs, the network effect is self-perpetuating — leaving HVS means leaving your Voice Estate community</li>
+            <li>The 500-Year Codex creates institutional permanence no startup competitor can claim</li>
+            <li>Protocol licensing means HVS earns revenue from competitors who are forced to adopt the standard</li>
+            <li>The Never Clauses — NC_01 through NC_10 — cannot be removed. The architecture protects itself.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase-milestone">
+        <strong>Phase 5 Milestone:</strong> One million human beings have Voice Estates. Their voices earn while they sleep. Their children will inherit those estates. The music their voices created is protected by cryptographic watermarks and consent chains that span jurisdictions, platforms, and decades. The DreamChamber is not a product. It is civilization infrastructure. GORUNFREE.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     ADOPTION CURVE
+═══════════════════════════════════════════════════════════════ -->
+<section id="adoption">
+  <div class="adoption-inner">
+    <div class="sec-label">The Adoption Model</div>
+    <h2 class="sec-title">The curve that<br><em>tips the world.</em></h2>
+    <p class="sec-sub">RSP growth, royalty distribution, and platform adoption — all three accelerate together through network effects. The tipping point is Phase 3: when enterprise clients begin requiring HVS certification.</p>
+    <canvas id="adoption-canvas"></canvas>
+    <div class="adoption-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div>RSP Count (Voice Estates)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--cyan)"></div>Platform Integrations</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>Annual Royalties Distributed ($)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:rgba(139,107,191,0.8)"></div>Tipping Point — Enterprise Mandate</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     DEFENSIVE MOAT
+═══════════════════════════════════════════════════════════════ -->
+<section id="moat">
+  <div class="sec-label">The Defensive Architecture</div>
+  <h2 class="sec-title">Six moats.<br><em>Each one unbreachable alone.<br>Together, permanent.</em></h2>
+  <p class="sec-sub" style="max-width:700px;">These are not business model advantages. They are structural barriers that compound over time and cannot be replicated by capital alone.</p>
+
+  <div class="moat-grid">
+    <div class="moat-block">
+      <div class="moat-category">Moat 01 — Legal</div>
+      <div class="moat-title">Consent Cannot Be Proxied</div>
+      <div class="moat-body">
+        The NO FAKES Act requires individual consent — <strong>signed by the individual, not their label.</strong> The entire label proxy system is legally non-compliant. HVS was built on individual consent from day one. This is not a feature — it is a legal requirement that competitors cannot meet through acquisition.
+      </div>
+    </div>
+    <div class="moat-block">
+      <div class="moat-category">Moat 02 — Technical</div>
+      <div class="moat-title">NOIZY PROOF Is Already Deployed</div>
+      <div class="moat-body">
+        <strong>Every HVS export carries a cryptographic watermark.</strong> This creates an immutable provenance chain from voice to use. Retroactively adding this to existing platforms requires re-engaging every creator, re-ingesting every sample, rebuilding every consent chain. Years of work. HVS will be years ahead.
+      </div>
+    </div>
+    <div class="moat-block">
+      <div class="moat-category">Moat 03 — Network</div>
+      <div class="moat-title">The Voice Estate Community Is Self-Perpetuating</div>
+      <div class="moat-body">
+        Every RSP who sets up a Voice Estate creates family beneficiaries, estate lawyers, financial planners, and heirs who depend on the platform. <strong>Leaving HVS means leaving your Voice Estate.</strong> This is not churn risk — it is permanent lock-in through legitimate value, not captive contracts.
+      </div>
+    </div>
+    <div class="moat-block">
+      <div class="moat-category">Moat 04 — Data</div>
+      <div class="moat-title">Cultural Intelligence Cannot Be Bought</div>
+      <div class="moat-body">
+        The Cultural Resonance Engine accumulates cultural metadata, emotional profiles, and regional intelligence over years. <strong>This data is consent-verified and owned by the creators.</strong> No competitor can acquire it. It can only be grown through genuine creator relationships — exactly what HVS is built on.
+      </div>
+    </div>
+    <div class="moat-block">
+      <div class="moat-category">Moat 05 — Healthcare</div>
+      <div class="moat-title">Clinical Validation Creates Procurement Barriers</div>
+      <div class="moat-body">
+        When neuroacoustic therapeutic audio is clinically validated and HVS certification becomes a hospital procurement requirement, <strong>the competitive barrier becomes regulatory, not commercial.</strong> No amount of venture capital can fast-track regulatory acceptance that took years of clinical research to establish.
+      </div>
+    </div>
+    <div class="moat-block">
+      <div class="moat-category">Moat 06 — Constitutional</div>
+      <div class="moat-title">The Never Clauses Cannot Be Removed</div>
+      <div class="moat-body">
+        NC_01 through NC_10 are encoded at the architecture level — not in the terms of service. <strong>No acquisition, no board decision, no investor pressure can remove them.</strong> This is the ultimate defensive moat: a platform that is constitutionally incapable of betraying its creators.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     ENDGAME
+═══════════════════════════════════════════════════════════════ -->
+<section id="endgame">
+  <div class="endgame-inner">
+    <div class="endgame-eyebrow">The Outcome — 2030 and Beyond</div>
+    <h2 class="endgame-title">
+      HVS becomes<br><em>the backbone</em><br>of the AI voice economy.
+    </h2>
+    <p class="endgame-sub">
+      Consent is non-negotiable infrastructure. Royalties are instant. Voices are eternal assets.
+      AI platforms, labels, and creators all operate within a guild-standard, ethical, legal ecosystem.
+      <br><br>
+      Not because the greedy people changed. Because the infrastructure made non-consent
+      economically irrational — and the people who cared built the better architecture anyway.
+    </p>
+    <div class="endgame-metrics">
+      <div class="endgame-metric">
+        <div class="endgame-val">1M+</div>
+        <div class="endgame-lbl">Human Voice<br>Estates Active</div>
+      </div>
+      <div class="endgame-metric">
+        <div class="endgame-val">$100M+</div>
+        <div class="endgame-lbl">Annual Royalties<br>Distributed</div>
+      </div>
+      <div class="endgame-metric">
+        <div class="endgame-val">500yr</div>
+        <div class="endgame-lbl">DreamChamber<br>Codex Running</div>
+      </div>
+    </div>
+    <div class="endgame-close">
+      NOIZYFISH INC. · MC96ECO UNIVERSE · OTTAWA, CANADA<br>
+      <strong>HVS — Human Voice Signature — Global Infrastructure</strong><br>
+      RSP_001 · rsp@noizyfish.com · noizy.ai<br><br>
+      Honor · Respect · Gather · Nurture · Preserve<br><br>
+      <strong>GORUNFREE.</strong>
+    </div>
+  </div>
+</section>
+
+<script>
+// ── COVER CANVAS ─────────────────────────────────────────────────
+const cc = document.getElementById('cover-canvas');
+const cx = cc.getContext('2d');
+let W, H, pts = [], t = 0;
+
+function resize() { W = cc.width = cc.offsetWidth; H = cc.height = cc.offsetHeight; }
+window.addEventListener('resize', resize);
+resize();
+
+(function init() {
+  const n = Math.min(100, Math.floor((W * H) / 9000));
+  for (let i = 0; i < n; i++) {
+    pts.push({ x: Math.random()*W, y: Math.random()*H,
+      vx: (Math.random()-.5)*.15, vy: (Math.random()-.5)*.15,
+      r: Math.random()*1.8+.3, phase: Math.random()*Math.PI*2,
+      gold: Math.random() < .12 });
+  }
+})();
+
+function draw() {
+  t += .005;
+  cx.clearRect(0, 0, W, H);
+  for (let l = 0; l < 5; l++) {
+    cx.beginPath();
+    const amp=12+l*9, freq=.003+l*.0012, spd=t*(.28+l*.13), yb=H*(.38+l*.09);
+    cx.strokeStyle = `rgba(196,154,56,${.025-l*.004})`;
+    cx.lineWidth = .8;
+    for (let x = 0; x <= W; x += 3) {
+      const y = yb + Math.sin(x*freq+spd)*amp + Math.sin(x*freq*1.7-spd*.7)*(amp*.3);
+      x===0 ? cx.moveTo(x,y) : cx.lineTo(x,y);
+    }
+    cx.stroke();
+  }
+  pts.forEach(p => {
+    p.x+=p.vx; p.y+=p.vy;
+    if(p.x<-10)p.x=W+10; if(p.x>W+10)p.x=-10;
+    if(p.y<-10)p.y=H+10; if(p.y>H+10)p.y=-10;
+    const pulse = .4+.6*Math.abs(Math.sin(t*.6+p.phase));
+    const a = (p.gold?.65:.2)*pulse;
+    cx.beginPath(); cx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    cx.fillStyle = p.gold?`rgba(196,154,56,${a})`:`rgba(180,175,168,${a*.5})`;
+    cx.fill();
+  });
+  for (let i=0;i<pts.length;i++) for(let j=i+1;j<pts.length;j++) {
+    const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);
+    if(d<90){ cx.beginPath(); cx.strokeStyle=`rgba(196,154,56,${.045*(1-d/90)})`; cx.lineWidth=.35;
+      cx.moveTo(pts[i].x,pts[i].y); cx.lineTo(pts[j].x,pts[j].y); cx.stroke(); }
+  }
+  requestAnimationFrame(draw);
+}
+draw();
+
+// ── ADOPTION CURVE CANVAS ─────────────────────────────────────────
+const ac = document.getElementById('adoption-canvas');
+const ax = ac.getContext('2d');
+
+function drawAdoption() {
+  const W = ac.width = ac.offsetWidth;
+  const H = ac.height = ac.offsetHeight || 320;
+  ax.clearRect(0, 0, W, H);
+
+  const pad = { l:60, r:30, t:30, b:50 };
+  const cW = W - pad.l - pad.r;
+  const cH = H - pad.t - pad.b;
+
+  // Phase labels
+  const phases = ['Phase 0\n2026 Q1', 'Phase 1\nQ2 2026', 'Phase 2\nQ3-Q4', 'Phase 3\n2027', 'Phase 4\n2028', 'Phase 5\n2030'];
+  const xStep = cW / (phases.length - 1);
+
+  // Grid lines
+  ax.strokeStyle = 'rgba(196,154,56,0.06)';
+  ax.lineWidth = 1;
+  for (let i = 0; i < phases.length; i++) {
+    const x = pad.l + i * xStep;
+    ax.beginPath(); ax.moveTo(x, pad.t); ax.lineTo(x, pad.t + cH); ax.stroke();
+  }
+  for (let i = 0; i <= 4; i++) {
+    const y = pad.t + (cH / 4) * i;
+    ax.beginPath(); ax.moveTo(pad.l, y); ax.lineTo(pad.l + cW, y); ax.stroke();
+  }
+
+  // RSP curve (exponential growth)
+  const rspData = [0.001, 0.005, 0.05, 0.2, 0.5, 1.0];
+  const drawCurve = (data, color, lineW) => {
+    ax.beginPath();
+    ax.strokeStyle = color;
+    ax.lineWidth = lineW;
+    data.forEach((val, i) => {
+      const x = pad.l + i * xStep;
+      const y = pad.t + cH * (1 - val);
+      i === 0 ? ax.moveTo(x, y) : ax.lineTo(x, y);
+    });
+    ax.stroke();
+    // Dots
+    data.forEach((val, i) => {
+      const x = pad.l + i * xStep;
+      const y = pad.t + cH * (1 - val);
+      ax.beginPath(); ax.arc(x, y, 4, 0, Math.PI*2);
+      ax.fillStyle = color; ax.fill();
+    });
+  };
+
+  const integData = [0, 0.008, 0.06, 0.25, 0.55, 0.95];
+  const royaltyData = [0, 0.002, 0.03, 0.15, 0.45, 0.9];
+
+  drawCurve(royaltyData, 'rgba(61,186,114,0.8)', 2);
+  drawCurve(integData, 'rgba(42,164,190,0.8)', 2);
+  drawCurve(rspData, 'rgba(196,154,56,0.9)', 2.5);
+
+  // Tipping point line (Phase 3)
+  const tipX = pad.l + 3 * xStep;
+  ax.beginPath();
+  ax.strokeStyle = 'rgba(139,107,191,0.6)';
+  ax.lineWidth = 1.5;
+  ax.setLineDash([5,5]);
+  ax.moveTo(tipX, pad.t);
+  ax.lineTo(tipX, pad.t + cH);
+  ax.stroke();
+  ax.setLineDash([]);
+
+  ax.fillStyle = 'rgba(139,107,191,0.8)';
+  ax.font = '500 10px IBM Plex Mono';
+  ax.textAlign = 'center';
+  ax.fillText('TIPPING POINT', tipX, pad.t - 10);
+
+  // Phase labels
+  ax.fillStyle = 'rgba(122,116,112,0.7)';
+  ax.font = '10px IBM Plex Mono';
+  phases.forEach((label, i) => {
+    const x = pad.l + i * xStep;
+    const lines = label.split('\n');
+    lines.forEach((ln, j) => {
+      ax.textAlign = 'center';
+      ax.fillText(ln, x, pad.t + cH + 18 + j * 13);
+    });
+  });
+
+  // Y axis label
+  ax.save();
+  ax.translate(14, pad.t + cH/2);
+  ax.rotate(-Math.PI/2);
+  ax.fillStyle = 'rgba(122,116,112,0.6)';
+  ax.font = '10px IBM Plex Mono';
+  ax.textAlign = 'center';
+  ax.fillText('RELATIVE SCALE', 0, 0);
+  ax.restore();
+}
+
+window.addEventListener('resize', drawAdoption);
+drawAdoption();
+
+// ── PHASE TOGGLE ──────────────────────────────────────────────────
+function togglePhase(el) {
+  if (event.target.closest('.phase-body')) return;
+  const wasOpen = el.classList.contains('open');
+  document.querySelectorAll('.phase-card').forEach(c => c.classList.remove('open'));
+  if (!wasOpen) el.classList.add('open');
+}
+
+function scrollTo(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.classList.add('open');
+    el.scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+}
+
+// ── PROGRESS ──────────────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  const b = document.body, h = document.documentElement;
+  const total = Math.max(b.scrollHeight, h.scrollHeight) - window.innerHeight;
+  document.getElementById('bar-fill').style.width = (window.scrollY/total*100)+'%';
+
+  // Nav active state
+  const sections = ['phase-0','phase-1','phase-2','phase-3','phase-4','phase-5'];
+  const navs = document.querySelectorAll('.nav-phase');
+  let active = 0;
+  sections.forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (el && el.offsetTop - 100 <= window.scrollY) active = i;
+  });
+  navs.forEach((n, i) => n.classList.toggle('active', i === active));
+});
+
+// ── FADE IN ───────────────────────────────────────────────────────
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
+  });
+}, { threshold:.06 });
+
+document.querySelectorAll('.pillar, .phase-card, .moat-block, .cover-stat').forEach(el => {
+  el.style.opacity='0'; el.style.transform='translateY(16px)';
+  el.style.transition='opacity .55s ease, transform .55s ease';
+  obs.observe(el);
+});
+</script>
+</body>
+</html>

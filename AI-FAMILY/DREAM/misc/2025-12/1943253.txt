@@ -1,0 +1,55 @@
+<root>
+    <CtrlLabelStyle name="NameLabelStyle" centeredText="true" colText="[r:100 g:100 b:100 a:255]">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlPanelStyle name="KitPiecePanelStyle10" noDefaultDrawing="true" imBackground="kit_piece_background_10.tga" colBorder="[r:0 g:0 b:0 a:0]" colFill="[r:255 g:255 b:255 a:0]" intSmartTileEdgeSize="5">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="KitPiecePanelStyle10ALT" noDefaultDrawing="true" imBackground="kit_piece_background_10_sel.tga" colBorder="[r:0 g:0 b:0 a:0]" colFill="[r:255 g:255 b:255 a:0]" intSmartTileEdgeSize="5">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlImageViewStyle name="KitPieceImageViewStyle" noDefaultDrawing="true" optBorder="false" optBackground="false" optMouseHandle="true" optDragNDrop="true" optHQResizing="true">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlImageViewStyle>
+    <CtrlButtonStyle name="KitButtonLoadStyle" imDown="load_icon_down.tga" imUp="load_icon_up.tga">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlPanelStyle name="BlankPanelStyle" noDefaultDrawing="true" intSmartTileEdgeSize="5">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlButtonStyle name="DeleteButtonStyleKP" imDown="del_icon_down.tga" imUp="del_icon_up.tga">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="NextBuildStyle10" imDown="next10Down.png" imUp="next10Up.png">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="PrevBuildStyle10" imDown="previous10Down.png" imUp="previous10Up.png">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlLabelStyle name="BuildPanelNumLabelStyle" rightAlignText="true" colText="[r:223 g:154 b:33 a:255]">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlSliderStyle name="KitPiecePanKnobStyleeee" imKnobOff="..\Mixer\mixer_pan_knob.tga" imKnobOn="..\Mixer\mixer_pan_knob.tga" imBackingStrip="..\Mixer\mixer_pan_base.tga" colBorder="[r:0 g:0 b:0 a:0]" colFill="[r:255 g:255 b:255 a:0]" snapSteps="0" fineScale="0.05" incDecButtonMode="off">
+        <VFont name="font" vSize="14" fontName="Arial" />
+    </CtrlSliderStyle>
+    <CtrlStyle name="HitStyle" noDefaultDrawing="true">
+        <VFont name="font" vSize="14" fontName="Arial" />
+    </CtrlStyle>
+    <CtrlKnobStyle name="KPKnobVolStyle" activeAreaRect="[x:0 y:0 w:18 h:18]" optStripInverted="true" imKnobNormal="..\com_small_knob_light.tga">
+        <VFont name="font" vSize="14" fontName="Arial" />
+    </CtrlKnobStyle>
+    <CtrlPanel name="SlotLayoutBackPanel" style="KitPiecePanelStyle10" rect="[x:0 y:0 w:140 h:151]" id="0">
+        <Ctrl name="HitIndicator" overloadClass="BFD2BuildPanelHitIndicator" style="HitStyle" rect="[x:5 y:24 w:131 h:107]" id="100000" zorder="0"/>
+        <CtrlButton name="KitPieceLoadButton" style="KitButtonLoadStyle" rect="[x:7 y:6 w:12 h:12]" id="100000" />
+        <CtrlLabel name="KitPieceNameLabel" style="NameLabelStyle" rect="[x:20 y:6 w:101 h:12]" id="100002" text="Empty Slot" />
+        <CtrlLabel name="SlotIDLabel" style="BuildPanelNumLabelStyle" rect="[x:120 y:6 w:12 h:12]" id="100000" text="9" />
+        <CtrlImageView name="KitPieceImageView" style="KitPieceImageViewStyle" rect="[x:8 y:23 w:122 h:101]" id="100003" zorder="1"/>
+        <CtrlButton name="KitPieceMuteButton" style="BFD2MuteButton" rect="[x:104 y:133 w:15 h:15]" id="100003" text="M" />
+        <CtrlButton name="KitPieceSoloButton" style="BFD2SoloButton" rect="[x:120 y:133 w:15 h:15]" id="100003" text="S" />
+        <CtrlButton name="KitPieceDeleteButton" style="DeleteButtonStyleKP" rect="[x:88 y:133 w:15 h:15]" id="100006" />
+        <CtrlKnob name="KitPieceVolumeKnob" style="KPKnobVolStyle" rect="[x:7 y:131 w:25 h:25]" id="100000" />
+        <CtrlSlider name="KitPiecePanKnob" style="KitPiecePanKnobStyleeee" rect="[x:26 y:135 w:53 h:8]" id="100000" />
+        <CtrlButton name="KitPiecePreviousButton" style="PrevBuildStyle10" rect="[x:5 y:22 w:10 h:108]" id="100008" zorder="999"/>
+        <CtrlButton name="KitPieceNextButton" style="NextBuildStyle10" rect="[x:125 y:22 w:10 h:108]" id="100008" zorder="999"/>
+    </CtrlPanel>
+</root>

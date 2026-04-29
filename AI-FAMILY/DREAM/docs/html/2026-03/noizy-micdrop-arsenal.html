@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RSP_001 MIC-DROP ARSENAL — NOIZYFISH INC.</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Bebas+Neue&display=swap');
+
+  :root {
+    --void: #030508;
+    --deep: #080c14;
+    --panel: #0c1220;
+    --border: #1a2540;
+    --green: #00ff88;
+    --green-dim: #00cc6a;
+    --green-glow: rgba(0,255,136,0.15);
+    --orange: #ff6b00;
+    --orange-dim: #cc5500;
+    --gold: #ffd700;
+    --gold-dim: #ccaa00;
+    --electric: #00d4ff;
+    --purple: #8b5cf6;
+    --red: #ff3366;
+    --text: #c8d8f0;
+    --text-dim: #6a7fa0;
+    --text-bright: #e8f0ff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--void);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── CANVAS HERO ─── */
+  #hero-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  /* ─── LAYOUT ─── */
+  .container {
+    position: relative;
+    z-index: 10;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px 120px;
+  }
+
+  /* ─── HEADER ─── */
+  .header {
+    padding: 60px 0 48px;
+    text-align: center;
+    position: relative;
+  }
+
+  .header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0,255,136,0.08);
+    border: 1px solid rgba(0,255,136,0.25);
+    border-radius: 4px;
+    padding: 6px 16px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--green);
+    letter-spacing: 0.15em;
+    margin-bottom: 28px;
+  }
+
+  .header-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--green);
+    border-radius: 50%;
+    animation: pulse-dot 1.4s ease-in-out infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.6); }
+  }
+
+  .header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 8vw, 96px);
+    letter-spacing: 0.04em;
+    line-height: 0.92;
+    color: var(--text-bright);
+    margin-bottom: 12px;
+  }
+
+  .header h1 span.drop {
+    color: var(--green);
+    text-shadow: 0 0 40px rgba(0,255,136,0.5);
+  }
+
+  .header h1 span.mic {
+    color: var(--gold);
+    text-shadow: 0 0 40px rgba(255,215,0,0.4);
+  }
+
+  .header-sub {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: 16px;
+  }
+
+  .header-divider {
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--green), transparent);
+    margin: 32px auto 0;
+  }
+
+  /* ─── SECTION ─── */
+  .section {
+    margin-bottom: 64px;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .section-label .num {
+    color: var(--green);
+  }
+
+  /* ─── RACE TO THE BOTTOM ─── */
+  .rtb-intro {
+    background: linear-gradient(135deg, rgba(255,107,0,0.06), rgba(255,107,0,0.02));
+    border: 1px solid rgba(255,107,0,0.2);
+    border-left: 4px solid var(--orange);
+    border-radius: 8px;
+    padding: 28px 32px;
+    margin-bottom: 32px;
+  }
+
+  .rtb-intro h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    color: var(--orange);
+    letter-spacing: 0.06em;
+    margin-bottom: 12px;
+  }
+
+  .rtb-intro p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text);
+  }
+
+  .rtb-intro p strong {
+    color: var(--text-bright);
+  }
+
+  .rtb-intro p em {
+    color: var(--green);
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  .rtb-reasons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .rtb-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .rtb-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--orange), transparent);
+  }
+
+  .rtb-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    color: rgba(255,107,0,0.15);
+    position: absolute;
+    top: 8px; right: 16px;
+    line-height: 1;
+  }
+
+  .rtb-card h3 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--orange);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+    padding-right: 40px;
+  }
+
+  .rtb-card p {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--text-dim);
+  }
+
+  .rtb-card p strong {
+    color: var(--text);
+  }
+
+  /* ─── POLISHED EXPLANATION ─── */
+  .polished-box {
+    background: linear-gradient(135deg, rgba(255,215,0,0.06), rgba(255,215,0,0.02));
+    border: 1px solid rgba(255,215,0,0.2);
+    border-radius: 8px;
+    padding: 32px;
+    position: relative;
+  }
+
+  .polished-box .quote-mark {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 120px;
+    color: rgba(255,215,0,0.08);
+    position: absolute;
+    top: -20px; left: 20px;
+    line-height: 1;
+  }
+
+  .polished-box p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text-bright);
+    position: relative;
+    z-index: 1;
+  }
+
+  .polished-box p .highlight {
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  .polished-box p .green {
+    color: var(--green);
+    font-weight: 600;
+  }
+
+  /* ─── ARSENAL SECTION ─── */
+  .arsenal-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .arsenal-header h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 5vw, 64px);
+    color: var(--text-bright);
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+
+  .arsenal-header h2 span {
+    color: var(--green);
+    text-shadow: 0 0 30px rgba(0,255,136,0.4);
+  }
+
+  .arsenal-header p {
+    font-size: 13px;
+    color: var(--text-dim);
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── MIC-DROP CARDS ─── */
+  .micdrop-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 16px;
+  }
+
+  .micdrop-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+    cursor: default;
+  }
+
+  .micdrop-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(0,255,136,0.3);
+  }
+
+  .micdrop-card.gold:hover { border-color: rgba(255,215,0,0.4); }
+  .micdrop-card.electric:hover { border-color: rgba(0,212,255,0.4); }
+  .micdrop-card.purple:hover { border-color: rgba(139,92,246,0.4); }
+  .micdrop-card.red:hover { border-color: rgba(255,51,102,0.4); }
+
+  .micdrop-context {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255,255,255,0.02);
+  }
+
+  .context-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+  .micdrop-card.green .context-dot { background: var(--green); }
+  .micdrop-card.gold .context-dot { background: var(--gold); }
+  .micdrop-card.electric .context-dot { background: var(--electric); }
+  .micdrop-card.purple .context-dot { background: var(--purple); }
+  .micdrop-card.red .context-dot { background: var(--red); }
+
+  .context-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .context-scene {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-left: auto;
+    font-style: italic;
+  }
+
+  .micdrop-body {
+    padding: 24px 28px 20px;
+  }
+
+  .micdrop-line {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(15px, 2.2vw, 18px);
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--text-bright);
+    margin-bottom: 12px;
+    position: relative;
+  }
+
+  .micdrop-card.green .micdrop-line .key { color: var(--green); }
+  .micdrop-card.gold .micdrop-line .key { color: var(--gold); }
+  .micdrop-card.electric .micdrop-line .key { color: var(--electric); }
+  .micdrop-card.purple .micdrop-line .key { color: var(--purple); }
+  .micdrop-card.red .micdrop-line .key { color: var(--red); }
+
+  .micdrop-why {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.6;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+    margin-top: 4px;
+  }
+
+  .micdrop-why strong {
+    color: var(--text);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    display: block;
+    margin-bottom: 4px;
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* ─── TALKING POINTS ─── */
+  .context-block {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+
+  .context-block-header {
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .context-icon {
+    font-size: 20px;
+  }
+
+  .context-block-header h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-bright);
+    letter-spacing: 0.05em;
+  }
+
+  .context-block-header .context-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    background: rgba(0,255,136,0.08);
+    color: var(--green);
+    border: 1px solid rgba(0,255,136,0.2);
+    border-radius: 3px;
+    padding: 3px 8px;
+    margin-left: auto;
+  }
+
+  .tp-list {
+    list-style: none;
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .tp-list li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .tp-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--green);
+    background: rgba(0,255,136,0.08);
+    border: 1px solid rgba(0,255,136,0.15);
+    border-radius: 3px;
+    padding: 2px 7px;
+    white-space: nowrap;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .tp-content {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--text);
+  }
+
+  .tp-content .accent {
+    color: var(--green);
+    font-weight: 600;
+  }
+
+  .tp-content .number {
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  /* ─── THE ONE-SENTENCE ─── */
+  .one-sentence-section {
+    text-align: center;
+    margin: 64px 0 48px;
+  }
+
+  .oss-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .oss-wrapper {
+    position: relative;
+    display: inline-block;
+    max-width: 900px;
+    width: 100%;
+  }
+
+  .oss-glow {
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, var(--green), var(--electric), var(--purple));
+    border-radius: 12px;
+    opacity: 0.4;
+    filter: blur(12px);
+    animation: glow-pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+  }
+
+  .oss-card {
+    position: relative;
+    background: var(--deep);
+    border: 1px solid rgba(0,255,136,0.3);
+    border-radius: 12px;
+    padding: 36px 40px;
+  }
+
+  .oss-text {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(16px, 2.4vw, 22px);
+    font-weight: 600;
+    line-height: 1.55;
+    color: var(--text-bright);
+  }
+
+  .oss-text .g { color: var(--green); }
+  .oss-text .gold { color: var(--gold); }
+  .oss-text .e { color: var(--electric); }
+
+  .oss-attribution {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    margin-top: 16px;
+  }
+
+  /* ─── EPOCH FRAMEWORK ─── */
+  .epoch-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 4px;
+  }
+
+  .epoch-table tr {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .epoch-table tr:last-child {
+    border-bottom: none;
+  }
+
+  .epoch-table td {
+    padding: 14px 16px;
+    font-size: 13px;
+    color: var(--text-dim);
+    vertical-align: top;
+  }
+
+  .epoch-table td:first-child {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    white-space: nowrap;
+    width: 80px;
+    padding-right: 0;
+  }
+
+  .epoch-table td:nth-child(2) {
+    font-weight: 700;
+    color: var(--text);
+    width: 200px;
+  }
+
+  .epoch-table tr.active td {
+    color: var(--text-bright);
+  }
+
+  .epoch-table tr.active td:nth-child(2) {
+    color: var(--green);
+  }
+
+  .epoch-table tr.active td:first-child {
+    color: var(--green);
+  }
+
+  .epoch-table td .epoch-tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-left: 8px;
+    background: rgba(0,255,136,0.1);
+    color: var(--green);
+    border: 1px solid rgba(0,255,136,0.2);
+    letter-spacing: 0.12em;
+    vertical-align: middle;
+  }
+
+  /* ─── CONVERSATION SCRIPTS ─── */
+  .script-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+
+  .script-trigger {
+    padding: 16px 24px;
+    background: rgba(255,255,255,0.03);
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  .script-trigger strong {
+    color: var(--text);
+    display: block;
+    font-size: 11px;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    color: var(--orange);
+  }
+
+  .script-body {
+    padding: 22px 24px;
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--text);
+  }
+
+  .script-body .opener {
+    color: var(--text-dim);
+    font-style: italic;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .script-body .core {
+    color: var(--text-bright);
+    font-weight: 500;
+  }
+
+  .script-body .pivot {
+    color: var(--green);
+    font-weight: 600;
+  }
+
+  .script-body .stat {
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  /* ─── GORUNFREE FOOTER ─── */
+  .grf-footer {
+    text-align: center;
+    padding: 48px 0 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 64px;
+  }
+
+  .grf-footer .grf-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--text-dim);
+    letter-spacing: 0.2em;
+  }
+
+  .grf-footer .grf-text span {
+    color: var(--green);
+  }
+
+  .grf-footer p {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.2em;
+    margin-top: 8px;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 700px) {
+    .rtb-reasons { grid-template-columns: 1fr; }
+    .container { padding: 0 20px 80px; }
+    .micdrop-body { padding: 18px 20px 16px; }
+  }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--void); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(0,255,136,0.3); }
+</style>
+</head>
+<body>
+
+<canvas id="hero-canvas"></canvas>
+
+<div class="container">
+
+  <!-- ─── HEADER ─── -->
+  <header class="header">
+    <div class="header-badge">RSP_001 · NOIZYFISH INC. · INTELLIGENCE BRIEF · GORUNFREE</div>
+    <h1>
+      <span class="mic">MIC</span>-<span class="drop">DROP</span><br>
+      ARSENAL
+    </h1>
+    <p class="header-sub">Race to the Bottom · 5th Epoch · NOIZY Position · Conversation Scripts</p>
+    <div class="header-divider"></div>
+  </header>
+
+
+  <!-- ─── SECTION 01: RACE TO THE BOTTOM ─── -->
+  <section class="section">
+    <div class="section-label"><span class="num">01</span> THE RACE TO THE BOTTOM — UNDERSTAND IT COLD</div>
+
+    <div class="rtb-intro">
+      <h2>Why This Is Happening</h2>
+      <p>
+        The race to the bottom in creator economics isn't a morality problem.
+        <strong>It's a structural problem.</strong> Platforms are designed to reward
+        <em>speed and scale</em> — not artistic value, not human creativity, not fairness.
+        AI accelerates this by making cheap content infinitely cheaper.
+        The result is systemic — and <em>the only solution is new infrastructure</em>.
+      </p>
+    </div>
+
+    <div class="rtb-reasons">
+      <div class="rtb-card">
+        <div class="rtb-num">01</div>
+        <h3>Misaligned Market Incentives</h3>
+        <p>
+          Platforms profit on <strong>volume and engagement</strong>, not creator earnings.
+          More content = more ad inventory = more revenue for the platform.
+          Your payout is a line item to minimize. The incentive structure is
+          architecturally opposed to creator prosperity.
+        </p>
+      </div>
+      <div class="rtb-card">
+        <div class="rtb-num">02</div>
+        <h3>Normalized Free & Cheap Content</h3>
+        <p>
+          Streaming trained billions of people to expect music at near-zero cost.
+          AI tools trained a generation to expect professional-quality content
+          for $10/month. <strong>The floor keeps dropping</strong> because audiences
+          have been conditioned by platforms with unlimited VC subsidy.
+        </p>
+      </div>
+      <div class="rtb-card">
+        <div class="rtb-num">03</div>
+        <h3>Structural Pressure, Not Ethics Failure</h3>
+        <p>
+          Individual creators aren't failing morally. They're responding rationally
+          to a system that punishes premium pricing and rewards volume.
+          <strong>You can't ethics your way out of a structural problem.</strong>
+          The solution must be at the infrastructure level.
+        </p>
+      </div>
+      <div class="rtb-card">
+        <div class="rtb-num">04</div>
+        <h3>AI Amplifies the Existing Problem</h3>
+        <p>
+          AI doesn't create the race to the bottom — it <strong>accelerates it</strong>
+          by removing friction from cheap content production. Without consent
+          infrastructure, AI also strips creators of ownership of the very
+          thing that made the training data valuable: their voice.
+        </p>
+      </div>
+    </div>
+
+    <!-- Polished Explanation -->
+    <div class="polished-box">
+      <div class="quote-mark">"</div>
+      <p>
+        The race to the bottom isn't about creators lacking ethics —
+        <span class="highlight">it's a structural outcome of platforms rewarding speed and scale over artistic value.</span>
+        AI accelerates this because it removes the last barrier to cheap, infinite content production.
+        But AI also contains its own solution: if you build consent and provenance
+        directly into the infrastructure — not in a terms of service document,
+        but <span class="highlight">at the cryptographic layer</span> — you invert the equation.
+        <span class="green">The solution isn't to resist AI. It's to build AI that structurally
+        cannot extract without compensating.</span> That's what Consent-as-Code means.
+        That's what a Voice Estate means. That's the difference between platforms
+        that use creators as training data and platforms that make creators the asset.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ─── SECTION 02: THE MIC-DROP ARSENAL ─── -->
+  <section class="section">
+    <div class="section-label"><span class="num">02</span> THE MIC-DROP ARSENAL — DEPLOY IN ANY ROOM</div>
+
+    <div class="arsenal-header">
+      <h2>ONE-SENTENCE <span>DEVASTATORS</span></h2>
+      <p>Pick the room. Load the line. Drop it. Walk away.</p>
+    </div>
+
+    <div class="micdrop-grid">
+
+      <!-- THE MASTER ONE-LINER -->
+      <div class="one-sentence-section">
+        <div class="oss-label">★ THE MASTER LINE — MEMORIZE THIS FIRST ★</div>
+        <div class="oss-wrapper">
+          <div class="oss-glow"></div>
+          <div class="oss-card">
+            <div class="oss-text">
+              "Every other platform in this space is building <span class="gold">faster tools for extraction</span> —
+              we're building <span class="g">infrastructure that makes extraction structurally impossible</span>,
+              and that's why <span class="e">consent isn't in our terms of service — it's in our database</span>."
+            </div>
+            <div class="oss-attribution">RSP_001 · GORUNFREE · NOIZYFISH INC.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LINE 01 -->
+      <div class="micdrop-card green">
+        <div class="micdrop-context">
+          <div class="context-dot"></div>
+          <span class="context-label">The 5th Epoch Frame</span>
+          <span class="context-scene">Use in: any pitch, panel, podcast</span>
+        </div>
+        <div class="micdrop-body">
+          <div class="micdrop-line">
+            "We are living through the <span class="key">5th Epoch</span> of the music industry —
+            and the first four were defined by whoever controlled distribution.
+            The 5th will be defined by whoever controls <span class="key">consent</span>."
+          </div>
+          <div class="micdrop-why">
+            <strong>Why it works</strong>
+            Immediately signals that you have a historical framework, not just an opinion.
+            Forces the room to ask "what are the first four?" — and you own the next 10 minutes.
+          </div>
+        </div>
+      </div>
+
+      <!-- LINE 02 -->
+      <div class="micdrop-card gold">
+        <div class="micdrop-context">
+          <div class="context-dot"></div>
+          <span class="context-label">The Consent Inversion</span>
+          <span class="context-scene">Use in: vs. ElevenLabs/any competitor comparison</span>
+        </div>
+        <div class="micdrop-body">
+          <div class="micdrop-line">
+            "ElevenLabs puts consent in their <span class="key">terms of service</span> —
+            we put it in our <span class="key">database</span>.
+            One of those can be changed by a lawyer on a Tuesday. The other can't."
+          </div>
+          <div class="micdrop-why">
+            <strong>Why it works</strong>
+            Concrete, memorable, impossible to argue with. Terms of service can change overnight —
+            ToS rewrites happen all the time. A D1 database with NC_01 hardcoded is not a policy.
+            It is code. Code doesn't have feelings about a board meeting.
+          </div>
+        </div>
+      </div>
+
+      <!-- LINE 03 -->
+      <div class="micdrop-card electric">
+        <div class="micdrop-context">
+          <div class="context-dot"></div>
+          <span class="context-label">The Royalty Hammer</span>
+          <span class="context-scene">Use in: creator economy conversations, press</span>
+        </div>
+        <div class="micdrop-body">
+          <div class="micdrop-line">
+            "Spotify pays <span class="key">$0.003</span> per stream.
+            ElevenLabs pays <span class="key">zero royalties</span> while charging creators to use their own cloned voice.
+            We hardcoded <span class="key">75%</span> at the database layer —
+            because a royalty you can change isn't a royalty, it's a suggestion."
+          </div>
+          <div class="micdrop-why">
+            <strong>Why it works</strong>
+            Three numbers that tell the entire story of extraction economics in one breath.
+            The punchline rewrites how every royalty conversation works.
+          </div>
+        </div>
+      </div>
+
+      <!-- LINE 04 -->
+      <div class="micdrop-card purple">
+        <div class="micdrop-context">
+          <div class="context-dot"></div>
+          <span class="context-label">The Lawsuit Frame</span>
+          <span class="context-scene">Use in: when Suno or AI music comes up</span>
+        </div>
+        <div class="micdrop-body">
+          <div class="micdrop-line">
+            "Suno trained on the world's music without consent and is now facing a
+            <span class="key">$500 million RIAA lawsuit</span> from Sony, Universal, and Warner.
+            NOIZY PROOF watermarking was built specifically so that what happened
+            to those artists <span class="key">can never happen to a NOIZY RSP</span>."
+          </div>
+          <div class="micdrop-why">
+            <strong>Why it works</strong>
+            Turns a competitor's legal catastrophe into your founding reason.
+            Real money, real companies, real consequence — and you have the solution.
+          </div>
+        </div>
+      </div>
+
+      <!-- LINE 05 -->
+      <div class="micdrop-card red">
+        <div class="micdrop-context">
+          <div class="context-dot"></div>
+          <span class="context-label">The Voice Estate Frame</span>
+          <span class="context-scene">Use in: estate/legacy/longevity conversations</span>
+        </div>
+        <div class="micdrop-body">
+          <div class="micdrop-line">
+            "We don't think of a human voice as a content source.
+            We think of it as a <span class="key">perpetual, inheritable creative asset</span> —
+            a Voice Estate that can outlive the person who made it
+            and still be <span class="key">cryptographically governed</span> by their wishes."
+          </div>
+          <div class="micdrop-why">
+            <strong>Why it works</strong>
+            Reframes the entire conversation from "AI voice tool" to "estate planning infrastructure."
+            Every major AI voice platform is blind to this dimension.
+          </div>
+        </div>
+      </div>
+
+      <!-- LINE 06 -->
+      <div class="micdrop-card green">
+        <div class="micdrop-context">
+          <div class="context-dot"></div>
+          <span class="context-label">The Structural Solution</span>
+          <span class="context-scene">Use in: policy/regulatory conversations</span>
+        </div>
+        <div class="micdrop-body">
+          <div class="micdrop-line">
+            "You can't solve a structural problem with an ethical argument.
+            The race to the bottom isn't happening because companies are evil —
+            it's happening because <span class="key">the incentives are wrong</span>.
+            We don't lecture creators about fairness.
+            We <span class="key">build infrastructure that makes fairness the default</span>."
+          </div>
+          <div class="micdrop-why">
+            <strong>Why it works</strong>
+            Signals systems thinking. Shows you've diagnosed the root cause, not just the symptoms.
+            Positions NOIZY as the infrastructure play, not the advocacy play.
+          </div>
+        </div>
+      </div>
+
+      <!-- LINE 07 — The Human Parallel -->
+      <div class="micdrop-card gold">
+        <div class="micdrop-context">
+          <div class="context-dot"></div>
+          <span class="context-label">The Human-AI Reframe</span>
+          <span class="context-scene">Use in: AI skeptic rooms, artist communities</span>
+        </div>
+        <div class="micdrop-body">
+          <div class="micdrop-line">
+            "Every other platform talks about AI as a <span class="key">replacement for humans</span>.
+            We talk about AI as a <span class="key">bandmate</span>.
+            The best music has always been made in collaboration —
+            we're just building the infrastructure for what that looks like in 2026."
+          </div>
+          <div class="micdrop-why">
+            <strong>Why it works</strong>
+            Instantly disarms AI anxiety. Reframes from threat to creative partnership.
+            The bandmate metaphor is viscerally human — every musician has felt what that means.
+          </div>
+        </div>
+      </div>
+
+      <!-- LINE 08 — The VC Trap -->
+      <div class="micdrop-card electric">
+        <div class="micdrop-context">
+          <div class="context-dot"></div>
+          <span class="context-label">The VC Subsidy Trap</span>
+          <span class="context-scene">Use in: investor / business model conversations</span>
+        </div>
+        <div class="micdrop-body">
+          <div class="micdrop-line">
+            "ElevenLabs raised <span class="key">$180 million</span> to subsidize pricing that
+            would destroy every voice actor on earth if it went to market rate.
+            When the VC money stops, the floor disappears.
+            We built our pricing to be <span class="key">fair when it's profitable</span>,
+            not just when it's subsidized."
+          </div>
+          <div class="micdrop-why">
+            <strong>Why it works</strong>
+            Reframes the competitive threat as a time-bomb. VC-subsidized underpricing is a
+            structural vulnerability, not a moat. You're building for the world after the subsidy ends.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ─── SECTION 03: 5TH EPOCH FRAMEWORK ─── -->
+  <section class="section">
+    <div class="section-label"><span class="num">03</span> THE 5TH EPOCH — YOUR HISTORICAL FRAMEWORK</div>
+    <div class="context-block">
+      <div class="context-block-header">
+        <span class="context-icon">📜</span>
+        <h3>The 5 Epochs of the Music Industry</h3>
+        <span class="context-tag">DEPLOY IN PANELS</span>
+      </div>
+      <table class="epoch-table">
+        <tr>
+          <td>EPOCH I</td>
+          <td>Publishing Era</td>
+          <td>Sheet music. Control = owning the notes. Publishers controlled distribution to musicians.</td>
+        </tr>
+        <tr>
+          <td>EPOCH II</td>
+          <td>Recording Era</td>
+          <td>Labels controlled recording infrastructure. Power = who owns the pressing plant.</td>
+        </tr>
+        <tr>
+          <td>EPOCH III</td>
+          <td>Digital Era</td>
+          <td>iTunes, Napster, MP3. Power = who controls the file format and the store.</td>
+        </tr>
+        <tr>
+          <td>EPOCH IV</td>
+          <td>Streaming & IP Era</td>
+          <td>Spotify, YouTube. Power = who controls the algorithm and the catalogue.</td>
+        </tr>
+        <tr class="active">
+          <td>EPOCH V</td>
+          <td>Consent-as-Code<br>& Voice Estate <span class="epoch-tag">NOW</span></td>
+          <td>AI voice, synthetic media, provenance infrastructure. Power = who controls cryptographic consent and inheritable creative assets. This is the epoch NOIZY was built to win.</td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+
+  <!-- ─── SECTION 04: CONVERSATION SCRIPTS BY CONTEXT ─── -->
+  <section class="section">
+    <div class="section-label"><span class="num">04</span> CONVERSATION SCRIPTS — READY TO DEPLOY</div>
+
+    <!-- Pitch Meeting -->
+    <div class="script-card">
+      <div class="script-trigger">
+        <strong>📍 Context: Pitch Meeting / Investor</strong>
+        Someone asks: "So what exactly does NOIZY do?"
+      </div>
+      <div class="script-body">
+        <span class="opener">[30-second version]</span>
+        <span class="core">
+          "We're building consent infrastructure for the AI voice economy.
+          Every major AI voice platform — ElevenLabs, Suno, PlayHT —
+          has <span class="pivot">zero royalties flowing back to creators</span> and consent buried in terms of service.
+          We hardcoded a <span class="pivot">75% creator royalty at the database layer</span>,
+          built cryptographic consent keys for every voice utterance,
+          and created the Voice Estate — the idea that your voice is a
+          <span class="pivot">perpetual, inheritable creative asset</span>, not a data source.
+          We're the 5th Epoch infrastructure play."
+        </span>
+      </div>
+    </div>
+
+    <!-- Panel / Stage -->
+    <div class="script-card">
+      <div class="script-trigger">
+        <strong>🎤 Context: Panel / Stage</strong>
+        Moderator asks: "Isn't the race to the bottom inevitable with AI?"
+      </div>
+      <div class="script-body">
+        <span class="core">
+          "Only if you accept that the infrastructure gets to stay the same.
+          The race to the bottom isn't a creator ethics failure —
+          it's a structural outcome of platforms whose business model
+          requires that your work be cheap.
+          <span class="pivot">You can't ethics your way out of a structural problem.</span>
+          What you can do is build new infrastructure.
+          NOIZY's Never Clauses are not a policy document —
+          they're code. The <span class="pivot">75% royalty isn't a promise in our ToS</span>.
+          It's hardcoded at the D1 database layer.
+          That distinction is the entire argument."
+        </span>
+      </div>
+    </div>
+
+    <!-- Creator / Artist -->
+    <div class="script-card">
+      <div class="script-trigger">
+        <strong>🎵 Context: Talking to a Creator / Voice Actor / Musician</strong>
+        They say: "I'm scared of what AI is going to do to my career."
+      </div>
+      <div class="script-body">
+        <span class="core">
+          "That fear makes total sense if AI is being built against you.
+          Suno trained on the world's music without asking anyone.
+          ElevenLabs charges you to use your own cloned voice and pays you nothing.
+          <span class="pivot">We think about your voice completely differently.</span>
+          To us, it's a Voice Estate — a creative asset that belongs to you,
+          can be governed by you, and can outlive you.
+          <span class="pivot">Every single utterance is protected by a cryptographic consent key.</span>
+          AI isn't your replacement. At NOIZY, it's your bandmate."
+        </span>
+      </div>
+    </div>
+
+    <!-- Media / Press -->
+    <div class="script-card">
+      <div class="script-trigger">
+        <strong>📰 Context: Media / Press Interview</strong>
+        Reporter asks: "How are you different from ElevenLabs?"
+      </div>
+      <div class="script-body">
+        <span class="core">
+          "ElevenLabs is a brilliant tool company.
+          They've raised <span class="stat">$180 million</span> and built incredibly sophisticated voice technology.
+          <span class="pivot">But they're building tools. We're building infrastructure.</span>
+          Their consent is in a terms of service. Ours is in our database —
+          it cannot be changed by a board decision.
+          Their royalty to creators is zero. Ours is 75%, hardcoded.
+          Their voice data trains their models.
+          <span class="pivot">A NOIZY RSP's voice is their property, their estate, their legacy.</span>
+          We're not competing on features. We're competing on the model of what
+          a voice platform should fundamentally be."
+        </span>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ─── SECTION 05: QUICK-FIRE TALKING POINTS ─── -->
+  <section class="section">
+    <div class="section-label"><span class="num">05</span> QUICK-FIRE TALKING POINTS</div>
+
+    <div class="context-block">
+      <div class="context-block-header">
+        <span class="context-icon">⚡</span>
+        <h3>The Race to the Bottom — 3 Points, Any Conversation</h3>
+        <span class="context-tag">30 SECONDS EACH</span>
+      </div>
+      <ul class="tp-list">
+        <li>
+          <span class="tp-num">TP·01</span>
+          <span class="tp-content">
+            "The race to the bottom is <span class="accent">structural, not moral</span> —
+            platforms reward speed and scale, not artistic value.
+            Individual creators aren't failing; the incentive architecture is failing them."
+          </span>
+        </li>
+        <li>
+          <span class="tp-num">TP·02</span>
+          <span class="tp-content">
+            "AI accelerates the race to the bottom because it removes the last friction point:
+            production cost. But AI also contains the solution —
+            if you embed <span class="accent">consent and provenance at the code layer</span>,
+            not the policy layer, you structurally invert the extraction dynamic."
+          </span>
+        </li>
+        <li>
+          <span class="tp-num">TP·03</span>
+          <span class="tp-content">
+            "The platforms that will survive the 5th Epoch are the ones that made creators
+            <span class="accent">the asset, not the data source</span>.
+            Every platform that failed to do that — Napster, early YouTube, every streaming service —
+            eventually faced a reckoning. We're building the infrastructure for after that reckoning."
+          </span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="context-block">
+      <div class="context-block-header">
+        <span class="context-icon">🔒</span>
+        <h3>NOIZY Consent Architecture — 3 Points</h3>
+        <span class="context-tag">TECHNICAL CREDIBILITY</span>
+      </div>
+      <ul class="tp-list">
+        <li>
+          <span class="tp-num">TP·04</span>
+          <span class="tp-content">
+            "Consent-as-Code means every voice utterance in our system is bound to a
+            <span class="accent">cryptographic consent key</span> —
+            format: <code style="color:var(--green);font-size:11px">NOIZY-[ACTOR]-CONSENT-[16hex]-AVA-[DOMAIN]-[JURISDICTION]-[DATE]</code>.
+            That's not paperwork. That's provenance."
+          </span>
+        </li>
+        <li>
+          <span class="tp-num">TP·05</span>
+          <span class="tp-content">
+            "Our <span class="accent">Never Clauses</span> — NC_01 through NC_10 —
+            are the constitutional architecture of the platform.
+            NC_01: no voice synthesis without consent. NC_02: no royalty bypass.
+            NC_03: no model training without opt-in. These aren't policies.
+            They're enforced at the pipeline layer."
+          </span>
+        </li>
+        <li>
+          <span class="tp-num">TP·06</span>
+          <span class="tp-content">
+            "The <span class="accent">75% royalty isn't variable and it isn't in our terms of service</span>.
+            It's hardcoded at our D1 database layer.
+            That means a future board decision, a VC pressure campaign,
+            or a competitive pricing war cannot change what a creator earns.
+            That's what infrastructure-level fairness means."
+          </span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+
+  <!-- ─── FOOTER ─── -->
+  <div class="grf-footer">
+    <div class="grf-text"><span>GORUNFREE</span> — BECAUSE IT IS THE ONLY WAY</div>
+    <p>RSP_001 · ROB PLOWMAN · NOIZYFISH INC. · OTTAWA · DREAMCHAMBER</p>
+  </div>
+
+</div><!-- end container -->
+
+<script>
+// ─── ELECTRIC CANVAS ───
+const canvas = document.getElementById('hero-canvas');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+// Particles
+const N = 60;
+const particles = Array.from({length: N}, (_, i) => ({
+  x: Math.random() * window.innerWidth,
+  y: Math.random() * window.innerHeight,
+  vx: (Math.random() - 0.5) * 0.35,
+  vy: (Math.random() - 0.5) * 0.35,
+  r: Math.random() * 1.8 + 0.4,
+  opacity: Math.random() * 0.5 + 0.1,
+  color: i % 5 === 0 ? '#00ff88' : i % 7 === 0 ? '#ffd700' : i % 11 === 0 ? '#00d4ff' : '#334466'
+}));
+
+// Sound wave
+let waveTime = 0;
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Connection lines
+  for (let i = 0; i < N; i++) {
+    for (let j = i + 1; j < N; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const d = Math.sqrt(dx*dx + dy*dy);
+      if (d < 130) {
+        const alpha = (1 - d/130) * 0.08;
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(0,255,136,${alpha})`;
+        ctx.lineWidth = 0.5;
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.stroke();
+      }
+    }
+  }
+
+  // Particles
+  particles.forEach(p => {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = p.color.replace(')', `,${p.opacity})`).replace('rgb', 'rgba').replace('#', '');
+    // simpler:
+    ctx.globalAlpha = p.opacity;
+    ctx.fillStyle = p.color;
+    ctx.fill();
+    ctx.globalAlpha = 1;
+
+    p.x += p.vx;
+    p.y += p.vy;
+    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+  });
+
+  // Subtle sine wave at bottom
+  ctx.beginPath();
+  ctx.strokeStyle = 'rgba(0,255,136,0.06)';
+  ctx.lineWidth = 1.5;
+  for (let x = 0; x < canvas.width; x += 2) {
+    const y = canvas.height * 0.85 + Math.sin((x * 0.008) + waveTime) * 30 + Math.sin((x * 0.02) + waveTime * 1.5) * 12;
+    x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.strokeStyle = 'rgba(255,215,0,0.04)';
+  ctx.lineWidth = 1;
+  for (let x = 0; x < canvas.width; x += 2) {
+    const y = canvas.height * 0.88 + Math.sin((x * 0.006) + waveTime * 0.8 + 1) * 20;
+    x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+
+  waveTime += 0.012;
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+
+</body>
+</html>

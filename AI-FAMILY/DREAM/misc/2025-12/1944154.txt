@@ -1,0 +1,64 @@
+<root>
+    <CtrlKnobStyle name="MixerFXKnobSmall_Red" optStripInverted="true" activeAreaRect="[x:0 y:0 w:18 h:18]" imKnobNormal="..\knob_red.tga">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlKnobStyle>
+    <CtrlKnobStyle name="MixerFXKnobSmall_Blue" optStripInverted="true" activeAreaRect="[x:0 y:0 w:18 h:18]" imKnobNormal="..\knob_blue.tga">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlKnobStyle>
+    <CtrlKnobStyle name="MixerFXKnobSmall_Green" optStripInverted="true" activeAreaRect="[x:0 y:0 w:18 h:18]" imKnobNormal="..\knob_green.tga">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlKnobStyle>
+    <CtrlKnobStyle name="MixerFXKnobSmall_Yellow" optStripInverted="true" activeAreaRect="[x:0 y:0 w:18 h:18]" imKnobNormal="..\knob_yellow.tga">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlKnobStyle>
+    <CtrlPlotStyle name="Default CtrlPlotStyle" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1" lineWidth="1" plotRectInset="0" />
+    <CtrlPanel style="MixerFXPanel" rect="[x:32 y:32 w:228 h:228]" id="0">
+        <CtrlPanel name="MixerFXTitlePanel" rect="[x:0 y:0 w:228 h:50]" id="0" />
+        <CtrlButton name="EQ_LF-In" style="MixerFXButtonLED" rect="[x:20 y:52 w:15 h:15]" id="1" text="On" />
+        <CtrlButton name="EQ_LMF-In" style="MixerFXButtonLED" rect="[x:74 y:52 w:15 h:15]" id="1" text="On" />
+        <CtrlButton name="EQ_HMF-In" style="MixerFXButtonLED" rect="[x:137 y:52 w:15 h:15]" id="1" text="On" />
+        <CtrlButton name="EQ_HF-In" style="MixerFXButtonLED" rect="[x:194 y:52 w:15 h:15]" id="1" text="On" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:38 y:53 w:16 h:15]" id="2000" text="LO" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:92 y:53 w:16 h:15]" id="2005" text="LM" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:120 y:53 w:17 h:15]" id="2006" text="HM" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:181 y:53 w:13 h:15]" id="2010" text="HI" />
+        <CtrlKnob name="EQ_LMF-Q" style="MixerFXKnobSmall_Blue" rect="[x:72 y:68 w:25 h:25]" id="1005" />
+        <CtrlKnob name="EQ_HMF-Q" style="MixerFXKnobSmall_Green" rect="[x:135 y:68 w:25 h:25]" id="1008" />
+        <CtrlButton name="EQ_LF-Bell" style="MixerFXButton" rect="[x:20 y:70 w:15 h:15]" id="1000" />
+        <CtrlButton name="EQ_HF-Bell" style="MixerFXButton" rect="[x:194 y:70 w:15 h:15]" id="1009" />
+        <CtrlLabel style="MixerFXLabel" rect="[x:107 y:71 w:11 h:15]" id="2007" text="Q" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:38 y:72 w:23 h:15]" id="2000" text="Bell" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:176 y:72 w:19 h:13]" id="2009" text="Bell" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:63 y:82 w:13 h:8]" id="2006" text="2.5" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:89 y:82 w:12 h:8]" id="2006" text="0.5" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:126 y:82 w:12 h:8]" id="2006" text="2.5" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:152 y:82 w:13 h:8]" id="2006" text="0.5" />
+        <CtrlKnob name="EQ_LF-Gain" style="MixerFXKnobSmall_Yellow" rect="[x:19 y:91 w:25 h:25]" id="1002" />
+        <CtrlKnob name="EQ_LMF-Gain" style="MixerFXKnobSmall_Blue" rect="[x:72 y:91 w:25 h:25]" id="1004" />
+        <CtrlKnob name="EQ_HMF-Gain" style="MixerFXKnobSmall_Green" rect="[x:135 y:91 w:25 h:25]" id="1007" />
+        <CtrlKnob name="EQ_HF-Gain" style="MixerFXKnobSmall_Red" rect="[x:192 y:91 w:25 h:25]" id="1011" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:102 y:94 w:25 h:15]" id="2007" text="Gain" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:5 y:106 w:20 h:8]" id="2006" text="-16.5" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:36 y:106 w:23 h:8]" id="2006" text="+16.5" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:63 y:106 w:15 h:8]" id="2006" text="-20" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:89 y:106 w:17 h:8]" id="2006" text="+20" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:126 y:106 w:14 h:8]" id="2006" text="-20" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:152 y:106 w:17 h:8]" id="2006" text="+20" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:182 y:106 w:13 h:8]" id="2006" text="-20" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:208 y:106 w:17 h:8]" id="2006" text="+20" />
+        <CtrlKnob name="EQ_LF-Freq" style="MixerFXKnobSmall_Yellow" rect="[x:19 y:114 w:25 h:25]" id="1001" />
+        <CtrlKnob name="EQ_LMF-Freq" style="MixerFXKnobSmall_Blue" rect="[x:72 y:114 w:25 h:25]" id="1003" />
+        <CtrlKnob name="EQ_HMF-Freq" style="MixerFXKnobSmall_Green" rect="[x:135 y:114 w:25 h:25]" id="1006" />
+        <CtrlKnob name="EQ_HF-Freq" style="MixerFXKnobSmall_Red" rect="[x:192 y:114 w:25 h:25]" id="1010" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:103 y:117 w:24 h:15]" id="2007" text="Freq" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:12 y:129 w:12 h:8]" id="2006" text="40" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:36 y:129 w:16 h:8]" id="2006" text="600" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:62 y:129 w:13 h:8]" id="2006" text="200" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:89 y:129 w:11 h:8]" id="2006" text="2k" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:125 y:129 w:15 h:8]" id="2006" text="600" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:152 y:129 w:11 h:8]" id="2006" text="7k" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:182 y:129 w:13 h:8]" id="2006" text="600" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:209 y:129 w:16 h:8]" id="2006" text="14k" />
+        <CtrlPlot name="effectGraph" overloadClass="BFD2CtrlEQEditor" style="MixerFXPlot" rect="[x:4 y:139 w:220 h:80]" id="100" />
+    </CtrlPanel>
+</root>

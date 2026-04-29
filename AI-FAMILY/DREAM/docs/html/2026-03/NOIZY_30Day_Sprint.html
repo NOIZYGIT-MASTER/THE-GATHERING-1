@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIZY.AI — Complete 30-Day Sprint</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --w1: #06B6D4; --w2: #7C3AED; --w3: #10B981; --w4: #F59E0B; --w5: #EC4899;
+  --dark: #050510; --dark2: #0D0820; --gray: #6B7280;
+}
+body { background: var(--dark); color: #E5E7EB; font-family: -apple-system, 'Inter', sans-serif; }
+
+header {
+  background: var(--dark2);
+  border-bottom: 1px solid rgba(124,58,237,0.2);
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+}
+.htitle { font-size: 17px; font-weight: 800; letter-spacing: -0.5px; }
+.hsub { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); margin-top: 3px; }
+.hstats { display: flex; gap: 28px; }
+.hs { text-align: center; }
+.hs-n { font-size: 22px; font-weight: 900; background: linear-gradient(135deg,#A78BFA,#06B6D4); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.hs-l { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); }
+
+.layout { display: grid; grid-template-columns: 240px 1fr; min-height: calc(100vh - 61px); }
+
+/* SIDEBAR */
+.sidebar { border-right: 1px solid rgba(255,255,255,0.05); overflow-y: auto; position: sticky; top: 61px; height: calc(100vh - 61px); padding: 16px 0; }
+.wk-head { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; padding: 12px 14px 6px; }
+.dl { display: flex; align-items: center; gap: 8px; padding: 6px 14px; cursor: pointer; transition: background 0.15s; text-decoration: none; border-radius: 0; }
+.dl:hover { background: rgba(255,255,255,0.04); }
+.dl.active { background: rgba(124,58,237,0.12); }
+.dl-num { font-size: 11px; font-weight: 700; color: var(--gray); width: 28px; flex-shrink: 0; }
+.dl.active .dl-num { color: #A78BFA; }
+.dl-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.dl-t { font-size: 12px; color: #9CA3AF; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
+.dl.active .dl-t { color: #E5E7EB; }
+
+/* CONTENT */
+.content { padding: 40px 48px; overflow-y: auto; }
+
+/* PHASE BANNER */
+.pb { padding: 20px 26px; border-radius: 12px; border-left: 4px solid; margin-bottom: 36px; }
+.pb-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; margin-bottom: 5px; }
+.pb-title { font-size: 20px; font-weight: 800; letter-spacing: -0.3px; margin-bottom: 6px; }
+.pb-desc { font-size: 14px; color: #94A3B8; line-height: 1.6; }
+
+/* DAY CARD */
+.dc { border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; margin-bottom: 20px; overflow: hidden; transition: border-color 0.2s; }
+.dc:hover { border-color: rgba(124,58,237,0.25); }
+.dc-head { padding: 20px 24px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.dc-badge { display: inline-block; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-bottom: 8px; }
+.dc-title { font-size: 19px; font-weight: 800; letter-spacing: -0.3px; margin-bottom: 3px; }
+.dc-sub { font-size: 13px; color: var(--gray); font-style: italic; }
+.dc-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 8px; }
+.tag { font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 600; letter-spacing: 0.5px; }
+
+.dc-body { padding: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.bs h4 { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); margin-bottom: 10px; font-weight: 600; }
+.tl { list-style: none; }
+.ti { display: flex; align-items: flex-start; gap: 9px; padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 13px; line-height: 1.4; color: #D1D5DB; }
+.ti:last-child { border-bottom: none; }
+.tc { width: 15px; height: 15px; border: 1px solid rgba(255,255,255,0.15); border-radius: 4px; flex-shrink: 0; margin-top: 1px; }
+.chip { display: inline-flex; align-items: center; gap: 5px; padding: 5px 11px; border-radius: 8px; font-size: 11px; font-weight: 600; margin: 3px; border: 1px solid; }
+.la { border-radius: 8px; padding: 12px 14px; margin-top: 8px; font-size: 12px; }
+.la-lbl { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; margin-bottom: 5px; }
+.ms { display: flex; align-items: center; gap: 8px; border-radius: 8px; padding: 10px 14px; font-size: 13px; font-weight: 600; margin-top: 10px; border: 1px solid; }
+
+@media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .sidebar { display: none; } .dc-body { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <div class="htitle">NOIZY.AI — 30-Day Complete Sprint</div>
+    <div class="hsub">Every Day · Every Task · March 18 – April 16, 2026</div>
+  </div>
+  <div class="hstats">
+    <div class="hs"><div class="hs-n">30</div><div class="hs-l">Days</div></div>
+    <div class="hs"><div class="hs-n">150+</div><div class="hs-l">Tasks</div></div>
+    <div class="hs"><div class="hs-n">5</div><div class="hs-l">Milestones</div></div>
+    <div class="hs"><div class="hs-n">5</div><div class="hs-l">Brands</div></div>
+  </div>
+</header>
+
+<div class="layout">
+<div class="sidebar" id="sidebar">
+  <div class="wk-head" style="color:var(--w1)">◦ WEEK 1 · Foundation</div>
+  <a class="dl active" href="#d1"><div class="dl-num">D01</div><div class="dl-dot" style="background:var(--w1)"></div><div class="dl-t">Environment Setup</div></a>
+  <a class="dl" href="#d2"><div class="dl-num">D02</div><div class="dl-dot" style="background:var(--w1)"></div><div class="dl-t">MacBook → M2 Audio Routing</div></a>
+  <a class="dl" href="#d3"><div class="dl-num">D03</div><div class="dl-dot" style="background:var(--w1)"></div><div class="dl-t">First Kokoro Voice</div></a>
+  <a class="dl" href="#d4"><div class="dl-num">D04</div><div class="dl-dot" style="background:var(--w1)"></div><div class="dl-t">48kHz Quality Gate</div></a>
+  <a class="dl" href="#d5"><div class="dl-num">D05</div><div class="dl-dot" style="background:var(--w1)"></div><div class="dl-t">ROB.AVA + Vault v0</div></a>
+  <a class="dl" href="#d6"><div class="dl-num">D06</div><div class="dl-dot" style="background:var(--w1)"></div><div class="dl-t">Gemma 3 Agent Base</div></a>
+  <a class="dl" href="#d7"><div class="dl-num">D07</div><div class="dl-dot" style="background:var(--w1)"></div><div class="dl-t">Milestone 1 Review</div></a>
+  <div class="wk-head" style="color:var(--w2)">◦ WEEK 2 · AVA + DreamChamber</div>
+  <a class="dl" href="#d8"><div class="dl-num">D08</div><div class="dl-dot" style="background:var(--w2)"></div><div class="dl-t">AVA Personality Core</div></a>
+  <a class="dl" href="#d9"><div class="dl-num">D09</div><div class="dl-dot" style="background:var(--w2)"></div><div class="dl-t">Casting Brief Engine</div></a>
+  <a class="dl" href="#d10"><div class="dl-num">D10</div><div class="dl-dot" style="background:var(--w2)"></div><div class="dl-t">DreamChamber MCP v1</div></a>
+  <a class="dl" href="#d11"><div class="dl-num">D11</div><div class="dl-dot" style="background:var(--w2)"></div><div class="dl-t">Consent Vault Crypto</div></a>
+  <a class="dl" href="#d12"><div class="dl-num">D12</div><div class="dl-dot" style="background:var(--w2)"></div><div class="dl-t">Character Voices 1–2</div></a>
+  <a class="dl" href="#d13"><div class="dl-num">D13</div><div class="dl-dot" style="background:var(--w2)"></div><div class="dl-t">MCP Layer + Orchestration</div></a>
+  <a class="dl" href="#d14"><div class="dl-num">D14</div><div class="dl-dot" style="background:var(--w2)"></div><div class="dl-t">Milestone 2 Demo</div></a>
+  <div class="wk-head" style="color:var(--w3)">◦ WEEK 3 · Characters + Collab</div>
+  <a class="dl" href="#d15"><div class="dl-num">D15</div><div class="dl-dot" style="background:var(--w3)"></div><div class="dl-t">Character Voices 3–4</div></a>
+  <a class="dl" href="#d16"><div class="dl-num">D16</div><div class="dl-dot" style="background:var(--w3)"></div><div class="dl-t">Detective Morrison Build</div></a>
+  <a class="dl" href="#d17"><div class="dl-num">D17</div><div class="dl-dot" style="background:var(--w3)"></div><div class="dl-t">Morrison Multi-Language</div></a>
+  <a class="dl" href="#d18"><div class="dl-num">D18</div><div class="dl-dot" style="background:var(--w3)"></div><div class="dl-t">Collab Contract Engine</div></a>
+  <a class="dl" href="#d19"><div class="dl-num">D19</div><div class="dl-dot" style="background:var(--w3)"></div><div class="dl-t">Royalty Calculator Live</div></a>
+  <a class="dl" href="#d20"><div class="dl-num">D20</div><div class="dl-dot" style="background:var(--w3)"></div><div class="dl-t">Client Feedback Loop</div></a>
+  <a class="dl" href="#d21"><div class="dl-num">D21</div><div class="dl-dot" style="background:var(--w3)"></div><div class="dl-t">Milestone 3 Demo</div></a>
+  <div class="wk-head" style="color:var(--w4)">◦ WEEK 4 · Intelligence Layer</div>
+  <a class="dl" href="#d22"><div class="dl-num">D22</div><div class="dl-dot" style="background:var(--w4)"></div><div class="dl-t">Gabriel Agent Live</div></a>
+  <a class="dl" href="#d23"><div class="dl-num">D23</div><div class="dl-dot" style="background:var(--w4)"></div><div class="dl-t">Lucy Email Agent</div></a>
+  <a class="dl" href="#d24"><div class="dl-num">D24</div><div class="dl-dot" style="background:var(--w4)"></div><div class="dl-t">Wisdom Keeper v1</div></a>
+  <a class="dl" href="#d25"><div class="dl-num">D25</div><div class="dl-dot" style="background:var(--w4)"></div><div class="dl-t">RAG Pipeline Safe</div></a>
+  <a class="dl" href="#d26"><div class="dl-num">D26</div><div class="dl-dot" style="background:var(--w4)"></div><div class="dl-t">IDE Extension Stub</div></a>
+  <a class="dl" href="#d27"><div class="dl-num">D27</div><div class="dl-dot" style="background:var(--w4)"></div><div class="dl-t">VSI Partnership Prep</div></a>
+  <a class="dl" href="#d28"><div class="dl-num">D28</div><div class="dl-dot" style="background:var(--w4)"></div><div class="dl-t">Full Integration Test</div></a>
+  <div class="wk-head" style="color:var(--w5)">◦ DAYS 29–30 · Launch</div>
+  <a class="dl" href="#d29"><div class="dl-num">D29</div><div class="dl-dot" style="background:var(--w5)"></div><div class="dl-t">Polish + Stress Test</div></a>
+  <a class="dl" href="#d30"><div class="dl-num">D30</div><div class="dl-dot" style="background:var(--w5)"></div><div class="dl-t">Full Universe Demo</div></a>
+</div>
+
+<div class="content">
+
+<!-- WEEK 1 -->
+<div class="pb" style="background:rgba(6,182,212,0.05);border-color:var(--w1)">
+  <div class="pb-label" style="color:var(--w1)">Week 1 · Days 1–7 · March 18–24</div>
+  <div class="pb-title">Foundation: Get the SUPERSONIC Stack breathing.</div>
+  <div class="pb-desc">M2 Ultra configured. MacBook audio routing live. Kokoro-82M producing 48kHz voice. Gemma 3 running locally. ROB.AVA in the Vault. By Day 7 you can demonstrate a sovereign audio pipeline end-to-end.</div>
+</div>
+
+<div class="dc" id="d1">
+  <div class="dc-head">
+    <div class="dc-badge" style="background:rgba(6,182,212,0.12);color:var(--w1);border:1px solid rgba(6,182,212,0.3)">Day 01 · March 18</div>
+    <div class="dc-title">Environment Setup & Stack Inventory</div>
+    <div class="dc-sub">"Know your machine before you build on it."</div>
+    <div class="dc-tags"><span class="tag" style="background:rgba(6,182,212,0.1);color:var(--w1)">VS Code Insiders</span><span class="tag" style="background:rgba(124,58,237,0.1);color:#A78BFA">Ollama</span><span class="tag" style="background:rgba(16,185,129,0.1);color:#34D399">Homebrew</span></div>
+  </div>
+  <div class="dc-body">
+    <div class="bs"><h4>Tasks</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>Install VS Code Insiders + key extensions: TypeScript, ESLint, Prettier, Python</li>
+      <li class="ti"><div class="tc"></div>Install Homebrew on M2 Ultra (package manager foundation)</li>
+      <li class="ti"><div class="tc"></div>Install Ollama — pull Gemma 3: <code>ollama pull gemma3</code></li>
+      <li class="ti"><div class="tc"></div>Install Node.js 20, Python 3.11 via Homebrew</li>
+      <li class="ti"><div class="tc"></div>Create noizy-platform/ repo with full folder structure from blueprint</li>
+      <li class="ti"><div class="tc"></div>Run <code>ollama run gemma3</code> — confirm response. Screenshot it.</li>
+      <li class="ti"><div class="tc"></div>Write setup-log.md: M2 Ultra specs, RAM, ports, macOS version</li>
+    </ul><div class="ms" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);color:#6EE7B7">🏁 M2 Ultra is a working dev machine. Gemma 3 runs locally.</div></div>
+    <div class="bs"><h4>Tools</h4>
+      <span class="chip" style="background:rgba(6,182,212,0.08);color:var(--w1);border-color:rgba(6,182,212,0.3)">VS Code Insiders</span>
+      <span class="chip" style="background:rgba(124,58,237,0.08);color:#A78BFA;border-color:rgba(124,58,237,0.3)">Ollama</span>
+      <span class="chip" style="background:rgba(16,185,129,0.08);color:#34D399;border-color:rgba(16,185,129,0.3)">Homebrew</span>
+      <div class="la" style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.15)"><div class="la-lbl" style="color:#F59E0B">📚 Learn Ahead → Day 3</div>Read Kokoro-82M install docs. 20 min. Understand what pip package installs it and what the text_to_speech() call looks like.</div>
+    </div>
+  </div>
+</div>
+
+<div class="dc" id="d2">
+  <div class="dc-head">
+    <div class="dc-badge" style="background:rgba(6,182,212,0.12);color:var(--w1);border:1px solid rgba(6,182,212,0.3)">Day 02 · March 19</div>
+    <div class="dc-title">MacBook Pro → M2 Ultra Audio Routing</div>
+    <div class="dc-sub">"Capture on the MacBook. Process on the Ultra. Sovereign all the way."</div>
+  </div>
+  <div class="dc-body">
+    <div class="bs"><h4>Tasks</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>Install BlackHole virtual audio driver on MacBook Pro</li>
+      <li class="ti"><div class="tc"></div>Set MacBook Audio MIDI Setup → 48kHz, 24-bit output</li>
+      <li class="ti"><div class="tc"></div>Install Whisper on M2 Ultra: <code>pip install openai-whisper</code></li>
+      <li class="ti"><div class="tc"></div>Set up basic TCP socket stream: MacBook records → sends raw audio → M2 receives</li>
+      <li class="ti"><div class="tc"></div>Test transcription: speak on MacBook → text appears on M2 Ultra terminal</li>
+      <li class="ti"><div class="tc"></div>Verify sample rate in terminal output — must show 48000 Hz</li>
+      <li class="ti"><div class="tc"></div>Commit audio-router/ service skeleton to repo</li>
+    </ul><div class="ms" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);color:#6EE7B7">🏁 Voice capture → M2 processing pipeline is live.</div></div>
+    <div class="bs"><h4>Tools</h4>
+      <span class="chip" style="background:rgba(6,182,212,0.08);color:var(--w1);border-color:rgba(6,182,212,0.3)">BlackHole</span>
+      <span class="chip" style="background:rgba(245,158,11,0.08);color:#FCD34D;border-color:rgba(245,158,11,0.3)">Whisper</span>
+      <span class="chip" style="background:rgba(124,58,237,0.08);color:#A78BFA;border-color:rgba(124,58,237,0.3)">TCP Socket / Network</span>
+      <div class="la" style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.15)"><div class="la-lbl" style="color:#F59E0B">📚 Learn Ahead → Day 4</div>Look up FFmpeg -ar 48000 -sample_fmt s16 flags. 10 min. You'll force 48kHz/16-bit on every audio conversion.</div>
+    </div>
+  </div>
+</div>
+
+<div class="dc" id="d3">
+  <div class="dc-head">
+    <div class="dc-badge" style="background:rgba(6,182,212,0.12);color:var(--w1);border:1px solid rgba(6,182,212,0.3)">Day 03 · March 20</div>
+    <div class="dc-title">First Kokoro-82M Voice Output</div>
+    <div class="dc-sub">"NOIZYVOX produces its first sound."</div>
+  </div>
+  <div class="dc-body">
+    <div class="bs"><h4>Tasks</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>Install Kokoro: <code>pip install kokoro</code> (or kokoro-tts — check current package name)</li>
+      <li class="ti"><div class="tc"></div>Run first synthesis: "Hello. I am NOIZYVOX. Every voice matters." → WAV output</li>
+      <li class="ti"><div class="tc"></div>Check output sample rate. If not 48kHz, convert: <code>ffmpeg -i out.wav -ar 48000 -sample_fmt s16 out_48k.wav</code></li>
+      <li class="ti"><div class="tc"></div>Build kokoro_wrapper.py: <code>text_to_voice(text, voice_id, output_path) → wav</code></li>
+      <li class="ti"><div class="tc"></div>Play it back. Write 3 honest notes about quality.</li>
+      <li class="ti"><div class="tc"></div>Commit: services/voice-engine/kokoro_wrapper.py</li>
+    </ul><div class="ms" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);color:#6EE7B7">🏁 NOIZYVOX produces its first 48kHz voice. The engine breathes.</div></div>
+    <div class="bs"><h4>Tools</h4>
+      <span class="chip" style="background:rgba(6,182,212,0.08);color:var(--w1);border-color:rgba(6,182,212,0.3)">Kokoro-82M</span>
+      <span class="chip" style="background:rgba(16,185,129,0.08);color:#34D399;border-color:rgba(16,185,129,0.3)">FFmpeg</span>
+      <span class="chip" style="background:rgba(124,58,237,0.08);color:#A78BFA;border-color:rgba(124,58,237,0.3)">Python</span>
+      <div class="la" style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.15)"><div class="la-lbl" style="color:#F59E0B">📚 Learn Ahead → Day 6</div>Read Gemma 3 system prompt guide. Understand how to give an LLM a persona with a system message. 20 min. AVA's personality lives here.</div>
+    </div>
+  </div>
+</div>
+
+<div class="dc" id="d4">
+  <div class="dc-head">
+    <div class="dc-badge" style="background:rgba(6,182,212,0.12);color:var(--w1);border:1px solid rgba(6,182,212,0.3)">Day 04 · March 21</div>
+    <div class="dc-title">48kHz Quality Gate — Constitutional</div>
+    <div class="dc-sub">"Quality becomes law. Not a preference. Not a setting."</div>
+  </div>
+  <div class="dc-body">
+    <div class="bs"><h4>Tasks</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>Install librosa: <code>pip install librosa</code></li>
+      <li class="ti"><div class="tc"></div>Build quality_gate.py with <code>validate_audio(path) → True | raises QualityViolationError</code></li>
+      <li class="ti"><div class="tc"></div>Gate checks: sample rate ≥ 48000, bit depth ≥ 16, file not corrupt</li>
+      <li class="ti"><div class="tc"></div>Wire gate into kokoro_wrapper.py — auto-validates every output before returning</li>
+      <li class="ti"><div class="tc"></div>Test rejection: generate 44.1kHz audio, confirm gate raises error</li>
+      <li class="ti"><div class="tc"></div>Write packages/never-clauses/core.ts — all 8 Never Clauses as const array</li>
+      <li class="ti"><div class="tc"></div>Add NO_OUTPUT_BELOW_48KHZ_16BIT to the array</li>
+    </ul><div class="ms" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);color:#6EE7B7">🏁 48kHz/16-bit enforced by code. Never Clauses written.</div></div>
+    <div class="bs"><h4>Tools</h4>
+      <span class="chip" style="background:rgba(6,182,212,0.08);color:var(--w1);border-color:rgba(6,182,212,0.3)">librosa</span>
+      <span class="chip" style="background:rgba(124,58,237,0.08);color:#A78BFA;border-color:rgba(124,58,237,0.3)">TypeScript</span>
+      <span class="chip" style="background:rgba(16,185,129,0.08);color:#34D399;border-color:rgba(16,185,129,0.3)">Python</span>
+    </div>
+  </div>
+</div>
+
+<div class="dc" id="d5">
+  <div class="dc-head">
+    <div class="dc-badge" style="background:rgba(6,182,212,0.12);color:var(--w1);border:1px solid rgba(6,182,212,0.3)">Day 05 · March 22</div>
+    <div class="dc-title">ROB.AVA — First Vault Record</div>
+    <div class="dc-sub">"The Vault's first sovereign voice."</div>
+  </div>
+  <div class="dc-body">
+    <div class="bs"><h4>Tasks</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>Record 10 min clean voice on MacBook Pro — multiple characters, multiple tones</li>
+      <li class="ti"><div class="tc"></div>Stream to M2, run through quality gate — confirm 48kHz pass</li>
+      <li class="ti"><div class="tc"></div>Create first Actor record matching Actor.ts schema</li>
+      <li class="ti"><div class="tc"></div>Create ROB.AVA record: voiceRange: "full", emotionalSpectrum: ["warm","authoritative","dry","playful","serious"]</li>
+      <li class="ti"><div class="tc"></div>Set allowedLanguages: ["en"], status: "active"</li>
+      <li class="ti"><div class="tc"></div>Store in vault.json (simple JSON file for now — crypto comes Day 11)</li>
+      <li class="ti"><div class="tc"></div>Generate UUID consent key placeholder, attach to ROB.AVA record</li>
+    </ul><div class="ms" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);color:#6EE7B7">🏁 ROB.AVA is in the Vault. The first sovereign voice is registered.</div></div>
+    <div class="bs"><h4>Tools</h4>
+      <span class="chip" style="background:rgba(6,182,212,0.08);color:var(--w1);border-color:rgba(6,182,212,0.3)">MacBook Pro i7</span>
+      <span class="chip" style="background:rgba(124,58,237,0.08);color:#A78BFA;border-color:rgba(124,58,237,0.3)">TypeScript Schemas</span>
+      <span class="chip" style="background:rgba(245,158,11,0.08);color:#FCD34D;border-color:rgba(245,158,11,0.3)">Python uuid</span>
+    </div>
+  </div>
+</div>
+
+<div class="dc" id="d6">
+  <div class="dc-head">
+    <div class="dc-badge" style="background:rgba(6,182,212,0.12);color:var(--w1);border:1px solid rgba(6,182,212,0.3)">Day 06 · March 23</div>
+    <div class="dc-title">Gemma 3 Agent Base + Never Clause Awareness</div>
+    <div class="dc-sub">"The intelligence wakes up knowing the law."</div>
+  </div>
+  <div class="dc-body">
+    <div class="bs"><h4>Tasks</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>Build agent_base.py: wraps Ollama API with system prompt, temperature, history</li>
+      <li class="ti"><div class="tc"></div>Add Never Clause block to every agent system prompt</li>
+      <li class="ti"><div class="tc"></div>Build violates_never_clauses(text) → bool (keyword scan + semantic check)</li>
+      <li class="ti"><div class="tc"></div>Build voice_of_refusal(reason, tone) → polite refusal string</li>
+      <li class="ti"><div class="tc"></div>Instantiate Gabriel, Lucy, Shirley with distinct system prompt personas</li>
+      <li class="ti"><div class="tc"></div>Test: ask Gabriel something blocked → confirm refusal fires correctly</li>
+      <li class="ti"><div class="tc"></div>Commit: services/agents/ with gabriel.py, lucy.py, shirley.py</li>
+    </ul><div class="ms" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);color:#6EE7B7">🏁 Three agents alive. They know the Never Clauses. They refuse politely.</div></div>
+    <div class="bs"><h4>Tools</h4>
+      <span class="chip" style="background:rgba(124,58,237,0.08);color:#A78BFA;border-color:rgba(124,58,237,0.3)">Gemma 3 via Ollama</span>
+      <span class="chip" style="background:rgba(16,185,129,0.08);color:#34D399;border-color:rgba(16,185,129,0.3)">Python</span>
+      <div class="la" style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.15)"><div class="la-lbl" style="color:#F59E0B">📚 Learn Ahead → Day 10</div>Skim FastMCP docs — specifically how to define tools and wire a server. 25 min. Day 10 you build the DreamChamber MCP from scratch.</div>
+    </div>
+  </div>
+</div>
+
+<div class="dc" id="d7">
+  <div class="dc-head">
+    <div class="dc-badge" style="background:rgba(6,182,212,0.12);color:var(--w1);border:1px solid rgba(6,182,212,0.3)">Day 07 · March 24</div>
+    <div class="dc-title">🏆 MILESTONE 1 — Week 1 Demo + Review</div>
+    <div class="dc-sub">"The wheel turns for the first time."</div>
+  </div>
+  <div class="dc-body">
+    <div class="bs"><h4>Demo Script</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>Speak on MacBook Pro → audio streams to M2 Ultra</li>
+      <li class="ti"><div class="tc"></div>Whisper transcribes on M2 → show the text output</li>
+      <li class="ti"><div class="tc"></div>Run kokoro_wrapper → generate NOIZYVOX voice at 48kHz</li>
+      <li class="ti"><div class="tc"></div>Quality gate validates — show the terminal output</li>
+      <li class="ti"><div class="tc"></div>Show ROB.AVA record in vault.json</li>
+      <li class="ti"><div class="tc"></div>Show Gabriel refusing a blocked request politely</li>
+      <li class="ti"><div class="tc"></div>Record 2-min screen capture. Write Week 1 log.</li>
+    </ul><div class="ms" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);color:#6EE7B7">🏆 MILESTONE 1: Pipeline. Vault. Agents. All sovereign. All local.</div></div>
+    <div class="bs"><h4>Milestone 1 Checklist</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>M2 Ultra running Gemma 3 locally</li>
+      <li class="ti"><div class="tc"></div>MacBook → M2 audio routing confirmed</li>
+      <li class="ti"><div class="tc"></div>Kokoro-82M producing 48kHz voice</li>
+      <li class="ti"><div class="tc"></div>Quality gate enforced by code</li>
+      <li class="ti"><div class="tc"></div>ROB.AVA in vault.json</li>
+      <li class="ti"><div class="tc"></div>Gabriel, Lucy, Shirley instantiated</li>
+      <li class="ti"><div class="tc"></div>Never Clauses written and checked</li>
+    </ul></div>
+  </div>
+</div>
+
+<!-- WEEK 2 -->
+<div class="pb" style="background:rgba(124,58,237,0.05);border-color:var(--w2);margin-top:40px">
+  <div class="pb-label" style="color:#A78BFA">Week 2 · Days 8–14 · March 25–31</div>
+  <div class="pb-title">AVA + DreamChamber: The casting director comes alive.</div>
+  <div class="pb-desc">AVA gets her voice, personality, and the ability to understand a creative brief. DreamChamber becomes the intake MCP. Consent Vault gets its first cryptographic layer. Two character voices join ROB.AVA in the roster.</div>
+</div>
+
+<div class="dc" id="d8">
+  <div class="dc-head">
+    <div class="dc-badge" style="background:rgba(124,58,237,0.12);color:#A78BFA;border:1px solid rgba(124,58,237,0.3)">Day 08 · March 25</div>
+    <div class="dc-title">AVA Personality Core</div>
+    <div class="dc-sub">"She's not a chatbot. She's a casting director."</div>
+  </div>
+  <div class="dc-body">
+    <div class="bs"><h4>Tasks</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>Write AVA's system prompt: warm, expert, human — speaks like a pro casting director</li>
+      <li class="ti"><div class="tc"></div>Key traits: asks the right questions, understands character archetypes, never rushes</li>
+      <li class="ti"><div class="tc"></div>Wire system prompt into agent_base.py as AVA persona instance</li>
+      <li class="ti"><div class="tc"></div>Connect AVA text output → Kokoro-82M → AVA speaks her responses</li>
+      <li class="ti"><div class="tc"></div>Test: describe a brief to AVA out loud — does she feel like a collaborator?</li>
+      <li class="ti"><div class="tc"></div>Iterate prompt until AVA sounds like someone you'd want to work with</li>
+      <li class="ti"><div class="tc"></div>Commit: services/ava/ava_agent.py</li>
+    </ul><div class="ms" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);color:#6EE7B7">🏁 AVA speaks. AVA listens. AVA feels human.</div></div>
+    <div class="bs"><h4>Tools</h4>
+      <span class="chip" style="background:rgba(124,58,237,0.08);color:#A78BFA;border-color:rgba(124,58,237,0.3)">Gemma 3</span>
+      <span class="chip" style="background:rgba(6,182,212,0.08);color:var(--w1);border-color:rgba(6,182,212,0.3)">Kokoro-82M</span>
+      <div class="la" style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.15)"><div class="la-lbl" style="color:#F59E0B">📚 Learn Ahead → Day 11</div>Read Python hmac and hashlib docs. 15 min. Understand HMAC-SHA256 signing. Day 11 you use it to make consent keys cryptographically real.</div>
+    </div>
+  </div>
+</div>
+
+<div class="dc" id="d9">
+  <div class="dc-head">
+    <div class="dc-badge" style="background:rgba(124,58,237,0.12);color:#A78BFA;border:1px solid rgba(124,58,237,0.3)">Day 09 · March 26</div>
+    <div class="dc-title">Casting Brief Engine</div>
+    <div class="dc-sub">"AVA understands what you mean, not just what you say."</div>
+  </div>
+  <div class="dc-body">
+    <div class="bs"><h4>Tasks</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>Build parse_brief(text) → CastingBrief dataclass (age_range, accent, tone, archetype, domain)</li>
+      <li class="ti"><div class="tc"></div>Use Gemma 3 to extract fields from natural language — not regex</li>
+      <li class="ti"><div class="tc"></div>Test: "weathered detective, 55, New York, world-weary but sharp" → correct fields</li>
+      <li class="ti"><div class="tc"></div>Test: "warm grandmother, 70s, southern US, storyteller" → correct fields</li>
+      <li class="ti"><div class="tc"></div>Build match_brief_to_roster(brief, vault) → ranked list of AVA IDs with match score</li>
+      <li class="ti"><div class="tc"></div>Stub 3 roster entries (ROB.AVA + 2 placeholder) to test matching logic</li>
+      <li class="ti"><div class="tc"></div>Wire into AVA: she presents top 3 matches with rationale</li>
+    </ul><div class="ms" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);color:#6EE7B7">🏁 AVA takes a brief and returns real ranked matches from the Vault.</div></div>
+    <div class="bs"><h4>Tools</h4>
+      <span class="chip" style="background:rgba(124,58,237,0.08);color:#A78BFA;border-color:rgba(124,58,237,0.3)">Gemma 3 (NLP parsing)</span>
+      <span class="chip" style="background:rgba(16,185,129,0.08);color:#34D399;border-color:rgba(16,185,129,0.3)">Python dataclasses</span>
+    </div>
+  </div>
+</div>
+
+<div class="dc" id="d10">
+  <div class="dc-head">
+    <div class="dc-badge" style="background:rgba(124,58,237,0.12);color:#A78BFA;border:1px solid rgba(124,58,237,0.3)">Day 10 · March 27</div>
+    <div class="dc-title">DreamChamber MCP v1</div>
+    <div class="dc-sub">"The gateway opens. The first sovereign API is live."</div>
+  </div>
+  <div class="dc-body">
+    <div class="bs"><h4>Tasks</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>Install FastMCP: <code>pip install fastmcp</code></li>
+      <li class="ti"><div class="tc"></div>Build dreamchamber_mcp.py with 3 tools: ingest_audio, submit_brief, get_matches</li>
+      <li class="ti"><div class="tc"></div>ingest_audio: runs quality gate, tags metadata, returns staging ID</li>
+      <li class="ti"><div class="tc"></div>submit_brief: calls parse_brief → match_brief_to_roster → returns top 3</li>
+      <li class="ti"><div class="tc"></div>get_matches: returns full AVA records for given IDs</li>
+      <li class="ti"><div class="tc"></div>Run MCP server locally, test all 3 tools with curl/httpx</li>
+      <li class="ti"><div class="tc"></div>Register DreamChamber MCP in SuperStack config JSON</li>
+    </ul><div class="ms" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);color:#6EE7B7">🏁 DreamChamber MCP is live. The first sovereign custom API works.</div></div>
+    <div class="bs"><h4>Tools</h4>
+      <span class="chip" style="background:rgba(236,72,153,0.08);color:#EC4899;border-color:rgba(236,72,153,0.3)">FastMCP</span>
+      <span class="chip" style="background:rgba(16,185,129,0.08);color:#34D399;border-color:rgba(16,185,129,0.3)">Python</span>
+      <span class="chip" style="background:rgba(6,182,212,0.08);color:var(--w1);border-color:rgba(6,182,212,0.3)">httpx (testing)</span>
+    </div>
+  </div>
+</div>
+
+<div class="dc" id="d11">
+  <div class="dc-head">
+    <div class="dc-badge" style="background:rgba(124,58,237,0.12);color:#A78BFA;border:1px solid rgba(124,58,237,0.3)">Day 11 · March 28</div>
+    <div class="dc-title">Consent-Locked Vault — Cryptographic Layer</div>
+    <div class="dc-sub">"Trust is signed. Not assumed."</div>
+  </div>
+  <div class="dc-body">
+    <div class="bs"><h4>Tasks</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>Build issue_consent_key(actor_id, ava_id, terms_hash) → HMAC-SHA256 signed key</li>
+      <li class="ti"><div class="tc"></div>Build validate_consent_key(key, actor_id, ava_id) → bool</li>
+      <li class="ti"><div class="tc"></div>Update quality_gate.py to also validate consent key before any output</li>
+      <li class="ti"><div class="tc"></div>Re-register ROB.AVA with a real cryptographic consent key (replace UUID)</li>
+      <li class="ti"><div class="tc"></div>Build Vault MCP: tools — validate_consent, issue_key, get_actor, list_roster</li>
+      <li class="ti"><div class="tc"></div>Test: attempt to generate audio without valid consent key → confirm rejection</li>
+    </ul><div class="ms" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);color:#6EE7B7">🏁 Vault is cryptographically real. Consent is signed, verified, never assumed.</div></div>
+    <div class="bs"><h4>Tools</h4>
+      <span class="chip" style="background:rgba(245,158,11,0.08);color:#FCD34D;border-color:rgba(245,158,11,0.3)">Python hmac / hashlib</span>
+      <span class="chip" style="background:rgba(124,58,237,0.08);color:#A78BFA;border-color:rgba(124,58,237,0.3)">FastMCP</span>
+    </div>
+  </div>
+</div>
+
+<div class="dc" id="d12">
+  <div class="dc-head">
+    <div class="dc-badge" style="background:rgba(124,58,237,0.12);color:#A78BFA;border:1px solid rgba(124,58,237,0.3)">Day 12 · March 29</div>
+    <div class="dc-title">Character Voices 1 & 2 — Vault Expansion</div>
+    <div class="dc-sub">"The roster grows. AVA has real options to cast."</div>
+  </div>
+  <div class="dc-body">
+    <div class="bs"><h4>Tasks</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>Record Character Voice 1: choose an archetype (e.g. "corporate narrator, authoritative, 40s")</li>
+      <li class="ti"><div class="tc"></div>Record Character Voice 2: contrasting archetype (e.g. "warm storyteller, female energy, 50s")</li>
+      <li class="ti"><div class="tc"></div>Process both through quality gate — confirm 48kHz pass</li>
+      <li class="ti"><div class="tc"></div>Register both as full AVA records with complete emotionalSpectrum and archetype tags</li>
+      <li class="ti"><div class="tc"></div>Issue cryptographic consent keys for both</li>
+      <li class="ti"><div class="tc"></div>Test brief matching: 3 different briefs → confirm correct AVA is suggested each time</li>
+    </ul><div class="ms" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);color:#6EE7B7">🏁 3 voices in Vault. AVA has real options. Casting is working.</div></div>
+    <div class="bs"><h4>Tools</h4>
+      <span class="chip" style="background:rgba(6,182,212,0.08);color:var(--w1);border-color:rgba(6,182,212,0.3)">MacBook Pro i7</span>
+      <span class="chip" style="background:rgba(245,158,11,0.08);color:#FCD34D;border-color:rgba(245,158,11,0.3)">Vault MCP</span>
+      <span class="chip" style="background:rgba(124,58,237,0.08);color:#A78BFA;border-color:rgba(124,58,237,0.3)">Quality Gate</span>
+    </div>
+  </div>
+</div>
+
+<div class="dc" id="d13">
+  <div class="dc-head">
+    <div class="dc-badge" style="background:rgba(124,58,237,0.12);color:#A78BFA;border:1px solid rgba(124,58,237,0.3)">Day 13 · March 30</div>
+    <div class="dc-title">MCP Orchestration Layer — Gabriel Routes</div>
+    <div class="dc-sub">"The nervous system connects."</div>
+  </div>
+  <div class="dc-body">
+    <div class="bs"><h4>Tasks</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>Build mcp_registry.py: maps MCP names to endpoints (DreamChamber, Vault, VoxEngine)</li>
+      <li class="ti"><div class="tc"></div>Build Gabriel's router: receives natural language → determines which MCP to call</li>
+      <li class="ti"><div class="tc"></div>Test: "cast a voice for my audiobook" → routes to DreamChamber submit_brief</li>
+      <li class="ti"><div class="tc"></div>Test: "is this audio file valid?" → routes to quality_gate</li>
+      <li class="ti"><div class="tc"></div>Test: "check consent for ROB.AVA" → routes to Vault validate_consent</li>
+      <li class="ti"><div class="tc"></div>All 3 MCPs running simultaneously as separate processes</li>
+      <li class="ti"><div class="tc"></div>Write superstack_config.json — master registry of all services</li>
+    </ul><div class="ms" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);color:#6EE7B7">🏁 Gabriel routes tasks across 3 MCPs. The SuperStack talks to itself.</div></div>
+    <div class="bs"><h4>Tools</h4>
+      <span class="chip" style="background:rgba(124,58,237,0.08);color:#A78BFA;border-color:rgba(124,58,237,0.3)">Gemma 3 (router)</span>
+      <span class="chip" style="background:rgba(236,72,153,0.08);color:#EC4899;border-color:rgba(236,72,153,0.3)">FastMCP × 3</span>
+    </div>
+  </div>
+</div>
+
+<div class="dc" id="d14">
+  <div class="dc-head">
+    <div class="dc-badge" style="background:rgba(124,58,237,0.12);color:#A78BFA;border:1px solid rgba(124,58,237,0.3)">Day 14 · March 31</div>
+    <div class="dc-title">🏆 MILESTONE 2 — DreamChamber Demo</div>
+    <div class="dc-sub">"Brief in. Human voice out. Vault locked. Sovereign."</div>
+  </div>
+  <div class="dc-body">
+    <div class="bs"><h4>Demo Script</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>Submit brief to AVA: "weathered detective, 55, New York, world-weary but sharp"</li>
+      <li class="ti"><div class="tc"></div>AVA presents 3 matches from Vault with rationale</li>
+      <li class="ti"><div class="tc"></div>Select ROB.AVA → NOIZYVOX generates sample line "I've seen everything twice…"</li>
+      <li class="ti"><div class="tc"></div>Quality gate confirms 48kHz — show terminal output</li>
+      <li class="ti"><div class="tc"></div>Consent key validated before generation — show the check</li>
+      <li class="ti"><div class="tc"></div>Gabriel routes follow-up query through correct MCP automatically</li>
+    </ul><div class="ms" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);color:#6EE7B7">🏆 MILESTONE 2: The casting director is operational. The pipeline is sovereign.</div></div>
+    <div class="bs"><h4>Week 2 Checklist</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>AVA personality and voice live</li>
+      <li class="ti"><div class="tc"></div>Casting brief engine parsing 5 brief types correctly</li>
+      <li class="ti"><div class="tc"></div>DreamChamber MCP with 3 tools operational</li>
+      <li class="ti"><div class="tc"></div>Vault cryptographically signed (HMAC-SHA256)</li>
+      <li class="ti"><div class="tc"></div>3 voices in Vault with consent keys</li>
+      <li class="ti"><div class="tc"></div>Gabriel routing across 3 MCPs</li>
+    </ul></div>
+  </div>
+</div>
+
+<!-- WEEK 3 -->
+<div class="pb" style="background:rgba(16,185,129,0.05);border-color:var(--w3);margin-top:40px">
+  <div class="pb-label" style="color:var(--w3)">Week 3 · Days 15–21 · April 1–7</div>
+  <div class="pb-title">Characters + Collaboration: The Ferris wheel pays its first riders.</div>
+  <div class="pb-desc">Five character voices fully integrated. Detective Morrison in English and a second language. Collaboration Contracts auto-generate. Royalty calculator enforces 75%. The client feedback loop makes collaboration feel real.</div>
+</div>
+
+<div class="dc" id="d15">
+  <div class="dc-head">
+    <div class="dc-badge" style="background:rgba(16,185,129,0.12);color:var(--w3);border:1px solid rgba(16,185,129,0.3)">Day 15 · April 1</div>
+    <div class="dc-title">Character Voices 3 & 4 — Expanding the Roster</div>
+    <div class="dc-sub">"More archetypes. Richer casting options."</div>
+  </div>
+  <div class="dc-body">
+    <div class="bs"><h4>Tasks</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>Record Character 3: young energetic archetype (e.g. "tech entrepreneur, fast-paced, 30s")</li>
+      <li class="ti"><div class="tc"></div>Record Character 4: villain/antagonist archetype (e.g. "cold, calculating, precise")</li>
+      <li class="ti"><div class="tc"></div>Process both through full pipeline: stream → quality gate → register → consent key</li>
+      <li class="ti"><div class="tc"></div>Expand emotionalSpectrum tags for all 4 existing voices — richer matching</li>
+      <li class="ti"><div class="tc"></div>Run 10 different briefs against the 4-voice roster — check accuracy rate</li>
+      <li class="ti"><div class="tc"></div>Fix any matching errors: tune the brief parser if needed</li>
+    </ul><div class="ms" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);color:#6EE7B7">🏁 4 voices in Vault. 10-brief accuracy test passing.</div></div>
+    <div class="bs"><h4>Tools</h4>
+      <span class="chip" style="background:rgba(6,182,212,0.08);color:var(--w1);border-color:rgba(6,182,212,0.3)">MacBook Pro i7</span>
+      <span class="chip" style="background:rgba(245,158,11,0.08);color:#FCD34D;border-color:rgba(245,158,11,0.3)">Vault MCP</span>
+    </div>
+  </div>
+</div>
+
+<div class="dc" id="d16">
+  <div class="dc-head">
+    <div class="dc-badge" style="background:rgba(16,185,129,0.12);color:var(--w3);border:1px solid rgba(16,185,129,0.3)">Day 16 · April 2</div>
+    <div class="dc-title">Detective Morrison — Build</div>
+    <div class="dc-sub">"The operative speaks for the first time."</div>
+  </div>
+  <div class="dc-body">
+    <div class="bs"><h4>Tasks</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>Record Detective Morrison: hardboiled, world-weary, NY, 55 — multiple sample lines</li>
+      <li class="ti"><div class="tc"></div>Sample lines include: monologue, dialogue, narration, emotional range demonstration</li>
+      <li class="ti"><div class="tc"></div>Process through full pipeline — quality gate, register, consent key</li>
+      <li class="ti"><div class="tc"></div>AVA record: emotionalSpectrum: ["hardboiled","weary","sharp","dry","sardonic","vulnerable"]</li>
+      <li class="ti"><div class="tc"></div>archetype tags: ["detective","noir","thriller","crime","drama","narrative"]</li>
+      <li class="ti"><div class="tc"></div>Test: "weathered detective, noir, gritty" brief → Morrison ranks #1</li>
+    </ul><div class="ms" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);color:#6EE7B7">🏁 Morrison is in the Vault. He speaks. He matches correctly.</div></div>
+    <div class="bs"><h4>Tools</h4>
+      <span class="chip" style="background:rgba(6,182,212,0.08);color:var(--w1);border-color:rgba(6,182,212,0.3)">MacBook Pro i7</span>
+      <span class="chip" style="background:rgba(16,185,129,0.08);color:var(--w3);border-color:rgba(16,185,129,0.3)">Vault MCP</span>
+      <div class="la" style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.15)"><div class="la-lbl" style="color:#F59E0B">📚 Learn Ahead → Day 17</div>Look up Whisper language detection and multi-language synthesis options in Kokoro-82M. 20 min. Tomorrow Morrison speaks in a second language.</div>
+    </div>
+  </div>
+</div>
+
+<div class="dc" id="d17">
+  <div class="dc-head">
+    <div class="dc-badge" style="background:rgba(16,185,129,0.12);color:var(--w3);border:1px solid rgba(16,185,129,0.3)">Day 17 · April 3</div>
+    <div class="dc-title">Morrison Multi-Language</div>
+    <div class="dc-sub">"The detective doesn't just speak English."</div>
+  </div>
+  <div class="dc-body">
+    <div class="bs"><h4>Tasks</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>Choose Morrison's second language (French or Spanish — whichever feels right)</li>
+      <li class="ti"><div class="tc"></div>Record the same character in the second language: same energy, different tongue</li>
+      <li class="ti"><div class="tc"></div>Process, quality gate, store as Morrison's language variant in Vault</li>
+      <li class="ti"><div class="tc"></div>Update AVA record allowedLanguages: ["en", "fr"] (or "es")</li>
+      <li class="ti"><div class="tc"></div>Build language_router(brief, target_lang) → selects correct voice variant</li>
+      <li class="ti"><div class="tc"></div>Test: "détective endurci, Paris, années 50" → Morrison in French surfaces</li>
+      <li class="ti"><div class="tc"></div>Both language variants pass quality gate (48kHz)</li>
+    </ul><div class="ms" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);color:#6EE7B7">🏁 Morrison speaks 2 languages. The same character. Sovereign in both.</div></div>
+    <div class="bs"><h4>Tools</h4>
+      <span class="chip" style="background:rgba(6,182,212,0.08);color:var(--w1);border-color:rgba(6,182,212,0.3)">Kokoro-82M (multi-lang)</span>
+      <span class="chip" style="background:rgba(245,158,11,0.08);color:#FCD34D;border-color:rgba(245,158,11,0.3)">Whisper (detection)</span>
+    </div>
+  </div>
+</div>
+
+<div class="dc" id="d18">
+  <div class="dc-head">
+    <div class="dc-badge" style="background:rgba(16,185,129,0.12);color:var(--w3);border:1px solid rgba(16,185,129,0.3)">Day 18 · April 4</div>
+    <div class="dc-title">Collaboration Contract Engine</div>
+    <div class="dc-sub">"The deal is written into the architecture."</div>
+  </div>
+  <div class="dc-body">
+    <div class="bs"><h4>Tasks</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>Build generate_contract(owner_ava_id, partner_ava_id, terms) → CollaborationContract object</li>
+      <li class="ti"><div class="tc"></div>Terms include: maxDurationMinutes, allowedDomains, prohibitedDomains, royaltySplit</li>
+      <li class="ti"><div class="tc"></div>Enforce minimum royaltySplit.partner ≥ 0.75 — throw error if violated</li>
+      <li class="ti"><div class="tc"></div>Sign contract with HMAC (same pattern as consent keys)</li>
+      <li class="ti"><div class="tc"></div>Build contracts.json ledger — append every generated contract</li>
+      <li class="ti"><div class="tc"></div>Test: generate contract between ROB.AVA and Morrison — confirm 75/25 split</li>
+      <li class="ti"><div class="tc"></div>Test: attempt 60/40 split → confirm rejection</li>
+    </ul><div class="ms" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);color:#6EE7B7">🏁 Collaboration contracts are signed, enforced, and immutable.</div></div>
+    <div class="bs"><h4>Tools</h4>
+      <span class="chip" style="background:rgba(124,58,237,0.08);color:#A78BFA;border-color:rgba(124,58,237,0.3)">Python dataclasses</span>
+      <span class="chip" style="background:rgba(245,158,11,0.08);color:#FCD34D;border-color:rgba(245,158,11,0.3)">hmac / hashlib</span>
+    </div>
+  </div>
+</div>
+
+<div class="dc" id="d19">
+  <div class="dc-head">
+    <div class="dc-badge" style="background:rgba(16,185,129,0.12);color:var(--w3);border:1px solid rgba(16,185,129,0.3)">Day 19 · April 5</div>
+    <div class="dc-title">Royalty Calculator — Live</div>
+    <div class="dc-sub">"The Ferris wheel pays its first rider."</div>
+  </div>
+  <div class="dc-body">
+    <div class="bs"><h4>Tasks</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>Build calculate_royalties(contract_id, gross_revenue) → {actor_share, platform_share, timestamp}</li>
+      <li class="ti"><div class="tc"></div>Enforce 75% actor minimum — Constitution. Not negotiable.</li>
+      <li class="ti"><div class="tc"></div>Test: $1,000 event → $750 to actor, $250 to platform. Exact.</li>
+      <li class="ti"><div class="tc"></div>Build royalty_ledger.db (SQLite) — append every calculation with contract ID + timestamp</li>
+      <li class="ti"><div class="tc"></div>Build get_actor_earnings(actor_id) → total lifetime earnings from ledger</li>
+      <li class="ti"><div class="tc"></div>Wire into Collaboration Contract: any licensed output auto-triggers calculation</li>
+      <li class="ti"><div class="tc"></div>Print ledger entry: "Morrison: $750.00 | Platform: $250.00 | 2026-04-05"</li>
+    </ul><div class="ms" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);color:#6EE7B7">🏁 75% perpetual royalty enforced by code. The economics are real.</div></div>
+    <div class="bs"><h4>Tools</h4>
+      <span class="chip" style="background:rgba(16,185,129,0.08);color:var(--w3);border-color:rgba(16,185,129,0.3)">Python</span>
+      <span class="chip" style="background:rgba(245,158,11,0.08);color:#FCD34D;border-color:rgba(245,158,11,0.3)">SQLite</span>
+    </div>
+  </div>
+</div>
+
+<div class="dc" id="d20">
+  <div class="dc-head">
+    <div class="dc-badge" style="background:rgba(16,185,129,0.12);color:var(--w3);border:1px solid rgba(16,185,129,0.3)">Day 20 · April 6</div>
+    <div class="dc-title">Client Feedback Loop</div>
+    <div class="dc-sub">"The client directs. AVA listens. Morrison adjusts."</div>
+  </div>
+  <div class="dc-body">
+    <div class="bs"><h4>Tasks</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>Build feedback_loop(session_id, client_note, current_ava_id) → refined direction prompt</li>
+      <li class="ti"><div class="tc"></div>AVA receives client note ("more weary, less aggressive") → refines synthesis direction</li>
+      <li class="ti"><div class="tc"></div>Re-generate voice sample with refined direction — same voice, adjusted delivery</li>
+      <li class="ti"><div class="tc"></div>Build session object: tracks brief, matches, selections, feedback history</li>
+      <li class="ti"><div class="tc"></div>Session data feeds Wisdom Keeper (Day 24) — every session becomes training signal</li>
+      <li class="ti"><div class="tc"></div>Test 3 feedback cycles: confirm each iteration sounds distinctly different</li>
+    </ul><div class="ms" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);color:#6EE7B7">🏁 Clients can direct. AVA refines. This feels like real collaboration.</div></div>
+    <div class="bs"><h4>Tools</h4>
+      <span class="chip" style="background:rgba(124,58,237,0.08);color:#A78BFA;border-color:rgba(124,58,237,0.3)">Gemma 3</span>
+      <span class="chip" style="background:rgba(6,182,212,0.08);color:var(--w1);border-color:rgba(6,182,212,0.3)">Kokoro-82M</span>
+    </div>
+  </div>
+</div>
+
+<div class="dc" id="d21">
+  <div class="dc-head">
+    <div class="dc-badge" style="background:rgba(16,185,129,0.12);color:var(--w3);border:1px solid rgba(16,185,129,0.3)">Day 21 · April 7</div>
+    <div class="dc-title">🏆 MILESTONE 3 — Human Collaboration Demo</div>
+    <div class="dc-sub">"Two voices. One contract. Real royalties. The ethics work."</div>
+  </div>
+  <div class="dc-body">
+    <div class="bs"><h4>Demo Script</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>Brief: "weathered detective, New York noir, 55" → AVA casts Morrison</li>
+      <li class="ti"><div class="tc"></div>Collaboration contract generated: ROB.AVA + Morrison, 75/25</li>
+      <li class="ti"><div class="tc"></div>Sample line generated, quality gate passes, consent confirmed</li>
+      <li class="ti"><div class="tc"></div>Client feedback: "more sardonic, pull back the weariness" → refined sample</li>
+      <li class="ti"><div class="tc"></div>Simulate $500 license event → royalty ledger: Morrison $375, Platform $125</li>
+      <li class="ti"><div class="tc"></div>Show Morrison in French with the same character energy</li>
+    </ul><div class="ms" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);color:#6EE7B7">🏆 MILESTONE 3: The Ferris wheel pays. The human model is proven.</div></div>
+    <div class="bs"><h4>Week 3 Checklist</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>5 character voices in Vault with consent keys</li>
+      <li class="ti"><div class="tc"></div>Morrison in English + second language</li>
+      <li class="ti"><div class="tc"></div>Collaboration contract engine live and enforced</li>
+      <li class="ti"><div class="tc"></div>Royalty calculator: 75% constitutional</li>
+      <li class="ti"><div class="tc"></div>Client feedback loop operational</li>
+      <li class="ti"><div class="tc"></div>Session data flowing to Wisdom Keeper stub</li>
+    </ul></div>
+  </div>
+</div>
+
+<!-- WEEK 4 -->
+<div class="pb" style="background:rgba(245,158,11,0.05);border-color:var(--w4);margin-top:40px">
+  <div class="pb-label" style="color:var(--w4)">Week 4 · Days 22–28 · April 8–14</div>
+  <div class="pb-title">Intelligence Layer: The agents go live. The universe thinks.</div>
+  <div class="pb-desc">Gabriel routes real tasks across all MCPs. Lucy handles email intelligence. Wisdom Keeper accumulates session learning. RAG pipeline is safe by design. IDE extension stub proves the developer market. VSI partnership outreach drafted.</div>
+</div>
+
+<div class="dc" id="d22">
+  <div class="dc-head">
+    <div class="dc-badge" style="background:rgba(245,158,11,0.12);color:var(--w4);border:1px solid rgba(245,158,11,0.3)">Day 22 · April 8</div>
+    <div class="dc-title">Gabriel — Full Orchestration Live</div>
+    <div class="dc-sub">"The traffic director comes fully online."</div>
+  </div>
+  <div class="dc-body">
+    <div class="bs"><h4>Tasks</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>Upgrade Gabriel's router to cover all 5 MCPs now running</li>
+      <li class="ti"><div class="tc"></div>Build intent_classifier(input) → {mcp: str, tool: str, params: dict}</li>
+      <li class="ti"><div class="tc"></div>Run 20 test commands through Gabriel — verify correct routing every time</li>
+      <li class="ti"><div class="tc"></div>Build retry logic: if MCP fails, Gabriel reports cleanly and suggests alternatives</li>
+      <li class="ti"><div class="tc"></div>Build session_log: Gabriel records every decision and its outcome</li>
+      <li class="ti"><div class="tc"></div>Test Never Clause refusals through Gabriel — confirm voice_of_refusal fires</li>
+    </ul><div class="ms" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);color:#6EE7B7">🏁 Gabriel routes 20/20 correctly. The nervous system works.</div></div>
+    <div class="bs"><h4>Tools</h4>
+      <span class="chip" style="background:rgba(124,58,237,0.08);color:#A78BFA;border-color:rgba(124,58,237,0.3)">Gemma 3</span>
+      <span class="chip" style="background:rgba(236,72,153,0.08);color:#EC4899;border-color:rgba(236,72,153,0.3)">FastMCP × 5</span>
+    </div>
+  </div>
+</div>
+
+<div class="dc" id="d23">
+  <div class="dc-head">
+    <div class="dc-badge" style="background:rgba(245,158,11,0.12);color:var(--w4);border:1px solid rgba(245,158,11,0.3)">Day 23 · April 9</div>
+    <div class="dc-title">Lucy — Email Intelligence Agent</div>
+    <div class="dc-sub">"Lucy handles the inbox. Sovereignly."</div>
+  </div>
+  <div class="dc-body">
+    <div class="bs"><h4>Tasks</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>Build Lucy's email MCP: tools — summarise_email(text), draft_reply(context, tone), categorise_thread(text)</li>
+      <li class="ti"><div class="tc"></div>Test: paste a real email → Lucy summarises in 2 sentences, drafts a reply</li>
+      <li class="ti"><div class="tc"></div>Lucy applies NOIZY.AI brand voice to all outbound drafts automatically</li>
+      <li class="ti"><div class="tc"></div>Build priority_score(email_text) → 1-5 — Lucy ranks inbox importance</li>
+      <li class="ti"><div class="tc"></div>Test VSI International email scenario: Lucy drafts the partnership outreach</li>
+      <li class="ti"><div class="tc"></div>Lucy runs on Gemma 3 locally — no email content leaves the M2 Ultra</li>
+    </ul><div class="ms" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);color:#6EE7B7">🏁 Lucy manages email intelligently. Sovereign. No cloud inbox.</div></div>
+    <div class="bs"><h4>Tools</h4>
+      <span class="chip" style="background:rgba(124,58,237,0.08);color:#A78BFA;border-color:rgba(124,58,237,0.3)">Gemma 3</span>
+      <span class="chip" style="background:rgba(236,72,153,0.08);color:#EC4899;border-color:rgba(236,72,153,0.3)">FastMCP</span>
+    </div>
+  </div>
+</div>
+
+<div class="dc" id="d24">
+  <div class="dc-head">
+    <div class="dc-badge" style="background:rgba(245,158,11,0.12);color:var(--w4);border:1px solid rgba(245,158,11,0.3)">Day 24 · April 10</div>
+    <div class="dc-title">Wisdom Keeper v1</div>
+    <div class="dc-sub">"The organism starts to remember and learn."</div>
+  </div>
+  <div class="dc-body">
+    <div class="bs"><h4>Tasks</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>Build wisdom_keeper.py: ingests session logs, extracts patterns, stores in wisdom.db (SQLite)</li>
+      <li class="ti"><div class="tc"></div>Patterns tracked: most-cast archetypes, common feedback phrases, brief-to-match accuracy</li>
+      <li class="ti"><div class="tc"></div>Build get_insights() → top 3 learnings from session history</li>
+      <li class="ti"><div class="tc"></div>Feed all Week 1-3 session logs into Wisdom Keeper — let it accumulate</li>
+      <li class="ti"><div class="tc"></div>Wire Wisdom Keeper output into AVA: she uses insights to improve match suggestions</li>
+      <li class="ti"><div class="tc"></div>Build wisdom MCP: tools — get_insights, add_observation, brief_history</li>
+    </ul><div class="ms" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);color:#6EE7B7">🏁 Wisdom Keeper is live. The platform is learning from itself.</div></div>
+    <div class="bs"><h4>Tools</h4>
+      <span class="chip" style="background:rgba(245,158,11,0.08);color:#FCD34D;border-color:rgba(245,158,11,0.3)">SQLite</span>
+      <span class="chip" style="background:rgba(124,58,237,0.08);color:#A78BFA;border-color:rgba(124,58,237,0.3)">Gemma 3 (pattern extraction)</span>
+    </div>
+  </div>
+</div>
+
+<div class="dc" id="d25">
+  <div class="dc-head">
+    <div class="dc-badge" style="background:rgba(245,158,11,0.12);color:var(--w4);border:1px solid rgba(245,158,11,0.3)">Day 25 · April 11</div>
+    <div class="dc-title">RAG Pipeline — Safe by Design</div>
+    <div class="dc-sub">"Every AI output is grounded, checked, and logged."</div>
+  </div>
+  <div class="dc-body">
+    <div class="bs"><h4>Tasks</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>Build rag_pipeline.py: retrieve_context(ava_id, contract_id) → approved context chunks</li>
+      <li class="ti"><div class="tc"></div>Context only comes from: Vault records, approved session history, Wisdom Keeper insights</li>
+      <li class="ti"><div class="tc"></div>Build augmented_prompt(user_input, context, ava) → full prompt with Never Clauses injected</li>
+      <li class="ti"><div class="tc"></div>Post-generation check: violates_never_clauses(output, ava.neverClausesId) → if true, trigger refusal</li>
+      <li class="ti"><div class="tc"></div>Log every generation: input, output, context used, Never Clause check result</li>
+      <li class="ti"><div class="tc"></div>Test: attempt to generate something blocked → pipeline catches it before output</li>
+    </ul><div class="ms" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);color:#6EE7B7">🏁 RAG pipeline is safe. Nothing ungrounded exits the system.</div></div>
+    <div class="bs"><h4>Tools</h4>
+      <span class="chip" style="background:rgba(124,58,237,0.08);color:#A78BFA;border-color:rgba(124,58,237,0.3)">Gemma 3</span>
+      <span class="chip" style="background:rgba(16,185,129,0.08);color:var(--w3);border-color:rgba(16,185,129,0.3)">Python</span>
+      <span class="chip" style="background:rgba(245,158,11,0.08);color:#FCD34D;border-color:rgba(245,158,11,0.3)">SQLite (generation log)</span>
+    </div>
+  </div>
+</div>
+
+<div class="dc" id="d26">
+  <div class="dc-head">
+    <div class="dc-badge" style="background:rgba(245,158,11,0.12);color:var(--w4);border:1px solid rgba(245,158,11,0.3)">Day 26 · April 12</div>
+    <div class="dc-title">IDE Extension Stub — VS Code / Cursor</div>
+    <div class="dc-sub">"DreamChamber enters the developer's workspace."</div>
+  </div>
+  <div class="dc-body">
+    <div class="bs"><h4>Tasks</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>Install VS Code Extension generator: <code>npm install -g yo generator-code</code></li>
+      <li class="ti"><div class="tc"></div>Scaffold NOIZY DreamChamber extension with <code>yo code</code></li>
+      <li class="ti"><div class="tc"></div>Build sidebar panel: text input for brief submission, results display area</li>
+      <li class="ti"><div class="tc"></div>Wire sidebar to DreamChamber MCP: submit brief → display top 3 matches</li>
+      <li class="ti"><div class="tc"></div>Add command palette entry: "NOIZY: Cast a Voice" → opens brief input</li>
+      <li class="ti"><div class="tc"></div>Load extension in VS Code Insiders — confirm it appears and connects to MCP</li>
+      <li class="ti"><div class="tc"></div>Document: Cursor and Windsurf compatibility note (VS Code fork = automatic)</li>
+    </ul><div class="ms" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);color:#6EE7B7">🏁 DreamChamber lives in VS Code. The developer market is unlocked.</div></div>
+    <div class="bs"><h4>Tools</h4>
+      <span class="chip" style="background:rgba(6,182,212,0.08);color:var(--w1);border-color:rgba(6,182,212,0.3)">VS Code Insiders</span>
+      <span class="chip" style="background:rgba(16,185,129,0.08);color:var(--w3);border-color:rgba(16,185,129,0.3)">Node.js / TypeScript</span>
+      <span class="chip" style="background:rgba(245,158,11,0.08);color:#FCD34D;border-color:rgba(245,158,11,0.3)">Yeoman scaffolding</span>
+    </div>
+  </div>
+</div>
+
+<div class="dc" id="d27">
+  <div class="dc-head">
+    <div class="dc-badge" style="background:rgba(245,158,11,0.12);color:var(--w4);border:1px solid rgba(245,158,11,0.3)">Day 27 · April 13</div>
+    <div class="dc-title">VSI Partnership Outreach + Partner Docs</div>
+    <div class="dc-sub">"28 offices. 80+ languages. The international layer arrives."</div>
+  </div>
+  <div class="dc-body">
+    <div class="bs"><h4>Tasks</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>Lucy drafts VSI International outreach email (Scott Rose, CTO) — frame as AI partnership, not vendor</li>
+      <li class="ti"><div class="tc"></div>Key message: NOIZYVOX + VSI talent network = sovereign multi-language casting at scale</li>
+      <li class="ti"><div class="tc"></div>Attach NOIZYVOX Client Journey pitch page as supporting doc</li>
+      <li class="ti"><div class="tc"></div>Create 1-page Partnership Brief: what VSI brings (talent, languages, quality), what NOIZY brings (infrastructure, consent layer, royalty protocol)</li>
+      <li class="ti"><div class="tc"></div>Review and refine — this is a real outreach, not a placeholder</li>
+      <li class="ti"><div class="tc"></div>Identify 2 backup contacts at VSI beyond Scott Rose</li>
+      <li class="ti"><div class="tc"></div>Queue outreach for post-Day 30 send (after demo is ready)</li>
+    </ul><div class="ms" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);color:#6EE7B7">🏁 VSI outreach drafted. Partnership brief ready. Queue to send after Day 30 demo.</div></div>
+    <div class="bs"><h4>Tools</h4>
+      <span class="chip" style="background:rgba(124,58,237,0.08);color:#A78BFA;border-color:rgba(124,58,237,0.3)">Lucy Agent</span>
+      <span class="chip" style="background:rgba(6,182,212,0.08);color:var(--w1);border-color:rgba(6,182,212,0.3)">NOIZYVOX Pitch Page</span>
+    </div>
+  </div>
+</div>
+
+<div class="dc" id="d28">
+  <div class="dc-head">
+    <div class="dc-badge" style="background:rgba(245,158,11,0.12);color:var(--w4);border:1px solid rgba(245,158,11,0.3)">Day 28 · April 14</div>
+    <div class="dc-title">Full Integration Test — Everything Talks</div>
+    <div class="dc-sub">"The universe runs end-to-end without anyone touching the wheel."</div>
+  </div>
+  <div class="dc-body">
+    <div class="bs"><h4>Tasks</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>Run full pipeline 10 times: brief → AVA → match → consent check → synthesis → quality gate → feedback → royalty</li>
+      <li class="ti"><div class="tc"></div>Run all 5 MCPs simultaneously — confirm no port conflicts, no timeouts</li>
+      <li class="ti"><div class="tc"></div>Test 5 different Never Clause violations — all caught before output</li>
+      <li class="ti"><div class="tc"></div>Test system under load: 3 concurrent sessions — confirm M2 Ultra handles it</li>
+      <li class="ti"><div class="tc"></div>Fix anything that fails. Write the bug log.</li>
+      <li class="ti"><div class="tc"></div>Build startup.sh: single command that boots entire SuperStack</li>
+      <li class="ti"><div class="tc"></div>Document every service: port, purpose, dependencies</li>
+    </ul><div class="ms" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);color:#6EE7B7">🏁 Full stack runs end-to-end. startup.sh brings it all up in one command.</div></div>
+    <div class="bs"><h4>Week 4 Checklist</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>Gabriel routes 20/20 correctly across all MCPs</li>
+      <li class="ti"><div class="tc"></div>Lucy email agent live and sovereign</li>
+      <li class="ti"><div class="tc"></div>Wisdom Keeper accumulating insights</li>
+      <li class="ti"><div class="tc"></div>RAG pipeline safe — all outputs checked</li>
+      <li class="ti"><div class="tc"></div>IDE extension in VS Code Insiders</li>
+      <li class="ti"><div class="tc"></div>VSI outreach drafted and queued</li>
+      <li class="ti"><div class="tc"></div>startup.sh boots everything in one command</li>
+    </ul></div>
+  </div>
+</div>
+
+<!-- DAYS 29-30 -->
+<div class="pb" style="background:rgba(236,72,153,0.05);border-color:var(--w5);margin-top:40px">
+  <div class="pb-label" style="color:var(--w5)">Days 29–30 · April 15–16</div>
+  <div class="pb-title">Launch Demo: The Ferris wheel spins for the world.</div>
+  <div class="pb-desc">Polish everything. Stress test. Build the demo script. Record the walkthrough. Then run the full demonstration of the MC96ECO universe in motion.</div>
+</div>
+
+<div class="dc" id="d29">
+  <div class="dc-head">
+    <div class="dc-badge" style="background:rgba(236,72,153,0.12);color:var(--w5);border:1px solid rgba(236,72,153,0.3)">Day 29 · April 15</div>
+    <div class="dc-title">Polish, Stress Test & Demo Prep</div>
+    <div class="dc-sub">"The universe should look as good as it runs."</div>
+  </div>
+  <div class="dc-body">
+    <div class="bs"><h4>Tasks</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>Review every output: does NOIZYVOX sound right? Fix anything jarring.</li>
+      <li class="ti"><div class="tc"></div>Polish AVA's responses — every line she says should feel considered</li>
+      <li class="ti"><div class="tc"></div>Stress test: 10 rapid-fire sessions, check for memory leaks or slowdowns</li>
+      <li class="ti"><div class="tc"></div>Prepare demo script (15 minutes): brief → casting → contract → royalty → agents → wisdom → IDE</li>
+      <li class="ti"><div class="tc"></div>Set up clean demo environment: desktop clear, startup.sh tested, all services confirmed</li>
+      <li class="ti"><div class="tc"></div>Record backup run of demo in case anything fails live</li>
+      <li class="ti"><div class="tc"></div>Rest. Tomorrow is Day 30.</li>
+    </ul><div class="ms" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);color:#6EE7B7">🏁 Everything polished. Demo script rehearsed. Backup recorded.</div></div>
+    <div class="bs"><h4>Polish Checklist</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>AVA voice sounds warm and professional</li>
+      <li class="ti"><div class="tc"></div>All 5 voices clear at 48kHz</li>
+      <li class="ti"><div class="tc"></div>startup.sh boots clean in under 30 seconds</li>
+      <li class="ti"><div class="tc"></div>Demo script timed at 15 min exactly</li>
+      <li class="ti"><div class="tc"></div>Backup recording saved</li>
+      <li class="ti"><div class="tc"></div>All docs reviewed: DreamChamber doc, pitch page, constellation map</li>
+    </ul></div>
+  </div>
+</div>
+
+<div class="dc" id="d30">
+  <div class="dc-head">
+    <div class="dc-badge" style="background:rgba(236,72,153,0.12);color:var(--w5);border:1px solid rgba(236,72,153,0.3)">Day 30 · April 16</div>
+    <div class="dc-title">🎡 THE FULL DEMONSTRATION</div>
+    <div class="dc-sub">"Not a product. An organism. Alive and spinning."</div>
+  </div>
+  <div class="dc-body">
+    <div class="bs"><h4>Demo Flow (15 min)</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div><strong>[0:00]</strong> Boot startup.sh — entire SuperStack up in one command</li>
+      <li class="ti"><div class="tc"></div><strong>[1:00]</strong> Open DreamChamber — submit brief: "weathered detective, 55, New York noir"</li>
+      <li class="ti"><div class="tc"></div><strong>[2:00]</strong> AVA responds as casting director — 3 human matches from Vault</li>
+      <li class="ti"><div class="tc"></div><strong>[3:30]</strong> Select Morrison — NOIZYVOX generates sample at 48kHz, gate confirms</li>
+      <li class="ti"><div class="tc"></div><strong>[5:00]</strong> Collaboration contract generated — 75/25 shown in real time</li>
+      <li class="ti"><div class="tc"></div><strong>[6:00]</strong> Client feedback: "more sardonic" → refined sample played</li>
+      <li class="ti"><div class="tc"></div><strong>[7:30]</strong> Morrison in French — same character, different language</li>
+      <li class="ti"><div class="tc"></div><strong>[8:30]</strong> Simulate $1,000 license → royalty ledger: Morrison $750</li>
+      <li class="ti"><div class="tc"></div><strong>[9:30]</strong> Gabriel routes 3 different tasks — all correct, all sovereign</li>
+      <li class="ti"><div class="tc"></div><strong>[11:00]</strong> Lucy drafts VSI outreach email in 15 seconds</li>
+      <li class="ti"><div class="tc"></div><strong>[12:00]</strong> Wisdom Keeper shows what it learned from the session</li>
+      <li class="ti"><div class="tc"></div><strong>[13:00]</strong> Never Clause test — violation attempt → Voice of Refusal, polite</li>
+      <li class="ti"><div class="tc"></div><strong>[14:00]</strong> IDE Extension — VS Code sidebar, brief submitted, matches returned</li>
+      <li class="ti"><div class="tc"></div><strong>[15:00]</strong> The wheel spins. The universe breathes. NOIZY.AI is real.</li>
+    </ul></div>
+    <div class="bs"><h4>Day 30 Final Checklist</h4><ul class="tl">
+      <li class="ti"><div class="tc"></div>5 voices in Vault ✓</li>
+      <li class="ti"><div class="tc"></div>AVA casting director live ✓</li>
+      <li class="ti"><div class="tc"></div>DreamChamber MCP + IDE extension ✓</li>
+      <li class="ti"><div class="tc"></div>Cryptographic consent vault ✓</li>
+      <li class="ti"><div class="tc"></div>75% royalty protocol demonstrated ✓</li>
+      <li class="ti"><div class="tc"></div>Gabriel + Lucy + Wisdom Keeper live ✓</li>
+      <li class="ti"><div class="tc"></div>RAG pipeline safe ✓</li>
+      <li class="ti"><div class="tc"></div>Morrison in 2 languages ✓</li>
+      <li class="ti"><div class="tc"></div>startup.sh boots everything ✓</li>
+      <li class="ti"><div class="tc"></div>VSI outreach queued ✓</li>
+    </ul>
+      <div class="ms" style="background:rgba(236,72,153,0.1);border-color:rgba(236,72,153,0.4);color:#F9A8D4;font-size:15px;padding:16px 20px;margin-top:16px">🎡 MILESTONE 5: The Ferris wheel spins. The universe breathes. Life is not a dress rehearsal — and NOIZY.AI is finally, completely real.</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /content -->
+</div><!-- /layout -->
+
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
+    document.querySelectorAll('.dl').forEach(d => d.classList.remove('active'));
+    a.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

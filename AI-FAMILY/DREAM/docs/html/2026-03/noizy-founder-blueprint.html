@@ -1,0 +1,1896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIZY-Founder-Blueprint-2026 — NOIZYFISH INC.</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=IBM+Plex+Mono:wght@300;400;500&display=swap');
+
+  :root {
+    --void: #020204;
+    --void2: #07080f;
+    --void3: #0d0f1a;
+    --amber: #c49a38;
+    --amber-dim: #7a5e1e;
+    --amber-glow: rgba(196,154,56,0.12);
+    --cyan: #2aa4be;
+    --green: #3dba72;
+    --red: #e05a5a;
+    --text: #d4cfc8;
+    --text-dim: #7a7670;
+    --border: rgba(196,154,56,0.18);
+    --border-bright: rgba(196,154,56,0.4);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--text);
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+  }
+
+  /* ── COVER ───────────────────────────────────────────────────── */
+  #cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+
+  #cover-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.7;
+  }
+
+  .cover-content {
+    position: relative;
+    z-index: 10;
+    max-width: 900px;
+    padding: 3rem 2rem;
+  }
+
+  .cover-confidential {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.35em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    border: 1px solid var(--amber-dim);
+    display: inline-block;
+    padding: 5px 18px;
+    margin-bottom: 3rem;
+  }
+
+  .cover-logo {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: clamp(3.5rem, 9vw, 8rem);
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: var(--amber);
+    line-height: 1;
+    margin-bottom: 0.2rem;
+  }
+
+  .cover-tagline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: clamp(0.55rem, 1.2vw, 0.75rem);
+    letter-spacing: 0.28em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+
+  .cover-title {
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    font-weight: 300;
+    font-style: italic;
+    color: #fff;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .cover-sub {
+    font-size: clamp(0.9rem, 1.8vw, 1.15rem);
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--text-dim);
+    max-width: 600px;
+    margin: 0 auto 3rem;
+  }
+
+  .cover-meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .cover-meta-item {
+    background: rgba(2,2,4,0.8);
+    padding: 1.2rem;
+  }
+
+  .cover-meta-value {
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: var(--amber);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .cover-meta-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  /* ── LAYOUT ──────────────────────────────────────────────────── */
+  .page-section {
+    max-width: 1020px;
+    margin: 0 auto;
+    padding: 5rem 2.5rem;
+  }
+
+  .page-section.dark {
+    background: var(--void2);
+    max-width: 100%;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .page-section.dark .inner {
+    max-width: 1020px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+  }
+
+  .sec-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1.5rem;
+  }
+
+  .sec-label::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--amber-dim);
+  }
+
+  .sec-title {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: #fff;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  .sec-title em { font-style: italic; color: var(--amber); }
+
+  .sec-body {
+    font-size: 1.1rem;
+    font-weight: 300;
+    line-height: 1.95;
+    color: var(--text-dim);
+    max-width: 700px;
+  }
+
+  hr.rule { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+  /* ── PULLQUOTE ────────────────────────────────────────────────── */
+  .pullquote {
+    font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--amber);
+    border-left: 3px solid var(--amber);
+    padding: 1rem 2rem;
+    margin: 2.5rem 0;
+    max-width: 720px;
+  }
+
+  /* ── EPOCH TABLE ─────────────────────────────────────────────── */
+  .epoch-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 3rem;
+  }
+
+  @media (max-width: 768px) {
+    .epoch-grid { grid-template-columns: 1fr 1fr; }
+    .epoch-cell:last-child { grid-column: 1 / -1; }
+  }
+
+  .epoch-cell {
+    background: var(--void2);
+    padding: 1.8rem 1.5rem;
+    position: relative;
+    transition: background 0.3s ease;
+  }
+
+  .epoch-cell:hover { background: var(--void3); }
+
+  .epoch-cell.current {
+    background: rgba(196,154,56,0.07);
+    border: 1px solid var(--amber-dim);
+    margin: -1px;
+  }
+
+  .epoch-cell.current::before {
+    content: 'NOW';
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--amber);
+    color: var(--void);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.2em;
+    padding: 3px 8px;
+    font-weight: 500;
+  }
+
+  .epoch-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .epoch-period {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    margin-bottom: 0.8rem;
+  }
+
+  .epoch-name {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .epoch-cell.current .epoch-name { color: var(--amber); }
+
+  .epoch-product {
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: var(--text-dim);
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .epoch-mechanism {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    color: var(--cyan);
+    line-height: 1.5;
+  }
+
+  .epoch-cell.current .epoch-mechanism { color: var(--amber); }
+
+  /* ── COMPARE TABLE ───────────────────────────────────────────── */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2.5rem;
+    font-size: 0.95rem;
+  }
+
+  .compare-table th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 1rem 1.5rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-bright);
+  }
+
+  .compare-table th:nth-child(2) { color: var(--text-dim); }
+  .compare-table th:nth-child(3) { color: var(--amber); }
+
+  .compare-table td {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-weight: 300;
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  .compare-table td:first-child {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+  }
+
+  .compare-table td:nth-child(2) { color: var(--text-dim); }
+  .compare-table td:nth-child(3) { color: var(--amber); font-weight: 400; }
+
+  /* ── PHILOSOPHY CARDS ────────────────────────────────────────── */
+  .philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 3rem;
+  }
+
+  .phil-card {
+    background: var(--void2);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s ease;
+  }
+
+  .phil-card:hover { background: var(--void3); }
+
+  .phil-card::after {
+    content: attr(data-num);
+    position: absolute;
+    right: 1.5rem;
+    bottom: 1rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    font-weight: 300;
+    color: rgba(196,154,56,0.05);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .phil-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+
+  .phil-title {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 0.8rem;
+    line-height: 1.3;
+  }
+
+  .phil-body {
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--text-dim);
+    margin-bottom: 1rem;
+  }
+
+  .phil-quote {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--amber);
+    line-height: 1.5;
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+    margin-top: 1rem;
+  }
+
+  /* ── BRAND CARDS ─────────────────────────────────────────────── */
+  .brand-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .brand-card {
+    background: var(--void2);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    position: relative;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+    overflow: hidden;
+  }
+
+  .brand-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(to right, var(--amber), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  .brand-card:hover { border-color: var(--amber-dim); transform: translateY(-2px); }
+  .brand-card:hover::before { transform: scaleX(1); }
+  .brand-card.flagship { border-color: var(--amber-dim); }
+  .brand-card.flagship::before { transform: scaleX(1); }
+
+  .brand-status {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border: 1px solid;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 1.2rem;
+  }
+
+  .brand-status.live { color: var(--green); border-color: var(--green); }
+  .brand-status.build { color: var(--amber); border-color: var(--amber-dim); }
+  .brand-status.mission { color: var(--cyan); border-color: var(--cyan); opacity: 0.7; }
+  .brand-status.revenue { color: var(--text-dim); border-color: var(--border); }
+  .brand-status.vault { color: var(--text-dim); border-color: var(--border); }
+
+  .brand-status::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .brand-status.live::before { animation: pulse-dot 1.6s ease infinite; }
+  @keyframes pulse-dot { 0%,100%{opacity:1}50%{opacity:0.3} }
+
+  .brand-name {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 0.3rem;
+    letter-spacing: -0.01em;
+  }
+
+  .brand-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    color: var(--amber-dim);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+
+  .brand-desc {
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--text-dim);
+    margin-bottom: 1.2rem;
+  }
+
+  .brand-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .brand-metric {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 8px 12px;
+  }
+
+  .brand-metric-value {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--amber);
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+
+  .brand-metric-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+
+  /* ── COMPETITOR GRID ─────────────────────────────────────────── */
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2.5rem;
+    font-size: 0.88rem;
+  }
+
+  .comp-table th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 1rem 1.2rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border-bright);
+  }
+
+  .comp-table th:first-child { text-align: left; color: var(--text-dim); }
+  .comp-table th:nth-child(2) { color: var(--amber); background: rgba(196,154,56,0.05); }
+  .comp-table th:nth-child(3), .comp-table th:nth-child(4) { color: var(--text-dim); }
+
+  .comp-table td {
+    padding: 0.8rem 1.2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    text-align: center;
+    font-weight: 300;
+  }
+
+  .comp-table td:first-child {
+    text-align: left;
+    font-size: 0.82rem;
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.04em;
+    color: var(--text-dim);
+  }
+
+  .comp-table td:nth-child(2) { background: rgba(196,154,56,0.04); }
+
+  .yes { color: var(--green); font-weight: 500; font-size: 1.1rem; }
+  .no { color: #444; font-size: 1rem; }
+  .partial { color: var(--text-dim); font-size: 0.75rem; font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.05em; }
+  .rsp { color: var(--amber); font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; font-weight: 500; }
+
+  /* ── TECH STACK ──────────────────────────────────────────────── */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 3rem;
+  }
+
+  .stack-block {
+    background: var(--void2);
+    padding: 1.8rem;
+  }
+
+  .stack-block-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stack-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 0.8rem;
+  }
+
+  .stack-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--amber-dim);
+    flex-shrink: 0;
+    margin-top: 8px;
+  }
+
+  .stack-item-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--cyan);
+    letter-spacing: 0.05em;
+    margin-bottom: 2px;
+  }
+
+  .stack-item-desc {
+    font-size: 0.82rem;
+    font-weight: 300;
+    color: var(--text-dim);
+    line-height: 1.4;
+  }
+
+  /* ── BOARD CARDS ─────────────────────────────────────────────── */
+  .board-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .board-card {
+    background: var(--void2);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    border-left: 3px solid var(--amber);
+  }
+
+  .board-role {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .board-name {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 0.8rem;
+  }
+
+  .board-desc {
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--text-dim);
+    margin-bottom: 0.8rem;
+  }
+
+  .board-domain {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    color: var(--cyan);
+  }
+
+  /* ── ROADMAP ─────────────────────────────────────────────────── */
+  .roadmap-timeline {
+    margin-top: 3rem;
+    position: relative;
+  }
+
+  .roadmap-timeline::before {
+    content: '';
+    position: absolute;
+    left: 68px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--amber), rgba(196,154,56,0.1));
+  }
+
+  .roadmap-item {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+  }
+
+  .roadmap-month {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    color: var(--amber);
+    text-transform: uppercase;
+    width: 60px;
+    flex-shrink: 0;
+    text-align: right;
+    padding-top: 0.2rem;
+  }
+
+  .roadmap-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--amber);
+    flex-shrink: 0;
+    margin-top: 5px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 10px rgba(196,154,56,0.4);
+  }
+
+  .roadmap-item:last-child .roadmap-dot {
+    width: 14px;
+    height: 14px;
+    background: var(--amber);
+    margin-top: 3px;
+    box-shadow: 0 0 20px rgba(196,154,56,0.6);
+  }
+
+  .roadmap-content {
+    flex: 1;
+  }
+
+  .roadmap-delivers {
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+  }
+
+  .roadmap-detail {
+    font-size: 0.88rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--text-dim);
+  }
+
+  /* ── GORUNFREE ───────────────────────────────────────────────── */
+  .gorunfree-box {
+    background: rgba(196,154,56,0.05);
+    border: 1px solid var(--amber-dim);
+    padding: 3rem;
+    text-align: center;
+    position: relative;
+    margin: 3rem 0;
+  }
+
+  .gorunfree-box::before {
+    content: 'GORUNFREE';
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--amber);
+    color: var(--void);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    padding: 4px 16px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .gorunfree-formula {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .grf-part {
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    font-weight: 300;
+    color: var(--amber);
+  }
+
+  .grf-op {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.2rem;
+    color: var(--text-dim);
+    margin: 0 0.3rem;
+  }
+
+  .gorunfree-quote {
+    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+    font-style: italic;
+    color: var(--text-dim);
+    line-height: 1.7;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* ── FRONTIER PLAYS ──────────────────────────────────────────── */
+  .frontier-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 3rem;
+  }
+
+  .frontier-item {
+    background: var(--void2);
+    padding: 1.5rem;
+  }
+
+  .frontier-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+
+  .frontier-name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .frontier-desc {
+    font-size: 0.82rem;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--text-dim);
+  }
+
+  /* ── ORIGIN STORY ────────────────────────────────────────────── */
+  .origin-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 720px) { .origin-grid { grid-template-columns: 1fr; } }
+
+  .origin-block {
+    border-left: 2px solid var(--amber-dim);
+    padding-left: 1.5rem;
+  }
+
+  .origin-block-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+
+  .origin-block-body {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.85;
+    color: var(--text-dim);
+  }
+
+  /* ── CLOSING STATEMENT ───────────────────────────────────────── */
+  #closing {
+    background: var(--void2);
+    border-top: 1px solid var(--border-bright);
+    padding: 6rem 2.5rem;
+    text-align: center;
+  }
+
+  .closing-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+
+  .closing-title {
+    font-size: clamp(2rem, 4.5vw, 3.8rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: #fff;
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .closing-title em { font-style: italic; color: var(--amber); }
+
+  .closing-body {
+    font-size: 1.15rem;
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--text-dim);
+    max-width: 640px;
+    margin: 0 auto 3rem;
+  }
+
+  .closing-footer {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+    line-height: 2;
+  }
+
+  .closing-footer a {
+    color: var(--amber-dim);
+    text-decoration: none;
+  }
+
+  /* ── NAV ─────────────────────────────────────────────────────── */
+  #nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(2,2,4,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    height: 48px;
+  }
+
+  .nav-logo {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s ease;
+  }
+
+  .nav-links a:hover { color: var(--amber); }
+
+  @media (max-width: 600px) { .nav-links { display: none; } }
+
+  /* ── PROGRESS ────────────────────────────────────────────────── */
+  #progress {
+    position: fixed;
+    top: 48px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(255,255,255,0.04);
+    z-index: 201;
+  }
+
+  #progress-fill {
+    height: 100%;
+    background: linear-gradient(to right, var(--amber-dim), var(--amber));
+    width: 0%;
+    transition: width 0.1s ease;
+  }
+
+  body { padding-top: 50px; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <span class="nav-logo">NOIZYFISH INC. — MC96ECO UNIVERSE</span>
+  <ul class="nav-links">
+    <li><a href="#origin">Origin</a></li>
+    <li><a href="#epoch">5th Epoch</a></li>
+    <li><a href="#universe">Universe</a></li>
+    <li><a href="#moat">Moat</a></li>
+    <li><a href="#team">Board</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+  </ul>
+</nav>
+<div id="progress"><div id="progress-fill"></div></div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     COVER
+════════════════════════════════════════════════════════════ -->
+<div id="cover">
+  <canvas id="cover-canvas"></canvas>
+  <div class="cover-content">
+    <div class="cover-confidential">Confidential — Board of Aligned Minds</div>
+    <div class="cover-logo">NOIZY</div>
+    <div class="cover-tagline">MC96ECO Universe · NOIZYFISH INC. · Ottawa, Canada · 2026</div>
+    <h1 class="cover-title">
+      A Civilization-Scale Vision<br>for Creator-Owned AI Music
+    </h1>
+    <p class="cover-sub">
+      The transition from the Streaming Age's focus on IP to the 5th Epoch's
+      focus on Protocol &amp; Provenance — where Consent is Code, voice is a
+      Voice Estate, and the creator's legacy lasts 500 years.
+    </p>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <div class="cover-meta-value">40</div>
+        <div class="cover-meta-label">Years Professional<br>Credits</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-value">34TB</div>
+        <div class="cover-meta-label">THE_AQUARIUM<br>Archive</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-value">Zero</div>
+        <div class="cover-meta-label">Direct Competitors<br>Across 12 Dimensions</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- ═══════════════════════════════════════════════════════════
+     ORIGIN
+════════════════════════════════════════════════════════════ -->
+<div class="page-section" id="origin">
+  <div class="sec-label">I. The Origin Story</div>
+  <h2 class="sec-title">Where <em>It Begins.</em></h2>
+  <p class="sec-body">
+    Rob Plowman is a 40-year professional composer, sound designer, and audio director.
+    Q107 Homegrown Contest winner. Scored <em>Ed Edd n Eddy, Dragon Tales, Johnny Test,
+    Transformers</em>, and Barbie feature films. Audio Director at Fuel Industries —
+    a 150-person agency with major global clients — for 14 years, until the company went bankrupt.
+  </p>
+  <p class="sec-body" style="margin-top:1rem;">
+    In 2024, a C3 spinal injury with permanent nerve damage fundamentally altered how Rob can work.
+    Most people would stop. Rob built a new operating system for his mind.
+  </p>
+
+  <div class="pullquote">
+    "35% voice. 65% AI. 1-click execution. Zero friction between imagination and execution. That is GORUNFREE."
+  </div>
+
+  <div class="origin-grid">
+    <div>
+      <div class="origin-block">
+        <div class="origin-block-title">The Transmission Problem</div>
+        <div class="origin-block-body">
+          Some artists paint all their pictures in their heads. They see complete, fully-rendered
+          miracles — and then they have to describe them over a cell phone.<br><br>
+          The history of creative technology is the history of building better phones. AI is
+          the highest-fidelity creative transmission cable ever built. For the first time,
+          the gap between imagination and execution can approach zero.
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="origin-block" style="border-color: var(--cyan);">
+        <div class="origin-block-title" style="color: var(--cyan);">The Father's Blueprint</div>
+        <div class="origin-block-body">
+          Rob's father, <strong style="color:var(--text)">R.K. Plowman</strong>, was a civil engineer.
+          Engineering principles — precision, systems thinking, infrastructure-first design —
+          are in the DNA of every NOIZY product. The <strong style="color:var(--text)">ENGR_KEITH</strong> agent
+          honors that legacy directly. The MC96ECO Universe is, at its core, a precision-engineered
+          creative infrastructure.
+        </div>
+      </div>
+      <div class="origin-block" style="margin-top:1.5rem; border-color: var(--green);">
+        <div class="origin-block-title" style="color: var(--green);">Nims & the Soul Mission</div>
+        <div class="origin-block-body">
+          <strong style="color:var(--text)">Mike Nemesvary</strong> — known as Nims — is a quadriplegic world
+          champion and Rob's close friend. Nims is the inspiration for LIFELUV and the NOIZYKIDZ
+          accessibility mission. He is the proof that human limits are negotiable and that technology,
+          at its best, serves the freest possible version of a human being.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- ═══════════════════════════════════════════════════════════
+     5TH EPOCH
+════════════════════════════════════════════════════════════ -->
+<div class="page-section" id="epoch">
+  <div class="sec-label">II. The Strategic Foundation</div>
+  <h2 class="sec-title">The <em>5th Epoch</em> of Music.</h2>
+  <p class="sec-body">
+    Music has reorganized itself completely four times. Each reorganization was triggered by
+    a new medium, and each one shifted who held power and how value was extracted.
+    NOIZY is not building a product inside Epoch IV — it is building the infrastructure
+    of Epoch V, before anyone else has mapped it.
+  </p>
+
+  <div class="epoch-grid">
+    <div class="epoch-cell">
+      <div class="epoch-num">Epoch I</div>
+      <div class="epoch-period">1400s – 1900s</div>
+      <div class="epoch-name">The Foundations<br>(Publishing)</div>
+      <div class="epoch-product">Primary product: Notation — Sheet Music</div>
+      <div class="epoch-mechanism">Physical sale of paper. Printing monopoly. First Rights (Petrucci, 1498).</div>
+    </div>
+    <div class="epoch-cell">
+      <div class="epoch-num">Epoch II</div>
+      <div class="epoch-period">1920s – 1990s</div>
+      <div class="epoch-name">The Recording Era<br>(Physical)</div>
+      <div class="epoch-product">Primary product: Performance — Records, CDs</div>
+      <div class="epoch-mechanism">Physical sale of an object. One-time purchase. Label as distribution monopoly.</div>
+    </div>
+    <div class="epoch-cell">
+      <div class="epoch-num">Epoch III</div>
+      <div class="epoch-period">2000s</div>
+      <div class="epoch-name">The Digital<br>Disruption</div>
+      <div class="epoch-product">Primary product: File — MP3s</div>
+      <div class="epoch-mechanism">File ownership at 99¢ or piracy. Disruption of physical distribution.</div>
+    </div>
+    <div class="epoch-cell">
+      <div class="epoch-num">Epoch IV</div>
+      <div class="epoch-period">2010s – Present</div>
+      <div class="epoch-name">The Streaming Age<br>(IP / Licensing)</div>
+      <div class="epoch-product">Primary product: Access — Rights, Streams</div>
+      <div class="epoch-mechanism">Licensing IP. Recurring micro-payment. Platform as gatekeeper. Financialization of catalogs.</div>
+    </div>
+    <div class="epoch-cell current">
+      <div class="epoch-num">Epoch V</div>
+      <div class="epoch-period">2026 → 2526</div>
+      <div class="epoch-name">The NOIZY Epoch<br>(Protocol)</div>
+      <div class="epoch-product">Primary product: Inheritable Asset — Voice Estate</div>
+      <div class="epoch-mechanism">Consent-as-Code. NOIZY PROOF cryptographic provenance. Creator as Infrastructure Architect.</div>
+    </div>
+  </div>
+
+  <table class="compare-table" style="margin-top:2.5rem;">
+    <thead>
+      <tr>
+        <th>Dimension</th>
+        <th>Streaming Age (Epoch IV)</th>
+        <th>NOIZY MC96ECO Universe (Epoch V)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>IP Mechanism</td>
+        <td>Legal Contract (Terms of Service)</td>
+        <td>Protocol — Consent-as-Code</td>
+      </tr>
+      <tr>
+        <td>The "Product"</td>
+        <td>Licensed Stream (Access)</td>
+        <td>Inheritable Asset (Voice Estate)</td>
+      </tr>
+      <tr>
+        <td>Authenticity Layer</td>
+        <td>Watermarking (Optional)</td>
+        <td>Cryptographic Provenance — NOIZY PROOF</td>
+      </tr>
+      <tr>
+        <td>Value Focus</td>
+        <td>IP Holder / Asset Manager</td>
+        <td>Infrastructure Architect</td>
+      </tr>
+      <tr>
+        <td>Royalty Mechanism</td>
+        <td>Quarterly, opaque, platform-controlled</td>
+        <td>75/25 Perpetual — instant, agentic, coded</td>
+      </tr>
+      <tr>
+        <td>Rights Enforcement</td>
+        <td>Courts and contract lawyers</td>
+        <td>Cloudflare D1/KV — policy is code</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pullquote">
+    "NOIZY is not disrupting the industry — it is building the next era."
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- ═══════════════════════════════════════════════════════════
+     PHILOSOPHY
+════════════════════════════════════════════════════════════ -->
+<div class="page-section dark">
+  <div class="inner">
+    <div class="sec-label">III. Core Philosophy</div>
+    <h2 class="sec-title">The principles that<br><em>cannot be negotiated.</em></h2>
+
+    <div class="philosophy-grid">
+      <div class="phil-card" data-num="1">
+        <div class="phil-num">Principle 01</div>
+        <div class="phil-title">Artist Creator First</div>
+        <div class="phil-body">
+          RSP_001 — Rob's own voice model — is the proof of concept for the entire NOIZYVOX platform.
+          Every product is validated by the creator who needs it most before it touches the world.
+        </div>
+        <div class="phil-quote">"I am the first client. If it doesn't work for me, it ships to nobody."</div>
+      </div>
+      <div class="phil-card" data-num="2">
+        <div class="phil-num">Principle 02</div>
+        <div class="phil-title">Consent as Code</div>
+        <div class="phil-body">
+          The 75/25 perpetual royalty split, no buyout clauses, and the Consent-as-Code
+          architecture built on Cloudflare Workers and D1 mean that artist rights are enforced
+          at the infrastructure level — not just in the terms of service.
+        </div>
+        <div class="phil-quote">"If the consent isn't in the code, it isn't consent."</div>
+      </div>
+      <div class="phil-card" data-num="3">
+        <div class="phil-num">Principle 03</div>
+        <div class="phil-title">The 500-Year Vision</div>
+        <div class="phil-body">
+          The MC96ECO Universe operates on a 500-year timeline. Seven epochs from 2026 to 2526.
+          Rob's 40-year body of work is the seed. The DreamChamber Codex is the map.
+          The goal is not to build a company — it is to plant a civilization.
+        </div>
+        <div class="phil-quote">"We are not building a company. We are planting a civilization."</div>
+      </div>
+      <div class="phil-card" data-num="4">
+        <div class="phil-num">Principle 04</div>
+        <div class="phil-title">Infrastructure is Policy</div>
+        <div class="phil-body">
+          Legal terms can be rewritten. Code enforces. Every ethical commitment NOIZY makes
+          to creators is implemented at the architecture level — in the consent ledger,
+          in the royalty split mechanics, in the watermarking system.
+        </div>
+        <div class="phil-quote">"The policy is the infrastructure."</div>
+      </div>
+    </div>
+
+    <div class="gorunfree-box">
+      <div class="gorunfree-formula">
+        <span class="grf-part">35% Voice</span>
+        <span class="grf-op">+</span>
+        <span class="grf-part">65% AI</span>
+        <span class="grf-op">+</span>
+        <span class="grf-part">1-Click Execution</span>
+        <span class="grf-op">=</span>
+        <span class="grf-part">Zero Friction</span>
+      </div>
+      <p class="gorunfree-quote">
+        GORUNFREE is not a productivity philosophy. It is a survival architecture that became
+        a design religion. Every tool in the NOIZY universe is tested against one question:
+        <em>does this close the gap between imagination and reality?</em>
+      </p>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- ═══════════════════════════════════════════════════════════
+     UNIVERSE
+════════════════════════════════════════════════════════════ -->
+<div class="page-section" id="universe">
+  <div class="sec-label">IV. The MC96ECO Universe</div>
+  <h2 class="sec-title">Five brands.<br><em>One civilization.</em></h2>
+  <p class="sec-body">
+    Each entity in the MC96ECO Universe serves a distinct purpose —
+    from the mothership intelligence platform to the soul mission for children who have never heard music.
+    Together they are a complete creator ecosystem with zero direct analogues.
+  </p>
+
+  <div class="brand-grid">
+    <div class="brand-card flagship">
+      <div class="brand-status live">LIVE — noizy.ai</div>
+      <div class="brand-name">NOIZY.ai</div>
+      <div class="brand-sub">The Mothership</div>
+      <div class="brand-desc">
+        The flagship intelligence platform. Dark space aesthetic, amber/cyan palette, Cormorant Garamond
+        typography, consent-first onboarding, DreamChamber portal entry. Every other brand lives inside NOIZY.ai.
+      </div>
+      <div class="brand-metrics">
+        <div class="brand-metric">
+          <div class="brand-metric-value">React JSX + Cloudflare</div>
+          <div class="brand-metric-label">Stack</div>
+        </div>
+        <div class="brand-metric">
+          <div class="brand-metric-value">D1 Consent Ledger</div>
+          <div class="brand-metric-label">Architecture</div>
+        </div>
+        <div class="brand-metric">
+          <div class="brand-metric-value">GABRIEL_V3</div>
+          <div class="brand-metric-label">Agent Backbone</div>
+        </div>
+        <div class="brand-metric">
+          <div class="brand-metric-value">Subscription + Enterprise</div>
+          <div class="brand-metric-label">Revenue Model</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="brand-card">
+      <div class="brand-status build">IN DEVELOPMENT — Q2 2026</div>
+      <div class="brand-name">NOIZYVOX</div>
+      <div class="brand-sub">A.I.V.A. Platform — Artificially Intelligent Voice Acting</div>
+      <div class="brand-desc">
+        Consent-first voice platform where every actor owns their profile, earns perpetual royalties,
+        and their voice becomes an inheritable, licensable Voice Estate. RSP_001 is the living proof of concept.
+      </div>
+      <div class="brand-metrics">
+        <div class="brand-metric">
+          <div class="brand-metric-value">75/25</div>
+          <div class="brand-metric-label">Perpetual Royalty Split</div>
+        </div>
+        <div class="brand-metric">
+          <div class="brand-metric-value">Librosa + XTTS v2 + RVC</div>
+          <div class="brand-metric-label">Pipeline</div>
+        </div>
+        <div class="brand-metric">
+          <div class="brand-metric-value">No Buyouts</div>
+          <div class="brand-metric-label">Creator Terms</div>
+        </div>
+        <div class="brand-metric">
+          <div class="brand-metric-value">RSP_001</div>
+          <div class="brand-metric-label">Proof of Concept</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="brand-card">
+      <div class="brand-status revenue">REVENUE ENGINE</div>
+      <div class="brand-name">NOIZYLAB</div>
+      <div class="brand-sub">Ottawa Tech Services</div>
+      <div class="brand-desc">
+        The practical revenue engine. Device repair at $89 flat rate, 12 repairs per day target.
+        Ottawa-area consumer and small business. noizylab.ca. Funds the visionary work.
+      </div>
+      <div class="brand-metrics">
+        <div class="brand-metric">
+          <div class="brand-metric-value">$389,280/yr</div>
+          <div class="brand-metric-label">Revenue Target</div>
+        </div>
+        <div class="brand-metric">
+          <div class="brand-metric-value">$89 × 12/day</div>
+          <div class="brand-metric-label">Model</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="brand-card">
+      <div class="brand-status mission">SOUL MISSION</div>
+      <div class="brand-name">NOIZYKIDZ</div>
+      <div class="brand-sub">Haptic Music for Every Child</div>
+      <div class="brand-desc">
+        Haptic music solutions for deaf children and autism spectrum families. Every child deserves
+        to feel music. Inspired by Nims. Frequency-to-haptic mapping. Accessible-first design.
+        Connected to the LIFELUV project.
+      </div>
+      <div class="brand-metrics">
+        <div class="brand-metric">
+          <div class="brand-metric-value">Inspired by Nims</div>
+          <div class="brand-metric-label">Soul Origin</div>
+        </div>
+        <div class="brand-metric">
+          <div class="brand-metric-value">Haptic + Neuro-Acoustic</div>
+          <div class="brand-metric-label">Technology</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="brand-card">
+      <div class="brand-status vault">LEGACY VAULT</div>
+      <div class="brand-name">Fish Music Inc.</div>
+      <div class="brand-sub">THE_AQUARIUM — fishmusicinc.com</div>
+      <div class="brand-desc">
+        40 years. 34 terabytes. The archive that proves this vision is not hypothetical — it is earned.
+        Ed Edd n Eddy, Dragon Tales, Johnny Test, Transformers, Barbie films.
+        Animation, feature film, AAA game audio.
+      </div>
+      <div class="brand-metrics">
+        <div class="brand-metric">
+          <div class="brand-metric-value">34TB</div>
+          <div class="brand-metric-label">THE_AQUARIUM</div>
+        </div>
+        <div class="brand-metric">
+          <div class="brand-metric-value">Sync + Catalog</div>
+          <div class="brand-metric-label">Revenue</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- ═══════════════════════════════════════════════════════════
+     COMPETITIVE MOAT
+════════════════════════════════════════════════════════════ -->
+<div class="page-section dark" id="moat">
+  <div class="inner">
+    <div class="sec-label">V. Competitive Moat</div>
+    <h2 class="sec-title">Zero direct competitors<br><em>across 12 dimensions.</em></h2>
+    <p class="sec-body">
+      Full competitive intelligence sweep conducted across ElevenLabs, Replica, Suno, Udio, and DistroKid.
+      Conclusion: NOIZY.ai operates in an uncontested category.
+    </p>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Capability</th>
+          <th>NOIZY.ai</th>
+          <th>ElevenLabs</th>
+          <th>Suno</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Consent-as-Code Architecture</td>
+          <td class="yes">✓</td>
+          <td class="no">✗</td>
+          <td class="no">✗</td>
+        </tr>
+        <tr>
+          <td>75/25 Perpetual Royalty Split</td>
+          <td class="yes">✓</td>
+          <td class="no">✗</td>
+          <td class="no">✗</td>
+        </tr>
+        <tr>
+          <td>Voice Estate IP Framework</td>
+          <td class="yes">✓</td>
+          <td class="no">✗</td>
+          <td class="no">✗</td>
+        </tr>
+        <tr>
+          <td>Neuro-Acoustic Research Layer</td>
+          <td class="yes">✓</td>
+          <td class="no">✗</td>
+          <td class="no">✗</td>
+        </tr>
+        <tr>
+          <td>Haptic / Accessibility Pipeline</td>
+          <td class="yes">✓</td>
+          <td class="no">✗</td>
+          <td class="no">✗</td>
+        </tr>
+        <tr>
+          <td>Watermark / NOIZY PROOF</td>
+          <td class="yes">✓</td>
+          <td class="partial">Partial</td>
+          <td class="no">✗</td>
+        </tr>
+        <tr>
+          <td>Living Score Adaptive Music</td>
+          <td class="yes">✓</td>
+          <td class="no">✗</td>
+          <td class="partial">Partial</td>
+        </tr>
+        <tr>
+          <td>Own AI Stack ($16K+/yr savings)</td>
+          <td class="yes">✓</td>
+          <td class="no">✗</td>
+          <td class="no">✗</td>
+        </tr>
+        <tr>
+          <td>40-Year Creator Archive</td>
+          <td class="yes">✓</td>
+          <td class="no">✗</td>
+          <td class="no">✗</td>
+        </tr>
+        <tr>
+          <td>Creator-Founder Proof of Concept</td>
+          <td class="rsp">RSP_001</td>
+          <td class="no">✗</td>
+          <td class="no">✗</td>
+        </tr>
+        <tr>
+          <td>Canadian Ethics Alignment</td>
+          <td class="yes">✓</td>
+          <td class="no">✗</td>
+          <td class="no">✗</td>
+        </tr>
+        <tr>
+          <td>500-Year Codex Vision</td>
+          <td class="yes">✓</td>
+          <td class="no">✗</td>
+          <td class="no">✗</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- ═══════════════════════════════════════════════════════════
+     TECH STACK
+════════════════════════════════════════════════════════════ -->
+<div class="page-section" id="tech">
+  <div class="sec-label">VI. Technology Infrastructure</div>
+  <h2 class="sec-title">SUPERSONIC AI STACK v2.0<br><em>Fully owned. Fully controlled.</em></h2>
+  <p class="sec-body">
+    9 layers. 19 HuggingFace models. $16,000+ per year in savings versus commercial alternatives.
+    This is the operational nervous system of NOIZYFISH INC. — answerable to no platform, no API rate limit,
+    no licensing change.
+  </p>
+
+  <div class="stack-grid">
+    <div class="stack-block">
+      <div class="stack-block-title">Audio Generation</div>
+      <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-item-name">MusicGen</div><div class="stack-item-desc">Generative music composition from text prompts</div></div></div>
+      <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-item-name">MaskGCT</div><div class="stack-item-desc">Masked generative codec transformer</div></div></div>
+      <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-item-name">Tango 2</div><div class="stack-item-desc">Audio generation from text descriptions</div></div></div>
+    </div>
+    <div class="stack-block">
+      <div class="stack-block-title">Voice Synthesis</div>
+      <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-item-name">XTTS v2</div><div class="stack-item-desc">Cross-lingual text-to-speech synthesis</div></div></div>
+      <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-item-name">RVC</div><div class="stack-item-desc">Real-time voice conversion pipeline</div></div></div>
+      <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-item-name">Fish Speech</div><div class="stack-item-desc">Neural text-to-speech (license review pending)</div></div></div>
+    </div>
+    <div class="stack-block">
+      <div class="stack-block-title">Analysis &amp; Processing</div>
+      <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-item-name">Librosa</div><div class="stack-item-desc">Audio analysis and feature extraction</div></div></div>
+      <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-item-name">pedalboard</div><div class="stack-item-desc">Audio effects pipeline</div></div></div>
+      <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-item-name">Gemma2</div><div class="stack-item-desc">Language model orchestration layer</div></div></div>
+    </div>
+    <div class="stack-block">
+      <div class="stack-block-title">GABRIEL_V3 — The Warrior Executor</div>
+      <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-item-name">Location: 10.90.90.20</div><div class="stack-item-desc">Internal server, always-on, mutation-ready architecture</div></div></div>
+      <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-item-name">315+ Memcells</div><div class="stack-item-desc">D1 databases: memcells, knowledge, patterns, mutations (11 databases, 20 KV namespaces)</div></div></div>
+      <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-item-name">HEAVEN Worker</div><div class="stack-item-desc">Master Cloudflare router connecting the entire universe</div></div></div>
+      <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-item-name">Command Chain</div><div class="stack-item-desc">Rob → Claude → Gabriel</div></div></div>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- ═══════════════════════════════════════════════════════════
+     BOARD
+════════════════════════════════════════════════════════════ -->
+<div class="page-section dark" id="team">
+  <div class="inner">
+    <div class="sec-label">VII. Board of Aligned Minds</div>
+    <h2 class="sec-title">The aligned<br><em>minds behind it.</em></h2>
+    <p class="sec-body">
+      Not a traditional board. A board assembled around a single shared conviction:
+      that the infrastructure of the music industry's next era must be ethically coded,
+      creator-owned, and built to last 500 years.
+    </p>
+
+    <div class="board-grid">
+      <div class="board-card">
+        <div class="board-role">Founder — RSP_001</div>
+        <div class="board-name">Rob Plowman</div>
+        <div class="board-desc">
+          40-year professional composer, audio director, and sound designer. Scored
+          <em>Ed Edd n Eddy, Transformers, Dragon Tales, Johnny Test, Barbie</em> features.
+          Audio Director, Fuel Industries (14 years). C3 spinal injury led to GORUNFREE —
+          the survival architecture that became the design religion for the entire universe.
+        </div>
+        <div class="board-domain">rsp@noizyfish.com · Ottawa, Canada · noizy.ai</div>
+      </div>
+      <div class="board-card">
+        <div class="board-role">Enterprise &amp; Capital</div>
+        <div class="board-name">Alex</div>
+        <div class="board-desc">
+          Board lead for enterprise strategy and capital architecture. Holds license flag
+          review authority for commercial deployment of MusicGen, MaskGCT, Tango 2,
+          and Fish Speech — the critical approval path before full DreamChamber client launch.
+        </div>
+        <div class="board-domain">Capital Architecture · License Review Authority</div>
+      </div>
+      <div class="board-card">
+        <div class="board-role">Wisdom Keeper</div>
+        <div class="board-name">Dr. Brien Benoit</div>
+        <div class="board-desc">
+          Neurosurgeon, Ottawa Civic Hospital. Health Canada PMPRB Chair.
+          NAI (Neuro-Acoustic Intelligence) research partner. The scientific backbone of
+          the NOIZYKIDZ and Living Score frontiers — connecting neuroscience to the
+          music-as-therapy thesis.
+        </div>
+        <div class="board-domain">Neurosurgery · Health Canada · Neuro-Acoustic Research</div>
+      </div>
+      <div class="board-card">
+        <div class="board-role">Security Architect</div>
+        <div class="board-name">Adam Robb</div>
+        <div class="board-desc">
+          Senior Security Consultant, iPSS Inc. Owns NOIZY PROOF development —
+          the cryptographic watermarking and authenticity layer for the AI audio age.
+          The technical backbone of the Consent-as-Code enforcement system.
+        </div>
+        <div class="board-domain">iPSS Inc. · NOIZY PROOF · Cryptographic Provenance</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- ═══════════════════════════════════════════════════════════
+     7 FRONTIER PLAYS
+════════════════════════════════════════════════════════════ -->
+<div class="page-section" id="frontier">
+  <div class="sec-label">VIII. The 7 Frontier Plays</div>
+  <h2 class="sec-title">March through September.<br><em>The six-month lead.</em></h2>
+  <p class="sec-body">
+    Seven simultaneous plays, executed in parallel over six months, that collectively
+    lock in a competitive lead before anyone in the market has mapped the 5th Epoch.
+  </p>
+
+  <div class="frontier-grid">
+    <div class="frontier-item">
+      <div class="frontier-num">Play 01</div>
+      <div class="frontier-name">NCP — NOIZY Creator Platform</div>
+      <div class="frontier-desc">The primary creator onboarding and management portal. DreamChamber Codex access. Voice Estate onboarding.</div>
+    </div>
+    <div class="frontier-item">
+      <div class="frontier-num">Play 02</div>
+      <div class="frontier-name">NAI — Neuro-Acoustic Intelligence</div>
+      <div class="frontier-desc">Research partnership with Dr. Benoit. Connecting neuroscience to music, frequency, and the NOIZYKIDZ haptics mission.</div>
+    </div>
+    <div class="frontier-item">
+      <div class="frontier-num">Play 03</div>
+      <div class="frontier-name">Living Score</div>
+      <div class="frontier-desc">Adaptive, real-time responsive music that reacts to context — emotion, environment, physiological data. Prototype June 2026.</div>
+    </div>
+    <div class="frontier-item">
+      <div class="frontier-num">Play 04</div>
+      <div class="frontier-name">Voice Estate</div>
+      <div class="frontier-desc">The full Voice Estate IP framework — voices as inheritable, perpetually earning, cryptographically governed digital assets.</div>
+    </div>
+    <div class="frontier-item">
+      <div class="frontier-num">Play 05</div>
+      <div class="frontier-name">NOIZY PROOF</div>
+      <div class="frontier-desc">Cryptographic audio watermarking developed with Adam Robb / iPSS Inc. The authenticity layer for the AI audio age. Alpha May 2026.</div>
+    </div>
+    <div class="frontier-item">
+      <div class="frontier-num">Play 06</div>
+      <div class="frontier-name">Cultural Resonance Engine</div>
+      <div class="frontier-desc">Global cultural pattern intelligence — mapping how sound, voice, and music move across cultures, languages, and time. Research phase July 2026.</div>
+    </div>
+    <div class="frontier-item">
+      <div class="frontier-num">Play 07</div>
+      <div class="frontier-name">Operation Voice Army</div>
+      <div class="frontier-desc">Direct creator onboarding campaign — RSP_001 as living proof, then 5 founding RSPs, then community penetration. Begins May 2026.</div>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- ═══════════════════════════════════════════════════════════
+     ROADMAP
+════════════════════════════════════════════════════════════ -->
+<div class="page-section dark" id="roadmap">
+  <div class="inner">
+    <div class="sec-label">IX. Six-Month Roadmap</div>
+    <h2 class="sec-title">March — September 2026.<br><em>The competitive lead window.</em></h2>
+
+    <div class="roadmap-timeline">
+      <div class="roadmap-item">
+        <div class="roadmap-month">Mar</div>
+        <div class="roadmap-dot"></div>
+        <div class="roadmap-content">
+          <div class="roadmap-delivers">Foundation Layer</div>
+          <div class="roadmap-detail">NOIZY.ai temp homepage LIVE. Brand system designed. Master Encyclopedia launched. Founder Blueprint published. NOIZYVOX demo sprint. RSP_001 signal chain active.</div>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-month">Apr</div>
+        <div class="roadmap-dot"></div>
+        <div class="roadmap-content">
+          <div class="roadmap-delivers">Voice Platform Build</div>
+          <div class="roadmap-detail">NOIZYVOX portal build begins. RSP_001 GPU inference environment. A.I.V.A. branding rollout. GABRIEL_V3 voice pipeline integration.</div>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-month">May</div>
+        <div class="roadmap-dot"></div>
+        <div class="roadmap-content">
+          <div class="roadmap-delivers">Operation Voice Army</div>
+          <div class="roadmap-detail">First voice actor onboarding. NOIZY PROOF watermarking alpha (Adam Robb / iPSS). License flags cleared with Alex for commercial deployment.</div>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-month">Jun</div>
+        <div class="roadmap-dot"></div>
+        <div class="roadmap-content">
+          <div class="roadmap-delivers">Revenue Engine Activation</div>
+          <div class="roadmap-detail">Living Score prototype live. Fish Music THE_AQUARIUM sync portal active. NOIZYLAB portal launch. First agentic royalty payments distributed.</div>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-month">Jul</div>
+        <div class="roadmap-dot"></div>
+        <div class="roadmap-content">
+          <div class="roadmap-delivers">Science &amp; Research Layer</div>
+          <div class="roadmap-detail">Cultural Resonance Engine research phase. NAI research partnership with Dr. Benoit deepens. NRC IRAP application. Neuro-acoustic data collection begins.</div>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-month">Aug</div>
+        <div class="roadmap-dot"></div>
+        <div class="roadmap-content">
+          <div class="roadmap-delivers">Humanitarian Layer</div>
+          <div class="roadmap-detail">NOIZYKIDZ haptics prototype. LIFELUV companion AI alpha for Nims. DreamChamber client beta. Genius Creator direct channel fully operational.</div>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-month">Sep</div>
+        <div class="roadmap-dot"></div>
+        <div class="roadmap-content">
+          <div class="roadmap-delivers" style="color:var(--amber)">Full MC96ECO Universe Live ✦</div>
+          <div class="roadmap-detail">All seven frontier plays active. 6-month competitive lead locked. Zero direct competitors across 12 dimensions confirmed. Series A readiness assessment. Protocol is civilization.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     CLOSING
+════════════════════════════════════════════════════════════ -->
+<div id="closing">
+  <div class="closing-eyebrow">∞ — The Longer Arc</div>
+  <h2 class="closing-title">
+    We are not building<br>a company.<br>
+    <em>We are planting a civilization.</em>
+  </h2>
+  <p class="closing-body">
+    NOIZY is not a startup in the conventional sense. It is a civilization-level creative
+    infrastructure project that happens to begin with a startup. The DreamChamber Codex
+    maps 7 epochs — 500 years of creator-owned, ethically-governed music intelligence.
+    <br><br>
+    The 40 years of professional work in THE_AQUARIUM are not a back catalog.
+    They are proof that this vision is not hypothetical. It is earned, documented, and ready.
+  </p>
+  <div class="pullquote" style="max-width:680px; margin: 0 auto 3rem; text-align:left;">
+    "AI does not replace artists. It removes friction between imagination and creation."
+  </div>
+  <div class="closing-footer">
+    NOIZYFISH INC. · MC96ECO UNIVERSE · OTTAWA, CANADA · 2026<br>
+    RSP_001 · <a href="mailto:rsp@noizyfish.com">rsp@noizyfish.com</a> ·
+    <a href="http://noizy.ai">noizy.ai</a> ·
+    <a href="http://fishmusicinc.com">fishmusicinc.com</a> ·
+    <a href="http://noizylab.ca">noizylab.ca</a>
+  </div>
+</div>
+
+<script>
+// ── COVER CANVAS ──────────────────────────────────────────────────
+const cv = document.getElementById('cover-canvas');
+const cx = cv.getContext('2d');
+let W, H, pts = [], t = 0;
+
+function resize() {
+  W = cv.width = cv.offsetWidth;
+  H = cv.height = cv.offsetHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+function initPts() {
+  pts = [];
+  const n = Math.min(80, Math.floor(W * H / 12000));
+  for (let i = 0; i < n; i++) {
+    pts.push({
+      x: Math.random() * W, y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.15,
+      vy: (Math.random() - 0.5) * 0.15,
+      r: Math.random() * 1.5 + 0.5,
+      phase: Math.random() * Math.PI * 2,
+      type: Math.random() < 0.12 ? 'a' : 'd'
+    });
+  }
+}
+initPts();
+
+function frame() {
+  t += 0.006;
+  cx.clearRect(0, 0, W, H);
+
+  // Radial glow
+  const g = cx.createRadialGradient(W * 0.5, H * 0.45, 0, W * 0.5, H * 0.45, Math.max(W, H) * 0.6);
+  g.addColorStop(0, 'rgba(196,154,56,0.04)');
+  g.addColorStop(0.4, 'rgba(2,2,4,0)');
+  g.addColorStop(1, 'rgba(2,2,4,0.7)');
+  cx.fillStyle = g;
+  cx.fillRect(0, 0, W, H);
+
+  // Slow wave
+  for (let layer = 0; layer < 4; layer++) {
+    cx.beginPath();
+    const amp = 15 + layer * 10;
+    const freq = 0.003 + layer * 0.0015;
+    const spd = t * (0.3 + layer * 0.15);
+    const yb = H * (0.4 + layer * 0.07);
+    cx.strokeStyle = `rgba(196,154,56,${0.035 - layer * 0.007})`;
+    cx.lineWidth = 1;
+    for (let x = 0; x <= W; x += 3) {
+      const y = yb + Math.sin(x * freq + spd) * amp
+               + Math.sin(x * freq * 1.6 - spd * 0.7) * (amp * 0.3);
+      x === 0 ? cx.moveTo(x, y) : cx.lineTo(x, y);
+    }
+    cx.stroke();
+  }
+
+  // Particles
+  pts.forEach(p => {
+    p.x += p.vx; p.y += p.vy;
+    if (p.x < -10) p.x = W + 10;
+    if (p.x > W + 10) p.x = -10;
+    if (p.y < -10) p.y = H + 10;
+    if (p.y > H + 10) p.y = -10;
+    const pulse = 0.4 + 0.6 * Math.abs(Math.sin(t * 0.6 + p.phase));
+    const a = (p.type === 'a' ? 0.7 : 0.25) * pulse;
+    cx.beginPath();
+    cx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    cx.fillStyle = p.type === 'a'
+      ? `rgba(196,154,56,${a})` : `rgba(180,175,168,${a})`;
+    cx.fill();
+  });
+
+  for (let i = 0; i < pts.length; i++) {
+    for (let j = i + 1; j < pts.length; j++) {
+      const dx = pts[i].x - pts[j].x;
+      const dy = pts[i].y - pts[j].y;
+      const d = Math.sqrt(dx*dx + dy*dy);
+      if (d < 100) {
+        cx.beginPath();
+        cx.strokeStyle = `rgba(196,154,56,${0.05 * (1 - d/100)})`;
+        cx.lineWidth = 0.4;
+        cx.moveTo(pts[i].x, pts[i].y);
+        cx.lineTo(pts[j].x, pts[j].y);
+        cx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(frame);
+}
+frame();
+
+// ── PROGRESS ───────────────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  const d = document, h = d.documentElement, b = d.body;
+  const total = Math.max(b.scrollHeight, h.scrollHeight) - window.innerHeight;
+  document.getElementById('progress-fill').style.width = (window.scrollY / total * 100) + '%';
+});
+
+// ── FADE IN SECTIONS ───────────────────────────────────────────────
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll(
+  '.epoch-cell, .phil-card, .brand-card, .comp-table tr, .board-card, .frontier-item, .roadmap-item, .stack-block'
+).forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(18px)';
+  el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+  obs.observe(el);
+});
+</script>
+</body>
+</html>

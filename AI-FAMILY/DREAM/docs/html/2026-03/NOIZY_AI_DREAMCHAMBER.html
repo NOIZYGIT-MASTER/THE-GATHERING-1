@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIZY.AI — The DreamChamber</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --deep: #0A0E17;
+  --abyss: #050B12;
+  --mid: #111827;
+  --panel: #151D2E;
+  --signal: #00D4FF;
+  --nerve: #E8A87C;
+  --restore: #00FFB3;
+  --pulse: #FF4D6D;
+  --soul: #B185DB;
+  --gold: #D4A017;
+  --white: #F1F5F9;
+  --silver: #94A3B8;
+  --mgray: #4A5568;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--abyss);
+  color: var(--white);
+  font-family: var(--font-display);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SCANLINE OVERLAY
+   ═══════════════════════════════════════════════════════════ */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 9999;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.03) 2px,
+    rgba(0,0,0,0.03) 4px
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════
+   NAVIGATION
+   ═══════════════════════════════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(5,11,18,0.92);
+  backdrop-filter: blur(20px);
+  padding: 16px 40px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid rgba(0,212,255,0.08);
+}
+.nav-brand { display: flex; align-items: baseline; gap: 12px; }
+.nav-brand-main {
+  font-family: var(--font-display);
+  font-size: 24px; font-weight: 700;
+  letter-spacing: 0.15em; color: var(--white);
+}
+.nav-brand-sub {
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 0.25em;
+  color: var(--gold); opacity: 0.9;
+}
+.nav-links { display: flex; gap: 32px; }
+.nav-links a {
+  font-family: var(--font-mono);
+  color: var(--silver); text-decoration: none;
+  font-size: 11px; letter-spacing: 0.12em;
+  text-transform: uppercase; transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--signal); }
+.nav-cta {
+  font-family: var(--font-mono);
+  background: transparent; border: 1px solid var(--gold);
+  color: var(--gold); padding: 8px 20px; font-size: 11px;
+  letter-spacing: 0.15em; cursor: pointer; transition: all 0.3s;
+  text-transform: uppercase;
+}
+.nav-cta:hover { background: var(--gold); color: var(--abyss); }
+
+/* ═══════════════════════════════════════════════════════════
+   HERO — A.I.V.A. MORPHING ANIMATION
+   ═══════════════════════════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 120px 40px 80px;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(ellipse 80% 50% at 50% 50%, rgba(181,133,219,0.06) 0%, transparent 70%),
+              radial-gradient(ellipse 60% 40% at 30% 60%, rgba(0,212,255,0.04) 0%, transparent 60%),
+              var(--abyss);
+}
+
+/* Canvas for the morphing animation */
+#morphCanvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
+}
+
+.hero-content { position: relative; z-index: 2; }
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 0.5em;
+  color: var(--gold); text-transform: uppercase;
+  margin-bottom: 32px; opacity: 0;
+  animation: fadeUp 1s 0.5s forwards;
+}
+.hero-morph-container {
+  height: 120px; display: flex;
+  align-items: center; justify-content: center;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+#morphText {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 8vw, 96px);
+  font-weight: 300; letter-spacing: 0.08em;
+  background: linear-gradient(135deg, var(--signal), var(--soul), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all 0.6s cubic-bezier(0.23,1,0.32,1);
+}
+.hero-subtitle {
+  font-size: clamp(18px, 2.5vw, 28px);
+  color: var(--nerve);
+  font-style: italic; font-weight: 300;
+  margin-bottom: 16px; opacity: 0;
+  animation: fadeUp 1s 1.5s forwards;
+}
+.hero-tagline {
+  font-family: var(--font-mono);
+  font-size: 13px; color: var(--silver);
+  letter-spacing: 0.15em; margin-bottom: 48px;
+  opacity: 0; animation: fadeUp 1s 2s forwards;
+}
+.hero-ctas {
+  display: flex; gap: 16px; justify-content: center;
+  flex-wrap: wrap; opacity: 0;
+  animation: fadeUp 1s 2.5s forwards;
+}
+.btn-primary {
+  font-family: var(--font-mono);
+  background: var(--gold); color: var(--abyss);
+  border: none; padding: 14px 32px;
+  font-size: 12px; font-weight: 500;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  cursor: pointer; transition: all 0.3s;
+}
+.btn-primary:hover { background: var(--white); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(212,160,23,0.3); }
+.btn-ghost {
+  font-family: var(--font-mono);
+  background: transparent; color: var(--white);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 14px 32px; font-size: 12px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  cursor: pointer; transition: all 0.3s;
+}
+.btn-ghost:hover { border-color: var(--signal); color: var(--signal); }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SECTION COMMON
+   ═══════════════════════════════════════════════════════════ */
+.section {
+  padding: 100px 40px;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+.section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: 0.5em;
+  color: var(--gold); text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 300; color: var(--white);
+  margin-bottom: 16px;
+}
+.section-desc {
+  font-size: 16px; color: var(--silver);
+  max-width: 640px; line-height: 1.8;
+  font-style: italic;
+}
+.divider {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  margin: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   THE A.I.V.A. CONCEPT — ANIMATED BREAKDOWN
+   ═══════════════════════════════════════════════════════════ */
+.aiva-section {
+  background: linear-gradient(180deg, var(--abyss) 0%, rgba(181,133,219,0.03) 50%, var(--abyss) 100%);
+  padding: 120px 40px;
+  text-align: center;
+}
+.aiva-inner { max-width: 1000px; margin: 0 auto; }
+.aiva-letters {
+  display: flex; justify-content: center; gap: clamp(8px,3vw,40px);
+  margin: 56px 0 48px;
+}
+.aiva-letter {
+  text-align: center;
+  opacity: 0; transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.23,1,0.32,1);
+}
+.aiva-letter.visible {
+  opacity: 1; transform: translateY(0);
+}
+.aiva-char {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 10vw, 120px);
+  font-weight: 700; line-height: 1;
+  display: block; margin-bottom: 12px;
+}
+.aiva-char.a1 { color: var(--signal); }
+.aiva-char.i1 { color: var(--soul); }
+.aiva-char.v1 { color: var(--gold); }
+.aiva-char.a2 { color: var(--nerve); }
+.aiva-word {
+  font-family: var(--font-mono);
+  font-size: clamp(10px, 1.2vw, 14px);
+  letter-spacing: 0.2em; text-transform: uppercase;
+}
+.aiva-word.a1 { color: var(--signal); }
+.aiva-word.i1 { color: var(--soul); }
+.aiva-word.v1 { color: var(--gold); }
+.aiva-word.a2 { color: var(--nerve); }
+
+.aiva-tagline {
+  font-family: var(--font-display);
+  font-size: clamp(16px, 2vw, 22px);
+  color: var(--silver); font-style: italic;
+  margin-bottom: 12px;
+}
+.aiva-tagline em { color: var(--gold); font-style: italic; }
+
+.aiva-manifesto {
+  font-family: var(--font-display);
+  font-size: 18px; color: var(--nerve);
+  font-style: italic; max-width: 600px;
+  margin: 0 auto; line-height: 1.8;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   VOICE ESTATE — RSP_001
+   ═══════════════════════════════════════════════════════════ */
+.estate-section {
+  background: linear-gradient(135deg, var(--mid) 0%, rgba(30,15,5,0.4) 100%);
+  padding: 100px 40px;
+}
+.estate-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
+  align-items: center;
+}
+@media(max-width:768px) { .estate-inner { grid-template-columns: 1fr; } }
+
+.voice-visualizer {
+  position: relative;
+  height: 400px;
+  display: flex; align-items: center; justify-content: center;
+}
+#voiceCanvas {
+  width: 100%; height: 100%;
+  border-radius: 12px;
+}
+.voice-badge {
+  position: absolute; bottom: 16px; left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 0.3em;
+  color: var(--gold); text-transform: uppercase;
+  background: rgba(5,11,18,0.8);
+  padding: 8px 20px; border-radius: 4px;
+  border: 1px solid rgba(212,160,23,0.3);
+}
+.estate-info {}
+.estate-label {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: 0.5em;
+  color: var(--gold); text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.estate-name {
+  font-size: 56px; font-weight: 300;
+  color: var(--white); margin-bottom: 8px;
+}
+.estate-owner {
+  font-size: 18px; color: var(--nerve);
+  font-style: italic; margin-bottom: 32px;
+}
+.estate-stats {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  margin-bottom: 32px;
+}
+.estate-stat {
+  background: rgba(212,160,23,0.06);
+  border: 1px solid rgba(212,160,23,0.15);
+  border-radius: 8px; padding: 20px;
+}
+.estate-stat-val {
+  font-size: 28px; font-weight: 600; color: var(--gold);
+  margin-bottom: 4px;
+}
+.estate-stat-label {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: 0.2em;
+  color: var(--silver); text-transform: uppercase;
+}
+.consent-status {
+  display: flex; align-items: center; gap: 12px;
+  padding: 16px 20px; border-radius: 8px;
+  background: rgba(0,255,179,0.06);
+  border: 1px solid rgba(0,255,179,0.2);
+}
+.consent-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--restore);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(0,255,179,0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(0,255,179,0); }
+}
+.consent-text {
+  font-family: var(--font-mono);
+  font-size: 12px; color: var(--restore);
+  letter-spacing: 0.1em;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CONSENT-AS-CODE — INTERACTIVE KERNEL
+   ═══════════════════════════════════════════════════════════ */
+.consent-section { padding: 100px 40px; }
+.consent-inner { max-width: 1200px; margin: 0 auto; }
+.kernel-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 20px; margin-top: 56px;
+}
+@media(max-width:900px) { .kernel-grid { grid-template-columns: repeat(2, 1fr); } }
+@media(max-width:500px) { .kernel-grid { grid-template-columns: 1fr; } }
+
+.kernel-card {
+  background: var(--panel);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px; padding: 28px;
+  cursor: pointer; transition: all 0.4s;
+  position: relative; overflow: hidden;
+}
+.kernel-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+}
+.kernel-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,255,255,0.12);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+}
+.kernel-card.identity::before { background: var(--signal); }
+.kernel-card.license::before { background: var(--soul); }
+.kernel-card.revenue::before { background: var(--gold); }
+.kernel-card.revocation::before { background: var(--pulse); }
+
+.kernel-icon {
+  font-size: 28px; margin-bottom: 16px;
+}
+.kernel-title {
+  font-family: var(--font-mono);
+  font-size: 12px; letter-spacing: 0.2em;
+  text-transform: uppercase; margin-bottom: 12px;
+}
+.kernel-card.identity .kernel-title { color: var(--signal); }
+.kernel-card.license .kernel-title { color: var(--soul); }
+.kernel-card.revenue .kernel-title { color: var(--gold); }
+.kernel-card.revocation .kernel-title { color: var(--pulse); }
+
+.kernel-desc {
+  font-size: 14px; color: var(--silver); line-height: 1.7;
+}
+.kernel-code {
+  font-family: var(--font-mono);
+  font-size: 11px; color: var(--mgray);
+  margin-top: 16px; padding: 12px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 4px; overflow-x: auto;
+  display: none;
+}
+.kernel-card.expanded .kernel-code { display: block; }
+.kernel-card.expanded { border-color: rgba(255,255,255,0.15); }
+
+/* ═══════════════════════════════════════════════════════════
+   ARTIST JOURNEY — INTERACTIVE 6-STEP
+   ═══════════════════════════════════════════════════════════ */
+.journey-section {
+  background: var(--mid);
+  padding: 100px 40px;
+}
+.journey-inner { max-width: 1200px; margin: 0 auto; }
+.journey-steps {
+  display: flex; gap: 0; margin-top: 56px;
+  overflow-x: auto; padding-bottom: 16px;
+}
+.journey-step {
+  flex: 1; min-width: 180px; position: relative;
+  padding: 28px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.4s;
+  border-top: 3px solid var(--mgray);
+}
+.journey-step:hover { background: rgba(255,255,255,0.02); }
+.journey-step.active { border-top-color: var(--gold); }
+.journey-step-num {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: 0.3em;
+  color: var(--mgray); margin-bottom: 12px;
+}
+.journey-step.active .journey-step-num { color: var(--gold); }
+.journey-step-icon { font-size: 24px; margin-bottom: 10px; }
+.journey-step-title {
+  font-size: 14px; color: var(--silver);
+  margin-bottom: 4px;
+}
+.journey-step.active .journey-step-title { color: var(--white); font-weight: 600; }
+
+.journey-detail {
+  margin-top: 40px; padding: 40px;
+  background: var(--panel);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  min-height: 180px;
+  transition: all 0.4s;
+}
+.journey-detail-title {
+  font-size: 24px; color: var(--gold);
+  margin-bottom: 16px;
+}
+.journey-detail-body {
+  font-size: 16px; color: var(--silver);
+  line-height: 1.8;
+}
+.journey-detail-body strong { color: var(--white); }
+
+/* ═══════════════════════════════════════════════════════════
+   REVENUE SPLIT — ANIMATED BAR
+   ═══════════════════════════════════════════════════════════ */
+.revenue-section { padding: 100px 40px; }
+.revenue-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+.split-bar-container {
+  margin: 48px 0 32px; position: relative;
+  height: 60px; border-radius: 8px;
+  overflow: hidden; background: var(--panel);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.split-artist {
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 0; background: linear-gradient(90deg, var(--gold), var(--nerve));
+  border-radius: 8px 0 0 8px;
+  transition: width 1.5s cubic-bezier(0.23,1,0.32,1);
+  display: flex; align-items: center; justify-content: center;
+}
+.split-artist.animated { width: 75%; }
+.split-platform {
+  position: absolute; right: 0; top: 0; bottom: 0;
+  width: 25%; display: flex; align-items: center;
+  justify-content: center;
+}
+.split-label {
+  font-family: var(--font-mono);
+  font-size: 14px; font-weight: 600;
+  letter-spacing: 0.1em;
+}
+.split-artist .split-label { color: var(--abyss); }
+.split-platform .split-label { color: var(--silver); }
+
+.split-philosophy {
+  font-size: 20px; color: var(--nerve);
+  font-style: italic;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TIERS TABLE
+   ═══════════════════════════════════════════════════════════ */
+.tiers-section {
+  background: var(--mid); padding: 100px 40px;
+}
+.tiers-inner { max-width: 1200px; margin: 0 auto; }
+.tiers-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 20px; margin-top: 56px;
+}
+@media(max-width:900px) { .tiers-grid { grid-template-columns: repeat(2, 1fr); } }
+@media(max-width:500px) { .tiers-grid { grid-template-columns: 1fr; } }
+
+.tier-card {
+  background: var(--panel);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px; padding: 32px;
+  transition: all 0.4s; position: relative;
+  overflow: hidden;
+}
+.tier-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+}
+.tier-card.starter::before { background: var(--silver); }
+.tier-card.pro::before { background: var(--signal); }
+.tier-card.elite::before { background: var(--gold); }
+.tier-card.legacy::before { background: var(--soul); }
+.tier-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+}
+.tier-name {
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 0.3em;
+  text-transform: uppercase; margin-bottom: 8px;
+}
+.tier-card.starter .tier-name { color: var(--silver); }
+.tier-card.pro .tier-name { color: var(--signal); }
+.tier-card.elite .tier-name { color: var(--gold); }
+.tier-card.legacy .tier-name { color: var(--soul); }
+
+.tier-price { font-size: 36px; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+.tier-period { font-family: var(--font-mono); font-size: 11px; color: var(--mgray); margin-bottom: 20px; }
+.tier-features { list-style: none; padding: 0; }
+.tier-features li {
+  font-size: 13px; color: var(--silver);
+  padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+  display: flex; align-items: center; gap: 8px;
+}
+.tier-features li::before { content: '→'; color: var(--gold); font-size: 11px; }
+
+/* ═══════════════════════════════════════════════════════════
+   KILLER FEATURES GRID
+   ═══════════════════════════════════════════════════════════ */
+.features-section { padding: 100px 40px; }
+.features-inner { max-width: 1200px; margin: 0 auto; }
+.features-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 20px; margin-top: 56px;
+}
+@media(max-width:768px) { .features-grid { grid-template-columns: 1fr; } }
+
+.feature-card {
+  background: var(--panel);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px; padding: 28px;
+  transition: all 0.4s;
+}
+.feature-card:hover {
+  border-color: rgba(255,255,255,0.12);
+  transform: translateY(-2px);
+}
+.feature-icon { font-size: 24px; margin-bottom: 14px; }
+.feature-name {
+  font-size: 16px; font-weight: 600;
+  color: var(--white); margin-bottom: 8px;
+}
+.feature-desc {
+  font-size: 13px; color: var(--silver); line-height: 1.7;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   LIVE DEMO — VOICE INTERACTION SIMULATOR
+   ═══════════════════════════════════════════════════════════ */
+.demo-section {
+  background: linear-gradient(180deg, var(--abyss) 0%, rgba(0,212,255,0.03) 50%, var(--abyss) 100%);
+  padding: 100px 40px;
+}
+.demo-inner { max-width: 900px; margin: 0 auto; }
+.demo-portal {
+  background: var(--panel);
+  border: 1px solid rgba(0,212,255,0.15);
+  border-radius: 16px;
+  overflow: hidden; margin-top: 48px;
+}
+.demo-header {
+  padding: 20px 28px;
+  background: rgba(0,212,255,0.04);
+  border-bottom: 1px solid rgba(0,212,255,0.1);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.demo-header-left {
+  display: flex; align-items: center; gap: 12px;
+}
+.demo-status-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--restore);
+  animation: pulse 2s infinite;
+}
+.demo-header-title {
+  font-family: var(--font-mono);
+  font-size: 12px; letter-spacing: 0.15em;
+  color: var(--signal); text-transform: uppercase;
+}
+.demo-header-right {
+  font-family: var(--font-mono);
+  font-size: 11px; color: var(--mgray);
+}
+.demo-body { padding: 28px; }
+.demo-request {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px; padding: 20px;
+  margin-bottom: 20px;
+}
+.demo-request-label {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: 0.3em;
+  color: var(--gold); text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.demo-request-text {
+  font-size: 15px; color: var(--white); line-height: 1.6;
+}
+.demo-actions {
+  display: flex; gap: 12px; margin-bottom: 20px;
+}
+.demo-btn {
+  font-family: var(--font-mono);
+  padding: 10px 20px; border-radius: 6px;
+  font-size: 11px; letter-spacing: 0.12em;
+  text-transform: uppercase; cursor: pointer;
+  transition: all 0.3s; border: 1px solid;
+}
+.demo-btn.approve {
+  background: rgba(0,255,179,0.1);
+  border-color: rgba(0,255,179,0.3);
+  color: var(--restore);
+}
+.demo-btn.approve:hover { background: rgba(0,255,179,0.2); }
+.demo-btn.decline {
+  background: rgba(255,77,109,0.1);
+  border-color: rgba(255,77,109,0.3);
+  color: var(--pulse);
+}
+.demo-btn.decline:hover { background: rgba(255,77,109,0.2); }
+.demo-btn.negotiate {
+  background: rgba(212,160,23,0.1);
+  border-color: rgba(212,160,23,0.3);
+  color: var(--gold);
+}
+.demo-btn.negotiate:hover { background: rgba(212,160,23,0.2); }
+
+.demo-result {
+  background: rgba(0,0,0,0.2);
+  border-radius: 8px; padding: 20px;
+  display: none;
+}
+.demo-result.visible { display: block; animation: fadeUp 0.4s forwards; }
+.demo-result-title {
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 0.2em;
+  text-transform: uppercase; margin-bottom: 8px;
+}
+.demo-result-body {
+  font-size: 14px; line-height: 1.7;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   EPOCH TIMELINE
+   ═══════════════════════════════════════════════════════════ */
+.epoch-section {
+  background: var(--mid); padding: 80px 40px;
+}
+.epoch-inner { max-width: 1200px; margin: 0 auto; }
+.epoch-timeline {
+  display: flex; gap: 0; margin-top: 48px;
+  overflow-x: auto;
+}
+.epoch-item {
+  flex: 1; min-width: 140px;
+  padding: 20px 16px;
+  text-align: center;
+  position: relative;
+  border-top: 2px solid var(--mgray);
+  transition: all 0.3s;
+}
+.epoch-item:hover { background: rgba(255,255,255,0.02); }
+.epoch-item.current {
+  border-top-color: var(--gold);
+  background: rgba(212,160,23,0.04);
+}
+.epoch-num {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: 0.3em;
+  color: var(--mgray); margin-bottom: 6px;
+}
+.epoch-item.current .epoch-num { color: var(--gold); }
+.epoch-name { font-size: 14px; color: var(--silver); margin-bottom: 4px; }
+.epoch-item.current .epoch-name { color: var(--white); font-weight: 600; }
+.epoch-tag {
+  font-family: var(--font-mono);
+  font-size: 10px; color: var(--mgray);
+  font-style: italic;
+}
+.epoch-item.current .epoch-tag { color: var(--nerve); }
+
+/* ═══════════════════════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════════════════════ */
+footer {
+  background: var(--abyss);
+  border-top: 1px solid rgba(255,255,255,0.04);
+  padding: 64px 40px; text-align: center;
+}
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 24px; font-weight: 700;
+  letter-spacing: 0.2em; color: var(--white);
+  margin-bottom: 8px;
+}
+.footer-tagline {
+  font-size: 14px; color: var(--silver);
+  font-style: italic; margin-bottom: 28px;
+}
+.footer-manifesto {
+  max-width: 640px; margin: 0 auto 32px;
+  font-size: 15px; color: var(--nerve);
+  font-style: italic; line-height: 1.8;
+}
+.footer-legal {
+  font-family: var(--font-mono);
+  font-size: 10px; color: var(--mgray);
+  letter-spacing: 0.08em;
+}
+.footer-credit {
+  font-family: var(--font-mono);
+  font-size: 10px; color: var(--mgray);
+  margin-top: 12px; letter-spacing: 0.08em;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SCROLLBAR
+   ═══════════════════════════════════════════════════════════ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--abyss); }
+::-webkit-scrollbar-thumb { background: var(--mgray); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--silver); }
+</style>
+</head>
+<body>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav>
+  <div class="nav-brand">
+    <span class="nav-brand-main">NOIZY.AI</span>
+    <span class="nav-brand-sub">DREAMCHAMBER</span>
+  </div>
+  <div class="nav-links">
+    <a href="#aiva">A.I.V.A.</a>
+    <a href="#rsp001">RSP_001</a>
+    <a href="#consent">Consent Kernel</a>
+    <a href="#journey">Artist Journey</a>
+    <a href="#demo">Live Demo</a>
+    <a href="#tiers">Pricing</a>
+  </div>
+  <button class="nav-cta" onclick="scrollTo('#journey')">Enter the Chamber</button>
+</nav>
+
+<!-- ═══ HERO — A.I.V.A. MORPH ANIMATION ═══ -->
+<section class="hero" id="hero">
+  <canvas id="morphCanvas"></canvas>
+  <div class="hero-content">
+    <p class="hero-eyebrow">MC96ECO Universe · NOIZYFISH Inc. · Ottawa, Canada · 2026</p>
+    <div class="hero-morph-container">
+      <div id="morphText">A.I.</div>
+    </div>
+    <p class="hero-subtitle" id="heroSubtitle">Artificial Intelligence</p>
+    <p class="hero-tagline">Your Voice. Your Model. Your Choice.</p>
+    <div class="hero-ctas">
+      <button class="btn-primary" onclick="scrollTo('#demo')">See It Work</button>
+      <button class="btn-ghost" onclick="scrollTo('#aiva')">What Is A.I.V.A.?</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ A.I.V.A. CONCEPT — ANIMATED LETTER BREAKDOWN ═══ -->
+<section class="aiva-section" id="aiva">
+  <div class="aiva-inner">
+    <p class="section-eyebrow" style="text-align:center">The Evolution</p>
+    <h2 class="section-title" style="text-align:center">A.I. Becomes A.I.V.A.</h2>
+    <p class="section-desc" style="text-align:center;max-width:640px;margin:0 auto">
+      We didn't just add letters. We added <em style="color:var(--gold)">humanity</em>.
+      When AI learns to perform — not just generate — it becomes something entirely new.
+    </p>
+
+    <div class="aiva-letters" id="aivaLetters">
+      <div class="aiva-letter" data-delay="0">
+        <span class="aiva-char a1">A</span>
+        <span class="aiva-word a1">Actors</span>
+      </div>
+      <div class="aiva-letter" data-delay="200">
+        <span class="aiva-char i1">I</span>
+        <span class="aiva-word i1">Intelligently &</span>
+      </div>
+      <div class="aiva-letter" data-delay="400">
+        <span class="aiva-char v1">V</span>
+        <span class="aiva-word v1">Voice</span>
+      </div>
+      <div class="aiva-letter" data-delay="600">
+        <span class="aiva-char a2">A</span>
+        <span class="aiva-word a2">Acting</span>
+      </div>
+    </div>
+
+    <p class="aiva-tagline">
+      <em>Actors, Intelligently &amp; Interactively, Voice Acting</em>
+    </p>
+    <p class="aiva-manifesto">
+      The world's first platform where AI serves the performer —
+      not the other way around. Your voice model works for <em style="color:var(--gold)">you</em>.
+      You approve. You direct. You own. You earn.
+    </p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══ VOICE ESTATE — RSP_001 ═══ -->
+<section class="estate-section" id="rsp001">
+  <div class="estate-inner">
+    <div class="voice-visualizer">
+      <canvas id="voiceCanvas"></canvas>
+      <div class="voice-badge">VOX_MC96_UNIVERSE_001 · LIVE</div>
+    </div>
+    <div class="estate-info">
+      <p class="estate-label">Voice Estate · Prototype #1</p>
+      <h2 class="estate-name">RSP_001</h2>
+      <p class="estate-owner">Robert Stephen Plowman</p>
+      <div class="estate-stats">
+        <div class="estate-stat">
+          <div class="estate-stat-val">40+</div>
+          <div class="estate-stat-label">Years in Audio</div>
+        </div>
+        <div class="estate-stat">
+          <div class="estate-stat-val">75%</div>
+          <div class="estate-stat-label">Artist Revenue</div>
+        </div>
+        <div class="estate-stat">
+          <div class="estate-stat-val">10+</div>
+          <div class="estate-stat-label">Voice Personas</div>
+        </div>
+        <div class="estate-stat">
+          <div class="estate-stat-val">∞</div>
+          <div class="estate-stat-label">Lifetime Ownership</div>
+        </div>
+      </div>
+      <div class="consent-status">
+        <div class="consent-dot"></div>
+        <span class="consent-text">Consent Signed · Jan 6, 2026 · Cryptographically Verified</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══ CONSENT-AS-CODE — THE KERNEL ═══ -->
+<section class="consent-section" id="consent">
+  <div class="consent-inner">
+    <p class="section-eyebrow">The Architecture</p>
+    <h2 class="section-title">Consent-as-Code</h2>
+    <p class="section-desc">
+      Four primitives. Immutable. Enforceable. The entire NOIZY platform
+      is built on this kernel — consent isn't a feature, it's the foundation.
+    </p>
+
+    <div class="kernel-grid">
+      <div class="kernel-card identity" onclick="toggleKernel(this)">
+        <div class="kernel-icon">🔐</div>
+        <div class="kernel-title">Identity Asset</div>
+        <div class="kernel-desc">
+          Your voice is a cryptographically unique asset. Voice DNA fingerprinting
+          proves ownership in 5 seconds. Nobody can claim your voice.
+        </div>
+        <pre class="kernel-code"><code>{
+  "type": "IdentityAsset",
+  "owner": "RSP_001",
+  "voiceDNA": "vox_mc96_001_sha256",
+  "created": "2026-01-06",
+  "immutable": true
+}</code></pre>
+      </div>
+
+      <div class="kernel-card license" onclick="toggleKernel(this)">
+        <div class="kernel-icon">📜</div>
+        <div class="kernel-title">License Policy</div>
+        <div class="kernel-desc">
+          Smart contracts define exactly how your voice can be used.
+          Time-limited. Territory-controlled. Auto-expiring. No lawyers needed.
+        </div>
+        <pre class="kernel-code"><code>{
+  "type": "LicensePolicy",
+  "allowed": ["audiobook", "commercial"],
+  "blocked": ["political", "deepfake"],
+  "territory": ["NA", "EU"],
+  "expires": "2027-01-06"
+}</code></pre>
+      </div>
+
+      <div class="kernel-card revenue" onclick="toggleKernel(this)">
+        <div class="kernel-icon">💰</div>
+        <div class="kernel-title">Revenue Policy</div>
+        <div class="kernel-desc">
+          75/25 split — always. Every transaction is transparent, immutable,
+          and paid automatically. No chasing payments. No disputes.
+        </div>
+        <pre class="kernel-code"><code>{
+  "type": "RevenuePolicy",
+  "artist_share": 0.75,
+  "platform_share": 0.25,
+  "payment": "auto_stripe",
+  "income_smoothing": true
+}</code></pre>
+      </div>
+
+      <div class="kernel-card revocation" onclick="toggleKernel(this)">
+        <div class="kernel-icon">🛑</div>
+        <div class="kernel-title">Revocation Policy</div>
+        <div class="kernel-desc">
+          Creative veto. Kill switch. You can block your voice from any use,
+          forever. Your voice, your values. Walk away with everything.
+        </div>
+        <pre class="kernel-code"><code>{
+  "type": "RevocationPolicy",
+  "creative_veto": true,
+  "kill_switch": true,
+  "portable": true,
+  "deletion": "on_demand"
+}</code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ARTIST JOURNEY — 6 STEPS ═══ -->
+<section class="journey-section" id="journey">
+  <div class="journey-inner">
+    <p class="section-eyebrow">The Path</p>
+    <h2 class="section-title">The 6-Step Artist Journey</h2>
+    <p class="section-desc">
+      From sign-up to sovereignty. Every step gives you more power, not less.
+    </p>
+
+    <div class="journey-steps" id="journeySteps">
+      <div class="journey-step active" data-step="0" onclick="setStep(0)">
+        <div class="journey-step-num">STEP 01</div>
+        <div class="journey-step-icon">🎤</div>
+        <div class="journey-step-title">Join NOIZYVOX</div>
+      </div>
+      <div class="journey-step" data-step="1" onclick="setStep(1)">
+        <div class="journey-step-num">STEP 02</div>
+        <div class="journey-step-icon">🏠</div>
+        <div class="journey-step-title">Your Portal</div>
+      </div>
+      <div class="journey-step" data-step="2" onclick="setStep(2)">
+        <div class="journey-step-num">STEP 03</div>
+        <div class="journey-step-icon">🧬</div>
+        <div class="journey-step-title">Voice Model</div>
+      </div>
+      <div class="journey-step" data-step="3" onclick="setStep(3)">
+        <div class="journey-step-num">STEP 04</div>
+        <div class="journey-step-icon">🔑</div>
+        <div class="journey-step-title">Lifetime Account</div>
+      </div>
+      <div class="journey-step" data-step="4" onclick="setStep(4)">
+        <div class="journey-step-num">STEP 05</div>
+        <div class="journey-step-icon">💎</div>
+        <div class="journey-step-title">Monetize</div>
+      </div>
+      <div class="journey-step" data-step="5" onclick="setStep(5)">
+        <div class="journey-step-num">STEP 06</div>
+        <div class="journey-step-icon">🦅</div>
+        <div class="journey-step-title">Your Choice</div>
+      </div>
+    </div>
+
+    <div class="journey-detail" id="journeyDetail">
+      <h3 class="journey-detail-title" id="journeyTitle">Join NOIZYVOX</h3>
+      <p class="journey-detail-body" id="journeyBody">
+        Sign up free. No credit card. No lock-in. We believe in earning your trust before asking for commitment.
+        <strong>The Starter tier is free forever</strong> — because everyone deserves access to their own voice.
+      </p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══ REVENUE SPLIT ═══ -->
+<section class="revenue-section" id="revenue">
+  <div class="revenue-inner">
+    <p class="section-eyebrow">The Economics</p>
+    <h2 class="section-title">We Win When Artists Win</h2>
+    <p class="section-desc" style="margin:0 auto">
+      Every transaction. Every licensing deal. Every API call.
+      The artist gets the lion's share — always.
+    </p>
+
+    <div class="split-bar-container" id="splitBar">
+      <div class="split-artist" id="splitArtist">
+        <span class="split-label">75% ARTIST</span>
+      </div>
+      <div class="split-platform">
+        <span class="split-label">25%</span>
+      </div>
+    </div>
+
+    <p class="split-philosophy">"We win when artists win. Period."</p>
+  </div>
+</section>
+
+<!-- ═══ TIERS ═══ -->
+<section class="tiers-section" id="tiers">
+  <div class="tiers-inner">
+    <p class="section-eyebrow">Artist Tiers</p>
+    <h2 class="section-title">Choose Your Level</h2>
+    <p class="section-desc">Every tier includes the 75/25 split. Every tier includes ownership.</p>
+
+    <div class="tiers-grid">
+      <div class="tier-card starter">
+        <div class="tier-name">Starter</div>
+        <div class="tier-price">FREE</div>
+        <div class="tier-period">Forever</div>
+        <ul class="tier-features">
+          <li>Basic voice model</li>
+          <li>Management portal</li>
+          <li>Marketplace access</li>
+          <li>75/25 revenue split</li>
+        </ul>
+      </div>
+      <div class="tier-card pro">
+        <div class="tier-name">Professional</div>
+        <div class="tier-price">$29</div>
+        <div class="tier-period">per month</div>
+        <ul class="tier-features">
+          <li>HD voice model</li>
+          <li>Voice Guardian 24/7</li>
+          <li>Priority matching</li>
+          <li>5 voice personas</li>
+          <li>API access</li>
+        </ul>
+      </div>
+      <div class="tier-card elite">
+        <div class="tier-name">Elite</div>
+        <div class="tier-price">$99</div>
+        <div class="tier-period">per month</div>
+        <ul class="tier-features">
+          <li>Ultra HD model</li>
+          <li>10-language cloning</li>
+          <li>Unlimited personas</li>
+          <li>Legacy Vault access</li>
+        </ul>
+      </div>
+      <div class="tier-card legacy">
+        <div class="tier-name">Legacy</div>
+        <div class="tier-price">$499</div>
+        <div class="tier-period">per year</div>
+        <ul class="tier-features">
+          <li>Full estate planning</li>
+          <li>Family access controls</li>
+          <li>Lifetime preservation</li>
+          <li>Legal documentation</li>
+          <li>Kill switch</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══ KILLER FEATURES ═══ -->
+<section class="features-section" id="features">
+  <div class="features-inner">
+    <p class="section-eyebrow">What Nobody Else Has</p>
+    <h2 class="section-title">The NOIZYVOX Difference</h2>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <div class="feature-name">Voice Guardian</div>
+        <div class="feature-desc">24/7 deepfake detection, web scanning, invisible watermarking, automated DMCA takedowns. Your voice sleeps. We don't.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤝</div>
+        <div class="feature-name">Voice Unions</div>
+        <div class="feature-desc">Collective bargaining power. No race to the bottom. Artists set minimum rates together — strength in numbers.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <div class="feature-name">Real-Time Bidding</div>
+        <div class="feature-desc">Urgent work = premium rates. Artists capture urgency value, not platforms. The faster they need it, the more you earn.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🧬</div>
+        <div class="feature-name">Voice DNA</div>
+        <div class="feature-desc">Cryptographic fingerprint. Prove ownership in 5 seconds. Every sample carries your signature — invisible, indelible, irrefutable.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📒</div>
+        <div class="feature-name">Consent Ledger</div>
+        <div class="feature-desc">Immutable log of every consent decision. No disputes ever. What you approved, when, for whom, for how long — all on record.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎭</div>
+        <div class="feature-name">Voice Evolution</div>
+        <div class="feature-desc">Track your voice over time. Multiple versions — young you, current you. Character personas, style packs, aging simulation.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏛️</div>
+        <div class="feature-name">Legacy Vault</div>
+        <div class="feature-desc">Estate planning for your voice. Posthumous restrictions. Family inheritance. Memorial mode. Or the kill switch — delete everything.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💵</div>
+        <div class="feature-name">Income Smoothing</div>
+        <div class="feature-desc">Steady paycheck from variable earnings. Because artists deserve financial stability, not feast-or-famine cycles.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎓</div>
+        <div class="feature-name">Apprentice Program</div>
+        <div class="feature-desc">Veterans mentor newcomers. Knowledge transfer. Legacy. The next generation of voice artists, trained by the best.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ LIVE DEMO — ARTIST PORTAL SIMULATOR ═══ -->
+<section class="demo-section" id="demo">
+  <div class="demo-inner">
+    <p class="section-eyebrow" style="text-align:center">Working Prototype</p>
+    <h2 class="section-title" style="text-align:center">Artist Portal — Live Simulation</h2>
+    <p class="section-desc" style="text-align:center;margin:0 auto">
+      This is what an artist sees when a client request arrives.
+      Full transparency. Full control. Full choice.
+    </p>
+
+    <div class="demo-portal">
+      <div class="demo-header">
+        <div class="demo-header-left">
+          <div class="demo-status-dot"></div>
+          <span class="demo-header-title">RSP_001 · Management Portal</span>
+        </div>
+        <div class="demo-header-right" id="demoTime"></div>
+      </div>
+      <div class="demo-body">
+        <div class="demo-request">
+          <div class="demo-request-label">Incoming Request</div>
+          <div class="demo-request-text" id="demoRequestText">
+            <strong>Client:</strong> Meridian Audio Books · Toronto, ON<br>
+            <strong>Project:</strong> 12-chapter sci-fi audiobook narration<br>
+            <strong>Voice Style:</strong> Warm baritone, contemplative tone<br>
+            <strong>Duration:</strong> ~8 hours total<br>
+            <strong>Offered Rate:</strong> $2,400 (your share: <span style="color:var(--gold);font-weight:600">$1,800</span>)<br>
+            <strong>Deadline:</strong> 14 days<br>
+            <strong>Consent Required:</strong> Audiobook distribution, EN territories
+          </div>
+        </div>
+
+        <div class="demo-actions" id="demoActions">
+          <button class="demo-btn approve" onclick="demoApprove()">✓ Approve</button>
+          <button class="demo-btn decline" onclick="demoDecline()">✕ Decline</button>
+          <button class="demo-btn negotiate" onclick="demoNegotiate()">↔ Negotiate</button>
+        </div>
+
+        <div class="demo-result" id="demoResult">
+          <div class="demo-result-title" id="demoResultTitle"></div>
+          <p class="demo-result-body" id="demoResultBody"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══ THE 5TH EPOCH ═══ -->
+<section class="epoch-section" id="epoch">
+  <div class="epoch-inner">
+    <p class="section-eyebrow" style="text-align:center">Where We Are in History</p>
+    <h2 class="section-title" style="text-align:center">The Five Epochs of Creative Rights</h2>
+
+    <div class="epoch-timeline">
+      <div class="epoch-item">
+        <div class="epoch-num">Epoch I</div>
+        <div class="epoch-name">Patronage</div>
+        <div class="epoch-tag">Permission</div>
+      </div>
+      <div class="epoch-item">
+        <div class="epoch-num">Epoch II</div>
+        <div class="epoch-name">Print</div>
+        <div class="epoch-tag">Copyright</div>
+      </div>
+      <div class="epoch-item">
+        <div class="epoch-num">Epoch III</div>
+        <div class="epoch-name">Broadcast</div>
+        <div class="epoch-tag">Licensing</div>
+      </div>
+      <div class="epoch-item">
+        <div class="epoch-num">Epoch IV</div>
+        <div class="epoch-name">Streaming</div>
+        <div class="epoch-tag">IP & Rights</div>
+      </div>
+      <div class="epoch-item current">
+        <div class="epoch-num">Epoch V</div>
+        <div class="epoch-name">Protocol & Provenance</div>
+        <div class="epoch-tag">Consent & Code</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-logo">NOIZYVOX</div>
+  <p class="footer-tagline">A.I.V.A. — Actors, Intelligently & Interactively, Voice Acting</p>
+  <p class="footer-manifesto">
+    We are not ElevenLabs. We are not another AI voice factory.
+    We are a Guild. A Sanctuary. A Revolution. We are NOIZYVOX.
+  </p>
+  <p class="footer-legal">
+    © 2026 NOIZYFISH INC. · MC96ECO UNIVERSE · ALL RIGHTS RESERVED
+  </p>
+  <p class="footer-credit">
+    Rob Plowman — 40 years protecting artists. Now amplifying them.
+  </p>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════════
+     JAVASCRIPT — ALL INTERACTIONS & ANIMATIONS
+     ═══════════════════════════════════════════════════════════ -->
+<script>
+// ── A.I.V.A. MORPH ANIMATION ──────────────────────────────
+const morphStages = [
+  { text: 'A.I.', subtitle: 'Artificial Intelligence', duration: 2500 },
+  { text: 'A.I.V.', subtitle: 'Artificial Intelligence... Voices?', duration: 2000 },
+  { text: 'A.I.V.A.', subtitle: 'Actors, Intelligently & Interactively, Voice Acting', duration: 4000 },
+  { text: 'A.I.V.A.', subtitle: 'Your Voice. Your Agent. Your Empire.', duration: 3000 },
+];
+
+let morphIndex = 0;
+const morphEl = document.getElementById('morphText');
+const subtitleEl = document.getElementById('heroSubtitle');
+
+function runMorph() {
+  const stage = morphStages[morphIndex];
+  morphEl.style.opacity = '0';
+  morphEl.style.transform = 'scale(0.95)';
+  subtitleEl.style.opacity = '0';
+
+  setTimeout(() => {
+    morphEl.textContent = stage.text;
+    morphEl.style.opacity = '1';
+    morphEl.style.transform = 'scale(1)';
+    setTimeout(() => {
+      subtitleEl.textContent = stage.subtitle;
+      subtitleEl.style.opacity = '1';
+    }, 300);
+  }, 400);
+
+  morphIndex = (morphIndex + 1) % morphStages.length;
+  setTimeout(runMorph, stage.duration);
+}
+setTimeout(runMorph, 1000);
+
+// ── HERO PARTICLE CANVAS ───────────────────────────────────
+const mc = document.getElementById('morphCanvas');
+const mctx = mc.getContext('2d');
+let particles = [];
+
+function resizeMorphCanvas() {
+  mc.width = mc.offsetWidth;
+  mc.height = mc.offsetHeight;
+}
+resizeMorphCanvas();
+window.addEventListener('resize', resizeMorphCanvas);
+
+const COLORS = ['#D4A017','#B185DB','#00D4FF','#E8A87C','#00FFB3'];
+
+for (let i = 0; i < 80; i++) {
+  particles.push({
+    x: Math.random() * mc.width,
+    y: Math.random() * mc.height,
+    vx: (Math.random() - 0.5) * 0.4,
+    vy: (Math.random() - 0.5) * 0.4,
+    r: 1 + Math.random() * 2,
+    color: COLORS[Math.floor(Math.random() * COLORS.length)],
+    alpha: 0.2 + Math.random() * 0.5,
+  });
+}
+
+function animateParticles() {
+  mctx.clearRect(0, 0, mc.width, mc.height);
+  particles.forEach(p => {
+    p.x += p.vx; p.y += p.vy;
+    if (p.x < 0) p.x = mc.width;
+    if (p.x > mc.width) p.x = 0;
+    if (p.y < 0) p.y = mc.height;
+    if (p.y > mc.height) p.y = 0;
+
+    mctx.beginPath();
+    mctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    mctx.fillStyle = p.color;
+    mctx.globalAlpha = p.alpha;
+    mctx.fill();
+  });
+
+  // Draw connections
+  mctx.globalAlpha = 0.06;
+  mctx.strokeStyle = '#D4A017';
+  mctx.lineWidth = 0.5;
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const d = Math.sqrt(dx * dx + dy * dy);
+      if (d < 150) {
+        mctx.beginPath();
+        mctx.moveTo(particles[i].x, particles[i].y);
+        mctx.lineTo(particles[j].x, particles[j].y);
+        mctx.stroke();
+      }
+    }
+  }
+  mctx.globalAlpha = 1;
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+// ── VOICE VISUALIZER CANVAS ────────────────────────────────
+const vc = document.getElementById('voiceCanvas');
+const vctx = vc.getContext('2d');
+
+function resizeVoiceCanvas() {
+  vc.width = vc.offsetWidth;
+  vc.height = vc.offsetHeight;
+}
+resizeVoiceCanvas();
+window.addEventListener('resize', resizeVoiceCanvas);
+
+let voicePhase = 0;
+function drawVoice() {
+  vctx.clearRect(0, 0, vc.width, vc.height);
+  const cx = vc.width / 2;
+  const cy = vc.height / 2;
+  const maxR = Math.min(cx, cy) * 0.7;
+
+  // Ambient glow
+  const glow = vctx.createRadialGradient(cx, cy, 0, cx, cy, maxR * 1.3);
+  glow.addColorStop(0, 'rgba(212,160,23,0.08)');
+  glow.addColorStop(1, 'transparent');
+  vctx.fillStyle = glow;
+  vctx.fillRect(0, 0, vc.width, vc.height);
+
+  // Draw concentric voice rings
+  const ringColors = ['#D4A017','#B185DB','#00D4FF','#E8A87C'];
+  for (let r = 0; r < 4; r++) {
+    const radius = maxR * (0.3 + r * 0.18);
+    vctx.beginPath();
+    for (let a = 0; a < Math.PI * 2; a += 0.02) {
+      const wave = Math.sin(a * (4 + r) + voicePhase * (1 + r * 0.3)) * (8 + r * 4);
+      const x = cx + Math.cos(a) * (radius + wave);
+      const y = cy + Math.sin(a) * (radius + wave);
+      if (a === 0) vctx.moveTo(x, y);
+      else vctx.lineTo(x, y);
+    }
+    vctx.closePath();
+    vctx.strokeStyle = ringColors[r];
+    vctx.globalAlpha = 0.4 - r * 0.07;
+    vctx.lineWidth = 2;
+    vctx.stroke();
+  }
+
+  // Center dot
+  vctx.globalAlpha = 0.8;
+  vctx.beginPath();
+  vctx.arc(cx, cy, 6 + Math.sin(voicePhase * 2) * 2, 0, Math.PI * 2);
+  vctx.fillStyle = '#D4A017';
+  vctx.fill();
+  vctx.globalAlpha = 1;
+
+  voicePhase += 0.02;
+  requestAnimationFrame(drawVoice);
+}
+drawVoice();
+
+// ── SCROLL ANIMATIONS ──────────────────────────────────────
+const observerOptions = { threshold: 0.3 };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      // A.I.V.A. letters
+      if (entry.target.id === 'aivaLetters') {
+        entry.target.querySelectorAll('.aiva-letter').forEach((el, i) => {
+          setTimeout(() => el.classList.add('visible'), i * 200);
+        });
+      }
+      // Revenue split bar
+      if (entry.target.id === 'splitBar') {
+        document.getElementById('splitArtist').classList.add('animated');
+      }
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('#aivaLetters, #splitBar').forEach(el => observer.observe(el));
+
+// ── JOURNEY STEPS ──────────────────────────────────────────
+const journeyData = [
+  {
+    title: 'Join NOIZYVOX',
+    body: 'Sign up free. No credit card. No lock-in. We believe in earning your trust before asking for commitment. <strong>The Starter tier is free forever</strong> — because everyone deserves access to their own voice.'
+  },
+  {
+    title: 'Your Management Portal',
+    body: 'We build you a personal workspace — your dashboard for everything. See incoming requests, track earnings, manage personas, review your consent history. <strong>Your command center.</strong>'
+  },
+  {
+    title: 'Pristine Voice Model',
+    body: 'We convert your recordings into a <strong>pristine AI voice model</strong> of YOUR voice. Performance-grade quality. Multiple personas from your base. This is YOUR model — not a generic template.'
+  },
+  {
+    title: 'Lifetime Account — You OWN It',
+    body: 'Your voice model, your account, your data — <strong>you own it forever</strong>. Not rented. Not licensed back to you. OWNED. This isn\'t a subscription to your own voice. It\'s a deed.'
+  },
+  {
+    title: 'Manipulate & Monetize',
+    body: 'Your voice model works 24/7 while you sleep. Marketplace sales, licensing deals, API usage — all at <strong>75% to you</strong>. Real-time bidding captures urgency value. Income smoothing gives you stability.'
+  },
+  {
+    title: 'Your Choice — Stay or Go',
+    body: '<strong>FREEDOM to leave anytime WITH your voice.</strong> Take your model, your data, your earnings history, and go. Or stay, because we actually give a shit. That\'s the difference. That\'s NOIZYVOX.'
+  },
+];
+
+function setStep(idx) {
+  document.querySelectorAll('.journey-step').forEach((el, i) => {
+    el.classList.toggle('active', i === idx);
+  });
+  const d = journeyData[idx];
+  document.getElementById('journeyTitle').textContent = d.title;
+  document.getElementById('journeyBody').innerHTML = d.body;
+}
+
+// ── CONSENT KERNEL TOGGLE ──────────────────────────────────
+function toggleKernel(card) {
+  card.classList.toggle('expanded');
+}
+
+// ── DEMO INTERACTIONS ──────────────────────────────────────
+function showDemoResult(title, body, color) {
+  const result = document.getElementById('demoResult');
+  const titleEl = document.getElementById('demoResultTitle');
+  const bodyEl = document.getElementById('demoResultBody');
+  titleEl.textContent = title;
+  titleEl.style.color = color;
+  bodyEl.innerHTML = body;
+  result.classList.add('visible');
+}
+
+function demoApprove() {
+  showDemoResult(
+    '✓ Request Approved',
+    '<span style="color:var(--restore)">Consent logged to immutable ledger.</span><br><br>' +
+    'Voice model assigned to project: <strong>Meridian Audio Books — Sci-Fi Narration</strong><br>' +
+    'Estimated completion: 3 days (AI-assisted)<br>' +
+    'Your earnings: <strong style="color:var(--gold)">$1,800</strong> (auto-deposited via Stripe)<br><br>' +
+    '<em style="color:var(--silver)">You\'ll receive a preview of Chapter 1 for quality review before full delivery.</em>',
+    'var(--restore)'
+  );
+}
+
+function demoDecline() {
+  showDemoResult(
+    '✕ Request Declined',
+    '<span style="color:var(--pulse)">No consent given. No voice used. No data shared.</span><br><br>' +
+    'The client has been notified. Your decline is logged privately — <strong>only you can see the reason</strong>.<br><br>' +
+    '<em style="color:var(--silver)">Your voice, your values. Creative veto exercised. This is your right.</em>',
+    'var(--pulse)'
+  );
+}
+
+function demoNegotiate() {
+  showDemoResult(
+    '↔ Counter-Offer Sent',
+    '<span style="color:var(--gold)">Negotiation mode activated.</span><br><br>' +
+    'Your counter: <strong style="color:var(--gold)">$3,200</strong> ($2,400 your share) — reflecting premium narration quality and urgency.<br>' +
+    'Added terms: Review rights on final edit, credit in audiobook metadata.<br><br>' +
+    '<em style="color:var(--silver)">Smart contract updated. Client has 48 hours to respond. You\'ll be notified in your portal.</em>',
+    'var(--gold)'
+  );
+}
+
+// ── DEMO CLOCK ─────────────────────────────────────────────
+function updateDemoClock() {
+  const now = new Date();
+  document.getElementById('demoTime').textContent =
+    now.toLocaleTimeString('en-US', { hour12: true, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+}
+setInterval(updateDemoClock, 1000);
+updateDemoClock();
+
+// ── SMOOTH SCROLL ──────────────────────────────────────────
+function scrollTo(selector) {
+  document.querySelector(selector)?.scrollIntoView({ behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>

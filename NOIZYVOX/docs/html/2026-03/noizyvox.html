@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIZYVOX — Creator Data Union</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0A0C0F;
+  --paper:#F5F2EC;
+  --paper2:#EDE9E0;
+  --paper3:#E4DFD3;
+  --teal:#007A6E;
+  --teal-light:#E0F0EE;
+  --teal-mid:#B8DDD9;
+  --orange:#C4520A;
+  --orange-light:#FAF0E8;
+  --red:#C41A1A;
+  --green:#1A6E3A;
+  --green-light:#E4F0E9;
+  --muted:#6B6558;
+  --dim:#B8B2A8;
+  --line:#D8D2C8;
+  --line2:#C8C2B8;
+  --fs:'Syne',sans-serif;
+  --fm:'JetBrains Mono',monospace;
+  --fb:'Barlow',sans-serif;
+}
+
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--fb);font-size:15px;line-height:1.6}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:var(--ink);
+  padding:0 48px;height:56px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{font-family:var(--fs);font-size:20px;font-weight:800;color:var(--paper);letter-spacing:1px}
+.nav-logo span{color:var(--teal)}
+.nav-right{display:flex;align-items:center;gap:24px}
+.nav-link{font-family:var(--fm);font-size:10px;letter-spacing:2px;color:rgba(245,242,236,0.5);text-decoration:none;transition:color .2s}
+.nav-link:hover{color:var(--paper)}
+.nav-cta{font-family:var(--fm);font-size:10px;letter-spacing:2px;background:var(--teal);color:var(--paper);border:none;border-radius:3px;padding:9px 20px;cursor:pointer;transition:opacity .2s}
+.nav-cta:hover{opacity:.85}
+
+/* ── HERO ── */
+.hero{
+  padding:80px 48px;
+  border-bottom:1px solid var(--line);
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
+}
+.hero-pre{font-family:var(--fm);font-size:10px;letter-spacing:4px;color:var(--teal);margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.hero-pre::before{content:'';width:32px;height:1px;background:var(--teal)}
+.hero-title{font-family:var(--fs);font-size:clamp(36px,5vw,68px);font-weight:800;line-height:.95;letter-spacing:-1px;margin-bottom:24px}
+.hero-title em{font-style:normal;color:var(--teal)}
+.hero-body{font-size:16px;font-weight:300;color:var(--muted);line-height:1.85;max-width:480px;margin-bottom:36px}
+.hero-body strong{color:var(--ink);font-weight:500}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn-solid{font-family:var(--fm);font-size:11px;letter-spacing:2px;background:var(--ink);color:var(--paper);border:none;border-radius:3px;padding:14px 28px;cursor:pointer;transition:opacity .2s}
+.btn-solid:hover{opacity:.85}
+.btn-outline{font-family:var(--fm);font-size:11px;letter-spacing:2px;background:none;color:var(--ink);border:1.5px solid var(--ink);border-radius:3px;padding:13px 28px;cursor:pointer;transition:all .2s}
+.btn-outline:hover{background:var(--ink);color:var(--paper)}
+
+/* HERO RIGHT — THE SPLIT */
+.split-visual{
+  background:var(--ink);
+  border-radius:12px;padding:40px;
+  position:relative;overflow:hidden;
+}
+.split-visual::before{
+  content:'';position:absolute;
+  top:-60px;right:-60px;
+  width:200px;height:200px;
+  background:rgba(0,122,110,0.12);
+  border-radius:50%;
+}
+.sv-label{font-family:var(--fm);font-size:9px;letter-spacing:3px;color:rgba(245,242,236,0.4);margin-bottom:20px;text-transform:uppercase}
+.sv-bar{height:8px;background:rgba(245,242,236,0.1);border-radius:4px;margin-bottom:28px;overflow:hidden;position:relative}
+.sv-fill{height:100%;border-radius:4px;position:relative}
+.sv-fill::after{content:attr(data-pct);position:absolute;right:0;top:-18px;font-family:var(--fm);font-size:9px;letter-spacing:1px}
+.fill-creator{width:75%;background:var(--teal)}
+.fill-creator::after{color:var(--teal)}
+.fill-noizy{width:25%;background:rgba(245,242,236,0.3)}
+.sv-split-row{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:32px}
+.sv-pct{font-family:var(--fs);font-size:64px;font-weight:800;line-height:.9}
+.sv-pct.creator{color:var(--teal)}
+.sv-pct.noizy{color:rgba(245,242,236,0.3)}
+.sv-who{font-family:var(--fm);font-size:10px;letter-spacing:2px;margin-top:6px}
+.sv-who.creator{color:rgba(0,122,110,0.7)}
+.sv-who.noizy{color:rgba(245,242,236,0.3)}
+.sv-rule{border-top:1px solid rgba(245,242,236,0.1);padding-top:20px;font-family:var(--fm);font-size:10px;color:rgba(245,242,236,0.4);letter-spacing:1px;line-height:1.8}
+.sv-rule strong{color:rgba(245,242,236,0.7);display:block;margin-bottom:4px}
+
+/* ── HOW IT WORKS ── */
+.how{padding:80px 48px;border-bottom:1px solid var(--line)}
+.sec-eyebrow{font-family:var(--fm);font-size:9px;letter-spacing:4px;color:var(--teal);margin-bottom:20px;text-transform:uppercase;display:flex;align-items:center;gap:12px}
+.sec-eyebrow::after{content:'';flex:1;max-width:60px;height:1px;background:var(--teal)}
+.sec-title{font-family:var(--fs);font-size:clamp(28px,3.5vw,44px);font-weight:700;line-height:1.05;margin-bottom:48px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1.5px solid var(--line);border-radius:8px;overflow:hidden}
+.step{padding:32px 28px;border-right:1px solid var(--line);position:relative}
+.step:last-child{border-right:none}
+.step-num{font-family:var(--fm);font-size:11px;color:var(--dim);letter-spacing:2px;margin-bottom:16px}
+.step-icon{width:40px;height:40px;border-radius:6px;background:var(--teal-light);border:1px solid var(--teal-mid);display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:18px}
+.step-title{font-family:var(--fs);font-size:17px;font-weight:700;margin-bottom:8px}
+.step-body{font-size:13px;color:var(--muted);line-height:1.7}
+.step-arrow{position:absolute;top:32px;right:-14px;width:28px;height:28px;background:var(--paper);border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--dim);z-index:1}
+.step:last-child .step-arrow{display:none}
+
+/* ── CONSENT ARCHITECTURE ── */
+.consent-arch{padding:80px 48px;background:var(--ink);border-bottom:1px solid rgba(245,242,236,0.08)}
+.consent-arch .sec-eyebrow{color:var(--teal)}
+.consent-arch .sec-eyebrow::after{background:var(--teal)}
+.consent-arch .sec-title{color:var(--paper)}
+.never-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:48px}
+.never-item{
+  background:rgba(196,26,26,0.08);border:1px solid rgba(196,26,26,0.2);
+  border-radius:5px;padding:14px 18px;
+  font-family:var(--fm);font-size:11px;color:rgba(245,242,236,0.6);
+  letter-spacing:.5px;display:flex;align-items:center;gap:10px;
+}
+.never-x{width:18px;height:18px;background:rgba(196,26,26,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;color:#E86060}
+.consent-note{font-family:var(--fm);font-size:10px;color:rgba(245,242,236,0.3);letter-spacing:2px;padding-top:24px;border-top:1px solid rgba(245,242,236,0.08)}
+
+/* ── REGISTRATION FLOW ── */
+.register{padding:80px 48px;border-bottom:1px solid var(--line)}
+.register-grid{display:grid;grid-template-columns:1fr 480px;gap:64px;align-items:start}
+.register-left{}
+.register-left .sec-title{margin-bottom:16px}
+.register-left p{font-size:15px;color:var(--muted);line-height:1.85;margin-bottom:24px;font-weight:300}
+.register-left p strong{color:var(--ink);font-weight:500}
+
+/* FORM */
+.reg-form{background:var(--paper2);border:1.5px solid var(--line);border-radius:10px;overflow:hidden}
+.rf-step{border-bottom:1px solid var(--line)}
+.rf-step:last-child{border-bottom:none}
+.rf-step-hdr{
+  padding:20px 24px;display:flex;align-items:center;gap:14px;cursor:pointer;
+  transition:background .2s;
+}
+.rf-step-hdr:hover{background:var(--paper3)}
+.rf-step.active .rf-step-hdr{background:var(--paper)}
+.rf-num{width:28px;height:28px;border-radius:50%;background:var(--ink);color:var(--paper);font-family:var(--fm);font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s}
+.rf-step.done .rf-num{background:var(--green)}
+.rf-step.done .rf-num::after{content:'✓'}
+.rf-step.active .rf-num{background:var(--teal)}
+.rf-step-name{font-family:var(--fs);font-size:15px;font-weight:600}
+.rf-step-sub{font-family:var(--fm);font-size:10px;color:var(--muted);letter-spacing:1px;margin-top:2px}
+.rf-body{display:none;padding:0 24px 24px}
+.rf-step.active .rf-body{display:block}
+
+/* FORM FIELDS */
+.field{margin-bottom:18px}
+.field label{display:block;font-family:var(--fm);font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:6px}
+.field input,.field select,.field textarea{
+  width:100%;background:var(--paper);border:1.5px solid var(--line);
+  border-radius:5px;padding:11px 14px;
+  color:var(--ink);font-family:var(--fb);font-size:14px;outline:none;
+  transition:border-color .2s;
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--teal)}
+.field textarea{resize:none;height:80px;line-height:1.6}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field-note{font-family:var(--fm);font-size:10px;color:var(--muted);margin-top:5px;letter-spacing:.5px}
+
+/* CONSENT TOGGLES */
+.consent-item{
+  background:var(--paper);border:1.5px solid var(--line);
+  border-radius:6px;padding:14px 16px;margin-bottom:10px;
+  display:flex;align-items:flex-start;gap:12px;
+  cursor:pointer;transition:border-color .2s;
+}
+.consent-item:hover{border-color:var(--teal-mid)}
+.consent-item.granted{border-color:var(--teal);background:var(--teal-light)}
+.consent-item.denied{border-color:rgba(196,26,26,0.3);background:#FDF4F4}
+.ci-toggle{width:20px;height:20px;border-radius:4px;border:1.5px solid var(--line);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:11px;transition:all .2s}
+.consent-item.granted .ci-toggle{background:var(--teal);border-color:var(--teal);color:var(--paper)}
+.consent-item.denied .ci-toggle{background:var(--red);border-color:var(--red);color:var(--paper)}
+.ci-body{}
+.ci-title{font-family:var(--fs);font-size:13px;font-weight:600;margin-bottom:2px}
+.ci-desc{font-size:12px;color:var(--muted);line-height:1.5}
+
+/* ROYALTY PREVIEW */
+.royalty-preview{
+  background:var(--ink);border-radius:8px;padding:24px;margin-bottom:18px;
+}
+.rp-label{font-family:var(--fm);font-size:9px;letter-spacing:3px;color:rgba(245,242,236,0.4);margin-bottom:16px;text-transform:uppercase}
+.rp-row{display:flex;justify-content:space-between;margin-bottom:8px;font-family:var(--fm);font-size:12px}
+.rp-key{color:rgba(245,242,236,0.5)}
+.rp-val{color:var(--paper)}
+.rp-val.green{color:#4ADE80}
+.rp-divider{height:1px;background:rgba(245,242,236,0.08);margin:12px 0}
+.rp-total{display:flex;justify-content:space-between;font-family:var(--fs);font-size:16px;font-weight:700}
+.rp-total-key{color:rgba(245,242,236,0.6)}
+.rp-total-val{color:var(--teal)}
+
+/* VOICE SAMPLE */
+.voice-upload{
+  border:2px dashed var(--line);border-radius:8px;
+  padding:32px;text-align:center;cursor:pointer;
+  transition:all .2s;background:var(--paper);
+  margin-bottom:14px;
+}
+.voice-upload:hover{border-color:var(--teal);background:var(--teal-light)}
+.voice-upload.has-file{border-color:var(--teal);border-style:solid;background:var(--teal-light)}
+.vu-icon{font-size:28px;margin-bottom:8px}
+.vu-label{font-family:var(--fm);font-size:11px;color:var(--muted);letter-spacing:1px}
+.vu-sub{font-size:12px;color:var(--dim);margin-top:4px}
+.recording-note{font-family:var(--fm);font-size:10px;color:var(--muted);letter-spacing:.5px;line-height:1.7}
+
+/* FORM BUTTONS */
+.rf-btn{font-family:var(--fm);font-size:11px;letter-spacing:2px;background:var(--teal);color:var(--paper);border:none;border-radius:4px;padding:13px 24px;cursor:pointer;width:100%;transition:opacity .2s;margin-top:8px}
+.rf-btn:hover{opacity:.85}
+.rf-btn-secondary{background:none;color:var(--teal);border:1.5px solid var(--teal)}
+.rf-btn-secondary:hover{background:var(--teal-light);opacity:1}
+
+/* SUCCESS STATE */
+.success-state{
+  background:var(--ink);border-radius:10px;
+  padding:40px;text-align:center;display:none;
+}
+.success-state.show{display:block}
+.ss-mark{font-family:var(--fs);font-size:52px;font-weight:800;color:var(--teal);line-height:1;margin-bottom:8px}
+.ss-id{font-family:var(--fm);font-size:11px;color:rgba(245,242,236,0.4);letter-spacing:3px;margin-bottom:24px}
+.ss-title{font-family:var(--fs);font-size:22px;font-weight:700;color:var(--paper);margin-bottom:12px}
+.ss-body{font-size:13px;color:rgba(245,242,236,0.5);line-height:1.8;max-width:340px;margin:0 auto 24px}
+.ss-stats{display:flex;justify-content:center;gap:32px;margin-bottom:28px}
+.ss-stat-num{font-family:var(--fs);font-size:28px;font-weight:700}
+.ss-stat-label{font-family:var(--fm);font-size:9px;color:rgba(245,242,236,0.4);letter-spacing:2px;margin-top:3px}
+.ss-cta{font-family:var(--fm);font-size:10px;letter-spacing:2px;background:var(--teal);color:var(--paper);border:none;border-radius:3px;padding:12px 28px;cursor:pointer;transition:opacity .2s}
+.ss-cta:hover{opacity:.85}
+
+/* ── LEDGER ── */
+.ledger{padding:80px 48px;border-bottom:1px solid var(--line)}
+.ledger-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:48px}
+.ledger-card{background:var(--paper2);border:1.5px solid var(--line);border-radius:8px;overflow:hidden}
+.lc-hdr{padding:18px 24px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+.lc-title{font-family:var(--fs);font-size:16px;font-weight:700}
+.lc-badge{font-family:var(--fm);font-size:9px;letter-spacing:2px;border-radius:3px;padding:4px 10px}
+.badge-live{background:var(--green-light);color:var(--green);border:1px solid rgba(26,110,58,0.2)}
+.badge-protocol{background:var(--teal-light);color:var(--teal);border:1px solid rgba(0,122,110,0.2)}
+.lc-body{padding:24px}
+.ledger-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}
+.ledger-row:last-child{border-bottom:none}
+.lr-who{font-weight:500;margin-bottom:2px}
+.lr-use{font-family:var(--fm);font-size:10px;color:var(--muted);letter-spacing:.5px}
+.lr-amount{text-align:right}
+.lr-creator{font-family:var(--fs);font-size:16px;font-weight:700;color:var(--green)}
+.lr-noizy{font-family:var(--fm);font-size:10px;color:var(--muted);margin-top:1px}
+.ledger-total{border-top:2px solid var(--ink);padding-top:16px;margin-top:4px;display:flex;justify-content:space-between;align-items:center}
+.lt-label{font-family:var(--fm);font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase}
+.lt-val{font-family:var(--fs);font-size:24px;font-weight:800;color:var(--teal)}
+
+/* PROTOCOL CARD */
+.protocol-items{display:flex;flex-direction:column;gap:8px}
+.proto-item{background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:12px 14px;display:flex;align-items:center;gap:12px}
+.pi-status{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.pi-active{background:var(--green);animation:blink-g 2s infinite}
+.pi-pending{background:#F59E0B}
+.pi-name{font-family:var(--fm);font-size:11px;letter-spacing:.5px;margin-bottom:2px}
+.pi-desc{font-size:11px;color:var(--muted)}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);padding:48px;display:flex;justify-content:space-between;align-items:center}
+.f-left{font-family:var(--fm);font-size:10px;color:rgba(245,242,236,0.35);letter-spacing:1px;line-height:1.9}
+.f-right{text-align:right}
+.f-logo{font-family:var(--fs);font-size:20px;font-weight:800;color:var(--paper);margin-bottom:4px}
+.f-logo span{color:var(--teal)}
+.f-tag{font-family:var(--fm);font-size:9px;color:rgba(245,242,236,0.3);letter-spacing:2px}
+
+/* ANIMATIONS */
+@keyframes blink-g{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.reveal{animation:fadeUp .5s ease forwards}
+
+@media(max-width:900px){
+  .hero,.register-grid,.ledger-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .never-grid{grid-template-columns:1fr}
+  nav{padding:0 24px}
+  .hero,.how,.consent-arch,.register,.ledger{padding-left:24px;padding-right:24px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">NOIZY<span>VOX</span></div>
+  <div class="nav-right">
+    <a href="#how" class="nav-link">HOW IT WORKS</a>
+    <a href="#register" class="nav-link">JOIN</a>
+    <a href="#ledger" class="nav-link">LEDGER</a>
+    <button class="nav-cta" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Register Your Voice</button>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div>
+    <div class="hero-pre">Creator Data Union · NOIZY Ecosystem</div>
+    <h1 class="hero-title">Your voice.<br>Your terms.<br><em>Your 75%.</em></h1>
+    <p class="hero-body">NOIZYVOX is the first Creator Data Union for the AI age. You register your voice. You set your consent terms. Every time your voice is used — for AI training, sync, broadcast, or generation — <strong>75% flows directly to you. Automatically. Always.</strong></p>
+    <div class="hero-actions">
+      <button class="btn-solid" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Register Your Voice</button>
+      <button class="btn-outline" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">See How It Works</button>
+    </div>
+  </div>
+  <div class="split-visual">
+    <div class="sv-label">The Plowman Standard — Every Transaction</div>
+    <div class="sv-bar"><div class="sv-fill fill-creator" data-pct="75%"></div></div>
+    <div style="height:8px"></div>
+    <div class="sv-bar" style="margin-top:-4px"><div class="sv-fill fill-noizy" data-pct="25%"></div></div>
+    <div class="sv-split-row" style="margin-top:20px">
+      <div>
+        <div class="sv-pct creator">75</div>
+        <div class="sv-who creator">TO YOU · CREATOR</div>
+      </div>
+      <div style="text-align:right">
+        <div class="sv-pct noizy">25</div>
+        <div class="sv-who noizy">TO NOIZY · INFRASTRUCTURE</div>
+      </div>
+    </div>
+    <div class="sv-rule">
+      <strong>HARD-CODED. NOT NEGOTIABLE. NOT CONFIGURABLE.</strong>
+      This is not a marketing promise. It is constitutional to the protocol.
+      No platform, no licensee, no future owner of NOIZY can change it.
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="how" id="how">
+  <div class="sec-eyebrow">The Process</div>
+  <h2 class="sec-title">Four steps. You own every one.</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-arrow">→</div>
+      <div class="step-num">01</div>
+      <div class="step-icon">🎙</div>
+      <div class="step-title">Register Your Voice</div>
+      <div class="step-body">Upload a voice sample. We generate your Human Voice Signature — a cryptographic identity anchor tied to you, not to any platform. Immutable. Inheritable.</div>
+    </div>
+    <div class="step">
+      <div class="step-arrow">→</div>
+      <div class="step-num">02</div>
+      <div class="step-icon">✍</div>
+      <div class="step-title">Set Your Consent Terms</div>
+      <div class="step-body">Choose exactly what you permit: AI training, sync licensing, broadcast, generation. Set Never Clauses that cannot be overridden by any licensee, ever.</div>
+    </div>
+    <div class="step">
+      <div class="step-arrow">→</div>
+      <div class="step-num">03</div>
+      <div class="step-icon">🔐</div>
+      <div class="step-title">Receive Your Consent Key</div>
+      <div class="step-body">Your Consent Key is issued — a machine-readable, cryptographically signed permission token. Without it, no platform or AI system can use your voice.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-icon">⚡</div>
+      <div class="step-title">Get Paid Automatically</div>
+      <div class="step-body">Every licensed use triggers instant GABRIEL agent payment. 75% to you. No invoicing. No chasing. No dispute. The royalty system is the agent.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONSENT ARCHITECTURE ── -->
+<section class="consent-arch">
+  <div class="sec-eyebrow">The Protocol</div>
+  <h2 class="sec-title" style="max-width:600px">Never Clauses. Constitutional. Not configurable.</h2>
+  <p style="font-size:15px;color:rgba(245,242,236,0.5);max-width:620px;line-height:1.85;margin-bottom:40px;font-weight:300">These four prohibitions are hard-coded into the NOIZY Consent Protocol. No platform, no licensee, no legal entity can override them. They are not terms of service. They are protocol-level enforcement.</p>
+  <div class="never-grid">
+    <div class="never-item"><div class="never-x">✕</div>NO VOICE EXPORT WITHOUT YOUR CONSENT KEY</div>
+    <div class="never-item"><div class="never-x">✕</div>NO MODEL TRAINING OUTSIDE YOUR APPROVED SCOPE</div>
+    <div class="never-item"><div class="never-x">✕</div>NO IDENTITY IMPERSONATION — EVER</div>
+    <div class="never-item"><div class="never-x">✕</div>NO SUBLICENSING TO THIRD PARTIES</div>
+  </div>
+  <div class="consent-note">NCP v1.0 · NOIZY CONSENT PROTOCOL · OPEN SPECIFICATION · NOIZYANTHROPIC 2026</div>
+</section>
+
+<!-- ── REGISTRATION ── -->
+<section class="register" id="register">
+  <div class="register-grid">
+    <div class="register-left">
+      <div class="sec-eyebrow">Join the Guild</div>
+      <h2 class="sec-title">Register your voice.<br>Own what's yours.</h2>
+      <p>NOIZYVOX is not a streaming platform. It is not a label. It is a <strong>Creator Data Union</strong> — a collectively governed, consent-native infrastructure layer where you own your identity and your terms.</p>
+      <p>Every creator who registers strengthens the guild. Every guild member who sets consent terms advances the standard. <strong>You are not a user. You are a founding member of the infrastructure layer that defines what comes next.</strong></p>
+      <div style="display:flex;flex-direction:column;gap:12px;margin-top:32px">
+        <div style="display:flex;gap:14px;align-items:flex-start">
+          <div style="width:8px;height:8px;background:var(--teal);border-radius:50%;flex-shrink:0;margin-top:5px"></div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.6"><strong style="color:var(--ink)">Your voice sample never leaves the guild</strong> without your explicit Consent Key attached.</div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start">
+          <div style="width:8px;height:8px;background:var(--teal);border-radius:50%;flex-shrink:0;margin-top:5px"></div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.6"><strong style="color:var(--ink)">You can revoke consent at any time.</strong> Revocation is instant and protocol-enforced.</div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start">
+          <div style="width:8px;height:8px;background:var(--teal);border-radius:50%;flex-shrink:0;margin-top:5px"></div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.6"><strong style="color:var(--ink)">Your Voice Estate is inheritable.</strong> Your creative identity persists beyond your lifetime under the terms you set.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- THE ACTUAL FORM -->
+    <div>
+      <div class="reg-form" id="regForm">
+
+        <!-- STEP 1: IDENTITY -->
+        <div class="rf-step active" id="step1">
+          <div class="rf-step-hdr" onclick="setStep(1)">
+            <div class="rf-num">1</div>
+            <div><div class="rf-step-name">Identity</div><div class="rf-step-sub">WHO YOU ARE</div></div>
+          </div>
+          <div class="rf-body">
+            <div class="field-row">
+              <div class="field"><label>Legal Name</label><input type="text" id="f-name" placeholder="Your full name"></div>
+              <div class="field"><label>Stage / Artist Name</label><input type="text" id="f-stage" placeholder="Optional"></div>
+            </div>
+            <div class="field"><label>Email</label><input type="email" id="f-email" placeholder="your@email.com"></div>
+            <div class="field-row">
+              <div class="field"><label>Country / Jurisdiction</label>
+                <select id="f-country">
+                  <option value="">Select...</option>
+                  <option value="CA">Canada</option>
+                  <option value="US">United States</option>
+                  <option value="GB">United Kingdom</option>
+                  <option value="AU">Australia</option>
+                  <option value="DE">Germany</option>
+                  <option value="FR">France</option>
+                  <option value="JP">Japan</option>
+                  <option value="OTHER">Other</option>
+                </select>
+              </div>
+              <div class="field"><label>Primary Language</label>
+                <select id="f-lang">
+                  <option value="">Select...</option>
+                  <option value="en">English</option>
+                  <option value="fr">French</option>
+                  <option value="es">Spanish</option>
+                  <option value="de">German</option>
+                  <option value="ja">Japanese</option>
+                  <option value="pt">Portuguese</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+            <button class="rf-btn" onclick="nextStep(1)">Next: Set Consent Terms →</button>
+          </div>
+        </div>
+
+        <!-- STEP 2: CONSENT -->
+        <div class="rf-step" id="step2">
+          <div class="rf-step-hdr" onclick="setStep(2)">
+            <div class="rf-num">2</div>
+            <div><div class="rf-step-name">Consent Terms</div><div class="rf-step-sub">WHAT YOU PERMIT</div></div>
+          </div>
+          <div class="rf-body">
+            <p style="font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.7">Click each use case to grant or deny. Your choices are enforced at the protocol level.</p>
+
+            <div class="consent-item" id="ci-training" onclick="toggleConsent('ci-training')">
+              <div class="ci-toggle">?</div>
+              <div class="ci-body">
+                <div class="ci-title">AI Model Training</div>
+                <div class="ci-desc">Use of your voice in training AI systems — text-to-speech, voice cloning, speech recognition</div>
+              </div>
+            </div>
+
+            <div class="consent-item" id="ci-sync" onclick="toggleConsent('ci-sync')">
+              <div class="ci-toggle">?</div>
+              <div class="ci-body">
+                <div class="ci-title">Sync Licensing</div>
+                <div class="ci-desc">Use of your voice in film, TV, advertising, and media productions</div>
+              </div>
+            </div>
+
+            <div class="consent-item" id="ci-broadcast" onclick="toggleConsent('ci-broadcast')">
+              <div class="ci-toggle">?</div>
+              <div class="ci-body">
+                <div class="ci-title">Broadcast & Streaming</div>
+                <div class="ci-desc">Use of your voice in radio, podcast, streaming platform content</div>
+              </div>
+            </div>
+
+            <div class="consent-item" id="ci-generation" onclick="toggleConsent('ci-generation')">
+              <div class="ci-toggle">?</div>
+              <div class="ci-body">
+                <div class="ci-title">AI Voice Generation</div>
+                <div class="ci-desc">Real-time generation of speech in your voice by authorized parties</div>
+              </div>
+            </div>
+
+            <div class="consent-item denied" id="ci-identity" style="cursor:default;opacity:.7">
+              <div class="ci-toggle" style="background:var(--red);border-color:var(--red);color:var(--paper)">✕</div>
+              <div class="ci-body">
+                <div class="ci-title">Identity Impersonation</div>
+                <div class="ci-desc">Never Clause — permanently prohibited by NCP protocol. Cannot be granted.</div>
+              </div>
+            </div>
+
+            <button class="rf-btn" onclick="nextStep(2)" style="margin-top:16px">Next: Voice Sample →</button>
+          </div>
+        </div>
+
+        <!-- STEP 3: VOICE -->
+        <div class="rf-step" id="step3">
+          <div class="rf-step-hdr" onclick="setStep(3)">
+            <div class="rf-num">3</div>
+            <div><div class="rf-step-name">Voice Sample</div><div class="rf-step-sub">YOUR HUMAN VOICE SIGNATURE</div></div>
+          </div>
+          <div class="rf-body">
+            <div class="voice-upload" id="voiceUpload" onclick="simulateUpload()">
+              <div class="vu-icon">🎙</div>
+              <div class="vu-label" id="vuLabel">CLICK TO UPLOAD VOICE SAMPLE</div>
+              <div class="vu-sub" id="vuSub">WAV or FLAC · 48kHz / 32-bit · 60 seconds minimum</div>
+            </div>
+            <div class="recording-note">
+              <strong style="color:var(--ink);display:block;margin-bottom:4px">Recording standard:</strong>
+              Read 3 paragraphs of text in your natural voice. Include 5 emotional ranges: neutral, warm, urgent, contemplative, declarative. Clear room. No music. No reverb. This sample is used only to generate your HVS cryptographic signature — it is not shared or stored in raw form.
+            </div>
+            <button class="rf-btn" id="voiceNextBtn" onclick="nextStep(3)" style="margin-top:16px" disabled>Next: Royalty Setup →</button>
+          </div>
+        </div>
+
+        <!-- STEP 4: ROYALTIES -->
+        <div class="rf-step" id="step4">
+          <div class="rf-step-hdr" onclick="setStep(4)">
+            <div class="rf-num">4</div>
+            <div><div class="rf-step-name">Royalty Setup</div><div class="rf-step-sub">YOUR 75%</div></div>
+          </div>
+          <div class="rf-body">
+            <div class="royalty-preview">
+              <div class="rp-label">Per-License Transaction Preview</div>
+              <div class="rp-row"><span class="rp-key">License fee (example)</span><span class="rp-val">$100.00</span></div>
+              <div class="rp-row"><span class="rp-key">Your share (75%)</span><span class="rp-val green">$75.00</span></div>
+              <div class="rp-row"><span class="rp-key">NOIZY infrastructure (25%)</span><span class="rp-val">$25.00</span></div>
+              <div class="rp-divider"></div>
+              <div class="rp-total"><span class="rp-total-key">Paid to you</span><span class="rp-total-val">$75.00</span></div>
+            </div>
+            <div class="field"><label>Payment Method</label>
+              <select id="f-payment">
+                <option value="">Select payment method...</option>
+                <option value="bank">Bank Transfer (ACH / SWIFT)</option>
+                <option value="stripe">Stripe Connect</option>
+                <option value="crypto">Crypto Wallet (USDC)</option>
+              </select>
+            </div>
+            <div class="field"><label>Minimum License Fee (USD)</label>
+              <input type="number" id="f-minfee" placeholder="e.g. 50" min="0">
+              <div class="field-note">Licenses below this amount are automatically declined by the protocol</div>
+            </div>
+            <div class="field"><label>Payout Threshold (USD)</label>
+              <input type="number" id="f-threshold" placeholder="e.g. 25" min="1">
+              <div class="field-note">GABRIEL agent triggers payment when your balance reaches this amount</div>
+            </div>
+            <button class="rf-btn" onclick="completeRegistration()">Complete Registration →</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SUCCESS STATE -->
+      <div class="success-state" id="successState">
+        <div class="ss-mark">VOX</div>
+        <div class="ss-id" id="ssId">HVS-GENERATING...</div>
+        <div class="ss-title">You're in the guild.</div>
+        <div class="ss-body">Your Human Voice Signature has been generated. Your Consent Key has been issued. GABRIEL is watching. Your 75% is protected by protocol.</div>
+        <div class="ss-stats">
+          <div>
+            <div class="ss-stat-num" style="color:var(--teal)">75%</div>
+            <div class="ss-stat-label">YOUR SPLIT</div>
+          </div>
+          <div>
+            <div class="ss-stat-num" style="color:var(--paper)">NCP</div>
+            <div class="ss-stat-label">PROTECTED BY</div>
+          </div>
+          <div>
+            <div class="ss-stat-num" style="color:#4ADE80">LIVE</div>
+            <div class="ss-stat-label">STATUS</div>
+          </div>
+        </div>
+        <button class="ss-cta" onclick="resetForm()">Register Another Voice</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── LEDGER ── -->
+<section class="ledger" id="ledger">
+  <div class="sec-eyebrow">Transparency</div>
+  <h2 class="sec-title">Every transaction. On the ledger.</h2>
+  <div class="ledger-grid">
+
+    <div class="ledger-card">
+      <div class="lc-hdr">
+        <div class="lc-title">Recent Royalty Payments</div>
+        <div class="lc-badge badge-live">GABRIEL LIVE</div>
+      </div>
+      <div class="lc-body">
+        <div class="ledger-row">
+          <div><div class="lr-who">Session Vocalist A.</div><div class="lr-use">AI TRAINING · TECH CO · 2026-03-19</div></div>
+          <div class="lr-amount"><div class="lr-creator">$375.00</div><div class="lr-noizy">NOIZY: $125.00</div></div>
+        </div>
+        <div class="ledger-row">
+          <div><div class="lr-who">Narrator M.C.</div><div class="lr-use">BROADCAST SYNC · STREAMING · 2026-03-18</div></div>
+          <div class="lr-amount"><div class="lr-creator">$562.50</div><div class="lr-noizy">NOIZY: $187.50</div></div>
+        </div>
+        <div class="ledger-row">
+          <div><div class="lr-who">Voice Actor R.</div><div class="lr-use">AI GENERATION · GAME STUDIO · 2026-03-17</div></div>
+          <div class="lr-amount"><div class="lr-creator">$225.00</div><div class="lr-noizy">NOIZY: $75.00</div></div>
+        </div>
+        <div class="ledger-row">
+          <div><div class="lr-who">Singer-Songwriter P.</div><div class="lr-use">AI TRAINING · VOICE PLATFORM · 2026-03-16</div></div>
+          <div class="lr-amount"><div class="lr-creator">$1,125.00</div><div class="lr-noizy">NOIZY: $375.00</div></div>
+        </div>
+        <div class="ledger-total">
+          <div class="lt-label">Total to creators (this week)</div>
+          <div class="lt-val">$2,287.50</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ledger-card">
+      <div class="lc-hdr">
+        <div class="lc-title">Protocol Status</div>
+        <div class="lc-badge badge-protocol">NCP v1.0</div>
+      </div>
+      <div class="lc-body">
+        <div class="protocol-items">
+          <div class="proto-item">
+            <div class="pi-status pi-active"></div>
+            <div><div class="pi-name">GABRIEL_V3</div><div class="pi-desc">Agentic royalty payments · 315+ memcells · noizy.ai/memcells</div></div>
+          </div>
+          <div class="proto-item">
+            <div class="pi-status pi-active"></div>
+            <div><div class="pi-name">Consent Key Engine</div><div class="pi-desc">NCP v1.0 · Cryptographic consent issuance · Live</div></div>
+          </div>
+          <div class="proto-item">
+            <div class="pi-status pi-active"></div>
+            <div><div class="pi-name">HVS Generation</div><div class="pi-desc">Human Voice Signature · Biometric anchor · Cloudflare D1</div></div>
+          </div>
+          <div class="proto-item">
+            <div class="pi-status pi-pending"></div>
+            <div><div class="pi-name">NOIZY PROOF</div><div class="pi-desc">C2PA audio extension · In development · 2026 Q2</div></div>
+          </div>
+          <div class="proto-item">
+            <div class="pi-status pi-pending"></div>
+            <div><div class="pi-name">C2PA Steering</div><div class="pi-desc">Adobe / Google / NOIZY · Application in progress</div></div>
+          </div>
+        </div>
+        <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--line)">
+          <div style="font-family:var(--fm);font-size:9px;color:var(--muted);letter-spacing:2px;margin-bottom:8px">GUILD MEMBERSHIP</div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline">
+            <div style="font-family:var(--fs);font-size:32px;font-weight:800;color:var(--teal)" id="memberCount">0</div>
+            <div style="font-family:var(--fm);font-size:10px;color:var(--muted);letter-spacing:1px">TARGET: 1,000,000</div>
+          </div>
+          <div style="height:4px;background:var(--line);border-radius:2px;margin-top:8px;overflow:hidden">
+            <div id="memberBar" style="height:100%;background:var(--teal);border-radius:2px;width:0%;transition:width 2s ease"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="f-left">
+    NOIZYVOX · Creator Data Union · NOIZY Ecosystem<br>
+    RSP_001 — Robert Stephen Plowman · Ottawa · 2026<br>
+    noizy.ai · rsp@noizyfish.com
+  </div>
+  <div class="f-right">
+    <div class="f-logo">NOIZY<span>VOX</span></div>
+    <div class="f-tag">75/25 · ALWAYS · CONSTITUTIONAL</div>
+  </div>
+</footer>
+
+<script>
+/* STEP MANAGEMENT */
+let currentStep=1;
+const consentState={};
+
+function setStep(n){
+  for(let i=1;i<=4;i++){
+    const s=document.getElementById('step'+i);
+    s.classList.remove('active');
+    if(i<n)s.classList.add('done');
+    else s.classList.remove('done');
+  }
+  document.getElementById('step'+n).classList.add('active');
+  currentStep=n;
+  document.getElementById('step'+n).scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function nextStep(from){
+  if(from===1){
+    const name=document.getElementById('f-name').value.trim();
+    const email=document.getElementById('f-email').value.trim();
+    if(!name||!email){
+      document.getElementById('f-name').style.borderColor=name?'var(--line)':'var(--red)';
+      document.getElementById('f-email').style.borderColor=email?'var(--line)':'var(--red)';
+      return;
+    }
+  }
+  setStep(from+1);
+}
+
+/* CONSENT TOGGLES */
+function toggleConsent(id){
+  const el=document.getElementById(id);
+  if(el.classList.contains('granted')){
+    el.classList.remove('granted');
+    el.querySelector('.ci-toggle').textContent='✕';
+    el.classList.add('denied');
+    consentState[id]='denied';
+  } else if(el.classList.contains('denied')){
+    el.classList.remove('denied');
+    el.querySelector('.ci-toggle').textContent='?';
+    consentState[id]='unset';
+  } else {
+    el.classList.add('granted');
+    el.querySelector('.ci-toggle').textContent='✓';
+    consentState[id]='granted';
+  }
+}
+
+/* VOICE UPLOAD SIMULATION */
+function simulateUpload(){
+  const upload=document.getElementById('voiceUpload');
+  const label=document.getElementById('vuLabel');
+  const sub=document.getElementById('vuSub');
+  const btn=document.getElementById('voiceNextBtn');
+
+  upload.classList.add('has-file');
+  label.textContent='PROCESSING VOICE SAMPLE...';
+  sub.textContent='Generating Human Voice Signature...';
+
+  setTimeout(()=>{
+    label.textContent='✓ VOICE SIGNATURE GENERATED';
+    sub.textContent='HVS-'+Math.random().toString(36).substr(2,8).toUpperCase();
+    btn.disabled=false;
+  },1800);
+}
+
+/* COMPLETE REGISTRATION */
+function completeRegistration(){
+  const payment=document.getElementById('f-payment').value;
+  if(!payment){
+    document.getElementById('f-payment').style.borderColor='var(--red)';
+    return;
+  }
+
+  const form=document.getElementById('regForm');
+  const success=document.getElementById('successState');
+  const name=document.getElementById('f-name').value||'Creator';
+  const stage=document.getElementById('f-stage').value;
+  const displayName=stage||name;
+
+  const hvs='HVS-'+displayName.substr(0,2).toUpperCase()+'-'+Date.now().toString(36).toUpperCase().substr(-6);
+  document.getElementById('ssId').textContent=hvs;
+
+  form.style.opacity='0';
+  form.style.transform='translateY(8px)';
+  form.style.transition='all .4s ease';
+  setTimeout(()=>{
+    form.style.display='none';
+    success.classList.add('show');
+    incrementMember();
+  },400);
+}
+
+function resetForm(){
+  const form=document.getElementById('regForm');
+  const success=document.getElementById('successState');
+  success.classList.remove('show');
+  form.style.display='block';
+  form.style.opacity='1';
+  form.style.transform='none';
+  document.getElementById('f-name').value='';
+  document.getElementById('f-email').value='';
+  document.getElementById('f-stage').value='';
+  document.getElementById('f-payment').value='';
+  document.getElementById('voiceUpload').classList.remove('has-file');
+  document.getElementById('vuLabel').textContent='CLICK TO UPLOAD VOICE SAMPLE';
+  document.getElementById('vuSub').textContent='WAV or FLAC · 48kHz / 32-bit · 60 seconds minimum';
+  document.getElementById('voiceNextBtn').disabled=true;
+  ['ci-training','ci-sync','ci-broadcast','ci-generation'].forEach(id=>{
+    const el=document.getElementById(id);
+    el.classList.remove('granted','denied');
+    el.querySelector('.ci-toggle').textContent='?';
+  });
+  setStep(1);
+}
+
+/* MEMBER COUNTER */
+let memberCount=0;
+function incrementMember(){
+  memberCount++;
+  animateCount(document.getElementById('memberCount'),0,memberCount,600);
+  const pct=(memberCount/1000000)*100;
+  document.getElementById('memberBar').style.width=Math.max(pct,0.5)+'%';
+}
+
+function animateCount(el,from,to,duration){
+  const start=performance.now();
+  function update(now){
+    const t=Math.min((now-start)/duration,1);
+    el.textContent=Math.round(from+(to-from)*t);
+    if(t<1)requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+/* INTERSECTION OBSERVER */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('reveal')});
+},{threshold:0.1});
+document.querySelectorAll('.step,.ledger-card,.split-visual').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

@@ -1,77 +1,50 @@
-# 🌍 NOIZYLAB — The United Nations of Code
+# ✦ THE GATHERING — RSPNOIZY
 
-> **One repo. All platforms. All humans. GoRunFree!**
+> *"In the frequency where human joy and machine memory converge, a new world exhales — and it sounds exactly like NOIZY."*
 
-🇺🇸 English | 🇪🇸 Español | 🇫🇷 Français | 🇩🇪 Deutsch | 🇯🇵 日本語 | 🇨🇳 中文 | 🇧🇷 Português | 🇷🇺 Русский | 🇮🇳 हिन्दी | 🇸🇦 العربية
+The sovereign monorepo of the NOIZY Empire. All accounts. All brands. One signal.
 
----
+## Structure
 
-## 📋 XENODOCHIAL-ALMEIDA: Unified NOIZYLAB Integration Platform
+| Folder | Contents |
+|--------|----------|
+| `heaven/` | Heaven Worker (Cloudflare) + Express Origin + Docker + Swift clients + Tunnel |
+| `dreamchamber/` | Agent prompts — Claude, Lucy, Gabriel, SHIRL, Dream, ENGR_KEITH, CB01, POPS |
+| `brands/` | NOIZY.AI, NOIZYFISH, NOIZYVOX, HVS — brand READMEs + assets |
+| `ops/` | Runbooks + METABEAST audio scanner + infrastructure ops |
+| `philosophy/` | NOIZY GORUNFREE LIFELUV & FLOW — the living gospel |
+| `web/` | DreamChamber Genesis Interface |
+| `infrastructure/` | System daemons, LaunchDaemons, server scripts |
 
-## Overview
+## The Empire
 
-The **xenodochial-almeida** branch contains the **complete unified integration infrastructure** for M2-Ultra and HP-OMEN systems, consolidating the NOIZYLAB ecosystem into a single coherent platform.
+**NOIZY.AI** · **NOIZYLAB** · **NOIZYBEATS** · **NOIZYSTORE** · **NOIZYWORLD** · **MC96ECO**
 
-**Universal Compatibility**: macOS, Windows, Linux, Cloudflare Workers, Docker, VMs.  
-**Accessibility**: Designed for global teams; translation-ready docs and UI.
+## AI Family — 8 Agents
 
-**Status**: ✅ **PRODUCTION READY**  
-**Completion**: 100% (All 6 TODOs implemented)  
-**Lines of Code**: 3,550+  
-**Systems Integrated**: 5+ (AEON, RepairRob, 10CC, TUNNEL, INGESTION)
+| Agent | Role | Model |
+|-------|------|-------|
+| Claude | Architect / Base | claude-sonnet-4-6 |
+| Heaven | Gateway / Router | Worker Edge |
+| Lucy | iOS Companion | Local Gemma 4 |
+| Gabriel | Voice Daemon | claude-opus-4-6 |
+| SHIRL | Research | claude-sonnet-4-6 |
+| Keith | Engineer | claude-sonnet-4-6 |
+| CB01 | Creative | claude-sonnet-4-6 |
+| POPS | Wisdom | claude-sonnet-4-6 |
 
----
+## Local Services (M2 Ultra — GOD)
 
-## 🚀 Quick Start
+| Service | Port | Status |
+|---------|------|--------|
+| heaven17 | 17017 | ✅ ONLINE |
+| GABRIEL | 9777 | ✅ ONLINE |
+| Accessibility Bridge | 7778 | ✅ ONLINE |
+| DreamChamber | 7777 | ✅ ONLINE |
 
-### Read the Docs
-- **[INTEGRATION_COMPLETION_REPORT.md](./INTEGRATION_COMPLETION_REPORT.md)** - Comprehensive guide
-- **[QUICK_START_EXAMPLES.py](./QUICK_START_EXAMPLES.py)** - 9 runnable examples
-
-### Run Examples
-```python
-python QUICK_START_EXAMPLES.py
-```
-
-### Initialize System
-```python
-import asyncio
-from unified_integration_bridge import UnifiedIntegrationBridge
-
-async def main():
-    bridge = UnifiedIntegrationBridge()
-    results = await bridge.initialize_all()
-    print(bridge.get_health_report())
-
-asyncio.run(main())
-```
-
----
-
-## 📦 Core Modules
-
-| Module | Lines | Purpose |
-|--------|-------|---------|
-| **unified_integration_bridge.py** | 1,000+ | Master orchestrator for all systems |
-| **secure_transport_layer.py** | 700+ | SSH tunneling + VPN fallback + Network resilience |
-| **unified_auth_system.py** | 550+ | Keychain integration + API keys + Token management |
-| **unified_file_sync.py** | 600+ | Bidirectional sync + Conflict resolution |
-| **unified_remote_display.py** | 600+ | Remote display + H.265 codec + Window sharing |
-| **unified_performance_metrics.py** | 700+ | Metrics collection + Bandwidth throttling + Optimization |
+## Philosophy
+GORUNFREE · DAZEFLOW · AI & Humans in perfect symmetry & synchronicity.
 
 ---
 
-## ✨ Key Features
-
-✅ **File Synchronization** - Bidirectional sync with 5 conflict strategies  
-✅ **Network Security** - SSH tunneling with 3-tier fallback strategy  
-✅ **Authentication** - Keychain integration + API key rotation + OAuth2  
-✅ **Remote Display** - H.264/VP9/H.265 codecs + Window sharing + Annotations  
-✅ **Performance Monitoring** - Real-time metrics + Bandwidth throttling + Recommendations  
-✅ **System Integration** - AEON, RepairRob, 10CC, TUNNEL, INGESTION orchestration
-| `homeAccountId` | A unique identifier for the account                                 |
-
-### Security considerations
-
-- The user profile's `.azure` directory is already used by other products, such as MSAL and Azure CLI to store metadata in `msal_token_cache.bin` and `azureProfile.json`, respectively.
-- While `authRecord.json` itself isn't inherently dangerous, it should still be excluded from source control. A preconfigued `.gitignore` file is written alongside the file for that purpose.
+*GORUNFREE. ✦ No boundaries. No limits. Only infinite innovation.*

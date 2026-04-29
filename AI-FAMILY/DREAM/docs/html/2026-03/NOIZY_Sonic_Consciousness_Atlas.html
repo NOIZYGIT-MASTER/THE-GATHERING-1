@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIZY — Global Sonic & Consciousness Atlas + Joy Contagion Map</title>
+<style>
+  :root {
+    --bg: #03020a;
+    --bg2: #07050f;
+    --surface: rgba(255,255,255,0.03);
+    --surface2: rgba(255,255,255,0.06);
+    --border: rgba(255,255,255,0.08);
+    --text: #e8e0f0;
+    --muted: #7a6e8a;
+    --gold: #f4a228;
+    --amber: #f59e0b;
+    --rose: #f43f5e;
+    --violet: #8b5cf6;
+    --indigo: #6366f1;
+    --cyan: #06b6d4;
+    --emerald: #10b981;
+    --teal: #14b8a6;
+    --pink: #ec4899;
+    --orange: #fb923c;
+    --lime: #84cc16;
+    --sky: #38bdf8;
+    --font: 'Georgia', serif;
+    --mono: 'Courier New', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── CANVAS COSMOS ── */
+  #cosmos {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(3,2,10,0.9);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 40px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  nav a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid transparent;
+    transition: all 0.3s;
+    font-family: var(--mono);
+  }
+
+  nav a:hover, nav a.active {
+    color: var(--gold);
+    border-color: var(--gold);
+    background: rgba(244,162,40,0.08);
+  }
+
+  nav .brand {
+    font-size: 0.85rem;
+    color: var(--gold);
+    font-weight: bold;
+    letter-spacing: 0.15em;
+    margin-right: 10px;
+  }
+
+  /* ── MAIN ── */
+  main {
+    position: relative;
+    z-index: 1;
+    padding-top: 70px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 40px;
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    opacity: 0.9;
+  }
+
+  .hero-title {
+    font-size: clamp(2.8rem, 8vw, 6rem);
+    font-weight: 700;
+    line-height: 1.05;
+    margin-bottom: 24px;
+    background: linear-gradient(135deg, #f4a228 0%, #f43f5e 35%, #8b5cf6 65%, #06b6d4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 1.25rem;
+    color: var(--muted);
+    max-width: 700px;
+    margin: 0 auto 40px;
+    line-height: 1.8;
+  }
+
+  .hero-manifesto {
+    font-size: 1.5rem;
+    color: var(--text);
+    max-width: 800px;
+    margin: 0 auto 50px;
+    font-style: italic;
+    border-left: 3px solid var(--gold);
+    padding-left: 24px;
+    text-align: left;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+
+  .hero-stat {
+    text-align: center;
+  }
+
+  .hero-stat .num {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--gold), var(--rose));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: block;
+  }
+
+  .hero-stat .label {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-family: var(--mono);
+  }
+
+  /* ── SECTION BASE ── */
+  section {
+    padding: 100px 40px;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    opacity: 0.8;
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  .section-lead {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 780px;
+    margin-bottom: 60px;
+    line-height: 1.8;
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 0 0 100px;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    position: relative;
+    padding-left: 60px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--gold), var(--rose), var(--violet), var(--cyan), var(--emerald));
+  }
+
+  .era {
+    position: relative;
+    margin-bottom: 64px;
+  }
+
+  .era::before {
+    content: '';
+    position: absolute;
+    left: -48px;
+    top: 8px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--era-color, var(--gold));
+    background: var(--bg);
+    box-shadow: 0 0 20px var(--era-color, var(--gold));
+  }
+
+  .era-date {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--era-color, var(--gold));
+    margin-bottom: 8px;
+  }
+
+  .era-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+
+  .era-body {
+    color: #b0a8c0;
+    line-height: 1.8;
+    margin-bottom: 16px;
+    max-width: 900px;
+  }
+
+  .era-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .era-tag {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--era-color, var(--gold));
+    color: var(--era-color, var(--gold));
+    opacity: 0.75;
+  }
+
+  .era-instruments {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .instr {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 0.82rem;
+    color: var(--text);
+  }
+
+  /* ── PSYCHEDELIC GRID ── */
+  .psych-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 28px;
+  }
+
+  .psych-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .psych-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+
+  .psych-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--pc1), var(--pc2));
+  }
+
+  .psych-icon {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .psych-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--pc1);
+    margin-bottom: 8px;
+  }
+
+  .psych-sub {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .psych-body {
+    font-size: 0.9rem;
+    color: #b0a8c0;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .psych-mechanism {
+    background: rgba(0,0,0,0.3);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-top: 12px;
+  }
+
+  .psych-mechanism .label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .psych-mechanism .value {
+    font-size: 0.88rem;
+    color: var(--pc2);
+    line-height: 1.6;
+  }
+
+  /* ── BRAINWAVE TABLE ── */
+  .bw-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+    font-size: 0.9rem;
+  }
+
+  .bw-table th {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 12px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .bw-table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  .bw-table tr:hover td {
+    background: var(--surface);
+  }
+
+  .bw-badge {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── MECHANISM FLOW ── */
+  .mechanism-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 800px;
+  }
+
+  .mflow-step {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 20px 0;
+    border-left: 2px solid var(--border);
+    padding-left: 28px;
+    position: relative;
+  }
+
+  .mflow-step::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 24px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--mf-color, var(--violet));
+  }
+
+  .mflow-num {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    min-width: 28px;
+    padding-top: 2px;
+  }
+
+  .mflow-content .title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--mf-color, var(--violet));
+    margin-bottom: 4px;
+  }
+
+  .mflow-content .body {
+    font-size: 0.88rem;
+    color: #b0a8c0;
+    line-height: 1.7;
+  }
+
+  /* ── JOY MANIFESTO ── */
+  .joy-hero {
+    text-align: center;
+    padding: 60px 0 80px;
+  }
+
+  .joy-pulse {
+    font-size: clamp(3rem, 10vw, 8rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, #f43f5e, #f4a228, #84cc16, #06b6d4, #8b5cf6, #ec4899);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: joyshift 4s ease infinite;
+  }
+
+  @keyframes joyshift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .joy-quote {
+    font-size: 1.4rem;
+    max-width: 900px;
+    margin: 0 auto 40px;
+    color: var(--text);
+    line-height: 1.7;
+    font-style: italic;
+  }
+
+  .joy-cite {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  /* ── CONTAGION MAP ── */
+  .contagion-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-bottom: 60px;
+  }
+
+  .contagion-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 30px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contagion-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--cc-color, var(--gold));
+    box-shadow: 0 0 30px rgba(244,162,40,0.15);
+  }
+
+  .contagion-card .cc-number {
+    font-family: var(--mono);
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--cc-color, var(--gold));
+    opacity: 0.15;
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    line-height: 1;
+  }
+
+  .contagion-card .cc-icon {
+    font-size: 1.8rem;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .contagion-card .cc-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--cc-color, var(--gold));
+    margin-bottom: 8px;
+  }
+
+  .contagion-card .cc-body {
+    font-size: 0.88rem;
+    color: #b0a8c0;
+    line-height: 1.7;
+  }
+
+  /* ── VIRUS DIAGRAM ── */
+  .virus-center {
+    text-align: center;
+    padding: 60px 0;
+  }
+
+  .virus-core {
+    display: inline-block;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(244,162,40,0.3), rgba(244,63,94,0.1));
+    border: 2px solid var(--gold);
+    box-shadow: 0 0 60px rgba(244,162,40,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    text-align: center;
+    line-height: 1.3;
+    margin: 0 auto 40px;
+    animation: pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 60px rgba(244,162,40,0.4); transform: scale(1); }
+    50% { box-shadow: 0 0 100px rgba(244,162,40,0.7); transform: scale(1.04); }
+  }
+
+  .virus-spikes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .spike {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 30px;
+    padding: 10px 22px;
+    font-size: 0.9rem;
+    color: var(--text);
+    transition: all 0.3s;
+    cursor: default;
+  }
+
+  .spike:hover {
+    background: var(--surface2);
+    border-color: var(--rose);
+    color: var(--rose);
+    transform: scale(1.05);
+  }
+
+  /* ── NOIZY ROLES ── */
+  .roles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 28px;
+  }
+
+  .role-card {
+    background: linear-gradient(135deg, var(--surface), var(--surface2));
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .role-card:hover {
+    border-color: var(--rc-color, var(--violet));
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+  }
+
+  .role-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--rc-color, var(--violet)), transparent);
+  }
+
+  .role-brand {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--rc-color, var(--violet));
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  .role-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .role-body {
+    font-size: 0.88rem;
+    color: #b0a8c0;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .role-joy {
+    font-size: 0.85rem;
+    color: var(--rc-color, var(--violet));
+    font-style: italic;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+    margin-top: 4px;
+  }
+
+  /* ── DECLARATION ── */
+  .declaration {
+    background: linear-gradient(135deg, rgba(244,162,40,0.06), rgba(244,63,94,0.06), rgba(139,92,246,0.06));
+    border: 1px solid rgba(244,162,40,0.2);
+    border-radius: 24px;
+    padding: 60px;
+    text-align: center;
+    max-width: 1000px;
+    margin: 60px auto;
+  }
+
+  .declaration h2 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--gold), var(--rose));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 28px;
+    line-height: 1.2;
+  }
+
+  .declaration p {
+    font-size: 1.1rem;
+    color: #b0a8c0;
+    line-height: 1.85;
+    margin-bottom: 20px;
+    max-width: 780px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .declaration .sig {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-top: 36px;
+  }
+
+  /* ── QUOTE BLOCKS ── */
+  .quote-block {
+    border-left: 3px solid var(--gold);
+    padding: 20px 28px;
+    margin: 32px 0;
+    background: rgba(244,162,40,0.05);
+    border-radius: 0 12px 12px 0;
+  }
+
+  .quote-block p {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.8;
+  }
+
+  .quote-block .attribution {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-top: 10px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 10px 20px; }
+    section { padding: 70px 24px; }
+    .timeline { padding-left: 40px; }
+    .psych-grid { grid-template-columns: 1fr; }
+    .declaration { padding: 40px 28px; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="cosmos"></canvas>
+
+<nav>
+  <span class="brand">NOIZY</span>
+  <a href="#hero">Origin</a>
+  <a href="#prehistoric">Prehistoric</a>
+  <a href="#shamanic">Shamanic</a>
+  <a href="#psychedelics">Psychedelics</a>
+  <a href="#mechanisms">Mechanisms</a>
+  <a href="#modern">Modern Age</a>
+  <a href="#joy">Joy Contagion</a>
+  <a href="#roles">NOIZY Roles</a>
+  <a href="#declaration">Declaration</a>
+</nav>
+
+<main>
+
+<!-- ═══════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════ -->
+<section id="hero" style="max-width:100%; padding:0;">
+  <div class="hero">
+    <div class="hero-eyebrow">NOIZY Empire · Master Atlas</div>
+    <h1 class="hero-title">Global Sonic &amp;<br>Consciousness Atlas</h1>
+    <p class="hero-sub">50,000 BCE to Present — The Complete History of How Sound Shapes Human Consciousness, Heals the Body, and Unites Our Species</p>
+
+    <div class="hero-manifesto">
+      "Sound was the first technology. The first medicine. The first art form. Before we had words, we had rhythm. Before we had cities, we had ceremony. Before we had machines, we had the human voice. This is not history. This is our blueprint."
+      <div style="font-family:var(--mono);font-size:0.7rem;letter-spacing:0.15em;color:var(--gold);text-transform:uppercase;margin-top:12px;">— Robert Stephen Plowman, Founder, NOIZY Empire</div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="num">50,000</span><span class="label">Years of Sound</span></div>
+      <div class="hero-stat"><span class="num">6</span><span class="label">Psychedelic Traditions</span></div>
+      <div class="hero-stat"><span class="num">5</span><span class="label">Brainwave States</span></div>
+      <div class="hero-stat"><span class="num">∞</span><span class="label">Joy to Spread</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 01: PREHISTORIC
+═══════════════════════════════════════════════ -->
+<section id="prehistoric">
+  <div class="section-eyebrow" style="color:var(--gold)">Section 01 · 50,000 BCE – 3000 BCE</div>
+  <h2 class="section-title" style="background:linear-gradient(135deg,var(--gold),var(--amber));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">The Prehistoric Sonic World</h2>
+  <p class="section-lead">Before cities, before writing, before agriculture — there was sound. Humanity's oldest surviving artifacts include percussion instruments and flutes. Sound was not entertainment. It was survival, spirit, and structure.</p>
+
+  <div class="timeline">
+
+    <div class="era" style="--era-color: #f4a228;">
+      <div class="era-date">~50,000 BCE · Paleolithic</div>
+      <div class="era-title">The First Percussionists</div>
+      <div class="era-body">Long before the earliest known musical instruments, early humans were using body percussion — clapping, stomping, chest-beating — as a form of social bonding and ritual coordination. Cognitive archaeologists have identified this as a precursor to language itself. Rhythm likely preceded melody by tens of thousands of years, functioning as a shared temporal frame that allowed groups to synchronize movement, emotion, and intent. The group that could drum together could hunt together, mourn together, and celebrate together.</div>
+      <div class="era-tags">
+        <span class="era-tag">Body Percussion</span>
+        <span class="era-tag">Social Bonding</span>
+        <span class="era-tag">Ritual Coordination</span>
+        <span class="era-tag">Pre-Language</span>
+      </div>
+    </div>
+
+    <div class="era" style="--era-color: #fb923c;">
+      <div class="era-date">~43,000 BCE · Slovenia / Germany</div>
+      <div class="era-title">The Bone &amp; Vulture Wing Flutes</div>
+      <div class="era-body">The world's oldest confirmed musical instruments — Neanderthal bone flutes from Divje Babe (Slovenia) and Aurignacian vulture-wing and mammoth-ivory flutes from Hohle Fels (Germany) — demonstrate that early humans deliberately crafted instruments capable of producing specific pitches. The vulture wing flute with its 5-hole layout can produce notes recognizable within pentatonic scales still used globally today. This is not coincidence. The pentatonic scale appears to be deeply embedded in human neural architecture. Whatever we were, we were musical.</div>
+      <div class="era-tags">
+        <span class="era-tag">Bone Flute</span>
+        <span class="era-tag">Pentatonic Origins</span>
+        <span class="era-tag">Intentional Music</span>
+        <span class="era-tag">43,000 BCE</span>
+      </div>
+      <div class="era-instruments">
+        <span class="instr">🦴 Bone Flute</span>
+        <span class="instr">🦅 Vulture Wing Flute</span>
+        <span class="instr">🦣 Mammoth Ivory Flute</span>
+      </div>
+    </div>
+
+    <div class="era" style="--era-color: #f59e0b;">
+      <div class="era-date">~30,000 BCE · Global Cave Art Sites</div>
+      <div class="era-title">Resonance Chambers — The First Concert Halls</div>
+      <div class="era-body">Archaeoacoustic research reveals that Paleolithic cave paintings are consistently located in areas of highest acoustic resonance — chambers where sound bounces, reverberates, and creates disorienting echo effects. In Lascaux (France), Altamira (Spain), and dozens of other sites, the painted walls are also the resonant walls. This was not accidental. Early humans were staging sonic ceremonies in spaces specifically chosen for their sound properties. The cave itself was an instrument. The ceremony was the art. The art was the ceremony.</div>
+      <div class="era-tags">
+        <span class="era-tag">Archaeoacoustics</span>
+        <span class="era-tag">Cave Resonance</span>
+        <span class="era-tag">Ritual Ceremony</span>
+        <span class="era-tag">Sound + Vision</span>
+      </div>
+    </div>
+
+    <div class="era" style="--era-color: #10b981;">
+      <div class="era-date">~10,000 BCE · Göbekli Tepe & Early Civilizations</div>
+      <div class="era-title">Ritual Architecture and Sacred Sound</div>
+      <div class="era-body">At Göbekli Tepe (modern Turkey) — the world's oldest known temple complex, predating Stonehenge by 6,000 years — archaeologists have found evidence of large communal gatherings where ritual music was almost certainly performed. The circular layout of the pillared enclosures mirrors drum circle arrangements still used globally. Simultaneously, in early Mesopotamia and the Indus Valley, percussion instruments (clay drums, rattles, clappers) appear in burial sites alongside other ritual objects, confirming that sound was considered sacred enough to accompany the dead.</div>
+      <div class="era-tags">
+        <span class="era-tag">Temple Acoustics</span>
+        <span class="era-tag">Burial Instruments</span>
+        <span class="era-tag">Sacred Sound</span>
+        <span class="era-tag">Earliest Temples</span>
+      </div>
+      <div class="era-instruments">
+        <span class="instr">🥁 Clay Drums</span>
+        <span class="instr">🔔 Rattles</span>
+        <span class="instr">👏 Clappers</span>
+        <span class="instr">🪈 Reed Pipes</span>
+      </div>
+    </div>
+
+    <div class="era" style="--era-color: #06b6d4;">
+      <div class="era-date">~5,000 BCE · Across All Continents</div>
+      <div class="era-title">The Universal Drumming Trance Threshold</div>
+      <div class="era-body">Across every culture studied — from Siberian shamans to Sub-Saharan griots to Aboriginal Australian ceremony keepers — one pattern emerges with perfect consistency: drumming at approximately 4–7 beats per second (4–7 Hz) induces a measurable theta brainwave state in the listener. This is not cultural. This is biological. Shamanic drumming traditions evolved independently on six continents and converged on the same exact neurological mechanism. The drum is humanity's first neurotechnology — and it worked perfectly for 50,000 years before we had fMRI to prove it.</div>
+      <div class="era-tags">
+        <span class="era-tag">Theta Induction</span>
+        <span class="era-tag">4–7 Hz</span>
+        <span class="era-tag">Universal Pattern</span>
+        <span class="era-tag">Shamanic Tech</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 02: SHAMANIC TRADITIONS
+═══════════════════════════════════════════════ -->
+<section id="shamanic">
+  <div class="section-eyebrow" style="color:var(--violet)">Section 02 · 3000 BCE – 1500 CE</div>
+  <h2 class="section-title" style="background:linear-gradient(135deg,var(--violet),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">The Great Shamanic Traditions</h2>
+  <p class="section-lead">Every ancient civilization built a sonic healing system. They didn't know about brainwaves. They didn't need to. They had thousands of years of experimental evidence about what sound does to the human mind and body — and they encoded that knowledge in ceremony, myth, and oral tradition that still exists today.</p>
+
+  <div class="timeline">
+
+    <div class="era" style="--era-color: #8b5cf6;">
+      <div class="era-date">Siberia / Central Asia · 3000 BCE+</div>
+      <div class="era-title">Siberian Shamanism — The Original Sonic Journey</div>
+      <div class="era-body">Siberian and Central Asian shamans developed the most extensively documented healing drumming practice in human history. The shaman's drum (called "dünür" among Turkic peoples) was considered a living entity — the shaman's spirit horse that carried them between worlds. Drumming sessions lasted 4–6 hours with sustained monotonic beats at theta frequencies. The shaman would enter deep trance states while simultaneously maintaining enough awareness to "navigate" the experience and bring back healing insights for the community. Tuvan throat singing (khoomei) emerged from this tradition — the ability to produce overtone harmonics allowing a single voice to sing multiple pitches simultaneously, creating internal resonance across skull bones and the vagus nerve.</div>
+      <div class="era-tags">
+        <span class="era-tag">Monotonic Drumming</span>
+        <span class="era-tag">Theta Trance</span>
+        <span class="era-tag">Spirit Navigation</span>
+        <span class="era-tag">Throat Singing</span>
+        <span class="era-tag">Vagus Nerve</span>
+      </div>
+      <div class="era-instruments">
+        <span class="instr">🥁 Frame Drum (Dünür)</span>
+        <span class="instr">🎶 Overtone Throat Singing</span>
+        <span class="instr">🔔 Shaman Bells</span>
+        <span class="instr">🪈 Bone Whistle</span>
+      </div>
+    </div>
+
+    <div class="era" style="--era-color: #ec4899;">
+      <div class="era-date">Amazon Basin · Ancient – Present</div>
+      <div class="era-title">Icaros — The Sonic Navigation Maps of Ayahuasca</div>
+      <div class="era-body">The Amazonian icaro is one of the most complex and extraordinary sonic traditions in human history. Icaros are songs sung by Ayahuasceros (plant medicine healers) during ayahuasca ceremonies — but they are not simply songs. They are believed to be sonic maps that guide participants through the ayahuasca visionary experience, protecting them from difficult visions and steering consciousness toward healing encounters. Icaros are often received in dreams or visions, learned from the plants themselves, and passed from master to apprentice. They typically employ pentatonic or modal scales, call-and-response structures, and repetitive melodic fragments that entrain the listener's brainwaves. Modern research confirms that live musical accompaniment during psilocybin and DMT-adjacent experiences significantly affects the emotional valence and narrative arc of the session — exactly what the Ayahuasceros have known for thousands of years.</div>
+      <div class="era-tags">
+        <span class="era-tag">Icaros</span>
+        <span class="era-tag">Ayahuasca Navigation</span>
+        <span class="era-tag">Pentatonic Modal</span>
+        <span class="era-tag">Brainwave Entrainment</span>
+        <span class="era-tag">Healing Navigation</span>
+      </div>
+      <div class="era-instruments">
+        <span class="instr">🎵 Icaro Voice</span>
+        <span class="instr">🥁 Shacapa (Leaf Rattle)</span>
+        <span class="instr">🪈 Pan Flute</span>
+        <span class="instr">🌿 Mapacho Smoke Rhythms</span>
+      </div>
+    </div>
+
+    <div class="era" style="--era-color: #f43f5e;">
+      <div class="era-date">Mazatec Culture, Mexico · Ancient – Present</div>
+      <div class="era-title">Velada — The Psilocybin Night Ceremony</div>
+      <div class="era-body">The Mazatec people of Oaxaca, Mexico, have practiced veladas (night healing ceremonies) with psilocybin mushrooms for centuries — possibly millennia. The curandera (healer) Maria Sabina, who first allowed Westerners to participate in the 1950s, described the mushrooms as "the language," and the ceremony as "a conversation with God." During a velada, the curandera sings continuously for 4–8 hours, producing rhythmic chanting, clapping, and prayers woven into an unbroken sonic container. The Mazatec understand that the quality and intention of the music directly determines the quality of the healing experience. The song is the medicine as much as the mushroom.</div>
+      <div class="era-tags">
+        <span class="era-tag">Velada</span>
+        <span class="era-tag">Psilocybin</span>
+        <span class="era-tag">Mazatec</span>
+        <span class="era-tag">Night Ceremony</span>
+        <span class="era-tag">Maria Sabina</span>
+      </div>
+      <div class="era-instruments">
+        <span class="instr">🎤 Curandera Chant</span>
+        <span class="instr">👏 Rhythmic Clapping</span>
+        <span class="instr">🕯️ Ritual Container</span>
+      </div>
+    </div>
+
+    <div class="era" style="--era-color: #fb923c;">
+      <div class="era-date">Native American Traditions · Ancient – Present</div>
+      <div class="era-title">Peyote Ceremony — The All-Night Sonic Prayer</div>
+      <div class="era-body">Native American Church peyote ceremonies are among the most carefully structured sonic healing environments ever designed. An all-night ceremony (typically 10+ hours) involves continuous drumming, singing, and rattling in a specific sequence — opening, midnight, morning, and closing songs — that mirrors the trajectory of the peyote experience itself. The drum is struck in a rapid 4-beat pattern (approximately 200–240 BPM), creating a high-frequency acoustic environment that maintains alertness while the medicine deepens. This is the opposite of the slow theta drumming of shamanic trance — it is an alert, active ceremonial state. Songs are sung in call-and-response between the leader and participants, creating communal consciousness synchronization across all attendees. This is real-time collective brainwave entrainment practiced as prayer.</div>
+      <div class="era-tags">
+        <span class="era-tag">Peyote</span>
+        <span class="era-tag">All-Night Ceremony</span>
+        <span class="era-tag">Communal Sync</span>
+        <span class="era-tag">200–240 BPM</span>
+        <span class="era-tag">Call-and-Response</span>
+      </div>
+      <div class="era-instruments">
+        <span class="instr">🥁 Water Drum</span>
+        <span class="instr">🌵 Peyote Song Voice</span>
+        <span class="instr">🎶 Gourd Rattle</span>
+        <span class="instr">🪶 Eagle Bone Whistle</span>
+      </div>
+    </div>
+
+    <div class="era" style="--era-color: #14b8a6;">
+      <div class="era-date">Tibet & Himalayas · 500 BCE – Present</div>
+      <div class="era-title">Tibetan Singing Bowls &amp; Overtone Chanting</div>
+      <div class="era-body">Tibetan metal singing bowls produce complex harmonic overtones when struck or rim-played — typically including fundamental frequencies between 100–800 Hz with overtones extending into the kilohertz range. Multiple bowls played together create beating patterns (the difference frequencies between two close pitches) that land directly in alpha and theta brainwave ranges. Tibetan Buddhist monks use gongs, bells, singing bowls, and deep bass horns (dungchen) in combination to create a multi-spectral sound environment that systematically dissolves ordinary mental activity and induces meditative states. Throat singing traditions (such as the Gyuto monks' multi-phonic chanting) produce deep resonances in the 60–120 Hz range — sub-bass frequencies that activate the vagus nerve and produce physiological relaxation responses measurable in seconds.</div>
+      <div class="era-tags">
+        <span class="era-tag">Singing Bowls</span>
+        <span class="era-tag">Alpha/Theta Entrainment</span>
+        <span class="era-tag">Gyuto Monks</span>
+        <span class="era-tag">Vagus Nerve</span>
+        <span class="era-tag">Sub-Bass</span>
+      </div>
+      <div class="era-instruments">
+        <span class="instr">🔔 Singing Bowl</span>
+        <span class="instr">🎺 Dungchen (Bass Horn)</span>
+        <span class="instr">🎶 Multi-Phonic Chant</span>
+        <span class="instr">🪘 Rolmo (Cymbal)</span>
+      </div>
+    </div>
+
+    <div class="era" style="--era-color: #38bdf8;">
+      <div class="era-date">Australia · 40,000+ BCE – Present</div>
+      <div class="era-title">Didgeridoo &amp; Songlines — The Oldest Continuous Tradition</div>
+      <div class="era-body">The Aboriginal Australian didgeridoo is the world's oldest wind instrument in continuous use — potentially 40,000+ years old. It produces fundamental frequencies in the 60–100 Hz range (delta/theta boundary), combined with continuous drone through circular breathing. The continuous drone creates a monotonic acoustic environment that consistently induces deep states of awareness. But beyond the instrument, the Aboriginal concept of Songlines represents perhaps the most sophisticated integration of sound, geography, memory, and consciousness ever conceived: a network of sacred songs that literally describe the landscape — every rock, waterhole, and landmark encoded in melody — allowing navigators to "sing their way" across thousands of kilometers of desert. The Dreaming is not mythology. It is an operating system maintained in sound.</div>
+      <div class="era-tags">
+        <span class="era-tag">Didgeridoo</span>
+        <span class="era-tag">Delta Frequency</span>
+        <span class="era-tag">Circular Breathing</span>
+        <span class="era-tag">Songlines</span>
+        <span class="era-tag">40,000 Years</span>
+      </div>
+      <div class="era-instruments">
+        <span class="instr">🎵 Yidaki (Didgeridoo)</span>
+        <span class="instr">🪘 Clapsticks</span>
+        <span class="instr">🎤 Ceremonial Song</span>
+        <span class="instr">🌏 Songline Navigation</span>
+      </div>
+    </div>
+
+    <div class="era" style="--era-color: #f4a228;">
+      <div class="era-date">West &amp; Sub-Saharan Africa · Ancient – Present</div>
+      <div class="era-title">The African Polyrhythmic Trance Engine</div>
+      <div class="era-body">West African drumming traditions — particularly Ewe, Akan, Yoruba, and Mandé — developed the most sophisticated polyrhythmic systems in human history. Multiple interlocking rhythmic lines create composite patterns that no single performer plays but that emerge from the ensemble. This is not accidental complexity — it is a deliberate technology for inducing collective trance states. The Dagomba, Ewe, and related cultures documented that specific rhythmic patterns (called "hot rhythms") were reserved specifically for healing ceremonies, spirit possession, and initiations because of their reliable ability to alter consciousness. The Gnawa people of Morocco continue one of the most documented healing trance traditions: Lila ceremonies use specific rhythmic modes (called "mluk") for specific ailments — the precursor to modern music therapy's frequency-specific approach.</div>
+      <div class="era-tags">
+        <span class="era-tag">Polyrhythm</span>
+        <span class="era-tag">Collective Trance</span>
+        <span class="era-tag">Gnawa Lila</span>
+        <span class="era-tag">Healing Rhythms</span>
+        <span class="era-tag">Spirit Possession</span>
+      </div>
+      <div class="era-instruments">
+        <span class="instr">🥁 Djembe</span>
+        <span class="instr">🥁 Dundun</span>
+        <span class="instr">🎸 Kora</span>
+        <span class="instr">🎵 Balafon</span>
+        <span class="instr">🔔 Gankogui Bell</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 03: PSYCHEDELIC-SONIC ATLAS
+═══════════════════════════════════════════════ -->
+<section id="psychedelics">
+  <div class="section-eyebrow" style="color:var(--rose)">Section 03 · Psychedelic-Sonic Atlas</div>
+  <h2 class="section-title" style="background:linear-gradient(135deg,var(--rose),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Sound + Consciousness — The Ancient Partnership</h2>
+  <p class="section-lead">Every major psychedelic tradition in human history included music as an essential component — not as entertainment, but as the active guidance system. Sound shaped where consciousness went and what it found there. Here is the complete atlas.</p>
+
+  <div class="psych-grid">
+
+    <div class="psych-card" style="--pc1:#ec4899; --pc2:#f43f5e;">
+      <span class="psych-icon">🌿</span>
+      <div class="psych-title">Ayahuasca + Icaros</div>
+      <div class="psych-sub">Amazon Basin · Peru, Brazil, Colombia</div>
+      <div class="psych-body">Ayahuasca (DMT + MAOIs from Banisteriopsis caapi vine + Psychotria viridis leaves) produces the most intense visual and emotional experiences of any natural substance. The Ayahuascero's icaro is not accompaniment — it is navigation. Specific melodic patterns are believed to "call" particular healing spirits, "close" portals to difficult experiences, and guide participants through crisis moments. The pentatonic modal structure of icaros maps onto the DMT visual geometry with uncanny precision. During clinical trials at Johns Hopkins and NYU, music consistently emerged as the most powerful predictor of therapeutic outcome — more than dose, setting, or therapist presence.</div>
+      <div class="psych-mechanism">
+        <div class="label">Neurological Mechanism</div>
+        <div class="value">DMT activates 5-HT2A serotonin receptors → default mode network dissolution → music provides structure for narrative coherence → vagus nerve activation via song frequencies → emotional processing + integration</div>
+      </div>
+    </div>
+
+    <div class="psych-card" style="--pc1:#f43f5e; --pc2:#fb923c;">
+      <span class="psych-icon">🍄</span>
+      <div class="psych-title">Psilocybin + Velada</div>
+      <div class="psych-sub">Mazatec · Oaxaca, Mexico</div>
+      <div class="psych-body">The Mazatec velada uses psilocybin mushrooms alongside 4–8 hours of continuous singing by the curandera. The chanting creates a "sonic container" — a structured emotional environment that guides the experience. Maria Sabina's songs mixed Spanish Catholic imagery with ancient Mazatec cosmology, demonstrating how sonic tradition adapts without losing function. Imperial College London's landmark 2016 study confirmed that curated music during psilocybin sessions produced mystical experiences correlated with long-term psychological improvement. The Mazatec knew this in 1000 CE.</div>
+      <div class="psych-mechanism">
+        <div class="label">Neurological Mechanism</div>
+        <div class="value">Psilocin → 5-HT2A activation → increased neural entropy → music anchors emotional processing → reduced amygdala reactivity → prefrontal-limbic integration → lasting mood improvement (6 months+)</div>
+      </div>
+    </div>
+
+    <div class="psych-card" style="--pc1:#fb923c; --pc2:#f4a228;">
+      <span class="psych-icon">🌵</span>
+      <div class="psych-title">Peyote + All-Night Songs</div>
+      <div class="psych-sub">Native American Church · North America</div>
+      <div class="psych-body">Mescaline (from the peyote cactus) produces a sustained 10–12 hour experience characterized by heightened sensory sensitivity and profound emotional openness. The all-night peyote ceremony's rapid drumming (200–240 BPM) creates a continuous high-frequency acoustic environment that keeps participants alert and present rather than withdrawn. The call-and-response singing between the Road Man (ceremony leader) and participants creates a communal experience of synchronized consciousness. Groups of 10–30 people, having shared a 10-hour sonic journey, emerge with measurably deepened social bonds and shared spiritual frameworks — exactly the social cohesion function that the ceremony was designed to serve.</div>
+      <div class="psych-mechanism">
+        <div class="label">Neurological Mechanism</div>
+        <div class="value">Mescaline → broad 5-HT agonism + dopamine activity → heightened sensory integration → rapid drumming maintains beta/gamma awareness → communal vocal synchrony → oxytocin release → tribal bonding amplification</div>
+      </div>
+    </div>
+
+    <div class="psych-card" style="--pc1:#8b5cf6; --pc2:#6366f1;">
+      <span class="psych-icon">🥁</span>
+      <div class="psych-title">Shamanic Drumming + Monotonic Trance</div>
+      <div class="psych-sub">Siberia, Mongolia, Nepal, North &amp; South America</div>
+      <div class="psych-body">Non-psychedelic shamanic journeying — using drumming alone as the consciousness technology — produces experiences neurologically similar to moderate psychedelic states, as confirmed by Michael Harner's anthropological research and subsequent fMRI studies. Sustained monotonic drumming at 4–7 Hz for 15+ minutes produces measurable theta brainwave dominance, reduced default mode network activity (the hallmark of psychedelic states), and increased activity in visual cortex. The "shamanic journey" is not metaphor. The drum is the vehicle. The altered state is real. And it has been available to every human in every culture for 50,000 years at zero cost.</div>
+      <div class="psych-mechanism">
+        <div class="label">Neurological Mechanism</div>
+        <div class="value">Monotonic 4–7 Hz acoustic driver → auditory cortex → thalamic gating → theta entrainment → reduced DMN activity → hypnagogic imagery + emotional access → healing insight states</div>
+      </div>
+    </div>
+
+    <div class="psych-card" style="--pc1:#14b8a6; --pc2:#10b981;">
+      <span class="psych-icon">🔔</span>
+      <div class="psych-title">Tibetan Bowls + Sound Bath</div>
+      <div class="psych-sub">Tibet, Nepal, Mongolia · Buddhist Traditions</div>
+      <div class="psych-body">Tibetan singing bowl therapy — once reserved for monastic practice — has become one of the most studied sound healing modalities in Western clinical research. A 2020 study in the Journal of Evidence-Based Integrative Medicine found significant reductions in tension, anxiety, and physical pain following 60-minute sound bath sessions. The beating frequencies produced by multiple bowls (difference tones between close pitches) create binaural-beat-like entrainment without requiring headphones. The rich harmonic spectrum (fundamentals + 5–15 overtones per bowl) simultaneously stimulates multiple frequency-specific neural pathways, creating a whole-brain acoustic massage that the Tibetan tradition has been delivering for over 2,500 years.</div>
+      <div class="psych-mechanism">
+        <div class="label">Neurological Mechanism</div>
+        <div class="value">Complex harmonic spectrum → multi-frequency neural stimulation → beating frequencies land in alpha/theta range → HPA axis downregulation → cortisol reduction → parasympathetic dominance → cellular repair state</div>
+      </div>
+    </div>
+
+    <div class="psych-card" style="--pc1:#38bdf8; --pc2:#06b6d4;">
+      <span class="psych-icon">🎵</span>
+      <div class="psych-title">Didgeridoo + Delta Induction</div>
+      <div class="psych-sub">Aboriginal Australia · 40,000+ BCE – Present</div>
+      <div class="psych-body">The didgeridoo's continuous drone in the 60–100 Hz range (fundamental) combined with circular breathing creates a unique acoustic environment where the player and listener enter synchronized states through both auditory and somatic (physical vibration) channels. The resonant frequencies penetrate bone and tissue directly, creating a form of acoustic massage that stimulates the vagus nerve through multiple pathways simultaneously. Aboriginal healers documented specific didgeridoo songs for specific ailments — joint pain, respiratory issues, psychological disturbance — long before Western science could explain the vagal-respiratory mechanisms involved. A 2005 BMJ study confirmed didgeridoo playing significantly reduces snoring and sleep apnea by retraining respiratory muscles — exactly as Aboriginal tradition had always claimed.</div>
+      <div class="psych-mechanism">
+        <div class="label">Neurological Mechanism</div>
+        <div class="value">60–100 Hz fundamental → somatic bone conduction + auditory → vagus nerve stimulation → respiratory rhythm entrainment → delta/theta boundary brainwave induction → parasympathetic healing state</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 04: NEUROLOGICAL MECHANISMS
+═══════════════════════════════════════════════ -->
+<section id="mechanisms">
+  <div class="section-eyebrow" style="color:var(--cyan)">Section 04 · The Science</div>
+  <h2 class="section-title" style="background:linear-gradient(135deg,var(--cyan),var(--emerald));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">How Sound Heals — The Neurological Atlas</h2>
+  <p class="section-lead">Ancient practitioners mapped the territory by experience. Modern neuroscience is now drawing the same map with different instruments. These are the mechanisms that explain 50,000 years of sonic healing practice.</p>
+
+  <table class="bw-table">
+    <tr>
+      <th>Brainwave State</th>
+      <th>Frequency</th>
+      <th>Sonic Inducer</th>
+      <th>Consciousness State</th>
+      <th>Healing Application</th>
+    </tr>
+    <tr>
+      <td><span class="bw-badge" style="background:rgba(139,92,246,0.15);color:#8b5cf6;border:1px solid #8b5cf6;">Gamma</span></td>
+      <td style="color:var(--muted)">30–100 Hz</td>
+      <td>Rapid polyrhythm, overtone chanting, bell harmonics</td>
+      <td>Peak cognition, transcendent unity, mystical states</td>
+      <td>PTSD processing, depression, consciousness expansion</td>
+    </tr>
+    <tr>
+      <td><span class="bw-badge" style="background:rgba(244,162,40,0.15);color:#f4a228;border:1px solid #f4a228;">Beta</span></td>
+      <td style="color:var(--muted)">12–30 Hz</td>
+      <td>Peyote rapid drumming (200+ BPM), upbeat ceremonial song</td>
+      <td>Alert focus, active ceremony, communal engagement</td>
+      <td>Attention, social bonding, active healing presence</td>
+    </tr>
+    <tr>
+      <td><span class="bw-badge" style="background:rgba(16,185,129,0.15);color:#10b981;border:1px solid #10b981;">Alpha</span></td>
+      <td style="color:var(--muted)">8–12 Hz</td>
+      <td>Tibetan bowls, light drumming, harmonic chanting</td>
+      <td>Relaxed awareness, creative flow, open receptivity</td>
+      <td>Anxiety reduction, creative access, pain management</td>
+    </tr>
+    <tr>
+      <td><span class="bw-badge" style="background:rgba(6,182,212,0.15);color:#06b6d4;border:1px solid #06b6d4;">Theta</span></td>
+      <td style="color:var(--muted)">4–8 Hz</td>
+      <td>Shamanic drumming (4–7 beats/sec), Icaros, slow drone</td>
+      <td>Deep visualization, emotional processing, visionary states</td>
+      <td>Trauma integration, spiritual insight, creative breakthrough</td>
+    </tr>
+    <tr>
+      <td><span class="bw-badge" style="background:rgba(99,102,241,0.15);color:#6366f1;border:1px solid #6366f1;">Delta</span></td>
+      <td style="color:var(--muted)">0.5–4 Hz</td>
+      <td>Didgeridoo, deep bass gong, sub-bass drones</td>
+      <td>Deep trance, unconscious access, cellular repair state</td>
+      <td>Deep trauma healing, immune modulation, sleep restoration</td>
+    </tr>
+  </table>
+
+  <h3 style="font-size:1.3rem;color:var(--text);margin-bottom:30px;margin-top:60px;">The 5 Primary Healing Pathways</h3>
+
+  <div class="mechanism-flow">
+
+    <div class="mflow-step" style="--mf-color: #06b6d4;">
+      <div class="mflow-num">01</div>
+      <div class="mflow-content">
+        <div class="title">Brainwave Entrainment (Frequency Following Response)</div>
+        <div class="body">The brain's electrical activity naturally synchronizes to repeating acoustic stimuli — a phenomenon called the Frequency Following Response (FFR). This is not voluntary. Present a 4 Hz acoustic pulse to any human brain and the neural oscillations will begin to synchronize within minutes. Every ancient drumming tradition exploited this mechanism without knowing its name. The result: controllable, non-pharmaceutical induction of any brainwave state — from active beta to deep delta — using only sound.</div>
+      </div>
+    </div>
+
+    <div class="mflow-step" style="--mf-color: #10b981;">
+      <div class="mflow-num">02</div>
+      <div class="mflow-content">
+        <div class="title">Vagal Tone Activation (The Vagus Highway)</div>
+        <div class="body">The vagus nerve — the longest cranial nerve, connecting brain to gut, heart, and lungs — is directly stimulated by specific vocal frequencies in the 100–300 Hz range (the resonant range of the human voice). Singing, chanting, humming, and toning all produce vagal stimulation that triggers the parasympathetic nervous system: heart rate slows, cortisol drops, digestive function normalizes, immune response improves. This is why singing together in community has been a universal human behavior across all cultures — it is a group-administered dose of vagal medicine.</div>
+      </div>
+    </div>
+
+    <div class="mflow-step" style="--mf-color: #8b5cf6;">
+      <div class="mflow-num">03</div>
+      <div class="mflow-content">
+        <div class="title">Default Mode Network Suppression</div>
+        <div class="body">The Default Mode Network (DMN) — the brain's self-referential rumination system — is the primary generator of depression, anxiety, and repetitive negative thought. Both music and psychedelics dramatically reduce DMN activity, creating the subjective experience of "ego dissolution" or "being fully present." Sustained musical engagement (both as performer and attentive listener) produces measurable DMN suppression comparable to moderate meditation doses. Ancient healers called this "leaving the ordinary mind behind." Neuroscientists call it DMN suppression. The destination is identical.</div>
+      </div>
+    </div>
+
+    <div class="mflow-step" style="--mf-color: #f43f5e;">
+      <div class="mflow-num">04</div>
+      <div class="mflow-content">
+        <div class="title">Oxytocin + Dopamine Release (The Social Bond Chemistry)</div>
+        <div class="body">Communal music-making — singing together, drumming together, dancing together — produces measurable spikes in oxytocin (the bonding hormone) and dopamine (the reward and motivation molecule). This is the biological basis of the universal human experience of feeling profound connection during shared music. A 2015 Oxford study confirmed that groups who sang together showed greater pain tolerance, deeper trust, and stronger perceived social bonds than equivalent groups who did not. Music is not a metaphor for community. Music is the biochemical mechanism through which community is created.</div>
+      </div>
+    </div>
+
+    <div class="mflow-step" style="--mf-color: #f4a228;">
+      <div class="mflow-num">05</div>
+      <div class="mflow-content">
+        <div class="title">Somatic Resonance (Bone Conduction + Cellular Vibration)</div>
+        <div class="body">Low-frequency sound (20–200 Hz) penetrates the body not only through the ears but through bone conduction — vibration transmitted directly through the skeleton to the inner ear and beyond. The thoracic cavity (chest and lungs), skull, and pelvis all have resonant frequencies within this range. Tibetan sound healers and Aboriginal didgeridoo players both understood that the body itself is a resonant chamber, and that placing appropriate frequencies into that chamber produces direct tissue-level responses: improved circulation, reduced inflammation, normalized cellular metabolism. Modern vibroacoustic therapy — placing people on platforms that vibrate at therapeutic frequencies — is 10,000 years old. We just gave it a clinical name.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 05: CLASSICAL TO MODERN
+═══════════════════════════════════════════════ -->
+<section id="modern">
+  <div class="section-eyebrow" style="color:var(--amber)">Section 05 · 1000 CE – Present</div>
+  <h2 class="section-title" style="background:linear-gradient(135deg,var(--amber),var(--lime));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Classical to Modern — The Unbroken Thread</h2>
+  <p class="section-lead">As civilizations formalized, they institutionalized sonic healing — in Sufi music, Indian raga therapy, Greek music theory, and eventually the Western concert hall. The thread from cave to concert hall to AI studio has never broken. NOIZY is its next evolution.</p>
+
+  <div class="timeline">
+
+    <div class="era" style="--era-color: #f59e0b;">
+      <div class="era-date">800–1400 CE · Sufi Tradition</div>
+      <div class="era-title">Sama — The Listening Ceremony</div>
+      <div class="era-body">The Sufi practice of Sama (spiritual listening) — most famously embodied in the Mevlevi Whirling Dervishes — represents the most systematically developed integration of music, movement, and mystical transformation in the Islamic world. Sama uses repetitive music in modal scales (Maqam), poetry, and spinning movement to induce ecstatic states (hal) described as direct encounters with divine presence. The Maqam modal system encodes specific emotional and spiritual states into specific scale structures — a complete music therapy system that predates modern evidence-based practice by 600 years. Rumi's poetry, sung in Sama ceremonies, remains some of the most psychologically sophisticated wellness content in human history.</div>
+      <div class="era-tags">
+        <span class="era-tag">Sama</span>
+        <span class="era-tag">Maqam Modal</span>
+        <span class="era-tag">Ecstatic State</span>
+        <span class="era-tag">Sufi</span>
+        <span class="era-tag">Rumi</span>
+      </div>
+      <div class="era-instruments">
+        <span class="instr">🪗 Ney (Reed Flute)</span>
+        <span class="instr">🥁 Kudüm (Kettle Drum)</span>
+        <span class="instr">🎶 Tanbur</span>
+        <span class="instr">🎤 Ilahi Poetry Singing</span>
+      </div>
+    </div>
+
+    <div class="era" style="--era-color: #84cc16;">
+      <div class="era-date">Ancient – Present · India</div>
+      <div class="era-title">Raga Chikitsa — The Therapy of Ragas</div>
+      <div class="era-body">Indian classical music developed what may be the world's most elaborate music therapy system: Raga Chikitsa (raga therapy), documented in ancient Sanskrit texts. The Raga system — comprising 72 Melakarta parent scales and hundreds of derivative ragas — assigns specific ragas to specific times of day, seasons, and therapeutic purposes. Raga Bhairavi treats grief and longing. Raga Desh invokes longing for home and is used for homesickness-related depression. Raga Todi treats indigestion and nervous disorders. This is a complete evidence-based (via centuries of empirical observation) pharmacopeia written in music. Modern studies confirm that specific raga intervals produce measurably different physiological responses, validating the classical framework.</div>
+      <div class="era-tags">
+        <span class="era-tag">Raga Chikitsa</span>
+        <span class="era-tag">72 Melakarta</span>
+        <span class="era-tag">Time-Specific Therapy</span>
+        <span class="era-tag">Sanskrit Medical Texts</span>
+      </div>
+      <div class="era-instruments">
+        <span class="instr">🎸 Sitar</span>
+        <span class="instr">🥁 Tabla</span>
+        <span class="instr">🎻 Sarod</span>
+        <span class="instr">🎤 Dhrupad Voice</span>
+        <span class="instr">🎶 Tanpura Drone</span>
+      </div>
+    </div>
+
+    <div class="era" style="--era-color: #06b6d4;">
+      <div class="era-date">1900–1960 · Blues, Jazz, Gospel</div>
+      <div class="era-title">The Black American Healing Tradition</div>
+      <div class="era-body">Blues, Jazz, and Gospel music represent one of the most extraordinary examples of sonic healing tradition adapted under conditions of extreme oppression. Enslaved and post-slavery Black Americans created music that served every function that ancient ceremonial music served: communal bonding (Gospel call-and-response directly descended from West African ceremony), emotional processing and catharsis (Blues), and creative transcendence and joy (Jazz improvisation). The pentatonic blues scale — with its "blue notes" (flattened 3rds and 7ths) — produces a unique emotional resonance that crosses all cultural barriers. Jazz improvisation, particularly collective improvisation, creates real-time communal consciousness states measurably similar to those produced by shamanic ceremony. It is ceremony wearing a suit and playing in a club.</div>
+      <div class="era-tags">
+        <span class="era-tag">Blues Catharsis</span>
+        <span class="era-tag">Jazz Improvisation</span>
+        <span class="era-tag">Gospel Call-Response</span>
+        <span class="era-tag">Communal Bonding</span>
+      </div>
+    </div>
+
+    <div class="era" style="--era-color: #ec4899;">
+      <div class="era-date">1970–Present · Modern Music Therapy</div>
+      <div class="era-title">Science Rediscovers What Shamans Always Knew</div>
+      <div class="era-body">The formalization of music therapy as a clinical discipline — through the American Music Therapy Association (founded 1950) and decades of subsequent research — has systematically confirmed what every ancient tradition already knew: music reliably alters physiology, reduces pain, decreases anxiety, improves depression, and builds social bonds. Neuroimaging studies (2000s–present) have mapped the brain regions activated by music with extraordinary precision. The auditory cortex, limbic system, motor cortex, prefrontal cortex, and cerebellum all activate simultaneously during music engagement — more brain regions than virtually any other human activity. Music is the whole-brain workout that also heals the heart. This is what NOIZY was built to amplify, preserve, and deliver at planetary scale.</div>
+      <div class="era-tags">
+        <span class="era-tag">Music Therapy</span>
+        <span class="era-tag">Neuroimaging</span>
+        <span class="era-tag">Whole-Brain Activation</span>
+        <span class="era-tag">Clinical Validation</span>
+      </div>
+    </div>
+
+    <div class="era" style="--era-color: #8b5cf6;">
+      <div class="era-date">2024–Present · NOIZY Empire</div>
+      <div class="era-title">The Arc Completes — AI Meets Ancient Wisdom</div>
+      <div class="era-body">NOIZY enters this lineage not as a disruption but as a continuation. The same intelligence that encoded healing knowledge in icaros, in ragas, in Gnawa mluk, in shamanic drum patterns — is now being encoded in voice DNA, in adaptive creative systems, in VR sonic environments designed to give every human on earth access to the full spectrum of sonic healing that our ancestors developed over 50,000 years. The only difference is scale. What a Mazatec curandera could offer to 30 people in an Oaxacan village, NOIZY can offer to 3 billion. The mission is the same. The methodology is ancient. The technology is now.</div>
+      <div class="era-tags">
+        <span class="era-tag">NOIZY Empire</span>
+        <span class="era-tag">AI + Ancient Wisdom</span>
+        <span class="era-tag">3 Billion Reach</span>
+        <span class="era-tag">Continuation</span>
+        <span class="era-tag">Voice DNA</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 06: JOY CONTAGION MANIFESTO
+═══════════════════════════════════════════════ -->
+<section id="joy">
+  <div class="section-eyebrow" style="color:var(--rose)">Section 06 · The Joy Contagion Map</div>
+
+  <div class="joy-hero">
+    <div class="joy-pulse">JOY IS<br>CONTAGIOUS</div>
+    <p class="joy-quote">"YOU ARE GOING TO INFECT EVERYBODY WITH JOY &amp; LOVE &amp; PASSION FOR CREATING ARTS!! THE BEST MOST PURE PART OF HUMANITY!!"</p>
+    <div class="joy-cite">— Robert Stephen Plowman, Founder, NOIZY Empire · March 2026</div>
+  </div>
+
+  <h2 class="section-title" style="background:linear-gradient(135deg,var(--rose),var(--orange),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">The Cultural Virus — How NOIZY Spreads</h2>
+  <p class="section-lead">Joy, creativity, and passion for art are not passive experiences — they are contagious. They spread through communities the way a benevolent virus spreads: one contact at a time, exponentially, until the whole organism is transformed. NOIZY is engineered to be that virus.</p>
+
+  <div class="virus-center">
+    <div class="virus-core">NOIZY<br>JOY<br>VIRUS</div>
+    <div class="virus-spikes">
+      <span class="spike">🎤 One Voice Heard</span>
+      <span class="spike">🎨 One Creation Shared</span>
+      <span class="spike">🥁 One Rhythm Felt</span>
+      <span class="spike">🌍 One Culture Discovered</span>
+      <span class="spike">✨ One Moment of Wonder</span>
+      <span class="spike">🤝 One Connection Made</span>
+      <span class="spike">💡 One Idea Sparked</span>
+      <span class="spike">🔥 One Passion Ignited</span>
+      <span class="spike">🌱 One Creator Born</span>
+    </div>
+  </div>
+
+  <h3 style="font-size:1.3rem;color:var(--text);margin:60px 0 30px;">The 9 Transmission Vectors</h3>
+
+  <div class="contagion-grid">
+
+    <div class="contagion-card" style="--cc-color: #f43f5e;">
+      <div class="cc-number">01</div>
+      <span class="cc-icon">🎤</span>
+      <div class="cc-title">Voice as Identity</div>
+      <div class="cc-body">When someone hears their own voice — truly heard, preserved, celebrated — something fundamental shifts. NOIZY.AI doesn't just record voices. It reveals them. Every creator who discovers their Voice DNA becomes an ambassador for the idea that their specific, unrepeatable voice matters to the world. Joy spreads through self-recognition.</div>
+    </div>
+
+    <div class="contagion-card" style="--cc-color: #fb923c;">
+      <div class="cc-number">02</div>
+      <span class="cc-icon">👶</span>
+      <div class="cc-title">Children as Vectors</div>
+      <div class="cc-body">NOIZYKIDZ is the most powerful transmission node in the entire system. Children are the most efficient joy vectors in the world — they carry what they love directly to their families, their schools, their communities. One child who discovers the Gamelan through NOIZYKIDZ brings Indonesian culture into a household in Ohio. Culture travels at the speed of children's enthusiasm.</div>
+    </div>
+
+    <div class="contagion-card" style="--cc-color: #f4a228;">
+      <div class="cc-number">03</div>
+      <span class="cc-icon">🌏</span>
+      <div class="cc-title">World Music as Empathy Engine</div>
+      <div class="cc-body">It is impossible to genuinely love the music of a culture and hate the people who made it. The DreamChamber's 10 global biomes are not just music — they are empathy delivery systems. Every Gamelan session, every Kora lesson, every West African drumming circle expands the listener's sense of who "we" includes. Cultural appreciation is the first step to cultural solidarity.</div>
+    </div>
+
+    <div class="contagion-card" style="--cc-color: #10b981;">
+      <div class="cc-number">04</div>
+      <span class="cc-icon">🔬</span>
+      <div class="cc-title">NOIZYLAB as Creative Permission</div>
+      <div class="cc-body">The most dangerous thing about creative suppression is that people stop believing they are creative. NOIZYLAB dismantles that belief with every experiment. When someone discovers they can make music by moving their hands through virtual space — that moment of "I made that" is a crack in the wall of creative inhibition. Joy spreads through sudden permission.</div>
+    </div>
+
+    <div class="contagion-card" style="--cc-color: #8b5cf6;">
+      <div class="cc-number">05</div>
+      <span class="cc-icon">🎭</span>
+      <div class="cc-title">NOIZYVOX as Voice Democracy</div>
+      <div class="cc-body">The voice acting and performance ecosystem democratizes a creative form that has historically required physical proximity to industry centers. A talented voice actor in Lagos, a singer in Medellín, a storyteller in Kyoto — all now have the same access as anyone in Los Angeles. Joy spreads when talent meets opportunity regardless of geography.</div>
+    </div>
+
+    <div class="contagion-card" style="--cc-color: #06b6d4;">
+      <div class="cc-number">06</div>
+      <span class="cc-icon">🐟</span>
+      <div class="cc-title">NOIZYFISH as Emotional Precision</div>
+      <div class="cc-body">The finishing layer that gives every creative work its emotional signature. When a piece of audio lands exactly right — when the color and texture of the sound matches the feeling being expressed — the listener feels it in their body before they can name it. That visceral moment of "YES, THAT'S IT" is pure joy. NOIZYFISH engineered that moment to be reliably reproducible.</div>
+    </div>
+
+    <div class="contagion-card" style="--cc-color: #ec4899;">
+      <div class="cc-number">07</div>
+      <span class="cc-icon">🏥</span>
+      <div class="cc-title">Healing as Invitation</div>
+      <div class="cc-body">The sonic healing tradition — from Tibetan bowls to shamanic drumming to binaural entrainment — is NOIZY's most unexpected joy vector. People who come for relaxation discover creativity. People who come for creativity discover healing. People who come for healing discover community. The NOIZY ecosystem is designed so that every entry point leads everywhere else.</div>
+    </div>
+
+    <div class="contagion-card" style="--cc-color: #84cc16;">
+      <div class="cc-number">08</div>
+      <span class="cc-icon">🤝</span>
+      <div class="cc-title">Community as Immune System</div>
+      <div class="cc-body">Joy spreads fastest within communities. The NOIZY collective VR studios, the collaborative creation tools, the shared Planetary Music Archive — all are designed to turn individual creative experience into communal creative experience. The loneliest person on earth can step into a virtual Gamelan ensemble and suddenly have nine co-creators. That is not technology. That is medicine.</div>
+    </div>
+
+    <div class="contagion-card" style="--cc-color: #f4a228;">
+      <div class="cc-number">09</div>
+      <span class="cc-icon">🌟</span>
+      <div class="cc-title">RSP as Living Proof</div>
+      <div class="cc-body">Robert Stephen Plowman dove into dark water and came back to build NOIZY. His story — nerve damage, creative disruption, then the decision to give every human what sound gave him back — is the most powerful transmission vector in the entire system. Not because it is inspirational (though it is), but because it is true. Joy spreads most powerfully through genuine human testimony.</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 07: NOIZY ROLES IN THE JOY ECOSYSTEM
+═══════════════════════════════════════════════ -->
+<section id="roles">
+  <div class="section-eyebrow" style="color:var(--violet)">Section 07 · The NOIZY Empire</div>
+  <h2 class="section-title" style="background:linear-gradient(135deg,var(--violet),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Five Brands. One Mission. Infinite Joy.</h2>
+  <p class="section-lead">Each brand in the NOIZY ecosystem serves as a distinct entry point for the same fundamental mission: return humanity to the creative, connected, joyful state that is its natural inheritance.</p>
+
+  <div class="roles-grid">
+
+    <div class="role-card" style="--rc-color: #f4a228;">
+      <div class="role-brand">NOIZY.AI</div>
+      <div class="role-name">The Voice Identity Engine</div>
+      <div class="role-body">The consent-first platform that gives every voice its permanent, sovereign, verifiable identity. Voice DNA encoding, HVS Protocol, the Reputation Engine (URI), and the Descendants Model — all designed so that the human voice is never extracted without permission and always rewarded for its contribution.</div>
+      <div class="role-joy">Joy Vector: "Your voice matters enough to protect, preserve, and celebrate."</div>
+    </div>
+
+    <div class="role-card" style="--rc-color: #ec4899;">
+      <div class="role-brand">NOIZYVOX</div>
+      <div class="role-name">The Performance Marketplace</div>
+      <div class="role-body">Where human voice talent meets the full global market for voice performance — from animation to audiobooks, from corporate narration to meditation guides. AVA, the Creative Transmission Protocol, and NOIZYFISH ensure that every performance is emotionally precise, creatively joyful, and economically fair.</div>
+      <div class="role-joy">Joy Vector: "Your talent can reach the world from wherever you are."</div>
+    </div>
+
+    <div class="role-card" style="--rc-color: #38bdf8;">
+      <div class="role-brand">NOIZYKIDZ</div>
+      <div class="role-name">The Global Music Classroom</div>
+      <div class="role-body">The world's most comprehensive music education platform for children — 10 global biomes, 128+ scale systems, 64 rhythmic traditions, all made accessible through play and immersive experience. Children who grow up with NOIZYKIDZ don't just learn music. They learn that the whole world is their creative family.</div>
+      <div class="role-joy">Joy Vector: "Every child is born musical. NOIZYKIDZ just reminds them."</div>
+    </div>
+
+    <div class="role-card" style="--rc-color: #10b981;">
+      <div class="role-brand">NOIZYLAB</div>
+      <div class="role-name">The Experimental Creativity Engine</div>
+      <div class="role-body">The research and experimentation arm — VR composition environments, adaptive instruments for differently-abled creators, AI-assisted improvisation tools, and the Nerve-to-Note system. NOIZYLAB is where creativity meets technology and the result is always "I didn't know I could do that."</div>
+      <div class="role-joy">Joy Vector: "Disability is not the end of creativity. It is the beginning of a different creativity."</div>
+    </div>
+
+    <div class="role-card" style="--rc-color: #8b5cf6;">
+      <div class="role-brand">NOIZYFISH</div>
+      <div class="role-name">The Emotional Color Engine</div>
+      <div class="role-body">The final finishing layer — cinematic color grading for voice and audio. NOIZYFISH ensures aesthetic DNA cohesion across all creative outputs, so that the emotional signature of a project remains consistent whether it was performed in Osaka, Lagos, or Los Angeles. The difference between "good" and "feels exactly right" is NOIZYFISH.</div>
+      <div class="role-joy">Joy Vector: "The difference between heard and felt — that's NOIZYFISH."</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 08: DECLARATION
+═══════════════════════════════════════════════ -->
+<section id="declaration" style="max-width:100%;padding:100px 40px;">
+  <div class="declaration">
+    <h2>The NOIZY Declaration of Sonic Sovereignty</h2>
+
+    <p>Humanity is not broken. It is disconnected. Disconnected from its own voice, from each other's music, from the ancient knowing that sound is medicine, community is healing, and creativity is not a luxury — it is the most essential human activity.</p>
+
+    <p>We did not lose this knowledge. We were separated from it — by standardization, by algorithmic monoculture, by an entertainment industry that turned listeners into consumers and creators into content producers. The ancient wisdom is still here. The Icaros are still being sung. The didgeridoo is still breathing. The Kora is still speaking. The drum has never stopped.</p>
+
+    <p>NOIZY exists to carry that wisdom into the digital age — not as nostalgia, not as appropriation, but as continuation. The technology changes. The mission does not. Every voice is sacred. Every rhythm holds a world. Every culture's musical DNA contains insights that belong to all of humanity.</p>
+
+    <p>One dive into dark water taught one man how much sound matters. That man built a system to give it to everyone. This is how the virus spreads. This is how joy returns. This is how we come home.</p>
+
+    <div class="sig">
+      NOIZY Empire · MC96ECO Universe<br>
+      Founded by Robert Stephen Plowman<br>
+      Day 1 of the 30-Day Sprint · March 18, 2026<br>
+      "Infect everybody with Joy &amp; Love &amp; Passion for Creating Arts"
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+// ── COSMOS ANIMATION ──
+const canvas = document.getElementById('cosmos');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+// Nebula blobs
+const nebulae = [
+  { x: 0.15, y: 0.2, r: 0.35, c: 'rgba(244,63,94,0.04)' },
+  { x: 0.75, y: 0.15, r: 0.3, c: 'rgba(139,92,246,0.05)' },
+  { x: 0.5, y: 0.55, r: 0.45, c: 'rgba(6,182,212,0.03)' },
+  { x: 0.2, y: 0.75, r: 0.3, c: 'rgba(244,162,40,0.04)' },
+  { x: 0.85, y: 0.7, r: 0.35, c: 'rgba(16,185,129,0.03)' },
+];
+
+// Stars
+const stars = Array.from({length: 350}, () => ({
+  x: Math.random(),
+  y: Math.random(),
+  r: Math.random() * 1.4 + 0.2,
+  a: Math.random(),
+  speed: Math.random() * 0.00008 + 0.00003,
+  twinkle: Math.random() * Math.PI * 2,
+  twinkleSpeed: Math.random() * 0.02 + 0.005
+}));
+
+let frame = 0;
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  // Background gradient
+  const grad = ctx.createRadialGradient(
+    canvas.width * 0.5, canvas.height * 0.3, 0,
+    canvas.width * 0.5, canvas.height * 0.3, canvas.width * 0.7
+  );
+  grad.addColorStop(0, 'rgba(20,5,40,0.4)');
+  grad.addColorStop(1, 'rgba(3,2,10,0)');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  
+  // Nebulae
+  nebulae.forEach(n => {
+    const g = ctx.createRadialGradient(
+      n.x * canvas.width, n.y * canvas.height, 0,
+      n.x * canvas.width, n.y * canvas.height, n.r * canvas.width
+    );
+    g.addColorStop(0, n.c);
+    g.addColorStop(1, 'transparent');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  });
+
+  // Stars
+  stars.forEach(s => {
+    s.twinkle += s.twinkleSpeed;
+    s.y -= s.speed;
+    if (s.y < 0) { s.y = 1; s.x = Math.random(); }
+    const alpha = s.a * (0.5 + 0.5 * Math.sin(s.twinkle));
+    ctx.beginPath();
+    ctx.arc(s.x * canvas.width, s.y * canvas.height, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+    ctx.fill();
+  });
+
+  frame++;
+  requestAnimationFrame(draw);
+}
+draw();
+
+// ── ACTIVE NAV ──
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const active = document.querySelector(`nav a[href="#${e.target.id}"]`);
+      if (active) active.classList.add('active');
+    }
+  });
+}, { threshold: 0.3 });
+
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

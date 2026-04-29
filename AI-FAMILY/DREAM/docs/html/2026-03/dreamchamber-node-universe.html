@@ -1,0 +1,1902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DreamChamber Node Universe — NOIZYVOX</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void: #030305;
+  --void-2: #07070f;
+  --void-3: #0d0d1a;
+  --amber: #c49a38;
+  --amber-dim: #8a6a20;
+  --amber-glow: rgba(196,154,56,0.15);
+  --cyan: #2aa4be;
+  --cyan-dim: #1a6878;
+  --cyan-glow: rgba(42,164,190,0.15);
+  --ghost: rgba(255,255,255,0.06);
+  --ghost-2: rgba(255,255,255,0.1);
+  --text: #d4cfc4;
+  --text-dim: #7a7468;
+  --green: #3dba72;
+  --green-glow: rgba(61,186,114,0.15);
+  --red: #c44a38;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --mono: 'IBM Plex Mono', 'Courier New', monospace;
+  --sidebar-w: 240px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--void);
+  color: var(--text);
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.65;
+  display: flex;
+}
+
+/* ── SIDEBAR ─────────────────────────────────── */
+#sidebar {
+  width: var(--sidebar-w);
+  min-height: 100vh;
+  background: var(--void-2);
+  border-right: 1px solid rgba(196,154,56,0.1);
+  position: fixed;
+  top: 0; left: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  overflow-y: auto;
+}
+.sb-logo {
+  padding: 24px 20px 16px;
+  border-bottom: 1px solid var(--ghost);
+}
+.sb-logo .mark {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--amber);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.sb-logo .title {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 300;
+  color: #fff;
+  margin-top: 4px;
+  line-height: 1.2;
+}
+.sb-logo .subtitle {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  margin-top: 6px;
+  letter-spacing: 0.1em;
+}
+.sb-section-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding: 16px 20px 6px;
+}
+#sidebar nav a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 20px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: all 0.2s;
+  border-left: 2px solid transparent;
+}
+#sidebar nav a:hover, #sidebar nav a.active {
+  color: var(--amber);
+  background: var(--amber-glow);
+  border-left-color: var(--amber);
+}
+#sidebar nav a .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--text-dim);
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+#sidebar nav a:hover .dot, #sidebar nav a.active .dot {
+  background: var(--amber);
+  box-shadow: 0 0 6px var(--amber);
+}
+.sb-status {
+  margin-top: auto;
+  padding: 16px 20px;
+  border-top: 1px solid var(--ghost);
+}
+.sb-status .status-row {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+.sb-status .status-row span {
+  color: var(--green);
+}
+
+/* ── MAIN ─────────────────────────────────── */
+#main {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── HERO ─────────────────────────────────── */
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 80px 60px;
+  overflow: hidden;
+}
+#universe-canvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  opacity: 0.6;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+}
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--amber);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(52px, 7vw, 88px);
+  font-weight: 300;
+  line-height: 1.0;
+  color: #fff;
+  margin-bottom: 12px;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--amber);
+}
+.hero-sub {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text);
+  margin-bottom: 32px;
+  max-width: 520px;
+}
+.hero-stats {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.hero-stat {
+  text-align: left;
+}
+.hero-stat .num {
+  font-family: var(--mono);
+  font-size: 28px;
+  color: var(--cyan);
+  display: block;
+}
+.hero-stat .lbl {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+.signal-strip {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--amber), var(--cyan), transparent);
+  opacity: 0.6;
+}
+
+/* ── SECTIONS ─────────────────────────────── */
+section {
+  padding: 80px 60px;
+  border-bottom: 1px solid var(--ghost);
+}
+.section-eyebrow {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--amber);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 300;
+  color: #fff;
+  margin-bottom: 8px;
+  line-height: 1.1;
+}
+.section-desc {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-style: italic;
+  color: var(--text-dim);
+  margin-bottom: 48px;
+  max-width: 600px;
+}
+.divider {
+  width: 60px; height: 1px;
+  background: linear-gradient(90deg, var(--amber), transparent);
+  margin: 16px 0 40px;
+}
+
+/* ── RSP REGISTRY ─────────────────────────── */
+.rsp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 24px;
+}
+.rsp-card {
+  background: var(--void-2);
+  border: 1px solid var(--ghost-2);
+  border-radius: 4px;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.2s;
+  cursor: pointer;
+}
+.rsp-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--amber), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.rsp-card:hover { border-color: var(--amber-dim); transform: translateY(-2px); }
+.rsp-card:hover::before { opacity: 1; }
+.rsp-card.founder { border-color: rgba(196,154,56,0.3); }
+.rsp-card.founder::before { opacity: 1; background: linear-gradient(90deg, var(--amber), var(--cyan)); }
+.rsp-id {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--amber);
+  letter-spacing: 0.15em;
+  margin-bottom: 6px;
+}
+.rsp-name {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 400;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.rsp-role {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.rsp-genome-mini {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.genome-tag {
+  font-family: var(--mono);
+  font-size: 9px;
+  padding: 3px 8px;
+  border-radius: 2px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.genome-tag.tone    { background: rgba(196,154,56,0.12); color: var(--amber); border: 1px solid rgba(196,154,56,0.2); }
+.genome-tag.energy  { background: rgba(42,164,190,0.12); color: var(--cyan); border: 1px solid rgba(42,164,190,0.2); }
+.genome-tag.emotion { background: rgba(61,186,114,0.12); color: var(--green); border: 1px solid rgba(61,186,114,0.2); }
+.genome-tag.arch    { background: rgba(160,100,220,0.12); color: #b07ade; border: 1px solid rgba(160,100,220,0.2); }
+.rsp-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.rsp-meta-item { font-family: var(--mono); font-size: 10px; color: var(--text-dim); }
+.rsp-meta-item span { color: var(--text); }
+.ava-count-badge {
+  position: absolute;
+  top: 20px; right: 20px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--cyan);
+  background: var(--cyan-glow);
+  border: 1px solid var(--cyan-dim);
+  border-radius: 2px;
+  padding: 3px 8px;
+}
+
+/* ── CREATIVE GENOME ──────────────────────── */
+.genome-viewer {
+  background: var(--void-2);
+  border: 1px solid var(--ghost-2);
+  border-radius: 4px;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.genome-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.genome-actor {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 300;
+  color: #fff;
+}
+.genome-fingerprint {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--amber);
+  letter-spacing: 0.1em;
+}
+.genome-axes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.genome-axis {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.axis-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+.axis-value {
+  font-family: var(--serif);
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.axis-bar-track {
+  height: 4px;
+  background: var(--ghost);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.axis-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 1s ease;
+}
+.axis-bar-fill.tone    { background: linear-gradient(90deg, var(--amber-dim), var(--amber)); }
+.axis-bar-fill.energy  { background: linear-gradient(90deg, var(--cyan-dim), var(--cyan)); }
+.axis-bar-fill.emotion { background: linear-gradient(90deg, #1a7a42, var(--green)); }
+.axis-bar-fill.arch    { background: linear-gradient(90deg, #5a3080, #b07ade); }
+.axis-bar-fill.lineage { background: linear-gradient(90deg, #804020, #d07040); }
+.axis-bar-fill.context { background: linear-gradient(90deg, #204080, #4080d0); }
+.genome-canvas-wrap {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+}
+#genome-radar {
+  border: 1px solid var(--ghost);
+  border-radius: 4px;
+  background: var(--void-3);
+}
+
+/* ── SESSIONS TIMELINE ────────────────────── */
+.timeline {
+  position: relative;
+  padding-left: 32px;
+  max-width: 800px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--amber), var(--cyan), transparent);
+}
+.session-entry {
+  position: relative;
+  margin-bottom: 40px;
+  padding: 24px 28px;
+  background: var(--void-2);
+  border: 1px solid var(--ghost);
+  border-radius: 4px;
+  transition: border-color 0.3s;
+}
+.session-entry::before {
+  content: '';
+  position: absolute;
+  left: -36px;
+  top: 28px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 8px var(--amber);
+}
+.session-entry:hover { border-color: rgba(196,154,56,0.3); }
+.session-date {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--amber);
+  letter-spacing: 0.15em;
+  margin-bottom: 4px;
+}
+.session-id {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+.session-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.session-desc {
+  font-family: var(--serif);
+  font-size: 16px;
+  color: var(--text);
+  margin-bottom: 16px;
+  font-style: italic;
+}
+.session-chips {
+  display: flex; gap: 8px; flex-wrap: wrap;
+}
+.chip {
+  font-family: var(--mono);
+  font-size: 9px;
+  padding: 3px 8px;
+  border-radius: 2px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.chip.ava    { background: rgba(196,154,56,0.1); color: var(--amber); border: 1px solid rgba(196,154,56,0.25); }
+.chip.scene  { background: rgba(42,164,190,0.1); color: var(--cyan); border: 1px solid rgba(42,164,190,0.25); }
+.chip.exp    { background: rgba(160,100,220,0.1); color: #b07ade; border: 1px solid rgba(160,100,220,0.25); }
+.chip.arch   { background: rgba(61,186,114,0.1); color: var(--green); border: 1px solid rgba(61,186,114,0.25); }
+.session-stats {
+  display: flex;
+  gap: 24px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--ghost);
+}
+.session-stat {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-dim);
+}
+.session-stat span { color: var(--cyan); }
+
+/* ── DREAM AGENTS ─────────────────────────── */
+.agents-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+.agent-card {
+  background: var(--void-2);
+  border: 1px solid var(--ghost);
+  border-radius: 4px;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+}
+.agent-sigil {
+  font-size: 32px;
+  margin-bottom: 12px;
+  display: block;
+}
+.agent-name {
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--amber);
+  letter-spacing: 0.2em;
+  margin-bottom: 4px;
+}
+.agent-role {
+  font-family: var(--serif);
+  font-size: 20px;
+  color: #fff;
+  font-weight: 300;
+  margin-bottom: 12px;
+}
+.agent-desc {
+  font-family: var(--serif);
+  font-size: 15px;
+  color: var(--text);
+  font-style: italic;
+  margin-bottom: 16px;
+}
+.agent-hw {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  padding: 6px 10px;
+  background: var(--ghost);
+  border-radius: 2px;
+  display: inline-block;
+}
+.agent-card.gabriel { border-top: 2px solid var(--amber); }
+.agent-card.pops    { border-top: 2px solid var(--cyan); }
+.agent-card.dream   { border-top: 2px solid #b07ade; }
+.agent-card.lucy    { border-top: 2px solid var(--green); }
+.agent-card.shirl   { border-top: 2px solid #d07040; }
+
+/* ── SCENE PROTOTYPES ─────────────────────── */
+.scenes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 24px;
+}
+.scene-card {
+  background: var(--void-2);
+  border: 1px solid var(--ghost);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.2s;
+}
+.scene-card:hover { border-color: rgba(42,164,190,0.3); transform: translateY(-2px); }
+.scene-header {
+  padding: 24px;
+  border-bottom: 1px solid var(--ghost);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+.scene-title-wrap {}
+.scene-id { font-family: var(--mono); font-size: 10px; color: var(--cyan); letter-spacing: 0.15em; margin-bottom: 4px; }
+.scene-title { font-family: var(--serif); font-size: 22px; color: #fff; font-weight: 300; }
+.scene-status-badge {
+  font-family: var(--mono);
+  font-size: 9px;
+  padding: 4px 10px;
+  border-radius: 2px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+.scene-status-badge.prototype { background: var(--cyan-glow); color: var(--cyan); border: 1px solid var(--cyan-dim); }
+.scene-status-badge.active    { background: var(--green-glow); color: var(--green); border: 1px solid #1a6a42; }
+.scene-status-badge.concept   { background: rgba(160,100,220,0.1); color: #b07ade; border: 1px solid rgba(160,100,220,0.3); }
+.scene-body { padding: 24px; }
+.scene-desc { font-family: var(--serif); font-size: 16px; color: var(--text); font-style: italic; margin-bottom: 16px; }
+.scene-cast {
+  margin-bottom: 16px;
+}
+.cast-label { font-family: var(--mono); font-size: 10px; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+.cast-list { display: flex; gap: 8px; flex-wrap: wrap; }
+.cast-ava {
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 4px 10px;
+  background: var(--amber-glow);
+  border: 1px solid rgba(196,154,56,0.2);
+  border-radius: 2px;
+  color: var(--amber);
+}
+.scene-genome-strip {
+  height: 3px;
+  border-radius: 2px;
+  margin-top: 16px;
+}
+
+/* ── GALLERY ──────────────────────────────── */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+.gallery-item {
+  background: var(--void-2);
+  border: 1px solid var(--ghost);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+.gallery-item:hover { border-color: rgba(42,164,190,0.3); }
+.gallery-visual {
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  position: relative;
+  overflow: hidden;
+}
+.gallery-visual::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 40px;
+  background: linear-gradient(to bottom, transparent, var(--void-2));
+}
+.gallery-info { padding: 16px; }
+.gallery-cat { font-family: var(--mono); font-size: 9px; color: var(--text-dim); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 4px; }
+.gallery-title { font-family: var(--serif); font-size: 18px; color: #fff; margin-bottom: 4px; }
+.gallery-year { font-family: var(--mono); font-size: 10px; color: var(--amber); }
+
+/* ── PROVENANCE LEDGER ────────────────────── */
+.ledger-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--ghost);
+  border-radius: 4px;
+}
+.ledger-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--mono);
+  font-size: 11px;
+}
+.ledger-table thead {
+  background: var(--void-3);
+  border-bottom: 1px solid var(--ghost-2);
+}
+.ledger-table th {
+  padding: 12px 16px;
+  text-align: left;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 9px;
+  white-space: nowrap;
+}
+.ledger-table td {
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--ghost);
+  color: var(--text);
+  white-space: nowrap;
+}
+.ledger-table tr:last-child td { border-bottom: none; }
+.ledger-table tr:hover td { background: var(--ghost); }
+.ledger-id { color: var(--amber); }
+.ledger-hash { color: var(--cyan); font-size: 10px; }
+.ledger-pass { color: var(--green); }
+.ledger-status-sent { color: var(--green); }
+.ledger-status-queued { color: var(--amber); }
+.ledger-footer {
+  margin-top: 16px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.ledger-footer .immutable-badge {
+  padding: 4px 10px;
+  background: var(--green-glow);
+  border: 1px solid rgba(61,186,114,0.3);
+  border-radius: 2px;
+  color: var(--green);
+}
+
+/* ── UPGRADE ROADMAP ──────────────────────── */
+.upgrade-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+.upgrade-card {
+  background: var(--void-2);
+  border: 1px solid var(--ghost);
+  border-radius: 4px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.upgrade-num {
+  font-family: var(--mono);
+  font-size: 48px;
+  font-weight: 300;
+  color: var(--ghost-2);
+  position: absolute;
+  top: 12px; right: 16px;
+  line-height: 1;
+  pointer-events: none;
+}
+.upgrade-phase { font-family: var(--mono); font-size: 10px; color: var(--amber); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 6px; }
+.upgrade-title { font-family: var(--serif); font-size: 20px; color: #fff; font-weight: 400; margin-bottom: 10px; }
+.upgrade-desc { font-family: var(--serif); font-size: 15px; color: var(--text); font-style: italic; margin-bottom: 14px; }
+.upgrade-items { list-style: none; }
+.upgrade-items li {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  padding: 3px 0 3px 14px;
+  position: relative;
+}
+.upgrade-items li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: var(--cyan);
+}
+.upgrade-status {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--ghost);
+  font-family: var(--mono);
+  font-size: 10px;
+}
+.status-dot {
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+.status-dot.planned  { background: var(--text-dim); }
+.status-dot.building { background: var(--amber); box-shadow: 0 0 6px var(--amber); }
+.status-dot.live     { background: var(--green); box-shadow: 0 0 6px var(--green); }
+
+/* ── CONSENT KEY ANATOMY ──────────────────── */
+.consent-anatomy {
+  background: var(--void-3);
+  border: 1px solid var(--ghost-2);
+  border-radius: 4px;
+  padding: 36px;
+  max-width: 800px;
+}
+.consent-key-display {
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--amber);
+  letter-spacing: 0.05em;
+  padding: 16px 20px;
+  background: var(--void);
+  border-radius: 3px;
+  margin-bottom: 28px;
+  word-break: break-all;
+  line-height: 1.7;
+}
+.key-segment { padding: 1px 3px; border-radius: 2px; }
+.key-segment.prefix  { background: rgba(196,154,56,0.2); color: var(--amber); }
+.key-segment.actor   { background: rgba(42,164,190,0.2); color: var(--cyan); }
+.key-segment.ctype   { background: rgba(196,154,56,0.15); color: var(--amber); }
+.key-segment.entropy { background: rgba(61,186,114,0.2); color: var(--green); }
+.key-segment.avaid   { background: rgba(160,100,220,0.2); color: #b07ade; }
+.key-segment.domain  { background: rgba(200,80,60,0.2); color: #e08070; }
+.key-segment.juris   { background: rgba(42,164,190,0.15); color: var(--cyan); }
+.key-segment.date    { background: rgba(196,154,56,0.1); color: var(--text); }
+.key-sep { color: var(--text-dim); }
+.key-legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+}
+.legend-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-dim);
+}
+.legend-swatch {
+  width: 10px; height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* ── RESPONSIVE ───────────────────────────── */
+@media (max-width: 900px) {
+  #sidebar { display: none; }
+  #main { margin-left: 0; }
+  section { padding: 48px 28px; }
+  #hero { padding: 60px 28px; }
+  .genome-axes { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside id="sidebar">
+  <div class="sb-logo">
+    <div class="mark">NOIZYVOX</div>
+    <div class="title">DreamChamber<br>Node Universe</div>
+    <div class="subtitle">RSP_001 · LIVING ARCHIVE</div>
+  </div>
+
+  <div class="sb-section-label">Navigation</div>
+  <nav>
+    <a href="#hero" class="active"><span class="dot"></span>Overview</a>
+    <a href="#rsp-registry"><span class="dot"></span>RSP Registry</a>
+    <a href="#creative-genome"><span class="dot"></span>Creative Genome</a>
+    <a href="#sessions"><span class="dot"></span>Experimental Sessions</a>
+    <a href="#dream-agents"><span class="dot"></span>Dream Agents</a>
+    <a href="#scene-prototypes"><span class="dot"></span>Scene Prototypes</a>
+    <a href="#gallery"><span class="dot"></span>Gallery / Archive</a>
+    <a href="#provenance"><span class="dot"></span>Provenance Ledger</a>
+    <a href="#upgrade-roadmap"><span class="dot"></span>Upgrade Roadmap</a>
+    <a href="#consent-key"><span class="dot"></span>Consent Key</a>
+  </nav>
+
+  <div class="sb-status">
+    <div class="status-row">STATUS <span>● LIVE</span></div>
+    <div class="status-row">ACTOR <span>RSP_001</span></div>
+    <div class="status-row">SESSIONS <span>14</span></div>
+    <div class="status-row">AVAs ACTIVE <span>6</span></div>
+    <div class="status-row">LEDGER <span>IMMUTABLE</span></div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main id="main">
+
+<!-- ══ HERO ══════════════════════════════════════════════ -->
+<section id="hero">
+  <canvas id="universe-canvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-eyebrow">DreamChamber · Living Node Universe · v2.0</div>
+    <h1 class="hero-title">The<br><em>Living</em><br>DreamChamber</h1>
+    <p class="hero-sub">Every voice, every experiment, every idea — captured, stacked, and fully indexed. Two years of sonic archaeology made navigable.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="num">14</span><span class="lbl">Sessions</span></div>
+      <div class="hero-stat"><span class="num">6</span><span class="lbl">AVAs</span></div>
+      <div class="hero-stat"><span class="num">847</span><span class="lbl">Utterances</span></div>
+      <div class="hero-stat"><span class="num">∞</span><span class="lbl">Provenance</span></div>
+    </div>
+  </div>
+  <div class="signal-strip"></div>
+</section>
+
+<!-- ══ RSP REGISTRY ══════════════════════════════════════ -->
+<section id="rsp-registry">
+  <div class="section-eyebrow">Guild Registry</div>
+  <h2 class="section-title">RSP Registry</h2>
+  <p class="section-desc">All registered Sonic Personas, catalogued by voice genome, AVA status, and session history.</p>
+  <div class="divider"></div>
+
+  <div class="rsp-grid">
+
+    <!-- RSP_001 -->
+    <div class="rsp-card founder">
+      <div class="ava-count-badge">6 AVAs</div>
+      <div class="rsp-id">RSP_001 · FOUNDER</div>
+      <div class="rsp-name">Rob S. Plowman</div>
+      <div class="rsp-role">Guild Founder · Proof of Concept Actor</div>
+      <div class="rsp-genome-mini">
+        <span class="genome-tag tone">Warm Baritone</span>
+        <span class="genome-tag energy">Dynamic</span>
+        <span class="genome-tag emotion">Resonant</span>
+        <span class="genome-tag arch">The Visionary</span>
+      </div>
+      <div class="rsp-meta">
+        <div class="rsp-meta-item">REGISTERED <span>2024-03-01</span></div>
+        <div class="rsp-meta-item">JURISDICTION <span>CA / ON</span></div>
+        <div class="rsp-meta-item">SESSIONS <span>14</span></div>
+        <div class="rsp-meta-item">UTTERANCES <span>847</span></div>
+        <div class="rsp-meta-item">ROYALTY TIER <span>75/25</span></div>
+        <div class="rsp-meta-item">ESTATE STATUS <span>ACTIVE TRUST</span></div>
+      </div>
+    </div>
+
+    <!-- RSP_002 -->
+    <div class="rsp-card">
+      <div class="ava-count-badge">2 AVAs</div>
+      <div class="rsp-id">RSP_002 · EXPERIMENTAL</div>
+      <div class="rsp-name">Aria Nova</div>
+      <div class="rsp-role">Experimental Voice Actor · AI Narrator</div>
+      <div class="rsp-genome-mini">
+        <span class="genome-tag tone">Crystalline Soprano</span>
+        <span class="genome-tag energy">Precise</span>
+        <span class="genome-tag emotion">Ethereal</span>
+        <span class="genome-tag arch">The Oracle</span>
+      </div>
+      <div class="rsp-meta">
+        <div class="rsp-meta-item">REGISTERED <span>2024-07-14</span></div>
+        <div class="rsp-meta-item">JURISDICTION <span>CA / BC</span></div>
+        <div class="rsp-meta-item">SESSIONS <span>3</span></div>
+        <div class="rsp-meta-item">UTTERANCES <span>124</span></div>
+        <div class="rsp-meta-item">ROYALTY TIER <span>50/50</span></div>
+        <div class="rsp-meta-item">ESTATE STATUS <span>PENDING</span></div>
+      </div>
+    </div>
+
+    <!-- RSP_003 -->
+    <div class="rsp-card">
+      <div class="ava-count-badge">3 AVAs</div>
+      <div class="rsp-id">RSP_003 · EXPERIMENTAL</div>
+      <div class="rsp-name">Marcus Veld</div>
+      <div class="rsp-role">Character Voice Actor · Audio Drama</div>
+      <div class="rsp-genome-mini">
+        <span class="genome-tag tone">Gravelled Bass</span>
+        <span class="genome-tag energy">Commanding</span>
+        <span class="genome-tag emotion">Stoic</span>
+        <span class="genome-tag arch">The Elder</span>
+      </div>
+      <div class="rsp-meta">
+        <div class="rsp-meta-item">REGISTERED <span>2024-09-22</span></div>
+        <div class="rsp-meta-item">JURISDICTION <span>CA / QC</span></div>
+        <div class="rsp-meta-item">SESSIONS <span>5</span></div>
+        <div class="rsp-meta-item">UTTERANCES <span>201</span></div>
+        <div class="rsp-meta-item">ROYALTY TIER <span>50/50</span></div>
+        <div class="rsp-meta-item">ESTATE STATUS <span>ACTIVE TRUST</span></div>
+      </div>
+    </div>
+
+    <!-- RSP_004 -->
+    <div class="rsp-card">
+      <div class="ava-count-badge">1 AVA</div>
+      <div class="rsp-id">RSP_004 · EXPERIMENTAL</div>
+      <div class="rsp-name">Solène Aubert</div>
+      <div class="rsp-role">Bilingual Voice Artist · FR/EN Narrator</div>
+      <div class="rsp-genome-mini">
+        <span class="genome-tag tone">Warm Mezzo</span>
+        <span class="genome-tag energy">Flowing</span>
+        <span class="genome-tag emotion">Intimate</span>
+        <span class="genome-tag arch">The Storyteller</span>
+      </div>
+      <div class="rsp-meta">
+        <div class="rsp-meta-item">REGISTERED <span>2025-01-08</span></div>
+        <div class="rsp-meta-item">JURISDICTION <span>CA / QC</span></div>
+        <div class="rsp-meta-item">SESSIONS <span>2</span></div>
+        <div class="rsp-meta-item">UTTERANCES <span>88</span></div>
+        <div class="rsp-meta-item">ROYALTY TIER <span>50/50</span></div>
+        <div class="rsp-meta-item">ESTATE STATUS <span>DRAFT</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ CREATIVE GENOME ════════════════════════════════════ -->
+<section id="creative-genome">
+  <div class="section-eyebrow">6-Dimensional Fingerprint</div>
+  <h2 class="section-title">Creative Genome</h2>
+  <p class="section-desc">Every voice node mapped across tone, energy, emotion, archetype, historical lineage, and usage context. The fingerprint of a soul.</p>
+  <div class="divider"></div>
+
+  <div class="genome-viewer">
+    <div class="genome-header">
+      <div>
+        <div class="genome-actor">RSP_001 — Rob S. Plowman</div>
+        <div class="genome-fingerprint">GENOME · GF-RSP001-A7C3-2024</div>
+      </div>
+      <canvas id="genome-radar" width="260" height="260"></canvas>
+    </div>
+
+    <div class="genome-axes">
+      <div class="genome-axis">
+        <div class="axis-label">I. Tonal Register</div>
+        <div class="axis-value">Warm Baritone — Low-Mid</div>
+        <div class="axis-bar-track"><div class="axis-bar-fill tone" style="width:72%"></div></div>
+      </div>
+      <div class="genome-axis">
+        <div class="axis-label">II. Energy Signature</div>
+        <div class="axis-value">Dynamic Range — Expansive</div>
+        <div class="axis-bar-track"><div class="axis-bar-fill energy" style="width:85%"></div></div>
+      </div>
+      <div class="genome-axis">
+        <div class="axis-label">III. Emotional Spectrum</div>
+        <div class="axis-value">Resonant Gravitas + Warmth</div>
+        <div class="axis-bar-track"><div class="axis-bar-fill emotion" style="width:78%"></div></div>
+      </div>
+      <div class="genome-axis">
+        <div class="axis-label">IV. Voice Archetype</div>
+        <div class="axis-value">The Visionary / The Builder</div>
+        <div class="axis-bar-track"><div class="axis-bar-fill arch" style="width:90%"></div></div>
+      </div>
+      <div class="genome-axis">
+        <div class="axis-label">V. Historical Lineage</div>
+        <div class="axis-value">Canadian Rock / Broadcast / Studio</div>
+        <div class="axis-bar-track"><div class="axis-bar-fill lineage" style="width:65%"></div></div>
+      </div>
+      <div class="genome-axis">
+        <div class="axis-label">VI. Usage Context</div>
+        <div class="axis-value">Narrative · Commercial · Creative AI</div>
+        <div class="axis-bar-track"><div class="axis-bar-fill context" style="width:88%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EXPERIMENTAL SESSIONS ════════════════════════════ -->
+<section id="sessions">
+  <div class="section-eyebrow">Two Years of Work</div>
+  <h2 class="section-title">Experimental Sessions</h2>
+  <p class="section-desc">Every session archived — the full creative archaeology. From first proof-of-concept to multi-agent DreamScene.</p>
+  <div class="divider"></div>
+
+  <div class="timeline">
+
+    <div class="session-entry">
+      <div class="session-date">2024-03-01</div>
+      <div class="session-id">SESSION-001 · BOOTSTRAP</div>
+      <div class="session-title">First Contact — Signal Chain Proof of Concept</div>
+      <div class="session-desc">"The night everything became real. U87 into UAD into the void — and back out, alive."</div>
+      <div class="session-chips">
+        <span class="chip ava">RSP_001 Raw</span>
+        <span class="chip arch">Infrastructure</span>
+      </div>
+      <div class="session-stats">
+        <div class="session-stat">DURATION <span>2h 14m</span></div>
+        <div class="session-stat">UTTERANCES <span>34</span></div>
+        <div class="session-stat">PEAK DB <span>−6.2</span></div>
+      </div>
+    </div>
+
+    <div class="session-entry">
+      <div class="session-date">2024-03-18</div>
+      <div class="session-id">SESSION-002 · IDENTITY</div>
+      <div class="session-title">AVA Genesis — Rob.AVA v0.1 Character Build</div>
+      <div class="session-desc">First conscious session: defining Rob.AVA's persona boundaries, tone ranges, and the Never Clauses as felt experience.</div>
+      <div class="session-chips">
+        <span class="chip ava">ROB.AVA v0.1</span>
+        <span class="chip exp">AVA Genesis</span>
+      </div>
+      <div class="session-stats">
+        <div class="session-stat">DURATION <span>3h 07m</span></div>
+        <div class="session-stat">UTTERANCES <span>58</span></div>
+        <div class="session-stat">GENOME LOCK <span>GF-RSP001-A7C3</span></div>
+      </div>
+    </div>
+
+    <div class="session-entry">
+      <div class="session-date">2024-05-09</div>
+      <div class="session-id">SESSION-003 · GENOME</div>
+      <div class="session-title">Creative Genome Mapping — Full 6D Scan</div>
+      <div class="session-desc">Systematic exploration of all six genome dimensions. Archetype clarified: The Visionary Builder — creator who documents as he goes.</div>
+      <div class="session-chips">
+        <span class="chip arch">Genome Scan</span>
+        <span class="chip exp">6D Mapping</span>
+      </div>
+      <div class="session-stats">
+        <div class="session-stat">DURATION <span>4h 22m</span></div>
+        <div class="session-stat">UTTERANCES <span>112</span></div>
+        <div class="session-stat">DIMENSIONS <span>6 / 6</span></div>
+      </div>
+    </div>
+
+    <div class="session-entry">
+      <div class="session-date">2024-07-03</div>
+      <div class="session-id">SESSION-004 · DREAMSCENE</div>
+      <div class="session-title">DreamScene Alpha — The Library at Midnight</div>
+      <div class="session-desc">First multi-character scene prototype. Rob.AVA as narrator, GABRIEL as archivist. A fictional research chamber where time folds.</div>
+      <div class="session-chips">
+        <span class="chip scene">DreamScene Alpha</span>
+        <span class="chip ava">ROB.AVA + GABRIEL</span>
+      </div>
+      <div class="session-stats">
+        <div class="session-stat">DURATION <span>5h 15m</span></div>
+        <div class="session-stat">CHARACTERS <span>2</span></div>
+        <div class="session-stat">SCENES <span>4</span></div>
+      </div>
+    </div>
+
+    <div class="session-entry">
+      <div class="session-date">2024-08-27</div>
+      <div class="session-id">SESSION-005 · PROVENANCE</div>
+      <div class="session-title">Ledger Initialization — Watermark Protocol Live</div>
+      <div class="session-desc">First provenance records written to ledger. WM hashes generated. The immutable archive begins its first breath.</div>
+      <div class="session-chips">
+        <span class="chip arch">Provenance</span>
+        <span class="chip exp">Watermark Live</span>
+      </div>
+      <div class="session-stats">
+        <div class="session-stat">DURATION <span>1h 48m</span></div>
+        <div class="session-stat">RECORDS <span>12</span></div>
+        <div class="session-stat">LEDGER HASH <span>LH-0028A4</span></div>
+      </div>
+    </div>
+
+    <div class="session-entry">
+      <div class="session-date">2024-10-14</div>
+      <div class="session-id">SESSION-006 · EMOTIONAL</div>
+      <div class="session-title">Emotional Range Expansion — Grief, Rage, Wonder</div>
+      <div class="session-desc">Deliberately pushing into emotional extremes. The genome needs the full spectrum — not just warmth. These recordings changed everything.</div>
+      <div class="session-chips">
+        <span class="chip exp">Emotional Expansion</span>
+        <span class="chip ava">ROB.AVA v0.3</span>
+      </div>
+      <div class="session-stats">
+        <div class="session-stat">DURATION <span>3h 30m</span></div>
+        <div class="session-stat">UTTERANCES <span>76</span></div>
+        <div class="session-stat">NEW STATES <span>8</span></div>
+      </div>
+    </div>
+
+    <div class="session-entry">
+      <div class="session-date">2024-12-01</div>
+      <div class="session-id">SESSION-007 · ESTATE</div>
+      <div class="session-title">Voice Estate Trust Formation — Legal Architecture</div>
+      <div class="session-desc">The day the inheritance firewall went in. Never Clauses NC_08–NC_10 written live during session. Legal personhood of the voice.</div>
+      <div class="session-chips">
+        <span class="chip arch">Voice Estate</span>
+        <span class="chip exp">Legal Layer</span>
+      </div>
+      <div class="session-stats">
+        <div class="session-stat">DURATION <span>6h 00m</span></div>
+        <div class="session-stat">NEVER CLAUSES <span>10 LOCKED</span></div>
+        <div class="session-stat">BENEFICIARIES <span>DEFINED</span></div>
+      </div>
+    </div>
+
+    <div class="session-entry">
+      <div class="session-date">2025-01-20</div>
+      <div class="session-id">SESSION-008 · MULTILINGUAL</div>
+      <div class="session-title">Language Expansion — EN/FR/ES Genome Threads</div>
+      <div class="session-desc">The genome bifurcates by language. French Rob.AVA carries different tonal gravity than English. A discovery that rewrote the architecture.</div>
+      <div class="session-chips">
+        <span class="chip ava">ROB.AVA·FR</span>
+        <span class="chip exp">Multilingual</span>
+      </div>
+      <div class="session-stats">
+        <div class="session-stat">DURATION <span>4h 45m</span></div>
+        <div class="session-stat">LANGUAGES <span>3</span></div>
+        <div class="session-stat">NEW AVES <span>2</span></div>
+      </div>
+    </div>
+
+    <div class="session-entry">
+      <div class="session-date">2025-03-08</div>
+      <div class="session-id">SESSION-009 · AGENTS</div>
+      <div class="session-title">Dream Agents Online — GABRIEL Orchestrates</div>
+      <div class="session-desc">GABRIEL, POPS, LUCY, SHIRL, and DREAM each given operational context. First fully-agented DreamChamber session. Magic.</div>
+      <div class="session-chips">
+        <span class="chip scene">Multi-Agent</span>
+        <span class="chip arch">GABRIEL Live</span>
+      </div>
+      <div class="session-stats">
+        <div class="session-stat">DURATION <span>7h 10m</span></div>
+        <div class="session-stat">AGENTS <span>5</span></div>
+        <div class="session-stat">SCENES <span>6</span></div>
+      </div>
+    </div>
+
+    <div class="session-entry">
+      <div class="session-date">2025-06-17</div>
+      <div class="session-id">SESSION-010 · ATLAS</div>
+      <div class="session-title">Global Music Atlas — First Entries Written</div>
+      <div class="session-desc">The Atlas begins. Instruments catalogued by timbre family, cultural origin, frequency signature. The living map of human sound.</div>
+      <div class="session-chips">
+        <span class="chip exp">Music Atlas</span>
+        <span class="chip arch">Schema v1</span>
+      </div>
+      <div class="session-stats">
+        <div class="session-stat">DURATION <span>3h 20m</span></div>
+        <div class="session-stat">INSTRUMENTS <span>42</span></div>
+        <div class="session-stat">CULTURES <span>18</span></div>
+      </div>
+    </div>
+
+    <div class="session-entry">
+      <div class="session-date">2025-09-04</div>
+      <div class="session-id">SESSION-011 · GALLERY</div>
+      <div class="session-title">Museum of Voice — Installation Prototype</div>
+      <div class="session-desc">First gallery prototype: a spatial audio walk through the evolution of Rob.AVA. Visitors navigate the genome like a landscape.</div>
+      <div class="session-chips">
+        <span class="chip scene">Gallery Install</span>
+        <span class="chip exp">Spatial Audio</span>
+      </div>
+      <div class="session-stats">
+        <div class="session-stat">DURATION <span>5h 00m</span></div>
+        <div class="session-stat">NODES MAPPED <span>28</span></div>
+        <div class="session-stat">VISITORS (BETA) <span>4</span></div>
+      </div>
+    </div>
+
+    <div class="session-entry">
+      <div class="session-date">2025-11-29</div>
+      <div class="session-id">SESSION-012 · INGEST</div>
+      <div class="session-title">NOIZYVOX Ingest API — First Live Dispatch</div>
+      <div class="session-desc">First utterance transmitted through the full 7-stage pipeline. Consent key validated. Watermark embedded. Ledger updated. The loop closes.</div>
+      <div class="session-chips">
+        <span class="chip arch">API Live</span>
+        <span class="chip exp">Pipeline Complete</span>
+      </div>
+      <div class="session-stats">
+        <div class="session-stat">DURATION <span>2h 55m</span></div>
+        <div class="session-stat">DISPATCHED <span>31</span></div>
+        <div class="session-stat">SUCCESS RATE <span>100%</span></div>
+      </div>
+    </div>
+
+    <div class="session-entry">
+      <div class="session-date">2026-01-15</div>
+      <div class="session-id">SESSION-013 · SPECTRAL</div>
+      <div class="session-title">Spectral Fingerprinting — Acoustic DNA Mapping</div>
+      <div class="session-desc">FFT-based spectral analysis layered into genome. Formant frequencies, harmonic envelope, and room signature now part of the fingerprint.</div>
+      <div class="session-chips">
+        <span class="chip exp">Spectral DNA</span>
+        <span class="chip arch">Genome v2</span>
+      </div>
+      <div class="session-stats">
+        <div class="session-stat">DURATION <span>4h 12m</span></div>
+        <div class="session-stat">FORMANTS <span>F1–F4 MAPPED</span></div>
+        <div class="session-stat">GENOME VERSION <span>v2.0</span></div>
+      </div>
+    </div>
+
+    <div class="session-entry">
+      <div class="session-date">2026-03-13</div>
+      <div class="session-id">SESSION-014 · NODE UNIVERSE</div>
+      <div class="session-title">DreamChamber Node Universe — Full Stack Live</div>
+      <div class="session-desc">Today. The living archive takes form. Every node indexed, every session stacked, every genome fingerprinted. We are live.</div>
+      <div class="session-chips">
+        <span class="chip scene">Node Universe</span>
+        <span class="chip arch">Full Stack</span>
+        <span class="chip exp">LIVE TODAY</span>
+      </div>
+      <div class="session-stats">
+        <div class="session-stat">DATE <span>TODAY</span></div>
+        <div class="session-stat">STATUS <span>IN PROGRESS</span></div>
+        <div class="session-stat">NODES TOTAL <span>847+</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ DREAM AGENTS ══════════════════════════════════════ -->
+<section id="dream-agents">
+  <div class="section-eyebrow">Operational Intelligence</div>
+  <h2 class="section-title">Dream Agents</h2>
+  <p class="section-desc">The five intelligences that orchestrate the DreamChamber. Each owns a domain. Together they are the machine mind of NOIZYVOX.</p>
+  <div class="divider"></div>
+
+  <div class="agents-grid">
+    <div class="agent-card gabriel">
+      <span class="agent-sigil">◈</span>
+      <div class="agent-name">GABRIEL</div>
+      <div class="agent-role">Overseer &amp; Grand Orchestrator</div>
+      <div class="agent-desc">Holds the total map of the system. Coordinates all agents, maintains architectural integrity, guards the Never Clauses.</div>
+      <div class="agent-hw">Apple M2 Ultra · 192GB RAM</div>
+    </div>
+    <div class="agent-card pops">
+      <span class="agent-sigil">⊕</span>
+      <div class="agent-name">POPS</div>
+      <div class="agent-role">Master Engineer</div>
+      <div class="agent-desc">Signal chain authority. UAD configuration, mic placement, routing topology, DAW integration. The studio brain.</div>
+      <div class="agent-hw">MacBook Pro · UAD Interface</div>
+    </div>
+    <div class="agent-card dream">
+      <span class="agent-sigil">◇</span>
+      <div class="agent-name">DREAM</div>
+      <div class="agent-role">Creative Intelligence</div>
+      <div class="agent-desc">Scene conception, narrative architecture, emotional direction. Generates DreamScene scripts and persona evolution pathways.</div>
+      <div class="agent-hw">Claude Opus · Creative Mode</div>
+    </div>
+    <div class="agent-card lucy">
+      <span class="agent-sigil">◉</span>
+      <div class="agent-name">LUCY</div>
+      <div class="agent-role">Operations &amp; Logistics</div>
+      <div class="agent-desc">Session scheduling, file management, ledger auditing, consent key issuance. The operational backbone.</div>
+      <div class="agent-hw">Workflow Automation Layer</div>
+    </div>
+    <div class="agent-card shirl">
+      <span class="agent-sigil">◎</span>
+      <div class="agent-name">SHIRL</div>
+      <div class="agent-role">Archivist &amp; Memory Keeper</div>
+      <div class="agent-desc">Maintains the Human Archive, Gallery taxonomy, and Museum installation state. Long-term memory of every node.</div>
+      <div class="agent-hw">Vector Store · JSONL Ledger</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SCENE PROTOTYPES ══════════════════════════════════ -->
+<section id="scene-prototypes">
+  <div class="section-eyebrow">DreamScene Builder</div>
+  <h2 class="section-title">Scene Prototypes</h2>
+  <p class="section-desc">Multi-character scenes assembled from AVA nodes. Drag, connect, direct — the spatial voice stage.</p>
+  <div class="divider"></div>
+
+  <div class="scenes-grid">
+
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-title-wrap">
+          <div class="scene-id">SCENE-001 · SESSION-004</div>
+          <div class="scene-title">The Library at Midnight</div>
+        </div>
+        <div class="scene-status-badge active">Active</div>
+      </div>
+      <div class="scene-body">
+        <p class="scene-desc">A fictional research chamber where time folds. Rob.AVA narrates the journey through stacked decades of creative archaeology. GABRIEL as silent archivist.</p>
+        <div class="scene-cast">
+          <div class="cast-label">Cast</div>
+          <div class="cast-list">
+            <span class="cast-ava">ROB.AVA — Narrator</span>
+            <span class="cast-ava">GABRIEL — Archivist</span>
+          </div>
+        </div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--text-dim)">
+          DURATION: 22 min &nbsp;·&nbsp; SCENES: 4 &nbsp;·&nbsp; GENOME LOCK: GF-RSP001-A7C3
+        </div>
+        <div class="scene-genome-strip" style="background:linear-gradient(90deg,var(--amber),var(--cyan))"></div>
+      </div>
+    </div>
+
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-title-wrap">
+          <div class="scene-id">SCENE-002 · SESSION-008</div>
+          <div class="scene-title">Deux Voix / Two Voices</div>
+        </div>
+        <div class="scene-status-badge prototype">Prototype</div>
+      </div>
+      <div class="scene-body">
+        <p class="scene-desc">Rob.AVA in English and Rob.AVA·FR in French — a bilingual dialogue about the nature of creative identity. The same soul, two languages, subtly different emotional gravity.</p>
+        <div class="scene-cast">
+          <div class="cast-label">Cast</div>
+          <div class="cast-list">
+            <span class="cast-ava">ROB.AVA — EN</span>
+            <span class="cast-ava">ROB.AVA·FR — FR</span>
+          </div>
+        </div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--text-dim)">
+          DURATION: 14 min &nbsp;·&nbsp; SCENES: 3 &nbsp;·&nbsp; LANGUAGES: 2
+        </div>
+        <div class="scene-genome-strip" style="background:linear-gradient(90deg,var(--amber),#b07ade)"></div>
+      </div>
+    </div>
+
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-title-wrap">
+          <div class="scene-id">SCENE-003 · SESSION-009</div>
+          <div class="scene-title">The Five Agents</div>
+        </div>
+        <div class="scene-status-badge prototype">Prototype</div>
+      </div>
+      <div class="scene-body">
+        <p class="scene-desc">All five Dream Agents in dialogue — GABRIEL, POPS, DREAM, LUCY, SHIRL — discussing the architecture of the system they inhabit. A meta-scene of AI self-awareness within governed structure.</p>
+        <div class="scene-cast">
+          <div class="cast-label">Cast</div>
+          <div class="cast-list">
+            <span class="cast-ava">GABRIEL</span>
+            <span class="cast-ava">POPS</span>
+            <span class="cast-ava">DREAM</span>
+            <span class="cast-ava">LUCY</span>
+            <span class="cast-ava">SHIRL</span>
+          </div>
+        </div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--text-dim)">
+          DURATION: 38 min &nbsp;·&nbsp; AGENTS: 5 &nbsp;·&nbsp; SCENES: 6
+        </div>
+        <div class="scene-genome-strip" style="background:linear-gradient(90deg,var(--cyan),var(--green),#b07ade)"></div>
+      </div>
+    </div>
+
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-title-wrap">
+          <div class="scene-id">SCENE-004 · CONCEPT</div>
+          <div class="scene-title">The Museum Walk</div>
+        </div>
+        <div class="scene-status-badge concept">Concept</div>
+      </div>
+      <div class="scene-body">
+        <p class="scene-desc">A visitor walks through the Gallery of Voice. Each exhibit is a session, each room a year. Rob.AVA guides. The architecture of a life in sound, navigable in space.</p>
+        <div class="scene-cast">
+          <div class="cast-label">Cast</div>
+          <div class="cast-list">
+            <span class="cast-ava">ROB.AVA — Guide</span>
+            <span class="cast-ava">SHIRL — Archive Voice</span>
+          </div>
+        </div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--text-dim)">
+          DURATION: TBD &nbsp;·&nbsp; ROOMS: 14 &nbsp;·&nbsp; STATUS: CONCEPT
+        </div>
+        <div class="scene-genome-strip" style="background:linear-gradient(90deg,var(--amber),var(--amber-dim))"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ GALLERY / ARCHIVE ══════════════════════════════════ -->
+<section id="gallery">
+  <div class="section-eyebrow">Human Archive · Museum of Voice</div>
+  <h2 class="section-title">Gallery</h2>
+  <p class="section-desc">The living cultural record. Installations, audio artifacts, and Canadian artist submissions — each node a permanent object in the archive.</p>
+  <div class="divider"></div>
+
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <div class="gallery-visual" style="background:linear-gradient(135deg,#07070f,#1a0a28)">🎙</div>
+      <div class="gallery-info">
+        <div class="gallery-cat">Installation · Audio</div>
+        <div class="gallery-title">Genesis Signal</div>
+        <div class="gallery-year">2024 · SESSION-001</div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-visual" style="background:linear-gradient(135deg,#070f07,#0a2810)">🌀</div>
+      <div class="gallery-info">
+        <div class="gallery-cat">Visual · Genome Map</div>
+        <div class="gallery-title">Six Dimensions</div>
+        <div class="gallery-year">2024 · SESSION-003</div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-visual" style="background:linear-gradient(135deg,#0f0707,#280a0a)">🔴</div>
+      <div class="gallery-info">
+        <div class="gallery-cat">Document · Legal</div>
+        <div class="gallery-title">The Never Clauses</div>
+        <div class="gallery-year">2024 · SESSION-007</div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-visual" style="background:linear-gradient(135deg,#07070f,#0a0f28)">⚡</div>
+      <div class="gallery-info">
+        <div class="gallery-cat">Technical · Pipeline</div>
+        <div class="gallery-title">First Dispatch</div>
+        <div class="gallery-year">2025 · SESSION-012</div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-visual" style="background:linear-gradient(135deg,#0a0f07,#182008)">🌍</div>
+      <div class="gallery-info">
+        <div class="gallery-cat">Atlas · Cultural</div>
+        <div class="gallery-title">Global Music Atlas v1</div>
+        <div class="gallery-year">2025 · SESSION-010</div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-visual" style="background:linear-gradient(135deg,#0f070a,#280a18)">🇨🇦</div>
+      <div class="gallery-info">
+        <div class="gallery-cat">Gallery · Canadian Artists</div>
+        <div class="gallery-title">Open for Submissions</div>
+        <div class="gallery-year">2026 · ONGOING</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROVENANCE LEDGER ══════════════════════════════════ -->
+<section id="provenance">
+  <div class="section-eyebrow">Immutable Record</div>
+  <h2 class="section-title">Provenance Ledger</h2>
+  <p class="section-desc">Every utterance, watermarked and written to the append-only ledger. Nothing is deleted. Everything is witnessed.</p>
+  <div class="divider"></div>
+
+  <div class="ledger-table-wrap">
+    <table class="ledger-table">
+      <thead>
+        <tr>
+          <th>UTTERANCE ID</th>
+          <th>ACTOR</th>
+          <th>TIMESTAMP</th>
+          <th>DURATION</th>
+          <th>WATERMARK</th>
+          <th>NC CHECKS</th>
+          <th>STATUS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="ledger-id">UTT-RSP001-0001</td>
+          <td>RSP_001</td>
+          <td>2024-03-01 21:14:07</td>
+          <td>3.2s</td>
+          <td class="ledger-hash">WM_a3f8c201</td>
+          <td class="ledger-pass">10/10 PASS</td>
+          <td class="ledger-status-sent">● SENT</td>
+        </tr>
+        <tr>
+          <td class="ledger-id">UTT-RSP001-0002</td>
+          <td>RSP_001</td>
+          <td>2024-03-01 21:14:32</td>
+          <td>7.8s</td>
+          <td class="ledger-hash">WM_b7d2e914</td>
+          <td class="ledger-pass">10/10 PASS</td>
+          <td class="ledger-status-sent">● SENT</td>
+        </tr>
+        <tr>
+          <td class="ledger-id">UTT-RSP001-0034</td>
+          <td>RSP_001</td>
+          <td>2024-03-01 23:28:01</td>
+          <td>12.4s</td>
+          <td class="ledger-hash">WM_c1a9f033</td>
+          <td class="ledger-pass">10/10 PASS</td>
+          <td class="ledger-status-sent">● SENT</td>
+        </tr>
+        <tr>
+          <td class="ledger-id">UTT-RSP001-0092</td>
+          <td>RSP_001</td>
+          <td>2024-05-09 14:07:44</td>
+          <td>9.1s</td>
+          <td class="ledger-hash">WM_d4e2b771</td>
+          <td class="ledger-pass">10/10 PASS</td>
+          <td class="ledger-status-sent">● SENT</td>
+        </tr>
+        <tr>
+          <td class="ledger-id">UTT-RSP001-0215</td>
+          <td>RSP_001</td>
+          <td>2024-08-27 19:33:12</td>
+          <td>5.6s</td>
+          <td class="ledger-hash">WM_e9c3a220</td>
+          <td class="ledger-pass">10/10 PASS</td>
+          <td class="ledger-status-sent">● SENT</td>
+        </tr>
+        <tr>
+          <td class="ledger-id">UTT-RSP001-0400</td>
+          <td>RSP_001</td>
+          <td>2025-03-08 10:18:55</td>
+          <td>18.3s</td>
+          <td class="ledger-hash">WM_f0b8d945</td>
+          <td class="ledger-pass">10/10 PASS</td>
+          <td class="ledger-status-sent">● SENT</td>
+        </tr>
+        <tr>
+          <td class="ledger-id">UTT-RSP001-0601</td>
+          <td>RSP_001</td>
+          <td>2025-11-29 16:44:02</td>
+          <td>6.9s</td>
+          <td class="ledger-hash">WM_1a7c3e82</td>
+          <td class="ledger-pass">10/10 PASS</td>
+          <td class="ledger-status-sent">● SENT</td>
+        </tr>
+        <tr>
+          <td class="ledger-id">UTT-RSP001-0847</td>
+          <td>RSP_001</td>
+          <td>2026-03-13 09:00:00</td>
+          <td>4.2s</td>
+          <td class="ledger-hash">WM_2b4d9f17</td>
+          <td class="ledger-status-queued">10/10 PASS</td>
+          <td class="ledger-status-queued">◎ QUEUED</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="ledger-footer">
+    <span>provenance-ledger.jsonl · append-only · 847 records · last write: 2026-03-13</span>
+    <span class="immutable-badge">IMMUTABLE ●</span>
+  </div>
+</section>
+
+<!-- ══ UPGRADE ROADMAP ════════════════════════════════════ -->
+<section id="upgrade-roadmap">
+  <div class="section-eyebrow">Full Upgrade Mode</div>
+  <h2 class="section-title">Upgrade Roadmap</h2>
+  <p class="section-desc">Eight phases. The complete DreamChamber ecosystem — from signal chain to Human Archive to autonomous AI assist.</p>
+  <div class="divider"></div>
+
+  <div class="upgrade-grid">
+    <div class="upgrade-card">
+      <div class="upgrade-num">01</div>
+      <div class="upgrade-phase">Phase 1 · Signal Chain</div>
+      <div class="upgrade-title">Voice Capture &amp; Signal Chain</div>
+      <div class="upgrade-desc">Multi-device support, spectral fingerprinting, adaptive VAD with learned thresholds.</div>
+      <ul class="upgrade-items">
+        <li>Neumann U87 + UAD Apollo integration</li>
+        <li>Adaptive VAD with per-actor thresholds</li>
+        <li>Spectral fingerprint capture (FFT)</li>
+        <li>Core Audio latency &lt; 2ms</li>
+      </ul>
+      <div class="upgrade-status"><span class="status-dot building"></span>Building</div>
+    </div>
+    <div class="upgrade-card">
+      <div class="upgrade-num">02</div>
+      <div class="upgrade-phase">Phase 2 · AI Persona</div>
+      <div class="upgrade-title">Dreamer AI Persona Upgrade</div>
+      <div class="upgrade-desc">Emotional range learning, persona interconnection between AVAs.</div>
+      <ul class="upgrade-items">
+        <li>Emotional state ML classifier</li>
+        <li>Persona-to-persona contrast mapping</li>
+        <li>Session-based genome evolution</li>
+        <li>AVA collaboration contracts</li>
+      </ul>
+      <div class="upgrade-status"><span class="status-dot building"></span>Building</div>
+    </div>
+    <div class="upgrade-card">
+      <div class="upgrade-num">03</div>
+      <div class="upgrade-phase">Phase 3 · Genome</div>
+      <div class="upgrade-title">Creative Genome v2</div>
+      <div class="upgrade-desc">Full 6D mapping with spectral acoustic DNA. The fingerprint of a soul.</div>
+      <ul class="upgrade-items">
+        <li>6D axis measurement automation</li>
+        <li>Formant F1–F4 acoustic mapping</li>
+        <li>Genome delta tracking per session</li>
+        <li>Cross-actor genome comparison</li>
+      </ul>
+      <div class="upgrade-status"><span class="status-dot live"></span>Live — v2.0</div>
+    </div>
+    <div class="upgrade-card">
+      <div class="upgrade-num">04</div>
+      <div class="upgrade-phase">Phase 4 · DreamScene</div>
+      <div class="upgrade-title">DreamScene Builder</div>
+      <div class="upgrade-desc">Drag-and-drop multi-character scene prototyping environment.</div>
+      <ul class="upgrade-items">
+        <li>Visual node canvas (React / D3)</li>
+        <li>AVA cast management per scene</li>
+        <li>Script templating + AI direction</li>
+        <li>Scene export to WAV + provenance</li>
+      </ul>
+      <div class="upgrade-status"><span class="status-dot planned"></span>Planned — Q2 2026</div>
+    </div>
+    <div class="upgrade-card">
+      <div class="upgrade-num">05</div>
+      <div class="upgrade-phase">Phase 5 · Archive</div>
+      <div class="upgrade-title">Gallery / Museum / Human Archive</div>
+      <div class="upgrade-desc">Audio installations, Canadian artist submissions, spatial museum walk.</div>
+      <ul class="upgrade-items">
+        <li>Spatial audio museum prototype</li>
+        <li>Canadian artist open submissions</li>
+        <li>Gallery taxonomy + curation</li>
+        <li>Web-navigable archive interface</li>
+      </ul>
+      <div class="upgrade-status"><span class="status-dot building"></span>Building</div>
+    </div>
+    <div class="upgrade-card">
+      <div class="upgrade-num">06</div>
+      <div class="upgrade-phase">Phase 6 · Ledger</div>
+      <div class="upgrade-title">Ledger &amp; Provenance v2</div>
+      <div class="upgrade-desc">Versioning, rollback, cryptographic chaining. The unbreakable record.</div>
+      <ul class="upgrade-items">
+        <li>Merkle tree provenance chain</li>
+        <li>Session-level versioning + rollback</li>
+        <li>Cryptographic ledger signing</li>
+        <li>Audit export (PDF + JSONL)</li>
+      </ul>
+      <div class="upgrade-status"><span class="status-dot planned"></span>Planned — Q3 2026</div>
+    </div>
+    <div class="upgrade-card">
+      <div class="upgrade-num">07</div>
+      <div class="upgrade-phase">Phase 7 · Node Universe</div>
+      <div class="upgrade-title">Node Universe Index</div>
+      <div class="upgrade-desc">Two years of experiments fully stacked. Actor → Persona → Scene → Genome → Gallery → Ledger.</div>
+      <ul class="upgrade-items">
+        <li>847 utterances indexed + searchable</li>
+        <li>14 sessions mapped + navigable</li>
+        <li>Node graph visualization (canvas)</li>
+        <li>Full-text + genome search</li>
+      </ul>
+      <div class="upgrade-status"><span class="status-dot live"></span>Live — This Document</div>
+    </div>
+    <div class="upgrade-card">
+      <div class="upgrade-num">08</div>
+      <div class="upgrade-phase">Phase 8 · Automation</div>
+      <div class="upgrade-title">Automation / AI Assist</div>
+      <div class="upgrade-desc">Auto-tagging, AI scene suggestions, GABRIEL as ambient orchestrator.</div>
+      <ul class="upgrade-items">
+        <li>Auto-tag utterances by emotion/archetype</li>
+        <li>AI scene suggestion engine</li>
+        <li>GABRIEL ambient orchestration mode</li>
+        <li>Scheduled session reminders + briefs</li>
+      </ul>
+      <div class="upgrade-status"><span class="status-dot planned"></span>Planned — Q4 2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONSENT KEY ════════════════════════════════════════ -->
+<section id="consent-key">
+  <div class="section-eyebrow">Cryptographic Governance</div>
+  <h2 class="section-title">Consent Key Anatomy</h2>
+  <p class="section-desc">Every use of a voice requires a valid, scoped consent key. The key is the contract.</p>
+  <div class="divider"></div>
+
+  <div class="consent-anatomy">
+    <div class="consent-key-display">
+      <span class="key-segment prefix">NOIZY</span><span class="key-sep">-</span><span class="key-segment actor">RSP001</span><span class="key-sep">-</span><span class="key-segment ctype">CONSENT</span><span class="key-sep">-</span><span class="key-segment entropy">a3f8c201b9e4d712</span><span class="key-sep">-</span><span class="key-segment avaid">ROB.AVA</span><span class="key-sep">-</span><span class="key-segment domain">NARRATIVE</span><span class="key-sep">-</span><span class="key-segment juris">CA-ON</span><span class="key-sep">-</span><span class="key-segment date">20260313</span>
+    </div>
+    <div class="key-legend">
+      <div class="legend-row"><div class="legend-swatch" style="background:rgba(196,154,56,0.4)"></div>NOIZY — Platform prefix</div>
+      <div class="legend-row"><div class="legend-swatch" style="background:rgba(42,164,190,0.4)"></div>RSP001 — Actor registry ID</div>
+      <div class="legend-row"><div class="legend-swatch" style="background:rgba(196,154,56,0.3)"></div>CONSENT — Key type</div>
+      <div class="legend-row"><div class="legend-swatch" style="background:rgba(61,186,114,0.4)"></div>16 hex chars — Cryptographic entropy</div>
+      <div class="legend-row"><div class="legend-swatch" style="background:rgba(160,100,220,0.4)"></div>ROB.AVA — Target AVA ID</div>
+      <div class="legend-row"><div class="legend-swatch" style="background:rgba(200,80,60,0.4)"></div>NARRATIVE — Usage domain scope</div>
+      <div class="legend-row"><div class="legend-swatch" style="background:rgba(42,164,190,0.3)"></div>CA-ON — Jurisdiction</div>
+      <div class="legend-row"><div class="legend-swatch" style="background:rgba(196,154,56,0.15)"></div>20260313 — Issuance date</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+// ── Universe Canvas (animated node graph) ──────────────
+const canvas = document.getElementById('universe-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, nodes = [], animFrame;
+
+function resize() {
+  W = canvas.width = canvas.offsetWidth;
+  H = canvas.height = canvas.offsetHeight;
+}
+
+function initNodes() {
+  nodes = [];
+  const count = Math.floor((W * H) / 14000);
+  for (let i = 0; i < count; i++) {
+    nodes.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.18,
+      vy: (Math.random() - 0.5) * 0.18,
+      r: Math.random() * 2.2 + 0.6,
+      color: Math.random() > 0.6
+        ? `rgba(196,154,56,${Math.random() * 0.7 + 0.2})`
+        : `rgba(42,164,190,${Math.random() * 0.5 + 0.2})`,
+      pulse: Math.random() * Math.PI * 2,
+      pulseSpeed: Math.random() * 0.03 + 0.01
+    });
+  }
+}
+
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+  const maxDist = 120;
+  nodes.forEach(n => {
+    n.x += n.vx; n.y += n.vy; n.pulse += n.pulseSpeed;
+    if (n.x < 0 || n.x > W) n.vx *= -1;
+    if (n.y < 0 || n.y > H) n.vy *= -1;
+  });
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      const dx = nodes[i].x - nodes[j].x;
+      const dy = nodes[i].y - nodes[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < maxDist) {
+        ctx.beginPath();
+        ctx.moveTo(nodes[i].x, nodes[i].y);
+        ctx.lineTo(nodes[j].x, nodes[j].y);
+        const alpha = (1 - dist / maxDist) * 0.15;
+        ctx.strokeStyle = `rgba(196,154,56,${alpha})`;
+        ctx.lineWidth = 0.6;
+        ctx.stroke();
+      }
+    }
+  }
+  nodes.forEach(n => {
+    const pulse = Math.sin(n.pulse) * 0.4 + 0.6;
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, n.r * pulse, 0, Math.PI * 2);
+    ctx.fillStyle = n.color;
+    ctx.fill();
+  });
+  animFrame = requestAnimationFrame(draw);
+}
+
+resize();
+initNodes();
+draw();
+window.addEventListener('resize', () => { resize(); initNodes(); });
+
+// ── Genome Radar Chart ──────────────────────────────────
+const radar = document.getElementById('genome-radar');
+const rc = radar.getContext('2d');
+const rW = radar.width, rH = radar.height;
+const cx = rW / 2, cy = rH / 2, maxR = Math.min(rW, rH) / 2 - 28;
+
+const axes = [
+  { label: 'TONE', value: 0.72 },
+  { label: 'ENERGY', value: 0.85 },
+  { label: 'EMOTION', value: 0.78 },
+  { label: 'ARCHETYPE', value: 0.90 },
+  { label: 'LINEAGE', value: 0.65 },
+  { label: 'CONTEXT', value: 0.88 }
+];
+const n = axes.length;
+
+function radarAngle(i) { return (i * 2 * Math.PI / n) - Math.PI / 2; }
+
+// Grid rings
+[0.25, 0.5, 0.75, 1.0].forEach(ring => {
+  rc.beginPath();
+  for (let i = 0; i < n; i++) {
+    const a = radarAngle(i);
+    const x = cx + Math.cos(a) * maxR * ring;
+    const y = cy + Math.sin(a) * maxR * ring;
+    i === 0 ? rc.moveTo(x, y) : rc.lineTo(x, y);
+  }
+  rc.closePath();
+  rc.strokeStyle = 'rgba(255,255,255,0.06)';
+  rc.lineWidth = 1;
+  rc.stroke();
+});
+
+// Axis lines
+axes.forEach((_, i) => {
+  const a = radarAngle(i);
+  rc.beginPath();
+  rc.moveTo(cx, cy);
+  rc.lineTo(cx + Math.cos(a) * maxR, cy + Math.sin(a) * maxR);
+  rc.strokeStyle = 'rgba(255,255,255,0.06)';
+  rc.lineWidth = 1;
+  rc.stroke();
+});
+
+// Data polygon
+rc.beginPath();
+axes.forEach((ax, i) => {
+  const a = radarAngle(i);
+  const x = cx + Math.cos(a) * maxR * ax.value;
+  const y = cy + Math.sin(a) * maxR * ax.value;
+  i === 0 ? rc.moveTo(x, y) : rc.lineTo(x, y);
+});
+rc.closePath();
+rc.fillStyle = 'rgba(196,154,56,0.12)';
+rc.fill();
+rc.strokeStyle = '#c49a38';
+rc.lineWidth = 1.5;
+rc.stroke();
+
+// Data points
+axes.forEach((ax, i) => {
+  const a = radarAngle(i);
+  const x = cx + Math.cos(a) * maxR * ax.value;
+  const y = cy + Math.sin(a) * maxR * ax.value;
+  rc.beginPath();
+  rc.arc(x, y, 3.5, 0, Math.PI * 2);
+  rc.fillStyle = '#c49a38';
+  rc.fill();
+  rc.beginPath();
+  rc.arc(x, y, 6, 0, Math.PI * 2);
+  rc.fillStyle = 'rgba(196,154,56,0.2)';
+  rc.fill();
+});
+
+// Labels
+rc.font = '9px IBM Plex Mono, monospace';
+rc.fillStyle = 'rgba(255,255,255,0.35)';
+rc.textAlign = 'center';
+axes.forEach((ax, i) => {
+  const a = radarAngle(i);
+  const lx = cx + Math.cos(a) * (maxR + 18);
+  const ly = cy + Math.sin(a) * (maxR + 18) + 4;
+  rc.fillText(ax.label, lx, ly);
+});
+
+// ── Sidebar active on scroll ───────────────────────────
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('#sidebar nav a');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const link = document.querySelector(`#sidebar nav a[href="#${entry.target.id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

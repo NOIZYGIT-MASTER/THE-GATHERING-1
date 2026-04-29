@@ -1,0 +1,26 @@
+<root>
+    <CtrlPanelStyle name="DetailsStyle" colBorder="[r:107 g:107 b:107 a:255]" colBorderAlt="[r:107 g:107 b:107 a:255]" colFill="[r:0 g:0 b:0 a:255]" intSmartTileEdgeSize="6" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlImageViewStyle name="KitPieceViewStyle" optBorder="false" optBackground="false" optMouseHandle="true" optHQResizing="true" intRoundedRectRadius="0" />
+    <CtrlPanelStyle name="ClickPanelStyle" colBorder="[r:0 g:0 b:0 a:0]" colBorderAlt="[r:0 g:0 b:0 a:0]" colFill="[r:255 g:255 b:255 a:0]" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="14" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="LinePanelStyle" colBorder="[r:107 g:107 b:107 a:255]" colBorderAlt="[r:107 g:107 b:107 a:255]" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlPanel name="KitPieceChooserDetailsPanel" style="DetailsStyle" rect="[x:0 y:0 w:465 h:20]" id="0">
+        <CtrlPanel name="ClickPanel" style="ClickPanelStyle" rect="[x:0 y:0 w:465 h:20]" id="100000" />
+        <CtrlPanel name="CtrlPanel" style="LinePanelStyle" rect="[x:23 y:0 w:1 h:20]" id="100020" />
+        <CtrlLabel name="NameLabel" style="BFD2Label14" rect="[x:27 y:0 w:335 h:20]" id="1" text="Name Label" />
+        <CtrlPanel name="CtrlPanel" style="LinePanelStyle" rect="[x:362 y:0 w:1 h:20]" id="100020" />
+        <CtrlImageView name="KitPieceImage" style="KitPieceViewStyle" rect="[x:2 y:1 w:21 h:18]" id="2" />
+        <CtrlImageView name="StarView1" style="BFD2StarStyle" rect="[x:366 y:2 w:16 h:16]" id="3" />
+        <CtrlImageView name="StarView2" style="BFD2StarStyle" rect="[x:386 y:2 w:16 h:16]" id="4" />
+        <CtrlImageView name="StarView3" style="BFD2StarStyle" rect="[x:406 y:2 w:16 h:16]" id="5" />
+        <CtrlImageView name="StarView4" style="BFD2StarStyle" rect="[x:426 y:2 w:16 h:16]" id="6" />
+        <CtrlImageView name="StarView5" style="BFD2StarStyle" rect="[x:446 y:2 w:16 h:16]" id="7" />
+        <CtrlButton name="GoToDemoPackButton" style="NoRecessedButtonMomentary" rect="[x:235 y:2 w:80 h:17]" id="100000" zorder="2" text="Show/Buy..." />
+        <CtrlImageView name="DemoImage" style="BrowserDemoImageStyle" rect="[x:316 y:3 w:45 h:15]" id="2" zorder="2" />
+    </CtrlPanel>
+</root>

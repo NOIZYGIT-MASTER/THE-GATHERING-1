@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UAD Apollo 8 — Mac Studio M2 Ultra Fix Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface2: #1a1a26;
+    --border: #2a2a3a;
+    --text: #e4e4ef;
+    --text-dim: #8888a0;
+    --accent: #6366f1;
+    --accent-glow: rgba(99, 102, 241, 0.3);
+    --green: #22c55e;
+    --green-glow: rgba(34, 197, 94, 0.15);
+    --red: #ef4444;
+    --red-glow: rgba(239, 68, 68, 0.15);
+    --yellow: #eab308;
+    --yellow-glow: rgba(234, 179, 8, 0.15);
+    --cyan: #06b6d4;
+    --orange: #f97316;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 2rem;
+    line-height: 1.6;
+  }
+
+  .container { max-width: 860px; margin: 0 auto; }
+
+  .header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, #f97316, #ef4444, #6366f1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+  }
+
+  .header .subtitle {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+  }
+
+  .warning-box {
+    background: var(--red-glow);
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .warning-box strong { color: var(--red); }
+
+  .info-box {
+    background: rgba(6, 182, 212, 0.1);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .info-box strong { color: var(--cyan); }
+
+  .diagnosis {
+    background: var(--yellow-glow);
+    border: 1px solid rgba(234, 179, 8, 0.3);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .diagnosis strong { color: var(--yellow); }
+
+  .phase {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .phase-number {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    font-weight: 800;
+    flex-shrink: 0;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .phase-number.p1 { background: var(--red-glow); color: var(--red); }
+  .phase-number.p2 { background: var(--yellow-glow); color: var(--yellow); }
+  .phase-number.p3 { background: var(--accent-glow); color: var(--accent); }
+  .phase-number.p4 { background: var(--green-glow); color: var(--green); }
+  .phase-number.p5 { background: rgba(249, 115, 22, 0.15); color: var(--orange); }
+  .phase-number.p6 { background: rgba(6, 182, 212, 0.15); color: var(--cyan); }
+
+  .phase-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .phase-subtitle {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    margin-top: 0.15rem;
+  }
+
+  .steps {
+    counter-reset: step;
+    list-style: none;
+  }
+
+  .steps li {
+    counter-increment: step;
+    position: relative;
+    padding: 0.75rem 0 0.75rem 2.8rem;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    border-bottom: 1px solid rgba(42, 42, 58, 0.5);
+  }
+
+  .steps li:last-child { border-bottom: none; }
+
+  .steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0.7rem;
+    width: 2rem;
+    height: 2rem;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--cyan);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .cmd {
+    display: block;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.6rem 0.9rem;
+    margin-top: 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--green);
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+
+  .highlight { color: var(--cyan); font-weight: 600; }
+  .warn { color: var(--yellow); font-weight: 600; }
+  .danger { color: var(--red); font-weight: 600; }
+  .good { color: var(--green); font-weight: 600; }
+
+  .nav-path {
+    display: inline;
+    color: var(--cyan);
+    font-weight: 500;
+    font-size: 0.88rem;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2rem 0;
+  }
+
+  .footer {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .checklist {
+    list-style: none;
+    margin-top: 0.75rem;
+  }
+
+  .checklist li {
+    padding: 0.4rem 0 0.4rem 1.8rem;
+    position: relative;
+    font-size: 0.88rem;
+  }
+
+  .checklist li::before {
+    content: "☐";
+    position: absolute;
+    left: 0;
+    font-size: 1.1rem;
+  }
+
+  .tip {
+    background: var(--green-glow);
+    border-left: 3px solid var(--green);
+    padding: 0.75rem 1rem;
+    margin-top: 0.75rem;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.85rem;
+  }
+
+  .tip strong { color: var(--green); }
+
+  a { color: var(--cyan); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h1>UAD Apollo 8 &times; Mac Studio M2 Ultra</h1>
+    <div class="subtitle">Complete Fix Guide &mdash; Kernel Extension &amp; Privacy/Security Resolution</div>
+  </div>
+
+  <!-- DIAGNOSIS -->
+  <div class="diagnosis">
+    <strong>&#128269; What's Happening:</strong><br>
+    Your UAD Apollo 8 connects via Thunderbolt and requires a <strong>kernel extension (kext)</strong> to communicate with macOS. On Apple Silicon Macs (your M2 Ultra), Apple locks down kernel extensions by default for security. Even though you disabled SIP with <code>csrutil disable</code>, that alone is <em>not enough</em> on Apple Silicon. You need a <strong>different</strong> security change &mdash; specifically, the <strong>Reduced Security</strong> policy with kernel extension management enabled, done through the <strong>Startup Security Utility</strong> in Recovery Mode. That's why Universal Audio isn't appearing in Privacy &amp; Security &mdash; macOS hasn't been told to even <em>look</em> for third-party kernel extensions yet.
+  </div>
+
+  <div class="warning-box">
+    <strong>&#9888; Important:</strong> On Apple Silicon, <code>csrutil disable</code> is NOT the same as enabling kernel extensions. They are separate security mechanisms. You need to use the <strong>Startup Security Utility</strong> in Recovery Mode to lower the security policy. Also: <strong>re-enable SIP</strong> after this process &mdash; you don't need it disabled, and leaving it off introduces unnecessary risk.
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- PHASE 1: CLEAN UNINSTALL -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-number p1">1</div>
+      <div>
+        <div class="phase-title">Complete Clean Uninstall</div>
+        <div class="phase-subtitle">Remove ALL existing UAD software and cached permissions</div>
+      </div>
+    </div>
+
+    <ol class="steps">
+      <li>
+        Open <span class="nav-path">Finder → Applications</span> and look for <span class="highlight">UA Connect</span> (or UA Uninstaller). If it has an uninstaller, run it first.
+      </li>
+      <li>
+        Open <span class="nav-path">Terminal</span> and remove leftover UAD files. Run each line:
+        <div class="cmd">sudo rm -rf /Library/Audio/Plug-Ins/HAL/UADDriver.plugin
+sudo rm -rf /Library/Audio/Plug-Ins/Components/UA*
+sudo rm -rf /Library/Audio/Plug-Ins/VST/UA*
+sudo rm -rf /Library/Audio/Plug-Ins/VST3/UA*
+sudo rm -rf /Library/Extensions/UAD*
+sudo rm -rf /Library/Extensions/Universal*
+sudo rm -rf "/Library/Application Support/Universal Audio"
+sudo rm -rf ~/Library/Preferences/com.uaudio.*
+sudo rm -rf ~/Library/Caches/com.uaudio.*
+sudo rm -rf "/Applications/UA Connect.app"
+sudo rm -rf "/Applications/Universal Audio"</div>
+      </li>
+      <li>
+        Clear the kernel extension staging area (this is the key step many guides miss):
+        <div class="cmd">sudo kmutil clear-staging</div>
+      </li>
+      <li>
+        Verify no UAD extensions remain loaded:
+        <div class="cmd">systemextensionsctl list</div>
+        If you see any Universal Audio entries, note them. They'll be cleared after the reboot process.
+      </li>
+      <li>
+        <strong>Restart your Mac Studio.</strong> Don't skip this. A clean reboot clears the extension cache.
+      </li>
+    </ol>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- PHASE 2: RE-ENABLE SIP -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-number p2">2</div>
+      <div>
+        <div class="phase-title">Re-Enable SIP + Set Reduced Security</div>
+        <div class="phase-subtitle">Boot into Recovery Mode on the Mac Studio</div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <strong>&#128161; Tip:</strong> Open this guide on your iPad or phone before starting &mdash; you won't have a web browser in Recovery Mode.
+    </div>
+
+    <ol class="steps">
+      <li>
+        <strong>Shut down</strong> the Mac Studio completely. Not sleep &mdash; full shutdown.
+        <div class="cmd">sudo shutdown -h now</div>
+      </li>
+      <li>
+        <strong>Press and hold the power button</strong> on the Mac Studio until you see <span class="highlight">"Loading startup options"</span> on screen. Keep holding until the options appear (about 10 seconds).
+      </li>
+      <li>
+        Click <span class="highlight">Options</span>, then click <span class="highlight">Continue</span>. You're now in Recovery Mode.
+      </li>
+      <li>
+        If prompted, select your user account and enter your password.
+      </li>
+      <li>
+        <strong>First: Re-enable SIP.</strong> From the menu bar, go to <span class="nav-path">Utilities → Terminal</span> and run:
+        <div class="cmd">csrutil enable</div>
+        You should see: <span class="good">"System Integrity Protection is on."</span>
+      </li>
+      <li>
+        Close Terminal. Now from the menu bar, go to <span class="nav-path">Utilities → Startup Security Utility</span>.
+      </li>
+      <li>
+        You'll see your startup disk (usually <span class="highlight">Macintosh HD</span>). Click on it to select it.
+      </li>
+      <li>
+        Click <span class="highlight">Security Policy…</span>
+      </li>
+      <li>
+        Select <span class="danger">Reduced Security</span>.
+      </li>
+      <li>
+        <strong>This is the critical checkbox:</strong> Check the box that says:<br><br>
+        <span class="warn">☑ "Allow user management of kernel extensions from identified developers"</span><br><br>
+        This is the setting that was missing. Without this, macOS will never show third-party kernel extensions in Privacy &amp; Security &mdash; no matter what you do with csrutil.
+      </li>
+      <li>
+        Click <span class="highlight">OK</span>. Enter your admin password if prompted.
+      </li>
+      <li>
+        Click <span class="highlight">Apple menu → Restart</span> from the menu bar.
+      </li>
+    </ol>
+
+    <div class="tip">
+      <strong>Why this matters:</strong> On Intel Macs, <code>csrutil disable</code> was the nuclear option that opened everything up. On Apple Silicon, Apple separated the security layers. SIP controls system file protection. The Startup Security Utility controls <em>what kinds of code can run at the kernel level</em>. You need to address the <em>second</em> one for UAD.
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- PHASE 3: FRESH INSTALL -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-number p3">3</div>
+      <div>
+        <div class="phase-title">Fresh UAD Software Install</div>
+        <div class="phase-subtitle">Download and install LATEST version from Universal Audio</div>
+      </div>
+    </div>
+
+    <ol class="steps">
+      <li>
+        After reboot, make sure your <span class="highlight">Apollo 8 is connected via Thunderbolt</span> and powered on.
+      </li>
+      <li>
+        Go to <a href="https://www.uaudio.com/downloads" target="_blank">uaudio.com/downloads</a> and download the <strong>latest version of UA Connect</strong>. Do NOT use an old installer &mdash; get the freshest one.
+      </li>
+      <li>
+        Run the installer. It will ask you to restart when finished. <strong>Restart immediately.</strong>
+      </li>
+      <li>
+        <strong>After restarting, you have a 30-minute window.</strong> This is critical.<br>
+        macOS only shows the "Allow" button for new kernel extensions for <span class="danger">30 minutes after installation</span>. If you miss it, you have to uninstall and reinstall.
+      </li>
+    </ol>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- PHASE 4: APPROVE THE EXTENSION -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-number p4">4</div>
+      <div>
+        <div class="phase-title">Approve the Kernel Extension</div>
+        <div class="phase-subtitle">The part that wasn't working before — it should now</div>
+      </div>
+    </div>
+
+    <ol class="steps">
+      <li>
+        Immediately after reboot, go to <span class="nav-path">Apple Menu → System Settings → Privacy &amp; Security</span>.
+      </li>
+      <li>
+        Scroll down to the <span class="highlight">Security</span> section. You should now see a message like:<br><br>
+        <span class="warn">"System software from developer 'Universal Audio' was blocked from loading."</span><br><br>
+        or<br><br>
+        <span class="warn">"Some system software was blocked from loading."</span>
+      </li>
+      <li>
+        Click <span class="highlight">Allow</span>. Enter your admin password.
+      </li>
+      <li>
+        If it says software from <strong>multiple developers</strong> was blocked, a list will appear. Make sure to check/allow <span class="highlight">Universal Audio</span> specifically.
+      </li>
+      <li>
+        You'll also see a <strong>"Background Items Added"</strong> notification from UAD. <span class="good">Allow all of these.</span> They are required for Apollo hardware to function.
+      </li>
+      <li>
+        <strong>Restart your Mac Studio one more time.</strong>
+      </li>
+    </ol>
+
+    <div class="tip">
+      <strong>If the "Allow" button still doesn't appear:</strong> This means Phase 2 didn't take. Go back to Recovery Mode and verify that Reduced Security is selected AND the kernel extension checkbox is checked. Both must be active.
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- PHASE 5: VERIFY -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-number p5">5</div>
+      <div>
+        <div class="phase-title">Verify Apollo 8 Is Working</div>
+        <div class="phase-subtitle">Confirm everything is talking to everything</div>
+      </div>
+    </div>
+
+    <ol class="steps">
+      <li>
+        Open <span class="highlight">UA Connect</span>. It should show your Apollo 8 as connected and the firmware as current.
+      </li>
+      <li>
+        Open <span class="nav-path">System Settings → Sound → Input</span>. The Apollo 8 should now appear as an available input device.
+      </li>
+      <li>
+        Open <span class="nav-path">System Settings → Sound → Output</span>. The Apollo 8 should also appear here.
+      </li>
+      <li>
+        Open <span class="highlight">Audio MIDI Setup</span> (in /Applications/Utilities). The Apollo 8 should appear in the device list with its full channel configuration.
+      </li>
+      <li>
+        Terminal verification:
+        <div class="cmd">system_profiler SPAudioDataType | grep -A 5 "Apollo"</div>
+        You should see your Apollo 8 listed with its manufacturer, sample rate, etc.
+      </li>
+      <li>
+        If you have SwitchAudioSource installed:
+        <div class="cmd">SwitchAudioSource -a -t input | grep -i "Apollo"
+SwitchAudioSource -a -t output | grep -i "Apollo"</div>
+      </li>
+      <li>
+        <strong>Open your DAW</strong> (Logic, Ableton, Luna, whatever you use) and set the Apollo 8 as the audio interface. Record a test signal. If audio flows, you're golden.
+      </li>
+    </ol>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- PHASE 6: NUCLEAR OPTION -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-number p6">6</div>
+      <div>
+        <div class="phase-title">Nuclear Option (If All Else Fails)</div>
+        <div class="phase-subtitle">The scorched-earth approach that has fixed the most stubborn cases</div>
+      </div>
+    </div>
+
+    <div class="warning-box">
+      <strong>Only do this if Phases 1-5 didn't work.</strong> This is more aggressive and involves resetting the kernel extension cache at the Recovery Mode level.
+    </div>
+
+    <ol class="steps">
+      <li>
+        Uninstall all UAD software (repeat Phase 1).
+      </li>
+      <li>
+        Boot into Recovery Mode (hold power button → Options → Continue).
+      </li>
+      <li>
+        Open Terminal from <span class="nav-path">Utilities → Terminal</span> and run the <strong>Panic Medic</strong> reset:
+        <div class="cmd">kmutil trigger-panic-medic --volume-root /Volumes/Macintosh\ HD</div>
+        (Adjust the volume name if yours is different.)
+        <br><br>
+        This clears corrupted kernel extension caches that may be preventing the Allow button from appearing.
+      </li>
+      <li>
+        While still in Recovery Mode, confirm Startup Security Utility has Reduced Security + kernel extension checkbox enabled (Phase 2, steps 6-11).
+      </li>
+      <li>
+        Re-enable SIP if it's still disabled:
+        <div class="cmd">csrutil enable</div>
+      </li>
+      <li>
+        Restart. Install fresh UAD software (Phase 3). Approve within 30 minutes (Phase 4).
+      </li>
+    </ol>
+
+    <div class="tip">
+      <strong>Last resort:</strong> If even this doesn't work, check if <strong>Find My Mac</strong> is interfering. Some users have reported that turning off Find My (in System Settings → Apple ID → Find My) before the Recovery Mode process resolves persistent kernel extension approval failures. Re-enable it afterward.
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- QUICK CHECKLIST -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-number p4">✓</div>
+      <div>
+        <div class="phase-title">Quick Checklist</div>
+        <div class="phase-subtitle">Print this or keep it on your iPad while you work through it</div>
+      </div>
+    </div>
+
+    <ul class="checklist">
+      <li>Clean uninstall all UAD software and files</li>
+      <li>Run <code>sudo kmutil clear-staging</code> in Terminal</li>
+      <li>Restart Mac Studio</li>
+      <li>Boot into Recovery Mode (hold power button)</li>
+      <li>Re-enable SIP: <code>csrutil enable</code></li>
+      <li>Open Startup Security Utility</li>
+      <li>Select startup disk → Security Policy → Reduced Security</li>
+      <li>Check "Allow user management of kernel extensions from identified developers"</li>
+      <li>Restart</li>
+      <li>Connect Apollo 8 via Thunderbolt, power it on</li>
+      <li>Download and install LATEST UA Connect from uaudio.com</li>
+      <li>Restart when prompted</li>
+      <li>IMMEDIATELY go to System Settings → Privacy & Security</li>
+      <li>Click Allow for Universal Audio (within 30 minutes!)</li>
+      <li>Allow all background items from UAD</li>
+      <li>Restart one final time</li>
+      <li>Verify in UA Connect, System Settings, and Audio MIDI Setup</li>
+      <li>Test recording in your DAW</li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    Built for Robert Stephen Plowman &middot; Mac Studio M2 Ultra &middot; UAD Apollo 8 &middot; March 2026<br>
+    Sources: <a href="https://help.uaudio.com/hc/en-us/articles/360057137692">UA Apple Silicon Compatibility</a> &middot;
+    <a href="https://help.uaudio.com/hc/en-us/articles/115005159703">UA Allow on macOS</a> &middot;
+    <a href="https://support.apple.com/guide/mac-help/mchl768f7291/mac">Apple Startup Security</a>
+  </div>
+
+</div>
+
+</body>
+</html>

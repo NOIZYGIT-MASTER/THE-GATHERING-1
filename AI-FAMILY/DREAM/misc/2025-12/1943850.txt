@@ -1,0 +1,59 @@
+<root>
+    <CtrlLabelStyle name="bfd2LogoStyle" centeredText="true">
+        <VFont name="font" vSize="24" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlTextBoxStyle name="TitleBarEditBoxStyle" optEditable="true" optSingleClickEdit="true" optSmartTile="true" intRoundedRectRadius="0" textOffset="[x:0 y:0]" colBackground="[r:162 g:162 b:162 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlTextBoxStyle>
+    <CtrlLabelStyle name="MainLabelStyle">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlLabelStyle name="FXLogoStyle" centeredText="true">
+        <VFont name="font" vSize="20" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlButtonStyle name="MainKitButtonStyle" noDefaultDrawing="true" optMomentary="false" optDrawText="true" activeAreaRect="[x:8 y:8 w:81 h:43]" imDown="main_kit_button_down.tga" colTextOn="[r:0 g:0 b:0 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="MainMixerButtonStyle" noDefaultDrawing="true" optMomentary="false" optDrawText="true" activeAreaRect="[x:8 y:8 w:81 h:43]" imDown="main_mixer_button_down.tga" colTextOn="[r:0 g:0 b:0 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="MainGrooveButtonStyle" noDefaultDrawing="true" optMomentary="false" optDrawText="true" activeAreaRect="[x:8 y:8 w:81 h:43]" imDown="main_groove_button_down.tga" colTextOn="[r:0 g:0 b:0 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlPanelStyle name="TitlePanelStyle" noDefaultDrawing="true" imBackground="main_title_panel.tga" colBorder="[r:0 g:0 b:0 a:0]" colBorderAlt="[r:0 g:0 b:0 a:0]" colFill="[r:0 g:0 b:0 a:0]" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1" />
+    <CtrlPanelStyle name="TitlePanelStyleNFUZD" noDefaultDrawing="true" imBackground="main_title_panel_nfuzd.tga" colBorder="[r:0 g:0 b:0 a:0]" colBorderAlt="[r:0 g:0 b:0 a:0]" colFill="[r:0 g:0 b:0 a:0]" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1" />
+    <CtrlButtonStyle name="TitleLogoStyle1">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="SavePresetStyle" optSendOnMouseDown="true" imDown="main_save_on.tga" imUp="main_save_off.tga">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="LoadPresetButtonStyle" optSendOnMouseDown="true" imDown="main_load_on.tga" imUp="main_load_off.tga">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="MainHelpButtonStyle" noDefaultDrawing="true" optMomentary="false" optSendOnMouseDown="true" activeAreaRect="[x:0 y:0 w:29 h:29]" imDown="main_help_button_down.tga" colTextOn="[r:0 g:0 b:0 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="MainOptionButtonStyle" noDefaultDrawing="true" optMomentary="false" optSendOnMouseDown="true" activeAreaRect="[x:0 y:0 w:28 h:29]" imDown="options_down.tga" colTextOn="[r:0 g:0 b:0 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="MainOptionButtonStyleAlwaysPressed" noDefaultDrawing="true" optMomentary="false" optSendOnMouseDown="true" activeAreaRect="[x:0 y:0 w:28 h:29]" imDown="options_down.tga" imUp="options_down.tga" colTextOn="[r:0 g:0 b:0 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlPanel name="titlePanel" style="TitlePanelStyle" rect="[x:0 y:0 w:959 h:94]" id="0" displayName=" " zorder="5">
+        <CtrlButton name="KitLock" style="BFD2LockButtonStyle" rect="[x:766 y:1 w:14 h:14]" id="100000" displayName="Kit Lock" />
+        <CtrlButton name="MixerLock" style="BFD2LockButtonStyle" rect="[x:807 y:1 w:14 h:14]" id="100000" displayName="Mixer Lock" />
+        <CtrlButton name="GroovesLock" style="BFD2LockButtonStyle" rect="[x:855 y:1 w:14 h:14]" id="100000" displayName="Mixer Lock" />
+        <CtrlButton name="KeymapLock" style="BFD2LockButtonStyle" rect="[x:904 y:1 w:14 h:14]" id="100000" displayName="Mixer Lock" />
+        <CtrlButtonGroup name="PanelButtonGroup" rect="[x:7 y:7 w:260 h:59]" id="100000">
+            <CtrlButton name="ShowKit" style="MainKitButtonStyle" rect="[x:1 y:1 w:98 h:59]" id="100006" displayName="Kit Page" />
+            <CtrlButton name="ShowChanInspector" style="MainMixerButtonStyle" rect="[x:82 y:1 w:98 h:59]" id="100006" displayName="Channel Page" />
+            <CtrlButton name="ShowGrooveLibrarian" style="MainGrooveButtonStyle" rect="[x:163 y:1 w:98 h:59]" id="100006" displayName="Grooves Page" />
+        </CtrlButtonGroup>
+        <CtrlButton name="OptionMenuButton" style="MainOptionButtonStyle" rect="[x:278 y:17 w:29 h:32]" id="100000" displayName="Option menu button" />
+        <CtrlButton name="HelpButton" style="MainHelpButtonStyle" rect="[x:307 y:17 w:29 h:32]" id="100001" text="Options" />
+        <CtrlPanel name="PresetPanel" style="BFD2InvisiblePanel" rect="[x:695 y:17 w:260 h:31]" id="100000" />
+        <CtrlPanel name="KitPresetPanel" style="BFD2InvisiblePanel" rect="[x:696 y:67 w:127 h:21]" id="100000" />
+        <CtrlPanel name="MixerPresetPanel" style="BFD2InvisiblePanel" rect="[x:827 y:67 w:127 h:21]" id="100000" />
+    </CtrlPanel>
+</root>

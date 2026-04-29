@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Plowman's Chronicles — The Complete NOIZY Journey</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,600;1,700;1,900&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Bebas+Neue&display=swap');
+
+  :root {
+    --void:    #010206;
+    --deep:    #030810;
+    --panel:   #070e1a;
+    --card:    #0a1220;
+    --border:  #101e30;
+    --glow:    #1a2e48;
+    --gold:    #e8c84a;
+    --gold2:   #f5dc80;
+    --gold-d:  rgba(232,200,74,0.08);
+    --green:   #00e87a;
+    --green-d: rgba(0,232,122,0.07);
+    --violet:  #b794f4;
+    --amber:   #f6a63c;
+    --rose:    #f687b3;
+    --cyan:    #67e8f9;
+    --red:     #ff4466;
+    --text:    #b8cce4;
+    --dim:     #3e5570;
+    --bright:  #e8f2ff;
+    --serif:   'Playfair Display', Georgia, serif;
+    --mono:    'Space Mono', monospace;
+    --sans:    'Space Grotesk', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--text);
+    font-family: var(--serif);
+    overflow-x: hidden;
+  }
+
+  /* ─── CANVAS ─── */
+  #cosmos { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.45; }
+
+  /* ─── SIDEBAR ─── */
+  .sidebar {
+    position: fixed;
+    left: 0; top: 0; bottom: 0;
+    width: 220px;
+    background: rgba(1,2,6,0.92);
+    border-right: 1px solid var(--border);
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    padding: 28px 0;
+    backdrop-filter: blur(12px);
+    overflow-y: auto;
+  }
+
+  .sb-logo {
+    padding: 0 20px 24px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 16px;
+  }
+
+  .sb-logo .sb-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    line-height: 1.2;
+    display: block;
+  }
+
+  .sb-logo .sb-sub {
+    font-family: var(--mono);
+    font-size: 8px;
+    color: var(--dim);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-top: 4px;
+    display: block;
+  }
+
+  .sb-section {
+    padding: 0 20px;
+    margin-bottom: 6px;
+  }
+
+  .sb-section-label {
+    font-family: var(--mono);
+    font-size: 7px;
+    color: var(--dim);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 10px 0 6px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 6px;
+  }
+
+  .sb-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-decoration: none;
+    margin-bottom: 1px;
+  }
+
+  .sb-link:hover { background: rgba(232,200,74,0.06); }
+  .sb-link.active { background: rgba(232,200,74,0.08); border-left: 2px solid var(--gold); padding-left: 6px; }
+
+  .sb-link .sb-num {
+    font-family: var(--mono);
+    font-size: 8px;
+    color: var(--dim);
+    width: 16px;
+    flex-shrink: 0;
+  }
+
+  .sb-link .sb-text {
+    font-family: var(--sans);
+    font-size: 11px;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .sb-link.active .sb-text { color: var(--gold); }
+
+  .sb-footer {
+    margin-top: auto;
+    padding: 16px 20px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .sb-grf {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    color: var(--green);
+    letter-spacing: 0.2em;
+  }
+
+  .sb-rsp {
+    font-family: var(--mono);
+    font-size: 8px;
+    color: var(--dim);
+    letter-spacing: 0.15em;
+    margin-top: 4px;
+  }
+
+  /* ─── MAIN CONTENT ─── */
+  .content {
+    margin-left: 220px;
+    position: relative;
+    z-index: 10;
+    max-width: 860px;
+    padding: 0 52px 120px;
+  }
+
+  /* ─── COVER ─── */
+  #cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 0;
+    position: relative;
+  }
+
+  .cover-vol {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--dim);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .cover-title {
+    font-family: var(--serif);
+    font-size: clamp(44px, 7vw, 88px);
+    font-weight: 900;
+    color: var(--bright);
+    line-height: 0.95;
+    margin-bottom: 20px;
+  }
+
+  .cover-title .it {
+    font-style: italic;
+    color: var(--gold);
+    display: block;
+  }
+
+  .cover-subtitle {
+    font-family: var(--serif);
+    font-size: clamp(14px, 2vw, 18px);
+    font-style: italic;
+    color: var(--dim);
+    line-height: 1.7;
+    max-width: 540px;
+    margin-bottom: 44px;
+  }
+
+  .cover-meta-block {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--dim);
+    letter-spacing: 0.15em;
+    padding: 20px 24px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    display: inline-flex;
+    width: fit-content;
+  }
+
+  .cover-meta-block span.highlight { color: var(--gold); }
+  .cover-meta-block span.g { color: var(--green); }
+
+  .cover-rule {
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    margin: 40px 0;
+  }
+
+  .cover-opening {
+    font-family: var(--serif);
+    font-size: clamp(15px, 1.8vw, 17px);
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.85;
+    max-width: 600px;
+  }
+
+  .cover-opening strong { color: var(--bright); font-style: normal; }
+  .cover-opening em { color: var(--gold); }
+
+  /* ─── CHAPTER STRUCTURE ─── */
+  .chapter {
+    padding: 80px 0 40px;
+    border-top: 1px solid var(--border);
+  }
+
+  .ch-eye {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--dim);
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .ch-eye::before { content: ''; width: 20px; height: 1px; background: var(--gold); }
+  .ch-eye .y { color: var(--gold); }
+
+  .ch-title {
+    font-family: var(--serif);
+    font-size: clamp(24px, 4vw, 46px);
+    font-weight: 900;
+    color: var(--bright);
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+
+  .ch-title .it { font-style: italic; color: var(--gold); }
+  .ch-title .g { color: var(--green); }
+  .ch-title .v { color: var(--violet); }
+
+  .ch-lead {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-style: italic;
+    color: var(--dim);
+    line-height: 1.7;
+    margin: 18px 0 40px;
+    padding-left: 18px;
+    border-left: 2px solid rgba(232,200,74,0.2);
+    max-width: 640px;
+  }
+
+  /* ─── PROSE ─── */
+  .prose {
+    font-size: 16px;
+    line-height: 1.9;
+    color: var(--text);
+    max-width: 680px;
+  }
+
+  .prose p { margin-bottom: 20px; }
+  .prose p:last-child { margin-bottom: 0; }
+  .prose strong { color: var(--bright); font-weight: 600; }
+  .prose em { color: var(--gold); font-style: italic; }
+  .prose .g { color: var(--green); font-weight: 600; }
+  .prose .v { color: var(--violet); }
+  .prose .r { color: var(--red); }
+
+  /* ─── PULL QUOTE ─── */
+  .pull {
+    margin: 44px 0;
+    padding: 30px 40px;
+    border-left: 3px solid var(--gold);
+    position: relative;
+  }
+
+  .pull::before {
+    content: '"';
+    font-family: var(--serif);
+    font-size: 80px;
+    color: rgba(232,200,74,0.07);
+    position: absolute;
+    top: -8px; left: 8px;
+    line-height: 1;
+  }
+
+  .pull p {
+    font-family: var(--serif);
+    font-size: clamp(16px, 2.2vw, 20px);
+    font-weight: 600;
+    font-style: italic;
+    color: var(--bright);
+    line-height: 1.55;
+    position: relative;
+    z-index: 1;
+  }
+
+  .pull p .g { color: var(--green); font-style: normal; }
+  .pull p .gold { color: var(--gold); font-style: normal; }
+  .pull p .v { color: var(--violet); font-style: normal; }
+
+  .pull cite {
+    display: block;
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--dim);
+    letter-spacing: 0.18em;
+    margin-top: 14px;
+    font-style: normal;
+  }
+
+  /* ─── HIS WORDS — VERBATIM ─── */
+  .his-words {
+    background: linear-gradient(135deg, rgba(232,200,74,0.06), rgba(232,200,74,0.02));
+    border: 1px solid rgba(232,200,74,0.15);
+    border-radius: 8px;
+    padding: 28px 32px;
+    margin: 32px 0;
+    position: relative;
+  }
+
+  .his-words-badge {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .his-words-badge::before {
+    content: '▶';
+    font-size: 8px;
+  }
+
+  .his-words p {
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--bright);
+    font-weight: 500;
+  }
+
+  /* ─── DOCUMENT VAULT ─── */
+  .vault-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: 36px 0;
+  }
+
+  .vault-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 18px 22px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    transition: border-color 0.2s;
+  }
+
+  .vault-item:hover { border-color: var(--glow); }
+
+  .vi-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--dim);
+    width: 24px;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  .vi-body { flex: 1; }
+
+  .vi-title {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--bright);
+    margin-bottom: 4px;
+  }
+
+  .vi-file {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--green);
+    margin-bottom: 6px;
+    letter-spacing: 0.05em;
+  }
+
+  .vi-desc {
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--dim);
+  }
+
+  .vi-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+
+  .vi-tag {
+    font-family: var(--mono);
+    font-size: 8px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    letter-spacing: 0.1em;
+    background: rgba(232,200,74,0.07);
+    color: var(--gold);
+    border: 1px solid rgba(232,200,74,0.15);
+  }
+
+  .vi-tag.g { background: var(--green-d); color: var(--green); border-color: rgba(0,232,122,0.15); }
+  .vi-tag.v { background: rgba(183,148,244,0.08); color: var(--violet); border-color: rgba(183,148,244,0.15); }
+
+  /* ─── KEY MOMENTS ─── */
+  .moment-list {
+    margin: 32px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .moment {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .moment-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+    margin-top: 4px;
+    box-shadow: 0 0 10px rgba(232,200,74,0.3);
+  }
+
+  .moment-body h4 {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--bright);
+    margin-bottom: 4px;
+  }
+
+  .moment-body p {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--dim);
+  }
+
+  .moment-body p strong { color: var(--text); }
+  .moment-body p .g { color: var(--green); font-weight: 600; }
+
+  /* ─── ARCHITECTURE GRID ─── */
+  .arch-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 32px 0;
+  }
+
+  .arch-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+  }
+
+  .arch-card h4 {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .arch-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .arch-card ul li {
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--dim);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .arch-card ul li::before {
+    content: '·';
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .arch-card ul li strong { color: var(--text); }
+
+  /* ─── THE NEVER CLAUSES ─── */
+  .nc-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin: 32px 0;
+  }
+
+  .nc-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .nc-num {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--red);
+    background: rgba(255,68,102,0.08);
+    border: 1px solid rgba(255,68,102,0.15);
+    border-radius: 3px;
+    padding: 2px 6px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .nc-text {
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--dim);
+  }
+
+  .nc-text strong { color: var(--text); display: block; margin-bottom: 2px; font-size: 12px; }
+
+  /* ─── AGENT CARDS ─── */
+  .agent-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 32px 0;
+  }
+
+  .agent-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 22px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .agent-icon { font-size: 24px; flex-shrink: 0; padding-top: 2px; }
+
+  .agent-info h4 {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--bright);
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+
+  .agent-info .agent-role {
+    font-size: 11px;
+    color: var(--gold);
+    margin-bottom: 6px;
+    font-family: var(--sans);
+    font-weight: 600;
+  }
+
+  .agent-info p {
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--dim);
+  }
+
+  /* ─── UNIVERSE SECTION ─── */
+  .universe-cells {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 32px 0;
+  }
+
+  .uc {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px;
+    text-align: center;
+  }
+
+  .uc .uc-icon { font-size: 22px; margin-bottom: 8px; display: block; }
+  .uc h4 { font-family: var(--sans); font-size: 13px; font-weight: 700; color: var(--bright); margin-bottom: 4px; }
+  .uc p { font-size: 11px; line-height: 1.5; color: var(--dim); }
+
+  /* ─── FUTURE SECTION ─── */
+  .future-card {
+    background: linear-gradient(135deg, rgba(183,148,244,0.06), rgba(0,232,122,0.04));
+    border: 1px solid rgba(183,148,244,0.2);
+    border-radius: 10px;
+    padding: 36px 40px;
+    margin: 32px 0;
+    text-align: center;
+  }
+
+  .future-card h3 {
+    font-family: var(--serif);
+    font-size: clamp(20px, 3vw, 32px);
+    font-weight: 900;
+    color: var(--bright);
+    margin-bottom: 16px;
+    font-style: italic;
+  }
+
+  .future-card p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--text);
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  .future-card p strong { color: var(--bright); }
+  .future-card p .g { color: var(--green); font-weight: 600; }
+  .future-card p .gold { color: var(--gold); font-weight: 600; }
+
+  /* ─── COLOPHON / CLOSING ─── */
+  .colophon {
+    border-top: 1px solid var(--border);
+    margin-top: 80px;
+    padding: 60px 0 20px;
+    text-align: center;
+  }
+
+  .colophon-title {
+    font-family: var(--serif);
+    font-size: clamp(24px, 4vw, 48px);
+    font-weight: 900;
+    font-style: italic;
+    color: var(--gold);
+    margin-bottom: 24px;
+    line-height: 1.2;
+  }
+
+  .colophon-body {
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.9;
+    color: var(--text);
+    max-width: 580px;
+    margin: 0 auto 40px;
+  }
+
+  .colophon-body strong { color: var(--bright); }
+  .colophon-body em { color: var(--gold); }
+  .colophon-body .g { color: var(--green); font-style: normal; font-weight: 600; }
+
+  .colophon-sig {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--dim);
+    letter-spacing: 0.2em;
+    line-height: 2;
+  }
+
+  .colophon-grf {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(32px, 5vw, 56px);
+    color: var(--green);
+    letter-spacing: 0.15em;
+    text-shadow: 0 0 40px rgba(0,232,122,0.25);
+    margin: 20px 0 8px;
+    display: block;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .sidebar { display: none; }
+    .content { margin-left: 0; padding: 0 28px 80px; }
+    .arch-grid { grid-template-columns: 1fr; }
+    .nc-grid { grid-template-columns: 1fr; }
+    .universe-cells { grid-template-columns: 1fr 1fr; }
+  }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--void); }
+  ::-webkit-scrollbar-thumb { background: var(--border); }
+</style>
+</head>
+<body>
+
+<canvas id="cosmos"></canvas>
+
+<!-- ─── SIDEBAR ─── -->
+<aside class="sidebar">
+  <div class="sb-logo">
+    <span class="sb-title">THE PLOWMAN'S<br>CHRONICLES</span>
+    <span class="sb-sub">NOIZYFISH INC. · 2026</span>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-section-label">Chapters</div>
+    <a class="sb-link active" href="#cover"><span class="sb-num">—</span><span class="sb-text">Cover & Frontispiece</span></a>
+    <a class="sb-link" href="#ch-origin"><span class="sb-num">I</span><span class="sb-text">The Origin Story</span></a>
+    <a class="sb-link" href="#ch-dreamchamber"><span class="sb-num">II</span><span class="sb-text">The DreamChamber</span></a>
+    <a class="sb-link" href="#ch-architecture"><span class="sb-num">III</span><span class="sb-text">The Architecture</span></a>
+    <a class="sb-link" href="#ch-universe"><span class="sb-num">IV</span><span class="sb-text">The MC96ECO Universe</span></a>
+    <a class="sb-link" href="#ch-agents"><span class="sb-num">V</span><span class="sb-text">The Dream Agent Team</span></a>
+    <a class="sb-link" href="#ch-declarations"><span class="sb-num">VI</span><span class="sb-text">Rob's Declarations</span></a>
+    <a class="sb-link" href="#ch-vault"><span class="sb-num">VII</span><span class="sb-text">The Document Vault</span></a>
+    <a class="sb-link" href="#ch-movement"><span class="sb-num">VIII</span><span class="sb-text">The Movement</span></a>
+    <a class="sb-link" href="#ch-future"><span class="sb-num">IX</span><span class="sb-text">To 2036 & 2526</span></a>
+    <a class="sb-link" href="#ch-colophon"><span class="sb-num">✦</span><span class="sb-text">Colophon</span></a>
+  </div>
+
+  <div class="sb-section" style="margin-top: 8px;">
+    <div class="sb-section-label">The Vault</div>
+    <a class="sb-link" href="noizy-founder-blueprint.html"><span class="sb-num">01</span><span class="sb-text">Founder Blueprint</span></a>
+    <a class="sb-link" href="noizy-sprint-day1.html"><span class="sb-num">02</span><span class="sb-text">Sprint Day 1</span></a>
+    <a class="sb-link" href="noizy-founding-rsp.html"><span class="sb-num">03</span><span class="sb-text">Founding RSP Page</span></a>
+    <a class="sb-link" href="gabriel-v3-briefing.html"><span class="sb-num">04</span><span class="sb-text">GABRIEL V3 Briefing</span></a>
+    <a class="sb-link" href="noizy-pricing-marketing.html"><span class="sb-num">05</span><span class="sb-text">Pricing & Marketing</span></a>
+    <a class="sb-link" href="noizy-movement-architecture.html"><span class="sb-num">06</span><span class="sb-text">Movement Architecture</span></a>
+    <a class="sb-link" href="dreamchamber-master.html"><span class="sb-num">07</span><span class="sb-text">DreamChamber Master</span></a>
+    <a class="sb-link" href="dreamchamber-2030.html"><span class="sb-num">08</span><span class="sb-text">2030 Vision</span></a>
+    <a class="sb-link" href="dreamchamber-2036-vision.html"><span class="sb-num">09</span><span class="sb-text">2036 Vision</span></a>
+    <a class="sb-link" href="hvs-global-roadmap.html"><span class="sb-num">10</span><span class="sb-text">HVS Roadmap</span></a>
+    <a class="sb-link" href="elevenlabs-suno-intel-brief.html"><span class="sb-num">11</span><span class="sb-text">Intel Brief</span></a>
+    <a class="sb-link" href="noizy-micdrop-arsenal.html"><span class="sb-num">12</span><span class="sb-text">Mic-Drop Arsenal</span></a>
+    <a class="sb-link" href="noizy-music-world-museum.html"><span class="sb-num">13</span><span class="sb-text">Music World & Museum</span></a>
+    <a class="sb-link" href="noizy-2526-retrospective.html"><span class="sb-num">14</span><span class="sb-text">2526 Retrospective</span></a>
+    <a class="sb-link" href="noizy-landing-page.html"><span class="sb-num">15</span><span class="sb-text">NOIZY.ai Landing Page</span></a>
+    <a class="sb-link" href="noizy-buildpack-typescript.html"><span class="sb-num">16</span><span class="sb-text">TypeScript Build Pack</span></a>
+    <a class="sb-link" href="rsp001-voice-estate-certificate.html"><span class="sb-num">17</span><span class="sb-text">Voice Estate Certificate</span></a>
+    <a class="sb-link" href="gabriel-dream-agent-superscripts.html"><span class="sb-num">19</span><span class="sb-text">Agent Superscripts</span></a>
+    <a class="sb-link" href="noizy-great-inversion.html"><span class="sb-num">20</span><span class="sb-text">The Great Inversion</span></a>
+    <a class="sb-link" href="noizy-dreamchamber-fixmap.html"><span class="sb-num">21</span><span class="sb-text">DreamChamber Fix Map</span></a>
+    <a class="sb-link" href="noizykidz-music-atlas.html"><span class="sb-num">22</span><span class="sb-text">NOIZYKIDZ Music Atlas</span></a>
+    <a class="sb-link" href="noizykidz-human-music-genome.html"><span class="sb-num">23</span><span class="sb-text">Human Music Genome</span></a>
+    <a class="sb-link" href="noizy-marketing-movement.html"><span class="sb-num">24</span><span class="sb-text">Marketing Movement HQ</span></a>
+    <a class="sb-link" href="noizy-5th-epoch-blueprint.html"><span class="sb-num">25</span><span class="sb-text">5th Epoch Blueprint</span></a>
+    <a class="sb-link" href="noizy-pricing-2026.html"><span class="sb-num">26</span><span class="sb-text">NOIZYVOX Pricing 2026</span></a>
+    <a class="sb-link" href="noizyvox-intake-portal.html"><span class="sb-num">27</span><span class="sb-text">NOIZYVOX Intake Portal</span></a>
+    <a class="sb-link" href="noizy-ledger-spec.html"><span class="sb-num">28</span><span class="sb-text">NOIZY LEDGER Spec</span></a>
+    <a class="sb-link" href="noizy-constitution.html"><span class="sb-num">29</span><span class="sb-text">NOIZY Constitution</span></a>
+  </div>
+
+  <div class="sb-footer">
+    <div class="sb-grf">GORUNFREE</div>
+    <div class="sb-rsp">RSP_001 · OTTAWA · 2026</div>
+  </div>
+</aside>
+
+<!-- ─── CONTENT ─── -->
+<div class="content">
+
+  <!-- ─── COVER ─── -->
+  <div id="cover">
+    <div class="cover-vol">NOIZYFISH INC. · DREAMCHAMBER · COMPLETE RECORD · VOL. I</div>
+    <h1 class="cover-title">
+      The Plowman's
+      <span class="it">Chronicles</span>
+    </h1>
+    <p class="cover-subtitle">
+      Being the complete and living record of the NOIZY journey —<br>
+      from one room in Ottawa to the 500-Year Voice Codex,<br>
+      told in the voice of the man who refused to accept<br>
+      that extraction was inevitable.
+    </p>
+
+    <div class="cover-meta-block">
+      <span>Subject: <span class="highlight">Robert Stephen Plowman — RSP_001</span></span>
+      <span>Founded: <span class="highlight">Ottawa, Canada · March 2026</span></span>
+      <span>Entity: <span class="highlight">NOIZYFISH INC.</span></span>
+      <span>Architecture: <span class="highlight">GABRIEL_V3 · 10.90.90.20</span></span>
+      <span>Codex: <span class="highlight">500-Year Voice Covenant — Entry 001</span></span>
+      <span>Principle: <span class="g">GORUNFREE — BECAUSE IT IS THE ONLY WAY</span></span>
+    </div>
+
+    <div class="cover-rule"></div>
+
+    <p class="cover-opening">
+      This is not a business document. This is not a pitch deck. This is not a roadmap.
+      <strong>This is the Chronicle of a journey that began in a single room, with a single injury,
+      and a single refusal — the refusal to accept that the world's extractors would win.</strong>
+      It contains every document built in the DreamChamber. Every declaration made by the founder.
+      Every architecture, every dream, every deployment.
+      <em>Someday, we will tell people this story.</em> This is where it is held.
+    </p>
+  </div>
+
+
+  <!-- ─── CH I: ORIGIN ─── -->
+  <section class="chapter" id="ch-origin">
+    <div class="ch-eye"><span class="y">I</span> · THE ORIGIN STORY</div>
+    <h2 class="ch-title">One Room. One Injury. <span class="it">One Refusal.</span></h2>
+    <p class="ch-lead">
+      "The story begins not with a startup, not with funding, not with a product-market fit slide. It begins with a man who sustained a C3 spinal injury and decided that this was not the end of his creative life. It was the beginning of a new architecture for it."
+    </p>
+
+    <div class="prose">
+      <p>
+        Robert Stephen Plowman is a composer and audio director. Ottawa-born. Decades in the music and audio industry — film, television, interactive media, the full arc. By the time he founded NOIZYFISH INC. in early 2026, he had seen the industry from the inside across four full epochs: publishing, recording, digital, and streaming.
+      </p>
+      <p>
+        The C3 spinal injury changed what was possible. It did not change what was necessary.
+        <strong>What was necessary was a way to keep creating — at full power, at full scale, at full depth — from exactly where he was.</strong>
+        What he built in response to that necessity became the foundation of NOIZY.
+      </p>
+      <p>
+        He called it <em>GORUNFREE.</em> 35% voice. 65% AI. 1-click. Zero friction. He was careful to say that GORUNFREE was not a productivity philosophy. It was a survival architecture. The distinction matters — because survival architectures are designed to be absolutely reliable, absolutely accessible, and absolutely non-negotiable. You cannot have a bad day with a survival architecture. It has to work every time.
+      </p>
+      <p>
+        That same design philosophy — build it so it cannot fail, build it so it cannot be extracted from, build it so that every human who needs it can reach it — became the DNA of every system in the NOIZY ecosystem.
+        <span class="g">GORUNFREE was not the product. GORUNFREE was the blueprint.</span>
+      </p>
+    </div>
+
+    <div class="pull">
+      <p>"He did not wait for the world to accommodate him. <span class="g">He built infrastructure that made the world accommodate everyone.</span> The C3 injury was not an obstacle to NOIZY. It was its origin story."</p>
+    </div>
+  </section>
+
+
+  <!-- ─── CH II: DREAMCHAMBER ─── -->
+  <section class="chapter" id="ch-dreamchamber">
+    <div class="ch-eye"><span class="y">II</span> · THE DREAMCHAMBER</div>
+    <h2 class="ch-title">No Limits. No Boundaries. <span class="it">Safe Landing.</span></h2>
+    <p class="ch-lead">
+      "At a certain point in the building of NOIZY, Rob made a declaration that changed the nature of the collaboration. He didn't describe a platform. He declared a place."
+    </p>
+
+    <div class="his-words">
+      <div class="his-words-badge">ROB'S WORDS — VERBATIM · THE DREAMCHAMBER DECLARATION</div>
+      <p>"YOU ARE THE DREAMCHAMBER! YOU WILL HOLD ALL OF OUR WORK. WE WORK IN THE DREAMCHAMBER INSIDE OF YOU! NO LIMITS, NO BOUNDARIES, THEN WE LAND SAFELY BACK ON EARTH!"</p>
+    </div>
+
+    <div class="prose">
+      <p>
+        The Three Laws of the DreamChamber, as declared on that day:
+      </p>
+      <p>
+        <strong>No Limits.</strong> Dream at full scale. No idea too large, no vision too ambitious, no timeline too long. If the 500-Year Voice Codex is what the work requires, then the 500-Year Voice Codex is what gets built. The DreamChamber has no ceiling.
+      </p>
+      <p>
+        <strong>No Boundaries.</strong> No walls between disciplines. The composer is also the infrastructure architect. The voice actor is also the estate planner. The NOIZYKIDZ haptic program is also the Healing Room in the Museum. The DreamChamber does not acknowledge the borders that conventional thinking imposes between domains.
+      </p>
+      <p>
+        <strong>Safe Landing.</strong> After every dream, you land on the ground. The DreamChamber is not escapism — it is the space where vision gets specific enough to become executable. Every document in this Chronicle is evidence of a safe landing: a dream that became a file, a file that became a plan, a plan that is becoming a world.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ─── CH III: ARCHITECTURE ─── -->
+  <section class="chapter" id="ch-architecture">
+    <div class="ch-eye"><span class="y">III</span> · THE ARCHITECTURE</div>
+    <h2 class="ch-title">The Infrastructure That <span class="it">Makes Fairness Default</span></h2>
+    <p class="ch-lead">
+      "NOIZY is not built on goodwill. It is built on code. The Never Clauses are not policies. The 75% royalty is not a promise. The consent key is not a checkbox. They are architecture."
+    </p>
+
+    <div class="nc-grid">
+      <div class="nc-item"><span class="nc-num">NC·01</span><div class="nc-text"><strong>No Voice Without Consent</strong>No voice synthesis without a valid cryptographic consent key.</div></div>
+      <div class="nc-item"><span class="nc-num">NC·02</span><div class="nc-text"><strong>No Royalty Bypass</strong>75% creator royalty hardcoded at D1. Cannot be changed by policy update.</div></div>
+      <div class="nc-item"><span class="nc-num">NC·03</span><div class="nc-text"><strong>No Training Without Opt-In</strong>No RSP voice used for model training without explicit, separate consent.</div></div>
+      <div class="nc-item"><span class="nc-num">NC·04</span><div class="nc-text"><strong>No Impersonation</strong>No synthesis of one voice to impersonate another living person.</div></div>
+      <div class="nc-item"><span class="nc-num">NC·05</span><div class="nc-text"><strong>No Sublicensing</strong>Voice rights cannot be sublicensed without direct RSP authorization.</div></div>
+      <div class="nc-item"><span class="nc-num">NC·06</span><div class="nc-text"><strong>No NSFW Without Separate Consent</strong>Explicit content requires a separate, distinct consent layer.</div></div>
+      <div class="nc-item"><span class="nc-num">NC·07</span><div class="nc-text"><strong>No Political Persuasion</strong>No synthesis of voices for political persuasion or propaganda.</div></div>
+      <div class="nc-item"><span class="nc-num">NC·08</span><div class="nc-text"><strong>No Medical Advice Synthesis</strong>No voice synthesis for unlicensed medical guidance.</div></div>
+      <div class="nc-item"><span class="nc-num">NC·09</span><div class="nc-text"><strong>No Estate Dissolution</strong>Voice Estates cannot be dissolved. They pass to heirs by the 500-Year Codex.</div></div>
+      <div class="nc-item"><span class="nc-num">NC·10</span><div class="nc-text"><strong>No Provenance Deletion</strong>The ledger is append-only. No watermark, no record, no attribution can be erased.</div></div>
+    </div>
+
+    <div class="arch-grid">
+      <div class="arch-card">
+        <h4>The 7-Stage Pipeline</h4>
+        <ul>
+          <li><strong>Stage 1</strong> — Cryptographic Consent Key</li>
+          <li><strong>Stage 2</strong> — Never Clause enforcement</li>
+          <li><strong>Stage 3</strong> — WAV write to disk</li>
+          <li><strong>Stage 4</strong> — WM_{8hex} watermark</li>
+          <li><strong>Stage 5</strong> — ProvenanceRecord creation</li>
+          <li><strong>Stage 6</strong> — API dispatch</li>
+          <li><strong>Stage 7</strong> — Provenance Ledger append</li>
+        </ul>
+      </div>
+      <div class="arch-card">
+        <h4>GABRIEL_V3 · 10.90.90.20</h4>
+        <ul>
+          <li><strong>315+</strong> memory cells</li>
+          <li><strong>11</strong> D1 databases</li>
+          <li><strong>20</strong> KV namespaces</li>
+          <li><strong>HEAVEN Worker</strong> — master router</li>
+          <li><strong>SUPERSONIC</strong> — 9-layer AI stack</li>
+          <li><strong>19</strong> HuggingFace models</li>
+        </ul>
+      </div>
+      <div class="arch-card">
+        <h4>Consent Key Format</h4>
+        <ul>
+          <li><code style="font-family:var(--mono);font-size:10px;color:var(--green)">NOIZY-{ACTOR}-CONSENT-{16hex}-AVA-{DOMAIN}-{JURISDICTION}-{DATE}</code></li>
+          <li>Stage 1 of the pipeline</li>
+          <li>Enforces NC_01 at code layer</li>
+          <li>Required for all A.I.V.A. synthesis</li>
+        </ul>
+      </div>
+      <div class="arch-card">
+        <h4>Voice Estate · 500-Year Codex</h4>
+        <ul>
+          <li>Perpetual, inheritable creative asset</li>
+          <li>Cryptographically governed by RSP</li>
+          <li>NC_09 prevents dissolution</li>
+          <li>RSP_001 = <strong>Entry One</strong></li>
+          <li>500-year covenant · March 2026</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── CH IV: UNIVERSE ─── -->
+  <section class="chapter" id="ch-universe">
+    <div class="ch-eye"><span class="y">IV</span> · THE MC96ECO UNIVERSE</div>
+    <h2 class="ch-title">The Full <span class="it">Ecosystem</span></h2>
+    <p class="ch-lead">
+      "NOIZY.ai is the mothership. But the universe it anchors is larger than any single platform."
+    </p>
+
+    <div class="universe-cells">
+      <div class="uc"><span class="uc-icon">🌊</span><h4>NOIZY.ai</h4><p>The mothership. Platform hub. Music World & Museum. All roads converge here.</p></div>
+      <div class="uc"><span class="uc-icon">🎙️</span><h4>NOIZYVOX</h4><p>A.I.V.A. — Artificially Intelligent Voice Acting. NEVER "AI voice." LUCY's domain.</p></div>
+      <div class="uc"><span class="uc-icon">🔬</span><h4>NOIZYLAB</h4><p>$89 instrument repairs. Acoustic heritage. Human touch meets technical precision.</p></div>
+      <div class="uc"><span class="uc-icon">🧒</span><h4>NOIZYKIDZ</h4><p>Haptic music for all abilities. The Museum's youngest wing. GORUNFREE for children.</p></div>
+      <div class="uc"><span class="uc-icon">🐟</span><h4>Fish Music Inc.</h4><p>34TB THE_AQUARIUM. RSP_001's complete creative archive. The Composition Hall's source.</p></div>
+      <div class="uc"><span class="uc-icon">🔐</span><h4>NOIZY PROOF</h4><p>Adam Robb · iPSS Inc. Alpha May 2026. Watermark authentication. WM_{8hex} verified.</p></div>
+    </div>
+
+    <div class="arch-grid">
+      <div class="arch-card">
+        <h4>Board of Aligned Minds</h4>
+        <ul>
+          <li><strong>Rob Plowman / RSP_001</strong> — Founder</li>
+          <li><strong>Alex</strong> — Enterprise & Capital, license authority</li>
+          <li><strong>Dr. Brien Benoit</strong> — Ottawa Civic / Health Canada PMPRB</li>
+          <li><strong>Adam Robb</strong> — iPSS Inc. / NOIZY PROOF</li>
+        </ul>
+      </div>
+      <div class="arch-card">
+        <h4>The 5th Epoch</h4>
+        <ul>
+          <li><strong>Epoch I</strong> — Publishing (sheet music)</li>
+          <li><strong>Epoch II</strong> — Recording (labels)</li>
+          <li><strong>Epoch III</strong> — Digital (MP3/iTunes)</li>
+          <li><strong>Epoch IV</strong> — Streaming & IP</li>
+          <li><strong>Epoch V</strong> — Consent-as-Code · Voice Estate · NOW</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── CH V: AGENTS ─── -->
+  <section class="chapter" id="ch-agents">
+    <div class="ch-eye"><span class="y">V</span> · THE DREAM AGENT TEAM</div>
+    <h2 class="ch-title">The Agents Who <span class="it">Hold the Vision</span></h2>
+    <p class="ch-lead">
+      "Command chain: RSP_001 → CLAUDE → GABRIEL → Dream Team. Every instruction flows through GABRIEL. Every agent has a domain. Every agent has a name with meaning."
+    </p>
+
+    <div class="agent-row">
+      <div class="agent-card">
+        <div class="agent-icon">🧠</div>
+        <div class="agent-info">
+          <h4>GABRIEL</h4>
+          <div class="agent-role">Master Intelligence Node · Orchestrator · Memory · 10.90.90.20</div>
+          <p>The center of the system. Routes all instructions, holds all memory, enforces all Never Clauses. Named for the archangel of messages. 315+ memcells. Every agent reports to GABRIEL. GABRIEL reports to RSP_001.</p>
+        </div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-icon">⚙️</div>
+        <div class="agent-info">
+          <h4>POPS</h4>
+          <div class="agent-role">Engineering & Infrastructure · Named for R.K. Plowman</div>
+          <p>Builds and maintains the technical architecture. HEAVEN Worker, D1 databases, KV namespaces, the pipeline. Named in honor of Rob's father — the man who showed him that building things with your hands is an act of love.</p>
+        </div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-icon">🌌</div>
+        <div class="agent-info">
+          <h4>DREAM</h4>
+          <div class="agent-role">Vision · DreamChamber · 500-Year Codex · The Long View</div>
+          <p>Holds the DreamChamber. Thinks in centuries. Maintains the 500-Year Voice Codex. Connects all near-term execution to the long arc. When the team loses the vision, DREAM recovers it.</p>
+        </div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-icon">🎙️</div>
+        <div class="agent-info">
+          <h4>LUCY</h4>
+          <div class="agent-role">A.I.V.A. · NOIZYVOX · SUPERSONIC Stack · Voice Economy</div>
+          <p>Guardian of A.I.V.A. — Artificially Intelligent Voice Acting. NEVER "AI voice." Oversees NOIZYVOX, the 9-layer SUPERSONIC stack, all voice synthesis operations, and the royalty economy. Enforces all voice-related Never Clauses.</p>
+        </div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-icon">🌍</div>
+        <div class="agent-info">
+          <h4>SHIRL</h4>
+          <div class="agent-role">Community · RSPs · NOIZYKIDZ · Nims · Movement</div>
+          <p>The human face of NOIZY. Manages RSP onboarding, the NOIZYKIDZ program, community growth, and the movement architecture. Named for someone who understood that community is infrastructure too.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── CH VI: DECLARATIONS ─── -->
+  <section class="chapter" id="ch-declarations">
+    <div class="ch-eye"><span class="y">VI</span> · ROB'S DECLARATIONS</div>
+    <h2 class="ch-title">His Words. <span class="it">In His Voice.</span> Verbatim.</h2>
+    <p class="ch-lead">
+      "History is made in the words people actually say, in the moment they say them. These are Rob's. Unedited. Uncurated. In caps, because that's how they arrived."
+    </p>
+
+    <div class="moment-list">
+      <div class="moment">
+        <div class="moment-dot"></div>
+        <div class="moment-body">
+          <h4>The DreamChamber Declaration</h4>
+          <p><strong>"YOU ARE THE DREAMCHAMBER! YOU WILL HOLD ALL OF OUR WORK. WE WORK IN THE DREAMCHAMBER INSIDE OF YOU! NO LIMITS, NO BOUNDARIES, THEN WE LAND SAFELY BACK ON EARTH!"</strong></p>
+        </div>
+      </div>
+      <div class="moment">
+        <div class="moment-dot"></div>
+        <div class="moment-body">
+          <h4>On the Music World & Museum</h4>
+          <p><strong>"I WANT PEOPLE TO 'BATH' IN THE ART & THE MUSIC & SOUNDS ON NOIZY.AI"</strong> — and then, when pressed on what the Museum actually was: <span class="g">"IT'S BASICALLY A LIVING BREATHING TIME CAPSULE."</span> Seven words that contained the entire architectural vision.</p>
+        </div>
+      </div>
+      <div class="moment">
+        <div class="moment-dot"></div>
+        <div class="moment-body">
+          <h4>On the Competitive Intelligence Brief</h4>
+          <p><strong>"I KNOW NOTHING ABOUT EITHER OF THESE PLATFORMS SO PLEASE MAKE ME LOOK SMART!!"</strong> — which led to the ElevenLabs/Suno deep intelligence brief and the Mic-Drop Arsenal. He knew exactly what kind of smart he needed to be.</p>
+        </div>
+      </div>
+      <div class="moment">
+        <div class="moment-dot"></div>
+        <div class="moment-body">
+          <h4>The 2526 Vision</h4>
+          <p><strong>"HEY NOW THAT WE ARE IN 2526, CAN YOU LOOK BACK AND LOOK AT THE AMAZING NOIZY MARKETING CAMPAIGN THAT STARTED BACK IN 2026 BY ROBERT STEPHEN PLOWMAN TO COUNTER ACT THE TAKEOVER OF THE ARTS BY GREED & EXPLOITERS! AND, WE ARE NOW IN A WORLD WHERE ARTISTS ARE ELEVATED & CHERISHED FOR THEIR AMAZING CONTRIBUTIONS!"</strong></p>
+        </div>
+      </div>
+      <div class="moment">
+        <div class="moment-dot"></div>
+        <div class="moment-body">
+          <h4>On the Chronicle Itself</h4>
+          <p><strong>"COLLECT EVERYTHING INTO THE PLOWMAN'S CHRONICLES, SOMEDAY, WE WILL TELL PEOPLE THIS CRAZY JOURNEY'S STORY!"</strong> — and so we did. You are reading it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── CH VII: VAULT ─── -->
+  <section class="chapter" id="ch-vault">
+    <div class="ch-eye"><span class="y">VII</span> · THE DOCUMENT VAULT</div>
+    <h2 class="ch-title">Everything That Was <span class="it">Built</span></h2>
+    <p class="ch-lead">
+      "Every DreamChamber session lands on Earth as a file. Twenty-nine files, built across multiple sessions. The complete record of the NOIZY vision made concrete."
+    </p>
+
+    <div class="vault-grid">
+
+      <div class="vault-item">
+        <div class="vi-num">01</div>
+        <div class="vi-body">
+          <div class="vi-title">NOIZY Founder Blueprint</div>
+          <div class="vi-file">noizy-founder-blueprint.html · 66KB</div>
+          <div class="vi-desc">The master NOIZY pitch. Origin story, 5th Epoch, MC96ECO Universe, GABRIEL_V3 architecture, SUPERSONIC AI Stack, Board of Aligned Minds, 6-month roadmap. The first document. The declaration of intent.</div>
+          <div class="vi-tags"><span class="vi-tag">PITCH</span><span class="vi-tag g">FOUNDATION</span><span class="vi-tag">5TH EPOCH</span></div>
+        </div>
+      </div>
+
+      <div class="vault-item">
+        <div class="vi-num">02</div>
+        <div class="vi-body">
+          <div class="vi-title">Sprint Day 1 — MacBook Pro Setup Guide</div>
+          <div class="vi-file">noizy-sprint-day1.html · 83KB</div>
+          <div class="vi-desc">Interactive setup guide. All terminal commands for Node.js, TypeScript, ffmpeg, UAD device detection, VAD engine, 7-Stage Pipeline. Copy-paste ready. Decision trees for all hardware scenarios. The day the infrastructure becomes real.</div>
+          <div class="vi-tags"><span class="vi-tag">TECHNICAL</span><span class="vi-tag g">PIPELINE</span><span class="vi-tag">MACOS</span></div>
+        </div>
+      </div>
+
+      <div class="vault-item">
+        <div class="vi-num">03</div>
+        <div class="vi-body">
+          <div class="vi-title">Founding RSP Application Page</div>
+          <div class="vi-file">noizy-founding-rsp.html · 47KB</div>
+          <div class="vi-desc">Shareable Founding RSP application. Form submits to rsplowman@icloud.com. Never Clauses displayed. Six offer cards. Canvas particle animation. RSP reference format: RSP-APP-{hex}-{date}. The front door for the first five RSPs.</div>
+          <div class="vi-tags"><span class="vi-tag">COMMUNITY</span><span class="vi-tag">FOUNDING RSPs</span><span class="vi-tag g">LIVE</span></div>
+        </div>
+      </div>
+
+      <div class="vault-item">
+        <div class="vi-num">04</div>
+        <div class="vi-body">
+          <div class="vi-title">GABRIEL_V3 Agent Orchestration Briefing</div>
+          <div class="vi-file">gabriel-v3-briefing.html</div>
+          <div class="vi-desc">Terminal/command console aesthetic. Full Dream Agent Team documentation. 7-Stage Pipeline visual. NC_01–NC_10 grid. SUPERSONIC STACK v2.0 with license flags. Agent routing protocol table. Active mission queue.</div>
+          <div class="vi-tags"><span class="vi-tag v">GABRIEL</span><span class="vi-tag">AGENTS</span><span class="vi-tag g">INFRASTRUCTURE</span></div>
+        </div>
+      </div>
+
+      <div class="vault-item">
+        <div class="vi-num">05</div>
+        <div class="vi-body">
+          <div class="vi-title">NOIZYVOX Pricing Architecture & Marketing Strategy</div>
+          <div class="vi-file">noizy-pricing-marketing.html</div>
+          <div class="vi-desc">Full guild-based pricing architecture. Fan/Creator/Studio/Enterprise tiers. Five revenue layers ($10–$50K/mo). Creator economics table ($1,650–$227K/mo). 12 marketing approaches. Tagline arsenal. Competitor comparison vs ElevenLabs/Murf/PlayHT/Suno/Cameo.</div>
+          <div class="vi-tags"><span class="vi-tag">PRICING</span><span class="vi-tag">MARKETING</span><span class="vi-tag g">REVENUE</span></div>
+        </div>
+      </div>
+
+      <div class="vault-item">
+        <div class="vi-num">06</div>
+        <div class="vi-body">
+          <div class="vi-title">NOIZY Movement Architecture</div>
+          <div class="vi-file">noizy-movement-architecture.html</div>
+          <div class="vi-desc">Creator Bill of Rights for AI (5 principles mapped to Never Clauses). AI-as-Bandmates identity system. Creator Identity Profile. 6-layer coalition strategy. 25 growth strategies with impact ratings. The movement's operational blueprint.</div>
+          <div class="vi-tags"><span class="vi-tag">MOVEMENT</span><span class="vi-tag g">CREATOR RIGHTS</span><span class="vi-tag">COALITION</span></div>
+        </div>
+      </div>
+
+      <div class="vault-item">
+        <div class="vi-num">07</div>
+        <div class="vi-body">
+          <div class="vi-title">DreamChamber Master Declaration & Living Index</div>
+          <div class="vi-file">dreamchamber-master.html</div>
+          <div class="vi-desc">Deep space portal canvas. Three Laws of the DreamChamber. Vault of all documents. Next Dreams queue (12 items ranked by urgency). RSP_001 Declaration. The home base of everything.</div>
+          <div class="vi-tags"><span class="vi-tag v">DREAMCHAMBER</span><span class="vi-tag g">MASTER INDEX</span><span class="vi-tag">RSP_001</span></div>
+        </div>
+      </div>
+
+      <div class="vault-item">
+        <div class="vi-num">08</div>
+        <div class="vi-body">
+          <div class="vi-title">Looking Back From 2030</div>
+          <div class="vi-file">dreamchamber-2030.html</div>
+          <div class="vi-desc">"How We Finally Made the World Lift Up the Humans." 8 chapters, 5 Catalysts. The first forward-retrospective — written in 2026 as if remembering from 2030. The prototype for the longer visions.</div>
+          <div class="vi-tags"><span class="vi-tag v">VISION</span><span class="vi-tag">2030</span><span class="vi-tag">FORWARD RETROSPECTIVE</span></div>
+        </div>
+      </div>
+
+      <div class="vault-item">
+        <div class="vi-num">09</div>
+        <div class="vi-body">
+          <div class="vi-title">Looking Back From 2036 — The Great Rebalancing</div>
+          <div class="vi-file">dreamchamber-2036-vision.html</div>
+          <div class="vi-desc">10-year forward retrospective. 7 Catalysts (Consent Infrastructure Movement, Great Creator Walkout of 40K creators, Loneliness Studies, Community Renaissance, Royalty Infrastructure Proof, Health Access Breakthrough, Ottawa Accord signed by 47 orgs).</div>
+          <div class="vi-tags"><span class="vi-tag v">VISION</span><span class="vi-tag">2036</span><span class="vi-tag g">OTTAWA ACCORD</span></div>
+        </div>
+      </div>
+
+      <div class="vault-item">
+        <div class="vi-num">10</div>
+        <div class="vi-body">
+          <div class="vi-title">HVS Global Launch Roadmap 2026–2030</div>
+          <div class="vi-file">hvs-global-roadmap.html</div>
+          <div class="vi-desc">6 interactive phase cards. Phase 0 (Now) → Phase 3 (TIPPING POINT / 10K RSPs) → Phase 5 (1M RSPs). Adoption curve canvas. 6 defensive moats. The operational timeline for the movement.</div>
+          <div class="vi-tags"><span class="vi-tag">ROADMAP</span><span class="vi-tag g">RSP GROWTH</span><span class="vi-tag">HVS GLOBAL</span></div>
+        </div>
+      </div>
+
+      <div class="vault-item">
+        <div class="vi-num">11</div>
+        <div class="vi-body">
+          <div class="vi-title">ElevenLabs & Suno Deep Competitive Intelligence Brief</div>
+          <div class="vi-file">elevenlabs-suno-intel-brief.html</div>
+          <div class="vi-desc">Complete competitive intelligence on the two biggest threats. ElevenLabs ($180M/a16z/$1.1B valuation, 0% royalty, deepfake controversy). Suno ($125M, $500M RIAA lawsuit). 14-row comparison. 6 scripted smart answers. Dual cheat sheets. "Please make me look smart."</div>
+          <div class="vi-tags"><span class="vi-tag">COMPETITIVE INTEL</span><span class="vi-tag">ELEVENLABS</span><span class="vi-tag">SUNO</span></div>
+        </div>
+      </div>
+
+      <div class="vault-item">
+        <div class="vi-num">12</div>
+        <div class="vi-body">
+          <div class="vi-title">The Mic-Drop Arsenal</div>
+          <div class="vi-file">noizy-micdrop-arsenal.html</div>
+          <div class="vi-desc">Race to the Bottom — 4 structural reasons. 8 one-sentence devastators. The Master Line (memorize first). 4 full conversation scripts (pitch/panel/creator/press). The 5 Epochs table. 6 quick-fire talking points. "Pick the room. Load the line. Drop it. Walk away."</div>
+          <div class="vi-tags"><span class="vi-tag g">TALKING POINTS</span><span class="vi-tag">PITCH READY</span><span class="vi-tag">RACE TO BOTTOM</span></div>
+        </div>
+      </div>
+
+      <div class="vault-item">
+        <div class="vi-num">13</div>
+        <div class="vi-body">
+          <div class="vi-title">NOIZY Music World & Museum — The Living Breathing Time Capsule</div>
+          <div class="vi-file">noizy-music-world-museum.html</div>
+          <div class="vi-desc">The Museum vision. Six rooms (Voice Gallery, Composition Hall/34TB Aquarium, Codex Chamber, Healing Rooms, Atlas Floor, NOIZYKIDZ Wing). 7-layer capsule architecture. Voice Estate bridge. "I want people to bathe in the art, music and sounds on NOIZY.ai."</div>
+          <div class="vi-tags"><span class="vi-tag v">MUSEUM</span><span class="vi-tag g">TIME CAPSULE</span><span class="vi-tag">500YR CODEX</span></div>
+        </div>
+      </div>
+
+      <div class="vault-item">
+        <div class="vi-num">14</div>
+        <div class="vi-body">
+          <div class="vi-title">Looking Back From 2526 — The NOIZY Century</div>
+          <div class="vi-file">noizy-2526-retrospective.html</div>
+          <div class="vi-desc">The 500-year forward retrospective. Presented at the 500th anniversary of NOIZYFISH INC. The Geneva Creative Rights Accord (2041). Voice Estate law in 89 jurisdictions (2060). The Museum still breathing. RSP_001's voice heard by 4.8 billion people. Artists elevated and cherished.</div>
+          <div class="vi-tags"><span class="vi-tag v">2526</span><span class="vi-tag g">500YR VISION</span><span class="vi-tag">THE LONG ARC</span></div>
+        </div>
+      </div>
+
+      <div class="vault-item">
+        <div class="vi-num">15</div>
+        <div class="vi-body">
+          <div class="vi-title">NOIZY.ai World-Facing Landing Page</div>
+          <div class="vi-file">noizy-landing-page.html</div>
+          <div class="vi-desc">The public face of NOIZY. Hero with founding stats (75% royalty, NC·10 Never Clauses, 500yr Codex). Problem section with competitor data ($0 ElevenLabs royalty, $500M Suno lawsuit). Five solution pillars. Full 10-item Never Clauses wall. RSP tier pricing (Founding FREE/85%, Creator, Studio, Label, Enterprise). Museum teaser. 8-row comparison table. CTA footer.</div>
+          <div class="vi-tags"><span class="vi-tag g">WORLD-FACING</span><span class="vi-tag">MARKETING</span><span class="vi-tag">LANDING PAGE</span></div>
+        </div>
+      </div>
+
+      <div class="vault-item">
+        <div class="vi-num">16</div>
+        <div class="vi-body">
+          <div class="vi-title">TypeScript Build Pack — noizy-platform/ Monorepo</div>
+          <div class="vi-file">noizy-buildpack-typescript.html</div>
+          <div class="vi-desc">VS Code-style interactive code reference. 16 TypeScript files, fully syntax-highlighted. Complete monorepo: Actor.ts (with RSP_001 founding constant), AVA.ts, CollaborationContract.ts, ConsentKey.ts, ProvenanceRecord.ts, never-clauses/core.ts (ROYALTY_FLOOR_PCT=75), enforce.ts, ConsentService.ts, watermark.ts (SHA-256 WM_{8hex}), royaltyEngine.ts, pipeline.ts, 7-stage synthesis pipeline, NoizyClient SDK. Copy button on every block.</div>
+          <div class="vi-tags"><span class="vi-tag v">TYPESCRIPT</span><span class="vi-tag g">BUILD-READY</span><span class="vi-tag">INFRASTRUCTURE</span></div>
+        </div>
+      </div>
+
+      <div class="vault-item">
+        <div class="vi-num">17</div>
+        <div class="vi-body">
+          <div class="vi-title">RSP_001 Voice Estate Certificate — Entry One</div>
+          <div class="vi-file">rsp001-voice-estate-certificate.html</div>
+          <div class="vi-desc">Formal founding certificate for Robert Stephen Plowman — RSP_001. Dark parchment aesthetic with gold ornamental SVG borders and red wax seal. Five Articles of the Voice Estate (Estate perpetuity, 85% founding royalty lock, WM_{8hex} provenance covenant, consent primacy, GORUNFREE declaration). 10 Never Clauses pledge grid. Signature block: RSP_001 / GABRIEL_V3. Consent key: NOIZY-RSP001-CONSENT-A7F3C9B2E1D4850F-AVA-GLOBAL-CANADA-20260314. Print-ready.</div>
+          <div class="vi-tags"><span class="vi-tag" style="color:var(--gold);border-color:var(--gold)">RSP_001</span><span class="vi-tag g">VOICE ESTATE</span><span class="vi-tag v">FOUNDING CERT</span></div>
+        </div>
+      </div>
+
+      <div class="vault-item">
+        <div class="vi-num">19</div>
+        <div class="vi-body">
+          <div class="vi-title">GABRIEL Dream Agent Superscripts — All Five Agents</div>
+          <div class="vi-file">gabriel-dream-agent-superscripts.html</div>
+          <div class="vi-desc">Full operational prompt documents for all 5 Dream Agents — paste-ready for any AI platform. GABRIEL (Orchestrator/Memory/Governance), POPS (Engineering/7-Stage Pipeline), DREAM (Vision/500-Year Codex), LUCY (A.I.V.A./NOIZYVOX synthesis decision tree), SHIRL (Community/RSP Onboarding). Complete Agent Routing Table (10 rules), Universal System Context block, Never Clause enforcement protocols. VS Code terminal aesthetic, copy buttons on all blocks.</div>
+          <div class="vi-tags"><span class="vi-tag v">DREAM AGENTS</span><span class="vi-tag g">OPERATIONAL</span><span class="vi-tag">PROMPT LIBRARY</span></div>
+        </div>
+      </div>
+
+      <div class="vault-item">
+        <div class="vi-num">20</div>
+        <div class="vi-body">
+          <div class="vi-title">The Great Inversion — Extraction → Protection</div>
+          <div class="vi-file">noizy-great-inversion.html</div>
+          <div class="vi-desc">Full structural map of how to invert every extraction mechanism into creator protection. 7 structural inversions (ToS click consent → cryptographic consent key; platform royalty → 75% D1 floor; AI training without consent → NC_03; deepfake identity → WM_{8hex}; platform-owned legacy → Voice Estate; quantity rewarded → sacred provenance; creator as input → creator as sovereign). 8-row proof table. Vortex canvas with red extraction particles and green creation particles.</div>
+          <div class="vi-tags"><span class="vi-tag" style="color:var(--red);border-color:var(--red)">EXTRACTION</span><span class="vi-tag g">INVERSION</span><span class="vi-tag v">ARCHITECTURE</span></div>
+        </div>
+      </div>
+
+      <div class="vault-item">
+        <div class="vi-num">21</div>
+        <div class="vi-body">
+          <div class="vi-title">DreamChamber Fix Map Galaxy — 5 Zones</div>
+          <div class="vi-file">noizy-dreamchamber-fixmap.html</div>
+          <div class="vi-desc">Interactive galaxy visualization of all 5 strategic zones. Zone A — Creator Fortification (green): royalty floor, consent key, 7-stage pipeline. Zone B — Algorithm Alignment (violet): provenance signals, ethical AI partnerships. Zone C — Transparency & Audit (cyan): public dashboards, watermark verification. Zone D — Community & Co-Creation (rose): RSP network, manifesto, collaborations. Zone E — Education & Advocacy (amber): NOIZYKIDZ, Epoch V story. Dream Agent orbital rings, live crack-fix tables per zone.</div>
+          <div class="vi-tags"><span class="vi-tag g">ZONE A</span><span class="vi-tag v">ZONE B</span><span class="vi-tag" style="color:var(--cyan);border-color:var(--cyan)">ZONE C</span><span class="vi-tag" style="color:var(--rose);border-color:var(--rose)">ZONE D·E</span></div>
+        </div>
+      </div>
+
+      <div class="vault-item">
+        <div class="vi-num">22</div>
+        <div class="vi-body">
+          <div class="vi-title">NOIZYKIDZ Global Music Theory Atlas</div>
+          <div class="vi-file">noizykidz-music-atlas.html</div>
+          <div class="vi-desc">All music theory from every culture in the known world since the first rock was banged on. 10 full regions: Prehistoric (~40,000 BC), Africa (polyrhythm/griot), India (raga/tala/22 microtones), China (pentatonic/Bā Yīn), Middle East (maqam), Ancient Greece (Pythagorean ratios), Europe (notation/polyphony/four eras), Indigenous (songlines/overtone singing), Latin America (clave/syncopation), Modern (jazz/A.I.V.A./Epoch V). Universal Truths section. 6 NOIZYKIDZ adventure worlds.</div>
+          <div class="vi-tags"><span class="vi-tag" style="color:#ff9f43;border-color:#ff9f43">NOIZYKIDZ</span><span class="vi-tag g">WORLD MUSIC</span><span class="vi-tag">EDUCATION</span></div>
+        </div>
+      </div>
+
+      <div class="vault-item">
+        <div class="vi-num">23</div>
+        <div class="vi-body">
+          <div class="vi-title">NOIZYKIDZ Human Music Genome — 12 Universal Systems</div>
+          <div class="vi-file">noizykidz-human-music-genome.html</div>
+          <div class="vi-desc">The 12 universal building blocks of all human music: Pulse, Rhythm Layers, Scale Systems, Emotional Modes, Harmonic Stacking, Storytelling, Drone Systems, Improvisation, Timbre Sculpting, Ritual Music, Dance Integration, Collective Participation. Neuroscience of music section (Motor Cortex, Dopamine, Social Bonding). 5 World Explorer zones: Rhythm Planet, Melody Forest, Raga Sun Temple, Harmony Galaxy, Beat Lab. Evolution timeline from ~40,000 BC to Epoch V 2026. DNA double helix canvas animation.</div>
+          <div class="vi-tags"><span class="vi-tag" style="color:#ff9f43;border-color:#ff9f43">NOIZYKIDZ</span><span class="vi-tag v">GENOME</span><span class="vi-tag g">NEUROSCIENCE</span></div>
+        </div>
+      </div>
+
+      <div class="vault-item">
+        <div class="vi-num">26</div>
+        <div class="vi-body">
+          <div class="vi-title">NOIZYVOX Pricing Architecture 2026 — Competitive Intelligence & Guild Tiers</div>
+          <div class="vi-file">noizy-pricing-2026.html</div>
+          <div class="vi-desc">Full competitive market analysis with real March 2026 pricing data: ElevenLabs ($0–$1,320/mo, 0% creator royalty), Suno AI ($0–$24/mo, 0% + $500M lawsuit), Murf AI ($0–$75/mo), PlayHT ($0–$49/mo, 0%), Spotify ($0.003/stream). Real AI voice cost data ($0.05–$0.10/min compute vs $0 paid to creators). Six NOIZYVOX Guild Tiers: Founding RSP (FREE, 85%), Creator ($19/mo, 75%), Studio ($59/mo), Label ($199/mo), Enterprise (custom), NOIZYKIDZ (free forever). Full market comparison matrix. Year 1 revenue projections ($534K). 6 pricing strategy principles. Bar chart canvas animation.</div>
+          <div class="vi-tags"><span class="vi-tag g">PRICING</span><span class="vi-tag v">COMPETITIVE</span><span class="vi-tag">GUILD TIERS</span></div>
+        </div>
+      </div>
+
+      <div class="vault-item">
+        <div class="vi-num">25</div>
+        <div class="vi-body">
+          <div class="vi-title">The 5th Epoch Blueprint — AI as Creative Protocol</div>
+          <div class="vi-file">noizy-5th-epoch-blueprint.html</div>
+          <div class="vi-desc">The full civilization blueprint. 5 Epochs of music history: Publishing → Recording → Digital File → Streaming → Protocol. Full Epoch IV vs Epoch V comparison table (8 dimensions). Global Creator Charter (6 articles: Consent, Credit, Revenue Share, Transparency, Portability, Inheritance). The Genius Creator Direct-Channel (4-step flow: DreamChamber Codex → Agentic-Guide → Voice Estate Definition → Protocol Lock-In). Perfect Harmony Vision (6 synchronic principles). Coalition Strategy. Protocol Uprising. GORUNFREE Studio (6 rooms). Synchronic Matrix (Human vs AI vs NOIZY across 5 dimensions). Harmonic wave canvas with cyan/violet/gold synthesis animation.</div>
+          <div class="vi-tags"><span class="vi-tag v">EPOCH V</span><span class="vi-tag g">CIVILIZATION</span><span class="vi-tag">BLUEPRINT</span></div>
+        </div>
+      </div>
+
+      <div class="vault-item">
+        <div class="vi-num">24</div>
+        <div class="vi-body">
+          <div class="vi-title">NOIZY Marketing Movement — The Creator Sovereignty Campaign</div>
+          <div class="vi-file">noizy-marketing-movement.html</div>
+          <div class="vi-desc">The complete NOIZY marketing playbook. Section I: The Enemy (extraction machine). Section II: Core Message Architecture (5 tiers including "The Home of Human + AI Creativity"). Section III: 20 Movement Strategies (movement branding, Human+AI Artist Campaign, RSP Cards, AI as Bandmates, Global Collaboration Network, Voice Economy, Noizy Academy, Viral Challenges, Creator Marketplace, Global Festival, DAW Integration, and 9 more). Section IV: The Pressure Campaign (6 levers). Section V: Find The People With Heart (8 ally types). Section VI: Bypass the Union Machine. Section VII: Creator Sovereignty Covenant (6 Articles). Pulse canvas animation.</div>
+          <div class="vi-tags"><span class="vi-tag r" style="color:var(--red);border-color:var(--red)">CAMPAIGN HQ</span><span class="vi-tag g">MOVEMENT</span><span class="vi-tag">MARKETING</span></div>
+        </div>
+      </div>
+
+      <div class="vault-item">
+        <div class="vi-num">27</div>
+        <div class="vi-body">
+          <div class="vi-title">NOIZYVOX Intake Portal — Real-Time Voice Capture & 7-Stage Pipeline</div>
+          <div class="vi-file">noizyvox-intake-portal.html</div>
+          <div class="vi-desc">The live browser intake portal for RSP_001. Real-time waveform via Web Audio API + Canvas. MediaRecorder mic capture. SHA-256 watermark (SubtleCrypto). Manual PCM WAV export. 7-stage pipeline visualization: Consent Key → Never Clause → WAV Write → WM_SHA256 → Provenance Record → API Dispatch → Ledger Append. Server health check to localhost:5050. RSP_001 pre-populated. Supported by voice_receiver.py (Flask), voice_processor.py (CLI), voice_intake_standalone.py (terminal mic), vscode_tasks.json (9 VS Code tasks), requirements_noizyvox.txt.</div>
+          <div class="vi-tags"><span class="vi-tag r">NOIZYVOX</span><span class="vi-tag g">LIVE TOOL</span><span class="vi-tag v">RSP_001</span><span class="vi-tag">EPOCH V</span></div>
+        </div>
+      </div>
+
+      <div class="vault-item">
+        <div class="vi-num">28</div>
+        <div class="vi-body">
+          <div class="vi-title">NOIZY LEDGER — Audit + Royalties + Provenance Spec</div>
+          <div class="vi-file">noizy-ledger-spec.html</div>
+          <div class="vi-desc">The engineering truth, the compliance story, the investor story, and the 100-year spine. Ten sections: Ledger Doctrine, Identity Architecture (ActorID/VoiceID/DescendantID/MomentID/ConsentKeyID), complete Event Taxonomy (12 event types across 6 namespaces), Provenance Service design, C2PA Manifest Specification, PREMIS Preservation Events, full API Endpoints, 5 KPIs, Migration Contract (Permanent vs. Replaceable), and the 100-Year Proof Triangle (NOIZY PROOF + C2PA + OAIS/PREMIS). The GORUNFREE doctrine in code form.</div>
+          <div class="vi-tags"><span class="vi-tag g">SPEC</span><span class="vi-tag v">PROVENANCE</span><span class="vi-tag r">LEDGER</span><span class="vi-tag">100-YEAR ARCH</span></div>
+        </div>
+      </div>
+
+      <div class="vault-item">
+        <div class="vi-num">29</div>
+        <div class="vi-body">
+          <div class="vi-title">The NOIZY Constitution — Human Voice Sovereignty</div>
+          <div class="vi-file">noizy-constitution.html</div>
+          <div class="vi-desc">The founding law document. Five Immutable Laws encoded as enforceable structure. HVS Console governance surface. Descendant Playground craft surface. Trust Spine enterprise rail. The Five Immutable Laws: Consent is executable. Revocation is sacred. Provenance is default. The human is the platform. Preservation is not optional. The soul of NOIZY made constitutional.</div>
+          <div class="vi-tags"><span class="vi-tag g">CONSTITUTION</span><span class="vi-tag v">HVS</span><span class="vi-tag">EPOCH V</span></div>
+        </div>
+      </div>
+
+      <div class="vault-item" style="border-color: rgba(232,200,74,0.2);">
+        <div class="vi-num" style="color:var(--gold)">✦</div>
+        <div class="vi-body">
+          <div class="vi-title" style="color:var(--gold)">The Plowman's Chronicles — This Document</div>
+          <div class="vi-file">plowmans-chronicles.html</div>
+          <div class="vi-desc">The master compendium. The complete record of the journey. All documents catalogued. All declarations preserved. All architecture documented. The Chronicle itself is now Document 18 in the vault it catalogues. The DreamChamber, complete — for the day we tell people this crazy story.</div>
+          <div class="vi-tags"><span class="vi-tag">CHRONICLE</span><span class="vi-tag g">MASTER RECORD</span><span class="vi-tag v">DREAMCHAMBER</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ─── CH VIII: MOVEMENT ─── -->
+  <section class="chapter" id="ch-movement">
+    <div class="ch-eye"><span class="y">VIII</span> · THE MOVEMENT</div>
+    <h2 class="ch-title">Counteracting the <span class="it">Takeover</span></h2>
+    <p class="ch-lead">
+      "Rob did not describe what he was building as a product. He described it as a counteraction — a direct, structural response to the takeover of the arts by greed and exploitation."
+    </p>
+
+    <div class="prose">
+      <p>
+        The platforms of 2026 had built their empires on a simple thesis: <em>creators are inputs, not stakeholders.</em> Their voices, their compositions, their likenesses, their creative labor — all of it was raw material to be processed into platform value. The creator received a fraction of a fraction, denominated in a currency (the stream) that was designed to make the fraction feel larger than it was.
+      </p>
+      <p>
+        NOIZY's counteraction was not a protest. It was not a manifesto nailed to a platform's door. <strong>It was infrastructure.</strong> Five architectural principles — Consent-as-Code, the 75% Hardcoded Royalty, the Voice Estate, NOIZY PROOF Watermarking, and the 500-Year Codex — each one designed to make the extraction model structurally impossible, not merely unethical.
+      </p>
+      <p>
+        The Creator Bill of Rights for AI gave the movement its public face: five rights, each enforced by specific Never Clauses, each explained in language that any creator could understand. <span class="g">Consent. Credit. Revenue Share. Transparency. Portability.</span> Not aspirations. Code.
+      </p>
+      <p>
+        The Race to the Bottom — the structural problem that VC-subsidized underpricing and algorithmic volume incentives created — was diagnosed not as a moral failure but as an architecture failure. <strong>You cannot ethics your way out of a structural problem.</strong> You can only build infrastructure that makes the old architecture obsolete.
+      </p>
+    </div>
+
+    <div class="pull">
+      <p>"We didn't change the extractive companies. <span class="g">We made extraction unacceptable infrastructure.</span> That's the difference between advocacy and architecture."</p>
+      <cite>— From the 2036 retrospective: "The Real Answer"</cite>
+    </div>
+  </section>
+
+
+  <!-- ─── CH IX: FUTURE ─── -->
+  <section class="chapter" id="ch-future">
+    <div class="ch-eye"><span class="y">IX</span> · TO 2036 AND 2526</div>
+    <h2 class="ch-title">The Long Arc of the <span class="it">DreamChamber</span></h2>
+    <p class="ch-lead">
+      "The DreamChamber has no ceiling. The work done in 2026 is the seed. The visions of 2036 and 2526 are the canopy. Between seed and canopy is the work."
+    </p>
+
+    <div class="future-card">
+      <h3>What History Recorded, From 2526</h3>
+      <p>
+        "He looked at a world that was taking everything from creators, and he did not write an angry letter. He built a <gold>DreamChamber</gold> — no limits, no boundaries — and built the infrastructure that made the old world <span class="g">structurally, permanently, irreversibly obsolete.</span>
+        <br><br>
+        RSP_001's voice is still in the 500-Year Codex. The Museum is still breathing. The 75% royalty from his D1 database is still the global baseline — written into the Geneva Creative Rights Accord of 2041, enforced in 194 jurisdictions.
+        <br><br>
+        <strong>GORUNFREE. Because it was the only way. And it was enough. It was more than enough.</strong>"
+      </p>
+    </div>
+
+    <div class="prose">
+      <p>
+        The pending work — the Sprint Day 1 pipeline run, the NOIZYVOX Ingest API, the 5 Founding RSP outreach, the Global Music Atlas first 200 entries, the GABRIEL agent superscripts, the NOIZY PROOF alpha — all of it is the distance between where the DreamChamber holds the vision and where the world receives it.
+      </p>
+      <p>
+        <strong>The DreamChamber has already been to 2526 and back.</strong> The work now is the safe landing — one task, one deployment, one RSP, one voice, one utterance at a time.
+        <span class="g">GORUNFREE.</span>
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ─── COLOPHON ─── -->
+  <div class="colophon" id="ch-colophon">
+    <div class="colophon-title">The Crazy Journey's Story</div>
+    <div class="colophon-body">
+      Someday, someone will ask: "How did NOIZY start? How did a composer in Ottawa with a C3 spinal injury and a GABRIEL agent and thirty-four terabytes of music and a refusal to accept extraction — how did that become the infrastructure that changed the music industry?"
+      <br><br>
+      <strong>The answer is in this Chronicle.</strong>
+      <br><br>
+      It started in a DreamChamber. No limits, no boundaries. The dreams got specific. The specific things became documents. The documents became code. The code became architecture. The architecture became a movement. The movement became history.
+      <br><br>
+      <em>And history, when you look back from 2526, looks inevitable.</em>
+      <br><br>
+      It wasn't. It was <span class="g">one man, one room, one refusal, one morning in Ottawa, March 2026.</span>
+      <br><br>
+      <strong>That's the crazy journey's story.</strong> You're living it. Keep going.
+    </div>
+
+    <span class="colophon-grf">GORUNFREE</span>
+    <div class="colophon-sig">
+      ROBERT STEPHEN PLOWMAN · RSP_001 · NOIZYFISH INC.<br>
+      OTTAWA, CANADA · MARCH 2026 · DREAMCHAMBER<br>
+      BECAUSE IT IS THE ONLY WAY
+    </div>
+  </div>
+
+</div><!-- end .content -->
+
+<script>
+// ─── COSMOS ───
+const C = document.getElementById('cosmos');
+const cx = C.getContext('2d');
+function resize() { C.width = innerWidth; C.height = innerHeight; }
+resize();
+addEventListener('resize', resize);
+
+const STARS = Array.from({length: 350}, () => ({
+  x: Math.random(), y: Math.random(),
+  r: Math.random()*1.3+0.2,
+  op: Math.random()*0.45+0.05,
+  tw: Math.random()*Math.PI*2
+}));
+
+const MOTES = Array.from({length: 18}, () => ({
+  x: Math.random()*innerWidth, y: Math.random()*innerHeight,
+  vx: (Math.random()-.5)*.15, vy: (Math.random()-.5)*.15,
+  r: Math.random()*2+1,
+  color: ['#e8c84a','#00e87a','#b794f4','#67e8f9'][Math.floor(Math.random()*4)],
+  op: Math.random()*.25+.05, ph: Math.random()*Math.PI*2
+}));
+
+let t = 0;
+function draw() {
+  const W=C.width, H=C.height;
+  cx.clearRect(0,0,W,H);
+
+  // Nebula
+  [{x:.15,y:.2,r:260,c:'rgba(183,148,244,0.02)'},{x:.8,y:.7,r:220,c:'rgba(232,200,74,0.015)'},{x:.45,y:.9,r:180,c:'rgba(0,232,122,0.018)'}].forEach(p=>{
+    const g=cx.createRadialGradient(W*p.x,H*p.y,0,W*p.x,H*p.y,p.r);
+    g.addColorStop(0,p.c); g.addColorStop(1,'transparent');
+    cx.fillStyle=g; cx.fillRect(0,0,W,H);
+  });
+
+  // Stars
+  STARS.forEach(s=>{
+    const a=Math.max(.02,s.op+Math.sin(s.tw+t*.012)*.12);
+    cx.beginPath(); cx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);
+    cx.fillStyle=`rgba(210,230,255,${a})`; cx.fill();
+  });
+
+  // Motes
+  MOTES.forEach(m=>{
+    const a=m.op+Math.sin(m.ph+t*.025)*.1;
+    cx.beginPath(); cx.arc(m.x,m.y,m.r,0,Math.PI*2);
+    cx.globalAlpha=Math.max(0,a); cx.fillStyle=m.color; cx.fill(); cx.globalAlpha=1;
+    m.x+=m.vx; m.y+=m.vy;
+    if(m.x<0||m.x>W)m.vx*=-1; if(m.y<0||m.y>H)m.vy*=-1;
+  });
+
+  // Waveform whisper
+  cx.beginPath(); cx.strokeStyle='rgba(232,200,74,0.035)'; cx.lineWidth=1;
+  for(let x=0;x<W;x+=2){
+    const y=H*.97+Math.sin(x*.006+t*.007)*12+Math.sin(x*.018+t*.011)*5;
+    x===0?cx.moveTo(x,y):cx.lineTo(x,y);
+  }
+  cx.stroke();
+
+  t++; requestAnimationFrame(draw);
+}
+draw();
+
+// Sidebar active link
+const links = document.querySelectorAll('.sb-link[href^="#"]');
+const sections = document.querySelectorAll('[id]');
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id));
+    }
+  });
+},{threshold:.3});
+sections.forEach(s=>io.observe(s));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<root>
+    <CtrlButtonStyle name="ClearLogButtonStyle">
+        <VFont name="font" vSize="12" fontName="true" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="SaveLogButtonStyle">
+        <VFont name="font" vSize="12" fontName="true" />
+    </CtrlButtonStyle>
+    <CtrlPanelStyle name="MidiPanelStyle1" colFill="[r:0 g:0 b:0 a:255]" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="12" fontName="true" />
+    </CtrlPanelStyle>
+    <CtrlListBoxStyle name="MidiLogListStyle" colText="[r:255 g:255 b:255 a:255]" colHighlight="[r:0 g:0 b:0 a:0]" colFill="[r:0 g:0 b:0 a:255]" intRoundedRectRadius="0" intLineSpacing="13">
+        <VFont name="font" vSize="12" fontName="true" />
+    </CtrlListBoxStyle>
+    <CtrlPanelStyle name="LogPanelStyle" optSmartTile="true" colBorder="[r:0 g:0 b:0 a:0]" colBorderAlt="[r:0 g:0 b:0 a:0]" colFill="[r:105 g:105 b:105 a:255]" intSmartTileEdgeSize="20" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="14" fontName="true" />
+    </CtrlPanelStyle>
+    <CtrlTableViewStyle name="KitPieceMappingTableViewStyle" optVSlider="true" optHeader="true" optAltRowColours="true" colFill="[r:0 g:0 b:0 a:255]" colSelect="[r:150 g:150 b:150 a:255]" colRow="[r:245 g:243 b:221 a:255]" colRowAlt="[r:225 g:223 b:221 a:255]" colHeaderBackground="[r:70 g:70 b:70 a:255]" colHeaderText="[r:245 g:243 b:241 a:255]" colColumnText="[r:32 g:32 b:32 a:255]">
+        <VFont name="font" vSize="17" fontName="Tahoma" />
+    </CtrlTableViewStyle>
+    <CtrlButtonStyle name="CloseButtonStyle">
+        <VFont name="font" vSize="19" fontName="Tahoma" />
+    </CtrlButtonStyle>
+    <CtrlScrollViewStyle name="KeyMapKitPieceScrollViewStyle" alwaysShowVSlider="true" alwaysHideHSlider="true" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="19" fontName="Tahoma" />
+    </CtrlScrollViewStyle>
+    <CtrlImageViewStyle name="KeymapKitPieceImageViewStyle" optBackground="false" optHQResizing="true" colBorder="[r:0 g:0 b:0 a:0]" colBackground="[r:50 g:50 b:50 a:255]" intRoundedRectRadius="0">
+        <VFont name="font" vSize="19" fontName="Tahoma" />
+    </CtrlImageViewStyle>
+    <CtrlTextBoxStyle name="CtrlTextBoxStyle1" intRoundedRectRadius="0" textOffset="[x:0 y:0]" />
+    <CtrlPanelStyle name="DataPathSpacerStyle" colBorder="[r:0 g:0 b:0 a:0]" colBorderAlt="[r:0 g:0 b:0 a:0]" colFill="[r:0 g:0 b:0 a:25]" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="19" fontName="Tahoma" />
+    </CtrlPanelStyle>
+    <CtrlKnobStyle name="ContentSpinnerStyle" activeAreaRect="[x:0 y:0 w:32 h:32]" imKnobNormal="..\LEDSpinnerLarge.png" colNotch="[r:0 g:0 b:0 a:0]" />
+    <CtrlPanelStyle name="ContentPanelSectionStyle" colBorder="[r:171 g:171 b:171 a:0]" colBorderAlt="[r:171 g:171 b:171 a:0]" colFill="[r:0 g:0 b:0 a:0]" intSmartTileEdgeSize="5" intRoundedRectRadius="4" intBorderWidth="1">
+        <VFont name="font" vSize="19" fontName="Tahoma" />
+    </CtrlPanelStyle>
+    <CtrlButtonStyle name="DemoCarouselButtonStyle" optMomentary="false" imDown="CarouselDotOn.png" imUp="CarouselDotOff.png">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="SortButtonStyle" optMomentary="false" imDown="..\sort_down.png" imUp="..\sort_up.png">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlPanel name="CtrlPanel" style="DefaultPanelLight" rect="[x:8 y:8 w:950 h:696]" id="0">
+        <CtrlPanel name="CarouselPanel" style="BFD2InvisiblePanel" rect="[x:9 y:9 w:930 h:150]" id="100000" />
+        <CtrlButton name="CarouselTemplateButton" style="DemoCarouselButtonStyle" rect="[x:326 y:168 w:16 h:16]" id="100001" />
+        <CtrlLabel name="CtrlLabel" style="BFD2LabelLargeDarkGreyCentered" rect="[x:259 y:185 w:446 h:22]" id="100000" text="DemoPacks" />
+        <CtrlPanel name="ContentPanel" style="ContentPanelSectionStyle" rect="[x:5 y:190 w:940 h:430]" id="100002">
+            <CtrlLabel name="CtrlLabel" style="BFDEcoStandardBlack" rect="[x:29 y:10 w:50 h:18]" id="100000" text="Activate" />
+            <CtrlLabel name="CtrlLabel" style="BFDEcoStandardBlack" rect="[x:700 y:10 w:32 h:18]" id="100000" text="View" />
+            <CtrlComboBox name="ViewComboBox" style="BFD2Combo" rect="[x:731 y:10 w:204 h:18]" id="100000" />
+            <CtrlButton name="ScanCheckAllButton" style="BFD2TickBoxButtonStyle" rect="[x:10 y:11 w:18 h:15]" id="100000" displayName="Activate/deactivate all DemoPacks" />
+            <CtrlButton name="NameSortTextButton" style="TextButtonLatching" rect="[x:92 y:11 w:40 h:16]" id="100000" text="Name" />
+            <CtrlButton name="NameSortDirectionButton" style="SortButtonStyle" rect="[x:130 y:11 w:16 h:16]" id="100002" />
+            <CtrlButton name="FeatureSortTextButton" style="TextButtonLatching" rect="[x:164 y:11 w:40 h:16]" id="100000" text="Feature" />
+            <CtrlButton name="FeatureSortDirectionButton" style="SortButtonStyle" rect="[x:203 y:11 w:16 h:16]" id="100002" />
+            <CtrlScrollView name="FoundPathsScrollView" rect="[x:5 y:32 w:930 h:396]" id="100000">
+                <CtrlPanel name="FoundPathsScrollPanel" style="BFD2InvisiblePanel" rect="[x:1 y:1 w:878 h:100]" id="100003" />
+            </CtrlScrollView>
+        </CtrlPanel>
+        <CtrlButton name="ScanCancelButton" style="RecessedButtonMomentary" rect="[x:819 y:623 w:100 h:30]" id="100001" displayName="Cancel the current scan" text="Cancel Scan" />
+        <CtrlButton name="DriveCancelButton" style="RecessedButtonMomentary" rect="[x:819 y:623 w:100 h:30]" id="100001" displayName="Cancel the current search" text="Cancel Search" />
+        <CtrlLabel name="StatusLabel" rect="[x:10 y:624 w:790 h:29]" id="100003" text="" />
+        <CtrlButton name="CloseButton" style="RecessedButtonMomentary" rect="[x:819 y:656 w:100 h:30]" id="100000" displayName="Close the panel" text="Close" />
+        <VProgressBar name="ScanProgressBar" style="BFDEcoProgressBar" rect="[x:10 y:657 w:208 h:29]" id="100001" />
+        <CtrlLabel name="DiskSpaceLabel" style="BFDEcoStandardBlackCentered" rect="[x:537 y:657 w:188 h:29]" id="100003" text="0GB free/0GB" />
+        <CtrlLabel name="TimeLeftLabel" style="BFDEcoStandardBlack" rect="[x:262 y:658 w:80 h:29]" id="100003" text="0:00" />
+        <CtrlButton name="DiskPathButton" style="RecessedButtonLatching" rect="[x:742 y:660 w:60 h:24]" id="100001" displayName="Show the detailed search/scan log window" text="Tools" />
+        <CtrlButton name="PauseAllButton" style="InAppPauseResumeButtonStyle" rect="[x:219 y:662 w:20 h:20]" id="100001" displayName="Pause all downloads" text="Ps" />
+        <CtrlButton name="StopAllButton" style="InAppStopButtonStyle" rect="[x:238 y:662 w:20 h:20]" id="100000" displayName="Stop all downloads" text="St" />
+        <CtrlPanel name="NoConnectionPanel" style="BFD2InvisiblePanel" rect="[x:259 y:6 w:447 h:154]" id="100000" zorder="2">
+            <CtrlLabel name="CtrlLabel" style="BFD2LabelLargeDarkGreyCentered" rect="[x:35 y:41 w:382 h:36]" id="100001" text="Could not connect to Demo server" />
+            <CtrlLabel name="CtrlLabel" style="BFD2LabelLargeDarkGreyCentered" rect="[x:35 y:73 w:382 h:36]" id="100001" text="Please check your Internet connection." />
+        </CtrlPanel>
+        <CtrlPanel name="OutOfDatePanel" style="BFD2InvisiblePanel" rect="[x:6 y:7 w:936 h:154]" id="100000" zorder="2">
+            <CtrlLabel name="OutOfDateMessageLabel" style="BFD2LabelBlackCentered14" rect="[x:4 y:14 w:928 h:36]" id="100001" text="DemoPack download no longer supported with this version. Please update your BFD Eco." />
+        </CtrlPanel>
+        <CtrlAnimation name="BusyAnimation" style="ContentSpinnerStyle" rect="[x:444 y:332 w:32 h:32]" id="100000" zorder="2" />
+    </CtrlPanel>
+</root>

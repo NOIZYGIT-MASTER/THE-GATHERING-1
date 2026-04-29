@@ -1,0 +1,25 @@
+<root>
+    <CtrlPanelStyle name="ScanPanelStyle1" optSmartTile="true" colFill="[r:149 g:149 b:149 a:255]" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="ScanPanelStyle2" optSmartTile="true" colFill="[r:0 g:0 b:0 a:255]" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlLabelStyle name="ScanProgressLabelStyle1">
+        <VFont name="font" vSize="28" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlTextBoxStyle name="PrefsScanStyle" intRoundedRectRadius="0" textOffset="[x:0 y:0]" colBackground="[r:255 g:255 b:255 a:0]" colBorder="[r:0 g:0 b:0 a:0]">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlTextBoxStyle>
+    <CtrlButtonStyle name="CtrlButtonStyleScanPanel" optDrawText="true" colFillOff="[r:75 g:75 b:75 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlPanel name="main_panel" style="ScanPanelStyle2" rect="[x:3 y:3 w:500 h:140]" id="0">
+        <CtrlPanel name="inner_panel" style="DefaultPanelLight" rect="[x:2 y:2 w:496 h:136]" id="0">
+            <CtrlLabel name="CtrlLabel" style="ScanProgressLabelStyle1" rect="[x:20 y:3 w:120 h:36]" id="100002" text="Scanning:" />
+            <VProgressBar name="ProgressBar" style="BFDEcoProgressBar" rect="[x:20 y:43 w:450 h:20]" id="100003" />
+            <CtrlTextBox name="StatusTextBox" style="PrefsScanStyle" rect="[x:20 y:67 w:450 h:20]" id="100004" />
+            <CtrlButton name="CancelButton" style="RecessedButtonMomentary" rect="[x:410 y:93 w:60 h:30]" id="100001" text="Cancel" />
+        </CtrlPanel>
+    </CtrlPanel>
+</root>

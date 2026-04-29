@@ -1,0 +1,30 @@
+<root>
+    <CtrlPanelStyle name="FlowStyle" colFill="[r:0 g:0 b:0 a:255]" intSmartTileEdgeSize="20" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="9" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlImageViewStyle name="KitPieceViewStyleFLOW" optBorder="false" optBackground="false" optMouseHandle="true" optHQResizing="true" colBorder="[r:150 g:150 b:150 a:255]" colBackground="[r:150 g:150 b:150 a:255]" intRoundedRectRadius="0">
+        <VFont name="font" vSize="9" fontName="Arial" />
+    </CtrlImageViewStyle>
+    <CtrlImageViewStyle name="KitPieceViewStyleAlpha" optBorder="false" optBackground="false" optNoStretch="true" optMouseHandle="true" colBorder="[r:150 g:150 b:150 a:255]" colBackground="[r:150 g:150 b:150 a:255]" intRoundedRectRadius="0">
+        <VFont name="font" vSize="9" fontName="Arial" />
+    </CtrlImageViewStyle>
+    <CtrlPanelStyle name="ClickPanelStyle" colBorder="[r:0 g:0 b:0 a:0]" colBorderAlt="[r:0 g:0 b:0 a:0]" colFill="[r:255 g:255 b:255 a:0]" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="9" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlLabelStyle name="FlowNameLabelStyle" centeredText="true">
+        <VFont name="font" vSize="17" fontName="Courier New" />
+    </CtrlLabelStyle>
+    <CtrlPanel name="KitPieceChooserXXLPanel" style="FlowStyle" rect="[x:0 y:0 w:285 h:400]" id="0">
+        <CtrlPanel name="ClickPanel" style="ClickPanelStyle" rect="[x:0 y:0 w:285 h:400]" id="100000" />
+        <CtrlImageView name="KitPieceImage" style="KitPieceViewStyleFLOW" rect="[x:10 y:10 w:265 h:221]" id="2" image="Flowfolder.png" />
+        <CtrlImageView name="KitPieceImageAlpha" style="KitPieceViewStyleAlpha" rect="[x:10 y:232 w:265 h:221]" id="2" />
+        <CtrlButton name="GoToDemoPackButton" style="NoRecessedButtonMomentary" rect="[x:156 y:22 w:100 h:20]" id="100000" zorder="2" text="Show/Buy..." />
+        <CtrlImageView name="DemoImage" style="BrowserDemoImageStyle" rect="[x:31 y:25 w:45 h:15]" id="2" zorder="2" />
+        <CtrlLabel name="NameLabel" style="FlowNameLabelStyle" rect="[x:19 y:200 w:245 h:25]" id="1" zorder="999" text="Name Label" />
+        <CtrlImageView name="StarView1" style="BFD2StarStyle" rect="[x:76 y:328 w:16 h:16]" id="3" zorder="999" />
+        <CtrlImageView name="StarView2" style="BFD2StarStyle" rect="[x:110 y:328 w:16 h:16]" id="4" zorder="999" />
+        <CtrlImageView name="StarView3" style="BFD2StarStyle" rect="[x:144 y:328 w:16 h:16]" id="5" zorder="999" />
+        <CtrlImageView name="StarView4" style="BFD2StarStyle" rect="[x:178 y:328 w:16 h:16]" id="6" zorder="999" />
+        <CtrlImageView name="StarView5" style="BFD2StarStyle" rect="[x:212 y:328 w:16 h:16]" id="7" zorder="999" />
+    </CtrlPanel>
+</root>

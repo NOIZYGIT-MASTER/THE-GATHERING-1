@@ -1,0 +1,16 @@
+<root>
+    <CtrlPanelStyle name="GrooveResultsPanelStyle" noDefaultDrawing="true" colBorder="[r:0 g:0 b:0 a:0]" colFill="[r:139 g:139 b:139 a:255]" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="GrooveSearchOverlayPanelStyle1" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlLabelStyle name="GrooveSearchOverlayLabelStyle2" centeredText="true">
+        <VFont name="font" vSize="24" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlPanel name="main_panel" style="GrooveResultsPanelStyle" rect="[x:0 y:0 w:346 h:210]" id="0">
+        <CtrlPanel name="SearchingOverlayPanel" style="GrooveSearchOverlayPanelStyle1" rect="[x:64 y:80 w:212 h:50]" id="100002" zorder="2">
+            <CtrlLabel name="CtrlLabel" style="GrooveSearchOverlayLabelStyle2" rect="[x:17 y:4 w:190 h:42]" id="100003" text="Searching..." />
+        </CtrlPanel>
+    </CtrlPanel>
+</root>

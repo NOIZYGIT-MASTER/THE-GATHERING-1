@@ -1,0 +1,675 @@
+<root>
+    <BFD2MixerInfo name="mixerInfo" info_name="Processed - DnB 02" info_rating="3" />
+    <BFD2Mixer name="BFD2Mixer" SourceEngine="BFD Eco" directBussMute="false" directBussSolo="false" directBussLevel="0.8" masterKickBleed="0" masterSnareBleed="0" masterOtherBleed="0.8" fxPower="true">
+        <VObjectArray name="MixerChannels" count="17">
+            <BFD2MixerChan solo="false" soloIsolate="false" mute="false" gain="0.5" chanType="2" micID="0" slotID="0" chanName="Kick" userChanName="Kick" stereo="false" output="Aux1" outputID="99" phaseInvert="false" inputMainTrim="0.8" inputSideTrim="0.8" pan="0.5" recArmed="false">
+                <VObjectArray name="Effects" count="4">
+                    <BFD2MixerChanEffect active="true" stereo="false" effect="EQ" presetName="default">
+                        <VValue name="Active" type="string" value="On" />
+                        <VValue name="LF-Bell" type="string" value="on" />
+                        <VValue name="LF-Freq" type="string" value="61.6 Hz" />
+                        <VValue name="LF-Gain" type="string" value="4.41 dB" />
+                        <VValue name="LF-In" type="string" value="on" />
+                        <VValue name="LMF-Q" type="string" value="1.00" />
+                        <VValue name="LMF-Freq" type="string" value="800 Hz" />
+                        <VValue name="LMF-Gain" type="string" value="0 dB" />
+                        <VValue name="LMF-In" type="string" value="off" />
+                        <VValue name="HMF-Q" type="string" value="1.00" />
+                        <VValue name="HMF-Freq" type="string" value="2.50 kHz" />
+                        <VValue name="HMF-Gain" type="string" value="0 dB" />
+                        <VValue name="HMF-In" type="string" value="off" />
+                        <VValue name="HF-Bell" type="string" value="off" />
+                        <VValue name="HF-Freq" type="string" value="4.00 kHz" />
+                        <VValue name="HF-Gain" type="string" value="0 dB" />
+                        <VValue name="HF-In" type="string" value="off" />
+                        <VValue name="Sidechain" type="string" value="off" />
+                        <VValue name="Wet Mix" type="string" value="100 %" />
+                    </BFD2MixerChanEffect>
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                </VObjectArray>
+                <VObjectArray name="Sends" count="4">
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="Aux1" send_from="PostInsert" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="Aux2" send_from="PostInsert" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                </VObjectArray>
+            </BFD2MixerChan>
+            <BFD2MixerChan solo="false" soloIsolate="false" mute="false" gain="0.411111" chanType="2" micID="0" slotID="1" chanName="Snare" userChanName="Snare" stereo="false" output="Aux1" outputID="99" phaseInvert="false" inputMainTrim="0.8" inputSideTrim="0.8" pan="0.5" recArmed="false">
+                <VObjectArray name="Effects" count="4">
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="EQ" presetName="default">
+                        <VValue name="Active" type="string" value="Off" />
+                        <VValue name="LF-Bell" type="string" value="off" />
+                        <VValue name="LF-Freq" type="string" value="200 Hz" />
+                        <VValue name="LF-Gain" type="string" value="0 dB" />
+                        <VValue name="LF-In" type="string" value="off" />
+                        <VValue name="LMF-Q" type="string" value="1.00" />
+                        <VValue name="LMF-Freq" type="string" value="800 Hz" />
+                        <VValue name="LMF-Gain" type="string" value="0 dB" />
+                        <VValue name="LMF-In" type="string" value="off" />
+                        <VValue name="HMF-Q" type="string" value="1.00" />
+                        <VValue name="HMF-Freq" type="string" value="2.50 kHz" />
+                        <VValue name="HMF-Gain" type="string" value="0 dB" />
+                        <VValue name="HMF-In" type="string" value="off" />
+                        <VValue name="HF-Bell" type="string" value="off" />
+                        <VValue name="HF-Freq" type="string" value="4.00 kHz" />
+                        <VValue name="HF-Gain" type="string" value="0 dB" />
+                        <VValue name="HF-In" type="string" value="off" />
+                        <VValue name="Sidechain" type="string" value="off" />
+                        <VValue name="Wet Mix" type="string" value="100 %" />
+                    </BFD2MixerChanEffect>
+                    <BFD2MixerChanEffect active="true" stereo="false" effect="EnvShaper" presetName="default">
+                        <VValue name="Active" type="string" value="On" />
+                        <VValue name="Mix" type="string" value="100 %" />
+                        <VValue name="Attack" type="string" value="3.00 dB" />
+                        <VValue name="Sustain" type="string" value="0.00 dB" />
+                        <VValue name="Gain" type="string" value="-0.12 dB" />
+                        <VValue name="Sensitivity" type="string" value="100 %" />
+                    </BFD2MixerChanEffect>
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                </VObjectArray>
+                <VObjectArray name="Sends" count="4">
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="Aux1" send_from="PostInsert" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="Aux2" send_from="PostInsert" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                </VObjectArray>
+            </BFD2MixerChan>
+            <BFD2MixerChan solo="false" soloIsolate="false" mute="false" gain="0.377778" chanType="2" micID="0" slotID="2" chanName="Hihat" userChanName="Hihat" stereo="false" output="Aux1" outputID="99" phaseInvert="false" inputMainTrim="0.8" inputSideTrim="0.8" pan="0.45" recArmed="false">
+                <VObjectArray name="Effects" count="4">
+                    <BFD2MixerChanEffect active="true" stereo="false" effect="EQ" presetName="default">
+                        <VValue name="Active" type="string" value="On" />
+                        <VValue name="LF-Bell" type="string" value="off" />
+                        <VValue name="LF-Freq" type="string" value="200 Hz" />
+                        <VValue name="LF-Gain" type="string" value="0 dB" />
+                        <VValue name="LF-In" type="string" value="off" />
+                        <VValue name="LMF-Q" type="string" value="1.00" />
+                        <VValue name="LMF-Freq" type="string" value="800 Hz" />
+                        <VValue name="LMF-Gain" type="string" value="0 dB" />
+                        <VValue name="LMF-In" type="string" value="off" />
+                        <VValue name="HMF-Q" type="string" value="1.00" />
+                        <VValue name="HMF-Freq" type="string" value="2.50 kHz" />
+                        <VValue name="HMF-Gain" type="string" value="0 dB" />
+                        <VValue name="HMF-In" type="string" value="on" />
+                        <VValue name="HF-Bell" type="string" value="off" />
+                        <VValue name="HF-Freq" type="string" value="4.00 kHz" />
+                        <VValue name="HF-Gain" type="string" value="3.31 dB" />
+                        <VValue name="HF-In" type="string" value="on" />
+                        <VValue name="Sidechain" type="string" value="off" />
+                        <VValue name="Wet Mix" type="string" value="100 %" />
+                    </BFD2MixerChanEffect>
+                    <BFD2MixerChanEffect active="true" stereo="false" effect="BitCrusher" presetName="default">
+                        <VValue name="Active" type="string" value="On" />
+                        <VValue name="Drive" type="string" value="3.33 dB" />
+                        <VValue name="Freq" type="string" value="12.6 kHz" />
+                        <VValue name="Bits" type="string" value="16.0" />
+                        <VValue name="LPFreq" type="string" value="100.0 kHz" />
+                        <VValue name="HPFreq" type="string" value="1.00 Hz" />
+                        <VValue name="Dirty" type="string" value="0 dB" />
+                        <VValue name="Clean" type="string" value="-28.1 dB" />
+                        <VValue name="Tone" type="string" value="12.6 kHz" />
+                        <VValue name="Wet Mix" type="string" value="100 %" />
+                    </BFD2MixerChanEffect>
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                </VObjectArray>
+                <VObjectArray name="Sends" count="4">
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="Aux1" send_from="PostInsert" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="Aux2" send_from="PostInsert" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                </VObjectArray>
+            </BFD2MixerChan>
+            <BFD2MixerChan solo="false" soloIsolate="false" mute="false" gain="0.5" chanType="2" micID="0" slotID="3" chanName="Floor Tom" userChanName="Floor Tom" stereo="false" output="Master" outputID="0" phaseInvert="false" inputMainTrim="0.8" inputSideTrim="0.8" pan="0.575" recArmed="false">
+                <VObjectArray name="Effects" count="4">
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="EQ" presetName="default">
+                        <VValue name="Active" type="string" value="Off" />
+                        <VValue name="LF-Bell" type="string" value="off" />
+                        <VValue name="LF-Freq" type="string" value="200 Hz" />
+                        <VValue name="LF-Gain" type="string" value="0 dB" />
+                        <VValue name="LF-In" type="string" value="off" />
+                        <VValue name="LMF-Q" type="string" value="1.00" />
+                        <VValue name="LMF-Freq" type="string" value="800 Hz" />
+                        <VValue name="LMF-Gain" type="string" value="0 dB" />
+                        <VValue name="LMF-In" type="string" value="off" />
+                        <VValue name="HMF-Q" type="string" value="1.00" />
+                        <VValue name="HMF-Freq" type="string" value="2.50 kHz" />
+                        <VValue name="HMF-Gain" type="string" value="0 dB" />
+                        <VValue name="HMF-In" type="string" value="off" />
+                        <VValue name="HF-Bell" type="string" value="off" />
+                        <VValue name="HF-Freq" type="string" value="4.00 kHz" />
+                        <VValue name="HF-Gain" type="string" value="0 dB" />
+                        <VValue name="HF-In" type="string" value="off" />
+                        <VValue name="Sidechain" type="string" value="off" />
+                        <VValue name="Wet Mix" type="string" value="100 %" />
+                    </BFD2MixerChanEffect>
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                </VObjectArray>
+                <VObjectArray name="Sends" count="4">
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="Aux1" send_from="PostInsert" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="Aux2" send_from="PostInsert" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                </VObjectArray>
+            </BFD2MixerChan>
+            <BFD2MixerChan solo="false" soloIsolate="false" mute="false" gain="0.455556" chanType="2" micID="0" slotID="4" chanName="Mid Tom" userChanName="Mid Tom" stereo="false" output="Master" outputID="0" phaseInvert="false" inputMainTrim="0.8" inputSideTrim="0.8" pan="0.6" recArmed="false">
+                <VObjectArray name="Effects" count="4">
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="EQ" presetName="default">
+                        <VValue name="Active" type="string" value="Off" />
+                        <VValue name="LF-Bell" type="string" value="off" />
+                        <VValue name="LF-Freq" type="string" value="200 Hz" />
+                        <VValue name="LF-Gain" type="string" value="0 dB" />
+                        <VValue name="LF-In" type="string" value="off" />
+                        <VValue name="LMF-Q" type="string" value="1.00" />
+                        <VValue name="LMF-Freq" type="string" value="800 Hz" />
+                        <VValue name="LMF-Gain" type="string" value="0 dB" />
+                        <VValue name="LMF-In" type="string" value="off" />
+                        <VValue name="HMF-Q" type="string" value="1.00" />
+                        <VValue name="HMF-Freq" type="string" value="2.50 kHz" />
+                        <VValue name="HMF-Gain" type="string" value="0 dB" />
+                        <VValue name="HMF-In" type="string" value="off" />
+                        <VValue name="HF-Bell" type="string" value="off" />
+                        <VValue name="HF-Freq" type="string" value="4.00 kHz" />
+                        <VValue name="HF-Gain" type="string" value="0 dB" />
+                        <VValue name="HF-In" type="string" value="off" />
+                        <VValue name="Sidechain" type="string" value="off" />
+                        <VValue name="Wet Mix" type="string" value="100 %" />
+                    </BFD2MixerChanEffect>
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                </VObjectArray>
+                <VObjectArray name="Sends" count="4">
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="Aux1" send_from="PostInsert" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="Aux2" send_from="PostInsert" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                </VObjectArray>
+            </BFD2MixerChan>
+            <BFD2MixerChan solo="false" soloIsolate="false" mute="false" gain="0.5" chanType="2" micID="0" slotID="5" chanName="Hi Tom" userChanName="Hi Tom" stereo="false" output="Master" outputID="0" phaseInvert="false" inputMainTrim="0.8" inputSideTrim="0.8" pan="0.4" recArmed="false">
+                <VObjectArray name="Effects" count="4">
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="EQ" presetName="default">
+                        <VValue name="Active" type="string" value="Off" />
+                        <VValue name="LF-Bell" type="string" value="off" />
+                        <VValue name="LF-Freq" type="string" value="200 Hz" />
+                        <VValue name="LF-Gain" type="string" value="0 dB" />
+                        <VValue name="LF-In" type="string" value="off" />
+                        <VValue name="LMF-Q" type="string" value="1.00" />
+                        <VValue name="LMF-Freq" type="string" value="800 Hz" />
+                        <VValue name="LMF-Gain" type="string" value="0 dB" />
+                        <VValue name="LMF-In" type="string" value="off" />
+                        <VValue name="HMF-Q" type="string" value="1.00" />
+                        <VValue name="HMF-Freq" type="string" value="2.50 kHz" />
+                        <VValue name="HMF-Gain" type="string" value="0 dB" />
+                        <VValue name="HMF-In" type="string" value="off" />
+                        <VValue name="HF-Bell" type="string" value="off" />
+                        <VValue name="HF-Freq" type="string" value="4.00 kHz" />
+                        <VValue name="HF-Gain" type="string" value="0 dB" />
+                        <VValue name="HF-In" type="string" value="off" />
+                        <VValue name="Sidechain" type="string" value="off" />
+                        <VValue name="Wet Mix" type="string" value="100 %" />
+                    </BFD2MixerChanEffect>
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                </VObjectArray>
+                <VObjectArray name="Sends" count="4">
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="Aux1" send_from="PostInsert" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="Aux2" send_from="PostInsert" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                </VObjectArray>
+            </BFD2MixerChan>
+            <BFD2MixerChan solo="false" soloIsolate="false" mute="false" gain="0.433333" chanType="2" micID="0" slotID="6" chanName="Crash" userChanName="Crash" stereo="false" output="Aux2" outputID="99" phaseInvert="false" inputMainTrim="0.8" inputSideTrim="0.8" pan="0.425" recArmed="false">
+                <VObjectArray name="Effects" count="4">
+                    <BFD2MixerChanEffect active="true" stereo="false" effect="EQ" presetName="default">
+                        <VValue name="Active" type="string" value="On" />
+                        <VValue name="LF-Bell" type="string" value="off" />
+                        <VValue name="LF-Freq" type="string" value="200 Hz" />
+                        <VValue name="LF-Gain" type="string" value="-14.0 dB" />
+                        <VValue name="LF-In" type="string" value="on" />
+                        <VValue name="LMF-Q" type="string" value="1.00" />
+                        <VValue name="LMF-Freq" type="string" value="800 Hz" />
+                        <VValue name="LMF-Gain" type="string" value="-4.01 dB" />
+                        <VValue name="LMF-In" type="string" value="on" />
+                        <VValue name="HMF-Q" type="string" value="1.00" />
+                        <VValue name="HMF-Freq" type="string" value="2.50 kHz" />
+                        <VValue name="HMF-Gain" type="string" value="0 dB" />
+                        <VValue name="HMF-In" type="string" value="off" />
+                        <VValue name="HF-Bell" type="string" value="off" />
+                        <VValue name="HF-Freq" type="string" value="4.00 kHz" />
+                        <VValue name="HF-Gain" type="string" value="5.28 dB" />
+                        <VValue name="HF-In" type="string" value="on" />
+                        <VValue name="Sidechain" type="string" value="off" />
+                        <VValue name="Wet Mix" type="string" value="100 %" />
+                    </BFD2MixerChanEffect>
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                </VObjectArray>
+                <VObjectArray name="Sends" count="4">
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="Aux1" send_from="PostInsert" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="Aux2" send_from="PostInsert" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                </VObjectArray>
+            </BFD2MixerChan>
+            <BFD2MixerChan solo="false" soloIsolate="false" mute="false" gain="0.455556" chanType="2" micID="0" slotID="7" chanName="Cymbal" userChanName="Cymbal" stereo="false" output="Aux2" outputID="99" phaseInvert="false" inputMainTrim="0.8" inputSideTrim="0.8" pan="0.55" recArmed="false">
+                <VObjectArray name="Effects" count="4">
+                    <BFD2MixerChanEffect active="true" stereo="false" effect="EQ" presetName="default">
+                        <VValue name="Active" type="string" value="On" />
+                        <VValue name="LF-Bell" type="string" value="off" />
+                        <VValue name="LF-Freq" type="string" value="200 Hz" />
+                        <VValue name="LF-Gain" type="string" value="-10.5 dB" />
+                        <VValue name="LF-In" type="string" value="on" />
+                        <VValue name="LMF-Q" type="string" value="1.00" />
+                        <VValue name="LMF-Freq" type="string" value="800 Hz" />
+                        <VValue name="LMF-Gain" type="string" value="0 dB" />
+                        <VValue name="LMF-In" type="string" value="off" />
+                        <VValue name="HMF-Q" type="string" value="1.00" />
+                        <VValue name="HMF-Freq" type="string" value="2.50 kHz" />
+                        <VValue name="HMF-Gain" type="string" value="0 dB" />
+                        <VValue name="HMF-In" type="string" value="off" />
+                        <VValue name="HF-Bell" type="string" value="off" />
+                        <VValue name="HF-Freq" type="string" value="4.00 kHz" />
+                        <VValue name="HF-Gain" type="string" value="5.56 dB" />
+                        <VValue name="HF-In" type="string" value="on" />
+                        <VValue name="Sidechain" type="string" value="off" />
+                        <VValue name="Wet Mix" type="string" value="100 %" />
+                    </BFD2MixerChanEffect>
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                </VObjectArray>
+                <VObjectArray name="Sends" count="4">
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="Aux1" send_from="PostInsert" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="Aux2" send_from="PostInsert" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                </VObjectArray>
+            </BFD2MixerChan>
+            <BFD2MixerChan solo="false" soloIsolate="false" mute="false" gain="0.5" chanType="2" micID="0" slotID="8" chanName="Ride" userChanName="Ride" stereo="false" output="Master" outputID="0" phaseInvert="false" inputMainTrim="0.8" inputSideTrim="0.8" pan="0.625" recArmed="false">
+                <VObjectArray name="Effects" count="4">
+                    <BFD2MixerChanEffect active="true" stereo="false" effect="EQ" presetName="default">
+                        <VValue name="Active" type="string" value="On" />
+                        <VValue name="LF-Bell" type="string" value="off" />
+                        <VValue name="LF-Freq" type="string" value="191 Hz" />
+                        <VValue name="LF-Gain" type="string" value="-16.5 dB" />
+                        <VValue name="LF-In" type="string" value="on" />
+                        <VValue name="LMF-Q" type="string" value="1.00" />
+                        <VValue name="LMF-Freq" type="string" value="800 Hz" />
+                        <VValue name="LMF-Gain" type="string" value="0 dB" />
+                        <VValue name="LMF-In" type="string" value="off" />
+                        <VValue name="HMF-Q" type="string" value="0.75" />
+                        <VValue name="HMF-Freq" type="string" value="3.04 kHz" />
+                        <VValue name="HMF-Gain" type="string" value="3.43 dB" />
+                        <VValue name="HMF-In" type="string" value="on" />
+                        <VValue name="HF-Bell" type="string" value="off" />
+                        <VValue name="HF-Freq" type="string" value="4.00 kHz" />
+                        <VValue name="HF-Gain" type="string" value="0 dB" />
+                        <VValue name="HF-In" type="string" value="off" />
+                        <VValue name="Sidechain" type="string" value="off" />
+                        <VValue name="Wet Mix" type="string" value="100 %" />
+                    </BFD2MixerChanEffect>
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                </VObjectArray>
+                <VObjectArray name="Sends" count="4">
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="Aux1" send_from="PostInsert" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="Aux2" send_from="PostInsert" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                </VObjectArray>
+            </BFD2MixerChan>
+            <BFD2MixerChan solo="false" soloIsolate="false" mute="false" gain="0.4" chanType="2" micID="0" slotID="9" chanName="Perc1" userChanName="Perc1" stereo="false" output="Master" outputID="0" phaseInvert="false" inputMainTrim="0.8" inputSideTrim="0.8" pan="0.5" recArmed="false">
+                <VObjectArray name="Effects" count="4">
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="EQ" presetName="default">
+                        <VValue name="Active" type="string" value="Off" />
+                        <VValue name="LF-Bell" type="string" value="off" />
+                        <VValue name="LF-Freq" type="string" value="200 Hz" />
+                        <VValue name="LF-Gain" type="string" value="0 dB" />
+                        <VValue name="LF-In" type="string" value="off" />
+                        <VValue name="LMF-Q" type="string" value="1.00" />
+                        <VValue name="LMF-Freq" type="string" value="800 Hz" />
+                        <VValue name="LMF-Gain" type="string" value="0 dB" />
+                        <VValue name="LMF-In" type="string" value="off" />
+                        <VValue name="HMF-Q" type="string" value="1.00" />
+                        <VValue name="HMF-Freq" type="string" value="2.50 kHz" />
+                        <VValue name="HMF-Gain" type="string" value="0 dB" />
+                        <VValue name="HMF-In" type="string" value="off" />
+                        <VValue name="HF-Bell" type="string" value="off" />
+                        <VValue name="HF-Freq" type="string" value="4.00 kHz" />
+                        <VValue name="HF-Gain" type="string" value="0 dB" />
+                        <VValue name="HF-In" type="string" value="off" />
+                        <VValue name="Sidechain" type="string" value="off" />
+                        <VValue name="Wet Mix" type="string" value="100 %" />
+                    </BFD2MixerChanEffect>
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                </VObjectArray>
+                <VObjectArray name="Sends" count="4">
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="Aux1" send_from="PostInsert" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="Aux2" send_from="PostInsert" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                </VObjectArray>
+            </BFD2MixerChan>
+            <BFD2MixerChan solo="false" soloIsolate="false" mute="false" gain="0.4" chanType="2" micID="0" slotID="10" chanName="Perc2" userChanName="Perc2" stereo="false" output="Master" outputID="0" phaseInvert="false" inputMainTrim="0.8" inputSideTrim="0.8" pan="0.5" recArmed="false">
+                <VObjectArray name="Effects" count="4">
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="EQ" presetName="default">
+                        <VValue name="Active" type="string" value="Off" />
+                        <VValue name="LF-Bell" type="string" value="off" />
+                        <VValue name="LF-Freq" type="string" value="200 Hz" />
+                        <VValue name="LF-Gain" type="string" value="0 dB" />
+                        <VValue name="LF-In" type="string" value="off" />
+                        <VValue name="LMF-Q" type="string" value="1.00" />
+                        <VValue name="LMF-Freq" type="string" value="800 Hz" />
+                        <VValue name="LMF-Gain" type="string" value="0 dB" />
+                        <VValue name="LMF-In" type="string" value="off" />
+                        <VValue name="HMF-Q" type="string" value="1.00" />
+                        <VValue name="HMF-Freq" type="string" value="2.50 kHz" />
+                        <VValue name="HMF-Gain" type="string" value="0 dB" />
+                        <VValue name="HMF-In" type="string" value="off" />
+                        <VValue name="HF-Bell" type="string" value="off" />
+                        <VValue name="HF-Freq" type="string" value="4.00 kHz" />
+                        <VValue name="HF-Gain" type="string" value="0 dB" />
+                        <VValue name="HF-In" type="string" value="off" />
+                        <VValue name="Sidechain" type="string" value="off" />
+                        <VValue name="Wet Mix" type="string" value="100 %" />
+                    </BFD2MixerChanEffect>
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                </VObjectArray>
+                <VObjectArray name="Sends" count="4">
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="Aux1" send_from="PostInsert" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="Aux2" send_from="PostInsert" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                </VObjectArray>
+            </BFD2MixerChan>
+            <BFD2MixerChan solo="false" soloIsolate="false" mute="false" gain="0.355556" chanType="2" micID="0" slotID="11" chanName="Perc3" userChanName="Perc3" stereo="false" output="Master" outputID="0" phaseInvert="false" inputMainTrim="0.8" inputSideTrim="0.8" pan="0.5" recArmed="false">
+                <VObjectArray name="Effects" count="4">
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="EQ" presetName="default">
+                        <VValue name="Active" type="string" value="Off" />
+                        <VValue name="LF-Bell" type="string" value="off" />
+                        <VValue name="LF-Freq" type="string" value="200 Hz" />
+                        <VValue name="LF-Gain" type="string" value="0 dB" />
+                        <VValue name="LF-In" type="string" value="off" />
+                        <VValue name="LMF-Q" type="string" value="1.00" />
+                        <VValue name="LMF-Freq" type="string" value="800 Hz" />
+                        <VValue name="LMF-Gain" type="string" value="0 dB" />
+                        <VValue name="LMF-In" type="string" value="off" />
+                        <VValue name="HMF-Q" type="string" value="1.00" />
+                        <VValue name="HMF-Freq" type="string" value="2.50 kHz" />
+                        <VValue name="HMF-Gain" type="string" value="0 dB" />
+                        <VValue name="HMF-In" type="string" value="off" />
+                        <VValue name="HF-Bell" type="string" value="off" />
+                        <VValue name="HF-Freq" type="string" value="4.00 kHz" />
+                        <VValue name="HF-Gain" type="string" value="0 dB" />
+                        <VValue name="HF-In" type="string" value="off" />
+                        <VValue name="Sidechain" type="string" value="off" />
+                        <VValue name="Wet Mix" type="string" value="100 %" />
+                    </BFD2MixerChanEffect>
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                    <BFD2MixerChanEffect active="false" stereo="false" effect="" presetName="" />
+                </VObjectArray>
+                <VObjectArray name="Sends" count="4">
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="Aux1" send_from="PostInsert" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="Aux2" send_from="PostInsert" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                </VObjectArray>
+            </BFD2MixerChan>
+            <BFD2MixerChan solo="false" soloIsolate="false" mute="false" gain="0.288889" chanType="1" micID="0" slotID="-1" chanName="OH" userChanName="OH" stereo="true" output="Master" outputID="0" phaseInvert="false" inputMainTrim="0.8" inputSideTrim="0.8" pan="0.5" recArmed="false" distance="0" width="0.5">
+                <VObjectArray name="Effects" count="4">
+                    <BFD2MixerChanEffect active="false" stereo="true" effect="EQ" presetName="default">
+                        <VValue name="Active" type="string" value="Off" />
+                        <VValue name="LF-Bell" type="string" value="off" />
+                        <VValue name="LF-Freq" type="string" value="84.1 Hz" />
+                        <VValue name="LF-Gain" type="string" value="-15.6 dB" />
+                        <VValue name="LF-In" type="string" value="on" />
+                        <VValue name="LMF-Q" type="string" value="1.00" />
+                        <VValue name="LMF-Freq" type="string" value="800 Hz" />
+                        <VValue name="LMF-Gain" type="string" value="0 dB" />
+                        <VValue name="LMF-In" type="string" value="off" />
+                        <VValue name="HMF-Q" type="string" value="1.00" />
+                        <VValue name="HMF-Freq" type="string" value="2.50 kHz" />
+                        <VValue name="HMF-Gain" type="string" value="0 dB" />
+                        <VValue name="HMF-In" type="string" value="off" />
+                        <VValue name="HF-Bell" type="string" value="off" />
+                        <VValue name="HF-Freq" type="string" value="4.00 kHz" />
+                        <VValue name="HF-Gain" type="string" value="0 dB" />
+                        <VValue name="HF-In" type="string" value="off" />
+                        <VValue name="Sidechain" type="string" value="off" />
+                        <VValue name="Wet Mix" type="string" value="100 %" />
+                    </BFD2MixerChanEffect>
+                    <BFD2MixerChanEffect active="true" stereo="true" effect="Filter Mod" presetName="default">
+                        <VValue name="Active" type="string" value="On" />
+                        <VValue name="Drive" type="string" value="9.71 dB" />
+                        <VValue name="Mode" type="string" value="Low" />
+                        <VValue name="Pitch" type="string" value="+18.7 st" />
+                        <VValue name="Res" type="string" value="0.27" />
+                        <VValue name="OutDrive" type="string" value="16.2 dB" />
+                        <VValue name="Wet Mix" type="string" value="58 %" />
+                        <VValue name="ExtSidechain" type="string" value="off" />
+                        <VValue name="Attack" type="string" value="0.1 ms" />
+                        <VValue name="Release" type="string" value="5.8 ms" />
+                        <VValue name="EnvDepth" type="string" value="40 %" />
+                        <VValue name="FMDepth" type="string" value="86 %" />
+                    </BFD2MixerChanEffect>
+                    <BFD2MixerChanEffect active="true" stereo="true" effect="BitCrusher" presetName="default">
+                        <VValue name="Active" type="string" value="On" />
+                        <VValue name="Drive" type="string" value="0 dB" />
+                        <VValue name="Freq" type="string" value="11.2 kHz" />
+                        <VValue name="Bits" type="string" value="12.4" />
+                        <VValue name="LPFreq" type="string" value="100.0 kHz" />
+                        <VValue name="HPFreq" type="string" value="1.00 Hz" />
+                        <VValue name="Dirty" type="string" value="0 dB" />
+                        <VValue name="Clean" type="string" value="-oo dB" />
+                        <VValue name="Tone" type="string" value="4.36 kHz" />
+                        <VValue name="Wet Mix" type="string" value="100 %" />
+                    </BFD2MixerChanEffect>
+                    <BFD2MixerChanEffect active="false" stereo="true" effect="" presetName="" />
+                </VObjectArray>
+                <VObjectArray name="Sends" count="4">
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="Aux1" send_from="PostInsert" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="Aux2" send_from="PostInsert" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                </VObjectArray>
+            </BFD2MixerChan>
+            <BFD2MixerChan solo="false" soloIsolate="false" mute="false" gain="0" chanType="1" micID="1" slotID="-1" chanName="Room" userChanName="Room" stereo="true" output="Master" outputID="0" phaseInvert="false" inputMainTrim="0.8" inputSideTrim="0.8" pan="0.5" recArmed="false" distance="0" width="0.5">
+                <VObjectArray name="Effects" count="4">
+                    <BFD2MixerChanEffect active="false" stereo="true" effect="EQ" presetName="default">
+                        <VValue name="Active" type="string" value="Off" />
+                        <VValue name="LF-Bell" type="string" value="off" />
+                        <VValue name="LF-Freq" type="string" value="200 Hz" />
+                        <VValue name="LF-Gain" type="string" value="0 dB" />
+                        <VValue name="LF-In" type="string" value="off" />
+                        <VValue name="LMF-Q" type="string" value="1.00" />
+                        <VValue name="LMF-Freq" type="string" value="800 Hz" />
+                        <VValue name="LMF-Gain" type="string" value="0 dB" />
+                        <VValue name="LMF-In" type="string" value="off" />
+                        <VValue name="HMF-Q" type="string" value="1.00" />
+                        <VValue name="HMF-Freq" type="string" value="2.50 kHz" />
+                        <VValue name="HMF-Gain" type="string" value="0 dB" />
+                        <VValue name="HMF-In" type="string" value="off" />
+                        <VValue name="HF-Bell" type="string" value="off" />
+                        <VValue name="HF-Freq" type="string" value="4.00 kHz" />
+                        <VValue name="HF-Gain" type="string" value="0 dB" />
+                        <VValue name="HF-In" type="string" value="off" />
+                        <VValue name="Sidechain" type="string" value="off" />
+                        <VValue name="Wet Mix" type="string" value="100 %" />
+                    </BFD2MixerChanEffect>
+                    <BFD2MixerChanEffect active="true" stereo="true" effect="EnvShaper" presetName="default">
+                        <VValue name="Active" type="string" value="On" />
+                        <VValue name="Mix" type="string" value="100 %" />
+                        <VValue name="Attack" type="string" value="0.00 dB" />
+                        <VValue name="Sustain" type="string" value="-24.00 dB" />
+                        <VValue name="Gain" type="string" value="0.00 dB" />
+                        <VValue name="Sensitivity" type="string" value="100 %" />
+                        <VValue name="Linked" type="string" value="on" />
+                    </BFD2MixerChanEffect>
+                    <BFD2MixerChanEffect active="false" stereo="true" effect="" presetName="" />
+                    <BFD2MixerChanEffect active="false" stereo="true" effect="" presetName="" />
+                </VObjectArray>
+                <VObjectArray name="Sends" count="4">
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="Aux1" send_from="PostInsert" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="Aux2" send_from="PostInsert" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                </VObjectArray>
+            </BFD2MixerChan>
+            <BFD2MixerChan solo="false" soloIsolate="false" mute="false" gain="0.5" chanType="3" micID="0" slotID="-1" chanName="Aux1" userChanName="Aux1" stereo="true" output="Master" outputID="0" phaseInvert="false" inputMainTrim="0.8" inputSideTrim="0.8" pan="0.5" recArmed="false">
+                <VObjectArray name="Effects" count="4">
+                    <BFD2MixerChanEffect active="false" stereo="true" effect="EQ" presetName="default">
+                        <VValue name="Active" type="string" value="Off" />
+                        <VValue name="LF-Bell" type="string" value="off" />
+                        <VValue name="LF-Freq" type="string" value="200 Hz" />
+                        <VValue name="LF-Gain" type="string" value="0 dB" />
+                        <VValue name="LF-In" type="string" value="off" />
+                        <VValue name="LMF-Q" type="string" value="1.00" />
+                        <VValue name="LMF-Freq" type="string" value="800 Hz" />
+                        <VValue name="LMF-Gain" type="string" value="0 dB" />
+                        <VValue name="LMF-In" type="string" value="off" />
+                        <VValue name="HMF-Q" type="string" value="1.00" />
+                        <VValue name="HMF-Freq" type="string" value="2.50 kHz" />
+                        <VValue name="HMF-Gain" type="string" value="0 dB" />
+                        <VValue name="HMF-In" type="string" value="off" />
+                        <VValue name="HF-Bell" type="string" value="off" />
+                        <VValue name="HF-Freq" type="string" value="4.00 kHz" />
+                        <VValue name="HF-Gain" type="string" value="0 dB" />
+                        <VValue name="HF-In" type="string" value="off" />
+                        <VValue name="Sidechain" type="string" value="off" />
+                        <VValue name="Wet Mix" type="string" value="100 %" />
+                    </BFD2MixerChanEffect>
+                    <BFD2MixerChanEffect active="true" stereo="true" effect="EnvShaper" presetName="default">
+                        <VValue name="Active" type="string" value="On" />
+                        <VValue name="Mix" type="string" value="100 %" />
+                        <VValue name="Attack" type="string" value="3.30 dB" />
+                        <VValue name="Sustain" type="string" value="16.80 dB" />
+                        <VValue name="Gain" type="string" value="0.00 dB" />
+                        <VValue name="Sensitivity" type="string" value="98 %" />
+                        <VValue name="Linked" type="string" value="on" />
+                    </BFD2MixerChanEffect>
+                    <BFD2MixerChanEffect active="true" stereo="true" effect="Comp Bus" presetName="default">
+                        <VValue name="Active" type="string" value="On" />
+                        <VValue name="Threshold" type="string" value="-14 dB" />
+                        <VValue name="Attack" type="string" value="0.3 ms" />
+                        <VValue name="Ratio" type="string" value="10" />
+                        <VValue name="Release" type="string" value="0.3 s" />
+                        <VValue name="Makeup" type="string" value="14 dB" />
+                        <VValue name="Wet Mix" type="string" value="100 %" />
+                        <VValue name="ExtSidechain" type="string" value="off" />
+                        <VValue name="SidechainHP" type="string" value="Off" />
+                        <VValue name="AnalogLimit" type="string" value="on" />
+                    </BFD2MixerChanEffect>
+                    <BFD2MixerChanEffect active="false" stereo="true" effect="" presetName="" />
+                </VObjectArray>
+                <VObjectArray name="Sends" count="4">
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                </VObjectArray>
+            </BFD2MixerChan>
+            <BFD2MixerChan solo="false" soloIsolate="false" mute="false" gain="0.311111" chanType="3" micID="1" slotID="-1" chanName="Aux2" userChanName="Aux2" stereo="true" output="Master" outputID="0" phaseInvert="false" inputMainTrim="0.8" inputSideTrim="0.8" pan="0.5" recArmed="false">
+                <VObjectArray name="Effects" count="4">
+                    <BFD2MixerChanEffect active="false" stereo="true" effect="EQ" presetName="default">
+                        <VValue name="Active" type="string" value="Off" />
+                        <VValue name="LF-Bell" type="string" value="off" />
+                        <VValue name="LF-Freq" type="string" value="200 Hz" />
+                        <VValue name="LF-Gain" type="string" value="0 dB" />
+                        <VValue name="LF-In" type="string" value="off" />
+                        <VValue name="LMF-Q" type="string" value="1.00" />
+                        <VValue name="LMF-Freq" type="string" value="800 Hz" />
+                        <VValue name="LMF-Gain" type="string" value="0 dB" />
+                        <VValue name="LMF-In" type="string" value="off" />
+                        <VValue name="HMF-Q" type="string" value="1.00" />
+                        <VValue name="HMF-Freq" type="string" value="2.50 kHz" />
+                        <VValue name="HMF-Gain" type="string" value="0 dB" />
+                        <VValue name="HMF-In" type="string" value="off" />
+                        <VValue name="HF-Bell" type="string" value="off" />
+                        <VValue name="HF-Freq" type="string" value="4.00 kHz" />
+                        <VValue name="HF-Gain" type="string" value="0 dB" />
+                        <VValue name="HF-In" type="string" value="off" />
+                        <VValue name="Sidechain" type="string" value="off" />
+                        <VValue name="Wet Mix" type="string" value="100 %" />
+                    </BFD2MixerChanEffect>
+                    <BFD2MixerChanEffect active="true" stereo="true" effect="Drive" presetName="default">
+                        <VValue name="Active" type="string" value="On" />
+                        <VValue name="Mode" type="string" value="Diode" />
+                        <VValue name="Drive" type="string" value="33.1 dB" />
+                        <VValue name="LPFreq" type="string" value="100.0 kHz" />
+                        <VValue name="HPFreq" type="string" value="565 Hz" />
+                        <VValue name="Dirty" type="string" value="0 dB" />
+                        <VValue name="Clean" type="string" value="0 dB" />
+                        <VValue name="Tone" type="string" value="100.0 kHz" />
+                        <VValue name="Wet Mix" type="string" value="100 %" />
+                    </BFD2MixerChanEffect>
+                    <BFD2MixerChanEffect active="false" stereo="true" effect="" presetName="" />
+                    <BFD2MixerChanEffect active="false" stereo="true" effect="" presetName="" />
+                </VObjectArray>
+                <VObjectArray name="Sends" count="4">
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                </VObjectArray>
+            </BFD2MixerChan>
+            <BFD2MixerChan solo="false" soloIsolate="false" mute="false" gain="0.713889" chanType="4" micID="-1" slotID="-1" chanName="Master" userChanName="Master" stereo="true" output="Master" outputID="0" phaseInvert="false" inputMainTrim="0.8" inputSideTrim="0.8" pan="0.5" recArmed="false">
+                <VObjectArray name="Effects" count="4">
+                    <BFD2MixerChanEffect active="false" stereo="true" effect="EQ" presetName="default">
+                        <VValue name="Active" type="string" value="Off" />
+                        <VValue name="LF-Bell" type="string" value="off" />
+                        <VValue name="LF-Freq" type="string" value="200 Hz" />
+                        <VValue name="LF-Gain" type="string" value="0 dB" />
+                        <VValue name="LF-In" type="string" value="off" />
+                        <VValue name="LMF-Q" type="string" value="1.00" />
+                        <VValue name="LMF-Freq" type="string" value="800 Hz" />
+                        <VValue name="LMF-Gain" type="string" value="0 dB" />
+                        <VValue name="LMF-In" type="string" value="off" />
+                        <VValue name="HMF-Q" type="string" value="1.00" />
+                        <VValue name="HMF-Freq" type="string" value="2.50 kHz" />
+                        <VValue name="HMF-Gain" type="string" value="0 dB" />
+                        <VValue name="HMF-In" type="string" value="off" />
+                        <VValue name="HF-Bell" type="string" value="off" />
+                        <VValue name="HF-Freq" type="string" value="4.00 kHz" />
+                        <VValue name="HF-Gain" type="string" value="0 dB" />
+                        <VValue name="HF-In" type="string" value="off" />
+                        <VValue name="Sidechain" type="string" value="off" />
+                        <VValue name="Wet Mix" type="string" value="100 %" />
+                    </BFD2MixerChanEffect>
+                    <BFD2MixerChanEffect active="true" stereo="true" effect="Comp Bus" presetName="default">
+                        <VValue name="Active" type="string" value="On" />
+                        <VValue name="Threshold" type="string" value="-4.0 dB" />
+                        <VValue name="Attack" type="string" value="0.3 ms" />
+                        <VValue name="Ratio" type="string" value="4" />
+                        <VValue name="Release" type="string" value="0.1 s" />
+                        <VValue name="Makeup" type="string" value="15 dB" />
+                        <VValue name="Wet Mix" type="string" value="100 %" />
+                        <VValue name="ExtSidechain" type="string" value="off" />
+                        <VValue name="SidechainHP" type="string" value="Off" />
+                        <VValue name="AnalogLimit" type="string" value="on" />
+                    </BFD2MixerChanEffect>
+                    <BFD2MixerChanEffect active="false" stereo="true" effect="" presetName="" />
+                    <BFD2MixerChanEffect active="false" stereo="true" effect="" presetName="" />
+                </VObjectArray>
+                <VObjectArray name="Sends" count="4">
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                    <BFD2MixerChanSend side_chain="false" send_level="0" active="false" dest_chan_name="" send_from="PostFader" />
+                </VObjectArray>
+            </BFD2MixerChan>
+        </VObjectArray>
+    </BFD2Mixer>
+</root>

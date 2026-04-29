@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIZYVOX — Founding RSP Application</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap');
+
+  :root {
+    --void: #020204;
+    --void2: #07080f;
+    --void3: #0d0f1a;
+    --amber: #c49a38;
+    --amber-dim: #7a5e1e;
+    --amber-glow: rgba(196, 154, 56, 0.15);
+    --cyan: #2aa4be;
+    --cyan-dim: #1a6878;
+    --green: #3dba72;
+    --red: #e05a5a;
+    --text: #d4cfc8;
+    --text-dim: #7a7670;
+    --border: rgba(196, 154, 56, 0.2);
+    --border-bright: rgba(196, 154, 56, 0.5);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--text);
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* ── HERO ─────────────────────────────────────────────────────── */
+  #hero {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  #hero-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    max-width: 800px;
+    padding: 2rem;
+  }
+
+  .badge-limited {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(196, 154, 56, 0.12);
+    border: 1px solid var(--amber-dim);
+    color: var(--amber);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    padding: 6px 16px;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+
+  .badge-limited::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--amber);
+    animation: pulse-dot 1.6s ease-in-out infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  .hero-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--amber);
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--text-dim);
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .hero-count {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 12px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    padding: 14px 32px;
+    margin-bottom: 2.5rem;
+  }
+
+  .count-num {
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--amber);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .count-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  .hero-cta {
+    display: inline-block;
+    background: var(--amber);
+    color: var(--void);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 16px 42px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.15);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+  }
+
+  .hero-cta:hover::before { transform: translateX(0); }
+  .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(196,154,56,0.4); }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.4;
+  }
+
+  .scroll-hint span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--amber), transparent);
+    animation: scroll-drop 2s ease-in-out infinite;
+  }
+
+  @keyframes scroll-drop {
+    0%, 100% { transform: scaleY(1); opacity: 0.4; }
+    50% { transform: scaleY(0.4); opacity: 0.1; }
+  }
+
+  /* ── LAYOUT ───────────────────────────────────────────────────── */
+  section {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--amber-dim);
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    line-height: 1.2;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .section-title em { font-style: italic; color: var(--amber); }
+
+  .section-body {
+    font-size: 1.15rem;
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--text-dim);
+    max-width: 680px;
+  }
+
+  hr.divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0;
+  }
+
+  /* ── WHAT YOU GET ─────────────────────────────────────────────── */
+  .offer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 3rem;
+  }
+
+  .offer-card {
+    background: var(--void2);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s ease;
+  }
+
+  .offer-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--amber);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  .offer-card:hover { background: var(--void3); }
+  .offer-card:hover::before { transform: scaleX(1); }
+
+  .offer-icon {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .offer-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 0.7rem;
+  }
+
+  .offer-title {
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 0.8rem;
+    line-height: 1.3;
+  }
+
+  .offer-body {
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--text-dim);
+  }
+
+  .offer-highlight {
+    display: inline-block;
+    background: rgba(196, 154, 56, 0.08);
+    border: 1px solid var(--amber-dim);
+    color: var(--amber);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    padding: 3px 10px;
+    margin-top: 1rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* ── NEVER CLAUSES ────────────────────────────────────────────── */
+  .nc-section {
+    background: var(--void2);
+    border: 1px solid var(--border);
+    padding: 3rem;
+    margin-top: 3rem;
+    position: relative;
+  }
+
+  .nc-section::before {
+    content: 'NEVER CLAUSES';
+    position: absolute;
+    top: -1px;
+    left: 2rem;
+    background: var(--amber);
+    color: var(--void);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    padding: 4px 12px;
+    font-weight: 500;
+  }
+
+  .nc-intro {
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--text-dim);
+    margin-bottom: 2rem;
+    max-width: 680px;
+  }
+
+  .nc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+
+  .nc-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 1rem;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .nc-id {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--amber-dim);
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .nc-text {
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--text);
+  }
+
+  /* ── TERMS COMPARE ────────────────────────────────────────────── */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 3rem;
+    font-size: 0.95rem;
+  }
+
+  .compare-table th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 1rem 1.5rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-bright);
+  }
+
+  .compare-table th:first-child { color: var(--text-dim); }
+  .compare-table th:nth-child(2) { color: var(--red); background: rgba(224,90,90,0.05); }
+  .compare-table th:nth-child(3) { color: var(--green); background: rgba(61,186,114,0.05); }
+
+  .compare-table td {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    line-height: 1.5;
+    vertical-align: top;
+    font-weight: 300;
+  }
+
+  .compare-table td:first-child {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+
+  .compare-table td:nth-child(2) {
+    color: #a07070;
+    background: rgba(224,90,90,0.03);
+  }
+
+  .compare-table td:nth-child(3) {
+    color: #7dc89a;
+    background: rgba(61,186,114,0.03);
+  }
+
+  .no-mark { color: var(--red) !important; font-weight: 400; }
+  .yes-mark { color: var(--green) !important; font-weight: 400; }
+
+  /* ── FOUNDER TERMS ────────────────────────────────────────────── */
+  .founder-terms {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 3rem;
+  }
+
+  .term-block {
+    background: var(--void2);
+    padding: 1.8rem;
+    text-align: center;
+  }
+
+  .term-value {
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--amber);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .term-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  /* ── APPLICATION FORM ─────────────────────────────────────────── */
+  #apply {
+    background: var(--void2);
+    border-top: 1px solid var(--border-bright);
+    border-bottom: 1px solid var(--border);
+    padding: 5rem 0;
+  }
+
+  #apply .inner {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .form-title {
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 300;
+    color: #fff;
+    margin-bottom: 0.8rem;
+    line-height: 1.2;
+  }
+
+  .form-title em { font-style: italic; color: var(--amber); }
+
+  .form-sub {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--text-dim);
+    margin-bottom: 3rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 600px) {
+    .form-row { grid-template-columns: 1fr; }
+    .offer-grid { gap: 1px; }
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 1rem;
+  }
+
+  .form-group.full { grid-column: 1 / -1; }
+
+  .form-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+  }
+
+  .form-input, .form-select, .form-textarea {
+    background: var(--void);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 300;
+    padding: 12px 16px;
+    outline: none;
+    transition: border-color 0.25s ease;
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .form-input::placeholder,
+  .form-textarea::placeholder { color: var(--text-dim); opacity: 0.5; }
+
+  .form-input:focus,
+  .form-select:focus,
+  .form-textarea:focus { border-color: var(--amber); }
+
+  .form-select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c49a38' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+  }
+
+  .form-select option { background: #0d0f1a; color: var(--text); }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.6;
+  }
+
+  .form-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 2rem 0;
+    cursor: pointer;
+  }
+
+  .form-consent input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    accent-color: var(--amber);
+    cursor: pointer;
+  }
+
+  .form-consent-text {
+    font-size: 0.85rem;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--text-dim);
+  }
+
+  .form-consent-text strong { color: var(--text); font-weight: 400; }
+
+  .submit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--amber);
+    color: var(--void);
+    border: none;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 18px 48px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .submit-btn:hover { background: #d4a844; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(196,154,56,0.35); }
+  .submit-btn:active { transform: translateY(0); }
+
+  .submit-btn svg { transition: transform 0.3s ease; }
+  .submit-btn:hover svg { transform: translateX(4px); }
+
+  .form-note {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    text-align: center;
+    margin-top: 1.5rem;
+    line-height: 1.7;
+  }
+
+  .form-note a {
+    color: var(--amber-dim);
+    text-decoration: none;
+  }
+
+  /* Success state */
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 4rem 2rem;
+  }
+
+  .form-success.active { display: block; }
+  .form-form.hidden { display: none; }
+
+  .success-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+
+  .success-title {
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: var(--green);
+    margin-bottom: 1rem;
+  }
+
+  .success-body {
+    font-size: 1.1rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--text-dim);
+    max-width: 500px;
+    margin: 0 auto 2rem;
+  }
+
+  .consent-key-display {
+    background: var(--void);
+    border: 1px solid var(--amber-dim);
+    padding: 1rem 1.5rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--amber);
+    display: inline-block;
+    margin: 0 auto;
+    word-break: break-all;
+  }
+
+  /* ── TESTIMONIAL ──────────────────────────────────────────────── */
+  .rsp001-block {
+    background: var(--void2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--amber);
+    padding: 2.5rem;
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  @media (max-width: 600px) {
+    .rsp001-block { grid-template-columns: 1fr; }
+  }
+
+  .rsp001-quote {
+    font-size: 1.2rem;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+
+  .rsp001-attr {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+  }
+
+  .rsp001-badge {
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .rsp001-id {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.3rem;
+    color: var(--amber);
+    font-weight: 400;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  .rsp001-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  /* ── FOOTER ───────────────────────────────────────────────────── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .footer-logo {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+  }
+
+  .footer-copy {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    text-align: right;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════════════════════ -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-content">
+    <div class="badge-limited">Founding RSP Program — 5 Seats Only</div>
+    <div class="hero-eyebrow">NOIZYVOX / DreamChamber — 2026</div>
+    <h1 class="hero-title">
+      Your voice.<br>
+      <em>Your wealth.</em><br>
+      Forever.
+    </h1>
+    <p class="hero-sub">
+      The first AI voice ecosystem built entirely around human creators —
+      where you own your profile, earn royalties in perpetuity, and your voice
+      can never be used without your living consent.
+    </p>
+    <div class="hero-count">
+      <span class="count-num" id="seats-remaining">5</span>
+      <span class="count-label">Founding RSP<br>seats remaining</span>
+    </div>
+    <br>
+    <a href="#apply" class="hero-cta">Apply for Founding RSP Status →</a>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════════════
+     THE MOMENT
+════════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="section-label">The Moment</div>
+  <h2 class="section-title">The industry just changed.<br><em>This is the door opening.</em></h2>
+  <p class="section-body">
+    Agents are closing. Unions are silent. Every major AI company is building voice technology
+    without a single dollar going to the humans whose voices trained their models.
+    <br><br>
+    We built something different. NOIZYVOX is not an AI company that uses human voices —
+    it's a human voice ecosystem that AI amplifies. The difference is everything.
+    <br><br>
+    Right now, we are accepting five founding members — RSPs (Registered Sound Profiles) —
+    who will shape this platform from the ground up, lock in the best terms it will ever offer,
+    and become the proof that this model works.
+  </p>
+
+  <div class="rsp001-block">
+    <div>
+      <p class="rsp001-quote">"I had an accident that left me with permanent nerve damage. I had to reinvent how I create. What I built in the process became something I think could change everything for voice actors worldwide."</p>
+      <div class="rsp001-attr">ROB PLOWMAN — RSP_001 — Founding Architect, NOIZYVOX</div>
+    </div>
+    <div class="rsp001-badge">
+      <span class="rsp001-id">RSP_001</span>
+      <span class="rsp001-label">Founding<br>Member<br>Active</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════════════
+     WHAT YOU GET
+════════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="section-label">What You Receive</div>
+  <h2 class="section-title">Six things no other<br><em>platform offers.</em></h2>
+  <p class="section-body">These are not features. They are constitutional guarantees — built into the architecture, not the policy page.</p>
+
+  <div class="offer-grid">
+    <div class="offer-card">
+      <span class="offer-icon">🧬</span>
+      <div class="offer-name">Voice DNA</div>
+      <div class="offer-title">Your Creative Genome</div>
+      <p class="offer-body">A 6-dimensional fingerprint — Tone, Energy, Emotion, Archetype, Historical Lineage, Acoustic Signature — that captures what makes your voice irreplaceable. It travels with every licensed use, forever.</p>
+      <span class="offer-highlight">FOUNDER EXCLUSIVE: Full genome mapping session</span>
+    </div>
+    <div class="offer-card">
+      <span class="offer-icon">🔐</span>
+      <div class="offer-name">Consent Architecture</div>
+      <div class="offer-title">Cryptographic Consent Keys</div>
+      <p class="offer-body">Every single use of your voice requires a cryptographic consent key scoped to that specific use, client, domain, and jurisdiction. No blanket licensing. No silent renewals. You control every door.</p>
+      <span class="offer-highlight">NC_01: No consent = no use. Period.</span>
+    </div>
+    <div class="offer-card">
+      <span class="offer-icon">♾️</span>
+      <div class="offer-name">Perpetual Royalties</div>
+      <div class="offer-title">You Get Paid Forever</div>
+      <p class="offer-body">70–90% royalty on every licensed use — not a one-time buyout. Every commercial use, every API call, every derivative. The clock never runs out. If a human made it, a human gets paid.</p>
+      <span class="offer-highlight">FOUNDING RSPs: Lock in 85% royalty rate</span>
+    </div>
+    <div class="offer-card">
+      <span class="offer-icon">🏛️</span>
+      <div class="offer-name">Voice Estate Trust</div>
+      <div class="offer-title">Your Voice Becomes an Asset</div>
+      <p class="offer-body">A separate legal entity governing your voice profile — protected against platform changes, acquisitions, and dissolution. It passes to your estate. Your voice can generate wealth for your children.</p>
+      <span class="offer-highlight">NC_09: Acquisition cannot override your terms</span>
+    </div>
+    <div class="offer-card">
+      <span class="offer-icon">📜</span>
+      <div class="offer-name">Immutable Archive</div>
+      <div class="offer-title">The Provenance Ledger</div>
+      <p class="offer-body">An append-only record of every utterance, every consent key, every use — cryptographically timestamped and watermarked. You can audit your entire voice history at any time. The ledger cannot be edited or deleted.</p>
+      <span class="offer-highlight">847 utterances already in RSP_001 ledger</span>
+    </div>
+    <div class="offer-card">
+      <span class="offer-icon">⚖️</span>
+      <div class="offer-name">Never Clauses</div>
+      <div class="offer-title">10 Constitutional Protections</div>
+      <p class="offer-body">Ten clauses encoded at the architecture level — not the terms of service. No AI can override them. No acquisition can remove them. These are not policies. They are the foundation the platform is built on.</p>
+      <span class="offer-highlight">NC_01 through NC_10 — enforced at Stage 2 of pipeline</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FOUNDER TERMS
+════════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="section-label">Founding RSP Terms</div>
+  <h2 class="section-title">The best deal this<br><em>platform will ever offer.</em></h2>
+  <p class="section-body">
+    Founding RSPs get terms that lock permanently — not subject to future pricing changes.
+    These are your terms for life.
+  </p>
+
+  <div class="founder-terms">
+    <div class="term-block">
+      <div class="term-value">85%</div>
+      <div class="term-label">Royalty<br>Rate<br>(locked forever)</div>
+    </div>
+    <div class="term-block">
+      <div class="term-value">$0</div>
+      <div class="term-label">Platform<br>Fee to<br>Join</div>
+    </div>
+    <div class="term-block">
+      <div class="term-value">∞</div>
+      <div class="term-label">Duration<br>of Your<br>Estate</div>
+    </div>
+    <div class="term-block">
+      <div class="term-value">10</div>
+      <div class="term-label">Never<br>Clauses<br>Protecting You</div>
+    </div>
+    <div class="term-block">
+      <div class="term-value">RSP<br><span style="font-size:1.4rem">002</span></div>
+      <div class="term-label">First Available<br>Founding<br>Number</div>
+    </div>
+    <div class="term-block">
+      <div class="term-value">5</div>
+      <div class="term-label">Seats<br>Total —<br>Ever</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════════════
+     NEVER CLAUSES
+════════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="section-label">Constitutional Architecture</div>
+  <h2 class="section-title">The ten things<br><em>that will never happen.</em></h2>
+
+  <div class="nc-section">
+    <p class="nc-intro">
+      These are not contract clauses. They are encoded in the platform pipeline itself —
+      enforced at Stage 2 of 7 before any voice data moves. No business decision, no acquisition,
+      no legal structure can override them.
+    </p>
+    <div class="nc-grid">
+      <div class="nc-item">
+        <span class="nc-id">NC_01</span>
+        <span class="nc-text">No voice use without explicit, current, scoped consent</span>
+      </div>
+      <div class="nc-item">
+        <span class="nc-id">NC_02</span>
+        <span class="nc-text">No retroactive consent — each use requires a new key</span>
+      </div>
+      <div class="nc-item">
+        <span class="nc-id">NC_03</span>
+        <span class="nc-text">No use in content that demeans, harms, or misrepresents</span>
+      </div>
+      <div class="nc-item">
+        <span class="nc-id">NC_04</span>
+        <span class="nc-text">No use in political advertising without explicit opt-in</span>
+      </div>
+      <div class="nc-item">
+        <span class="nc-id">NC_05</span>
+        <span class="nc-text">No cloning or synthetic replication outside the consent schema</span>
+      </div>
+      <div class="nc-item">
+        <span class="nc-id">NC_06</span>
+        <span class="nc-text">No royalty deferrals, reductions, or renegotiation without consent</span>
+      </div>
+      <div class="nc-item">
+        <span class="nc-id">NC_07</span>
+        <span class="nc-text">No data training use outside the explicit training consent domain</span>
+      </div>
+      <div class="nc-item">
+        <span class="nc-id">NC_08</span>
+        <span class="nc-text">No platform sale or transfer that changes actor terms</span>
+      </div>
+      <div class="nc-item">
+        <span class="nc-id">NC_09</span>
+        <span class="nc-text">No acquisition override — Voice Estate Trust is sovereign</span>
+      </div>
+      <div class="nc-item">
+        <span class="nc-id">NC_10</span>
+        <span class="nc-text">No dissolution of a Voice Estate without unanimous beneficiary consent</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════════════
+     COMPARISON
+════════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="section-label">What the Market Offers</div>
+  <h2 class="section-title">Everyone else.<br><em>Then us.</em></h2>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>What Matters</th>
+        <th>ElevenLabs / Suno / Runway</th>
+        <th>NOIZYVOX Founding RSP</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Royalty on every use</td>
+        <td><span class="no-mark">✗ &nbsp;$0 / buyout</span></td>
+        <td><span class="yes-mark">✓ &nbsp;85% perpetual</span></td>
+      </tr>
+      <tr>
+        <td>You own your profile</td>
+        <td><span class="no-mark">✗ &nbsp;Platform-owned</span></td>
+        <td><span class="yes-mark">✓ &nbsp;Actor-owned, always</span></td>
+      </tr>
+      <tr>
+        <td>Consent per use</td>
+        <td><span class="no-mark">✗ &nbsp;Blanket license on signup</span></td>
+        <td><span class="yes-mark">✓ &nbsp;Cryptographic key, every time</span></td>
+      </tr>
+      <tr>
+        <td>Revoke at any time</td>
+        <td><span class="no-mark">✗ &nbsp;Contractually limited</span></td>
+        <td><span class="yes-mark">✓ &nbsp;Immediate. No penalties.</span></td>
+      </tr>
+      <tr>
+        <td>Your voice after death</td>
+        <td><span class="no-mark">✗ &nbsp;Platform decides</span></td>
+        <td><span class="yes-mark">✓ &nbsp;Voice Estate Trust — your heirs</span></td>
+      </tr>
+      <tr>
+        <td>Provenance record</td>
+        <td><span class="no-mark">✗ &nbsp;None</span></td>
+        <td><span class="yes-mark">✓ &nbsp;Immutable ledger, every utterance</span></td>
+      </tr>
+      <tr>
+        <td>AI amplification of your style</td>
+        <td><span class="no-mark">✗ &nbsp;Replaces your style</span></td>
+        <td><span class="yes-mark">✓ &nbsp;Extends your style, you own the output</span></td>
+      </tr>
+      <tr>
+        <td>Platform acquisition protection</td>
+        <td><span class="no-mark">✗ &nbsp;Zero protection</span></td>
+        <td><span class="yes-mark">✓ &nbsp;NC_09 — Trust is sovereign</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════════════
+     WHO WE'RE LOOKING FOR
+════════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="section-label">Who Qualifies</div>
+  <h2 class="section-title">We are looking for<br><em>genius creators.</em></h2>
+  <p class="section-body">
+    Not the biggest names. Not the most followers. The most committed —
+    to their craft, to human voice, and to building something that outlasts the chaos.
+  </p>
+
+  <div class="offer-grid" style="margin-top:3rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+    <div class="offer-card">
+      <span class="offer-icon">🎙️</span>
+      <div class="offer-name">Voice Actors</div>
+      <div class="offer-title">Professional VO Talent</div>
+      <p class="offer-body">Commercial, audiobook, animation, narration — anyone who makes a living with their voice and wants to own where that voice goes next.</p>
+    </div>
+    <div class="offer-card">
+      <span class="offer-icon">🎵</span>
+      <div class="offer-name">Musicians</div>
+      <div class="offer-title">Vocalists & Composers</div>
+      <p class="offer-body">Singers, rappers, spoken word artists — those whose vocal identity is their signature and who refuse to let it become someone else's training data.</p>
+    </div>
+    <div class="offer-card">
+      <span class="offer-icon">🌍</span>
+      <div class="offer-name">Cultural Voices</div>
+      <div class="offer-title">Indigenous & Heritage Voices</div>
+      <p class="offer-body">Storytellers, language keepers, oral historians whose voices carry something irreplaceable. Your archive is protected from extraction, forever.</p>
+    </div>
+    <div class="offer-card">
+      <span class="offer-icon">📚</span>
+      <div class="offer-name">Educators</div>
+      <div class="offer-title">Teachers & Lecturers</div>
+      <p class="offer-body">People whose voice has guided thousands — who want their teaching voice to reach more students without giving up authorship.</p>
+    </div>
+    <div class="offer-card">
+      <span class="offer-icon">🏛️</span>
+      <div class="offer-name">Estates</div>
+      <div class="offer-title">Representing a Legacy Voice</div>
+      <p class="offer-body">Families and estates of deceased artists whose voices deserve protection, provenance, and the right to generate income on their own terms.</p>
+    </div>
+    <div class="offer-card">
+      <span class="offer-icon">🧠</span>
+      <div class="offer-name">Innovators</div>
+      <div class="offer-title">People Who See What's Coming</div>
+      <p class="offer-body">You don't need a category. You just need to understand that voice identity is the next great creative asset — and you want to be first.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     APPLICATION FORM
+════════════════════════════════════════════════════════════════ -->
+<div id="apply">
+  <div class="inner">
+    <div class="form-form" id="form-form">
+      <div class="section-label">Founding RSP Application</div>
+      <h2 class="form-title"><em>Apply now.</em><br>Five seats. No waitlist after.</h2>
+      <p class="form-sub">
+        This takes about three minutes. We read every application personally.
+        If selected, you'll hear from Rob directly within 48 hours.
+      </p>
+
+      <form id="rsp-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="fname">First Name</label>
+            <input type="text" id="fname" class="form-input" placeholder="Your first name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="lname">Last Name</label>
+            <input type="text" id="lname" class="form-input" placeholder="Your last name" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address</label>
+            <input type="email" id="email" class="form-input" placeholder="your@email.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="city">City / Country</label>
+            <input type="text" id="city" class="form-input" placeholder="e.g. Los Angeles, CA">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="voice-type">What kind of voice creator are you?</label>
+          <select id="voice-type" class="form-select" required>
+            <option value="" disabled selected>Select your category</option>
+            <option value="vo">Professional Voice Actor (VO)</option>
+            <option value="musician">Musician / Vocalist</option>
+            <option value="educator">Educator / Lecturer</option>
+            <option value="cultural">Cultural / Heritage Voice</option>
+            <option value="estate">Estate / Legacy Representative</option>
+            <option value="therapist">Therapist / Healer</option>
+            <option value="other">Other — I'll explain below</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="experience">Tell us about your voice work — what you do, how long you've been doing it</label>
+          <textarea id="experience" class="form-textarea" placeholder="e.g. 12 years commercial VO, 400+ audiobooks, worked with Disney, Audible..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="why">Why do you want to be a Founding RSP? What do you want to protect?</label>
+          <textarea id="why" class="form-textarea" placeholder="Tell us what this means to you and what you want to build..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="urgency">Are you currently facing any immediate threats to your voice work — AI replacement, agent closure, contract issues?</label>
+          <textarea id="urgency" class="form-textarea" style="min-height:80px" placeholder="Optional — but it helps us understand the urgency for your situation"></textarea>
+        </div>
+
+        <label class="form-consent">
+          <input type="checkbox" id="consent-box" required>
+          <span class="form-consent-text">
+            I understand that <strong>submitting this form does not create any agreement</strong> between me and NOIZYVOX. I am expressing interest in the Founding RSP program. If accepted, I will receive a full consent architecture review before any voice session begins. My data is used only to evaluate this application.
+          </span>
+        </label>
+
+        <button type="submit" class="submit-btn">
+          Submit Founding RSP Application
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <p class="form-note">
+          Applications are reviewed by Rob Plowman personally.<br>
+          Contact directly: <a href="mailto:rsplowman@icloud.com">rsplowman@icloud.com</a><br>
+          NOIZYVOX / DreamChamber — © 2026 Rob Plowman. All voice rights reserved.
+        </p>
+      </form>
+    </div>
+
+    <div class="form-success" id="form-success">
+      <span class="success-icon">✦</span>
+      <h2 class="success-title">Application Received</h2>
+      <p class="success-body">
+        Your Founding RSP application has been submitted.
+        Rob will review it personally and respond within 48 hours.
+        <br><br>
+        Your provisional application reference:
+      </p>
+      <div class="consent-key-display" id="app-ref"></div>
+      <br><br>
+      <p style="font-size:0.85rem; color: var(--text-dim); line-height:1.7;">
+        Keep this reference. It will appear in your Consent Key when your voice session is confirmed.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-logo">NOIZYVOX / DreamChamber</div>
+  <div class="footer-copy">
+    Founding RSP Program — 2026<br>
+    rsplowman@icloud.com — All voice rights reserved
+  </div>
+</footer>
+
+<script>
+// ── HERO CANVAS ────────────────────────────────────────────────────
+const canvas = document.getElementById('hero-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [], t = 0;
+
+function resize() {
+  W = canvas.width = canvas.offsetWidth;
+  H = canvas.height = canvas.offsetHeight;
+}
+
+window.addEventListener('resize', resize);
+resize();
+
+// Generate particles
+(function initParticles() {
+  particles = [];
+  const count = Math.min(120, Math.floor(W * H / 9000));
+  for (let i = 0; i < count; i++) {
+    particles.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.18,
+      vy: (Math.random() - 0.5) * 0.18,
+      r: Math.random() * 1.8 + 0.4,
+      a: Math.random(),
+      phase: Math.random() * Math.PI * 2,
+      type: Math.random() < 0.1 ? 'amber' : 'dim'
+    });
+  }
+})();
+
+function drawFrame() {
+  t += 0.008;
+  ctx.clearRect(0, 0, W, H);
+
+  // Radial gradient overlay
+  const grad = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, Math.max(W,H) * 0.7);
+  grad.addColorStop(0, 'rgba(196, 154, 56, 0.03)');
+  grad.addColorStop(0.5, 'rgba(2, 2, 4, 0)');
+  grad.addColorStop(1, 'rgba(2, 2, 4, 0.6)');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, W, H);
+
+  // Sine wave layers
+  for (let layer = 0; layer < 3; layer++) {
+    ctx.beginPath();
+    const amp = 18 + layer * 12;
+    const freq = 0.004 + layer * 0.002;
+    const speed = t * (0.4 + layer * 0.2);
+    const yBase = H * (0.42 + layer * 0.08);
+    const alpha = 0.04 - layer * 0.01;
+    ctx.strokeStyle = `rgba(196, 154, 56, ${alpha})`;
+    ctx.lineWidth = 1;
+    for (let x = 0; x <= W; x += 2) {
+      const y = yBase + Math.sin(x * freq + speed) * amp + Math.sin(x * freq * 1.7 - speed * 0.8) * (amp * 0.4);
+      x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+  }
+
+  // Particles
+  particles.forEach(p => {
+    p.x += p.vx;
+    p.y += p.vy;
+    if (p.x < -10) p.x = W + 10;
+    if (p.x > W + 10) p.x = -10;
+    if (p.y < -10) p.y = H + 10;
+    if (p.y > H + 10) p.y = -10;
+
+    const pulse = 0.4 + 0.6 * Math.abs(Math.sin(t * 0.7 + p.phase));
+    const alpha = p.a * pulse * (p.type === 'amber' ? 0.9 : 0.35);
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = p.type === 'amber'
+      ? `rgba(196, 154, 56, ${alpha})`
+      : `rgba(180, 175, 168, ${alpha})`;
+    ctx.fill();
+  });
+
+  // Connecting lines between close particles
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if (dist < 90) {
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(196, 154, 56, ${0.06 * (1 - dist/90)})`;
+        ctx.lineWidth = 0.5;
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.stroke();
+      }
+    }
+  }
+
+  requestAnimationFrame(drawFrame);
+}
+drawFrame();
+
+// ── COUNTDOWN ─────────────────────────────────────────────────────
+let seatsLeft = 5;
+// Could be dynamic; for now static
+document.getElementById('seats-remaining').textContent = seatsLeft;
+
+// ── FORM SUBMISSION ────────────────────────────────────────────────
+function generateRef(name, email) {
+  let hash = 0;
+  const str = name + email + Date.now();
+  for (let i = 0; i < str.length; i++) {
+    hash = ((hash << 5) - hash) + str.charCodeAt(i);
+    hash |= 0;
+  }
+  const hex = Math.abs(hash).toString(16).padStart(8, '0').toUpperCase();
+  const dateStr = new Date().toISOString().slice(0,10).replace(/-/g,'');
+  return `RSP-APP-${hex}-${dateStr}`;
+}
+
+function handleSubmit(e) {
+  e.preventDefault();
+
+  const fname = document.getElementById('fname').value;
+  const lname = document.getElementById('lname').value;
+  const email = document.getElementById('email').value;
+  const vtype = document.getElementById('voice-type').value;
+  const exp = document.getElementById('experience').value;
+  const why = document.getElementById('why').value;
+  const urgency = document.getElementById('urgency').value;
+
+  const ref = generateRef(fname + lname, email);
+  document.getElementById('app-ref').textContent = ref;
+
+  // Build mailto body
+  const body = encodeURIComponent(
+    `FOUNDING RSP APPLICATION\n` +
+    `Reference: ${ref}\n\n` +
+    `Name: ${fname} ${lname}\n` +
+    `Email: ${email}\n` +
+    `Location: ${document.getElementById('city').value}\n` +
+    `Voice Type: ${vtype}\n\n` +
+    `EXPERIENCE:\n${exp}\n\n` +
+    `WHY FOUNDING RSP:\n${why}\n\n` +
+    `URGENCY / THREATS:\n${urgency}\n\n` +
+    `Submitted: ${new Date().toISOString()}`
+  );
+
+  const subject = encodeURIComponent(`Founding RSP Application — ${fname} ${lname} [${ref}]`);
+  const mailtoUrl = `mailto:rsplowman@icloud.com?subject=${subject}&body=${body}`;
+
+  // Open mail client
+  window.location.href = mailtoUrl;
+
+  // Show success state
+  setTimeout(() => {
+    document.getElementById('form-form').classList.add('hidden');
+    document.getElementById('form-success').classList.add('active');
+    window.scrollTo({ top: document.getElementById('apply').offsetTop, behavior: 'smooth' });
+  }, 400);
+}
+
+// ── SCROLL ANIMATION ───────────────────────────────────────────────
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(el => {
+    if (el.isIntersecting) {
+      el.target.style.opacity = '1';
+      el.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.offer-card, .term-block, .nc-item, .rsp001-block').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>

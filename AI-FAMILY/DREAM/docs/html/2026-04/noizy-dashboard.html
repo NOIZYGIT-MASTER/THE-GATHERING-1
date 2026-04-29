@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOIZYWORLD — Sovereign Stack Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1" integrity="sha384-jb8JQMbMoBUzgWatfe6COACi2ljcDdZQ2OxczGA3bGNeWe+6DChMTBJemed7ZnvJ" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --bg: #0D0D0D;
+            --surface: #1A1A1A;
+            --surface-alt: #222222;
+            --burgundy: #6B1D2A;
+            --brown: #4A3223;
+            --amber: #D4A03C;
+            --cream: #F5E6C8;
+            --text: #E8E0D4;
+            --text-dim: #A09080;
+            --text-muted: #605040;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --danger: #F44336;
+            --info: #90CAF9;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+
+        .dashboard { max-width: 1400px; margin: 0 auto; padding: 24px; }
+
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 0; border-bottom: 2px solid var(--burgundy); margin-bottom: 24px;
+        }
+        header h1 { font-family: Georgia, serif; font-size: 28px; color: var(--cream); letter-spacing: 2px; }
+        header .meta { text-align: right; font-size: 12px; color: var(--text-dim); }
+        header .meta .version { color: var(--amber); font-weight: bold; }
+
+        /* KPI Row */
+        .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+        .kpi-card {
+            background: var(--surface); border-radius: 8px; padding: 20px;
+            border-left: 4px solid var(--burgundy); transition: transform 0.2s;
+        }
+        .kpi-card:hover { transform: translateY(-2px); }
+        .kpi-card .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 8px; }
+        .kpi-card .value { font-size: 32px; font-weight: bold; color: var(--amber); font-family: Georgia, serif; }
+        .kpi-card .sub { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
+        .kpi-card.critical { border-left-color: var(--danger); }
+        .kpi-card.critical .value { color: var(--danger); }
+        .kpi-card.ok { border-left-color: var(--success); }
+        .kpi-card.ok .value { color: var(--success); }
+
+        /* Section headers */
+        .section-header {
+            font-family: Georgia, serif; font-size: 20px; color: var(--cream);
+            margin: 32px 0 16px; padding-bottom: 8px;
+            border-bottom: 1px solid var(--brown);
+        }
+        .section-header span { color: var(--amber); font-size: 14px; margin-left: 8px; }
+
+        /* Charts grid */
+        .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+        .chart-card { background: var(--surface); border-radius: 8px; padding: 20px; }
+        .chart-card h3 { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        .chart-card canvas { max-height: 260px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+        .data-table th {
+            background: var(--burgundy); color: var(--cream); padding: 10px 14px;
+            text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .data-table td { padding: 10px 14px; border-bottom: 1px solid var(--surface-alt); font-size: 13px; }
+        .data-table tr:hover td { background: var(--surface); }
+
+        /* Status badges */
+        .badge {
+            display: inline-block; padding: 3px 10px; border-radius: 12px;
+            font-size: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .badge.active { background: rgba(76,175,80,0.2); color: var(--success); }
+        .badge.running { background: rgba(76,175,80,0.2); color: var(--success); }
+        .badge.stub { background: rgba(244,67,54,0.2); color: var(--danger); }
+        .badge.partial { background: rgba(255,152,0,0.2); color: var(--warning); }
+        .badge.pending { background: rgba(144,202,249,0.2); color: var(--info); }
+        .badge.critical { background: rgba(244,67,54,0.3); color: var(--danger); }
+        .badge.high { background: rgba(255,152,0,0.3); color: var(--warning); }
+        .badge.medium { background: rgba(212,160,60,0.3); color: var(--amber); }
+        .badge.low { background: rgba(76,175,80,0.2); color: var(--success); }
+        .badge.disconnected { background: rgba(244,67,54,0.3); color: var(--danger); }
+        .badge.done { background: rgba(76,175,80,0.2); color: var(--success); }
+        .badge.today { background: rgba(212,160,60,0.3); color: var(--amber); }
+        .badge.solved { background: rgba(76,175,80,0.2); color: var(--success); }
+        .badge.building { background: rgba(212,160,60,0.3); color: var(--amber); }
+
+        /* Constraint grid */
+        .constraint-row {
+            display: flex; gap: 12px; padding: 10px 14px; margin-bottom: 4px;
+            background: var(--surface); border-radius: 4px; align-items: center;
+        }
+        .constraint-id {
+            min-width: 36px; height: 24px; border-radius: 4px; display: flex;
+            align-items: center; justify-content: center; font-size: 10px; font-weight: bold; color: var(--bg);
+        }
+        .constraint-rule { flex: 1; font-size: 13px; color: var(--cream); font-weight: 500; }
+        .constraint-risk { flex: 1.5; font-size: 12px; color: var(--text-dim); }
+
+        footer {
+            margin-top: 40px; padding: 20px 0; border-top: 1px solid var(--brown);
+            display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted);
+        }
+        footer .quote { font-style: italic; color: var(--text-dim); }
+
+        @media (max-width: 768px) {
+            .chart-grid { grid-template-columns: 1fr; }
+            .kpi-row { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+<div class="dashboard">
+    <header>
+        <h1>NOIZYWORLD</h1>
+        <div class="meta">
+            <div class="version">Sovereign Stack Dashboard v1.0</div>
+            <div>Robert Stephen Plowman — NOIZY.AI</div>
+            <div id="timestamp"></div>
+        </div>
+    </header>
+
+    <!-- KPI Row -->
+    <div class="kpi-row" id="kpi-row"></div>
+
+    <!-- Infrastructure -->
+    <h2 class="section-header">Infrastructure <span>Cloudflare — Fishmusicinc</span></h2>
+    <div class="chart-grid">
+        <div class="chart-card"><h3>Service Status</h3><canvas id="chart-services"></canvas></div>
+        <div class="chart-card"><h3>Database Tables</h3><canvas id="chart-tables"></canvas></div>
+    </div>
+
+    <!-- Agent Family -->
+    <h2 class="section-header">Agent Family <span>8 Agents Registered</span></h2>
+    <table class="data-table" id="agent-table">
+        <thead><tr><th>Agent</th><th>Role</th><th>Device</th><th>Powers</th><th>Status</th></tr></thead>
+        <tbody></tbody>
+    </table>
+
+    <!-- Sovereign Stack Services -->
+    <h2 class="section-header">Sovereign Stack <span>GOD.local — M2 Ultra</span></h2>
+    <table class="data-table" id="services-table">
+        <thead><tr><th>Service</th><th>Port</th><th>Status</th><th>Subdomain</th></tr></thead>
+        <tbody></tbody>
+    </table>
+
+    <!-- Critical Gaps -->
+    <h2 class="section-header">Critical Gaps <span>Ranked by Impact</span></h2>
+    <table class="data-table" id="gaps-table">
+        <thead><tr><th>Severity</th><th>Gap</th><th>Resolution</th></tr></thead>
+        <tbody></tbody>
+    </table>
+
+    <!-- 2036 Constraints -->
+    <h2 class="section-header">2036 Architectural Constraints <span>HEAVEN Future-Back</span></h2>
+    <div id="constraints-container"></div>
+
+    <!-- 7-Day Runbook -->
+    <h2 class="section-header">7-Day Runbook <span>April 10-17</span></h2>
+    <table class="data-table" id="runbook-table">
+        <thead><tr><th>Day</th><th>Task</th><th>Status</th></tr></thead>
+        <tbody></tbody>
+    </table>
+
+    <!-- DreamChamber Build Log -->
+    <h2 class="section-header">DreamChamber Build Log <span>One Problem, One Solution</span></h2>
+    <table class="data-table" id="problems-table">
+        <thead><tr><th>Problem</th><th>Title</th><th>Status</th><th>Deliverables</th></tr></thead>
+        <tbody></tbody>
+    </table>
+
+    <!-- MCP Connectors -->
+    <h2 class="section-header">MCP Connectors <span>Live Integrations</span></h2>
+    <div class="chart-grid">
+        <div class="chart-card"><h3>Connector Status</h3><canvas id="chart-mcp"></canvas></div>
+        <div class="chart-card"><h3>Never Clauses</h3><canvas id="chart-clauses"></canvas></div>
+    </div>
+
+    <footer>
+        <span>NOIZYWORLD — Robert Stephen Plowman — April 2026</span>
+        <span class="quote">"The gap between 2036 and 2026 is infrastructure, not imagination."</span>
+    </footer>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════════
+// EMBEDDED DATA — Live from Cloudflare D1 + MCP audit, April 12, 2026
+// ═══════════════════════════════════════════════════════════════════════
+
+const DATA = {
+    kpis: [
+        { label: "Workers", value: "1", sub: "HEAVEN (Hello World stub)", cls: "critical" },
+        { label: "D1 Databases", value: "2", sub: "agent-memory + gabriel_db", cls: "ok" },
+        { label: "D1 Tables", value: "28", sub: "15 HVS + 13 agent-memory", cls: "ok" },
+        { label: "KV Namespaces", value: "4", sub: "All provisioned", cls: "ok" },
+        { label: "R2 Buckets", value: "0", sub: "NOT ENABLED", cls: "critical" },
+        { label: "Never Clauses", value: "9", sub: "Constitutional, immutable", cls: "ok" },
+        { label: "Agents", value: "8", sub: "All active", cls: "ok" },
+        { label: "Days to Launch", value: "5", sub: "April 17, 2026", cls: "" },
+    ],
+
+    agents: [
+        { id: "GABRIEL", name: "Gabriel", role: "Warrior Orchestrator", device: "iPhone/GOD", powers: "heaven_full, d1, kv, mcp, consent, deploy", status: "active" },
+        { id: "LUCY", name: "Lucy", role: "Compassionate Adaptation Agent", device: "iPad", powers: "heaven_full, d1, kv, observe, speak, act", status: "active" },
+        { id: "SHIRL", name: "Shirl", role: "Data Curator", device: "GOD", powers: "email, calendar, data_curation", status: "active" },
+        { id: "POPS", name: "Pops", role: "Grounding Agent", device: "GOD", powers: "grounding, wisdom", status: "active" },
+        { id: "ENGR_KEITH", name: "Engineer Keith", role: "Studio Engineer", device: "GOD", powers: "audio_analysis, quality_gate, hardware", status: "active" },
+        { id: "DREAM", name: "Dream", role: "Vision Keeper", device: "GOD", powers: "architecture, vision, doctrine", status: "active" },
+        { id: "CB01", name: "CB01", role: "Operations", device: "GOD", powers: "ops, monitoring, health", status: "active" },
+        { id: "HEAVEN", name: "Heaven", role: "API Gateway", device: "Cloudflare", powers: "routing, auth, mcp, fts5, consent_log", status: "stub" },
+    ],
+
+    services: [
+        { name: "DreamChamber", port: ":7777", status: "running", subdomain: "dream.chamber.noizy.ai" },
+        { name: "Voice Bridge", port: ":8088", status: "partial", subdomain: "voice.noizy.ai" },
+        { name: "Open WebUI", port: ":3080", status: "running", subdomain: "ollama.noizy.ai" },
+        { name: "Ollama API", port: ":11434", status: "running", subdomain: "ollama-api.noizy.ai" },
+        { name: "n8n Automation", port: ":5678", status: "running", subdomain: "n8n.noizy.ai" },
+        { name: "Grafana", port: ":3000", status: "running", subdomain: "grafana.noizy.ai" },
+        { name: "Neo4j", port: ":7474", status: "running", subdomain: "graph.noizy.ai" },
+        { name: "Qdrant", port: ":6333", status: "running", subdomain: "vectors.noizy.ai" },
+        { name: "RabbitMQ", port: ":15672", status: "running", subdomain: "mq.noizy.ai" },
+        { name: "Meilisearch", port: ":7700", status: "running", subdomain: "search.noizy.ai" },
+        { name: "HEAVEN Dev", port: ":8787", status: "pending", subdomain: "heaven-dev.noizy.ai" },
+        { name: "Kubernetes", port: ":54335", status: "running", subdomain: "k8s.noizy.ai" },
+    ],
+
+    gaps: [
+        { severity: "critical", gap: "HEAVEN not deployed", resolution: "Deploy HEAVEN v18 (code now ready)" },
+        { severity: "critical", gap: "R2 not enabled", resolution: "Enable R2 in Cloudflare Dashboard (2 min)" },
+        { severity: "high", gap: "Email routing not configured", resolution: "Configure CF Email Routing or iCloud+ custom domain" },
+        { severity: "high", gap: "Stripe disconnected", resolution: "Reconnect in Cowork settings" },
+        { severity: "medium", gap: "Never clauses duplicated (18 vs 9)", resolution: "FIXED — April 12, 2026" },
+        { severity: "medium", gap: "Consent log empty", resolution: "Resolves when HEAVEN deploys" },
+        { severity: "medium", gap: "Stale DB UUID in audit", resolution: "FIXED — correct UUID: 68ac0f08-c4ee" },
+        { severity: "low", gap: "Jira not connected", resolution: "Add Jira scopes to Atlassian" },
+        { severity: "low", gap: "Figma view-only", resolution: "Upgrade seat if design editing needed" },
+    ],
+
+    constraints: [
+        { id: "C1", rule: "No single-actor assumptions", risk: "Hardcoded RSP_001 → full rewrite at actor #2", severity: "danger" },
+        { id: "C2", rule: "API versioning from first request", risk: "No /v1/ prefix → break all integrations on first evolution", severity: "danger" },
+        { id: "C3", rule: "Consent logic as pure function", risk: "Worker-coupled logic → can't test, can't port, can't federate", severity: "danger" },
+        { id: "C4", rule: "Voice DNA in R2, not D1", risk: "Binary blobs in SQLite → 10GB limit, security vulnerability", severity: "warning" },
+        { id: "C5", rule: "Append-only ledger from genesis", risk: "UPDATE/DELETE on ledger → broken audit trail, legal inadmissibility", severity: "warning" },
+        { id: "C6", rule: "Rate table versioning", risk: "In-place rate updates → can't reconstruct historical billing", severity: "warning" },
+        { id: "C7", rule: "Jurisdiction-aware from day one", risk: "Untyped country string → GDPR violation on first EU actor", severity: "success" },
+        { id: "C8", rule: "Idempotency keys on every mutation", risk: "No retry safety → double-billing, consent state corruption", severity: "success" },
+        { id: "C9", rule: "No sequential IDs in public APIs", risk: "Integer IDs → enumeration attacks, information leakage", severity: "success" },
+    ],
+
+    runbook: [
+        { day: "Day 1 (Apr 10)", task: "Foundation — MCP audit, D1 schema, tunnel config", status: "done" },
+        { day: "Day 2 (Apr 11)", task: "Access Policies — CF One Dashboard, R2 enable", status: "partial" },
+        { day: "Day 3 (Apr 12)", task: "Database + HEAVEN v18 deploy", status: "today" },
+        { day: "Day 4 (Apr 13)", task: "Voice Pipeline + Accessibility stack", status: "pending" },
+        { day: "Day 5 (Apr 14)", task: "DreamChamber polish — 11 AI providers, C2PA", status: "pending" },
+        { day: "Day 6 (Apr 15)", task: "Integration + Monitoring — n8n, Grafana", status: "pending" },
+        { day: "Day 7 (Apr 16)", task: "Security audit + Load test + Backup", status: "pending" },
+        { day: "LAUNCH (Apr 17)", task: "The front door opens. NOIZY.AI goes live.", status: "pending" },
+    ],
+
+    problems: [
+        { num: "#1", title: "Hero + Quick Signup", status: "solved", deliverables: "noizy-hero-signup-v1.jsx, SPEC-v1.md" },
+        { num: "#2", title: "Full Systems Audit", status: "solved", deliverables: "NOIZY-FULL-AUDIT-2026-04-12.md" },
+        { num: "#3", title: "NOIZYWORLD Master Deck", status: "solved", deliverables: "NOIZYWORLD.pptx (37 slides)" },
+        { num: "#4", title: "2036 Future-Back Vision", status: "solved", deliverables: "HEAVEN-2036-FUTURE-BACK.md, 3 deck slides" },
+        { num: "#5", title: "Gordon Docker Prompts", status: "solved", deliverables: "GORDON-DOCKER-PROMPTS.md (7 prompts)" },
+        { num: "#6", title: "Fix Duplicate Never Clauses", status: "solved", deliverables: "Live D1 fix — 9 duplicates deleted" },
+        { num: "#7", title: "HEAVEN v18 Consent Kernel", status: "solved", deliverables: "heaven/ — 8 files, full Worker codebase" },
+        { num: "#8", title: "Sovereign Stack Dashboard", status: "building", deliverables: "noizy-dashboard.html" },
+    ],
+
+    mcpConnectors: [
+        { name: "Cloudflare", status: "live" }, { name: "Gmail", status: "live" },
+        { name: "Google Calendar", status: "live" }, { name: "Google Drive", status: "live" },
+        { name: "Slack", status: "live" }, { name: "Notion", status: "live" },
+        { name: "Linear", status: "live" }, { name: "Figma", status: "live" },
+        { name: "Confluence", status: "live" }, { name: "Hugging Face", status: "live" },
+        { name: "GoDaddy", status: "live" }, { name: "GitKraken", status: "live" },
+        { name: "Stripe", status: "disconnected" },
+    ],
+};
+
+// ═══════════════════════════════════════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════════════════════════════════════
+
+document.getElementById('timestamp').textContent = new Date().toLocaleString();
+
+// KPIs
+const kpiRow = document.getElementById('kpi-row');
+DATA.kpis.forEach(k => {
+    kpiRow.innerHTML += `<div class="kpi-card ${k.cls}">
+        <div class="label">${k.label}</div><div class="value">${k.value}</div><div class="sub">${k.sub}</div>
+    </div>`;
+});
+
+// Agents table
+const agentBody = document.querySelector('#agent-table tbody');
+DATA.agents.forEach(a => {
+    agentBody.innerHTML += `<tr>
+        <td><strong>${a.name}</strong> <span style="color:var(--text-muted);font-size:11px">${a.id}</span></td>
+        <td>${a.role}</td><td>${a.device}</td>
+        <td style="font-size:11px;color:var(--text-dim)">${a.powers}</td>
+        <td><span class="badge ${a.status}">${a.status}</span></td>
+    </tr>`;
+});
+
+// Services table
+const servBody = document.querySelector('#services-table tbody');
+DATA.services.forEach(s => {
+    servBody.innerHTML += `<tr>
+        <td><strong>${s.name}</strong></td><td style="font-family:monospace">${s.port}</td>
+        <td><span class="badge ${s.status}">${s.status}</span></td>
+        <td style="font-size:12px;color:var(--text-dim)">${s.subdomain}</td>
+    </tr>`;
+});
+
+// Gaps table
+const gapBody = document.querySelector('#gaps-table tbody');
+DATA.gaps.forEach(g => {
+    gapBody.innerHTML += `<tr>
+        <td><span class="badge ${g.severity}">${g.severity}</span></td>
+        <td>${g.gap}</td><td style="font-size:12px;color:var(--text-dim)">${g.resolution}</td>
+    </tr>`;
+});
+
+// Constraints
+const cc = document.getElementById('constraints-container');
+DATA.constraints.forEach(c => {
+    const colors = { danger: 'var(--danger)', warning: 'var(--amber)', success: 'var(--success)' };
+    cc.innerHTML += `<div class="constraint-row">
+        <div class="constraint-id" style="background:${colors[c.severity]}">${c.id}</div>
+        <div class="constraint-rule">${c.rule}</div>
+        <div class="constraint-risk">${c.risk}</div>
+    </div>`;
+});
+
+// Runbook table
+const rbBody = document.querySelector('#runbook-table tbody');
+DATA.runbook.forEach(r => {
+    rbBody.innerHTML += `<tr>
+        <td><strong>${r.day}</strong></td><td>${r.task}</td>
+        <td><span class="badge ${r.status}">${r.status}</span></td>
+    </tr>`;
+});
+
+// Problems table
+const pbBody = document.querySelector('#problems-table tbody');
+DATA.problems.forEach(p => {
+    pbBody.innerHTML += `<tr>
+        <td><strong>${p.num}</strong></td><td>${p.title}</td>
+        <td><span class="badge ${p.status}">${p.status}</span></td>
+        <td style="font-size:12px;color:var(--text-dim)">${p.deliverables}</td>
+    </tr>`;
+});
+
+// ═══════════════════════════════════════════════════════════════════════
+// CHARTS
+// ═══════════════════════════════════════════════════════════════════════
+
+Chart.defaults.color = '#A09080';
+Chart.defaults.borderColor = '#2A2A2A';
+
+// Service Status Donut
+new Chart(document.getElementById('chart-services'), {
+    type: 'doughnut',
+    data: {
+        labels: ['Running', 'Partial', 'Stub/Pending'],
+        datasets: [{
+            data: [
+                DATA.services.filter(s => s.status === 'running').length,
+                DATA.services.filter(s => s.status === 'partial').length,
+                DATA.services.filter(s => ['stub','pending'].includes(s.status)).length
+            ],
+            backgroundColor: ['#4CAF50', '#FF9800', '#F44336'],
+            borderWidth: 0,
+        }]
+    },
+    options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { padding: 16 } } } }
+});
+
+// Database Tables Bar
+new Chart(document.getElementById('chart-tables'), {
+    type: 'bar',
+    data: {
+        labels: ['agent-memory', 'gabriel_db (HVS)'],
+        datasets: [{
+            label: 'Tables',
+            data: [15, 15],
+            backgroundColor: ['#4A3223', '#6B1D2A'],
+            borderRadius: 4,
+        }]
+    },
+    options: { responsive: true, indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } } } }
+});
+
+// MCP Connectors
+new Chart(document.getElementById('chart-mcp'), {
+    type: 'doughnut',
+    data: {
+        labels: ['Live', 'Disconnected'],
+        datasets: [{
+            data: [
+                DATA.mcpConnectors.filter(m => m.status === 'live').length,
+                DATA.mcpConnectors.filter(m => m.status === 'disconnected').length
+            ],
+            backgroundColor: ['#4CAF50', '#F44336'],
+            borderWidth: 0,
+        }]
+    },
+    options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+});
+
+// Never Clauses Radar
+new Chart(document.getElementById('chart-clauses'), {
+    type: 'radar',
+    data: {
+        labels: ['Political', 'Sexual', 'Weapons', 'Deception', 'Hate', 'Transfer', 'Surveillance', 'Integrity', 'DNA Transfer'],
+        datasets: [{
+            label: 'Protection Level',
+            data: [10, 10, 10, 10, 10, 10, 10, 10, 10],
+            backgroundColor: 'rgba(107,29,42,0.3)',
+            borderColor: '#6B1D2A',
+            borderWidth: 2,
+            pointBackgroundColor: '#D4A03C',
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: { r: { beginAtZero: true, max: 10, ticks: { display: false }, grid: { color: '#2A2A2A' }, angleLines: { color: '#2A2A2A' } } },
+        plugins: { legend: { display: false } }
+    }
+});
+</script>
+</body>
+</html>

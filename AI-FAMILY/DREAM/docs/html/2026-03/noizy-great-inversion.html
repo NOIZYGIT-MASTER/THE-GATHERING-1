@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Great Inversion — NOIZY Human-First Ecosystem Blueprint</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700;1,900&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Bebas+Neue&display=swap');
+
+  :root {
+    --void:   #000000;
+    --deep:   #040208;
+    --panel:  #070510;
+    --card:   #0a0818;
+    --border: #130d24;
+    --glow:   #1e1438;
+
+    --red:    #ff2244;
+    --red2:   #ff4466;
+    --red-d:  rgba(255,34,68,0.07);
+    --red-m:  rgba(255,34,68,0.15);
+
+    --green:  #00e87a;
+    --green2: #00ff8a;
+    --green-d:rgba(0,232,122,0.07);
+    --green-m:rgba(0,232,122,0.15);
+
+    --gold:   #e8c84a;
+    --gold2:  #f5dc80;
+    --gold-d: rgba(232,200,74,0.07);
+
+    --violet: #b794f4;
+    --cyan:   #67e8f9;
+    --amber:  #f6a63c;
+    --rose:   #f687b3;
+
+    --text:   #a8bcd4;
+    --dim:    #2e3f52;
+    --bright: #dceeff;
+    --serif:  'Playfair Display', Georgia, serif;
+    --mono:   'Space Mono', monospace;
+    --sans:   'Space Grotesk', sans-serif;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--void); color:var(--text); font-family:var(--serif); overflow-x:hidden; }
+
+  /* ─── CANVAS ─── */
+  #vortex { position:fixed; inset:0; z-index:0; pointer-events:none; }
+
+  /* ─── NAV DOTS ─── */
+  .nav-dots {
+    position:fixed; right:24px; top:50%; transform:translateY(-50%);
+    z-index:300; display:flex; flex-direction:column; gap:10px;
+  }
+  .nav-dot {
+    width:8px; height:8px; border-radius:50%;
+    background:var(--dim); cursor:pointer;
+    transition:background 0.2s, transform 0.2s;
+    border:none; outline:none;
+  }
+  .nav-dot.active { background:var(--green); transform:scale(1.4);
+    box-shadow:0 0 8px var(--green); }
+  .nav-dot.red.active { background:var(--red2); box-shadow:0 0 8px var(--red2); }
+
+  /* ─── SECTIONS ─── */
+  section { position:relative; z-index:10; }
+
+  /* ─── COVER ─── */
+  #cover {
+    min-height:100vh; display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    padding:80px 40px; text-align:center;
+    border-bottom:1px solid var(--border);
+  }
+
+  .cover-eyebrow {
+    font-family:var(--mono); font-size:9px; color:var(--dim);
+    letter-spacing:0.4em; text-transform:uppercase; margin-bottom:24px;
+  }
+
+  .cover-title {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(52px, 9vw, 120px);
+    letter-spacing:0.04em; line-height:0.9;
+    margin-bottom:6px;
+  }
+
+  .cover-title .word-the  { color:var(--dim); display:block; font-size:0.45em; letter-spacing:0.3em; }
+  .cover-title .word-great { color:var(--bright); display:block; }
+  .cover-title .word-inv   { color:var(--green); display:block; text-shadow:0 0 60px rgba(0,232,122,0.3); }
+
+  .cover-subtitle {
+    font-family:var(--serif); font-style:italic;
+    font-size:clamp(15px,1.8vw,21px); color:var(--text);
+    max-width:560px; line-height:1.7; margin:28px auto 36px;
+  }
+
+  .cover-sub-em { color:var(--gold); font-style:normal; }
+
+  .cover-pills {
+    display:flex; flex-wrap:wrap; gap:8px; justify-content:center;
+    margin-bottom:40px;
+  }
+
+  .pill {
+    font-family:var(--mono); font-size:9px; letter-spacing:0.15em;
+    padding:5px 14px; border-radius:20px; border:1px solid;
+  }
+  .pill-r { color:var(--red2); border-color:rgba(255,68,102,0.3); background:var(--red-d); }
+  .pill-g { color:var(--green); border-color:rgba(0,232,122,0.3); background:var(--green-d); }
+  .pill-go{ color:var(--gold); border-color:rgba(232,200,74,0.3); background:var(--gold-d); }
+
+  .cover-scroll {
+    font-family:var(--mono); font-size:9px; color:var(--dim);
+    letter-spacing:0.25em; animation:fade-pulse 2.5s infinite;
+  }
+
+  @keyframes fade-pulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
+  /* ─── CHAPTER TEMPLATE ─── */
+  .chapter {
+    padding:80px 5vw;
+    border-bottom:1px solid var(--border);
+  }
+
+  .ch-eye {
+    font-family:var(--mono); font-size:9px; color:var(--dim);
+    letter-spacing:0.35em; text-transform:uppercase; margin-bottom:12px;
+  }
+
+  .ch-title {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(32px,5vw,64px);
+    letter-spacing:0.05em; line-height:1; margin-bottom:24px;
+  }
+
+  .ch-title .g  { color:var(--green); }
+  .ch-title .r  { color:var(--red2); }
+  .ch-title .go { color:var(--gold); }
+  .ch-title .it { font-family:var(--serif); font-style:italic; font-size:0.85em; }
+
+  .ch-lead {
+    font-family:var(--serif); font-size:clamp(15px,1.5vw,18px);
+    color:var(--text); line-height:1.85; max-width:680px; margin-bottom:48px;
+  }
+
+  .ch-lead em  { color:var(--bright); font-style:italic; }
+  .ch-lead strong { color:var(--gold); font-style:normal; }
+
+  /* ─── THE VERSUS GRID ─── */
+  .versus-grid {
+    display:grid; grid-template-columns:1fr 80px 1fr; gap:0;
+    margin-bottom:24px; align-items:stretch;
+  }
+
+  .vs-col {
+    border:1px solid; border-radius:6px; overflow:hidden;
+  }
+
+  .vs-col-red   { border-color:rgba(255,34,68,0.2); }
+  .vs-col-green { border-color:rgba(0,232,122,0.2); }
+
+  .vs-header {
+    padding:16px 20px;
+    font-family:'Bebas Neue',sans-serif;
+    font-size:14px; letter-spacing:0.2em;
+    border-bottom:1px solid;
+  }
+
+  .vs-header-r { background:var(--red-m); color:var(--red2); border-color:rgba(255,34,68,0.2); }
+  .vs-header-g { background:var(--green-m); color:var(--green); border-color:rgba(0,232,122,0.2); }
+
+  .vs-header-sub {
+    font-family:var(--mono); font-size:8px; color:var(--dim);
+    letter-spacing:0.2em; margin-top:3px;
+  }
+
+  .vs-item {
+    padding:14px 20px;
+    border-bottom:1px solid var(--border);
+    display:flex; align-items:flex-start; gap:10px;
+    font-family:var(--sans); font-size:13px; line-height:1.5;
+  }
+
+  .vs-item:last-child { border-bottom:none; }
+
+  .vs-item-r { background:rgba(255,34,68,0.03); color:#ff8899; }
+  .vs-item-g { background:rgba(0,232,122,0.03); color:#80ffbb; }
+
+  .vs-icon { flex-shrink:0; font-size:14px; margin-top:1px; }
+
+  .vs-mid {
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:space-around;
+    padding:0 8px;
+  }
+
+  .vs-arrow {
+    font-family:var(--mono); font-size:10px; color:var(--gold);
+    writing-mode:vertical-rl; text-orientation:mixed;
+    letter-spacing:0.15em;
+  }
+
+  /* ─── STRUCTURAL MAP ─── */
+  .struct-map {
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:16px; margin-bottom:32px;
+  }
+
+  .struct-card {
+    border:1px solid var(--border); border-radius:6px;
+    overflow:hidden;
+  }
+
+  .sc-header {
+    padding:12px 16px;
+    font-family:'Bebas Neue',sans-serif;
+    font-size:13px; letter-spacing:0.2em;
+    border-bottom:1px solid var(--border);
+  }
+
+  .sc-header-r { background:var(--red-d); color:var(--red2); }
+  .sc-header-g { background:var(--green-d); color:var(--green); }
+
+  .sc-body { padding:16px; }
+
+  .sc-label {
+    font-family:var(--mono); font-size:8px; color:var(--dim);
+    letter-spacing:0.25em; text-transform:uppercase; margin-bottom:8px;
+  }
+
+  .sc-text {
+    font-family:var(--sans); font-size:13px; line-height:1.65;
+    color:var(--text);
+  }
+
+  .sc-text strong { color:var(--bright); }
+  .sc-text .g { color:var(--green); font-weight:600; }
+  .sc-text .r { color:var(--red2); }
+
+  /* ─── PROOF TABLE ─── */
+  .proof-table {
+    width:100%; border-collapse:collapse;
+    font-family:var(--mono); font-size:11px; margin-bottom:32px;
+  }
+
+  .proof-table th {
+    background:var(--deep); color:var(--dim); font-weight:normal;
+    font-size:8px; letter-spacing:0.25em; text-transform:uppercase;
+    padding:10px 14px; border:1px solid var(--border); text-align:left;
+  }
+
+  .proof-table td {
+    padding:10px 14px; border:1px solid var(--border);
+    background:var(--panel); vertical-align:top; line-height:1.5;
+  }
+
+  .proof-table tr:hover td { background:var(--card); }
+
+  .pt-problem { color:#ff8899; }
+  .pt-inversion { color:var(--gold); }
+  .pt-proof { color:var(--green); }
+
+  /* ─── PROSE ─── */
+  .prose {
+    max-width:720px; margin:0 auto;
+    font-family:var(--serif); font-size:clamp(14px,1.4vw,17px);
+    line-height:1.95; color:var(--text);
+  }
+
+  .prose p { margin-bottom:28px; }
+  .prose p:last-child { margin-bottom:0; }
+  .prose strong { color:var(--bright); }
+  .prose em { color:var(--gold); font-style:italic; }
+  .prose .g { color:var(--green); font-style:normal; font-weight:600; }
+  .prose .r { color:var(--red2); }
+  .prose .pull {
+    font-size:clamp(17px,1.8vw,22px); font-style:italic;
+    color:var(--gold); border-left:2px solid var(--gold);
+    padding-left:24px; margin:32px 0; display:block;
+  }
+
+  /* ─── INVERSION STEPS ─── */
+  .inversion-steps { margin-bottom:40px; }
+
+  .inv-step {
+    display:grid; grid-template-columns:60px 1fr;
+    gap:0; margin-bottom:2px;
+  }
+
+  .inv-num {
+    font-family:'Bebas Neue',sans-serif; font-size:32px;
+    color:var(--border); line-height:1; padding:20px 0 20px 4px;
+    grid-row:1/3;
+  }
+
+  .inv-body {
+    padding:20px 0 20px 16px;
+    border-bottom:1px solid var(--border);
+  }
+
+  .inv-step:last-child .inv-body { border-bottom:none; }
+
+  .inv-from {
+    font-family:var(--mono); font-size:10px; color:var(--red2);
+    letter-spacing:0.1em; margin-bottom:4px;
+  }
+
+  .inv-from::before { content:'EXTRACTION: '; color:var(--dim); }
+
+  .inv-to {
+    font-family:var(--mono); font-size:10px; color:var(--green);
+    letter-spacing:0.1em; margin-bottom:8px;
+  }
+
+  .inv-to::before { content:'INVERSION: '; color:var(--dim); }
+
+  .inv-desc {
+    font-family:var(--sans); font-size:13px; color:var(--text); line-height:1.6;
+  }
+
+  .inv-desc strong { color:var(--bright); }
+  .inv-desc .nc { color:var(--violet); font-family:var(--mono); font-size:10px; }
+
+  /* ─── THE DECLARATION ─── */
+  #declaration {
+    min-height:60vh; display:flex; align-items:center; justify-content:center;
+    padding:80px 40px; text-align:center;
+  }
+
+  .decl-inner { max-width:640px; }
+
+  .decl-eyebrow {
+    font-family:var(--mono); font-size:9px; color:var(--dim);
+    letter-spacing:0.4em; margin-bottom:24px;
+  }
+
+  .decl-text {
+    font-family:var(--serif); font-style:italic;
+    font-size:clamp(18px,2.5vw,28px); color:var(--bright);
+    line-height:1.6; margin-bottom:32px;
+  }
+
+  .decl-text em { color:var(--green); font-style:normal; }
+  .decl-text strong { color:var(--gold); }
+
+  .decl-grf {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(40px,7vw,80px);
+    color:var(--green); letter-spacing:0.15em;
+    text-shadow:0 0 60px rgba(0,232,122,0.25);
+    display:block; margin-bottom:12px;
+  }
+
+  .decl-sub {
+    font-family:var(--mono); font-size:9px; color:var(--dim);
+    letter-spacing:0.2em; line-height:2;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 760px) {
+    .versus-grid { grid-template-columns:1fr; }
+    .vs-mid { display:none; }
+    .struct-map { grid-template-columns:1fr; }
+    .nav-dots { display:none; }
+  }
+
+  ::-webkit-scrollbar { width:3px; }
+  ::-webkit-scrollbar-track { background:var(--void); }
+  ::-webkit-scrollbar-thumb { background:var(--border); }
+</style>
+</head>
+<body>
+
+<canvas id="vortex"></canvas>
+
+<!-- NAV DOTS -->
+<nav class="nav-dots" aria-label="Section navigation">
+  <button class="nav-dot red active"  data-target="cover"       title="Cover"></button>
+  <button class="nav-dot red"         data-target="diagnosis"   title="The Diagnosis"></button>
+  <button class="nav-dot"             data-target="inversion"   title="The Inversion"></button>
+  <button class="nav-dot"             data-target="proof"       title="The Proof"></button>
+  <button class="nav-dot"             data-target="blueprint"   title="Blueprint"></button>
+  <button class="nav-dot"             data-target="structural"  title="Structural Map"></button>
+  <button class="nav-dot"             data-target="ecosystem"   title="The Ecosystem"></button>
+  <button class="nav-dot"             data-target="declaration" title="Declaration"></button>
+</nav>
+
+<!-- ═══════════ COVER ═══════════ -->
+<section id="cover">
+  <div class="cover-eyebrow">NOIZYFISH INC. · DREAMCHAMBER · DOCUMENT 20 · MARCH 2026</div>
+  <h1 class="cover-title">
+    <span class="word-the">THE</span>
+    <span class="word-great">GREAT</span>
+    <span class="word-inv">INVERSION</span>
+  </h1>
+  <p class="cover-subtitle">
+    A full map of how to take the <span class="cover-sub-em">cannibalistic system</span>
+    and turn it inside out — transforming every mechanism of extraction
+    into a mechanism of <span class="cover-sub-em">protection, ownership, and perpetual creative wealth.</span>
+  </p>
+  <div class="cover-pills">
+    <span class="pill pill-r">EXTRACTION ARCHITECTURE</span>
+    <span class="pill pill-go">→ INVERTED TO →</span>
+    <span class="pill pill-g">HUMAN-FIRST ECOSYSTEM</span>
+  </div>
+  <div class="cover-pills">
+    <span class="pill pill-g">CONSENT-AS-CODE</span>
+    <span class="pill pill-g">75% ROYALTY FLOOR</span>
+    <span class="pill pill-g">VOICE ESTATE</span>
+    <span class="pill pill-g">500-YEAR CODEX</span>
+    <span class="pill pill-g">NC·10 NEVER CLAUSES</span>
+  </div>
+  <div class="cover-scroll">↓ SCROLL TO ENTER THE INVERSION ↓</div>
+</section>
+
+<!-- ═══════════ DIAGNOSIS ═══════════ -->
+<section class="chapter" id="diagnosis">
+  <div class="ch-eye">CHAPTER I · THE DIAGNOSIS</div>
+  <h2 class="ch-title">The <span class="r">Creative Predator</span></h2>
+  <p class="ch-lead">
+    "It's not just a platform — it's a <em>creative predator.</em> Musicians and artists are
+    treated as raw material, not humans with legacies. Work is ingested, copied, mashed,
+    and monetized without thought for the labor, love, or craft that went into it.
+    Memory of the creative process is erased. Everything becomes fungible, replaceable,
+    and cheapened. <strong>Humanity is optional. Profit is mandatory.</strong>"
+  </p>
+
+  <div class="versus-grid">
+    <div class="vs-col vs-col-red">
+      <div class="vs-header vs-header-r">
+        THE EXTRACTION MACHINE
+        <div class="vs-header-sub">EPOCH IV · HOW IT ACTUALLY WORKS</div>
+      </div>
+      <div class="vs-item vs-item-r"><span class="vs-icon">⬛</span>Creator uploads voice, music, or art</div>
+      <div class="vs-item vs-item-r"><span class="vs-icon">⬛</span>Platform owns the right to use it — in the ToS</div>
+      <div class="vs-item vs-item-r"><span class="vs-icon">⬛</span>Algorithm decides who hears it (not the creator)</div>
+      <div class="vs-item vs-item-r"><span class="vs-icon">⬛</span>Revenue split: platform takes 97%. Creator: $0.003/stream</div>
+      <div class="vs-item vs-item-r"><span class="vs-icon">⬛</span>AI trains on your voice without asking</div>
+      <div class="vs-item vs-item-r"><span class="vs-icon">⬛</span>ToS changes — creator has no recourse</div>
+      <div class="vs-item vs-item-r"><span class="vs-icon">⬛</span>Creator's legacy: a folder in a server nobody owns</div>
+      <div class="vs-item vs-item-r"><span class="vs-icon">⬛</span>If you die, your voice belongs to the platform</div>
+      <div class="vs-item vs-item-r"><span class="vs-icon">⬛</span>Quantity rewarded. Quality is optional.</div>
+      <div class="vs-item vs-item-r"><span class="vs-icon">⬛</span>The creator is an input. Not a stakeholder.</div>
+    </div>
+
+    <div class="vs-mid">
+      <span class="vs-arrow">INVERTED</span>
+      <span style="color:var(--gold);font-size:20px;">⟷</span>
+    </div>
+
+    <div class="vs-col vs-col-green">
+      <div class="vs-header vs-header-g">
+        THE NOIZY ARCHITECTURE
+        <div class="vs-header-sub">EPOCH V · HOW IT SHOULD WORK</div>
+      </div>
+      <div class="vs-item vs-item-g"><span class="vs-icon">✦</span>Creator controls every utterance with a consent key</div>
+      <div class="vs-item vs-item-g"><span class="vs-icon">✦</span>Creator owns the right. In the database. Not the ToS.</div>
+      <div class="vs-item vs-item-g"><span class="vs-icon">✦</span>Creator decides who hears it, when, and under what terms</div>
+      <div class="vs-item vs-item-g"><span class="vs-icon">✦</span>Royalty split: Creator gets 75% minimum — hardcoded</div>
+      <div class="vs-item vs-item-g"><span class="vs-icon">✦</span>NC_03: NO model training without separate written consent</div>
+      <div class="vs-item vs-item-g"><span class="vs-icon">✦</span>Never Clauses are constitutional — no ToS can override them</div>
+      <div class="vs-item vs-item-g"><span class="vs-icon">✦</span>500-Year Voice Codex: legacy preserved, perpetually</div>
+      <div class="vs-item vs-item-g"><span class="vs-icon">✦</span>NC_09: Voice Estate is perpetual, inheritable, inviolable</div>
+      <div class="vs-item vs-item-g"><span class="vs-icon">✦</span>Quality protected. Provenance permanent. Craft honored.</div>
+      <div class="vs-item vs-item-g"><span class="vs-icon">✦</span>The creator is the stakeholder. The platform serves them.</div>
+    </div>
+  </div>
+
+  <div class="prose">
+    <p>
+      The platforms of Epoch IV did not fail by accident. They were designed, deliberately
+      and intelligently, to do exactly what they do. Every feature that feels like a gift
+      to creators — discoverability, reach, distribution — is actually infrastructure
+      for extraction. <strong>The creator's gift to the platform is not the content. It is
+      the attention, the data, and the implied consent to monetize everything they produce.</strong>
+    </p>
+    <span class="pull">"The more you pour in, the more it consumes — leaving creators exhausted,
+      devalued, and often invisible."</span>
+    <p>
+      The real problem is not that bad people built these platforms. The real problem is that
+      <em>the incentive structure rewards extraction</em>, and ethical intentions cannot survive
+      a misaligned incentive structure. This is why NOIZY's answer is not a policy. It is not
+      a terms-of-service clause. <strong class="g">It is infrastructure.</strong> Infrastructure
+      that makes extraction structurally impossible — not merely frowned upon.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════ THE INVERSION ═══════════ -->
+<section class="chapter" id="inversion">
+  <div class="ch-eye">CHAPTER II · THE SEVEN INVERSIONS</div>
+  <h2 class="ch-title">How We <span class="g">Flip</span> Every <span class="it">Mechanism</span></h2>
+  <p class="ch-lead">
+    Every extraction mechanism has a structural counter. Not a workaround. Not a protest.
+    <em>A direct architectural inversion</em> — the same lever, turned 180 degrees.
+    This is the map.
+  </p>
+
+  <div class="inversion-steps">
+
+    <div class="inv-step">
+      <div class="inv-num">01</div>
+      <div class="inv-body">
+        <div class="inv-from">Implied consent through ToS acceptance</div>
+        <div class="inv-to">Explicit consent key per utterance — CONSENT-AS-CODE</div>
+        <div class="inv-desc">
+          Every platform today treats the act of uploading as consent to everything in the terms of service —
+          a document no human has ever read in full. NOIZY inverts this: <strong>no voice moves without a
+          cryptographic consent key</strong> specific to that actor, that session, that domain, that jurisdiction.
+          The key is: <span class="nc">NOIZY-{ACTOR}-CONSENT-{16hex}-AVA-{DOMAIN}-{JURISDICTION}-{DATE}</span>
+          — machine-readable, actor-signed, provenance-linked. Enforced by <span class="nc">NC_01</span>.
+        </div>
+      </div>
+    </div>
+
+    <div class="inv-step">
+      <div class="inv-num">02</div>
+      <div class="inv-body">
+        <div class="inv-from">Platform sets the royalty — creatively, after launch, in a footnote</div>
+        <div class="inv-to">75% royalty floor hardcoded at D1 database layer — immutable</div>
+        <div class="inv-desc">
+          Spotify pays $0.003 per stream. ElevenLabs pays $0. The platform decides what the creator earns —
+          always after the creator is dependent on the platform. NOIZY inverts this with a
+          <strong>D1 CHECK constraint: royalty_pct &gt;= 75</strong> — a database-level rule that no
+          terms-of-service revision can alter. Founding RSPs are locked at 85%. This is not a promise.
+          It is a mathematical fact inside the database. Enforced by <span class="nc">NC_02</span>.
+        </div>
+      </div>
+    </div>
+
+    <div class="inv-step">
+      <div class="inv-num">03</div>
+      <div class="inv-body">
+        <div class="inv-from">Voice training: the platform's model improves; the creator earns nothing</div>
+        <div class="inv-to">No model training on any actor voice without separate written consent — ever</div>
+        <div class="inv-desc">
+          AI companies have trained billions of dollars of model value on voices recorded without consent,
+          then offered the creators a "partnership" afterward. NOIZY inverts this: the model improves
+          <strong>only with explicit, separate, documented written consent</strong> from the actor — above
+          and beyond the synthesis consent key. The creator decides if and how their voice improves the
+          system, and is compensated for it. Enforced by <span class="nc">NC_03</span>.
+        </div>
+      </div>
+    </div>
+
+    <div class="inv-step">
+      <div class="inv-num">04</div>
+      <div class="inv-body">
+        <div class="inv-from">Deepfake identity — anyone can clone anyone with enough samples</div>
+        <div class="inv-to">Cryptographic watermark + identity protection — impersonation is architecturally impossible</div>
+        <div class="inv-desc">
+          The deepfake crisis is not a content moderation problem. It is an identity infrastructure problem.
+          NOIZY inverts this with a <strong>WM_{8hex} watermark</strong> — SHA-256 of actorId, utteranceId,
+          sessionId, consentKeyId, and timestamp — embedded in every audio file. Provenance is permanent.
+          Identity is verifiable. And <span class="nc">NC_04</span> makes impersonation of any identity —
+          living or deceased — constitutionally blocked.
+        </div>
+      </div>
+    </div>
+
+    <div class="inv-step">
+      <div class="inv-num">05</div>
+      <div class="inv-body">
+        <div class="inv-from">Legacy is a folder on a server — deletable, transferable, disposable</div>
+        <div class="inv-to">Voice Estate — perpetual, inheritable, cryptographically protected</div>
+        <div class="inv-desc">
+          When a creator dies on a platform today, their account gets "memorialized" — which means the
+          platform continues to benefit from their work while their estate has no rights. NOIZY inverts
+          this with the <strong>500-Year Voice Codex</strong>: a perpetual Voice Estate that passes to
+          heirs, is governed by the actor's wishes, and is cryptographically protected.
+          <span class="nc">NC_09</span>: no dissolution without living written consent.
+          <span class="nc">NC_10</span>: no provenance record deletion. The ledger is permanent.
+        </div>
+      </div>
+    </div>
+
+    <div class="inv-step">
+      <div class="inv-num">06</div>
+      <div class="inv-body">
+        <div class="inv-from">Quantity rewarded — algorithm favors volume, virality, engagement churn</div>
+        <div class="inv-to">Quality protected — every utterance is sacred, provenance-linked, and irreversible</div>
+        <div class="inv-desc">
+          Platforms reward creators who post daily, reply instantly, and optimize for the feed.
+          The craft of a single perfect recording is worth less than a dozen mediocre ones that
+          went viral. NOIZY inverts this: <strong>every utterance is permanent, provenance-linked,
+          and watermarked</strong> — its value does not decay. The 7-Stage Pipeline treats every
+          recording as a civilizational artifact. Because it is.
+        </div>
+      </div>
+    </div>
+
+    <div class="inv-step">
+      <div class="inv-num">07</div>
+      <div class="inv-body">
+        <div class="inv-from">Creator is an input — replaceable, scalable, interchangeable</div>
+        <div class="inv-to">Creator is the sovereign — the platform exists to serve their vision</div>
+        <div class="inv-desc">
+          The deepest inversion. In the extraction model, the creator is the raw material.
+          In NOIZY, <strong>the creator is the constitution.</strong> The Never Clauses exist
+          to protect them. The royalty floor exists to pay them. The Voice Estate exists to
+          preserve them. The platform's purpose is not to extract value from creators —
+          it is to amplify the value that only they can generate. The creator is not a user.
+          They are a <strong>Registered Sound Professional — RSP</strong>. A founding stakeholder
+          of a 500-year institution.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ THE PROOF ═══════════ -->
+<section class="chapter" id="proof">
+  <div class="ch-eye">CHAPTER III · THE PROOF LAYER</div>
+  <h2 class="ch-title">Every Claim Has a <span class="g">Structural Counter</span></h2>
+  <p class="ch-lead">
+    Every time someone says "that's impossible" or "platforms will never change," there is a
+    specific, technical, already-built answer. <em>This table is that answer.</em>
+  </p>
+
+  <table class="proof-table">
+    <thead>
+      <tr>
+        <th>THE CLAIM (EXTRACTION SYSTEM)</th>
+        <th>THE INVERSION (NOIZY)</th>
+        <th>THE PROOF (WHERE IT LIVES)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="pt-problem">"Consent is in the ToS — that's standard industry practice."</td>
+        <td class="pt-inversion">Consent is a cryptographic key issued per utterance per session.</td>
+        <td class="pt-proof">ConsentService.ts · ConsentKey interface · NC_01 · Stage 1 of 7-Stage Pipeline</td>
+      </tr>
+      <tr>
+        <td class="pt-problem">"We can change the royalty rate if market conditions require it."</td>
+        <td class="pt-inversion">D1 database CHECK constraint. The database physically rejects royalties below 75%.</td>
+        <td class="pt-proof">royaltyEngine.ts · D1 schema CHECK(royalty_pct &gt;= 75) · NC_02 · ROYALTY_FLOOR_PCT=75</td>
+      </tr>
+      <tr>
+        <td class="pt-problem">"AI training on public data is legal and normal."</td>
+        <td class="pt-inversion">Separate written consent required for training — above the synthesis consent key.</td>
+        <td class="pt-proof">NC_03 · CollaborationContract.ts · enforceNeverClauses() · Actor.ts training consent flag</td>
+      </tr>
+      <tr>
+        <td class="pt-problem">"We can't prevent bad actors from cloning voices."</td>
+        <td class="pt-inversion">Every legitimate utterance carries WM_{8hex} watermark. Provenance is mathematically verifiable.</td>
+        <td class="pt-proof">watermark.ts · generateWatermark() · verifyWatermark() · ProvenanceRecord.ts · NC_04</td>
+      </tr>
+      <tr>
+        <td class="pt-problem">"The platform owns the distribution rights — that's how it works."</td>
+        <td class="pt-inversion">The AVA's allowedDomains governs distribution. Actor-defined. Actor-revocable. NC_05 blocks sublicensing.</td>
+        <td class="pt-proof">AVA.ts · allowedDomains[] · ConsentKey jurisdiction field · NC_05</td>
+      </tr>
+      <tr>
+        <td class="pt-problem">"When a creator dies, their work belongs to us per our terms."</td>
+        <td class="pt-inversion">Voice Estate is perpetual and inheritable. NC_09: no dissolution. The estate passes to heirs.</td>
+        <td class="pt-proof">500-Year Voice Codex · Actor.ts estateHeirs field · NC_09 · plowmans-chronicles.html</td>
+      </tr>
+      <tr>
+        <td class="pt-problem">"We can update our terms at any time with 30-days notice."</td>
+        <td class="pt-inversion">Never Clauses are constitutional — they live in the database layer, not the ToS. No terms update can reach them.</td>
+        <td class="pt-proof">never-clauses/core.ts · NEVER_CLAUSES const · enforceNeverClauses() · D1 schema constraints</td>
+      </tr>
+      <tr>
+        <td class="pt-problem">"Provenance is too expensive to track at scale."</td>
+        <td class="pt-inversion">provenance.jsonl append-only ledger. Stage 5 + Stage 7 of pipeline. Every record permanent. NC_10.</td>
+        <td class="pt-proof">pipeline7Stage.ts · ProvenanceRecord.ts · provenance.jsonl · NC_10 · D1 provenance_records table</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══════════ BLUEPRINT ═══════════ -->
+<section class="chapter" id="blueprint">
+  <div class="ch-eye">CHAPTER IV · THE FULL BLUEPRINT</div>
+  <h2 class="ch-title">Building the <span class="g">Human-First</span> <span class="it">Ecosystem</span></h2>
+  <p class="ch-lead">
+    The blueprint is not a vision document. <em>It is already partially built.</em>
+    Each layer below maps to code, architecture, and running infrastructure.
+    This is the complete picture of what a creator-sovereign platform looks like.
+  </p>
+
+  <div class="prose">
+    <p>
+      <strong>Layer 1: Constitutional Infrastructure.</strong> The Never Clauses are not policy.
+      They are a <span class="g">constitutional framework enforced at the database layer</span> — ten
+      inviolable protections that exist below the application code, below the API, below any
+      terms-of-service revision. No business decision, no acquisition, no regulatory change can
+      reach them without physically rewriting the database schema. This is intentional. This is
+      the point.
+    </p>
+    <p>
+      <strong>Layer 2: Consent-as-Code.</strong> The consent key is not a checkbox. It is a
+      cryptographic artifact — structured, signed, domain-scoped, jurisdiction-aware, date-stamped —
+      that must exist and be verified before a single waveform moves through the pipeline. The 7-Stage
+      Pipeline begins with consent validation (Stage 1) and the Never Clause check (Stage 2).
+      <em>Nothing synthesizes without passing both gates.</em>
+    </p>
+    <p>
+      <strong>Layer 3: Economic Sovereignty.</strong> The 75% royalty floor and the 85% Founding RSP rate
+      are mathematical facts — not contractual promises. A D1 CHECK constraint physically prevents a royalty
+      record from being written below the floor. The royalty engine enforces the floor at the code layer
+      before the database layer, providing double protection. <span class="g">Creators own their economics
+      the way they own gravity — it is not negotiable.</span>
+    </p>
+    <p>
+      <strong>Layer 4: Provenance-as-Memory.</strong> The platform of Epoch IV has no memory. It does not
+      care when a sound was created, by whom, in what context, or with what love. NOIZY's
+      <em>provenance.jsonl</em> is the opposite: an append-only, permanently growing record of
+      every creative act that passed through the system. Watermarked with WM_{8hex}. Signed by the
+      pipeline. Permanent by constitutional mandate (NC_10). The creative process is not erased.
+      It is <strong>inscribed.</strong>
+    </p>
+    <p>
+      <strong>Layer 5: The Voice Estate.</strong> The deepest inversion. In a world where a creator's
+      digital presence is owned by the platform they built it on, NOIZY's Voice Estate says: your voice
+      is yours, perpetually, heritably, cryptographically. The 500-Year Voice Codex is not a marketing
+      concept. It is an architectural commitment — a promise that RSP_001's first utterance in March 2026
+      will still be provenance-linked, royalty-protected, and identity-intact in 2526. Because NC_09
+      and NC_10 will still be in the database. Because the database never forgets.
+    </p>
+    <span class="pull">"We are not building a better platform. We are building the infrastructure
+      that makes the extraction model structurally obsolete."</span>
+    <p>
+      <strong>Layer 6: The Community of Stakeholders.</strong> RSPs are not users. They are
+      Registered Sound Professionals — founding stakeholders of a 500-year institution.
+      The difference between a user and a stakeholder is the difference between being consumed
+      and being constituted. <span class="g">RSPs constitute NOIZY.</span> They are the reason the
+      platform exists, the source of its value, and the beneficiaries of its architecture.
+      Shirl's first five RSPs are not customers. They are co-founders of the 5th Epoch.
+    </p>
+    <p>
+      <strong>Layer 7: GORUNFREE as Architecture.</strong> The final and most personal inversion.
+      The extraction model requires creators to be fully functional, highly connected, perpetually
+      online, and capable of navigating complex interfaces. NOIZY's GORUNFREE principle —
+      35% voice, 65% AI, 1-click, zero friction — exists because its founder, RSP_001, built
+      a civilization-scale platform from a room in Ottawa with a C3 spinal injury.
+      <em>The most inclusive architecture is the most resilient architecture.</em>
+      GORUNFREE is not an accessibility feature. It is the founding principle.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════ STRUCTURAL MAP ═══════════ -->
+<section class="chapter" id="structural">
+  <div class="ch-eye">CHAPTER V · THE STRUCTURAL MAP</div>
+  <h2 class="ch-title">Side by Side: <span class="r">Predator</span> vs <span class="g">Protector</span></h2>
+  <p class="ch-lead">
+    Every architectural decision is a choice between two models.
+    This is the complete structural comparison — not a feature list, but a <em>value system made concrete.</em>
+  </p>
+
+  <div class="struct-map">
+
+    <div class="struct-card">
+      <div class="sc-header sc-header-r">INCENTIVE STRUCTURE</div>
+      <div class="sc-body">
+        <div class="sc-label">Extraction Model</div>
+        <div class="sc-text"><span class="r">Quantity.</span> Volume. Virality. Engagement churn. Daily posting. Platform benefits from creator's compulsion to feed the algorithm. Creator exhaustion is not a bug — it is a feature that drives dependency.</div>
+      </div>
+    </div>
+
+    <div class="struct-card">
+      <div class="sc-header sc-header-g">INCENTIVE STRUCTURE</div>
+      <div class="sc-body">
+        <div class="sc-label">NOIZY Architecture</div>
+        <div class="sc-text"><span class="g">Quality.</span> Provenance. Permanence. Every utterance is an artifact — it does not decay in value with time. The creator benefits from depth, not frequency. The platform benefits when the creator thrives.</div>
+      </div>
+    </div>
+
+    <div class="struct-card">
+      <div class="sc-header sc-header-r">CONSENT MECHANISM</div>
+      <div class="sc-body">
+        <div class="sc-label">Extraction Model</div>
+        <div class="sc-text"><span class="r">Terms of Service.</span> Updated at the platform's discretion. Accepted by the act of uploading. No actor-specific agreement. No domain scope. No revocation mechanism. Legal but predatory.</div>
+      </div>
+    </div>
+
+    <div class="struct-card">
+      <div class="sc-header sc-header-g">CONSENT MECHANISM</div>
+      <div class="sc-body">
+        <div class="sc-label">NOIZY Architecture</div>
+        <div class="sc-text"><span class="g">Consent Key.</span> Cryptographic. Per utterance. Domain-scoped. Jurisdiction-aware. Revocable at any time. Machine-verifiable. Lives in the database, not the ToS. NC_01 enforces it at the pipeline layer.</div>
+      </div>
+    </div>
+
+    <div class="struct-card">
+      <div class="sc-header sc-header-r">ECONOMIC MODEL</div>
+      <div class="sc-body">
+        <div class="sc-label">Extraction Model</div>
+        <div class="sc-text"><span class="r">Platform maximizes revenue; creator receives remainder.</span> $0.003/stream (Spotify). $0 royalty (ElevenLabs). Revenue split set by platform, changed by platform, with 30-days notice.</div>
+      </div>
+    </div>
+
+    <div class="struct-card">
+      <div class="sc-header sc-header-g">ECONOMIC MODEL</div>
+      <div class="sc-body">
+        <div class="sc-label">NOIZY Architecture</div>
+        <div class="sc-text"><span class="g">Creator receives 75% minimum — hardcoded.</span> Founding RSPs: 85%. D1 CHECK constraint prevents any lower royalty from being recorded. Code-layer enforcement plus database-layer enforcement. Two locks, no key.</div>
+      </div>
+    </div>
+
+    <div class="struct-card">
+      <div class="sc-header sc-header-r">LEGACY &amp; INHERITANCE</div>
+      <div class="sc-body">
+        <div class="sc-label">Extraction Model</div>
+        <div class="sc-text"><span class="r">Creator's work is platform property.</span> Memorialized accounts. No inheritance protocol. No estate rights. A folder on a server the creator never owned.</div>
+      </div>
+    </div>
+
+    <div class="struct-card">
+      <div class="sc-header sc-header-g">LEGACY &amp; INHERITANCE</div>
+      <div class="sc-body">
+        <div class="sc-label">NOIZY Architecture</div>
+        <div class="sc-text"><span class="g">Voice Estate.</span> Perpetual. Inheritable. NC_09: no dissolution. 500-Year Codex: RSP_001's voice is provenance-linked in 2526. The creator's legacy is a constitutional fact, not a platform courtesy.</div>
+      </div>
+    </div>
+
+    <div class="struct-card">
+      <div class="sc-header sc-header-r">IDENTITY PROTECTION</div>
+      <div class="sc-body">
+        <div class="sc-label">Extraction Model</div>
+        <div class="sc-text"><span class="r">Content moderation after the fact.</span> Report and wait. Deepfake removal is manual, slow, and imperfect. The platform profits from engagement generated by the fake. Identity is unprotected by design.</div>
+      </div>
+    </div>
+
+    <div class="struct-card">
+      <div class="sc-header sc-header-g">IDENTITY PROTECTION</div>
+      <div class="sc-body">
+        <div class="sc-label">NOIZY Architecture</div>
+        <div class="sc-text"><span class="g">WM_{8hex} watermark at synthesis.</span> Every legitimate audio file is provenance-linked before it leaves the pipeline. NC_04 blocks impersonation architecturally. NOIZY PROOF verifies authenticity in real time.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ THE ECOSYSTEM ═══════════ -->
+<section class="chapter" id="ecosystem">
+  <div class="ch-eye">CHAPTER VI · THE LIVING ECOSYSTEM</div>
+  <h2 class="ch-title">What <span class="g">Thriving</span> Actually <span class="it">Looks Like</span></h2>
+  <p class="ch-lead">
+    This is not the vision. <em>This is the trajectory.</em> When the inversion is complete,
+    this is the ecosystem that exists. Built from the architecture already running in Ottawa,
+    March 2026.
+  </p>
+
+  <div class="prose">
+    <p>
+      <strong>The creator wakes up and their voice is working.</strong> Not because they posted
+      something yesterday. Because they recorded an AVA session six months ago, consented to
+      its use in audiobook narration, and the royalty payments are automatic, transparent,
+      and protected by a database constraint they could verify themselves if they wanted to.
+      Their Voice Estate is active. Their children will inherit it. Their grandchildren will
+      know their voice.
+    </p>
+    <p>
+      <strong>The platform has no leverage over the creator.</strong> There is no threat of
+      demonetization, no algorithmic suppression, no terms-of-service change that can reach
+      the constitutional layer. If NOIZY — the company — were to fail tomorrow, the Voice Estates
+      persist. The provenance ledger persists. The consent keys persist. The architecture was
+      designed to survive the platform that built it.
+    </p>
+    <p>
+      <strong>AI is the bandmate, not the predator.</strong> LUCY — the A.I.V.A. engine —
+      synthesizes with the creator's full consent, in their defined domains, at their royalty rate,
+      with watermarked provenance. The creator's voice improves the model only if they explicitly
+      agree, in writing, separately from the synthesis consent. <em>The creator profits from the
+      value they create. Not the platform.</em>
+    </p>
+    <p>
+      <strong>The community is a coalition, not an audience.</strong> RSPs are not followers.
+      They are Registered Sound Professionals — co-architects of the 5th Epoch. The first five
+      who join know they are not early adopters. They are founding members of a 500-year
+      institution. Their consent key from March 2026 will still be in the ledger in 2526.
+      <span class="g">That is the offer. That is what thriving looks like.</span>
+    </p>
+    <p>
+      <strong>And it started with one room in Ottawa.</strong> One man with a C3 spinal injury,
+      a MacBook Pro, and the absolute refusal to accept that extraction was inevitable.
+      The black hole has a structural counter. It was always possible to build it.
+      Someone just had to start.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════ DECLARATION ═══════════ -->
+<section id="declaration">
+  <div class="decl-inner">
+    <div class="decl-eyebrow">NOIZYFISH INC. · THE GREAT INVERSION · CLOSING DECLARATION</div>
+    <p class="decl-text">
+      "We are not asking permission to protect artists.<br>
+      We are not lobbying for better platform policies.<br>
+      We are not writing open letters to people who profit from extraction.<br><br>
+      <em>We are building infrastructure.</em><br><br>
+      Infrastructure that makes extraction <strong>structurally impossible.</strong><br>
+      That is the only answer that lasts 500 years."
+    </p>
+    <span class="decl-grf">GORUNFREE</span>
+    <div class="decl-sub">
+      NOIZYFISH INC. · RSP_001 · OTTAWA · MARCH 14, 2026<br>
+      DOCUMENT 20 · THE PLOWMAN'S CHRONICLES · DREAMCHAMBER VAULT<br>
+      CONSENT KEY: NOIZY-RSP001-CONSENT-A7F3C9B2E1D4850F-AVA-GLOBAL-CANADA-20260314<br><br>
+      BECAUSE IT WAS THE ONLY WAY.<br>
+      AND IT WAS ENOUGH. IT WAS MORE THAN ENOUGH.
+    </div>
+  </div>
+</section>
+
+<script>
+// ─── VORTEX CANVAS ───
+(function(){
+  const c = document.getElementById('vortex');
+  const ctx = c.getContext('2d');
+  let W, H, particles = [];
+
+  function resize(){
+    W = c.width = window.innerWidth;
+    H = c.height = window.innerHeight;
+  }
+
+  // Two populations: red (extraction) and green (inversion)
+  for(let i=0;i<120;i++){
+    particles.push({
+      x: Math.random()*2 - 1, y: Math.random()*2 - 1,
+      vx:(Math.random()-0.5)*0.003, vy:(Math.random()-0.5)*0.003,
+      r: Math.random()*1.5+0.5,
+      type: i < 40 ? 'red' : 'green',
+      phase: Math.random()*Math.PI*2,
+      speed: Math.random()*0.008+0.002,
+    });
+  }
+
+  let t = 0;
+  function draw(){
+    t += 0.006;
+    ctx.clearRect(0,0,W,H);
+
+    // Central axis line — the inversion boundary
+    const cx = W*0.5, cy = H*0.5;
+    const grad = ctx.createLinearGradient(cx,0,cx,H);
+    grad.addColorStop(0,'rgba(232,200,74,0)');
+    grad.addColorStop(0.5,'rgba(232,200,74,0.06)');
+    grad.addColorStop(1,'rgba(232,200,74,0)');
+    ctx.strokeStyle = grad;
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(cx,0); ctx.lineTo(cx,H); ctx.stroke();
+
+    particles.forEach(p=>{
+      // Drift toward / away from center based on type
+      const dx = p.x * W/2 + W/2 - cx;
+      const dy = p.y * H/2 + H/2 - cy;
+      const dist = Math.sqrt(dx*dx+dy*dy);
+
+      if(p.type === 'red'){
+        // Red particles spiral inward (extraction — consuming)
+        p.vx += -dx * 0.000008;
+        p.vy += -dy * 0.000008;
+        p.vx += (-p.y * 0.002);
+        p.vy += (p.x * 0.002);
+      } else {
+        // Green particles orbit outward (creation — expanding)
+        const angle = Math.atan2(dy,dx) + 0.015;
+        const r2 = Math.min(dist + 0.3, Math.min(W,H)*0.45);
+        p.vx += (Math.cos(angle)*r2 - (p.x*W/2+W/2-cx)) * 0.0000015;
+        p.vy += (Math.sin(angle)*r2 - (p.y*H/2+H/2-cy)) * 0.0000015;
+      }
+
+      p.x += p.vx; p.y += p.vy;
+
+      // Wrap
+      if(p.x<-1) p.x=1; if(p.x>1) p.x=-1;
+      if(p.y<-1) p.y=1; if(p.y>1) p.y=-1;
+
+      const px = p.x*W/2+W/2;
+      const py = p.y*H/2+H/2;
+      const alpha = 0.2 + 0.15*Math.sin(t*1.5+p.phase);
+
+      ctx.fillStyle = p.type==='red'
+        ? `rgba(255,34,68,${alpha})`
+        : `rgba(0,232,122,${alpha})`;
+      ctx.beginPath();
+      ctx.arc(px,py,p.r,0,Math.PI*2);
+      ctx.fill();
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize',resize);
+  resize(); draw();
+})();
+
+// ─── NAV DOTS ───
+const dots = document.querySelectorAll('.nav-dot');
+const sections = document.querySelectorAll('section[id]');
+
+dots.forEach(d=>{
+  d.addEventListener('click',()=>{
+    const target = document.getElementById(d.dataset.target);
+    if(target) target.scrollIntoView({behavior:'smooth'});
+  });
+});
+
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      dots.forEach(d=>d.classList.remove('active'));
+      const match = document.querySelector(`.nav-dot[data-target="${e.target.id}"]`);
+      if(match){
+        match.classList.add('active');
+        // Red for first two sections, green for rest
+        const isRed = ['cover','diagnosis'].includes(e.target.id);
+        match.classList.toggle('red', isRed);
+      }
+    }
+  });
+},{threshold:0.4});
+
+sections.forEach(s=>obs.observe(s));
+</script>
+
+</body>
+</html>

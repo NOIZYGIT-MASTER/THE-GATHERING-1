@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIZY INTEL — ElevenLabs + Suno Deep Competitive Brief</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg: #050508;
+    --bg2: #08090f;
+    --panel: #0d0e16;
+    --panel2: #111220;
+    --border: #181a2c;
+    --border-hi: #222440;
+    --green: #00ff88;
+    --green2: #00cc6a;
+    --amber: #ffb300;
+    --cyan: #00d4ff;
+    --purple: #a855f7;
+    --red: #ff3355;
+    --red2: #cc2244;
+    --el-blue: #5b9ef6;
+    --el-purple: #8b5cf6;
+    --suno-orange: #ff6b35;
+    --suno-yellow: #ffd60a;
+    --white: #edf0f8;
+    --muted: #40435a;
+    --text: #b0bac8;
+    --mono: 'Share Tech Mono', monospace;
+    --display: 'Orbitron', monospace;
+    --body: 'Inter', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--green2); }
+
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    z-index: 1000;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--el-blue), var(--el-purple), var(--suno-orange), var(--green));
+    width: 0%;
+  }
+
+  /* TOP NAV */
+  .top-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 54px;
+    background: rgba(5,5,8,0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    padding: 0 60px;
+    gap: 24px;
+  }
+
+  .nav-brand {
+    font-family: var(--display);
+    font-size: 11px;
+    font-weight: 900;
+    color: var(--green);
+    letter-spacing: 3px;
+  }
+
+  .nav-sep { width: 1px; height: 18px; background: var(--border-hi); }
+
+  .nav-sub {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    flex: 1;
+  }
+
+  .nav-tabs {
+    display: flex;
+    gap: 4px;
+  }
+
+  .nav-tab {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 6px 14px;
+    border-radius: 3px;
+    cursor: pointer;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+  }
+
+  .nav-tab.el {
+    color: var(--el-blue);
+    border-color: rgba(91,158,246,0.2);
+    background: rgba(91,158,246,0.05);
+  }
+  .nav-tab.el:hover { background: rgba(91,158,246,0.12); }
+
+  .nav-tab.suno {
+    color: var(--suno-orange);
+    border-color: rgba(255,107,53,0.2);
+    background: rgba(255,107,53,0.05);
+  }
+  .nav-tab.suno:hover { background: rgba(255,107,53,0.12); }
+
+  .nav-tab.noizy {
+    color: var(--green);
+    border-color: rgba(0,255,136,0.25);
+    background: rgba(0,255,136,0.06);
+  }
+  .nav-tab.noizy:hover { background: rgba(0,255,136,0.12); }
+
+  /* HERO */
+  .hero {
+    padding: 120px 80px 80px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-label::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--green);
+    box-shadow: 0 0 6px var(--green);
+  }
+
+  .hero-title {
+    font-family: var(--display);
+    font-size: clamp(30px, 5vw, 60px);
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: 2px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  .hero-title .el-c { color: var(--el-blue); text-shadow: 0 0 30px rgba(91,158,246,0.3); }
+  .hero-title .suno-c { color: var(--suno-orange); text-shadow: 0 0 30px rgba(255,107,53,0.3); }
+  .hero-title .noizy-c { color: var(--green); text-shadow: 0 0 30px rgba(0,255,136,0.3); }
+
+  .hero-desc {
+    font-size: 16px;
+    color: var(--text);
+    max-width: 700px;
+    line-height: 1.8;
+    margin-bottom: 48px;
+  }
+
+  .hero-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 900px;
+  }
+
+  .hc {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hc::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+
+  .hc.el::before { background: linear-gradient(90deg, var(--el-purple), var(--el-blue)); }
+  .hc.suno::before { background: linear-gradient(90deg, var(--suno-orange), var(--suno-yellow)); }
+
+  .hc-logo {
+    font-family: var(--display);
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+
+  .hc.el .hc-logo { color: var(--el-blue); }
+  .hc.suno .hc-logo { color: var(--suno-orange); }
+
+  .hc-tagline {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  .hc-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .hcs {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .hcs .v {
+    font-family: var(--display);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .hcs .l {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* SECTION LAYOUT */
+  .section {
+    padding: 80px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .sh-stripe {
+    height: 28px;
+    width: 4px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .sh-stripe.el { background: var(--el-blue); box-shadow: 0 0 10px rgba(91,158,246,0.4); }
+  .sh-stripe.suno { background: var(--suno-orange); box-shadow: 0 0 10px rgba(255,107,53,0.4); }
+  .sh-stripe.vs { background: var(--green); box-shadow: 0 0 10px rgba(0,255,136,0.4); }
+
+  .sh-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .sh-title {
+    font-family: var(--display);
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--white);
+  }
+
+  .sh-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border-hi), transparent);
+  }
+
+  /* FACT GRID */
+  .fact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+
+  .fact-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 16px 18px;
+    transition: border-color 0.2s;
+  }
+
+  .fact-card:hover { border-color: var(--border-hi); }
+
+  .fc-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .fc-value {
+    font-size: 14px;
+    color: var(--white);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .fc-value.money { font-family: var(--mono); color: var(--amber); }
+  .fc-value.el-color { color: var(--el-blue); font-family: var(--display); font-size: 16px; font-weight: 700; }
+  .fc-value.suno-color { color: var(--suno-orange); font-family: var(--display); font-size: 16px; font-weight: 700; }
+  .fc-value.danger { color: var(--red); font-family: var(--mono); font-size: 13px; }
+  .fc-value.green { color: var(--green); font-family: var(--mono); }
+
+  /* PEOPLE CARDS */
+  .people-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+
+  .person-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 20px 22px;
+    min-width: 200px;
+  }
+
+  .pc-initials {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--display);
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .el .pc-initials { background: rgba(91,158,246,0.15); color: var(--el-blue); border: 1px solid rgba(91,158,246,0.3); }
+  .suno .pc-initials { background: rgba(255,107,53,0.15); color: var(--suno-orange); border: 1px solid rgba(255,107,53,0.3); }
+
+  .pc-name {
+    font-size: 14px;
+    color: var(--white);
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .pc-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .pc-note {
+    font-size: 12px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  /* PRICING TABLE */
+  .pricing-block {
+    background: var(--panel);
+    border: 1px solid var(--border-hi);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+
+  .pricing-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .pricing-table thead {
+    background: var(--panel2);
+  }
+
+  .pricing-table th {
+    padding: 12px 20px;
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border-hi);
+    font-weight: 400;
+  }
+
+  .pricing-table td {
+    padding: 11px 20px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    vertical-align: middle;
+  }
+
+  .pricing-table tr:last-child td { border-bottom: none; }
+  .pricing-table tr:hover td { background: rgba(255,255,255,0.01); }
+
+  .pricing-table .plan-name { color: var(--white); font-weight: 500; }
+  .pricing-table .price { font-family: var(--mono); color: var(--amber); font-size: 12px; }
+  .pricing-table .usage { font-family: var(--mono); color: var(--muted); font-size: 11px; }
+  .pricing-table .notes { font-size: 12px; color: var(--text); }
+
+  /* PRODUCTS */
+  .product-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 32px;
+    max-width: 800px;
+  }
+
+  .product-item {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 20px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 14px 20px;
+    transition: border-color 0.2s;
+  }
+
+  .product-item:first-child { border-radius: 4px 4px 0 0; }
+  .product-item:last-child { border-radius: 0 0 4px 4px; }
+  .product-item:hover { border-color: var(--border-hi); }
+
+  .pi-name {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .el-section .pi-name { color: var(--el-blue); }
+  .suno-section .pi-name { color: var(--suno-orange); }
+
+  .pi-desc {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  /* CONTROVERSY / LEGAL */
+  .alert-box {
+    border-radius: 4px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+  }
+
+  .alert-box.danger {
+    background: rgba(255,51,85,0.05);
+    border: 1px solid rgba(255,51,85,0.25);
+    border-left: 3px solid var(--red);
+  }
+
+  .alert-box.warning {
+    background: rgba(255,179,0,0.05);
+    border: 1px solid rgba(255,179,0,0.2);
+    border-left: 3px solid var(--amber);
+  }
+
+  .alert-box.info {
+    background: rgba(91,158,246,0.05);
+    border: 1px solid rgba(91,158,246,0.2);
+    border-left: 3px solid var(--el-blue);
+  }
+
+  .ab-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .alert-box.danger .ab-label { color: var(--red); }
+  .alert-box.warning .ab-label { color: var(--amber); }
+  .alert-box.info .ab-label { color: var(--el-blue); }
+
+  .ab-text {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.8;
+  }
+
+  .ab-text strong { color: var(--white); }
+
+  /* SMART QUESTIONS */
+  .question-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    max-width: 900px;
+    margin-bottom: 32px;
+  }
+
+  .question-item {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 20px 24px;
+    transition: border-color 0.2s;
+  }
+
+  .question-item:first-child { border-radius: 4px 4px 0 0; }
+  .question-item:last-child { border-radius: 0 0 4px 4px; }
+  .question-item:hover { border-color: var(--border-hi); }
+
+  .qi-q {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--cyan);
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+
+  .qi-a {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .qi-a strong { color: var(--white); }
+  .qi-a .noizy-angle { color: var(--green); font-weight: 600; }
+
+  /* VERSUS TABLE */
+  .vs-table {
+    width: 100%;
+    border-collapse: collapse;
+    max-width: 1000px;
+  }
+
+  .vs-table thead {
+    background: var(--panel2);
+  }
+
+  .vs-table th {
+    padding: 14px 20px;
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+    border-bottom: 1px solid var(--border-hi);
+  }
+
+  .vs-table th:nth-child(1) { color: var(--muted); }
+  .vs-table th:nth-child(2) { color: var(--el-blue); }
+  .vs-table th:nth-child(3) { color: var(--suno-orange); }
+  .vs-table th:nth-child(4) { color: var(--green); }
+
+  .vs-table td {
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  .vs-table tr:last-child td { border-bottom: none; }
+  .vs-table tr:hover td { background: rgba(255,255,255,0.01); }
+
+  .vs-table .cat { color: var(--white); font-weight: 500; font-size: 12px; }
+  .vs-table .el-cell { color: var(--el-blue); font-family: var(--mono); font-size: 11px; }
+  .vs-table .suno-cell { color: var(--suno-orange); font-family: var(--mono); font-size: 11px; }
+  .vs-table .noizy-cell { color: var(--green); font-family: var(--mono); font-size: 11px; font-weight: 600; }
+  .vs-table .bad { color: var(--red); }
+  .vs-table .ok { color: var(--amber); }
+  .vs-table .good { color: var(--green); }
+
+  .vs-wrap {
+    background: var(--panel);
+    border: 1px solid var(--border-hi);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  /* CHEAT SHEET */
+  .cheat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 1000px;
+  }
+
+  .cheat-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .cheat-card.el-card { border-top: 3px solid var(--el-blue); }
+  .cheat-card.suno-card { border-top: 3px solid var(--suno-orange); }
+
+  .cc-header {
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    background: var(--panel2);
+  }
+
+  .cc-header .cc-name {
+    font-family: var(--display);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 2px;
+  }
+
+  .el-card .cc-name { color: var(--el-blue); }
+  .suno-card .cc-name { color: var(--suno-orange); }
+
+  .cc-header .cc-sub {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  .cc-body { padding: 20px 24px; }
+
+  .cc-section {
+    margin-bottom: 20px;
+  }
+
+  .cc-section-title {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 4px;
+  }
+
+  .cc-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .cc-list li {
+    font-size: 13px;
+    color: var(--text);
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.4;
+  }
+
+  .cc-list li::before {
+    position: absolute;
+    left: 0;
+    font-size: 10px;
+  }
+
+  .el-card .cc-list li::before { content: '◆'; color: var(--el-blue); top: 2px; }
+  .suno-card .cc-list li::before { content: '◆'; color: var(--suno-orange); top: 2px; }
+
+  .cc-list li strong { color: var(--white); font-weight: 500; }
+
+  /* FOOTER */
+  .intel-footer {
+    padding: 60px 80px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: gap;
+    gap: 20px;
+  }
+
+  .if-brand {
+    font-family: var(--display);
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--green);
+    letter-spacing: 3px;
+  }
+
+  .if-meta {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    line-height: 2;
+  }
+
+  .if-gorunfree {
+    font-family: var(--display);
+    font-size: 14px;
+    font-weight: 900;
+    color: var(--green);
+    letter-spacing: 4px;
+    text-shadow: 0 0 20px rgba(0,255,136,0.2);
+  }
+
+  @media (max-width: 900px) {
+    .section { padding: 60px 24px; }
+    .hero { padding: 100px 24px 60px; }
+    .intel-footer { padding: 40px 24px; }
+    .cheat-grid, .hero-cards { grid-template-columns: 1fr; }
+    .product-item { grid-template-columns: 1fr; gap: 6px; }
+    .top-nav { padding: 0 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+<!-- NAV -->
+<nav class="top-nav">
+  <div class="nav-brand">NOIZY INTEL</div>
+  <div class="nav-sep"></div>
+  <div class="nav-sub">COMPETITIVE INTELLIGENCE BRIEF · RSP_001 CLEARANCE</div>
+  <div class="nav-tabs">
+    <a href="#elevenlabs" class="nav-tab el">ELEVENLABS</a>
+    <a href="#suno" class="nav-tab suno">SUNO</a>
+    <a href="#versus" class="nav-tab noizy">NOIZY vs BOTH</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-label">DREAMCHAMBER INTEL BRIEF · MAKE RSP_001 THE SMARTEST IN THE ROOM</div>
+  <div class="hero-title">
+    <span class="el-c">ElevenLabs</span> &<br>
+    <span class="suno-c">Suno</span> — Everything<br>
+    You Need to Know.
+  </div>
+  <div class="hero-desc">
+    This is your complete cheat sheet on the two most-referenced companies in the AI voice + music space. Know their founders, funding, products, pricing, weaknesses, controversies, and exactly how NOIZY positions against both. Study this once. Own every room.
+  </div>
+
+  <div class="hero-cards">
+    <div class="hc el">
+      <div class="hc-logo">ELEVENLABS</div>
+      <div class="hc-tagline">"AI Voice for Everyone" — AI voice synthesis platform</div>
+      <div class="hc-stats">
+        <div class="hcs">
+          <div class="v" style="color:var(--el-blue)">$180M+</div>
+          <div class="l">Total Raised</div>
+        </div>
+        <div class="hcs">
+          <div class="v">1M+</div>
+          <div class="l">Users</div>
+        </div>
+        <div class="hcs">
+          <div class="v">2022</div>
+          <div class="l">Founded</div>
+        </div>
+        <div class="hcs">
+          <div class="v" style="color:var(--red)">0%</div>
+          <div class="l">Creator Royalty</div>
+        </div>
+      </div>
+    </div>
+    <div class="hc suno">
+      <div class="hc-logo">SUNO</div>
+      <div class="hc-tagline">"Make any song imaginable" — AI music generation</div>
+      <div class="hc-stats">
+        <div class="hcs">
+          <div class="v" style="color:var(--suno-orange)">$125M</div>
+          <div class="l">Total Raised</div>
+        </div>
+        <div class="hcs">
+          <div class="v">12M+</div>
+          <div class="l">Users</div>
+        </div>
+        <div class="hcs">
+          <div class="v">2023</div>
+          <div class="l">Founded</div>
+        </div>
+        <div class="hcs">
+          <div class="v" style="color:var(--red)">$500M</div>
+          <div class="l">RIAA Lawsuit</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ELEVENLABS SECTION -->
+<section class="section el-section" id="elevenlabs">
+  <div class="section-header">
+    <div class="sh-stripe el"></div>
+    <div>
+      <div class="sh-label">PLATFORM DEEP DIVE</div>
+      <div class="sh-title" style="color:var(--el-blue);">ELEVENLABS</div>
+    </div>
+    <div class="sh-line"></div>
+  </div>
+
+  <!-- WHO THEY ARE -->
+  <div class="fact-grid" style="margin-bottom:32px;">
+    <div class="fact-card">
+      <div class="fc-label">Founded</div>
+      <div class="fc-value">2022 · London / New York</div>
+    </div>
+    <div class="fact-card">
+      <div class="fc-label">Category</div>
+      <div class="fc-value">AI Voice Synthesis · Text-to-Speech · Voice Cloning</div>
+    </div>
+    <div class="fact-card">
+      <div class="fc-label">Total Funding</div>
+      <div class="fc-value money">$180M+ (Series B led by Andreessen Horowitz, Jan 2024)</div>
+    </div>
+    <div class="fact-card">
+      <div class="fc-label">Valuation</div>
+      <div class="fc-value money">~$1.1 Billion (unicorn as of 2024)</div>
+    </div>
+    <div class="fact-card">
+      <div class="fc-label">Users</div>
+      <div class="fc-value el-color">1 Million+</div>
+    </div>
+    <div class="fact-card">
+      <div class="fc-label">Key Investors</div>
+      <div class="fc-value">a16z · Sequoia · Instagram co-founder Mike Krieger · Nat Friedman</div>
+    </div>
+    <div class="fact-card">
+      <div class="fc-label">Creator Royalty</div>
+      <div class="fc-value danger">0% — creators pay to use the platform, not the other way around</div>
+    </div>
+    <div class="fact-card">
+      <div class="fc-label">Consent Architecture</div>
+      <div class="fc-value danger">Terms of Service only — no cryptographic enforcement</div>
+    </div>
+  </div>
+
+  <!-- FOUNDERS -->
+  <div style="font-family:var(--mono); font-size:9px; color:var(--muted); letter-spacing:3px; text-transform:uppercase; margin-bottom:16px;">// FOUNDERS — KNOW THESE NAMES</div>
+  <div class="people-row el">
+    <div class="person-card el">
+      <div class="pc-initials">PD</div>
+      <div class="pc-name">Piotr Dabkowski</div>
+      <div class="pc-title">CO-FOUNDER · CTO</div>
+      <div class="pc-note">Former Google DeepMind. Polish-born. The technical architect. Built the core voice synthesis engine. Rarely speaks publicly.</div>
+    </div>
+    <div class="person-card el">
+      <div class="pc-initials">MS</div>
+      <div class="pc-name">Mati Staniszewski</div>
+      <div class="pc-title">CO-FOUNDER · CEO</div>
+      <div class="pc-note">Former McKinsey · Palantir. Polish-born. The face of ElevenLabs. Frequently quoted saying "we want to make content accessible in every voice, language, and accent." Well-spoken. Media-friendly. Beware: charming but the model extracts from creators.</div>
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <div style="font-family:var(--mono); font-size:9px; color:var(--muted); letter-spacing:3px; text-transform:uppercase; margin-bottom:16px; margin-top:32px;">// PRODUCT LINEUP — WHAT THEY ACTUALLY SELL</div>
+  <ul class="product-list">
+    <li class="product-item">
+      <div class="pi-name">TEXT TO SPEECH</div>
+      <div class="pi-desc">Core product. Type text, choose a voice, get audio. Thousands of pre-built voices. Used by publishers, content creators, audiobook platforms. Very good. Industry-leading quality in 2023-24.</div>
+    </li>
+    <li class="product-item">
+      <div class="pi-name">VOICE CLONING</div>
+      <div class="pi-desc">Upload samples, clone a voice. Instant Voice Cloning (IVC) from short samples. Professional Voice Cloning (PVC) from longer recordings. This is the product that sparked the creator rights conversation. Your voice can be cloned — consent is a checkbox in terms of service.</div>
+    </li>
+    <li class="product-item">
+      <div class="pi-name">ELEVENLABS STUDIO</div>
+      <div class="pi-desc">Long-form audio production tool. Script → audio with scene direction. Used for audiobooks, podcasts, narrative content. Competes with traditional recording studios at 1% of the cost.</div>
+    </li>
+    <li class="product-item">
+      <div class="pi-name">PROJECTS</div>
+      <div class="pi-desc">Multi-chapter audio production. Manage entire book or podcast series. Designed to replace the audiobook production pipeline.</div>
+    </li>
+    <li class="product-item">
+      <div class="pi-name">DUBBING</div>
+      <div class="pi-desc">Automatic video dubbing across 29 languages. Upload a video, it outputs a dubbed version preserving the speaker's voice. Used by major media companies.</div>
+    </li>
+    <li class="product-item">
+      <div class="pi-name">VOICE LIBRARY</div>
+      <div class="pi-desc">Marketplace where voice creators can share their cloned voice and earn revenue. The "creator royalty" play — but the revenue share is small (platform takes significant cut) and consent is ToS-only. RSP_001 response: "They sell access to your voice. We sell your voice to you."</div>
+    </li>
+    <li class="product-item">
+      <div class="pi-name">CONVERSATIONAL AI</div>
+      <div class="pi-desc">Real-time low-latency voice AI for customer service bots, interactive agents. Growing enterprise business. Most profitable segment.</div>
+    </li>
+    <li class="product-item">
+      <div class="pi-name">SOUND EFFECTS</div>
+      <div class="pi-desc">Text-to-sound-effects generator. Describe a sound, get audio. Launched 2024. Positions them against audio production libraries.</div>
+    </li>
+  </ul>
+
+  <!-- PRICING -->
+  <div style="font-family:var(--mono); font-size:9px; color:var(--muted); letter-spacing:3px; text-transform:uppercase; margin-bottom:16px; margin-top:32px;">// PRICING TIERS — WHAT PEOPLE ACTUALLY PAY</div>
+  <div class="pricing-block">
+    <table class="pricing-table">
+      <thead>
+        <tr>
+          <th>Plan</th>
+          <th>Price</th>
+          <th>Characters / Month</th>
+          <th>Key Features</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="plan-name">Free</td>
+          <td class="price">$0</td>
+          <td class="usage">10,000 chars (~8 min audio)</td>
+          <td class="notes">3 custom voices. No commercial rights.</td>
+        </tr>
+        <tr>
+          <td class="plan-name">Starter</td>
+          <td class="price">$5/mo</td>
+          <td class="usage">30,000 chars</td>
+          <td class="notes">Commercial rights. 10 custom voices.</td>
+        </tr>
+        <tr>
+          <td class="plan-name">Creator</td>
+          <td class="price">$22/mo</td>
+          <td class="usage">100,000 chars</td>
+          <td class="notes">Professional Voice Cloning. 30 voices.</td>
+        </tr>
+        <tr>
+          <td class="plan-name">Pro</td>
+          <td class="price">$99/mo</td>
+          <td class="usage">500,000 chars</td>
+          <td class="notes">Highest quality model. 160 voices.</td>
+        </tr>
+        <tr>
+          <td class="plan-name">Scale</td>
+          <td class="price">$330/mo</td>
+          <td class="usage">2,000,000 chars</td>
+          <td class="notes">Enterprise features. 660 voices.</td>
+        </tr>
+        <tr>
+          <td class="plan-name">Business</td>
+          <td class="price">$1,320/mo</td>
+          <td class="usage">11,000,000 chars</td>
+          <td class="notes">Full enterprise suite. Unlimited voices.</td>
+        </tr>
+        <tr>
+          <td class="plan-name">API</td>
+          <td class="price">$0.08–$0.15 per 1K chars</td>
+          <td class="usage">Pay as you go</td>
+          <td class="notes">~$0.05–0.10 per minute of audio. 1hr ≈ $3–8.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CONTROVERSIES -->
+  <div style="font-family:var(--mono); font-size:9px; color:var(--muted); letter-spacing:3px; text-transform:uppercase; margin-bottom:16px; margin-top:32px;">// CONTROVERSIES + VULNERABILITIES — KNOW THESE</div>
+
+  <div class="alert-box danger">
+    <div class="ab-label">⚠ CONSENT CONTROVERSY</div>
+    <div class="ab-text">
+      In 2023, ElevenLabs' voice cloning was used to create deepfake audio of <strong>Joe Biden, Taylor Swift, and multiple journalists</strong> — without consent. The platform introduced stricter verification, but the architecture remained ToS-based, not cryptographic. <strong>The consent problem is not solved — it is papered over.</strong> This is the most important thing to know when talking to anyone who uses or is considering ElevenLabs.
+    </div>
+  </div>
+
+  <div class="alert-box warning">
+    <div class="ab-label">◎ CREATOR ROYALTY = $0</div>
+    <div class="ab-text">
+      ElevenLabs pays <strong>0% royalty to voice creators</strong> unless they are in the Voice Library marketplace — which pays a small revenue share that the platform controls unilaterally. ElevenLabs' business model requires creators to pay monthly fees to use their own cloned voice commercially. The creator is a customer, not a partner.
+    </div>
+  </div>
+
+  <div class="alert-box info">
+    <div class="ab-label">ℹ STRATEGIC POSITIONING</div>
+    <div class="ab-text">
+      ElevenLabs is strong at <strong>enterprise synthesis, accessibility tools, and developer API.</strong> Their weakness is creator trust and long-term loyalty. Professional voice actors generally dislike them — they are seen as a threat, not a partner. This is NOIZY's opening. Every voice professional who is uncomfortable with ElevenLabs is a potential NOIZYVOX RSP.
+    </div>
+  </div>
+</section>
+
+<!-- SUNO SECTION -->
+<section class="section suno-section" id="suno">
+  <div class="section-header">
+    <div class="sh-stripe suno"></div>
+    <div>
+      <div class="sh-label">PLATFORM DEEP DIVE</div>
+      <div class="sh-title" style="color:var(--suno-orange);">SUNO</div>
+    </div>
+    <div class="sh-line"></div>
+  </div>
+
+  <!-- FAST FACTS -->
+  <div class="fact-grid" style="margin-bottom:32px;">
+    <div class="fact-card">
+      <div class="fc-label">Founded</div>
+      <div class="fc-value">2023 · Cambridge, Massachusetts</div>
+    </div>
+    <div class="fact-card">
+      <div class="fc-label">Category</div>
+      <div class="fc-value">AI Music Generation · Text-to-Song</div>
+    </div>
+    <div class="fact-card">
+      <div class="fc-label">Total Funding</div>
+      <div class="fc-value money">~$125M Series B · Lightspeed Venture Partners · Matrix Partners (2024)</div>
+    </div>
+    <div class="fact-card">
+      <div class="fc-label">Valuation</div>
+      <div class="fc-value money">~$500M (estimated at Series B)</div>
+    </div>
+    <div class="fact-card">
+      <div class="fc-label">Users</div>
+      <div class="fc-value suno-color">12 Million+</div>
+    </div>
+    <div class="fact-card">
+      <div class="fc-label">Songs Generated</div>
+      <div class="fc-value suno-color">100 Million+ (as of mid 2024)</div>
+    </div>
+    <div class="fact-card">
+      <div class="fc-label">Active Legal Threat</div>
+      <div class="fc-value danger">$500M RIAA lawsuit (Sony, UMG, Warner) filed June 2024</div>
+    </div>
+    <div class="fact-card">
+      <div class="fc-label">Creator Royalty</div>
+      <div class="fc-value danger">0% — no human musicians involved or compensated</div>
+    </div>
+  </div>
+
+  <!-- FOUNDERS -->
+  <div style="font-family:var(--mono); font-size:9px; color:var(--muted); letter-spacing:3px; text-transform:uppercase; margin-bottom:16px;">// FOUNDERS — KNOW THESE NAMES</div>
+  <div class="people-row suno">
+    <div class="person-card suno">
+      <div class="pc-initials">MS</div>
+      <div class="pc-name">Mikey Shulman</div>
+      <div class="pc-title">CEO · CO-FOUNDER</div>
+      <div class="pc-note">Former Kensho Technologies (acquired by S&P Global for $550M). Harvard grad. Quantitative background. Frequently quoted saying "we want to make it so that anyone can make music." Confident in press. Currently managing the RIAA lawsuit narrative carefully.</div>
+    </div>
+    <div class="person-card suno">
+      <div class="pc-initials">GS</div>
+      <div class="pc-name">Georg Scholz</div>
+      <div class="pc-title">CO-FOUNDER · CTO</div>
+      <div class="pc-note">PhD in ML. Former Kensho. The technical lead. Quiet publicly. Built the core Chirp audio model that powers Suno. Key technical architect — if you ever meet him, he responds well to model architecture questions.</div>
+    </div>
+    <div class="person-card suno">
+      <div class="pc-initials">ST</div>
+      <div class="pc-name">Sherry Tsai</div>
+      <div class="pc-title">CO-FOUNDER · CPO</div>
+      <div class="pc-note">Former Kensho. Product lead. Has given interviews on making music creation more accessible. Often the "human face" of Suno's accessibility narrative.</div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div style="font-family:var(--mono); font-size:9px; color:var(--muted); letter-spacing:3px; text-transform:uppercase; margin-bottom:16px; margin-top:32px;">// HOW SUNO ACTUALLY WORKS</div>
+  <ul class="product-list">
+    <li class="product-item">
+      <div class="pi-name">TEXT PROMPT → SONG</div>
+      <div class="pi-desc">Type a description ("an upbeat pop song about a dog named Charlie"), click generate, get a 2-minute song with lyrics and full production in about 30 seconds. Quality ranges from impressive to uncanny valley. The most common reaction from first-time users: shock at how fast it works.</div>
+    </li>
+    <li class="product-item">
+      <div class="pi-name">CUSTOM MODE</div>
+      <div class="pi-desc">Write your own lyrics. Choose a style. Generate. Gives more creative control — still no human musician in the loop. The "artist" is the prompt.</div>
+    </li>
+    <li class="product-item">
+      <div class="pi-name">CHIRP MODEL</div>
+      <div class="pi-desc">Suno's proprietary audio generation model. Trained on copyrighted music — this is the core of the RIAA lawsuit. The model learned to generate music that sounds like real artists because it was trained on real artists without their consent or compensation.</div>
+    </li>
+    <li class="product-item">
+      <div class="pi-name">SUNO API</div>
+      <div class="pi-desc">Developer access to generate music programmatically. Used in apps, games, and content tools. Growing enterprise customer base.</div>
+    </li>
+  </ul>
+
+  <!-- PRICING -->
+  <div style="font-family:var(--mono); font-size:9px; color:var(--muted); letter-spacing:3px; text-transform:uppercase; margin-bottom:16px; margin-top:32px;">// PRICING</div>
+  <div class="pricing-block">
+    <table class="pricing-table">
+      <thead>
+        <tr>
+          <th>Plan</th>
+          <th>Price</th>
+          <th>Credits / Month</th>
+          <th>Songs Generated</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="plan-name">Basic</td>
+          <td class="price">$0</td>
+          <td class="usage">50 credits/day</td>
+          <td class="notes">~10 songs/day. Non-commercial use only.</td>
+        </tr>
+        <tr>
+          <td class="plan-name">Pro</td>
+          <td class="price">$10/mo ($8 annual)</td>
+          <td class="usage">2,500 credits/mo</td>
+          <td class="notes">~500 songs/mo. Commercial rights. No watermark.</td>
+        </tr>
+        <tr>
+          <td class="plan-name">Premier</td>
+          <td class="price">$30/mo ($24 annual)</td>
+          <td class="usage">10,000 credits/mo</td>
+          <td class="notes">~2,000 songs/mo. Priority generation.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- THE RIAA LAWSUIT — CRITICAL -->
+  <div style="font-family:var(--mono); font-size:9px; color:var(--muted); letter-spacing:3px; text-transform:uppercase; margin-bottom:16px; margin-top:32px;">// THE RIAA LAWSUIT — THIS IS YOUR MOST IMPORTANT TALKING POINT</div>
+
+  <div class="alert-box danger">
+    <div class="ab-label">🚨 $500M RIAA LAWSUIT — ACTIVE — FILED JUNE 2024</div>
+    <div class="ab-text">
+      <strong>Sony Music, Universal Music Group, and Warner Records</strong> filed a $500M copyright infringement lawsuit against Suno and Udio (a competitor) in June 2024. The core allegation: Suno trained its model on <strong>copyrighted recordings without license, consent, or compensation</strong> to the musicians, songwriters, and labels who owned those recordings.<br><br>
+      RIAA President Mitch Glazer called it "systematic theft on a massive scale." The complaint filed 1,700+ specific examples of Suno generating outputs that directly reproduced elements of copyrighted songs.<br><br>
+      <strong>Suno's defense</strong>: claimed training on copyrighted data is "transformative fair use." Legal experts consider this defense weak. Outcome is pending but will be the most significant AI copyright decision of the decade.<br><br>
+      <strong>The NOIZY angle</strong>: NOIZY's Never Clause NC_03 prohibits training on any voice without explicit opt-in consent. This lawsuit is the proof case for why that clause exists. NOIZY built the architecture this lawsuit was written about needing.
+    </div>
+  </div>
+
+  <div class="alert-box warning">
+    <div class="ab-label">◎ NO HUMAN MUSICIAN IN THE LOOP</div>
+    <div class="ab-text">
+      Suno's core vulnerability is that it produces music <strong>with zero human creative involvement</strong> and zero compensation to the musicians whose recorded work trained the model. It is the purest expression of the extractive AI model: ingest human creativity, generate synthetic output, monetize it, pay creators nothing.<br><br>
+      In every conversation where someone mentions Suno, this is your differentiator: <span style="color:var(--green);font-weight:600;">"Suno generates music without humans. NOIZY amplifies humans. Those are not the same category."</span>
+    </div>
+  </div>
+
+  <div class="alert-box warning">
+    <div class="ab-label">◎ UDIO — SUNO'S COMPANION LAWSUIT</div>
+    <div class="ab-text">
+      Udio (another AI music generator, formerly Uncharted Labs) was sued in the same RIAA action. Udio raised $10M and generated similar controversy. Less market share than Suno but the same legal exposure. If you hear "Udio" — it's essentially the same story as Suno, same lawsuit, same vulnerability.
+    </div>
+  </div>
+</section>
+
+<!-- VERSUS TABLE -->
+<section class="section" id="versus">
+  <div class="section-header">
+    <div class="sh-stripe vs"></div>
+    <div>
+      <div class="sh-label">THE COMPETITION MAP</div>
+      <div class="sh-title" style="color:var(--green);">ELEVENLABS vs SUNO vs NOIZYVOX</div>
+    </div>
+    <div class="sh-line"></div>
+  </div>
+
+  <div class="vs-wrap" style="margin-bottom:40px;">
+    <table class="vs-table">
+      <thead>
+        <tr>
+          <th>DIMENSION</th>
+          <th>ELEVENLABS</th>
+          <th>SUNO</th>
+          <th>NOIZYVOX / NOIZY</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="cat">Category</td>
+          <td class="el-cell">AI voice synthesis · TTS</td>
+          <td class="suno-cell">AI music generation</td>
+          <td class="noizy-cell">Voice Estate + A.I.V.A. + Music</td>
+        </tr>
+        <tr>
+          <td class="cat">Founding Year</td>
+          <td class="el-cell">2022</td>
+          <td class="suno-cell">2023</td>
+          <td class="noizy-cell">2026 (launch)</td>
+        </tr>
+        <tr>
+          <td class="cat">Creator Revenue</td>
+          <td><span class="bad">$0 royalty</span> — creators pay them</td>
+          <td><span class="bad">$0 royalty</span> — musicians not in model</td>
+          <td class="noizy-cell good">75% ALWAYS · hardcoded at DB layer</td>
+        </tr>
+        <tr>
+          <td class="cat">Consent Architecture</td>
+          <td><span class="bad">Terms of Service only</span> — overridable</td>
+          <td><span class="bad">None</span> — trained without consent</td>
+          <td class="noizy-cell good">Cryptographic · NC_01 · Code law</td>
+        </tr>
+        <tr>
+          <td class="cat">Voice Ownership</td>
+          <td><span class="bad">Platform retains</span> — you rent access</td>
+          <td><span class="bad">N/A</span> — no human voice</td>
+          <td class="noizy-cell good">Creator owns · Voice Estate · inheritable</td>
+        </tr>
+        <tr>
+          <td class="cat">Duration</td>
+          <td><span class="ok">Active subscription only</span></td>
+          <td><span class="ok">Active subscription only</span></td>
+          <td class="noizy-cell good">∞ · 500-Year Codex · generational</td>
+        </tr>
+        <tr>
+          <td class="cat">Legal Exposure</td>
+          <td><span class="ok">Deepfake controversy · ToS risk</span></td>
+          <td><span class="bad">$500M RIAA lawsuit ACTIVE</span></td>
+          <td class="noizy-cell good">Never Clauses · cryptographic provenance</td>
+        </tr>
+        <tr>
+          <td class="cat">Healthcare / Accessibility</td>
+          <td><span class="ok">Some accessibility tools</span></td>
+          <td><span class="bad">None</span></td>
+          <td class="noizy-cell good">NOIZYKIDZ · LIFELUV · Dr. Benoit pathway</td>
+        </tr>
+        <tr>
+          <td class="cat">Human in the Loop</td>
+          <td><span class="ok">Optional voice cloning</span></td>
+          <td><span class="bad">No — purely generative</span></td>
+          <td class="noizy-cell good">Always — 35% human is the product</td>
+        </tr>
+        <tr>
+          <td class="cat">Watermarking</td>
+          <td><span class="ok">Basic audio fingerprint</span></td>
+          <td><span class="bad">Minimal / none</span></td>
+          <td class="noizy-cell good">NOIZY PROOF · cryptographic · court-ready</td>
+        </tr>
+        <tr>
+          <td class="cat">Training Data Ethics</td>
+          <td><span class="ok">Improving but unclear</span></td>
+          <td><span class="bad">Active lawsuit — trained on stolen music</span></td>
+          <td class="noizy-cell good">NC_03 · opt-in only · never default</td>
+        </tr>
+        <tr>
+          <td class="cat">Union/Creator Trust</td>
+          <td><span class="bad">Negative — seen as threat</span></td>
+          <td><span class="bad">Very negative — RIAA lawsuit</span></td>
+          <td class="noizy-cell good">SAG-AFTRA aligned · Creator Bill of Rights</td>
+        </tr>
+        <tr>
+          <td class="cat">Entry Price</td>
+          <td class="el-cell">$0–$1,320/mo (subscription)</td>
+          <td class="suno-cell">$0–$30/mo (subscription)</td>
+          <td class="noizy-cell good">$0 to join · 75% back to creator</td>
+        </tr>
+        <tr>
+          <td class="cat">Primary Mission</td>
+          <td><span style="color:var(--muted)">Democratize voice generation</span></td>
+          <td><span style="color:var(--muted)">Make anyone a "musician"</span></td>
+          <td class="noizy-cell good">AI & humans in perfect harmony · always</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SMART QUESTIONS TO ASK IN ANY MEETING -->
+  <div style="font-family:var(--mono); font-size:9px; color:var(--muted); letter-spacing:3px; text-transform:uppercase; margin-bottom:16px; margin-top:40px;">// SMART QUESTIONS TO ASK IN ANY MEETING — USE THESE</div>
+  <ul class="question-list">
+    <li class="question-item">
+      <div class="qi-q">Q → "Have you looked at ElevenLabs?"</div>
+      <div class="qi-a">
+        "Yes — ElevenLabs is technically impressive and they've built real enterprise traction. Their challenge is the creator relationship. <strong>Their platform charges creators to use their own cloned voice commercially — 0% royalty flows back to the human.</strong> That's a fundamental tension that grows as creators get more sophisticated about their rights. <span class="noizy-angle">NOIZY was built to solve that problem structurally, not just philosophically — the 75% royalty is hardcoded at the database layer. It can't be changed by a terms of service update.</span>"
+      </div>
+    </li>
+    <li class="question-item">
+      <div class="qi-q">Q → "How is this different from Suno?"</div>
+      <div class="qi-a">
+        "Different category entirely. Suno generates music with no human creative involvement — it's fully AI-generated. <strong>They're also currently facing a $500 million RIAA lawsuit from Sony, Universal, and Warner for training on copyrighted music without consent.</strong> NOIZY is the opposite: every sound starts with a human — a consented, watermarked, provenanced human voice and creative estate. <span class="noizy-angle">NOIZY PROOF watermarking was built specifically so that what happened to the musicians in the Suno lawsuit can never happen to a NOIZY RSP.</span>"
+      </div>
+    </li>
+    <li class="question-item">
+      <div class="qi-q">Q → "ElevenLabs has a voice marketplace — isn't that what NOIZY does?"</div>
+      <div class="qi-a">
+        "ElevenLabs' Voice Library is a marketplace — you upload your voice, they take a platform cut, you earn a small share. <strong>The key differences: ElevenLabs controls the terms unilaterally, there's no cryptographic consent enforcement, and the voice estate ends when you stop paying your subscription.</strong> <span class="noizy-angle">NOIZY's Voice Estate is permanent, inheritable, and the 75% split is in the database — not in the contract. Those are different levels of protection.</span>"
+      </div>
+    </li>
+    <li class="question-item">
+      <div class="qi-q">Q → "Could ElevenLabs or Suno just copy what you're doing?"</div>
+      <div class="qi-a">
+        "They could copy the features. <strong>They can't copy the architecture without restructuring their entire business model.</strong> ElevenLabs' revenue depends on creators paying subscription fees — if they moved to a creator-royalty model, their revenue curve inverts. Suno's model depends on training on existing music — if they added consent infrastructure retroactively, they'd need to re-license their entire training dataset. <span class="noizy-angle">NOIZY is built consent-first from day one. Retrofitting consent onto an extractive model is like trying to add a foundation to a building that's already standing.</span>"
+      </div>
+    </li>
+    <li class="question-item">
+      <div class="qi-q">Q → "Are you worried about ElevenLabs' resources — they're a unicorn?"</div>
+      <div class="qi-a">
+        "Scale and trust are different things. <strong>ElevenLabs has $180M and 1 million users. They don't have the trust of the professional creator community.</strong> Voice actors, musicians, and podcasters who understand what's happening with their rights increasingly see ElevenLabs as a platform that profits from them rather than with them. <span class="noizy-angle">NOIZY doesn't need to out-spend ElevenLabs. It needs to out-trust them. And that's already happening.</span>"
+      </div>
+    </li>
+    <li class="question-item">
+      <div class="qi-q">Q → "What do you think of Suno's accessibility argument — making music for everyone?"</div>
+      <div class="qi-a">
+        "It's a compelling framing with a real problem underneath it. <strong>The musicians whose work was used to train Suno's model didn't get to decide whether their art became a training dataset.</strong> That's the Suno paradox — they democratize music creation by first taking from the musicians who created it. <span class="noizy-angle">NOIZY democratizes music creation by paying the humans who make it possible. The math is different and so is the relationship.</span>"
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- CHEAT SHEET -->
+<section class="section">
+  <div class="section-header">
+    <div class="sh-stripe vs"></div>
+    <div>
+      <div class="sh-label">FIELD REFERENCE</div>
+      <div class="sh-title">MEMORIZE THIS. CARRY IT.</div>
+    </div>
+    <div class="sh-line"></div>
+  </div>
+
+  <div class="cheat-grid">
+    <div class="cheat-card el-card">
+      <div class="cc-header">
+        <div class="cc-name">ELEVENLABS</div>
+        <div class="cc-sub">The voice AI unicorn — technically great, creator-hostile by design</div>
+      </div>
+      <div class="cc-body">
+        <div class="cc-section">
+          <div class="cc-section-title">// SAY THIS WHEN ASKED</div>
+          <ul class="cc-list">
+            <li><strong>"Great synthesis engine."</strong> Technically the benchmark. Acknowledge it.</li>
+            <li><strong>"Their model is subscription-first."</strong> Creators pay them. Not the other way around.</li>
+            <li><strong>"ToS-based consent."</strong> Changeable. Breakable. Not cryptographic.</li>
+            <li><strong>"$0 royalty to creators"</strong> is the core vulnerability. Say it confidently.</li>
+            <li><strong>"Used to clone Biden and Swift."</strong> The trust problem is structural, not accidental.</li>
+          </ul>
+        </div>
+        <div class="cc-section">
+          <div class="cc-section-title">// FOUNDERS + KEY NAMES</div>
+          <ul class="cc-list">
+            <li><strong>Mati Staniszewski</strong> — CEO. Former McKinsey/Palantir. Polish-born. Media-friendly.</li>
+            <li><strong>Piotr Dabkowski</strong> — CTO. Former Google DeepMind. The technical brain.</li>
+            <li><strong>Backed by a16z</strong> — Andreessen Horowitz Series B, Jan 2024.</li>
+            <li>Unicorn at <strong>~$1.1B valuation</strong>. $180M+ raised.</li>
+          </ul>
+        </div>
+        <div class="cc-section">
+          <div class="cc-section-title">// PRICING MEMORY</div>
+          <ul class="cc-list">
+            <li>Free → $5 → $22 → $99 → $330 → $1,320/mo</li>
+            <li>API: ~$0.10 per 1K characters</li>
+            <li>~$0.05–0.10 per minute of generated audio</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="cheat-card suno-card">
+      <div class="cc-header">
+        <div class="cc-name">SUNO</div>
+        <div class="cc-sub">The AI music generator — viral growth, $500M legal exposure</div>
+      </div>
+      <div class="cc-body">
+        <div class="cc-section">
+          <div class="cc-section-title">// SAY THIS WHEN ASKED</div>
+          <ul class="cc-list">
+            <li><strong>"Fast and impressive."</strong> 100M+ songs generated. Real adoption. Acknowledge it.</li>
+            <li><strong>"$500M RIAA lawsuit."</strong> Sony + Universal + Warner. Filed June 2024. Active.</li>
+            <li><strong>"No human in the loop."</strong> Different category from NOIZY entirely.</li>
+            <li><strong>"Trained on stolen music"</strong> is the RIAA's argument — hard to refute publicly.</li>
+            <li><strong>"Fair use defense is weak."</strong> Most IP lawyers agree privately.</li>
+          </ul>
+        </div>
+        <div class="cc-section">
+          <div class="cc-section-title">// FOUNDERS + KEY NAMES</div>
+          <ul class="cc-list">
+            <li><strong>Mikey Shulman</strong> — CEO. Former Kensho (sold to S&P for $550M). Harvard.</li>
+            <li><strong>Georg Scholz</strong> — CTO. PhD ML. Built the Chirp audio model.</li>
+            <li><strong>Sherry Tsai</strong> — CPO. Product lead. The accessibility narrative.</li>
+            <li>Backed by <strong>Lightspeed + Matrix</strong>. $125M raised. ~$500M valuation.</li>
+          </ul>
+        </div>
+        <div class="cc-section">
+          <div class="cc-section-title">// PRICING MEMORY</div>
+          <ul class="cc-list">
+            <li>Free (50 credits/day) → Pro $10/mo → Premier $30/mo</li>
+            <li>~$0.02–0.30 per song depending on plan</li>
+            <li>Pro ≈ 500 songs/month · Premier ≈ 2,000 songs/month</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="intel-footer">
+  <div>
+    <div class="if-brand">NOIZY INTEL</div>
+    <div class="if-meta">
+      RSP_001 CLEARANCE · DREAMCHAMBER ARCHIVE<br>
+      GABRIEL_V3 · 10.90.90.20 · MARCH 2026
+    </div>
+  </div>
+  <div style="text-align:right;">
+    <div class="if-gorunfree">GORUNFREE</div>
+    <div style="font-family:var(--mono); font-size:9px; color:var(--muted); margin-top:6px; letter-spacing:2px;">THE SMARTEST IN THE ROOM</div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    document.getElementById('progress').style.width = pct + '%';
+  });
+</script>
+</body>
+</html>

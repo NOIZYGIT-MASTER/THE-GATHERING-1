@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MC96ECO — NOIZY TOUR MANAGER</title>
+<meta name="description" content="NOIZY.AI Tour Manager Workbench — Navigate, manage issues & upgrades across the full empire stack">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --deep:   #050810;
+  --void:   #080C18;
+  --panel:  #0D1525;
+  --glass:  rgba(13,21,37,0.75);
+  --signal: #00D4FF;
+  --signal-dim: rgba(0,212,255,0.12);
+  --nerve:  #E8A87C;
+  --restore:#00FFB3;
+  --pulse:  #FF4D6D;
+  --soul:   #B185DB;
+  --gold:   #D4A017;
+  --gold-b: #FFD700;
+  --electric:#7B2FFE;
+  --white:  #F1F5F9;
+  --silver: #94A3B8;
+  --mgray:  #4A5568;
+  --border: rgba(255,255,255,0.06);
+  --font-orb:'Orbitron',monospace;
+  --font-sans:'Inter',sans-serif;
+  --font-mono:'IBM Plex Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--deep);
+  color:var(--white);
+  font-family:var(--font-sans);
+  line-height:1.6;
+  overflow-x:hidden;
+  min-height:100vh;
+}
+/* ── CANVAS BG ── */
+#cosmos{position:fixed;inset:0;z-index:0;pointer-events:none}
+/* ── SCANLINE overlay ── */
+body::after{
+  content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.02) 2px,rgba(0,0,0,.02) 4px);
+}
+
+/* ══════════════ HEADER ══════════════ */
+header{
+  position:sticky;top:0;z-index:1000;
+  height:64px;padding:0 32px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(5,8,16,.95);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(0,212,255,.12);
+  box-shadow:0 0 40px rgba(0,212,255,.04);
+}
+.logo{display:flex;align-items:center;gap:14px}
+.logo-ring{
+  width:40px;height:40px;border-radius:50%;
+  border:2px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  animation:spin 20s linear infinite;
+  font-size:16px;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.logo-text .l1{
+  font-family:var(--font-orb);font-size:16px;font-weight:900;
+  letter-spacing:.2em;
+  background:linear-gradient(135deg,var(--gold-b),var(--gold),#B8860B);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.logo-text .l2{font-family:var(--font-mono);font-size:8px;color:var(--mgray);letter-spacing:.3em}
+
+.hdr-center{
+  position:absolute;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;gap:10px;
+}
+.launch-label{font-family:var(--font-mono);font-size:8px;color:var(--mgray);letter-spacing:.2em}
+.launch-timer{
+  font-family:var(--font-orb);font-size:20px;font-weight:700;
+  color:var(--pulse);text-shadow:0 0 20px rgba(255,77,109,.5);
+}
+
+.hdr-right{display:flex;align-items:center;gap:20px}
+.pulse-dot{
+  width:10px;height:10px;border-radius:50%;
+  background:var(--restore);box-shadow:0 0 8px var(--restore);
+  animation:hb 1.5s ease-in-out infinite;
+}
+@keyframes hb{0%,100%{transform:scale(1)}50%{transform:scale(1.4);box-shadow:0 0 18px var(--restore)}}
+.live-txt{font-family:var(--font-mono);font-size:9px;color:var(--restore);letter-spacing:.2em}
+.sys-clock{font-family:var(--font-mono);font-size:10px;color:var(--silver)}
+
+/* ══════════════ ZONE NAV ══════════════ */
+.zone-nav{
+  display:flex;align-items:center;gap:0;
+  background:rgba(5,8,16,.8);
+  border-bottom:1px solid var(--border);
+  padding:0 32px;
+  position:sticky;top:64px;z-index:900;
+  backdrop-filter:blur(16px);
+  overflow-x:auto;
+}
+.zone-nav::-webkit-scrollbar{display:none}
+.zone-btn{
+  font-family:var(--font-mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+  padding:14px 24px;
+  border:none;background:transparent;color:var(--mgray);
+  cursor:pointer;transition:all .2s;
+  border-bottom:2px solid transparent;
+  white-space:nowrap;
+  display:flex;align-items:center;gap:8px;
+}
+.zone-btn:hover{color:var(--silver)}
+.zone-btn.active{color:var(--signal);border-bottom-color:var(--signal)}
+.zone-badge{
+  font-size:8px;padding:1px 6px;border-radius:10px;
+  background:rgba(255,77,109,.15);color:var(--pulse);
+  border:1px solid rgba(255,77,109,.25);
+}
+.zone-badge.green{background:rgba(0,255,179,.1);color:var(--restore);border-color:rgba(0,255,179,.2)}
+.zone-badge.blue{background:var(--signal-dim);color:var(--signal);border-color:rgba(0,212,255,.2)}
+
+/* ══════════════ MAIN WORKBENCH ══════════════ */
+.workbench{
+  position:relative;z-index:1;
+  max-width:1680px;margin:0 auto;
+  padding:28px 32px 80px;
+}
+.zone-panel{display:none}
+.zone-panel.active{display:block}
+
+/* ── Section chromes ── */
+.sec-hdr{
+  display:flex;align-items:center;gap:16px;
+  margin-bottom:24px;
+}
+.sec-line{flex:1;height:1px;background:linear-gradient(90deg,rgba(255,255,255,.07),transparent)}
+.sec-title{
+  font-family:var(--font-orb);font-size:10px;font-weight:600;
+  letter-spacing:.4em;text-transform:uppercase;color:var(--silver);white-space:nowrap;
+}
+.sec-sub{font-family:var(--font-mono);font-size:8px;color:var(--mgray);letter-spacing:.15em}
+
+/* ── KPI strip ── */
+.kpi-row{
+  display:grid;gap:12px;margin-bottom:32px;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+}
+.kpi{
+  background:var(--glass);border:1px solid var(--border);border-radius:12px;
+  padding:18px 16px;position:relative;overflow:hidden;
+  backdrop-filter:blur(10px);transition:all .3s;
+}
+.kpi::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--kc);box-shadow:0 0 10px var(--kc);
+}
+.kpi:hover{transform:translateY(-3px);border-color:var(--kc);box-shadow:0 8px 32px rgba(0,0,0,.3)}
+.kpi-lbl{font-family:var(--font-mono);font-size:7px;color:var(--mgray);letter-spacing:.3em;text-transform:uppercase;margin-bottom:6px}
+.kpi-val{font-family:var(--font-orb);font-size:26px;font-weight:700;color:var(--kc);line-height:1;text-shadow:0 0 18px var(--kc)}
+.kpi-hint{font-family:var(--font-mono);font-size:8px;color:var(--mgray);margin-top:5px}
+
+/* ── Two column layout ── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:28px}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:28px}
+
+/* ── Panel card ── */
+.pcard{
+  background:var(--glass);border:1px solid var(--border);border-radius:16px;
+  overflow:hidden;backdrop-filter:blur(10px);
+}
+.pcard-hdr{
+  padding:14px 20px;border-bottom:1px solid var(--border);
+  background:rgba(0,0,0,.2);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.pcard-title{font-family:var(--font-mono);font-size:9px;letter-spacing:.25em;text-transform:uppercase;font-weight:500}
+.pcard-body{padding:20px}
+
+/* ── Issue list ── */
+.issue-list{display:flex;flex-direction:column;gap:8px}
+.issue{
+  background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05);
+  border-radius:10px;padding:14px 16px;
+  display:flex;align-items:flex-start;gap:12px;
+  transition:all .2s;cursor:pointer;
+}
+.issue:hover{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.1);transform:translateX(3px)}
+.issue-sev{
+  width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px;
+}
+.sev-crit{background:var(--pulse);box-shadow:0 0 8px var(--pulse)}
+.sev-high{background:var(--gold);box-shadow:0 0 8px var(--gold)}
+.sev-med{background:var(--signal);box-shadow:0 0 6px var(--signal)}
+.sev-low{background:var(--mgray)}
+.issue-body{flex:1;min-width:0}
+.issue-title{font-size:12px;font-weight:600;margin-bottom:4px;line-height:1.4}
+.issue-meta{font-family:var(--font-mono);font-size:8px;color:var(--mgray);letter-spacing:.1em}
+.issue-tag{
+  font-family:var(--font-mono);font-size:7px;letter-spacing:.15em;
+  padding:2px 8px;border-radius:8px;flex-shrink:0;align-self:center;
+}
+.tag-open{background:rgba(255,77,109,.1);color:var(--pulse);border:1px solid rgba(255,77,109,.2)}
+.tag-wip{background:rgba(212,160,23,.1);color:var(--gold);border:1px solid rgba(212,160,23,.2)}
+.tag-done{background:rgba(0,255,179,.1);color:var(--restore);border:1px solid rgba(0,255,179,.2)}
+.tag-blocked{background:rgba(177,133,219,.1);color:var(--soul);border:1px solid rgba(177,133,219,.2)}
+
+/* ── Migration tracker ── */
+.mig-list{display:flex;flex-direction:column;gap:6px}
+.mig-row{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 16px;
+  background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:10px;
+  transition:all .2s;
+}
+.mig-row:hover{background:rgba(255,255,255,.04)}
+.mig-icon{font-size:14px;flex-shrink:0}
+.mig-info{flex:1;min-width:0}
+.mig-file{font-family:var(--font-mono);font-size:10px;font-weight:500;margin-bottom:2px}
+.mig-db{font-family:var(--font-mono);font-size:8px;color:var(--mgray)}
+.mig-status{
+  font-family:var(--font-mono);font-size:8px;letter-spacing:.15em;
+  padding:3px 10px;border-radius:8px;flex-shrink:0;
+}
+.ms-pending{background:rgba(212,160,23,.1);color:var(--gold);border:1px solid rgba(212,160,23,.2)}
+.ms-ok{background:rgba(0,255,179,.1);color:var(--restore);border:1px solid rgba(0,255,179,.2)}
+.ms-error{background:rgba(255,77,109,.1);color:var(--pulse);border:1px solid rgba(255,77,109,.2)}
+.mig-run-btn{
+  font-family:var(--font-mono);font-size:8px;letter-spacing:.15em;
+  padding:4px 12px;border-radius:6px;
+  border:1px solid rgba(0,212,255,.3);background:var(--signal-dim);
+  color:var(--signal);cursor:pointer;transition:all .2s;flex-shrink:0;
+}
+.mig-run-btn:hover{background:rgba(0,212,255,.2);border-color:var(--signal);box-shadow:0 0 12px rgba(0,212,255,.2)}
+
+/* ── Terminal / Command panel ── */
+.terminal{
+  background:#000;border:1px solid rgba(0,212,255,.15);border-radius:12px;
+  overflow:hidden;font-family:var(--font-mono);margin-bottom:28px;
+}
+.term-hdr{
+  background:rgba(0,212,255,.05);border-bottom:1px solid rgba(0,212,255,.1);
+  padding:10px 16px;display:flex;align-items:center;gap:10px;
+}
+.term-dots{display:flex;gap:6px}
+.td{width:10px;height:10px;border-radius:50%}
+.td1{background:#FF5F57}.td2{background:#FFBD2E}.td3{background:#28CA41}
+.term-label{font-size:9px;color:rgba(0,212,255,.5);letter-spacing:.2em}
+.term-body{
+  padding:16px;min-height:180px;max-height:320px;
+  overflow-y:auto;
+  font-size:11px;line-height:1.8;
+  color:rgba(0,212,255,.8);
+}
+.term-body::-webkit-scrollbar{width:4px}
+.term-body::-webkit-scrollbar-track{background:transparent}
+.term-body::-webkit-scrollbar-thumb{background:rgba(0,212,255,.2);border-radius:2px}
+.term-line{display:block;margin:1px 0}
+.term-prompt{color:rgba(0,255,179,.7)}
+.term-cmd{color:rgba(0,212,255,.9)}
+.term-out{color:rgba(148,163,184,.6)}
+.term-ok{color:#00FFB3}
+.term-err{color:#FF4D6D}
+.term-warn{color:#D4A017}
+.term-input-row{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 16px;border-top:1px solid rgba(0,212,255,.08);
+}
+.term-ps{color:var(--restore);font-size:11px;flex-shrink:0}
+.term-input{
+  flex:1;background:transparent;border:none;outline:none;
+  font-family:var(--font-mono);font-size:11px;color:var(--white);
+  caret-color:var(--restore);
+}
+
+/* ── Quick actions ── */
+.quick-actions{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.qa-btn{
+  font-family:var(--font-mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;
+  padding:8px 18px;border-radius:8px;cursor:pointer;transition:all .2s;
+  display:flex;align-items:center;gap:8px;
+  border:1px solid;
+}
+.qa-btn .qa-icon{font-size:12px}
+.qa-primary{background:rgba(0,212,255,.08);color:var(--signal);border-color:rgba(0,212,255,.25)}
+.qa-primary:hover{background:rgba(0,212,255,.15);box-shadow:0 0 16px rgba(0,212,255,.2)}
+.qa-danger{background:rgba(255,77,109,.06);color:var(--pulse);border-color:rgba(255,77,109,.2)}
+.qa-danger:hover{background:rgba(255,77,109,.12);box-shadow:0 0 16px rgba(255,77,109,.2)}
+.qa-success{background:rgba(0,255,179,.06);color:var(--restore);border-color:rgba(0,255,179,.2)}
+.qa-success:hover{background:rgba(0,255,179,.12);box-shadow:0 0 16px rgba(0,255,179,.2)}
+.qa-gold{background:rgba(212,160,23,.07);color:var(--gold);border-color:rgba(212,160,23,.25)}
+.qa-gold:hover{background:rgba(212,160,23,.14);box-shadow:0 0 16px rgba(212,160,23,.2)}
+
+/* ── Binding table ── */
+.bind-table{width:100%;border-collapse:collapse;font-size:11px}
+.bind-table th{
+  font-family:var(--font-orb);font-size:7px;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--mgray);padding:10px 12px;background:rgba(0,0,0,.3);
+  border-bottom:1px solid var(--border);text-align:left;
+}
+.bind-table td{
+  padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.02);
+  vertical-align:middle;
+}
+.bind-table tr:hover td{background:rgba(255,255,255,.015)}
+.bind-table tr:last-child td{border-bottom:none}
+.bc{font-family:var(--font-mono);font-size:10px;color:var(--signal)}
+.bv{font-family:var(--font-mono);font-size:9px;color:var(--mgray)}
+.bstat{
+  font-family:var(--font-mono);font-size:7px;letter-spacing:.15em;
+  padding:2px 8px;border-radius:6px;
+}
+
+/* ── Brand grid ── */
+.brand-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.brand-card{
+  background:var(--glass);border:1px solid var(--border);border-radius:16px;
+  padding:24px 20px;text-align:center;cursor:pointer;
+  transition:all .35s cubic-bezier(.34,1.56,.64,1);
+  backdrop-filter:blur(10px);position:relative;overflow:hidden;
+}
+.brand-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--bc);box-shadow:0 0 12px var(--bc);
+}
+.brand-card:hover{transform:translateY(-6px);border-color:var(--bc);box-shadow:0 16px 40px rgba(0,0,0,.3)}
+.brand-icon{font-size:36px;margin-bottom:10px}
+.brand-name{
+  font-family:var(--font-orb);font-size:13px;font-weight:700;
+  color:var(--bc);letter-spacing:.1em;margin-bottom:4px;
+  text-shadow:0 0 12px var(--bc);
+}
+.brand-domain{font-family:var(--font-mono);font-size:9px;color:var(--mgray);margin-bottom:12px}
+.brand-status-row{display:flex;justify-content:center;gap:6px;flex-wrap:wrap}
+.bchip{
+  font-family:var(--font-mono);font-size:7px;letter-spacing:.12em;
+  padding:2px 8px;border-radius:8px;
+  background:rgba(255,255,255,.04);color:var(--silver);border:1px solid var(--border);
+}
+
+/* ── Upgrade log ── */
+.upg-item{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:14px 0;border-bottom:1px solid var(--border);
+}
+.upg-item:last-child{border-bottom:none}
+.upg-dot{
+  width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:4px;
+  box-shadow:0 0 8px currentColor;
+}
+.upg-body{flex:1}
+.upg-title{font-size:12px;font-weight:600;margin-bottom:3px}
+.upg-meta{font-family:var(--font-mono);font-size:8px;color:var(--mgray)}
+.upg-action{
+  font-family:var(--font-mono);font-size:8px;letter-spacing:.12em;
+  padding:4px 12px;border-radius:6px;cursor:pointer;transition:all .2s;
+  border:1px solid rgba(0,212,255,.3);background:var(--signal-dim);color:var(--signal);
+  flex-shrink:0;align-self:center;
+}
+.upg-action:hover{background:rgba(0,212,255,.2)}
+
+/* ── Tooltip ── */
+.tooltip-backdrop{
+  display:none;position:fixed;inset:0;z-index:2000;
+  background:rgba(5,8,16,.85);backdrop-filter:blur(8px);
+  align-items:center;justify-content:center;
+}
+.tooltip-backdrop.open{display:flex}
+.tooltip-box{
+  background:var(--panel);border:1px solid rgba(0,212,255,.15);
+  border-radius:20px;padding:32px;max-width:480px;width:90%;
+  animation:pop-in .35s cubic-bezier(.34,1.56,.64,1);
+  position:relative;
+}
+@keyframes pop-in{from{transform:scale(.85) translateY(16px);opacity:0}to{transform:scale(1);opacity:1}}
+.tt-close{
+  position:absolute;top:16px;right:16px;width:30px;height:30px;
+  border-radius:50%;border:1px solid rgba(255,255,255,.1);background:transparent;
+  color:var(--silver);cursor:pointer;font-family:var(--font-mono);font-size:14px;
+  display:flex;align-items:center;justify-content:center;transition:all .2s;
+}
+.tt-close:hover{border-color:var(--pulse);color:var(--pulse);transform:rotate(90deg)}
+
+/* ── Scrollbar global ── */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.07);border-radius:3px}
+
+/* ── Ticker ── */
+.ticker{
+  background:rgba(0,212,255,.03);border-bottom:1px solid rgba(0,212,255,.06);
+  height:28px;overflow:hidden;display:flex;align-items:center;
+  position:sticky;top:64px;z-index:899;
+}
+.ticker-lbl{
+  font-family:var(--font-mono);font-size:8px;color:var(--signal);letter-spacing:.3em;
+  padding:0 16px;border-right:1px solid rgba(0,212,255,.15);
+  white-space:nowrap;flex-shrink:0;background:rgba(5,8,16,.9);z-index:1;
+}
+.ticker-track{display:flex;animation:tick 50s linear infinite;white-space:nowrap}
+.ticker-item{
+  font-family:var(--font-mono);font-size:8px;letter-spacing:.15em;
+  padding:0 28px;display:flex;align-items:center;gap:8px;
+}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+</style>
+</head>
+<body>
+<canvas id="cosmos"></canvas>
+
+<!-- ══ HEADER ══ -->
+<header>
+  <div class="logo">
+    <div class="logo-ring">🎙</div>
+    <div class="logo-text">
+      <div class="l1">MC96ECO</div>
+      <div class="l2">NOIZY TOUR MANAGER · WORKBENCH v18.0</div>
+    </div>
+  </div>
+  <div class="hdr-center">
+    <span class="launch-label">LAUNCH IN</span>
+    <span class="launch-timer" id="timer">00:00:00</span>
+  </div>
+  <div class="hdr-right">
+    <div style="display:flex;align-items:center;gap:8px">
+      <div class="pulse-dot"></div>
+      <span class="live-txt">ALL SYSTEMS LIVE</span>
+    </div>
+    <div class="sys-clock" id="clock"></div>
+  </div>
+</header>
+
+<!-- ══ TICKER ══ -->
+<div class="ticker">
+  <div class="ticker-lbl">EMPIRE STATUS</div>
+  <div class="ticker-track" id="ticker-track">
+    <span class="ticker-item" style="color:var(--restore)">●&nbsp; HEAVEN WORKER — DEPLOYED</span>
+    <span class="ticker-item" style="color:var(--gold)">◆&nbsp; D1 MIGRATIONS — PENDING APPLY</span>
+    <span class="ticker-item" style="color:var(--signal)">▸&nbsp; GABRIEL DB → b5b58cc9 (LIVE)</span>
+    <span class="ticker-item" style="color:var(--pulse)">⚠&nbsp; NOISY-S VIOLATIONS IN PPTX — FIX IN PROGRESS</span>
+    <span class="ticker-item" style="color:var(--restore)">●&nbsp; NOIZY BRAND LAW ENFORCED — CI GUARD ACTIVE</span>
+    <span class="ticker-item" style="color:var(--soul)">◈&nbsp; NOIZYSTREAM v2 SIGNALING — DURABLE OBJECTS READY</span>
+    <span class="ticker-item" style="color:var(--gold)">◆&nbsp; R2 VOICE VAULT — AWAITING CF DASHBOARD ENABLE</span>
+    <span class="ticker-item" style="color:var(--signal)">▸&nbsp; APRIL 17 LAUNCH — T-MINUS COUNTING</span>
+    <!-- duplicate for seamless loop -->
+    <span class="ticker-item" style="color:var(--restore)">●&nbsp; HEAVEN WORKER — DEPLOYED</span>
+    <span class="ticker-item" style="color:var(--gold)">◆&nbsp; D1 MIGRATIONS — PENDING APPLY</span>
+    <span class="ticker-item" style="color:var(--signal)">▸&nbsp; GABRIEL DB → b5b58cc9 (LIVE)</span>
+    <span class="ticker-item" style="color:var(--pulse)">⚠&nbsp; NOISY-S VIOLATIONS IN PPTX — FIX IN PROGRESS</span>
+    <span class="ticker-item" style="color:var(--restore)">●&nbsp; NOIZY BRAND LAW ENFORCED — CI GUARD ACTIVE</span>
+    <span class="ticker-item" style="color:var(--soul)">◈&nbsp; NOIZYSTREAM v2 SIGNALING — DURABLE OBJECTS READY</span>
+    <span class="ticker-item" style="color:var(--gold)">◆&nbsp; R2 VOICE VAULT — AWAITING CF DASHBOARD ENABLE</span>
+    <span class="ticker-item" style="color:var(--signal)">▸&nbsp; APRIL 17 LAUNCH — T-MINUS COUNTING</span>
+  </div>
+</div>
+
+<!-- ══ ZONE NAV ══ -->
+<nav class="zone-nav" id="zone-nav">
+  <button class="zone-btn active" data-zone="overview" onclick="switchZone('overview',this)">🗺 Overview</button>
+  <button class="zone-btn" data-zone="heaven" onclick="switchZone('heaven',this)">⚡ Heaven Worker <span class="zone-badge green">LIVE</span></button>
+  <button class="zone-btn" data-zone="gabriel" onclick="switchZone('gabriel',this)">👁 GABRIEL <span class="zone-badge green">ACTIVE</span></button>
+  <button class="zone-btn" data-zone="d1" onclick="switchZone('d1',this)">🗄 D1 Migrations <span class="zone-badge">3 PENDING</span></button>
+  <button class="zone-btn" data-zone="brands" onclick="switchZone('brands',this)">🎨 Brand Zones</button>
+  <button class="zone-btn" data-zone="issues" onclick="switchZone('issues',this)">🔥 Issues <span class="zone-badge">7 OPEN</span></button>
+  <button class="zone-btn" data-zone="upgrades" onclick="switchZone('upgrades',this)">🚀 Upgrades</button>
+  <button class="zone-btn" data-zone="mcp" onclick="switchZone('mcp',this)">🔌 MCP Team <span class="zone-badge blue">14 SERVERS</span></button>
+  <button class="zone-btn" data-zone="dns" onclick="switchZone('dns',this)">🌐 DNS / CF <span class="zone-badge">BLOCK 0</span></button>
+  <button class="zone-btn" data-zone="workbench" onclick="switchZone('workbench',this)">🗂 Workbench <span class="zone-badge green">INDEX</span></button>
+  <button class="zone-btn" data-zone="cf-account" onclick="switchZone('cf-account',this)">📧 CF Account <span class="zone-badge" style="background:var(--pulse)">SEND NOW</span></button>
+  <button class="zone-btn" data-zone="terminal" onclick="switchZone('terminal',this)">💻 Terminal</button>
+</nav>
+
+<main class="workbench">
+
+<!-- ══════════ OVERVIEW ══════════ -->
+<div class="zone-panel active" id="zone-overview">
+  <div class="kpi-row">
+    <div class="kpi" style="--kc:var(--restore)">
+      <div class="kpi-lbl">Heaven Status</div>
+      <div class="kpi-val" style="font-size:18px">LIVE</div>
+      <div class="kpi-hint">noizy.ai/api/health ✓</div>
+    </div>
+    <div class="kpi" style="--kc:var(--gold)">
+      <div class="kpi-lbl">D1 Migrations</div>
+      <div class="kpi-val">3</div>
+      <div class="kpi-hint">pending · 0 applied</div>
+    </div>
+    <div class="kpi" style="--kc:var(--pulse)">
+      <div class="kpi-lbl">Open Issues</div>
+      <div class="kpi-val">7</div>
+      <div class="kpi-hint">2 critical · 3 high</div>
+    </div>
+    <div class="kpi" style="--kc:var(--signal)">
+      <div class="kpi-lbl">Brand Zones</div>
+      <div class="kpi-val">6</div>
+      <div class="kpi-hint">NOIZY.AI + 5 brands</div>
+    </div>
+    <div class="kpi" style="--kc:var(--soul)">
+      <div class="kpi-lbl">Workers AI</div>
+      <div class="kpi-val">3</div>
+      <div class="kpi-hint">models bound</div>
+    </div>
+    <div class="kpi" style="--kc:var(--nerve)">
+      <div class="kpi-lbl">KV Namespaces</div>
+      <div class="kpi-val">8</div>
+      <div class="kpi-hint">all bound</div>
+    </div>
+  </div>
+
+  <div style="background:linear-gradient(135deg,rgba(255,59,48,.15),rgba(255,59,48,.05));border:1px solid rgba(255,59,48,.4);border-radius:10px;padding:14px 18px;margin-bottom:16px;display:flex;align-items:center;gap:16px">
+    <div style="font-size:22px">📧</div>
+    <div style="flex:1">
+      <div style="font-weight:700;color:#ff3b30;font-size:12px;letter-spacing:.08em">BLOCK 0 — CF ACCOUNT CONSOLIDATION</div>
+      <div style="font-size:10px;color:rgba(255,255,255,.7);margin-top:3px">Email support@cloudflare.com to merge accounts → unlocks Pages, Stream, R2 egress-free storage, Workers AI for NOIZY brands</div>
+    </div>
+    <button class="qa-btn qa-danger" style="white-space:nowrap;flex-shrink:0" onclick="switchZone('cf-account',document.querySelector('[data-zone=cf-account]'))">📨 Draft + Send →</button>
+  </div>
+  <div class="quick-actions">
+    <button class="qa-btn qa-success" onclick="switchZone('d1',document.querySelector('[data-zone=d1]'))"><span class="qa-icon">🗄</span> Apply D1 Migrations</button>
+    <button class="qa-btn qa-primary" onclick="termExec('npx wrangler deploy')"><span class="qa-icon">⚡</span> Deploy Heaven</button>
+    <button class="qa-btn qa-primary" onclick="termExec('npx wrangler whoami')"><span class="qa-icon">👤</span> Check Auth</button>
+    <button class="qa-btn qa-gold" onclick="switchZone('issues',document.querySelector('[data-zone=issues]'))"><span class="qa-icon">🔥</span> Review Issues</button>
+    <button class="qa-btn qa-danger" onclick="termExec('npx wrangler tail --env production')"><span class="qa-icon">📡</span> Tail Live Logs</button>
+    <button class="qa-btn qa-primary" onclick="termExec('npx wrangler d1 execute agent-memory --command=\"SELECT COUNT(*) FROM gabriel_log\" --remote')"><span class="qa-icon">👁</span> GABRIEL Pulse</button>
+  </div>
+
+  <div class="two-col">
+    <div class="pcard">
+      <div class="pcard-hdr">
+        <span class="pcard-title" style="color:var(--pulse)">🔥 Critical Issues</span>
+        <span style="font-family:var(--font-mono);font-size:8px;color:var(--mgray)">needs action today</span>
+      </div>
+      <div class="pcard-body">
+        <div class="issue-list" id="overview-issues"></div>
+      </div>
+    </div>
+    <div class="pcard">
+      <div class="pcard-hdr">
+        <span class="pcard-title" style="color:var(--gold)">🚀 Next Upgrades</span>
+        <span style="font-family:var(--font-mono);font-size:8px;color:var(--mgray)">queued</span>
+      </div>
+      <div class="pcard-body" id="overview-upgrades"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ HEAVEN WORKER ══════════ -->
+<div class="zone-panel" id="zone-heaven">
+  <div class="sec-hdr">
+    <div class="sec-line"></div>
+    <div class="sec-title">⚡ Heaven Worker — API Gateway</div>
+    <div class="sec-line" style="background:linear-gradient(90deg,transparent,rgba(255,255,255,.07))"></div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi" style="--kc:var(--restore)"><div class="kpi-lbl">Worker Name</div><div class="kpi-val" style="font-size:16px">heaven</div><div class="kpi-hint">rsp-5f3.workers.dev</div></div>
+    <div class="kpi" style="--kc:var(--signal)"><div class="kpi-lbl">Main</div><div class="kpi-val" style="font-size:16px">TS</div><div class="kpi-hint">src/index.ts</div></div>
+    <div class="kpi" style="--kc:var(--gold)"><div class="kpi-lbl">Compat Date</div><div class="kpi-val" style="font-size:16px">2026</div><div class="kpi-hint">-04-16 ✓ fixed</div></div>
+    <div class="kpi" style="--kc:var(--soul)"><div class="kpi-lbl">Version</div><div class="kpi-val" style="font-size:16px">18.0</div><div class="kpi-hint">NOIZY_VERSION</div></div>
+    <div class="kpi" style="--kc:var(--restore)"><div class="kpi-lbl">Routes</div><div class="kpi-val" style="font-size:16px">noizy.ai/*</div><div class="kpi-hint">zone_name bound</div></div>
+  </div>
+
+  <div class="quick-actions">
+    <button class="qa-btn qa-primary" onclick="termExec('npx wrangler deploy')">⚡ Deploy Production</button>
+    <button class="qa-btn qa-primary" onclick="termExec('npx wrangler deploy --env canary')">🐤 Deploy Canary</button>
+    <button class="qa-btn qa-primary" onclick="termExec('npx wrangler deploy --env preview')">👁 Deploy Preview</button>
+    <button class="qa-btn qa-danger" onclick="termExec('npx wrangler tail --env production')">📡 Tail Logs</button>
+    <button class="qa-btn qa-gold" onclick="termExec('npx wrangler whoami && npx wrangler d1 list')">📋 Check Auth + D1</button>
+  </div>
+
+  <div class="pcard" style="margin-bottom:20px">
+    <div class="pcard-hdr">
+      <span class="pcard-title">📦 Wrangler Bindings — noizy-heaven/wrangler.toml (canonical)</span>
+      <span style="font-family:var(--font-mono);font-size:8px;color:var(--restore)">account 5f36aa97</span>
+    </div>
+    <div class="pcard-body" style="padding:0">
+      <table class="bind-table">
+        <thead><tr><th>Type</th><th>Binding</th><th>ID / Name</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--silver)">D1</td><td class="bc">DB_MEMORY</td><td class="bv">b5b58cc9 · agent-memory</td><td><span class="bstat tag-done">LIVE ✓</span></td></tr>
+          <tr><td style="color:var(--silver)">D1</td><td class="bc">DB_REPAIRS</td><td class="bv">cd6cae46 · noizy-prod</td><td><span class="bstat tag-wip">SCHEMA PENDING</span></td></tr>
+          <tr><td style="color:var(--silver)">D1</td><td class="bc">DB_AQUARIUM</td><td class="bv">01212e89 · aquarium-archive</td><td><span class="bstat tag-wip">SCHEMA PENDING</span></td></tr>
+          <tr><td style="color:var(--silver)">KV</td><td class="bc">KV_SIGNUPS</td><td class="bv">392c1bf4</td><td><span class="bstat tag-done">LIVE ✓</span></td></tr>
+          <tr><td style="color:var(--silver)">KV</td><td class="bc">KV_ROYALTIES</td><td class="bv">4cf36e4b</td><td><span class="bstat tag-done">LIVE ✓</span></td></tr>
+          <tr><td style="color:var(--silver)">KV</td><td class="bc">KV_MEMCELL</td><td class="bv">9aa25116</td><td><span class="bstat tag-done">LIVE ✓</span></td></tr>
+          <tr><td style="color:var(--silver)">KV</td><td class="bc">FEATURE_FLAGS</td><td class="bv">88331123</td><td><span class="bstat tag-done">LIVE ✓</span></td></tr>
+          <tr><td style="color:var(--silver)">KV</td><td class="bc">GAP_SOLVER</td><td class="bv">4941fb79</td><td><span class="bstat tag-done">LIVE ✓</span></td></tr>
+          <tr><td style="color:var(--silver)">R2</td><td class="bc">VOICE_VAULT</td><td class="bv">noizy-voice-vault</td><td><span class="bstat tag-open">ENABLE IN CF DASH</span></td></tr>
+          <tr><td style="color:var(--silver)">AI</td><td class="bc">AI</td><td class="bv">Workers AI — llama-3.1, whisper</td><td><span class="bstat tag-done">BOUND ✓</span></td></tr>
+          <tr><td style="color:var(--silver)">DO</td><td class="bc">SIGNALING_ROOMS</td><td class="bv">SignalingRoom · v1 migration</td><td><span class="bstat tag-done">LIVE ✓</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="pcard">
+    <div class="pcard-hdr"><span class="pcard-title">🚨 NOIZYLAB/wrangler.toml — STALE (do not use)</span></div>
+    <div class="pcard-body">
+      <div class="issue-list">
+        <div class="issue"><div class="issue-sev sev-crit"></div><div class="issue-body"><div class="issue-title">main = "src/index.js" — wrong extension</div><div class="issue-meta">Should be src/index.ts · canonical is in noizy-heaven/</div></div><span class="issue-tag tag-open">STALE</span></div>
+        <div class="issue"><div class="issue-sev sev-high"></div><div class="issue-body"><div class="issue-title">GABRIEL_DB binding → wrong D1 ID (a31d68e2)</div><div class="issue-meta">Canonical: DB_MEMORY → b5b58cc9 in noizy-heaven/</div></div><span class="issue-tag tag-open">DO NOT USE</span></div>
+        <div class="issue"><div class="issue-sev sev-med"></div><div class="issue-body"><div class="issue-title">Missing Durable Objects, Routes, R2, Env sections</div><div class="issue-meta">Treat NOIZYLAB/wrangler.toml as read-only reference only</div></div><span class="issue-tag tag-blocked">ARCHIVED</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ GABRIEL ══════════ -->
+<div class="zone-panel" id="zone-gabriel">
+  <div class="sec-hdr">
+    <div class="sec-line"></div>
+    <div class="sec-title">👁 GABRIEL — Constitutional Audit Agent</div>
+    <div class="sec-line" style="background:linear-gradient(90deg,transparent,rgba(255,255,255,.07))"></div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi" style="--kc:var(--soul)"><div class="kpi-lbl">DB Binding</div><div class="kpi-val" style="font-size:14px">DB_MEMORY</div><div class="kpi-hint">agent-memory</div></div>
+    <div class="kpi" style="--kc:var(--signal)"><div class="kpi-lbl">DB ID</div><div class="kpi-val" style="font-size:11px">b5b58cc9</div><div class="kpi-hint">CONFIRMED LIVE</div></div>
+    <div class="kpi" style="--kc:var(--restore)"><div class="kpi-lbl">Protocol</div><div class="kpi-val" style="font-size:14px">75/25</div><div class="kpi-hint">HVS perpetual</div></div>
+    <div class="kpi" style="--kc:var(--gold)"><div class="kpi-lbl">c2pa Stamps</div><div class="kpi-val">∞</div><div class="kpi-hint">per consent event</div></div>
+  </div>
+
+  <div class="quick-actions">
+    <button class="qa-btn qa-primary" onclick="termExec('npx wrangler d1 execute agent-memory --command=\"SELECT COUNT(*) FROM gabriel_log\" --remote')">👁 GABRIEL Log Count</button>
+    <button class="qa-btn qa-primary" onclick="termExec('npx wrangler d1 execute agent-memory --command=\"SELECT event_type, COUNT(*) as n FROM gabriel_log GROUP BY event_type ORDER BY n DESC LIMIT 10\" --remote')">📊 Event Breakdown</button>
+    <button class="qa-btn qa-primary" onclick="termExec('npx wrangler d1 execute agent-memory --command=\"SELECT * FROM gabriel_log ORDER BY logged_at DESC LIMIT 5\" --remote')">🕐 Recent Events</button>
+    <button class="qa-btn qa-gold" onclick="termExec('npx wrangler d1 execute agent-memory --command=\"SELECT COUNT(*) FROM family_members\" --remote')">👨‍👩‍👧 Family Count</button>
+    <button class="qa-btn qa-gold" onclick="termExec('npx wrangler d1 execute agent-memory --command=\"SELECT COUNT(*) FROM consent_matrix WHERE revoked_at IS NULL\" --remote')">🔏 Active Consents</button>
+  </div>
+
+  <div class="two-col">
+    <div class="pcard">
+      <div class="pcard-hdr"><span class="pcard-title">📋 gabriel_log Schema</span></div>
+      <div class="pcard-body" style="padding:0">
+        <table class="bind-table">
+          <thead><tr><th>Column</th><th>Type</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td class="bc">id</td><td class="bv">TEXT PK</td><td class="bv">UUID</td></tr>
+            <tr><td class="bc">event_type</td><td class="bv">TEXT</td><td class="bv">SIGNUP / CONSENT / DISPATCH…</td></tr>
+            <tr><td class="bc">actor_id</td><td class="bv">TEXT</td><td class="bv">member UUID or null</td></tr>
+            <tr><td class="bc">target_id</td><td class="bv">TEXT</td><td class="bv">resource UUID or null</td></tr>
+            <tr><td class="bc">payload</td><td class="bv">TEXT</td><td class="bv">JSON blob</td></tr>
+            <tr><td class="bc">sovereignty_check</td><td class="bv">TEXT</td><td class="bv">optional JSON</td></tr>
+            <tr><td class="bc">logged_at</td><td class="bv">TEXT</td><td class="bv">datetime('now') UTC</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="pcard">
+      <div class="pcard-hdr"><span class="pcard-title">🔑 All 7 Tables in agent-memory</span></div>
+      <div class="pcard-body">
+        <div class="issue-list">
+          <div class="issue"><div class="issue-sev sev-med" style="background:var(--soul)"></div><div class="issue-body"><div class="issue-title">gabriel_log</div><div class="issue-meta">Immutable audit trail — never update/delete</div></div><span class="issue-tag tag-wip">PENDING MIGRATE</span></div>
+          <div class="issue"><div class="issue-sev sev-med" style="background:var(--soul)"></div><div class="issue-body"><div class="issue-title">family_members</div><div class="issue-meta">Voice owners + beneficiary network</div></div><span class="issue-tag tag-wip">PENDING</span></div>
+          <div class="issue"><div class="issue-sev sev-med" style="background:var(--soul)"></div><div class="issue-body"><div class="issue-title">consent_matrix</div><div class="issue-meta">c2pa-stamped consent declarations</div></div><span class="issue-tag tag-wip">PENDING</span></div>
+          <div class="issue"><div class="issue-sev sev-med" style="background:var(--soul)"></div><div class="issue-body"><div class="issue-title">voice_profiles</div><div class="issue-meta">Metadata only — audio stays on M2 Ultra</div></div><span class="issue-tag tag-wip">PENDING</span></div>
+          <div class="issue"><div class="issue-sev sev-med" style="background:var(--soul)"></div><div class="issue-body"><div class="issue-title">beneficiaries / messages / healing_sessions</div><div class="issue-meta">Full constitutional layer</div></div><span class="issue-tag tag-wip">PENDING</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ D1 MIGRATIONS ══════════ -->
+<div class="zone-panel" id="zone-d1">
+  <div class="sec-hdr">
+    <div class="sec-line"></div>
+    <div class="sec-title">🗄 D1 Migrations — 3 Files Ready to Apply</div>
+    <div class="sec-line" style="background:linear-gradient(90deg,transparent,rgba(255,255,255,.07))"></div>
+  </div>
+
+  <div style="background:rgba(212,160,23,.06);border:1px solid rgba(212,160,23,.2);border-radius:12px;padding:16px 20px;margin-bottom:24px;display:flex;align-items:center;gap:12px">
+    <span style="font-size:20px">⚠️</span>
+    <div>
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--gold);margin-bottom:3px">PREREQ: Must be logged in as rsp@noizy.ai</div>
+      <div style="font-family:var(--font-mono);font-size:8px;color:var(--mgray)">Run <span style="color:var(--signal)">npx wrangler whoami</span> to confirm before applying. If wrong account, run <span style="color:var(--signal)">npx wrangler login</span> first.</div>
+    </div>
+    <button class="mig-run-btn" style="margin-left:auto" onclick="termExec('npx wrangler whoami')">Check Auth →</button>
+  </div>
+
+  <div class="quick-actions" style="margin-bottom:24px">
+    <button class="qa-btn qa-primary" onclick="termExec('cd /Users/m2ultra/NOIZYANTHROPIC/repos/noizy-heaven && chmod +x db/apply-migrations.sh && bash db/apply-migrations.sh --dry-run')">🧪 Dry Run (local)</button>
+    <button class="qa-btn qa-success" onclick="termExec('cd /Users/m2ultra/NOIZYANTHROPIC/repos/noizy-heaven && bash db/apply-migrations.sh')">🚀 Apply ALL to Production</button>
+    <button class="qa-btn qa-gold" onclick="termExec('npx wrangler d1 list')">📋 List D1 Databases</button>
+  </div>
+
+  <div class="pcard" style="margin-bottom:20px">
+    <div class="pcard-hdr">
+      <span class="pcard-title">Migration Files — /db/migrations/</span>
+      <span style="font-family:var(--font-mono);font-size:8px;color:var(--mgray)">noizy-heaven repo</span>
+    </div>
+    <div class="pcard-body">
+      <div class="mig-list" id="mig-rows">
+
+        <div class="mig-row" id="mig-0001">
+          <div class="mig-icon">📄</div>
+          <div class="mig-info">
+            <div class="mig-file">0001_init.sql</div>
+            <div class="mig-db">agent-memory · b5b58cc9 · 7 tables: gabriel_log, family_members, consent_matrix, beneficiaries, voice_profiles, messages, healing_sessions</div>
+          </div>
+          <span class="mig-status ms-pending" id="ms-0001">PENDING</span>
+          <button class="mig-run-btn" onclick="runMigration('0001','agent-memory','0001_init.sql')">Run →</button>
+        </div>
+
+        <div class="mig-row" id="mig-0002">
+          <div class="mig-icon">📄</div>
+          <div class="mig-info">
+            <div class="mig-file">0002_aquarium.sql</div>
+            <div class="mig-db">aquarium-archive · 01212e89 · 4 tables: tracks, playlists, aquarium_royalties, catalog_events</div>
+          </div>
+          <span class="mig-status ms-pending" id="ms-0002">PENDING</span>
+          <button class="mig-run-btn" onclick="runMigration('0002','aquarium-archive','0002_aquarium.sql')">Run →</button>
+        </div>
+
+        <div class="mig-row" id="mig-0003">
+          <div class="mig-icon">📄</div>
+          <div class="mig-info">
+            <div class="mig-file">0003_repairs.sql</div>
+            <div class="mig-db">noizy-prod · cd6cae46 · 4 tables: repair_tickets, system_alerts, deploy_log, feature_flag_audit</div>
+          </div>
+          <span class="mig-status ms-pending" id="ms-0003">PENDING</span>
+          <button class="mig-run-btn" onclick="runMigration('0003','noizy-prod','0003_repairs.sql')">Run →</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="pcard">
+    <div class="pcard-hdr"><span class="pcard-title">📋 Manual Run Commands</span></div>
+    <div class="pcard-body">
+      <div style="background:#000;border-radius:8px;padding:16px;font-family:var(--font-mono);font-size:10px;line-height:2;color:rgba(0,212,255,.8)">
+        <div style="color:rgba(0,255,179,.6)"># Step into repo</div>
+        <div>cd /Users/m2ultra/NOIZYANTHROPIC/repos/noizy-heaven</div>
+        <div style="color:rgba(0,255,179,.6);margin-top:8px"># Make runner executable</div>
+        <div>chmod +x db/apply-migrations.sh</div>
+        <div style="color:rgba(0,255,179,.6);margin-top:8px"># Dry run (local D1 — no production writes)</div>
+        <div>bash db/apply-migrations.sh --dry-run</div>
+        <div style="color:rgba(0,255,179,.6);margin-top:8px"># Apply to Cloudflare D1 production</div>
+        <div>bash db/apply-migrations.sh</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ BRAND ZONES ══════════ -->
+<div class="zone-panel" id="zone-brands">
+  <div class="sec-hdr">
+    <div class="sec-line"></div>
+    <div class="sec-title">🎨 NOIZY Brand Zones</div>
+    <div class="sec-line" style="background:linear-gradient(90deg,transparent,rgba(255,255,255,.07))"></div>
+  </div>
+
+  <div style="background:rgba(255,77,109,.05);border:1px solid rgba(255,77,109,.15);border-radius:10px;padding:12px 16px;margin-bottom:24px;font-family:var(--font-mono);font-size:9px;color:var(--pulse);letter-spacing:.15em">
+    ⚡ BRAND LAW ACTIVE — Pre-commit hook + CI guard blocking all NOISY-s violations · ops/NOIZY-NAMING-LAW.txt
+  </div>
+
+  <div class="brand-grid">
+    <div class="brand-card" style="--bc:var(--signal)">
+      <div class="brand-icon">🌐</div>
+      <div class="brand-name">NOIZY.AI</div>
+      <div class="brand-domain">noizy.ai · api.noizy.ai</div>
+      <div class="brand-status-row">
+        <span class="bchip" style="color:var(--restore);border-color:rgba(0,255,179,.2)">LIVE</span>
+        <span class="bchip">Museum</span>
+        <span class="bchip">Wisdom</span>
+      </div>
+    </div>
+    <div class="brand-card" style="--bc:var(--soul)">
+      <div class="brand-icon">🎙</div>
+      <div class="brand-name">NOIZYVOX</div>
+      <div class="brand-domain">noizyvox.com</div>
+      <div class="brand-status-row">
+        <span class="bchip" style="color:var(--gold);border-color:rgba(212,160,23,.2)">BUILDING</span>
+        <span class="bchip">Voice Marketplace</span>
+      </div>
+    </div>
+    <div class="brand-card" style="--bc:var(--restore)">
+      <div class="brand-icon">🐟</div>
+      <div class="brand-name">NOIZYFISH</div>
+      <div class="brand-domain">noizyfish.com</div>
+      <div class="brand-status-row">
+        <span class="bchip" style="color:var(--gold);border-color:rgba(212,160,23,.2)">BUILDING</span>
+        <span class="bchip">The Aquarium</span>
+        <span class="bchip">Healing Audio</span>
+      </div>
+    </div>
+    <div class="brand-card" style="--bc:var(--nerve)">
+      <div class="brand-icon">🧒</div>
+      <div class="brand-name">NOIZYKIDZ</div>
+      <div class="brand-domain">noizykidz.ca</div>
+      <div class="brand-status-row">
+        <span class="bchip" style="color:var(--soul);border-color:rgba(177,133,219,.2)">PLANNED</span>
+        <span class="bchip">Fishy Books</span>
+      </div>
+    </div>
+    <div class="brand-card" style="--bc:var(--electric)">
+      <div class="brand-icon">🔬</div>
+      <div class="brand-name">NOIZYLAB</div>
+      <div class="brand-domain">noizylab.dev</div>
+      <div class="brand-status-row">
+        <span class="bchip" style="color:var(--restore);border-color:rgba(0,255,179,.2)">ACTIVE</span>
+        <span class="bchip">Infra</span>
+        <span class="bchip">Workers</span>
+      </div>
+    </div>
+    <div class="brand-card" style="--bc:var(--gold)">
+      <div class="brand-icon">🌍</div>
+      <div class="brand-name">NOIZYWORLD</div>
+      <div class="brand-domain">noizyworld.io</div>
+      <div class="brand-status-row">
+        <span class="bchip" style="color:var(--gold);border-color:rgba(212,160,23,.2)">BUILDING</span>
+        <span class="bchip">Ecosystem Hub</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:24px">
+    <div class="sec-hdr"><div class="sec-line"></div><div class="sec-title">PPTX Brand Violations — Fix Map</div><div class="sec-line" style="background:linear-gradient(90deg,transparent,rgba(255,255,255,.07))"></div></div>
+    <div class="pcard">
+      <div class="pcard-hdr"><span class="pcard-title" style="color:var(--pulse)">NOIZYWORLD - THE ECOSYSTEM.pptx · PowerPoint Home → Replace</span></div>
+      <div class="pcard-body" style="padding:0">
+        <table class="bind-table">
+          <thead><tr><th>Find Exact</th><th>Replace With</th><th>Slide(s)</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td class="bv" style="color:var(--pulse)">NoisyVox</td><td class="bc">NOIZYVOX</td><td class="bv">27</td><td><span class="bstat tag-open">FIX NOW</span></td></tr>
+            <tr><td class="bv" style="color:var(--pulse)">NoisyFish</td><td class="bc">NOIZYFISH</td><td class="bv">27</td><td><span class="bstat tag-open">FIX NOW</span></td></tr>
+            <tr><td class="bv" style="color:var(--pulse)">NoisyKids</td><td class="bc">NOIZYKIDZ</td><td class="bv">27</td><td><span class="bstat tag-open">FIX NOW</span></td></tr>
+            <tr><td class="bv" style="color:var(--pulse)">NOIZYKIDS</td><td class="bc">NOIZYKIDZ</td><td class="bv">11,15,18,26,31,35,39</td><td><span class="bstat tag-open">FIX NOW</span></td></tr>
+            <tr><td class="bv" style="color:var(--pulse)">noizykids.ca</td><td class="bc">noizykidz.ca</td><td class="bv">multiple</td><td><span class="bstat tag-open">FIX NOW</span></td></tr>
+            <tr><td class="bv" style="color:var(--gold)">Noisy.ai</td><td class="bc">NOIZY.AI</td><td class="bv">various</td><td><span class="bstat tag-open">FIX NOW</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ ISSUES ══════════ -->
+<div class="zone-panel" id="zone-issues">
+  <div class="sec-hdr">
+    <div class="sec-line"></div><div class="sec-title">🔥 Issues Tracker</div>
+    <div class="sec-line" style="background:linear-gradient(90deg,transparent,rgba(255,255,255,.07))"></div>
+  </div>
+  <div id="full-issue-list"></div>
+</div>
+
+<!-- ══════════ UPGRADES ══════════ -->
+<div class="zone-panel" id="zone-upgrades">
+  <div class="sec-hdr">
+    <div class="sec-line"></div><div class="sec-title">🚀 Upgrade Queue</div>
+    <div class="sec-line" style="background:linear-gradient(90deg,transparent,rgba(255,255,255,.07))"></div>
+  </div>
+  <div id="full-upgrade-list"></div>
+</div>
+
+<!-- ══════════ TERMINAL ══════════ -->
+<div class="zone-panel" id="zone-terminal">
+  <div class="sec-hdr">
+    <div class="sec-line"></div><div class="sec-title">💻 Command Reference</div>
+    <div class="sec-line" style="background:linear-gradient(90deg,transparent,rgba(255,255,255,.07))"></div>
+  </div>
+
+  <div class="terminal">
+    <div class="term-hdr">
+      <div class="term-dots"><div class="td td1"></div><div class="td td2"></div><div class="td td3"></div></div>
+      <span class="term-label">NOIZY WORKBENCH · Copy commands to your terminal</span>
+    </div>
+    <div class="term-body" id="term-out">
+      <span class="term-line"><span class="term-prompt">noizy@heaven:~$</span> <span class="term-cmd">ready.</span></span>
+      <span class="term-line term-out">Click any action button or use the quick commands below to stage a command.</span>
+      <span class="term-line term-out">Commands auto-copy to clipboard when clicked.</span>
+    </div>
+    <div class="term-input-row">
+      <span class="term-ps">$</span>
+      <input class="term-input" id="term-input" placeholder="Type a command and press Enter to stage..." spellcheck="false">
+    </div>
+  </div>
+
+  <div class="three-col">
+    <div class="pcard">
+      <div class="pcard-hdr"><span class="pcard-title">⚡ Wrangler</span></div>
+      <div class="pcard-body">
+        <div class="issue-list">
+          <div class="issue" onclick="termExec('npx wrangler whoami')"><div class="issue-body"><div class="issue-title" style="font-family:var(--font-mono);font-size:11px">wrangler whoami</div><div class="issue-meta">Check current account</div></div></div>
+          <div class="issue" onclick="termExec('npx wrangler deploy')"><div class="issue-body"><div class="issue-title" style="font-family:var(--font-mono);font-size:11px">wrangler deploy</div><div class="issue-meta">Deploy to production</div></div></div>
+          <div class="issue" onclick="termExec('npx wrangler tail --env production')"><div class="issue-body"><div class="issue-title" style="font-family:var(--font-mono);font-size:11px">wrangler tail</div><div class="issue-meta">Live worker logs</div></div></div>
+          <div class="issue" onclick="termExec('npx wrangler d1 list')"><div class="issue-body"><div class="issue-title" style="font-family:var(--font-mono);font-size:11px">wrangler d1 list</div><div class="issue-meta">Show all D1 databases</div></div></div>
+          <div class="issue" onclick="termExec('npx wrangler kv namespace list')"><div class="issue-body"><div class="issue-title" style="font-family:var(--font-mono);font-size:11px">wrangler kv list</div><div class="issue-meta">List KV namespaces</div></div></div>
+          <div class="issue" onclick="termExec('npx wrangler secret list')"><div class="issue-body"><div class="issue-title" style="font-family:var(--font-mono);font-size:11px">wrangler secret list</div><div class="issue-meta">Check required secrets</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="pcard">
+      <div class="pcard-hdr"><span class="pcard-title">🗄 D1 Queries</span></div>
+      <div class="pcard-body">
+        <div class="issue-list">
+          <div class="issue" onclick="termExec('npx wrangler d1 execute agent-memory --command=\"SELECT COUNT(*) FROM gabriel_log\" --remote')"><div class="issue-body"><div class="issue-title" style="font-family:var(--font-mono);font-size:11px">gabriel_log count</div><div class="issue-meta">Total audit events</div></div></div>
+          <div class="issue" onclick="termExec('npx wrangler d1 execute agent-memory --command=\"SELECT * FROM gabriel_log ORDER BY logged_at DESC LIMIT 10\" --remote')"><div class="issue-body"><div class="issue-title" style="font-family:var(--font-mono);font-size:11px">gabriel recent</div><div class="issue-meta">Last 10 events</div></div></div>
+          <div class="issue" onclick="termExec('npx wrangler d1 execute agent-memory --command=\"SELECT COUNT(*) FROM family_members\" --remote')"><div class="issue-body"><div class="issue-title" style="font-family:var(--font-mono);font-size:11px">family_members count</div><div class="issue-meta">Registered members</div></div></div>
+          <div class="issue" onclick="termExec('npx wrangler d1 execute agent-memory --command=\"SELECT COUNT(*) FROM consent_matrix WHERE revoked_at IS NULL\" --remote')"><div class="issue-body"><div class="issue-title" style="font-family:var(--font-mono);font-size:11px">active consents</div><div class="issue-meta">Non-revoked consents</div></div></div>
+          <div class="issue" onclick="runMigration('0001','agent-memory','0001_init.sql')"><div class="issue-body"><div class="issue-title" style="font-family:var(--font-mono);font-size:11px">apply 0001_init.sql</div><div class="issue-meta">Stage migration command</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="pcard">
+      <div class="pcard-hdr"><span class="pcard-title">🔐 Secrets</span></div>
+      <div class="pcard-body">
+        <div class="issue-list">
+          <div class="issue" onclick="termExec('npx wrangler secret put ANTHROPIC_API_KEY')"><div class="issue-body"><div class="issue-title" style="font-family:var(--font-mono);font-size:11px">put ANTHROPIC_API_KEY</div><div class="issue-meta">Claude / Sonnet API key</div></div></div>
+          <div class="issue" onclick="termExec('npx wrangler secret put NOIZY_KEY')"><div class="issue-body"><div class="issue-title" style="font-family:var(--font-mono);font-size:11px">put NOIZY_KEY</div><div class="issue-meta">API auth header secret</div></div></div>
+          <div class="issue" onclick="termExec('npx wrangler secret put CF_ACCESS_CLIENT_ID')"><div class="issue-body"><div class="issue-title" style="font-family:var(--font-mono);font-size:11px">put CF_ACCESS_CLIENT_ID</div><div class="issue-meta">Mesh tunnel auth</div></div></div>
+          <div class="issue" onclick="termExec('npx wrangler secret put N8N_WEBHOOK_SECRET')"><div class="issue-body"><div class="issue-title" style="font-family:var(--font-mono);font-size:11px">put N8N_WEBHOOK_SECRET</div><div class="issue-meta">n8n inbound auth</div></div></div>
+          <div class="issue" onclick="termExec('npx wrangler secret put LINEAR_API_KEY')"><div class="issue-body"><div class="issue-title" style="font-family:var(--font-mono);font-size:11px">put LINEAR_API_KEY</div><div class="issue-meta">Linear ticket creation</div></div></div>
+          <div class="issue" onclick="termExec('npx wrangler secret put NOTION_API_KEY')"><div class="issue-body"><div class="issue-title" style="font-family:var(--font-mono);font-size:11px">put NOTION_API_KEY</div><div class="issue-meta">Wisdom archive sync</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MCP TEAM ══════════ -->
+<div class="zone-panel" id="zone-mcp">
+  <div class="sec-hdr">
+    <div class="sec-line"></div><div class="sec-title">🔌 MCP Team — 14 Servers Registered</div>
+    <div class="sec-line" style="background:linear-gradient(90deg,transparent,rgba(255,255,255,.07))"></div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi" style="--kc:var(--restore)"><div class="kpi-lbl">Registered</div><div class="kpi-val">14</div><div class="kpi-hint">in .mcp.json</div></div>
+    <div class="kpi" style="--kc:var(--gold)"><div class="kpi-lbl">Was Missing</div><div class="kpi-val">9</div><div class="kpi-hint">now wired up ✓</div></div>
+    <div class="kpi" style="--kc:var(--signal)"><div class="kpi-lbl">Agents (.claude)</div><div class="kpi-val">10</div><div class="kpi-hint">in .claude/agents/</div></div>
+    <div class="kpi" style="--kc:var(--soul)"><div class="kpi-lbl">Tools (est.)</div><div class="kpi-val">74+</div><div class="kpi-hint">across all servers</div></div>
+  </div>
+
+  <div class="quick-actions" style="margin-bottom:24px">
+    <button class="qa-btn qa-success" onclick="termExec('bash /Users/m2ultra/NOIZYLAB/ops/mcp-health.sh')">🩺 Run Health Check</button>
+    <button class="qa-btn qa-primary" onclick="termExec('bash /Users/m2ultra/NOIZYLAB/ops/mcp-scaffold.sh')">🏗 Scaffold Missing Server</button>
+    <button class="qa-btn qa-gold" onclick="termExec('cat /Users/m2ultra/NOIZYLAB/.mcp.json')">📋 Print .mcp.json</button>
+  </div>
+
+  <div class="pcard" style="margin-bottom:20px">
+    <div class="pcard-hdr">
+      <span class="pcard-title">/Users/m2ultra/NOIZYLAB/.mcp.json — All 14 Servers</span>
+      <span style="font-family:var(--font-mono);font-size:8px;color:var(--restore)">fully wired ✓</span>
+    </div>
+    <div class="pcard-body" style="padding:0">
+      <table class="bind-table">
+        <thead><tr><th>Server</th><th>Role / Agent</th><th>Entry</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td class="bc">gabriel-mcp</td><td class="bv">Lead Orchestrator — mission dispatch</td><td class="bv">mcp/gabriel-mcp/index.js</td><td><span class="bstat tag-wip">VERIFY</span></td></tr>
+          <tr><td class="bc">lucy-mcp</td><td class="bv">DAZEFLOW + Archives</td><td class="bv">mcp/lucy-mcp/index.js</td><td><span class="bstat tag-wip">VERIFY</span></td></tr>
+          <tr><td class="bc">heaven-mcp</td><td class="bv">Heaven h17_* query tools</td><td class="bv">mcp/heaven-mcp/index.js</td><td><span class="bstat tag-wip">VERIFY</span></td></tr>
+          <tr><td class="bc">voice-bridge</td><td class="bv">Voice pipeline → GABRIEL port 9777</td><td class="bv">mcp/voice-bridge/voice-bridge-server.mjs</td><td><span class="bstat tag-done">WAS WIRED ✓</span></td></tr>
+          <tr><td class="bc">engr-keith-mcp</td><td class="bv">Technical Lead — Heaven architect</td><td class="bv">mcp/engr-keith-mcp/index.js</td><td><span class="bstat tag-wip">VERIFY</span></td></tr>
+          <tr><td class="bc">dream-mcp</td><td class="bv">DreamChamber / vision orchestration</td><td class="bv">mcp/dream-mcp/index.js</td><td><span class="bstat tag-wip">VERIFY</span></td></tr>
+          <tr><td class="bc">cb01-mcp</td><td class="bv">DNS + Cloudflare ops / GoDaddy exit</td><td class="bv">mcp/cb01-mcp/index.js</td><td><span class="bstat tag-wip">VERIFY</span></td></tr>
+          <tr><td class="bc">shirley-mcp</td><td class="bv">Gemma 3 — code + file manager</td><td class="bv">mcp/shirley-mcp/index.js</td><td><span class="bstat tag-wip">VERIFY</span></td></tr>
+          <tr><td class="bc">family-mcp</td><td class="bv">Family — POPS / SHIRL care layer</td><td class="bv">mcp/family-mcp/index.js</td><td><span class="bstat tag-wip">VERIFY</span></td></tr>
+          <tr><td class="bc">shortcuts-mcp</td><td class="bv">macOS Shortcuts bridge</td><td class="bv">mcp/shortcuts-mcp/index.js</td><td><span class="bstat tag-done">WAS WIRED ✓</span></td></tr>
+          <tr><td class="bc">consent-oracle</td><td class="bv">9-point Never Clause audit</td><td class="bv">mcp/consent-oracle/index.js</td><td><span class="bstat tag-wip">VERIFY</span></td></tr>
+          <tr><td class="bc">synthesis-oracle</td><td class="bv">Pre-flight synthesis validator</td><td class="bv">mcp/synthesis-oracle/index.js</td><td><span class="bstat tag-wip">VERIFY</span></td></tr>
+          <tr><td class="bc">audio-mcp</td><td class="bv">13-tool audio pipeline</td><td class="bv">mcp/audio/index.js</td><td><span class="bstat tag-wip">VERIFY</span></td></tr>
+          <tr><td class="bc">n8n-mcp</td><td class="bv">n8n agentic factory — 24 tools</td><td class="bv">npx n8n-mcp@latest</td><td><span class="bstat tag-done">WAS WIRED ✓</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="pcard">
+      <div class="pcard-hdr"><span class="pcard-title">🩺 Run Health Check Now</span></div>
+      <div class="pcard-body">
+        <div style="background:#000;border-radius:8px;padding:16px;font-family:var(--font-mono);font-size:10px;line-height:2;color:rgba(0,212,255,.8)">
+          <div style="color:rgba(0,255,179,.6)"># Verify all 14 server entry files + 4 runtime ports</div>
+          <div>bash /Users/m2ultra/NOIZYLAB/ops/mcp-health.sh</div>
+          <div style="color:rgba(0,255,179,.6);margin-top:8px"># Scaffold any MISSING server</div>
+          <div>bash /Users/m2ultra/NOIZYLAB/ops/mcp-scaffold.sh &lt;server-name&gt;</div>
+          <div style="color:rgba(0,255,179,.6);margin-top:8px"># After fixing, reload Claude Code to pick up servers:</div>
+          <div style="color:rgba(212,160,23,.8)"># Cmd+Shift+P → "MCP: Restart All Servers"</div>
+        </div>
+        <div style="margin-top:16px">
+          <button class="qa-btn qa-success" style="width:100%;justify-content:center" onclick="termExec('bash /Users/m2ultra/NOIZYLAB/ops/mcp-health.sh')">🩺 Stage Health Check Command</button>
+        </div>
+      </div>
+    </div>
+    <div class="pcard">
+      <div class="pcard-hdr"><span class="pcard-title">📋 Agent Team (10 Agents in .claude/agents/)</span></div>
+      <div class="pcard-body">
+        <div class="issue-list">
+          <div class="issue"><div class="issue-sev" style="background:var(--gold);box-shadow:0 0 8px var(--gold)"></div><div class="issue-body"><div class="issue-title">gabriel-orchestrator</div><div class="issue-meta">Lead — mission dispatch, worktree isolation, verify + merge</div></div></div>
+          <div class="issue"><div class="issue-sev" style="background:var(--signal);box-shadow:0 0 6px var(--signal)"></div><div class="issue-body"><div class="issue-title">engr-keith</div><div class="issue-meta">Heaven architect — schema, endpoints, KV caching</div></div></div>
+          <div class="issue"><div class="issue-sev" style="background:var(--pulse);box-shadow:0 0 6px var(--pulse)"></div><div class="issue-body"><div class="issue-title">consent-auditor</div><div class="issue-meta">Never Clauses — mandatory before any consent deploy</div></div></div>
+          <div class="issue"><div class="issue-sev" style="background:var(--soul);box-shadow:0 0 6px var(--soul)"></div><div class="issue-body"><div class="issue-title">voice-specialist</div><div class="issue-meta">Audio MCP, TTS, TaleSpin, Loopback, Voice DNA</div></div></div>
+          <div class="issue"><div class="issue-sev" style="background:var(--restore);box-shadow:0 0 6px var(--restore)"></div><div class="issue-body"><div class="issue-title">dream + cb01 + shirley + test-runner + pops</div><div class="issue-meta">Strategy / DNS / Code / Testing / Family care agents</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ DNS / CLOUDFLARE ══════════ -->
+<div class="zone-panel" id="zone-dns">
+  <div class="sec-hdr">
+    <div class="sec-line"></div><div class="sec-title">🌐 DNS / Cloudflare — BLOCK 0 (GoDaddy Exit)</div>
+    <div class="sec-line" style="background:linear-gradient(90deg,transparent,rgba(255,255,255,.07))"></div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi" style="--kc:var(--pulse)"><div class="kpi-lbl">Account ID</div><div class="kpi-val" style="font-size:10px;letter-spacing:0">5f36aa97</div><div class="kpi-hint">…95348ea681d0b21910dfc82a</div></div>
+    <div class="kpi" style="--kc:var(--gold)"><div class="kpi-lbl">Status</div><div class="kpi-val">BLOCK 0</div><div class="kpi-hint">apr 17 critical path</div></div>
+    <div class="kpi" style="--kc:var(--signal)"><div class="kpi-lbl">Target</div><div class="kpi-val">noizy.ai</div><div class="kpi-hint">+ NoizyBox, subdomain zones</div></div>
+    <div class="kpi" style="--kc:var(--restore)"><div class="kpi-lbl">Registrar</div><div class="kpi-val">GoDaddy</div><div class="kpi-hint">→ exit to Cloudflare Registrar</div></div>
+  </div>
+
+  <div class="quick-actions" style="margin-bottom:24px">
+    <button class="qa-btn qa-danger" onclick="termExec('export CF_API_TOKEN=YOUR_TOKEN && bash /Users/m2ultra/NOIZYLAB/ops/cf-zone-health.sh')">🩺 Run Zone Health Check</button>
+    <button class="qa-btn qa-gold" onclick="termExec('nohup bash /Users/m2ultra/NOIZYLAB/ops/cf-zone-watch.sh &amp; echo Watcher PID: $!')">👁 Start Zone Watcher (bg)</button>
+    <button class="qa-btn qa-primary" onclick="termExec('open https://dash.cloudflare.com/5f36aa9795348ea681d0b21910dfc82a/domains')">🌐 Open CF Dashboard</button>
+    <button class="qa-btn qa-primary" onclick="termExec('open https://dash.cloudflare.com/5f36aa9795348ea681d0b21910dfc82a/profile/api-tokens')">🔑 Get API Token</button>
+  </div>
+
+  <div class="two-col">
+    <div class="pcard">
+      <div class="pcard-hdr"><span class="pcard-title">🛠 Zone Health Script</span><span style="font-family:var(--font-mono);font-size:8px;color:var(--restore)">ops/cf-zone-health.sh ✓</span></div>
+      <div class="pcard-body">
+        <div style="background:#000;border-radius:8px;padding:14px;font-family:var(--font-mono);font-size:10px;line-height:1.9;color:rgba(0,212,255,.8)">
+          <div style="color:rgba(0,255,179,.6)"># Run once — checks all zones</div>
+          <div>export CF_API_TOKEN=your_token</div>
+          <div>bash ops/cf-zone-health.sh</div>
+          <div style="color:rgba(0,255,179,.6);margin-top:8px"># What it checks:</div>
+          <div>✓ ACTIVE → NS resolves correctly</div>
+          <div>✓ PENDING → shows what to set + registrar</div>
+          <div>✓ Proxied MX/DKIM/SPF → flags bad records</div>
+          <div>✓ Empty/placeholder values</div>
+          <div>✓ Duplicate DNS records</div>
+        </div>
+      </div>
+    </div>
+    <div class="pcard">
+      <div class="pcard-hdr"><span class="pcard-title">📡 Zone Watcher (30min poll)</span><span style="font-family:var(--font-mono);font-size:8px;color:var(--restore)">ops/cf-zone-watch.sh ✓</span></div>
+      <div class="pcard-body">
+        <div style="background:#000;border-radius:8px;padding:14px;font-family:var(--font-mono);font-size:10px;line-height:1.9;color:rgba(0,212,255,.8)">
+          <div style="color:rgba(0,255,179,.6)"># Start watcher (fires macOS notif when active)</div>
+          <div>export CF_API_TOKEN=your_token</div>
+          <div>nohup bash ops/cf-zone-watch.sh &amp;</div>
+          <div style="color:rgba(0,255,179,.6);margin-top:8px"># Stop watcher:</div>
+          <div>kill $(pgrep -f cf-zone-watch)</div>
+          <div style="color:rgba(255,183,0,.8);margin-top:8px"># Fires: macOS notification + terminal bell</div>
+          <div style="color:rgba(255,183,0,.8)"># when any zone transitions pending → active</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pcard" style="margin-top:20px">
+    <div class="pcard-hdr"><span class="pcard-title">⚡ CF API Quick Reference</span></div>
+    <div class="pcard-body" style="padding:0">
+      <table class="bind-table">
+        <thead><tr><th>Task</th><th>Method</th><th>Endpoint</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td class="bc">List zones</td><td class="bv">GET</td><td class="bv">/zones?account.id={id}</td><td><div class="issue-body" onclick="termExec('curl -H &quot;Authorization: Bearer $CF_API_TOKEN&quot; https://api.cloudflare.com/client/v4/zones?account.id=5f36aa9795348ea681d0b21910dfc82a | jq .result[].name')" style="cursor:pointer;color:var(--signal)">Run ↗</div></td></tr>
+          <tr><td class="bc">Get DNS records</td><td class="bv">GET</td><td class="bv">/zones/{zone_id}/dns_records</td><td><span style="font-family:var(--font-mono);font-size:8px;color:var(--mgray)">need zone_id</span></td></tr>
+          <tr><td class="bc">Update record</td><td class="bv">PATCH</td><td class="bv">/zones/{zone_id}/dns_records/{id}</td><td><span style="font-family:var(--font-mono);font-size:8px;color:var(--mgray)">JSON body</span></td></tr>
+          <tr><td class="bc">Create record</td><td class="bv">POST</td><td class="bv">/zones/{zone_id}/dns_records</td><td><span style="font-family:var(--font-mono);font-size:8px;color:var(--mgray)">JSON body</span></td></tr>
+          <tr><td class="bc">Delete record</td><td class="bv">DELETE</td><td class="bv">/zones/{zone_id}/dns_records/{id}</td><td><span style="font-family:var(--font-mono);font-size:8px;color:var(--mgray)">irreversible</span></td></tr>
+          <tr><td class="bc">Pending zones only</td><td class="bv">GET</td><td class="bv">/zones?account.id={id}&amp;status=pending</td><td><div class="issue-body" onclick="termExec('curl -H &quot;Authorization: Bearer $CF_API_TOKEN&quot; https://api.cloudflare.com/client/v4/zones?account.id=5f36aa9795348ea681d0b21910dfc82a&amp;status=pending | jq .result[].name')" style="cursor:pointer;color:var(--signal)">Run ↗</div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="pcard" style="margin-top:20px">
+    <div class="pcard-hdr"><span class="pcard-title">🔑 API Token Setup</span><span style="font-family:var(--font-mono);font-size:8px;color:var(--pulse)">required before running scripts</span></div>
+    <div class="pcard-body">
+      <div class="issue-list">
+        <div class="issue"><div class="issue-sev" style="background:var(--pulse);box-shadow:0 0 6px var(--pulse)"></div><div class="issue-body"><div class="issue-title">Create token at CF Dashboard → Profile → API Tokens</div><div class="issue-meta">Scopes needed: Zone:Zone:Read + Zone:DNS:Edit</div></div></div>
+        <div class="issue"><div class="issue-sev" style="background:var(--gold);box-shadow:0 0 6px var(--gold)"></div><div class="issue-body"><div class="issue-title">Add to .zshrc: export CF_API_TOKEN=your_token</div><div class="issue-meta">Or: set via wrangler secret put CF_API_TOKEN</div></div></div>
+        <div class="issue"><div class="issue-sev" style="background:var(--restore);box-shadow:0 0 6px var(--restore)"></div><div class="issue-body"><div class="issue-title">Install deps: brew install jq bind</div><div class="issue-meta">jq = JSON parser, bind provides the `dig` DNS tool</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ WORKBENCH SLIDE — _INDEX ══════════ -->
+<div class="zone-panel" id="zone-workbench">
+  <div class="sec-hdr">
+    <div class="sec-line"></div><div class="sec-title">🗂 Workbench Slide — NOIZY Monorepo Index</div>
+    <div class="sec-line" style="background:linear-gradient(90deg,transparent,rgba(255,255,255,.07))"></div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi" style="--kc:var(--signal)"><div class="kpi-lbl">Apps</div><div class="kpi-val">21</div><div class="kpi-hint">brand PWAs + native</div></div>
+    <div class="kpi" style="--kc:var(--restore)"><div class="kpi-lbl">Workers</div><div class="kpi-val">8</div><div class="kpi-hint">6 active, 2 legacy</div></div>
+    <div class="kpi" style="--kc:var(--gold)"><div class="kpi-lbl">MCP Servers</div><div class="kpi-val">14</div><div class="kpi-hint">all wired in .mcp.json</div></div>
+    <div class="kpi" style="--kc:var(--soul)"><div class="kpi-lbl">CI Workflows</div><div class="kpi-val">15</div><div class="kpi-hint">+brand-law.yml NEW</div></div>
+    <div class="kpi" style="--kc:var(--pulse)"><div class="kpi-lbl">Claude Agents</div><div class="kpi-val">10</div><div class="kpi-hint">.claude/agents/</div></div>
+  </div>
+
+  <div class="quick-actions" style="margin-bottom:24px">
+    <button class="qa-btn qa-success" onclick="termExec('node /Users/m2ultra/NOIZYLAB/ops/tree-bot.mjs')">🌲 Regenerate Tree</button>
+    <button class="qa-btn qa-danger" onclick="termExec('bash /Users/m2ultra/NOIZYLAB/ops/noizy-fix.sh --dry-run')">🔍 Dry-Run Brand Fix</button>
+    <button class="qa-btn qa-primary" onclick="termExec('bash /Users/m2ultra/NOIZYLAB/ops/noizy-fix.sh')">⚡ Apply Brand Fix</button>
+    <button class="qa-btn qa-gold" onclick="termExec('cat /Users/m2ultra/NOIZYLAB/_INDEX/tree.txt | head -80')">📄 Print Tree</button>
+    <button class="qa-btn qa-primary" onclick="termExec('cat /Users/m2ultra/NOIZYLAB/_INDEX/violations.md')">🚫 Print Violations</button>
+  </div>
+
+  <div class="two-col">
+    <div class="pcard">
+      <div class="pcard-hdr"><span class="pcard-title">🏗 Monorepo Structure (npm workspaces)</span></div>
+      <div class="pcard-body" style="padding:0">
+        <table class="bind-table">
+          <thead><tr><th>Workspace</th><th>Contents</th><th>Count</th></tr></thead>
+          <tbody>
+            <tr><td class="bc">workers/*</td><td class="bv">Cloudflare edge functions</td><td class="bv">8 (6 active)</td></tr>
+            <tr><td class="bc">apps/*</td><td class="bv">Brand PWAs + iOS/Swift apps</td><td class="bv">21</td></tr>
+            <tr><td class="bc">mcp/*</td><td class="bv">MCP agent servers</td><td class="bv">14</td></tr>
+            <tr><td class="bc">packages/*</td><td class="bv">Shared libs (session-proof, recall)</td><td class="bv">2+</td></tr>
+          </tbody>
+        </table>
+        <div style="padding:12px 16px;font-family:var(--font-mono);font-size:10px;color:rgba(0,255,179,.7)">
+          <div># Activate workspaces (run once):</div>
+          <div>npm install  # links all workspaces</div>
+          <div>npm run build  # builds all packages</div>
+          <div>npm run test   # tests all packages</div>
+        </div>
+      </div>
+    </div>
+    <div class="pcard">
+      <div class="pcard-hdr"><span class="pcard-title">🔒 CI Gate Lock Status (15 workflows)</span></div>
+      <div class="pcard-body">
+        <div class="issue-list">
+          <div class="issue"><div class="issue-sev" style="background:var(--restore);box-shadow:0 0 6px var(--restore)"></div><div class="issue-body"><div class="issue-title">brand-law.yml ✓ NEW</div><div class="issue-meta">Blocks all NOISY spellings on every push + PR</div></div><span class="issue-tag tag-done">ACTIVE</span></div>
+          <div class="issue"><div class="issue-sev" style="background:var(--restore);box-shadow:0 0 6px var(--restore)"></div><div class="issue-body"><div class="issue-title">noizy-spelling-guard.yml</div><div class="issue-meta">Existing spell guard (now backed by brand-law)</div></div><span class="issue-tag tag-done">ACTIVE</span></div>
+          <div class="issue"><div class="issue-sev" style="background:var(--gold);box-shadow:0 0 6px var(--gold)"></div><div class="issue-body"><div class="issue-title">ethics-gate.yml</div><div class="issue-meta">Never Clause enforcement on all PRs</div></div><span class="issue-tag tag-done">ACTIVE</span></div>
+          <div class="issue"><div class="issue-sev" style="background:var(--signal);box-shadow:0 0 6px var(--signal)"></div><div class="issue-body"><div class="issue-title">noizy-preflight.yml</div><div class="issue-meta">Pre-deploy manifest gate</div></div><span class="issue-tag tag-done">ACTIVE</span></div>
+          <div class="issue"><div class="issue-sev" style="background:var(--soul);box-shadow:0 0 6px var(--soul)"></div><div class="issue-body"><div class="issue-title">heaven-deploy.yml + 10 more</div><div class="issue-meta">Deploy, DR, consent-gateway, release, zone-migration gates</div></div><span class="issue-tag tag-done">ACTIVE</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pcard" style="margin-top:20px">
+    <div class="pcard-hdr"><span class="pcard-title">🤖 Tree Bot — ops/tree-bot.mjs</span><span style="font-family:var(--font-mono);font-size:8px;color:var(--restore)">auto-runs in CI</span></div>
+    <div class="pcard-body">
+      <div style="background:#000;border-radius:8px;padding:14px;font-family:var(--font-mono);font-size:10px;line-height:2;color:rgba(0,212,255,.8)">
+        <div style="color:rgba(0,255,179,.6)"># Run the bot locally (generates 3 files in _INDEX/):</div>
+        <div>node ops/tree-bot.mjs</div>
+        <div style="color:rgba(0,255,179,.6);margin-top:8px"># Or via npm scripts:</div>
+        <div>npm run tree           # regenerate tree.txt</div>
+        <div>npm run violations     # tree + print violations.md</div>
+        <div>npm run fix:brand      # auto-patch all NOISY→NOIZY</div>
+        <div>npm run fix:brand:dry  # dry run first (safe)</div>
+        <div style="color:rgba(255,183,0,.8);margin-top:8px"># Generated files:</div>
+        <div style="color:rgba(255,183,0,.8)">_INDEX/tree.txt &nbsp;&nbsp;&nbsp;&nbsp; ← full repo map</div>
+        <div style="color:rgba(255,183,0,.8)">_INDEX/violations.md ← brand law report</div>
+        <div style="color:rgba(255,183,0,.8)">_INDEX/manifest.json ← machine stats</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ CF ACCOUNT CONSOLIDATION ══════════ -->
+<div class="zone-panel" id="zone-cf-account">
+  <div class="sec-hdr">
+    <div class="sec-line"></div><div class="sec-title" style="color:var(--pulse)">📧 CF Account Consolidation — BLOCK 0 Critical Path</div>
+    <div class="sec-line" style="background:linear-gradient(90deg,transparent,rgba(255,59,48,.2))"></div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi" style="--kc:#ff3b30"><div class="kpi-lbl">Priority</div><div class="kpi-val" style="font-size:14px">P0</div><div class="kpi-hint">blocks all else</div></div>
+    <div class="kpi" style="--kc:var(--gold)"><div class="kpi-lbl">Action</div><div class="kpi-val" style="font-size:11px">1 Email</div><div class="kpi-hint">support@cloudflare.com</div></div>
+    <div class="kpi" style="--kc:var(--restore)"><div class="kpi-lbl">Unlocks</div><div class="kpi-val" style="font-size:11px">Pages+Stream</div><div class="kpi-hint">R2 + Workers AI</div></div>
+    <div class="kpi" style="--kc:var(--signal)"><div class="kpi-lbl">Domains</div><div class="kpi-val">7</div><div class="kpi-hint">noizy.ai + 6 brands</div></div>
+    <div class="kpi" style="--kc:var(--soul)"><div class="kpi-lbl">Account</div><div class="kpi-val" style="font-size:9px;letter-spacing:0">5f36aa97</div><div class="kpi-hint">target (keep this one)</div></div>
+  </div>
+
+  <div class="quick-actions" style="margin-bottom:24px">
+    <button class="qa-btn qa-danger" onclick="openConsolidationEmail()">📨 Open Email in Mail App</button>
+    <button class="qa-btn qa-gold" onclick="copyEmailBody()">📋 Copy Email Body</button>
+    <button class="qa-btn qa-primary" onclick="termExec('open https://dash.cloudflare.com/5f36aa9795348ea681d0b21910dfc82a')">🌐 Open Target Account</button>
+    <button class="qa-btn qa-primary" onclick="termExec('open https://support.cloudflare.com/hc/en-us/requests/new')">🎫 Open Support Ticket</button>
+  </div>
+
+  <div class="pcard">
+    <div class="pcard-hdr">
+      <span class="pcard-title">📬 Ready-to-Send Email</span>
+      <span style="font-family:var(--font-mono);font-size:8px;color:var(--pulse)">TO: support@cloudflare.com — copy and send NOW</span>
+    </div>
+    <div class="pcard-body">
+      <div id="email-body" style="background:#000;border-radius:8px;padding:20px;font-family:var(--font-mono);font-size:10px;line-height:1.8;color:rgba(255,255,255,.85);white-space:pre-wrap;border:1px solid rgba(255,59,48,.3)">Subject: Account Consolidation Request — Multiple Cloudflare Accounts / Single Owner
+
+Dear Cloudflare Support,
+
+I am writing to request the consolidation of multiple Cloudflare accounts 
+that are all owned and operated by me, Robert Stephen Plowman.
+
+<span style="color:rgba(0,255,179,.9)">ACCOUNT TO KEEP (target):</span>
+  Account ID: 5f36aa9795348ea681d0b21910dfc82a
+  Email:      rsp@noizy.ai
+  Contains:   noizy.ai zone + Heaven Worker + R2 + D1 databases
+
+<span style="color:rgba(0,212,255,.9)">DOMAINS / ZONES ON TARGET ACCOUNT:</span>
+  - noizy.ai            (primary — Heaven Worker, Workers AI)
+  - [additional zones to be transferred in]
+
+<span style="color:rgba(255,183,0,.9)">REQUEST:</span>
+  1. Identify any other Cloudflare accounts registered to my email addresses 
+     (rsp@noizy.ai, rsp@fishmusicinc.com, and any others on file)
+  2. Transfer all zones, Workers, Pages projects, and R2 buckets to the 
+     target account above
+  3. Close / consolidate the duplicate accounts after transfer
+  4. Confirm when consolidation is complete so I can update DNS settings
+
+<span style="color:rgba(0,255,179,.9)">CONTEXT:</span>
+  I run NOIZY.AI — an edge-native creative AI platform for music and audio.
+  I'm a composer working with AI tools to manage my creative infrastructure.
+  My domains include brands: NOIZYVOX, NOIZYFISH, NOIZYKIDZ, NOIZYSTREAM, 
+  NOIZYWORLD, and NOIZYBOX.
+
+  Having my infrastructure split across multiple accounts is preventing me 
+  from using Cloudflare Pages, Stream, and unified Workers AI bindings 
+  across all my brand properties.
+
+Please let me know what verification you need to proceed.
+
+Thank you,
+Robert Stephen Plowman
+rsp@noizy.ai
+Account: 5f36aa9795348ea681d0b21910dfc82a</div>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-top:20px">
+    <div class="pcard">
+      <div class="pcard-hdr"><span class="pcard-title">🔓 What This Unlocks</span></div>
+      <div class="pcard-body">
+        <div class="issue-list">
+          <div class="issue"><div class="issue-sev" style="background:var(--restore);box-shadow:0 0 6px var(--restore)"></div><div class="issue-body"><div class="issue-title">Cloudflare Pages — host all 6 NOIZY brand PWAs</div><div class="issue-meta">Zero server management, instant global CDN, git-connected deploys</div></div></div>
+          <div class="issue"><div class="issue-sev" style="background:var(--gold);box-shadow:0 0 6px var(--gold)"></div><div class="issue-body"><div class="issue-title">Cloudflare Stream — music + video delivery</div><div class="issue-meta">Upload stems, album artwork video, NOIZYVOX content — player you control</div></div></div>
+          <div class="issue"><div class="issue-sev" style="background:var(--signal);box-shadow:0 0 6px var(--signal)"></div><div class="issue-body"><div class="issue-title">R2 Storage — zero egress fees across all brands</div><div class="issue-meta">noizy-voice-vault + stems + archive — no bandwidth costs</div></div></div>
+          <div class="issue"><div class="issue-sev" style="background:var(--soul);box-shadow:0 0 6px var(--soul)"></div><div class="issue-body"><div class="issue-title">Workers AI — bound to all brand Workers</div><div class="issue-meta">Music generation, text-to-audio, GABRIEL agent inference at the edge</div></div></div>
+          <div class="issue"><div class="issue-sev" style="background:var(--pulse);box-shadow:0 0 6px var(--pulse)"></div><div class="issue-body"><div class="issue-title">Unified DNS management — all 7 domains in one place</div><div class="issue-meta">Single dashboard, single API token, single billing structure</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="pcard">
+      <div class="pcard-hdr"><span class="pcard-title">📋 After Consolidation — Setup Order</span></div>
+      <div class="pcard-body">
+        <div style="background:#000;border-radius:8px;padding:14px;font-family:var(--font-mono);font-size:10px;line-height:2;color:rgba(0,212,255,.8)">
+          <div style="color:rgba(0,255,179,.7)"># Step 1 — Send email (do this NOW)</div>
+          <div>→ support@cloudflare.com</div>
+          <div style="color:rgba(0,255,179,.7);margin-top:6px"># Step 2 — Once confirmed, verify account</div>
+          <div>npx wrangler whoami</div>
+          <div style="color:rgba(0,255,179,.7);margin-top:6px"># Step 3 — Provision R2 bucket</div>
+          <div>npm run r2:create</div>
+          <div style="color:rgba(0,255,179,.7);margin-top:6px"># Step 4 — Deploy all brands to Pages</div>
+          <div>→ Connect GitHub repos in CF dashboard</div>
+          <div style="color:rgba(0,255,179,.7);margin-top:6px"># Step 5 — Enable Stream for NOIZYVOX</div>
+          <div>→ Dashboard → Stream → Enable</div>
+          <div style="color:rgba(0,255,179,.7);margin-top:6px"># Step 6 — Lock all DNS records</div>
+          <div>bash ops/cf-zone-health.sh</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stream Specs Reference -->
+  <div class="sec-hdr" style="margin-top:32px">
+    <div class="sec-line"></div><div class="sec-title" style="font-size:12px">📡 Cloudflare Stream — NOIZY Brand Specs (post-consolidation)</div>
+    <div class="sec-line" style="background:linear-gradient(90deg,transparent,rgba(255,255,255,.05))"></div>
+  </div>
+
+  <div class="kpi-row" style="margin-bottom:20px">
+    <div class="kpi" style="--kc:var(--pulse)"><div class="kpi-lbl">WebRTC</div><div class="kpi-val" style="font-size:13px">&lt;1s</div><div class="kpi-hint">live studio sessions</div></div>
+    <div class="kpi" style="--kc:var(--signal)"><div class="kpi-lbl">LL-HLS</div><div class="kpi-val" style="font-size:13px">2–4s</div><div class="kpi-hint">near-live perfs</div></div>
+    <div class="kpi" style="--kc:var(--restore)"><div class="kpi-lbl">Standard HLS</div><div class="kpi-val" style="font-size:13px">5–10s</div><div class="kpi-hint">on-demand content</div></div>
+    <div class="kpi" style="--kc:var(--gold)"><div class="kpi-lbl">Edge Cities</div><div class="kpi-val">300+</div><div class="kpi-hint">viewers nearest node</div></div>
+    <div class="kpi" style="--kc:var(--soul)"><div class="kpi-lbl">AV1 Savings</div><div class="kpi-val">46%</div><div class="kpi-hint">vs H.264, same quality</div></div>
+    <div class="kpi" style="--kc:var(--nerve)"><div class="kpi-lbl">Price</div><div class="kpi-val" style="font-size:11px">$1/1K</div><div class="kpi-hint">min delivered · $0 egress</div></div>
+  </div>
+
+  <div class="two-col">
+    <div class="pcard">
+      <div class="pcard-hdr"><span class="pcard-title">🎵 NOIZY Brand → Stream Mode Map</span></div>
+      <div class="pcard-body" style="padding:0">
+        <table class="bind-table">
+          <thead><tr><th>Brand</th><th>Use Case</th><th>Mode</th><th>Latency</th></tr></thead>
+          <tbody>
+            <tr><td class="bc">NOIZYVOX</td><td class="bv">Live performances, collabs</td><td class="bv" style="color:var(--pulse)">WebRTC</td><td class="bv">&lt;1s</td></tr>
+            <tr><td class="bc">NOIZYVOX</td><td class="bv">Near-live shows, audience Q&A</td><td class="bv" style="color:var(--signal)">LL-HLS</td><td class="bv">2–4s</td></tr>
+            <tr><td class="bc">NOIZYFISH</td><td class="bv">Recorded compositions, catalog</td><td class="bv" style="color:var(--restore)">HLS + AV1</td><td class="bv">5–10s</td></tr>
+            <tr><td class="bc">NOIZYKIDZ</td><td class="bv">Educational audio/video content</td><td class="bv" style="color:var(--restore)">HLS + AV1</td><td class="bv">5–10s</td></tr>
+            <tr><td class="bc">NOIZYWORLD</td><td class="bv">Museum / gallery immersive A/V</td><td class="bv" style="color:var(--signal)">LL-HLS</td><td class="bv">2–4s</td></tr>
+            <tr><td class="bc">GABRIEL</td><td class="bv">AI voice agent sessions</td><td class="bv" style="color:var(--pulse)">WebRTC + Deepgram</td><td class="bv">&lt;1s</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="pcard">
+      <div class="pcard-hdr"><span class="pcard-title">🎤 Audio Quality Specs</span></div>
+      <div class="pcard-body" style="padding:0">
+        <table class="bind-table">
+          <thead><tr><th>Spec</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td class="bc">Codec</td><td class="bv">AAC (industry standard)</td></tr>
+            <tr><td class="bc">Channels</td><td class="bv">Stereo (5.1 → stereo mix-down)</td></tr>
+            <tr><td class="bc">Multi-track</td><td class="bv" style="color:var(--restore)">✅ Music + commentary + stems + accessibility</td></tr>
+            <tr><td class="bc">Audio extraction</td><td class="bv" style="color:var(--restore)">✅ Video → M4A via Media Transformations</td></tr>
+            <tr><td class="bc">1080p bitrate</td><td class="bv">8 Mbps</td></tr>
+            <tr><td class="bc">720p bitrate</td><td class="bv">4.8 Mbps</td></tr>
+            <tr><td class="bc">480p bitrate</td><td class="bv">2.4 Mbps</td></tr>
+            <tr><td class="bc">ABR</td><td class="bv" style="color:var(--restore)">✅ Auto 360p/480p/720p/1080p</td></tr>
+            <tr><td class="bc">AI pipeline</td><td class="bv">Stream → M4A → Workers AI → Deepgram STT</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="pcard" style="margin-top:20px">
+    <div class="pcard-hdr"><span class="pcard-title">🔧 wrangler.toml — Stream binding (add after consolidation)</span><span style="font-family:var(--font-mono);font-size:8px;color:var(--gold)">READY TO PASTE</span></div>
+    <div class="pcard-body">
+      <div style="background:#000;border-radius:8px;padding:16px;font-family:var(--font-mono);font-size:10px;line-height:1.9;color:rgba(0,212,255,.85)">
+        <div style="color:rgba(0,255,179,.6)"># Add to noizy-heaven/wrangler.toml after CF account consolidation:</div>
+        <div>&nbsp;</div>
+        <div style="color:rgba(255,183,0,.9)">[stream]</div>
+        <div>customer_subdomain = "customer-&lt;your-hash&gt;.cloudflarestream.com"</div>
+        <div>&nbsp;</div>
+        <div style="color:rgba(255,183,0,.9)">[[r2_buckets]]</div>
+        <div>binding = "VOICE_VAULT"</div>
+        <div>bucket_name = "noizy-voice-vault"</div>
+        <div>&nbsp;</div>
+        <div style="color:rgba(0,255,179,.6)"># Worker route to Stream API:</div>
+        <div style="color:rgba(255,183,0,.9)">[[unsafe.bindings]]</div>
+        <div>name = "STREAM_TOKEN"</div>
+        <div>type = "secret_key"</div>
+        <div>&nbsp;</div>
+        <div style="color:rgba(0,255,179,.6)"># AI binding for audio transcription pipeline:</div>
+        <div style="color:rgba(255,183,0,.9)">[ai]</div>
+        <div>binding = "AI"</div>
+        <div style="color:rgba(128,128,128,.6)"># Model: @cf/openai/whisper  ← audio → text</div>
+        <div style="color:rgba(128,128,128,.6)"># Model: @cf/meta/llama-3-8b  ← GABRIEL reasoning</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</main>
+
+<script>
+function openConsolidationEmail() {
+  const subject = encodeURIComponent('Account Consolidation Request — Multiple Cloudflare Accounts / Single Owner');
+  const body = encodeURIComponent(document.getElementById('email-body').innerText);
+  window.location.href = 'mailto:support@cloudflare.com?subject=' + subject + '&body=' + body;
+}
+function copyEmailBody() {
+  const text = document.getElementById('email-body').innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = event.target;
+    const orig = btn.textContent;
+    btn.textContent = '✓ Copied!';
+    setTimeout(() => btn.textContent = orig, 2000);
+  });
+}
+</script>
+
+<!-- ══ TOOLTIP MODAL ══ -->
+<div class="tooltip-backdrop" id="tt-backdrop" onclick="closeTT(event)">
+  <div class="tooltip-box">
+    <button class="tt-close" onclick="document.getElementById('tt-backdrop').classList.remove('open')">✕</button>
+    <div id="tt-content"></div>
+  </div>
+</div>
+
+<script>
+// ══ COSMOS BG ══
+(function(){
+  const c=document.getElementById('cosmos'),x=c.getContext('2d');
+  let W,H,stars=[];
+  function init(){
+    W=c.width=window.innerWidth;H=c.height=window.innerHeight;
+    stars=[];
+    for(let i=0;i<120;i++){
+      stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*.9+.1,a:Math.random(),da:Math.random()*.002+.0005});
+    }
+  }
+  function draw(){
+    x.clearRect(0,0,W,H);
+    stars.forEach(s=>{
+      s.a+=s.da;if(s.a>1||s.a<0)s.da*=-1;
+      x.beginPath();x.arc(s.x,s.y,s.r,0,Math.PI*2);
+      x.fillStyle=`rgba(148,163,184,${s.a*.4})`;x.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  init();draw();
+  window.addEventListener('resize',init);
+})();
+
+// ══ CLOCK ══
+function tick(){
+  const d=new Date();
+  document.getElementById('clock').textContent=d.toLocaleTimeString('en-US',{hour12:false});
+}
+tick();setInterval(tick,1000);
+
+// ══ LAUNCH TIMER ══
+(function(){
+  const target=new Date('2026-04-17T09:00:00-04:00');
+  function upd(){
+    const diff=target-Date.now();
+    if(diff<=0){document.getElementById('timer').textContent='🚀 LAUNCHED';return;}
+    const h=Math.floor(diff/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
+    document.getElementById('timer').textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  }
+  upd();setInterval(upd,1000);
+})();
+
+// ══ ZONE NAV ══
+function switchZone(id, btn){
+  document.querySelectorAll('.zone-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.zone-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('zone-'+id).classList.add('active');
+  if(btn) btn.classList.add('active');
+  else {
+    const b=document.querySelector(`[data-zone="${id}"]`);
+    if(b)b.classList.add('active');
+  }
+}
+
+// ══ DATA ══
+const ISSUES=[
+  {sev:'crit',title:'D1 migrations not yet applied to production',meta:'0001/0002/0003 written, not executed · agent-memory tables missing',tag:'open',zone:'D1'},
+  {sev:'crit',title:'NOIZYLAB/wrangler.toml references wrong D1 ID (a31d68e2)',meta:'Canonical is noizy-heaven/wrangler.toml · DB_MEMORY → b5b58cc9',tag:'open',zone:'Heaven'},
+  {sev:'high',title:'R2 Voice Vault not enabled in CF dashboard',meta:'VOICE_VAULT binding declared, but R2 must be enabled at dash.cloudflare.com first',tag:'open',zone:'Heaven'},
+  {sev:'high',title:'NOIZYKIDS → NOIZYKIDZ — 7 slides in NOIZYWORLD PPTX',meta:'Slides 11,15,18,26,31,35,39 — use PowerPoint Replace All',tag:'open',zone:'Brands'},
+  {sev:'high',title:'NoisyVox / NoisyFish / NoisyKids in roadmap slide 27',meta:'Replace with NOIZYVOX / NOIZYFISH / NOIZYKIDZ',tag:'open',zone:'Brands'},
+  {sev:'med',title:'wrangler.toml NOIZYLAB main = "src/index.js" (wrong extension)',meta:'Already fixed in noizy-heaven/ — keep that as canonical',tag:'wip',zone:'Heaven'},
+  {sev:'low',title:'Mixed-case "Noizy" in body prose (slides 5,6,20–25,29,41)',meta:'Not a brand-token violation — judgment call on all-caps uniformity',tag:'open',zone:'Brands'},
+];
+
+const UPGRADES=[
+  {title:'Apply all 3 D1 migrations to production',meta:'Run db/apply-migrations.sh from noizy-heaven repo',color:'var(--restore)',action:'applyMigs'},
+  {title:'Enable R2 Object Storage in CF dashboard',meta:'Then uncomment [[r2_buckets]] and redeploy heaven',color:'var(--signal)',action:'openCF'},
+  {title:'Set all 11 wrangler secrets',meta:'ANTHROPIC_API_KEY, NOIZY_KEY, CF_ACCESS_*, N8N_*, LINEAR_*, NOTION_*',color:'var(--gold)',action:'termExec("npx wrangler secret list")'},
+  {title:'Fix PPTX brand violations (6 replacements)',meta:'PowerPoint Home → Replace All — see Brands zone for full map',color:'var(--soul)',action:null},
+  {title:'Add AI.run() endpoints to Heaven Worker',meta:'Voice fingerprinting, consent validation at edge via Workers AI',color:'var(--electric)',action:null},
+  {title:'Deploy React PWAs for each brand zone',meta:'Call shared api.noizy.ai — NOIZYVOX, NOIZYFISH, NOIZYKIDZ, NOIZYLAB',color:'var(--nerve)',action:null},
+];
+
+// ══ RENDER ISSUES ══
+function renderIssue(iss){
+  const sevClass={crit:'sev-crit',high:'sev-high',med:'sev-med',low:'sev-low'}[iss.sev]||'sev-low';
+  const tagClass={open:'tag-open',wip:'tag-wip',done:'tag-done',blocked:'tag-blocked'}[iss.tag]||'tag-open';
+  const zoneHtml = iss.zone ? '&nbsp;&middot;&nbsp;<span style="color:var(--signal)">' + iss.zone + '</span>' : '';
+  return '<div class="issue">'
+    + '<div class="issue-sev ' + sevClass + '"></div>'
+    + '<div class="issue-body">'
+    + '<div class="issue-title">' + iss.title + '</div>'
+    + '<div class="issue-meta">' + iss.meta + zoneHtml + '</div>'
+    + '</div>'
+    + '<span class="issue-tag ' + tagClass + '">' + iss.tag.toUpperCase() + '</span>'
+    + '</div>';
+}
+
+document.getElementById('overview-issues').innerHTML=ISSUES.filter(i=>i.sev==='crit'||i.sev==='high').slice(0,4).map(renderIssue).join('');
+document.getElementById('full-issue-list').innerHTML=`<div class="pcard"><div class="pcard-body"><div class="issue-list">${ISSUES.map(renderIssue).join('')}</div></div></div>`;
+
+// ══ RENDER UPGRADES ══
+function renderUpgrade(u){
+  return `<div class="upg-item">
+    <div class="upg-dot" style="color:${u.color};background:${u.color}"></div>
+    <div class="upg-body">
+      <div class="upg-title">${u.title}</div>
+      <div class="upg-meta">${u.meta}</div>
+    </div>
+    ${u.action?`<button class="upg-action" onclick="${u.action}">Do it →</button>`:'<span style="font-family:var(--font-mono);font-size:8px;color:var(--mgray)">manual</span>'}
+  </div>`;
+}
+document.getElementById('overview-upgrades').innerHTML=`<div class="pcard-body" style="padding:0">${UPGRADES.slice(0,4).map(renderUpgrade).join('')}</div>`;
+document.getElementById('full-upgrade-list').innerHTML=`<div class="pcard"><div class="pcard-body" style="padding:0">${UPGRADES.map(renderUpgrade).join('')}</div></div>`;
+
+// ══ TERMINAL ══
+const termOut=document.getElementById('term-out');
+const termInput=document.getElementById('term-input');
+
+function termLog(line,cls='term-out'){
+  const span=document.createElement('span');
+  span.className=`term-line ${cls}`;
+  span.textContent=line;
+  termOut.appendChild(span);
+  termOut.scrollTop=termOut.scrollHeight;
+}
+
+function applyMigs(){
+  termExec('cd /Users/m2ultra/NOIZYANTHROPIC/repos/noizy-heaven && chmod +x db/apply-migrations.sh && bash db/apply-migrations.sh');
+}
+function openCF(){
+  termExec('open https://dash.cloudflare.com/5f36aa9795348ea681d0b21910dfc82a/r2');
+}
+
+function termExec(cmd){
+  switchZone('terminal',document.querySelector('[data-zone=terminal]'));
+  setTimeout(()=>{
+    termLog(`$ ${cmd}`,'term-cmd');
+    termLog('↑ Copied to clipboard. Paste in your Terminal.','term-out');
+    termOut.scrollTop=termOut.scrollHeight;
+  },100);
+  // Copy to clipboard
+  navigator.clipboard.writeText(cmd).catch(()=>{
+    termLog('(clipboard unavailable — copy manually above)','term-warn');
+  });
+}
+
+termInput.addEventListener('keydown',function(e){
+  if(e.key==='Enter' && this.value.trim()){
+    termExec(this.value.trim());
+    this.value='';
+  }
+});
+
+// ══ MIGRATION RUNNER ══
+function runMigration(id,db,file){
+  const cmd=`cd /Users/m2ultra/NOIZYANTHROPIC/repos/noizy-heaven && npx wrangler d1 execute ${db} --file=db/migrations/${file} --remote`;
+  const statusEl=document.getElementById(`ms-${id}`);
+  if(statusEl){
+    statusEl.className='mig-status ms-pending';
+    statusEl.textContent='STAGING…';
+    setTimeout(()=>{
+      statusEl.className='mig-status ms-ok';
+      statusEl.textContent='CMD STAGED ✓';
+    },800);
+  }
+  termExec(cmd);
+}
+
+// ══ TOOLTIP ══
+function closeTT(e){
+  if(e.target.id==='tt-backdrop') document.getElementById('tt-backdrop').classList.remove('open');
+}
+</script>
+</body>
+</html>

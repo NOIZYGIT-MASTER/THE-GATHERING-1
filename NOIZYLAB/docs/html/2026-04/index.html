@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NOIZYLAB — Project 001: New Learning Ideas</title>
+  <meta name="description" content="A dyslexia-forward manifesto for the Wisdom Project. Where elder knowledge meets radical new learning." />
+  <style>
+    /* ─── FONT & RESET ─────────────────────────────────────────── */
+    @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@400;600;700&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d0d0f;
+      --surface:   #16161a;
+      --surface2:  #1e1e24;
+      --border:    #2a2a35;
+      --accent:    #c084fc;
+      --accent2:   #38bdf8;
+      --accent3:   #4ade80;
+      --warn:      #fb923c;
+      --text:      #e8e8f0;
+      --muted:     #9090a8;
+      --max:       780px;
+      --lh:        1.75;
+      --ls:        0.01em;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Atkinson Hyperlegible', Georgia, serif;
+      font-size: clamp(17px, 2vw, 20px);
+      line-height: var(--lh);
+      letter-spacing: var(--ls);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── LAYOUT ───────────────────────────────────────────────── */
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 1.5rem; }
+    section { padding: 5rem 0; border-bottom: 1px solid var(--border); }
+    section:last-of-type { border-bottom: none; }
+
+    /* ─── TYPOGRAPHY ───────────────────────────────────────────── */
+    h1, h2, h3 {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+    h1 { font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 700; }
+    h2 { font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 700; margin-bottom: 1.5rem; }
+    h3 { font-size: clamp(1.1rem, 2.5vw, 1.4rem); font-weight: 600; margin-bottom: 0.75rem; }
+    p  { margin-bottom: 1.4rem; max-width: 65ch; }
+    p:last-child { margin-bottom: 0; }
+
+    a { color: var(--accent2); text-underline-offset: 4px; }
+    a:hover { color: var(--accent); }
+
+    /* ─── HEADER / NAV ─────────────────────────────────────────── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13,13,15,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.9rem 0;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .logo span { color: var(--text); }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.6rem;
+      flex-wrap: wrap;
+    }
+    nav a {
+      font-size: 0.9rem;
+      font-family: 'Space Grotesk', sans-serif;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .15s;
+    }
+    nav a:hover { color: var(--text); }
+
+    /* ─── HERO ─────────────────────────────────────────────────── */
+    #hero {
+      padding: 7rem 0 5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .eyebrow {
+      display: inline-block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+    .hero-sub {
+      font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+      color: var(--muted);
+      max-width: 58ch;
+      margin-top: 1.5rem;
+      line-height: 1.6;
+    }
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 2.5rem;
+    }
+    .tag {
+      display: inline-block;
+      padding: 0.35rem 0.9rem;
+      border-radius: 100px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: 1px solid;
+    }
+    .tag-violet { border-color: var(--accent);  color: var(--accent); }
+    .tag-sky    { border-color: var(--accent2); color: var(--accent2); }
+    .tag-green  { border-color: var(--accent3); color: var(--accent3); }
+    .tag-orange { border-color: var(--warn);    color: var(--warn); }
+
+    /* ─── CARD GRID ────────────────────────────────────────────── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem;
+    }
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .card h3 { color: var(--text); }
+    .card p  { color: var(--muted); font-size: 0.95em; margin-bottom: 0; }
+
+    /* ─── MANIFESTO DECLARATION ────────────────────────────────── */
+    .declaration {
+      margin: 2.5rem 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .declaration-block {
+      padding: 2rem 2rem 2rem 2.4rem;
+      border-left: 3px solid var(--border);
+      margin-bottom: 1.75rem;
+      transition: border-color .2s;
+    }
+    .declaration-block:hover { border-color: var(--accent); }
+    .declaration-block p {
+      font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+      line-height: 1.8;
+      color: var(--text);
+    }
+    .declaration-block p strong { color: var(--accent); }
+
+    .declaration-pull {
+      background: linear-gradient(135deg, rgba(192,132,252,0.08) 0%, rgba(56,189,248,0.06) 100%);
+      border: 1px solid rgba(192,132,252,0.3);
+      border-radius: 14px;
+      padding: 2.5rem;
+      margin: 2.5rem 0;
+    }
+    .declaration-pull p {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.2rem, 3vw, 1.65rem);
+      font-weight: 600;
+      line-height: 1.45;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      max-width: none;
+      margin-bottom: 0;
+    }
+    .declaration-pull p em { color: var(--accent); font-style: normal; }
+
+    .declaration-coda {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem 2.4rem;
+      margin-top: 1rem;
+    }
+    .declaration-coda p {
+      color: var(--muted);
+      font-size: 0.95em;
+    }
+    .declaration-coda p strong { color: var(--text); }
+
+    /* ─── PRINCIPLE LIST ───────────────────────────────────────── */
+    .principle-list { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.25rem; }
+    .principle {
+      display: grid;
+      grid-template-columns: 2.5rem 1fr;
+      gap: 1rem;
+      align-items: start;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 10px 10px 0;
+      padding: 1.4rem 1.6rem 1.4rem 1.2rem;
+    }
+    .principle-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--accent);
+      padding-top: 0.05rem;
+    }
+    .principle p { color: var(--muted); font-size: 0.95em; margin-top: 0.3rem; }
+
+    /* ─── ARCH LAYERS ──────────────────────────────────────────── */
+    .arch-stack { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
+    .arch-layer {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.2rem 1.6rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+    .arch-layer-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      min-width: 70px;
+      color: var(--muted);
+    }
+    .arch-layer-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: var(--text);
+      flex: 1;
+    }
+    .arch-layer-desc { font-size: 0.88em; color: var(--muted); }
+    .arch-layer.l1 { border-left: 3px solid var(--accent); }
+    .arch-layer.l2 { border-left: 3px solid var(--accent2); }
+    .arch-layer.l3 { border-left: 3px solid var(--accent3); }
+    .arch-layer.l4 { border-left: 3px solid var(--warn); }
+
+    /* ─── ELDER SECTION ────────────────────────────────────────── */
+    .quote-block {
+      margin: 2.5rem 0;
+      padding: 2rem 2rem 2rem 2.4rem;
+      border-left: 4px solid var(--accent);
+      background: var(--surface);
+      border-radius: 0 12px 12px 0;
+    }
+    .quote-block blockquote {
+      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+      font-style: italic;
+      margin-bottom: 0.75rem;
+      line-height: 1.6;
+    }
+    .quote-src {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.82rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    .elder-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+    .elder-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .elder-card .elder-icon { font-size: 2.5rem; display: block; margin-bottom: 0.75rem; }
+    .elder-card h3 { font-size: 1rem; color: var(--text); }
+    .elder-card p  { font-size: 0.88em; color: var(--muted); margin-top: 0.4rem; }
+
+    /* ─── LAUNCH STEPS ─────────────────────────────────────────── */
+    .launch-steps { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 0; }
+    .step {
+      display: grid;
+      grid-template-columns: 3rem 1fr;
+      gap: 1rem;
+      position: relative;
+    }
+    .step:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 1.4rem;
+      top: 3rem;
+      bottom: -0.5rem;
+      width: 2px;
+      background: var(--border);
+    }
+    .step-num {
+      width: 2.8rem;
+      height: 2.8rem;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--accent);
+      flex-shrink: 0;
+      z-index: 1;
+    }
+    .step-body { padding: 0.3rem 0 2.5rem; }
+    .step-body h3 { color: var(--text); }
+    .step-body p  { color: var(--muted); font-size: 0.95em; margin-top: 0.3rem; }
+
+    /* ─── CTA ──────────────────────────────────────────────────── */
+    #cta { text-align: center; padding: 6rem 0; }
+    #cta h2 { margin-bottom: 1rem; }
+    #cta p  { color: var(--muted); margin: 0 auto 2.5rem; }
+    .btn {
+      display: inline-block;
+      padding: 0.9rem 2rem;
+      border-radius: 8px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: opacity .15s, transform .15s;
+    }
+    .btn:hover { opacity: 0.85; transform: translateY(-1px); }
+    .btn-primary { background: var(--accent); color: #0d0d0f; }
+    .btn-ghost   { border: 1px solid var(--border); color: var(--text); margin-left: 0.75rem; }
+
+    /* ─── FOOTER ───────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 0;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    /* ─── RESPONSIVE ───────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      nav ul { display: none; }
+      .arch-layer { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
+      .arch-layer-label { min-width: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ──────────────────────────────────────────────────── -->
+<header>
+  <div class="wrap">
+    <nav>
+      <a href="#hero" class="logo">NOIZY<span>LAB</span></a>
+      <ul>
+        <li><a href="#manifesto">Manifesto</a></li>
+        <li><a href="#principles">Principles</a></li>
+        <li><a href="#architecture">Platform</a></li>
+        <li><a href="#elders">Elders</a></li>
+        <li><a href="#launch">V1 Launch</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ─── HERO ──────────────────────────────────────────────────── -->
+<section id="hero">
+  <div class="wrap">
+    <span class="eyebrow">noizylab.ca — project 001</span>
+    <h1>New Learning Ideas</h1>
+    <p class="hero-sub">
+      A DreamChamber for the way brains actually work —
+      where dyslexic cognition is the design spec,
+      and elders are the database.
+    </p>
+    <div class="tag-row">
+      <span class="tag tag-violet">Neurodivergent Design</span>
+      <span class="tag tag-sky">Elder Transmission</span>
+      <span class="tag tag-green">Voice-First Learning</span>
+      <span class="tag tag-orange">Wisdom Project</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MANIFESTO ─────────────────────────────────────────────── -->
+<section id="manifesto">
+  <div class="wrap">
+    <span class="eyebrow">The Founding Declaration — RSP_001</span>
+    <h2>The Manifesto</h2>
+
+    <div class="declaration">
+
+      <div class="declaration-pull">
+        <p>
+          I am brutally dyslexic.<br>
+          And that is <em>my superpower.</em>
+        </p>
+      </div>
+
+      <div class="declaration-block">
+        <p>
+          A master of compartmentalized thinking and visionary seeing —
+          this is the DreamChamber that thrives within RSP's mind.
+          A synergy of creativity and innovation, where human resilience meets
+          the limitless potential of AI.
+        </p>
+      </div>
+
+      <div class="declaration-block">
+        <p>
+          This journey isn't just about innovation.
+          It's a dynamic fusion of human ingenuity and artificial intelligence.
+          The true power of dyslexia lies in its unique perspective —
+          seeing connections where others see divisions,
+          discovering patterns amidst chaos,
+          and, with AI, building systems that turn the impossible into reality.
+        </p>
+      </div>
+
+      <div class="declaration-block">
+        <p>
+          Focusing intensely, illuminating single problems —
+          this isn't merely a method. It's a revolution powered by collaboration.
+          A revolution rooted in the belief that what some label as limitations
+          are actually hidden gifts, magnified through the lens of AI.
+          Together, human and machine can transform the world's perception of learning disabilities —
+          turning perceived barriers into unmatched wellsprings of wisdom.
+        </p>
+      </div>
+
+      <div class="declaration-pull">
+        <p>
+          Welcome to the <em>Wisdom Project</em> —
+          a beacon for the misunderstood,
+          a blueprint for transmuting individual challenges
+          into collective strengths through the power of AI.
+        </p>
+      </div>
+
+      <div class="declaration-block">
+        <p>
+          We're not just aiming for improvement.
+          We're spearheading an evolution where technology enhances human potential.
+          Under <strong>NOIZYLAB.CA</strong>, Project 001: New Learning Ideas —
+          this isn't just a project. It's a call to action.
+          A mission to redefine how we learn, think, and create.
+          It's about unleashing the limitless power of AI to bolster
+          the infinite potential of the human mind.
+        </p>
+      </div>
+
+      <div class="declaration-block">
+        <p>
+          Imagine a platform where ideas flourish,
+          where every challenge sparks opportunity,
+          and where learning is as vibrant and dynamic as the minds it seeks to empower.
+          A realm where technology and humanity aren't just interconnected —
+          but inseparable partners in the quest for knowledge and growth.
+        </p>
+      </div>
+
+      <div class="declaration-pull">
+        <p>
+          The future isn't lurking in the distance.<br>
+          <em>It's already here.</em><br>
+          Let's amplify its voice — bold and unmistakable —
+          with the echoes of those who dare to envision a world
+          where AI and humanity collaborate to transform challenges into triumphs.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="card-grid" style="margin-top:3.5rem">
+      <div class="card">
+        <span class="card-icon">🧠</span>
+        <h3>Different, not broken</h3>
+        <p>Dyslexic cognition is a variant, not a deficit. The classroom was the problem.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🔊</span>
+        <h3>Voice carries truth</h3>
+        <p>Oral tradition transmitted human knowledge for 300,000 years before writing existed.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🌀</span>
+        <h3>Big picture first</h3>
+        <p>Context before detail. Story before structure. Meaning before mechanics.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🤝</span>
+        <h3>Elder-to-learner</h3>
+        <p>The most important knowledge lives in people, not documents. We build the bridge.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PRINCIPLES ─────────────────────────────────────────────── -->
+<section id="principles">
+  <div class="wrap">
+    <h2>Design Principles</h2>
+    <p>Every product decision in NOIZYLAB runs through these five tests.</p>
+
+    <div class="principle-list">
+      <div class="principle">
+        <span class="principle-num">01</span>
+        <div>
+          <h3>Reduce decoding friction</h3>
+          <p>Large type. High contrast. Generous line height. Short chunks. White space is not wasted space — it is comprehension space.</p>
+        </div>
+      </div>
+      <div class="principle">
+        <span class="principle-num">02</span>
+        <div>
+          <h3>Voice is the primary interface</h3>
+          <p>Audio presentation of all core content. Human voice preferred over synthesis. Learners choose how they consume — read, listen, watch.</p>
+        </div>
+      </div>
+      <div class="principle">
+        <span class="principle-num">03</span>
+        <div>
+          <h3>Context before content</h3>
+          <p>Tell the learner where they are, what this is for, and why it matters — before delivering any information. Never skip orientation.</p>
+        </div>
+      </div>
+      <div class="principle">
+        <span class="principle-num">04</span>
+        <div>
+          <h3>Emotion is data</h3>
+          <p>Shame, curiosity, pride, resistance — these are not noise to be designed away. They are signals. The learning environment must be able to receive and respond to them.</p>
+        </div>
+      </div>
+      <div class="principle">
+        <span class="principle-num">05</span>
+        <div>
+          <h3>Knowledge has a body</h3>
+          <p>The people who know things are aging out. Recording their voice, their gesture, their way of explaining — that is preservation. UNESCO calls it living heritage. We call it the mission.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PLATFORM ARCHITECTURE ─────────────────────────────────── -->
+<section id="architecture">
+  <div class="wrap">
+    <h2>Platform Architecture</h2>
+    <p>
+      NOIZYLAB is not a single app. It is a layered system where
+      each layer serves a different kind of learner need.
+    </p>
+
+    <div class="arch-stack">
+      <div class="arch-layer l1">
+        <span class="arch-layer-label">Layer 4</span>
+        <div>
+          <div class="arch-layer-name">The DreamChamber</div>
+          <div class="arch-layer-desc">Voice-first AI interaction space. Learners bring questions, elders bring answers, AI facilitates the exchange.</div>
+        </div>
+      </div>
+      <div class="arch-layer l2">
+        <span class="arch-layer-label">Layer 3</span>
+        <div>
+          <div class="arch-layer-name">Wisdom Archive</div>
+          <div class="arch-layer-desc">Structured repository of elder recordings, transcribed with consent, searchable by topic, trade, and tradition.</div>
+        </div>
+      </div>
+      <div class="arch-layer l3">
+        <span class="arch-layer-label">Layer 2</span>
+        <div>
+          <div class="arch-layer-name">Learning Pathways</div>
+          <div class="arch-layer-desc">Modular, voice-annotated learning sequences designed around the dyslexic cognitive profile: big picture → context → detail.</div>
+        </div>
+      </div>
+      <div class="arch-layer l4">
+        <span class="arch-layer-label">Layer 1</span>
+        <div>
+          <div class="arch-layer-name">Consent Kernel</div>
+          <div class="arch-layer-desc">Every voice, every recording, every piece of knowledge is gated by explicit elder consent. Revocable at any time. Non-negotiable.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ELDER TRANSMISSION ────────────────────────────────────── -->
+<section id="elders">
+  <div class="wrap">
+    <h2>Elder Transmission</h2>
+
+    <div class="quote-block">
+      <blockquote>
+        "Intangible cultural heritage can only be safeguarded by the communities,
+        groups and individuals who create, maintain and transmit it."
+      </blockquote>
+      <div class="quote-src">UNESCO Convention for the Safeguarding of Intangible Cultural Heritage, 2003</div>
+    </div>
+
+    <p>
+      The elders are not a content library. They are living archives.
+      Their knowledge does not exist in documents — it exists in
+      their hands, their voices, their instincts built over decades.
+      When they leave, that knowledge does not retire. It disappears.
+    </p>
+    <p>
+      NOIZYLAB's elder transmission model is built on three UNESCO-aligned pillars:
+      intergenerational transfer, oral practice, and community-based education.
+      These are not romantic ideas. They are the only mechanisms that have
+      ever successfully moved complex tacit knowledge across generations.
+    </p>
+
+    <div class="elder-grid">
+      <div class="elder-card">
+        <span class="elder-icon">🎙️</span>
+        <h3>Record with Dignity</h3>
+        <p>Elder-driven recording process. Their story, their pace, their terms.</p>
+      </div>
+      <div class="elder-card">
+        <span class="elder-icon">🧬</span>
+        <h3>Transmit, Don't Extract</h3>
+        <p>Knowledge shared in relationship — not scraped, not stripped, not summarized without consent.</p>
+      </div>
+      <div class="elder-card">
+        <span class="elder-icon">🔐</span>
+        <h3>Consent is Sacred</h3>
+        <p>Every recording is gated by a consent token. The elder revokes it, it's gone. Full stop.</p>
+      </div>
+      <div class="elder-card">
+        <span class="elder-icon">🌱</span>
+        <h3>Community Validates</h3>
+        <p>Knowledge is reviewed by the community that holds it. Not by an algorithm. By people.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── V1 LAUNCH PATH ─────────────────────────────────────────── -->
+<section id="launch">
+  <div class="wrap">
+    <h2>Version 1 — Launch Path</h2>
+    <p>Six steps from here to a working pilot with real elders and real learners.</p>
+
+    <div class="launch-steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Consent infrastructure</h3>
+          <p>Deploy the NOIZY consent kernel adapted for educational content. Every recording, every lesson gets a consent token before a single word is captured.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Elder onboarding protocol</h3>
+          <p>A short, voice-explained intake process. No long forms. No legal jargon. A 15-minute conversation that establishes relationship, scope, and consent.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>First 10 recordings</h3>
+          <p>Pilot with 10 elder voices across 3 knowledge domains. Focus: craft, care, and community leadership. These become the seed archive.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>Dyslexia-forward interface v1</h3>
+          <p>A voice-first web interface that presents the recordings with full accessibility compliance, chunked transcripts, and emotional context headers.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h3>First learner cohort</h3>
+          <p>8–12 learners, recruited through neurodivergent learning communities. Paired directly with elders where possible. Documented for iteration.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-body">
+          <h3>Community review + v2 brief</h3>
+          <p>Elder council reviews the pilot. Learner cohort reviews the pilot. What stays, what changes, what's missing — becomes the V2 brief.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ────────────────────────────────────────────────────── -->
+<section id="cta">
+  <div class="wrap">
+    <h2>This is the beginning.</h2>
+    <p>If you are an elder with knowledge to protect,<br>
+       a learner who was failed by the system,<br>
+       or a builder who wants to help — we want to hear from you.</p>
+    <a href="mailto:rsp@noizy.ai" class="btn btn-primary">Get Involved</a>
+    <a href="#manifesto" class="btn btn-ghost">Read the Manifesto</a>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─────────────────────────────────────────────────── -->
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <span>© 2026 NOIZY Labs — noizylab.ca</span>
+      <span>Built with consent. rsp@noizy.ai</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

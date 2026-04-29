@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIZY.AI — Command Center</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #0D0D0D;
+    --surface: #1A1A1A;
+    --surface-2: #222222;
+    --burgundy: #6B1D2A;
+    --brown: #4A3223;
+    --amber: #D4A03C;
+    --cream: #F5E6C8;
+    --success: #2ECC71;
+    --danger: #E74C3C;
+    --warning: #F39C12;
+    --text-dim: #A89B8C;
+    --text-muted: #6B5E50;
+    --border: #333333;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--cream);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 32px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--burgundy), var(--amber));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 16px;
+    color: var(--bg);
+  }
+
+  .logo-text {
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: -0.5px;
+  }
+
+  .logo-sub {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .status-dot.ok { background: var(--success); box-shadow: 0 0 8px var(--success); }
+  .status-dot.error { background: var(--danger); box-shadow: 0 0 8px var(--danger); }
+  .status-dot.loading { background: var(--text-muted); animation: pulse 1.5s infinite; }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  .refresh-btn {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--cream);
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    transition: all 0.2s;
+  }
+
+  .refresh-btn:hover { border-color: var(--amber); color: var(--amber); }
+
+  .main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 24px 32px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    transition: border-color 0.2s;
+  }
+
+  .card:hover { border-color: var(--brown); }
+
+  .card-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .card-value {
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: -2px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .card-value.amber { color: var(--amber); }
+  .card-value.cream { color: var(--cream); }
+  .card-value.success { color: var(--success); }
+  .card-value.burgundy { color: var(--burgundy); }
+
+  .card-detail {
+    font-size: 12px;
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .section-title {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+  }
+
+  .wide-card {
+    grid-column: 1 / -1;
+  }
+
+  .health-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+  }
+
+  .health-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: var(--surface-2);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+  }
+
+  .health-item .label { color: var(--text-dim); }
+  .health-item .value { color: var(--cream); font-weight: 500; }
+
+  .waitlist-breakdown {
+    display: flex;
+    gap: 24px;
+    margin-top: 16px;
+  }
+
+  .breakdown-item {
+    text-align: center;
+  }
+
+  .breakdown-count {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--cream);
+  }
+
+  .breakdown-label {
+    font-size: 10px;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .bar-chart {
+    display: flex;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 12px;
+    background: var(--surface-2);
+  }
+
+  .bar-segment {
+    height: 100%;
+    transition: width 0.6s ease;
+  }
+
+  .bar-segment.artists { background: var(--amber); }
+  .bar-segment.studios { background: var(--brown); }
+  .bar-segment.curious { background: var(--burgundy); }
+  .bar-segment.developers { background: var(--text-dim); }
+
+  .never-clauses {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 8px;
+  }
+
+  .clause-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 16px;
+    background: var(--surface-2);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.4;
+  }
+
+  .clause-badge {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    background: var(--burgundy);
+    color: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .clause-code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    display: block;
+    margin-top: 2px;
+  }
+
+  .endpoints-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 8px;
+  }
+
+  .endpoint-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: var(--surface-2);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+  }
+
+  .method {
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 9px;
+  }
+
+  .method.get { background: var(--success); color: var(--bg); }
+  .method.post { background: var(--amber); color: var(--bg); }
+
+  .endpoint-path { color: var(--cream); }
+
+  .ledger-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+  }
+
+  .ledger-table th {
+    text-align: left;
+    padding: 10px 12px;
+    color: var(--text-muted);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .ledger-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-dim);
+  }
+
+  .ledger-table tr:hover td { color: var(--cream); }
+
+  .event-type {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .event-type.signup { background: var(--amber); color: var(--bg); }
+  .event-type.consent { background: var(--success); color: var(--bg); }
+  .event-type.revoke { background: var(--danger); color: var(--bg); }
+
+  .footer {
+    text-align: center;
+    padding: 32px;
+    font-size: 11px;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+    border-top: 1px solid var(--border);
+    margin-top: 24px;
+  }
+
+  .footer em {
+    display: block;
+    margin-top: 8px;
+    font-style: italic;
+    color: var(--text-dim);
+  }
+
+  .loading-skeleton {
+    background: linear-gradient(90deg, var(--surface-2) 25%, var(--border) 50%, var(--surface-2) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 4px;
+    height: 42px;
+    width: 80px;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  .error-banner {
+    background: var(--danger);
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    display: none;
+  }
+
+  .links {
+    display: flex;
+    gap: 16px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+
+  .link {
+    color: var(--amber);
+    text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    padding: 6px 12px;
+    border: 1px solid var(--amber);
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+
+  .link:hover {
+    background: var(--amber);
+    color: var(--bg);
+  }
+</style>
+</head>
+<body>
+
+<div class="error-banner" id="errorBanner"></div>
+
+<header class="header">
+  <div class="logo">
+    <div class="logo-icon">N</div>
+    <div>
+      <div class="logo-text">NOIZY.AI</div>
+      <div class="logo-sub">Command Center</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <span><span class="status-dot loading" id="statusDot"></span> <span id="statusText">connecting...</span></span>
+    <span id="versionText">v--</span>
+    <button class="refresh-btn" onclick="refreshAll()">Refresh</button>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- Stats Overview -->
+  <div class="grid">
+    <div class="card">
+      <div class="card-label">Waitlist Signups</div>
+      <div class="card-value amber" id="totalSignups"><div class="loading-skeleton"></div></div>
+      <div class="card-detail" id="signupDetail">loading...</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Registered Actors</div>
+      <div class="card-value cream" id="totalActors"><div class="loading-skeleton"></div></div>
+      <div class="card-detail">sovereign voice owners</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Consent Tokens</div>
+      <div class="card-value success" id="totalTokens"><div class="loading-skeleton"></div></div>
+      <div class="card-detail">active permissions</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Ledger Entries</div>
+      <div class="card-value cream" id="totalLedger"><div class="loading-skeleton"></div></div>
+      <div class="card-detail">append-only, immutable</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Never Clauses</div>
+      <div class="card-value burgundy" id="totalClauses"><div class="loading-skeleton"></div></div>
+      <div class="card-detail">constitutional, unbreakable</div>
+    </div>
+  </div>
+
+  <!-- Waitlist Breakdown -->
+  <div class="section-title">Waitlist Breakdown</div>
+  <div class="grid">
+    <div class="card wide-card">
+      <div class="bar-chart" id="waitlistBar"></div>
+      <div class="waitlist-breakdown" id="waitlistBreakdown">
+        <div class="breakdown-item">
+          <div class="breakdown-count" id="artistCount">-</div>
+          <div class="breakdown-label">Voice Artists</div>
+        </div>
+        <div class="breakdown-item">
+          <div class="breakdown-count" id="studioCount">-</div>
+          <div class="breakdown-label">Studios</div>
+        </div>
+        <div class="breakdown-item">
+          <div class="breakdown-count" id="curiousCount">-</div>
+          <div class="breakdown-label">Curious</div>
+        </div>
+        <div class="breakdown-item">
+          <div class="breakdown-count" id="devCount">-</div>
+          <div class="breakdown-label">Developers</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Infrastructure Health -->
+  <div class="section-title">Infrastructure Health</div>
+  <div class="grid">
+    <div class="card wide-card">
+      <div class="health-grid" id="healthGrid">
+        <div class="health-item"><span class="status-dot loading"></span><span class="label">Loading...</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Never Clauses -->
+  <div class="section-title">The 9 Never Clauses</div>
+  <div class="never-clauses" id="clausesList">
+    <div class="clause-item"><div class="loading-skeleton" style="width:100%;height:20px"></div></div>
+  </div>
+
+  <!-- API Endpoints -->
+  <div class="section-title" style="margin-top: 24px;">HEAVEN API Endpoints</div>
+  <div class="endpoints-grid">
+    <div class="endpoint-item"><span class="method get">GET</span><span class="endpoint-path">/v1/health</span></div>
+    <div class="endpoint-item"><span class="method get">GET</span><span class="endpoint-path">/v1/never-clauses</span></div>
+    <div class="endpoint-item"><span class="method get">GET</span><span class="endpoint-path">/v1/actors</span></div>
+    <div class="endpoint-item"><span class="method get">GET</span><span class="endpoint-path">/v1/actors/:id</span></div>
+    <div class="endpoint-item"><span class="method post">POST</span><span class="endpoint-path">/v1/consent/check</span></div>
+    <div class="endpoint-item"><span class="method post">POST</span><span class="endpoint-path">/v1/consent/grant</span></div>
+    <div class="endpoint-item"><span class="method post">POST</span><span class="endpoint-path">/v1/consent/revoke</span></div>
+    <div class="endpoint-item"><span class="method get">GET</span><span class="endpoint-path">/v1/ledger</span></div>
+    <div class="endpoint-item"><span class="method get">GET</span><span class="endpoint-path">/v1/estates/:actor_id</span></div>
+    <div class="endpoint-item"><span class="method get">GET</span><span class="endpoint-path">/v1/flags/:name</span></div>
+    <div class="endpoint-item"><span class="method post">POST</span><span class="endpoint-path">/v1/signup</span></div>
+    <div class="endpoint-item"><span class="method get">GET</span><span class="endpoint-path">/v1/stats</span></div>
+    <div class="endpoint-item"><span class="method get">GET</span><span class="endpoint-path">/v1/waitlist/stats</span></div>
+    <div class="endpoint-item"><span class="method get">GET</span><span class="endpoint-path">/v1/variant</span></div>
+    <div class="endpoint-item"><span class="method get">GET</span><span class="endpoint-path">/v1/agents</span></div>
+  </div>
+
+  <!-- Recent Ledger -->
+  <div class="section-title" style="margin-top: 24px;">Recent Ledger Activity</div>
+  <div class="card wide-card" style="overflow-x: auto;">
+    <table class="ledger-table" id="ledgerTable">
+      <thead>
+        <tr><th>Event ID</th><th>Type</th><th>Actor</th><th>Timestamp</th></tr>
+      </thead>
+      <tbody id="ledgerBody">
+        <tr><td colspan="4" style="text-align:center;color:var(--text-muted)">Loading...</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Quick Links -->
+  <div class="section-title" style="margin-top: 24px;">Quick Links</div>
+  <div class="links">
+    <a class="link" href="https://heaven.rsp-5f3.workers.dev/v1/health" target="_blank">HEAVEN Health</a>
+    <a class="link" href="https://noizy-ai-landing.pages.dev" target="_blank">Landing Page</a>
+    <a class="link" href="https://github.com/RSPNOIZY/CLAUDE-TODAY" target="_blank">GitHub Repo</a>
+    <a class="link" href="https://dash.cloudflare.com" target="_blank">Cloudflare Dashboard</a>
+    <a class="link" href="https://heaven.rsp-5f3.workers.dev" target="_blank">HEAVEN Root</a>
+  </div>
+
+</main>
+
+<footer class="footer">
+  NOIZY.AI Command Center — Robert Stephen Plowman / NOIZYFISH
+  <em>Every voice is sovereign. Every use requires consent. Every artist gets 75%.</em>
+</footer>
+
+<script>
+const API = 'https://heaven.rsp-5f3.workers.dev';
+
+async function fetchJSON(path) {
+  const res = await fetch(`${API}${path}`);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
+
+async function loadStats() {
+  try {
+    const data = await fetchJSON('/v1/stats');
+    const s = data.stats;
+    document.getElementById('totalSignups').textContent = s.waitlist_signups;
+    document.getElementById('totalActors').textContent = s.actors;
+    document.getElementById('totalTokens').textContent = s.consent_tokens;
+    document.getElementById('totalLedger').textContent = s.ledger_entries;
+    document.getElementById('totalClauses').textContent = s.never_clauses;
+    document.getElementById('versionText').textContent = `v${data.version}`;
+  } catch (e) {
+    showError('Failed to load stats: ' + e.message);
+  }
+}
+
+async function loadHealth() {
+  try {
+    const data = await fetchJSON('/v1/health');
+    const dot = document.getElementById('statusDot');
+    const txt = document.getElementById('statusText');
+
+    if (data.status === 'ok') {
+      dot.className = 'status-dot ok';
+      txt.textContent = 'operational';
+    } else {
+      dot.className = 'status-dot error';
+      txt.textContent = 'degraded';
+    }
+
+    const grid = document.getElementById('healthGrid');
+    const items = [
+      { label: 'Agent Memory DB', ok: data.databases.agent_memory },
+      { label: 'Gabriel DB (HVS)', ok: data.databases.gabriel_db },
+      { label: 'KV Voice', ok: data.kv.voice },
+      { label: 'KV Gabriel', ok: data.kv.gabriel },
+      { label: 'KV Flags', ok: data.kv.flags },
+      { label: 'KV Gaps', ok: data.kv.gaps },
+    ];
+
+    grid.innerHTML = items.map(i => `
+      <div class="health-item">
+        <span class="status-dot ${i.ok ? 'ok' : 'error'}"></span>
+        <span class="label">${i.label}</span>
+        <span class="value" style="margin-left:auto">${i.ok ? 'OK' : 'DOWN'}</span>
+      </div>
+    `).join('');
+  } catch (e) {
+    document.getElementById('statusDot').className = 'status-dot error';
+    document.getElementById('statusText').textContent = 'offline';
+  }
+}
+
+async function loadWaitlist() {
+  try {
+    const data = await fetchJSON('/v1/waitlist/stats');
+    const w = data.waitlist;
+    const total = w.total || 1;
+
+    document.getElementById('artistCount').textContent = w.breakdown.voice_actors;
+    document.getElementById('studioCount').textContent = w.breakdown.studios;
+    document.getElementById('curiousCount').textContent = w.breakdown.curious;
+    document.getElementById('devCount').textContent = w.breakdown.developers;
+    document.getElementById('signupDetail').textContent = w.latest_signup
+      ? `latest: ${new Date(w.latest_signup).toLocaleString()}`
+      : 'no signups yet';
+
+    const bar = document.getElementById('waitlistBar');
+    bar.innerHTML = `
+      <div class="bar-segment artists" style="width:${(w.breakdown.voice_actors/total)*100}%"></div>
+      <div class="bar-segment studios" style="width:${(w.breakdown.studios/total)*100}%"></div>
+      <div class="bar-segment curious" style="width:${(w.breakdown.curious/total)*100}%"></div>
+      <div class="bar-segment developers" style="width:${(w.breakdown.developers/total)*100}%"></div>
+    `;
+  } catch (e) {
+    console.error('Waitlist error:', e);
+  }
+}
+
+async function loadClauses() {
+  try {
+    const data = await fetchJSON('/v1/never-clauses');
+    const list = document.getElementById('clausesList');
+    list.innerHTML = data.clauses.map((c, i) => `
+      <div class="clause-item">
+        <div class="clause-badge">${i + 1}</div>
+        <div>
+          ${c.clause_text}
+          <span class="clause-code">${c.clause_code} · ${c.category}</span>
+        </div>
+      </div>
+    `).join('');
+  } catch (e) {
+    console.error('Clauses error:', e);
+  }
+}
+
+async function loadLedger() {
+  try {
+    const data = await fetchJSON('/v1/ledger?limit=10');
+    const body = document.getElementById('ledgerBody');
+
+    if (!data.entries.length) {
+      body.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--text-muted)">No entries yet</td></tr>';
+      return;
+    }
+
+    body.innerHTML = data.entries.map(e => {
+      const typeClass = e.event_type.includes('signup') ? 'signup'
+        : e.event_type.includes('revoke') ? 'revoke' : 'consent';
+      return `
+        <tr>
+          <td style="font-size:10px;color:var(--text-muted)">${e.event_id.substring(0, 12)}...</td>
+          <td><span class="event-type ${typeClass}">${e.event_type}</span></td>
+          <td>${e.actor_id === 'SYSTEM' ? 'SYSTEM' : e.actor_id.substring(0, 12) + '...'}</td>
+          <td>${new Date(e.recorded_at).toLocaleString()}</td>
+        </tr>
+      `;
+    }).join('');
+  } catch (e) {
+    console.error('Ledger error:', e);
+  }
+}
+
+function showError(msg) {
+  const banner = document.getElementById('errorBanner');
+  banner.textContent = msg;
+  banner.style.display = 'block';
+  setTimeout(() => banner.style.display = 'none', 5000);
+}
+
+async function refreshAll() {
+  document.getElementById('statusDot').className = 'status-dot loading';
+  document.getElementById('statusText').textContent = 'refreshing...';
+  await Promise.all([loadStats(), loadHealth(), loadWaitlist(), loadClauses(), loadLedger()]);
+}
+
+// Initial load
+refreshAll();
+
+// Auto-refresh every 30 seconds
+setInterval(refreshAll, 30000);
+</script>
+</body>
+</html>

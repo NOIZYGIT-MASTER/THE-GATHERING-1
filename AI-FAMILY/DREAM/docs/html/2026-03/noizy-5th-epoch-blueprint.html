@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The 5th Epoch — AI as Creative Protocol · NOIZYFISH INC.</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,900&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Bebas+Neue&display=swap');
+
+  :root {
+    --void:    #010206;
+    --deep:    #030810;
+    --panel:   #070e1a;
+    --card:    #0a1220;
+    --border:  #101e30;
+    --glow:    #1a2e48;
+    --gold:    #e8c84a;
+    --gold2:   #f5dc80;
+    --gold-d:  rgba(232,200,74,0.07);
+    --green:   #00e87a;
+    --green-d: rgba(0,232,122,0.07);
+    --violet:  #b794f4;
+    --violet-d:rgba(183,148,244,0.08);
+    --amber:   #f6a63c;
+    --rose:    #f687b3;
+    --cyan:    #67e8f9;
+    --red:     #ff4466;
+    --red-d:   rgba(255,68,102,0.07);
+    --text:    #b8cce4;
+    --dim:     #3e5570;
+    --bright:  #e8f2ff;
+    --serif:   'Playfair Display', Georgia, serif;
+    --mono:    'Space Mono', monospace;
+    --sans:    'Space Grotesk', sans-serif;
+    --bebas:   'Bebas Neue', sans-serif;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--text);
+    font-family: var(--serif);
+    overflow-x: hidden;
+  }
+
+  /* ─── HARMONIC CANVAS ─── */
+  #harmony-canvas {
+    position: fixed;
+    inset: 0; z-index: 0;
+    pointer-events: none;
+    opacity: 0.28;
+  }
+
+  /* ─── SIDEBAR ─── */
+  .sidebar {
+    position: fixed;
+    left: 0; top: 0; bottom: 0;
+    width: 240px;
+    background: rgba(1,2,6,0.94);
+    border-right: 1px solid var(--border);
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    padding: 28px 0;
+    backdrop-filter: blur(12px);
+    overflow-y: auto;
+  }
+
+  .sb-logo { padding: 0 20px 22px; border-bottom: 1px solid var(--border); margin-bottom: 14px; }
+  .sb-brand { font-family: var(--bebas); font-size: 18px; color: var(--gold); letter-spacing: 0.18em; display: block; }
+  .sb-sub { font-family: var(--mono); font-size: 7.5px; color: var(--dim); letter-spacing: 0.2em; margin-top: 3px; display: block; }
+
+  .sb-section { padding: 0 20px; margin-bottom: 8px; }
+  .sb-section-label {
+    font-family: var(--mono); font-size: 7px; color: var(--dim);
+    letter-spacing: 0.25em; text-transform: uppercase;
+    padding: 10px 0 7px; border-bottom: 1px solid var(--border); margin-bottom: 5px;
+  }
+
+  .sb-link {
+    display: flex; align-items: center; gap: 8px;
+    padding: 7px 8px; border-radius: 4px; cursor: pointer;
+    text-decoration: none; transition: background 0.2s; margin-bottom: 1px;
+  }
+  .sb-link:hover { background: rgba(232,200,74,0.06); }
+  .sb-link.active { background: var(--gold-d); border-left: 2px solid var(--gold); padding-left: 6px; }
+  .sb-link .sb-num { font-family: var(--mono); font-size: 8px; color: var(--dim); width: 18px; flex-shrink: 0; }
+  .sb-link .sb-text { font-family: var(--sans); font-size: 11px; color: var(--text); line-height: 1.3; }
+  .sb-link.active .sb-text { color: var(--gold); }
+
+  .sb-footer { margin-top: auto; padding: 16px 20px 0; border-top: 1px solid var(--border); }
+  .sb-grf { font-family: var(--bebas); font-size: 13px; color: var(--green); letter-spacing: 0.2em; }
+  .sb-rsp { font-family: var(--mono); font-size: 8px; color: var(--dim); letter-spacing: 0.15em; margin-top: 4px; }
+
+  /* ─── MAIN ─── */
+  .content { margin-left: 240px; position: relative; z-index: 10; max-width: 900px; padding: 0 52px 140px; }
+
+  /* ─── HERO ─── */
+  #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 80px 0; }
+  .hero-doc { font-family: var(--mono); font-size: 9px; color: var(--dim); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 22px; }
+
+  .hero-epoch {
+    font-family: var(--mono); font-size: 11px; color: var(--gold);
+    letter-spacing: 0.4em; text-transform: uppercase; margin-bottom: 12px;
+  }
+
+  .hero-title {
+    font-family: var(--bebas);
+    font-size: clamp(64px, 10vw, 136px);
+    color: var(--bright);
+    letter-spacing: 0.04em;
+    line-height: 0.88;
+    margin-bottom: 8px;
+  }
+
+  .hero-title .hl { color: var(--gold); display: block; }
+  .hero-title .hg { color: var(--green); }
+  .hero-title .hv { color: var(--violet); }
+
+  .hero-sub {
+    font-family: var(--serif);
+    font-size: clamp(15px, 2vw, 20px);
+    font-style: italic;
+    color: var(--dim);
+    line-height: 1.7;
+    max-width: 580px;
+    margin: 28px 0 48px;
+  }
+
+  .epoch-badges {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+
+  .ep-badge {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .ep-badge .ep-num { font-family: var(--bebas); font-size: 24px; color: var(--gold); display: block; letter-spacing: 0.08em; }
+  .ep-badge.active { border-color: var(--gold); background: var(--gold-d); }
+  .ep-badge.active .ep-num { color: var(--green); }
+
+  /* ─── SECTION STRUCTURE ─── */
+  .section { padding: 80px 0 40px; border-top: 1px solid var(--border); }
+
+  .sec-eye {
+    font-family: var(--mono); font-size: 9px; color: var(--dim);
+    letter-spacing: 0.28em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
+  }
+  .sec-eye::before { content:''; width:20px; height:1px; background: var(--gold); }
+  .sec-eye .r { color: var(--red); }
+  .sec-eye .g { color: var(--green); }
+  .sec-eye .y { color: var(--gold); }
+  .sec-eye .v { color: var(--violet); }
+  .sec-eye .c { color: var(--cyan); }
+
+  .sec-title {
+    font-family: var(--serif);
+    font-size: clamp(26px, 4.5vw, 54px);
+    font-weight: 900; color: var(--bright);
+    line-height: 1.1; margin-bottom: 10px;
+  }
+  .sec-title .it { font-style: italic; color: var(--gold); }
+  .sec-title .r  { color: var(--red); }
+  .sec-title .g  { color: var(--green); }
+  .sec-title .v  { color: var(--violet); }
+  .sec-title .c  { color: var(--cyan); }
+
+  .sec-lead {
+    font-family: var(--serif); font-size: 17px; font-style: italic;
+    color: var(--dim); line-height: 1.75; margin: 18px 0 40px;
+    padding-left: 18px; border-left: 2px solid rgba(232,200,74,0.2); max-width: 640px;
+  }
+
+  /* ─── PROSE ─── */
+  .prose { font-size: 16px; line-height: 1.9; color: var(--text); max-width: 680px; }
+  .prose p { margin-bottom: 20px; }
+  .prose strong { color: var(--bright); }
+  .prose em { color: var(--gold); font-style: italic; }
+  .prose .r { color: var(--red); }
+  .prose .g { color: var(--green); }
+  .prose .v { color: var(--violet); }
+
+  /* ─── EPOCH TIMELINE ─── */
+  .epoch-timeline { max-width: 820px; margin: 32px 0; }
+
+  .epoch-row {
+    display: grid;
+    grid-template-columns: 80px 4px 1fr;
+    gap: 0 24px;
+    margin-bottom: 0;
+    position: relative;
+  }
+
+  .epoch-row::after {
+    content: '';
+    position: absolute;
+    left: 82px;
+    top: 32px;
+    bottom: -32px;
+    width: 4px;
+    background: var(--border);
+  }
+
+  .epoch-row:last-child::after { display: none; }
+  .epoch-row:last-child { margin-bottom: 0; }
+
+  .epoch-year {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--dim);
+    letter-spacing: 0.15em;
+    text-align: right;
+    padding-top: 28px;
+    line-height: 1.3;
+  }
+
+  .epoch-dot {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    background: var(--void);
+    flex-shrink: 0;
+    z-index: 2;
+    position: relative;
+    margin-top: 25px;
+    left: -5px;
+    transition: all 0.2s;
+  }
+
+  .epoch-row:hover .epoch-dot { transform: scale(1.3); }
+
+  .epoch-row.e1 .epoch-dot { border-color: var(--dim); background: var(--dim); }
+  .epoch-row.e2 .epoch-dot { border-color: var(--amber); background: var(--amber); }
+  .epoch-row.e3 .epoch-dot { border-color: var(--rose); background: var(--rose); }
+  .epoch-row.e4 .epoch-dot { border-color: var(--cyan); background: var(--cyan); }
+  .epoch-row.e5 .epoch-dot { border-color: var(--gold); background: var(--gold); box-shadow: 0 0 16px rgba(232,200,74,0.6); }
+
+  .epoch-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 22px 24px;
+    margin-bottom: 28px;
+    transition: border-color 0.2s;
+  }
+
+  .epoch-card:hover { border-color: var(--glow); }
+
+  .epoch-row.e5 .epoch-card {
+    border-color: rgba(232,200,74,0.25);
+    background: var(--gold-d);
+  }
+
+  .ec-num {
+    font-family: var(--bebas);
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    margin-bottom: 6px;
+  }
+
+  .epoch-row.e1 .ec-num { color: var(--dim); }
+  .epoch-row.e2 .ec-num { color: var(--amber); }
+  .epoch-row.e3 .ec-num { color: var(--rose); }
+  .epoch-row.e4 .ec-num { color: var(--cyan); }
+  .epoch-row.e5 .ec-num { color: var(--gold); }
+
+  .ec-title { font-family: var(--sans); font-size: 16px; font-weight: 700; color: var(--bright); margin-bottom: 4px; }
+  .ec-product { font-family: var(--mono); font-size: 9px; color: var(--dim); letter-spacing: 0.15em; margin-bottom: 10px; text-transform: uppercase; }
+  .ec-desc { font-family: var(--serif); font-size: 14px; color: var(--text); line-height: 1.7; font-style: italic; }
+
+  /* ─── COMPARE TABLE ─── */
+  .compare-table {
+    width: 100%;
+    max-width: 820px;
+    border-collapse: collapse;
+    margin: 32px 0;
+    font-family: var(--sans);
+    font-size: 13px;
+  }
+
+  .compare-table th {
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--dim);
+    padding: 10px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .compare-table th.golden { color: var(--gold); }
+
+  .compare-table td {
+    padding: 13px 16px;
+    border-bottom: 1px solid rgba(16,30,48,0.7);
+    vertical-align: top;
+    line-height: 1.6;
+    color: var(--text);
+  }
+
+  .compare-table tr:hover td { background: rgba(255,255,255,0.012); }
+
+  .ct-metric { color: var(--bright); font-weight: 600; }
+  .ct-old { color: var(--dim); font-style: italic; }
+  .ct-new { color: var(--gold); font-weight: 600; }
+
+  /* ─── STRATEGY GRID ─── */
+  .strat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    max-width: 820px;
+    margin: 32px 0;
+  }
+
+  @media (max-width: 700px) { .strat-grid { grid-template-columns: 1fr; } }
+
+  .sg-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 22px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .sg-card:hover { border-color: var(--glow); }
+
+  .sg-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+  }
+
+  .sg-card.gold::before { background: var(--gold); }
+  .sg-card.green::before { background: var(--green); }
+  .sg-card.violet::before { background: var(--violet); }
+  .sg-card.cyan::before { background: var(--cyan); }
+  .sg-card.amber::before { background: var(--amber); }
+  .sg-card.rose::before { background: var(--rose); }
+
+  .sg-num {
+    font-family: var(--bebas);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    margin-bottom: 8px;
+  }
+
+  .sg-card.gold .sg-num { color: var(--gold); }
+  .sg-card.green .sg-num { color: var(--green); }
+  .sg-card.violet .sg-num { color: var(--violet); }
+  .sg-card.cyan .sg-num { color: var(--cyan); }
+  .sg-card.amber .sg-num { color: var(--amber); }
+  .sg-card.rose .sg-num { color: var(--rose); }
+
+  .sg-title { font-family: var(--sans); font-size: 14px; font-weight: 700; color: var(--bright); margin-bottom: 8px; }
+  .sg-body { font-family: var(--serif); font-style: italic; font-size: 13px; color: var(--text); line-height: 1.65; }
+  .sg-arrow { font-family: var(--mono); font-size: 10px; color: var(--green); margin-top: 8px; letter-spacing: 0.08em; }
+
+  /* ─── CHARTER ─── */
+  .charter {
+    background: var(--green-d);
+    border: 1px solid rgba(0,232,122,0.18);
+    border-left: 4px solid var(--green);
+    border-radius: 8px;
+    padding: 36px;
+    max-width: 720px;
+    margin: 40px 0;
+  }
+
+  .charter-label {
+    font-family: var(--mono); font-size: 8px; color: var(--green);
+    letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 20px;
+  }
+
+  .charter-articles { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+
+  .charter-articles li {
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+
+  .art-n {
+    font-family: var(--bebas); font-size: 20px; color: var(--green);
+    line-height: 1; flex-shrink: 0; width: 22px;
+  }
+
+  .art-t {
+    font-family: var(--sans); font-size: 14px; color: var(--bright); line-height: 1.6;
+  }
+
+  .art-t em { color: var(--gold); font-style: italic; }
+  .art-t strong { color: var(--green); }
+
+  /* ─── GENIUS CREATOR ─── */
+  .genius-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 820px;
+    margin: 32px 0;
+  }
+
+  .gf-step {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 24px;
+    position: relative;
+    padding-bottom: 28px;
+  }
+
+  .gf-step::after {
+    content: '';
+    position: absolute;
+    left: 23px;
+    top: 48px;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--gold), transparent);
+  }
+
+  .gf-step:last-child::after { display: none; }
+
+  .gf-num {
+    font-family: var(--bebas);
+    font-size: 32px;
+    color: var(--gold);
+    line-height: 1;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gold-d);
+    border: 1px solid rgba(232,200,74,0.2);
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  .gf-body { padding-top: 6px; }
+  .gf-tag { font-family: var(--mono); font-size: 8px; color: var(--dim); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 6px; }
+  .gf-title { font-family: var(--sans); font-size: 15px; font-weight: 700; color: var(--bright); margin-bottom: 8px; }
+  .gf-desc { font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--text); line-height: 1.7; }
+  .gf-outcome { font-family: var(--mono); font-size: 10px; color: var(--green); margin-top: 8px; letter-spacing: 0.08em; }
+
+  /* ─── HARMONY VISION ─── */
+  .harmony-block {
+    background: var(--violet-d);
+    border: 1px solid rgba(183,148,244,0.18);
+    border-left: 4px solid var(--violet);
+    border-radius: 8px;
+    padding: 36px;
+    max-width: 720px;
+    margin: 40px 0;
+  }
+
+  .hb-label { font-family: var(--mono); font-size: 8px; color: var(--violet); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 18px; }
+
+  .hb-text {
+    font-family: var(--serif);
+    font-size: clamp(16px, 2.2vw, 22px);
+    font-style: italic;
+    color: var(--bright);
+    line-height: 1.65;
+    font-weight: 700;
+  }
+
+  .hb-text em { color: var(--gold); font-style: normal; }
+  .hb-text .g { color: var(--green); }
+  .hb-text .v { color: var(--violet); }
+
+  /* ─── PROTOCOL UPRISING ─── */
+  .uprising-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    max-width: 820px;
+    margin: 32px 0;
+  }
+
+  @media (max-width: 700px) { .uprising-grid { grid-template-columns: 1fr; } }
+
+  .up-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    border-top: 2px solid;
+    transition: border-color 0.2s;
+  }
+
+  .up-card:hover { opacity: 0.9; }
+  .up-card.gold { border-top-color: var(--gold); }
+  .up-card.green { border-top-color: var(--green); }
+  .up-card.violet { border-top-color: var(--violet); }
+  .up-card.cyan { border-top-color: var(--cyan); }
+  .up-card.amber { border-top-color: var(--amber); }
+  .up-card.rose { border-top-color: var(--rose); }
+
+  .up-icon { font-size: 24px; display: block; margin-bottom: 10px; }
+  .up-title { font-family: var(--sans); font-size: 13px; font-weight: 700; color: var(--bright); margin-bottom: 6px; }
+  .up-body { font-family: var(--serif); font-style: italic; font-size: 12px; color: var(--text); line-height: 1.6; }
+
+  /* ─── SYNC MATRIX ─── */
+  .sync-matrix {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    max-width: 820px;
+    margin: 32px 0;
+    background: var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .sm-cell {
+    background: var(--card);
+    padding: 20px;
+  }
+
+  .sm-cell.header {
+    background: var(--panel);
+    font-family: var(--mono);
+    font-size: 8px;
+    color: var(--dim);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .sm-cell.human { border-top: 2px solid var(--cyan); }
+  .sm-cell.ai { border-top: 2px solid var(--violet); }
+  .sm-cell.noizy { border-top: 2px solid var(--gold); }
+
+  .sm-role { font-family: var(--bebas); font-size: 16px; letter-spacing: 0.1em; margin-bottom: 6px; }
+  .sm-cell.human .sm-role { color: var(--cyan); }
+  .sm-cell.ai .sm-role { color: var(--violet); }
+  .sm-cell.noizy .sm-role { color: var(--gold); }
+
+  .sm-desc { font-family: var(--sans); font-size: 12px; color: var(--text); line-height: 1.55; }
+
+  /* ─── STUDIO ─── */
+  .studio-rooms {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    max-width: 820px;
+    margin: 32px 0;
+  }
+
+  @media (max-width: 700px) { .studio-rooms { grid-template-columns: 1fr; } }
+
+  .room-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 22px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .room-num {
+    position: absolute;
+    top: 12px; right: 14px;
+    font-family: var(--bebas);
+    font-size: 48px;
+    color: rgba(255,255,255,0.03);
+    line-height: 1;
+  }
+
+  .room-icon { font-size: 26px; display: block; margin-bottom: 10px; }
+  .room-name { font-family: var(--bebas); font-size: 16px; color: var(--bright); letter-spacing: 0.1em; margin-bottom: 6px; }
+  .room-purpose { font-family: var(--mono); font-size: 8px; color: var(--dim); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px; }
+  .room-desc { font-family: var(--sans); font-size: 12px; color: var(--text); line-height: 1.6; }
+
+  /* ─── FINALE ─── */
+  .finale {
+    padding: 100px 0;
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .finale-title {
+    font-family: var(--bebas);
+    font-size: clamp(44px, 7vw, 90px);
+    color: var(--bright);
+    letter-spacing: 0.05em;
+    line-height: 0.9;
+    margin-bottom: 28px;
+  }
+
+  .finale-title .hl { color: var(--gold); display: block; }
+  .finale-title .hg { color: var(--green); display: block; }
+  .finale-title .hv { color: var(--violet); display: block; }
+
+  .finale-sub {
+    font-family: var(--serif);
+    font-size: clamp(15px, 2vw, 19px);
+    font-style: italic;
+    color: var(--dim);
+    line-height: 1.8;
+    max-width: 540px;
+    margin: 0 auto 16px;
+  }
+
+  .finale-grf { font-family: var(--bebas); font-size: 26px; color: var(--green); letter-spacing: 0.3em; margin-top: 44px; }
+  .finale-rsp { font-family: var(--mono); font-size: 9px; color: var(--dim); letter-spacing: 0.18em; margin-top: 8px; }
+
+</style>
+</head>
+<body>
+
+<canvas id="harmony-canvas"></canvas>
+
+<!-- ─── SIDEBAR ─── -->
+<nav class="sidebar">
+  <div class="sb-logo">
+    <span class="sb-brand">5TH EPOCH</span>
+    <span class="sb-sub">DOCUMENT 25 · PROTOCOL BLUEPRINT</span>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-section-label">Sections</div>
+    <a class="sb-link active" href="#hero"><span class="sb-num">—</span><span class="sb-text">The 5 Epochs</span></a>
+    <a class="sb-link" href="#sec-protocol"><span class="sb-num">I</span><span class="sb-text">Protocol vs. Contract</span></a>
+    <a class="sb-link" href="#sec-charter"><span class="sb-num">II</span><span class="sb-text">Global Creator Charter</span></a>
+    <a class="sb-link" href="#sec-genius"><span class="sb-num">III</span><span class="sb-text">Genius Creator Channel</span></a>
+    <a class="sb-link" href="#sec-harmony"><span class="sb-num">IV</span><span class="sb-text">Perfect Harmony Vision</span></a>
+    <a class="sb-link" href="#sec-coalition"><span class="sb-num">V</span><span class="sb-text">Coalition Strategy</span></a>
+    <a class="sb-link" href="#sec-uprising"><span class="sb-num">VI</span><span class="sb-text">Protocol Uprising</span></a>
+    <a class="sb-link" href="#sec-studio"><span class="sb-num">VII</span><span class="sb-text">The GORUNFREE Studio</span></a>
+    <a class="sb-link" href="#sec-matrix"><span class="sb-num">VIII</span><span class="sb-text">Synchronic Matrix</span></a>
+    <a class="sb-link" href="#finale"><span class="sb-num">∞</span><span class="sb-text">500-Year Declaration</span></a>
+  </div>
+
+  <div class="sb-section" style="margin-top: 8px;">
+    <div class="sb-section-label">The Vault</div>
+    <a class="sb-link" href="plowmans-chronicles.html"><span class="sb-num">00</span><span class="sb-text">Plowman's Chronicles</span></a>
+    <a class="sb-link" href="noizy-founder-blueprint.html"><span class="sb-num">01</span><span class="sb-text">Founder Blueprint</span></a>
+    <a class="sb-link" href="gabriel-dream-agent-superscripts.html"><span class="sb-num">19</span><span class="sb-text">Agent Superscripts</span></a>
+    <a class="sb-link" href="noizy-great-inversion.html"><span class="sb-num">20</span><span class="sb-text">The Great Inversion</span></a>
+    <a class="sb-link" href="noizy-marketing-movement.html"><span class="sb-num">24</span><span class="sb-text">Marketing Movement</span></a>
+  </div>
+
+  <div class="sb-footer">
+    <div class="sb-grf">GORUNFREE</div>
+    <div class="sb-rsp">RSP_001 · NOIZYFISH INC.</div>
+    <div class="sb-rsp" style="margin-top:4px;">EPOCH V · 2026 → 2526</div>
+  </div>
+</nav>
+
+<!-- ─── MAIN CONTENT ─── -->
+<main class="content">
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-doc">NOIZYFISH INC. · DOCUMENT 25 · THE CIVILIZATION BLUEPRINT</div>
+    <div class="hero-epoch">EPOCH V · AI AS CREATIVE PROTOCOL</div>
+    <div class="hero-title">
+      <span>THE 5TH</span>
+      <span class="hl">EPOCH.</span>
+    </div>
+    <p class="hero-sub">
+      Every 80 years, music undergoes a civilizational transformation. The product changes. The power shifts.
+      The mechanism of value evolves. We are living in the hinge moment between Epoch IV and Epoch V.
+      <em>NOIZY is building what comes next.</em>
+    </p>
+
+    <div class="epoch-badges">
+      <div class="ep-badge">
+        <span class="ep-num">I</span>
+        PRINTING<br>1400s–1900s
+      </div>
+      <div class="ep-badge">
+        <span class="ep-num">II</span>
+        RECORDING<br>1920s–1990s
+      </div>
+      <div class="ep-badge">
+        <span class="ep-num">III</span>
+        DIGITAL FILE<br>2000s
+      </div>
+      <div class="ep-badge">
+        <span class="ep-num">IV</span>
+        STREAMING<br>2010s–PRESENT
+      </div>
+      <div class="ep-badge active">
+        <span class="ep-num">V</span>
+        PROTOCOL<br>2026 → 2526
+      </div>
+    </div>
+
+    <div class="epoch-timeline">
+
+      <div class="epoch-row e1">
+        <div class="epoch-year">1400s–<br>1900s</div>
+        <div class="epoch-dot"></div>
+        <div class="epoch-card">
+          <div class="ec-num">EPOCH I · PUBLISHING ERA</div>
+          <div class="ec-title">The Printing Revolution — Sheet Music as Product</div>
+          <div class="ec-product">Product: Notation (Sheet Music) · Value: Physical Sale / Printing Monopoly</div>
+          <div class="ec-desc">Ottaviano Petrucci secured the first rights to print music in 1498. Power resided in whoever could control the physical reproduction of notation. The music existed only as instructions — the performance was the act. Composers were the content; printers were the infrastructure.</div>
+        </div>
+      </div>
+
+      <div class="epoch-row e2">
+        <div class="epoch-year">1920s–<br>1990s</div>
+        <div class="epoch-dot"></div>
+        <div class="epoch-card">
+          <div class="ec-num">EPOCH II · RECORDING ERA</div>
+          <div class="ec-title">The Record Label Age — Performance Captured</div>
+          <div class="ec-product">Product: Performance (Vinyl/Cassette/CD) · Value: Physical Sale of Object</div>
+          <div class="ec-desc">The recording became the product. Labels gained power by controlling studio infrastructure and distribution channels. Artists signed away rights for access to the machine. The recording was permanent, ownable, sellable — but the creator owned almost none of it.</div>
+        </div>
+      </div>
+
+      <div class="epoch-row e3">
+        <div class="epoch-year">2000s</div>
+        <div class="epoch-dot"></div>
+        <div class="epoch-card">
+          <div class="ec-num">EPOCH III · DIGITAL DISRUPTION</div>
+          <div class="ec-title">The File Era — Everything Became Free</div>
+          <div class="ec-product">Product: File (MP3) · Value: 99¢ Download or Zero (Piracy)</div>
+          <div class="ec-desc">The infrastructure collapsed. Napster and then iTunes destroyed the physical object. The music became weightless. Labels flailed. Artists got pirated. The product was now a file — infinitely copyable, infinitely distributed. The power temporarily fell to no one. Then the platforms noticed.</div>
+        </div>
+      </div>
+
+      <div class="epoch-row e4">
+        <div class="epoch-year">2010s–<br>present</div>
+        <div class="epoch-dot"></div>
+        <div class="epoch-card">
+          <div class="ec-num">EPOCH IV · STREAMING AGE</div>
+          <div class="ec-title">IP as Financial Asset — Access Beats Ownership</div>
+          <div class="ec-product">Product: Access (Rights/Streams) · Value: Micro-Payment Licensing</div>
+          <div class="ec-desc">Spotify, Apple Music, YouTube: access replaced ownership. IP became a financial instrument — catalog financing, royalty securitization, streaming fractions. $0.003 per stream. AI companies then began training on streamed content without consent. The extraction intensified. The crisis is now.</div>
+        </div>
+      </div>
+
+      <div class="epoch-row e5">
+        <div class="epoch-year">2026–<br>2526</div>
+        <div class="epoch-dot"></div>
+        <div class="epoch-card">
+          <div class="ec-num">EPOCH V · THE PROTOCOL ERA</div>
+          <div class="ec-title">Consent-as-Code — The Voice Estate as Inheritable IP</div>
+          <div class="ec-product">Product: Inheritable Asset (Voice Estate) · Value: Protocol Enforcement / Cryptographic Provenance</div>
+          <div class="ec-desc">The leap from IP as legal contract to IP as enforced protocol. Rights are not negotiated — they are architecturally guaranteed. Every utterance provenance-linked. Every royalty enforced at the database layer (D1 CHECK: royalty_pct ≥ 75). Every voice is an inheritable estate. The creator is the architect of their own digital civilization. <strong>NOIZY is building this now.</strong></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- I. PROTOCOL VS CONTRACT -->
+  <section id="sec-protocol" class="section">
+    <div class="sec-eye"><span class="y">SECTION I</span> — The Core Strategic Shift</div>
+    <h2 class="sec-title">From <span class="r">Legal Contract</span><br>to <span class="it">Living Protocol.</span></h2>
+    <p class="sec-lead">
+      "The Streaming Age treats rights as legal instruments — interpreted, disputed, and violated by parties with superior legal resources. NOIZY treats rights as technical infrastructure. Code enforces what contracts cannot."
+    </p>
+
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Streaming Age — Epoch IV</th>
+          <th class="golden">NOIZY — Epoch V</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="ct-metric">IP Mechanism</td>
+          <td class="ct-old">Legal Contract (Terms of Service)</td>
+          <td class="ct-new">Protocol (Consent-as-Code)</td>
+        </tr>
+        <tr>
+          <td class="ct-metric">The "Product"</td>
+          <td class="ct-old">Licensed Stream (Access)</td>
+          <td class="ct-new">Inheritable Asset (Voice Estate)</td>
+        </tr>
+        <tr>
+          <td class="ct-metric">Authenticity</td>
+          <td class="ct-old">Watermarking (Optional)</td>
+          <td class="ct-new">Cryptographic Provenance (NOIZY PROOF / WM_{8hex})</td>
+        </tr>
+        <tr>
+          <td class="ct-metric">Creator Role</td>
+          <td class="ct-old">IP Holder / Asset Manager</td>
+          <td class="ct-new">Infrastructure Architect</td>
+        </tr>
+        <tr>
+          <td class="ct-metric">Royalty Floor</td>
+          <td class="ct-old">Negotiated (0–12%). Can be zero.</td>
+          <td class="ct-new">75% hardcoded at D1 database level. Cannot be reduced.</td>
+        </tr>
+        <tr>
+          <td class="ct-metric">Consent Unit</td>
+          <td class="ct-old">Platform ToS (class consent, one-time)</td>
+          <td class="ct-new">Consent Key per utterance, per use case, per jurisdiction</td>
+        </tr>
+        <tr>
+          <td class="ct-metric">Legacy</td>
+          <td class="ct-old">Undefined after creator's death</td>
+          <td class="ct-new">Perpetual Voice Estate — inheritable for 500 years</td>
+        </tr>
+        <tr>
+          <td class="ct-metric">Mogul Role</td>
+          <td class="ct-old">IP Holder / Asset Manager</td>
+          <td class="ct-new">Protocol Architect for the Civilization</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="prose">
+      <p><strong>The long-term value of NOIZY is not in selling music or services.</strong> It is in the licensing and widespread adoption of the Consent-as-Code, NOIZY PROOF, and Voice Estate protocols by other major platforms. When the world's Spotifys, Apples, and Metas are forced to license our protocol to access the best talent — <em>we don't disrupt the industry. We become the foundation it runs on.</em></p>
+    </div>
+  </section>
+
+  <!-- II. GLOBAL CREATOR CHARTER -->
+  <section id="sec-charter" class="section">
+    <div class="sec-eye"><span class="g">SECTION II</span> — The Moral Standard</div>
+    <h2 class="sec-title">The <span class="g">Global Creator</span> Charter</h2>
+    <p class="sec-lead">
+      "The world needs a moral standard for AI and creative work. Not a law — those come too late. A charter. A set of principles that the best creators, the most ethical platforms, and the most serious legislators can rally around. NOIZY published this charter. Now we invite the world to adopt it."
+    </p>
+
+    <div class="charter">
+      <div class="charter-label">✦ CREATOR BILL OF RIGHTS FOR THE AI AGE · NOIZYFISH INC. · 2026</div>
+      <ol class="charter-articles">
+        <li>
+          <span class="art-n">I</span>
+          <span class="art-t"><strong>CONSENT.</strong> Artists must individually approve the use of their work in AI training. Class consent via platform ToS is not consent. Only <em>cryptographic individual consent — per utterance, per use case</em> — meets the ethical standard of Epoch V.</span>
+        </li>
+        <li>
+          <span class="art-n">II</span>
+          <span class="art-t"><strong>CREDIT.</strong> All creators receive perpetual attribution. Every AI-generated output that incorporates a creator's voice, style, or work carries that creator's name and RSP identifier — permanently, in the provenance ledger.</span>
+        </li>
+        <li>
+          <span class="art-n">III</span>
+          <span class="art-t"><strong>REVENUE SHARE.</strong> AI outputs tied to a creator's training data pay royalties — automatically, perpetually, at no less than <em>75% of net revenue</em>. This is not a policy. It is a D1 CHECK constraint.</span>
+        </li>
+        <li>
+          <span class="art-n">IV</span>
+          <span class="art-t"><strong>TRANSPARENCY.</strong> All data sources used in AI training are visible to creators and publicly auditable. The provenance ledger is permanent and append-only. No black boxes.</span>
+        </li>
+        <li>
+          <span class="art-n">V</span>
+          <span class="art-t"><strong>PORTABILITY.</strong> Creators can export their voice models, their provenance history, and all their creative assets at any time. No platform lock-in. The creator owns everything, always.</span>
+        </li>
+        <li>
+          <span class="art-n">VI</span>
+          <span class="art-t"><strong>INHERITANCE.</strong> A creator's Voice Estate is perpetual and inheritable. It survives them. It earns for their heirs. The <em>500-Year Voice Codex</em> is the formal record. Digital creativity is a civilization-scale asset.</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- III. GENIUS CREATOR DIRECT-CHANNEL -->
+  <section id="sec-genius" class="section">
+    <div class="sec-eye"><span class="y">SECTION III</span> — The GORUNFREE Protocol</div>
+    <h2 class="sec-title">The <span class="it">Genius Creator</span><br>Direct-Channel</h2>
+    <p class="sec-lead">
+      "The competition failed because they mistake their users for consumers. They are building platforms, not protocols. NOIZY goes directly to the top 1% of the creative class — those who are alienated by the Transmission Problem and ready for the architecture that solves it."
+    </p>
+
+    <div class="genius-flow">
+
+      <div class="gf-step">
+        <div class="gf-num">1</div>
+        <div class="gf-body">
+          <div class="gf-tag">ACQUISITION LAYER</div>
+          <div class="gf-title">The DreamChamber Codex Onboarding</div>
+          <div class="gf-desc">The Genius Creator doesn't need another tool. They need a new map. The DreamChamber is repositioned as an Invitation-Only Ideation Portal. The first thing they see: the interactive 5 Epochs map and their place in the Protocol Era. This provides an instant world-class strategic idea for their own creative legacy — before they've uploaded a single file.</div>
+          <div class="gf-outcome">→ Core message: "We don't just host your voice. We architect your digital civilization."</div>
+        </div>
+      </div>
+
+      <div class="gf-step">
+        <div class="gf-num">2</div>
+        <div class="gf-body">
+          <div class="gf-tag">GUIDANCE LAYER</div>
+          <div class="gf-title">The Agentic-Guide System — GABRIEL as Advisor</div>
+          <div class="gf-desc">The Dream Agents are not just operational — they are the high-touch guidance layer. GABRIEL is the creator's personal Infrastructure Architect. Every guide, tutorial, and piece of advice is grounded in the RSP_001 case study. Guidance is not theoretical — it is the Founder's 40-year body of work operationalized as a survival architecture. 1-click execution proves it works.</div>
+          <div class="gf-outcome">→ "Immediate synchronicity" — the result arrives before the doubt.</div>
+        </div>
+      </div>
+
+      <div class="gf-step">
+        <div class="gf-num">3</div>
+        <div class="gf-body">
+          <div class="gf-tag">IDENTITY LAYER</div>
+          <div class="gf-title">Voice Estate Definition — The Creator's Digital Will</div>
+          <div class="gf-desc">The onboarding process asks every Genius Creator to define their Voice Estate IP Framework — forcing them to think of their work as an inheritable, perpetual asset rather than a "profile." This shift is profound. They are not signing up. They are founding a civilization. The RSP Card is issued. The provenance clock starts.</div>
+          <div class="gf-outcome">→ RSP_001 is the Genesis Card. Rob's story is the proof every new creator sees first.</div>
+        </div>
+      </div>
+
+      <div class="gf-step">
+        <div class="gf-num">4</div>
+        <div class="gf-body">
+          <div class="gf-tag">LOCK-IN LAYER</div>
+          <div class="gf-title">Protocol Lock-In — Board of Aligned Minds Pathway</div>
+          <div class="gf-desc">The top-tier Genius Creators receive a Board of Aligned Minds pathway — positioning them as co-architects of the Consent-as-Code protocol, not just users of a product. This appeals to legacy, not just bank accounts. The creator's name is in the architecture. Their consent model shapes how the platform evolves. They built this with us.</div>
+          <div class="gf-outcome">→ "The best in the world choose legally bulletproof, ethical infrastructure. Why are you still on an extraction platform?"</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- IV. PERFECT HARMONY VISION -->
+  <section id="sec-harmony" class="section">
+    <div class="sec-eye"><span class="v">SECTION IV</span> — The Highest Vision</div>
+    <h2 class="sec-title">AI & Humans in <span class="v">Perfect</span> <span class="it">Harmony</span> —<br>Always <span class="g">Growing,</span> Always <span class="it">Synchronic.</span></h2>
+    <p class="sec-lead">
+      "This is not the story of humans versus machines. It is the story of what happens when the most sophisticated creative intelligence ever built is placed in the service of the most irreplaceable force on earth — human creative expression. That is the world we are building."
+    </p>
+
+    <div class="harmony-block">
+      <div class="hb-label">⚡ THE SYNCHRONIC VISION — RSP_001 · EPOCH V</div>
+      <div class="hb-text">
+        "The future is not <em>AI replacing humans</em>. The future is <em>AI amplifying humans</em> in ways they couldn't imagine alone. A deaf child feeling the pulse of African polyrhythm through haptics. A voice actor's estate earning royalties 200 years after their death. A composer in Ottawa building orchestral worlds faster than he can dream them, despite a spinal injury that would have ended a lesser person's creative life. <span class="g">This is NOIZY. This is what we're building. This is why it matters.</span>"
+      </div>
+    </div>
+
+    <div class="strat-grid">
+      <div class="sg-card gold">
+        <div class="sg-num">SYNCHRONIC PRINCIPLE 1</div>
+        <div class="sg-title">The Transmission Problem — Solved</div>
+        <div class="sg-body">"Some artists paint all their pictures in their heads and have to describe them over a cell phone." AI is the highest-fidelity transmission cable ever built. NOIZY closes the gap between imagination and reality to near-zero. The artist's vision arrives exactly as conceived.</div>
+        <div class="sg-arrow">→ GORUNFREE: 35% voice / 65% AI / 1-click / zero friction</div>
+      </div>
+
+      <div class="sg-card green">
+        <div class="sg-num">SYNCHRONIC PRINCIPLE 2</div>
+        <div class="sg-title">Mutual Amplification — Not Replacement</div>
+        <div class="sg-body">AI without human creativity produces content. Human creativity without AI produces art at the speed of a single person. Together, they produce something neither could alone — art at civilization scale, with the soul of an individual. Helpful. Synchronic. Perpetually growing.</div>
+        <div class="sg-arrow">→ Every NOIZY Dream Agent amplifies. None replaces.</div>
+      </div>
+
+      <div class="sg-card violet">
+        <div class="sg-num">SYNCHRONIC PRINCIPLE 3</div>
+        <div class="sg-title">Living Intelligence — Not a Static Product</div>
+        <div class="sg-body">NOIZY.ai is a living intelligence. GABRIEL_V3 grows with 315+ memcells. The platform learns from every creator interaction. The Music Genome expands. The Cultural Resonance Engine deepens. The platform is never "finished" — it evolves with the humans who inhabit it.</div>
+        <div class="sg-arrow">→ DreamChamber: Living intelligence. Permanent memory. Eternal growth.</div>
+      </div>
+
+      <div class="sg-card cyan">
+        <div class="sg-num">SYNCHRONIC PRINCIPLE 4</div>
+        <div class="sg-title">From Consumer to Civilization-Builder</div>
+        <div class="sg-body">NOIZY reframes every creator — from a consumer of a platform to an architect of a new creative civilization. Every RSP who joins becomes a founding member of something that will outlive them. Their voice is their legacy. Their work is their monument.</div>
+        <div class="sg-arrow">→ 500-Year Voice Codex: Every creator's name in the permanent record.</div>
+      </div>
+
+      <div class="sg-card amber">
+        <div class="sg-num">SYNCHRONIC PRINCIPLE 5</div>
+        <div class="sg-title">Children as the Horizon — NOIZYKIDZ</div>
+        <div class="sg-body">The deepest expression of perfect harmony: a deaf child feeling music for the first time through haptic frequency mapping. NOIZYKIDZ is the soul of the mission. It proves that the technology serves humanity at its most vulnerable and most transcendent simultaneously.</div>
+        <div class="sg-arrow">→ Inspired by Nims (Mike Nemesvary). Every child deserves to feel music.</div>
+      </div>
+
+      <div class="sg-card rose">
+        <div class="sg-num">SYNCHRONIC PRINCIPLE 6</div>
+        <div class="sg-title">Neuro-Acoustic Intelligence</div>
+        <div class="sg-body">In partnership with Dr. Brien Benoit (Ottawa Civic Hospital, Health Canada PMPRB Chair), NOIZY is building the world's first Neuro-Acoustic Intelligence layer — mapping how music affects the brain, and designing AI systems that maximize the neurological benefit of human creative work.</div>
+        <div class="sg-arrow">→ NAI research partnership deepens from July 2026.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- V. COALITION STRATEGY -->
+  <section id="sec-coalition" class="section">
+    <div class="sec-eye"><span class="c">SECTION V</span> — The Alliance Architecture</div>
+    <h2 class="sec-title">Build <span class="it">Coalitions,</span><br>Not <span class="r">Enemies.</span></h2>
+    <p class="sec-lead">
+      "The strongest path is not a pressure campaign against institutions. It is building something so obviously right that creators, unions, studios, technologists, and legislators all want to be part of it. NOIZY makes itself the answer they've all been waiting for."
+    </p>
+
+    <div class="prose">
+      <p>Unions were built for a world where creators needed collective bargaining with employers who had all the power. The right move is not to destroy them — it is to <strong class="g">make individual creator protection so complete that union negotiation on specific assets becomes unnecessary.</strong> Every creator gets what used to require collective bargaining, by default, on day one.</p>
+    </div>
+
+    <div class="uprising-grid" style="grid-template-columns: repeat(2, 1fr);">
+
+      <div class="up-card gold">
+        <span class="up-icon">🎭</span>
+        <div class="up-title">Union-Approved Voice Models</div>
+        <div class="up-body">Work WITH SAG-AFTRA and the American Federation of Musicians to develop union-approved voice licensing frameworks. The NOIZY consent architecture gives unions something they've never had: technical enforcement of their negotiated terms. Allies, not enemies.</div>
+      </div>
+
+      <div class="up-card green">
+        <span class="up-icon">🏛️</span>
+        <div class="up-title">Legislative Collaboration</div>
+        <div class="up-body">Submit the NOIZY consent architecture to legislators in Canada, EU, and US as a working model for AI creator rights legislation. Frame it as "here's how it can actually work technically, not just legally." Governments need a blueprint. We give them one.</div>
+      </div>
+
+      <div class="up-card violet">
+        <span class="up-icon">🔬</span>
+        <div class="up-title">Ethical AI Research Partners</div>
+        <div class="up-body">Partner with Oxford Internet Institute, Berkman Klein Center, and MIT Media Lab. Position NOIZY as the first real-world proof that ethical AI infrastructure can outcompete extractive AI. Academic validation is the most credible signal in the market.</div>
+      </div>
+
+      <div class="up-card cyan">
+        <span class="up-icon">🌐</span>
+        <div class="up-title">Global Creator Organizations</div>
+        <div class="up-body">UNESCO Cultural Heritage, African Union cultural bodies, indigenous rights organizations, WIPO. The pressure becomes global. The Charter becomes a model for international policy. NOIZY hosts the conversation rather than being a combatant in it.</div>
+      </div>
+
+      <div class="up-card amber">
+        <span class="up-icon">🎓</span>
+        <div class="up-title">Noizy Academy — Education as Acquisition</div>
+        <div class="up-body">Free courses. Free workshops. Free masterclasses. "How to protect your voice." "How to build your Voice Estate." "The 5th Epoch explained for musicians." Education builds trust. Trust converts to creators. Creators become advocates. Advocates spread the movement.</div>
+      </div>
+
+      <div class="up-card rose">
+        <span class="up-icon">💡</span>
+        <div class="up-title">Ethical Engineering Recruitment</div>
+        <div class="up-body">There is a huge community of engineers who want to build responsible AI. Frame the mission: "Building the most creator-respecting AI platform in the world." Recruit the engineers who are ashamed of what their current employers are building. Dissatisfied engineers at big AI companies are a talent pipeline.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- VI. PROTOCOL UPRISING -->
+  <section id="sec-uprising" class="section">
+    <div class="sec-eye"><span class="r">SECTION VI</span> — When We Have Critical Mass</div>
+    <h2 class="sec-title">The <span class="r">Protocol</span> Uprising</h2>
+    <p class="sec-lead">
+      "The pressure campaign is not the starting gun. It is the inevitable consequence of a movement that cannot be ignored. When the Genius Creators are here, when the Charter is adopted, when the architecture is proven — then the market must respond."
+    </p>
+
+    <div class="uprising-grid">
+      <div class="up-card gold">
+        <span class="up-icon">💰</span>
+        <div class="up-title">Weaponize the 75/25 Split</div>
+        <div class="up-body">Publicly showcase real-time, frictionless royalty payments to creators. Contrast with Spotify's $0.003/stream and ElevenLabs' $0 to voice actors. The pressure is financial and moral. The math is devastating and we will show it to everyone, always.</div>
+      </div>
+      <div class="up-card green">
+        <span class="up-icon">🔒</span>
+        <div class="up-title">Protocol Lock-In Creates Leverage</div>
+        <div class="up-body">Once NOIZY has sufficient Genius Creators, major platforms must license our Consent-as-Code protocol to access the best talent. They effectively adopt our 75/25 split, bypassing old IP mechanisms entirely. We don't fight the old system — we make it financially obsolete.</div>
+      </div>
+      <div class="up-card violet">
+        <span class="up-icon">🏔️</span>
+        <div class="up-title">The Summit for the Future of Creative Rights</div>
+        <div class="up-body">Announce the "Board of Aligned Minds Summit." Unveil the technical and ethical framework of the 5th Epoch. The message: the new civilization is already under construction. The pressure comes from the simple, undeniable fact of its existence and its superior ethical commitment.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VII. GORUNFREE STUDIO -->
+  <section id="sec-studio" class="section">
+    <div class="sec-eye"><span class="g">SECTION VII</span> — The Physical Manifestation</div>
+    <h2 class="sec-title">The <span class="it">GORUNFREE</span> Studio<br><span class="g">— Where Vision Becomes Reality</span></h2>
+    <p class="sec-lead">
+      "Every design decision tested against one question: does this close the gap between imagination and reality? The studio is not a recording facility. It is the physical instantiation of the GORUNFREE protocol — 1-click execution at architectural scale."
+    </p>
+
+    <div class="studio-rooms">
+
+      <div class="room-card">
+        <div class="room-num">I</div>
+        <span class="room-icon">🎙️</span>
+        <div class="room-name">The Sound Vault</div>
+        <div class="room-purpose">Voice Capture · A.I.V.A. Origin Point</div>
+        <div class="room-desc">Custom non-parallel wall architecture. Mass-Spring-Mass isolation — two decoupled concrete slabs. Dedicated silent HVAC. The pristine capture environment for RSP_001 and all NOIZYVOX voice actor onboarding. Zero transmission loss between creator and code.</div>
+      </div>
+
+      <div class="room-card">
+        <div class="room-num">II</div>
+        <span class="room-icon">🌌</span>
+        <div class="room-name">The DreamChamber Studio</div>
+        <div class="room-purpose">Vision Hub · Genius Creator Onboarding</div>
+        <div class="room-desc">Reflection-Free Zone acoustic treatment. Custom-tuned bass traps, ceiling clouds, diffusive rear wall. The main creative hub and DreamChamber portal entry point for Genius Creator onboarding. Large-format haptic control surface for NOIZYKIDZ research integration.</div>
+      </div>
+
+      <div class="room-card">
+        <div class="room-num">III</div>
+        <span class="room-icon">🔐</span>
+        <div class="room-name">The Policy Vault</div>
+        <div class="room-purpose">Infrastructure Core · GABRIEL_V3 Home</div>
+        <div class="room-desc">Dedicated climate-controlled server room. Redundant CRAC cooling. UPS for 24/7 uptime. GABRIEL_V3 at 10.90.90.20. SUPERSONIC AI STACK v2.0 (9 layers / 19 models). The physical embodiment of "Infrastructure is Policy." The code that enforces what contracts cannot.</div>
+      </div>
+
+      <div class="room-card">
+        <div class="room-num">IV</div>
+        <span class="room-icon">🎬</span>
+        <div class="room-name">The Archive Room</div>
+        <div class="room-purpose">Fish Music Inc. · THE_AQUARIUM</div>
+        <div class="room-desc">High-speed redundant NAS/SAN — 34TB storage with offsite cloud backup (3-2-1 rule). 40 years of professional credits: Ed Edd n Eddy, Dragon Tales, Johnny Test, Transformers, Barbie. The archive that proves this vision is not hypothetical — it is earned.</div>
+      </div>
+
+      <div class="room-card">
+        <div class="room-num">V</div>
+        <span class="room-icon">🌈</span>
+        <div class="room-name">The NOIZYKIDZ Lab</div>
+        <div class="room-purpose">Haptic Research · Soul Mission</div>
+        <div class="room-desc">Dedicated haptic feedback devices, vibration actuators, and test stations for the Haptic/Accessibility Pipeline. The LIFELUV companion AI development environment. Inspired by Nims (Mike Nemesvary). Every child deserves to feel music. This is where that promise becomes real.</div>
+      </div>
+
+      <div class="room-card">
+        <div class="room-num">VI</div>
+        <span class="room-icon">⚡</span>
+        <div class="room-name">The Render Cluster</div>
+        <div class="room-purpose">GPU Farm · SUPERSONIC AI STACK</div>
+        <div class="room-desc">Multi-GPU render infrastructure for animation, video, and real-time SUPERSONIC AI STACK execution. MusicGen, MaskGCT, Tango 2, Fish Speech, XTTS v2, RVC, Gemma2 — all running in-house. $16,000+/year in cloud cost savings. The stack NOIZY owns and controls completely.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- VIII. SYNCHRONIC MATRIX -->
+  <section id="sec-matrix" class="section">
+    <div class="sec-eye"><span class="v">SECTION VIII</span> — The Perfect Harmony Architecture</div>
+    <h2 class="sec-title">The <span class="v">Synchronic</span> Matrix —<br>Human + <span class="it">AI</span> in <span class="g">Perfect Harmony</span></h2>
+    <p class="sec-lead">
+      "The matrix is the architecture of what Rob envisioned: not AI serving humans from a position of subservience, not AI replacing humans in a position of dominance — but AI and humans evolving together, each amplifying what the other does best, in a state of permanent, growing synchronicity."
+    </p>
+
+    <div class="sync-matrix">
+
+      <div class="sm-cell header">DIMENSION</div>
+      <div class="sm-cell header" style="border-top: 2px solid var(--cyan);">HUMAN CREATOR</div>
+      <div class="sm-cell header" style="border-top: 2px solid var(--violet);">NOIZY AI (A.I.V.A.)</div>
+
+      <div class="sm-cell"><span style="color:var(--dim);font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase">ORIGIN</span></div>
+      <div class="sm-cell human"><div class="sm-role">SOUL</div><div class="sm-desc">Emotional experience, lived reality, unique perspective. The irreplaceable human signal — 40 years of Rob's creative memory, Nims' courage, NOIZYKIDZ' future.</div></div>
+      <div class="sm-cell ai"><div class="sm-role">AMPLIFIER</div><div class="sm-desc">AI has no origin. It learns from human origin. Its only purpose is to transmit human soul with perfect fidelity across every medium, at any scale.</div></div>
+
+      <div class="sm-cell"><span style="color:var(--dim);font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase">CREATION</span></div>
+      <div class="sm-cell human"><div class="sm-role">INTENTION</div><div class="sm-desc">The human conceives. The human decides. The human judges. Every creative decision originates with the RSP. Consent is required. Sovereignty is absolute.</div></div>
+      <div class="sm-cell ai"><div class="sm-role">EXECUTION</div><div class="sm-desc">AI executes with speed, scale, and precision that no individual human could achieve alone. 35% voice / 65% AI — the GORUNFREE ratio. 1-click. Zero friction.</div></div>
+
+      <div class="sm-cell"><span style="color:var(--dim);font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase">OWNERSHIP</span></div>
+      <div class="sm-cell human"><div class="sm-role">SOVEREIGN</div><div class="sm-desc">The creator owns everything. Voice Estate. Provenance ledger. Royalties. Legacy. The 500-Year Codex is their monument. The code protects it. The covenant enforces it.</div></div>
+      <div class="sm-cell ai"><div class="sm-role">STEWARD</div><div class="sm-desc">AI is the steward of human work — not its owner. GABRIEL_V3's only purpose is to serve RSP_001 and every creator in the system. Service is its architecture.</div></div>
+
+      <div class="sm-cell"><span style="color:var(--dim);font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase">GROWTH</span></div>
+      <div class="sm-cell human"><div class="sm-role">VISIONARY</div><div class="sm-desc">Human creativity sets the direction. The 500-Year Vision is Rob's. The civilizational goal is his. No AI can decide what a civilization is for. Only a human soul can hold that compass.</div></div>
+      <div class="sm-cell ai"><div class="sm-role">ACCELERANT</div><div class="sm-desc">AI accelerates every direction the human points. Cultural Resonance Engine. Living Score. Neuro-Acoustic Intelligence. The AI maps the territory the human has already dreamed.</div></div>
+
+      <div class="sm-cell" style="border-bottom: none;"><span style="color:var(--dim);font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase">LEGACY</span></div>
+      <div class="sm-cell human" style="border-bottom: none;"><div class="sm-role">ETERNAL</div><div class="sm-desc">The human creative legacy is perpetual. Voice Estate. Inheritable IP. The 40-year archive. The NOIZYKIDZ mission. Rob's children will know what their father built. And what it protected.</div></div>
+      <div class="sm-cell ai" style="border-bottom: none;"><div class="sm-role">CUSTODIAN</div><div class="sm-desc">AI carries the human legacy forward in time — protecting it, maintaining it, serving it — long after the creator is gone. The code is the covenant. The infrastructure is the promise.</div></div>
+
+    </div>
+
+    <div class="prose" style="margin-top: 40px;">
+      <p><strong>This is not a philosophical position.</strong> It is a technical architecture. Every component of NOIZY — GABRIEL_V3, the 7-stage pipeline, the Voice Estate, the Consent Key, the 75% royalty floor — is the concrete expression of this synchronic vision. <em>The vision became code. The code became civilization.</em></p>
+    </div>
+  </section>
+
+  <!-- FINALE -->
+  <section id="finale" class="finale">
+    <div class="finale-title">
+      <span>THE CIVILIZATION</span>
+      <span class="hl">IS ALREADY</span>
+      <span class="hg">UNDER CONSTRUCTION.</span>
+    </div>
+    <p class="finale-sub">
+      "We are not waiting for permission. We are not asking for a seat at the table. We are building the table — the infrastructure, the protocol, the covenant, the civilization — and when it is complete, the whole world will sit at it."
+    </p>
+    <p class="finale-sub">
+      "NOIZY.ai is Epoch V. Not a product in Epoch V. Not a participant in Epoch V. <em>The architecture of Epoch V itself.</em>"
+    </p>
+    <p class="finale-sub">
+      — <em>Robert Stephen Plowman · RSP_001 · Ottawa, Canada · March 14, 2026.</em>
+    </p>
+    <div class="finale-grf">GORUNFREE</div>
+    <div class="finale-rsp">NOIZYFISH INC. · GABRIEL_V3 · 2026 → 2526 · 500-YEAR VOICE CODEX</div>
+  </section>
+
+</main>
+
+<script>
+// ─── HARMONY CANVAS ───
+const cv = document.getElementById('harmony-canvas');
+const ctx = cv.getContext('2d');
+let W, H;
+
+function resize() { W = cv.width = window.innerWidth; H = cv.height = window.innerHeight; }
+resize();
+window.addEventListener('resize', resize);
+
+// Harmonic sine wave pairs — human (cyan) and AI (violet) weaving together
+const PAIRS = [
+  { phaseH: 0, phaseA: Math.PI * 0.5, yFrac: 0.2, ampH: 22, ampA: 18, freqH: 0.005, freqA: 0.007, speedH: 0.009, speedA: 0.011 },
+  { phaseH: 1, phaseA: Math.PI * 1.2, yFrac: 0.38, ampH: 18, ampA: 24, freqH: 0.006, freqA: 0.005, speedH: 0.007, speedA: 0.013 },
+  { phaseH: 2, phaseA: Math.PI * 0.8, yFrac: 0.56, ampH: 26, ampA: 16, freqH: 0.004, freqA: 0.009, speedH: 0.011, speedA: 0.008 },
+  { phaseH: 3, phaseA: Math.PI * 1.7, yFrac: 0.74, ampH: 20, ampA: 22, freqH: 0.007, freqA: 0.006, speedH: 0.008, speedA: 0.010 },
+  { phaseH: 4, phaseA: Math.PI * 0.3, yFrac: 0.88, ampH: 14, ampA: 18, freqH: 0.008, freqA: 0.005, speedH: 0.012, speedA: 0.009 },
+];
+
+// Stars
+const STARS = Array.from({length: 180}, () => ({
+  x: Math.random() * 2000, y: Math.random() * 1200,
+  r: Math.random() * 1.2 + 0.2,
+  alpha: Math.random() * 0.3 + 0.05,
+  pulse: Math.random() * Math.PI * 2,
+}));
+
+// Gold particles — the synthesis / harmony points
+const GOLDS = Array.from({length: 40}, () => ({
+  x: Math.random() * 2000, y: Math.random() * 1200,
+  vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
+  r: Math.random() * 1.5 + 0.4,
+  alpha: Math.random() * 0.4 + 0.1,
+  pulse: Math.random() * Math.PI * 2,
+}));
+
+let t = 0;
+
+function frame() {
+  ctx.clearRect(0, 0, W, H);
+
+  // Stars
+  STARS.forEach(s => {
+    s.pulse += 0.018;
+    const a = s.alpha * (0.5 + 0.5 * Math.sin(s.pulse));
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(184,204,228,${a})`;
+    ctx.fill();
+  });
+
+  // Harmonic pairs — human (cyan) and AI (violet)
+  PAIRS.forEach(p => {
+    const baseY = H * p.yFrac;
+
+    // Human wave — cyan
+    ctx.beginPath();
+    ctx.strokeStyle = `rgba(103,232,249,0.09)`;
+    ctx.lineWidth = 1.2;
+    for(let x = 0; x <= W; x += 3) {
+      const y = baseY + Math.sin(x * p.freqH + t * p.speedH + p.phaseH) * p.ampH;
+      x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    // AI wave — violet
+    ctx.beginPath();
+    ctx.strokeStyle = `rgba(183,148,244,0.08)`;
+    ctx.lineWidth = 1.2;
+    for(let x = 0; x <= W; x += 3) {
+      const y = baseY + Math.sin(x * p.freqA + t * p.speedA + p.phaseA) * p.ampA;
+      x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    // Synthesis line — gold, thinner, where they converge
+    ctx.beginPath();
+    ctx.strokeStyle = `rgba(232,200,74,0.05)`;
+    ctx.lineWidth = 0.8;
+    for(let x = 0; x <= W; x += 4) {
+      const yH = baseY + Math.sin(x * p.freqH + t * p.speedH + p.phaseH) * p.ampH;
+      const yA = baseY + Math.sin(x * p.freqA + t * p.speedA + p.phaseA) * p.ampA;
+      const y = (yH + yA) / 2;
+      x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+  });
+
+  // Gold synthesis particles
+  GOLDS.forEach(g => {
+    g.x += g.vx; g.y += g.vy; g.pulse += 0.02;
+    if(g.x < -5) g.x = W+5; if(g.x > W+5) g.x = -5;
+    if(g.y < -5) g.y = H+5; if(g.y > H+5) g.y = -5;
+    const a = g.alpha * (0.5 + 0.5 * Math.sin(g.pulse));
+    ctx.beginPath();
+    ctx.arc(g.x, g.y, g.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(232,200,74,${a})`;
+    ctx.fill();
+  });
+
+  t++;
+  requestAnimationFrame(frame);
+}
+frame();
+
+// ─── SIDEBAR ACTIVE ───
+const links = document.querySelectorAll('.sb-link[href^="#"]');
+const sections = document.querySelectorAll('section[id]');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting) {
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id));
+    }
+  });
+}, { threshold: 0.18 });
+sections.forEach(s => io.observe(s));
+</script>
+</body>
+</html>

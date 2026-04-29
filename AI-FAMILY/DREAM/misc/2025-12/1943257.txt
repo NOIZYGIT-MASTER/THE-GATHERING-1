@@ -1,0 +1,11 @@
+<root>
+    <CtrlListBoxStyle name="KitErrorListBoxStyle" colHighlight="[r:150 g:150 b:150 a:0]">
+        <VFont name="font" vSize="7" fontName="Arial" />
+    </CtrlListBoxStyle>
+    <CtrlPanel name="CtrlPanel" style="DefaultPanelLight" rect="[x:138 y:12 w:516 h:303]" id="0">
+        <CtrlListBox name="ListBox" style="KitErrorListBoxStyle" rect="[x:4 y:4 w:507 h:257]" id="100001" />
+        <CtrlButton name="ClearButton" style="BFD2ShinyTextButtonMomentary" rect="[x:311 y:266 w:60 h:30]" id="100003" text="Clear" />
+        <CtrlButton name="SaveButton" style="BFD2ShinyTextButtonMomentary" rect="[x:381 y:266 w:60 h:30]" id="100003" text="Save" />
+        <CtrlButton name="CloseButton" style="BFD2ShinyTextButtonMomentary" rect="[x:451 y:266 w:60 h:30]" id="100002" text="Close" />
+    </CtrlPanel>
+</root>

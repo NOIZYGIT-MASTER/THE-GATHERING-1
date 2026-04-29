@@ -1,0 +1,66 @@
+<root>
+    <CtrlPanelStyle name="NoBackgroundInspectorStyle" optSmartTile="true" imBackground="default_tile_dark.tga" colBorder="[r:0 g:0 b:0 a:0]" colFill="[r:105 g:105 b:105 a:255]" intSmartTileEdgeSize="20">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlButtonStyle name="DeleteArticulationStyle" optDrawText="true" imDown="..\Build\del_icon_down.tga" imUp="..\Build\del_icon_up.tga">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlFaderStyle name="VelocityRangeFaderStyle" optFlipDirection="true" optHistogram="true" colBorder="[r:150 g:150 b:150 a:255]" colSlider="[r:150 g:150 b:150 a:255]" colFill="[r:0 g:0 b:0 a:0]" snapSteps="0" fineScale="0.05" incDecButtonMode="off" faderHeadSize="10">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlFaderStyle>
+    <CtrlButtonStyle name="LockTipShankStyle">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="TipShankStyle" optMomentary="false" imDown="..\Mixer\mixer_LED_on.tga" imUp="..\Mixer\mixer_LED_off.tga">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlTextBoxStyle name="MidiChannelBoxStyle" optSmartTile="true" centeredText="true" optEditable="true" dragable="true" optNoDragSendValue="true" imBackground="screen_background.tga" colTextHighlight="[r:200 g:200 b:200 a:255]" colText="[r:200 g:200 b:200 a:255]" colBackground="[r:29 g:29 b:29 a:255]" colHighlight="[r:200 g:200 b:255 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlTextBoxStyle>
+    <CtrlListBoxStyle name="AssListBoxStyle" colText="[r:255 g:255 b:255 a:255]" colHighlight="[r:105 g:105 b:105 a:255]" colFill="[r:0 g:0 b:0 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlListBoxStyle>
+    <CtrlPanelStyle name="NoStyleStyle" colBorder="[r:0 g:0 b:0 a:0]" colFill="[r:255 g:0 b:255 a:0]" intSmartTileEdgeSize="5">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="CtrlPanelStyle1" colFill="[r:0 g:0 b:0 a:0]" intSmartTileEdgeSize="5">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlFaderStyle name="VelRangeFaderStyle2" optFlipDirection="true" optHistogram="true" colBorder="[r:150 g:150 b:150 a:255]" colSlider="[r:150 g:150 b:150 a:255]" colFill="[r:0 g:0 b:0 a:0]" snapSteps="0" fineScale="0.05" incDecButtonMode="off" faderHeadSize="10">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlFaderStyle>
+    <CtrlPanelStyle name="StripPanelStryleMIDI" colBorder="[r:150 g:150 b:150 a:255]" colFill="[r:0 g:0 b:0 a:255]" intSmartTileEdgeSize="5">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlTextBoxStyle name="VSliderZoneTextSTyle" colBackground="[r:150 g:150 b:150 a:0]" colBorder="[r:0 g:0 b:0 a:0]" colText="[r:150 g:150 b:150 a:255]">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlTextBoxStyle>
+    <CtrlLabelStyle name="BFD2LabelMidi">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlPanelStyle name="InspBackStyle" colBorder="[r:55 g:55 b:55 a:255]" colFill="[r:55 g:55 b:55 a:255]" intSmartTileEdgeSize="5">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlPanel name="InspectorPanel" style="NoBackgroundInspectorStyle" rect="[x:186 y:122 w:490 h:233]" id="0" displayName="CtrlPanel">
+        <CtrlPanel name="CtrlPanel" style="InspBackStyle" rect="[x:9 y:8 w:247 h:217]" id="100000" />
+        <CtrlPanel name="CtrlPanel" style="InspBackStyle" rect="[x:263 y:8 w:218 h:216]" id="100001" />
+        <CtrlListBox name="AssignmentsListBox" style="AssListBoxStyle" rect="[x:15 y:13 w:235 h:60]" id="101" />
+        <CtrlPanel name="SliderPanel" style="NoStyleStyle" rect="[x:272 y:14 w:200 h:205]" id="100012" />
+        <CtrlLabel name="CtrlLabel" style="BFD2Label" rect="[x:35 y:75 w:40 h:12]" id="100009" text="Delete" />
+        <CtrlLabel name="CtrlLabel" style="BFD2Label" rect="[x:203 y:75 w:40 h:12]" id="100009" text="Delete" />
+        <CtrlButton name="DeleteArticulationButton" style="DeleteArticulationStyle" rect="[x:15 y:78 w:15 h:15]" id="0" displayName="CtrlButton" />
+        <CtrlButton name="ClearArticulationButton" style="DeleteArticulationStyle" rect="[x:235 y:78 w:15 h:15]" id="0" displayName="CtrlButton" />
+        <CtrlLabel name="CtrlLabel" style="BFD2Label" rect="[x:35 y:86 w:60 h:12]" id="100009" text="Articulation" />
+        <CtrlLabel name="CtrlLabel" style="BFD2Label" rect="[x:219 y:86 w:15 h:12]" id="100009" text="All" />
+        <CtrlSlider name="LowVelocityFader" style="BFD2HistogramV" rect="[x:15 y:109 w:17 h:90]" id="1" />
+        <CtrlSlider name="HighVelocityFader" style="BFD2HistogramV" rect="[x:43 y:109 w:17 h:90]" id="2" displayName="CtrlFader" />
+        <CtrlPanel name="VelocityCurvePanel" style="CtrlPanelStyle1" rect="[x:71 y:109 w:89 h:90]" id="100003" />
+        <CtrlButton name="LockTipShankButton" style="TipShankStyle" rect="[x:198 y:117 w:15 h:15]" id="100000" />
+        <CtrlLabel name="LockTipAndShankLabel" style="BFD2Label" rect="[x:166 y:135 w:86 h:15]" id="100001" text="Lock Tip and Shank" />
+        <CtrlValueBox name="MidiChannelBox" style="MidiChannelBoxStyle" rect="[x:188 y:159 w:40 h:15]" id="100002" displayName="CtrlValueBox" />
+        <CtrlLabel name="MidiChannelLabel" style="BFD2Label" rect="[x:188 y:177 w:40 h:15]" id="100003" displayName="MidiChannelLabel" text="Midi CC" />
+        <CtrlLabel name="CtrlLabel" style="BFD2Label" rect="[x:13 y:201 w:25 h:12]" id="100004" text="Low" />
+        <CtrlLabel name="CtrlLabel" style="BFD2Label" rect="[x:42 y:201 w:25 h:12]" id="100005" text="High" />
+        <CtrlLabel name="CtrlLabel" style="BFD2Label" rect="[x:83 y:201 w:67 h:12]" id="100006" text="Velocity Curve" />
+    </CtrlPanel>
+</root>

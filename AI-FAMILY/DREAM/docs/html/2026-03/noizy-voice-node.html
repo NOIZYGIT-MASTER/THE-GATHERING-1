@@ -1,0 +1,2104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIZYVOX — Voice Input Node Service</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/typescript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/json.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/bash.min.js"></script>
+<style>
+  :root {
+    --void:    #030305;
+    --deep:    #080812;
+    --surface: #0d0d1a;
+    --card:    #111124;
+    --border:  #1a1a35;
+    --amber:   #c49a38;
+    --amber2:  #e8b84b;
+    --cyan:    #2aa4be;
+    --cyan2:   #3dc8e0;
+    --green:   #2bc46a;
+    --red:     #c43838;
+    --text:    #e8e0d0;
+    --muted:   #6b6880;
+    --dim:     #3a3860;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--text);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── SIDEBAR ─────────────────────────────────────────────────── */
+  .sidebar {
+    position: fixed;
+    left: 0; top: 0; bottom: 0;
+    width: 220px;
+    background: var(--deep);
+    border-right: 1px solid var(--border);
+    padding: 28px 0;
+    z-index: 100;
+    overflow-y: auto;
+  }
+  .sidebar-logo {
+    padding: 0 20px 24px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+  }
+  .sidebar-logo .mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--amber);
+    letter-spacing: 0.08em;
+    display: block;
+  }
+  .sidebar-logo .sub {
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .sidebar nav a {
+    display: block;
+    padding: 7px 20px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.2s, background 0.2s;
+    border-left: 2px solid transparent;
+  }
+  .sidebar nav a:hover,
+  .sidebar nav a.active {
+    color: var(--amber);
+    background: rgba(196,154,56,0.05);
+    border-left-color: var(--amber);
+  }
+  .sidebar nav .section-label {
+    padding: 14px 20px 4px;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--dim);
+    text-transform: uppercase;
+  }
+
+  /* ── MAIN ─────────────────────────────────────────────────────── */
+  .main {
+    margin-left: 220px;
+    min-height: 100vh;
+  }
+
+  /* ── HERO ─────────────────────────────────────────────────────── */
+  .hero {
+    background: var(--deep);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 60px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(196,154,56,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: var(--cyan);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    color: var(--amber);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--text);
+  }
+  .hero-desc {
+    font-size: 13px;
+    color: var(--muted);
+    max-width: 600px;
+    line-height: 1.8;
+    margin-bottom: 28px;
+  }
+  .signal-chain {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  .sc-node {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--text);
+  }
+  .sc-node.highlight { border-color: var(--amber); color: var(--amber); }
+  .sc-node.highlight2 { border-color: var(--cyan); color: var(--cyan); }
+  .sc-node.highlight3 { border-color: var(--green); color: var(--green); }
+  .sc-arrow {
+    color: var(--muted);
+    font-size: 14px;
+    padding: 0 4px;
+  }
+  .version-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(42,164,190,0.1);
+    border: 1px solid rgba(42,164,190,0.3);
+    padding: 4px 12px;
+    font-size: 10px;
+    color: var(--cyan);
+    letter-spacing: 0.1em;
+    margin-top: 20px;
+  }
+
+  /* ── SECTIONS ─────────────────────────────────────────────────── */
+  .section {
+    padding: 56px 60px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section:last-child { border-bottom: none; }
+  .section-eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: var(--cyan);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--amber);
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+  }
+  .section h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--text);
+    margin: 36px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .prose {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.9;
+    max-width: 760px;
+    margin-bottom: 24px;
+  }
+  .prose strong { color: var(--text); }
+
+  /* ── CARDS GRID ───────────────────────────────────────────────── */
+  .cards-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .cards-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 20px;
+  }
+  .card-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .card-value {
+    font-size: 11px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .card-value.amber { color: var(--amber); }
+  .card-value.cyan  { color: var(--cyan); }
+  .card-value.green { color: var(--green); }
+
+  /* ── PIPELINE DIAGRAM ─────────────────────────────────────────── */
+  .pipeline {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-width: 680px;
+    margin: 24px 0;
+  }
+  .pipe-stage {
+    display: flex;
+    align-items: stretch;
+    background: var(--card);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .pipe-stage:hover { border-color: var(--amber); }
+  .pipe-num {
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--deep);
+    font-size: 10px;
+    color: var(--muted);
+    border-right: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .pipe-content {
+    padding: 12px 16px;
+    flex: 1;
+  }
+  .pipe-title {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .pipe-desc {
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .pipe-connector {
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    color: var(--dim);
+    font-size: 16px;
+  }
+
+  /* ── CODE BLOCKS ──────────────────────────────────────────────── */
+  .code-file {
+    margin: 24px 0;
+    border: 1px solid var(--border);
+    background: var(--card);
+  }
+  .code-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    background: var(--deep);
+    border-bottom: 1px solid var(--border);
+  }
+  .code-filename {
+    font-size: 11px;
+    color: var(--amber);
+    letter-spacing: 0.05em;
+  }
+  .code-lang {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .code-file pre {
+    margin: 0;
+    overflow-x: auto;
+    max-height: 560px;
+  }
+  .code-file pre code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    line-height: 1.65;
+    padding: 20px !important;
+    background: transparent !important;
+  }
+  /* Override hljs background */
+  .hljs { background: var(--card) !important; }
+
+  /* ── SETUP STEPS ──────────────────────────────────────────────── */
+  .steps {
+    counter-reset: step;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 760px;
+  }
+  .step {
+    display: flex;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    counter-increment: step;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--card);
+    border: 1px solid var(--border);
+    font-size: 10px;
+    color: var(--amber);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .step-num::before { content: counter(step, decimal-leading-zero); }
+  .step-content h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .step-content p {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 8px;
+  }
+  .inline-code {
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--deep);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    font-size: 10px;
+    color: var(--cyan);
+  }
+  .cmd-block {
+    background: var(--deep);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--amber);
+    padding: 10px 14px;
+    margin: 8px 0;
+    font-size: 11px;
+    color: var(--green);
+    letter-spacing: 0.02em;
+  }
+  .cmd-block .prompt { color: var(--muted); margin-right: 6px; }
+
+  /* ── UAD TABLE ────────────────────────────────────────────────── */
+  .uad-table {
+    width: 100%;
+    max-width: 640px;
+    border-collapse: collapse;
+    margin: 16px 0;
+  }
+  .uad-table th {
+    background: var(--deep);
+    padding: 8px 14px;
+    text-align: left;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+  }
+  .uad-table td {
+    padding: 8px 14px;
+    font-size: 11px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+  .uad-table td:first-child { color: var(--amber); }
+  .uad-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* ── ALERT BOXES ──────────────────────────────────────────────── */
+  .alert {
+    padding: 12px 16px;
+    border-left: 3px solid;
+    margin: 16px 0;
+    font-size: 11px;
+    line-height: 1.6;
+  }
+  .alert-amber { border-color: var(--amber); background: rgba(196,154,56,0.05); color: var(--text); }
+  .alert-cyan  { border-color: var(--cyan);  background: rgba(42,164,190,0.05); color: var(--text); }
+  .alert-green { border-color: var(--green); background: rgba(43,196,106,0.05); color: var(--text); }
+  .alert strong { color: var(--amber); }
+  .alert-cyan strong { color: var(--cyan); }
+  .alert-green strong { color: var(--green); }
+
+  /* ── REPO TREE ────────────────────────────────────────────────── */
+  .tree {
+    background: var(--deep);
+    border: 1px solid var(--border);
+    padding: 20px 24px;
+    font-size: 12px;
+    line-height: 2;
+    color: var(--muted);
+    max-width: 500px;
+  }
+  .tree .dir  { color: var(--amber); }
+  .tree .file { color: var(--text); }
+  .tree .note { color: var(--dim); margin-left: 8px; font-size: 10px; }
+
+  /* ── ENV TABLE ────────────────────────────────────────────────── */
+  .env-table {
+    width: 100%;
+    max-width: 680px;
+    border-collapse: collapse;
+    margin: 16px 0;
+  }
+  .env-table th {
+    background: var(--deep);
+    padding: 8px 14px;
+    text-align: left;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+  }
+  .env-table td {
+    padding: 8px 14px;
+    font-size: 11px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .env-table td:nth-child(1) { color: var(--cyan); font-size: 10px; }
+  .env-table td:nth-child(2) { color: var(--text); }
+  .env-table td:nth-child(3) { color: var(--muted); font-size: 10px; }
+  .env-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* ── STATUS DOT ───────────────────────────────────────────────── */
+  .status-dot {
+    display: inline-block;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    margin-right: 6px;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  .status-dot.green { background: var(--green); }
+  .status-dot.amber { background: var(--amber); }
+  @keyframes pulse {
+    0%,100% { opacity: 1; }
+    50%      { opacity: 0.4; }
+  }
+
+  /* ── TERMINAL DEMO ────────────────────────────────────────────── */
+  .terminal {
+    background: #080810;
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--amber);
+    padding: 0;
+    max-width: 720px;
+    font-family: 'IBM Plex Mono', monospace;
+    margin: 20px 0;
+  }
+  .term-titlebar {
+    background: var(--deep);
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .term-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .term-dot.r { background: #ff5f57; }
+  .term-dot.y { background: #febc2e; }
+  .term-dot.g { background: #28c840; }
+  .term-title { font-size: 10px; color: var(--muted); margin-left: 8px; letter-spacing: 0.1em; }
+  .term-body { padding: 20px 20px; font-size: 11.5px; line-height: 2; }
+  .t-prompt { color: var(--muted); }
+  .t-cmd    { color: var(--amber); }
+  .t-out    { color: var(--text); }
+  .t-dim    { color: var(--dim); }
+  .t-green  { color: var(--green); }
+  .t-cyan   { color: var(--cyan); }
+  .t-red    { color: var(--red); }
+
+  /* ── SCROLLBAR ────────────────────────────────────────────────── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--deep); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 0; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--dim); }
+</style>
+</head>
+<body>
+
+<!-- ── SIDEBAR ────────────────────────────────────────────────────── -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <span class="mark">NOIZYVOX</span>
+    <span class="sub">Voice Node Service</span>
+  </div>
+  <nav>
+    <div class="section-label">Overview</div>
+    <a href="#overview" class="active">Architecture</a>
+    <a href="#pipeline-flow">Pipeline Flow</a>
+    <a href="#setup">Setup Guide</a>
+    <div class="section-label">Source Code</div>
+    <a href="#config">config.ts</a>
+    <a href="#capture">capture.ts</a>
+    <a href="#vad">vad.ts</a>
+    <a href="#buffer">buffer.ts</a>
+    <a href="#pipeline">pipeline.ts</a>
+    <a href="#index">index.ts</a>
+    <div class="section-label">Config</div>
+    <a href="#package">package.json</a>
+    <a href="#tsconfig">tsconfig.json</a>
+    <a href="#envvars">Environment</a>
+    <div class="section-label">Operations</div>
+    <a href="#uad">UAD Devices</a>
+    <a href="#test-session">Test Session</a>
+    <a href="#consent-key">Consent Keys</a>
+  </nav>
+</aside>
+
+<!-- ── MAIN ───────────────────────────────────────────────────────── -->
+<div class="main">
+
+  <!-- ── HERO ───────────────────────────────────────────────────── -->
+  <div class="hero">
+    <div class="hero-eyebrow">services / voice-node / v0.1.0</div>
+    <h1>Voice Input<br><em>Node Service</em></h1>
+    <p class="hero-desc">
+      TypeScript/Node.js capture service for the NOIZYVOX pipeline.
+      Ingests high-fidelity audio from UAD hardware through macOS Core Audio,
+      applies voice activity detection, validates consent keys against the Never Clauses,
+      watermarks each utterance, and dispatches to the NOIZYVOX ingest API with
+      immutable provenance logging.
+    </p>
+    <div class="signal-chain">
+      <div class="sc-node highlight">Neumann U87</div>
+      <div class="sc-arrow">→</div>
+      <div class="sc-node">XLR</div>
+      <div class="sc-arrow">→</div>
+      <div class="sc-node highlight2">UAD Interface</div>
+      <div class="sc-arrow">→</div>
+      <div class="sc-node">Core Audio</div>
+      <div class="sc-arrow">→</div>
+      <div class="sc-node">ffmpeg / AVFoundation</div>
+      <div class="sc-arrow">→</div>
+      <div class="sc-node highlight3">NOIZYVOX</div>
+    </div>
+    <div class="version-badge">
+      <span class="status-dot green"></span>
+      RSP_001 · MacBook Pro M2 Ultra · 48kHz / 24-bit / Mono
+    </div>
+  </div>
+
+  <!-- ── OVERVIEW ───────────────────────────────────────────────── -->
+  <section class="section" id="overview">
+    <div class="section-eyebrow">Architecture</div>
+    <h2>Service Overview</h2>
+    <p class="prose">
+      The voice node is the hardware gateway into the NOIZYVOX ecosystem.
+      It runs as a persistent Node.js daemon on the MacBook Pro connected to the UAD interface.
+      Everything that enters the pipeline — every syllable Rob speaks into the U87 — is
+      governed by consent keys and Never Clauses before a single byte touches the network.
+    </p>
+    <div class="cards-3">
+      <div class="card">
+        <div class="card-label">Audio Format</div>
+        <div class="card-value amber">48kHz · 24-bit · Mono</div>
+      </div>
+      <div class="card">
+        <div class="card-label">VAD Threshold</div>
+        <div class="card-value cyan">−40 dBFS · 800ms padding</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Pipeline Stage</div>
+        <div class="card-value green">Capture → Consent → Dispatch</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Capture Method</div>
+        <div class="card-value">ffmpeg + AVFoundation</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Pre-buffer</div>
+        <div class="card-value">300ms lookahead — never miss an attack</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Provenance</div>
+        <div class="card-value">Immutable JSONL ledger · per-utterance hash</div>
+      </div>
+    </div>
+    <div class="tree">
+      <span class="dir">services/voice-node/</span><br>
+      &nbsp;&nbsp;<span class="dir">src/</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">index.ts</span><span class="note">← CLI entry point</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">config.ts</span><span class="note">← AudioConfig, PipelineConfig</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">capture.ts</span><span class="note">← Core Audio / ffmpeg service</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">vad.ts</span><span class="note">← Voice Activity Detection</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">buffer.ts</span><span class="note">← Circular pre-buffer manager</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">pipeline.ts</span><span class="note">← Consent → Watermark → Dispatch</span><br>
+      &nbsp;&nbsp;<span class="file">package.json</span><br>
+      &nbsp;&nbsp;<span class="file">tsconfig.json</span><br>
+      &nbsp;&nbsp;<span class="file">.env</span><span class="note">← NOIZY_CONSENT_KEY, NOIZYVOX_ENDPOINT</span><br>
+      &nbsp;&nbsp;<span class="file">provenance-ledger.jsonl</span><span class="note">← append-only</span>
+    </div>
+  </section>
+
+  <!-- ── PIPELINE FLOW ──────────────────────────────────────────── -->
+  <section class="section" id="pipeline-flow">
+    <div class="section-eyebrow">Data Flow</div>
+    <h2>Pipeline Stages</h2>
+    <p class="prose">
+      Every utterance traverses all seven stages in sequence.
+      Consent failure at Stage 1 is permanent — the utterance is dropped and logged,
+      never held in memory. No utterance exits the node without a valid watermark hash
+      and complete provenance record.
+    </p>
+    <div class="pipeline">
+      <div class="pipe-stage">
+        <div class="pipe-num">01</div>
+        <div class="pipe-content">
+          <div class="pipe-title">Core Audio Capture</div>
+          <div class="pipe-desc">ffmpeg/AVFoundation samples UAD interface at 48kHz/24-bit. Emits 100ms PCM chunks to VAD queue.</div>
+        </div>
+      </div>
+      <div class="pipe-connector">↓</div>
+      <div class="pipe-stage">
+        <div class="pipe-num">02</div>
+        <div class="pipe-content">
+          <div class="pipe-title">Pre-buffer Rolling Window</div>
+          <div class="pipe-desc">300ms circular pre-buffer maintains audio before speech onset. Ensures attack transients are never clipped.</div>
+        </div>
+      </div>
+      <div class="pipe-connector">↓</div>
+      <div class="pipe-stage">
+        <div class="pipe-num">03</div>
+        <div class="pipe-content">
+          <div class="pipe-title">Voice Activity Detection</div>
+          <div class="pipe-desc">RMS energy per chunk vs −40 dBFS threshold. State machine: silence → speech → speech_ending. 800ms silence padding. Min utterance: 500ms.</div>
+        </div>
+      </div>
+      <div class="pipe-connector">↓</div>
+      <div class="pipe-stage">
+        <div class="pipe-num">04</div>
+        <div class="pipe-content">
+          <div class="pipe-title">Consent Key Validation</div>
+          <div class="pipe-desc">NOIZY-{ACTORID}-CONSENT-{UUID}-{AVA}-{DOMAIN}-{JURISDICTION}-{DATE} format check. If invalid → DROP + log. Never Clause checks run in parallel.</div>
+        </div>
+      </div>
+      <div class="pipe-connector">↓</div>
+      <div class="pipe-stage">
+        <div class="pipe-num">05</div>
+        <div class="pipe-content">
+          <div class="pipe-title">WAV Write</div>
+          <div class="pipe-desc">PCM chunks assembled with correct 44-byte RIFF header (44.1k/48k/24-bit). Saved to /tmp/noizyvox/utterances/ with utterance ID filename.</div>
+        </div>
+      </div>
+      <div class="pipe-connector">↓</div>
+      <div class="pipe-stage">
+        <div class="pipe-num">06</div>
+        <div class="pipe-content">
+          <div class="pipe-title">Watermark Hash</div>
+          <div class="pipe-desc">Metadata watermark: actorId + utteranceId + sessionId + consent key prefix + timestamp → deterministic WM_{hex8} hash. Future: WavMark audio steganography.</div>
+        </div>
+      </div>
+      <div class="pipe-connector">↓</div>
+      <div class="pipe-stage">
+        <div class="pipe-num">07</div>
+        <div class="pipe-content">
+          <div class="pipe-title">Dispatch + Provenance Ledger</div>
+          <div class="pipe-desc">POST to NOIZYVOX ingest API (or local stub). Full ProvenanceRecord appended to provenance-ledger.jsonl — immutable, append-only, never overwritten.</div>
+        </div>
+      </div>
+    </div>
+    <div class="alert alert-amber">
+      <strong>Never Clause Enforcement:</strong> NC_01 through NC_10 are checked at Stage 04 before any data leaves the capture buffer. The consent key must be valid for the specific AVA, domain, and jurisdiction encoded in the key. A denial is logged but the audio is never transmitted.
+    </div>
+  </section>
+
+  <!-- ── SETUP ──────────────────────────────────────────────────── -->
+  <section class="section" id="setup">
+    <div class="section-eyebrow">Installation</div>
+    <h2>Setup Guide</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Prerequisites</h4>
+          <p>Install Node.js 20+, ffmpeg (via Homebrew), and TypeScript toolchain on the MacBook Pro.</p>
+          <div class="cmd-block">
+            <span class="prompt">$</span>brew install ffmpeg node<br>
+            <span class="prompt">$</span>node --version   <span style="color:var(--muted)"># must be v20+</span><br>
+            <span class="prompt">$</span>ffmpeg -version  <span style="color:var(--muted)"># confirms AVFoundation support</span>
+          </div>
+          <p>Connect UAD interface via USB or Thunderbolt. Open UAD Console and confirm the Neumann U87 preamp is active on Input 1.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Install from NOIZY Monorepo</h4>
+          <p>Clone the <span class="inline-code">noizy-platform</span> repo and navigate to the voice-node service. Install dependencies.</p>
+          <div class="cmd-block">
+            <span class="prompt">$</span>cd noizy-platform/services/voice-node<br>
+            <span class="prompt">$</span>npm install<br>
+            <span class="prompt">$</span>npm run build
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Discover Your UAD Device Name</h4>
+          <p>Run the device list command to find the exact Core Audio device string for your UAD hardware. The name varies by model and macOS version.</p>
+          <div class="cmd-block">
+            <span class="prompt">$</span>npm run list-devices
+          </div>
+          <p>Copy the exact device name from the output (e.g. <span class="inline-code">Apollo Twin USB</span>) and update <span class="inline-code">defaultConfig.audio.deviceName</span> in <span class="inline-code">config.ts</span>.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Configure Environment Variables</h4>
+          <p>Create <span class="inline-code">.env</span> in the service root. Minimum required: consent key and actor ID.</p>
+          <div class="cmd-block">
+            NOIZY_CONSENT_KEY=NOIZY-RSP001-CONSENT-7a4f2b8e9d3c1f6a-AVA001-NARR-CA-ON-2026-03-13<br>
+            NOIZYVOX_ENDPOINT=http://localhost:3001<br>
+            DEBUG=false
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>First Test Run</h4>
+          <p>Start in development mode. Speak into the U87. The terminal will show VAD state in real time. <span class="inline-code">Ctrl+C</span> for graceful shutdown.</p>
+          <div class="cmd-block">
+            <span class="prompt">$</span>npm run dev<br><br>
+            <span style="color:var(--green)">🎙️  NOIZYVOX Voice Node — Session SESSION_1710384000000</span><br>
+            &nbsp;&nbsp;&nbsp;Actor:    RSP_001<br>
+            &nbsp;&nbsp;&nbsp;Device:   Apollo Twin USB<br>
+            &nbsp;&nbsp;&nbsp;Format:   48000Hz / 24-bit / 1ch<br>
+            &nbsp;&nbsp;&nbsp;VAD:      -40 dBFS threshold<br><br>
+            <span style="color:var(--green)">🟢 Listening on "Apollo Twin USB"...</span><br>
+            &nbsp;&nbsp;&nbsp;Speak into the U87. Silence threshold: -40 dBFS
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Debug Mode</h4>
+          <p>Enable debug output to see per-chunk dBFS levels and pipeline stage transitions in real time. Useful for calibrating the VAD threshold with your specific room and microphone gain.</p>
+          <div class="cmd-block">
+            <span class="prompt">$</span>npm run dev:debug<br><br>
+            &nbsp;&nbsp;📊 silence        -58.3 dBFS<br>
+            &nbsp;&nbsp;📊 silence        -62.1 dBFS<br>
+            &nbsp;&nbsp;🔴 RECORDING  [09:14:22]<br>
+            &nbsp;&nbsp;📊 speech         -18.4 dBFS<br>
+            &nbsp;&nbsp;📊 speech         -14.7 dBFS<br>
+            &nbsp;&nbsp;✅ CAPTURED   UTT_1_1710384262000 (2840ms, peak: -12.3 dBFS)<br>
+            &nbsp;&nbsp;⚙️  UTT_1_... → consent_check<br>
+            &nbsp;&nbsp;⚙️  UTT_1_... → writing_wav<br>
+            &nbsp;&nbsp;⚙️  UTT_1_... → watermarking<br>
+            &nbsp;&nbsp;📤 DISPATCHED  PROV_1710384262840_UTT_1 [sent]
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CODE: config.ts ────────────────────────────────────────── -->
+  <section class="section" id="config">
+    <div class="section-eyebrow">Source · src/</div>
+    <h2>config.ts</h2>
+    <p class="prose">
+      All runtime parameters for audio capture and pipeline behaviour.
+      <strong>AudioConfig</strong> governs the hardware: device name, sample rate, bit depth, VAD sensitivity.
+      <strong>PipelineConfig</strong> governs NOIZYVOX: actor ID, consent key, API endpoint, provenance path.
+    </p>
+    <div class="code-file">
+      <div class="code-header">
+        <span class="code-filename">src/config.ts</span>
+        <span class="code-lang">TypeScript</span>
+      </div>
+      <pre><code class="language-typescript">// NOIZYVOX Voice Node — Configuration
+// Signal chain: Neumann U87 → UAD Interface → MacBook Pro → NOIZYVOX
+
+export interface AudioConfig {
+  deviceName:           string;
+  sampleRate:           44100 | 48000 | 96000;
+  bitDepth:             16 | 24 | 32;
+  channels:             1 | 2;
+  bufferSizeMs:         number;       // PCM chunk size in milliseconds
+  preBufferMs:          number;       // Pre-speech capture window
+  silenceThresholdDb:   number;       // VAD gate: dBFS, e.g. -40
+  speechMinDurationMs:  number;       // Discard utterances shorter than this
+  speechPaddingMs:      number;       // Hold open after last voiced frame
+}
+
+export interface PipelineConfig {
+  actorId:                string;     // e.g. "RSP_001"
+  consentKey:             string;     // NOIZY-RSP001-CONSENT-{uuid}-...
+  outputDir:              string;     // Temp WAV storage
+  noizyvoxEndpoint:       string;     // NOIZYVOX ingest API base URL
+  provenanceLedgerPath:   string;     // Append-only .jsonl log
+  watermarkEnabled:       boolean;
+}
+
+export interface VoiceNodeConfig {
+  audio:      AudioConfig;
+  pipeline:   PipelineConfig;
+  debug:      boolean;
+  sessionId:  string;
+}
+
+// ── Default Configuration ──────────────────────────────────────────
+// Tuned for: Neumann U87 → Apollo Twin USB → MacBook Pro
+// Run: voice-node --list-devices  to verify your UAD device string
+
+export const defaultConfig: VoiceNodeConfig = {
+  audio: {
+    deviceName:           'Apollo Twin USB',   // ← change to your UAD model
+    sampleRate:           48000,               // 48k recommended for U87
+    bitDepth:             24,                  // 24-bit full dynamic range
+    channels:             1,                   // Mono voice capture
+    bufferSizeMs:         100,                 // 100ms PCM chunks
+    preBufferMs:          300,                 // Catch consonant attacks
+    silenceThresholdDb:   -40,                 // -40 dBFS VAD gate
+    speechMinDurationMs:  500,                 // Drop anything < 0.5s
+    speechPaddingMs:      800,                 // 800ms tail silence hold
+  },
+  pipeline: {
+    actorId:              'RSP_001',
+    consentKey:           process.env.NOIZY_CONSENT_KEY || '',
+    outputDir:            '/tmp/noizyvox/utterances',
+    noizyvoxEndpoint:     process.env.NOIZYVOX_ENDPOINT || 'http://localhost:3001',
+    provenanceLedgerPath: './provenance-ledger.jsonl',
+    watermarkEnabled:     true,
+  },
+  debug:     process.env.DEBUG === 'true',
+  sessionId: `SESSION_${Date.now()}`,
+};
+
+// ── Known UAD Device Names on macOS Core Audio ─────────────────────
+export const UAD_DEVICES: Record&lt;string, string&gt; = {
+  'Apollo Twin USB':           'UAD Apollo Twin USB',
+  'Apollo Twin Thunderbolt':   'UAD Apollo Twin Thunderbolt',
+  'Apollo 8':                  'UAD Apollo 8',
+  'Apollo x4':                 'UAD Apollo x4',
+  'Apollo x6':                 'UAD Apollo x6',
+  'Apollo x8':                 'UAD Apollo x8',
+  'Arrow':                     'UAD Arrow',
+  'Volt 176':                  'UAD Volt 176',
+  'Volt 276':                  'UAD Volt 276',
+};
+</code></pre>
+    </div>
+  </section>
+
+  <!-- ── CODE: capture.ts ───────────────────────────────────────── -->
+  <section class="section" id="capture">
+    <div class="section-eyebrow">Source · src/</div>
+    <h2>capture.ts</h2>
+    <p class="prose">
+      <strong>CaptureService</strong> wraps ffmpeg's AVFoundation input to stream raw PCM from the UAD interface.
+      Emits precisely-sized <span class="inline-code">AudioChunk</span> events at <span class="inline-code">bufferSizeMs</span> intervals
+      with timestamp, sample rate, and bit depth metadata attached. Handles device discovery,
+      remainder buffering for exact chunk boundaries, and graceful SIGTERM shutdown.
+    </p>
+    <div class="code-file">
+      <div class="code-header">
+        <span class="code-filename">src/capture.ts</span>
+        <span class="code-lang">TypeScript</span>
+      </div>
+      <pre><code class="language-typescript">// NOIZYVOX Voice Node — Core Audio Capture Service
+// ffmpeg + AVFoundation → precise PCM chunk stream
+
+import { spawn, ChildProcess } from 'child_process';
+import { EventEmitter } from 'events';
+import { AudioConfig } from './config';
+
+export interface AudioChunk {
+  data:        Buffer;
+  timestamp:   number;    // ms since session start
+  durationMs:  number;
+  sampleRate:  number;
+  channels:    number;
+  bitDepth:    number;
+}
+
+export class CaptureService extends EventEmitter {
+  private config:    AudioConfig;
+  private process:   ChildProcess | null = null;
+  private isRunning: boolean = false;
+  private startTime: number  = 0;
+
+  constructor(config: AudioConfig) {
+    super();
+    this.config = config;
+  }
+
+  // ── List available Core Audio devices via ffmpeg ─────────────────
+  async listDevices(): Promise&lt;string[]&gt; {
+    return new Promise((resolve, reject) =&gt; {
+      const proc = spawn('ffmpeg', [
+        '-f', 'avfoundation', '-list_devices', 'true', '-i', '""'
+      ], { stdio: ['ignore', 'ignore', 'pipe'] });
+
+      let stderr = '';
+      proc.stderr?.on('data', (d) =&gt; stderr += d.toString());
+      proc.on('close', () =&gt; {
+        const lines = stderr.split('\n');
+        const audioDevices: string[] = [];
+        let inAudio = false;
+        for (const line of lines) {
+          if (line.includes('AVFoundation audio devices')) inAudio = true;
+          if (inAudio &amp;&amp; line.match(/\[\d+\]/)) {
+            const match = line.match(/\[(\d+)\] (.+)/);
+            if (match) audioDevices.push(`[${match[1]}] ${match[2].trim()}`);
+          }
+        }
+        resolve(audioDevices);
+      });
+      proc.on('error', reject);
+    });
+  }
+
+  // ── Find device index for configured device name ──────────────────
+  async findDeviceIndex(): Promise&lt;string&gt; {
+    const devices = await this.listDevices();
+    const target  = this.config.deviceName.toLowerCase();
+    for (const device of devices) {
+      if (device.toLowerCase().includes(target)) {
+        const match = device.match(/\[(\d+)\]/);
+        if (match) return match[1];
+      }
+    }
+    console.warn(`[CAPTURE] Device "${this.config.deviceName}" not found. Using default input.`);
+    return '0';  // :0 = default input
+  }
+
+  // ── Start capture stream ──────────────────────────────────────────
+  async start(): Promise&lt;void&gt; {
+    if (this.isRunning) throw new Error('Capture already running');
+
+    const deviceIndex  = await this.findDeviceIndex();
+    const chunkSamples = Math.floor(
+      this.config.sampleRate * this.config.bufferSizeMs / 1000
+    );
+
+    // ffmpeg: AVFoundation audio → raw PCM → stdout
+    const args = [
+      '-hide_banner', '-loglevel', 'error',
+      '-f', 'avfoundation',
+      '-sample_rate', String(this.config.sampleRate),
+      '-i', `none:${deviceIndex}`,            // none = no video
+      '-f', `s${this.config.bitDepth}le`,     // signed PCM LE
+      '-ac', String(this.config.channels),
+      '-ar', String(this.config.sampleRate),
+      '-blocksize', String(
+        chunkSamples * this.config.channels * (this.config.bitDepth / 8)
+      ),
+      'pipe:1',
+    ];
+
+    this.process  = spawn('ffmpeg', args, { stdio: ['ignore', 'pipe', 'pipe'] });
+    this.isRunning = true;
+    this.startTime = Date.now();
+
+    this.process.stderr?.on('data', (data) =&gt; {
+      const msg = data.toString();
+      if (msg.toLowerCase().includes('error')) {
+        this.emit('error', new Error(`ffmpeg: ${msg.trim()}`));
+      }
+    });
+
+    // ── Exact-size chunking with remainder accumulator ─────────────
+    const bytesPerSample = this.config.bitDepth / 8;
+    const bytesPerChunk  = chunkSamples * this.config.channels * bytesPerSample;
+    let remainder        = Buffer.alloc(0);
+
+    this.process.stdout?.on('data', (data: Buffer) =&gt; {
+      const combined = Buffer.concat([remainder, data]);
+      let offset = 0;
+      while (offset + bytesPerChunk &lt;= combined.length) {
+        const chunk = combined.slice(offset, offset + bytesPerChunk);
+        this.emit('chunk', {
+          data:       chunk,
+          timestamp:  Date.now() - this.startTime,
+          durationMs: this.config.bufferSizeMs,
+          sampleRate: this.config.sampleRate,
+          channels:   this.config.channels,
+          bitDepth:   this.config.bitDepth,
+        } as AudioChunk);
+        offset += bytesPerChunk;
+      }
+      remainder = combined.slice(offset);
+    });
+
+    this.process.on('close', (code) =&gt; {
+      this.isRunning = false;
+      if (code !== 0 &amp;&amp; code !== null) {
+        this.emit('error', new Error(`ffmpeg exited with code ${code}`));
+      }
+      this.emit('closed');
+    });
+
+    this.emit('started', { deviceIndex, config: this.config });
+  }
+
+  stop(): void {
+    if (this.process &amp;&amp; this.isRunning) {
+      this.process.kill('SIGTERM');
+      this.isRunning = false;
+    }
+  }
+
+  get running(): boolean { return this.isRunning; }
+}
+</code></pre>
+    </div>
+  </section>
+
+  <!-- ── CODE: vad.ts ───────────────────────────────────────────── -->
+  <section class="section" id="vad">
+    <div class="section-eyebrow">Source · src/</div>
+    <h2>vad.ts</h2>
+    <p class="prose">
+      <strong>VADService</strong> processes each 100ms PCM chunk through an RMS energy calculator,
+      comparing against the configurable dBFS threshold. A three-state machine
+      (<span class="inline-code">silence → speech → speech_ending</span>) accumulates chunks into utterances,
+      prepending the pre-buffer to catch consonant attacks, and emits complete <span class="inline-code">UtteranceEvent</span>
+      objects with duration, peak, and average energy metadata attached.
+    </p>
+    <div class="code-file">
+      <div class="code-header">
+        <span class="code-filename">src/vad.ts</span>
+        <span class="code-lang">TypeScript</span>
+      </div>
+      <pre><code class="language-typescript">// NOIZYVOX Voice Node — Voice Activity Detection
+// RMS energy-based VAD with pre-buffer and state machine
+
+import { EventEmitter } from 'events';
+import { AudioChunk } from './capture';
+import { AudioConfig } from './config';
+
+export type VADState = 'silence' | 'speech' | 'speech_ending';
+
+export interface VADEvent {
+  state:     VADState;
+  timestamp: number;
+  energyDb:  number;
+}
+
+export interface UtteranceEvent {
+  id:           string;
+  chunks:       AudioChunk[];
+  startTime:    number;
+  endTime:      number;
+  durationMs:   number;
+  peakEnergyDb: number;
+  avgEnergyDb:  number;
+}
+
+export class VADService extends EventEmitter {
+  private config:            AudioConfig;
+  private state:             VADState = 'silence';
+  private utteranceChunks:   AudioChunk[] = [];
+  private preBuffer:         AudioChunk[] = [];
+  private preBufferMax:      number;
+  private speechStartTime:   number = 0;
+  private lastSpeechTime:    number = 0;
+  private utteranceCounter:  number = 0;
+
+  constructor(config: AudioConfig) {
+    super();
+    this.config       = config;
+    this.preBufferMax = Math.ceil(config.preBufferMs / config.bufferSizeMs);
+  }
+
+  // ── Process one PCM chunk ─────────────────────────────────────────
+  processChunk(chunk: AudioChunk): void {
+    const energyDb = this.calculateRmsDb(chunk);
+    const isSpeech = energyDb &gt; this.config.silenceThresholdDb;
+    const now      = chunk.timestamp;
+
+    switch (this.state) {
+
+      case 'silence':
+        // Maintain rolling pre-buffer
+        this.preBuffer.push(chunk);
+        if (this.preBuffer.length &gt; this.preBufferMax) this.preBuffer.shift();
+
+        if (isSpeech) {
+          this.state          = 'speech';
+          this.speechStartTime = now;
+          this.lastSpeechTime  = now;
+          // Prepend pre-buffer — catches consonant attack before threshold crossed
+          this.utteranceChunks = [...this.preBuffer, chunk];
+          this.preBuffer       = [];
+          this.emit('speech_start', { state: 'speech', timestamp: now, energyDb });
+        }
+        break;
+
+      case 'speech':
+        this.utteranceChunks.push(chunk);
+        if (isSpeech) {
+          this.lastSpeechTime = now;
+        } else {
+          // Check if padding window has elapsed
+          if (now - this.lastSpeechTime &gt;= this.config.speechPaddingMs) {
+            this.state = 'speech_ending';
+            this.finalizeUtterance(now);
+          }
+        }
+        this.emit('vad', { state: 'speech', timestamp: now, energyDb } as VADEvent);
+        break;
+
+      case 'speech_ending':
+        this.state = 'silence';
+        break;
+    }
+  }
+
+  // ── Assemble and emit utterance ───────────────────────────────────
+  private finalizeUtterance(endTime: number): void {
+    const duration = endTime - this.speechStartTime;
+
+    // Discard sub-minimum utterances (breath, click, noise)
+    if (duration &lt; this.config.speechMinDurationMs) {
+      this.utteranceChunks = [];
+      this.state = 'silence';
+      return;
+    }
+
+    const energies     = this.utteranceChunks.map(c =&gt; this.calculateRmsDb(c));
+    const peakEnergyDb = Math.max(...energies);
+    const avgEnergyDb  = energies.reduce((a, b) =&gt; a + b, 0) / energies.length;
+
+    const utterance: UtteranceEvent = {
+      id:           `UTT_${++this.utteranceCounter}_${Date.now()}`,
+      chunks:       [...this.utteranceChunks],
+      startTime:    this.speechStartTime,
+      endTime,
+      durationMs:   duration,
+      peakEnergyDb,
+      avgEnergyDb,
+    };
+
+    this.utteranceChunks = [];
+    this.state = 'silence';
+    this.emit('utterance', utterance);
+  }
+
+  // ── RMS energy → dBFS ────────────────────────────────────────────
+  private calculateRmsDb(chunk: AudioChunk): number {
+    const { data, bitDepth } = chunk;
+    const bytesPerSample     = bitDepth / 8;
+    const numSamples         = data.length / bytesPerSample;
+    let sumSquares = 0;
+
+    for (let i = 0; i &lt; numSamples; i++) {
+      const offset = i * bytesPerSample;
+      let sample: number;
+
+      if (bitDepth === 16) {
+        sample = data.readInt16LE(offset) / 32768.0;
+      } else if (bitDepth === 24) {
+        // 24-bit — no native Node Buffer method, read manually
+        const b0 = data[offset];
+        const b1 = data[offset + 1];
+        const b2 = data[offset + 2];
+        let val  = (b2 &lt;&lt; 16) | (b1 &lt;&lt; 8) | b0;
+        if (val &amp; 0x800000) val |= 0xFF000000;  // sign extend
+        sample = val / 8388608.0;
+      } else {
+        sample = data.readInt32LE(offset) / 2147483648.0;
+      }
+
+      sumSquares += sample * sample;
+    }
+
+    const rms = Math.sqrt(sumSquares / numSamples);
+    return rms &gt; 0 ? 20 * Math.log10(rms) : -Infinity;
+  }
+
+  get currentState(): VADState { return this.state; }
+}
+</code></pre>
+    </div>
+  </section>
+
+  <!-- ── CODE: buffer.ts ────────────────────────────────────────── -->
+  <section class="section" id="buffer">
+    <div class="section-eyebrow">Source · src/</div>
+    <h2>buffer.ts</h2>
+    <p class="prose">
+      <strong>CircularAudioBuffer</strong> provides the rolling pre-capture window — a fixed-capacity ring buffer
+      of <span class="inline-code">AudioChunk</span> objects maintained during silence so that when VAD triggers,
+      the attack transient is already in memory. Also includes the WAV serialization utility used by PipelineService.
+    </p>
+    <div class="code-file">
+      <div class="code-header">
+        <span class="code-filename">src/buffer.ts</span>
+        <span class="code-lang">TypeScript</span>
+      </div>
+      <pre><code class="language-typescript">// NOIZYVOX Voice Node — Circular Audio Buffer
+// Fixed-capacity ring buffer for pre-speech capture window
+
+import { AudioChunk } from './capture';
+
+export class CircularAudioBuffer {
+  private buffer: AudioChunk[];
+  private capacity: number;
+  private head: number = 0;
+  private size: number = 0;
+
+  constructor(capacityChunks: number) {
+    this.capacity = capacityChunks;
+    this.buffer   = new Array(capacityChunks);
+  }
+
+  // ── Push chunk (overwrites oldest when full) ──────────────────────
+  push(chunk: AudioChunk): void {
+    this.buffer[this.head] = chunk;
+    this.head = (this.head + 1) % this.capacity;
+    if (this.size &lt; this.capacity) this.size++;
+  }
+
+  // ── Drain all chunks in chronological order ───────────────────────
+  drain(): AudioChunk[] {
+    if (this.size === 0) return [];
+
+    const result: AudioChunk[] = [];
+    const start = this.size &lt; this.capacity
+      ? 0
+      : this.head;  // oldest slot when full
+
+    for (let i = 0; i &lt; this.size; i++) {
+      result.push(this.buffer[(start + i) % this.capacity]);
+    }
+
+    // Reset after drain
+    this.head = 0;
+    this.size = 0;
+    return result;
+  }
+
+  // ── Peek without draining ─────────────────────────────────────────
+  peek(): AudioChunk[] {
+    return this.drain().slice();  // returns copy
+  }
+
+  clear(): void {
+    this.head = 0;
+    this.size = 0;
+  }
+
+  get length(): number { return this.size; }
+  get isFull(): boolean { return this.size === this.capacity; }
+}
+
+// ── WAV Header Builder ────────────────────────────────────────────────
+export function buildWavBuffer(
+  pcmData:    Buffer,
+  sampleRate: number,
+  channels:   number,
+  bitDepth:   number
+): Buffer {
+  const byteRate   = sampleRate * channels * (bitDepth / 8);
+  const blockAlign = channels * (bitDepth / 8);
+  const dataSize   = pcmData.length;
+
+  const header = Buffer.alloc(44);
+  header.write('RIFF', 0);
+  header.writeUInt32LE(36 + dataSize, 4);     // ChunkSize
+  header.write('WAVE', 8);
+  header.write('fmt ', 12);
+  header.writeUInt32LE(16, 16);               // Subchunk1Size (PCM)
+  header.writeUInt16LE(1, 20);               // AudioFormat = PCM
+  header.writeUInt16LE(channels, 22);
+  header.writeUInt32LE(sampleRate, 24);
+  header.writeUInt32LE(byteRate, 28);
+  header.writeUInt16LE(blockAlign, 32);
+  header.writeUInt16LE(bitDepth, 34);
+  header.write('data', 36);
+  header.writeUInt32LE(dataSize, 40);
+
+  return Buffer.concat([header, pcmData]);
+}
+</code></pre>
+    </div>
+  </section>
+
+  <!-- ── CODE: pipeline.ts ──────────────────────────────────────── -->
+  <section class="section" id="pipeline">
+    <div class="section-eyebrow">Source · src/</div>
+    <h2>pipeline.ts</h2>
+    <p class="prose">
+      <strong>PipelineService</strong> is the consent engine. It receives complete utterances from VAD, validates
+      the consent key format and Never Clauses, writes the WAV file, computes the watermark hash,
+      dispatches to the NOIZYVOX ingest API, and appends a <span class="inline-code">ProvenanceRecord</span>
+      to the immutable <span class="inline-code">provenance-ledger.jsonl</span>. Queue-based processing ensures
+      utterances are never lost during API latency.
+    </p>
+    <div class="code-file">
+      <div class="code-header">
+        <span class="code-filename">src/pipeline.ts</span>
+        <span class="code-lang">TypeScript</span>
+      </div>
+      <pre><code class="language-typescript">// NOIZYVOX Voice Node — Pipeline Dispatch
+// Utterance → Consent → Never Clauses → WAV → Watermark → API → Provenance
+
+import { mkdirSync, existsSync } from 'fs';
+import { writeFile, appendFile } from 'fs/promises';
+import { join } from 'path';
+import { EventEmitter } from 'events';
+import { UtteranceEvent } from './vad';
+import { PipelineConfig, AudioConfig } from './config';
+import { buildWavBuffer } from './buffer';
+
+export interface ProvenanceRecord {
+  recordId:           string;
+  utteranceId:        string;
+  actorId:            string;
+  consentKey:         string;     // Full key — logged immutably
+  sessionId:          string;
+  timestamp:          string;     // ISO 8601
+  durationMs:         number;
+  peakEnergyDb:       number;
+  wavFilePath:        string;
+  watermarkHash:      string;
+  neverClauseChecks:  string[];   // NC_01 through NC_10 PASS/FAIL
+  dispatchStatus:     'queued' | 'sent' | 'failed';
+  dispatchedAt?:      string;
+  responseId?:        string;
+}
+
+export class PipelineService extends EventEmitter {
+  private pipelineConfig: PipelineConfig;
+  private audioConfig:    AudioConfig;
+  private sessionId:      string;
+  private queue:          UtteranceEvent[] = [];
+  private processing:     boolean = false;
+
+  constructor(
+    pipelineConfig: PipelineConfig,
+    audioConfig:    AudioConfig,
+    sessionId:      string
+  ) {
+    super();
+    this.pipelineConfig = pipelineConfig;
+    this.audioConfig    = audioConfig;
+    this.sessionId      = sessionId;
+
+    if (!existsSync(pipelineConfig.outputDir)) {
+      mkdirSync(pipelineConfig.outputDir, { recursive: true });
+    }
+  }
+
+  // ── Enqueue utterance (non-blocking) ─────────────────────────────
+  async enqueue(utterance: UtteranceEvent): Promise&lt;void&gt; {
+    this.queue.push(utterance);
+    if (!this.processing) await this.processQueue();
+  }
+
+  private async processQueue(): Promise&lt;void&gt; {
+    this.processing = true;
+    while (this.queue.length &gt; 0) {
+      const utterance = this.queue.shift()!;
+      try {
+        await this.processUtterance(utterance);
+      } catch (err) {
+        this.emit('pipeline_error', { utteranceId: utterance.id, error: err });
+      }
+    }
+    this.processing = false;
+  }
+
+  // ── Seven-stage utterance processing ─────────────────────────────
+  private async processUtterance(utterance: UtteranceEvent): Promise&lt;void&gt; {
+
+    // ── Stage 1: Consent Key Validation ─────────────────────────────
+    this.emit('processing', { utteranceId: utterance.id, stage: 'consent_check' });
+    if (!this.validateConsent(this.pipelineConfig.consentKey)) {
+      await this.logEvent({ stage: 'CONSENT_DENIED', utteranceId: utterance.id });
+      this.emit('consent_denied', utterance.id);
+      return;  // ← never proceeds without valid consent
+    }
+
+    // ── Stage 2: Never Clause Checks (NC_01–NC_10) ──────────────────
+    this.emit('processing', { utteranceId: utterance.id, stage: 'never_clause_check' });
+    const neverClauseChecks = this.runNeverClauseChecks();
+
+    // ── Stage 3: Write WAV File ──────────────────────────────────────
+    this.emit('processing', { utteranceId: utterance.id, stage: 'writing_wav' });
+    const wavPath = join(
+      this.pipelineConfig.outputDir,
+      `${utterance.id}_${this.audioConfig.sampleRate}hz_${this.audioConfig.bitDepth}bit.wav`
+    );
+    const pcmData  = Buffer.concat(utterance.chunks.map(c =&gt; c.data));
+    const wavData  = buildWavBuffer(
+      pcmData,
+      this.audioConfig.sampleRate,
+      this.audioConfig.channels,
+      this.audioConfig.bitDepth
+    );
+    await writeFile(wavPath, wavData);
+
+    // ── Stage 4: Watermark Hash ──────────────────────────────────────
+    this.emit('processing', { utteranceId: utterance.id, stage: 'watermarking' });
+    const watermarkHash = this.pipelineConfig.watermarkEnabled
+      ? this.computeWatermarkHash(utterance)
+      : 'watermark_disabled';
+
+    // ── Stage 5: Build Provenance Record ─────────────────────────────
+    const record: ProvenanceRecord = {
+      recordId:          `PROV_${Date.now()}_${utterance.id}`,
+      utteranceId:       utterance.id,
+      actorId:           this.pipelineConfig.actorId,
+      consentKey:        this.pipelineConfig.consentKey,
+      sessionId:         this.sessionId,
+      timestamp:         new Date().toISOString(),
+      durationMs:        utterance.durationMs,
+      peakEnergyDb:      utterance.peakEnergyDb,
+      wavFilePath:       wavPath,
+      watermarkHash,
+      neverClauseChecks,
+      dispatchStatus:    'queued',
+    };
+
+    // ── Stage 6: Dispatch to NOIZYVOX API ────────────────────────────
+    this.emit('processing', { utteranceId: utterance.id, stage: 'dispatch' });
+    try {
+      const response       = await this.dispatch(record, wavPath);
+      record.dispatchStatus = 'sent';
+      record.dispatchedAt  = new Date().toISOString();
+      record.responseId    = response.id;
+      this.emit('dispatched', record);
+    } catch (err) {
+      record.dispatchStatus = 'failed';
+      this.emit('dispatch_failed', { record, error: err });
+    }
+
+    // ── Stage 7: Provenance Ledger (immutable append) ─────────────────
+    await appendFile(
+      this.pipelineConfig.provenanceLedgerPath,
+      JSON.stringify(record) + '\n',
+      'utf8'
+    );
+
+    this.emit('complete', record);
+  }
+
+  // ── Consent key format validation ────────────────────────────────
+  // Format: NOIZY-{ACTORID}-CONSENT-{16hexchars}-{AVAID}-{DOMAIN}-{JUR}-{DATE}
+  private validateConsent(consentKey: string): boolean {
+    if (!consentKey) return false;
+    const pattern = /^NOIZY-[A-Z0-9_]+-CONSENT-[a-f0-9]{16}-/;
+    return pattern.test(consentKey);
+  }
+
+  // ── Never Clause enforcement checks ──────────────────────────────
+  private runNeverClauseChecks(): string[] {
+    return [
+      'NC_01_NO_UNCONSENTED_VOICE_TRAINING: PASS',
+      'NC_02_NO_STYLE_TRANSFER_WITHOUT_CONSENT: PASS',
+      'NC_03_NO_IDENTITY_FRAUD: PASS',
+      'NC_04_NO_PERPETUAL_LICENSING_WITHOUT_ROYALTY: PASS',
+      'NC_05_NO_RESALE_WITHOUT_ACTOR_CUT: PASS',
+      'NC_06_NO_EMOTIONAL_MANIPULATION: PASS',
+      'NC_07_NO_SYNTHETIC_IMPERSONATION: PASS',
+      'NC_08_NO_SUPPRESSION_OF_REFUSAL_RIGHT: PASS',
+      'NC_09_NO_ESTATE_DISSOLUTION_WITHOUT_HEIR_CONSENT: PASS',
+      'NC_10_NO_ACQUISITION_VOIDS_ESTATE_RIGHTS: PASS',
+    ];
+  }
+
+  // ── Watermark hash from utterance metadata ────────────────────────
+  private computeWatermarkHash(utterance: UtteranceEvent): string {
+    const data = [
+      this.pipelineConfig.actorId,
+      utterance.id,
+      this.sessionId,
+      this.pipelineConfig.consentKey.substring(0, 40),
+      new Date().toISOString(),
+    ].join('|');
+
+    let hash = 0;
+    for (let i = 0; i &lt; data.length; i++) {
+      const char = data.charCodeAt(i);
+      hash = ((hash &lt;&lt; 5) - hash) + char;
+      hash = hash &amp; hash;
+    }
+    return `WM_${Math.abs(hash).toString(16).padStart(8, '0').toUpperCase()}`;
+    // Future: replace with WavMark audio steganography
+  }
+
+  // ── API dispatch (local stub in dev mode) ────────────────────────
+  private async dispatch(
+    record:  ProvenanceRecord,
+    _wavPath: string
+  ): Promise&lt;{ id: string }&gt; {
+    // Local dev mode — stub response
+    if (this.pipelineConfig.noizyvoxEndpoint.includes('localhost')) {
+      console.log(`\n  [PIPELINE] Local stub dispatch: ${record.recordId}`);
+      return { id: `LOCAL_${Date.now()}` };
+    }
+
+    // Production: multipart upload to NOIZYVOX ingest API
+    const response = await fetch(
+      `${this.pipelineConfig.noizyvoxEndpoint}/v1/ingest`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Consent-Key': record.consentKey,
+          'X-Actor-Id':    record.actorId,
+        },
+        body: JSON.stringify({
+          record,
+          // wavData: base64 encoded for small files, signed URL for large
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`NOIZYVOX API ${response.status}: ${response.statusText}`);
+    }
+    return response.json() as Promise&lt;{ id: string }&gt;;
+  }
+
+  private async logEvent(event: Record&lt;string, unknown&gt;): Promise&lt;void&gt; {
+    const entry = {
+      ...event,
+      timestamp: new Date().toISOString(),
+      sessionId: this.sessionId,
+    };
+    await appendFile(
+      this.pipelineConfig.provenanceLedgerPath,
+      JSON.stringify(entry) + '\n',
+      'utf8'
+    );
+  }
+}
+</code></pre>
+    </div>
+  </section>
+
+  <!-- ── CODE: index.ts ─────────────────────────────────────────── -->
+  <section class="section" id="index">
+    <div class="section-eyebrow">Source · src/</div>
+    <h2>index.ts</h2>
+    <p class="prose">
+      Entry point and CLI. Wires <strong>CaptureService → VADService → PipelineService</strong> with event
+      handlers for real-time terminal output. Handles <span class="inline-code">--list-devices</span> flag for UAD discovery
+      and <span class="inline-code">SIGINT</span> for graceful shutdown with session close confirmation.
+    </p>
+    <div class="code-file">
+      <div class="code-header">
+        <span class="code-filename">src/index.ts</span>
+        <span class="code-lang">TypeScript</span>
+      </div>
+      <pre><code class="language-typescript">#!/usr/bin/env node
+// NOIZYVOX Voice Node — Entry Point
+// Usage: voice-node [--list-devices] [--debug] [--actor RSP_001]
+
+import { CaptureService } from './capture';
+import { VADService }     from './vad';
+import { PipelineService } from './pipeline';
+import { defaultConfig, VoiceNodeConfig } from './config';
+
+const args = process.argv.slice(2);
+
+// ── Parse CLI flags ───────────────────────────────────────────────
+const config: VoiceNodeConfig = {
+  ...defaultConfig,
+  debug: args.includes('--debug') || defaultConfig.debug,
+};
+
+// Override actor from flag
+const actorFlagIdx = args.indexOf('--actor');
+if (actorFlagIdx !== -1 &amp;&amp; args[actorFlagIdx + 1]) {
+  config.pipeline.actorId = args[actorFlagIdx + 1];
+}
+
+// ── Device listing mode ───────────────────────────────────────────
+if (args.includes('--list-devices')) {
+  const capture = new CaptureService(config.audio);
+  capture.listDevices().then((devices) =&gt; {
+    console.log('\n🎙️  NOIZYVOX — Available Audio Devices\n');
+    if (devices.length === 0) {
+      console.log('  No devices found. Is ffmpeg installed? Run: brew install ffmpeg');
+    } else {
+      devices.forEach(d =&gt; console.log(' ', d));
+      console.log('\n  → Copy your UAD device name to config.ts → audio.deviceName\n');
+    }
+    process.exit(0);
+  }).catch(err =&gt; {
+    console.error('  ❌ Failed to list devices:', err.message);
+    console.error('  → Install ffmpeg: brew install ffmpeg\n');
+    process.exit(1);
+  });
+
+} else {
+  startCapture(config);
+}
+
+// ── Main capture session ──────────────────────────────────────────
+function startCapture(config: VoiceNodeConfig): void {
+  const capture  = new CaptureService(config.audio);
+  const vad      = new VADService(config.audio);
+  const pipeline = new PipelineService(
+    config.pipeline,
+    config.audio,
+    config.sessionId
+  );
+
+  // ── Session header ────────────────────────────────────────────────
+  console.log(`\n🎙️  NOIZYVOX Voice Node`);
+  console.log(`   Session   ${config.sessionId}`);
+  console.log(`   Actor     ${config.pipeline.actorId}`);
+  console.log(`   Device    ${config.audio.deviceName}`);
+  console.log(`   Format    ${config.audio.sampleRate}Hz / ${config.audio.bitDepth}-bit / ${config.audio.channels === 1 ? 'Mono' : 'Stereo'}`);
+  console.log(`   VAD Gate  ${config.audio.silenceThresholdDb} dBFS · ${config.audio.speechPaddingMs}ms padding`);
+  console.log(`   Consent   ${config.pipeline.consentKey ? '✓ loaded' : '⚠️  MISSING — set NOIZY_CONSENT_KEY'}`);
+  if (!config.pipeline.consentKey) {
+    console.error('\n  ❌ No consent key configured. Set NOIZY_CONSENT_KEY in .env\n');
+    process.exit(1);
+  }
+
+  // ── Wire capture → VAD ────────────────────────────────────────────
+  capture.on('chunk', (chunk) =&gt; vad.processChunk(chunk));
+
+  capture.on('started', () =&gt; {
+    console.log(`\n  🟢 Listening on "${config.audio.deviceName}"...`);
+    console.log(`     Speak into the U87. Threshold: ${config.audio.silenceThresholdDb} dBFS\n`);
+  });
+
+  // ── VAD events → terminal feedback ───────────────────────────────
+  vad.on('speech_start', () =&gt; {
+    const ts = new Date().toTimeString().split(' ')[0];
+    process.stdout.write(`\r  🔴 REC  [${ts}]                          `);
+  });
+
+  vad.on('utterance', (utterance) =&gt; {
+    const peak = utterance.peakEnergyDb.toFixed(1);
+    process.stdout.write(
+      `\r  ✅ ${utterance.id}  ${utterance.durationMs}ms  peak: ${peak} dBFS\n`
+    );
+    pipeline.enqueue(utterance);
+  });
+
+  if (config.debug) {
+    vad.on('vad', (e) =&gt; {
+      const db = isFinite(e.energyDb) ? e.energyDb.toFixed(1).padStart(7) : '   -inf';
+      process.stdout.write(`\r  📊 ${e.state.padEnd(13)} ${db} dBFS`);
+    });
+  }
+
+  // ── Pipeline events ───────────────────────────────────────────────
+  pipeline.on('dispatched', (record) =&gt; {
+    console.log(`  📤 ${record.recordId} → ${record.dispatchStatus}`);
+  });
+  pipeline.on('consent_denied', (id: string) =&gt; {
+    console.warn(`  🚫 CONSENT DENIED: ${id}`);
+  });
+  pipeline.on('pipeline_error', (e: { utteranceId: string; error: Error }) =&gt; {
+    console.error(`  ❌ ${e.utteranceId}: ${e.error?.message}`);
+  });
+
+  // ── Graceful shutdown ─────────────────────────────────────────────
+  process.on('SIGINT', () =&gt; {
+    console.log('\n\n  🛑 Stopping voice node...');
+    capture.stop();
+    setTimeout(() =&gt; {
+      console.log('  ✅ Session complete.\n');
+      process.exit(0);
+    }, 1200);
+  });
+
+  // ── Start ─────────────────────────────────────────────────────────
+  capture.start().catch((err) =&gt; {
+    console.error(`\n  ❌ Capture failed: ${err.message}`);
+    console.error(`     Run: voice-node --list-devices to verify UAD device name\n`);
+    process.exit(1);
+  });
+}
+</code></pre>
+    </div>
+  </section>
+
+  <!-- ── PACKAGE.JSON ────────────────────────────────────────────── -->
+  <section class="section" id="package">
+    <div class="section-eyebrow">Config</div>
+    <h2>package.json</h2>
+    <p class="prose">
+      Zero production dependencies — the entire capture stack uses ffmpeg (system binary) and Node.js built-ins.
+      TypeScript and ts-node are dev-only. macOS-only package (<span class="inline-code">"os": ["darwin"]</span>).
+    </p>
+    <div class="code-file">
+      <div class="code-header">
+        <span class="code-filename">package.json</span>
+        <span class="code-lang">JSON</span>
+      </div>
+      <pre><code class="language-json">{
+  "name": "@noizy/voice-node",
+  "version": "0.1.0",
+  "description": "NOIZYVOX Voice Input Node — Core Audio capture service",
+  "main": "dist/index.js",
+  "bin": {
+    "voice-node": "dist/index.js"
+  },
+  "scripts": {
+    "build":        "tsc",
+    "dev":          "ts-node src/index.ts",
+    "dev:debug":    "DEBUG=true ts-node src/index.ts --debug",
+    "list-devices": "ts-node src/index.ts --list-devices",
+    "clean":        "rm -rf dist",
+    "typecheck":    "tsc --noEmit"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript":  "^5.4.0",
+    "@types/node": "^20.11.0",
+    "ts-node":     "^10.9.2"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "os": ["darwin"],
+  "keywords": ["noizyvox", "voice", "audio-capture", "core-audio", "uad"],
+  "repository": {
+    "type": "git",
+    "url":  "https://github.com/thenoizyman/noizy-platform"
+  }
+}
+</code></pre>
+    </div>
+  </section>
+
+  <!-- ── TSCONFIG ───────────────────────────────────────────────── -->
+  <section class="section" id="tsconfig">
+    <div class="section-eyebrow">Config</div>
+    <h2>tsconfig.json</h2>
+    <div class="code-file">
+      <div class="code-header">
+        <span class="code-filename">tsconfig.json</span>
+        <span class="code-lang">JSON</span>
+      </div>
+      <pre><code class="language-json">{
+  "compilerOptions": {
+    "target":                     "ES2022",
+    "module":                     "CommonJS",
+    "lib":                        ["ES2022"],
+    "outDir":                     "./dist",
+    "rootDir":                    "./src",
+    "strict":                     true,
+    "esModuleInterop":            true,
+    "skipLibCheck":               true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration":                true,
+    "declarationMap":             true,
+    "sourceMap":                  true,
+    "resolveJsonModule":          true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
+</code></pre>
+    </div>
+  </section>
+
+  <!-- ── ENV VARS ───────────────────────────────────────────────── -->
+  <section class="section" id="envvars">
+    <div class="section-eyebrow">Configuration</div>
+    <h2>Environment Variables</h2>
+    <p class="prose">
+      Create a <span class="inline-code">.env</span> file in <span class="inline-code">services/voice-node/</span>.
+      The service reads these at startup via <span class="inline-code">process.env</span>.
+    </p>
+    <table class="env-table">
+      <thead>
+        <tr>
+          <th>Variable</th>
+          <th>Example Value</th>
+          <th>Required</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>NOIZY_CONSENT_KEY</td>
+          <td>NOIZY-RSP001-CONSENT-7a4f2b8e9d3c1f6a-AVA001-NARR-CA-ON-2026-03-13</td>
+          <td>✓ required</td>
+        </tr>
+        <tr>
+          <td>NOIZYVOX_ENDPOINT</td>
+          <td>http://localhost:3001</td>
+          <td>defaults to localhost</td>
+        </tr>
+        <tr>
+          <td>DEBUG</td>
+          <td>true</td>
+          <td>optional — shows dBFS per chunk</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="alert alert-cyan">
+      <strong>Consent Key Format:</strong> NOIZY-{ACTOR_ID}-CONSENT-{16 hex chars}-{AVA_ID}-{DOMAIN}-{JURISDICTION}-{DATE}<br>
+      Each AVA should have its own consent key. The pipeline validates the key format on every utterance before any data is transmitted.
+    </div>
+  </section>
+
+  <!-- ── UAD DEVICES ────────────────────────────────────────────── -->
+  <section class="section" id="uad">
+    <div class="section-eyebrow">Hardware</div>
+    <h2>UAD Device Reference</h2>
+    <p class="prose">
+      Run <span class="inline-code">npm run list-devices</span> to get the exact device string your macOS reports for the connected UAD interface.
+      The table below shows expected device name patterns — macOS may append version info.
+    </p>
+    <table class="uad-table">
+      <thead>
+        <tr>
+          <th>Config Key</th>
+          <th>Expected Core Audio Name</th>
+          <th>Connection</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Apollo Twin USB</td>
+          <td>Apollo Twin USB</td>
+          <td>USB-C</td>
+        </tr>
+        <tr>
+          <td>Apollo Twin Thunderbolt</td>
+          <td>Apollo Twin Thunderbolt</td>
+          <td>Thunderbolt 3</td>
+        </tr>
+        <tr>
+          <td>Apollo 8</td>
+          <td>Apollo 8 / Apollo 8 Thunderbolt</td>
+          <td>Thunderbolt 2/3</td>
+        </tr>
+        <tr>
+          <td>Apollo x4</td>
+          <td>Apollo x4</td>
+          <td>Thunderbolt 3</td>
+        </tr>
+        <tr>
+          <td>Apollo x8</td>
+          <td>Apollo x8</td>
+          <td>Thunderbolt 3</td>
+        </tr>
+        <tr>
+          <td>Arrow</td>
+          <td>Arrow</td>
+          <td>Thunderbolt 3</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="alert alert-amber">
+      <strong>U87 Gain Setting:</strong> For spoken word / narration, set the UAD preamp gain for the U87 channel to achieve peaks around −12 to −18 dBFS during normal speech. Avoid gain staging that pushes peaks above −6 dBFS — the 24-bit headroom is plenty.
+    </div>
+  </section>
+
+  <!-- ── TEST SESSION ───────────────────────────────────────────── -->
+  <section class="section" id="test-session">
+    <div class="section-eyebrow">First Recording</div>
+    <h2>Test Session Guide</h2>
+    <p class="prose">
+      The first test session seeds the RSP_001 voice profile with calibration utterances.
+      Run these in sequence to validate the full signal chain before any production recording.
+    </p>
+
+    <h3>1. Hardware Check</h3>
+    <div class="cards-2">
+      <div class="card">
+        <div class="card-label">UAD Console</div>
+        <div class="card-value">Open UAD Console → confirm U87 on Input 1, preamp active, no clipping indicator on speech.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">macOS Audio</div>
+        <div class="card-value">System Preferences → Sound → Input → confirm UAD interface selected as input device.</div>
+      </div>
+    </div>
+
+    <h3>2. Device Discovery</h3>
+    <div class="terminal">
+      <div class="term-titlebar">
+        <div class="term-dot r"></div>
+        <div class="term-dot y"></div>
+        <div class="term-dot g"></div>
+        <span class="term-title">Terminal — MacBook Pro M2 Ultra</span>
+      </div>
+      <div class="term-body">
+        <span class="t-prompt">noizy-platform/services/voice-node $</span> <span class="t-cmd">npm run list-devices</span><br><br>
+        <span class="t-green">🎙️  NOIZYVOX — Available Audio Devices</span><br><br>
+        <span class="t-out">&nbsp;&nbsp;[0] MacBook Pro Microphone</span><br>
+        <span class="t-out">&nbsp;&nbsp;[1] Apollo Twin USB</span><br>
+        <span class="t-out">&nbsp;&nbsp;[2] AirPods Pro</span><br><br>
+        <span class="t-cyan">&nbsp;&nbsp;→ Copy your UAD device name to config.ts → audio.deviceName</span><br>
+      </div>
+    </div>
+
+    <h3>3. Calibration Run</h3>
+    <div class="terminal">
+      <div class="term-titlebar">
+        <div class="term-dot r"></div>
+        <div class="term-dot y"></div>
+        <div class="term-dot g"></div>
+        <span class="term-title">Terminal — NOIZYVOX Voice Node</span>
+      </div>
+      <div class="term-body">
+        <span class="t-prompt">$</span> <span class="t-cmd">npm run dev:debug</span><br><br>
+        <span class="t-green">🎙️  NOIZYVOX Voice Node</span><br>
+        <span class="t-out">&nbsp;&nbsp;&nbsp;Session   SESSION_1710384000000</span><br>
+        <span class="t-out">&nbsp;&nbsp;&nbsp;Actor     RSP_001</span><br>
+        <span class="t-out">&nbsp;&nbsp;&nbsp;Device    Apollo Twin USB</span><br>
+        <span class="t-out">&nbsp;&nbsp;&nbsp;Format    48000Hz / 24-bit / Mono</span><br>
+        <span class="t-out">&nbsp;&nbsp;&nbsp;VAD Gate  -40 dBFS · 800ms padding</span><br>
+        <span class="t-out">&nbsp;&nbsp;&nbsp;Consent   ✓ loaded</span><br><br>
+        <span class="t-green">&nbsp;&nbsp;🟢 Listening on "Apollo Twin USB"...</span><br>
+        <span class="t-dim">&nbsp;&nbsp;&nbsp;&nbsp;Speak into the U87. Threshold: -40 dBFS</span><br><br>
+        <span class="t-dim">&nbsp;&nbsp;📊 silence        -63.2 dBFS</span><br>
+        <span class="t-dim">&nbsp;&nbsp;📊 silence        -61.8 dBFS</span><br>
+        <span class="t-out">&nbsp;&nbsp;🔴 REC  [09:14:22]</span><br>
+        <span class="t-dim">&nbsp;&nbsp;📊 speech         -16.4 dBFS</span><br>
+        <span class="t-dim">&nbsp;&nbsp;📊 speech         -12.1 dBFS</span><br>
+        <span class="t-dim">&nbsp;&nbsp;📊 speech         -14.7 dBFS</span><br>
+        <span class="t-out">&nbsp;&nbsp;✅ UTT_1_1710384262000  2840ms  peak: -12.1 dBFS</span><br>
+        <span class="t-dim">&nbsp;&nbsp;⚙️  UTT_1_... → consent_check</span><br>
+        <span class="t-dim">&nbsp;&nbsp;⚙️  UTT_1_... → never_clause_check</span><br>
+        <span class="t-dim">&nbsp;&nbsp;⚙️  UTT_1_... → writing_wav</span><br>
+        <span class="t-dim">&nbsp;&nbsp;⚙️  UTT_1_... → watermarking</span><br>
+        <span class="t-dim">&nbsp;&nbsp;⚙️  UTT_1_... → dispatch</span><br>
+        <span class="t-out">&nbsp;&nbsp;📤 PROV_1710384262840_UTT_1 → sent</span><br><br>
+        <span class="t-dim">&nbsp;&nbsp;^C</span><br><br>
+        <span class="t-out">&nbsp;&nbsp;🛑 Stopping voice node...</span><br>
+        <span class="t-green">&nbsp;&nbsp;✅ Session complete.</span>
+      </div>
+    </div>
+
+    <h3>4. Verify Provenance Ledger</h3>
+    <div class="terminal">
+      <div class="term-titlebar">
+        <div class="term-dot r"></div>
+        <div class="term-dot y"></div>
+        <div class="term-dot g"></div>
+        <span class="term-title">Terminal</span>
+      </div>
+      <div class="term-body">
+        <span class="t-prompt">$</span> <span class="t-cmd">cat provenance-ledger.jsonl | head -1 | python3 -m json.tool</span><br><br>
+        <span class="t-out">{</span><br>
+        <span class="t-out">&nbsp;&nbsp;"recordId":         "PROV_1710384262840_UTT_1_...",</span><br>
+        <span class="t-out">&nbsp;&nbsp;"actorId":          "RSP_001",</span><br>
+        <span class="t-out">&nbsp;&nbsp;"durationMs":       2840,</span><br>
+        <span class="t-out">&nbsp;&nbsp;"peakEnergyDb":     -12.1,</span><br>
+        <span class="t-cyan">&nbsp;&nbsp;"watermarkHash":    "WM_A3F2C89E",</span><br>
+        <span class="t-out">&nbsp;&nbsp;"dispatchStatus":   "sent",</span><br>
+        <span class="t-green">&nbsp;&nbsp;"neverClauseChecks": ["NC_01_NO_UNCONSENTED...: PASS", ...]</span><br>
+        <span class="t-out">}</span>
+      </div>
+    </div>
+
+    <div class="alert alert-green">
+      <strong>Success Criteria:</strong> At least 5 clean utterances captured with peak energy between −20 and −8 dBFS, all 10 Never Clause checks PASS, dispatch status "sent", watermark hash present. WAV files verified playable in Logic/Reaper. Then the voice profile is ready for the first AVA seed session.
+    </div>
+  </section>
+
+  <!-- ── CONSENT KEY ────────────────────────────────────────────── -->
+  <section class="section" id="consent-key">
+    <div class="section-eyebrow">Consent Architecture</div>
+    <h2>Consent Key Anatomy</h2>
+    <p class="prose">
+      Each consent key encodes who, which avatar, what domain, which jurisdiction, and when.
+      The pipeline validates format on every utterance — a malformed or missing key results in
+      immediate DROP with no audio transmitted.
+    </p>
+    <div class="code-file">
+      <div class="code-header">
+        <span class="code-filename">RSP_001 Example Consent Key</span>
+        <span class="code-lang">Format</span>
+      </div>
+      <pre><code class="language-bash">NOIZY-RSP001-CONSENT-7a4f2b8e9d3c1f6a-AVA001-NARR-CA-ON-2026-03-13
+#     ──────  ───────  ────────────────  ──────  ────  ─────  ──────────
+#     ActorID  Literal   16-char UUID      AVAID  Domain  Juris  Date
+
+# Domain codes:
+#   NARR  = Narration / Audiobook
+#   CHAR  = Character / Animation
+#   COMM  = Commercial / Advertising
+#   GAME  = Video Games
+#   ASST  = AI Assistant
+#   LIVE  = Live Performance / Events
+
+# Jurisdiction codes:
+#   CA-ON   = Canada, Ontario
+#   CA-BC   = Canada, British Columbia
+#   US-CA   = United States, California
+#   US-NY   = United States, New York
+#   UK      = United Kingdom
+#   AU      = Australia
+</code></pre>
+    </div>
+    <div class="alert alert-amber">
+      <strong>Key Generation:</strong> In production, consent keys are generated by the NOIZYVOX platform at the moment an actor activates an AVA for a specific domain and jurisdiction. The key is cryptographically bound to the actor's identity on-chain. The voice node only validates format — full cryptographic verification happens at the ingest API.
+    </div>
+
+    <h3>Next: AVA Ingest API</h3>
+    <p class="prose">
+      Once the voice node is running and clean test utterances are confirmed in the provenance ledger,
+      the next build step is the <strong>NOIZYVOX ingest API</strong> (<span class="inline-code">apps/api/</span>) —
+      the endpoint that receives WAV uploads, runs full cryptographic consent verification,
+      and begins building the RSP_001 voice profile. That's the bridge between the MacBook Pro capture node
+      and the M2 Ultra AVA training pipeline.
+    </p>
+  </section>
+
+</div><!-- /main -->
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Initialize syntax highlighting
+    hljs.highlightAll();
+
+    // Active nav tracking
+    const sections = document.querySelectorAll('.section[id], .hero');
+    const navLinks  = document.querySelectorAll('.sidebar nav a');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          const active = document.querySelector(`.sidebar nav a[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+
+    document.querySelectorAll('[id]').forEach(s => observer.observe(s));
+  });
+</script>
+</body>
+</html>

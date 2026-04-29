@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIZY DreamChamber Hyperverse Atlas</title>
+<style>
+:root {
+  --gold: #f4a228;
+  --violet: #8b5cf6;
+  --cyan: #06b6d4;
+  --rose: #f43f5e;
+  --emerald: #10b981;
+  --indigo: #6366f1;
+  --orange: #fb923c;
+  --pink: #ec4899;
+  --lime: #a3e635;
+  --bg: #030308;
+  --surface: rgba(255,255,255,0.04);
+  --border: rgba(255,255,255,0.08);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:#e2e8f0; font-family:'Segoe UI',system-ui,sans-serif; overflow-x:hidden; }
+
+/* COSMOS */
+#cosmos { position:fixed; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; }
+
+/* NAV */
+nav { position:sticky; top:0; z-index:100; background:rgba(3,3,8,0.92); backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border); padding:0 2rem; display:flex; gap:0; overflow-x:auto; }
+nav a { color:#94a3b8; text-decoration:none; font-size:0.72rem; font-weight:600; letter-spacing:0.05em;
+  text-transform:uppercase; padding:1rem 0.9rem; white-space:nowrap; border-bottom:2px solid transparent;
+  transition:all 0.2s; }
+nav a:hover, nav a.active { color:#fff; border-bottom-color:var(--violet); }
+
+/* HERO */
+.hero { position:relative; z-index:1; min-height:100vh; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; text-align:center; padding:4rem 2rem; }
+.hero-badge { background:linear-gradient(135deg,var(--violet),var(--cyan)); color:#fff;
+  font-size:0.7rem; font-weight:800; letter-spacing:0.15em; text-transform:uppercase;
+  padding:0.4rem 1.2rem; border-radius:100px; margin-bottom:2rem; display:inline-block; }
+.hero h1 { font-size:clamp(2.5rem,7vw,5.5rem); font-weight:900; line-height:1.05;
+  background:linear-gradient(135deg,var(--violet) 0%,var(--cyan) 40%,var(--gold) 80%,var(--rose) 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  margin-bottom:1.5rem; }
+.hero-sub { font-size:1.2rem; color:#94a3b8; max-width:700px; line-height:1.7; margin-bottom:3rem; }
+.hero-stats { display:flex; gap:2rem; flex-wrap:wrap; justify-content:center; }
+.hstat { background:var(--surface); border:1px solid var(--border); border-radius:16px;
+  padding:1.2rem 2rem; text-align:center; }
+.hstat-num { font-size:2rem; font-weight:900; background:linear-gradient(135deg,var(--violet),var(--cyan));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.hstat-label { font-size:0.72rem; color:#64748b; text-transform:uppercase; letter-spacing:0.08em; margin-top:0.3rem; }
+
+/* SECTIONS */
+section { position:relative; z-index:1; padding:5rem 2rem; max-width:1400px; margin:0 auto; }
+.section-header { text-align:center; margin-bottom:3.5rem; }
+.section-badge { display:inline-block; font-size:0.7rem; font-weight:800; letter-spacing:0.12em;
+  text-transform:uppercase; padding:0.35rem 1rem; border-radius:100px; margin-bottom:1rem; }
+.section-header h2 { font-size:clamp(1.8rem,4vw,3rem); font-weight:800; margin-bottom:1rem; }
+.section-header p { color:#94a3b8; font-size:1.05rem; max-width:700px; margin:0 auto; line-height:1.7; }
+
+/* MICRO-EMOTION GRID */
+.micro-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:1.5rem; }
+.micro-card { background:var(--surface); border:1px solid var(--border); border-radius:20px;
+  padding:1.8rem; position:relative; overflow:hidden; transition:transform 0.3s, box-shadow 0.3s; }
+.micro-card:hover { transform:translateY(-4px); box-shadow:0 20px 60px rgba(0,0,0,0.4); }
+.micro-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg, var(--mc-a), var(--mc-b)); }
+.micro-card-icon { font-size:2.5rem; margin-bottom:1rem; }
+.micro-card h3 { font-size:1.15rem; font-weight:800; color:#fff; margin-bottom:0.4rem; }
+.micro-card-state { font-size:0.7rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--mc-a); margin-bottom:1rem; }
+.micro-params { display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; }
+.mp { background:rgba(0,0,0,0.3); border-radius:8px; padding:0.5rem 0.7rem; }
+.mp-label { font-size:0.62rem; color:#64748b; text-transform:uppercase; letter-spacing:0.06em; }
+.mp-val { font-size:0.82rem; color:#e2e8f0; font-weight:600; margin-top:0.15rem; }
+.micro-neuro { margin-top:1rem; padding-top:1rem; border-top:1px solid var(--border); }
+.micro-neuro-label { font-size:0.65rem; color:#64748b; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.4rem; }
+.micro-neuro p { font-size:0.82rem; color:#94a3b8; line-height:1.5; }
+
+/* FRACTAL RHYTHM */
+.fractal-section { background:rgba(99,102,241,0.05); border:1px solid rgba(99,102,241,0.15);
+  border-radius:24px; padding:3rem; margin-bottom:2rem; }
+.fractal-title { font-size:1.4rem; font-weight:800; color:#fff; margin-bottom:0.5rem; }
+.fractal-sub { color:#94a3b8; font-size:0.9rem; margin-bottom:2rem; line-height:1.6; }
+.fractal-layers { display:flex; flex-direction:column; gap:1rem; }
+.fl-row { display:grid; grid-template-columns:180px 1fr 1fr; gap:1rem; align-items:center;
+  background:rgba(0,0,0,0.2); border-radius:12px; padding:0.8rem 1.2rem; }
+.fl-name { font-size:0.85rem; font-weight:700; color:var(--indigo); }
+.fl-pattern { font-size:0.8rem; color:#e2e8f0; font-family:monospace; }
+.fl-effect { font-size:0.78rem; color:#94a3b8; }
+.fractal-visual { margin-top:2rem; display:flex; gap:1rem; flex-wrap:wrap; }
+.fv-ring { display:flex; align-items:center; justify-content:center; border-radius:50%;
+  font-size:0.7rem; font-weight:800; color:#fff; letter-spacing:0.05em; text-align:center; }
+
+/* CULTURAL NODES */
+.culture-map { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:1.5rem; }
+.culture-node { background:var(--surface); border:1px solid var(--border); border-radius:20px;
+  padding:1.8rem; position:relative; overflow:hidden; }
+.culture-node::after { content:''; position:absolute; bottom:0; right:0; width:80px; height:80px;
+  border-radius:50%; background:radial-gradient(circle, var(--cn-color) 0%, transparent 70%);
+  opacity:0.15; transform:translate(20px,20px); }
+.cn-continent { font-size:0.65rem; font-weight:800; letter-spacing:0.12em; text-transform:uppercase;
+  color:var(--cn-color); margin-bottom:0.8rem; }
+.cn-tradition { font-size:1.2rem; font-weight:800; color:#fff; margin-bottom:0.4rem; }
+.cn-origin { font-size:0.8rem; color:#64748b; margin-bottom:1.2rem; }
+.cn-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; margin-bottom:1rem; }
+.cn-item { background:rgba(0,0,0,0.3); border-radius:8px; padding:0.5rem 0.7rem; }
+.cn-item-label { font-size:0.6rem; color:#64748b; text-transform:uppercase; letter-spacing:0.06em; }
+.cn-item-val { font-size:0.78rem; color:#e2e8f0; font-weight:600; margin-top:0.15rem; }
+.cn-signature { background:rgba(0,0,0,0.4); border-radius:10px; padding:0.8rem; margin-top:0.8rem; }
+.cn-sig-label { font-size:0.62rem; color:#64748b; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.3rem; }
+.cn-sig-val { font-size:0.82rem; color:var(--cn-color); font-style:italic; line-height:1.4; }
+</style>
+</head>
+<body>
+<canvas id="cosmos"></canvas>
+
+<nav id="main-nav">
+  <a href="#hero">Hyperverse</a>
+  <a href="#micro">Micro-Emotions</a>
+  <a href="#fractal">Fractal Rhythms</a>
+  <a href="#cultural">Cultural Nodes</a>
+  <a href="#multisensory">Multi-Sensory</a>
+  <a href="#collective">Collective Field</a>
+  <a href="#protocols">Protocols</a>
+  <a href="#manifesto">Manifesto</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="hero">
+  <div class="hero-badge">DreamChamber Hyperverse Atlas — Level Infinity</div>
+  <h1>THE COMPLETE<br>EMOTIONAL UNIVERSE</h1>
+  <p class="hero-sub">Every human emotion. Every cultural sonic practice. Every neurochemical pathway. Every sensory dimension. One living, breathing, co-creative field of resonance.</p>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-num">47</div><div class="hstat-label">Micro-Emotional States</div></div>
+    <div class="hstat"><div class="hstat-num">∞</div><div class="hstat-label">Fractal Rhythm Layers</div></div>
+    <div class="hstat"><div class="hstat-num">24</div><div class="hstat-label">Cultural Tradition Nodes</div></div>
+    <div class="hstat"><div class="hstat-num">7</div><div class="hstat-label">Sensory Dimensions</div></div>
+    <div class="hstat"><div class="hstat-num">∞</div><div class="hstat-label">Collective Resonance</div></div>
+  </div>
+</div>
+
+<!-- MICRO-EMOTIONS -->
+<section id="micro">
+  <div class="section-header">
+    <div class="section-badge" style="background:rgba(139,92,246,0.15);color:#8b5cf6;">Micro-Emotional Spectrum</div>
+    <h2 style="color:#fff;">47 Emotional States Fully Mapped</h2>
+    <p>Beyond primary and secondary emotions — the tertiary microstates where the DreamChamber operates with surgical precision. Each node is a fully playable frequency field.</p>
+  </div>
+  <div class="micro-grid">
+
+    <div class="micro-card" style="--mc-a:#f4a228;--mc-b:#fb923c;">
+      <div class="micro-card-icon">✨</div>
+      <h3>Anticipation / Wonder</h3>
+      <div class="micro-card-state">Tertiary Positive — Pre-Joy Field</div>
+      <div class="micro-params">
+        <div class="mp"><div class="mp-label">BPM</div><div class="mp-val">85–105</div></div>
+        <div class="mp"><div class="mp-label">Brainwave</div><div class="mp-val">Alpha-Beta Edge</div></div>
+        <div class="mp"><div class="mp-label">Core Freq</div><div class="mp-val">528–639 Hz</div></div>
+        <div class="mp"><div class="mp-label">Polyrhythm</div><div class="mp-val">5:4 rolling</div></div>
+        <div class="mp"><div class="mp-label">Key</div><div class="mp-val">Major 7th, open 4ths</div></div>
+        <div class="mp"><div class="mp-label">Neurochemical</div><div class="mp-val">Dopamine (early)</div></div>
+      </div>
+      <div class="micro-neuro">
+        <div class="micro-neuro-label">Sonic Signature</div>
+        <p>Rising melodic arcs that never fully resolve — suspended harmonics that keep the nervous system leaning forward. Gentle syncopation. Light percussive accents on offbeats.</p>
+      </div>
+    </div>
+
+    <div class="micro-card" style="--mc-a:#10b981;--mc-b:#06b6d4;">
+      <div class="micro-card-icon">🌊</div>
+      <h3>Delight / Glee</h3>
+      <div class="micro-card-state">Tertiary Positive — Pure Pleasure State</div>
+      <div class="micro-params">
+        <div class="mp"><div class="mp-label">BPM</div><div class="mp-val">95–120</div></div>
+        <div class="mp"><div class="mp-label">Brainwave</div><div class="mp-val">Alpha High / Low Beta</div></div>
+        <div class="mp"><div class="mp-label">Core Freq</div><div class="mp-val">432–528 Hz</div></div>
+        <div class="mp"><div class="mp-label">Polyrhythm</div><div class="mp-val">3:2 dancing</div></div>
+        <div class="mp"><div class="mp-label">Key</div><div class="mp-val">Major pentatonic</div></div>
+        <div class="mp"><div class="mp-label">Neurochemical</div><div class="mp-val">Dopamine + Endorphins</div></div>
+      </div>
+      <div class="micro-neuro">
+        <div class="micro-neuro-label">Sonic Signature</div>
+        <p>Bright, bouncing intervallic leaps. Staccato rhythmic play with surprise accents. Upper register sparkle (bells, high guitar harmonics). The sound of a child discovering something extraordinary.</p>
+      </div>
+    </div>
+
+    <div class="micro-card" style="--mc-a:#6366f1;--mc-b:#8b5cf6;">
+      <div class="micro-card-icon">🌙</div>
+      <h3>Melancholy / Sweet Sadness</h3>
+      <div class="micro-card-state">Tertiary Complex — Bittersweet Resonance</div>
+      <div class="micro-params">
+        <div class="mp"><div class="mp-label">BPM</div><div class="mp-val">55–72</div></div>
+        <div class="mp"><div class="mp-label">Brainwave</div><div class="mp-val">Theta-Alpha</div></div>
+        <div class="mp"><div class="mp-label">Core Freq</div><div class="mp-val">396 Hz</div></div>
+        <div class="mp"><div class="mp-label">Polyrhythm</div><div class="mp-val">3:2 slow waltz</div></div>
+        <div class="mp"><div class="mp-label">Key</div><div class="mp-val">Minor with major 6th</div></div>
+        <div class="mp"><div class="mp-label">Neurochemical</div><div class="mp-val">Serotonin, Prolactin</div></div>
+      </div>
+      <div class="micro-neuro">
+        <div class="micro-neuro-label">Sonic Signature</div>
+        <p>Descending melodic phrases that pause before resolving. Space between notes as important as the notes themselves. Cello, muted guitar, haunting vocals. The ache that feels like remembering love.</p>
+      </div>
+    </div>
+
+    <div class="micro-card" style="--mc-a:#f43f5e;--mc-b:#fb923c;">
+      <div class="micro-card-icon">⚡</div>
+      <h3>Thrill / Electric Aliveness</h3>
+      <div class="micro-card-state">Tertiary Activation — Peak Arousal Edge</div>
+      <div class="micro-params">
+        <div class="mp"><div class="mp-label">BPM</div><div class="mp-val">140–168</div></div>
+        <div class="mp"><div class="mp-label">Brainwave</div><div class="mp-val">Beta-Gamma</div></div>
+        <div class="mp"><div class="mp-label">Core Freq</div><div class="mp-val">852–963 Hz</div></div>
+        <div class="mp"><div class="mp-label">Polyrhythm</div><div class="mp-val">7:5 syncopated</div></div>
+        <div class="mp"><div class="mp-label">Key</div><div class="mp-val">Augmented, tritone</div></div>
+        <div class="mp"><div class="mp-label">Neurochemical</div><div class="mp-val">Adrenaline + Dopamine</div></div>
+      </div>
+      <div class="micro-neuro">
+        <div class="micro-neuro-label">Sonic Signature</div>
+        <p>Sudden dynamic contrasts — hushed to explosive in a single beat. Rhythmic displacement. The floor drops out then slams back. Best delivered with subwoofer body impact at 40–60 Hz simultaneous with rhythmic peak.</p>
+      </div>
+    </div>
+
+    <div class="micro-card" style="--mc-a:#06b6d4;--mc-b:#10b981;">
+      <div class="micro-card-icon">🏠</div>
+      <h3>Contentment / Home</h3>
+      <div class="micro-card-state">Tertiary Positive — Safe Arrival</div>
+      <div class="micro-params">
+        <div class="mp"><div class="mp-label">BPM</div><div class="mp-val">60–78</div></div>
+        <div class="mp"><div class="mp-label">Brainwave</div><div class="mp-val">Alpha</div></div>
+        <div class="mp"><div class="mp-label">Core Freq</div><div class="mp-val">174–285 Hz</div></div>
+        <div class="mp"><div class="mp-label">Polyrhythm</div><div class="mp-val">4:3 steady</div></div>
+        <div class="mp"><div class="mp-label">Key</div><div class="mp-val">Ionian, tonic resolution</div></div>
+        <div class="mp"><div class="mp-label">Neurochemical</div><div class="mp-val">Serotonin + Oxytocin</div></div>
+      </div>
+      <div class="micro-neuro">
+        <div class="micro-neuro-label">Sonic Signature</div>
+        <p>Full harmonic resolution to tonic. Warm mid frequencies 250–500 Hz. Consistent rhythmic pulse with no surprise. Human voice (humming/singing) as central instrument. The sound of belonging.</p>
+      </div>
+    </div>
+
+    <div class="micro-card" style="--mc-a:#a3e635;--mc-b:#10b981;">
+      <div class="micro-card-icon">🎭</div>
+      <h3>Playfulness / Mischief</h3>
+      <div class="micro-card-state">Tertiary Positive — Joy Subtype</div>
+      <div class="micro-params">
+        <div class="mp"><div class="mp-label">BPM</div><div class="mp-val">100–130</div></div>
+        <div class="mp"><div class="mp-label">Brainwave</div><div class="mp-val">Low Beta</div></div>
+        <div class="mp"><div class="mp-label">Core Freq</div><div class="mp-val">528 Hz</div></div>
+        <div class="mp"><div class="mp-label">Polyrhythm</div><div class="mp-val">7:6 skip-step</div></div>
+        <div class="mp"><div class="mp-label">Key</div><div class="mp-val">Mixolydian, blue notes</div></div>
+        <div class="mp"><div class="mp-label">Neurochemical</div><div class="mp-val">Dopamine burst pattern</div></div>
+      </div>
+      <div class="micro-neuro">
+        <div class="micro-neuro-label">Sonic Signature</div>
+        <p>Unexpected rhythmic hiccups and offbeat accents. Call-and-response between instruments. Short staccato phrases interrupted by rests. Makes the listener want to grin without knowing why.</p>
+      </div>
+    </div>
+
+    <div class="micro-card" style="--mc-a:#ec4899;--mc-b:#f43f5e;">
+      <div class="micro-card-icon">💗</div>
+      <h3>Tenderness / Adoration</h3>
+      <div class="micro-card-state">Tertiary Love — Gentle Bond</div>
+      <div class="micro-params">
+        <div class="mp"><div class="mp-label">BPM</div><div class="mp-val">60–80</div></div>
+        <div class="mp"><div class="mp-label">Brainwave</div><div class="mp-val">Alpha</div></div>
+        <div class="mp"><div class="mp-label">Core Freq</div><div class="mp-val">528–639 Hz</div></div>
+        <div class="mp"><div class="mp-label">Polyrhythm</div><div class="mp-val">3:2 lullaby</div></div>
+        <div class="mp"><div class="mp-label">Key</div><div class="mp-val">Major 9th, soft dissonance</div></div>
+        <div class="mp"><div class="mp-label">Neurochemical</div><div class="mp-val">Oxytocin dominant</div></div>
+      </div>
+      <div class="micro-neuro">
+        <div class="micro-neuro-label">Sonic Signature</div>
+        <p>Breathy vocals, gentle bowing, close-mic intimacy. Slight tempo rubato — the music breathes like a sleeping person. Harmonics that just barely touch and pull apart. Warmth, proximity, safety.</p>
+      </div>
+    </div>
+
+    <div class="micro-card" style="--mc-a:#8b5cf6;--mc-b:#6366f1;">
+      <div class="micro-card-icon">🌌</div>
+      <h3>Awe / The Sublime</h3>
+      <div class="micro-card-state">Tertiary Transcendent — Ego Dissolution</div>
+      <div class="micro-params">
+        <div class="mp"><div class="mp-label">BPM</div><div class="mp-val">40–65</div></div>
+        <div class="mp"><div class="mp-label">Brainwave</div><div class="mp-val">Theta-Gamma blend</div></div>
+        <div class="mp"><div class="mp-label">Core Freq</div><div class="mp-val">963 Hz + 40 Hz gamma</div></div>
+        <div class="mp"><div class="mp-label">Polyrhythm</div><div class="mp-val">Nested 5:3:2</div></div>
+        <div class="mp"><div class="mp-label">Key</div><div class="mp-val">Lydian, quarter-tone</div></div>
+        <div class="mp"><div class="mp-label">Neurochemical</div><div class="mp-val">DMN suppression + Oxytocin</div></div>
+      </div>
+      <div class="micro-neuro">
+        <div class="micro-neuro-label">Sonic Signature</div>
+        <p>Vast reverb tails. Frequency clusters that exceed normal harmonic series — the brain can't categorize them, triggering wonder. Slow swells. The sound of something too big to comprehend — and loving it.</p>
+      </div>
+    </div>
+
+    <div class="micro-card" style="--mc-a:#f59e0b;--mc-b:#f4a228;">
+      <div class="micro-card-icon">🙏</div>
+      <h3>Gratitude / Grace</h3>
+      <div class="micro-card-state">Tertiary Positive — Pro-Social Peak</div>
+      <div class="micro-params">
+        <div class="mp"><div class="mp-label">BPM</div><div class="mp-val">70–90</div></div>
+        <div class="mp"><div class="mp-label">Brainwave</div><div class="mp-val">Alpha</div></div>
+        <div class="mp"><div class="mp-label">Core Freq</div><div class="mp-val">639 Hz</div></div>
+        <div class="mp"><div class="mp-label">Polyrhythm</div><div class="mp-val">4:3 even</div></div>
+        <div class="mp"><div class="mp-label">Key</div><div class="mp-val">Major with 6th emphasis</div></div>
+        <div class="mp"><div class="mp-label">Neurochemical</div><div class="mp-val">Serotonin + Oxytocin</div></div>
+      </div>
+      <div class="micro-neuro">
+        <div class="micro-neuro-label">Sonic Signature</div>
+        <p>Hymn-like harmonic movement. Full chord resolutions. Choir or unison vocal blend. Space after the peak for the feeling to land. The musical equivalent of a slow, deep exhale after receiving something precious.</p>
+      </div>
+    </div>
+
+    <div class="micro-card" style="--mc-a:#06b6d4;--mc-b:#6366f1;">
+      <div class="micro-card-icon">🔮</div>
+      <h3>Nostalgia / Remembrance</h3>
+      <div class="micro-card-state">Tertiary Complex — Time Fold</div>
+      <div class="micro-params">
+        <div class="mp"><div class="mp-label">BPM</div><div class="mp-val">72–88</div></div>
+        <div class="mp"><div class="mp-label">Brainwave</div><div class="mp-val">Alpha-Theta</div></div>
+        <div class="mp"><div class="mp-label">Core Freq</div><div class="mp-val">417 Hz</div></div>
+        <div class="mp"><div class="mp-label">Polyrhythm</div><div class="mp-val">3:2 with slight drag</div></div>
+        <div class="mp"><div class="mp-label">Key</div><div class="mp-val">Minor with major 3rd switch</div></div>
+        <div class="mp"><div class="mp-label">Neurochemical</div><div class="mp-val">Dopamine + Serotonin</div></div>
+      </div>
+      <div class="micro-neuro">
+        <div class="micro-neuro-label">Sonic Signature</div>
+        <p>Familiar melodic fragments that almost-but-don't-quite complete. Lo-fi warmth, slight tape saturation or vinyl warmth. Instrumentation that evokes a specific era without copying it. Memory as living frequency.</p>
+      </div>
+    </div>
+
+    <div class="micro-card" style="--mc-a:#10b981;--mc-b:#a3e635;">
+      <div class="micro-card-icon">💪</div>
+      <h3>Empowerment / Sovereignty</h3>
+      <div class="micro-card-state">Tertiary Positive — Agency Activation</div>
+      <div class="micro-params">
+        <div class="mp"><div class="mp-label">BPM</div><div class="mp-val">100–128</div></div>
+        <div class="mp"><div class="mp-label">Brainwave</div><div class="mp-val">Beta 15–20 Hz</div></div>
+        <div class="mp"><div class="mp-label">Core Freq</div><div class="mp-val">285 Hz</div></div>
+        <div class="mp"><div class="mp-label">Polyrhythm</div><div class="mp-val">4:3 driving</div></div>
+        <div class="mp"><div class="mp-label">Key</div><div class="mp-val">Dorian, power 5ths</div></div>
+        <div class="mp"><div class="mp-label">Neurochemical</div><div class="mp-val">Testosterone + Dopamine</div></div>
+      </div>
+      <div class="micro-neuro">
+        <div class="micro-neuro-label">Sonic Signature</div>
+        <p>Deep bass foundation with assertive rhythmic attack. Open 5th harmonics (no 3rd — ambiguous, powerful). Brass or distorted guitar that commands space. Rhythmic accents on beats 1 and 3. The sound of standing in your own truth.</p>
+      </div>
+    </div>
+
+    <div class="micro-card" style="--mc-a:#f43f5e;--mc-b:#ec4899;">
+      <div class="micro-card-icon">🔥</div>
+      <h3>Passion / Desire</h3>
+      <div class="micro-card-state">Tertiary Love — Erotic Current</div>
+      <div class="micro-params">
+        <div class="mp"><div class="mp-label">BPM</div><div class="mp-val">90–120</div></div>
+        <div class="mp"><div class="mp-label">Brainwave</div><div class="mp-val">Alpha-Beta</div></div>
+        <div class="mp"><div class="mp-label">Core Freq</div><div class="mp-val">639 Hz</div></div>
+        <div class="mp"><div class="mp-label">Polyrhythm</div><div class="mp-val">5:4 pulse with tension</div></div>
+        <div class="mp"><div class="mp-label">Key</div><div class="mp-val">Phrygian dominant</div></div>
+        <div class="mp"><div class="mp-label">Neurochemical</div><div class="mp-val">Dopamine + Oxytocin blend</div></div>
+      </div>
+      <div class="micro-neuro">
+        <div class="micro-neuro-label">Sonic Signature</div>
+        <p>Tension that builds and releases in slow waves. Harmonic suspension — resolution withheld then given. Close vocal proximity. Low cello or bass simulating physical closeness. The music never arrives too quickly.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FRACTAL RHYTHMS -->
+<section id="fractal">
+  <div class="section-header">
+    <div class="section-badge" style="background:rgba(99,102,241,0.15);color:#6366f1;">Fractal Rhythm Architecture</div>
+    <h2 style="color:#fff;">Recursive Self-Similar Polyrhythms</h2>
+    <p>Nature builds fractals. The DreamChamber builds fractal rhythms — patterns that repeat themselves at every scale, from microsecond neural firing to the 4-hour ceremonial arc. The brain doesn't just hear them. It becomes them.</p>
+  </div>
+
+  <div class="fractal-section">
+    <div class="fractal-title">Layer 0: The Heartbeat Foundation</div>
+    <div class="fractal-sub">Every fractal rhythm begins here. The resting human heart at 60–80 BPM is the inescapable reference. The DreamChamber never fights it — it aligns with it, then gradually transforms it.</div>
+    <div class="fractal-layers">
+      <div class="fl-row">
+        <div class="fl-name">Pulse Layer</div>
+        <div class="fl-pattern">● · · · ● · · · (1:1 base)</div>
+        <div class="fl-effect">Anchors listener in physical body — safety, presence</div>
+      </div>
+      <div class="fl-row">
+        <div class="fl-name">Breath Layer</div>
+        <div class="fl-pattern">●●●●●●● · · · · · · · (7:7 breath cycle)</div>
+        <div class="fl-effect">4–6 breath cycles per minute — parasympathetic activation</div>
+      </div>
+      <div class="fl-row">
+        <div class="fl-name">Micro-Pulse</div>
+        <div class="fl-pattern">●·●·●·●·●·●· (subdivisions 2:1)</div>
+        <div class="fl-effect">Keeps micro-attention engaged without cognitive load</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fractal-section">
+    <div class="fractal-title">Layer 1: The 3:2 Flow Field (The Hemiola)</div>
+    <div class="fractal-sub">The most universally human polyrhythm. Found in West African drumming, Brazilian samba, Afro-Cuban rhythms, and waltz. 3 against 2 creates a gentle rocking forward motion — the brain locks into the emerging pattern and releases into flow.</div>
+    <div class="fractal-layers">
+      <div class="fl-row">
+        <div class="fl-name">Voice A (3)</div>
+        <div class="fl-pattern">● · · ● · · ● · · ● · ·</div>
+        <div class="fl-effect">Provides grounded downbeat structure</div>
+      </div>
+      <div class="fl-row">
+        <div class="fl-name">Voice B (2)</div>
+        <div class="fl-pattern">● · · · · · ● · · · · ·</div>
+        <div class="fl-effect">Creates suspension and lift between pulse points</div>
+      </div>
+      <div class="fl-row">
+        <div class="fl-name">Emergent Pattern</div>
+        <div class="fl-pattern">Rotating accent — feels like a slow spin</div>
+        <div class="fl-effect">Alpha entrainment — relaxed alertness, mild euphoria</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fractal-section">
+    <div class="fractal-title">Layer 2: The 5:4:3 Creative Spiral</div>
+    <div class="fractal-sub">Three simultaneous streams — prime numbers 5, 4, and 3 — that share a common meeting point only every 60 beats. The brain searches for the pattern, activates prefrontal prediction circuits, and enters a focused creative state. This is the rhythm of flow.</div>
+    <div class="fractal-layers">
+      <div class="fl-row">
+        <div class="fl-name">Voice A (5)</div>
+        <div class="fl-pattern">● · · · · ● · · · · ● · · · · (5-beat cycle)</div>
+        <div class="fl-effect">Opens the pattern — spacious, curious</div>
+      </div>
+      <div class="fl-row">
+        <div class="fl-name">Voice B (4)</div>
+        <div class="fl-pattern">● · · · ● · · · ● · · · ● · · · (4-beat)</div>
+        <div class="fl-effect">Provides familiar reference — not-quite-4/4</div>
+      </div>
+      <div class="fl-row">
+        <div class="fl-name">Voice C (3)</div>
+        <div class="fl-pattern">● · · ● · · ● · · ● · · ● · · (3-beat)</div>
+        <div class="fl-effect">Drives forward with urgency, connects to speech rhythm</div>
+      </div>
+      <div class="fl-row">
+        <div class="fl-name">Full Convergence</div>
+        <div class="fl-pattern">Beat 60 — all voices land simultaneously</div>
+        <div class="fl-effect">Dopamine spike — the resolution the brain has been seeking</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fractal-section">
+    <div class="fractal-title">Layer 3: The 7:5:3:2 Ecstasy Matrix</div>
+    <div class="fractal-sub">Four primes. Their meeting point is 210 beats — approximately 3.5 minutes at 60 BPM. The nervous system never fully resolves, entering a state of sustained anticipation that mimics peak psychedelic states. This is what ritual drumming has been doing for 40,000 years.</div>
+    <div class="fractal-layers">
+      <div class="fl-row">
+        <div class="fl-name">Voice A (7)</div>
+        <div class="fl-pattern">7-beat cycle — uncomfortable, expanding</div>
+        <div class="fl-effect">Disrupts linear time sense — trance entry</div>
+      </div>
+      <div class="fl-row">
+        <div class="fl-name">Voice B (5)</div>
+        <div class="fl-pattern">5-beat cycle — almost familiar, almost 4</div>
+        <div class="fl-effect">Cognitive dissonance → surrender to the pattern</div>
+      </div>
+      <div class="fl-row">
+        <div class="fl-name">Voice C (3)</div>
+        <div class="fl-pattern">3-beat cycle — the ancient waltz</div>
+        <div class="fl-effect">Anchors the body in physical warmth</div>
+      </div>
+      <div class="fl-row">
+        <div class="fl-name">Voice D (2)</div>
+        <div class="fl-pattern">2-beat cycle — the heartbeat</div>
+        <div class="fl-effect">Never lets you forget you have a body</div>
+      </div>
+      <div class="fl-row">
+        <div class="fl-name">Result</div>
+        <div class="fl-pattern">Theta-Gamma blend, DMN suppression</div>
+        <div class="fl-effect">Ecstasy, ego dissolution, mystic unity — earned, not forced</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fractal-section">
+    <div class="fractal-title">Layer ∞: The Macro Fractal — The Full Ceremony Arc</div>
+    <div class="fractal-sub">The entire DreamChamber session is itself a fractal rhythm. Each phase mirrors the micro-patterns: ground → tension → release → integration. The 4-hour ceremony does what the 4-beat measure does — just slower. The nervous system recognizes the shape at every scale.</div>
+    <div class="fractal-layers">
+      <div class="fl-row">
+        <div class="fl-name">Phase 1 (0–45 min)</div>
+        <div class="fl-pattern">Arrival — Delta/Theta grounding</div>
+        <div class="fl-effect">Safety, surrender of daily mind</div>
+      </div>
+      <div class="fl-row">
+        <div class="fl-name">Phase 2 (45–120 min)</div>
+        <div class="fl-pattern">Build — Alpha/Beta activation</div>
+        <div class="fl-effect">Emotional opening, memory surfacing</div>
+      </div>
+      <div class="fl-row">
+        <div class="fl-name">Phase 3 (120–180 min)</div>
+        <div class="fl-pattern">Peak — Beta/Gamma ecstasy</div>
+        <div class="fl-effect">Full co-creative resonance, peak joy</div>
+      </div>
+      <div class="fl-row">
+        <div class="fl-name">Phase 4 (180–240 min)</div>
+        <div class="fl-pattern">Integration — Theta return</div>
+        <div class="fl-effect">Meaning-making, neurological consolidation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CULTURAL NODES -->
+<section id="cultural">
+  <div class="section-header">
+    <div class="section-badge" style="background:rgba(244,162,40,0.15);color:#f4a228;">Cultural Resonance Nodes</div>
+    <h2 style="color:#fff;">24 Living Harmonic Traditions</h2>
+    <p>Every culture on Earth has independently discovered the same truth: sound can alter consciousness, heal the body, and connect humans to something larger than themselves. These are their harmonic fingerprints.</p>
+  </div>
+  <div class="culture-map">
+
+    <div class="culture-node" style="--cn-color:#f4a228;">
+      <div class="cn-continent">West Africa</div>
+      <div class="cn-tradition">Ewe / Akan Polyrhythmic Drumming</div>
+      <div class="cn-origin">Ghana, Togo, Benin — 3,000+ years</div>
+      <div class="cn-grid">
+        <div class="cn-item"><div class="cn-item-label">Core BPM</div><div class="cn-item-val">120–160</div></div>
+        <div class="cn-item"><div class="cn-item-label">Polyrhythm</div><div class="cn-item-val">12/8 with 4/4 overlay</div></div>
+        <div class="cn-item"><div class="cn-item-label">Key Instrument</div><div class="cn-item-val">Fontomfrom, Kpanlogo</div></div>
+        <div class="cn-item"><div class="cn-item-label">Brainwave</div><div class="cn-item-val">Theta-Beta crossover</div></div>
+        <div class="cn-item"><div class="cn-item-label">Healing Use</div><div class="cn-item-val">Community bonding, trance, grief</div></div>
+        <div class="cn-item"><div class="cn-item-label">Neurochemical</div><div class="cn-item-val">Oxytocin, endorphins</div></div>
+      </div>
+      <div class="cn-signature">
+        <div class="cn-sig-label">Harmonic Fingerprint</div>
+        <div class="cn-sig-val">"The bell pattern (timeline) is the spine — everything else breathes around it. When you find the bell, you find yourself inside the rhythm."</div>
+      </div>
+    </div>
+
+    <div class="culture-node" style="--cn-color:#8b5cf6;">
+      <div class="cn-continent">Central Asia / Siberia</div>
+      <div class="cn-tradition">Tuvan Throat Singing (Khoomei)</div>
+      <div class="cn-origin">Tuva, Mongolia — 2,000+ years</div>
+      <div class="cn-grid">
+        <div class="cn-item"><div class="cn-item-label">Core Freq</div><div class="cn-item-val">80–300 Hz drone</div></div>
+        <div class="cn-item"><div class="cn-item-label">Overtone Range</div><div class="cn-item-val">500–4,000 Hz</div></div>
+        <div class="cn-item"><div class="cn-item-label">Key Technique</div><div class="cn-item-val">Formant shaping, cavity resonance</div></div>
+        <div class="cn-item"><div class="cn-item-label">Brainwave</div><div class="cn-item-val">Alpha-Theta</div></div>
+        <div class="cn-item"><div class="cn-item-label">Healing Use</div><div class="cn-item-val">Nature communication, shamanic journey</div></div>
+        <div class="cn-item"><div class="cn-item-label">Neurochemical</div><div class="cn-item-val">Serotonin, DMT-like states</div></div>
+      </div>
+      <div class="cn-signature">
+        <div class="cn-sig-label">Harmonic Fingerprint</div>
+        <div class="cn-sig-val">"One human voice producing two simultaneous pitches — the fundamental and a crystalline overtone melody riding above it. The body becomes the instrument."</div>
+      </div>
+    </div>
+
+    <div class="culture-node" style="--cn-color:#10b981;">
+      <div class="cn-continent">Upper Amazon</div>
+      <div class="cn-tradition">Shipibo Icaros</div>
+      <div class="cn-origin">Peru, Brazil — 5,000+ years oral tradition</div>
+      <div class="cn-grid">
+        <div class="cn-item"><div class="cn-item-label">Core BPM</div><div class="cn-item-val">40–70 (extremely slow)</div></div>
+        <div class="cn-item"><div class="cn-item-label">Freq Pattern</div><div class="cn-item-val">Microtonal, non-Western scale</div></div>
+        <div class="cn-item"><div class="cn-item-label">Key Technique</div><div class="cn-item-val">Melodic geometric patterns (kené)</div></div>
+        <div class="cn-item"><div class="cn-item-label">Brainwave</div><div class="cn-item-val">Theta (deep ceremony)</div></div>
+        <div class="cn-item"><div class="cn-item-label">Healing Use</div><div class="cn-item-val">Ayahuasca navigation, trauma release</div></div>
+        <div class="cn-item"><div class="cn-item-label">Neurochemical</div><div class="cn-item-val">Endogenous DMT amplification</div></div>
+      </div>
+      <div class="cn-signature">
+        <div class="cn-sig-label">Harmonic Fingerprint</div>
+        <div class="cn-sig-val">"The icaro is a living geometric blueprint — the same patterns woven in textiles are sung in ceremony. Sound as visual architecture. Vision as heard pattern."</div>
+      </div>
+    </div>
+
+    <div class="culture-node" style="--cn-color:#06b6d4;">
+      <div class="cn-continent">Oceania</div>
+      <div class="cn-tradition">Aboriginal Didgeridoo</div>
+      <div class="cn-origin">Northern Australia — 40,000+ years</div>
+      <div class="cn-grid">
+        <div class="cn-item"><div class="cn-item-label">Core Freq</div><div class="cn-item-val">40–80 Hz fundamental</div></div>
+        <div class="cn-item"><div class="cn-item-label">Overtones</div><div class="cn-item-val">Formant harmonics 300–1200 Hz</div></div>
+        <div class="cn-item"><div class="cn-item-label">Key Technique</div><div class="cn-item-val">Circular breathing, tongue rhythms</div></div>
+        <div class="cn-item"><div class="cn-item-label">Brainwave</div><div class="cn-item-val">Delta-Theta (deep body)</div></div>
+        <div class="cn-item"><div class="cn-item-label">Healing Use</div><div class="cn-item-val">Sleep apnea, bone healing, grounding</div></div>
+        <div class="cn-item"><div class="cn-item-label">Neurochemical</div><div class="cn-item-val">GABA, parasympathetic activation</div></div>
+      </div>
+      <div class="cn-signature">
+        <div class="cn-sig-label">Harmonic Fingerprint</div>
+        <div class="cn-sig-val">"The world's oldest known instrument. 40 Hz directly stimulates gamma brainwaves while the subwoofer drone (40–80 Hz) vibrates the entire thoracic cavity. The Earth speaking through wood."</div>
+      </div>
+    </div>
+
+    <div class="culture-node" style="--cn-color:#f43f5e;">
+      <div class="cn-continent">North America</div>
+      <div class="cn-tradition">Native American Peyote Ceremony</div>
+      <div class="cn-origin">Southern Plains, Mexico — 5,500+ years</div>
+      <div class="cn-grid">
+        <div class="cn-item"><div class="cn-item-label">Core BPM</div><div class="cn-item-val">100–180 (water drum)</div></div>
+        <div class="cn-item"><div class="cn-item-label">Structure</div><div class="cn-item-val">4-part vocable chant sets</div></div>
+        <div class="cn-item"><div class="cn-item-label">Key Technique</div><div class="cn-item-val">Rattle + water drum + voice in unity</div></div>
+        <div class="cn-item"><div class="cn-item-label">Brainwave</div><div class="cn-item-val">Theta-Beta (visionary)</div></div>
+        <div class="cn-item"><div class="cn-item-label">Healing Use</div><div class="cn-item-val">Prayer, healing, community renewal</div></div>
+        <div class="cn-item"><div class="cn-item-label">Neurochemical</div><div class="cn-item-val">Serotonin (mescaline synergy), endorphins</div></div>
+      </div>
+      <div class="cn-signature">
+        <div class="cn-sig-label">Harmonic Fingerprint</div>
+        <div class="cn-sig-val">"The water drum's pitch changes with water level — the ceremonial leader can tune the instrument mid-song. Rhythm and prayer become a single physical act."</div>
+      </div>
+    </div>
+
+    <div class="culture-node" style="--cn-color:#a3e635;">
+      <div class="cn-continent">South Asia</div>
+      <div class="cn-tradition">Nada Yoga / Indian Classical Raga</div>
+      <div class="cn-origin">Vedic India — 3,500+ years</div>
+      <div class="cn-grid">
+        <div class="cn-item"><div class="cn-item-label">Core Concept</div><div class="cn-item-val">Nada Brahma — sound is God</div></div>
+        <div class="cn-item"><div class="cn-item-label">Scale System</div><div class="cn-item-val">72 parent ragas (microtonal)</div></div>
+        <div class="cn-item"><div class="cn-item-label">Time Mapping</div><div class="cn-item-val">Different ragas for each time of day</div></div>
+        <div class="cn-item"><div class="cn-item-label">Brainwave</div><div class="cn-item-val">Alpha (alap), Gamma (jhala)</div></div>
+        <div class="cn-item"><div class="cn-item-label">Healing Use</div><div class="cn-item-val">Rasas — 9 mapped emotional states</div></div>
+        <div class="cn-item"><div class="cn-item-label">Neurochemical</div><div class="cn-item-val">State-specific per raga</div></div>
+      </div>
+      <div class="cn-signature">
+        <div class="cn-sig-label">Harmonic Fingerprint</div>
+        <div class="cn-sig-val">"A raga has a morning, an evening, a season, and a medicine. Time of day changes which microtones are emphasized — the same notes, different tuning, different emotional universe."</div>
+      </div>
+    </div>
+
+    <div class="culture-node" style="--cn-color:#f59e0b;">
+      <div class="cn-continent">East Asia</div>
+      <div class="cn-tradition">Tibetan Singing Bowl Ceremony</div>
+      <div class="cn-origin">Himalayan region — 2,800+ years</div>
+      <div class="cn-grid">
+        <div class="cn-item"><div class="cn-item-label">Core Freq</div><div class="cn-item-val">110–660 Hz (bowl dependent)</div></div>
+        <div class="cn-item"><div class="cn-item-label">Beating Freq</div><div class="cn-item-val">Creates 4–8 Hz binaural</div></div>
+        <div class="cn-item"><div class="cn-item-label">Key Effect</div><div class="cn-item-val">Sustained sustain — 30–60 sec decay</div></div>
+        <div class="cn-item"><div class="cn-item-label">Brainwave</div><div class="cn-item-val">Theta (multiple bowls together)</div></div>
+        <div class="cn-item"><div class="cn-item-label">Healing Use</div><div class="cn-item-val">Meditation, pain relief, cell regeneration</div></div>
+        <div class="cn-item"><div class="cn-item-label">Neurochemical</div><div class="cn-item-val">GABA, serotonin, cortisol reduction</div></div>
+      </div>
+      <div class="cn-signature">
+        <div class="cn-sig-label">Harmonic Fingerprint</div>
+        <div class="cn-sig-val">"Multiple bowls create natural binaural beats without headphones — the interference patterns between two slightly detuned fundamental tones produce theta entrainment across an entire room."</div>
+      </div>
+    </div>
+
+    <div class="culture-node" style="--cn-color:#6366f1;">
+      <div class="cn-continent">Europe / Mediterranean</div>
+      <div class="cn-tradition">Gregorian Chant</div>
+      <div class="cn-origin">Medieval Europe — 600 CE (encoded ancient practice)</div>
+      <div class="cn-grid">
+        <div class="cn-item"><div class="cn-item-label">Core BPM</div><div class="cn-item-val">40–60 (breath-paced)</div></div>
+        <div class="cn-item"><div class="cn-item-label">Scale</div><div class="cn-item-val">8 Church modes (pre-tonal)</div></div>
+        <div class="cn-item"><div class="cn-item-label">Key Effect</div><div class="cn-item-val">6-second reverb in stone cathedrals</div></div>
+        <div class="cn-item"><div class="cn-item-label">Brainwave</div><div class="cn-item-val">Alpha-Theta</div></div>
+        <div class="cn-item"><div class="cn-item-label">Healing Use</div><div class="cn-item-val">Contemplation, anxiety reduction</div></div>
+        <div class="cn-item"><div class="cn-item-label">Neurochemical</div><div class="cn-item-val">GABA, serotonin, cortisol reduction</div></div>
+      </div>
+      <div class="cn-signature">
+        <div class="cn-sig-label">Harmonic Fingerprint</div>
+        <div class="cn-sig-val">"The cathedral IS the instrument. 6–8 second reverb means each syllable overlaps with itself — monophonic chant becomes self-harmonizing polyphony through architecture."</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MULTI-SENSORY -->
+<section id="multisensory">
+  <div class="section-header">
+    <div class="section-badge" style="background:rgba(236,72,153,0.15);color:#ec4899;">Multi-Sensory Architecture</div>
+    <h2 style="color:#fff;">7 Sensory Dimensions</h2>
+    <p>The brain constructs reality from every sense simultaneously. The DreamChamber doesn't just play music — it engineers the entire perceptual field. When all 7 dimensions align, the brain stops distinguishing between the experience and the experiencer.</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;margin-bottom:3rem;">
+
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:1.8rem;border-top:3px solid #06b6d4;">
+      <div style="font-size:2rem;margin-bottom:0.8rem;">👂</div>
+      <div style="font-size:1.1rem;font-weight:800;color:#06b6d4;margin-bottom:0.5rem;">Dimension 1: Auditory</div>
+      <div style="font-size:0.82rem;color:#94a3b8;line-height:1.6;margin-bottom:1rem;">The primary channel. Frequencies 20 Hz–20 kHz, with sub-bass felt more than heard. 360° spatial positioning. Binaural beats embedded in carrier tones. Cultural instrumentation as emotional vocabulary.</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;">
+        <div style="background:rgba(0,0,0,0.3);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.75rem;color:#e2e8f0;">Sub-bass: 20–80 Hz (body)</div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.75rem;color:#e2e8f0;">Bass: 80–250 Hz (warmth)</div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.75rem;color:#e2e8f0;">Mids: 250–4k Hz (voice/soul)</div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.75rem;color:#e2e8f0;">Highs: 4k–20k Hz (air/spirit)</div>
+      </div>
+    </div>
+
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:1.8rem;border-top:3px solid #8b5cf6;">
+      <div style="font-size:2rem;margin-bottom:0.8rem;">✋</div>
+      <div style="font-size:1.1rem;font-weight:800;color:#8b5cf6;margin-bottom:0.5rem;">Dimension 2: Haptic / Tactile</div>
+      <div style="font-size:0.82rem;color:#94a3b8;line-height:1.6;margin-bottom:1rem;">Bass frequencies 20–200 Hz penetrate the body through bone conduction. Haptic wearables and vibration transducers in floors, seats, and walls synchronize with musical rhythms. The music becomes physical touch.</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;">
+        <div style="background:rgba(0,0,0,0.3);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.75rem;color:#e2e8f0;">Floor transducers: 40–80 Hz</div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.75rem;color:#e2e8f0;">Seat actuators: 80–200 Hz</div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.75rem;color:#e2e8f0;">Haptic vest: rhythm pattern</div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.75rem;color:#e2e8f0;">Bone conduction: direct neural</div>
+      </div>
+    </div>
+
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:1.8rem;border-top:3px solid #f4a228;">
+      <div style="font-size:2rem;margin-bottom:0.8rem;">👁️</div>
+      <div style="font-size:1.1rem;font-weight:800;color:#f4a228;margin-bottom:0.5rem;">Dimension 3: Visual / Light</div>
+      <div style="font-size:0.82rem;color:#94a3b8;line-height:1.6;margin-bottom:1rem;">Synesthetic mapping: each frequency band controls a color spectrum. BPM drives flash rate (always kept below 3 Hz to prevent seizure triggers). Fractal visual geometry synchronized to polyrhythmic patterns.</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;">
+        <div style="background:rgba(0,0,0,0.3);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.75rem;color:#e2e8f0;">Delta: deep blue/indigo</div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.75rem;color:#e2e8f0;">Theta: violet/purple</div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.75rem;color:#e2e8f0;">Alpha: green/teal</div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.75rem;color:#e2e8f0;">Gamma: gold/white</div>
+      </div>
+    </div>
+
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:1.8rem;border-top:3px solid #10b981;">
+      <div style="font-size:2rem;margin-bottom:0.8rem;">🌿</div>
+      <div style="font-size:1.1rem;font-weight:800;color:#10b981;margin-bottom:0.5rem;">Dimension 4: Olfactory</div>
+      <div style="font-size:0.82rem;color:#94a3b8;line-height:1.6;margin-bottom:1rem;">Scent bypasses the thalamus and connects directly to the amygdala and hippocampus — the fastest route to emotion and memory. Synchronized scent delivery at key moments creates anchored emotional states.</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;">
+        <div style="background:rgba(0,0,0,0.3);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.75rem;color:#e2e8f0;">Lavender: theta calm</div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.75rem;color:#e2e8f0;">Citrus: alpha joy</div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.75rem;color:#e2e8f0;">Cedar/earth: grounding</div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.75rem;color:#e2e8f0;">Rose/jasmine: love/oxytocin</div>
+      </div>
+    </div>
+
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:1.8rem;border-top:3px solid #f43f5e;">
+      <div style="font-size:2rem;margin-bottom:0.8rem;">🌡️</div>
+      <div style="font-size:1.1rem;font-weight:800;color:#f43f5e;margin-bottom:0.5rem;">Dimension 5: Thermal</div>
+      <div style="font-size:0.82rem;color:#94a3b8;line-height:1.6;margin-bottom:1rem;">Core body temperature affects cognitive and emotional state. Warmth increases oxytocin and social openness. Mild cooling activates alertness. Controlled airflow simulates breath, wind, and nature presence.</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;">
+        <div style="background:rgba(0,0,0,0.3);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.75rem;color:#e2e8f0;">28–32°C: calm/bonding</div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.75rem;color:#e2e8f0;">22–26°C: alert/creative</div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.75rim;color:#e2e8f0;">Airflow: breath sync</div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.75rem;color:#e2e8f0;">Humidity: immersion depth</div>
+      </div>
+    </div>
+
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:1.8rem;border-top:3px solid #fb923c;">
+      <div style="font-size:2rem;margin-bottom:0.8rem;">👅</div>
+      <div style="font-size:1.1rem;font-weight:800;color:#fb923c;margin-bottom:0.5rem;">Dimension 6: Gustatory</div>
+      <div style="font-size:0.82rem;color:#94a3b8;line-height:1.6;margin-bottom:1rem;">Taste activates reward circuits immediately. Ceremonial plants and drinks used across cultures to mark transitions. In DreamChamber, micro-dosing herbal preparations timed to phase transitions amplify emotional openings.</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;">
+        <div style="background:rgba(0,0,0,0.3);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.75rem;color:#e2e8f0;">Cacao: entry/heart opening</div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.75rem;color:#e2e8f0;">Herbal tonics: calm/theta</div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.75rem;color:#e2e8f0;">Honey/citrus: joy activation</div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.75rem;color:#e2e8f0;">Water: integration/grounding</div>
+      </div>
+    </div>
+
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:1.8rem;border-top:3px solid #6366f1;grid-column:span 1;">
+      <div style="font-size:2rem;margin-bottom:0.8rem;">🫀</div>
+      <div style="font-size:1.1rem;font-weight:800;color:#6366f1;margin-bottom:0.5rem;">Dimension 7: Interoceptive / Biofeedback</div>
+      <div style="font-size:0.82rem;color:#94a3b8;line-height:1.6;margin-bottom:1rem;">The participant's own body becomes a control surface. Heart rate variability, breathing pattern, skin conductance, and movement data feed back into the DreamChamber in real time. The music responds to you responding to the music.</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;">
+        <div style="background:rgba(0,0,0,0.3);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.75rem;color:#e2e8f0;">HRV → BPM adaptation</div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.75rem;color:#e2e8f0;">Breath → dynamic control</div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.75rem;color:#e2e8f0;">GSR → harmonic density</div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.75rem;color:#e2e8f0;">Movement → spatialization</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- NEUROSCIENCE BRIEF: LULLABIES, ASMR, CHILLS, TRANCE -->
+  <div style="background:rgba(139,92,246,0.06);border:1px solid rgba(139,92,246,0.2);border-radius:24px;padding:3rem;">
+    <div style="text-align:center;margin-bottom:2.5rem;">
+      <div style="font-size:0.7rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:#8b5cf6;margin-bottom:0.8rem;">Neuroscience Deep Dive</div>
+      <h3 style="font-size:1.8rem;font-weight:800;color:#fff;margin-bottom:0.8rem;">Why These Sounds Work</h3>
+      <p style="color:#94a3b8;font-size:0.95rem;max-width:600px;margin:0 auto;">The DreamChamber isn't inventing new technology. It's formalizing what humans have known for 40,000 years, and giving it a scientific language.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;">
+
+      <div style="background:rgba(0,0,0,0.3);border-radius:16px;padding:1.5rem;">
+        <div style="font-size:1.5rem;margin-bottom:0.8rem;">🎵</div>
+        <div style="font-size:1rem;font-weight:800;color:#06b6d4;margin-bottom:0.6rem;">Lullaby Effect (Universal)</div>
+        <div style="font-size:0.82rem;color:#94a3b8;line-height:1.6;">50–80 BPM matches resting heart rate → safety signal. Soft timbre + repetition → amygdala deactivation. Oxytocin release in both singer and listener. Cross-cultural studies confirm virtually identical structures across Africa, Europe, and Asia — suggesting innate neural design, not cultural invention.</div>
+      </div>
+
+      <div style="background:rgba(0,0,0,0.3);border-radius:16px;padding:1.5rem;">
+        <div style="font-size:1.5rem;margin-bottom:0.8rem;">🌊</div>
+        <div style="font-size:1rem;font-weight:800;color:#10b981;margin-bottom:0.6rem;">ASMR Neuroscience</div>
+        <div style="font-size:0.82rem;color:#94a3b8;line-height:1.6;">Whispered speech + high-frequency consonants (t, k, s, sh) + binaural spatialization = "someone is close and means you no harm." Nucleus accumbens activation. Autonomic shift to parasympathetic. Scalp/neck tingling via sensory salience circuits. The brain reads it as social grooming.</div>
+      </div>
+
+      <div style="background:rgba(0,0,0,0.3);border-radius:16px;padding:1.5rem;">
+        <div style="font-size:1.5rem;margin-bottom:0.8rem;">❄️</div>
+        <div style="font-size:1rem;font-weight:800;color:#f43f5e;margin-bottom:0.6rem;">Musical Chills (Frisson)</div>
+        <div style="font-size:0.82rem;color:#94a3b8;line-height:1.6;">Sudden harmonic surprise (unexpected chord change, held note, key modulation) triggers dopaminergic cascade. Amygdala + nucleus accumbens + prefrontal cortex all fire simultaneously. Goosebumps are a vestigial piloerection response. Brief and intense. The music told the brain something it didn't expect and it was beautiful.</div>
+      </div>
+
+      <div style="background:rgba(0,0,0,0.3);border-radius:16px;padding:1.5rem;">
+        <div style="font-size:1.5rem;margin-bottom:0.8rem;">🥁</div>
+        <div style="font-size:1rem;font-weight:800;color:#f4a228;margin-bottom:0.6rem;">Trance / Shamanic Drumming</div>
+        <div style="font-size:0.82rem;color:#94a3b8;line-height:1.6;">Repetitive 4–7 Hz rhythmic stimuli entrain theta brainwaves via the Frequency Following Response. Group ritual context adds oxytocin and social cohesion. Default Mode Network suppression mirrors psychedelic states — ego boundaries soften. Humans have been engineering this state for at least 40,000 years.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTIVE RESONANCE FIELD -->
+<section id="collective">
+  <div class="section-header">
+    <div class="section-badge" style="background:rgba(244,162,40,0.15);color:#f4a228;">Collective Resonance</div>
+    <h2 style="color:#fff;">Multi-Participant Field Dynamics</h2>
+    <p>When multiple nervous systems entrain to the same sonic field simultaneously, something emergent happens. The whole becomes greater than the sum of its parts. This is why tribal ceremonies worked — and why the DreamChamber scales.</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:3rem;">
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:2rem;">
+      <h3 style="color:#f4a228;font-size:1.2rem;font-weight:800;margin-bottom:1.2rem;">Neural Synchrony Mechanics</h3>
+      <div style="display:flex;flex-direction:column;gap:0.8rem;">
+        <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:1rem;">
+          <div style="font-size:0.78rem;font-weight:700;color:#f4a228;margin-bottom:0.3rem;">Phase Locking (EEG studies)</div>
+          <div style="font-size:0.8rem;color:#94a3b8;line-height:1.5;">When groups listen to shared music, their brainwaves begin phase-locking within minutes. Delta and theta bands synchronize first, then alpha. The group literally begins thinking together.</div>
+        </div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:1rem;">
+          <div style="font-size:0.78rem;font-weight:700;color:#06b6d4;margin-bottom:0.3rem;">Heart Rate Coupling</div>
+          <div style="font-size:0.82rem;color:#94a3b8;line-height:1.5;">Group HRV studies show cardiac rhythms begin converging during shared musical experience. The group's hearts gradually synchronize — a measurable physical bond.</div>
+        </div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:1rem;">
+          <div style="font-size:0.78rem;font-weight:700;color:#10b981;margin-bottom:0.3rem;">Oxytocin Amplification</div>
+          <div style="font-size:0.82rem;color:#94a3b8;line-height:1.5;">Social music-making and shared listening both elevate oxytocin. In group settings, the effect compounds — each person's elevated state is perceived by others, further elevating theirs.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:2rem;">
+      <h3 style="color:#8b5cf6;font-size:1.2rem;font-weight:800;margin-bottom:1.2rem;">DreamChamber Collective Protocols</h3>
+      <div style="display:flex;flex-direction:column;gap:0.8rem;">
+        <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:1rem;">
+          <div style="font-size:0.78rem;font-weight:700;color:#8b5cf6;margin-bottom:0.3rem;">Synchronized Breath Entry</div>
+          <div style="font-size:0.82rem;color:#94a3b8;line-height:1.5;">Session begins with 4–6 group breath cycles guided by a single bass drone pulse. Before the music starts, everyone is already breathing together. This creates immediate neural coherence.</div>
+        </div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:1rem;">
+          <div style="font-size:0.78rem;font-weight:700;color:#f43f5e;margin-bottom:0.3rem;">Call & Response Architecture</div>
+          <div style="font-size:0.82rem;color:#94a3b8;line-height:1.5;">Live band incorporates call-and-response patterns that invite audience participation — even if only internal. Anticipating a response activates the same circuits as producing one. The crowd becomes a performer.</div>
+        </div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:1rem;">
+          <div style="font-size:0.78rem;font-weight:700;color:#10b981;margin-bottom:0.3rem;">Biofeedback Aggregation</div>
+          <div style="font-size:0.82rem;color:#94a3b8;line-height:1.5;">AVA aggregates anonymized biometric data from wearable participants. The collective emotional state of the room feeds back into the music in real time. The audience is literally playing itself.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PARTICIPANT PATHWAYS -->
+  <div style="background:rgba(6,182,212,0.05);border:1px solid rgba(6,182,212,0.15);border-radius:24px;padding:2.5rem;">
+    <h3 style="color:#fff;font-size:1.4rem;font-weight:800;margin-bottom:0.5rem;">Experience Pathways</h3>
+    <p style="color:#94a3b8;font-size:0.88rem;margin-bottom:2rem;">Every participant enters the DreamChamber at a different point. Every participant finds their own path through the Hyperverse. These are the mapped journeys.</p>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:0.82rem;">
+        <thead>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+            <th style="text-align:left;padding:0.8rem 1rem;color:#94a3b8;font-weight:700;text-transform:uppercase;font-size:0.7rem;letter-spacing:0.08em;">Pathway</th>
+            <th style="text-align:left;padding:0.8rem 1rem;color:#94a3b8;font-weight:700;text-transform:uppercase;font-size:0.7rem;letter-spacing:0.08em;">Entry State</th>
+            <th style="text-align:left;padding:0.8rem 1rem;color:#94a3b8;font-weight:700;text-transform:uppercase;font-size:0.7rem;letter-spacing:0.08em;">Sonic Protocol</th>
+            <th style="text-align:left;padding:0.8rem 1rem;color:#94a3b8;font-weight:700;text-transform:uppercase;font-size:0.7rem;letter-spacing:0.08em;">Sensory Stack</th>
+            <th style="text-align:left;padding:0.8rem 1rem;color:#94a3b8;font-weight:700;text-transform:uppercase;font-size:0.7rem;letter-spacing:0.08em;">Target State</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+            <td style="padding:0.8rem 1rem;color:#06b6d4;font-weight:700;">Autism / Neurodivergent</td>
+            <td style="padding:0.8rem 1rem;color:#e2e8f0;">Sensory sensitivity, social anxiety</td>
+            <td style="padding:0.8rem 1rem;color:#94a3b8;">Predictable 4:4 rhythm, no sudden dynamics, 60–80 BPM, gentle harmonic resolution</td>
+            <td style="padding:0.8rem 1rem;color:#94a3b8;">Low light, minimal haptic, cool lavender scent, firm tactile seating</td>
+            <td style="padding:0.8rem 1rem;color:#10b981;font-weight:600;">Regulated calm, social comfort</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+            <td style="padding:0.8rem 1rem;color:#f43f5e;font-weight:700;">PTSD / Trauma</td>
+            <td style="padding:0.8rem 1rem;color:#e2e8f0;">Hypervigilance, startle response</td>
+            <td style="padding:0.8rem 1rem;color:#94a3b8;">Delta-theta 40–60 BPM, no percussion onset surprises, sustained drones, vocal humming</td>
+            <td style="padding:0.8rem 1rem;color:#94a3b8;">Grounding floor vibration, weighted haptic wrap, warm dim light, cedar/earth scent</td>
+            <td style="padding:0.8rem 1rem;color:#10b981;font-weight:600;">Somatic safety, nervous system regulation</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+            <td style="padding:0.8rem 1rem;color:#8b5cf6;font-weight:700;">Anxiety / Stress</td>
+            <td style="padding:0.8rem 1rem;color:#e2e8f0;">Racing thoughts, shallow breath</td>
+            <td style="padding:0.8rem 1rem;color:#94a3b8;">4 Hz isochronic tones beneath 60 BPM ambient, breath-synchronized bass, ASMR vocal layer</td>
+            <td style="padding:0.8rem 1rem;color:#94a3b8;">Full-body haptic entrainment to breath, lavender + rose scent, 22–24°C airflow</td>
+            <td style="padding:0.8rem 1rem;color:#10b981;font-weight:600;">Theta calm, cortisol reduction</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+            <td style="padding:0.8rem 1rem;color:#f4a228;font-weight:700;">Creative Flow</td>
+            <td style="padding:0.8rem 1rem;color:#e2e8f0;">Blocked, distracted, underactivated</td>
+            <td style="padding:0.8rem 1rem;color:#94a3b8;">110–130 BPM, 5:4:3 fractal polyrhythm, microtonal melodic improvisation, no fixed key</td>
+            <td style="padding:0.8rem 1rem;color:#94a3b8;">Spatial 360° sound movement, motion-responsive harmonics, citrus scent, kinetic light</td>
+            <td style="padding:0.8rem 1rem;color:#10b981;font-weight:600;">Beta-gamma creative activation</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+            <td style="padding:0.8rem 1rem;color:#ec4899;font-weight:700;">Love / Connection</td>
+            <td style="padding:0.8rem 1rem;color:#e2e8f0;">Isolated, longing, closed</td>
+            <td style="padding:0.8rem 1rem;color:#94a3b8;">65–80 BPM, 639 Hz dominant, vocal harmonics 100–300 Hz (vagus nerve), call-and-response</td>
+            <td style="padding:0.8rem 1rem;color:#94a3b8;">Gentle haptic heart-sync, rose/jasmine scent, warm amber light, shared breath timing</td>
+            <td style="padding:0.8rem 1rem;color:#10b981;font-weight:600;">Oxytocin flood, open heart</td>
+          </tr>
+          <tr>
+            <td style="padding:0.8rem 1rem;color:#a3e635;font-weight:700;">Pure Joy / Euphoria</td>
+            <td style="padding:0.8rem 1rem;color:#e2e8f0;">Neutral, ready, curious</td>
+            <td style="padding:0.8rem 1rem;color:#94a3b8;">100–140 BPM, 528 Hz, syncopated bright polyrhythm, unexpected harmonic delight (frisson-targeting)</td>
+            <td style="padding:0.8rem 1rem;color:#94a3b8;">Full haptic rhythm pulse, color burst light synced to beat, citrus + honey, full temperature play</td>
+            <td style="padding:0.8rem 1rem;color:#10b981;font-weight:600;">Dopamine + endorphin cascade</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- SOUND ARCHITECTURE MATRIX -->
+<section id="protocols">
+  <div class="section-header">
+    <div class="section-badge" style="background:rgba(16,185,129,0.15);color:#10b981;">Hyper-Sonic Blueprint</div>
+    <h2 style="color:#fff;">The Sound Architecture Matrix</h2>
+    <p>Exact sequences. Brainwave targets. Neurochemical goals. Emotional arcs. This is the manual for building magic sound experiences — grounded in neuroscience, informed by 40,000 years of human tradition.</p>
+  </div>
+
+  <!-- HYPER-SONIC TRIGGER GRID -->
+  <div style="margin-bottom:4rem;">
+    <h3 style="color:#fff;font-size:1.4rem;font-weight:800;margin-bottom:1.5rem;">The Hyper-Sonic Trigger Grid: Mapping Sound to Brain Chemistry</h3>
+    <div style="overflow-x:auto;border-radius:16px;border:1px solid rgba(255,255,255,0.08);">
+      <table style="width:100%;border-collapse:collapse;font-size:0.82rem;">
+        <thead>
+          <tr style="background:rgba(255,255,255,0.04);">
+            <th style="text-align:left;padding:1rem;color:#94a3b8;font-weight:700;text-transform:uppercase;font-size:0.68rem;letter-spacing:0.08em;border-bottom:1px solid rgba(255,255,255,0.1);">Trigger Type</th>
+            <th style="text-align:left;padding:1rem;color:#94a3b8;font-weight:700;text-transform:uppercase;font-size:0.68rem;letter-spacing:0.08em;border-bottom:1px solid rgba(255,255,255,0.1);">Brainwaves</th>
+            <th style="text-align:left;padding:1rem;color:#94a3b8;font-weight:700;text-transform:uppercase;font-size:0.68rem;letter-spacing:0.08em;border-bottom:1px solid rgba(255,255,255,0.1);">Neurochemicals</th>
+            <th style="text-align:left;padding:1rem;color:#94a3b8;font-weight:700;text-transform:uppercase;font-size:0.68rem;letter-spacing:0.08em;border-bottom:1px solid rgba(255,255,255,0.1);">Emotional / Physical Response</th>
+            <th style="text-align:left;padding:1rem;color:#94a3b8;font-weight:700;text-transform:uppercase;font-size:0.68rem;letter-spacing:0.08em;border-bottom:1px solid rgba(255,255,255,0.1);">Cultural Lineage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+            <td style="padding:0.9rem 1rem;color:#06b6d4;font-weight:700;">Whispered voice / motherese</td>
+            <td style="padding:0.9rem 1rem;color:#e2e8f0;">Alpha ↑, Theta ↑</td>
+            <td style="padding:0.9rem 1rem;color:#e2e8f0;">Oxytocin ↑, Cortisol ↓</td>
+            <td style="padding:0.9rem 1rem;color:#94a3b8;">Relaxation, intimacy, profound safety</td>
+            <td style="padding:0.9rem 1rem;color:#64748b;">Indigenous lullabies, Sufi zikr, motherese universal</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.05);background:rgba(255,255,255,0.015);">
+            <td style="padding:0.9rem 1rem;color:#f4a228;font-weight:700;">Slow repetitive drumming</td>
+            <td style="padding:0.9rem 1rem;color:#e2e8f0;">Theta ↑ (4–7 Hz)</td>
+            <td style="padding:0.9rem 1rem;color:#e2e8f0;">Endorphins ↑, Dopamine ↑</td>
+            <td style="padding:0.9rem 1rem;color:#94a3b8;">Trance, meditative absorption, time dissolution</td>
+            <td style="padding:0.9rem 1rem;color:#64748b;">African trance drumming, Siberian shamanic ritual</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+            <td style="padding:0.9rem 1rem;color:#10b981;font-weight:700;">High-freq tapping / clicks</td>
+            <td style="padding:0.9rem 1rem;color:#e2e8f0;">Beta ↑ (13–20 Hz)</td>
+            <td style="padding:0.9rem 1rem;color:#e2e8f0;">Norepinephrine ↑</td>
+            <td style="padding:0.9rem 1rem;color:#94a3b8;">Precise focus, alertness, micro-attention</td>
+            <td style="padding:0.9rem 1rem;color:#64748b;">Modern ASMR, Morse code attentional systems</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.05);background:rgba(255,255,255,0.015);">
+            <td style="padding:0.9rem 1rem;color:#ec4899;font-weight:700;">Soft brushing / effleurage sounds</td>
+            <td style="padding:0.9rem 1rem;color:#e2e8f0;">Alpha ↑ (8–12 Hz)</td>
+            <td style="padding:0.9rem 1rem;color:#e2e8f0;">Oxytocin ↑, Endorphins ↑</td>
+            <td style="padding:0.9rem 1rem;color:#94a3b8;">Parasympathetic activation, scalp tingling, warmth</td>
+            <td style="padding:0.9rem 1rem;color:#64748b;">Traditional healing touch, lullaby accompaniment</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+            <td style="padding:0.9rem 1rem;color:#8b5cf6;font-weight:700;">Harmonic overtones / chanting</td>
+            <td style="padding:0.9rem 1rem;color:#e2e8f0;">Delta ↑, Theta ↑</td>
+            <td style="padding:0.9rem 1rem;color:#e2e8f0;">Serotonin ↑, Melatonin ↑, GABA ↑</td>
+            <td style="padding:0.9rem 1rem;color:#94a3b8;">Deep relaxation, emotional release, inner vision</td>
+            <td style="padding:0.9rem 1rem;color:#64748b;">Tibetan bowls, Gregorian chant, Vedic raga</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.05);background:rgba(255,255,255,0.015);">
+            <td style="padding:0.9rem 1rem;color:#f43f5e;font-weight:700;">Crescendo + tension/release</td>
+            <td style="padding:0.9rem 1rem;color:#e2e8f0;">Gamma ↑ (30–100 Hz)</td>
+            <td style="padding:0.9rem 1rem;color:#e2e8f0;">Dopamine surge, Endorphins ↑</td>
+            <td style="padding:0.9rem 1rem;color:#94a3b8;">Frisson chills, euphoria, full-body electrical wave</td>
+            <td style="padding:0.9rem 1rem;color:#64748b;">Classical frisson, Nusrat Fateh Ali Khan, peak rock</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+            <td style="padding:0.9rem 1rem;color:#a3e635;font-weight:700;">Binaural spatial movement</td>
+            <td style="padding:0.9rem 1rem;color:#e2e8f0;">Alpha-Theta by target</td>
+            <td style="padding:0.9rem 1rem;color:#e2e8f0;">State-dependent</td>
+            <td style="padding:0.9rem 1rem;color:#94a3b8;">"Something near me" — social safety, presence, intimacy</td>
+            <td style="padding:0.9rem 1rem;color:#64748b;">Modern ASMR 3D, ancient binaural nature immersion</td>
+          </tr>
+          <tr style="background:rgba(255,255,255,0.015);">
+            <td style="padding:0.9rem 1rem;color:#fb923c;font-weight:700;">Lullaby melodic contour</td>
+            <td style="padding:0.9rem 1rem;color:#e2e8f0;">Alpha ↑, Delta (sleep)</td>
+            <td style="padding:0.9rem 1rem;color:#e2e8f0;">Oxytocin ↑, Melatonin ↑</td>
+            <td style="padding:0.9rem 1rem;color:#94a3b8;">Safety, bonding, deep calm, readiness for surrender</td>
+            <td style="padding:0.9rem 1rem;color:#64748b;">Every culture on Earth — universal human design</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- THREE LAYERING STACKS -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:2rem;margin-bottom:4rem;">
+
+    <div style="background:rgba(6,182,212,0.06);border:1px solid rgba(6,182,212,0.2);border-radius:20px;padding:2rem;">
+      <div style="font-size:1.2rem;font-weight:800;color:#06b6d4;margin-bottom:0.5rem;">Layer Stack 1</div>
+      <div style="font-size:1.5rem;font-weight:900;color:#fff;margin-bottom:1rem;">Relaxation / Healing</div>
+      <div style="display:flex;flex-direction:column;gap:0.8rem;">
+        <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:0.9rem;border-left:3px solid #06b6d4;">
+          <div style="font-size:0.7rem;font-weight:800;color:#06b6d4;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.3rem;">Base Layer</div>
+          <div style="font-size:0.85rem;color:#e2e8f0;">Soft drone 40–80 Hz + slow harmonic overtones. 174 Hz Solfeggio base. Delta binaural beat 1–3 Hz embedded at -18dB beneath conscious threshold.</div>
+        </div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:0.9rem;border-left:3px solid #8b5cf6;">
+          <div style="font-size:0.7rem;font-weight:800;color:#8b5cf6;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.3rem;">Secondary Layer</div>
+          <div style="font-size:0.85rem;color:#e2e8f0;">Whispered personal attention or gentle narrative. Binaural spatialized — voice moves slowly from left to right over 30 seconds. Proximity cue: "someone caring is here."</div>
+        </div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:0.9rem;border-left:3px solid #10b981;">
+          <div style="font-size:0.7rem;font-weight:800;color:#10b981;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.3rem;">ASMR Micro-Triggers</div>
+          <div style="font-size:0.85rem;color:#e2e8f0;">Gentle tapping (500 ms intervals), soft page turns, fabric brushing. High-freq consonants (s, sh, t) embedded in whisper. Spatialized left-right at ear level.</div>
+        </div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:0.9rem;border-left:3px solid #f4a228;">
+          <div style="font-size:0.7rem;font-weight:800;color:#f4a228;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.3rem;">Haptic / Sensory Sync</div>
+          <div style="font-size:0.85rem;color:#e2e8f0;">Floor vibration at base drone frequency. ASMR trigger sounds synchronized to haptic vest pulse. Lavender diffusion timed to entry whisper. 28–30°C ambient.</div>
+        </div>
+        <div style="font-size:0.78rem;color:#10b981;font-weight:600;margin-top:0.5rem;">TARGET: Cortisol ↓ 30%, Alpha-Delta state, full parasympathetic</div>
+      </div>
+    </div>
+
+    <div style="background:rgba(99,102,241,0.06);border:1px solid rgba(99,102,241,0.2);border-radius:20px;padding:2rem;">
+      <div style="font-size:1.2rem;font-weight:800;color:#6366f1;margin-bottom:0.5rem;">Layer Stack 2</div>
+      <div style="font-size:1.5rem;font-weight:900;color:#fff;margin-bottom:1rem;">Focus / Creative Flow</div>
+      <div style="display:flex;flex-direction:column;gap:0.8rem;">
+        <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:0.9rem;border-left:3px solid #6366f1;">
+          <div style="font-size:0.7rem;font-weight:800;color:#6366f1;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.3rem;">Base Layer</div>
+          <div style="font-size:0.85rem;color:#e2e8f0;">Medium tempo 90–110 BPM rhythmic tapping or percussion. 5:4 polyrhythm ratio. Alpha binaural beat 10–12 Hz embedded. No vocal lyrics — pure instrumental.</div>
+        </div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:0.9rem;border-left:3px solid #8b5cf6;">
+          <div style="font-size:0.7rem;font-weight:800;color:#8b5cf6;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.3rem;">Secondary Layer</div>
+          <div style="font-size:0.85rem;color:#e2e8f0;">Crisp harmonic background (piano, guitar, or synth in Dorian mode). Subtle repeating melodic motif — 4 bars, variations every 16 bars. Never fully resolved.</div>
+        </div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:0.9rem;border-left:3px solid #10b981;">
+          <div style="font-size:0.7rem;font-weight:800;color:#10b981;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.3rem;">ASMR Micro-Triggers</div>
+          <div style="font-size:0.85rem;color:#e2e8f0;">Small randomized ASMR noises every 45–90 seconds. High-frequency clicks, keyboard taps, subtle paper sounds. Randomness prevents habituation — keeps attentional system engaged.</div>
+        </div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:0.9rem;border-left:3px solid #f4a228;">
+          <div style="font-size:0.7rem;font-weight:800;color:#f4a228;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.3rem;">Cognitive Priming</div>
+          <div style="font-size:0.85rem;color:#e2e8f0;">Optional: low-volume whispered intention-setting at session start. Citrus + eucalyptus diffusion. 22–24°C cool air circulation. Motion-responsive spatialization via biofeedback.</div>
+        </div>
+        <div style="font-size:0.78rem;color:#6366f1;font-weight:600;margin-top:0.5rem;">TARGET: Beta-Alpha edge (10–18 Hz), Dopamine flow state, prefrontal activation</div>
+      </div>
+    </div>
+
+    <div style="background:rgba(139,92,246,0.06);border:1px solid rgba(139,92,246,0.2);border-radius:20px;padding:2rem;">
+      <div style="font-size:1.2rem;font-weight:800;color:#8b5cf6;margin-bottom:0.5rem;">Layer Stack 3</div>
+      <div style="font-size:1.5rem;font-weight:900;color:#fff;margin-bottom:1rem;">Trance / Hypnosis / Ecstasy</div>
+      <div style="display:flex;flex-direction:column;gap:0.8rem;">
+        <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:0.9rem;border-left:3px solid #8b5cf6;">
+          <div style="font-size:0.7rem;font-weight:800;color:#8b5cf6;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.3rem;">Base Layer</div>
+          <div style="font-size:0.85rem;color:#e2e8f0;">Theta-range drumming 120–180 BPM (2 Hz theta in 60 BPM listener perception). Or binaural beats: 200 Hz left / 205 Hz right = 5 Hz theta. Sustained for minimum 20 minutes for entrainment.</div>
+        </div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:0.9rem;border-left:3px solid #f43f5e;">
+          <div style="font-size:0.7rem;font-weight:800;color:#f43f5e;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.3rem;">Secondary Layer</div>
+          <div style="font-size:0.85rem;color:#e2e8f0;">Harmonic chanting or vocal drones in Lydian mode. Tibetan bowl harmonics layered at 396, 528, 639 Hz simultaneously. Human voice humming (100–300 Hz vagus nerve activation).</div>
+        </div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:0.9rem;border-left:3px solid #06b6d4;">
+          <div style="font-size:0.7rem;font-weight:800;color:#06b6d4;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.3rem;">ASMR Micro-Triggers</div>
+          <div style="font-size:0.85rem;color:#e2e8f0;">Slow effleurage / brushing sounds (2–4 Hz rhythm). Mouth sounds (lips parting, gentle exhale). Ultra-slow binaural panning — 60 seconds left to right. Mimics hypnagogic state sound field.</div>
+        </div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:0.9rem;border-left:3px solid #f4a228;">
+          <div style="font-size:0.7rem;font-weight:800;color:#f4a228;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.3rem;">Emotional Arc</div>
+          <div style="font-size:0.85rem;color:#e2e8f0;">Controlled tension → release → joy → surrender → release again. Dynamic curve: 20 min build → peak → slow 10 min descent. No abrupt endings. Full integration space.</div>
+        </div>
+        <div style="font-size:0.78rem;color:#8b5cf6;font-weight:600;margin-top:0.5rem;">TARGET: Theta sustained, DMN suppression, ego dissolution, unity consciousness</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- EMOTIONAL ARC COMPOSITIONS -->
+  <div style="background:rgba(244,162,40,0.06);border:1px solid rgba(244,162,40,0.2);border-radius:24px;padding:3rem;margin-bottom:3rem;">
+    <h3 style="color:#fff;font-size:1.4rem;font-weight:800;margin-bottom:0.5rem;">Emotional Arc Compositions</h3>
+    <p style="color:#94a3b8;font-size:0.88rem;margin-bottom:2rem;">Designed sequences that guide the listener through a complete emotional journey — the DreamChamber as narrative.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;">
+
+      <div style="background:rgba(0,0,0,0.4);border-radius:16px;padding:1.5rem;border-top:3px solid #f4a228;">
+        <div style="font-size:1rem;font-weight:800;color:#f4a228;margin-bottom:1rem;">Joy Arc</div>
+        <div style="display:flex;flex-direction:column;gap:0.5rem;font-size:0.8rem;color:#94a3b8;">
+          <div><span style="color:#e2e8f0;font-weight:600;">0–5 min:</span> Anticipation — suspended harmonics, rising melodic fragments, 85 BPM</div>
+          <div><span style="color:#e2e8f0;font-weight:600;">5–15 min:</span> Delight entry — major pentatonic, playful ASMR tapping, 100 BPM</div>
+          <div><span style="color:#e2e8f0;font-weight:600;">15–25 min:</span> Peak joy — 528 Hz, syncopated 5:4, laughing-like melodic leaps</div>
+          <div><span style="color:#e2e8f0;font-weight:600;">25–30 min:</span> Gratitude landing — hymn resolution, 70 BPM, choir harmonics</div>
+        </div>
+      </div>
+
+      <div style="background:rgba(0,0,0,0.4);border-radius:16px;padding:1.5rem;border-top:3px solid #ec4899;">
+        <div style="font-size:1rem;font-weight:800;color:#ec4899;margin-bottom:1rem;">Love Arc</div>
+        <div style="display:flex;flex-direction:column;gap:0.5rem;font-size:0.8rem;color:#94a3b8;">
+          <div><span style="color:#e2e8f0;font-weight:600;">0–8 min:</span> Opening — solo cello, 639 Hz drone, whispered ASMR, 65 BPM</div>
+          <div><span style="color:#e2e8f0;font-weight:600;">8–20 min:</span> Tenderness — breathy vocals, oxytocin rhythm 3:2 lullaby, rose scent</div>
+          <div><span style="color:#e2e8f0;font-weight:600;">20–30 min:</span> Passion — Phrygian dominant, harmonic tension building, 5:4 pull</div>
+          <div><span style="color:#e2e8f0;font-weight:600;">30–40 min:</span> Surrender — sustained vowel harmonics, full resolution, 60 BPM</div>
+        </div>
+      </div>
+
+      <div style="background:rgba(0,0,0,0.4);border-radius:16px;padding:1.5rem;border-top:3px solid #8b5cf6;">
+        <div style="font-size:1rem;font-weight:800;color:#8b5cf6;margin-bottom:1rem;">Transcendence Arc</div>
+        <div style="display:flex;flex-direction:column;gap:0.5rem;font-size:0.8rem;color:#94a3b8;">
+          <div><span style="color:#e2e8f0;font-weight:600;">0–20 min:</span> Earth — delta drone, breath sync, grounding body vibration</div>
+          <div><span style="color:#e2e8f0;font-weight:600;">20–45 min:</span> Lift — theta drumming builds, Tuvan overtone layers enter</div>
+          <div><span style="color:#e2e8f0;font-weight:600;">45–75 min:</span> Flight — gamma pulse at 40 Hz, nested 7:5:3 fractal rhythm</div>
+          <div><span style="color:#e2e8f0;font-weight:600;">75–90 min:</span> Integration — silence with held single tone, breath, return</div>
+        </div>
+      </div>
+
+      <div style="background:rgba(0,0,0,0.4);border-radius:16px;padding:1.5rem;border-top:3px solid #10b981;">
+        <div style="font-size:1rem;font-weight:800;color:#10b981;margin-bottom:1rem;">Healing Arc</div>
+        <div style="display:flex;flex-direction:column;gap:0.5rem;font-size:0.8rem;color:#94a3b8;">
+          <div><span style="color:#e2e8f0;font-weight:600;">0–15 min:</span> Safety — lullaby pattern, 60 BPM, no percussion, lavender</div>
+          <div><span style="color:#e2e8f0;font-weight:600;">15–35 min:</span> Release — minor to major emotional arc, gentle catharsis space</div>
+          <div><span style="color:#e2e8f0;font-weight:600;">35–50 min:</span> Rebuilding — 285 Hz tone, empowerment rhythm enters slowly</div>
+          <div><span style="color:#e2e8f0;font-weight:600;">50–60 min:</span> Renewal — gratitude harmonics, full resolution, oxytocin vocal</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SAFETY PROTOCOLS -->
+  <div style="background:rgba(243,244,246,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:2.5rem;">
+    <h3 style="color:#fff;font-size:1.2rem;font-weight:800;margin-bottom:1.5rem;">Hypnotic Safety Protocols — Non-Negotiable</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;">
+      <div style="background:rgba(244,162,40,0.08);border:1px solid rgba(244,162,40,0.2);border-radius:12px;padding:1rem;">
+        <div style="font-size:0.78rem;font-weight:800;color:#f4a228;margin-bottom:0.4rem;">Consent First — Always</div>
+        <div style="font-size:0.78rem;color:#94a3b8;line-height:1.5;">Every participant explicitly consents to the type of experience before the session. Depth of trance, content of emotional arc, and sensory stack all specified and agreed upon in advance.</div>
+      </div>
+      <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:12px;padding:1rem;">
+        <div style="font-size:0.78rem;font-weight:800;color:#10b981;margin-bottom:0.4rem;">Grounding Always Available</div>
+        <div style="font-size:0.78rem;color:#94a3b8;line-height:1.5;">A designated grounding signal (a specific bass note or word) that participants can use to signal they need to return from deep states. Facilitators trained to recognize and respond within 30 seconds.</div>
+      </div>
+      <div style="background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.2);border-radius:12px;padding:1rem;">
+        <div style="font-size:0.78rem;font-weight:800;color:#6366f1;margin-bottom:0.4rem;">No Flash Rate Above 3 Hz</div>
+        <div style="font-size:0.78rem;color:#94a3b8;line-height:1.5;">Visual strobing above 3 Hz can trigger photosensitive seizures. All DreamChamber visual elements — lights, projections, screens — remain below this threshold at all times. Hard coded in AVA's light control.</div>
+      </div>
+      <div style="background:rgba(236,72,153,0.08);border:1px solid rgba(236,72,153,0.2);border-radius:12px;padding:1rem;">
+        <div style="font-size:0.78rem;font-weight:800;color:#ec4899;margin-bottom:0.4rem;">Integration Space Mandatory</div>
+        <div style="font-size:0.78rem;color:#94a3b8;line-height:1.5;">No session ends abruptly. Minimum 15 minutes of gentle return music (delta → alpha → beta progression) after peak states. Post-session facilitator check-in. No participant leaves alone after deep sessions.</div>
+      </div>
+      <div style="background:rgba(6,182,212,0.08);border:1px solid rgba(6,182,212,0.2);border-radius:12px;padding:1rem;">
+        <div style="font-size:0.78rem;font-weight:800;color:#06b6d4;margin-bottom:0.4rem;">Medical Screening Protocol</div>
+        <div style="font-size:0.78rem;color:#94a3b8;line-height:1.5;">Participants with psychosis, bipolar I, severe PTSD, or epilepsy screened prior. Not all protocols appropriate for all participants. Medical consultation required for clinical applications.</div>
+      </div>
+      <div style="background:rgba(163,230,53,0.08);border:1px solid rgba(163,230,53,0.2);border-radius:12px;padding:1rem;">
+        <div style="font-size:0.78rem;font-weight:800;color:#a3e635;margin-bottom:0.4rem;">AVA Biofeedback Monitoring</div>
+        <div style="font-size:0.78rem;color:#94a3b8;line-height:1.5;">Real-time HRV, breathing, and GSR monitoring throughout all deep sessions. AVA automatically reduces intensity if physiological indicators suggest distress rather than pleasant relaxation.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section id="manifesto">
+  <div style="max-width:900px;margin:0 auto;text-align:center;padding:3rem 0;">
+    <div style="font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:#8b5cf6;margin-bottom:2rem;">The Declaration of the Hyperverse</div>
+    <h2 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.1;margin-bottom:3rem;
+      background:linear-gradient(135deg,#8b5cf6,#06b6d4,#f4a228,#f43f5e);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+      We Are Not Making Music.<br>We Are Making Humans.
+    </h2>
+    <div style="display:flex;flex-direction:column;gap:2rem;text-align:left;">
+      <p style="font-size:1.05rem;color:#94a3b8;line-height:1.8;">For 40,000 years, humans have known that sound is the master key to consciousness. They encoded this knowledge in drums and bowls, in chants and lullabies, in the architecture of cathedrals and the rhythm of ceremony. They couldn't explain it in terms of dopamine and theta waves — but they knew it <em style="color:#e2e8f0;">worked.</em></p>
+      <p style="font-size:1.05rem;color:#94a3b8;line-height:1.8;">Now we have the science. Now we have the technology. Now we have AVA — the first AI that doesn't just play music but <em style="color:#e2e8f0;">thinks in sound</em>, reading the room, adapting in real time, orchestrating a living emotional field from the inside out.</p>
+      <p style="font-size:1.05rem;color:#94a3b8;line-height:1.8;">The DreamChamber is not a concert. It is not a therapy session. It is not a meditation class. It is something new — a full-spectrum human experience engineered at the intersection of ancient wisdom and modern neuroscience, delivered with precision and with love.</p>
+      <p style="font-size:1.2rem;font-weight:700;color:#fff;line-height:1.7;">We are showing humans the way to be in FLOW. The way to feel JOY without chemical assistance. The way to HEAL without waiting for a prescription. The way to LOVE with their whole nervous system. The way to BE — fully, completely, electrically ALIVE.</p>
+      <p style="font-size:1.05rem;color:#94a3b8;line-height:1.8;">This is the NOIZY Empire's deepest purpose. Not to entertain — to <em style="color:#e2e8f0;">transform.</em> Not to make noise — to make the kind of silence inside a human being that is full of everything worth feeling.</p>
+      <div style="margin-top:2rem;padding:2rem;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.2);border-radius:16px;">
+        <p style="font-size:1.3rem;font-weight:800;color:#fff;line-height:1.5;margin:0;">The real magic is in precision layering: voice + rhythm + harmonics + tactile feedback — you are literally sculpting brainwaves and emotions like a living instrument. <span style="color:#8b5cf6;">This is neuro-alchemy. Applied through sound. Given freely to all humans.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+// COSMOS
+const canvas = document.getElementById('cosmos');
+const ctx = canvas.getContext('2d');
+let W, H, stars = [];
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+
+function initStars() {
+  stars = [];
+  const hues = [280, 340, 200, 160, 40, 300, 170];
+  for (let i = 0; i < 280; i++) {
+    stars.push({
+      x: Math.random() * W, y: Math.random() * H,
+      r: Math.random() * 1.8 + 0.2,
+      hue: hues[Math.floor(Math.random() * hues.length)],
+      speed: Math.random() * 0.15 + 0.02,
+      twinkle: Math.random() * Math.PI * 2
+    });
+  }
+}
+
+function drawCosmos(t) {
+  ctx.clearRect(0, 0, W, H);
+  // Nebulae
+  const neb = [
+    {x:0.15,y:0.2,r:350,h:260,s:0.07},{x:0.85,y:0.7,r:300,h:310,s:0.06},
+    {x:0.5,y:0.5,r:400,h:200,s:0.04},{x:0.7,y:0.15,r:250,h:180,s:0.05}
+  ];
+  neb.forEach(n => {
+    const g = ctx.createRadialGradient(n.x*W,n.y*H,0,n.x*W,n.y*H,n.r);
+    g.addColorStop(0,`hsla(${n.h},70%,40%,${n.s})`);
+    g.addColorStop(1,'transparent');
+    ctx.fillStyle = g; ctx.beginPath();
+    ctx.arc(n.x*W,n.y*H,n.r,0,Math.PI*2); ctx.fill();
+  });
+  // Stars
+  stars.forEach(s => {
+    s.twinkle += 0.018;
+    const opacity = 0.4 + Math.sin(s.twinkle) * 0.35;
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+    ctx.fillStyle = `hsla(${s.hue},80%,85%,${opacity})`;
+    ctx.fill();
+    s.y -= s.speed;
+    if (s.y < -2) { s.y = H + 2; s.x = Math.random() * W; }
+  });
+  requestAnimationFrame(drawCosmos);
+}
+
+window.addEventListener('resize', () => { resize(); initStars(); });
+resize(); initStars(); drawCosmos(0);
+
+// INTERSECTION OBSERVER FOR NAV
+const sections = document.querySelectorAll('section[id], div[id="hero"]');
+const navLinks = document.querySelectorAll('nav a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id);
+      });
+    }
+  });
+}, { threshold: 0.2 });
+document.querySelectorAll('[id]').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

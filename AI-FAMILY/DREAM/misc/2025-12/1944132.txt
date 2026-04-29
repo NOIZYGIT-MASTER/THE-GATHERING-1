@@ -1,0 +1,23 @@
+<root>
+    <CtrlTextBoxStyle name="MixerFXHeaderComboInvisible" noDefaultDrawing="true" colText="[r:64 g:64 b:64 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlTextBoxStyle>
+    <CtrlPanelStyle name="EffectTypePanel" noDefaultDrawing="true" intSmartTileEdgeSize="5" intRoundedRectRadius="0">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlLabelStyle name="EQLabelStyle" colText="[r:32 g:32 b:32 a:255]">
+        <VFont name="font" vSize="16" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlPanel name="FXTitlePanel" style="MixerFXPanel" rect="[x:0 y:0 w:228 h:50]" id="0">
+        <CtrlKnob name="Mix" style="BFD2KnobMediumLight" rect="[x:35 y:3 w:32 h:41]" id="1006" />
+        <CtrlSlider name="inputLevel" style="MixerFXLevelMeter" rect="[x:26 y:6 w:4 h:15]" id="100000" />
+        <CtrlLabel style="EQLabelStyle" rect="[x:102 y:6 w:32 h:14]" id="1" text="EQ" />
+        <CtrlButton name="effectActive" style="MixerFXActive" rect="[x:6 y:7 w:15 h:15]" id="1" text="On" />
+        <CtrlComboBox name="MixerFXPresetCombo" style="MixerFXHeaderComboInvisible" rect="[x:101 y:29 w:86 h:15]" id="100002" />
+        <CtrlButton name="MixerFXMenu" style="MixerMenuButton" rect="[x:6 y:29 w:15 h:15]" id="100000" text="M" />
+        <CtrlLabel name="label2" style="MixerFXLabelDark" rect="[x:63 y:29 w:35 h:14]" id="1" text="Preset:" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:38 y:29 w:18 h:14]" id="2006" text="Mix" />
+        <CtrlButton name="MixerFXPresetPrev" style="MixerFXPresetPrev" rect="[x:190 y:28 w:14 h:15]" id="100000" zorder="2" text="&lt;" />
+        <CtrlButton name="MixerFXPresetNext" style="MixerFXPresetNext" rect="[x:207 y:28 w:14 h:15]" id="100000" zorder="2" text="&gt;" />
+    </CtrlPanel>
+</root>

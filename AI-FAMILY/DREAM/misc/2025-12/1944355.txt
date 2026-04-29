@@ -1,0 +1,57 @@
+<root>
+    <CtrlPanel style="MixerFXPanel" rect="[x:62 y:49 w:228 h:228]" id="0">
+        <CtrlPanel name="MixerFXTitlePanel" rect="[x:0 y:0 w:228 h:50]" id="0" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:26 y:51 w:20 h:10]" id="100000" text="10ms" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:183 y:51 w:20 h:10]" id="100000" text="10ms" />
+        <CtrlPanel style="MixerFXLargeKnobNotches" rect="[x:13 y:61 w:58 h:58]" id="0">
+            <CtrlKnob name="NoiseGate_Attack" style="MixerFXKnobLarge" rect="[x:3 y:3 w:53 h:53]" id="1000" />
+        </CtrlPanel>
+        <CtrlPanel style="MixerFXLargeKnobNotches" rect="[x:171 y:61 w:58 h:58]" id="0">
+            <CtrlKnob name="NoiseGate_Hold" style="MixerFXKnobLarge" rect="[x:3 y:3 w:53 h:53]" id="1001" />
+        </CtrlPanel>
+        <CtrlMeter name="NoiseGate_display_GateEnv" style="MixerFXMeter_Percent" rect="[x:64 y:67 w:100 h:60]" id="100000" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:5 y:97 w:19 h:10]" id="100000" text=".1ms" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:51 y:97 w:14 h:10]" id="100000" text="1s" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:167 y:97 w:18 h:10]" id="100000" text=".1ms" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:209 y:97 w:14 h:10]" id="100000" text="1s" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:19 y:102 w:40 h:15]" id="2000" text="Attack" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:183 y:102 w:24 h:15]" id="2001" text="Hold" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:29 y:112 w:14 h:10]" id="100000" text="-18" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:186 y:112 w:24 h:10]" id="100000" text=".1s" />
+        <CtrlPanel style="MixerFXLargeKnobNotches" rect="[x:13 y:121 w:58 h:58]" id="0">
+            <CtrlKnob name="NoiseGate_Threshold" style="MixerFXKnobLarge" rect="[x:3 y:3 w:53 h:53]" id="1003" />
+        </CtrlPanel>
+        <CtrlPanel style="MixerFXLargeKnobNotches" rect="[x:171 y:121 w:58 h:58]" id="0">
+            <CtrlKnob name="NoiseGate_Release" style="MixerFXKnobLarge" rect="[x:3 y:3 w:53 h:53]" id="1002" />
+        </CtrlPanel>
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:85 y:127 w:57 h:15]" id="2001" text="Gate Amount" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:76 y:151 w:14 h:10]" id="100000" text="300" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:137 y:151 w:14 h:10]" id="100000" text="300" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:9 y:157 w:14 h:10]" id="100000" text="-96" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:52 y:157 w:14 h:10]" id="100000" text="0" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:167 y:157 w:14 h:10]" id="100000" text="1ms" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:209 y:157 w:14 h:10]" id="100000" text="10s" />
+        <CtrlPanel name="CtrlPanel" style="MixerFXMiniKnobNotches" rect="[x:66 y:159 w:32 h:32]" id="100000">
+            <CtrlKnob name="NoiseGate_HPFreq" style="MixerFXKnobSmall" rect="[x:5 y:4 w:29 h:29]" id="1001" />
+        </CtrlPanel>
+        <CtrlPanel name="CtrlPanel" style="MixerFXMiniKnobNotches" rect="[x:127 y:159 w:32 h:32]" id="100000">
+            <CtrlKnob name="NoiseGate_LPFreq" style="MixerFXKnobSmall" rect="[x:5 y:4 w:29 h:29]" id="1001" />
+        </CtrlPanel>
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:12 y:163 w:51 h:15]" id="2003" text="Threshold" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:174 y:163 w:44 h:15]" id="2002" text="Release" />
+        <CtrlPanel name="CtrlPanel" style="MixerFXMiniKnobNotches" rect="[x:19 y:177 w:32 h:32]" id="100000">
+            <CtrlKnob name="NoiseGate_Hysteresis" style="MixerFXKnobSmall" rect="[x:5 y:4 w:29 h:29]" id="1001" />
+        </CtrlPanel>
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:94 y:183 w:20 h:10]" id="100000" text="100k" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:66 y:184 w:7 h:10]" id="100000" text="1" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:127 y:184 w:8 h:10]" id="100000" text="1" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:155 y:184 w:18 h:10]" id="100000" text="100k" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:64 y:191 w:45 h:15]" id="2001" text="HP Freq" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:125 y:191 w:42 h:15]" id="2001" text="LP Freq" />
+        <CtrlButton name="NoiseGate_Preview" style="MixerFXButton" rect="[x:184 y:191 w:15 h:15]" id="1" displayName="Preview" text="On" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:13 y:201 w:14 h:10]" id="100000" text="-12" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:48 y:202 w:7 h:10]" id="100000" text="0" />
+        <CtrlLabel name="Preview label" style="MixerFXLabelDark" rect="[x:168 y:206 w:54 h:15]" id="2009" text="Key Listen" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:9 y:208 w:55 h:15]" id="2001" text="Hysteresis" />
+    </CtrlPanel>
+</root>

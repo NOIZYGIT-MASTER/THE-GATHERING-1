@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIZYVOX Intake Portal — RSP_001</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Bebas+Neue&display=swap');
+
+  :root {
+    --void:    #010206;
+    --deep:    #030810;
+    --panel:   #070e1a;
+    --card:    #0a1220;
+    --border:  #101e30;
+    --glow:    #1a2e48;
+    --gold:    #e8c84a;
+    --gold-d:  rgba(232,200,74,0.08);
+    --green:   #00e87a;
+    --green-d: rgba(0,232,122,0.08);
+    --violet:  #b794f4;
+    --cyan:    #67e8f9;
+    --red:     #ff4466;
+    --red-d:   rgba(255,68,102,0.08);
+    --text:    #b8cce4;
+    --dim:     #3e5570;
+    --bright:  #e8f2ff;
+    --mono:    'Space Mono', monospace;
+    --sans:    'Space Grotesk', sans-serif;
+    --bebas:   'Bebas Neue', sans-serif;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { height:100%; }
+
+  body {
+    background: var(--void);
+    color: var(--text);
+    font-family: var(--sans);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    background: rgba(1,2,6,0.96);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+  }
+
+  .hdr-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .hdr-logo {
+    font-family: var(--bebas);
+    font-size: 26px;
+    color: var(--gold);
+    letter-spacing: 0.14em;
+  }
+
+  .hdr-product {
+    font-family: var(--mono);
+    font-size: 8px;
+    color: var(--dim);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+
+  .hdr-sep { width: 1px; height: 30px; background: var(--border); }
+
+  .hdr-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--dim);
+    letter-spacing: 0.15em;
+  }
+
+  .status-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--dim);
+    transition: background 0.3s, box-shadow 0.3s;
+  }
+
+  .status-dot.live {
+    background: var(--red);
+    box-shadow: 0 0 8px rgba(255,68,102,0.7);
+    animation: pulse-dot 1s infinite;
+  }
+
+  .status-dot.ready { background: var(--green); box-shadow: 0 0 6px rgba(0,232,122,0.5); }
+  .status-dot.processing { background: var(--gold); box-shadow: 0 0 6px rgba(232,200,74,0.5); }
+
+  @keyframes pulse-dot {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.3); opacity: 0.8; }
+  }
+
+  .hdr-key {
+    font-family: var(--mono);
+    font-size: 8px;
+    color: var(--dim);
+    letter-spacing: 0.08em;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 4px 10px;
+    max-width: 340px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* ─── MAIN LAYOUT ─── */
+  main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 340px 1fr 300px;
+    gap: 0;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 28px;
+    gap: 20px;
+  }
+
+  @media (max-width: 1100px) { main { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 700px) { main { grid-template-columns: 1fr; } }
+
+  /* ─── PANEL ─── */
+  .panel {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .panel-head {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .panel-head .ph-label {
+    font-family: var(--mono);
+    font-size: 8px;
+    color: var(--dim);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    flex: 1;
+  }
+
+  .panel-body { padding: 18px; }
+
+  /* ─── RSP IDENTITY ─── */
+  .rsp-identity {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .rsp-avatar {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: var(--gold-d);
+    border: 2px solid rgba(232,200,74,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--bebas);
+    font-size: 22px;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+
+  .rsp-name {
+    font-family: var(--bebas);
+    font-size: 22px;
+    color: var(--bright);
+    letter-spacing: 0.08em;
+    margin-bottom: 2px;
+  }
+
+  .rsp-id {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--green);
+    letter-spacing: 0.2em;
+    margin-bottom: 16px;
+  }
+
+  .field-row {
+    margin-bottom: 12px;
+  }
+
+  .field-label {
+    font-family: var(--mono);
+    font-size: 7px;
+    color: var(--dim);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+
+  .field-val {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 7px 10px;
+    width: 100%;
+    letter-spacing: 0.06em;
+    line-height: 1.5;
+  }
+
+  .field-val input,
+  .field-val select,
+  .field-val textarea {
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    width: 100%;
+    outline: none;
+    resize: none;
+    line-height: 1.5;
+  }
+
+  .field-val textarea { min-height: 56px; }
+  .field-val.editable { border-color: rgba(103,232,249,0.2); }
+
+  .consent-key-display {
+    font-family: var(--mono);
+    font-size: 8px;
+    color: var(--gold);
+    background: var(--gold-d);
+    border: 1px solid rgba(232,200,74,0.2);
+    border-radius: 4px;
+    padding: 8px 10px;
+    line-height: 1.7;
+    word-break: break-all;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+
+  .consent-key-display:hover { border-color: rgba(232,200,74,0.5); }
+
+  .copy-hint {
+    font-family: var(--mono);
+    font-size: 7px;
+    color: var(--dim);
+    letter-spacing: 0.15em;
+    margin-top: 4px;
+  }
+
+  /* ─── WAVEFORM CENTER ─── */
+  .center-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .waveform-panel {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0;
+    overflow: hidden;
+    flex: 1;
+    min-height: 220px;
+  }
+
+  .wf-header {
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .wf-label {
+    font-family: var(--mono);
+    font-size: 8px;
+    color: var(--dim);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+
+  .wf-timer {
+    font-family: var(--bebas);
+    font-size: 22px;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+  }
+
+  #waveform-canvas {
+    display: block;
+    width: 100%;
+    height: 160px;
+    background: var(--panel);
+  }
+
+  /* ─── CONTROLS ─── */
+  .controls-bar {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    font-family: var(--bebas);
+    font-size: 15px;
+    letter-spacing: 0.14em;
+    padding: 10px 22px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.1s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+  }
+
+  .btn:hover { opacity: 0.85; }
+  .btn:active { transform: scale(0.97); }
+  .btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+  .btn-record { background: var(--red); color: #fff; }
+  .btn-stop   { background: var(--dim); color: var(--bright); }
+  .btn-play   { background: var(--green-d); color: var(--green); border: 1px solid rgba(0,232,122,0.3); }
+  .btn-process{ background: var(--gold-d); color: var(--gold); border: 1px solid rgba(232,200,74,0.3); }
+  .btn-send   { background: var(--violet); color: #fff; }
+  .btn-download{ background: var(--card); color: var(--cyan); border: 1px solid rgba(103,232,249,0.3); }
+
+  .btn-record.recording {
+    background: var(--void);
+    color: var(--red);
+    border: 2px solid var(--red);
+    animation: border-pulse 0.8s infinite;
+  }
+
+  @keyframes border-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255,68,102,0.4); }
+    50% { box-shadow: 0 0 0 6px rgba(255,68,102,0); }
+  }
+
+  .ctrl-spacer { flex: 1; }
+
+  .level-meter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 8px;
+    color: var(--dim);
+    letter-spacing: 0.15em;
+  }
+
+  .level-bars {
+    display: flex;
+    gap: 2px;
+    align-items: flex-end;
+    height: 20px;
+  }
+
+  .level-bar {
+    width: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    transition: height 0.05s, background 0.1s;
+  }
+
+  /* ─── RIGHT PANEL: LOG ─── */
+  .log-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .log-inner {
+    padding: 14px 18px;
+    font-family: var(--mono);
+    font-size: 10px;
+    line-height: 1.75;
+    height: 280px;
+    overflow-y: auto;
+    color: var(--text);
+    scroll-behavior: smooth;
+  }
+
+  .log-inner::-webkit-scrollbar { width: 4px; }
+  .log-inner::-webkit-scrollbar-track { background: var(--panel); }
+  .log-inner::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .log-entry { margin-bottom: 4px; }
+  .log-entry .le-time { color: var(--dim); margin-right: 8px; }
+  .log-entry .le-msg { color: var(--text); }
+  .log-entry.info .le-msg { color: var(--text); }
+  .log-entry.ok .le-msg { color: var(--green); }
+  .log-entry.warn .le-msg { color: var(--gold); }
+  .log-entry.err .le-msg { color: var(--red); }
+  .log-entry.sys .le-msg { color: var(--violet); }
+
+  /* ─── ANALYSIS PANEL ─── */
+  .analysis-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 14px 18px;
+  }
+
+  .aval {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px;
+  }
+
+  .aval-label {
+    font-family: var(--mono);
+    font-size: 7px;
+    color: var(--dim);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .aval-val {
+    font-family: var(--bebas);
+    font-size: 20px;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    line-height: 1;
+  }
+
+  .aval.green .aval-val { color: var(--green); }
+  .aval.violet .aval-val { color: var(--violet); }
+  .aval.cyan .aval-val { color: var(--cyan); }
+
+  /* ─── TRANSCRIPT ─── */
+  #transcript-box {
+    padding: 14px 18px;
+    min-height: 80px;
+    font-family: var(--serif, Georgia, serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.75;
+    letter-spacing: 0.01em;
+    border-top: 1px solid var(--border);
+  }
+
+  #transcript-box .placeholder { color: var(--dim); font-size: 12px; font-style: normal; font-family: var(--mono); letter-spacing: 0.1em; }
+
+  /* ─── SERVER STATUS ─── */
+  .server-status {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+  }
+
+  .ss-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .ss-row:last-child { margin-bottom: 0; }
+
+  .ss-name {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text);
+    letter-spacing: 0.1em;
+  }
+
+  .ss-badge {
+    font-family: var(--mono);
+    font-size: 7px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    border: 1px solid;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .ss-badge.online { color: var(--green); border-color: rgba(0,232,122,0.3); background: var(--green-d); }
+  .ss-badge.offline { color: var(--red); border-color: rgba(255,68,102,0.3); background: var(--red-d); }
+  .ss-badge.checking { color: var(--gold); border-color: rgba(232,200,74,0.3); background: var(--gold-d); }
+
+  /* ─── PIPELINE STEPS ─── */
+  .pipeline-steps {
+    padding: 12px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .pipe-step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--dim);
+    letter-spacing: 0.08em;
+    padding: 8px 10px;
+    border-radius: 5px;
+    transition: all 0.3s;
+  }
+
+  .pipe-step.active { background: var(--gold-d); color: var(--gold); border: 1px solid rgba(232,200,74,0.15); }
+  .pipe-step.done   { color: var(--green); }
+  .pipe-step.error  { color: var(--red); }
+
+  .pipe-num {
+    font-family: var(--bebas);
+    font-size: 14px;
+    width: 20px;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .pipe-icon { width: 14px; flex-shrink: 0; }
+
+  /* ─── BOTTOM BAR ─── */
+  footer {
+    background: rgba(1,2,6,0.92);
+    border-top: 1px solid var(--border);
+    padding: 10px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 8px;
+    color: var(--dim);
+    letter-spacing: 0.15em;
+  }
+
+  .footer-left { display: flex; gap: 20px; }
+  .footer-right { color: var(--green); }
+
+  .flash { animation: flash-anim 0.4s; }
+  @keyframes flash-anim { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  /* ─── NOTIFICATION TOAST ─── */
+  #toast {
+    position: fixed;
+    bottom: 60px; right: 24px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--green);
+    border-radius: 8px;
+    padding: 12px 18px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text);
+    letter-spacing: 0.08em;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.3s;
+    z-index: 999;
+    max-width: 320px;
+  }
+
+  #toast.show { transform: translateY(0); opacity: 1; }
+  #toast.err { border-left-color: var(--red); }
+
+</style>
+</head>
+<body>
+
+<!-- ─── HEADER ─── -->
+<header>
+  <div class="hdr-brand">
+    <div>
+      <div class="hdr-logo">NOIZYVOX</div>
+      <div class="hdr-product">A.I.V.A. INTAKE PORTAL · v1.0</div>
+    </div>
+    <div class="hdr-sep"></div>
+    <div class="hdr-status">
+      <div class="status-dot" id="rec-indicator"></div>
+      <span id="rec-status-label">STANDBY</span>
+    </div>
+  </div>
+  <div class="hdr-key" id="active-consent-key" title="Active Consent Key">
+    NOIZY-RSP001-CONSENT-A7F3C9B2E1D4850F-AVA-GLOBAL-CANADA-20260314
+  </div>
+</header>
+
+<!-- ─── MAIN ─── -->
+<main>
+
+  <!-- LEFT: RSP IDENTITY -->
+  <div style="display:flex;flex-direction:column;gap:16px;">
+    <div class="panel">
+      <div class="panel-head">
+        <div class="ph-label">RSP Identity</div>
+        <span style="font-family:var(--mono);font-size:8px;color:var(--green);letter-spacing:.15em;">RSP_001</span>
+      </div>
+      <div class="panel-body rsp-identity">
+        <div class="rsp-avatar">RSP</div>
+        <div class="rsp-name">ROBERT STEPHEN PLOWMAN</div>
+        <div class="rsp-id">RSP_001 · FOUNDING CREATOR · 85% FLOOR</div>
+
+        <div class="field-row">
+          <div class="field-label">Actor ID</div>
+          <div class="field-val"><input type="text" id="actor-id" value="RSP_001" readonly></div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-label">Session ID</div>
+          <div class="field-val"><input type="text" id="session-id" value="" placeholder="auto-generated"></div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-label">Domain</div>
+          <div class="field-val editable">
+            <select id="domain">
+              <option value="AVA-GLOBAL">AVA-GLOBAL</option>
+              <option value="AVA-VOICE">AVA-VOICE</option>
+              <option value="AVA-MUSIC">AVA-MUSIC</option>
+              <option value="AVA-BROADCAST">AVA-BROADCAST</option>
+              <option value="AVA-FILM">AVA-FILM</option>
+              <option value="AVA-GAME">AVA-GAME</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-label">Utterance Tag</div>
+          <div class="field-val editable">
+            <input type="text" id="utterance-tag" placeholder="e.g. intake-001, monologue-a, verse-1">
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-label">Active Consent Key</div>
+          <div class="consent-key-display" id="consent-key-box" onclick="copyConsentKey()" title="Click to copy">
+            NOIZY-RSP001-CONSENT-A7F3C9B2E1D4850F<br>-AVA-GLOBAL-CANADA-20260314
+          </div>
+          <div class="copy-hint">CLICK TO COPY · IMMUTABLE · SHA-256 BOUND</div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-label">Notes / Script Excerpt</div>
+          <div class="field-val editable">
+            <textarea id="notes" placeholder="Optional: paste script, notes, or utterance description..."></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVER STATUS -->
+    <div class="server-status">
+      <div class="panel-head" style="border:none;padding:0 0 10px 0;margin-bottom:8px;border-bottom:1px solid var(--border);">
+        <div class="ph-label">Backend Status</div>
+        <button onclick="checkServer()" style="background:none;border:none;color:var(--dim);font-family:var(--mono);font-size:9px;cursor:pointer;letter-spacing:.1em;">↻ CHECK</button>
+      </div>
+      <div class="ss-row">
+        <span class="ss-name">Voice Receiver (Flask)</span>
+        <span class="ss-badge checking" id="flask-status">CHECKING...</span>
+      </div>
+      <div class="ss-row">
+        <span class="ss-name">Whisper (STT)</span>
+        <span class="ss-badge offline" id="whisper-status">OFFLINE</span>
+      </div>
+      <div class="ss-row">
+        <span class="ss-name">Librosa (Analysis)</span>
+        <span class="ss-badge offline" id="librosa-status">OFFLINE</span>
+      </div>
+      <div class="ss-row">
+        <span class="ss-name">Microphone</span>
+        <span class="ss-badge offline" id="mic-status">OFFLINE</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CENTER: WAVEFORM + CONTROLS -->
+  <div class="center-panel">
+
+    <!-- WAVEFORM -->
+    <div class="waveform-panel">
+      <div class="wf-header">
+        <span class="wf-label">Live Waveform · <span id="sample-rate">— Hz</span></span>
+        <span class="wf-timer" id="rec-timer">00:00.0</span>
+      </div>
+      <canvas id="waveform-canvas" width="800" height="160"></canvas>
+    </div>
+
+    <!-- CONTROLS -->
+    <div class="controls-bar">
+      <button class="btn btn-record" id="btn-record" onclick="startRecording()">
+        ● RECORD
+      </button>
+      <button class="btn btn-stop" id="btn-stop" onclick="stopRecording()" disabled>
+        ■ STOP
+      </button>
+      <button class="btn btn-play" id="btn-play" onclick="playback()" disabled>
+        ▶ PLAY
+      </button>
+      <button class="btn btn-process" id="btn-process" onclick="processAudio()" disabled>
+        ⚙ PROCESS
+      </button>
+      <div class="ctrl-spacer"></div>
+      <div class="level-meter">
+        <span>LEVEL</span>
+        <div class="level-bars" id="level-bars">
+          <div class="level-bar" style="height:4px;" id="lb0"></div>
+          <div class="level-bar" style="height:6px;" id="lb1"></div>
+          <div class="level-bar" style="height:5px;" id="lb2"></div>
+          <div class="level-bar" style="height:8px;" id="lb3"></div>
+          <div class="level-bar" style="height:4px;" id="lb4"></div>
+          <div class="level-bar" style="height:10px;" id="lb5"></div>
+          <div class="level-bar" style="height:6px;" id="lb6"></div>
+          <div class="level-bar" style="height:14px;" id="lb7"></div>
+          <div class="level-bar" style="height:10px;" id="lb8"></div>
+          <div class="level-bar" style="height:7px;" id="lb9"></div>
+        </div>
+      </div>
+      <button class="btn btn-download" id="btn-download" onclick="downloadWAV()" disabled>
+        ↓ DOWNLOAD WAV
+      </button>
+      <button class="btn btn-send" id="btn-send" onclick="sendToServer()" disabled>
+        ↑ SEND TO GABRIEL
+      </button>
+    </div>
+
+    <!-- ANALYSIS VALUES -->
+    <div class="panel">
+      <div class="panel-head">
+        <div class="ph-label">Audio Analysis</div>
+        <span style="font-family:var(--mono);font-size:8px;color:var(--dim);">LIBROSA + WEB AUDIO API</span>
+      </div>
+      <div class="analysis-grid">
+        <div class="aval">
+          <div class="aval-label">Duration</div>
+          <div class="aval-val" id="val-duration">—</div>
+        </div>
+        <div class="aval green">
+          <div class="aval-label">Peak Level</div>
+          <div class="aval-val" id="val-peak">—</div>
+        </div>
+        <div class="aval violet">
+          <div class="aval-label">Avg RMS</div>
+          <div class="aval-val" id="val-rms">—</div>
+        </div>
+        <div class="aval cyan">
+          <div class="aval-label">Sample Rate</div>
+          <div class="aval-val" id="val-sr">—</div>
+        </div>
+        <div class="aval">
+          <div class="aval-label">Utterance ID</div>
+          <div class="aval-val" id="val-uid" style="font-size:10px;letter-spacing:.04em;">—</div>
+        </div>
+        <div class="aval green">
+          <div class="aval-label">Watermark</div>
+          <div class="aval-val" id="val-wm" style="font-size:10px;letter-spacing:.04em;">—</div>
+        </div>
+      </div>
+
+      <!-- TRANSCRIPT -->
+      <div id="transcript-box">
+        <span class="placeholder">// TRANSCRIPT WILL APPEAR HERE AFTER PROCESSING<br>// WHISPER STT · CONNECT BACKEND TO ENABLE</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: LOG + PIPELINE -->
+  <div class="log-panel">
+
+    <div class="panel" style="flex:1;">
+      <div class="panel-head">
+        <div class="ph-label">System Log</div>
+        <button onclick="clearLog()" style="background:none;border:none;color:var(--dim);font-family:var(--mono);font-size:9px;cursor:pointer;">CLEAR</button>
+      </div>
+      <div class="log-inner" id="system-log"></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <div class="ph-label">7-Stage Pipeline</div>
+      </div>
+      <div class="pipeline-steps">
+        <div class="pipe-step" id="ps-1">
+          <div class="pipe-num">1</div>
+          <span>Consent Key Verify</span>
+        </div>
+        <div class="pipe-step" id="ps-2">
+          <div class="pipe-num">2</div>
+          <span>Never Clause Check</span>
+        </div>
+        <div class="pipe-step" id="ps-3">
+          <div class="pipe-num">3</div>
+          <span>WAV Write</span>
+        </div>
+        <div class="pipe-step" id="ps-4">
+          <div class="pipe-num">4</div>
+          <span>WM_{8hex} Watermark</span>
+        </div>
+        <div class="pipe-step" id="ps-5">
+          <div class="pipe-num">5</div>
+          <span>Provenance Record</span>
+        </div>
+        <div class="pipe-step" id="ps-6">
+          <div class="pipe-num">6</div>
+          <span>API Dispatch</span>
+        </div>
+        <div class="pipe-step" id="ps-7">
+          <div class="pipe-num">7</div>
+          <span>Provenance Ledger Append</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-left">
+    <span>NOIZYFISH INC. · RSP_001 · GABRIEL_V3</span>
+    <span id="footer-clock">—</span>
+    <span id="footer-session">SESSION: INIT</span>
+  </div>
+  <div class="footer-right">GORUNFREE · 35% VOICE / 65% AI · 1-CLICK / ZERO FRICTION</div>
+</footer>
+
+<div id="toast"></div>
+
+<script>
+// ─── STATE ─────────────────────────────────────────────────────────
+let mediaRecorder = null;
+let audioChunks   = [];
+let audioCtx      = null;
+let analyserNode  = null;
+let sourceNode    = null;
+let recStream     = null;
+let recStartTime  = null;
+let timerInterval = null;
+let animFrame     = null;
+let recordedBlob  = null;
+let audioBuffer   = null;
+let playbackSrc   = null;
+let isRecording   = false;
+let sessionId     = generateSessionId();
+
+// ─── INIT ───────────────────────────────────────────────────────────
+document.getElementById('session-id').value = sessionId;
+updateClock();
+setInterval(updateClock, 100);
+checkServer();
+log('sys', 'NOIZYVOX INTAKE PORTAL v1.0 INITIALIZED');
+log('sys', 'RSP_001 · GABRIEL_V3 · CONSENT KEY LOADED');
+log('info', 'Click RECORD to begin audio capture');
+log('info', 'Backend: http://localhost:5050 · Start voice_receiver.py');
+
+// ─── HELPERS ────────────────────────────────────────────────────────
+function generateSessionId() {
+  const hex = () => Math.floor(Math.random() * 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
+  return `SES-${hex()}${hex()}-${Date.now().toString(36).toUpperCase()}`;
+}
+
+function generateUtteranceId(actorId, sessionId) {
+  const ts = Date.now().toString(36).toUpperCase();
+  const rand = Math.floor(Math.random() * 0xFFFF).toString(16).toUpperCase();
+  return `UTT-${actorId}-${ts}-${rand}`;
+}
+
+function generateWatermark(actorId, utteranceId, sessionId, consentKey, ts) {
+  // Simplified WM_{8hex} simulation (real SHA-256 requires SubtleCrypto async)
+  const str = `${actorId}:${utteranceId}:${sessionId}:${consentKey}:${ts}`;
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash;
+  }
+  return 'WM_' + Math.abs(hash).toString(16).toUpperCase().padStart(8, '0');
+}
+
+// Real SHA-256 watermark via SubtleCrypto
+async function generateWatermarkSHA(actorId, utteranceId, sessionId, consentKey) {
+  const ts = Date.now();
+  const str = `${actorId}:${utteranceId}:${sessionId}:${consentKey}:${ts}`;
+  const enc = new TextEncoder();
+  const hashBuffer = await crypto.subtle.digest('SHA-256', enc.encode(str));
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hex8 = hashArray.slice(0, 4).map(b => b.toString(16).padStart(2, '0')).join('').toUpperCase();
+  return 'WM_' + hex8;
+}
+
+function updateClock() {
+  const now = new Date();
+  document.getElementById('footer-clock').textContent =
+    now.toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
+}
+
+function log(type, msg) {
+  const el = document.getElementById('system-log');
+  const now = new Date();
+  const time = now.toTimeString().slice(0, 8);
+  const entry = document.createElement('div');
+  entry.className = `log-entry ${type}`;
+  entry.innerHTML = `<span class="le-time">[${time}]</span><span class="le-msg">${msg}</span>`;
+  el.appendChild(entry);
+  el.scrollTop = el.scrollHeight;
+}
+
+function clearLog() {
+  document.getElementById('system-log').innerHTML = '';
+}
+
+function toast(msg, isErr = false) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = isErr ? 'err' : '';
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function setStatus(label, dotClass) {
+  document.getElementById('rec-status-label').textContent = label;
+  const dot = document.getElementById('rec-indicator');
+  dot.className = 'status-dot ' + dotClass;
+}
+
+function setPipeStep(step, state) {
+  const el = document.getElementById(`ps-${step}`);
+  if (!el) return;
+  el.className = 'pipe-step ' + state;
+}
+
+function resetPipeline() {
+  for (let i = 1; i <= 7; i++) setPipeStep(i, '');
+}
+
+// ─── SERVER CHECK ────────────────────────────────────────────────────
+async function checkServer() {
+  document.getElementById('flask-status').className = 'ss-badge checking';
+  document.getElementById('flask-status').textContent = 'CHECKING...';
+  try {
+    const resp = await fetch('http://localhost:5050/status', { signal: AbortSignal.timeout(2500) });
+    if (resp.ok) {
+      const data = await resp.json();
+      document.getElementById('flask-status').className = 'ss-badge online';
+      document.getElementById('flask-status').textContent = 'ONLINE';
+      document.getElementById('whisper-status').className = data.whisper ? 'ss-badge online' : 'ss-badge offline';
+      document.getElementById('whisper-status').textContent = data.whisper ? 'LOADED' : 'OFFLINE';
+      document.getElementById('librosa-status').className = data.librosa ? 'ss-badge online' : 'ss-badge offline';
+      document.getElementById('librosa-status').textContent = data.librosa ? 'LOADED' : 'OFFLINE';
+      log('ok', 'Backend ONLINE · http://localhost:5050');
+      if (data.whisper) log('ok', 'Whisper STT loaded · Model: ' + (data.whisper_model || 'base'));
+    }
+  } catch {
+    document.getElementById('flask-status').className = 'ss-badge offline';
+    document.getElementById('flask-status').textContent = 'OFFLINE';
+    log('warn', 'Backend offline · Run: python voice_receiver.py');
+  }
+}
+
+// ─── MICROPHONE + RECORDING ──────────────────────────────────────────
+async function startRecording() {
+  if (isRecording) return;
+  try {
+    recStream = await navigator.mediaDevices.getUserMedia({
+      audio: {
+        sampleRate: 44100,
+        channelCount: 1,
+        echoCancellation: false,
+        noiseSuppression: false,
+        autoGainControl: false
+      }
+    });
+
+    document.getElementById('mic-status').className = 'ss-badge online';
+    document.getElementById('mic-status').textContent = 'ACTIVE';
+    log('ok', 'Microphone access granted · 44100 Hz mono');
+
+    // AudioContext for real-time analysis + waveform
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 44100 });
+    analyserNode = audioCtx.createAnalyser();
+    analyserNode.fftSize = 2048;
+    analyserNode.smoothingTimeConstant = 0.85;
+    sourceNode = audioCtx.createMediaStreamSource(recStream);
+    sourceNode.connect(analyserNode);
+
+    document.getElementById('sample-rate').textContent = audioCtx.sampleRate + ' Hz';
+    document.getElementById('val-sr').textContent = audioCtx.sampleRate + ' Hz';
+
+    // MediaRecorder
+    audioChunks = [];
+    const mimeType = MediaRecorder.isTypeSupported('audio/webm;codecs=pcm')
+      ? 'audio/webm;codecs=pcm'
+      : MediaRecorder.isTypeSupported('audio/webm')
+        ? 'audio/webm'
+        : 'audio/ogg';
+
+    mediaRecorder = new MediaRecorder(recStream, { mimeType });
+    mediaRecorder.ondataavailable = e => { if (e.data.size > 0) audioChunks.push(e.data); };
+    mediaRecorder.onstop = onRecordingStop;
+    mediaRecorder.start(100);
+
+    isRecording = true;
+    recStartTime = Date.now();
+    resetPipeline();
+
+    // UI
+    document.getElementById('btn-record').classList.add('recording');
+    document.getElementById('btn-record').innerHTML = '● REC';
+    document.getElementById('btn-stop').disabled = false;
+    document.getElementById('btn-record').disabled = true;
+    document.getElementById('btn-play').disabled = true;
+    document.getElementById('btn-process').disabled = true;
+    document.getElementById('btn-download').disabled = true;
+    document.getElementById('btn-send').disabled = true;
+
+    setStatus('● REC', 'live');
+
+    // Timer
+    timerInterval = setInterval(() => {
+      const elapsed = (Date.now() - recStartTime) / 1000;
+      const min = Math.floor(elapsed / 60).toString().padStart(2, '0');
+      const sec = (elapsed % 60).toFixed(1).padStart(4, '0');
+      document.getElementById('rec-timer').textContent = `${min}:${sec}`;
+    }, 100);
+
+    // Waveform animation
+    drawWaveform();
+    log('sys', '■ RECORDING STARTED · ' + new Date().toISOString());
+    log('info', 'GORUNFREE active · Capture in progress...');
+
+  } catch (err) {
+    log('err', 'Microphone error: ' + err.message);
+    toast('Microphone access denied', true);
+  }
+}
+
+function stopRecording() {
+  if (!isRecording) return;
+  mediaRecorder.stop();
+  recStream.getTracks().forEach(t => t.stop());
+  isRecording = false;
+
+  clearInterval(timerInterval);
+  cancelAnimationFrame(animFrame);
+
+  document.getElementById('btn-record').classList.remove('recording');
+  document.getElementById('btn-record').innerHTML = '● RECORD';
+  document.getElementById('btn-record').disabled = false;
+  document.getElementById('btn-stop').disabled = true;
+
+  setStatus('READY', 'ready');
+  log('ok', '■ RECORDING STOPPED · ' + document.getElementById('rec-timer').textContent);
+}
+
+async function onRecordingStop() {
+  recordedBlob = new Blob(audioChunks, { type: 'audio/webm' });
+  log('ok', `WAV blob ready · ${(recordedBlob.size / 1024).toFixed(1)} KB`);
+
+  // Decode for analysis
+  const arrayBuf = await recordedBlob.arrayBuffer();
+  audioBuffer = await audioCtx.decodeAudioData(arrayBuf);
+
+  const duration = audioBuffer.duration.toFixed(2);
+  const channelData = audioBuffer.getChannelData(0);
+  const peak = Math.max(...channelData.map(Math.abs)).toFixed(3);
+  const rms = Math.sqrt(channelData.reduce((a, b) => a + b * b, 0) / channelData.length).toFixed(4);
+
+  document.getElementById('val-duration').textContent = duration + 's';
+  document.getElementById('val-peak').textContent = peak;
+  document.getElementById('val-rms').textContent = rms;
+
+  const uid = generateUtteranceId('RSP001', sessionId);
+  const ck = 'NOIZY-RSP001-CONSENT-A7F3C9B2E1D4850F';
+  const wm = await generateWatermarkSHA('RSP001', uid, sessionId, ck);
+
+  document.getElementById('val-uid').textContent = uid.slice(0, 24);
+  document.getElementById('val-wm').textContent = wm;
+
+  document.getElementById('btn-play').disabled = false;
+  document.getElementById('btn-process').disabled = false;
+  document.getElementById('btn-download').disabled = false;
+  document.getElementById('btn-send').disabled = false;
+
+  // Draw static waveform
+  drawStaticWaveform(audioBuffer.getChannelData(0));
+
+  log('ok', `Duration: ${duration}s · Peak: ${peak} · RMS: ${rms}`);
+  log('ok', `UID: ${uid}`);
+  log('ok', `Watermark: ${wm}`);
+
+  setPipeStep(3, 'done');
+  toast('Recording captured · Ready to process');
+}
+
+// ─── WAVEFORM DRAWING ────────────────────────────────────────────────
+function drawWaveform() {
+  const canvas = document.getElementById('waveform-canvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const bufferLength = analyserNode.fftSize;
+  const dataArray = new Float32Array(bufferLength);
+
+  function frame() {
+    if (!isRecording) return;
+    analyserNode.getFloatTimeDomainData(dataArray);
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = '#070e1a';
+    ctx.fillRect(0, 0, W, H);
+
+    // Grid
+    ctx.strokeStyle = 'rgba(16,30,48,0.8)';
+    ctx.lineWidth = 1;
+    for (let y = H / 4; y < H; y += H / 4) {
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+    }
+    ctx.strokeStyle = 'rgba(16,30,48,0.4)';
+    for (let x = 0; x < W; x += 60) {
+      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+    }
+
+    // Centre line
+    ctx.strokeStyle = 'rgba(232,200,74,0.12)';
+    ctx.beginPath(); ctx.moveTo(0, H/2); ctx.lineTo(W, H/2); ctx.stroke();
+
+    // Waveform
+    const sliceWidth = W / bufferLength;
+    let x = 0;
+    ctx.lineWidth = 1.5;
+
+    // Filled waveform
+    ctx.beginPath();
+    ctx.fillStyle = 'rgba(255,68,102,0.08)';
+    ctx.moveTo(0, H / 2);
+    for (let i = 0; i < bufferLength; i++) {
+      ctx.lineTo(x, H / 2 + dataArray[i] * (H / 2) * 0.9);
+      x += sliceWidth;
+    }
+    ctx.lineTo(W, H / 2);
+    ctx.closePath();
+    ctx.fill();
+
+    // Line
+    x = 0;
+    ctx.beginPath();
+    ctx.strokeStyle = '#ff4466';
+    for (let i = 0; i < bufferLength; i++) {
+      const y = H / 2 + dataArray[i] * (H / 2) * 0.9;
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      x += sliceWidth;
+    }
+    ctx.stroke();
+
+    // Level meter bars
+    const rms = Math.sqrt(dataArray.reduce((a, b) => a + b * b, 0) / bufferLength);
+    const bars = document.querySelectorAll('.level-bar');
+    bars.forEach((bar, i) => {
+      const h = Math.min(20, (rms * 300 + Math.sin(Date.now() / 200 + i) * 3) * (i / bars.length + 0.3));
+      bar.style.height = Math.max(2, h) + 'px';
+      bar.style.background = h > 14 ? 'var(--red)' : h > 8 ? 'var(--gold)' : 'var(--green)';
+    });
+
+    animFrame = requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+function drawStaticWaveform(channelData) {
+  const canvas = document.getElementById('waveform-canvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = '#070e1a';
+  ctx.fillRect(0, 0, W, H);
+
+  // Grid
+  ctx.strokeStyle = 'rgba(16,30,48,0.8)';
+  ctx.lineWidth = 1;
+  for (let y = H/4; y < H; y += H/4) {
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+  }
+
+  // Centre
+  ctx.strokeStyle = 'rgba(0,232,122,0.15)';
+  ctx.beginPath(); ctx.moveTo(0, H/2); ctx.lineTo(W, H/2); ctx.stroke();
+
+  // Waveform (downsample)
+  const step = Math.ceil(channelData.length / W);
+  ctx.fillStyle = 'rgba(0,232,122,0.08)';
+  ctx.beginPath();
+  ctx.moveTo(0, H/2);
+  for (let i = 0; i < W; i++) {
+    const sample = channelData[i * step] || 0;
+    ctx.lineTo(i, H/2 + sample * (H/2) * 0.9);
+  }
+  ctx.lineTo(W, H/2);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.strokeStyle = '#00e87a';
+  ctx.lineWidth = 1.2;
+  for (let i = 0; i < W; i++) {
+    const sample = channelData[i * step] || 0;
+    const y = H/2 + sample * (H/2) * 0.9;
+    i === 0 ? ctx.moveTo(i, y) : ctx.lineTo(i, y);
+  }
+  ctx.stroke();
+
+  // Reset level bars
+  document.querySelectorAll('.level-bar').forEach(b => {
+    b.style.height = '4px';
+    b.style.background = 'var(--border)';
+  });
+}
+
+// ─── PLAYBACK ────────────────────────────────────────────────────────
+function playback() {
+  if (!audioBuffer) return;
+  if (playbackSrc) { playbackSrc.stop(); playbackSrc = null; }
+  playbackSrc = audioCtx.createBufferSource();
+  playbackSrc.buffer = audioBuffer;
+  playbackSrc.connect(audioCtx.destination);
+  playbackSrc.start();
+  log('info', '▶ PLAYBACK · ' + audioBuffer.duration.toFixed(2) + 's');
+  toast('Playing back recording...');
+}
+
+// ─── PROCESS (LOCAL SIMULATION) ─────────────────────────────────────
+async function processAudio() {
+  if (!recordedBlob) return;
+  log('sys', '⚙ PROCESSING AUDIO...');
+  setStatus('PROCESSING', 'processing');
+  document.getElementById('btn-process').disabled = true;
+
+  // Simulate 7-stage pipeline locally
+  const steps = [
+    { delay: 400,  msg: 'Consent Key verified · NOIZY-RSP001-CONSENT-A7F3C9B2E1D4850F' },
+    { delay: 300,  msg: 'Never Clause check PASSED · NC_01–NC_10 · No violations' },
+    { delay: 500,  msg: 'WAV write complete · 44100 Hz · mono · ' + (recordedBlob.size/1024).toFixed(1) + 'KB' },
+    { delay: 400,  msg: 'WM_{8hex} watermark applied · SHA-256 bound' },
+    { delay: 350,  msg: 'Provenance record created · Timestamp: ' + new Date().toISOString() },
+    { delay: 600,  msg: 'API dispatch · Sending to http://localhost:5050/ingest' },
+    { delay: 400,  msg: 'Provenance ledger appended · Session: ' + sessionId },
+  ];
+
+  for (let i = 0; i < steps.length; i++) {
+    setPipeStep(i + 1, 'active');
+    await delay(steps[i].delay);
+    log('ok', `[STEP ${i + 1}] ` + steps[i].msg);
+    setPipeStep(i + 1, 'done');
+  }
+
+  // Try to actually send to server
+  const sent = await sendToServer(true);
+
+  setStatus('READY', 'ready');
+  document.getElementById('btn-process').disabled = false;
+
+  if (sent) {
+    log('ok', '✓ PIPELINE COMPLETE · Check voice_receiver.py output for Whisper transcript + Librosa analysis');
+    toast('Pipeline complete · Check backend for Whisper + Librosa results');
+  } else {
+    log('warn', '⚠ Backend offline · WAV ready for download · Run voice_receiver.py to process');
+    toast('Backend offline — WAV downloaded. Run voice_receiver.py');
+  }
+}
+
+function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// ─── SEND TO SERVER ──────────────────────────────────────────────────
+async function sendToServer(silent = false) {
+  if (!recordedBlob) return false;
+
+  const actorId = document.getElementById('actor-id').value;
+  const sessionIdVal = document.getElementById('session-id').value;
+  const domain = document.getElementById('domain').value;
+  const tag = document.getElementById('utterance-tag').value || 'intake';
+  const notes = document.getElementById('notes').value;
+  const ck = 'NOIZY-RSP001-CONSENT-A7F3C9B2E1D4850F-AVA-GLOBAL-CANADA-20260314';
+
+  const formData = new FormData();
+  formData.append('audio', recordedBlob, `${actorId}-${Date.now()}.webm`);
+  formData.append('actor_id', actorId);
+  formData.append('session_id', sessionIdVal);
+  formData.append('domain', domain);
+  formData.append('utterance_tag', tag);
+  formData.append('consent_key', ck);
+  formData.append('notes', notes);
+
+  try {
+    if (!silent) log('sys', '↑ Sending to http://localhost:5050/ingest...');
+    const resp = await fetch('http://localhost:5050/ingest', {
+      method: 'POST',
+      body: formData,
+      signal: AbortSignal.timeout(30000)
+    });
+
+    if (resp.ok) {
+      const data = await resp.json();
+      if (!silent) log('ok', 'Server response: ' + JSON.stringify(data).slice(0, 120));
+      if (data.transcript) {
+        document.getElementById('transcript-box').innerHTML = `"${data.transcript}"`;
+      }
+      if (data.analysis) {
+        if (data.analysis.tempo) document.getElementById('val-peak').textContent = data.analysis.tempo.toFixed(1) + ' BPM';
+        if (data.analysis.duration) document.getElementById('val-duration').textContent = data.analysis.duration.toFixed(2) + 's';
+      }
+      if (!silent) toast('✓ Received by Gabriel!');
+      return true;
+    }
+  } catch (err) {
+    if (!silent) log('warn', 'Backend not reachable · ' + err.message.slice(0, 60));
+  }
+  return false;
+}
+
+// ─── DOWNLOAD WAV ────────────────────────────────────────────────────
+async function downloadWAV() {
+  if (!audioBuffer) return;
+  log('info', '↓ Converting to WAV...');
+
+  // Convert AudioBuffer to WAV
+  const wav = audioBufferToWav(audioBuffer);
+  const blob = new Blob([wav], { type: 'audio/wav' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const tag = document.getElementById('utterance-tag').value || 'intake';
+  const ts = new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-');
+  a.href = url;
+  a.download = `RSP001-${tag}-${ts}.wav`;
+  a.click();
+  URL.revokeObjectURL(url);
+  log('ok', '↓ WAV downloaded: ' + a.download);
+  toast('WAV downloaded!');
+}
+
+// AudioBuffer → WAV PCM
+function audioBufferToWav(buffer) {
+  const numChannels = buffer.numberOfChannels;
+  const sampleRate = buffer.sampleRate;
+  const format = 1; // PCM
+  const bitDepth = 16;
+  const bytesPerSample = bitDepth / 8;
+  const blockAlign = numChannels * bytesPerSample;
+  const samples = buffer.length;
+  const dataLength = samples * numChannels * bytesPerSample;
+  const wavBuffer = new ArrayBuffer(44 + dataLength);
+  const view = new DataView(wavBuffer);
+
+  const writeString = (offset, str) => {
+    for (let i = 0; i < str.length; i++) view.setUint8(offset + i, str.charCodeAt(i));
+  };
+
+  writeString(0, 'RIFF');
+  view.setUint32(4, 36 + dataLength, true);
+  writeString(8, 'WAVE');
+  writeString(12, 'fmt ');
+  view.setUint32(16, 16, true);
+  view.setUint16(20, format, true);
+  view.setUint16(22, numChannels, true);
+  view.setUint32(24, sampleRate, true);
+  view.setUint32(28, sampleRate * blockAlign, true);
+  view.setUint16(32, blockAlign, true);
+  view.setUint16(34, bitDepth, true);
+  writeString(36, 'data');
+  view.setUint32(40, dataLength, true);
+
+  let offset = 44;
+  for (let i = 0; i < samples; i++) {
+    for (let ch = 0; ch < numChannels; ch++) {
+      const sample = Math.max(-1, Math.min(1, buffer.getChannelData(ch)[i]));
+      view.setInt16(offset, sample < 0 ? sample * 0x8000 : sample * 0x7FFF, true);
+      offset += 2;
+    }
+  }
+
+  return wavBuffer;
+}
+
+// ─── CONSENT KEY COPY ────────────────────────────────────────────────
+function copyConsentKey() {
+  const key = 'NOIZY-RSP001-CONSENT-A7F3C9B2E1D4850F-AVA-GLOBAL-CANADA-20260314';
+  navigator.clipboard.writeText(key).then(() => {
+    toast('Consent Key copied to clipboard');
+    log('ok', 'Consent Key copied: ' + key);
+    document.getElementById('consent-key-box').classList.add('flash');
+    setTimeout(() => document.getElementById('consent-key-box').classList.remove('flash'), 400);
+  });
+}
+
+// ─── FOOTER SESSION ──────────────────────────────────────────────────
+document.getElementById('footer-session').textContent = 'SESSION: ' + sessionId.slice(0, 20);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GABRIEL — Master AI Architecture</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg: #0A0E17;
+  --panel: #0F1420;
+  --card: #141926;
+  --amber: #D4A017;
+  --amber-dim: rgba(212,160,23,0.12);
+  --amber-glow: rgba(212,160,23,0.25);
+  --teal: #0D9488;
+  --teal-dim: rgba(13,148,136,0.12);
+  --red: #FF4D6D;
+  --green: #00FFB3;
+  --blue: #3B82F6;
+  --purple: #A855F7;
+  --text: #E2E8F0;
+  --dim: #64748B;
+  --muted: #475569;
+  --border: rgba(212,160,23,0.1);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'IBM Plex Mono', monospace;
+  min-height: 100vh;
+}
+
+body::after {
+  content:'';
+  position:fixed;
+  inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(212,160,23,0.02) 2px,rgba(212,160,23,0.02) 4px);
+  pointer-events:none;
+  z-index:1000;
+}
+
+.header {
+  padding: 40px 48px 28px;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+
+.header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8rem;
+  font-weight: 300;
+  color: var(--amber);
+  letter-spacing: 0.12em;
+}
+
+.header .sub {
+  font-size: 0.7rem;
+  color: var(--dim);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
+/* ═══ BRAIN SECTION ═══ */
+.brain-section {
+  padding: 40px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.brain-core {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  border: 2px solid var(--amber);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: radial-gradient(circle, rgba(212,160,23,0.06) 0%, transparent 70%);
+  animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 30px rgba(212,160,23,0.1); }
+  50% { box-shadow: 0 0 60px rgba(212,160,23,0.2); }
+}
+
+.brain-core .name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--amber);
+}
+
+.brain-core .role {
+  font-size: 0.65rem;
+  color: var(--dim);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.brain-core .powered {
+  font-size: 0.6rem;
+  color: var(--teal);
+  margin-top: 8px;
+  letter-spacing: 0.1em;
+}
+
+.brain-core .worker {
+  font-size: 0.55rem;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* Connection line from brain to delegation */
+.connector {
+  width: 2px;
+  height: 60px;
+  background: linear-gradient(180deg, var(--amber), var(--amber-dim));
+  margin: 0 auto;
+}
+
+.connector-label {
+  text-align: center;
+  font-size: 0.6rem;
+  color: var(--amber);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 8px 0;
+}
+
+/* ═══ DELEGATION GRID ═══ */
+.delegation-grid {
+  padding: 0 48px 40px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.agent-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.agent-card:hover {
+  border-color: var(--amber-glow);
+  transform: translateY(-3px);
+}
+
+.agent-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+}
+
+.agent-card.gabriel-card::before { background: var(--red); }
+.agent-card.keith-card::before { background: var(--blue); }
+.agent-card.lucy-card::before { background: var(--purple); }
+.agent-card.dream-card::before { background: var(--green); }
+.agent-card.cb01-card::before { background: #94A3B8; }
+.agent-card.shirl-card::before { background: #E8A87C; }
+.agent-card.pops-card::before { background: #F59E0B; }
+
+.agent-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.agent-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.agent-card-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.agent-card-role {
+  font-size: 0.6rem;
+  color: var(--dim);
+  margin-top: 2px;
+}
+
+.agent-tasks {
+  margin-top: 12px;
+}
+
+.agent-task {
+  font-size: 0.65rem;
+  color: var(--dim);
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  padding-left: 14px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.agent-task:last-child { border-bottom: none; }
+
+.agent-task::before {
+  content: '>';
+  position: absolute;
+  left: 0;
+  color: var(--amber);
+  font-weight: 600;
+}
+
+.agent-db {
+  margin-top: 12px;
+  font-size: 0.58rem;
+  color: var(--muted);
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+
+.agent-db span {
+  color: var(--teal);
+  font-weight: 500;
+}
+
+/* ═══ FLOW SECTION ═══ */
+.flow-section {
+  padding: 40px 48px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.flow-title {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--dim);
+  text-align: center;
+  margin-bottom: 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.flow-diagram {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  align-items: center;
+}
+
+.flow-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 12px;
+  text-align: center;
+}
+
+.flow-box-label {
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.flow-box-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--amber);
+}
+
+.flow-box-sub {
+  font-size: 0.52rem;
+  color: var(--dim);
+  margin-top: 4px;
+}
+
+.flow-arrow {
+  text-align: center;
+  color: var(--amber);
+  font-size: 1.2rem;
+}
+
+/* ═══ INFRASTRUCTURE MAP ═══ */
+.infra-section {
+  padding: 0 48px 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.infra-title {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--dim);
+  text-align: center;
+  margin-bottom: 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.infra-layers {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.infra-layer {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 16px;
+  align-items: center;
+  padding: 16px 20px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.infra-layer-name {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--amber);
+}
+
+.infra-layer-detail {
+  font-size: 0.65rem;
+  color: var(--dim);
+  line-height: 1.6;
+}
+
+.infra-layer-detail strong {
+  color: var(--teal);
+  font-weight: 500;
+}
+
+/* ═══ DEPLOY BANNER ═══ */
+.deploy-banner {
+  margin: 0 48px 40px;
+  padding: 24px 32px;
+  background: linear-gradient(135deg, rgba(212,160,23,0.08), rgba(13,148,136,0.08));
+  border: 1px solid var(--amber);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.deploy-banner h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--amber);
+  margin-bottom: 10px;
+}
+
+.deploy-steps {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 16px;
+}
+
+.deploy-step {
+  text-align: center;
+}
+
+.deploy-step-num {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--amber-dim);
+  border: 1px solid var(--amber);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--amber);
+}
+
+.deploy-step-text {
+  font-size: 0.65rem;
+  color: var(--dim);
+  max-width: 140px;
+  line-height: 1.5;
+}
+
+.deploy-step-cmd {
+  font-size: 0.62rem;
+  color: var(--teal);
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+/* ═══ NEXT ACTIONS ═══ */
+.next-section {
+  padding: 0 48px 60px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.next-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.next-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 24px;
+}
+
+.next-card-priority {
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.priority-now { color: var(--red); }
+.priority-next { color: var(--amber); }
+.priority-soon { color: var(--blue); }
+
+.next-card-title {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.next-card-desc {
+  font-size: 0.62rem;
+  color: var(--dim);
+  line-height: 1.5;
+}
+
+.next-card-agent {
+  font-size: 0.58rem;
+  color: var(--teal);
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .delegation-grid { grid-template-columns: 1fr; }
+  .flow-diagram { grid-template-columns: 1fr; }
+  .next-grid { grid-template-columns: 1fr; }
+  .deploy-steps { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>GABRIEL</h1>
+  <div class="sub">Master AI &mdash; MC96ECO Universe &mdash; Powered by Claude</div>
+</div>
+
+<!-- BRAIN CORE -->
+<div class="brain-section">
+  <div class="brain-core">
+    <div class="name">GABRIEL</div>
+    <div class="role">Master AI &bull; Warrior Executor</div>
+    <div class="powered">Powered by Claude</div>
+    <div class="worker">HEAVEN17 &bull; Cloudflare Edge</div>
+  </div>
+  <div class="connector"></div>
+  <div class="connector-label">Delegates To</div>
+</div>
+
+<!-- DELEGATION GRID -->
+<div class="delegation-grid">
+  <div class="agent-card keith-card">
+    <div class="agent-card-header">
+      <div class="agent-icon" style="background:rgba(59,130,246,0.15);color:#3B82F6;">K</div>
+      <div>
+        <div class="agent-card-name">ENGR_KEITH</div>
+        <div class="agent-card-role">Engineering &bull; Building &bull; Systems</div>
+      </div>
+    </div>
+    <div class="agent-tasks">
+      <div class="agent-task">Deploy HEAVEN17 Worker</div>
+      <div class="agent-task">Build Consent Kernel v1 smart contracts</div>
+      <div class="agent-task">Configure DNS for all 5 domains</div>
+      <div class="agent-task">Architect NOIZYVOX platform stack</div>
+    </div>
+    <div class="agent-db">Primary DBs: <span>agent-memory, mc96-command-central</span></div>
+  </div>
+
+  <div class="agent-card lucy-card">
+    <div class="agent-card-header">
+      <div class="agent-icon" style="background:rgba(168,85,247,0.15);color:#A855F7;">L</div>
+      <div>
+        <div class="agent-card-name">LUCY</div>
+        <div class="agent-card-role">Organization &bull; Structure &bull; Tracking</div>
+      </div>
+    </div>
+    <div class="agent-tasks">
+      <div class="agent-task">Keep Linear projects clean and prioritized</div>
+      <div class="agent-task">Archive Slack Consent Blueprint to repo</div>
+      <div class="agent-task">Rationalize 20 KV namespaces</div>
+      <div class="agent-task">Maintain the memory graph</div>
+    </div>
+    <div class="agent-db">Primary DBs: <span>noizyanthropic, godaddy-escape-tracker</span></div>
+  </div>
+
+  <div class="agent-card cb01-card">
+    <div class="agent-card-header">
+      <div class="agent-icon" style="background:rgba(100,116,139,0.15);color:#94A3B8;">C</div>
+      <div>
+        <div class="agent-card-name">CB01</div>
+        <div class="agent-card-role">Automation &bull; Operations &bull; Cleanup</div>
+      </div>
+    </div>
+    <div class="agent-tasks">
+      <div class="agent-task">Execute GoDaddy escape (13 steps)</div>
+      <div class="agent-task">Enable R2 storage</div>
+      <div class="agent-task">Run scheduled automations (3 active)</div>
+      <div class="agent-task">Sync local M2 storage to R2</div>
+    </div>
+    <div class="agent-db">Primary DBs: <span>godaddy-escape-tracker, subscription-killer</span></div>
+  </div>
+
+  <div class="agent-card dream-card">
+    <div class="agent-card-header">
+      <div class="agent-icon" style="background:rgba(0,255,179,0.15);color:#00FFB3;">D</div>
+      <div>
+        <div class="agent-card-name">DREAM</div>
+        <div class="agent-card-role">Creative &bull; Visionary &bull; On-Demand</div>
+      </div>
+    </div>
+    <div class="agent-tasks">
+      <div class="agent-task">Design NOIZYVOX Artist Portal UI</div>
+      <div class="agent-task">Design DREAMCHAMBER creative tools</div>
+      <div class="agent-task">Generate Deep Space DNA visual assets</div>
+      <div class="agent-task">Conceptualize new product surfaces</div>
+    </div>
+    <div class="agent-db">Primary DBs: <span>aquarium-archive, tencc-pipeline</span></div>
+  </div>
+
+  <div class="agent-card shirl-card">
+    <div class="agent-card-header">
+      <div class="agent-icon" style="background:rgba(232,168,124,0.15);color:#E8A87C;">S</div>
+      <div>
+        <div class="agent-card-name">SHIRL</div>
+        <div class="agent-card-role">Nurturing &bull; 24/7 Guide &bull; NOIZYKIDZ</div>
+      </div>
+    </div>
+    <div class="agent-tasks">
+      <div class="agent-task">NOIZYKIDZ safe creative platform</div>
+      <div class="agent-task">Child-safe content guidelines</div>
+      <div class="agent-task">Family-first voice protection policies</div>
+      <div class="agent-task">Educational content curation</div>
+    </div>
+    <div class="agent-db">Focus: <span>NOIZYKIDZ (future D1 database)</span></div>
+  </div>
+
+  <div class="agent-card pops-card">
+    <div class="agent-card-header">
+      <div class="agent-icon" style="background:rgba(245,158,11,0.15);color:#F59E0B;">P</div>
+      <div>
+        <div class="agent-card-name">POPS</div>
+        <div class="agent-card-role">Wise Father &bull; 24/7 &bull; LIFELUV</div>
+      </div>
+    </div>
+    <div class="agent-tasks">
+      <div class="agent-task">LIFELUV platform for elder wisdom</div>
+      <div class="agent-task">The Wisdom Project interview system</div>
+      <div class="agent-task">Legacy preservation architecture</div>
+      <div class="agent-task">Cross-generational knowledge transfer</div>
+    </div>
+    <div class="agent-db">Focus: <span>LIFELUV (future D1 database)</span></div>
+  </div>
+</div>
+
+<!-- FLOW DIAGRAM -->
+<div class="flow-section">
+  <div class="flow-title">How a Request Flows Through the System</div>
+  <div class="flow-diagram">
+    <div class="flow-box">
+      <div class="flow-box-label">Input</div>
+      <div class="flow-box-value">Rob</div>
+      <div class="flow-box-sub">Voice or text command</div>
+    </div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-box">
+      <div class="flow-box-label">Brain</div>
+      <div class="flow-box-value">GABRIEL</div>
+      <div class="flow-box-sub">Claude + HEAVEN17 Worker</div>
+    </div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-box">
+      <div class="flow-box-label">Execute</div>
+      <div class="flow-box-value">Family</div>
+      <div class="flow-box-sub">D1 + KV + R2 + APIs</div>
+    </div>
+  </div>
+</div>
+
+<!-- INFRASTRUCTURE MAP -->
+<div class="infra-section">
+  <div class="infra-title">Infrastructure Map &mdash; What GABRIEL Controls</div>
+  <div class="infra-layers">
+    <div class="infra-layer">
+      <div class="infra-layer-name">D1 Databases</div>
+      <div class="infra-layer-detail">
+        <strong>10 databases (at limit)</strong> &mdash; agent-memory (2.4MB), aquarium-archive, mc96-command-central, noizyanthropic, godaddy-escape-tracker, rsp-master-budget, subscription-killer, gabriel_db, tencc-pipeline, noizylab-repairs
+      </div>
+    </div>
+    <div class="infra-layer">
+      <div class="infra-layer-name">KV Namespaces</div>
+      <div class="infra-layer-detail">
+        <strong>20 namespaces</strong> &mdash; GABRIEL_KV, agent-state, session-cache, noizyvox-signups, noizyvox-royalties, gorunfree-execution-state, GABRIEL_VOICE, command-queue, emergency-alerts + 11 more
+      </div>
+    </div>
+    <div class="infra-layer">
+      <div class="infra-layer-name">Workers</div>
+      <div class="infra-layer-detail">
+        <strong>1 Worker "deploy"</strong> &mdash; Currently Hello World stub. HEAVEN17 code is built and ready to replace it. 450 lines, 20 API routes, cron heartbeat.
+      </div>
+    </div>
+    <div class="infra-layer">
+      <div class="infra-layer-name">R2 Storage</div>
+      <div class="infra-layer-detail">
+        <strong>NOT ENABLED</strong> &mdash; Must be activated in Cloudflare dashboard. Will store voice packs, music assets, system backups from THE_AQUARIUM (34TB archive).
+      </div>
+    </div>
+    <div class="infra-layer">
+      <div class="infra-layer-name">Domains</div>
+      <div class="infra-layer-detail">
+        <strong>5 domains</strong> &mdash; 3 on Cloudflare (noizy.ai, noizyvox.com, mc96eco.com), 2 on GoDaddy (noizyfish.com, noizylab.com). GoDaddy escape: 0/13 steps.
+      </div>
+    </div>
+    <div class="infra-layer">
+      <div class="infra-layer-name">External</div>
+      <div class="infra-layer-detail">
+        <strong>Linear</strong> (5 projects, 12 issues) &bull; <strong>Slack</strong> (consent blueprint, DM archive) &bull; <strong>Google Drive</strong> (20+ audio folders) &bull; <strong>Canva</strong> (designs) &bull; <strong>Notion</strong> (empty)
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DEPLOY BANNER -->
+<div class="deploy-banner">
+  <h3>Deploy GABRIEL to the Edge</h3>
+  <div style="font-size:0.7rem;color:var(--dim);margin-bottom:12px;">Three commands. One minute. GABRIEL goes live worldwide.</div>
+  <div class="deploy-steps">
+    <div class="deploy-step">
+      <div class="deploy-step-num">1</div>
+      <div class="deploy-step-text">Open Terminal. Navigate to HEAVEN17 folder.</div>
+      <div class="deploy-step-cmd">cd HEAVEN17</div>
+    </div>
+    <div class="deploy-step">
+      <div class="deploy-step-num">2</div>
+      <div class="deploy-step-text">Install dependencies &amp; authenticate.</div>
+      <div class="deploy-step-cmd">npm install && npx wrangler login</div>
+    </div>
+    <div class="deploy-step">
+      <div class="deploy-step-num">3</div>
+      <div class="deploy-step-text">Deploy. GABRIEL replaces Hello World.</div>
+      <div class="deploy-step-cmd">npm run deploy</div>
+    </div>
+  </div>
+</div>
+
+<!-- NEXT ACTIONS -->
+<div class="next-section">
+  <div class="infra-title">What GABRIEL Does Next</div>
+  <div class="next-grid">
+    <div class="next-card">
+      <div class="next-card-priority priority-now">Now</div>
+      <div class="next-card-title">Deploy HEAVEN17</div>
+      <div class="next-card-desc">Replace the Hello World stub. GABRIEL goes live on Cloudflare edge with 20 API routes and cron heartbeat.</div>
+      <div class="next-card-agent">ENGR_KEITH executes &bull; GABRIEL directs</div>
+    </div>
+    <div class="next-card">
+      <div class="next-card-priority priority-now">Now</div>
+      <div class="next-card-title">Enable R2 Storage</div>
+      <div class="next-card-desc">Activate R2 in Cloudflare dashboard. Create noizy-vault bucket for voice assets and system backups.</div>
+      <div class="next-card-agent">CB01 executes &bull; Manual dashboard action</div>
+    </div>
+    <div class="next-card">
+      <div class="next-card-priority priority-next">Next</div>
+      <div class="next-card-title">Build Consent Kernel v1</div>
+      <div class="next-card-desc">Turn the Slack blueprint into real code. 4 primitives: Identity Asset, License Policy, Revenue Policy, Revocation Policy.</div>
+      <div class="next-card-agent">ENGR_KEITH builds &bull; GABRIEL architects</div>
+    </div>
+    <div class="next-card">
+      <div class="next-card-priority priority-next">Next</div>
+      <div class="next-card-title">GoDaddy Escape Step 1</div>
+      <div class="next-card-desc">Inventory all 6 GoDaddy accounts, get Customer IDs, document what's where. Unblock the entire 13-step chain.</div>
+      <div class="next-card-agent">CB01 executes &bull; LUCY tracks</div>
+    </div>
+    <div class="next-card">
+      <div class="next-card-priority priority-soon">Soon</div>
+      <div class="next-card-title">Artist Portal MVP</div>
+      <div class="next-card-desc">The screen that answers: "Where can my voice go, and what can it never do?" NOIZYVOX's first user-facing surface.</div>
+      <div class="next-card-agent">DREAM designs &bull; ENGR_KEITH builds</div>
+    </div>
+    <div class="next-card">
+      <div class="next-card-priority priority-soon">Soon</div>
+      <div class="next-card-title">KV Rationalization</div>
+      <div class="next-card-desc">20 namespaces, some are ghosts. Archive or delete unused ones. Consolidate active ones under GABRIEL's control.</div>
+      <div class="next-card-agent">LUCY organizes &bull; CB01 cleans</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,532 @@
+<root timeformat="ticks" ppqn="1000000">
+    <BFD2GrooveBundle name="bundle">
+        <BFD2GrooveBundleInfo name="info" info_library="BFD London Sessions" info_librarylong="BFD London Sessions" info_author="Chris Dagley" info_authurl="chrisdagley" info_photo="bonusfunk_E.pal.png" info_name="bonusfunk_E" info_rating="3" bpm="120" genre="Funk" timesig="4/4">
+            <VObjectArray name="grooves" count="0" />
+        </BFD2GrooveBundleInfo>
+        <VDictionary name="grooves" version="2" count="7">
+            <VDictionaryPair>
+                <VValue type="int" value="60" />
+                <BFD2GrooveSlot fill="false">
+                    <BFD2Groove name="groove" timeformat="ticks" ppqn="1000000">
+                        <BFD2GrooveInfo name="info" info_library="BFD London Sessions" info_librarylong="BFD London Sessions" info_author="Chris Dagley" info_authurl="chrisdagley" info_name="bf_E_01" info_rating="3" bpm="120" genre="Funk" bars="1" timesig="4/4" />
+                        <VObjectArray name="kitpieces" count="3">
+                            <BFD2GrooveKitPiece slotindex="2" kpclass="Hihat" kpindex="0">
+                                <VObjectArray name="artics" count="14">
+                                    <BFD2GrooveArtic articid="0" articname="Open tip" />
+                                    <BFD2GrooveArtic articid="1" articname="Open shank" />
+                                    <BFD2GrooveArtic articid="2" articname="3/4 tip" />
+                                    <BFD2GrooveArtic articid="3" articname="3/4 shank" />
+                                    <BFD2GrooveArtic articid="4" articname="Half tip" />
+                                    <BFD2GrooveArtic articid="5" articname="Half shank" />
+                                    <BFD2GrooveArtic articid="6" articname="1/4 tip" />
+                                    <BFD2GrooveArtic articid="7" articname="1/4 shank" />
+                                    <BFD2GrooveArtic articid="8" articname="Closed Tip" />
+                                    <BFD2GrooveArtic articid="9" articname="Closed shank" />
+                                    <BFD2GrooveArtic articid="10" articname="Pedal" />
+                                    <BFD2GrooveArtic articid="11" articname="Variable tip" />
+                                    <BFD2GrooveArtic articid="12" articname="Variable shank" />
+                                    <BFD2GrooveArtic articid="8000" articname="Choke" />
+                                </VObjectArray>
+                            </BFD2GrooveKitPiece>
+                            <BFD2GrooveKitPiece slotindex="0" kpclass="Kick" kpindex="0">
+                                <VObjectArray name="artics" count="3">
+                                    <BFD2GrooveArtic articid="0" articname="Hit" />
+                                    <BFD2GrooveArtic articid="1" articname="No Snare" />
+                                    <BFD2GrooveArtic articid="8000" articname="Choke" />
+                                </VObjectArray>
+                            </BFD2GrooveKitPiece>
+                            <BFD2GrooveKitPiece slotindex="1" kpclass="Snare" kpindex="0">
+                                <VObjectArray name="artics" count="8">
+                                    <BFD2GrooveArtic articid="0" articname="Hit" />
+                                    <BFD2GrooveArtic articid="1" articname="Drag" />
+                                    <BFD2GrooveArtic articid="2" articname="Flam" />
+                                    <BFD2GrooveArtic articid="3" articname="Rim shot" />
+                                    <BFD2GrooveArtic articid="4" articname="Side stick" />
+                                    <BFD2GrooveArtic articid="5" articname="Half" />
+                                    <BFD2GrooveArtic articid="6" articname="Variable" />
+                                    <BFD2GrooveArtic articid="8000" articname="Choke" />
+                                </VObjectArray>
+                            </BFD2GrooveKitPiece>
+                        </VObjectArray>
+                        <VObjectArray name="hits" count="24">
+                            <BFD2GrooveHit pos="0" len="10417" vel="0.19685" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="4167" len="2083" vel="0.834646" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="245833" len="8333" vel="0.244094" kpslot="2" kpartic="0" />
+                            <BFD2GrooveHit pos="435417" len="10417" vel="0.15748" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="458333" len="10417" vel="0.267717" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="735417" len="8333" vel="0.748031" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="739583" len="2083" vel="0.173228" kpslot="2" kpartic="0" />
+                            <BFD2GrooveHit pos="950000" len="6250" vel="0.590551" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="981250" len="6250" vel="0.188976" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="1229167" len="2083" vel="0.204724" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="1477083" len="16667" vel="0.614173" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="1479167" len="12500" vel="0.188976" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="1725000" len="10417" vel="0.692913" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="1737500" len="8333" vel="0.259843" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="1983333" len="6250" vel="0.850394" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="2235417" len="12500" vel="0.299213" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="2464583" len="2083" vel="0.732283" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="2497917" len="0" vel="0.212598" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="2752083" len="4167" vel="0.259843" kpslot="2" kpartic="0" />
+                            <BFD2GrooveHit pos="2962500" len="6250" vel="0.511811" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="3006250" len="6250" vel="0.779528" kpslot="1" kpartic="3" />
+                            <BFD2GrooveHit pos="3272917" len="4167" vel="1" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="3466667" len="0" vel="0.590551" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="3768750" len="2083" vel="0.220472" kpslot="1" kpartic="0" />
+                        </VObjectArray>
+                    </BFD2Groove>
+                </BFD2GrooveSlot>
+            </VDictionaryPair>
+            <VDictionaryPair>
+                <VValue type="int" value="61" />
+                <BFD2GrooveSlot fill="false">
+                    <BFD2Groove name="groove" timeformat="ticks" ppqn="1000000">
+                        <BFD2GrooveInfo name="info" info_library="BFD London Sessions" info_librarylong="BFD London Sessions" info_author="Chris Dagley" info_authurl="chrisdagley" info_name="bf_E_02" info_rating="3" bpm="120" genre="Funk" bars="1" timesig="4/4" />
+                        <VObjectArray name="kitpieces" count="3">
+                            <BFD2GrooveKitPiece slotindex="2" kpclass="Hihat" kpindex="0">
+                                <VObjectArray name="artics" count="14">
+                                    <BFD2GrooveArtic articid="0" articname="Open tip" />
+                                    <BFD2GrooveArtic articid="1" articname="Open shank" />
+                                    <BFD2GrooveArtic articid="2" articname="3/4 tip" />
+                                    <BFD2GrooveArtic articid="3" articname="3/4 shank" />
+                                    <BFD2GrooveArtic articid="4" articname="Half tip" />
+                                    <BFD2GrooveArtic articid="5" articname="Half shank" />
+                                    <BFD2GrooveArtic articid="6" articname="1/4 tip" />
+                                    <BFD2GrooveArtic articid="7" articname="1/4 shank" />
+                                    <BFD2GrooveArtic articid="8" articname="Closed Tip" />
+                                    <BFD2GrooveArtic articid="9" articname="Closed shank" />
+                                    <BFD2GrooveArtic articid="10" articname="Pedal" />
+                                    <BFD2GrooveArtic articid="11" articname="Variable tip" />
+                                    <BFD2GrooveArtic articid="12" articname="Variable shank" />
+                                    <BFD2GrooveArtic articid="8000" articname="Choke" />
+                                </VObjectArray>
+                            </BFD2GrooveKitPiece>
+                            <BFD2GrooveKitPiece slotindex="0" kpclass="Kick" kpindex="0">
+                                <VObjectArray name="artics" count="3">
+                                    <BFD2GrooveArtic articid="0" articname="Hit" />
+                                    <BFD2GrooveArtic articid="1" articname="No Snare" />
+                                    <BFD2GrooveArtic articid="8000" articname="Choke" />
+                                </VObjectArray>
+                            </BFD2GrooveKitPiece>
+                            <BFD2GrooveKitPiece slotindex="1" kpclass="Snare" kpindex="0">
+                                <VObjectArray name="artics" count="8">
+                                    <BFD2GrooveArtic articid="0" articname="Hit" />
+                                    <BFD2GrooveArtic articid="1" articname="Drag" />
+                                    <BFD2GrooveArtic articid="2" articname="Flam" />
+                                    <BFD2GrooveArtic articid="3" articname="Rim shot" />
+                                    <BFD2GrooveArtic articid="4" articname="Side stick" />
+                                    <BFD2GrooveArtic articid="5" articname="Half" />
+                                    <BFD2GrooveArtic articid="6" articname="Variable" />
+                                    <BFD2GrooveArtic articid="8000" articname="Choke" />
+                                </VObjectArray>
+                            </BFD2GrooveKitPiece>
+                        </VObjectArray>
+                        <VObjectArray name="hits" count="27">
+                            <BFD2GrooveHit pos="0" len="12500" vel="0.181102" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="6250" len="22917" vel="0.992126" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="258333" len="8333" vel="0.228346" kpslot="2" kpartic="0" />
+                            <BFD2GrooveHit pos="437500" len="10417" vel="0.543307" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="479167" len="12500" vel="0.267717" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="743750" len="16667" vel="0.141732" kpslot="2" kpartic="0" />
+                            <BFD2GrooveHit pos="745833" len="12500" vel="0.818898" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="947917" len="12500" vel="0.385827" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="995833" len="2083" vel="0.204724" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="1237500" len="10417" vel="0.19685" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="1481250" len="12500" vel="0.19685" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="1481250" len="10417" vel="0.574803" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="1731250" len="20833" vel="0.866142" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="1739583" len="8333" vel="0.228346" kpslot="2" kpartic="0" />
+                            <BFD2GrooveHit pos="1783333" len="6250" vel="0.188976" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="1975000" len="4167" vel="0.724409" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="2237500" len="8333" vel="0.92126" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="2239583" len="4167" vel="0.204724" kpslot="2" kpartic="0" />
+                            <BFD2GrooveHit pos="2302083" len="8333" vel="0.417323" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="2487500" len="18750" vel="0.244094" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="2741667" len="2083" vel="0.23622" kpslot="2" kpartic="0" />
+                            <BFD2GrooveHit pos="2806250" len="0" vel="0.330709" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="2975000" len="0" vel="0.700787" kpslot="1" kpartic="3" />
+                            <BFD2GrooveHit pos="3247917" len="0" vel="1" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="3437500" len="2083" vel="0.748031" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="3487500" len="0" vel="0.228346" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="3758333" len="2083" vel="0.23622" kpslot="1" kpartic="0" />
+                        </VObjectArray>
+                    </BFD2Groove>
+                </BFD2GrooveSlot>
+            </VDictionaryPair>
+            <VDictionaryPair>
+                <VValue type="int" value="62" />
+                <BFD2GrooveSlot fill="false">
+                    <BFD2Groove name="groove" timeformat="ticks" ppqn="1000000">
+                        <BFD2GrooveInfo name="info" info_library="BFD London Sessions" info_librarylong="BFD London Sessions" info_author="Chris Dagley" info_authurl="chrisdagley" info_name="bf_E_03" info_rating="3" bpm="120" genre="Funk" bars="1" timesig="4/4" />
+                        <VObjectArray name="kitpieces" count="3">
+                            <BFD2GrooveKitPiece slotindex="0" kpclass="Kick" kpindex="0">
+                                <VObjectArray name="artics" count="3">
+                                    <BFD2GrooveArtic articid="0" articname="Hit" />
+                                    <BFD2GrooveArtic articid="1" articname="No Snare" />
+                                    <BFD2GrooveArtic articid="8000" articname="Choke" />
+                                </VObjectArray>
+                            </BFD2GrooveKitPiece>
+                            <BFD2GrooveKitPiece slotindex="2" kpclass="Hihat" kpindex="0">
+                                <VObjectArray name="artics" count="14">
+                                    <BFD2GrooveArtic articid="0" articname="Open tip" />
+                                    <BFD2GrooveArtic articid="1" articname="Open shank" />
+                                    <BFD2GrooveArtic articid="2" articname="3/4 tip" />
+                                    <BFD2GrooveArtic articid="3" articname="3/4 shank" />
+                                    <BFD2GrooveArtic articid="4" articname="Half tip" />
+                                    <BFD2GrooveArtic articid="5" articname="Half shank" />
+                                    <BFD2GrooveArtic articid="6" articname="1/4 tip" />
+                                    <BFD2GrooveArtic articid="7" articname="1/4 shank" />
+                                    <BFD2GrooveArtic articid="8" articname="Closed Tip" />
+                                    <BFD2GrooveArtic articid="9" articname="Closed shank" />
+                                    <BFD2GrooveArtic articid="10" articname="Pedal" />
+                                    <BFD2GrooveArtic articid="11" articname="Variable tip" />
+                                    <BFD2GrooveArtic articid="12" articname="Variable shank" />
+                                    <BFD2GrooveArtic articid="8000" articname="Choke" />
+                                </VObjectArray>
+                            </BFD2GrooveKitPiece>
+                            <BFD2GrooveKitPiece slotindex="1" kpclass="Snare" kpindex="0">
+                                <VObjectArray name="artics" count="8">
+                                    <BFD2GrooveArtic articid="0" articname="Hit" />
+                                    <BFD2GrooveArtic articid="1" articname="Drag" />
+                                    <BFD2GrooveArtic articid="2" articname="Flam" />
+                                    <BFD2GrooveArtic articid="3" articname="Rim shot" />
+                                    <BFD2GrooveArtic articid="4" articname="Side stick" />
+                                    <BFD2GrooveArtic articid="5" articname="Half" />
+                                    <BFD2GrooveArtic articid="6" articname="Variable" />
+                                    <BFD2GrooveArtic articid="8000" articname="Choke" />
+                                </VObjectArray>
+                            </BFD2GrooveKitPiece>
+                        </VObjectArray>
+                        <VObjectArray name="hits" count="25">
+                            <BFD2GrooveHit pos="0" len="2083" vel="1" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="8333" len="8333" vel="0.220472" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="256250" len="2083" vel="0.204724" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="506250" len="12500" vel="0.637795" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="510417" len="4167" vel="0.19685" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="760417" len="14583" vel="0.267717" kpslot="2" kpartic="0" />
+                            <BFD2GrooveHit pos="764583" len="8333" vel="0.708661" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="802083" len="16667" vel="0.425197" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="997917" len="8333" vel="0.23622" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="1254167" len="8333" vel="0.291339" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="1491667" len="20833" vel="0.653543" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="1512500" len="22917" vel="0.188976" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="1745833" len="4167" vel="0.88189" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="1758333" len="20833" vel="0.251969" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="1991667" len="22917" vel="0.645669" kpslot="1" kpartic="3" />
+                            <BFD2GrooveHit pos="2258333" len="2083" vel="0.23622" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="2466667" len="10417" vel="0.393701" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="2493750" len="18750" vel="0.204724" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="2739583" len="18750" vel="0.283465" kpslot="2" kpartic="0" />
+                            <BFD2GrooveHit pos="2966667" len="10417" vel="0.307087" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="2993750" len="0" vel="1" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="3252083" len="0" vel="1" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="3456250" len="2083" vel="0.582677" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="3504167" len="2083" vel="0.188976" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="3760417" len="2083" vel="0.212598" kpslot="1" kpartic="0" />
+                        </VObjectArray>
+                    </BFD2Groove>
+                </BFD2GrooveSlot>
+            </VDictionaryPair>
+            <VDictionaryPair>
+                <VValue type="int" value="63" />
+                <BFD2GrooveSlot fill="false">
+                    <BFD2Groove name="groove" timeformat="ticks" ppqn="1000000">
+                        <BFD2GrooveInfo name="info" info_library="BFD London Sessions" info_librarylong="BFD London Sessions" info_author="Chris Dagley" info_authurl="chrisdagley" info_name="bf_E_04" info_rating="3" bpm="120" genre="Funk" bars="1" timesig="4/4" />
+                        <VObjectArray name="kitpieces" count="3">
+                            <BFD2GrooveKitPiece slotindex="0" kpclass="Kick" kpindex="0">
+                                <VObjectArray name="artics" count="3">
+                                    <BFD2GrooveArtic articid="0" articname="Hit" />
+                                    <BFD2GrooveArtic articid="1" articname="No Snare" />
+                                    <BFD2GrooveArtic articid="8000" articname="Choke" />
+                                </VObjectArray>
+                            </BFD2GrooveKitPiece>
+                            <BFD2GrooveKitPiece slotindex="2" kpclass="Hihat" kpindex="0">
+                                <VObjectArray name="artics" count="14">
+                                    <BFD2GrooveArtic articid="0" articname="Open tip" />
+                                    <BFD2GrooveArtic articid="1" articname="Open shank" />
+                                    <BFD2GrooveArtic articid="2" articname="3/4 tip" />
+                                    <BFD2GrooveArtic articid="3" articname="3/4 shank" />
+                                    <BFD2GrooveArtic articid="4" articname="Half tip" />
+                                    <BFD2GrooveArtic articid="5" articname="Half shank" />
+                                    <BFD2GrooveArtic articid="6" articname="1/4 tip" />
+                                    <BFD2GrooveArtic articid="7" articname="1/4 shank" />
+                                    <BFD2GrooveArtic articid="8" articname="Closed Tip" />
+                                    <BFD2GrooveArtic articid="9" articname="Closed shank" />
+                                    <BFD2GrooveArtic articid="10" articname="Pedal" />
+                                    <BFD2GrooveArtic articid="11" articname="Variable tip" />
+                                    <BFD2GrooveArtic articid="12" articname="Variable shank" />
+                                    <BFD2GrooveArtic articid="8000" articname="Choke" />
+                                </VObjectArray>
+                            </BFD2GrooveKitPiece>
+                            <BFD2GrooveKitPiece slotindex="1" kpclass="Snare" kpindex="0">
+                                <VObjectArray name="artics" count="8">
+                                    <BFD2GrooveArtic articid="0" articname="Hit" />
+                                    <BFD2GrooveArtic articid="1" articname="Drag" />
+                                    <BFD2GrooveArtic articid="2" articname="Flam" />
+                                    <BFD2GrooveArtic articid="3" articname="Rim shot" />
+                                    <BFD2GrooveArtic articid="4" articname="Side stick" />
+                                    <BFD2GrooveArtic articid="5" articname="Half" />
+                                    <BFD2GrooveArtic articid="6" articname="Variable" />
+                                    <BFD2GrooveArtic articid="8000" articname="Choke" />
+                                </VObjectArray>
+                            </BFD2GrooveKitPiece>
+                        </VObjectArray>
+                        <VObjectArray name="hits" count="27">
+                            <BFD2GrooveHit pos="0" len="12500" vel="0.992126" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="4167" len="6250" vel="0.173228" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="250000" len="2083" vel="0.228346" kpslot="2" kpartic="0" />
+                            <BFD2GrooveHit pos="439583" len="4167" vel="0.370079" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="466667" len="14583" vel="0.283465" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="737500" len="8333" vel="0.811024" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="741667" len="20833" vel="0.259843" kpslot="2" kpartic="0" />
+                            <BFD2GrooveHit pos="937500" len="10417" vel="0.417323" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="995833" len="2083" vel="0.220472" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="1241667" len="2083" vel="0.259843" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="1475000" len="4167" vel="0.590551" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="1487500" len="20833" vel="0.188976" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="1735417" len="12500" vel="0.80315" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="1739583" len="8333" vel="0.23622" kpslot="2" kpartic="0" />
+                            <BFD2GrooveHit pos="1808333" len="20833" vel="0.496063" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="1972917" len="8333" vel="0.771654" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="2231250" len="22917" vel="0.897638" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="2241667" len="22917" vel="0.173228" kpslot="2" kpartic="0" />
+                            <BFD2GrooveHit pos="2312500" len="12500" vel="0.370079" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="2485417" len="4167" vel="0.188976" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="2739583" len="8333" vel="0.299213" kpslot="2" kpartic="0" />
+                            <BFD2GrooveHit pos="2935417" len="18750" vel="0.551181" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="2981250" len="2083" vel="0.755906" kpslot="1" kpartic="3" />
+                            <BFD2GrooveHit pos="3245833" len="2083" vel="0.992126" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="3447917" len="0" vel="0.732283" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="3487500" len="0" vel="0.228346" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="3739583" len="2083" vel="0.204724" kpslot="1" kpartic="0" />
+                        </VObjectArray>
+                    </BFD2Groove>
+                </BFD2GrooveSlot>
+            </VDictionaryPair>
+            <VDictionaryPair>
+                <VValue type="int" value="64" />
+                <BFD2GrooveSlot fill="false">
+                    <BFD2Groove name="groove" timeformat="ticks" ppqn="1000000">
+                        <BFD2GrooveInfo name="info" info_library="BFD London Sessions" info_librarylong="BFD London Sessions" info_author="Chris Dagley" info_authurl="chrisdagley" info_name="bf_E_05" info_rating="3" bpm="120" genre="Funk" bars="1" timesig="4/4" />
+                        <VObjectArray name="kitpieces" count="3">
+                            <BFD2GrooveKitPiece slotindex="0" kpclass="Kick" kpindex="0">
+                                <VObjectArray name="artics" count="3">
+                                    <BFD2GrooveArtic articid="0" articname="Hit" />
+                                    <BFD2GrooveArtic articid="1" articname="No Snare" />
+                                    <BFD2GrooveArtic articid="8000" articname="Choke" />
+                                </VObjectArray>
+                            </BFD2GrooveKitPiece>
+                            <BFD2GrooveKitPiece slotindex="2" kpclass="Hihat" kpindex="0">
+                                <VObjectArray name="artics" count="14">
+                                    <BFD2GrooveArtic articid="0" articname="Open tip" />
+                                    <BFD2GrooveArtic articid="1" articname="Open shank" />
+                                    <BFD2GrooveArtic articid="2" articname="3/4 tip" />
+                                    <BFD2GrooveArtic articid="3" articname="3/4 shank" />
+                                    <BFD2GrooveArtic articid="4" articname="Half tip" />
+                                    <BFD2GrooveArtic articid="5" articname="Half shank" />
+                                    <BFD2GrooveArtic articid="6" articname="1/4 tip" />
+                                    <BFD2GrooveArtic articid="7" articname="1/4 shank" />
+                                    <BFD2GrooveArtic articid="8" articname="Closed Tip" />
+                                    <BFD2GrooveArtic articid="9" articname="Closed shank" />
+                                    <BFD2GrooveArtic articid="10" articname="Pedal" />
+                                    <BFD2GrooveArtic articid="11" articname="Variable tip" />
+                                    <BFD2GrooveArtic articid="12" articname="Variable shank" />
+                                    <BFD2GrooveArtic articid="8000" articname="Choke" />
+                                </VObjectArray>
+                            </BFD2GrooveKitPiece>
+                            <BFD2GrooveKitPiece slotindex="1" kpclass="Snare" kpindex="0">
+                                <VObjectArray name="artics" count="8">
+                                    <BFD2GrooveArtic articid="0" articname="Hit" />
+                                    <BFD2GrooveArtic articid="1" articname="Drag" />
+                                    <BFD2GrooveArtic articid="2" articname="Flam" />
+                                    <BFD2GrooveArtic articid="3" articname="Rim shot" />
+                                    <BFD2GrooveArtic articid="4" articname="Side stick" />
+                                    <BFD2GrooveArtic articid="5" articname="Half" />
+                                    <BFD2GrooveArtic articid="6" articname="Variable" />
+                                    <BFD2GrooveArtic articid="8000" articname="Choke" />
+                                </VObjectArray>
+                            </BFD2GrooveKitPiece>
+                        </VObjectArray>
+                        <VObjectArray name="hits" count="26">
+                            <BFD2GrooveHit pos="0" len="0" vel="0.952756" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="6250" len="8333" vel="0.267717" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="252083" len="8333" vel="0.244094" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="508333" len="6250" vel="0.559055" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="512500" len="18750" vel="0.188976" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="758333" len="18750" vel="0.251969" kpslot="2" kpartic="0" />
+                            <BFD2GrooveHit pos="766667" len="2083" vel="0.645669" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="810417" len="2083" vel="0.259843" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="1006250" len="10417" vel="0.307087" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="1241667" len="8333" vel="0.330709" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="1493750" len="14583" vel="0.566929" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="1504167" len="16667" vel="0.188976" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="1754167" len="6250" vel="0.755906" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="1754167" len="8333" vel="0.228346" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="1947917" len="2083" vel="0.0708661" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="2002083" len="2083" vel="0.84252" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="2283333" len="14583" vel="0.19685" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="2502083" len="2083" vel="0.496063" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="2518750" len="12500" vel="0.19685" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="2768750" len="2083" vel="0.275591" kpslot="2" kpartic="0" />
+                            <BFD2GrooveHit pos="2995833" len="4167" vel="0.653543" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="3010417" len="0" vel="0.92126" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="3270833" len="2083" vel="1" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="3483333" len="2083" vel="0.582677" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="3512500" len="2083" vel="0.220472" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="3762500" len="0" vel="0.275591" kpslot="1" kpartic="0" />
+                        </VObjectArray>
+                    </BFD2Groove>
+                </BFD2GrooveSlot>
+            </VDictionaryPair>
+            <VDictionaryPair>
+                <VValue type="int" value="65" />
+                <BFD2GrooveSlot fill="false">
+                    <BFD2Groove name="groove" timeformat="ticks" ppqn="1000000">
+                        <BFD2GrooveInfo name="info" info_library="BFD London Sessions" info_librarylong="BFD London Sessions" info_author="Chris Dagley" info_authurl="chrisdagley" info_name="bf_E_06" info_rating="3" bpm="120" genre="Funk" bars="1" timesig="4/4" />
+                        <VObjectArray name="kitpieces" count="3">
+                            <BFD2GrooveKitPiece slotindex="0" kpclass="Kick" kpindex="0">
+                                <VObjectArray name="artics" count="3">
+                                    <BFD2GrooveArtic articid="0" articname="Hit" />
+                                    <BFD2GrooveArtic articid="1" articname="No Snare" />
+                                    <BFD2GrooveArtic articid="8000" articname="Choke" />
+                                </VObjectArray>
+                            </BFD2GrooveKitPiece>
+                            <BFD2GrooveKitPiece slotindex="2" kpclass="Hihat" kpindex="0">
+                                <VObjectArray name="artics" count="14">
+                                    <BFD2GrooveArtic articid="0" articname="Open tip" />
+                                    <BFD2GrooveArtic articid="1" articname="Open shank" />
+                                    <BFD2GrooveArtic articid="2" articname="3/4 tip" />
+                                    <BFD2GrooveArtic articid="3" articname="3/4 shank" />
+                                    <BFD2GrooveArtic articid="4" articname="Half tip" />
+                                    <BFD2GrooveArtic articid="5" articname="Half shank" />
+                                    <BFD2GrooveArtic articid="6" articname="1/4 tip" />
+                                    <BFD2GrooveArtic articid="7" articname="1/4 shank" />
+                                    <BFD2GrooveArtic articid="8" articname="Closed Tip" />
+                                    <BFD2GrooveArtic articid="9" articname="Closed shank" />
+                                    <BFD2GrooveArtic articid="10" articname="Pedal" />
+                                    <BFD2GrooveArtic articid="11" articname="Variable tip" />
+                                    <BFD2GrooveArtic articid="12" articname="Variable shank" />
+                                    <BFD2GrooveArtic articid="8000" articname="Choke" />
+                                </VObjectArray>
+                            </BFD2GrooveKitPiece>
+                            <BFD2GrooveKitPiece slotindex="1" kpclass="Snare" kpindex="0">
+                                <VObjectArray name="artics" count="8">
+                                    <BFD2GrooveArtic articid="0" articname="Hit" />
+                                    <BFD2GrooveArtic articid="1" articname="Drag" />
+                                    <BFD2GrooveArtic articid="2" articname="Flam" />
+                                    <BFD2GrooveArtic articid="3" articname="Rim shot" />
+                                    <BFD2GrooveArtic articid="4" articname="Side stick" />
+                                    <BFD2GrooveArtic articid="5" articname="Half" />
+                                    <BFD2GrooveArtic articid="6" articname="Variable" />
+                                    <BFD2GrooveArtic articid="8000" articname="Choke" />
+                                </VObjectArray>
+                            </BFD2GrooveKitPiece>
+                        </VObjectArray>
+                        <VObjectArray name="hits" count="27">
+                            <BFD2GrooveHit pos="0" len="14583" vel="1" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="10417" len="14583" vel="0.228346" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="256250" len="14583" vel="0.267717" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="504167" len="8333" vel="0.149606" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="518750" len="22917" vel="0.527559" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="754167" len="18750" vel="0.291339" kpslot="2" kpartic="0" />
+                            <BFD2GrooveHit pos="768750" len="12500" vel="0.755906" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="950000" len="10417" vel="0.204724" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="1012500" len="14583" vel="0.228346" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="1247917" len="10417" vel="0.338583" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="1512500" len="16667" vel="0.645669" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="1516667" len="10417" vel="0.220472" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="1758333" len="12500" vel="0.228346" kpslot="2" kpartic="0" />
+                            <BFD2GrooveHit pos="1768750" len="14583" vel="0.858268" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="1968750" len="16667" vel="0.511811" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="2000000" len="18750" vel="0.685039" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="2260417" len="10417" vel="0.204724" kpslot="2" kpartic="0" />
+                            <BFD2GrooveHit pos="2266667" len="18750" vel="0.874016" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="2464583" len="6250" vel="0.133858" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="2504167" len="14583" vel="0.228346" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="2766667" len="20833" vel="0.244094" kpslot="2" kpartic="0" />
+                            <BFD2GrooveHit pos="2806250" len="6250" vel="0.015748" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="2991667" len="0" vel="0.929134" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="3254167" len="2083" vel="1" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="3458333" len="2083" vel="0.417323" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="3495833" len="0" vel="0.23622" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="3756250" len="2083" vel="0.204724" kpslot="1" kpartic="0" />
+                        </VObjectArray>
+                    </BFD2Groove>
+                </BFD2GrooveSlot>
+            </VDictionaryPair>
+            <VDictionaryPair>
+                <VValue type="int" value="66" />
+                <BFD2GrooveSlot fill="false">
+                    <BFD2Groove name="groove" timeformat="ticks" ppqn="1000000">
+                        <BFD2GrooveInfo name="info" info_library="BFD London Sessions" info_librarylong="BFD London Sessions" info_author="Chris Dagley" info_authurl="chrisdagley" info_name="bf_E_07" info_rating="3" bpm="120" genre="Funk" bars="1" timesig="4/4" />
+                        <VObjectArray name="kitpieces" count="3">
+                            <BFD2GrooveKitPiece slotindex="0" kpclass="Kick" kpindex="0">
+                                <VObjectArray name="artics" count="3">
+                                    <BFD2GrooveArtic articid="0" articname="Hit" />
+                                    <BFD2GrooveArtic articid="1" articname="No Snare" />
+                                    <BFD2GrooveArtic articid="8000" articname="Choke" />
+                                </VObjectArray>
+                            </BFD2GrooveKitPiece>
+                            <BFD2GrooveKitPiece slotindex="2" kpclass="Hihat" kpindex="0">
+                                <VObjectArray name="artics" count="14">
+                                    <BFD2GrooveArtic articid="0" articname="Open tip" />
+                                    <BFD2GrooveArtic articid="1" articname="Open shank" />
+                                    <BFD2GrooveArtic articid="2" articname="3/4 tip" />
+                                    <BFD2GrooveArtic articid="3" articname="3/4 shank" />
+                                    <BFD2GrooveArtic articid="4" articname="Half tip" />
+                                    <BFD2GrooveArtic articid="5" articname="Half shank" />
+                                    <BFD2GrooveArtic articid="6" articname="1/4 tip" />
+                                    <BFD2GrooveArtic articid="7" articname="1/4 shank" />
+                                    <BFD2GrooveArtic articid="8" articname="Closed Tip" />
+                                    <BFD2GrooveArtic articid="9" articname="Closed shank" />
+                                    <BFD2GrooveArtic articid="10" articname="Pedal" />
+                                    <BFD2GrooveArtic articid="11" articname="Variable tip" />
+                                    <BFD2GrooveArtic articid="12" articname="Variable shank" />
+                                    <BFD2GrooveArtic articid="8000" articname="Choke" />
+                                </VObjectArray>
+                            </BFD2GrooveKitPiece>
+                            <BFD2GrooveKitPiece slotindex="1" kpclass="Snare" kpindex="0">
+                                <VObjectArray name="artics" count="8">
+                                    <BFD2GrooveArtic articid="0" articname="Hit" />
+                                    <BFD2GrooveArtic articid="1" articname="Drag" />
+                                    <BFD2GrooveArtic articid="2" articname="Flam" />
+                                    <BFD2GrooveArtic articid="3" articname="Rim shot" />
+                                    <BFD2GrooveArtic articid="4" articname="Side stick" />
+                                    <BFD2GrooveArtic articid="5" articname="Half" />
+                                    <BFD2GrooveArtic articid="6" articname="Variable" />
+                                    <BFD2GrooveArtic articid="8000" articname="Choke" />
+                                </VObjectArray>
+                            </BFD2GrooveKitPiece>
+                        </VObjectArray>
+                        <VObjectArray name="hits" count="24">
+                            <BFD2GrooveHit pos="0" len="12500" vel="1" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="10417" len="14583" vel="0.267717" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="258333" len="10417" vel="0.251969" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="508333" len="20833" vel="0.519685" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="514583" len="10417" vel="0.165354" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="756250" len="14583" vel="0.755906" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="766667" len="16667" vel="0.275591" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="1016667" len="6250" vel="0.23622" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="1258333" len="12500" vel="0.393701" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="1512500" len="14583" vel="0.622047" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="1516667" len="8333" vel="0.204724" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="1764583" len="2083" vel="0.23622" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="1770833" len="10417" vel="0.818898" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="2008333" len="4167" vel="0.755906" kpslot="1" kpartic="3" />
+                            <BFD2GrooveHit pos="2262500" len="6250" vel="0.0472441" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="2495833" len="8333" vel="0.330709" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="2502083" len="16667" vel="0.173228" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="2745833" len="18750" vel="0.23622" kpslot="2" kpartic="0" />
+                            <BFD2GrooveHit pos="2979167" len="0" vel="0.212598" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="3002083" len="2083" vel="0.818898" kpslot="1" kpartic="0" />
+                            <BFD2GrooveHit pos="3264583" len="2083" vel="0.929134" kpslot="0" kpartic="0" />
+                            <BFD2GrooveHit pos="3468750" len="2083" vel="0.409449" kpslot="2" kpartic="10" />
+                            <BFD2GrooveHit pos="3512500" len="2083" vel="0.228346" kpslot="2" kpartic="8" />
+                            <BFD2GrooveHit pos="3745833" len="0" vel="0.307087" kpslot="1" kpartic="0" />
+                        </VObjectArray>
+                    </BFD2Groove>
+                </BFD2GrooveSlot>
+            </VDictionaryPair>
+        </VDictionary>
+    </BFD2GrooveBundle>
+</root>

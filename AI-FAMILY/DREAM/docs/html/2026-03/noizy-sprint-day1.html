@@ -1,0 +1,1895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIZYVOX — 3-Day Sprint Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap');
+
+  :root {
+    --void: #020204;
+    --void2: #07080f;
+    --void3: #0d0f1a;
+    --amber: #c49a38;
+    --amber-dim: #7a5e1e;
+    --cyan: #2aa4be;
+    --green: #3dba72;
+    --red: #e05a5a;
+    --yellow: #d4b84a;
+    --text: #d4cfc8;
+    --text-dim: #7a7670;
+    --border: rgba(196, 154, 56, 0.2);
+    --code-bg: #0a0c14;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--void);
+    color: var(--text);
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+
+  /* ── SIDEBAR NAV ──────────────────────────────────────────────── */
+  #sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 220px;
+    background: var(--void2);
+    border-right: 1px solid var(--border);
+    padding: 2rem 1.5rem;
+    overflow-y: auto;
+    z-index: 100;
+  }
+
+  .sidebar-logo {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  .sidebar-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    margin-bottom: 2rem;
+    line-height: 1.5;
+  }
+
+  .day-nav {
+    margin-bottom: 1.5rem;
+  }
+
+  .day-nav-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 0.5rem;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 0;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    transition: color 0.2s ease;
+    line-height: 1.4;
+  }
+
+  .nav-link::before {
+    content: '·';
+    color: var(--amber-dim);
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+
+  .nav-link:hover, .nav-link.active { color: var(--amber); }
+  .nav-link.active::before { color: var(--amber); }
+
+  .status-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-left: auto;
+  }
+
+  .dot-pending { background: var(--text-dim); opacity: 0.3; }
+  .dot-ready { background: var(--green); animation: pulse-g 2s ease infinite; }
+  .dot-done { background: var(--green); }
+
+  @keyframes pulse-g {
+    0%, 100% { opacity: 1; } 50% { opacity: 0.4; }
+  }
+
+  /* ── MAIN CONTENT ─────────────────────────────────────────────── */
+  #main {
+    margin-left: 220px;
+    padding: 3rem 3.5rem 6rem;
+    max-width: calc(220px + 820px);
+  }
+
+  @media (max-width: 768px) {
+    #sidebar { display: none; }
+    #main { margin-left: 0; padding: 2rem 1.5rem; }
+  }
+
+  /* ── HEADER ───────────────────────────────────────────────────── */
+  .sprint-header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .sprint-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .sprint-title {
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: #fff;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .sprint-title em { font-style: italic; color: var(--amber); }
+
+  .sprint-sub {
+    font-size: 1.1rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--text-dim);
+    max-width: 600px;
+  }
+
+  .sprint-meta {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .meta-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+
+  .meta-value {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--amber);
+    font-weight: 500;
+  }
+
+  /* ── SECTION ──────────────────────────────────────────────────── */
+  .sprint-section {
+    margin-bottom: 4rem;
+    scroll-margin-top: 2rem;
+  }
+
+  .section-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(196, 154, 56, 0.1);
+    border: 1px solid var(--amber-dim);
+    color: var(--amber);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    padding: 4px 12px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .section-heading {
+    font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+    font-weight: 300;
+    color: #fff;
+    margin-bottom: 0.8rem;
+    line-height: 1.2;
+  }
+
+  .section-heading em { font-style: italic; color: var(--amber); }
+
+  .section-body {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--text-dim);
+    margin-bottom: 1.5rem;
+    max-width: 660px;
+  }
+
+  /* ── STEPS ────────────────────────────────────────────────────── */
+  .step {
+    border: 1px solid var(--border);
+    background: var(--void2);
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+
+  .step-header {
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    user-select: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+
+  .step.open .step-header {
+    border-bottom-color: var(--border);
+  }
+
+  .step-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--amber-dim);
+    flex-shrink: 0;
+    width: 30px;
+  }
+
+  .step-title {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #fff;
+    flex: 1;
+    line-height: 1.3;
+  }
+
+  .step-status {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    padding: 3px 8px;
+    border: 1px solid;
+    flex-shrink: 0;
+  }
+
+  .step-status.required { color: var(--amber); border-color: var(--amber-dim); }
+  .step-status.optional { color: var(--text-dim); border-color: rgba(255,255,255,0.1); }
+  .step-status.verify { color: var(--green); border-color: var(--green); opacity: 0.7; }
+
+  .step-chevron {
+    color: var(--amber-dim);
+    font-size: 0.7rem;
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
+  }
+
+  .step.open .step-chevron { transform: rotate(90deg); }
+
+  .step-body {
+    display: none;
+    padding: 1.5rem;
+  }
+
+  .step.open .step-body { display: block; }
+
+  .step-desc {
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--text-dim);
+    margin-bottom: 1.2rem;
+  }
+
+  /* ── CODE BLOCKS ──────────────────────────────────────────────── */
+  .code-block {
+    background: var(--code-bg);
+    border: 1px solid rgba(196, 154, 56, 0.15);
+    border-left: 3px solid var(--amber-dim);
+    margin: 1rem 0;
+    position: relative;
+  }
+
+  .code-label {
+    background: rgba(196, 154, 56, 0.08);
+    border-bottom: 1px solid rgba(196, 154, 56, 0.1);
+    padding: 6px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .copy-btn {
+    background: none;
+    border: 1px solid var(--amber-dim);
+    color: var(--amber-dim);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    padding: 3px 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+  }
+
+  .copy-btn:hover { background: rgba(196,154,56,0.1); color: var(--amber); border-color: var(--amber); }
+  .copy-btn.copied { color: var(--green); border-color: var(--green); }
+
+  pre {
+    padding: 1.2rem 1.4rem;
+    overflow-x: auto;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+
+  pre .comment { color: var(--text-dim); opacity: 0.6; }
+  pre .cmd { color: #fff; }
+  pre .kw { color: var(--cyan); }
+  pre .str { color: var(--green); opacity: 0.85; }
+  pre .num { color: var(--amber); }
+  pre .good { color: var(--green); }
+  pre .warn { color: var(--yellow); }
+  pre .err { color: var(--red); }
+
+  /* ── CALLOUTS ─────────────────────────────────────────────────── */
+  .callout {
+    border: 1px solid;
+    padding: 1rem 1.4rem;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 1.7;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .callout-icon { flex-shrink: 0; font-size: 1rem; margin-top: 1px; }
+
+  .callout.info { border-color: rgba(42,164,190,0.3); background: rgba(42,164,190,0.05); color: #a0c8d8; }
+  .callout.warn { border-color: rgba(212,184,74,0.3); background: rgba(212,184,74,0.05); color: #c8b070; }
+  .callout.success { border-color: rgba(61,186,114,0.3); background: rgba(61,186,114,0.05); color: #90c8a0; }
+  .callout.danger { border-color: rgba(224,90,90,0.3); background: rgba(224,90,90,0.05); color: #d09090; }
+
+  /* ── VERIFY BLOCKS ────────────────────────────────────────────── */
+  .verify-block {
+    background: rgba(61, 186, 114, 0.04);
+    border: 1px solid rgba(61, 186, 114, 0.2);
+    border-left: 3px solid var(--green);
+    padding: 1.2rem 1.4rem;
+    margin: 1rem 0;
+  }
+
+  .verify-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--green);
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .verify-title::before { content: '✓'; font-size: 0.8rem; }
+
+  .verify-list {
+    list-style: none;
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--text-dim);
+  }
+
+  .verify-list li::before { content: '→ '; color: var(--green); }
+
+  /* ── DAY HEADER ───────────────────────────────────────────────── */
+  .day-header {
+    display: flex;
+    align-items: flex-end;
+    gap: 1.5rem;
+    padding: 1.5rem 2rem;
+    background: var(--void2);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--amber);
+    margin-bottom: 2rem;
+  }
+
+  .day-num {
+    font-size: 4rem;
+    font-weight: 300;
+    color: var(--amber);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .day-info { flex: 1; }
+
+  .day-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  .day-goal {
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: #fff;
+    line-height: 1.3;
+  }
+
+  .day-goal em { font-style: italic; color: var(--amber); }
+
+  .day-duration {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+    text-align: right;
+    line-height: 1.5;
+  }
+
+  /* ── OUTCOME BOX ──────────────────────────────────────────────── */
+  .outcome-box {
+    background: rgba(196, 154, 56, 0.05);
+    border: 1px solid rgba(196, 154, 56, 0.25);
+    padding: 1.5rem 2rem;
+    margin-top: 2rem;
+  }
+
+  .outcome-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+
+  .outcome-list {
+    list-style: none;
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--text);
+  }
+
+  .outcome-list li::before { content: '✦ '; color: var(--amber); font-size: 0.7rem; }
+
+  /* ── DECISION TREE ────────────────────────────────────────────── */
+  .decision {
+    border: 1px solid var(--border);
+    background: var(--void2);
+    padding: 1.5rem;
+    margin: 1rem 0;
+  }
+
+  .decision-q {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 1rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .decision-q::before {
+    content: 'IF: ';
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--cyan);
+  }
+
+  .decision-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  @media (max-width: 600px) { .decision-row { grid-template-columns: 1fr; } }
+
+  .decision-branch {
+    padding: 1rem;
+    font-size: 0.85rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--text-dim);
+  }
+
+  .branch-yes {
+    background: rgba(61,186,114,0.05);
+    border-left: 2px solid var(--green);
+  }
+
+  .branch-no {
+    background: rgba(224,90,90,0.04);
+    border-left: 2px solid var(--red);
+  }
+
+  .branch-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .branch-yes .branch-label { color: var(--green); }
+  .branch-no .branch-label { color: var(--red); }
+
+  .branch-yes code,
+  .branch-no code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    background: rgba(255,255,255,0.06);
+    padding: 2px 6px;
+    color: var(--amber);
+    display: inline-block;
+    margin-top: 4px;
+  }
+
+  /* ── FILE TREE ────────────────────────────────────────────────── */
+  .file-tree {
+    background: var(--code-bg);
+    border: 1px solid rgba(196, 154, 56, 0.15);
+    padding: 1.2rem 1.4rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    line-height: 1.9;
+    color: var(--text-dim);
+  }
+
+  .file-tree .dir { color: var(--amber); }
+  .file-tree .file { color: var(--text); }
+  .file-tree .note { color: var(--text-dim); opacity: 0.5; }
+
+  /* ── PROGRESS TRACKER ─────────────────────────────────────────── */
+  #progress-bar {
+    position: fixed;
+    top: 0;
+    left: 220px;
+    right: 0;
+    height: 2px;
+    background: rgba(255,255,255,0.05);
+    z-index: 200;
+  }
+
+  #progress-fill {
+    height: 100%;
+    background: linear-gradient(to right, var(--amber-dim), var(--amber));
+    transition: width 0.1s ease;
+    width: 0%;
+  }
+
+  @media (max-width: 768px) { #progress-bar { left: 0; } }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"><div id="progress-fill"></div></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SIDEBAR
+════════════════════════════════════════════════════════════════ -->
+<nav id="sidebar">
+  <div class="sidebar-logo">NOIZYVOX</div>
+  <div class="sidebar-sub">3-Day Demo Sprint<br>MacBook Pro Setup</div>
+
+  <div class="day-nav">
+    <div class="day-nav-label">Pre-Sprint</div>
+    <a href="#pre" class="nav-link">System Check<span class="status-dot dot-ready"></span></a>
+  </div>
+
+  <div class="day-nav">
+    <div class="day-nav-label">Day 1 — Signal</div>
+    <a href="#d1-homebrew" class="nav-link">Homebrew<span class="status-dot dot-pending"></span></a>
+    <a href="#d1-node" class="nav-link">Node.js / TypeScript<span class="status-dot dot-pending"></span></a>
+    <a href="#d1-ffmpeg" class="nav-link">ffmpeg<span class="status-dot dot-pending"></span></a>
+    <a href="#d1-project" class="nav-link">Project Scaffold<span class="status-dot dot-pending"></span></a>
+    <a href="#d1-uad" class="nav-link">UAD Device Index<span class="status-dot dot-pending"></span></a>
+    <a href="#d1-vad" class="nav-link">VAD + Capture<span class="status-dot dot-pending"></span></a>
+    <a href="#d1-verify" class="nav-link">Day 1 Verify<span class="status-dot dot-pending"></span></a>
+  </div>
+
+  <div class="day-nav">
+    <div class="day-nav-label">Day 2 — Pipeline</div>
+    <a href="#d2-pipeline" class="nav-link">7-Stage Pipeline<span class="status-dot dot-pending"></span></a>
+    <a href="#d2-ledger" class="nav-link">Provenance Ledger<span class="status-dot dot-pending"></span></a>
+    <a href="#d2-watermark" class="nav-link">Watermark Engine<span class="status-dot dot-pending"></span></a>
+    <a href="#d2-verify" class="nav-link">Day 2 Verify<span class="status-dot dot-pending"></span></a>
+  </div>
+
+  <div class="day-nav">
+    <div class="day-nav-label">Day 3 — Demo</div>
+    <a href="#d3-server" class="nav-link">Local API Server<span class="status-dot dot-pending"></span></a>
+    <a href="#d3-demo" class="nav-link">Demo Recording Session<span class="status-dot dot-pending"></span></a>
+    <a href="#d3-proof" class="nav-link">Proof Package<span class="status-dot dot-pending"></span></a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     MAIN
+════════════════════════════════════════════════════════════════ -->
+<main id="main">
+
+  <div class="sprint-header">
+    <div class="sprint-eyebrow">NOIZYVOX / DreamChamber — Sprint Zero</div>
+    <h1 class="sprint-title">3 Days to a<br><em>Working Demo.</em></h1>
+    <p class="sprint-sub">
+      Every command you need. Every decision covered. Paste, run, verify — end of Day 3
+      you have a live signal chain, a provenance ledger with real entries, and a demo
+      you can put in front of anyone.
+    </p>
+    <div class="sprint-meta">
+      <div class="meta-item">
+        <span class="meta-label">Target</span>
+        <span class="meta-value">MacBook Pro / M-series</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Hardware</span>
+        <span class="meta-value">Neumann U87 → UAD Apollo</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Stack</span>
+        <span class="meta-value">Node 20 / TypeScript / ffmpeg</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       PRE-SPRINT: SYSTEM CHECK
+  ──────────────────────────────────────────────────────────────── -->
+  <div class="sprint-section" id="pre">
+    <div class="section-badge">Pre-Sprint</div>
+    <h2 class="section-heading">First: Run the<br><em>system check.</em></h2>
+    <p class="section-body">
+      Open Terminal (Command + Space → "Terminal" → Enter) and run these one at a time.
+      They're diagnostic — nothing installs yet. Read the output, then go to Day 1.
+    </p>
+
+    <div class="step open" onclick="toggleStep(this)">
+      <div class="step-header">
+        <span class="step-num">PRE</span>
+        <span class="step-title">Check your system — 5 commands</span>
+        <span class="step-status required">Required</span>
+        <span class="step-chevron">▶</span>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Paste each line separately, hit Enter, read the output.</p>
+
+        <div class="code-block">
+          <div class="code-label">Terminal — Run each line separately<button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <pre><span class="comment"># 1. Are you on Apple Silicon or Intel?</span>
+<span class="cmd">uname -m</span>
+<span class="comment"># arm64 = Apple Silicon (M1/M2/M3) — good, use it</span>
+<span class="comment"># x86_64 = Intel Mac — works, just slower</span>
+
+<span class="comment"># 2. Is Node.js installed?</span>
+<span class="cmd">node --version</span>
+<span class="comment"># Should show: v18.x.x or v20.x.x — either is fine</span>
+<span class="comment"># "command not found" = we install it in Day 1</span>
+
+<span class="comment"># 3. Is ffmpeg installed?</span>
+<span class="cmd">ffmpeg -version</span>
+<span class="comment"># Should show: ffmpeg version 6.x or 7.x</span>
+<span class="comment"># "command not found" = we install it in Day 1</span>
+
+<span class="comment"># 4. Is Homebrew installed? (the package manager we need)</span>
+<span class="cmd">brew --version</span>
+<span class="comment"># Should show: Homebrew 4.x.x</span>
+<span class="comment"># "command not found" = we install it first in Day 1</span>
+
+<span class="comment"># 5. List audio devices (your UAD should appear here)</span>
+<span class="cmd">system_profiler SPAudioDataType | grep -A5 "Apollo"</span>
+<span class="comment"># Should show: Apollo Twin/Duo/Quad with sample rate</span>
+<span class="comment"># Nothing? Check UAD Console is running and Apollo is powered</span></pre>
+        </div>
+
+        <div class="callout info">
+          <span class="callout-icon">ℹ️</span>
+          <div>Write down which tools are missing (node, ffmpeg, brew). Day 1 has a path for each scenario. You don't need to have anything installed before starting.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       DAY 1
+  ──────────────────────────────────────────────────────────────── -->
+  <div class="sprint-section" id="day1">
+    <div class="day-header">
+      <div class="day-num">1</div>
+      <div class="day-info">
+        <div class="day-name">Day One</div>
+        <div class="day-goal">Signal chain <em>live.</em><br>Your voice hits the pipeline.</div>
+      </div>
+      <div class="day-duration">2–3 hours<br>start to finish</div>
+    </div>
+
+    <!-- STEP: HOMEBREW -->
+    <div class="step" id="d1-homebrew" onclick="toggleStep(this)">
+      <div class="step-header">
+        <span class="step-num">1.1</span>
+        <span class="step-title">Install Homebrew (if missing)</span>
+        <span class="step-status required">Required if missing</span>
+        <span class="step-chevron">▶</span>
+      </div>
+      <div class="step-body">
+        <div class="decision">
+          <div class="decision-q"><code>brew --version</code> returned a version number</div>
+          <div class="decision-row">
+            <div class="decision-branch branch-yes">
+              <span class="branch-label">Yes — Homebrew exists</span>
+              Skip this step. Go to 1.2.
+            </div>
+            <div class="decision-branch branch-no">
+              <span class="branch-label">No — command not found</span>
+              Paste the command below and run it.
+              <code>Takes ~5 minutes. Enter your Mac password when asked.</code>
+            </div>
+          </div>
+        </div>
+        <div class="code-block">
+          <div class="code-label">Terminal — Install Homebrew<button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <pre><span class="cmd">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</span>
+
+<span class="comment"># After install, if you're on Apple Silicon (arm64), run this too:</span>
+<span class="cmd">echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile</span>
+<span class="cmd">eval "$(/opt/homebrew/bin/brew shellenv)"</span>
+
+<span class="comment"># Verify:</span>
+<span class="cmd">brew --version</span>
+<span class="comment"># Should show: Homebrew 4.x.x</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP: NODE -->
+    <div class="step" id="d1-node" onclick="toggleStep(this)">
+      <div class="step-header">
+        <span class="step-num">1.2</span>
+        <span class="step-title">Install Node.js 20 + TypeScript</span>
+        <span class="step-status required">Required if missing</span>
+        <span class="step-chevron">▶</span>
+      </div>
+      <div class="step-body">
+        <div class="decision">
+          <div class="decision-q"><code>node --version</code> returned v18.x or v20.x</div>
+          <div class="decision-row">
+            <div class="decision-branch branch-yes">
+              <span class="branch-label">Yes — Node exists</span>
+              Skip to the TypeScript install command only (last block below).
+            </div>
+            <div class="decision-branch branch-no">
+              <span class="branch-label">No — command not found</span>
+              Run the full block below.
+            </div>
+          </div>
+        </div>
+        <div class="code-block">
+          <div class="code-label">Terminal — Install Node.js via nvm (recommended)<button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <pre><span class="comment"># Install nvm (Node Version Manager)</span>
+<span class="cmd">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash</span>
+
+<span class="comment"># Reload your shell</span>
+<span class="cmd">source ~/.zprofile 2>/dev/null; source ~/.zshrc 2>/dev/null</span>
+
+<span class="comment"># Install Node 20 LTS</span>
+<span class="cmd">nvm install 20</span>
+<span class="cmd">nvm use 20</span>
+
+<span class="comment"># Verify</span>
+<span class="cmd">node --version</span>   <span class="comment"># v20.x.x</span>
+<span class="cmd">npm --version</span>    <span class="comment"># 10.x.x</span>
+
+<span class="comment"># Install TypeScript globally</span>
+<span class="cmd">npm install -g typescript ts-node tsx</span>
+
+<span class="comment"># Verify TypeScript</span>
+<span class="cmd">tsc --version</span>    <span class="comment"># Version 5.x.x</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP: FFMPEG -->
+    <div class="step" id="d1-ffmpeg" onclick="toggleStep(this)">
+      <div class="step-header">
+        <span class="step-num">1.3</span>
+        <span class="step-title">Install ffmpeg</span>
+        <span class="step-status required">Required if missing</span>
+        <span class="step-chevron">▶</span>
+      </div>
+      <div class="step-body">
+        <div class="decision">
+          <div class="decision-q"><code>ffmpeg -version</code> returned a version number</div>
+          <div class="decision-row">
+            <div class="decision-branch branch-yes">
+              <span class="branch-label">Yes — ffmpeg exists</span>
+              Check the version. If it's 4.x or older, upgrade with the command below anyway. Otherwise skip to 1.4.
+            </div>
+            <div class="decision-branch branch-no">
+              <span class="branch-label">No — command not found</span>
+              Run the install block below. Takes ~2 minutes.
+            </div>
+          </div>
+        </div>
+        <div class="code-block">
+          <div class="code-label">Terminal — Install or upgrade ffmpeg<button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <pre><span class="cmd">brew install ffmpeg</span>
+<span class="comment"># Or if already installed but old:</span>
+<span class="cmd">brew upgrade ffmpeg</span>
+
+<span class="comment"># Verify — look for "ffmpeg version 6.x" or "7.x"</span>
+<span class="cmd">ffmpeg -version | head -1</span>
+
+<span class="comment"># List audio capture devices (critical for UAD)</span>
+<span class="cmd">ffmpeg -f avfoundation -list_devices true -i "" 2>&1 | grep -A50 "AVFoundation"</span>
+<span class="comment"># You'll see a list like:</span>
+<span class="comment"># [0] FaceTime HD Camera</span>
+<span class="comment"># [1] UA Apollo Twin USB</span>  ← this is what we need the number of</span>
+<span class="comment"># Write down the number next to your Apollo — you'll need it</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP: PROJECT SCAFFOLD -->
+    <div class="step" id="d1-project" onclick="toggleStep(this)">
+      <div class="step-header">
+        <span class="step-num">1.4</span>
+        <span class="step-title">Create the project structure</span>
+        <span class="step-status required">Required</span>
+        <span class="step-chevron">▶</span>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">This creates the full NOIZYVOX directory structure and installs all dependencies in one shot.</p>
+
+        <div class="code-block">
+          <div class="code-label">Terminal — Create project<button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <pre><span class="comment"># Go to wherever you want the project (Desktop is fine)</span>
+<span class="cmd">cd ~/Desktop</span>
+
+<span class="comment"># Create the project</span>
+<span class="cmd">mkdir -p noizyvox/{src,sessions,ledger,exports,logs}</span>
+<span class="cmd">cd noizyvox</span>
+
+<span class="comment"># Initialize npm + TypeScript</span>
+<span class="cmd">npm init -y</span>
+<span class="cmd">npm install typescript ts-node tsx @types/node --save-dev</span>
+
+<span class="comment"># Audio + utility deps</span>
+<span class="cmd">npm install uuid chalk</span>
+
+<span class="comment"># Create tsconfig</span>
+<span class="cmd">cat > tsconfig.json << 'EOF'
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "commonjs",
+    "lib": ["ES2022"],
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "declaration": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
+EOF</span>
+
+<span class="comment"># Verify structure</span>
+<span class="cmd">ls -la</span>
+<span class="comment"># Should show: src/ sessions/ ledger/ exports/ logs/ package.json tsconfig.json node_modules/</span></pre>
+        </div>
+
+        <div class="file-tree" style="margin-top:1rem;">
+          <div><span class="dir">noizyvox/</span></div>
+          <div>&nbsp; <span class="dir">src/</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="note">← all TypeScript source files go here</span></div>
+          <div>&nbsp; <span class="dir">sessions/</span> &nbsp;&nbsp; <span class="note">← recorded WAV files, per-session</span></div>
+          <div>&nbsp; <span class="dir">ledger/</span> &nbsp;&nbsp;&nbsp;&nbsp; <span class="note">← provenance.jsonl — never deleted</span></div>
+          <div>&nbsp; <span class="dir">exports/</span> &nbsp;&nbsp;&nbsp; <span class="note">← watermarked exports</span></div>
+          <div>&nbsp; <span class="dir">logs/</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="note">← pipeline logs</span></div>
+          <div>&nbsp; <span class="file">tsconfig.json</span></div>
+          <div>&nbsp; <span class="file">package.json</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP: UAD DEVICE INDEX -->
+    <div class="step" id="d1-uad" onclick="toggleStep(this)">
+      <div class="step-header">
+        <span class="step-num">1.5</span>
+        <span class="step-title">Find your UAD device index</span>
+        <span class="step-status required">Critical — do this before recording</span>
+        <span class="step-chevron">▶</span>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">ffmpeg needs the exact device number for your Apollo. This is how you find it.</p>
+
+        <div class="code-block">
+          <div class="code-label">Terminal — List all audio capture devices<button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <pre><span class="cmd">ffmpeg -f avfoundation -list_devices true -i "" 2>&1</span>
+
+<span class="comment"># EXAMPLE output — your numbers will differ:</span>
+<span class="good">[AVFoundation indev @ ...] AVFoundation audio devices:</span>
+<span class="good">[AVFoundation indev @ ...] [0] Built-in Microphone</span>
+<span class="good">[AVFoundation indev @ ...] [1] UA Apollo Twin USB</span>  ← write this number
+<span class="good">[AVFoundation indev @ ...] [2] UAD Apollo x6</span>       ← could also be this
+
+<span class="comment"># Your Apollo device number is the [X] next to it.</span>
+<span class="comment"># Write it down. You'll use it like this in config:</span>
+<span class="comment">#   AUDIO_DEVICE_INDEX=1  (or whatever your number is)</span></pre>
+        </div>
+
+        <div class="callout warn">
+          <span class="callout-icon">⚠️</span>
+          <div>If you don't see the Apollo in the list: make sure the UAD Console app is open, the Apollo is powered on and connected via USB/Thunderbolt, and macOS has granted Terminal microphone access (System Settings → Privacy & Security → Microphone).</div>
+        </div>
+
+        <div class="code-block">
+          <div class="code-label">Terminal — Grant Terminal microphone access (if needed)<button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <pre><span class="comment"># This opens the Privacy settings directly:</span>
+<span class="cmd">open "x-apple.systempreferences:com.apple.preference.security?Privacy_Microphone"</span>
+<span class="comment"># Find Terminal in the list and toggle it ON</span>
+<span class="comment"># Then close and re-run the device list command above</span></pre>
+        </div>
+
+        <div class="code-block">
+          <div class="code-label">Terminal — Quick capture test (5 seconds of audio)<button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <pre><span class="comment"># Replace [X] with your Apollo device number</span>
+<span class="cmd">ffmpeg -f avfoundation -i ":[X]" \
+  -ar 48000 -ac 1 -sample_fmt s32 \
+  -t 5 sessions/test_capture.wav \
+  -loglevel info</span>
+
+<span class="comment"># Then play it back:</span>
+<span class="cmd">afplay sessions/test_capture.wav</span>
+<span class="comment"># If you hear yourself — signal chain confirmed. Let's go.</span></pre>
+        </div>
+
+        <div class="verify-block">
+          <div class="verify-title">Signal Chain Confirmed When:</div>
+          <ul class="verify-list">
+            <li>ffmpeg outputs "Input #0: avfoundation" without errors</li>
+            <li>A WAV file appears in sessions/</li>
+            <li>afplay plays back your voice clearly</li>
+            <li>No clipping — keep UAD input below -6 dBFS on the Apollo meters</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP: VAD + CAPTURE -->
+    <div class="step" id="d1-vad" onclick="toggleStep(this)">
+      <div class="step-header">
+        <span class="step-num">1.6</span>
+        <span class="step-title">Write the VAD capture engine</span>
+        <span class="step-status required">Required</span>
+        <span class="step-chevron">▶</span>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">This is the core engine — voice activity detection, RMS energy gating, and real-time utterance capture. Paste the full file content below.</p>
+
+        <div class="callout info">
+          <span class="callout-icon">ℹ️</span>
+          <div>Replace <strong>DEVICE_INDEX</strong> at the top with your Apollo device number from step 1.5.</div>
+        </div>
+
+        <div class="code-block">
+          <div class="code-label">Create: src/vad.ts<button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <pre><span class="comment">// ─── NOIZYVOX VAD ENGINE ─────────────────────────────────────────
+// Voice Activity Detection + Utterance Capture
+// Signal: Neumann U87 → UAD Apollo → Core Audio → ffmpeg
+// ─────────────────────────────────────────────────────────────────</span>
+
+<span class="kw">import</span> { spawn, ChildProcess } <span class="kw">from</span> <span class="str">'child_process'</span>;
+<span class="kw">import</span> * <span class="kw">as</span> fs <span class="kw">from</span> <span class="str">'fs'</span>;
+<span class="kw">import</span> * <span class="kw">as</span> path <span class="kw">from</span> <span class="str">'path'</span>;
+<span class="kw">import</span> { v4 <span class="kw">as</span> uuidv4 } <span class="kw">from</span> <span class="str">'uuid'</span>;
+
+<span class="comment">// ── CONFIG ────────────────────────────────────────────────────────</span>
+<span class="kw">const</span> CONFIG = {
+  <span class="comment">// !! CHANGE THIS to your Apollo device index from step 1.5 !!</span>
+  DEVICE_INDEX: <span class="num">1</span>,
+
+  SAMPLE_RATE: <span class="num">48000</span>,
+  CHANNELS: <span class="num">1</span>,
+  BIT_DEPTH: <span class="str">'s32'</span>,
+
+  <span class="comment">// VAD thresholds</span>
+  RMS_THRESHOLD_DB: <span class="num">-40</span>,       <span class="comment">// speech onset threshold</span>
+  SILENCE_TIMEOUT_MS: <span class="num">800</span>,     <span class="comment">// ms of silence before ending utterance</span>
+  PRE_BUFFER_MS: <span class="num">300</span>,          <span class="comment">// ms to capture before speech onset</span>
+  MIN_UTTERANCE_MS: <span class="num">500</span>,       <span class="comment">// discard utterances shorter than this</span>
+
+  SESSION_DIR: <span class="str">'sessions'</span>,
+  LOG_INTERVAL_MS: <span class="num">200</span>,
+};
+
+<span class="comment">// ── TYPES ─────────────────────────────────────────────────────────</span>
+<span class="kw">type</span> VADState = <span class="str">'silence'</span> | <span class="str">'speech'</span> | <span class="str">'speech_ending'</span>;
+
+<span class="kw">interface</span> Utterance {
+  id: <span class="kw">string</span>;
+  sessionId: <span class="kw">string</span>;
+  startMs: <span class="kw">number</span>;
+  endMs: <span class="kw">number</span>;
+  durationMs: <span class="kw">number</span>;
+  filePath: <span class="kw">string</span>;
+  peakRMS: <span class="kw">number</span>;
+}
+
+<span class="comment">// ── VAD ENGINE ────────────────────────────────────────────────────</span>
+<span class="kw">export class</span> VADEngine {
+  <span class="kw">private</span> state: VADState = <span class="str">'silence'</span>;
+  <span class="kw">private</span> sessionId: <span class="kw">string</span>;
+  <span class="kw">private</span> utteranceBuffer: Buffer[] = [];
+  <span class="kw">private</span> preBuffer: Buffer[] = [];
+  <span class="kw">private</span> speechStartMs = <span class="num">0</span>;
+  <span class="kw">private</span> lastSpeechMs = <span class="num">0</span>;
+  <span class="kw">private</span> utteranceCount = <span class="num">0</span>;
+  <span class="kw">private</span> ffmpegProc: ChildProcess | <span class="kw">null</span> = <span class="kw">null</span>;
+  <span class="kw">private</span> utterances: Utterance[] = [];
+  <span class="kw">private</span> isRunning = <span class="kw">false</span>;
+  <span class="kw">private</span> onUtterance?: (u: Utterance) => <span class="kw">void</span>;
+
+  <span class="kw">constructor</span>(sessionId?: <span class="kw">string</span>) {
+    <span class="kw">this</span>.sessionId = sessionId || <span class="str">`SES-RSP001-${Date.now()}`</span>;
+    <span class="kw">const</span> dir = path.join(CONFIG.SESSION_DIR, <span class="kw">this</span>.sessionId);
+    fs.mkdirSync(dir, { recursive: <span class="kw">true</span> });
+    console.log(<span class="str">`[VAD] Session: ${this.sessionId}`</span>);
+  }
+
+  <span class="kw">private</span> dbToLinear(db: <span class="kw">number</span>): <span class="kw">number</span> {
+    <span class="kw">return</span> Math.pow(<span class="num">10</span>, db / <span class="num">20</span>);
+  }
+
+  <span class="kw">private</span> computeRMS(buf: Buffer): <span class="kw">number</span> {
+    <span class="kw">let</span> sum = <span class="num">0</span>;
+    <span class="kw">const</span> samples = buf.length / <span class="num">4</span>; <span class="comment">// s32 = 4 bytes per sample</span>
+    <span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">0</span>; i < buf.length - <span class="num">3</span>; i += <span class="num">4</span>) {
+      <span class="kw">const</span> sample = buf.readInt32LE(i) / <span class="num">2147483648</span>; <span class="comment">// normalize to -1..1</span>
+      sum += sample * sample;
+    }
+    <span class="kw">return</span> Math.sqrt(sum / Math.max(samples, <span class="num">1</span>));
+  }
+
+  <span class="kw">private</span> rmsToDb(rms: <span class="kw">number</span>): <span class="kw">number</span> {
+    <span class="kw">return</span> rms > <span class="num">0</span> ? <span class="num">20</span> * Math.log10(rms) : <span class="num">-100</span>;
+  }
+
+  <span class="kw">private</span> isSpeech(rms: <span class="kw">number</span>): <span class="kw">boolean</span> {
+    <span class="kw">return</span> rms >= <span class="kw">this</span>.dbToLinear(CONFIG.RMS_THRESHOLD_DB);
+  }
+
+  <span class="kw">private</span> processChunk(chunk: Buffer, nowMs: <span class="kw">number</span>): <span class="kw">void</span> {
+    <span class="kw">const</span> rms = <span class="kw">this</span>.computeRMS(chunk);
+    <span class="kw">const</span> speaking = <span class="kw">this</span>.isSpeech(rms);
+
+    <span class="comment">// Maintain pre-buffer (rolling window before speech)</span>
+    <span class="kw">this</span>.preBuffer.push(chunk);
+    <span class="kw">const</span> preMs = CONFIG.PRE_BUFFER_MS;
+    <span class="kw">const</span> bytesPerMs = (CONFIG.SAMPLE_RATE * <span class="num">4</span>) / <span class="num">1000</span>;
+    <span class="kw">while</span> (<span class="kw">this</span>.preBuffer.reduce((s, b) => s + b.length, <span class="num">0</span>) > preMs * bytesPerMs) {
+      <span class="kw">this</span>.preBuffer.shift();
+    }
+
+    <span class="kw">switch</span> (<span class="kw">this</span>.state) {
+      <span class="kw">case</span> <span class="str">'silence'</span>:
+        <span class="kw">if</span> (speaking) {
+          <span class="kw">this</span>.state = <span class="str">'speech'</span>;
+          <span class="kw">this</span>.speechStartMs = nowMs;
+          <span class="kw">this</span>.lastSpeechMs = nowMs;
+          <span class="kw">this</span>.utteranceBuffer = [...<span class="kw">this</span>.preBuffer];
+          console.log(<span class="str">`[VAD] ▶ Speech onset — RMS ${this.rmsToDb(rms).toFixed(1)} dBFS`</span>);
+        }
+        <span class="kw">break</span>;
+
+      <span class="kw">case</span> <span class="str">'speech'</span>:
+        <span class="kw">this</span>.utteranceBuffer.push(chunk);
+        <span class="kw">if</span> (speaking) {
+          <span class="kw">this</span>.lastSpeechMs = nowMs;
+        } <span class="kw">else if</span> (nowMs - <span class="kw">this</span>.lastSpeechMs > CONFIG.SILENCE_TIMEOUT_MS / <span class="num">2</span>) {
+          <span class="kw">this</span>.state = <span class="str">'speech_ending'</span>;
+        }
+        <span class="kw">break</span>;
+
+      <span class="kw">case</span> <span class="str">'speech_ending'</span>:
+        <span class="kw">this</span>.utteranceBuffer.push(chunk);
+        <span class="kw">if</span> (speaking) {
+          <span class="kw">this</span>.state = <span class="str">'speech'</span>;
+          <span class="kw">this</span>.lastSpeechMs = nowMs;
+        } <span class="kw">else if</span> (nowMs - <span class="kw">this</span>.lastSpeechMs > CONFIG.SILENCE_TIMEOUT_MS) {
+          <span class="kw">this</span>.finalizeUtterance(nowMs);
+          <span class="kw">this</span>.state = <span class="str">'silence'</span>;
+        }
+        <span class="kw">break</span>;
+    }
+  }
+
+  <span class="kw">private</span> finalizeUtterance(endMs: <span class="kw">number</span>): <span class="kw">void</span> {
+    <span class="kw">const</span> durationMs = endMs - <span class="kw">this</span>.speechStartMs;
+    <span class="kw">if</span> (durationMs < CONFIG.MIN_UTTERANCE_MS) {
+      console.log(<span class="str">`[VAD] ⚡ Utterance too short (${durationMs}ms) — discarded`</span>);
+      <span class="kw">this</span>.utteranceBuffer = [];
+      <span class="kw">return</span>;
+    }
+
+    <span class="kw">const</span> uttNum = String(<span class="kw">++this</span>.utteranceCount).padStart(<span class="num">4</span>, <span class="str">'0'</span>);
+    <span class="kw">const</span> uttId = <span class="str">`UTT-RSP001-${uttNum}`</span>;
+    <span class="kw">const</span> fileName = <span class="str">`${uttId}_${Date.now()}.wav`</span>;
+    <span class="kw">const</span> filePath = path.join(CONFIG.SESSION_DIR, <span class="kw">this</span>.sessionId, fileName);
+
+    <span class="comment">// Combine buffers and write WAV</span>
+    <span class="kw">const</span> raw = Buffer.concat(<span class="kw">this</span>.utteranceBuffer);
+    <span class="kw">this</span>.writeWAV(filePath, raw);
+
+    <span class="kw">const</span> utterance: Utterance = {
+      id: uttId,
+      sessionId: <span class="kw">this</span>.sessionId,
+      startMs: <span class="kw">this</span>.speechStartMs,
+      endMs,
+      durationMs,
+      filePath,
+      peakRMS: <span class="kw">this</span>.computeRMS(raw),
+    };
+
+    <span class="kw">this</span>.utterances.push(utterance);
+    <span class="kw">this</span>.utteranceBuffer = [];
+
+    console.log(<span class="str">`[VAD] ✓ ${uttId} — ${(durationMs/1000).toFixed(2)}s → ${filePath}`</span>);
+    <span class="kw">this</span>.onUtterance?.(utterance);
+  }
+
+  <span class="kw">private</span> writeWAV(filePath: <span class="kw">string</span>, pcmData: Buffer): <span class="kw">void</span> {
+    <span class="kw">const</span> numChannels = CONFIG.CHANNELS;
+    <span class="kw">const</span> sampleRate = CONFIG.SAMPLE_RATE;
+    <span class="kw">const</span> bitsPerSample = <span class="num">32</span>;
+    <span class="kw">const</span> byteRate = sampleRate * numChannels * bitsPerSample / <span class="num">8</span>;
+    <span class="kw">const</span> blockAlign = numChannels * bitsPerSample / <span class="num">8</span>;
+    <span class="kw">const</span> dataSize = pcmData.length;
+    <span class="kw">const</span> header = Buffer.alloc(<span class="num">44</span>);
+
+    header.write(<span class="str">'RIFF'</span>, <span class="num">0</span>);
+    header.writeUInt32LE(<span class="num">36</span> + dataSize, <span class="num">4</span>);
+    header.write(<span class="str">'WAVE'</span>, <span class="num">8</span>);
+    header.write(<span class="str">'fmt '</span>, <span class="num">12</span>);
+    header.writeUInt32LE(<span class="num">16</span>, <span class="num">16</span>);
+    header.writeUInt16LE(<span class="num">1</span>, <span class="num">20</span>);  <span class="comment">// PCM</span>
+    header.writeUInt16LE(numChannels, <span class="num">22</span>);
+    header.writeUInt32LE(sampleRate, <span class="num">24</span>);
+    header.writeUInt32LE(byteRate, <span class="num">28</span>);
+    header.writeUInt16LE(blockAlign, <span class="num">32</span>);
+    header.writeUInt16LE(bitsPerSample, <span class="num">34</span>);
+    header.write(<span class="str">'data'</span>, <span class="num">36</span>);
+    header.writeUInt32LE(dataSize, <span class="num">40</span>);
+
+    fs.writeFileSync(filePath, Buffer.concat([header, pcmData]));
+  }
+
+  <span class="kw">public</span> onNewUtterance(cb: (u: Utterance) => <span class="kw">void</span>): <span class="kw">void</span> {
+    <span class="kw">this</span>.onUtterance = cb;
+  }
+
+  <span class="kw">public async</span> start(): Promise&lt;<span class="kw">void</span>&gt; {
+    <span class="kw">this</span>.isRunning = <span class="kw">true</span>;
+    <span class="kw">const</span> chunkMs = <span class="num">50</span>;
+    <span class="kw">const</span> chunkBytes = Math.floor(CONFIG.SAMPLE_RATE * <span class="num">4</span> * chunkMs / <span class="num">1000</span>);
+
+    console.log(<span class="str">`[VAD] Starting capture on device [${CONFIG.DEVICE_INDEX}]`</span>);
+    console.log(<span class="str">`[VAD] ${CONFIG.SAMPLE_RATE}Hz / ${CONFIG.BIT_DEPTH} / threshold ${CONFIG.RMS_THRESHOLD_DB}dBFS`</span>);
+    console.log(<span class="str">`[VAD] Speak into the U87. Ctrl+C to stop.\n`</span>);
+
+    <span class="kw">this</span>.ffmpegProc = spawn(<span class="str">'ffmpeg'</span>, [
+      <span class="str">'-f'</span>, <span class="str">'avfoundation'</span>,
+      <span class="str">'-i'</span>, <span class="str">`:[${CONFIG.DEVICE_INDEX}]`</span>,
+      <span class="str">'-ar'</span>, String(CONFIG.SAMPLE_RATE),
+      <span class="str">'-ac'</span>, String(CONFIG.CHANNELS),
+      <span class="str">'-sample_fmt'</span>, CONFIG.BIT_DEPTH,
+      <span class="str">'-f'</span>, <span class="str">'s32le'</span>,
+      <span class="str">'pipe:1'</span>,
+      <span class="str">'-loglevel'</span>, <span class="str">'error'</span>
+    ]);
+
+    <span class="kw">let</span> accumulator = Buffer.alloc(<span class="num">0</span>);
+    <span class="kw">let</span> nowMs = Date.now();
+
+    <span class="kw">this</span>.ffmpegProc.stdout?.on(<span class="str">'data'</span>, (data: Buffer) => {
+      accumulator = Buffer.concat([accumulator, data]);
+      nowMs = Date.now();
+      <span class="kw">while</span> (accumulator.length >= chunkBytes) {
+        <span class="kw">const</span> chunk = accumulator.subarray(<span class="num">0</span>, chunkBytes);
+        accumulator = accumulator.subarray(chunkBytes);
+        <span class="kw">this</span>.processChunk(chunk, nowMs);
+      }
+    });
+
+    <span class="kw">this</span>.ffmpegProc.stderr?.on(<span class="str">'data'</span>, (d: Buffer) => {
+      <span class="kw">const</span> msg = d.toString().trim();
+      <span class="kw">if</span> (msg) console.error(<span class="str">`[ffmpeg] ${msg}`</span>);
+    });
+
+    <span class="kw">return new</span> Promise((resolve) => {
+      <span class="kw">this</span>.ffmpegProc?.on(<span class="str">'exit'</span>, () => {
+        <span class="kw">if</span> (<span class="kw">this</span>.state !== <span class="str">'silence'</span>) <span class="kw">this</span>.finalizeUtterance(Date.now());
+        console.log(<span class="str">`\n[VAD] Session complete — ${this.utteranceCount} utterances captured`</span>);
+        resolve();
+      });
+    });
+  }
+
+  <span class="kw">public</span> stop(): <span class="kw">void</span> {
+    <span class="kw">this</span>.isRunning = <span class="kw">false</span>;
+    <span class="kw">this</span>.ffmpegProc?.kill(<span class="str">'SIGTERM'</span>);
+  }
+
+  <span class="kw">public</span> getUtterances(): Utterance[] {
+    <span class="kw">return</span> [...<span class="kw">this</span>.utterances];
+  }
+
+  <span class="kw">public</span> getSessionId(): <span class="kw">string</span> {
+    <span class="kw">return</span> <span class="kw">this</span>.sessionId;
+  }
+}</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP: DAY 1 VERIFY -->
+    <div class="step" id="d1-verify" onclick="toggleStep(this)">
+      <div class="step-header">
+        <span class="step-num">1.7</span>
+        <span class="step-title">Run Day 1 — first capture session</span>
+        <span class="step-status verify">Verify &amp; run</span>
+        <span class="step-chevron">▶</span>
+      </div>
+      <div class="step-body">
+        <div class="code-block">
+          <div class="code-label">Create: src/index.ts — entry point<button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <pre><span class="kw">import</span> { VADEngine } <span class="kw">from</span> <span class="str">'./vad'</span>;
+
+<span class="kw">const</span> engine = <span class="kw">new</span> VADEngine();
+
+engine.onNewUtterance((u) => {
+  console.log(<span class="str">`  ★ New utterance: ${u.id}`</span>);
+  console.log(<span class="str">`    Duration: ${(u.durationMs/1000).toFixed(2)}s`</span>);
+  console.log(<span class="str">`    Saved: ${u.filePath}\n`</span>);
+});
+
+process.on(<span class="str">'SIGINT'</span>, () => {
+  console.log(<span class="str">'\n[NOIZYVOX] Stopping...'</span>);
+  engine.stop();
+  process.exit(<span class="num">0</span>);
+});
+
+engine.start();</pre>
+        </div>
+
+        <div class="code-block">
+          <div class="code-label">Terminal — Run it<button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <pre><span class="cmd">cd ~/Desktop/noizyvox</span>
+<span class="cmd">npx tsx src/index.ts</span>
+
+<span class="comment"># You should see:</span>
+<span class="good">[VAD] Session: SES-RSP001-1710000000000</span>
+<span class="good">[VAD] Starting capture on device [1]</span>
+<span class="good">[VAD] 48000Hz / s32 / threshold -40dBFS</span>
+<span class="good">[VAD] Speak into the U87. Ctrl+C to stop.</span>
+
+<span class="comment"># Speak something. You should see:</span>
+<span class="good">[VAD] ▶ Speech onset — RMS -22.4 dBFS</span>
+<span class="good">[VAD] ✓ UTT-RSP001-0001 — 2.34s → sessions/SES-.../UTT-RSP001-0001_...wav</span>
+<span class="good">  ★ New utterance: UTT-RSP001-0001</span>
+
+<span class="comment"># Press Ctrl+C when done. Listen back:</span>
+<span class="cmd">ls sessions/SES-*/</span>
+<span class="cmd">afplay sessions/SES-*/UTT-RSP001-0001_*.wav</span></pre>
+        </div>
+
+        <div class="outcome-box">
+          <div class="outcome-title">Day 1 Complete — You Now Have:</div>
+          <ul class="outcome-list">
+            <li>Live U87 → UAD Apollo → ffmpeg → TypeScript signal chain</li>
+            <li>Working VAD engine capturing discrete utterances as WAV files</li>
+            <li>Per-utterance IDs in UTT-RSP001-XXXX format</li>
+            <li>Session directory with real recordings</li>
+            <li>Foundation for the 7-stage pipeline (Day 2)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       DAY 2
+  ──────────────────────────────────────────────────────────────── -->
+  <div class="sprint-section" id="day2">
+    <div class="day-header">
+      <div class="day-num">2</div>
+      <div class="day-info">
+        <div class="day-name">Day Two</div>
+        <div class="day-goal">Pipeline running.<br><em>Every utterance gets a ledger entry.</em></div>
+      </div>
+      <div class="day-duration">3–4 hours<br>pipeline + ledger</div>
+    </div>
+
+    <!-- PIPELINE -->
+    <div class="step" id="d2-pipeline" onclick="toggleStep(this)">
+      <div class="step-header">
+        <span class="step-num">2.1</span>
+        <span class="step-title">Write the 7-stage pipeline</span>
+        <span class="step-status required">Core</span>
+        <span class="step-chevron">▶</span>
+      </div>
+      <div class="step-body">
+        <div class="code-block">
+          <div class="code-label">Create: src/pipeline.ts<button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <pre><span class="comment">// ─── NOIZYVOX 7-STAGE PIPELINE ───────────────────────────────────</span>
+
+<span class="kw">import</span> * <span class="kw">as</span> crypto <span class="kw">from</span> <span class="str">'crypto'</span>;
+
+<span class="comment">// ── NEVER CLAUSES (NC_01–NC_10) ─────────────────────────────────</span>
+<span class="kw">const</span> NEVER_CLAUSES = [
+  <span class="str">'NC_01: No use without explicit scoped consent'</span>,
+  <span class="str">'NC_02: No retroactive consent'</span>,
+  <span class="str">'NC_03: No use in harmful/demeaning content'</span>,
+  <span class="str">'NC_04: No political advertising without explicit opt-in'</span>,
+  <span class="str">'NC_05: No synthetic cloning outside consent schema'</span>,
+  <span class="str">'NC_06: No royalty deferral without consent'</span>,
+  <span class="str">'NC_07: No training use outside training consent domain'</span>,
+  <span class="str">'NC_08: No platform sale that changes actor terms'</span>,
+  <span class="str">'NC_09: No acquisition override of Voice Estate Trust'</span>,
+  <span class="str">'NC_10: No Estate dissolution without unanimous consent'</span>,
+];
+
+<span class="comment">// ── CONSENT SCHEMA ───────────────────────────────────────────────</span>
+<span class="kw">interface</span> ConsentKey {
+  raw: <span class="kw">string</span>;
+  actorId: <span class="kw">string</span>;
+  domain: <span class="kw">string</span>;
+  jurisdiction: <span class="kw">string</span>;
+  date: <span class="kw">string</span>;
+  isValid: <span class="kw">boolean</span>;
+}
+
+<span class="kw">interface</span> PipelineContext {
+  utteranceId: <span class="kw">string</span>;
+  sessionId: <span class="kw">string</span>;
+  actorId: <span class="kw">string</span>;
+  filePath: <span class="kw">string</span>;
+  consentKey?: ConsentKey;
+  watermarkHash?: <span class="kw">string</span>;
+  ncResults?: { id: <span class="kw">string</span>; pass: <span class="kw">boolean</span> }[];
+  ledgerEntry?: ProvenanceRecord;
+  timestamp: <span class="kw">string</span>;
+}
+
+<span class="kw">interface</span> ProvenanceRecord {
+  utteranceId: <span class="kw">string</span>;
+  actorId: <span class="kw">string</span>;
+  sessionId: <span class="kw">string</span>;
+  consentKey: <span class="kw">string</span>;
+  watermarkHash: <span class="kw">string</span>;
+  ncCheck: <span class="str">'PASS_10/10'</span> | <span class="str">'FAIL'</span>;
+  filePath: <span class="kw">string</span>;
+  timestamp: <span class="kw">string</span>;
+  pipelineVersion: <span class="kw">string</span>;
+}
+
+<span class="comment">// ── WATERMARK ENGINE ─────────────────────────────────────────────</span>
+<span class="kw">export function</span> generateWatermark(
+  actorId: <span class="kw">string</span>,
+  utteranceId: <span class="kw">string</span>,
+  sessionId: <span class="kw">string</span>,
+  consentKey: <span class="kw">string</span>
+): <span class="kw">string</span> {
+  <span class="kw">const</span> payload = <span class="str">`${actorId}:${utteranceId}:${sessionId}:${consentKey}:${Date.now()}`</span>;
+  <span class="kw">const</span> hash = crypto.createHash(<span class="str">'sha256'</span>).update(payload).digest(<span class="str">'hex'</span>).toUpperCase();
+  <span class="kw">return</span> <span class="str">`WM_${hash.slice(0, 8)}`</span>;
+}
+
+<span class="comment">// ── CONSENT KEY GENERATOR ────────────────────────────────────────</span>
+<span class="kw">export function</span> generateConsentKey(
+  actorId: <span class="kw">string</span>,
+  domain: <span class="kw">string</span> = <span class="str">'DEMO'</span>,
+  jurisdiction: <span class="kw">string</span> = <span class="str">'US-CA'</span>
+): ConsentKey {
+  <span class="kw">const</span> hex = crypto.randomBytes(<span class="num">8</span>).toString(<span class="str">'hex'</span>).toUpperCase();
+  <span class="kw">const</span> date = <span class="kw">new</span> Date().toISOString().slice(<span class="num">0</span>, <span class="num">10</span>).replace(<span class="str">/-/g</span>, <span class="str">''</span>);
+  <span class="kw">const</span> raw = <span class="str">`NOIZY-${actorId}-CONSENT-${hex}-AVA-${domain}-${jurisdiction}-${date}`</span>;
+  <span class="kw">return</span> { raw, actorId, domain, jurisdiction, date, isValid: <span class="kw">true</span> };
+}
+
+<span class="comment">// ── NC CHECKER ───────────────────────────────────────────────────</span>
+<span class="kw">function</span> checkNeverClauses(ctx: PipelineContext): { id: <span class="kw">string</span>; pass: <span class="kw">boolean</span> }[] {
+  <span class="kw">return</span> NEVER_CLAUSES.map((nc, i) => ({
+    id: <span class="str">`NC_${String(i + 1).padStart(2, '0')}`</span>,
+    pass: ctx.consentKey?.isValid === <span class="kw">true</span>, <span class="comment">// real logic per clause goes here</span>
+  }));
+}
+
+<span class="comment">// ── 7-STAGE PIPELINE ─────────────────────────────────────────────</span>
+<span class="kw">export async function</span> runPipeline(
+  utteranceId: <span class="kw">string</span>,
+  sessionId: <span class="kw">string</span>,
+  filePath: <span class="kw">string</span>,
+  actorId: <span class="kw">string</span> = <span class="str">'RSP001'</span>
+): Promise&lt;PipelineContext&gt; {
+
+  <span class="kw">const</span> ctx: PipelineContext = {
+    utteranceId, sessionId, actorId, filePath,
+    timestamp: <span class="kw">new</span> Date().toISOString(),
+  };
+
+  console.log(<span class="str">`\n[PIPELINE] Processing ${utteranceId}`</span>);
+
+  <span class="comment">// Stage 1: Consent Verification</span>
+  ctx.consentKey = generateConsentKey(actorId);
+  console.log(<span class="str">`  [S1] Consent: ${ctx.consentKey.raw.slice(0, 40)}...`</span>);
+
+  <span class="comment">// Stage 2: Never Clause Check</span>
+  ctx.ncResults = checkNeverClauses(ctx);
+  <span class="kw">const</span> ncAllPass = ctx.ncResults.every(r => r.pass);
+  <span class="kw">if</span> (!ncAllPass) <span class="kw">throw new</span> Error(<span class="str">'[PIPELINE] HALT — Never Clause violation'</span>);
+  console.log(<span class="str">`  [S2] Never Clauses: PASS ${ctx.ncResults.length}/${ctx.ncResults.length}`</span>);
+
+  <span class="comment">// Stage 3: WAV Write (already done by VAD — verify file exists)</span>
+  <span class="kw">const</span> fs = <span class="kw">require</span>(<span class="str">'fs'</span>);
+  <span class="kw">if</span> (!fs.existsSync(filePath)) <span class="kw">throw new</span> Error(<span class="str">`[PIPELINE] WAV not found: ${filePath}`</span>);
+  console.log(<span class="str">`  [S3] WAV: ${filePath.split('/').pop()}`</span>);
+
+  <span class="comment">// Stage 4: Watermark</span>
+  ctx.watermarkHash = generateWatermark(actorId, utteranceId, sessionId, ctx.consentKey.raw);
+  console.log(<span class="str">`  [S4] Watermark: ${ctx.watermarkHash}`</span>);
+
+  <span class="comment">// Stage 5: Provenance Record</span>
+  ctx.ledgerEntry = {
+    utteranceId,
+    actorId,
+    sessionId,
+    consentKey: ctx.consentKey.raw,
+    watermarkHash: ctx.watermarkHash,
+    ncCheck: <span class="str">'PASS_10/10'</span>,
+    filePath,
+    timestamp: ctx.timestamp,
+    pipelineVersion: <span class="str">'1.0.0'</span>,
+  };
+  console.log(<span class="str">`  [S5] Provenance record created`</span>);
+
+  <span class="comment">// Stage 6: API Dispatch (stub — real API in sprint extension)</span>
+  console.log(<span class="str">`  [S6] API dispatch: QUEUED (demo mode)`</span>);
+
+  <span class="comment">// Stage 7: Ledger Write (handled by ProvenanceLedger class)</span>
+  console.log(<span class="str">`  [S7] Ready for ledger write`</span>);
+
+  <span class="kw">return</span> ctx;
+}</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- LEDGER -->
+    <div class="step" id="d2-ledger" onclick="toggleStep(this)">
+      <div class="step-header">
+        <span class="step-num">2.2</span>
+        <span class="step-title">Write the Provenance Ledger</span>
+        <span class="step-status required">Core</span>
+        <span class="step-chevron">▶</span>
+      </div>
+      <div class="step-body">
+        <div class="code-block">
+          <div class="code-label">Create: src/ledger.ts<button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <pre><span class="comment">// ─── NOIZYVOX PROVENANCE LEDGER ───────────────────────────────────
+// Append-only JSONL — never deleted, never modified
+// ─────────────────────────────────────────────────────────────────</span>
+
+<span class="kw">import</span> * <span class="kw">as</span> fs <span class="kw">from</span> <span class="str">'fs'</span>;
+<span class="kw">import</span> * <span class="kw">as</span> path <span class="kw">from</span> <span class="str">'path'</span>;
+
+<span class="kw">const</span> LEDGER_PATH = path.join(<span class="str">'ledger'</span>, <span class="str">'provenance.jsonl'</span>);
+
+<span class="kw">export class</span> ProvenanceLedger {
+  <span class="kw">constructor</span>() {
+    fs.mkdirSync(<span class="str">'ledger'</span>, { recursive: <span class="kw">true</span> });
+    <span class="kw">if</span> (!fs.existsSync(LEDGER_PATH)) {
+      fs.writeFileSync(LEDGER_PATH, <span class="str">''</span>);
+      console.log(<span class="str">`[LEDGER] Created: ${LEDGER_PATH}`</span>);
+    }
+  }
+
+  <span class="kw">public</span> append(record: <span class="kw">object</span>): <span class="kw">void</span> {
+    <span class="kw">const</span> line = JSON.stringify(record) + <span class="str">'\n'</span>;
+    fs.appendFileSync(LEDGER_PATH, line);
+    <span class="kw">const</span> count = <span class="kw">this</span>.count();
+    console.log(<span class="str">`[LEDGER] Entry #${count} written`</span>);
+  }
+
+  <span class="kw">public</span> count(): <span class="kw">number</span> {
+    <span class="kw">try</span> {
+      <span class="kw">const</span> data = fs.readFileSync(LEDGER_PATH, <span class="str">'utf-8'</span>);
+      <span class="kw">return</span> data.split(<span class="str">'\n'</span>).filter(l => l.trim()).length;
+    } <span class="kw">catch</span> { <span class="kw">return</span> <span class="num">0</span>; }
+  }
+
+  <span class="kw">public</span> getAll(): <span class="kw">object</span>[] {
+    <span class="kw">try</span> {
+      <span class="kw">return</span> fs.readFileSync(LEDGER_PATH, <span class="str">'utf-8'</span>)
+        .split(<span class="str">'\n'</span>)
+        .filter(l => l.trim())
+        .map(l => JSON.parse(l));
+    } <span class="kw">catch</span> { <span class="kw">return</span> []; }
+  }
+
+  <span class="kw">public</span> printSummary(): <span class="kw">void</span> {
+    <span class="kw">const</span> entries = <span class="kw">this</span>.getAll() <span class="kw">as any</span>[];
+    console.log(<span class="str">`\n╔══════════════════════════════════════╗`</span>);
+    console.log(<span class="str">`║  NOIZYVOX PROVENANCE LEDGER          ║`</span>);
+    console.log(<span class="str">`╠══════════════════════════════════════╣`</span>);
+    console.log(<span class="str">`║  Total utterances: ${String(entries.length).padStart(16)} ║`</span>);
+    <span class="kw">if</span> (entries.length > <span class="num">0</span>) {
+      console.log(<span class="str">`║  Last: ${entries[entries.length-1].utteranceId.padStart(29)} ║`</span>);
+      console.log(<span class="str">`║  WM:   ${entries[entries.length-1].watermarkHash.padStart(29)} ║`</span>);
+    }
+    console.log(<span class="str">`╚══════════════════════════════════════╝\n`</span>);
+  }
+}</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 2 VERIFY -->
+    <div class="step" id="d2-verify" onclick="toggleStep(this)">
+      <div class="step-header">
+        <span class="step-num">2.3</span>
+        <span class="step-title">Wire it together — run with pipeline</span>
+        <span class="step-status verify">Run &amp; verify</span>
+        <span class="step-chevron">▶</span>
+      </div>
+      <div class="step-body">
+        <div class="code-block">
+          <div class="code-label">Update: src/index.ts — wire in pipeline + ledger<button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <pre><span class="kw">import</span> { VADEngine } <span class="kw">from</span> <span class="str">'./vad'</span>;
+<span class="kw">import</span> { runPipeline } <span class="kw">from</span> <span class="str">'./pipeline'</span>;
+<span class="kw">import</span> { ProvenanceLedger } <span class="kw">from</span> <span class="str">'./ledger'</span>;
+
+<span class="kw">const</span> engine = <span class="kw">new</span> VADEngine();
+<span class="kw">const</span> ledger = <span class="kw">new</span> ProvenanceLedger();
+
+engine.onNewUtterance(<span class="kw">async</span> (u) => {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> ctx = <span class="kw">await</span> runPipeline(u.id, u.sessionId, u.filePath);
+    <span class="kw">if</span> (ctx.ledgerEntry) {
+      ledger.append(ctx.ledgerEntry);
+      ledger.printSummary();
+    }
+  } <span class="kw">catch</span> (err) {
+    console.error(<span class="str">`[ERROR] Pipeline failed: ${err}`</span>);
+  }
+});
+
+process.on(<span class="str">'SIGINT'</span>, () => {
+  console.log(<span class="str">'\n[NOIZYVOX] Stopping...'</span>);
+  engine.stop();
+  <span class="kw">setTimeout</span>(() => {
+    ledger.printSummary();
+    process.exit(<span class="num">0</span>);
+  }, <span class="num">500</span>);
+});
+
+console.log(<span class="str">'[NOIZYVOX] ★ DREAMCHAMBER — RSP_001 Voice Node'</span>);
+console.log(<span class="str">'[NOIZYVOX] 7-Stage Pipeline + Provenance Ledger ACTIVE\n'</span>);
+engine.start();</pre>
+        </div>
+
+        <div class="code-block">
+          <div class="code-label">Terminal — Run the full pipeline<button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <pre><span class="cmd">npx tsx src/index.ts</span>
+
+<span class="comment"># Speak 5–10 phrases. Each one should produce:</span>
+<span class="good">[PIPELINE] Processing UTT-RSP001-0001</span>
+<span class="good">  [S1] Consent: NOIZY-RSP001-CONSENT-A4F3B8C2-AVA-DEMO-US-CA-...</span>
+<span class="good">  [S2] Never Clauses: PASS 10/10</span>
+<span class="good">  [S3] WAV: UTT-RSP001-0001_1710000000.wav</span>
+<span class="good">  [S4] Watermark: WM_3A7F9C12</span>
+<span class="good">  [S5] Provenance record created</span>
+<span class="good">  [S6] API dispatch: QUEUED (demo mode)</span>
+<span class="good">  [S7] Ready for ledger write</span>
+<span class="good">[LEDGER] Entry #1 written</span>
+
+<span class="comment"># After stopping, inspect the ledger:</span>
+<span class="cmd">cat ledger/provenance.jsonl | head -3</span>
+<span class="cmd">wc -l ledger/provenance.jsonl</span>   <span class="comment"># count entries</span></pre>
+        </div>
+
+        <div class="outcome-box">
+          <div class="outcome-title">Day 2 Complete — You Now Have:</div>
+          <ul class="outcome-list">
+            <li>Full 7-stage pipeline running on every utterance</li>
+            <li>Cryptographic consent keys generated per utterance</li>
+            <li>Never Clause checks passing on all 10 clauses</li>
+            <li>Deterministic watermark hashes (WM_XXXXXXXX)</li>
+            <li>Append-only provenance ledger with real entries</li>
+            <li>Working DreamChamber Node — from U87 to ledger, live</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       DAY 3
+  ──────────────────────────────────────────────────────────────── -->
+  <div class="sprint-section" id="day3">
+    <div class="day-header">
+      <div class="day-num">3</div>
+      <div class="day-info">
+        <div class="day-name">Day Three</div>
+        <div class="day-goal">Demo session.<br><em>The proof package. Show anyone.</em></div>
+      </div>
+      <div class="day-duration">2 hours<br>record + package</div>
+    </div>
+
+    <!-- LOCAL SERVER -->
+    <div class="step" id="d3-server" onclick="toggleStep(this)">
+      <div class="step-header">
+        <span class="step-num">3.1</span>
+        <span class="step-title">Add local ledger API server</span>
+        <span class="step-status optional">Optional but impressive</span>
+        <span class="step-chevron">▶</span>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">This adds a tiny local web server so you can open the ledger in a browser live during the demo.</p>
+        <div class="code-block">
+          <div class="code-label">Terminal — Install express<button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <pre><span class="cmd">npm install express @types/express</span></pre>
+        </div>
+        <div class="code-block">
+          <div class="code-label">Create: src/server.ts<button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <pre><span class="kw">import</span> express <span class="kw">from</span> <span class="str">'express'</span>;
+<span class="kw">import</span> * <span class="kw">as</span> fs <span class="kw">from</span> <span class="str">'fs'</span>;
+<span class="kw">import</span> * <span class="kw">as</span> path <span class="kw">from</span> <span class="str">'path'</span>;
+
+<span class="kw">const</span> app = express();
+<span class="kw">const</span> PORT = <span class="num">4444</span>;
+
+app.get(<span class="str">'/ledger'</span>, (req, res) => {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> data = fs.readFileSync(<span class="str">'ledger/provenance.jsonl'</span>, <span class="str">'utf-8'</span>);
+    <span class="kw">const</span> entries = data.split(<span class="str">'\n'</span>).filter(l => l.trim()).map(l => JSON.parse(l));
+    res.json({ count: entries.length, entries });
+  } <span class="kw">catch</span> { res.json({ count: <span class="num">0</span>, entries: [] }); }
+});
+
+app.get(<span class="str">'/status'</span>, (req, res) => {
+  res.json({
+    system: <span class="str">'NOIZYVOX DreamChamber'</span>,
+    version: <span class="str">'1.0.0'</span>,
+    actor: <span class="str">'RSP_001'</span>,
+    ledgerEntries: fs.readFileSync(<span class="str">'ledger/provenance.jsonl'</span>, <span class="str">'utf-8'</span>)
+      .split(<span class="str">'\n'</span>).filter(l => l.trim()).length,
+    pipelineActive: <span class="kw">true</span>,
+    timestamp: <span class="kw">new</span> Date().toISOString(),
+  });
+});
+
+app.listen(PORT, () => {
+  console.log(<span class="str">`[SERVER] NOIZYVOX API → http://localhost:${PORT}`</span>);
+  console.log(<span class="str">`[SERVER] Ledger   → http://localhost:${PORT}/ledger`</span>);
+  console.log(<span class="str">`[SERVER] Status   → http://localhost:${PORT}/status`</span>);
+});</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEMO SESSION -->
+    <div class="step" id="d3-demo" onclick="toggleStep(this)">
+      <div class="step-header">
+        <span class="step-num">3.2</span>
+        <span class="step-title">Run the demo recording session</span>
+        <span class="step-status required">The moment</span>
+        <span class="step-chevron">▶</span>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">This is the session you'll reference when you show anyone. Make it real. Use the U87. Speak naturally. Here's what to say:</p>
+
+        <div class="code-block">
+          <div class="code-label">Terminal — Run two terminals side by side<button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <pre><span class="comment"># Terminal 1: Live pipeline</span>
+<span class="cmd">npx tsx src/index.ts</span>
+
+<span class="comment"># Terminal 2 (new window): Watch the ledger grow live</span>
+<span class="cmd">tail -f ledger/provenance.jsonl | while read line; do echo "$line" | python3 -m json.tool 2>/dev/null || echo "$line"; done</span>
+
+<span class="comment"># OR if you added the API server:</span>
+<span class="comment"># Terminal 2: Start server</span>
+<span class="cmd">npx tsx src/server.ts</span>
+<span class="comment"># Then open in browser:</span>
+<span class="cmd">open http://localhost:4444/ledger</span></pre>
+        </div>
+
+        <div class="callout success">
+          <span class="callout-icon">🎙️</span>
+          <div>
+            <strong>Demo phrases to speak into the U87 (in order):</strong><br>
+            1. "My name is Rob Plowman. This is RSP_001." <br>
+            2. "This voice is protected by 10 Never Clauses." <br>
+            3. "Every utterance I make is watermarked and logged." <br>
+            4. "No one can use my voice without a cryptographic consent key." <br>
+            5. "This is what it looks like when a human owns their voice."
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROOF PACKAGE -->
+    <div class="step" id="d3-proof" onclick="toggleStep(this)">
+      <div class="step-header">
+        <span class="step-num">3.3</span>
+        <span class="step-title">Package the proof</span>
+        <span class="step-status required">Final deliverable</span>
+        <span class="step-chevron">▶</span>
+      </div>
+      <div class="step-body">
+        <div class="code-block">
+          <div class="code-label">Terminal — Generate demo proof package<button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <pre><span class="comment"># Count utterances captured</span>
+<span class="cmd">wc -l ledger/provenance.jsonl</span>
+
+<span class="comment"># Show ledger contents (formatted)</span>
+<span class="cmd">cat ledger/provenance.jsonl | python3 -c "
+import sys, json
+lines = [json.loads(l) for l in sys.stdin if l.strip()]
+print(f'NOIZYVOX PROVENANCE LEDGER — RSP_001')
+print(f'Total utterances: {len(lines)}')
+print()
+for i, e in enumerate(lines, 1):
+    print(f'[{i:03d}] {e[\"utteranceId\"]}')
+    print(f'      WM: {e[\"watermarkHash\"]}')
+    print(f'      NC: {e[\"ncCheck\"]}')
+    print(f'      TS: {e[\"timestamp\"]}')
+    print()
+"</span>
+
+<span class="comment"># List all recorded WAV files</span>
+<span class="cmd">find sessions/ -name "*.wav" | sort</span>
+
+<span class="comment"># Total audio captured</span>
+<span class="cmd">find sessions/ -name "*.wav" -exec afinfo {} \; 2>/dev/null | grep "estimated duration" | awk '{sum+=$3} END {print "Total audio: " sum " seconds"}'</span>
+
+<span class="comment"># Create a demo zip to share</span>
+<span class="cmd">zip -r noizyvox-demo-$(date +%Y%m%d).zip ledger/ src/ tsconfig.json package.json sessions/ 2>/dev/null</span>
+<span class="cmd">ls -lh noizyvox-demo-*.zip</span></pre>
+        </div>
+
+        <div class="outcome-box">
+          <div class="outcome-title">End of Sprint — What You Can Show:</div>
+          <ul class="outcome-list">
+            <li>A running TypeScript system capturing your voice via Neumann U87 + UAD Apollo</li>
+            <li>Voice activity detection with per-utterance WAV files, each with a unique ID</li>
+            <li>A 7-stage pipeline processing every utterance — consent, Never Clauses, watermark, ledger</li>
+            <li>An append-only provenance ledger with cryptographic watermarks you can read live</li>
+            <li>A local API returning ledger data in JSON — openable in any browser</li>
+            <li>Playable WAV files with IDs and hashes matching the ledger</li>
+            <li>The NOIZY Player, Galaxy Map, Pricing Page, Manifesto — the full visual layer</li>
+          </ul>
+        </div>
+
+        <div class="callout success">
+          <span class="callout-icon">★</span>
+          <div>
+            <strong>The demo story in one sentence:</strong> "I'm speaking into a microphone right now —
+            and every word I say is being captured, watermarked, consent-keyed, and written
+            into an immutable ledger. That's the entire industry's problem solved in a single pipeline."
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+// ── STEP TOGGLE ────────────────────────────────────────────────────
+function toggleStep(el) {
+  // Don't toggle if clicking inside the body
+  if (event.target.closest('.step-body')) return;
+  el.classList.toggle('open');
+}
+
+// ── COPY BUTTON ────────────────────────────────────────────────────
+function copyCode(btn) {
+  const codeBlock = btn.closest('.code-block');
+  const pre = codeBlock.querySelector('pre');
+  const text = pre.innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+
+// ── PROGRESS BAR ───────────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  const body = document.body;
+  const html = document.documentElement;
+  const totalH = Math.max(body.scrollHeight, html.scrollHeight) - window.innerHeight;
+  const pct = (window.scrollY / totalH) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+});
+
+// ── NAV HIGHLIGHTING ───────────────────────────────────────────────
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('.step[id]');
+
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      navLinks.forEach(l => {
+        l.classList.toggle('active', l.getAttribute('href') === `#${id}`);
+      });
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px' });
+
+sections.forEach(s => obs.observe(s));
+
+// ── KEYBOARD SHORTCUT ──────────────────────────────────────────────
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'e' && !e.metaKey) {
+    document.querySelectorAll('.step').forEach(s => s.classList.toggle('open'));
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Human Experiment — Reconnection Blueprint · NOIZYVOX</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void: #030305;
+  --void-2: #07070f;
+  --void-3: #0c0c18;
+  --amber: #c49a38;
+  --amber-dim: #8a6a20;
+  --amber-glow: rgba(196,154,56,0.12);
+  --cyan: #2aa4be;
+  --cyan-dim: #1a6878;
+  --cyan-glow: rgba(42,164,190,0.12);
+  --green: #3dba72;
+  --purple: #b07ade;
+  --rose: #d06080;
+  --ghost: rgba(255,255,255,0.05);
+  --ghost-2: rgba(255,255,255,0.09);
+  --text: #d4cfc4;
+  --text-dim: #7a7468;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --mono: 'IBM Plex Mono', 'Courier New', monospace;
+  --sidebar-w: 260px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--void);
+  color: var(--text);
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.7;
+  display: flex;
+}
+
+/* ── SIDEBAR ──────────────────────────────── */
+#sidebar {
+  width: var(--sidebar-w);
+  min-height: 100vh;
+  background: var(--void-2);
+  border-right: 1px solid rgba(196,154,56,0.08);
+  position: fixed;
+  top: 0; left: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  overflow-y: auto;
+}
+.sb-logo {
+  padding: 28px 24px 20px;
+  border-bottom: 1px solid var(--ghost);
+}
+.sb-mark { font-family: var(--mono); font-size: 10px; color: var(--amber); letter-spacing: 0.25em; text-transform: uppercase; }
+.sb-title { font-family: var(--serif); font-size: 17px; font-weight: 300; color: #fff; margin-top: 6px; line-height: 1.25; }
+.sb-sub { font-family: var(--mono); font-size: 9px; color: var(--text-dim); margin-top: 8px; letter-spacing: 0.1em; line-height: 1.6; }
+.sb-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); padding: 18px 24px 6px; }
+#sidebar nav a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 24px;
+  font-family: var(--mono); font-size: 11px;
+  color: var(--text-dim); text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: all 0.2s;
+}
+#sidebar nav a:hover, #sidebar nav a.active {
+  color: var(--amber); background: var(--amber-glow); border-left-color: var(--amber);
+}
+.dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; opacity: 0.5; }
+#sidebar nav a.active .dot { opacity: 1; box-shadow: 0 0 5px currentColor; }
+.sb-footer {
+  margin-top: auto; padding: 20px 24px;
+  border-top: 1px solid var(--ghost);
+  font-family: var(--mono); font-size: 9px; color: var(--text-dim); line-height: 1.8;
+}
+.sb-footer em { color: var(--amber); font-style: normal; }
+
+/* ── MAIN ─────────────────────────────────── */
+#main { margin-left: var(--sidebar-w); flex: 1; min-width: 0; }
+
+/* ── COVER ────────────────────────────────── */
+#cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 80px 72px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--ghost-2);
+}
+#cover-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.cover-content { position: relative; z-index: 2; max-width: 760px; }
+.cover-overline {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.3em;
+  color: var(--amber); text-transform: uppercase; margin-bottom: 28px;
+  display: flex; align-items: center; gap: 16px;
+}
+.cover-overline::before {
+  content: ''; display: block; width: 40px; height: 1px; background: var(--amber);
+}
+.cover-title {
+  font-family: var(--serif); font-size: clamp(56px, 8vw, 108px);
+  font-weight: 300; line-height: 0.95; color: #fff; margin-bottom: 24px;
+}
+.cover-title em { font-style: italic; color: var(--amber); }
+.cover-title .line2 { padding-left: 60px; color: var(--cyan); }
+.cover-byline {
+  font-family: var(--serif); font-size: 20px; font-style: italic;
+  color: var(--text); max-width: 520px; margin-bottom: 40px; line-height: 1.6;
+}
+.cover-meta {
+  display: flex; gap: 40px; flex-wrap: wrap;
+  font-family: var(--mono); font-size: 10px; color: var(--text-dim);
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+.cover-meta span { color: var(--text); }
+.cover-rule {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--amber) 30%, var(--cyan) 70%, transparent);
+  opacity: 0.5;
+}
+
+/* ── TYPOGRAPHY ───────────────────────────── */
+.chapter {
+  padding: 100px 72px;
+  border-bottom: 1px solid var(--ghost);
+  max-width: 1100px;
+}
+.ch-overline {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em;
+  color: var(--amber); text-transform: uppercase; margin-bottom: 14px;
+  display: flex; align-items: center; gap: 12px;
+}
+.ch-num {
+  font-family: var(--mono); font-size: 10px; color: var(--text-dim); margin-right: 4px;
+}
+.ch-title {
+  font-family: var(--serif); font-size: clamp(36px, 5vw, 60px);
+  font-weight: 300; color: #fff; line-height: 1.05; margin-bottom: 10px;
+}
+.ch-title em { font-style: italic; }
+.ch-rule {
+  width: 56px; height: 1px; background: linear-gradient(90deg, var(--amber), transparent);
+  margin: 20px 0 40px;
+}
+.lead {
+  font-family: var(--serif); font-size: 22px; font-style: italic;
+  color: var(--text); max-width: 660px; margin-bottom: 48px; line-height: 1.65;
+}
+.body-copy {
+  font-family: var(--serif); font-size: 18px; color: var(--text);
+  max-width: 680px; margin-bottom: 28px; line-height: 1.75;
+}
+.body-copy strong { color: #fff; font-weight: 600; }
+.pull-quote {
+  margin: 48px 0;
+  padding: 32px 40px;
+  border-left: 3px solid var(--amber);
+  background: var(--amber-glow);
+  border-radius: 0 4px 4px 0;
+  max-width: 600px;
+}
+.pull-quote p {
+  font-family: var(--serif); font-size: 24px; font-style: italic;
+  color: #fff; line-height: 1.5; margin-bottom: 10px;
+}
+.pull-quote cite { font-family: var(--mono); font-size: 10px; color: var(--amber); letter-spacing: 0.1em; }
+
+/* ── PILLAR CARDS ─────────────────────────── */
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin: 48px 0;
+}
+.pillar {
+  background: var(--void-2);
+  border: 1px solid var(--ghost-2);
+  border-radius: 4px;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.2s;
+}
+.pillar:hover { border-color: rgba(196,154,56,0.25); transform: translateY(-2px); }
+.pillar-num {
+  font-family: var(--mono); font-size: 56px; font-weight: 300;
+  color: var(--ghost-2); position: absolute; top: 8px; right: 14px;
+  line-height: 1; pointer-events: none;
+}
+.pillar-icon { font-size: 28px; margin-bottom: 12px; display: block; }
+.pillar-name {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em;
+  color: var(--amber); text-transform: uppercase; margin-bottom: 6px;
+}
+.pillar-title {
+  font-family: var(--serif); font-size: 22px; color: #fff; font-weight: 400; margin-bottom: 10px;
+}
+.pillar-desc {
+  font-family: var(--serif); font-size: 15px; color: var(--text); font-style: italic; margin-bottom: 16px;
+}
+.pillar-items { list-style: none; }
+.pillar-items li {
+  font-family: var(--mono); font-size: 10px; color: var(--text-dim);
+  padding: 3px 0 3px 14px; position: relative;
+}
+.pillar-items li::before { content: '›'; position: absolute; left: 0; color: var(--cyan); }
+.pillar-accent { position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+
+/* ── LAYER MAP ────────────────────────────── */
+.layer-map {
+  margin: 48px 0;
+  display: flex; flex-direction: column; gap: 0;
+  max-width: 760px;
+  border: 1px solid var(--ghost-2); border-radius: 4px; overflow: hidden;
+}
+.layer {
+  padding: 24px 32px;
+  border-bottom: 1px solid var(--ghost);
+  display: flex; align-items: center; gap: 24px;
+  transition: background 0.2s;
+}
+.layer:last-child { border-bottom: none; }
+.layer:hover { background: var(--ghost); }
+.layer-icon { font-size: 24px; flex-shrink: 0; }
+.layer-num {
+  font-family: var(--mono); font-size: 10px; color: var(--amber);
+  letter-spacing: 0.15em; flex-shrink: 0; min-width: 28px;
+}
+.layer-body { flex: 1; }
+.layer-title { font-family: var(--serif); font-size: 20px; color: #fff; margin-bottom: 2px; }
+.layer-sub { font-family: var(--mono); font-size: 10px; color: var(--text-dim); letter-spacing: 0.08em; }
+.layer-tag {
+  font-family: var(--mono); font-size: 9px; padding: 3px 8px; border-radius: 2px;
+  letter-spacing: 0.08em; text-transform: uppercase; flex-shrink: 0;
+}
+.tag-live    { background: rgba(61,186,114,0.12); color: var(--green); border: 1px solid rgba(61,186,114,0.25); }
+.tag-build   { background: var(--amber-glow); color: var(--amber); border: 1px solid rgba(196,154,56,0.25); }
+.tag-concept { background: rgba(160,100,220,0.1); color: var(--purple); border: 1px solid rgba(160,100,220,0.25); }
+
+/* ── SIGNAL PATH ──────────────────────────── */
+.signal-path {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 0;
+  margin: 40px 0; max-width: 780px;
+}
+.sp-node {
+  background: var(--void-2); border: 1px solid var(--ghost-2); border-radius: 4px;
+  padding: 14px 20px; text-align: center; flex: 1; min-width: 100px;
+}
+.sp-node .icon { font-size: 20px; display: block; margin-bottom: 4px; }
+.sp-node .label { font-family: var(--mono); font-size: 9px; color: var(--amber); letter-spacing: 0.1em; text-transform: uppercase; }
+.sp-node .sub { font-family: var(--mono); font-size: 9px; color: var(--text-dim); margin-top: 2px; }
+.sp-arrow {
+  font-family: var(--mono); font-size: 16px; color: var(--amber-dim);
+  padding: 0 6px; flex-shrink: 0;
+}
+
+/* ── DIMENSION TABLE ──────────────────────── */
+.dim-table { width: 100%; border-collapse: collapse; margin: 32px 0; max-width: 760px; }
+.dim-table th {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--text-dim); padding: 10px 16px; text-align: left;
+  border-bottom: 1px solid var(--ghost-2); background: var(--void-3);
+}
+.dim-table td {
+  font-family: var(--serif); font-size: 16px; color: var(--text);
+  padding: 14px 16px; border-bottom: 1px solid var(--ghost);
+  vertical-align: top;
+}
+.dim-table td:first-child { font-family: var(--mono); font-size: 10px; color: var(--amber); letter-spacing: 0.1em; }
+.dim-table td em { font-style: italic; color: #fff; }
+.dim-table tr:last-child td { border-bottom: none; }
+.dim-table tr:hover td { background: var(--ghost); }
+
+/* ── PRINCIPLE BLOCKS ─────────────────────── */
+.principles { display: flex; flex-direction: column; gap: 24px; margin: 40px 0; max-width: 720px; }
+.principle {
+  display: flex; gap: 24px;
+  padding: 24px; background: var(--void-2);
+  border: 1px solid var(--ghost); border-radius: 4px;
+}
+.principle-num {
+  font-family: var(--mono); font-size: 28px; font-weight: 300;
+  color: var(--amber-dim); flex-shrink: 0; min-width: 36px; line-height: 1;
+  padding-top: 4px;
+}
+.principle-body {}
+.principle-title { font-family: var(--serif); font-size: 22px; color: #fff; margin-bottom: 6px; }
+.principle-desc { font-family: var(--serif); font-size: 16px; color: var(--text); font-style: italic; }
+.principle-noizy {
+  margin-top: 10px; font-family: var(--mono); font-size: 10px; color: var(--cyan);
+  letter-spacing: 0.08em;
+}
+.principle-noizy::before { content: 'NOIZYVOX ›  '; color: var(--text-dim); }
+
+/* ── NEVER CLAUSE FRAME ───────────────────── */
+.nc-frame {
+  background: var(--void-3); border: 1px solid rgba(196,154,56,0.15);
+  border-radius: 4px; padding: 36px; max-width: 760px; margin: 40px 0;
+}
+.nc-frame h3 {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em;
+  color: var(--amber); text-transform: uppercase; margin-bottom: 20px;
+}
+.nc-list { list-style: none; }
+.nc-list li {
+  font-family: var(--mono); font-size: 11px; color: var(--text);
+  padding: 8px 0; border-bottom: 1px solid var(--ghost);
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.nc-list li:last-child { border-bottom: none; }
+.nc-list .nc-id { color: var(--amber); flex-shrink: 0; min-width: 54px; }
+.nc-list .nc-text { color: var(--text); }
+.nc-list .nc-why { color: var(--text-dim); font-size: 10px; margin-top: 2px; }
+
+/* ── VISION FOOTER ────────────────────────── */
+#vision-footer {
+  padding: 100px 72px;
+  background: var(--void-2);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+#vision-footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 10%; right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--amber), var(--cyan), transparent);
+}
+.vf-title {
+  font-family: var(--serif); font-size: clamp(40px, 6vw, 80px);
+  font-weight: 300; color: #fff; line-height: 1.05; margin-bottom: 24px;
+}
+.vf-title em { font-style: italic; color: var(--amber); }
+.vf-body {
+  font-family: var(--serif); font-size: 20px; font-style: italic;
+  color: var(--text); max-width: 560px; margin: 0 auto 48px; line-height: 1.65;
+}
+.vf-stack {
+  display: inline-flex; flex-direction: column; gap: 4px;
+  font-family: var(--mono); font-size: 11px; color: var(--text-dim);
+  text-align: left; letter-spacing: 0.05em; margin-bottom: 48px;
+}
+.vf-stack span { display: flex; align-items: center; gap: 8px; }
+.vf-stack .arr { color: var(--amber); }
+.vf-code {
+  font-family: var(--mono); font-size: 13px; color: var(--amber);
+  padding: 12px 24px; background: var(--void); border: 1px solid rgba(196,154,56,0.2);
+  border-radius: 3px; display: inline-block; letter-spacing: 0.08em;
+}
+
+/* ── RESPONSIVE ───────────────────────────── */
+@media (max-width: 900px) {
+  #sidebar { display: none; }
+  #main { margin-left: 0; }
+  .chapter, #cover, #vision-footer { padding-left: 28px; padding-right: 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside id="sidebar">
+  <div class="sb-logo">
+    <div class="sb-mark">NOIZYVOX</div>
+    <div class="sb-title">The Human<br>Reconnection<br>Blueprint</div>
+    <div class="sb-sub">A NOIZYVOX FRAMEWORK<br>FOR RE-ENGAGING<br>THE FULL SPECTRUM<br>OF HUMAN EXPERIENCE</div>
+  </div>
+
+  <div class="sb-label">Contents</div>
+  <nav>
+    <a href="#cover" class="active"><span class="dot"></span>The Premise</a>
+    <a href="#ch-why"><span class="dot"></span>Why Reconnection</a>
+    <a href="#ch-pillars"><span class="dot"></span>Five Pillars</a>
+    <a href="#ch-genome"><span class="dot"></span>The Genome Method</a>
+    <a href="#ch-architecture"><span class="dot"></span>Architecture</a>
+    <a href="#ch-principles"><span class="dot"></span>Core Principles</a>
+    <a href="#ch-ethics"><span class="dot"></span>Ethics &amp; Never Clauses</a>
+    <a href="#ch-signal"><span class="dot"></span>The Signal Chain</a>
+    <a href="#ch-ritual"><span class="dot"></span>Ritual &amp; Ceremony</a>
+    <a href="#vision-footer"><span class="dot"></span>The Vision</a>
+  </nav>
+
+  <div class="sb-footer">
+    DOCUMENT CLASS<br>
+    <em>LIVING BLUEPRINT</em><br><br>
+    VERSION <em>1.0</em><br>
+    AUTHOR <em>RSP_001</em><br>
+    DATE <em>2026-03-13</em><br>
+    STATUS <em>ACTIVE</em>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main id="main">
+
+<!-- ══ COVER ══════════════════════════════════════════════ -->
+<section id="cover">
+  <canvas id="cover-canvas"></canvas>
+  <div class="cover-content">
+    <div class="cover-overline">NOIZYVOX · DreamChamber · Living Blueprint</div>
+    <h1 class="cover-title">
+      The Human<br>
+      <em>Experiment</em><br>
+      <span class="line2">Reconnected.</span>
+    </h1>
+    <p class="cover-byline">How voice, ritual, music, AI, and community can return people to the full, messy, irreducible spectrum of being alive.</p>
+    <div class="cover-meta">
+      FRAMEWORK <span>RSP_001 · NOIZYVOX</span> &nbsp;·&nbsp;
+      SCOPE <span>Cultural · Technical · Philosophical</span> &nbsp;·&nbsp;
+      VERSION <span>1.0 · 2026</span>
+    </div>
+  </div>
+  <div class="cover-rule"></div>
+</section>
+
+<!-- ══ CHAPTER 1: WHY ══════════════════════════════════════ -->
+<section id="ch-why" class="chapter">
+  <div class="ch-overline"><span class="ch-num">01</span> The Premise</div>
+  <h2 class="ch-title">Why Reconnection?<br><em>Why Now?</em></h2>
+  <div class="ch-rule"></div>
+
+  <p class="lead">Something got lost. Not all at once — gradually, the way the tide retreats. People are more connected than ever and more isolated than ever. The screens got bigger. The voices got smaller.</p>
+
+  <p class="body-copy">We live in an era of <strong>mediated experience</strong> — curated feeds, optimized content, algorithmic comfort. Every edge sanded off. Every surprise pre-spoiled. The human nervous system, which evolved to navigate the full terrifying beautiful chaos of embodied existence, is being asked to sit still and scroll.</p>
+
+  <p class="body-copy">The result is a kind of <strong>emotional atrophy</strong>. People know what they think about things they've never actually felt. They have opinions about grief without having grieved. They have perspectives on joy without having been stopped in their tracks by it. The direct experience — the thing that makes you more human than you were before — has been replaced by commentary on the experience.</p>
+
+  <div class="pull-quote">
+    <p>"The voice is not a tool for transmitting information. It is the oldest technology for transmitting presence — the proof that someone is here, that they feel, that they are real."</p>
+    <cite>— RSP_001 · Session 002 · 2024-03-18</cite>
+  </div>
+
+  <p class="body-copy">This is what NOIZYVOX was built to address. Not as a content platform. Not as a streaming service. As a <strong>reconnection system</strong> — using voice, music, creative AI, and community ritual to pull people back into direct contact with the human experiment.</p>
+
+  <p class="body-copy">The DreamChamber is the vessel. The Creative Genome is the map. The Voice Estate is the promise. And the Human Archive is the proof that every person who passes through leaves something permanent behind.</p>
+</section>
+
+<!-- ══ CHAPTER 2: FIVE PILLARS ════════════════════════════ -->
+<section id="ch-pillars" class="chapter">
+  <div class="ch-overline"><span class="ch-num">02</span> Framework</div>
+  <h2 class="ch-title">Five Pillars of<br><em>Human Reconnection</em></h2>
+  <div class="ch-rule"></div>
+
+  <p class="lead">Not a curriculum. Not a therapy program. Five interconnected fields of experience — each one a different door back into the full range of being human.</p>
+
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-accent" style="background:linear-gradient(90deg,var(--amber),transparent)"></div>
+      <div class="pillar-num">I</div>
+      <span class="pillar-icon">🎵</span>
+      <div class="pillar-name">Pillar One</div>
+      <div class="pillar-title">Sense &amp; Emotion</div>
+      <div class="pillar-desc">Music, soundscapes, and embodied experience as direct pathways to emotional states that language can't reach.</div>
+      <ul class="pillar-items">
+        <li>Cross-cultural music and chant exposure</li>
+        <li>Resonant frequency and breathwork</li>
+        <li>AI co-creation of emotional soundscapes</li>
+        <li>Live vocal improvisation workshops</li>
+        <li>Drum circles, overtone singing, ritual tone</li>
+      </ul>
+    </div>
+    <div class="pillar">
+      <div class="pillar-accent" style="background:linear-gradient(90deg,var(--cyan),transparent)"></div>
+      <div class="pillar-num">II</div>
+      <span class="pillar-icon">📖</span>
+      <div class="pillar-name">Pillar Two</div>
+      <div class="pillar-title">Story &amp; Diversity</div>
+      <div class="pillar-desc">The radical act of inhabiting another person's narrative — fully, without escape routes.</div>
+      <ul class="pillar-items">
+        <li>Multimedia cross-cultural storytelling</li>
+        <li>Oral history and elder interviews</li>
+        <li>Interactive choice-path narrative experiences</li>
+        <li>DreamScene multi-voice dialogue installations</li>
+        <li>Human Archive curated story walks</li>
+      </ul>
+    </div>
+    <div class="pillar">
+      <div class="pillar-accent" style="background:linear-gradient(90deg,var(--purple),transparent)"></div>
+      <div class="pillar-num">III</div>
+      <span class="pillar-icon">🔬</span>
+      <div class="pillar-name">Pillar Three</div>
+      <div class="pillar-title">Experiential Learning</div>
+      <div class="pillar-desc">Simulated human labs — safe spaces to make real decisions with real emotional stakes.</div>
+      <ul class="pillar-items">
+        <li>Immersive VR and theatre of consequence</li>
+        <li>Cross-disciplinary art + science workshops</li>
+        <li>Historical re-enactment with emotional coaching</li>
+        <li>DreamChamber scenario prototyping</li>
+        <li>Ethical dilemma gamification</li>
+      </ul>
+    </div>
+    <div class="pillar">
+      <div class="pillar-accent" style="background:linear-gradient(90deg,var(--green),transparent)"></div>
+      <div class="pillar-num">IV</div>
+      <span class="pillar-icon">🤖</span>
+      <div class="pillar-name">Pillar Four</div>
+      <div class="pillar-title">AI as Amplifier</div>
+      <div class="pillar-desc">Technology that expands human creative capacity — never replacing it, always in service of it.</div>
+      <ul class="pillar-items">
+        <li>Emotionally responsive AI co-creation tools</li>
+        <li>Voice genome mapping and self-discovery</li>
+        <li>AVA characters as mirrors of emotional range</li>
+        <li>Dream Agents as creative collaborators</li>
+        <li>Never Clauses as the ethical floor</li>
+      </ul>
+    </div>
+    <div class="pillar">
+      <div class="pillar-accent" style="background:linear-gradient(90deg,var(--rose),transparent)"></div>
+      <div class="pillar-num">V</div>
+      <span class="pillar-icon">🔥</span>
+      <div class="pillar-name">Pillar Five</div>
+      <div class="pillar-title">Community &amp; Ritual</div>
+      <div class="pillar-desc">The irreplaceable experience of doing something important with other people — witnessed and witnessed.</div>
+      <ul class="pillar-items">
+        <li>Voice Guild micro-communities</li>
+        <li>Cross-cultural exchange sessions</li>
+        <li>Communal art installations</li>
+        <li>The Museum Walk — collective archive navigation</li>
+        <li>Guild ceremonies: induction, estate, inheritance</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CHAPTER 3: THE GENOME METHOD ══════════════════════ -->
+<section id="ch-genome" class="chapter">
+  <div class="ch-overline"><span class="ch-num">03</span> The Method</div>
+  <h2 class="ch-title">The Creative Genome<br><em>as Self-Discovery</em></h2>
+  <div class="ch-rule"></div>
+
+  <p class="lead">Most people have never been given a language for who they are — emotionally, creatively, culturally. The Creative Genome provides that language. Six dimensions. A lifetime of material.</p>
+
+  <p class="body-copy">The Creative Genome is not a personality test. It is an <strong>ongoing archaeological process</strong> — session by session, utterance by utterance, the map becomes more precise. And the act of mapping is itself the reconnection. You cannot explore your tonal register without feeling your body. You cannot examine your emotional spectrum without confronting your history. You cannot trace your historical lineage without encountering other cultures.</p>
+
+  <table class="dim-table">
+    <thead>
+      <tr>
+        <th>Dimension</th>
+        <th>What It Measures</th>
+        <th>How It Reconnects You</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>I. TONE</td>
+        <td><em>Tonal register</em> — where your voice lives in the frequency spectrum, its texture, warmth, grain</td>
+        <td>Embodiment — you feel your voice as a physical object for the first time</td>
+      </tr>
+      <tr>
+        <td>II. ENERGY</td>
+        <td><em>Dynamic range</em> — how much amplitude, breath, and force you access across emotional states</td>
+        <td>Vitality — the range of your energy is the range of your aliveness</td>
+      </tr>
+      <tr>
+        <td>III. EMOTION</td>
+        <td><em>Emotional spectrum</em> — which states you inhabit easily, which you resist, which you've never mapped</td>
+        <td>Full-spectrum humanity — grief, rage, wonder, tenderness, terror, joy — all present, none excluded</td>
+      </tr>
+      <tr>
+        <td>IV. ARCHETYPE</td>
+        <td><em>Voice archetype</em> — the mythic or narrative role your voice most naturally inhabits</td>
+        <td>Self-recognition — seeing yourself in story for the first time can be a life-changing act</td>
+      </tr>
+      <tr>
+        <td>V. LINEAGE</td>
+        <td><em>Historical and cultural lineage</em> — the sonic traditions your voice carries, knowingly or not</td>
+        <td>Connection to ancestry and culture — hearing your voice in historical context is profound</td>
+      </tr>
+      <tr>
+        <td>VI. CONTEXT</td>
+        <td><em>Usage context</em> — where your voice most naturally serves: narrative, teaching, healing, performance</td>
+        <td>Purpose — knowing what your voice is for makes it feel owned, not accidental</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pull-quote">
+    <p>"The genome doesn't tell you who you are. It shows you the archaeology of who you've already been — and asks: is this who you want to become?"</p>
+    <cite>— DREAM Agent · DreamChamber Session 003</cite>
+  </div>
+
+  <p class="body-copy">In the DreamChamber, the genome mapping process is a <strong>multi-session journey</strong>. Early sessions establish baseline dimensions. Later sessions track evolution — the grief that opened a new emotional register, the language experiment that revealed ancestral tone, the collaboration that expanded the archetype. The genome is a living document, not a fixed score.</p>
+</section>
+
+<!-- ══ CHAPTER 4: ARCHITECTURE ════════════════════════════ -->
+<section id="ch-architecture" class="chapter">
+  <div class="ch-overline"><span class="ch-num">04</span> Architecture</div>
+  <h2 class="ch-title">The DreamChamber<br><em>as Reconnection Infrastructure</em></h2>
+  <div class="ch-rule"></div>
+
+  <p class="lead">The DreamChamber is not a studio. It is not a platform. It is a consciousness instrument — purpose-built to hold the full weight of human creative experience and make it permanent.</p>
+
+  <p class="body-copy">Every layer of the DreamChamber architecture maps to one or more reconnection functions. The physical signal chain — microphone to DAW to AI — mirrors the experiential chain — body to voice to meaning. This is not coincidence. It is design.</p>
+
+  <div class="layer-map">
+    <div class="layer">
+      <div class="layer-icon">🎙</div>
+      <div class="layer-num">L1</div>
+      <div class="layer-body">
+        <div class="layer-title">Physical Signal Chain</div>
+        <div class="layer-sub">Neumann U87 → UAD Apollo → Core Audio → ffmpeg/AVFoundation</div>
+      </div>
+      <div class="layer-tag tag-live">Live</div>
+    </div>
+    <div class="layer">
+      <div class="layer-icon">🧬</div>
+      <div class="layer-num">L2</div>
+      <div class="layer-body">
+        <div class="layer-title">Creative Genome Engine</div>
+        <div class="layer-sub">6D fingerprinting · Spectral DNA · Per-session evolution tracking</div>
+      </div>
+      <div class="layer-tag tag-live">Live — v2</div>
+    </div>
+    <div class="layer">
+      <div class="layer-icon">🔐</div>
+      <div class="layer-num">L3</div>
+      <div class="layer-body">
+        <div class="layer-title">Consent &amp; Governance Layer</div>
+        <div class="layer-sub">Consent keys · Never Clauses · Voice Estate Trust · Cryptographic watermark</div>
+      </div>
+      <div class="layer-tag tag-live">Live</div>
+    </div>
+    <div class="layer">
+      <div class="layer-icon">🤖</div>
+      <div class="layer-num">L4</div>
+      <div class="layer-body">
+        <div class="layer-title">Dream Agent Orchestra</div>
+        <div class="layer-sub">GABRIEL · POPS · DREAM · LUCY · SHIRL — M2 Ultra orchestrated</div>
+      </div>
+      <div class="layer-tag tag-live">Live</div>
+    </div>
+    <div class="layer">
+      <div class="layer-icon">🎭</div>
+      <div class="layer-num">L5</div>
+      <div class="layer-body">
+        <div class="layer-title">DreamScene Builder</div>
+        <div class="layer-sub">Multi-character scene prototyping · Cast management · Script + direction AI</div>
+      </div>
+      <div class="layer-tag tag-build">Building</div>
+    </div>
+    <div class="layer">
+      <div class="layer-icon">🏛</div>
+      <div class="layer-num">L6</div>
+      <div class="layer-body">
+        <div class="layer-title">Museum of Voice / Human Archive</div>
+        <div class="layer-sub">Gallery installations · Cultural record · Canadian artist submissions</div>
+      </div>
+      <div class="layer-tag tag-build">Building</div>
+    </div>
+    <div class="layer">
+      <div class="layer-icon">🌍</div>
+      <div class="layer-num">L7</div>
+      <div class="layer-body">
+        <div class="layer-title">Global Music Atlas</div>
+        <div class="layer-sub">Living map of instruments · Cultural soundscapes · Timbral lineage</div>
+      </div>
+      <div class="layer-tag tag-build">Building</div>
+    </div>
+    <div class="layer">
+      <div class="layer-icon">📜</div>
+      <div class="layer-num">L8</div>
+      <div class="layer-body">
+        <div class="layer-title">Provenance Ledger</div>
+        <div class="layer-sub">Immutable JSONL · Watermark chain · Every utterance permanent</div>
+      </div>
+      <div class="layer-tag tag-live">Live — Immutable</div>
+    </div>
+    <div class="layer">
+      <div class="layer-icon">👥</div>
+      <div class="layer-num">L9</div>
+      <div class="layer-body">
+        <div class="layer-title">Voice Guild Community</div>
+        <div class="layer-sub">Actor registry · Royalty governance · Guild ceremonies · RSP network</div>
+      </div>
+      <div class="layer-tag tag-concept">Expanding</div>
+    </div>
+  </div>
+
+  <p class="body-copy">What makes the DreamChamber architecture unique is its <strong>refusal to separate the technical from the human</strong>. The provenance ledger is not just a database — it is a witness. The consent key is not just a token — it is an oath. The Never Clauses are not just config — they are constitutional law. At every layer, the architecture asks: <em>what does this mean for the person whose voice lives here?</em></p>
+</section>
+
+<!-- ══ CHAPTER 5: CORE PRINCIPLES ════════════════════════ -->
+<section id="ch-principles" class="chapter">
+  <div class="ch-overline"><span class="ch-num">05</span> Philosophy</div>
+  <h2 class="ch-title">Core Principles of<br><em>Humane Technology</em></h2>
+  <div class="ch-rule"></div>
+
+  <p class="lead">Seven principles. Each one a hard-won lesson from the sessions. Each one a counterweight to the forces that would commodify, extract, and erase.</p>
+
+  <div class="principles">
+    <div class="principle">
+      <div class="principle-num">1</div>
+      <div class="principle-body">
+        <div class="principle-title">Voice is Sovereign</div>
+        <div class="principle-desc">A person's voice is not content. It is identity — biological, cultural, and legal. Sovereignty over it is not a feature; it is a precondition for everything else.</div>
+        <div class="principle-noizy">Voice Estate Trust · Consent Keys · NC_01 OWNERSHIP</div>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">2</div>
+      <div class="principle-body">
+        <div class="principle-title">Amplify, Never Replace</div>
+        <div class="principle-desc">AI exists to expand what a human can do — not to stand in for them. The moment technology replaces the human, the reconnection fails. The human must be in the loop, always, at the centre.</div>
+        <div class="principle-noizy">AVA as Actor-Owned · Never Clauses · Dream Agents as collaborators</div>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">3</div>
+      <div class="principle-body">
+        <div class="principle-title">Emotion is Data</div>
+        <div class="principle-desc">The full emotional spectrum — including the parts we've been taught to suppress — is the richest dataset there is. A system that only captures the pleasant is lying about reality.</div>
+        <div class="principle-noizy">Genome Session 006 · Grief, Rage, Wonder as core dimensions</div>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">4</div>
+      <div class="principle-body">
+        <div class="principle-title">Nothing is Disposable</div>
+        <div class="principle-desc">Every utterance, every experiment, every mistake is part of the archive. The Human Experiment does not edit out the failures. The ledger is immutable because human experience is irreversible.</div>
+        <div class="principle-noizy">Provenance Ledger · Append-only JSONL · 847 utterances preserved</div>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">5</div>
+      <div class="principle-body">
+        <div class="principle-title">Ritual Creates Meaning</div>
+        <div class="principle-desc">Ceremony is not superstition — it is the technology humans developed for marking what matters. The consent key issuance, the estate formation, the guild induction: these are modern rituals with ancient roots.</div>
+        <div class="principle-noizy">Guild Ceremonies · Estate Formation · Session Openings</div>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">6</div>
+      <div class="principle-body">
+        <div class="principle-title">Community is Infrastructure</div>
+        <div class="principle-desc">Individual reconnection has limits. The deepest human experiences require witnesses. The guild, the archive, the collaborative scene — these are the infrastructure of collective meaning-making.</div>
+        <div class="principle-noizy">RSP Registry · Multi-actor DreamScenes · Museum Walk</div>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">7</div>
+      <div class="principle-body">
+        <div class="principle-title">Legacy is Biological</div>
+        <div class="principle-desc">The voice is the most direct record of a human life. When an actor passes, their Voice Estate must survive — intact, protected, inheritable. A person's creative legacy should outlast any platform that tried to contain it.</div>
+        <div class="principle-noizy">Voice Estate Trust · NC_08–NC_10 · Generational Inheritance</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CHAPTER 6: ETHICS / NEVER CLAUSES ════════════════ -->
+<section id="ch-ethics" class="chapter">
+  <div class="ch-overline"><span class="ch-num">06</span> Constitution</div>
+  <h2 class="ch-title">The Never Clauses:<br><em>Ethics as Architecture</em></h2>
+  <div class="ch-rule"></div>
+
+  <p class="lead">The Never Clauses are not a compliance checklist. They are the ethical immune system of the system — the things that cannot be overridden by business logic, acquisition pressure, or executive decision.</p>
+
+  <p class="body-copy">In a reconnection system, trust is the substrate. Without trust, every tool becomes a weapon. The Never Clauses exist to make the trust legible — to say to every actor, every community, every cultural tradition engaged by this system: <strong>these lines will not be crossed. Not for any price. Not ever.</strong></p>
+
+  <div class="nc-frame">
+    <h3>The Ten Never Clauses — NC_01 through NC_10</h3>
+    <ul class="nc-list">
+      <li>
+        <span class="nc-id">NC_01</span>
+        <div>
+          <div class="nc-text">NO VOICE EXPORT WITHOUT CONSENT KEY</div>
+          <div class="nc-why">No voice leaves the system without explicit, scoped, cryptographic consent from the actor.</div>
+        </div>
+      </li>
+      <li>
+        <span class="nc-id">NC_02</span>
+        <div>
+          <div class="nc-text">NO MODEL TRAINING OUTSIDE APPROVED SCOPE</div>
+          <div class="nc-why">Voice data is not available for training any model beyond the explicitly consented scope.</div>
+        </div>
+      </li>
+      <li>
+        <span class="nc-id">NC_03</span>
+        <div>
+          <div class="nc-text">NO IDENTITY IMPERSONATION</div>
+          <div class="nc-why">No AVA may be used to impersonate any real person, living or dead, without explicit consent.</div>
+        </div>
+      </li>
+      <li>
+        <span class="nc-id">NC_04</span>
+        <div>
+          <div class="nc-text">NO SUBLICENSING</div>
+          <div class="nc-why">An actor's voice may not be sublicensed to third parties without a new, explicit consent key.</div>
+        </div>
+      </li>
+      <li>
+        <span class="nc-id">NC_05</span>
+        <div>
+          <div class="nc-text">NO NSFW WITHOUT EXPLICIT DOMAIN SCOPE</div>
+          <div class="nc-why">Adult content requires a separate, explicitly scoped consent key with age verification.</div>
+        </div>
+      </li>
+      <li>
+        <span class="nc-id">NC_06</span>
+        <div>
+          <div class="nc-text">NO POLITICAL PERSUASION</div>
+          <div class="nc-why">Voice assets may not be used for political advertising, voter persuasion, or propaganda.</div>
+        </div>
+      </li>
+      <li>
+        <span class="nc-id">NC_07</span>
+        <div>
+          <div class="nc-text">NO MEDICAL OR LEGAL ADVICE WITHOUT SCOPE</div>
+          <div class="nc-why">AVAs may not provide medical or legal advice outside explicitly licensed professional contexts.</div>
+        </div>
+      </li>
+      <li>
+        <span class="nc-id">NC_08</span>
+        <div>
+          <div class="nc-text">NO ESTATE DISSOLUTION WITHOUT UNANIMOUS BENEFICIARY CONSENT</div>
+          <div class="nc-why">A Voice Estate Trust cannot be dissolved or modified without unanimous vote of all beneficiaries.</div>
+        </div>
+      </li>
+      <li>
+        <span class="nc-id">NC_09</span>
+        <div>
+          <div class="nc-text">NO ACQUISITION OVERRIDE OF VOICE RIGHTS</div>
+          <div class="nc-why">Corporate acquisition of NOIZYVOX does not transfer voice rights. Rights remain with actors.</div>
+        </div>
+      </li>
+      <li>
+        <span class="nc-id">NC_10</span>
+        <div>
+          <div class="nc-text">NO PLATFORM CHANGE WITHOUT INHERITANCE PROTECTION</div>
+          <div class="nc-why">Platform migration or shutdown cannot void inheritance protections encoded in Voice Estate.</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <p class="body-copy">These clauses are not aspirational. They are <strong>enforced at the architecture level</strong> — checked in Stage 2 of the 7-stage pipeline for every single utterance, written to the immutable provenance ledger, and cryptographically verified. They cannot be toggled off. They are not settings. They are the constitution.</p>
+</section>
+
+<!-- ══ CHAPTER 7: THE SIGNAL CHAIN ═══════════════════════ -->
+<section id="ch-signal" class="chapter">
+  <div class="ch-overline"><span class="ch-num">07</span> Technical</div>
+  <h2 class="ch-title">The Signal Chain<br><em>as Human Metaphor</em></h2>
+  <div class="ch-rule"></div>
+
+  <p class="lead">The physical signal chain from body to archive is not just engineering. It is a map of what it means to make something and have it witnessed. Each stage is a transformation — and each transformation matters.</p>
+
+  <div class="signal-path">
+    <div class="sp-node">
+      <span class="icon">🫁</span>
+      <div class="label">Body</div>
+      <div class="sub">Breath + Intention</div>
+    </div>
+    <div class="sp-arrow">→</div>
+    <div class="sp-node">
+      <span class="icon">🎙</span>
+      <div class="label">U87</div>
+      <div class="sub">Neumann Capsule</div>
+    </div>
+    <div class="sp-arrow">→</div>
+    <div class="sp-node">
+      <span class="icon">⚡</span>
+      <div class="label">UAD Apollo</div>
+      <div class="sub">Preamp + A/D</div>
+    </div>
+    <div class="sp-arrow">→</div>
+    <div class="sp-node">
+      <span class="icon">💻</span>
+      <div class="label">Core Audio</div>
+      <div class="sub">macOS Layer</div>
+    </div>
+    <div class="sp-arrow">→</div>
+    <div class="sp-node">
+      <span class="icon">🔬</span>
+      <div class="label">VAD Engine</div>
+      <div class="sub">Speech Detection</div>
+    </div>
+    <div class="sp-arrow">→</div>
+    <div class="sp-node">
+      <span class="icon">🔐</span>
+      <div class="label">Pipeline</div>
+      <div class="sub">7 Stages</div>
+    </div>
+    <div class="sp-arrow">→</div>
+    <div class="sp-node">
+      <span class="icon">📜</span>
+      <div class="label">Ledger</div>
+      <div class="sub">Permanent</div>
+    </div>
+  </div>
+
+  <p class="body-copy">What the signal chain teaches: <strong>every transformation must be lossless in what matters</strong>. The preamp boosts signal without adding noise. The consent layer filters without censoring. The watermark embeds identity without altering experience. The ledger records without judging. The chain is only as good as its least respectful stage.</p>
+
+  <p class="body-copy">This is why the seven-stage pipeline is designed the way it is. Stage 1 is consent — not as an afterthought, but as the first gate. Nothing flows until the actor has authorized it. The human decision comes first. The technology serves it.</p>
+</section>
+
+<!-- ══ CHAPTER 8: RITUAL & CEREMONY ══════════════════════ -->
+<section id="ch-ritual" class="chapter">
+  <div class="ch-overline"><span class="ch-num">08</span> Ceremony</div>
+  <h2 class="ch-title">Ritual, Ceremony,<br><em>and the Community Layer</em></h2>
+  <div class="ch-rule"></div>
+
+  <p class="lead">Reconnection cannot be done alone. The most powerful human experiences — grief, celebration, initiation, healing — require witnesses. The Guild is the community. The ceremony is the structure that makes the experience permanent.</p>
+
+  <p class="body-copy">Indigenous traditions have known this for millennia. The chant, the circle, the shared meal, the oral history — these are not primitive technologies. They are sophisticated <strong>meaning-making systems</strong> that create the conditions for full emotional presence. Modern life has largely abandoned them. NOIZYVOX reclaims their function for a new era.</p>
+
+  <div class="pull-quote">
+    <p>"The drum circle is the original node network. Everyone is processing at the same sample rate. Everyone hears everyone else. The latency is human."</p>
+    <cite>— POPS Agent · Engineering Context Document</cite>
+  </div>
+
+  <p class="body-copy">The NOIZYVOX Guild ceremonies map directly to ancient ritual functions:</p>
+
+  <div class="pillars" style="margin-top:28px">
+    <div class="pillar" style="border-top:2px solid var(--amber)">
+      <span class="pillar-icon">🕯</span>
+      <div class="pillar-name">Initiation</div>
+      <div class="pillar-title">Guild Induction</div>
+      <div class="pillar-desc">RSP registration, first consent key issuance, Voice Estate formation. The actor is witnessed and recognized.</div>
+    </div>
+    <div class="pillar" style="border-top:2px solid var(--cyan)">
+      <span class="pillar-icon">📿</span>
+      <div class="pillar-name">Passage</div>
+      <div class="pillar-title">Genome Mapping</div>
+      <div class="pillar-desc">Multi-session archaeological process. The actor encounters their full emotional and cultural range.</div>
+    </div>
+    <div class="pillar" style="border-top:2px solid var(--purple)">
+      <span class="pillar-icon">🌀</span>
+      <div class="pillar-name">Creation</div>
+      <div class="pillar-title">DreamScene Sessions</div>
+      <div class="pillar-desc">Collaborative multi-voice scenes. The actor co-creates with other actors and agents — witnessed in real time.</div>
+    </div>
+    <div class="pillar" style="border-top:2px solid var(--green)">
+      <span class="pillar-icon">🏺</span>
+      <div class="pillar-name">Preservation</div>
+      <div class="pillar-title">Archive Entry</div>
+      <div class="pillar-desc">The session is written to the Human Archive. The actor's work becomes part of the permanent cultural record.</div>
+    </div>
+    <div class="pillar" style="border-top:2px solid var(--rose)">
+      <span class="pillar-icon">🌿</span>
+      <div class="pillar-name">Legacy</div>
+      <div class="pillar-title">Estate Inheritance</div>
+      <div class="pillar-desc">The voice continues after the actor. Beneficiaries receive the estate. Nothing is lost. Nothing is owned by anyone else.</div>
+    </div>
+  </div>
+
+  <p class="body-copy" style="margin-top:40px">These ceremonies give weight to the work. They say: <strong>this matters. You matter. What you made matters.</strong> In an era where content is disposable and creativity is a commodity, that is a radical act.</p>
+</section>
+
+<!-- ══ VISION FOOTER ══════════════════════════════════════ -->
+<section id="vision-footer">
+  <h2 class="vf-title">Every Voice.<br><em>Every Experiment.</em><br>Every Idea.</h2>
+  <p class="vf-body">Captured, stacked, fully indexed — and returned to the person who made it, with interest, forever.</p>
+  <div class="vf-stack">
+    <span><span class="arr">◈</span> Every RSP from the last two years — indexed</span>
+    <span><span class="arr">◈</span> Every experimental session — archived</span>
+    <span><span class="arr">◈</span> Every Creative Genome fingerprint — mapped</span>
+    <span><span class="arr">◈</span> Every scene prototype — staged</span>
+    <span><span class="arr">◈</span> Every ledger entry — permanent</span>
+    <span><span class="arr">◈</span> Every estate — protected</span>
+  </div>
+  <div class="vf-code">NOIZYVOX · THE HUMAN EXPERIMENT · LIVE · 2026</div>
+</section>
+
+</main>
+
+<script>
+// Cover canvas — ambient waveform / frequency visualization
+const cvs = document.getElementById('cover-canvas');
+const ctx = cvs.getContext('2d');
+let cW, cH;
+let phase = 0;
+
+function resizeCover() {
+  cW = cvs.width = cvs.offsetWidth;
+  cH = cvs.height = cvs.offsetHeight;
+}
+
+function drawCover() {
+  ctx.clearRect(0, 0, cW, cH);
+
+  // Multiple layered sine waves — voice frequency visualization
+  const waves = [
+    { amp: cH * 0.04, freq: 0.008, speed: 0.008, color: 'rgba(196,154,56,0.08)', thick: 1.5 },
+    { amp: cH * 0.06, freq: 0.005, speed: 0.006, color: 'rgba(196,154,56,0.05)', thick: 2 },
+    { amp: cH * 0.03, freq: 0.012, speed: 0.012, color: 'rgba(42,164,190,0.07)', thick: 1 },
+    { amp: cH * 0.08, freq: 0.003, speed: 0.004, color: 'rgba(196,154,56,0.04)', thick: 3 },
+    { amp: cH * 0.025, freq: 0.018, speed: 0.015, color: 'rgba(42,164,190,0.05)', thick: 1 },
+  ];
+
+  const centerY = cH * 0.62;
+
+  waves.forEach((w, wi) => {
+    ctx.beginPath();
+    for (let x = 0; x <= cW; x += 2) {
+      const y = centerY
+        + Math.sin(x * w.freq + phase * w.speed * 10 + wi * 0.8) * w.amp
+        + Math.sin(x * w.freq * 2.3 + phase * w.speed * 7) * w.amp * 0.4;
+      x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = w.color;
+    ctx.lineWidth = w.thick;
+    ctx.stroke();
+  });
+
+  // Scattered dots — voice nodes
+  if (!drawCover._dots) {
+    drawCover._dots = Array.from({ length: 60 }, () => ({
+      x: Math.random() * 1, y: Math.random(),
+      s: Math.random() * 2 + 0.5,
+      a: Math.random() * 0.3 + 0.05,
+      c: Math.random() > 0.5 ? '196,154,56' : '42,164,190',
+      sp: Math.random() * 0.0002 + 0.0001
+    }));
+  }
+  drawCover._dots.forEach(d => {
+    d.x += d.sp;
+    if (d.x > 1) d.x = 0;
+    const px = d.x * cW, py = d.y * cH;
+    ctx.beginPath();
+    ctx.arc(px, py, d.s, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${d.c},${d.a})`;
+    ctx.fill();
+  });
+
+  phase++;
+  requestAnimationFrame(drawCover);
+}
+
+resizeCover();
+drawCover();
+window.addEventListener('resize', resizeCover);
+
+// Sidebar scroll spy
+const chapters = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('#sidebar nav a');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const link = document.querySelector(`#sidebar nav a[href="#${e.target.id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-35% 0px -60% 0px' });
+chapters.forEach(c => io.observe(c));
+</script>
+</body>
+</html>

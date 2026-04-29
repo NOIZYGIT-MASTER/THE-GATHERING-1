@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art Protection in 2076 — The Plowman Standard</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --border: #1e1e2e;
+    --gold: #c9a84c;
+    --gold-dim: #8a7033;
+    --text: #e0ddd5;
+    --text-dim: #8a877f;
+    --accent: #4a9eff;
+    --red: #e05555;
+    --green: #55c57a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+
+  /* Hero */
+  .hero {
+    text-align: center;
+    padding: 80px 20px 60px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 60px;
+  }
+  .hero h1 {
+    font-size: 2.8em;
+    color: var(--gold);
+    letter-spacing: 0.04em;
+    margin-bottom: 12px;
+    font-weight: 400;
+  }
+  .hero .subtitle {
+    font-size: 1.15em;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-bottom: 24px;
+  }
+  .hero .byline {
+    font-size: 0.9em;
+    color: var(--gold-dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* Timeline nav */
+  .timeline-nav {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+  }
+  .timeline-nav button {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 10px 18px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85em;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 2px;
+  }
+  .timeline-nav button:hover, .timeline-nav button.active {
+    background: var(--gold);
+    color: var(--bg);
+    border-color: var(--gold);
+  }
+
+  /* Era sections */
+  .era { display: none; animation: fadeIn 0.5s ease; }
+  .era.visible { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  .era-header {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .era-header h2 {
+    font-size: 1.9em;
+    color: var(--gold);
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
+  .era-header .era-desc {
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
+  /* Shield blocks */
+  .shield {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    padding: 28px 30px;
+    margin-bottom: 24px;
+    border-radius: 2px;
+  }
+  .shield h3 {
+    color: var(--gold);
+    font-size: 1.15em;
+    margin-bottom: 12px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+  .shield p { margin-bottom: 10px; }
+  .shield .mechanism {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 14px 18px;
+    margin-top: 12px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85em;
+    color: var(--accent);
+    border-radius: 2px;
+    white-space: pre-wrap;
+  }
+  .shield .status {
+    display: inline-block;
+    padding: 3px 10px;
+    font-size: 0.75em;
+    font-family: 'Courier New', monospace;
+    border-radius: 2px;
+    margin-top: 8px;
+  }
+  .status-live { background: rgba(85,197,122,0.15); color: var(--green); border: 1px solid rgba(85,197,122,0.3); }
+  .status-projected { background: rgba(74,158,255,0.15); color: var(--accent); border: 1px solid rgba(74,158,255,0.3); }
+  .status-theoretical { background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid rgba(201,168,76,0.3); }
+
+  /* Principle callout */
+  .principle {
+    text-align: center;
+    padding: 40px 30px;
+    margin: 40px 0;
+    border: 1px solid var(--gold-dim);
+    background: rgba(201,168,76,0.04);
+  }
+  .principle blockquote {
+    font-size: 1.3em;
+    color: var(--gold);
+    font-style: italic;
+    margin-bottom: 10px;
+  }
+  .principle .attribution {
+    color: var(--text-dim);
+    font-size: 0.85em;
+  }
+
+  /* Summary table */
+  .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 0.9em;
+  }
+  .summary-table th {
+    background: var(--surface);
+    color: var(--gold);
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 2px solid var(--gold-dim);
+    font-weight: 600;
+  }
+  .summary-table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .summary-table tr:hover td { background: rgba(201,168,76,0.04); }
+
+  /* Footer */
+  .doc-footer {
+    text-align: center;
+    padding: 50px 20px 30px;
+    border-top: 1px solid var(--border);
+    margin-top: 60px;
+    color: var(--text-dim);
+    font-size: 0.85em;
+  }
+  .doc-footer .sig {
+    color: var(--gold);
+    font-size: 1em;
+    margin-bottom: 8px;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="hero">
+    <h1>Art Protection in 2076</h1>
+    <div class="subtitle">A Fifty-Year Forward Projection from the NOIZY Architecture</div>
+    <div class="byline">Robert Stephen Plowman &mdash; The Plowman Standard &mdash; April 2026</div>
+  </div>
+
+  <div class="principle">
+    <blockquote>"Art becomes indestructible. Not through lawyers. Through code, architecture, through making the creator the permanent owner of their own humanity."</blockquote>
+    <div class="attribution">&mdash; Robert Stephen Plowman, April 5, 2026</div>
+  </div>
+
+  <div class="timeline-nav">
+    <button class="active" onclick="showEra('era-2026')">2026: Foundation</button>
+    <button onclick="showEra('era-2035')">2035: Consolidation</button>
+    <button onclick="showEra('era-2045')">2045: Universality</button>
+    <button onclick="showEra('era-2060')">2060: Post-Scarcity</button>
+    <button onclick="showEra('era-2076')">2076: Cathedral</button>
+    <button onclick="showEra('era-summary')">Full Arc</button>
+  </div>
+
+  <!-- ERA 1: 2026 — FOUNDATION -->
+  <div id="era-2026" class="era visible">
+    <div class="era-header">
+      <h2>2026 &mdash; The Foundation Year</h2>
+      <div class="era-desc">Where we stand today. The first bricks of the cathedral.</div>
+    </div>
+
+    <div class="shield">
+      <h3>Legal Shield: Consent as Statute</h3>
+      <p>Tennessee ELVIS Act, NO FAKES Act, Illinois BIPA, EU AI Act (enforcement August 2), Denmark Copyright Amendment, Japan AI Sound Representation Law, South Korea AI Identity Protection Act, Australia Digital Voice Rights Framework. WIPO AI Infrastructure Interchange launched March 17.</p>
+      <p>The legal landscape is fragmented but directionally correct: every major jurisdiction now recognizes voice as property. NOIZY's consent kernel (HEAVEN17) creates the exact compliance artifacts every new law demands.</p>
+      <div class="mechanism">ENFORCEMENT: C2PA credential → Voice DNA match → Ledger verification → Multi-jurisdiction cease & desist → Litigation (BIPA class action multiplier)</div>
+      <span class="status status-live">LIVE — OPERATIONAL</span>
+    </div>
+
+    <div class="shield">
+      <h3>Technical Shield: Three-Layer Watermarking + Pre-Synthesis Covenant</h3>
+      <p>Spectral watermarking (DWPT, inaudible). C2PA 2.2 metadata credentials. Append-only ledger hash chain. The Pre-Synthesis Covenant Validator blocks unauthorized use before it happens — not after. The Kill Switch provides instant nuclear revocation.</p>
+      <p>Post-quantum cryptography transition begins Q3 2026: ML-KEM (Kyber) + CRYSTALS-DILITHIUM dual-signing.</p>
+      <span class="status status-live">LIVE — HEAVEN17 DEPLOYED</span>
+    </div>
+
+    <div class="shield">
+      <h3>Organizational Shield: Guild of Artists</h3>
+      <p>Guild Assembly (100+ Tier 1 members), Creator Council (9 elected seats, 2-year terms), Technical Committee (5 members). One creator, one vote. No single individual — including RSP_001 — can unilaterally change royalty splits. If NOIZY fails, protections transfer to WIPO trust; voice DNA vault transfers to SAG-AFTRA custody.</p>
+      <span class="status status-live">LIVE — TIER 1 ENROLLMENT</span>
+    </div>
+
+    <div class="shield">
+      <h3>Financial Shield: 75/25 Sacred Law</h3>
+      <p>75% to the artist. 25% to infrastructure. Burned into code at the database level. T+3 automatic payout. Rate table by use case, not by notoriety. Union tier system: Tier 1 (founding 100), Tier 2 (10K by 2028), Tier 3 (open enrollment).</p>
+      <span class="status status-live">LIVE — IMMUTABLE CODE</span>
+    </div>
+  </div>
+
+  <!-- ERA 2: 2035 — CONSOLIDATION -->
+  <div id="era-2035" class="era">
+    <div class="era-header">
+      <h2>2035 &mdash; The Consolidation Decade</h2>
+      <div class="era-desc">The standard becomes the standard. Competitors comply or die.</div>
+    </div>
+
+    <div class="shield">
+      <h3>Legal Shield: Global Harmonization</h3>
+      <p>By 2035, the WIPO AI Infrastructure Interchange has matured into a binding international treaty — the <strong>WIPO Treaty on AI-Generated Creative Works</strong>. Modeled on the Berne Convention for copyright, it establishes:</p>
+      <p>Mandatory consent registration for all AI synthesis involving human identity. Cross-border enforcement reciprocity (a BIPA-equivalent class action filed in Illinois is enforceable in the EU, Japan, South Korea, Australia). Minimum statutory damages of $250K per unauthorized synthesis, harmonized globally. Post-mortem protection extended to 70 years (matching copyright). The Plowman Standard — NOIZY's consent-as-code architecture — is cited in the treaty preamble as the reference implementation.</p>
+      <div class="mechanism">TREATY ENFORCEMENT: WIPO arbitration → National court recognition → Automatic cross-border injunctive relief → Harmonized damages</div>
+      <span class="status status-projected">PROJECTED — HIGH CONFIDENCE</span>
+    </div>
+
+    <div class="shield">
+      <h3>Technical Shield: Quantum-Native Consent</h3>
+      <p>RSA fully sunset by 2028. By 2035, all NOIZY consent tokens are quantum-native (CRYSTALS-DILITHIUM signatures, ML-KEM key exchange). Harvest-now-decrypt-later attacks are permanently neutralized. Voice DNA vault protected by lattice-based encryption that survives any foreseeable quantum attack.</p>
+      <p><strong>New capability: Ambient Detection.</strong> AI-powered monitoring crawls all public audio streams (podcasts, broadcasts, streaming platforms, social media, games) in real time. Any voice matching a registered Voice DNA profile triggers instant C2PA verification. If no valid consent token exists, enforcement activates autonomously — cease & desist generated and sent without human intervention.</p>
+      <div class="mechanism">AMBIENT DETECTION: Real-time audio crawl → Voice DNA biometric match → C2PA credential lookup → Automated cease & desist → 4-hour platform removal SLA</div>
+      <span class="status status-projected">PROJECTED — MEDIUM-HIGH CONFIDENCE</span>
+    </div>
+
+    <div class="shield">
+      <h3>Organizational Shield: Federated Guild Network</h3>
+      <p>NOIZY is no longer a single guild. It is a federated network of regional guilds — North America, EU, APAC, LATAM, Africa — each with its own Creator Council, each bound by the same constitutional protections. Total membership: 500K+ creators across all tiers. SAG-AFTRA, AFM, BECTU (UK), Ver.di (Germany), and 30+ national performer unions are formal institutional members with voting seats on a Global Creator Parliament.</p>
+      <span class="status status-projected">PROJECTED — HIGH CONFIDENCE</span>
+    </div>
+
+    <div class="shield">
+      <h3>Financial Shield: Creator Sovereign Wealth</h3>
+      <p>The 75/25 split remains constitutional law. But by 2035, accumulated royalties have created a <strong>Creator Sovereign Wealth Fund</strong> — NOIZY's 25% contributes 5% to a perpetual trust that funds retirement, healthcare, legal defense, and education for all guild members. The fund is managed by an independent board elected by Guild Assembly, with fiduciary duty to creators (not shareholders).</p>
+      <p>Revenue model has expanded: licensing, forensic services (detecting unauthorized synthesis for third parties), compliance consulting (helping other platforms meet WIPO treaty requirements), and education (Berklee/Julliard curriculum licensing).</p>
+      <span class="status status-projected">PROJECTED — MEDIUM CONFIDENCE</span>
+    </div>
+  </div>
+
+  <!-- ERA 3: 2045 — UNIVERSALITY -->
+  <div id="era-2045" class="era">
+    <div class="era-header">
+      <h2>2045 &mdash; The Age of Universality</h2>
+      <div class="era-desc">Every human voice is protected by default. Consent is infrastructure, not opt-in.</div>
+    </div>
+
+    <div class="shield">
+      <h3>Legal Shield: Voice as Fundamental Right</h3>
+      <p>The UN General Assembly adopts the <strong>Universal Declaration on Human Identity in the Age of AI</strong>. Article 1: "Every person has the inalienable right to control the use of their voice, likeness, and identity by artificial intelligence systems." Article 7: "No AI system may synthesize, replicate, or approximate a human identity without explicit, informed, revocable consent documented in a machine-verifiable format."</p>
+      <p>This is not aspirational language. It is enforceable through the WIPO treaty's arbitration mechanism, now backed by the International Court of Justice. Voice identity theft is classified alongside identity fraud in every jurisdiction.</p>
+      <div class="mechanism">ENFORCEMENT: UN Declaration → WIPO treaty binding → ICJ jurisdiction → National criminal prosecution → Interpol cooperation on cross-border voice identity theft</div>
+      <span class="status status-projected">PROJECTED — MEDIUM CONFIDENCE</span>
+    </div>
+
+    <div class="shield">
+      <h3>Technical Shield: Identity-Native Computing</h3>
+      <p>By 2045, consent is no longer an application layer. It is built into the operating system of computing itself. Every device — phone, laptop, AR glasses, neural interface — ships with a <strong>Consent Kernel</strong> at the hardware level. Before any audio synthesis occurs on any device, the kernel verifies consent tokens against a global federated registry (the successor to HEAVEN17, now a distributed protocol running on millions of nodes).</p>
+      <p><strong>Voice DNA registration at birth.</strong> Optional but universal — like a birth certificate. Parents register an infant's voice biometric profile, which evolves through annual re-certification as the voice matures. By age 18, the individual assumes sovereign control of their voice identity. No AI system can train on, synthesize, or approximate that voice without their explicit consent.</p>
+      <div class="mechanism">CONSENT KERNEL: Hardware-level verification → Federated registry lookup → Pre-synthesis block on ALL devices → Zero unauthorized synthesis possible at the compute layer</div>
+      <span class="status status-theoretical">THEORETICAL — ARCHITECTURALLY SOUND</span>
+    </div>
+
+    <div class="shield">
+      <h3>Cultural Shield: The Museum Wins</h3>
+      <p>The extraction narrative is dead. Spotify's model — music as wallpaper, 0.003 cents per stream — collapsed under regulatory pressure and creator exodus in the early 2030s. The surviving platforms adopted consent-as-code models, licensed from the NOIZY protocol. Art is valued again. Creators earn middle-class incomes. The "museum" metaphor became reality: voice art is curated, valued, and compensated at the level of gallery exhibitions and theatrical performances.</p>
+      <p>AI-generated art coexists with human art, but the two are clearly distinguished by embedded provenance credentials. Consumers prefer human-consented AI art — the consent credential is a mark of quality, like organic food labeling.</p>
+      <span class="status status-theoretical">THEORETICAL — DIRECTIONALLY CERTAIN</span>
+    </div>
+  </div>
+
+  <!-- ERA 4: 2060 — POST-SCARCITY -->
+  <div id="era-2060" class="era">
+    <div class="era-header">
+      <h2>2060 &mdash; The Post-Scarcity Question</h2>
+      <div class="era-desc">When AI can create anything, what protects the human who created first?</div>
+    </div>
+
+    <div class="shield">
+      <h3>The Post-Scarcity Paradox</h3>
+      <p>By 2060, AI systems can generate music, voice performances, visual art, and literature that is indistinguishable from human creation — and in many dimensions superior in technical execution. The question that nearly destroyed creator economies in the 2040s was: <em>why pay a human when the machine is free?</em></p>
+      <p>The answer, proven by three decades of the Plowman Standard, is that the question itself is malformed. The value of human creative work was never about technical execution. It was about <strong>provenance, identity, consent, and the irreducible meaning of a human choosing to create</strong>. The consent credential doesn't just protect against theft — it certifies that a human being invested their identity in this work. That certification carries economic, cultural, and spiritual value that no machine can replicate.</p>
+    </div>
+
+    <div class="shield">
+      <h3>Technical Shield: The Provenance Layer</h3>
+      <p>Computing in 2060 runs on a three-layer stack: compute, network, and <strong>provenance</strong>. The provenance layer — the direct descendant of NOIZY's C2PA implementation and consent kernel — is as fundamental as TCP/IP. Every piece of digital content carries an immutable, cryptographically verified chain of custody from creation to consumption. Not optional. Not an add-on. Infrastructure.</p>
+      <p>The Voice DNA vault concept has expanded to encompass all biometric identity: voice, face, gait, neural signature. Every human has a sovereign identity profile, hardware-protected, revocable at will, and legally enforceable in every jurisdiction on Earth and in orbital habitats.</p>
+      <div class="mechanism">PROVENANCE STACK: Hardware identity chip → Biometric profile (voice + face + neural) → Federated consent registry → Real-time verification at compute layer → Universal enforcement</div>
+      <span class="status status-theoretical">THEORETICAL — ARCHITECTURALLY NECESSARY</span>
+    </div>
+
+    <div class="shield">
+      <h3>Financial Shield: Universal Creator Income</h3>
+      <p>The Creator Sovereign Wealth Fund, now managing $50B+ in assets across the federated guild network, provides a <strong>Universal Creator Income</strong> — a baseline payment to every registered creator regardless of commercial success. Funded by the 5% allocation from NOIZY's share of all synthesis revenues globally. This is not charity. It is recognition that the training data for every AI system was built on human creativity, and that debt must be repaid in perpetuity.</p>
+      <span class="status status-theoretical">THEORETICAL — ECONOMICALLY VIABLE</span>
+    </div>
+  </div>
+
+  <!-- ERA 5: 2076 — THE CATHEDRAL -->
+  <div id="era-2076" class="era">
+    <div class="era-header">
+      <h2>2076 &mdash; The Cathedral Complete</h2>
+      <div class="era-desc">Fifty years from now. Art is indestructible. The human is sovereign.</div>
+    </div>
+
+    <div class="principle">
+      <blockquote>"We didn't build a product. We built a cathedral. And like all cathedrals, its builders knew they wouldn't live to see it finished. They built it anyway."</blockquote>
+      <div class="attribution">&mdash; Projected Plowman Standard, 2076 edition</div>
+    </div>
+
+    <div class="shield">
+      <h3>The Seven Shields in 2076</h3>
+      <p>Every shield that Robert Stephen Plowman designed in 2026 still stands. Not because they were frozen in time — they evolved continuously, adapted to new technologies, new threats, new jurisdictions, new forms of creativity. They stand because their <em>principles</em> were sound from the beginning.</p>
+    </div>
+
+    <div class="shield">
+      <h3>1. Legal Shield</h3>
+      <p>Voice identity protection is a fundamental human right under international law, enforced by the ICJ and 193 national jurisdictions. Post-mortem protection: 70 years, matching copyright. Criminal penalties for voice identity theft in every country. The WIPO Treaty on AI-Generated Creative Works, now in its 40th year, is the most widely ratified IP treaty in history.</p>
+      <span class="status status-theoretical">2076 — CONSTITUTIONAL</span>
+    </div>
+
+    <div class="shield">
+      <h3>2. Technical Shield</h3>
+      <p>Consent verification is hardware-native on every computing device. Post-quantum cryptography (third generation) protects all identity records. Real-time ambient detection covers all public and licensed audio streams globally. Zero unauthorized synthesis is technically possible — and achieved at 99.97% prevention rate. The remaining 0.03% is detected and enforced within 4 hours.</p>
+      <span class="status status-theoretical">2076 — INFRASTRUCTURE</span>
+    </div>
+
+    <div class="shield">
+      <h3>3. Organizational Shield</h3>
+      <p>The Federated Guild Network spans 12 million creators across 140 countries. Governance is fully democratic: one creator, one vote. The Global Creator Parliament meets annually. Constitutional protections — the Never Clauses — have never been violated. The guild has survived three attempted hostile acquisitions, two global economic crises, and the transition to post-scarcity economics. It endures because its structure was designed to survive organizational failure from the beginning.</p>
+      <span class="status status-theoretical">2076 — ENDURING</span>
+    </div>
+
+    <div class="shield">
+      <h3>4. Financial Shield</h3>
+      <p>The 75/25 split remains constitutional law. The Creator Sovereign Wealth Fund manages $200B+ in assets. Universal Creator Income provides $2,400/month baseline to every registered creator. T+3 automatic payout has been shortened to T+0 (instant settlement via quantum-secured payment rails). No creator in the guild network lives below the poverty line.</p>
+      <span class="status status-theoretical">2076 — SOVEREIGN</span>
+    </div>
+
+    <div class="shield">
+      <h3>5. Cultural Shield</h3>
+      <p>The extraction narrative is a historical curiosity, studied in universities the way we study child labor today. Human-consented AI art carries a provenance credential that consumers value — art with a human story behind it commands premium prices. The museum metaphor is literal: major institutions curate AI-human collaborative art as the defining creative movement of the century.</p>
+      <span class="status status-theoretical">2076 — CULTURE</span>
+    </div>
+
+    <div class="shield">
+      <h3>6. Relational Shield</h3>
+      <p>SAG-AFTRA, AFM, and 200+ national performer unions are permanent institutional members of the guild network. Every major creative institution — Berklee, Julliard, Royal College of Music, Tokyo University of the Arts — offers curriculum built on the Plowman Standard. The educational pipeline produces creators who understand their rights from age 12.</p>
+      <span class="status status-theoretical">2076 — SOLIDARITY</span>
+    </div>
+
+    <div class="shield">
+      <h3>7. Educational Shield</h3>
+      <p>The mandatory 75-minute onboarding flow designed in 2026 has evolved into a globally standardized <strong>Creator Sovereignty Curriculum</strong>, taught in every country. Children learn about voice identity, consent, and creative rights alongside reading and mathematics. The "Know Your Voice" campaign, launched April 2026, reached 4 billion people by 2076. Ignorance of voice rights is as rare as ignorance of basic literacy.</p>
+      <span class="status status-theoretical">2076 — UNIVERSAL</span>
+    </div>
+
+    <div class="principle">
+      <blockquote>"The cathedral was never about the technology. It was about the principle that no machine should own a human voice. We built the technology to enforce that principle. Fifty years later, the principle stands. The technology served its purpose."</blockquote>
+      <div class="attribution">&mdash; The Plowman Standard, 2076</div>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div id="era-summary" class="era">
+    <div class="era-header">
+      <h2>The Full Arc &mdash; 2026 to 2076</h2>
+      <div class="era-desc">How seven shields become unbreakable over fifty years.</div>
+    </div>
+
+    <table class="summary-table">
+      <thead>
+        <tr>
+          <th>Shield</th>
+          <th>2026</th>
+          <th>2035</th>
+          <th>2045</th>
+          <th>2076</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="color:var(--gold)">Legal</td>
+          <td>Fragmented statutes (ELVIS, BIPA, EU AI Act)</td>
+          <td>WIPO binding treaty</td>
+          <td>UN Declaration on Human Identity</td>
+          <td>Fundamental right, ICJ-enforced</td>
+        </tr>
+        <tr>
+          <td style="color:var(--gold)">Technical</td>
+          <td>C2PA + 3-layer watermark + Covenant Validator</td>
+          <td>Quantum-native consent, ambient detection</td>
+          <td>Hardware consent kernel, birth registration</td>
+          <td>Infrastructure-level, 99.97% prevention</td>
+        </tr>
+        <tr>
+          <td style="color:var(--gold)">Organizational</td>
+          <td>Guild Assembly (100 founders)</td>
+          <td>Federated regional guilds (500K)</td>
+          <td>Global Creator Parliament</td>
+          <td>12M creators, 140 countries, Never Clauses intact</td>
+        </tr>
+        <tr>
+          <td style="color:var(--gold)">Financial</td>
+          <td>75/25 split, T+3 payout</td>
+          <td>Creator Sovereign Wealth Fund</td>
+          <td>Universal Creator Income</td>
+          <td>$200B fund, T+0 payout, zero poverty</td>
+        </tr>
+        <tr>
+          <td style="color:var(--gold)">Cultural</td>
+          <td>"Museum, not wallpaper"</td>
+          <td>Extraction model collapses</td>
+          <td>Consent credential = quality signal</td>
+          <td>Human-AI art is the century's defining movement</td>
+        </tr>
+        <tr>
+          <td style="color:var(--gold)">Relational</td>
+          <td>SAG-AFTRA + AFM partnerships</td>
+          <td>30+ national union memberships</td>
+          <td>200+ unions, institutional curriculum</td>
+          <td>Global solidarity network, permanent</td>
+        </tr>
+        <tr>
+          <td style="color:var(--gold)">Educational</td>
+          <td>75-min onboarding, "Know Your Voice"</td>
+          <td>University curriculum licensing</td>
+          <td>K-12 global integration</td>
+          <td>Universal literacy in voice rights</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="principle">
+      <blockquote>"Peace, love, and understanding are not slogans — they are design goals. This architecture proves it."</blockquote>
+      <div class="attribution">&mdash; Robert Stephen Plowman</div>
+    </div>
+
+    <div class="shield">
+      <h3>The North Star, Unchanged</h3>
+      <p>Everything in this document traces back to a single principle articulated on April 5, 2026: <strong>Art becomes indestructible. Not through lawyers. Through code, architecture, through making the creator the permanent owner of their own humanity.</strong></p>
+      <p>The seven directories — Gemma de Kupol Hunter, ENGR, Metabeast, DreamChamber, Consensus Code Protocol, Voice Estate, HBS — were the first bricks. The Plowman Standard was the blueprint. Fifty years later, the cathedral stands because the foundation was true.</p>
+      <p>This is not a feature built onto a platform. This is the operating system for human creativity in a post-scarcity, post-trust world.</p>
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    <div class="sig">THE PLOWMAN STANDARD</div>
+    <p>Document authored April 5, 2026 by Robert Stephen Plowman</p>
+    <p>Architecture: NOIZY / HEAVEN17 / Universal Protector Strategy</p>
+    <p style="margin-top:12px; color:var(--gold-dim);">This is a living document. Every brick laid today shapes the cathedral of 2076.</p>
+  </div>
+</div>
+
+<script>
+function showEra(id) {
+  document.querySelectorAll('.era').forEach(e => e.classList.remove('visible'));
+  document.querySelectorAll('.timeline-nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('visible');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

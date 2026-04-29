@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DreamChamber Fix Map — The Galaxy Blueprint</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,900&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Bebas+Neue&display=swap');
+
+  :root {
+    --void:   #000000;
+    --deep:   #030108;
+    --panel:  #060212;
+    --card:   #09031a;
+    --border: #120828;
+
+    /* Zone colors */
+    --zone-a: #00e87a;   /* Creator Fortification — green */
+    --zone-b: #b794f4;   /* Algorithm Alignment — violet */
+    --zone-c: #67e8f9;   /* Transparency & Audit — cyan */
+    --zone-d: #f687b3;   /* Community & Co-Creation — rose */
+    --zone-e: #f6a63c;   /* Education & Advocacy — amber */
+    --core:   #e8c84a;   /* Core — gold */
+    --red:    #ff2244;
+
+    --text:   #a8bcd4;
+    --dim:    #2e3f52;
+    --bright: #dceeff;
+    --mono:   'Space Mono', monospace;
+    --sans:   'Space Grotesk', sans-serif;
+    --serif:  'Playfair Display', Georgia, serif;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width:100%; height:100%; overflow:hidden; background:var(--void); }
+
+  /* ─── GALAXY CANVAS ─── */
+  #galaxy { position:absolute; inset:0; z-index:0; }
+
+  /* ─── ZONE PANEL (right side) ─── */
+  .zone-panel {
+    position:absolute;
+    right:0; top:0; bottom:0;
+    width:340px;
+    background:rgba(0,0,0,0.88);
+    border-left:1px solid var(--border);
+    z-index:100;
+    display:flex; flex-direction:column;
+    overflow:hidden;
+    backdrop-filter:blur(12px);
+  }
+
+  .zp-header {
+    padding:20px 22px 16px;
+    border-bottom:1px solid var(--border);
+    flex-shrink:0;
+  }
+
+  .zp-eyebrow {
+    font-family:var(--mono); font-size:8px; color:var(--dim);
+    letter-spacing:0.3em; text-transform:uppercase; margin-bottom:6px;
+  }
+
+  .zp-title {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:22px; color:var(--bright); letter-spacing:0.1em;
+  }
+
+  .zp-title .y { color:var(--core); }
+
+  .zp-sub {
+    font-family:var(--mono); font-size:8px; color:var(--dim);
+    letter-spacing:0.1em; margin-top:4px;
+  }
+
+  /* Zone tabs */
+  .zone-tabs {
+    display:flex; flex-wrap:wrap; gap:4px;
+    padding:12px 14px; border-bottom:1px solid var(--border);
+    flex-shrink:0;
+  }
+
+  .zone-tab {
+    font-family:var(--mono); font-size:8px; letter-spacing:0.1em;
+    padding:5px 10px; border-radius:3px; border:1px solid;
+    cursor:pointer; transition:all 0.15s; background:transparent;
+    text-transform:uppercase;
+  }
+
+  .zt-a { color:var(--zone-a); border-color:rgba(0,232,122,0.25); }
+  .zt-b { color:var(--zone-b); border-color:rgba(183,148,244,0.25); }
+  .zt-c { color:var(--zone-c); border-color:rgba(103,232,249,0.25); }
+  .zt-d { color:var(--zone-d); border-color:rgba(246,135,179,0.25); }
+  .zt-e { color:var(--zone-e); border-color:rgba(246,166,60,0.25); }
+  .zt-all{ color:var(--core);  border-color:rgba(232,200,74,0.25); }
+
+  .zone-tab.active { opacity:1; }
+  .zone-tab:not(.active) { opacity:0.4; }
+  .zt-a.active  { background:rgba(0,232,122,0.1); }
+  .zt-b.active  { background:rgba(183,148,244,0.1); }
+  .zt-c.active  { background:rgba(103,232,249,0.1); }
+  .zt-d.active  { background:rgba(246,135,179,0.1); }
+  .zt-e.active  { background:rgba(246,166,60,0.1); }
+  .zt-all.active{ background:rgba(232,200,74,0.1); }
+
+  /* Zone content */
+  .zone-content { flex:1; overflow-y:auto; padding:16px 22px 80px; }
+
+  .zone-detail { display:none; }
+  .zone-detail.visible { display:block; animation:fade-in 0.25s ease; }
+
+  @keyframes fade-in { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
+
+  .zd-name {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:18px; letter-spacing:0.1em; margin-bottom:4px;
+  }
+
+  .zd-tagline {
+    font-family:var(--serif); font-style:italic;
+    font-size:12px; color:var(--text); line-height:1.6; margin-bottom:16px;
+  }
+
+  .zd-section { margin-bottom:16px; }
+  .zd-section-label {
+    font-family:var(--mono); font-size:8px; color:var(--dim);
+    letter-spacing:0.25em; text-transform:uppercase; margin-bottom:8px;
+    border-bottom:1px solid var(--border); padding-bottom:4px;
+  }
+
+  .zd-items { list-style:none; }
+  .zd-items li {
+    font-family:var(--sans); font-size:12px; color:var(--text);
+    line-height:1.55; padding:5px 0 5px 16px; position:relative;
+    border-bottom:1px solid rgba(255,255,255,0.03);
+  }
+  .zd-items li::before { content:'→'; position:absolute; left:0; color:var(--dim); font-size:10px; }
+  .zd-items li strong { color:var(--bright); }
+  .zd-items li .nc { font-family:var(--mono); font-size:9px; color:var(--violet); }
+  .zd-items li .g  { color:var(--zone-a); font-weight:600; }
+
+  .crack-table { width:100%; border-collapse:collapse; font-size:11px; }
+  .crack-table th {
+    font-family:var(--mono); font-size:7px; letter-spacing:0.2em; color:var(--dim);
+    padding:6px 8px; border-bottom:1px solid var(--border); text-align:left;
+    text-transform:uppercase;
+  }
+  .crack-table td {
+    font-family:var(--sans); font-size:11px; padding:7px 8px;
+    border-bottom:1px solid rgba(255,255,255,0.03); vertical-align:top;
+    line-height:1.4;
+  }
+  .crack-r { color:#ff8899; }
+  .crack-g { color:#80ffbb; }
+  .crack-go{ color:var(--core); }
+
+  /* ─── TOP BAR ─── */
+  .top-bar {
+    position:absolute; top:0; left:0; right:340px;
+    height:48px; z-index:100;
+    background:rgba(0,0,0,0.7);
+    border-bottom:1px solid var(--border);
+    display:flex; align-items:center; padding:0 28px;
+    justify-content:space-between;
+    backdrop-filter:blur(8px);
+  }
+
+  .tb-title {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:16px; color:var(--bright); letter-spacing:0.15em;
+  }
+
+  .tb-meta {
+    font-family:var(--mono); font-size:8px; color:var(--dim);
+    letter-spacing:0.15em; display:flex; gap:20px;
+  }
+
+  .tb-live {
+    color:var(--zone-a);
+    display:flex; align-items:center; gap:6px;
+  }
+
+  .live-dot {
+    width:6px; height:6px; border-radius:50%;
+    background:var(--zone-a); display:inline-block;
+    animation:pulse 2s infinite;
+    box-shadow:0 0 6px var(--zone-a);
+  }
+
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  /* ─── BOTTOM BAR ─── */
+  .bottom-bar {
+    position:absolute; bottom:0; left:0; right:340px;
+    z-index:100;
+    background:rgba(0,0,0,0.7);
+    border-top:1px solid var(--border);
+    padding:10px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+    backdrop-filter:blur(8px);
+  }
+
+  .bb-grf {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:20px; color:var(--zone-a); letter-spacing:0.2em;
+    text-shadow:0 0 20px rgba(0,232,122,0.3);
+  }
+
+  .bb-right {
+    font-family:var(--mono); font-size:8px; color:var(--dim);
+    letter-spacing:0.12em; text-align:right; line-height:1.8;
+  }
+
+  /* ─── HOVER TOOLTIP ─── */
+  .tooltip {
+    position:absolute; z-index:200; pointer-events:none;
+    background:rgba(0,0,0,0.9); border:1px solid var(--border);
+    border-radius:4px; padding:10px 14px; max-width:220px;
+    display:none; backdrop-filter:blur(8px);
+  }
+
+  .tt-name {
+    font-family:'Bebas Neue',sans-serif; font-size:13px;
+    letter-spacing:0.1em; margin-bottom:4px;
+  }
+
+  .tt-desc {
+    font-family:var(--sans); font-size:10px; color:var(--text); line-height:1.5;
+  }
+
+  /* scroll */
+  ::-webkit-scrollbar { width:3px; }
+  ::-webkit-scrollbar-track { background:var(--void); }
+  ::-webkit-scrollbar-thumb { background:var(--border); }
+
+  @media (max-width:900px) {
+    .zone-panel { width:100%; height:45vh; top:auto; left:0; right:0; border-left:none; border-top:1px solid var(--border); }
+    .top-bar, .bottom-bar { right:0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- GALAXY CANVAS -->
+<canvas id="galaxy"></canvas>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="tb-title">DREAMCHAMBER FIX MAP — THE GALAXY</div>
+  <div class="tb-meta">
+    <span class="tb-live"><span class="live-dot"></span>SYSTEM LIVE</span>
+    <span>NOIZYFISH INC. · GABRIEL_V3</span>
+    <span>5 ZONES · 7 INVERSIONS · 10 NEVER CLAUSES</span>
+  </div>
+</div>
+
+<!-- BOTTOM BAR -->
+<div class="bottom-bar">
+  <div class="bb-grf">GORUNFREE</div>
+  <div class="bb-right">
+    RSP_001 · ROBERT STEPHEN PLOWMAN · OTTAWA · MARCH 2026<br>
+    DOCUMENT 21 · THE PLOWMAN'S CHRONICLES · DREAMCHAMBER VAULT
+  </div>
+</div>
+
+<!-- TOOLTIP -->
+<div class="tooltip" id="tooltip">
+  <div class="tt-name" id="tt-name"></div>
+  <div class="tt-desc" id="tt-desc"></div>
+</div>
+
+<!-- ZONE PANEL -->
+<div class="zone-panel">
+  <div class="zp-header">
+    <div class="zp-eyebrow">NOIZYFISH INC. · DREAMCHAMBER</div>
+    <div class="zp-title">FIX <span class="y">MAP</span></div>
+    <div class="zp-sub">CLICK A ZONE OR SELECT BELOW</div>
+  </div>
+
+  <div class="zone-tabs">
+    <button class="zone-tab zt-all active" data-zone="all">ALL ZONES</button>
+    <button class="zone-tab zt-a" data-zone="A">A · FORTIFY</button>
+    <button class="zone-tab zt-b" data-zone="B">B · ALIGN</button>
+    <button class="zone-tab zt-c" data-zone="C">C · AUDIT</button>
+    <button class="zone-tab zt-d" data-zone="D">D · COMMUNITY</button>
+    <button class="zone-tab zt-e" data-zone="E">E · ADVOCATE</button>
+  </div>
+
+  <div class="zone-content">
+
+    <!-- ALL -->
+    <div class="zone-detail visible" id="detail-all">
+      <div class="zd-name" style="color:var(--core)">THE COMPLETE FIX MAP</div>
+      <div class="zd-tagline">
+        Five zones. Seven structural inversions. Ten Never Clauses. One mission:
+        make extraction architecturally impossible and human creativity structurally protected.
+      </div>
+
+      <div class="zd-section">
+        <div class="zd-section-label">The Five Zones</div>
+        <ul class="zd-items">
+          <li><strong style="color:var(--zone-a)">A · Creator Fortification</strong> — Core sphere. Consent-as-Code, Voice Estate, NOIZY PROOF. The protected heart.</li>
+          <li><strong style="color:var(--zone-b)">B · Algorithm Alignment</strong> — First ring. Rewires AI incentives from virality → craft. Humanity-weighted scoring.</li>
+          <li><strong style="color:var(--zone-c)">C · Transparency &amp; Audit</strong> — Second ring. Provenance dashboards, real-time royalty tracking, full auditability.</li>
+          <li><strong style="color:var(--zone-d)">D · Community &amp; Co-Creation</strong> — Outer halo. Mentorship, collaboration, RSP relationships, human connection.</li>
+          <li><strong style="color:var(--zone-e)">E · Education &amp; Advocacy</strong> — Outermost ring. Culture shift. Ethical AI principles. Expose bad actors.</li>
+        </ul>
+      </div>
+
+      <div class="zd-section">
+        <div class="zd-section-label">The Crack Table</div>
+        <table class="crack-table">
+          <thead><tr><th>CRACK</th><th>FIX</th><th>RESULT</th></tr></thead>
+          <tbody>
+            <tr><td class="crack-r">Algorithm favors cheap content</td><td class="crack-go">Humanity-weighted scoring</td><td class="crack-g">Race-to-bottom eliminated</td></tr>
+            <tr><td class="crack-r">IP theft &amp; AI remixing</td><td class="crack-go">Consent-as-Code + Voice Estate</td><td class="crack-g">Ownership enforced automatically</td></tr>
+            <tr><td class="crack-r">Invisible revenue</td><td class="crack-go">Transparent dashboards + 75% floor</td><td class="crack-g">Artists paid instantly &amp; fairly</td></tr>
+            <tr><td class="crack-r">Isolation &amp; churn</td><td class="crack-go">Co-Creation + Mentorship</td><td class="crack-g">Community &amp; collaboration thrive</td></tr>
+            <tr><td class="crack-r">Lack of ethics</td><td class="crack-go">Never Clauses + Education</td><td class="crack-g">Moral framework restored</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="zd-section">
+        <div class="zd-section-label">Core Principle</div>
+        <div style="font-family:var(--serif);font-style:italic;font-size:13px;color:var(--bright);line-height:1.7;padding:12px;border-left:2px solid var(--core)">
+          "The system eats creators because it's designed to ignore humanity.
+          Every crack is also a lever. Where others see impossible —
+          we see infrastructure."
+        </div>
+      </div>
+    </div>
+
+    <!-- ZONE A -->
+    <div class="zone-detail" id="detail-A">
+      <div class="zd-name" style="color:var(--zone-a)">ZONE A · CREATOR FORTIFICATION</div>
+      <div class="zd-tagline">
+        The protected core sphere. Every creator enters this zone and leaves sovereign —
+        voice, identity, legacy, and economics locked and protected by architecture.
+      </div>
+      <div class="zd-section">
+        <div class="zd-section-label">Tools &amp; Actions</div>
+        <ul class="zd-items">
+          <li><strong>Consent-as-Code:</strong> Cryptographic consent key per utterance. <span class="nc">NC_01</span>. No key = no synthesis. Ever.</li>
+          <li><strong>Voice Estate:</strong> Perpetual, inheritable, inviolable. <span class="nc">NC_09</span> blocks dissolution. 500-Year Codex.</li>
+          <li><strong>NOIZY PROOF Watermark:</strong> WM_{8hex} SHA-256 embedded in every audio file. Provenance is mathematically verifiable.</li>
+          <li><strong>75% Royalty Floor:</strong> <span class="g">Hardcoded at D1 layer.</span> Not in the ToS — in the database. <span class="nc">NC_02</span>.</li>
+          <li><strong>No Training Without Consent:</strong> Separate written consent required for model training. <span class="nc">NC_03</span>.</li>
+          <li><strong>Identity Protection:</strong> NC_04 blocks impersonation. Watermark verifies authenticity. No deepfakes pass.</li>
+        </ul>
+      </div>
+      <div class="zd-section">
+        <div class="zd-section-label">Effect</div>
+        <div style="font-family:var(--sans);font-size:12px;color:var(--text);line-height:1.65;padding:10px;background:rgba(0,232,122,0.04);border-radius:4px;border:1px solid rgba(0,232,122,0.1)">
+          Artists own their legacy even as AI interacts with their work.
+          Their voice is a constitutional fact — not a platform permission.
+          Their economics survive ToS changes. Their estate survives them.
+        </div>
+      </div>
+      <div class="zd-section">
+        <div class="zd-section-label">NOIZY Architecture Mapped</div>
+        <ul class="zd-items">
+          <li>ConsentService.ts · Stage 1 (consent validation)</li>
+          <li>never-clauses/core.ts · never-clauses/enforce.ts</li>
+          <li>watermark.ts · generateWatermark() · verifyWatermark()</li>
+          <li>royaltyEngine.ts · D1 CHECK(royalty_pct >= 75)</li>
+          <li>Actor.ts · VoiceEstate · 500YearCodex entry</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ZONE B -->
+    <div class="zone-detail" id="detail-B">
+      <div class="zd-name" style="color:var(--zone-b)">ZONE B · ALGORITHM ALIGNMENT</div>
+      <div class="zd-tagline">
+        The first orbital ring. Every AI activity passes through here.
+        Reorients the incentive structure from virality predator to humanity enhancer.
+      </div>
+      <div class="zd-section">
+        <div class="zd-section-label">The Problem It Fixes</div>
+        <ul class="zd-items">
+          <li class="crack-r">Platforms reward virality over craft — 30-second clip beats a masterwork</li>
+          <li class="crack-r">AI trains on scraped content — musician's signature style cloned without pay</li>
+          <li class="crack-r">Race to the bottom: quantity over quality because that's what the algorithm rewards</li>
+          <li class="crack-r">AI models improve on the creator's work while the creator earns nothing</li>
+        </ul>
+      </div>
+      <div class="zd-section">
+        <div class="zd-section-label">The Fix</div>
+        <ul class="zd-items">
+          <li><strong>Humanity-Weighted Scoring:</strong> Time spent, intention, creative complexity — all signal quality over virality.</li>
+          <li><strong>Ethical Enforcement at Protocol Layer:</strong> Every pipeline interaction enforced at infrastructure, not legal contract.</li>
+          <li><strong>A.I.V.A. as Bandmate:</strong> AI synthesizes in collaboration with consent, not in competition with the creator.</li>
+          <li><strong>7-Stage Pipeline:</strong> Stages 1–2 ensure every generation is consent-checked and Never Clause-validated before any synthesis occurs.</li>
+        </ul>
+      </div>
+      <div class="zd-section">
+        <div class="zd-section-label">Effect</div>
+        <div style="font-family:var(--sans);font-size:12px;color:var(--text);line-height:1.65;padding:10px;background:rgba(183,148,244,0.04);border-radius:4px;border:1px solid rgba(183,148,244,0.1)">
+          The race to the bottom becomes irrelevant. Craft rises naturally because
+          the architecture rewards provenance, consent, and depth — not algorithmic churn.
+        </div>
+      </div>
+    </div>
+
+    <!-- ZONE C -->
+    <div class="zone-detail" id="detail-C">
+      <div class="zd-name" style="color:var(--zone-c)">ZONE C · TRANSPARENCY &amp; AUDIT</div>
+      <div class="zd-tagline">
+        The second orbital ring. Full provenance. Real-time royalties. Complete auditability.
+        No black boxes. Every creator can see exactly where their work went and what it earned.
+      </div>
+      <div class="zd-section">
+        <div class="zd-section-label">The Problem It Fixes</div>
+        <ul class="zd-items">
+          <li class="crack-r">Opaque monetization — micro-payments, streaming fractions, no traceable income</li>
+          <li class="crack-r">AI consumes work invisibly — creators can't audit provenance</li>
+          <li class="crack-r">Revenue and usage are black boxes — platform controls the ledger</li>
+          <li class="crack-r">Art becomes disposable commodity — no traceable origin or legacy</li>
+        </ul>
+      </div>
+      <div class="zd-section">
+        <div class="zd-section-label">The Fix</div>
+        <ul class="zd-items">
+          <li><strong>Provenance Dashboard:</strong> Who used your voice, where, when, and for what reward — visible in real time.</li>
+          <li><strong>provenance.jsonl Ledger:</strong> Append-only, permanent record. <span class="nc">NC_10</span>: no deletion ever.</li>
+          <li><strong>WM_{8hex} Watermark:</strong> Every audio file carries cryptographic proof of origin, authorship, and consent.</li>
+          <li><strong>Automated Royalty Tracking:</strong> 75% floor enforced at both code and database layer. Real-time. Immutable.</li>
+          <li><strong>ProvenanceRecord Interface:</strong> Every record: utteranceId, actorId, avaId, consentKeyId, watermark, timestamp, royaltyPct.</li>
+        </ul>
+      </div>
+      <div class="zd-section">
+        <div class="zd-section-label">Effect</div>
+        <div style="font-family:var(--sans);font-size:12px;color:var(--text);line-height:1.65;padding:10px;background:rgba(103,232,249,0.04);border-radius:4px;border:1px solid rgba(103,232,249,0.1)">
+          Artists can see, verify, and monetize every interaction with their work.
+          The ledger is permanent. The watermark is mathematical. The royalty is guaranteed.
+        </div>
+      </div>
+    </div>
+
+    <!-- ZONE D -->
+    <div class="zone-detail" id="detail-D">
+      <div class="zd-name" style="color:var(--zone-d)">ZONE D · COMMUNITY &amp; CO-CREATION</div>
+      <div class="zd-tagline">
+        The outer halo. Rebuild human connection at the core of creation.
+        RSPs are not users — they are co-founders of the 5th Epoch.
+      </div>
+      <div class="zd-section">
+        <div class="zd-section-label">The Problem It Fixes</div>
+        <ul class="zd-items">
+          <li class="crack-r">Artists become isolated inputs — replaceable, scalable, interchangeable</li>
+          <li class="crack-r">Community and collaboration take a back seat to algorithmic solo churn</li>
+          <li class="crack-r">Artists compete for attention, not respect — lowering their own creative bar</li>
+          <li class="crack-r">Human disconnection — process and intent are invisible</li>
+        </ul>
+      </div>
+      <div class="zd-section">
+        <div class="zd-section-label">The Fix</div>
+        <ul class="zd-items">
+          <li><strong>RSP Program:</strong> Registered Sound Professionals — stakeholders, not users. Founding RSPs: FREE forever, 85% royalty.</li>
+          <li><strong>SHIRL Agent:</strong> Community intelligence — warm onboarding, no sales pressure. Human-first guidance.</li>
+          <li><strong>Mentorship &amp; Co-Creation Rewards:</strong> Platform incentivizes collaboration, skill-sharing, co-created works.</li>
+          <li><strong>NOIZY Music World &amp; Museum:</strong> Living, breathing time capsule — 6 rooms where creators bathe in art, music, and sound.</li>
+          <li><strong>NOIZYKIDZ Wing:</strong> Safe, creative, no data harvesting. Community starts early. Forever.</li>
+        </ul>
+      </div>
+      <div class="zd-section">
+        <div class="zd-section-label">Effect</div>
+        <div style="font-family:var(--sans);font-size:12px;color:var(--text);line-height:1.65;padding:10px;background:rgba(246,135,179,0.04);border-radius:4px;border:1px solid rgba(246,135,179,0.1)">
+          Artists feel valued, visible, and interconnected. RSPs feel constituted —
+          because they are. The community is a coalition of 500-year stakeholders.
+        </div>
+      </div>
+    </div>
+
+    <!-- ZONE E -->
+    <div class="zone-detail" id="detail-E">
+      <div class="zd-name" style="color:var(--zone-e)">ZONE E · EDUCATION &amp; ADVOCACY</div>
+      <div class="zd-tagline">
+        The outermost ring. Culture shift. Ethical AI principles taught and modeled.
+        Bad actors exposed. The moral compass guides technology — not the other way around.
+      </div>
+      <div class="zd-section">
+        <div class="zd-section-label">The Problem It Fixes</div>
+        <ul class="zd-items">
+          <li class="crack-r">Creators don't know what they're signing when they agree to ToS</li>
+          <li class="crack-r">Cheap, exploitative platforms are normalized — they're "just how it works"</li>
+          <li class="crack-r">AI ethics is abstract — creators can't see it working</li>
+          <li class="crack-r">The 5th Epoch needs a public face and a vocabulary</li>
+        </ul>
+      </div>
+      <div class="zd-section">
+        <div class="zd-section-label">The Fix</div>
+        <ul class="zd-items">
+          <li><strong>Creator Bill of Rights for AI:</strong> 5 principles mapped to Never Clauses. In plain language. Freely shareable.</li>
+          <li><strong>The Mic-Drop Arsenal:</strong> Talking points, one-liners, conversation scripts for any room. Ready to deploy.</li>
+          <li><strong>The 5 Epochs Framework:</strong> Teach where we are and why it matters. Epoch V = Consent Infrastructure Era.</li>
+          <li><strong>NAVA + VO Atlanta Outreach:</strong> The manifesto reaches voice actors first — they already know the stakes.</li>
+          <li><strong>Visible Proof of Ethics:</strong> Payments, permissions, provenance — shown in real time. Not promised. Demonstrated.</li>
+        </ul>
+      </div>
+      <div class="zd-section">
+        <div class="zd-section-label">Effect</div>
+        <div style="font-family:var(--sans);font-size:12px;color:var(--text);line-height:1.65;padding:10px;background:rgba(246,166,60,0.04);border-radius:4px;border:1px solid rgba(246,166,60,0.1)">
+          Humanity's moral compass guides technology. Creators become advocates.
+          Platforms compete on ethics. The movement has language, proof, and momentum.
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end zone-content -->
+</div><!-- end zone-panel -->
+
+<script>
+// ═══════════════════════════════════════════
+// GALAXY CANVAS
+// ═══════════════════════════════════════════
+const canvas = document.getElementById('galaxy');
+const ctx = canvas.getContext('2d');
+const tooltip = document.getElementById('tooltip');
+const ttName = document.getElementById('tt-name');
+const ttDesc = document.getElementById('tt-desc');
+const panelW = 340;
+
+let W, H, cx, cy;
+let activeZone = 'all';
+
+// Zone definitions
+const ZONES = [
+  {
+    id: 'A',
+    label: 'CREATOR\nFORTIFICATION',
+    sublabel: 'ZONE A',
+    color: '#00e87a',
+    radius: 0,   // core sphere
+    angle: 0,
+    desc: 'The protected core. Consent-as-Code · Voice Estate · NOIZY PROOF · 75% Royalty Floor · NC_01–NC_10',
+  },
+  {
+    id: 'B',
+    label: 'ALGORITHM\nALIGNMENT',
+    sublabel: 'ZONE B',
+    color: '#b794f4',
+    radius: 1,
+    angle: 0,
+    desc: 'First ring. AI rewired from virality predator → humanity enhancer. Humanity-weighted scoring.',
+  },
+  {
+    id: 'C',
+    label: 'TRANSPARENCY\n& AUDIT',
+    sublabel: 'ZONE C',
+    color: '#67e8f9',
+    radius: 2,
+    angle: Math.PI/6,
+    desc: 'Second ring. Provenance dashboards · WM_{8hex} watermarks · Real-time royalty ledger.',
+  },
+  {
+    id: 'D',
+    label: 'COMMUNITY\n& CO-CREATION',
+    sublabel: 'ZONE D',
+    color: '#f687b3',
+    radius: 3,
+    angle: Math.PI/3,
+    desc: 'Outer halo. RSP stakeholders · Mentorship · Museum · NOIZYKIDZ · Human connection.',
+  },
+  {
+    id: 'E',
+    label: 'EDUCATION\n& ADVOCACY',
+    sublabel: 'ZONE E',
+    color: '#f6a63c',
+    radius: 4,
+    angle: Math.PI/2,
+    desc: 'Outermost ring. Creator Bill of Rights · Mic-Drop Arsenal · Epoch V movement · NAVA outreach.',
+  },
+];
+
+// Nodes orbiting each ring
+const NODES = [];
+
+function buildNodes(){
+  NODES.length = 0;
+
+  // Core nodes (Zone A)
+  const coreItems = [
+    {label:'CONSENT KEY',  desc:'NOIZY-{ACTOR}-CONSENT-{16hex}', col:'#00e87a'},
+    {label:'NC_01–NC_10',  desc:'10 Never Clauses — Constitutional', col:'#00e87a'},
+    {label:'75% ROYALTY',  desc:'Hardcoded at D1 — immutable', col:'#00e87a'},
+    {label:'VOICE ESTATE', desc:'Perpetual · Inheritable · NC_09', col:'#00e87a'},
+    {label:'WM_{8hex}',    desc:'SHA-256 watermark — provenance proof', col:'#00e87a'},
+    {label:'RSP_001',      desc:'Robert Stephen Plowman · Entry One · 500yr Codex', col:'#e8c84a'},
+  ];
+  coreItems.forEach((n,i)=>{
+    const angle = (i/coreItems.length)*Math.PI*2;
+    NODES.push({...n, ring:0, angleBase:angle, angleCurrent:angle, orbitR:0.08, zone:'A'});
+  });
+
+  // Ring 1 — Zone B
+  const ringB = [
+    {label:'7-STAGE PIPELINE', desc:'Consent → NC Check → WAV → Watermark → Provenance → Dispatch → Ledger'},
+    {label:'A.I.V.A.',         desc:'Artificially Intelligent Voice Acting — NOT "AI voice"'},
+    {label:'LUCY AGENT',       desc:'NOIZYVOX synthesis engine — consent-first'},
+    {label:'RAG PIPELINE',     desc:'Pre + post-generation NC checks on every synthesis'},
+  ];
+  ringB.forEach((n,i)=>{
+    const angle = (i/ringB.length)*Math.PI*2;
+    NODES.push({...n, col:ZONES[1].color, ring:1, angleBase:angle, angleCurrent:angle, orbitR:0.19, zone:'B'});
+  });
+
+  // Ring 2 — Zone C
+  const ringC = [
+    {label:'PROVENANCE.JSONL', desc:'Append-only permanent ledger — NC_10: no deletion'},
+    {label:'ROYALTY ENGINE',   desc:'calculateRoyalty() · floor enforced at code + DB layer'},
+    {label:'POPS AGENT',       desc:'Engineering · Infrastructure · Pipeline integrity'},
+    {label:'D1 DATABASES',     desc:'11 databases · actors, consent, provenance, royalties'},
+    {label:'KV NAMESPACES',    desc:'20 namespaces · session cache, rate limits'},
+  ];
+  ringC.forEach((n,i)=>{
+    const angle = (i/ringC.length)*Math.PI*2 + Math.PI/8;
+    NODES.push({...n, col:ZONES[2].color, ring:2, angleBase:angle, angleCurrent:angle, orbitR:0.3, zone:'C'});
+  });
+
+  // Ring 3 — Zone D
+  const ringD = [
+    {label:'RSP PROGRAM',   desc:'Registered Sound Professionals — founding stakeholders'},
+    {label:'SHIRL AGENT',   desc:'Community · Onboarding · NAVA · VO Atlanta'},
+    {label:'MUSIC MUSEUM',  desc:'6 rooms · Living breathing time capsule · noizy.ai'},
+    {label:'NOIZYKIDZ',     desc:'Safe · Creative · No data harvesting · Ever'},
+    {label:'GABRIEL AGENT', desc:'Orchestrator · Memory · Constitutional enforcement'},
+    {label:'DREAM AGENT',   desc:'500yr Codex · Vision · Forward retrospectives'},
+  ];
+  ringD.forEach((n,i)=>{
+    const angle = (i/ringD.length)*Math.PI*2 + Math.PI/5;
+    NODES.push({...n, col:ZONES[3].color, ring:3, angleBase:angle, angleCurrent:angle, orbitR:0.41, zone:'D'});
+  });
+
+  // Ring 4 — Zone E
+  const ringE = [
+    {label:'5 EPOCHS',        desc:'Epoch I–IV: extraction. Epoch V: Consent Infrastructure.'},
+    {label:'MIC-DROP ARSENAL', desc:'"Consent isn\'t in our ToS — it\'s in our database."'},
+    {label:'CREATOR BILL',    desc:'5 rights mapped to 5 Never Clauses. Plain language.'},
+    {label:'OTTAWA 2026',     desc:'Where RSP_001 started. Where Epoch V began.'},
+    {label:'GENEVA 2041',     desc:'Geneva Creative Rights Accord — 73 nations. The long arc.'},
+    {label:'2526 MUSEUM',     desc:'Still breathing. RSP_001\'s voice heard by 4.8B people.'},
+    {label:'GORUNFREE',       desc:'35% voice / 65% AI / 1-click / zero friction. RSP_001 origin.'},
+  ];
+  ringE.forEach((n,i)=>{
+    const angle = (i/ringE.length)*Math.PI*2 + Math.PI/7;
+    NODES.push({...n, col:ZONES[4].color, ring:4, angleBase:angle, angleCurrent:angle, orbitR:0.52, zone:'E'});
+  });
+
+  // Star field
+  NODES.stars = [];
+  for(let i=0;i<300;i++){
+    NODES.stars.push({
+      x: Math.random(), y: Math.random(),
+      r: Math.random()*1.2,
+      alpha: Math.random()*0.4+0.05,
+      twinkle: Math.random()*Math.PI*2,
+    });
+  }
+}
+
+function resize(){
+  W = canvas.width = window.innerWidth - panelW;
+  H = canvas.height = window.innerHeight;
+  cx = W/2; cy = H/2;
+  buildNodes();
+}
+
+// Ring radii in pixels
+function ringPx(ring){
+  const minDim = Math.min(W,H);
+  const scales = [0, 0.19, 0.30, 0.41, 0.52];
+  return scales[ring] * minDim;
+}
+
+let t = 0;
+let hoveredNode = null;
+let mouseX = 0, mouseY = 0;
+
+// Draw
+function draw(){
+  t += 0.004;
+  ctx.clearRect(0,0,W,H);
+
+  // Star field
+  if(NODES.stars){
+    NODES.stars.forEach(s=>{
+      const tw = Math.sin(t*0.8 + s.twinkle);
+      ctx.globalAlpha = s.alpha*(0.6+0.4*tw);
+      ctx.fillStyle='#ffffff';
+      ctx.beginPath();
+      ctx.arc(s.x*W, s.y*H, s.r, 0, Math.PI*2);
+      ctx.fill();
+    });
+    ctx.globalAlpha=1;
+  }
+
+  // Orbital rings
+  ZONES.slice(1).forEach((z,i)=>{
+    const r = ringPx(i+1);
+    const isActive = activeZone==='all' || activeZone===z.id;
+    const alpha = isActive ? 0.12 : 0.03;
+    ctx.strokeStyle = z.color.replace(')',`,${alpha})`).replace('rgb','rgba').replace('#','rgba(') ;
+    // simpler:
+    const col = hexToRgb(z.color);
+    ctx.strokeStyle = `rgba(${col},${alpha})`;
+    ctx.lineWidth = isActive ? 1.5 : 0.5;
+    ctx.setLineDash([4,8]);
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI*2);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  });
+
+  // Extraction vortex (background — red spiral fading inward)
+  for(let i=0;i<3;i++){
+    const spiralAngle = t*0.3 + i*Math.PI*0.66;
+    const r = ringPx(4)*0.8;
+    ctx.strokeStyle = `rgba(255,34,68,0.04)`;
+    ctx.lineWidth=1;
+    ctx.beginPath();
+    for(let a=0;a<Math.PI*2;a+=0.05){
+      const rr = r*(0.2+0.8*(a/(Math.PI*2)));
+      const px = cx + Math.cos(a+spiralAngle)*rr;
+      const py = cy + Math.sin(a+spiralAngle)*rr;
+      a===0 ? ctx.moveTo(px,py) : ctx.lineTo(px,py);
+    }
+    ctx.stroke();
+  }
+
+  // Connection lines from core to nodes
+  NODES.forEach(node=>{
+    if(!node.ring) return;
+    const r = ringPx(node.ring);
+    node.angleCurrent += (node.ring===1 ? 0.003 : node.ring===2 ? -0.002 : node.ring===3 ? 0.0015 : -0.001);
+    node.px = cx + Math.cos(node.angleCurrent)*r;
+    node.py = cy + Math.sin(node.angleCurrent)*r;
+
+    const isActive = activeZone==='all' || activeZone===node.zone;
+    if(!isActive) return;
+
+    ctx.strokeStyle = `rgba(${hexToRgb(node.col)},0.08)`;
+    ctx.lineWidth=0.5;
+    ctx.beginPath();
+    ctx.moveTo(cx,cy);
+    ctx.lineTo(node.px, node.py);
+    ctx.stroke();
+  });
+
+  // Core nodes (zone A — small orbit around center)
+  NODES.filter(n=>n.ring===0).forEach((node,i)=>{
+    const r = ringPx(0.5) || 60;
+    node.angleCurrent = node.angleBase + t*0.4;
+    node.px = cx + Math.cos(node.angleCurrent)*70;
+    node.py = cy + Math.sin(node.angleCurrent)*70;
+    const isActive = activeZone==='all' || activeZone==='A';
+    const alpha = isActive ? 1 : 0.2;
+    const glowA = isActive ? 0.6 : 0.1;
+    drawNode(node, alpha, glowA, 4);
+  });
+
+  // Outer ring nodes
+  NODES.filter(n=>n.ring>0).forEach(node=>{
+    if(!node.px) return;
+    const isActive = activeZone==='all' || activeZone===node.zone;
+    const alpha = isActive ? 1 : 0.15;
+    const glowA = isActive ? 0.5 : 0.05;
+    const size = node.ring===1 ? 5 : node.ring===2 ? 4 : node.ring===3 ? 4 : 3;
+    drawNode(node, alpha, glowA, size);
+  });
+
+  // Draw core
+  drawCore();
+
+  // Zone labels on rings
+  ZONES.slice(1).forEach((z,i)=>{
+    const r = ringPx(i+1);
+    const labelAngle = -Math.PI/2 + t*0.05*(i%2===0?1:-1);
+    const lx = cx + Math.cos(labelAngle)*r;
+    const ly = cy + Math.sin(labelAngle)*r;
+    const isActive = activeZone==='all' || activeZone===z.id;
+    if(!isActive) return;
+    ctx.font = '700 8px "Space Mono"';
+    ctx.fillStyle = z.color;
+    ctx.globalAlpha = 0.7;
+    ctx.fillText(z.id, lx-4, ly+3);
+    ctx.globalAlpha=1;
+  });
+
+  requestAnimationFrame(draw);
+}
+
+function drawCore(){
+  const coreR = 44;
+  const pulse = 0.7+0.3*Math.sin(t*1.5);
+
+  // outer glow
+  const grad = ctx.createRadialGradient(cx,cy,0,cx,cy,coreR*2.5);
+  grad.addColorStop(0,`rgba(232,200,74,${0.15*pulse})`);
+  grad.addColorStop(0.5,`rgba(0,232,122,${0.06*pulse})`);
+  grad.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=grad;
+  ctx.beginPath(); ctx.arc(cx,cy,coreR*2.5,0,Math.PI*2); ctx.fill();
+
+  // core circle
+  const innerGrad = ctx.createRadialGradient(cx,cy,0,cx,cy,coreR);
+  innerGrad.addColorStop(0,`rgba(232,200,74,0.25)`);
+  innerGrad.addColorStop(0.6,`rgba(0,232,122,0.1)`);
+  innerGrad.addColorStop(1,`rgba(0,0,0,0.5)`);
+  ctx.fillStyle=innerGrad;
+  ctx.strokeStyle=`rgba(232,200,74,${0.4*pulse})`;
+  ctx.lineWidth=1.5;
+  ctx.beginPath(); ctx.arc(cx,cy,coreR,0,Math.PI*2);
+  ctx.fill(); ctx.stroke();
+
+  // core label
+  ctx.font='900 11px "Bebas Neue"';
+  ctx.fillStyle=`rgba(232,200,74,${0.9*pulse})`;
+  ctx.textAlign='center';
+  ctx.fillText('CREATOR',cx,cy-5);
+  ctx.fillText('CORE',cx,cy+8);
+  ctx.font='400 7px "Space Mono"';
+  ctx.fillStyle='rgba(232,200,74,0.5)';
+  ctx.fillText('ZONE A',cx,cy+20);
+  ctx.textAlign='left';
+}
+
+function drawNode(node, alpha, glowA, size){
+  const col = hexToRgb(node.col);
+  const isHovered = hoveredNode===node;
+  const sz = isHovered ? size+2 : size;
+
+  if(glowA>0.1){
+    const g = ctx.createRadialGradient(node.px,node.py,0,node.px,node.py,sz*4);
+    g.addColorStop(0,`rgba(${col},${glowA*0.6})`);
+    g.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=g;
+    ctx.beginPath(); ctx.arc(node.px,node.py,sz*4,0,Math.PI*2); ctx.fill();
+  }
+
+  ctx.globalAlpha=alpha;
+  ctx.fillStyle=`rgba(${col},0.9)`;
+  ctx.beginPath(); ctx.arc(node.px,node.py,sz,0,Math.PI*2); ctx.fill();
+  ctx.globalAlpha=1;
+
+  if(isHovered || (alpha>0.5 && size>=4)){
+    ctx.font='600 8px "Space Grotesk"';
+    ctx.fillStyle=`rgba(${col},${alpha*0.9})`;
+    ctx.textAlign='center';
+    const lines = node.label.split('\n');
+    lines.forEach((l,i)=>ctx.fillText(l, node.px, node.py-sz-6-i*10));
+    ctx.textAlign='left';
+  }
+}
+
+function hexToRgb(hex){
+  if(!hex.startsWith('#')) return '200,220,255';
+  const r=parseInt(hex.slice(1,3),16);
+  const g=parseInt(hex.slice(3,5),16);
+  const b=parseInt(hex.slice(5,7),16);
+  return `${r},${g},${b}`;
+}
+
+// Mouse hover
+canvas.addEventListener('mousemove', e=>{
+  mouseX = e.clientX; mouseY = e.clientY;
+  let found = null;
+  NODES.forEach(node=>{
+    if(!node.px) return;
+    const dx = e.clientX - node.px;
+    const dy = e.clientY - node.py;
+    if(Math.sqrt(dx*dx+dy*dy)<18) found=node;
+  });
+
+  if(found){
+    hoveredNode = found;
+    tooltip.style.display='block';
+    tooltip.style.left=(e.clientX+16)+'px';
+    tooltip.style.top=(e.clientY-10)+'px';
+    ttName.style.color=found.col;
+    ttName.textContent=found.label.replace('\n',' ');
+    ttDesc.textContent=found.desc;
+  } else {
+    hoveredNode=null;
+    tooltip.style.display='none';
+  }
+});
+
+canvas.addEventListener('click', e=>{
+  NODES.forEach(node=>{
+    if(!node.px) return;
+    const dx=e.clientX-node.px, dy=e.clientY-node.py;
+    if(Math.sqrt(dx*dx+dy*dy)<18){
+      setZone(node.zone);
+    }
+  });
+});
+
+// Zone tabs
+document.querySelectorAll('.zone-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    setZone(tab.dataset.zone);
+  });
+});
+
+function setZone(zone){
+  activeZone = zone;
+  document.querySelectorAll('.zone-tab').forEach(t=>t.classList.toggle('active', t.dataset.zone===zone));
+  document.querySelectorAll('.zone-detail').forEach(d=>d.classList.toggle('visible', d.id==='detail-'+zone.toLowerCase()));
+}
+
+window.addEventListener('resize',resize);
+resize();
+draw();
+</script>
+
+</body>
+</html>

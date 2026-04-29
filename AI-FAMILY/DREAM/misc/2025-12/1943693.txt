@@ -1,0 +1,112 @@
+<root>
+    <CtrlPanelStyle name="GrooveEditorPanelStyle1" colBorder="[r:0 g:0 b:0 a:0]" colFill="[r:228 g:228 b:228 a:255]" intSmartTileEdgeSize="5" intRoundedRectRadius="0">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlButtonStyle name="latchingButtonStyle" optMomentary="false" optSendOnMouseDown="true" />
+    <CtrlButtonStyle name="GrooveSelectButtonStyle" optMomentary="false">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="GrooveDrawButtonStyle" optMomentary="false">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="GrooveEraseButtonStyle" optMomentary="false">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="GrooveMuteButtonStyle" optMomentary="false">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="GrooveVelButtonStyle" optMomentary="false">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlTextBoxStyle name="CtrlTextBoxStyle1" centeredText="true">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlTextBoxStyle>
+    <CtrlButtonStyle name="GrooveSnapButtonStyle" optMomentary="false" imDown="..\com_blue_LED_on.tga" imUp="..\com_blue_LED_off.tga">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="GrooveQuantizeButtonStyle">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="GrooveShiftLeftButtonStyle">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="GrooveShiftRightButtonStyle">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="GrooveFreezeButtonStyle">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="GrooveShowVelButtonStyle" optMomentary="false">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="GrooveLoadGrooveButtonStyle">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="GrooveSaveGrooveButtonStyle">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlTextBoxStyle name="GrooveTextBoxStyle" colBackground="[r:200 g:200 b:255 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlTextBoxStyle>
+    <CtrlPanelStyle name="ShowVelButton" noDefaultDrawing="true" intSmartTileEdgeSize="5" intRoundedRectRadius="0">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlButtonStyle name="GrooveZoomInButtonStyle" imDown="gl_zoom_in_down.tga" imUp="gl_zoom_in_up.tga" imMouseOver="gl_zoom_in_down.tga">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="GrooveZoomOutButtonStyle" imDown="gl_zoom_out_down.tga" imUp="gl_zoom_out_up.tga" imMouseOver="gl_zoom_out_down.tga">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlKnobStyle name="GrooveSwingKnobStyle" optStripInverted="true" activeAreaRect="[x:0 y:0 w:18 h:18]" imKnobNormal="..\com_small_knob_light.tga">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlKnobStyle>
+    <CtrlButtonStyle name="GrooveFollowButton" optMomentary="false">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="GrooveShowBrowserButtonStyle" optSendOnMouseDown="true">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="GrooveShowEditorButtonStyle" optSendOnMouseDown="true">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlPanelStyle name="GrooveEditorPanelStyle2" colBorder="[r:0 g:0 b:0 a:0]" colFill="[r:241 g:241 b:241 a:255]" intSmartTileEdgeSize="5" intRoundedRectRadius="0">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlButtonStyle name="GrooveShowFxButtonStyle" optMomentary="false">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="GrooveEditorTextButtonStyle" optDrawText="true" optSmartTile="true">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="GrooveEditButtonStyle1" optDrawText="true" optSmartTile="true">
+        <VFont name="font" vSize="10" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="gl_groovesmode_off" noDefaultDrawing="true" optMomentary="false" activeAreaRect="[x:8 y:8 w:51 h:29]" imDown="gl_groovesmode_off_on.tga">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="gl_groovesmode_single" noDefaultDrawing="true" optMomentary="false" activeAreaRect="[x:8 y:8 w:51 h:29]" imDown="gl_groovesmode_single_on.tga">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="gl_groovesmode_track" noDefaultDrawing="true" optMomentary="false" activeAreaRect="[x:8 y:8 w:51 h:29]" imDown="gl_groovesmode_track_on.tga">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="gl_loop" noDefaultDrawing="true" optMomentary="false" activeAreaRect="[x:8 y:8 w:51 h:29]" imDown="gl_loop_on.tga">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="gl_export" noDefaultDrawing="true" activeAreaRect="[x:8 y:8 w:51 h:29]" imDown="gl_export_on.tga">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlPanel name="main_panel" style="BFD2InvisiblePanel" rect="[x:0 y:0 w:304 h:208]" id="0" displayName="Groove Editor" zorder="6">
+        <CtrlLabel name="CtrlLabel" style="BFD2LabelLargeDarkGrey" rect="[x:106 y:8 w:90 h:26]" id="100000" text="Grooves" />
+        <CtrlPanel name="FxPanel" overloadClass="BFD2GrooveFxPanel" style="BFD2InvisiblePanel" rect="[x:0 y:76 w:280 h:56]" id="100000" displayName="Groove Effects Panel" />
+        <CtrlPanel name="MenuPanel" overloadClass="BFD2GrooveEditorPanel" style="BFD2InvisiblePanel" rect="[x:0 y:157 w:280 h:45]" id="100000" displayName="Groove Effects Panel">
+            <CtrlButtonGroup name="AutoPlayModeButtonGroup" rect="[x:0 y:0 w:163 h:45]" id="100000">
+                <CtrlButton name="Mode_off" style="gl_groovesmode_off" rect="[x:-2 y:0 w:68 h:45]" id="0" displayName="Disable Groove auto play on Song Start" />
+                <CtrlButton name="Mode_single" style="gl_groovesmode_single" rect="[x:49 y:0 w:68 h:45]" id="2" displayName="Play Single Grooves from the Browser on Song Start" />
+                <CtrlButton name="Mode_track" style="gl_groovesmode_track" rect="[x:100 y:0 w:68 h:45]" id="1" displayName="Play Grooves from the Drum Track on Song Start" />
+            </CtrlButtonGroup>
+            <CtrlButton name="trans_loop" style="gl_loop" rect="[x:157 y:0 w:68 h:45]" id="0" displayName="Loop Playback" text="Loop" />
+            <CtrlButton name="Export" style="gl_export" rect="[x:215 y:1 w:68 h:45]" id="0" displayName="Export Drum Track" text="Export" />
+        </CtrlPanel>
+    </CtrlPanel>
+</root>

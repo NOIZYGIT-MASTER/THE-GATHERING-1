@@ -1,0 +1,164 @@
+<root>
+    <CtrlSliderStyle name="MidiSliderStyle" optScaleKnob="true" colSlider="[r:32 g:32 b:32 a:140]" colFill="[r:255 g:255 b:255 a:0]" snapSteps="0" fineScale="0.05" incDecButtonMode="off">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlSliderStyle>
+    <CtrlPanelStyle name="WhiteNoteStyle" intSmartTileEdgeSize="5">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="BlackNoteStyle" colBorder="[r:0 g:0 b:0 a:0]" colFill="[r:0 g:0 b:0 a:0]" intSmartTileEdgeSize="5">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlPanel name="CtrlPanel" rect="[x:351 y:140 w:30 h:525]" id="0">
+        <CtrlPanel name="CtrlPanel" rect="[x:0 y:-14 w:30 h:49]" id="0">
+            <CtrlPanel name="Note_127" style="WhiteNoteStyle" rect="[x:0 y:14 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_125" style="WhiteNoteStyle" rect="[x:0 y:21 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_124" style="WhiteNoteStyle" rect="[x:0 y:28 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_122" style="WhiteNoteStyle" rect="[x:0 y:35 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_120" style="WhiteNoteStyle" rect="[x:0 y:42 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_126" style="BlackNoteStyle" rect="[x:0 y:18 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_123" style="BlackNoteStyle" rect="[x:0 y:32 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_121" style="BlackNoteStyle" rect="[x:0 y:39 w:20 h:6]" id="100001" zorder="500" />
+        </CtrlPanel>
+        <CtrlPanel name="CtrlPanel" rect="[x:0 y:35 w:30 h:49]" id="0">
+            <CtrlPanel name="Note_119" style="WhiteNoteStyle" rect="[x:0 y:0 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_117" style="WhiteNoteStyle" rect="[x:0 y:7 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_115" style="WhiteNoteStyle" rect="[x:0 y:14 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_113" style="WhiteNoteStyle" rect="[x:0 y:21 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_112" style="WhiteNoteStyle" rect="[x:0 y:28 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_110" style="WhiteNoteStyle" rect="[x:0 y:35 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_108" style="WhiteNoteStyle" rect="[x:0 y:42 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_118" style="BlackNoteStyle" rect="[x:0 y:4 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_116" style="BlackNoteStyle" rect="[x:0 y:11 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_114" style="BlackNoteStyle" rect="[x:0 y:18 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_111" style="BlackNoteStyle" rect="[x:0 y:32 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_109" style="BlackNoteStyle" rect="[x:0 y:39 w:20 h:6]" id="100001" zorder="500" />
+        </CtrlPanel>
+        <CtrlPanel name="CtrlPanel" rect="[x:0 y:84 w:30 h:49]" id="0">
+            <CtrlPanel name="Note_107" style="WhiteNoteStyle" rect="[x:0 y:0 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_105" style="WhiteNoteStyle" rect="[x:0 y:7 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_103" style="WhiteNoteStyle" rect="[x:0 y:14 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_101" style="WhiteNoteStyle" rect="[x:0 y:21 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_100" style="WhiteNoteStyle" rect="[x:0 y:28 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_98" style="WhiteNoteStyle" rect="[x:0 y:35 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_96" style="WhiteNoteStyle" rect="[x:0 y:42 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_106" style="BlackNoteStyle" rect="[x:0 y:4 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_104" style="BlackNoteStyle" rect="[x:0 y:11 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_102" style="BlackNoteStyle" rect="[x:0 y:18 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_99" style="BlackNoteStyle" rect="[x:0 y:32 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_97" style="BlackNoteStyle" rect="[x:0 y:39 w:20 h:6]" id="100001" zorder="500" />
+        </CtrlPanel>
+        <CtrlPanel name="CtrlPanel" rect="[x:0 y:133 w:30 h:49]" id="0">
+            <CtrlPanel name="Note_95" style="WhiteNoteStyle" rect="[x:0 y:0 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_93" style="WhiteNoteStyle" rect="[x:0 y:7 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_91" style="WhiteNoteStyle" rect="[x:0 y:14 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_89" style="WhiteNoteStyle" rect="[x:0 y:21 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_88" style="WhiteNoteStyle" rect="[x:0 y:28 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_86" style="WhiteNoteStyle" rect="[x:0 y:35 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_84" style="WhiteNoteStyle" rect="[x:0 y:42 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_94" style="BlackNoteStyle" rect="[x:0 y:4 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_92" style="BlackNoteStyle" rect="[x:0 y:11 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_90" style="BlackNoteStyle" rect="[x:0 y:18 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_87" style="BlackNoteStyle" rect="[x:0 y:32 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_85" style="BlackNoteStyle" rect="[x:0 y:39 w:20 h:6]" id="100001" zorder="500" />
+        </CtrlPanel>
+        <CtrlPanel name="CtrlPanel" rect="[x:0 y:182 w:30 h:49]" id="0">
+            <CtrlPanel name="Note_83" style="WhiteNoteStyle" rect="[x:0 y:0 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_81" style="WhiteNoteStyle" rect="[x:0 y:7 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_79" style="WhiteNoteStyle" rect="[x:0 y:14 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_77" style="WhiteNoteStyle" rect="[x:0 y:21 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_76" style="WhiteNoteStyle" rect="[x:0 y:28 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_74" style="WhiteNoteStyle" rect="[x:0 y:35 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_72" style="WhiteNoteStyle" rect="[x:0 y:42 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_82" style="BlackNoteStyle" rect="[x:0 y:4 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_80" style="BlackNoteStyle" rect="[x:0 y:11 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_78" style="BlackNoteStyle" rect="[x:0 y:18 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_75" style="BlackNoteStyle" rect="[x:0 y:32 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_73" style="BlackNoteStyle" rect="[x:0 y:39 w:20 h:6]" id="100001" zorder="500" />
+        </CtrlPanel>
+        <CtrlPanel name="CtrlPanel" rect="[x:0 y:231 w:30 h:49]" id="0">
+            <CtrlPanel name="Note_71" style="WhiteNoteStyle" rect="[x:0 y:0 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_69" style="WhiteNoteStyle" rect="[x:0 y:7 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_67" style="WhiteNoteStyle" rect="[x:0 y:14 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_65" style="WhiteNoteStyle" rect="[x:0 y:21 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_64" style="WhiteNoteStyle" rect="[x:0 y:28 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_62" style="WhiteNoteStyle" rect="[x:0 y:35 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_60" style="WhiteNoteStyle" rect="[x:0 y:42 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_70" style="BlackNoteStyle" rect="[x:0 y:4 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_68" style="BlackNoteStyle" rect="[x:0 y:11 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_66" style="BlackNoteStyle" rect="[x:0 y:18 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_63" style="BlackNoteStyle" rect="[x:0 y:32 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_61" style="BlackNoteStyle" rect="[x:0 y:39 w:20 h:6]" id="100001" zorder="500" />
+        </CtrlPanel>
+        <CtrlPanel name="CtrlPanel" rect="[x:0 y:280 w:30 h:49]" id="0">
+            <CtrlPanel name="Note_59" style="WhiteNoteStyle" rect="[x:0 y:0 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_57" style="WhiteNoteStyle" rect="[x:0 y:7 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_55" style="WhiteNoteStyle" rect="[x:0 y:14 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_53" style="WhiteNoteStyle" rect="[x:0 y:21 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_52" style="WhiteNoteStyle" rect="[x:0 y:28 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_50" style="WhiteNoteStyle" rect="[x:0 y:35 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_48" style="WhiteNoteStyle" rect="[x:0 y:42 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_58" style="BlackNoteStyle" rect="[x:0 y:4 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_56" style="BlackNoteStyle" rect="[x:0 y:11 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_54" style="BlackNoteStyle" rect="[x:0 y:18 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_51" style="BlackNoteStyle" rect="[x:0 y:32 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_49" style="BlackNoteStyle" rect="[x:0 y:39 w:20 h:6]" id="100001" zorder="500" />
+        </CtrlPanel>
+        <CtrlPanel name="CtrlPanel" rect="[x:0 y:329 w:30 h:49]" id="0">
+            <CtrlPanel name="Note_47" style="WhiteNoteStyle" rect="[x:0 y:0 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_45" style="WhiteNoteStyle" rect="[x:0 y:7 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_43" style="WhiteNoteStyle" rect="[x:0 y:14 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_41" style="WhiteNoteStyle" rect="[x:0 y:21 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_40" style="WhiteNoteStyle" rect="[x:0 y:28 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_38" style="WhiteNoteStyle" rect="[x:0 y:35 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_36" style="WhiteNoteStyle" rect="[x:0 y:42 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_46" style="BlackNoteStyle" rect="[x:0 y:4 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_44" style="BlackNoteStyle" rect="[x:0 y:11 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_42" style="BlackNoteStyle" rect="[x:0 y:18 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_39" style="BlackNoteStyle" rect="[x:0 y:32 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_37" style="BlackNoteStyle" rect="[x:0 y:39 w:20 h:6]" id="100001" zorder="500" />
+        </CtrlPanel>
+        <CtrlPanel name="CtrlPanel" rect="[x:0 y:378 w:30 h:49]" id="0">
+            <CtrlPanel name="Note_35" style="WhiteNoteStyle" rect="[x:0 y:0 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_33" style="WhiteNoteStyle" rect="[x:0 y:7 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_31" style="WhiteNoteStyle" rect="[x:0 y:14 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_29" style="WhiteNoteStyle" rect="[x:0 y:21 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_28" style="WhiteNoteStyle" rect="[x:0 y:28 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_26" style="WhiteNoteStyle" rect="[x:0 y:35 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_24" style="WhiteNoteStyle" rect="[x:0 y:42 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_34" style="BlackNoteStyle" rect="[x:0 y:4 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_32" style="BlackNoteStyle" rect="[x:0 y:11 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_30" style="BlackNoteStyle" rect="[x:0 y:18 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_27" style="BlackNoteStyle" rect="[x:0 y:32 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_25" style="BlackNoteStyle" rect="[x:0 y:39 w:20 h:6]" id="100001" zorder="500" />
+        </CtrlPanel>
+        <CtrlPanel name="CtrlPanel" rect="[x:0 y:427 w:30 h:49]" id="0">
+            <CtrlPanel name="Note_23" style="WhiteNoteStyle" rect="[x:0 y:0 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_21" style="WhiteNoteStyle" rect="[x:0 y:7 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_19" style="WhiteNoteStyle" rect="[x:0 y:14 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_17" style="WhiteNoteStyle" rect="[x:0 y:21 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_16" style="WhiteNoteStyle" rect="[x:0 y:28 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_14" style="WhiteNoteStyle" rect="[x:0 y:35 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_12" style="WhiteNoteStyle" rect="[x:0 y:42 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_22" style="BlackNoteStyle" rect="[x:0 y:4 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_20" style="BlackNoteStyle" rect="[x:0 y:11 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_18" style="BlackNoteStyle" rect="[x:0 y:18 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_15" style="BlackNoteStyle" rect="[x:0 y:32 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_13" style="BlackNoteStyle" rect="[x:0 y:39 w:20 h:6]" id="100001" zorder="500" />
+        </CtrlPanel>
+        <CtrlPanel name="CtrlPanel" rect="[x:0 y:476 w:30 h:49]" id="0">
+            <CtrlPanel name="Note_11" style="WhiteNoteStyle" rect="[x:0 y:0 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_9" style="WhiteNoteStyle" rect="[x:0 y:7 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_7" style="WhiteNoteStyle" rect="[x:0 y:14 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_5" style="WhiteNoteStyle" rect="[x:0 y:21 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_4" style="WhiteNoteStyle" rect="[x:0 y:28 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_2" style="WhiteNoteStyle" rect="[x:0 y:35 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_0" style="WhiteNoteStyle" rect="[x:0 y:42 w:30 h:7]" id="100001" zorder="0" />
+            <CtrlPanel name="Note_10" style="BlackNoteStyle" rect="[x:0 y:4 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_8" style="BlackNoteStyle" rect="[x:0 y:11 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_6" style="BlackNoteStyle" rect="[x:0 y:18 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_3" style="BlackNoteStyle" rect="[x:0 y:32 w:20 h:6]" id="100001" zorder="500" />
+            <CtrlPanel name="Note_1" style="BlackNoteStyle" rect="[x:0 y:39 w:20 h:6]" id="100001" zorder="500" />
+        </CtrlPanel>
+        <CtrlSlider name="MidiPositionSlider" overloadClass="CtrlScrollViewSlider" style="MidiSliderStyle" rect="[x:0 y:0 w:30 h:525]" id="100003" zorder="800" />
+    </CtrlPanel>
+</root>

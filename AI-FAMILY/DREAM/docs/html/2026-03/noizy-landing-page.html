@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIZY.ai — Where Human Voice Meets Artificial Intelligence</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Bebas+Neue&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap');
+
+  :root {
+    --void: #010308;
+    --deep: #050c18;
+    --panel: #08111f;
+    --border: #0f1e30;
+    --glow: #182840;
+    --green: #00ff88;
+    --green-d: rgba(0,255,136,0.08);
+    --gold: #f0c040;
+    --gold-d: rgba(240,192,64,0.08);
+    --electric: #00d4ff;
+    --violet: #a78bfa;
+    --amber: #fb923c;
+    --rose: #f472b6;
+    --text: #b8cce0;
+    --dim: #3c5570;
+    --bright: #eaf2ff;
+    --sans: 'Space Grotesk', sans-serif;
+    --mono: 'Space Mono', monospace;
+    --serif: 'Playfair Display', Georgia, serif;
+    --display: 'Bebas Neue', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--void); color: var(--text); font-family: var(--sans); overflow-x: hidden; }
+
+  /* ─── CANVAS ─── */
+  #bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; height: 64px;
+    background: rgba(1,3,8,0.85);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(16px);
+  }
+
+  .nav-logo {
+    font-family: var(--display);
+    font-size: 28px;
+    color: var(--bright);
+    letter-spacing: 0.08em;
+  }
+
+  .nav-logo span { color: var(--green); }
+
+  .nav-links {
+    display: flex; gap: 32px; list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 13px; font-weight: 500;
+    color: var(--dim); text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--bright); }
+
+  .nav-cta {
+    background: var(--green);
+    color: #010308;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 10px 24px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* ─── SECTIONS ─── */
+  section { position: relative; z-index: 10; }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center;
+    padding: 120px 40px 80px;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(0,255,136,0.06);
+    border: 1px solid rgba(0,255,136,0.2);
+    border-radius: 40px;
+    padding: 8px 20px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--green);
+    letter-spacing: 0.2em;
+    margin-bottom: 32px;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--green);
+    border-radius: 50%;
+    animation: blink 1.4s ease infinite;
+  }
+
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+  .hero-h1 {
+    font-family: var(--display);
+    font-size: clamp(56px, 10vw, 128px);
+    color: var(--bright);
+    letter-spacing: 0.04em;
+    line-height: 0.9;
+    margin-bottom: 16px;
+  }
+
+  .hero-h1 .green { color: var(--green); text-shadow: 0 0 60px rgba(0,255,136,0.35); }
+  .hero-h1 .gold { color: var(--gold); }
+
+  .hero-tagline {
+    font-family: var(--serif);
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-style: italic;
+    color: var(--text);
+    max-width: 640px;
+    line-height: 1.55;
+    margin-bottom: 48px;
+  }
+
+  .hero-tagline strong { color: var(--bright); font-style: normal; }
+
+  .hero-ctas {
+    display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+    margin-bottom: 72px;
+  }
+
+  .btn-primary {
+    background: var(--green);
+    color: #010308;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: none; cursor: pointer;
+  }
+
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,255,136,0.25); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .btn-secondary:hover { border-color: var(--glow); color: var(--bright); }
+
+  /* Hero stats */
+  .hero-stats {
+    display: flex; gap: 48px; justify-content: center; flex-wrap: wrap;
+  }
+
+  .h-stat {
+    text-align: center;
+  }
+
+  .h-stat-num {
+    font-family: var(--display);
+    font-size: 40px;
+    color: var(--green);
+    display: block;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .h-stat-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--dim);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  /* ─── WAVE DIVIDER ─── */
+  .wave-div {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--green), transparent);
+    opacity: 0.2;
+  }
+
+  /* ─── THE PROBLEM ─── */
+  #problem {
+    padding: 120px 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--dim);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+
+  .section-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--green); }
+
+  .section-h2 {
+    font-family: var(--display);
+    font-size: clamp(36px, 6vw, 72px);
+    color: var(--bright);
+    letter-spacing: 0.04em;
+    line-height: 1;
+    margin-bottom: 32px;
+  }
+
+  .section-h2 .g { color: var(--green); }
+  .section-h2 .gold { color: var(--gold); }
+  .section-h2 .r { color: #ff4466; }
+
+  .problem-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+    margin-top: 60px;
+  }
+
+  .problem-col p {
+    font-size: 16px;
+    line-height: 1.85;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+
+  .problem-col p strong { color: var(--bright); }
+  .problem-col p em { color: var(--gold); font-style: italic; }
+
+  .problem-stats {
+    display: flex; flex-direction: column; gap: 16px;
+  }
+
+  .ps-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    display: flex; align-items: center; gap: 20px;
+  }
+
+  .ps-num {
+    font-family: var(--display);
+    font-size: 36px;
+    color: #ff4466;
+    line-height: 1;
+    flex-shrink: 0;
+    width: 80px;
+    text-align: right;
+  }
+
+  .ps-text { font-size: 13px; line-height: 1.6; color: var(--dim); }
+  .ps-text strong { color: var(--text); display: block; margin-bottom: 2px; }
+
+  /* ─── SOLUTION ─── */
+  #solution {
+    padding: 120px 40px;
+    background: linear-gradient(180deg, transparent, rgba(0,255,136,0.02), transparent);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .solution-intro {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 72px;
+  }
+
+  .solution-intro p {
+    font-family: var(--serif);
+    font-size: clamp(16px, 2vw, 20px);
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.8;
+    margin-top: 24px;
+  }
+
+  .solution-intro p strong { color: var(--bright); font-style: normal; }
+  .solution-intro p .g { color: var(--green); font-style: normal; font-weight: 700; }
+
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .pillar {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 32px 28px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+
+  .pillar:hover { border-color: var(--glow); transform: translateY(-3px); }
+
+  .pillar::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+  }
+
+  .pillar.p1::before { background: linear-gradient(90deg, var(--green), transparent); }
+  .pillar.p2::before { background: linear-gradient(90deg, var(--gold), transparent); }
+  .pillar.p3::before { background: linear-gradient(90deg, var(--violet), transparent); }
+  .pillar.p4::before { background: linear-gradient(90deg, var(--electric), transparent); }
+  .pillar.p5::before { background: linear-gradient(90deg, var(--amber), transparent); }
+
+  .pillar-icon { font-size: 30px; margin-bottom: 16px; display: block; }
+
+  .pillar h3 {
+    font-size: 16px; font-weight: 700;
+    color: var(--bright); margin-bottom: 10px;
+  }
+
+  .pillar p { font-size: 13px; line-height: 1.65; color: var(--dim); }
+  .pillar p strong { color: var(--text); }
+
+  /* ─── NEVER CLAUSES ─── */
+  #never {
+    padding: 120px 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .never-intro {
+    max-width: 600px;
+    margin-bottom: 56px;
+  }
+
+  .never-intro p {
+    font-size: 16px; line-height: 1.8; color: var(--text); margin-top: 20px;
+  }
+
+  .never-intro p strong { color: var(--bright); }
+
+  .nc-wall {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .nc {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 3px solid rgba(255,68,102,0.4);
+    border-radius: 6px;
+    padding: 16px 20px;
+    display: flex; gap: 14px; align-items: flex-start;
+    transition: border-left-color 0.2s;
+  }
+
+  .nc:hover { border-left-color: rgba(255,68,102,0.8); }
+
+  .nc-id {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: #ff4466;
+    background: rgba(255,68,102,0.08);
+    border: 1px solid rgba(255,68,102,0.15);
+    border-radius: 3px;
+    padding: 3px 7px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    letter-spacing: 0.1em;
+  }
+
+  .nc-content h4 { font-size: 13px; font-weight: 700; color: var(--bright); margin-bottom: 4px; }
+  .nc-content p { font-size: 12px; line-height: 1.5; color: var(--dim); }
+
+  .nc-note {
+    margin-top: 32px;
+    padding: 20px 24px;
+    background: rgba(255,68,102,0.04);
+    border: 1px solid rgba(255,68,102,0.12);
+    border-radius: 6px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--dim);
+    line-height: 1.6;
+  }
+
+  .nc-note strong { color: #ff4466; }
+
+  /* ─── RSP PROGRAM ─── */
+  #rsp {
+    padding: 120px 40px;
+    background: linear-gradient(180deg, transparent, rgba(240,192,64,0.02), transparent);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .rsp-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 72px;
+    align-items: start;
+    margin-top: 56px;
+  }
+
+  .rsp-left p {
+    font-size: 16px; line-height: 1.85; color: var(--text); margin-bottom: 20px;
+  }
+
+  .rsp-left p strong { color: var(--bright); }
+  .rsp-left p .g { color: var(--green); font-weight: 700; }
+  .rsp-left p .gold { color: var(--gold); font-weight: 700; }
+
+  .rsp-tiers {
+    display: flex; flex-direction: column; gap: 12px;
+  }
+
+  .tier {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: border-color 0.2s;
+  }
+
+  .tier:hover { border-color: var(--glow); }
+
+  .tier.featured {
+    border-color: rgba(0,255,136,0.3);
+    background: linear-gradient(135deg, rgba(0,255,136,0.05), var(--panel));
+  }
+
+  .tier-name { font-weight: 700; font-size: 14px; color: var(--bright); }
+  .tier-name small { display: block; font-size: 11px; color: var(--dim); font-weight: 400; margin-top: 2px; }
+  .tier-price { font-family: var(--display); font-size: 28px; color: var(--gold); }
+  .tier.featured .tier-price { color: var(--green); }
+  .tier-price small { font-family: var(--sans); font-size: 11px; color: var(--dim); }
+
+  .tier-badge {
+    font-family: var(--mono);
+    font-size: 9px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    letter-spacing: 0.1em;
+  }
+
+  .tier.featured .tier-badge { background: rgba(0,255,136,0.1); color: var(--green); border: 1px solid rgba(0,255,136,0.2); }
+
+  /* ─── MUSEUM TEASER ─── */
+  #museum {
+    padding: 120px 40px;
+    text-align: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .museum-card {
+    position: relative;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 72px 60px;
+    overflow: hidden;
+    margin-top: 56px;
+  }
+
+  .museum-card::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, rgba(167,139,250,0.15), rgba(0,255,136,0.1), rgba(240,192,64,0.1));
+    border-radius: 17px;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  .museum-card-inner { position: relative; z-index: 1; }
+
+  .museum-card h3 {
+    font-family: var(--serif);
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 900;
+    font-style: italic;
+    color: var(--bright);
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  .museum-card h3 .gold { color: var(--gold); font-style: normal; }
+
+  .museum-card p {
+    font-size: clamp(14px, 1.8vw, 17px);
+    line-height: 1.8; color: var(--text);
+    max-width: 620px;
+    margin: 0 auto 36px;
+  }
+
+  .museum-card p strong { color: var(--bright); }
+  .museum-card p .g { color: var(--green); font-weight: 700; }
+
+  .museum-rooms {
+    display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 36px;
+  }
+
+  .m-room {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    color: var(--dim);
+    border: 1px solid var(--border);
+    letter-spacing: 0.15em;
+    transition: all 0.2s;
+  }
+
+  .m-room:hover { border-color: var(--glow); color: var(--text); }
+
+  /* ─── CODEX SECTION ─── */
+  #codex {
+    padding: 120px 40px;
+    background: linear-gradient(180deg, transparent, rgba(167,139,250,0.03), transparent);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .codex-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 72px;
+    align-items: center;
+    margin-top: 56px;
+  }
+
+  .codex-left p {
+    font-size: 16px; line-height: 1.85; color: var(--text); margin-bottom: 20px;
+  }
+
+  .codex-left p strong { color: var(--bright); }
+  .codex-left p em { color: var(--violet); }
+  .codex-left p .g { color: var(--green); font-weight: 700; }
+
+  .codex-right {
+    background: var(--panel);
+    border: 1px solid rgba(167,139,250,0.2);
+    border-radius: 10px;
+    padding: 32px;
+    text-align: center;
+  }
+
+  .codex-right .cr-badge {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--violet);
+    letter-spacing: 0.2em;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .codex-right .cr-year {
+    font-family: var(--display);
+    font-size: 80px;
+    color: rgba(167,139,250,0.15);
+    line-height: 1;
+    margin-bottom: -10px;
+  }
+
+  .codex-right .cr-title {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--violet);
+    margin-bottom: 12px;
+  }
+
+  .codex-right p {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--dim);
+    margin-bottom: 20px;
+  }
+
+  .codex-key {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--green);
+    background: var(--green-d);
+    border: 1px solid rgba(0,255,136,0.15);
+    border-radius: 4px;
+    padding: 10px 16px;
+    display: block;
+    word-break: break-all;
+    line-height: 1.5;
+    text-align: left;
+  }
+
+  /* ─── COMPARISON ─── */
+  #compare {
+    padding: 120px 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 48px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .compare-table th {
+    padding: 16px 20px;
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--dim);
+    border-bottom: 1px solid var(--border);
+    background: rgba(255,255,255,0.02);
+  }
+
+  .compare-table th.noizy { color: var(--green); }
+
+  .compare-table td {
+    padding: 14px 20px;
+    font-size: 13px;
+    color: var(--dim);
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .compare-table tr:last-child td { border-bottom: none; }
+
+  .compare-table td:first-child { color: var(--text); font-weight: 600; }
+  .compare-table td.noizy { color: var(--green); font-weight: 600; }
+  .compare-table td.bad { color: rgba(255,68,102,0.7); }
+
+  .check { color: var(--green); }
+  .cross { color: rgba(255,68,102,0.7); }
+
+  /* ─── CTA SECTION ─── */
+  #cta-section {
+    padding: 120px 40px;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .cta-eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--dim);
+    letter-spacing: 0.3em;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+
+  .cta-h2 {
+    font-family: var(--display);
+    font-size: clamp(44px, 8vw, 96px);
+    color: var(--bright);
+    letter-spacing: 0.04em;
+    line-height: 0.95;
+    margin-bottom: 24px;
+  }
+
+  .cta-h2 .g { color: var(--green); text-shadow: 0 0 40px rgba(0,255,136,0.3); }
+
+  .cta-body {
+    font-family: var(--serif);
+    font-size: clamp(15px, 2vw, 18px);
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 48px;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 48px 48px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 10;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .footer-logo {
+    font-family: var(--display);
+    font-size: 22px;
+    color: var(--dim);
+    letter-spacing: 0.1em;
+  }
+
+  .footer-logo span { color: var(--green); }
+
+  .footer-links {
+    display: flex; gap: 32px; list-style: none; flex-wrap: wrap;
+  }
+
+  .footer-links a {
+    font-size: 12px; color: var(--dim); text-decoration: none;
+    letter-spacing: 0.05em; transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--text); }
+
+  .footer-grf {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--dim);
+    letter-spacing: 0.2em;
+  }
+
+  .footer-grf span { color: var(--green); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav .nav-links { display: none; }
+    .problem-split, .rsp-layout, .codex-layout { grid-template-columns: 1fr; gap: 40px; }
+    .pillars { grid-template-columns: 1fr 1fr; }
+    .nc-wall { grid-template-columns: 1fr; }
+    .museum-card { padding: 48px 32px; }
+    main { padding: 0 24px; }
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 0 24px; }
+    .pillars { grid-template-columns: 1fr; }
+    .hero-stats { gap: 28px; }
+  }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--void); }
+  ::-webkit-scrollbar-thumb { background: var(--border); }
+</style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <div class="nav-logo">NOIZY<span>.</span>AI</div>
+  <ul class="nav-links">
+    <li><a href="#solution">Platform</a></li>
+    <li><a href="#never">Never Clauses</a></li>
+    <li><a href="#rsp">RSP Program</a></li>
+    <li><a href="#museum">Museum</a></li>
+    <li><a href="#codex">500-Year Codex</a></li>
+  </ul>
+  <a href="noizy-founding-rsp.html" class="nav-cta">Become a Founding RSP</a>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-badge">The 5th Epoch of Music is Here</div>
+  <h1 class="hero-h1">
+    HUMAN<br>
+    <span class="green">VOICE</span><br>
+    <span class="gold">ELEVATED</span>
+  </h1>
+  <p class="hero-tagline">
+    The first platform where <strong>consent is code, not policy</strong> —
+    where <strong>75% of every dollar</strong> flows to the creator —
+    and where your voice is a <strong>perpetual, inheritable asset</strong>
+    protected for 500 years.
+  </p>
+  <div class="hero-ctas">
+    <a href="noizy-founding-rsp.html" class="btn-primary">Join as Founding RSP</a>
+    <a href="#solution" class="btn-secondary">How It Works</a>
+  </div>
+  <div class="hero-stats">
+    <div class="h-stat">
+      <span class="h-stat-num">75%</span>
+      <span class="h-stat-label">Creator Royalty<br>Hardcoded at D1</span>
+    </div>
+    <div class="h-stat">
+      <span class="h-stat-num">NC·10</span>
+      <span class="h-stat-label">Never Clauses<br>Enforced in Code</span>
+    </div>
+    <div class="h-stat">
+      <span class="h-stat-num">500yr</span>
+      <span class="h-stat-label">Voice Codex<br>Covenant</span>
+    </div>
+    <div class="h-stat">
+      <span class="h-stat-num">0</span>
+      <span class="h-stat-label">Royalties Paid<br>by Competitors</span>
+    </div>
+  </div>
+</section>
+
+<div class="wave-div"></div>
+
+<!-- ─── PROBLEM ─── -->
+<section id="problem">
+  <div class="section-eyebrow">The Problem</div>
+  <h2 class="section-h2">THEY <span class="r">TOOK</span><br>EVERYTHING</h2>
+
+  <div class="problem-split">
+    <div class="problem-col">
+      <p>
+        In 2026, a voice actor can have their voice cloned by a platform they have never heard of — used in a film they will never be paid for, in a language they do not speak, heard by an audience that will never know their name.
+      </p>
+      <p>
+        The largest AI voice platform in the world pays <strong>zero royalties</strong> to creators while charging them to use their own cloned voice commercially. Their consent exists in a terms of service document that can be changed on a Tuesday.
+      </p>
+      <p>
+        The largest AI music platform is facing a <strong>$500 million RIAA lawsuit</strong> from Sony, Universal, and Warner for training on copyrighted music without consent.
+      </p>
+      <p>
+        This is not a morality failure. <em>It is an architecture failure.</em> You cannot solve a structural problem with an ethical argument. You can only build infrastructure that makes the old model obsolete.
+      </p>
+    </div>
+    <div class="problem-stats">
+      <div class="ps-card">
+        <div class="ps-num">$0</div>
+        <div class="ps-text"><strong>ElevenLabs creator royalty</strong>They charge you to use your own cloned voice commercially. Zero flows back.</div>
+      </div>
+      <div class="ps-card">
+        <div class="ps-num">$500M</div>
+        <div class="ps-text"><strong>Suno RIAA lawsuit</strong>Sony, Universal, Warner. June 2024. Training on copyrighted music without consent.</div>
+      </div>
+      <div class="ps-card">
+        <div class="ps-num">ToS</div>
+        <div class="ps-text"><strong>Where competitor "consent" lives</strong>A document a lawyer can rewrite on a Tuesday. Not a database. Not code.</div>
+      </div>
+      <div class="ps-card">
+        <div class="ps-num">0.3¢</div>
+        <div class="ps-text"><strong>Spotify per stream</strong>The legacy of four epochs of extractive infrastructure. NOIZY breaks this.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SOLUTION ─── -->
+<section id="solution">
+  <div style="max-width:1100px; margin:0 auto; padding: 0 40px;">
+    <div class="section-eyebrow">The NOIZY Platform</div>
+    <h2 class="section-h2">CONSENT<br>AS <span class="g">CODE</span></h2>
+
+    <div class="solution-intro">
+      <p>
+        NOIZY is <strong>not a tool.</strong> It's infrastructure. Every feature, every policy, every royalty is enforced at the database layer — not in a document, not in a promise.
+        <span class="g">The ethics are the code.</span>
+      </p>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar p1">
+        <span class="pillar-icon">🔐</span>
+        <h3>Cryptographic Consent</h3>
+        <p>Every voice utterance is bound to a cryptographic consent key. <strong>Format: NOIZY-[ACTOR]-CONSENT-[16hex]-AVA-[DOMAIN]-[JURISDICTION]-[DATE].</strong> Not paperwork. Provenance.</p>
+      </div>
+      <div class="pillar p2">
+        <span class="pillar-icon">💰</span>
+        <h3>75% Hardcoded Royalty</h3>
+        <p>The creator royalty is <strong>hardcoded at the D1 database layer.</strong> It cannot be changed by a board decision, a VC pressure campaign, or a terms of service update. Ever.</p>
+      </div>
+      <div class="pillar p3">
+        <span class="pillar-icon">🏛️</span>
+        <h3>Voice Estate</h3>
+        <p>Your voice is a <strong>perpetual, inheritable creative asset</strong> — not a data source. Governed by you. Protected by NC_09. Held by the 500-Year Voice Codex.</p>
+      </div>
+      <div class="pillar p4">
+        <span class="pillar-icon">🔍</span>
+        <h3>NOIZY PROOF</h3>
+        <p>Every synthesis is watermarked with <strong>WM_{8hex}</strong> — SHA-256 of actorId + utteranceId + sessionId + consentKey + timestamp. Cryptographic attribution, always.</p>
+      </div>
+      <div class="pillar p5">
+        <span class="pillar-icon">🌊</span>
+        <h3>The Music World</h3>
+        <p>A living museum of human creative expression. <strong>Bathe in voices, compositions, and sounds</strong> from creators across the world — all protected, all earning, all attributed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── NEVER CLAUSES ─── -->
+<section id="never">
+  <div style="max-width:1100px; margin:0 auto; padding: 0 40px;">
+    <div class="section-eyebrow">Constitutional Architecture</div>
+    <h2 class="section-h2">THE <span class="g">NEVER</span><br>CLAUSES</h2>
+
+    <div class="never-intro">
+      <p>
+        These are not policies. They are not terms of service. They are <strong>constitutional clauses enforced at the pipeline layer.</strong> Every audio synthesis operation passes through every relevant clause before a single byte of audio is generated.
+      </p>
+    </div>
+
+    <div class="nc-wall">
+      <div class="nc"><span class="nc-id">NC·01</span><div class="nc-content"><h4>No Voice Without Consent</h4><p>No voice synthesis without a valid cryptographic consent key. Stage 1 of the pipeline. No exceptions.</p></div></div>
+      <div class="nc"><span class="nc-id">NC·02</span><div class="nc-content"><h4>No Royalty Bypass</h4><p>75% creator royalty is hardcoded at D1. No platform decision can reduce it below the floor.</p></div></div>
+      <div class="nc"><span class="nc-id">NC·03</span><div class="nc-content"><h4>No Training Without Opt-In</h4><p>No RSP voice used for model training without explicit, separate consent. Not implied. Not inherited.</p></div></div>
+      <div class="nc"><span class="nc-id">NC·04</span><div class="nc-content"><h4>No Impersonation</h4><p>No synthesis of one voice to impersonate a different living person. Period.</p></div></div>
+      <div class="nc"><span class="nc-id">NC·05</span><div class="nc-content"><h4>No Sublicensing</h4><p>Voice rights cannot be sublicensed to any third party without direct RSP authorization in writing.</p></div></div>
+      <div class="nc"><span class="nc-id">NC·06</span><div class="nc-content"><h4>No NSFW Without Separate Consent</h4><p>Adult content requires a distinct, explicit consent layer. Cannot be inherited from general consent.</p></div></div>
+      <div class="nc"><span class="nc-id">NC·07</span><div class="nc-content"><h4>No Political Persuasion</h4><p>No voice synthesis for political campaigns, propaganda, or persuasion of any kind.</p></div></div>
+      <div class="nc"><span class="nc-id">NC·08</span><div class="nc-content"><h4>No Medical Advice Synthesis</h4><p>No synthesis of unlicensed medical guidance using any RSP voice.</p></div></div>
+      <div class="nc"><span class="nc-id">NC·09</span><div class="nc-content"><h4>No Estate Dissolution</h4><p>Voice Estates cannot be dissolved. They pass to designated heirs under the 500-Year Codex.</p></div></div>
+      <div class="nc"><span class="nc-id">NC·10</span><div class="nc-content"><h4>No Provenance Deletion</h4><p>The ledger is append-only. No watermark, attribution, or provenance record can ever be erased.</p></div></div>
+    </div>
+
+    <p class="nc-note"><strong>ENFORCEMENT:</strong> These clauses are not monitored by a legal department. They are enforced by the 7-Stage synthesis pipeline. A request that violates any applicable clause does not generate a warning — it does not generate audio.</p>
+  </div>
+</section>
+
+<!-- ─── RSP PROGRAM ─── -->
+<section id="rsp">
+  <div style="max-width:1100px; margin:0 auto; padding: 0 40px;">
+    <div class="section-eyebrow">The RSP Program</div>
+    <h2 class="section-h2">REGISTERED<br>SOUND <span class="g">PROFESSIONALS</span></h2>
+
+    <div class="rsp-layout">
+      <div class="rsp-left">
+        <p>
+          The Registered Sound Professional program is how you join NOIZY as a creator with full Voice Estate rights, cryptographic consent protection, and the <span class="g">75% royalty floor locked to your name forever.</span>
+        </p>
+        <p>
+          <strong>Founding RSPs</strong> join at a special 85% royalty tier — permanently locked. These are the first five voices in the 500-Year Voice Codex. Their names will be on the founding plaque.
+        </p>
+        <p>
+          Every RSP receives: a Voice Estate, a cryptographic consent key, NOIZY PROOF watermarking on every synthesis, a provenance ledger entry for every utterance, and <span class="gold">full royalty transparency</span> — not a number in a dashboard, a number in a database you can audit.
+        </p>
+        <a href="noizy-founding-rsp.html" class="btn-primary" style="display:inline-block; margin-top: 12px;">Apply as Founding RSP</a>
+      </div>
+      <div class="rsp-tiers">
+        <div class="tier featured">
+          <div class="tier-name">Founding RSP <small>First 5 — Codex Entry</small></div>
+          <div class="tier-price">FREE <small>forever</small></div>
+          <span class="tier-badge">85% ROYALTY · LOCKED</span>
+        </div>
+        <div class="tier">
+          <div class="tier-name">Creator RSP <small>Standard enrollment</small></div>
+          <div class="tier-price">$0 <small>– $29/mo</small></div>
+        </div>
+        <div class="tier">
+          <div class="tier-name">Studio <small>Multi-voice operations</small></div>
+          <div class="tier-price">$99 <small>/mo</small></div>
+        </div>
+        <div class="tier">
+          <div class="tier-name">Label <small>Full catalogue management</small></div>
+          <div class="tier-price">$399 <small>/mo</small></div>
+        </div>
+        <div class="tier">
+          <div class="tier-name">Enterprise <small>Custom licensing</small></div>
+          <div class="tier-price">Custom</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MUSEUM TEASER ─── -->
+<section id="museum">
+  <div style="max-width:1100px; margin:0 auto; padding: 0 40px;">
+    <div class="section-eyebrow">NOIZY Music World</div>
+    <h2 class="section-h2">COME<br><span class="g">BATHE</span> IN IT</h2>
+
+    <div class="museum-card">
+      <div class="museum-card-inner">
+        <h3>The Living <span class="gold">Breathing</span> Time Capsule</h3>
+        <p>
+          The NOIZY Music World & Museum is not a streaming platform. It is a place.
+          Every voice, every composition, every sound in it is <strong>attributed, watermarked, protected, and earning.</strong>
+          You don't consume it. <span class="g">You bathe in it.</span>
+        </p>
+        <div class="museum-rooms">
+          <span class="m-room">🎙️ Voice Gallery</span>
+          <span class="m-room">🎵 Composition Hall</span>
+          <span class="m-room">⏳ Codex Chamber</span>
+          <span class="m-room">🫀 Healing Rooms</span>
+          <span class="m-room">🌍 Atlas Floor</span>
+          <span class="m-room">🌱 NOIZYKIDZ Wing</span>
+        </div>
+        <a href="noizy-music-world-museum.html" class="btn-secondary">Enter the Museum →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CODEX ─── -->
+<section id="codex">
+  <div style="max-width:1100px; margin:0 auto; padding: 0 40px;">
+    <div class="section-eyebrow">500-Year Voice Codex</div>
+    <h2 class="section-h2">YOUR VOICE<br><span class="v" style="color:var(--violet)">LASTS FOREVER</span></h2>
+
+    <div class="codex-layout">
+      <div class="codex-left">
+        <p>
+          The 500-Year Voice Codex is the most ambitious archive in the history of human creative expression. Every RSP voice is a Codex entry — <em>a perpetual, inheritable creative asset</em> that will be here in 2036, in 2126, in 2526.
+        </p>
+        <p>
+          Your Voice Estate governs everything: who can use your voice, in what contexts, for how long, and what happens after you are gone. NC_09 ensures that no one — not a platform, not a corporate successor, not a legal challenge — can dissolve your estate.
+        </p>
+        <p>
+          RSP_001 — Robert Stephen Plowman, Ottawa, March 2026 — is <span class="g">Entry One.</span> The founding voice. In 2526, his voice will still be in the Museum, still be watermarked, still be earning for his estate.
+        </p>
+      </div>
+      <div class="codex-right">
+        <span class="cr-badge">500-YEAR VOICE CODEX · ENTRY 001 · ACTIVE</span>
+        <div class="cr-year">500</div>
+        <div class="cr-title">RSP_001<br>Robert Stephen Plowman</div>
+        <p>Composer · Audio Director<br>Ottawa, Canada · March 2026<br>Founding Entry — The Voice That Started Everything</p>
+        <code class="codex-key">NOIZY-RSP001-CONSENT-A7F3C9B2E1D4850F-AVA-GLOBAL-CANADA-20260314</code>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── COMPARISON ─── -->
+<section id="compare">
+  <div style="max-width:1100px; margin:0 auto; padding: 0 40px;">
+    <div class="section-eyebrow">The Comparison</div>
+    <h2 class="section-h2">THERE IS<br>NO <span class="g">COMPARISON</span></h2>
+
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>ElevenLabs</th>
+          <th>Suno</th>
+          <th class="noizy">NOIZY.ai ✦</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Creator royalty</td>
+          <td class="bad">0%</td>
+          <td class="bad">0%</td>
+          <td class="noizy">75% — hardcoded at D1</td>
+        </tr>
+        <tr>
+          <td>Consent architecture</td>
+          <td class="bad">Terms of service</td>
+          <td class="bad">Terms of service</td>
+          <td class="noizy">Cryptographic key — NC_01</td>
+        </tr>
+        <tr>
+          <td>Voice ownership</td>
+          <td class="bad">Platform controls</td>
+          <td class="bad">Platform controls</td>
+          <td class="noizy">Voice Estate — RSP owns forever</td>
+        </tr>
+        <tr>
+          <td>Model training</td>
+          <td class="bad">Default opt-in</td>
+          <td class="bad">$500M RIAA lawsuit</td>
+          <td class="noizy">Explicit opt-in — NC_03</td>
+        </tr>
+        <tr>
+          <td>Provenance tracking</td>
+          <td class="bad">None</td>
+          <td class="bad">None</td>
+          <td class="noizy">WM_{8hex} · append-only ledger</td>
+        </tr>
+        <tr>
+          <td>500-year preservation</td>
+          <td class="bad"><span class="cross">✕</span></td>
+          <td class="bad"><span class="cross">✕</span></td>
+          <td class="noizy"><span class="check">✓</span> Voice Codex + NC_09</td>
+        </tr>
+        <tr>
+          <td>Inheritance rights</td>
+          <td class="bad"><span class="cross">✕</span></td>
+          <td class="bad"><span class="cross">✕</span></td>
+          <td class="noizy"><span class="check">✓</span> Voice Estate framework</td>
+        </tr>
+        <tr>
+          <td>Royalty floor enforceability</td>
+          <td class="bad">N/A — $0</td>
+          <td class="bad">N/A — $0</td>
+          <td class="noizy">Cannot be lowered. Ever.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ─── CTA ─── -->
+<section id="cta-section">
+  <div class="cta-eyebrow">The 5th Epoch Starts Now</div>
+  <h2 class="cta-h2">JOIN THE<br><span class="g">MOVEMENT</span></h2>
+  <p class="cta-body">
+    The first four epochs were defined by whoever controlled distribution.
+    The 5th Epoch will be defined by whoever controls consent.
+    <em>Be one of the first five.</em>
+  </p>
+  <div class="hero-ctas">
+    <a href="noizy-founding-rsp.html" class="btn-primary">Become a Founding RSP</a>
+    <a href="plowmans-chronicles.html" class="btn-secondary">Read the Chronicles →</a>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-logo">NOIZY<span>.</span>AI</div>
+  <ul class="footer-links">
+    <li><a href="noizy-founding-rsp.html">RSP Program</a></li>
+    <li><a href="noizy-music-world-museum.html">Music World</a></li>
+    <li><a href="noizy-movement-architecture.html">Creator Rights</a></li>
+    <li><a href="plowmans-chronicles.html">Chronicles</a></li>
+    <li><a href="noizy-2526-retrospective.html">2526 Vision</a></li>
+  </ul>
+  <div class="footer-grf">
+    <span>GORUNFREE</span> — BECAUSE IT IS THE ONLY WAY<br>
+    <span style="color:var(--dim); font-size:9px">NOIZYFISH INC. · OTTAWA · 2026 · RSP_001</span>
+  </div>
+</footer>
+
+<script>
+// ─── CANVAS HERO ───
+const C = document.getElementById('bg');
+const cx = C.getContext('2d');
+function resize() { C.width = innerWidth; C.height = innerHeight; }
+resize(); addEventListener('resize', resize);
+
+// Stars
+const STARS = Array.from({length:300}, () => ({
+  x: Math.random(), y: Math.random(),
+  r: Math.random()*1.2+.2,
+  op: Math.random()*.4+.04,
+  tw: Math.random()*Math.PI*2
+}));
+
+// Sound particles
+const PARTICLES = Array.from({length:24}, () => ({
+  x: Math.random()*innerWidth, y: Math.random()*innerHeight,
+  vx: (Math.random()-.5)*.3, vy: (Math.random()-.5)*.3,
+  r: Math.random()*2.5+.8,
+  color: ['#00ff88','#f0c040','#a78bfa','#00d4ff'][Math.floor(Math.random()*4)],
+  op: Math.random()*.2+.05, ph: Math.random()*Math.PI*2
+}));
+
+let t=0;
+function draw() {
+  const W=C.width, H=C.height;
+  cx.clearRect(0,0,W,H);
+
+  // Nebula
+  [{x:.1,y:.15,r:250,c:'rgba(0,255,136,0.018)'},{x:.85,y:.6,r:300,c:'rgba(167,139,250,0.018)'},{x:.5,y:.95,r:200,c:'rgba(240,192,64,0.015)'}].forEach(p=>{
+    const g=cx.createRadialGradient(W*p.x,H*p.y,0,W*p.x,H*p.y,p.r);
+    g.addColorStop(0,p.c); g.addColorStop(1,'transparent');
+    cx.fillStyle=g; cx.fillRect(0,0,W,H);
+  });
+
+  // Stars
+  STARS.forEach(s=>{
+    const a=Math.max(.02,s.op+Math.sin(s.tw+t*.01)*.1);
+    cx.beginPath(); cx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);
+    cx.fillStyle=`rgba(200,225,255,${a})`; cx.fill();
+  });
+
+  // Particles
+  PARTICLES.forEach(p=>{
+    const a=p.op+Math.sin(p.ph+t*.025)*.08;
+    cx.beginPath(); cx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    cx.globalAlpha=Math.max(0,a); cx.fillStyle=p.color; cx.fill(); cx.globalAlpha=1;
+    p.x+=p.vx; p.y+=p.vy;
+    if(p.x<0||p.x>W)p.vx*=-1; if(p.y<0||p.y>H)p.vy*=-1;
+  });
+
+  // Waveform
+  cx.beginPath(); cx.strokeStyle='rgba(0,255,136,0.04)'; cx.lineWidth=1.5;
+  for(let x=0;x<W;x+=2){
+    const y=H*.96+Math.sin(x*.007+t*.008)*18+Math.sin(x*.02+t*.013)*8;
+    x===0?cx.moveTo(x,y):cx.lineTo(x,y);
+  }
+  cx.stroke();
+
+  t++; requestAnimationFrame(draw);
+}
+draw();
+</script>
+
+</body>
+</html>

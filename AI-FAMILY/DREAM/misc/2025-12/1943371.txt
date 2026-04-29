@@ -1,0 +1,19 @@
+<root>
+    <CtrlLabelStyle name="InspectorLabelStyle" centeredText="true">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlImageViewStyle name="StarStyle" noMouseOverEvent="true" optBorder="false" optBackground="false" optMouseHandle="true" optHQResizing="true" colBorder="[r:255 g:255 b:255 a:255]" />
+    <CtrlPanelStyle name="KPInspectorPanelStyleInfo" noDefaultDrawing="true" optSmartTile="true" colBorder="[r:0 g:0 b:0 a:0]" colFill="[r:0 g:0 b:0 a:0]" intSmartTileEdgeSize="20" intRoundedRectRadius="0">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlImageViewStyle name="BlankImageStyle" optBorder="false" optBackground="false" optHQResizing="true" colBorder="[r:0 g:0 b:0 a:0]" colBackground="[r:128 g:128 b:128 a:0]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlImageViewStyle>
+    <CtrlListBoxStyle name="TransparentBoxStyleKPChoose" colHighlight="[r:208 g:208 b:208 a:0]" colBorder="[r:160 g:160 b:160 a:255]" colFill="[r:176 g:176 b:176 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlListBoxStyle>
+    <CtrlPanel name="CtrlPanel" style="KPInspectorPanelStyleInfo" rect="[x:0 y:0 w:200 h:420]" id="0">
+        <CtrlListBox name="MfrListBox" style="TransparentBoxStyleKPChoose" rect="[x:8 y:8 w:184 h:200]" id="100001" />
+        <CtrlListBox name="ShippedInfoBox" style="TransparentBoxStyleKPChoose" rect="[x:8 y:216 w:184 h:196]" id="0" />
+    </CtrlPanel>
+</root>

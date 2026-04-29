@@ -1,0 +1,26 @@
+<root>
+    <CtrlTextBoxStyle name="MixerFXHeaderComboInvisible" noDefaultDrawing="true" colText="[r:64 g:64 b:64 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlTextBoxStyle>
+    <CtrlTextBoxStyle name="MixerFXHeaderComboInvisibleBig" noDefaultDrawing="true" colText="[r:64 g:64 b:64 a:255]">
+        <VFont name="font" vSize="15" fontName="Arial" />
+    </CtrlTextBoxStyle>
+    <CtrlPanelStyle name="EffectTypePanel" imBackground="effect_combo_background.tga" intSmartTileEdgeSize="5" intRoundedRectRadius="0">
+        <VFont name="font" vSize="12" fontName="Arial" weight="bold" />
+    </CtrlPanelStyle>
+    <CtrlPanel name="FXTitlePanel" style="MixerFXPanel" rect="[x:0 y:0 w:228 h:50]" id="0">
+        <CtrlKnob name="Mix" style="BFD2KnobMediumLight" rect="[x:35 y:3 w:32 h:41]" id="1006" />
+        <CtrlPanel name="EffectTypePanel" style="EffectTypePanel" rect="[x:98 y:4 w:125 h:21]" id="0">
+            <CtrlComboBox name="MixerFXCombo" style="MixerFXHeaderComboInvisibleBig" rect="[x:3 y:2 w:119 h:16]" id="100002" />
+        </CtrlPanel>
+        <CtrlSlider name="inputLevel" style="MixerFXLevelMeter" rect="[x:26 y:6 w:4 h:15]" id="100000" />
+        <CtrlButton name="effectActive" style="MixerFXActive" rect="[x:6 y:7 w:15 h:15]" id="1" text="On" />
+        <CtrlLabel name="EffectTypeLabel" style="MixerFXLabelDark" rect="[x:65 y:7 w:32 h:14]" id="1" text="Effect:" />
+        <CtrlComboBox name="MixerFXPresetCombo" style="MixerFXHeaderComboInvisible" rect="[x:101 y:29 w:86 h:15]" id="100002" />
+        <CtrlButton name="MixerFXMenu" style="MixerMenuButton" rect="[x:6 y:29 w:15 h:15]" id="100000" text="M" />
+        <CtrlLabel name="label2" style="MixerFXLabelDark" rect="[x:63 y:29 w:33 h:14]" id="1" text="Preset:" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:38 y:29 w:18 h:14]" id="2006" text="Mix" />
+        <CtrlButton name="MixerFXPresetPrev" style="MixerFXPresetPrev" rect="[x:190 y:28 w:14 h:15]" id="100000" zorder="2" text="&lt;" />
+        <CtrlButton name="MixerFXPresetNext" style="MixerFXPresetNext" rect="[x:207 y:28 w:14 h:15]" id="100000" zorder="2" text="&gt;" />
+    </CtrlPanel>
+</root>

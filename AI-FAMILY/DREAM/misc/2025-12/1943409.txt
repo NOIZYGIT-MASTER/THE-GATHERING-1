@@ -1,0 +1,91 @@
+<root>
+    <CtrlPanelStyle name="ImporterPanelStyle" colBorder="[r:0 g:0 b:0 a:0]" colBorderAlt="[r:0 g:0 b:0 a:0]" colFill="[r:149 g:149 b:149 a:0]" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlTextBoxStyle name="ImporterComboStyle" optSmartTile="true" imBackground="..\com_sunken_box_horizontal.tga" intRoundedRectRadius="0" textOffset="[x:0 y:0]" colBackground="[r:29 g:29 b:29 a:255]" colBorder="[r:150 g:150 b:150 a:255]" colText="[r:200 g:200 b:200 a:255]" colTextSelected="[r:150 g:150 b:150 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlTextBoxStyle>
+    <CtrlTextBoxStyle name="ImporterEditStyle" optEditable="true" optSingleClickEdit="true" optSmartTile="true" imBackground="..\com_sunken_box_horizontal.tga" intRoundedRectRadius="0" textOffset="[x:0 y:0]" colBackground="[r:29 g:29 b:29 a:255]" colText="[r:200 g:200 b:200 a:255]" colTextSelected="[r:150 g:150 b:150 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlTextBoxStyle>
+    <CtrlImageViewStyle name="ImporterImageStyle" optBackground="false" optMouseHandle="true" optHQResizing="true" colBorder="[r:150 g:150 b:150 a:255]" colBackground="[r:128 g:128 b:128 a:0]" intRoundedRectRadius="0">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlImageViewStyle>
+    <CtrlListBoxStyle name="ArticViewStyle" colHighlight="[r:107 g:107 b:107 a:255]" colFill="[r:255 g:255 b:255 a:0]" intRoundedRectRadius="0" intLineSpacing="13">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlListBoxStyle>
+    <CtrlPanelStyle name="ImportOuterPanelStyle" colFill="[r:0 g:0 b:0 a:255]" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlLabelStyle name="ImporterLabelSTyle">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlButtonStyle name="SampleImporterButtonStyle" optDrawText="true" colFillOff="[r:75 g:75 b:75 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlPanelStyle name="GradStyle" imBackground="importer_grad.png" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlButtonStyle name="KickClassButton" optMomentary="false" imDown="..\Mixer\class_kick_sm.tga" imUp="..\Mixer\class_kick_sm.tga">
+        <VFont name="font" vSize="12" fontName="Tahoma" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="SnareClassButton" optMomentary="false" imDown="..\Mixer\class_snare_sm.tga" imUp="..\Mixer\class_snare_sm.tga">
+        <VFont name="font" vSize="12" fontName="Tahoma" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="HihatClassButton" optMomentary="false" imDown="..\Mixer\class_hihat_sm.tga" imUp="..\Mixer\class_hihat_sm.tga">
+        <VFont name="font" vSize="12" fontName="Tahoma" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="CymbalClassButton" optMomentary="false" imDown="..\Mixer\class_cymbal_sm.tga" imUp="..\Mixer\class_cymbal_sm.tga">
+        <VFont name="font" vSize="12" fontName="Tahoma" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="TomClassButton" optMomentary="false" imDown="..\Mixer\class_tom_sm.tga" imUp="..\Mixer\class_tom_sm.tga">
+        <VFont name="font" vSize="12" fontName="Tahoma" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="PercussionClassButton" optMomentary="false" imDown="..\Mixer\class_percussion_sm.tga" imUp="..\Mixer\class_percussion_sm.tga">
+        <VFont name="font" vSize="12" fontName="Tahoma" />
+    </CtrlButtonStyle>
+    <CtrlTextBoxStyle name="ImporterEditable" optEditable="true" optSmartTile="true" imBackground="..\SongInfoTextBox.tga" intRoundedRectRadius="0" textOffset="[x:0 y:0]" colBackground="[r:163 g:163 b:163 a:255]" colText="[r:240 g:240 b:240 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlTextBoxStyle>
+    <CtrlTextBoxStyle name="ImporterCombo" optSmartTile="true" imBackground="..\SongInfoTextBox.tga" intRoundedRectRadius="0" textOffset="[x:0 y:0]" colBackground="[r:163 g:163 b:163 a:255]" colText="[r:240 g:240 b:240 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlTextBoxStyle>
+    <CtrlAudioBufferViewStyle name="AudioBufferView" colBorder="[r:96 g:96 b:96 a:255]" colFill="[r:75 g:90 b:115 a:255]" colFillSel="[r:48 g:48 b:48 a:255]" colFillTitle="[r:150 g:160 b:175 a:255]" cursor="[r:255 g:255 b:255 a:255]" colWave="[r:0 g:200 b:255 a:255]">
+        <VFont name="font" vSize="12" fontName="Tahoma" />
+    </CtrlAudioBufferViewStyle>
+    <CtrlPanel name="SampleImportOuterPanel" style="ImportOuterPanelStyle" rect="[x:8 y:0 w:600 h:336]" id="0">
+        <CtrlPanel name="SampleImportPanel" style="DefaultPanelLight" rect="[x:2 y:2 w:596 h:332]" id="0">
+            <CtrlPanel name="CtrlPanel" style="ExportTitleBar" rect="[x:5 y:4 w:587 h:32]" id="100002">
+                <CtrlLabel name="CtrlLabel" style="BFD2LabelLargeDarkGreyCentered" rect="[x:0 y:0 w:587 h:32]" id="100003" text="Sample Importer" />
+            </CtrlPanel>
+            <CtrlAudioBufferView name="AudioBufferView" style="BFDEcoAudioBufferView" rect="[x:9 y:44 w:387 h:106]" id="100000">
+                <CtrlButton rect="[x:357 y:91 w:15 h:15]" id="1" text="+" />
+                <CtrlButton rect="[x:357 y:91 w:15 h:15]" id="1" text="+" />
+                <CtrlButton rect="[x:372 y:91 w:15 h:15]" id="2" text="-" />
+                <CtrlButton rect="[x:372 y:91 w:15 h:15]" id="2" text="-" />
+            </CtrlAudioBufferView>
+            <CtrlPhotoEdit name="KitPiecePhoto" style="BFD2_PhotoEditStyle" rect="[x:404 y:44 w:180 h:170]" id="100000" />
+            <CtrlLabel name="NameLabel" style="ImporterLabelSTyle" rect="[x:10 y:150 w:80 h:16]" id="1000" text="Sample" />
+            <CtrlButton name="SampleBrowse" style="RecessedButtonMomentary" rect="[x:360 y:163 w:36 h:24]" id="100009" text="..." />
+            <CtrlLabel name="CtrlLabel" style="ImporterLabelSTyle" rect="[x:10 y:186 w:180 h:16]" id="100010" text="Destination" />
+            <CtrlComboBox name="OutputPathCombo" style="BFD2Combo" rect="[x:10 y:202 w:348 h:18]" id="100004" />
+            <CtrlLabel name="NameLabel" style="ImporterLabelSTyle" rect="[x:420 y:221 w:164 h:15]" id="1000" text="Supply your own Kit Piece" />
+            <CtrlLabel name="NameLabel" style="ImporterLabelSTyle" rect="[x:10 y:226 w:80 h:16]" id="1000" text="Kit-piece Name" />
+            <CtrlButtonGroup name="KitpieceClass" rect="[x:194 y:232 w:180 h:90]" id="100000">
+                <CtrlButton name="KickClassButton" style="KickClassButton" rect="[x:4 y:0 w:47 h:39]" id="100001" displayName="Kick" />
+                <CtrlButton name="SnareClassButton" style="SnareClassButton" rect="[x:68 y:0 w:47 h:39]" id="100002" displayName="Snare" />
+                <CtrlButton name="HihatClassButton" style="HihatClassButton" rect="[x:132 y:0 w:47 h:39]" id="100003" displayName="Hihat" />
+                <CtrlButton name="TomClassButton" style="TomClassButton" rect="[x:4 y:42 w:47 h:39]" id="100004" displayName="Tom" />
+                <CtrlButton name="CymbalClassButton" style="CymbalClassButton" rect="[x:68 y:42 w:47 h:39]" id="100005" displayName="Cymbal" />
+                <CtrlButton name="PercussionClassButton" style="PercussionClassButton" rect="[x:132 y:42 w:47 h:39]" id="100006" displayName="Percussion" />
+            </CtrlButtonGroup>
+            <CtrlLabel name="NameLabel" style="ImporterLabelSTyle" rect="[x:420 y:237 w:164 h:15]" id="1000" text="image here: 180x150 tga or png" />
+            <CtrlLabel name="TypeLabel" style="ImporterLabelSTyle" rect="[x:10 y:266 w:80 h:16]" id="1000" text="Kit-piece Type" />
+            <CtrlButton name="ImporterCloseButton" style="RecessedButtonMomentary" rect="[x:409 y:275 w:80 h:40]" id="100009" text="Cancel" />
+            <CtrlButton name="ImporterOkButton" style="RecessedButtonMomentary" rect="[x:499 y:275 w:80 h:40]" id="100010" text="Import" />
+            <CtrlComboBox name="ImporterTypeCombo" style="ImporterCombo" rect="[x:10 y:282 w:180 h:18]" id="100004" />
+            <CtrlTextBox name="SamplePath" style="ImporterEditable" rect="[x:10 y:166 w:347 h:18]" id="100001" zorder="50" />
+            <CtrlTextBox name="NameEditBox" style="ImporterEditable" rect="[x:10 y:242 w:180 h:18]" id="100001" zorder="50" />
+        </CtrlPanel>
+    </CtrlPanel>
+</root>

@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIZYKIDZ — Global Music Theory Atlas</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Bebas+Neue&display=swap');
+
+  :root {
+    --void:    #04020c;
+    --deep:    #080416;
+    --panel:   #0c0620;
+    --card:    #110828;
+    --border:  #1a1035;
+
+    /* Continent colors */
+    --africa:   #ff9f43;
+    --india:    #ee5a24;
+    --china:    #e84393;
+    --mideast:  #a29bfe;
+    --greece:   #74b9ff;
+    --europe:   #00cec9;
+    --indigenous:#55efc4;
+    --latam:    #fd79a8;
+    --modern:   #fdcb6e;
+    --prehistory:#dfe6e9;
+
+    --gold:    #e8c84a;
+    --green:   #00e87a;
+    --text:    #b8cce4;
+    --dim:     #3e4f62;
+    --bright:  #eef4ff;
+    --mono:    'Space Mono', monospace;
+    --sans:    'Space Grotesk', sans-serif;
+    --kids:    'Nunito', sans-serif;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--text);
+    font-family: var(--kids);
+    overflow-x: hidden;
+  }
+
+  /* ─── CANVAS ─── */
+  #stars-canvas { position:fixed; inset:0; z-index:0; pointer-events:none; }
+
+  /* ─── NAV ─── */
+  .top-nav {
+    position:sticky; top:0; z-index:200;
+    background:rgba(4,2,12,0.95);
+    border-bottom:1px solid var(--border);
+    padding:12px 32px;
+    display:flex; align-items:center; justify-content:space-between;
+    backdrop-filter:blur(10px);
+    flex-wrap:wrap; gap:8px;
+  }
+
+  .nav-brand {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:20px; letter-spacing:0.15em;
+    display:flex; align-items:center; gap:10px;
+  }
+
+  .brand-noizy { color:var(--green); }
+  .brand-kids  { color:var(--gold); }
+
+  .nav-title {
+    font-family:var(--kids); font-weight:900;
+    font-size:11px; color:var(--text);
+    letter-spacing:0.05em;
+  }
+
+  .nav-regions {
+    display:flex; flex-wrap:wrap; gap:4px;
+  }
+
+  .nav-region {
+    font-family:var(--mono); font-size:8px; letter-spacing:0.1em;
+    padding:4px 9px; border-radius:20px; border:1px solid rgba(255,255,255,0.08);
+    cursor:pointer; transition:all 0.15s; text-decoration:none;
+    color:var(--dim);
+  }
+  .nav-region:hover { color:var(--bright); border-color:rgba(255,255,255,0.2); }
+
+  /* ─── HERO ─── */
+  .hero {
+    padding:80px 40px 60px; text-align:center;
+    border-bottom:1px solid var(--border);
+    position:relative; z-index:10;
+  }
+
+  .hero-badge {
+    font-family:var(--mono); font-size:9px; color:var(--green);
+    letter-spacing:0.4em; text-transform:uppercase; margin-bottom:16px;
+  }
+
+  .hero-title {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(40px,8vw,100px);
+    letter-spacing:0.05em; line-height:0.9;
+    margin-bottom:8px;
+  }
+
+  .ht-noizy   { color:var(--green); }
+  .ht-kidz    { color:var(--gold); }
+  .ht-global  { color:var(--bright); }
+  .ht-music   { color:var(--africa); }
+  .ht-theory  { color:var(--bright); }
+  .ht-atlas   { color:var(--latam); }
+
+  .hero-subtitle {
+    font-family:var(--kids); font-weight:600;
+    font-size:clamp(14px,1.6vw,18px); color:var(--text);
+    max-width:600px; margin:20px auto 32px; line-height:1.7;
+  }
+
+  .hero-sub-em { color:var(--gold); font-weight:800; }
+
+  .stat-row {
+    display:flex; flex-wrap:wrap; gap:12px; justify-content:center;
+    margin-bottom:20px;
+  }
+
+  .stat-pill {
+    font-family:var(--kids); font-weight:800;
+    font-size:11px; padding:6px 16px; border-radius:20px;
+    border:1px solid rgba(255,255,255,0.1);
+    letter-spacing:0.05em;
+  }
+
+  /* ─── REGION GRID ─── */
+  .regions-nav {
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+    gap:10px; padding:32px 40px;
+    border-bottom:1px solid var(--border);
+    position:relative; z-index:10;
+  }
+
+  .region-card {
+    border:1px solid rgba(255,255,255,0.06);
+    border-radius:10px; padding:16px 14px;
+    cursor:pointer; transition:all 0.2s;
+    text-decoration:none; display:block;
+    background:rgba(255,255,255,0.01);
+  }
+
+  .region-card:hover { transform:translateY(-2px); border-color:rgba(255,255,255,0.15); }
+
+  .rc-emoji { font-size:28px; margin-bottom:8px; display:block; }
+  .rc-name  { font-family:var(--kids); font-weight:900; font-size:13px; margin-bottom:4px; }
+  .rc-sub   { font-family:var(--mono); font-size:8px; color:var(--dim); letter-spacing:0.1em; }
+
+  /* ─── REGION SECTIONS ─── */
+  .region-section {
+    padding:64px 40px;
+    border-bottom:1px solid var(--border);
+    position:relative; z-index:10;
+    overflow:hidden;
+  }
+
+  .rs-accent {
+    position:absolute; top:0; left:0; right:0; height:3px;
+  }
+
+  .rs-header {
+    display:flex; align-items:flex-start; gap:20px; margin-bottom:32px;
+    flex-wrap:wrap;
+  }
+
+  .rs-emoji-big {
+    font-size:56px; flex-shrink:0;
+    filter:drop-shadow(0 0 20px rgba(255,255,255,0.1));
+  }
+
+  .rs-header-text { flex:1; min-width:200px; }
+
+  .rs-era {
+    font-family:var(--mono); font-size:8px; letter-spacing:0.3em;
+    text-transform:uppercase; margin-bottom:6px;
+  }
+
+  .rs-name {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(28px,4vw,52px);
+    letter-spacing:0.06em; line-height:1; margin-bottom:8px;
+  }
+
+  .rs-tagline {
+    font-family:var(--kids); font-weight:600;
+    font-size:clamp(13px,1.4vw,16px); color:var(--text); line-height:1.65;
+    max-width:640px;
+  }
+
+  /* ─── CONCEPT CARDS ─── */
+  .concepts-grid {
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+    gap:12px; margin-bottom:28px;
+  }
+
+  .concept-card {
+    border:1px solid; border-radius:8px; padding:16px;
+    background:rgba(255,255,255,0.02);
+  }
+
+  .cc-icon   { font-size:24px; margin-bottom:8px; display:block; }
+  .cc-name   { font-family:var(--kids); font-weight:900; font-size:14px; margin-bottom:6px; }
+  .cc-desc   { font-family:var(--kids); font-weight:500; font-size:12px; line-height:1.6; color:var(--text); }
+  .cc-desc strong { color:var(--bright); }
+
+  /* ─── INSTRUMENTS ─── */
+  .instruments-row {
+    display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px;
+  }
+
+  .instr-chip {
+    font-family:var(--kids); font-weight:700; font-size:11px;
+    padding:6px 12px; border-radius:6px;
+    border:1px solid rgba(255,255,255,0.1);
+    background:rgba(255,255,255,0.03);
+    display:flex; align-items:center; gap:6px;
+  }
+
+  /* ─── DID YOU KNOW ─── */
+  .dyk-box {
+    border-radius:10px; padding:20px 22px; margin-bottom:24px;
+    border:1px solid rgba(255,255,255,0.08);
+  }
+
+  .dyk-label {
+    font-family:var(--mono); font-size:8px; letter-spacing:0.3em;
+    text-transform:uppercase; margin-bottom:8px; opacity:0.7;
+  }
+
+  .dyk-text {
+    font-family:var(--kids); font-weight:700; font-size:14px;
+    line-height:1.6; color:var(--bright);
+  }
+
+  /* ─── INFLUENCE CHAIN ─── */
+  .influence-chain {
+    display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-bottom:24px;
+  }
+
+  .inf-item {
+    font-family:var(--kids); font-weight:800; font-size:11px;
+    padding:5px 12px; border-radius:20px; border:1px solid rgba(255,255,255,0.1);
+    background:rgba(255,255,255,0.03);
+  }
+
+  .inf-arrow { color:var(--dim); font-size:14px; }
+
+  /* ─── UNIVERSAL TRUTHS ─── */
+  .universal-section {
+    padding:64px 40px;
+    border-bottom:1px solid var(--border);
+    position:relative; z-index:10;
+    text-align:center;
+  }
+
+  .ut-title {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(32px,5vw,64px);
+    color:var(--bright); letter-spacing:0.06em; margin-bottom:8px;
+  }
+
+  .ut-subtitle {
+    font-family:var(--kids); font-weight:600;
+    font-size:16px; color:var(--text); max-width:560px;
+    margin:0 auto 40px; line-height:1.6;
+  }
+
+  .elements-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+    gap:12px; max-width:900px; margin:0 auto 48px;
+  }
+
+  .element-card {
+    border-radius:12px; padding:20px 16px; text-align:center;
+    border:1px solid rgba(255,255,255,0.08);
+    background:rgba(255,255,255,0.02);
+    transition:transform 0.2s;
+  }
+
+  .element-card:hover { transform:scale(1.03); }
+
+  .el-icon  { font-size:36px; margin-bottom:10px; display:block; }
+  .el-name  { font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:0.1em; margin-bottom:6px; }
+  .el-desc  { font-family:var(--kids); font-weight:600; font-size:11px; color:var(--dim); line-height:1.5; }
+
+  /* ─── NOIZYKIDZ VISION ─── */
+  .vision-section {
+    padding:64px 40px;
+    position:relative; z-index:10;
+    text-align:center;
+  }
+
+  .vision-title {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(32px,5vw,60px);
+    color:var(--gold); letter-spacing:0.08em; margin-bottom:16px;
+  }
+
+  .vision-sub {
+    font-family:var(--kids); font-weight:700;
+    font-size:15px; color:var(--text);
+    max-width:600px; margin:0 auto 40px; line-height:1.7;
+  }
+
+  .adventure-grid {
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+    gap:12px; max-width:1000px; margin:0 auto 40px;
+  }
+
+  .adventure-card {
+    border-radius:10px; padding:18px;
+    border:1px solid rgba(255,255,255,0.08);
+    text-align:left;
+    transition:all 0.2s;
+  }
+
+  .adventure-card:hover { transform:translateY(-2px); }
+
+  .adv-emoji { font-size:32px; margin-bottom:10px; display:block; }
+  .adv-title { font-family:var(--kids); font-weight:900; font-size:14px; margin-bottom:6px; }
+  .adv-desc  { font-family:var(--kids); font-weight:500; font-size:12px; line-height:1.6; color:var(--text); }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    padding:32px 40px;
+    border-top:1px solid var(--border);
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:12px;
+    position:relative; z-index:10;
+    font-family:var(--mono); font-size:8px; color:var(--dim);
+    letter-spacing:0.1em;
+  }
+
+  .footer-grf {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:22px; color:var(--green); letter-spacing:0.2em;
+    text-shadow:0 0 20px rgba(0,232,122,0.2);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width:700px) {
+    .regions-nav { grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); padding:20px; }
+    .region-section { padding:40px 20px; }
+    .hero { padding:48px 20px 40px; }
+  }
+
+  ::-webkit-scrollbar { width:3px; }
+  ::-webkit-scrollbar-track { background:var(--void); }
+  ::-webkit-scrollbar-thumb { background:var(--border); }
+</style>
+</head>
+<body>
+
+<canvas id="stars-canvas"></canvas>
+
+<!-- ─── NAV ─── -->
+<nav class="top-nav">
+  <div class="nav-brand">
+    <span class="brand-noizy">NOIZY</span><span class="brand-kids">KIDZ</span>
+    <div class="nav-title">GLOBAL MUSIC THEORY ATLAS</div>
+  </div>
+  <div class="nav-regions">
+    <a class="nav-region" href="#prehistory">🪨 Prehistoric</a>
+    <a class="nav-region" href="#africa">🥁 Africa</a>
+    <a class="nav-region" href="#india">🪗 India</a>
+    <a class="nav-region" href="#china">🎋 China</a>
+    <a class="nav-region" href="#mideast">🌙 Middle East</a>
+    <a class="nav-region" href="#greece">🏛️ Greece</a>
+    <a class="nav-region" href="#europe">🎻 Europe</a>
+    <a class="nav-region" href="#indigenous">🌿 Indigenous</a>
+    <a class="nav-region" href="#latam">💃 Latin America</a>
+    <a class="nav-region" href="#modern">⚡ Modern</a>
+    <a class="nav-region" href="#universal">🌍 Universal</a>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<div class="hero">
+  <div class="hero-badge">NOIZYFISH INC. · NOIZYKIDZ · DOCUMENT 22 · THE PLOWMAN'S CHRONICLES</div>
+  <div class="hero-title">
+    <div class="ht-noizy">NOIZY</div>
+    <div class="ht-kidz">KIDZ</div>
+    <div class="ht-global">GLOBAL</div>
+    <div class="ht-music">MUSIC</div>
+    <div class="ht-theory">THEORY</div>
+    <div class="ht-atlas">ATLAS</div>
+  </div>
+  <p class="hero-subtitle">
+    Every rhythm, scale, and song tradition from
+    <span class="hero-sub-em">every culture on Earth</span> —
+    from the first rock ever struck to the music being made right now.
+    This is humanity's complete sonic memory. Built for curious kids everywhere.
+  </p>
+  <div class="stat-row">
+    <span class="stat-pill" style="color:var(--africa);border-color:rgba(255,159,67,0.3)">🥁 10 WORLD TRADITIONS</span>
+    <span class="stat-pill" style="color:var(--green);border-color:rgba(0,232,122,0.3)">🎵 40,000+ YEARS OF MUSIC</span>
+    <span class="stat-pill" style="color:var(--gold);border-color:rgba(232,200,74,0.3)">🌍 EVERY CONTINENT</span>
+    <span class="stat-pill" style="color:var(--latam);border-color:rgba(253,121,168,0.3)">✨ FOR EVERY KID ON EARTH</span>
+  </div>
+</div>
+
+<!-- ─── REGION QUICK-NAV GRID ─── -->
+<div class="regions-nav">
+  <a class="region-card" href="#prehistory" style="border-color:rgba(223,230,233,0.15)">
+    <span class="rc-emoji">🪨</span>
+    <div class="rc-name" style="color:var(--prehistory)">Prehistoric</div>
+    <div class="rc-sub">40,000 BC — THE FIRST BEAT</div>
+  </a>
+  <a class="region-card" href="#africa" style="border-color:rgba(255,159,67,0.2)">
+    <span class="rc-emoji">🥁</span>
+    <div class="rc-name" style="color:var(--africa)">Africa</div>
+    <div class="rc-sub">THE FOUNDATION OF RHYTHM</div>
+  </a>
+  <a class="region-card" href="#india" style="border-color:rgba(238,90,36,0.2)">
+    <span class="rc-emoji">🪗</span>
+    <div class="rc-name" style="color:var(--india)">India</div>
+    <div class="rc-sub">RAGA · TALA · EMOTION</div>
+  </a>
+  <a class="region-card" href="#china" style="border-color:rgba(232,67,147,0.2)">
+    <span class="rc-emoji">🎋</span>
+    <div class="rc-name" style="color:var(--china)">China</div>
+    <div class="rc-sub">HARMONY WITH NATURE</div>
+  </a>
+  <a class="region-card" href="#mideast" style="border-color:rgba(162,155,254,0.2)">
+    <span class="rc-emoji">🌙</span>
+    <div class="rc-name" style="color:var(--mideast)">Middle East</div>
+    <div class="rc-sub">MICROTONES · MAQAM</div>
+  </a>
+  <a class="region-card" href="#greece" style="border-color:rgba(116,185,255,0.2)">
+    <span class="rc-emoji">🏛️</span>
+    <div class="rc-name" style="color:var(--greece)">Greece</div>
+    <div class="rc-sub">MATH + MUSIC BORN TOGETHER</div>
+  </a>
+  <a class="region-card" href="#europe" style="border-color:rgba(0,206,201,0.2)">
+    <span class="rc-emoji">🎻</span>
+    <div class="rc-name" style="color:var(--europe)">Europe</div>
+    <div class="rc-sub">HARMONY · COUNTERPOINT</div>
+  </a>
+  <a class="region-card" href="#indigenous" style="border-color:rgba(85,239,196,0.2)">
+    <span class="rc-emoji">🌿</span>
+    <div class="rc-name" style="color:var(--indigenous)">Indigenous</div>
+    <div class="rc-sub">EARTH · SPIRIT · SONG</div>
+  </a>
+  <a class="region-card" href="#latam" style="border-color:rgba(253,121,168,0.2)">
+    <span class="rc-emoji">💃</span>
+    <div class="rc-name" style="color:var(--latam)">Latin America</div>
+    <div class="rc-sub">RHYTHM + HARMONY FUSION</div>
+  </a>
+  <a class="region-card" href="#modern" style="border-color:rgba(253,203,110,0.2)">
+    <span class="rc-emoji">⚡</span>
+    <div class="rc-name" style="color:var(--modern)">Modern World</div>
+    <div class="rc-sub">JAZZ · HIP-HOP · AI · EDM</div>
+  </a>
+</div>
+
+<!-- ══════════ PREHISTORIC ══════════ -->
+<section class="region-section" id="prehistory">
+  <div class="rs-accent" style="background:linear-gradient(90deg,var(--prehistory),transparent)"></div>
+  <div class="rs-header">
+    <div class="rs-emoji-big">🪨</div>
+    <div class="rs-header-text">
+      <div class="rs-era" style="color:var(--prehistory)">~40,000 BC — THE VERY BEGINNING</div>
+      <div class="rs-name" style="color:var(--prehistory)">Prehistoric Music</div>
+      <div class="rs-tagline">
+        Long before writing existed, before cities or countries, humans made music.
+        They discovered it the same way every child does: by hitting something and listening.
+        The first musician was every single one of us.
+      </div>
+    </div>
+  </div>
+
+  <div class="concepts-grid">
+    <div class="concept-card" style="border-color:rgba(223,230,233,0.15)">
+      <span class="cc-icon">💓</span>
+      <div class="cc-name" style="color:var(--prehistory)">Pulse</div>
+      <div class="cc-desc">The heartbeat is the first rhythm any human ever hears — before they're even born. <strong>Every music tradition on Earth is built on pulse.</strong></div>
+    </div>
+    <div class="concept-card" style="border-color:rgba(223,230,233,0.15)">
+      <span class="cc-icon">🔁</span>
+      <div class="cc-name" style="color:var(--prehistory)">Repetition</div>
+      <div class="cc-desc">When something sounds good, you do it again. Then again. Then again. <strong>Repetition is how music creates meaning.</strong> Every culture discovered this.</div>
+    </div>
+    <div class="concept-card" style="border-color:rgba(223,230,233,0.15)">
+      <span class="cc-icon">📣</span>
+      <div class="cc-name" style="color:var(--prehistory)">Call and Response</div>
+      <div class="cc-desc">One person sings something. Someone else answers. <strong>It's a musical conversation</strong> — and it appears in every culture on Earth, from Africa to North America to Australia.</div>
+    </div>
+    <div class="concept-card" style="border-color:rgba(223,230,233,0.15)">
+      <span class="cc-icon">👥</span>
+      <div class="cc-name" style="color:var(--prehistory)">Group Sync</div>
+      <div class="cc-desc">When people play together and lock into the same beat, something amazing happens — <strong>separate humans become one organism.</strong> This is why music is sacred in every culture.</div>
+    </div>
+  </div>
+
+  <div class="instruments-row">
+    <span class="instr-chip">🪨 Stones struck together</span>
+    <span class="instr-chip">🪵 Hollow logs</span>
+    <span class="instr-chip">🦴 Bone flutes</span>
+    <span class="instr-chip">🥁 Skin drums</span>
+    <span class="instr-chip">🎤 The human voice</span>
+    <span class="instr-chip">🐚 Conch shells</span>
+  </div>
+
+  <div class="dyk-box" style="background:rgba(223,230,233,0.04);border-color:rgba(223,230,233,0.1)">
+    <div class="dyk-label" style="color:var(--prehistory)">🤯 DID YOU KNOW?</div>
+    <div class="dyk-text">The oldest musical instrument ever found is a bone flute — carved from a vulture wing bone — discovered in Germany. It's <strong>40,000 years old.</strong> The person who made it was just like you. They heard something beautiful and wanted to make it again.</div>
+  </div>
+</section>
+
+<!-- ══════════ AFRICA ══════════ -->
+<section class="region-section" id="africa">
+  <div class="rs-accent" style="background:linear-gradient(90deg,var(--africa),transparent)"></div>
+  <div class="rs-header">
+    <div class="rs-emoji-big">🥁</div>
+    <div class="rs-header-text">
+      <div class="rs-era" style="color:var(--africa)">ANCIENT TO NOW — THE HEARTBEAT OF THE WORLD</div>
+      <div class="rs-name" style="color:var(--africa)">Africa</div>
+      <div class="rs-tagline">
+        Africa holds the oldest continuous musical traditions on Earth and gave the world
+        the rhythmic architecture that underlies jazz, blues, funk, hip-hop, rock, and almost
+        every other popular music form that exists today. Without Africa, modern music doesn't exist.
+      </div>
+    </div>
+  </div>
+
+  <div class="concepts-grid">
+    <div class="concept-card" style="border-color:rgba(255,159,67,0.2)">
+      <span class="cc-icon">🥁</span>
+      <div class="cc-name" style="color:var(--africa)">Polyrhythm</div>
+      <div class="cc-desc"><strong>Multiple rhythms happening at the same time</strong> — each one different, but all locking together perfectly. It sounds impossible until you feel it. West African drumming can layer 3, 4, or even 5 different rhythms simultaneously.</div>
+    </div>
+    <div class="concept-card" style="border-color:rgba(255,159,67,0.2)">
+      <span class="cc-icon">📣</span>
+      <div class="cc-name" style="color:var(--africa)">Call & Response</div>
+      <div class="cc-desc">A leader sings a phrase, the group responds. <strong>This is the foundation of gospel, blues, hip-hop, and jazz.</strong> You hear it in every genre that has roots in African tradition.</div>
+    </div>
+    <div class="concept-card" style="border-color:rgba(255,159,67,0.2)">
+      <span class="cc-icon">✂️</span>
+      <div class="cc-name" style="color:var(--africa)">Cross-Rhythm</div>
+      <div class="cc-desc">Playing a rhythm that feels like it's "cutting across" the main beat. <strong>It creates that irresistible groove</strong> that makes people want to move. The secret ingredient of funk.</div>
+    </div>
+    <div class="concept-card" style="border-color:rgba(255,159,67,0.2)">
+      <span class="cc-icon">🌍</span>
+      <div class="cc-name" style="color:var(--africa)">Communal Music</div>
+      <div class="cc-desc">In many African traditions, <strong>music is not a performance — it's a participation.</strong> Everyone joins. The distinction between audience and musician disappears. That's a revolutionary idea.</div>
+    </div>
+  </div>
+
+  <div class="instruments-row">
+    <span class="instr-chip">🥁 Djembe</span>
+    <span class="instr-chip">🎵 Mbira (thumb piano)</span>
+    <span class="instr-chip">🪘 Talking drum</span>
+    <span class="instr-chip">🎶 Balafon (xylophone)</span>
+    <span class="instr-chip">🎤 Griot vocal tradition</span>
+    <span class="instr-chip">🪘 Dunun bass drums</span>
+  </div>
+
+  <div class="influence-chain">
+    <span class="inf-item" style="color:var(--africa);border-color:rgba(255,159,67,0.3)">African Polyrhythm</span>
+    <span class="inf-arrow">→</span>
+    <span class="inf-item">Blues</span>
+    <span class="inf-arrow">→</span>
+    <span class="inf-item">Jazz</span>
+    <span class="inf-arrow">→</span>
+    <span class="inf-item">Rock &amp; Roll</span>
+    <span class="inf-arrow">→</span>
+    <span class="inf-item">Funk</span>
+    <span class="inf-arrow">→</span>
+    <span class="inf-item">Hip-Hop</span>
+    <span class="inf-arrow">→</span>
+    <span class="inf-item" style="color:var(--green);border-color:rgba(0,232,122,0.3)">ALL MODERN MUSIC</span>
+  </div>
+
+  <div class="dyk-box" style="background:rgba(255,159,67,0.04);border-color:rgba(255,159,67,0.1)">
+    <div class="dyk-label" style="color:var(--africa)">🤯 DID YOU KNOW?</div>
+    <div class="dyk-text">The word "Griot" (pronounced gree-OH) refers to West African storyteller-musicians who memorized and passed down thousands of years of history through song. <strong>They were living libraries.</strong> Long before writing, the Griots kept civilization's memory in music.</div>
+  </div>
+</section>
+
+<!-- ══════════ INDIA ══════════ -->
+<section class="region-section" id="india">
+  <div class="rs-accent" style="background:linear-gradient(90deg,var(--india),transparent)"></div>
+  <div class="rs-header">
+    <div class="rs-emoji-big">🪗</div>
+    <div class="rs-header-text">
+      <div class="rs-era" style="color:var(--india)">2000+ YEARS OF THEORY — THE MOST ADVANCED SYSTEM ON EARTH</div>
+      <div class="rs-name" style="color:var(--india)">India</div>
+      <div class="rs-tagline">
+        Indian classical music has one of the most complex and sophisticated music theory systems
+        ever developed. It combines mathematics, emotion, spirituality, and improvisation into a
+        single framework that has been refined for over two thousand years.
+      </div>
+    </div>
+  </div>
+
+  <div class="concepts-grid">
+    <div class="concept-card" style="border-color:rgba(238,90,36,0.2)">
+      <span class="cc-icon">🌈</span>
+      <div class="cc-name" style="color:var(--india)">Raga</div>
+      <div class="cc-desc">A <strong>melodic framework for improvisation</strong> — not just a scale, but a personality. Each raga has specific notes, an emotional mood (called "rasa"), a time of day it belongs to, even a season. There are thousands of ragas.</div>
+    </div>
+    <div class="concept-card" style="border-color:rgba(238,90,36,0.2)">
+      <span class="cc-icon">⏰</span>
+      <div class="cc-name" style="color:var(--india)">Tala</div>
+      <div class="cc-desc"><strong>Rhythmic cycles</strong> that can be incredibly complex — 16 beats, 10 beats, 7 beats. The tabla drummer and sitarist improvise together within these cycles, sometimes for hours, building tension and release.</div>
+    </div>
+    <div class="concept-card" style="border-color:rgba(238,90,36,0.2)">
+      <span class="cc-icon">💫</span>
+      <div class="cc-name" style="color:var(--india)">Rasa (Emotion)</div>
+      <div class="cc-desc">Indian music theory has <strong>nine fundamental emotions</strong> (rasas) that music can express: love, humor, compassion, fury, heroism, terror, disgust, wonder, and serenity. Every raga is designed to evoke specific emotions.</div>
+    </div>
+    <div class="concept-card" style="border-color:rgba(238,90,36,0.2)">
+      <span class="cc-icon">🧮</span>
+      <div class="cc-name" style="color:var(--india)">Shruti (Microtones)</div>
+      <div class="cc-desc">Western music uses 12 notes in an octave. <strong>Indian music uses 22 shrutis</strong> — tiny steps between notes — giving it an incredible palette of emotional expression that Western scales simply can't access.</div>
+    </div>
+  </div>
+
+  <div class="instruments-row">
+    <span class="instr-chip">🎸 Sitar</span>
+    <span class="instr-chip">🥁 Tabla (drum pair)</span>
+    <span class="instr-chip">🎵 Sarod</span>
+    <span class="instr-chip">🎶 Bansuri (bamboo flute)</span>
+    <span class="instr-chip">🎤 Sarangi (bowed)</span>
+    <span class="instr-chip">🥁 Mridangam</span>
+    <span class="instr-chip">🎵 Veena (ancient lute)</span>
+  </div>
+
+  <div class="dyk-box" style="background:rgba(238,90,36,0.04);border-color:rgba(238,90,36,0.1)">
+    <div class="dyk-label" style="color:var(--india)">🤯 DID YOU KNOW?</div>
+    <div class="dyk-text">In Indian classical music, a performance can last <strong>4 to 6 hours</strong>, moving slowly from a meditative dawn raga to an energetic midnight raga. The music is designed to mirror the emotional arc of an entire day. The Beatles' George Harrison studied sitar under Ravi Shankar and brought Indian music theory to millions of Western listeners.</div>
+  </div>
+</section>
+
+<!-- ══════════ CHINA ══════════ -->
+<section class="region-section" id="china">
+  <div class="rs-accent" style="background:linear-gradient(90deg,var(--china),transparent)"></div>
+  <div class="rs-header">
+    <div class="rs-emoji-big">🎋</div>
+    <div class="rs-header-text">
+      <div class="rs-era" style="color:var(--china)">3000+ YEARS — MUSIC AS COSMIC ORDER</div>
+      <div class="rs-name" style="color:var(--china)">China</div>
+      <div class="rs-tagline">
+        In ancient China, music wasn't just entertainment — it was a force of nature.
+        Chinese philosophers believed music could bring harmony to society and connect
+        humans with the cosmos. The pentatonic scale they developed appears in music
+        all over the world to this day.
+      </div>
+    </div>
+  </div>
+
+  <div class="concepts-grid">
+    <div class="concept-card" style="border-color:rgba(232,67,147,0.2)">
+      <span class="cc-icon">🖐️</span>
+      <div class="cc-name" style="color:var(--china)">Pentatonic Scale</div>
+      <div class="cc-desc"><strong>Five notes per octave.</strong> Simple, powerful, beautiful. It appears in Chinese folk music, blues, rock, Celtic music, and dozens of other traditions. Play any five black keys on a piano — that's a pentatonic scale.</div>
+    </div>
+    <div class="concept-card" style="border-color:rgba(232,67,147,0.2)">
+      <span class="cc-icon">☯️</span>
+      <div class="cc-name" style="color:var(--china)">Music &amp; Nature</div>
+      <div class="cc-desc">Chinese music theory links the five notes to the <strong>five elements (wood, fire, earth, metal, water), five seasons, and five emotions.</strong> Music wasn't separate from nature — it was a map of it.</div>
+    </div>
+    <div class="concept-card" style="border-color:rgba(232,67,147,0.2)">
+      <span class="cc-icon">🔔</span>
+      <div class="cc-name" style="color:var(--china)">Tone Colors (Bā Yīn)</div>
+      <div class="cc-desc">Ancient China classified instruments by the material they were made from: <strong>silk, stone, metal, bamboo, wood, skin, gourd, and clay.</strong> Each material gave a different emotional color to the sound.</div>
+    </div>
+    <div class="concept-card" style="border-color:rgba(232,67,147,0.2)">
+      <span class="cc-icon">🧘</span>
+      <div class="cc-name" style="color:var(--china)">Qin Philosophy</div>
+      <div class="cc-desc">The guqin (a 7-string zither) was the instrument of scholars and philosophers. <strong>Playing it was a meditative practice</strong> — a conversation between the musician, the music, and the universe.</div>
+    </div>
+  </div>
+
+  <div class="instruments-row">
+    <span class="instr-chip">🎵 Guqin (7-string zither)</span>
+    <span class="instr-chip">🪗 Pipa (lute)</span>
+    <span class="instr-chip">🎻 Erhu (2-string bowed)</span>
+    <span class="instr-chip">🎶 Dizi (bamboo flute)</span>
+    <span class="instr-chip">🔔 Bian Zhong (bell chimes)</span>
+    <span class="instr-chip">🥁 Paigu drums</span>
+  </div>
+
+  <div class="dyk-box" style="background:rgba(232,67,147,0.04);border-color:rgba(232,67,147,0.1)">
+    <div class="dyk-label" style="color:var(--china)">🤯 DID YOU KNOW?</div>
+    <div class="dyk-text">A set of bronze bells called <strong>Bian Zhong</strong>, discovered in China in 1978, is over 2,400 years old and still playable. Each bell produces two different notes depending on where you strike it. Ancient Chinese engineers achieved perfect musical tuning using only mathematics — no computers, no electronic tuners.</div>
+  </div>
+</section>
+
+<!-- ══════════ MIDDLE EAST ══════════ -->
+<section class="region-section" id="mideast">
+  <div class="rs-accent" style="background:linear-gradient(90deg,var(--mideast),transparent)"></div>
+  <div class="rs-header">
+    <div class="rs-emoji-big">🌙</div>
+    <div class="rs-header-text">
+      <div class="rs-era" style="color:var(--mideast)">ANCIENT MESOPOTAMIA TO NOW — THE UNIVERSE BETWEEN THE NOTES</div>
+      <div class="rs-name" style="color:var(--mideast)">Middle East &amp; Persia</div>
+      <div class="rs-tagline">
+        Middle Eastern music found the music between the notes — microtones,
+        sliding pitches, and emotional ornaments that Western scales simply cannot
+        express. The Maqam system is one of the most sophisticated melodic frameworks
+        ever developed.
+      </div>
+    </div>
+  </div>
+
+  <div class="concepts-grid">
+    <div class="concept-card" style="border-color:rgba(162,155,254,0.2)">
+      <span class="cc-icon">🎚️</span>
+      <div class="cc-name" style="color:var(--mideast)">Maqam</div>
+      <div class="cc-desc">A <strong>melodic system</strong> — like a raga — that defines not just the notes but the emotional journey of a piece. Each maqam has a different character, and skilled musicians can improvise within them for hours.</div>
+    </div>
+    <div class="concept-card" style="border-color:rgba(162,155,254,0.2)">
+      <span class="cc-icon">〰️</span>
+      <div class="cc-name" style="color:var(--mideast)">Microtones</div>
+      <div class="cc-desc"><strong>Notes between the notes</strong> — pitches that don't exist in Western music at all. Quarter-tones, third-tones. These microtones give Middle Eastern music its distinctive emotional depth and expressiveness.</div>
+    </div>
+    <div class="concept-card" style="border-color:rgba(162,155,254,0.2)">
+      <span class="cc-icon">🌊</span>
+      <div class="cc-name" style="color:var(--mideast)">Ornamentation</div>
+      <div class="cc-desc"><strong>Decorating melodies</strong> with slides, trills, and vibrations. In Middle Eastern music, ornamentation isn't optional — it's how the music breathes. A plain note is incomplete.</div>
+    </div>
+    <div class="concept-card" style="border-color:rgba(162,155,254,0.2)">
+      <span class="cc-icon">📖</span>
+      <div class="cc-name" style="color:var(--mideast)">Al-Musiqi</div>
+      <div class="cc-desc">Medieval Islamic scholars — especially <strong>Al-Farabi and Ibn Sina (Avicenna)</strong> — wrote the first comprehensive music theory texts in the world, combining Greek mathematics with Middle Eastern practice.</div>
+    </div>
+  </div>
+
+  <div class="instruments-row">
+    <span class="instr-chip">🎵 Oud (ancestor of guitar)</span>
+    <span class="instr-chip">🪕 Saz (lute)</span>
+    <span class="instr-chip">🎶 Nay (reed flute)</span>
+    <span class="instr-chip">🥁 Darbuka (goblet drum)</span>
+    <span class="instr-chip">🎻 Kamancheh (bowed lute)</span>
+    <span class="instr-chip">🎵 Qanun (zither)</span>
+  </div>
+
+  <div class="dyk-box" style="background:rgba(162,155,254,0.04);border-color:rgba(162,155,254,0.1)">
+    <div class="dyk-label" style="color:var(--mideast)">🤯 DID YOU KNOW?</div>
+    <div class="dyk-text">The <strong>oud</strong> — a pear-shaped stringed instrument played across the Middle East — is the direct ancestor of the European lute, which eventually became the guitar. Every time you hear a guitar, you're hearing an instrument that began in ancient Mesopotamia over 5,000 years ago.</div>
+  </div>
+</section>
+
+<!-- ══════════ GREECE ══════════ -->
+<section class="region-section" id="greece">
+  <div class="rs-accent" style="background:linear-gradient(90deg,var(--greece),transparent)"></div>
+  <div class="rs-header">
+    <div class="rs-emoji-big">🏛️</div>
+    <div class="rs-header-text">
+      <div class="rs-era" style="color:var(--greece)">500 BC — WHERE MUSIC BECAME MATHEMATICS</div>
+      <div class="rs-name" style="color:var(--greece)">Ancient Greece</div>
+      <div class="rs-tagline">
+        Ancient Greece asked a question nobody had asked before: why do some notes sound beautiful
+        together and others don't? Pythagoras discovered the answer was mathematics —
+        and Western music theory was born.
+      </div>
+    </div>
+  </div>
+
+  <div class="concepts-grid">
+    <div class="concept-card" style="border-color:rgba(116,185,255,0.2)">
+      <span class="cc-icon">🔢</span>
+      <div class="cc-name" style="color:var(--greece)">Pythagorean Ratios</div>
+      <div class="cc-desc"><strong>Pythagoras discovered that musical harmony is mathematics.</strong> A string half as long plays a note one octave higher. Two-thirds length = a perfect fifth. Three-quarters = a perfect fourth. Music is physics you can hear.</div>
+    </div>
+    <div class="concept-card" style="border-color:rgba(116,185,255,0.2)">
+      <span class="cc-icon">🎭</span>
+      <div class="cc-name" style="color:var(--greece)">Greek Modes</div>
+      <div class="cc-desc">Early scale systems — Dorian, Phrygian, Lydian, Mixolydian — each with a different character. <strong>The Dorian mode is still used in jazz and rock today.</strong> When you hear a mysterious, slightly melancholic scale — that's often Dorian.</div>
+    </div>
+    <div class="concept-card" style="border-color:rgba(116,185,255,0.2)">
+      <span class="cc-icon">🌌</span>
+      <div class="cc-name" style="color:var(--greece)">Music of the Spheres</div>
+      <div class="cc-desc">Greeks believed the planets moved in mathematical ratios — creating a <strong>"music of the spheres"</strong> that humans couldn't hear but that governed the universe. Music wasn't just art. It was a map of reality.</div>
+    </div>
+    <div class="concept-card" style="border-color:rgba(116,185,255,0.2)">
+      <span class="cc-icon">🎤</span>
+      <div class="cc-name" style="color:var(--greece)">Drama &amp; Music</div>
+      <div class="cc-desc">Greek theatre combined <strong>music, poetry, dance, and storytelling</strong> into a single art form. Every Greek tragedy was performed with a chorus singing in modal scales. This became the ancestor of opera.</div>
+    </div>
+  </div>
+
+  <div class="influence-chain">
+    <span class="inf-item" style="color:var(--greece);border-color:rgba(116,185,255,0.3)">Greek Modes &amp; Math</span>
+    <span class="inf-arrow">→</span>
+    <span class="inf-item">Medieval Church Modes</span>
+    <span class="inf-arrow">→</span>
+    <span class="inf-item">Renaissance Harmony</span>
+    <span class="inf-arrow">→</span>
+    <span class="inf-item">Western Classical Music</span>
+    <span class="inf-arrow">→</span>
+    <span class="inf-item" style="color:var(--green);border-color:rgba(0,232,122,0.3)">ALL WESTERN POP, JAZZ, ROCK</span>
+  </div>
+
+  <div class="dyk-box" style="background:rgba(116,185,255,0.04);border-color:rgba(116,185,255,0.1)">
+    <div class="dyk-label" style="color:var(--greece)">🤯 DID YOU KNOW?</div>
+    <div class="dyk-text">Pythagoras (yes, the triangle guy) is also the father of music theory. He discovered musical harmony by experimenting with <strong>a single vibrating string called a monochord.</strong> He found that the simplest mathematical ratios produced the most beautiful sounds. Math and music have been inseparable ever since.</div>
+  </div>
+</section>
+
+<!-- ══════════ EUROPE ══════════ -->
+<section class="region-section" id="europe">
+  <div class="rs-accent" style="background:linear-gradient(90deg,var(--europe),transparent)"></div>
+  <div class="rs-header">
+    <div class="rs-emoji-big">🎻</div>
+    <div class="rs-header-text">
+      <div class="rs-era" style="color:var(--europe)">500 AD — NOW — BUILDING THE HARMONIC SKYSCRAPER</div>
+      <div class="rs-name" style="color:var(--europe)">Europe</div>
+      <div class="rs-tagline">
+        European music built one of the most complex harmonic systems in human history — stacking notes into
+        chords, weaving multiple melodies together, building orchestras of a hundred instruments,
+        and writing it all down in notation that a musician can read 400 years later.
+      </div>
+    </div>
+  </div>
+
+  <div class="concepts-grid">
+    <div class="concept-card" style="border-color:rgba(0,206,201,0.2)">
+      <span class="cc-icon">🎼</span>
+      <div class="cc-name" style="color:var(--europe)">Musical Notation</div>
+      <div class="cc-desc">Medieval monks invented a way to <strong>write music down</strong> — five lines, notes on a staff, clefs and key signatures. Before this, every song had to be memorized. Now a musician today can play exactly what Bach wrote in 1722.</div>
+    </div>
+    <div class="concept-card" style="border-color:rgba(0,206,201,0.2)">
+      <span class="cc-icon">🧵</span>
+      <div class="cc-name" style="color:var(--europe)">Polyphony</div>
+      <div class="cc-desc"><strong>Multiple melodies at the same time,</strong> each independent but all working together. J.S. Bach was the master — his fugues weave three or four separate melodies that each make sense alone but create something miraculous together.</div>
+    </div>
+    <div class="concept-card" style="border-color:rgba(0,206,201,0.2)">
+      <span class="cc-icon">🏗️</span>
+      <div class="cc-name" style="color:var(--europe)">Harmony &amp; Chords</div>
+      <div class="cc-desc">Stacking notes to create chords — major (happy), minor (sad), diminished (tense), augmented (strange). <strong>Western chord theory is the backbone of virtually all pop music</strong> — every song you know uses these chord structures.</div>
+    </div>
+    <div class="concept-card" style="border-color:rgba(0,206,201,0.2)">
+      <span class="cc-icon">🎭</span>
+      <div class="cc-name" style="color:var(--europe)">The Four Eras</div>
+      <div class="cc-desc"><strong>Medieval</strong> (chant) → <strong>Baroque</strong> (Bach, complexity) → <strong>Classical</strong> (Mozart, balance) → <strong>Romantic</strong> (Beethoven, emotion). Each era built on the last and left music richer.</div>
+    </div>
+  </div>
+
+  <div class="instruments-row">
+    <span class="instr-chip">🎻 Violin family</span>
+    <span class="instr-chip">🎹 Piano / Harpsichord</span>
+    <span class="instr-chip">🎺 Trumpet / French horn</span>
+    <span class="instr-chip">🎷 Woodwinds</span>
+    <span class="instr-chip">🎸 Lute / Guitar</span>
+    <span class="instr-chip">🎵 Pipe organ</span>
+    <span class="instr-chip">🥁 Orchestral percussion</span>
+  </div>
+
+  <div class="dyk-box" style="background:rgba(0,206,201,0.04);border-color:rgba(0,206,201,0.1)">
+    <div class="dyk-label" style="color:var(--europe)">🤯 DID YOU KNOW?</div>
+    <div class="dyk-text">Beethoven wrote some of his most powerful music — including his famous 9th Symphony — after he became <strong>completely deaf.</strong> He could no longer hear a single note, yet he composed using pure imagination and musical memory. The 9th Symphony, which ends with the famous "Ode to Joy," premiered in 1824. Beethoven never heard the audience's applause.</div>
+  </div>
+</section>
+
+<!-- ══════════ INDIGENOUS ══════════ -->
+<section class="region-section" id="indigenous">
+  <div class="rs-accent" style="background:linear-gradient(90deg,var(--indigenous),transparent)"></div>
+  <div class="rs-header">
+    <div class="rs-emoji-big">🌿</div>
+    <div class="rs-header-text">
+      <div class="rs-era" style="color:var(--indigenous)">TENS OF THOUSANDS OF YEARS — MUSIC AS THE MAP OF THE WORLD</div>
+      <div class="rs-name" style="color:var(--indigenous)">Indigenous Traditions</div>
+      <div class="rs-tagline">
+        Indigenous music traditions across every continent hold some of the most ancient, sacred,
+        and sophisticated musical knowledge on Earth. Many of these traditions encode geography,
+        history, and spiritual knowledge in song — music as a living map and library.
+      </div>
+    </div>
+  </div>
+
+  <div class="concepts-grid">
+    <div class="concept-card" style="border-color:rgba(85,239,196,0.2)">
+      <span class="cc-icon">🗺️</span>
+      <div class="cc-name" style="color:var(--indigenous)">Songlines (Australia)</div>
+      <div class="cc-desc">Aboriginal Australians encode <strong>geographic maps in songs</strong> — the melody follows the landscape. By singing the song, you navigate across thousands of miles of terrain. The entire continent is mapped in music.</div>
+    </div>
+    <div class="concept-card" style="border-color:rgba(85,239,196,0.2)">
+      <span class="cc-icon">🌀</span>
+      <div class="cc-name" style="color:var(--indigenous)">Overtone Singing</div>
+      <div class="cc-desc">Throat singers from Arctic and Mongolian cultures can <strong>sing two or more notes at the same time</strong> — a fundamental and a high harmonic overtone, simultaneously. One person, creating a chord with a single voice.</div>
+    </div>
+    <div class="concept-card" style="border-color:rgba(85,239,196,0.2)">
+      <span class="cc-icon">🪈</span>
+      <div class="cc-name" style="color:var(--indigenous)">Native American Flute</div>
+      <div class="cc-desc">The Native American flute uses a <strong>pentatonic scale to tell stories</strong> — of nature, of spirit, of memory. Different tribes have distinct styles, but the flute appears across the entire continent as a voice for the deepest truths.</div>
+    </div>
+    <div class="concept-card" style="border-color:rgba(85,239,196,0.2)">
+      <span class="cc-icon">🔊</span>
+      <div class="cc-name" style="color:var(--indigenous)">Didgeridoo (Australia)</div>
+      <div class="cc-desc">One of the world's oldest wind instruments — over 40,000 years old. Played using <strong>circular breathing</strong> (breathing in through your nose while continuing to blow out), it creates continuous drones and rhythms that represent animals and landscapes.</div>
+    </div>
+  </div>
+
+  <div class="dyk-box" style="background:rgba(85,239,196,0.04);border-color:rgba(85,239,196,0.1)">
+    <div class="dyk-label" style="color:var(--indigenous)">🤯 DID YOU KNOW?</div>
+    <div class="dyk-text">Aboriginal Australian songlines are so precise that <strong>archaeologists have used them to find ancient sites.</strong> A song describing "the place where two rivers meet beneath a hill of red rock" can lead scientists to a 10,000-year-old sacred location. The music was the map — and it was perfectly accurate across millennia.</div>
+  </div>
+</section>
+
+<!-- ══════════ LATIN AMERICA ══════════ -->
+<section class="region-section" id="latam">
+  <div class="rs-accent" style="background:linear-gradient(90deg,var(--latam),transparent)"></div>
+  <div class="rs-header">
+    <div class="rs-emoji-big">💃</div>
+    <div class="rs-header-text">
+      <div class="rs-era" style="color:var(--latam)">500 YEARS OF BEAUTIFUL COLLISION — WHERE THREE WORLDS BECAME ONE</div>
+      <div class="rs-name" style="color:var(--latam)">Latin America</div>
+      <div class="rs-tagline">
+        Latin American music is what happens when African rhythms, Indigenous melodies,
+        and European harmonies meet and create something none of them could have made alone.
+        The result is the most irresistibly danceable music on Earth.
+      </div>
+    </div>
+  </div>
+
+  <div class="concepts-grid">
+    <div class="concept-card" style="border-color:rgba(253,121,168,0.2)">
+      <span class="cc-icon">🔑</span>
+      <div class="cc-name" style="color:var(--latam)">Clave Rhythm</div>
+      <div class="cc-desc">The <strong>rhythmic spine of all Afro-Cuban music</strong> — a repeating 2-3 or 3-2 pattern that all other instruments align to. Salsa, rumba, cha-cha: all built on clave. Once you hear it, you hear it in everything.</div>
+    </div>
+    <div class="concept-card" style="border-color:rgba(253,121,168,0.2)">
+      <span class="cc-icon">⚡</span>
+      <div class="cc-name" style="color:var(--latam)">Syncopation</div>
+      <div class="cc-desc">Putting the accent <strong>between the expected beats</strong> — hitting where you don't expect to be hit. It creates tension, excitement, the irresistible urge to move. Syncopation is the secret of Brazilian samba and Cuban son.</div>
+    </div>
+    <div class="concept-card" style="border-color:rgba(253,121,168,0.2)">
+      <span class="cc-icon">💃</span>
+      <div class="cc-name" style="color:var(--latam)">Dance as Music Theory</div>
+      <div class="cc-desc">In Latin music, <strong>the dance is not separate from the music — it IS the music.</strong> The way salsa dancers move encodes the clave rhythm in their bodies. The theory is felt before it's understood.</div>
+    </div>
+    <div class="concept-card" style="border-color:rgba(253,121,168,0.2)">
+      <span class="cc-icon">🎺</span>
+      <div class="cc-name" style="color:var(--latam)">Fusion Harmony</div>
+      <div class="cc-desc">Bossa nova blends <strong>complex jazz chords with Brazilian samba rhythms</strong> — creating something that sounds both relaxed and harmonically sophisticated. João Gilberto and Tom Jobim changed music forever with a guitar, a voice, and a new way of thinking about harmony.</div>
+    </div>
+  </div>
+
+  <div class="instruments-row">
+    <span class="instr-chip">🥁 Congas &amp; Bongos</span>
+    <span class="instr-chip">🪘 Timbales</span>
+    <span class="instr-chip">🎺 Trumpet (jazz-influenced)</span>
+    <span class="instr-chip">🎸 Tres (Cuban guitar)</span>
+    <span class="instr-chip">🪗 Accordion (tango, cumbia)</span>
+    <span class="instr-chip">🎶 Marimba (indigenous)</span>
+    <span class="instr-chip">🥁 Cajón (Peru)</span>
+  </div>
+
+  <div class="influence-chain">
+    <span class="inf-item" style="color:var(--africa);border-color:rgba(255,159,67,0.3)">African Rhythm</span>
+    <span class="inf-arrow">+</span>
+    <span class="inf-item" style="color:var(--indigenous);border-color:rgba(85,239,196,0.3)">Indigenous Melody</span>
+    <span class="inf-arrow">+</span>
+    <span class="inf-item" style="color:var(--europe);border-color:rgba(0,206,201,0.3)">European Harmony</span>
+    <span class="inf-arrow">=</span>
+    <span class="inf-item" style="color:var(--latam);border-color:rgba(253,121,168,0.3)">LATIN AMERICA</span>
+    <span class="inf-arrow">→</span>
+    <span class="inf-item" style="color:var(--green);border-color:rgba(0,232,122,0.3)">GLOBAL POP MUSIC</span>
+  </div>
+
+  <div class="dyk-box" style="background:rgba(253,121,168,0.04);border-color:rgba(253,121,168,0.1)">
+    <div class="dyk-label" style="color:var(--latam)">🤯 DID YOU KNOW?</div>
+    <div class="dyk-text"><strong>Reggaeton</strong> — one of the most-streamed music genres on Earth today — is built on a rhythm called "dembow," which comes directly from Jamaican dancehall, which comes from African drumming traditions that crossed the Atlantic 400 years ago. The music of 2024 has roots that stretch back to ancient West Africa. Every beat carries history.</div>
+  </div>
+</section>
+
+<!-- ══════════ MODERN ══════════ -->
+<section class="region-section" id="modern">
+  <div class="rs-accent" style="background:linear-gradient(90deg,var(--modern),transparent)"></div>
+  <div class="rs-header">
+    <div class="rs-emoji-big">⚡</div>
+    <div class="rs-header-text">
+      <div class="rs-era" style="color:var(--modern)">1900 — NOW — ALL TRADITIONS CONVERGE</div>
+      <div class="rs-name" style="color:var(--modern)">The Modern World</div>
+      <div class="rs-tagline">
+        The 20th and 21st centuries brought all of these traditions together —
+        sometimes violently, sometimes beautifully — and created something entirely new.
+        Music is now made everywhere, by everyone, using all of human history as raw material.
+      </div>
+    </div>
+  </div>
+
+  <div class="concepts-grid">
+    <div class="concept-card" style="border-color:rgba(253,203,110,0.2)">
+      <span class="cc-icon">🎷</span>
+      <div class="cc-name" style="color:var(--modern)">Jazz Harmony</div>
+      <div class="cc-desc">Jazz took European chord theory and <strong>made it elastic</strong> — adding 7ths, 9ths, 11ths, and 13ths to chords, and then improvising over them. Miles Davis, John Coltrane, and Thelonious Monk reinvented what "harmony" could mean.</div>
+    </div>
+    <div class="concept-card" style="border-color:rgba(253,203,110,0.2)">
+      <span class="cc-icon">🎤</span>
+      <div class="cc-name" style="color:var(--modern)">Blues &amp; The Bent Note</div>
+      <div class="cc-desc">Blues guitarists <strong>bend strings to create notes between Western pitches</strong> — borrowing from African microtonal singing. The "blue note" — slightly flattened — became the emotional heart of an entire century of music.</div>
+    </div>
+    <div class="concept-card" style="border-color:rgba(253,203,110,0.2)">
+      <span class="cc-icon">🎚️</span>
+      <div class="cc-name" style="color:var(--modern)">Electronic Sound Design</div>
+      <div class="cc-desc">Synthesizers, samplers, and computers made <strong>any sound possible as a musical note.</strong> A raindrop, a heartbeat, a voice — anything can become music. Electronic music erased the boundary between "instrument" and "sound."</div>
+    </div>
+    <div class="concept-card" style="border-color:rgba(253,203,110,0.2)">
+      <span class="cc-icon">🤖</span>
+      <div class="cc-name" style="color:var(--modern)">A.I.V.A. &amp; The 5th Epoch</div>
+      <div class="cc-desc">AI can now <strong>compose, synthesize, and collaborate</strong> in music — but only ethically when the human creator remains sovereign. NOIZY's A.I.V.A. is the music world's answer: AI as bandmate, not predator. The 5th Epoch is now.</div>
+    </div>
+  </div>
+
+  <div class="influence-chain">
+    <span class="inf-item" style="color:var(--africa);border-color:rgba(255,159,67,0.3)">Africa</span>
+    <span class="inf-arrow">+</span>
+    <span class="inf-item" style="color:var(--europe);border-color:rgba(0,206,201,0.3)">Europe</span>
+    <span class="inf-arrow">→</span>
+    <span class="inf-item">Blues → Jazz</span>
+    <span class="inf-arrow">→</span>
+    <span class="inf-item">Rock → Funk</span>
+    <span class="inf-arrow">→</span>
+    <span class="inf-item">Hip-Hop → EDM</span>
+    <span class="inf-arrow">→</span>
+    <span class="inf-item" style="color:var(--gold);border-color:rgba(232,200,74,0.3)">EPOCH V · NOIZY</span>
+  </div>
+
+  <div class="dyk-box" style="background:rgba(253,203,110,0.04);border-color:rgba(253,203,110,0.1)">
+    <div class="dyk-label" style="color:var(--modern)">🤯 DID YOU KNOW?</div>
+    <div class="dyk-text">Hip-hop sampling is <strong>a direct continuation of every "borrowing" tradition in music history</strong> — Bach borrowed from Italian composers, blues borrowed from African field hollers, jazz borrowed from blues. When a hip-hop producer samples a drum break from 1971, they're doing what every musician has always done: honoring the music that came before while creating something new. The ethics of sampling — consent, credit, and payment — are exactly what NOIZY was built to protect.</div>
+  </div>
+</section>
+
+<!-- ══════════ UNIVERSAL TRUTHS ══════════ -->
+<section class="universal-section" id="universal">
+  <div class="ut-title">THE UNIVERSAL TRUTH</div>
+  <p class="ut-subtitle">
+    Across every culture, every continent, every century — the same six elements appear.
+    Music is a human language older than writing. Every child on Earth is born speaking it.
+  </p>
+
+  <div class="elements-grid">
+    <div class="element-card" style="border-color:rgba(255,159,67,0.2)">
+      <span class="el-icon">💓</span>
+      <div class="el-name" style="color:var(--africa)">RHYTHM</div>
+      <div class="el-desc">The pulse. The heartbeat. The organizing principle of time. Every music tradition on Earth begins here.</div>
+    </div>
+    <div class="element-card" style="border-color:rgba(238,90,36,0.2)">
+      <span class="el-icon">🎵</span>
+      <div class="el-name" style="color:var(--india)">PITCH</div>
+      <div class="el-desc">How high or low a sound is. Every culture found ways to organize pitch into scales, ragas, maqams, and modes.</div>
+    </div>
+    <div class="element-card" style="border-color:rgba(0,206,201,0.2)">
+      <span class="el-icon">🎼</span>
+      <div class="el-name" style="color:var(--europe)">HARMONY</div>
+      <div class="el-desc">Notes sounding together. From simple drones to Bach's fugues — the sound of multiple pitches combining.</div>
+    </div>
+    <div class="element-card" style="border-color:rgba(162,155,254,0.2)">
+      <span class="el-icon">🌈</span>
+      <div class="el-name" style="color:var(--mideast)">TIMBRE</div>
+      <div class="el-desc">The color of a sound. Why a violin and a flute playing the same note sound different. Every instrument has its own voice.</div>
+    </div>
+    <div class="element-card" style="border-color:rgba(253,121,168,0.2)">
+      <span class="el-icon">💫</span>
+      <div class="el-name" style="color:var(--latam)">EMOTION</div>
+      <div class="el-desc">Music moves us. It always has. Every tradition — from Indian rasa to African griot — knew that music's ultimate purpose is to make humans feel.</div>
+    </div>
+    <div class="element-card" style="border-color:rgba(85,239,196,0.2)">
+      <span class="el-icon">👥</span>
+      <div class="el-name" style="color:var(--indigenous)">COMMUNITY</div>
+      <div class="el-desc">Music is made together. Even a solo performer is in conversation with every musician who came before. Music connects us across time.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ NOIZYKIDZ VISION ══════════ -->
+<section class="vision-section">
+  <div class="vision-title">WHAT NOIZYKIDZ WILL BUILD WITH THIS</div>
+  <p class="vision-sub">
+    Imagine a world where every child can explore music as a global adventure —
+    not just Western theory, but the entire sonic heritage of humanity.
+    That's what the NOIZYKIDZ Atlas makes possible.
+  </p>
+
+  <div class="adventure-grid">
+    <div class="adventure-card" style="border-color:rgba(255,159,67,0.2);background:rgba(255,159,67,0.03)">
+      <span class="adv-emoji">🥁</span>
+      <div class="adv-title" style="color:var(--africa)">African Rhythm Playground</div>
+      <div class="adv-desc">Kids build polyrhythm patterns with virtual djembes and talking drums — feeling how multiple rhythms lock together before they can name it.</div>
+    </div>
+    <div class="adventure-card" style="border-color:rgba(238,90,36,0.2);background:rgba(238,90,36,0.03)">
+      <span class="adv-emoji">🌈</span>
+      <div class="adv-title" style="color:var(--india)">Indian Raga Explorer</div>
+      <div class="adv-desc">Choose a mood. A time of day. Discover the raga that expresses it. Improvise on a virtual sitar using the notes of that raga — guided by 2,000 years of theory.</div>
+    </div>
+    <div class="adventure-card" style="border-color:rgba(232,67,147,0.2);background:rgba(232,67,147,0.03)">
+      <span class="adv-emoji">🖐️</span>
+      <div class="adv-title" style="color:var(--china)">Chinese Pentatonic Builder</div>
+      <div class="adv-desc">Five notes. Infinite possibilities. Kids discover how the same pentatonic scale sounds in Chinese guqin, Scottish bagpipes, and American blues — the same five notes, five traditions, one universe.</div>
+    </div>
+    <div class="adventure-card" style="border-color:rgba(162,155,254,0.2);background:rgba(162,155,254,0.03)">
+      <span class="adv-emoji">〰️</span>
+      <div class="adv-title" style="color:var(--mideast)">Maqam Microtone Lab</div>
+      <div class="adv-desc">Hear the notes between the notes. Explore the quarter-tones of Arabic and Persian music that Western scales can't express — and feel how they make your emotions do things major/minor scales never could.</div>
+    </div>
+    <div class="adventure-card" style="border-color:rgba(0,206,201,0.2);background:rgba(0,206,201,0.03)">
+      <span class="adv-emoji">🧵</span>
+      <div class="adv-title" style="color:var(--europe)">Bach Counterpoint Workshop</div>
+      <div class="adv-desc">Weave two melodies together. Watch how they create harmony even when they're each going in different directions. Discover why Baroque counterpoint is the same as jazz improvisation — just 300 years earlier.</div>
+    </div>
+    <div class="adventure-card" style="border-color:rgba(85,239,196,0.2);background:rgba(85,239,196,0.03)">
+      <span class="adv-emoji">🗺️</span>
+      <div class="adv-title" style="color:var(--indigenous)">Songlines Adventure</div>
+      <div class="adv-desc">Follow an Aboriginal Australian songline across a virtual landscape. The melody is the map. Discover how music can hold a continent's geography in its notes — and how sound can be memory.</div>
+    </div>
+  </div>
+
+  <div style="max-width:600px;margin:0 auto;padding:32px;border-radius:12px;border:1px solid rgba(232,200,74,0.2);background:rgba(232,200,74,0.04);text-align:center;">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:13px;color:var(--gold);letter-spacing:0.3em;margin-bottom:12px;">NOIZYKIDZ · THE CORE BELIEF</div>
+    <div style="font-family:var(--kids);font-weight:700;font-size:16px;color:var(--bright);line-height:1.7;">
+      "Music is a human language older than writing.<br>
+      Every child on Earth is born speaking it.<br>
+      NOIZYKIDZ makes sure no child ever forgets."
+    </div>
+    <div style="font-family:var(--mono);font-size:9px;color:var(--dim);letter-spacing:0.2em;margin-top:16px;">
+      SAFE · CREATIVE · NO DATA HARVESTING · EVER<br>
+      NC_06 · NO NSFW · NC_09 · VOICE ESTATES PROTECTED FROM BIRTH
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div>
+    <div class="footer-grf">GORUNFREE</div>
+    <div style="margin-top:4px;">NOIZYFISH INC. · NOIZYKIDZ GLOBAL MUSIC THEORY ATLAS · DOCUMENT 22</div>
+    <div>RSP_001 · OTTAWA · MARCH 2026 · THE PLOWMAN'S CHRONICLES</div>
+  </div>
+  <div style="text-align:right;">
+    <div style="color:var(--green);font-size:9px;letter-spacing:0.15em;">10 WORLD TRADITIONS · 40,000 YEARS OF MUSIC</div>
+    <div style="margin-top:4px;">EVERY CHILD ON EARTH DESERVES THIS KNOWLEDGE</div>
+  </div>
+</div>
+
+<script>
+// ─── STAR FIELD ───
+(function(){
+  const c = document.getElementById('stars-canvas');
+  const ctx = c.getContext('2d');
+  let stars = [];
+
+  function resize(){
+    c.width = window.innerWidth;
+    c.height = window.innerHeight;
+    stars = [];
+    for(let i=0;i<200;i++){
+      stars.push({
+        x:Math.random(), y:Math.random(),
+        r:Math.random()*1.5+0.3,
+        alpha:Math.random()*0.4+0.05,
+        speed:Math.random()*0.0003+0.0001,
+        phase:Math.random()*Math.PI*2,
+      });
+    }
+  }
+
+  let t=0;
+  function draw(){
+    t+=0.01;
+    ctx.clearRect(0,0,c.width,c.height);
+    stars.forEach(s=>{
+      ctx.globalAlpha=s.alpha*(0.5+0.5*Math.sin(t*s.speed*200+s.phase));
+      ctx.fillStyle='#ffffff';
+      ctx.beginPath();
+      ctx.arc(s.x*c.width,s.y*c.height,s.r,0,Math.PI*2);
+      ctx.fill();
+    });
+    ctx.globalAlpha=1;
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize',resize);
+  resize(); draw();
+})();
+
+// ─── REGION CARD HOVER COLORS ───
+document.querySelectorAll('.region-card').forEach(card=>{
+  card.addEventListener('mouseenter',()=>{
+    const name = card.querySelector('.rc-name');
+    if(name) card.style.background = 'rgba(255,255,255,0.03)';
+  });
+  card.addEventListener('mouseleave',()=>{
+    card.style.background='rgba(255,255,255,0.01)';
+  });
+});
+</script>
+
+</body>
+</html>

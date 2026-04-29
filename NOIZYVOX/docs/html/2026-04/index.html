@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOIZYVOX — A.I.V.A. Voice Guild</title>
+  <meta name="description" content="Artificially Intelligent Voice Acting. 75/25 always. Human Voice Sovereignty. Your voice. Your estate. Forever.">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --void: #080808;
+      --cream: #EDE8DF;
+      --cream-dim: rgba(237,232,223,0.5);
+      --cream-faint: rgba(237,232,223,0.08);
+      --electric: #00E5FF;
+      --electric-dim: rgba(0,229,255,0.15);
+      --gold: #C9A84C;
+      --red: #E53935;
+      --display: 'Bebas Neue', sans-serif;
+      --mono: 'DM Mono', monospace;
+      --serif: 'Cormorant Garamond', serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--void); color: var(--cream); font-family: var(--mono); overflow-x: hidden; }
+
+    /* Scanlines */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 48px;
+      border-bottom: 1px solid var(--cream-faint);
+      backdrop-filter: blur(20px);
+      background: rgba(8,8,8,0.8);
+    }
+    .nav-logo { font-family: var(--display); font-size: 24px; letter-spacing: 0.1em; color: var(--electric); }
+    .nav-tag  { font-size: 9px; letter-spacing: 0.25em; color: var(--cream-dim); text-transform: uppercase; margin-top: 2px; }
+    .nav-back { font-size: 10px; letter-spacing: 0.15em; color: var(--cream-dim); text-decoration: none; text-transform: uppercase; }
+    .nav-back:hover { color: var(--electric); }
+
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 120px 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 60% at 80% 50%, rgba(0,229,255,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .aiva-badge {
+      display: inline-flex; align-items: center; gap: 12px;
+      border: 1px solid var(--electric-dim);
+      padding: 8px 20px;
+      margin-bottom: 40px;
+      width: fit-content;
+      opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+    }
+    .aiva-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--electric); box-shadow: 0 0 8px var(--electric); animation: blink 1.5s ease-in-out infinite; }
+    .aiva-text { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--electric); }
+
+    h1 {
+      font-family: var(--display);
+      font-size: clamp(72px, 13vw, 180px);
+      line-height: 0.87;
+      letter-spacing: -0.01em;
+      color: var(--cream);
+      opacity: 0; animation: fadeUp 0.9s 0.35s forwards;
+    }
+    h1 .electric { color: var(--electric); }
+    h1 .outline { -webkit-text-stroke: 1.5px rgba(237,232,223,0.3); color: transparent; }
+
+    .hero-sub {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(16px, 2vw, 24px);
+      color: var(--cream-dim);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-top: 36px;
+      opacity: 0; animation: fadeUp 0.9s 0.55s forwards;
+    }
+
+    .split-row {
+      display: flex; gap: 48px; margin-top: 56px; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 0.9s 0.7s forwards;
+    }
+    .split-block {}
+    .split-number { font-family: var(--display); font-size: 72px; line-height: 1; color: var(--electric); }
+    .split-label  { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cream-dim); margin-top: 4px; }
+    .split-divider { width: 1px; background: var(--cream-faint); align-self: stretch; }
+
+    .cta-row { display: flex; gap: 16px; margin-top: 48px; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.9s 0.85s forwards; }
+    .btn-electric {
+      background: var(--electric); color: var(--void);
+      font-family: var(--mono); font-size: 11px; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none;
+      padding: 16px 36px; border: none; cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .btn-electric:hover { opacity: 0.85; transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent; color: var(--cream);
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none;
+      padding: 16px 36px; border: 1px solid var(--cream-faint); cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--electric); color: var(--electric); }
+
+    /* AIVA SECTION */
+    .aiva-section { padding: 120px 48px; background: var(--electric-dim); }
+    .aiva-title {
+      font-family: var(--display); font-size: clamp(48px, 8vw, 120px);
+      line-height: 0.9; color: var(--cream); margin-bottom: 24px;
+    }
+    .aiva-full { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--electric); margin-bottom: 48px; }
+    .aiva-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2px; margin-top: 48px; }
+    .aiva-card { padding: 36px 28px; background: rgba(8,8,8,0.6); border-top: 2px solid var(--electric-dim); transition: border-color 0.2s; }
+    .aiva-card:hover { border-top-color: var(--electric); }
+    .aiva-card-title { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--electric); margin-bottom: 12px; }
+    .aiva-card-body  { font-size: 13px; color: var(--cream-dim); line-height: 1.7; }
+
+    /* ESTATE SECTION */
+    .estate { padding: 120px 48px; }
+    .estate-label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 48px; }
+    .estate-title { font-family: var(--serif); font-size: clamp(32px, 5vw, 72px); font-weight: 300; line-height: 1.2; color: var(--cream); max-width: 800px; margin-bottom: 32px; }
+    .estate-title em { font-style: italic; color: var(--gold); }
+    .estate-body { font-size: 13px; color: var(--cream-dim); line-height: 1.9; max-width: 560px; }
+
+    footer {
+      padding: 48px; border-top: 1px solid var(--cream-faint);
+      display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px;
+    }
+    .footer-logo { font-family: var(--display); font-size: 40px; color: var(--electric); }
+    .footer-meta { font-size: 9px; letter-spacing: 0.15em; color: var(--cream-faint); line-height: 2; text-transform: uppercase; }
+
+    @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes blink  { 0%,100% { opacity:1; } 50% { opacity:0.2; } }
+
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-thumb { background: var(--electric-dim); }
+
+    @media(max-width:768px) { nav,  .hero, .aiva-section, .estate, footer { padding-left:24px; padding-right:24px; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div>
+    <div class="nav-logo">NOIZYVOX</div>
+    <div class="nav-tag">A.I.V.A. — Artificially Intelligent Voice Acting</div>
+  </div>
+  <a href="https://noizy.ai" class="nav-back">← noizy.ai</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="aiva-badge">
+    <div class="aiva-dot"></div>
+    <div class="aiva-text">A.I.V.A. Guild — Now Enrolling</div>
+  </div>
+  <h1>
+    YOUR<br>
+    <span class="electric">VOICE.</span><br>
+    YOUR<br>
+    <span class="outline">ESTATE.</span>
+  </h1>
+  <p class="hero-sub">
+    NOIZYVOX is the world's first consent-native voice acting guild.
+    Human voices, AI-assisted performance, sovereign rights.
+    75/25. Always. Your estate passes to your children.
+  </p>
+  <div class="split-row">
+    <div class="split-block">
+      <div class="split-number">75%</div>
+      <div class="split-label">Yours — Always</div>
+    </div>
+    <div class="split-divider"></div>
+    <div class="split-block">
+      <div class="split-number">100</div>
+      <div class="split-label">Year Voice Estate</div>
+    </div>
+    <div class="split-divider"></div>
+    <div class="split-block">
+      <div class="split-number">17</div>
+      <div class="split-label">Languages Supported</div>
+    </div>
+  </div>
+  <div class="cta-row">
+    <a href="#enroll" class="btn-electric">Enroll Your Voice</a>
+    <a href="#aiva" class="btn-outline">What is A.I.V.A.?</a>
+  </div>
+</section>
+
+<section class="aiva-section" id="aiva">
+  <div class="aiva-full">A.I.V.A. — Artificially Intelligent Voice Acting</div>
+  <div class="aiva-title">THE NEW<br>VOICE GUILD</div>
+  <p style="font-size:14px; color:var(--cream-dim); max-width:600px; line-height:1.8;">
+    A.I.V.A. is not AI replacing voice actors. It is voice actors using AI to perform at a scale, speed, and range impossible alone — while retaining every right, every royalty, every future use their voice enables.
+  </p>
+  <div class="aiva-grid">
+    <div class="aiva-card">
+      <div class="aiva-card-title">Consent as Code</div>
+      <div class="aiva-card-body">NCP v1.0 — every use of your voice is logged, audited, and cryptographically signed. You see every transaction. You approve every use. You can revoke everything instantly.</div>
+    </div>
+    <div class="aiva-card">
+      <div class="aiva-card-title">Voice Estate</div>
+      <div class="aiva-card-body">Your voice rights don't die with you. They transfer to named beneficiaries. 100-year OAIS/PREMIS protection. Generational wealth, not a catalog dump.</div>
+    </div>
+    <div class="aiva-card">
+      <div class="aiva-card-title">Kill Switch</div>
+      <div class="aiva-card-body">Instant, irrevocable, system-wide. One command and every use of your voice stops globally. No delay. No appeal. You are sovereign.</div>
+    </div>
+    <div class="aiva-card">
+      <div class="aiva-card-title">Never Clause</div>
+      <div class="aiva-card-body">Permanently block specific uses of your voice. Political ads. Competing products. Anything. It is irrevocable. No one can override it. Not even NOIZY.</div>
+    </div>
+    <div class="aiva-card">
+      <div class="aiva-card-title">Transparency Ledger</div>
+      <div class="aiva-card-body">Every use. Every payment. Every decision. Visible to you. Always. No black boxes. No surprises. Your voice, your ledger.</div>
+    </div>
+    <div class="aiva-card">
+      <div class="aiva-card-title">17 Languages</div>
+      <div class="aiva-card-body">XTTS v2 pipeline. Your voice performs globally — in languages you don't speak — with your consent and your royalty on every render.</div>
+    </div>
+  </div>
+</section>
+
+<section class="estate" id="enroll">
+  <div class="estate-label">Voice Estate — The Georgia May Clause</div>
+  <div class="estate-title">
+    Built to matter<br>
+    <em>in 2056.</em>
+  </div>
+  <p class="estate-body">
+    The Georgia May Clause is the constitutional principle that everything built at NOIZY must compound across generations. Not just for one creator. For every artist who ever made something worth protecting and wanted their children to inherit something more than a memory.
+    <br><br>
+    Enroll your voice. Name your beneficiary. Build an estate.
+  </p>
+  <br><br>
+  <a href="mailto:rsp@noizy.ai?subject=NOIZYVOX Enrollment" class="btn-electric" style="display:inline-block; margin-top:16px;">Begin Enrollment — rsp@noizy.ai</a>
+</section>
+
+<footer>
+  <div>
+    <div class="footer-logo">NOIZYVOX</div>
+    <div class="footer-meta" style="margin-top:12px;">
+      A NOIZY EMPIRE BRAND<br>
+      RSP_001 — Robert Stephen Plowman — Fish Music Inc.<br>
+      NCP v1.0 — Consent Enforced — 75/25 Public Law
+    </div>
+  </div>
+  <div class="footer-meta" style="text-align:right;">
+    HEAVEN WORKER v4.2.0<br>
+    HVS ENFORCEMENT ACTIVE<br>
+    GABRIEL STANDING BY
+  </div>
+</footer>
+
+</body>
+</html>

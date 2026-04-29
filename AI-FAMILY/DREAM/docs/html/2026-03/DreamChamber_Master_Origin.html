@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE DREAMCHAMBER — Master Origin Story</title>
+<style>
+:root{
+  --bg:#04040a;--bg2:#080810;--bg3:#0e0e1a;--panel:#131324;--border:#1e1e38;
+  --accent:#7c3aed;--a2:#06b6d4;--a3:#f59e0b;--a4:#10b981;--a5:#ef4444;--a6:#ec4899;
+  --a7:#8b5cf6;--text:#eeeef8;--muted:#7777aa;--font:'Segoe UI',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--font);overflow-x:hidden;}
+canvas#bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(4,4,10,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);height:52px;display:flex;align-items:center;padding:0 1.5rem;gap:0;overflow-x:auto;}
+.nav-brand{font-weight:900;font-size:0.9rem;color:var(--a3);letter-spacing:0.06em;white-space:nowrap;margin-right:1.5rem;padding-right:1.5rem;border-right:1px solid var(--border);}
+nav a{color:var(--muted);text-decoration:none;font-size:0.7rem;letter-spacing:0.08em;text-transform:uppercase;padding:0 0.75rem;height:52px;display:flex;align-items:center;border-bottom:2px solid transparent;white-space:nowrap;transition:all 0.2s;}
+nav a:hover,nav a.active{color:var(--a3);border-bottom-color:var(--a3);}
+
+/* MAIN */
+main{position:relative;z-index:1;padding-top:52px;}
+section{padding:5rem 2rem;max-width:1120px;margin:0 auto;}
+.divider{border:none;border-top:1px solid var(--border);}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:52px 2rem 6rem;position:relative;overflow:hidden;max-width:100%;}
+.hero-kicker{font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--a3);margin-bottom:2rem;display:flex;align-items:center;gap:1rem;}
+.hero-kicker::before,.hero-kicker::after{content:'';display:block;width:50px;height:1px;background:linear-gradient(90deg,transparent,var(--a3));}
+.hero h1{font-size:clamp(3rem,7vw,7rem);font-weight:900;line-height:0.95;letter-spacing:-0.03em;margin-bottom:2rem;}
+.hero h1 .line1{color:var(--text);}
+.hero h1 .line2{background:linear-gradient(135deg,var(--a3),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero h1 .line3{color:var(--a2);font-size:0.5em;letter-spacing:0.05em;font-style:italic;}
+.hero-quote{font-size:1.15rem;color:var(--muted);max-width:680px;line-height:1.8;margin:0 auto 3rem;font-style:italic;}
+.hero-quote strong{color:var(--a3);font-style:normal;}
+.hero-badges{display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;}
+.hb{background:rgba(124,58,237,0.12);border:1px solid rgba(124,58,237,0.3);color:var(--accent);font-size:0.75rem;padding:0.4rem 1rem;border-radius:20px;letter-spacing:0.08em;}
+.hb.g{background:rgba(6,182,212,0.1);border-color:rgba(6,182,212,0.3);color:var(--a2);}
+.hb.a{background:rgba(245,158,11,0.1);border-color:rgba(245,158,11,0.3);color:var(--a3);}
+.hb.e{background:rgba(16,185,129,0.1);border-color:rgba(16,185,129,0.3);color:var(--a4);}
+
+/* SECTION HEADERS */
+.sec-eye{font-size:0.67rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;}
+h2.shead{font-size:clamp(2rem,4.5vw,3.5rem);font-weight:900;line-height:1.05;margin-bottom:1rem;}
+h2.shead span{background:linear-gradient(135deg,var(--accent),var(--a2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+h2.shead .a3{background:linear-gradient(135deg,var(--a3),var(--a6));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.slead{color:var(--muted);font-size:1.05rem;line-height:1.75;max-width:680px;margin-bottom:3rem;}
+
+/* ORIGIN BOX */
+.origin-box{background:linear-gradient(135deg,rgba(124,58,237,0.1),rgba(245,158,11,0.06));border:1px solid rgba(124,58,237,0.3);border-radius:20px;padding:3rem;margin-bottom:3rem;position:relative;overflow:hidden;}
+.origin-box::before{content:"ORIGIN";position:absolute;right:-1rem;top:50%;transform:translateY(-50%) rotate(-90deg);font-size:6rem;font-weight:900;color:rgba(124,58,237,0.04);letter-spacing:0.3em;pointer-events:none;}
+.ob-label{font-size:0.68rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--a3);margin-bottom:1rem;}
+.ob-text{font-size:1rem;line-height:1.9;color:var(--text);}
+.ob-quote{margin-top:2rem;padding:1.25rem 1.75rem;border-left:4px solid var(--a3);background:rgba(245,158,11,0.06);border-radius:0 10px 10px 0;font-size:1.1rem;color:var(--a3);font-style:italic;line-height:1.7;font-weight:600;}
+
+/* BIOME GRID */
+.biome-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-top:2rem;}
+.biome{background:var(--panel);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all 0.25s;position:relative;}
+.biome:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 12px 40px rgba(124,58,237,0.15);}
+.biome-header{padding:1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:1rem;}
+.biome-icon{font-size:2rem;width:50px;height:50px;display:flex;align-items:center;justify-content:center;border-radius:12px;flex-shrink:0;}
+.bi-africa{background:rgba(245,158,11,0.15);}
+.bi-india{background:rgba(236,72,153,0.15);}
+.bi-asia{background:rgba(6,182,212,0.15);}
+.bi-me{background:rgba(245,158,11,0.12);}
+.bi-europe{background:rgba(139,92,246,0.15);}
+.bi-americas{background:rgba(16,185,129,0.15);}
+.bi-oceania{background:rgba(6,182,212,0.12);}
+.bi-electronic{background:rgba(124,58,237,0.15);}
+.bi-healing{background:rgba(16,185,129,0.12);}
+.biome-header h3{font-size:1rem;font-weight:800;line-height:1.2;}
+.biome-header .bh-region{font-size:0.7rem;color:var(--muted);margin-top:0.2rem;}
+.biome-body{padding:1.25rem;}
+.biome-section{margin-bottom:1rem;}
+.bs-label{font-size:0.65rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);margin-bottom:0.4rem;}
+.instrument-chips{display:flex;flex-wrap:wrap;gap:0.3rem;}
+.chip{font-size:0.72rem;padding:0.2rem 0.55rem;border-radius:4px;border:1px solid;}
+.chip-gold{background:rgba(245,158,11,0.1);border-color:rgba(245,158,11,0.3);color:var(--a3);}
+.chip-purple{background:rgba(124,58,237,0.1);border-color:rgba(124,58,237,0.3);color:var(--accent);}
+.chip-cyan{background:rgba(6,182,212,0.1);border-color:rgba(6,182,212,0.3);color:var(--a2);}
+.chip-green{background:rgba(16,185,129,0.1);border-color:rgba(16,185,129,0.3);color:var(--a4);}
+.chip-pink{background:rgba(236,72,153,0.1);border-color:rgba(236,72,153,0.3);color:var(--a6);}
+.vr-behavior{background:rgba(124,58,237,0.06);border-top:1px solid var(--border);padding:1rem 1.25rem;font-size:0.8rem;color:var(--muted);line-height:1.6;}
+.vr-behavior strong{color:var(--accent);}
+
+/* SCALE TABLE */
+.scale-table-wrap{overflow-x:auto;margin-top:1.5rem;}
+table.data{width:100%;border-collapse:collapse;font-size:0.85rem;}
+table.data th{background:var(--bg3);color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;font-size:0.68rem;padding:0.75rem 1rem;text-align:left;border-bottom:1px solid var(--border);}
+table.data td{padding:0.8rem 1rem;border-bottom:1px solid rgba(255,255,255,0.04);vertical-align:top;line-height:1.5;}
+table.data tr:hover td{background:rgba(255,255,255,0.02);}
+
+/* BRAINWAVE MAP */
+.bw-grid{display:flex;flex-direction:column;gap:1rem;margin-top:1.5rem;}
+.bw-row{background:var(--panel);border:1px solid var(--border);border-radius:12px;display:grid;grid-template-columns:90px 120px 1fr 1fr;gap:0;overflow:hidden;transition:border-color 0.2s;}
+.bw-row:hover{border-color:var(--accent);}
+.bw-hz{display:flex;align-items:center;justify-content:center;font-size:0.85rem;font-weight:800;border-right:1px solid var(--border);color:var(--a3);}
+.bw-state{display:flex;align-items:center;font-size:0.82rem;font-weight:700;padding:1rem;border-right:1px solid var(--border);}
+.bw-desc{padding:1rem;font-size:0.8rem;color:var(--muted);line-height:1.6;border-right:1px solid var(--border);}
+.bw-tools{padding:1rem;font-size:0.78rem;color:var(--text);line-height:1.6;}
+
+/* HEALING TARGETS */
+.healing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:1.5rem;}
+.heal-card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:1.5rem;transition:all 0.2s;position:relative;overflow:hidden;}
+.heal-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.heal-card:hover{border-color:var(--a4);transform:translateY(-2px);}
+.hc-icon{font-size:1.8rem;margin-bottom:0.75rem;}
+.hc-condition{font-size:0.95rem;font-weight:800;margin-bottom:0.35rem;}
+.hc-modality{font-size:0.78rem;color:var(--a2);margin-bottom:0.5rem;font-weight:600;}
+.hc-evidence{font-size:0.8rem;color:var(--muted);line-height:1.6;}
+
+/* ADAPTIVE ARTIST */
+.adaptive-hero{background:linear-gradient(135deg,rgba(239,68,68,0.08),rgba(124,58,237,0.08));border:1px solid rgba(239,68,68,0.25);border-radius:20px;padding:3rem;margin-bottom:2.5rem;}
+.ah-eyebrow{font-size:0.68rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--a5);margin-bottom:1rem;}
+.ah-title{font-size:1.5rem;font-weight:900;margin-bottom:1rem;line-height:1.3;}
+.ah-body{font-size:0.95rem;color:var(--muted);line-height:1.8;max-width:700px;}
+.ah-quote{margin-top:1.5rem;padding:1.25rem 1.75rem;border-left:4px solid var(--a5);background:rgba(239,68,68,0.06);border-radius:0 10px 10px 0;font-size:1rem;color:var(--text);font-style:italic;line-height:1.7;}
+
+.nerve-pipeline{display:flex;flex-direction:column;gap:0;margin-top:2rem;}
+.nv-step{display:grid;grid-template-columns:56px 1fr;position:relative;}
+.nv-step::after{content:'';position:absolute;left:27px;top:44px;width:2px;height:calc(100% - 12px);background:linear-gradient(180deg,var(--a5),transparent);}
+.nv-step:last-child::after{display:none;}
+.nv-num{display:flex;align-items:flex-start;justify-content:center;padding-top:0.6rem;}
+.nv-circle{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:800;z-index:1;background:var(--a5);color:white;}
+.nv-circle.c2{background:var(--a3);color:#000;}
+.nv-circle.c3{background:var(--accent);}
+.nv-circle.c4{background:var(--a2);}
+.nv-circle.c5{background:var(--a4);}
+.nv-body{padding:0.5rem 0 1.5rem 0.75rem;}
+.nv-body h4{font-size:0.9rem;font-weight:700;margin-bottom:0.3rem;}
+.nv-body p{font-size:0.82rem;color:var(--muted);line-height:1.6;}
+
+/* VR ARCHITECTURE */
+.vr-stack{display:flex;flex-direction:column;gap:1rem;margin-top:1.5rem;}
+.vr-layer{background:var(--bg3);border:1px solid var(--border);border-radius:12px;overflow:hidden;display:grid;grid-template-columns:140px 1fr;gap:0;}
+.vr-layer-label{padding:1.25rem;background:rgba(124,58,237,0.08);border-right:1px solid var(--border);display:flex;align-items:center;justify-content:center;text-align:center;}
+.vll-name{font-size:0.8rem;font-weight:800;line-height:1.3;}
+.vll-tech{font-size:0.68rem;color:var(--muted);margin-top:0.35rem;}
+.vr-layer-body{padding:1.25rem;}
+.vr-layer-body h4{font-size:0.9rem;font-weight:700;margin-bottom:0.5rem;}
+.vr-layer-body ul{list-style:none;display:flex;flex-direction:column;gap:0.3rem;}
+.vr-layer-body li{font-size:0.82rem;color:var(--muted);padding-left:1rem;position:relative;line-height:1.5;}
+.vr-layer-body li::before{content:'›';position:absolute;left:0;color:var(--accent);}
+
+/* CTP PROTOCOL */
+.ctp-flow{display:flex;flex-direction:column;gap:0;margin-top:2rem;}
+.ctp-step{background:var(--bg3);border:1px solid var(--border);border-radius:12px;margin-bottom:1rem;overflow:hidden;}
+.ctp-header{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);}
+.ctp-num{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.9rem;font-weight:800;color:white;flex-shrink:0;}
+.ctp-header h3{font-size:1rem;font-weight:700;flex:1;}
+.ctp-header .ctp-tag{font-size:0.68rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);}
+.ctp-body{padding:1.25rem 1.5rem;display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.ctp-col h4{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);margin-bottom:0.6rem;}
+.ctp-item{font-size:0.83rem;padding:0.3rem 0;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--text);line-height:1.5;display:flex;align-items:flex-start;gap:0.5rem;}
+.ctp-item::before{content:'→';color:var(--accent);font-size:0.75rem;flex-shrink:0;margin-top:1px;}
+
+/* 4 CORE SYSTEMS */
+.core-systems{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:2rem;}
+.cs-card{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:2rem;position:relative;overflow:hidden;transition:all 0.25s;}
+.cs-card:hover{border-color:var(--accent);transform:translateY(-2px);}
+.cs-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+.cs1::before{background:linear-gradient(90deg,var(--accent),var(--a2));}
+.cs2::before{background:linear-gradient(90deg,var(--a5),var(--accent));}
+.cs3::before{background:linear-gradient(90deg,var(--a3),var(--a6));}
+.cs4::before{background:linear-gradient(90deg,var(--a4),var(--a2));}
+.cs-num{font-size:0.68rem;text-transform:uppercase;letter-spacing:0.18em;color:var(--muted);margin-bottom:0.5rem;}
+.cs-title{font-size:1.15rem;font-weight:800;margin-bottom:0.75rem;line-height:1.3;}
+.cs-desc{font-size:0.85rem;color:var(--muted);line-height:1.7;}
+.cs-features{margin-top:1rem;display:flex;flex-direction:column;gap:0.3rem;}
+.cs-feature{font-size:0.8rem;padding:0.25rem 0;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--text);display:flex;gap:0.5rem;}
+.cs-feature::before{content:'◆';color:var(--accent);font-size:0.55rem;flex-shrink:0;margin-top:3px;}
+
+/* HUMANITY RECONNECTION */
+.phase-row{display:grid;grid-template-columns:80px 1fr;gap:1.5rem;align-items:start;margin-bottom:2.5rem;}
+.pr-num{display:flex;flex-direction:column;align-items:center;gap:0.5rem;}
+.pr-circle{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:900;border:2px solid;}
+.pr-circle.ph1{background:rgba(124,58,237,0.15);border-color:rgba(124,58,237,0.4);color:var(--accent);}
+.pr-circle.ph2{background:rgba(6,182,212,0.15);border-color:rgba(6,182,212,0.4);color:var(--a2);}
+.pr-circle.ph3{background:rgba(245,158,11,0.15);border-color:rgba(245,158,11,0.4);color:var(--a3);}
+.pr-circle.ph4{background:rgba(16,185,129,0.15);border-color:rgba(16,185,129,0.4);color:var(--a4);}
+.pr-circle.ph5{background:rgba(236,72,153,0.15);border-color:rgba(236,72,153,0.4);color:var(--a6);}
+.pr-circle.ph6{background:rgba(139,92,246,0.15);border-color:rgba(139,92,246,0.4);color:var(--a7);}
+.pr-body{}
+.pr-body h3{font-size:1.15rem;font-weight:800;margin-bottom:0.5rem;}
+.pr-body p{font-size:0.88rem;color:var(--muted);line-height:1.7;margin-bottom:0.75rem;}
+.pr-actions{display:flex;flex-wrap:wrap;gap:0.4rem;}
+.action-chip{font-size:0.75rem;padding:0.25rem 0.65rem;border-radius:20px;background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.25);color:var(--accent);}
+
+/* CALLOUT */
+.callout{border-left:3px solid var(--accent);background:rgba(124,58,237,0.07);border-radius:0 10px 10px 0;padding:1.25rem 1.5rem;margin:1.5rem 0;}
+.callout.amber{border-left-color:var(--a3);background:rgba(245,158,11,0.07);}
+.callout.cyan{border-left-color:var(--a2);background:rgba(6,182,212,0.07);}
+.callout.green{border-left-color:var(--a4);background:rgba(16,185,129,0.07);}
+.callout.red{border-left-color:var(--a5);background:rgba(239,68,68,0.07);}
+.c-head{font-size:0.68rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);margin-bottom:0.5rem;}
+.callout p{font-size:0.9rem;line-height:1.7;}
+
+/* CLOSING */
+.closing{background:linear-gradient(135deg,rgba(245,158,11,0.08),rgba(124,58,237,0.06));border:1px solid rgba(245,158,11,0.25);border-radius:22px;padding:4rem 3rem;text-align:center;margin-top:3rem;}
+.closing h2{font-size:2.5rem;font-weight:900;margin-bottom:1.5rem;line-height:1.2;}
+.closing p{font-size:1rem;color:var(--muted);max-width:620px;margin:0 auto 2.5rem;line-height:1.8;}
+.closing .big-quote{font-size:1.3rem;font-style:italic;color:var(--a3);max-width:700px;margin:0 auto 2.5rem;line-height:1.6;}
+.stat-row{display:flex;flex-wrap:wrap;justify-content:center;gap:2.5rem;}
+.stat{text-align:center;}
+.stat .val{font-size:2rem;font-weight:900;background:linear-gradient(135deg,var(--a3),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.stat .lbl{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);margin-top:0.3rem;}
+
+@media(max-width:700px){
+  .biome-grid{grid-template-columns:1fr;}
+  .bw-row{grid-template-columns:70px 1fr}
+  .bw-desc,.bw-tools{display:none}
+  .vr-layer{grid-template-columns:1fr}
+  .vr-layer-label{border-right:none;border-bottom:1px solid var(--border)}
+  .ctp-body{grid-template-columns:1fr}
+  .phase-row{grid-template-columns:50px 1fr}
+  section{padding:3rem 1.25rem}
+}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<nav>
+  <span class="nav-brand">DREAMCHAMBER &middot; ORIGIN</span>
+  <a href="#origin">Origin</a>
+  <a href="#world-music">World Music</a>
+  <a href="#healing">Sonic Healing</a>
+  <a href="#adaptive">Adaptive Artist</a>
+  <a href="#vr-arch">VR Architecture</a>
+  <a href="#resonance">Resonance</a>
+  <a href="#four-systems">4 Systems</a>
+  <a href="#humanity">Humanity</a>
+</nav>
+<main>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-kicker">NOIZY Universe &middot; DreamChamber &middot; Master Origin Story</div>
+  <h1>
+    <div class="line1">THE</div>
+    <div class="line2">DREAMCHAMBER</div>
+    <div class="line3">A Planetary Consciousness Instrument</div>
+  </h1>
+  <p class="hero-quote">
+    <strong>Treat the whole world like it&rsquo;s a small children&rsquo;s clear little ball to play with.</strong><br>
+    Every instrument humanity ever invented. Every scale. Every rhythm. Every healing tradition.<br>
+    All of it, alive inside one room.
+  </p>
+  <div class="hero-badges">
+    <span class="hb">10 Global Biomes</span>
+    <span class="hb g">5 Sonic Healing Layers</span>
+    <span class="hb a">Nerve-to-Note System</span>
+    <span class="hb e">MetaQuest + Unreal + FMOD/Wwise</span>
+    <span class="hb">Creative Transmission Protocol</span>
+    <span class="hb g">4 Core Systems</span>
+    <span class="hb a">Humanity Reconnection Plan</span>
+  </div>
+</div>
+
+<!-- SECTION 00: ORIGIN STORY -->
+<section id="origin">
+  <div class="sec-eye">Section 00 &mdash; The Master Origin Story</div>
+  <h2 class="shead">The Earth as a <span class="a3">Clear Glass Ball</span></h2>
+  <p class="slead">Long before computers, humans were already engineers of sound. This is where everything begins.</p>
+
+  <div class="origin-box">
+    <div class="ob-label">The Origin</div>
+    <p class="ob-text">
+      Long before computers, humans were already engineers of sound.<br><br>
+      A hollow log became a drum.<br>
+      A bone became a flute.<br>
+      A stretched gut string became a violin.<br><br>
+      Across deserts, forests, temples, cities, and oceans, humanity invented <strong>thousands of musical languages</strong>.
+      Each one solved the same mystery:<br><br>
+      <strong>How do you turn emotion into vibration?</strong><br><br>
+      The first instrument was the body: heartbeat, breath, voice, footsteps.
+      Music was not invented. <strong>It was discovered.</strong><br><br>
+      Every culture on Earth eventually built tools to extend the body&rsquo;s ability to shape vibration.
+      Those tools &mdash; thousands of them &mdash; form the <strong>sonic DNA of humanity</strong>.<br><br>
+      The DreamChamber is where that entire DNA library lives.
+      Not as static samples. As <strong>living musical ecosystems</strong>.
+      When an artist enters the DreamChamber, the world appears as floating sound biomes.
+      Each biome is a musical culture &mdash; instruments, scales, rhythms, performance traditions.<br><br>
+      You don&rsquo;t load a preset. <strong>You step into the culture.</strong>
+    </p>
+    <div class="ob-quote">
+      &ldquo;The machine does not replace the human. It opens the door to the sound of the Earth itself.&rdquo;
+    </div>
+  </div>
+
+  <div class="callout amber">
+    <div class="c-head">Robert Stephen Plowman &mdash; The Man Who Survived the Water</div>
+    <p>
+      After a diving accident and living with permanent nerve damage, the interface between mind and instrument changed forever.
+      The struggle was never with the music &mdash; the music was always louder than ever.
+      The struggle was with the <em>translation</em>.
+      NOIZY was not born in a boardroom. It was forged in the fire of necessity.
+      <strong>AI as a prosthesis for the creative spirit.</strong> Not productivity. <em>Restoration</em>.
+    </p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SECTION 01: WORLD MUSIC ATLAS -->
+<section id="world-music">
+  <div class="sec-eye">Section 01 &mdash; Global Music Atlas</div>
+  <h2 class="shead">Every Sonic Civilization<br><span>Floating in One Room</span></h2>
+  <p class="slead">10 living biomes. Every instrument family. Every scale system. Every cultural tradition. The DreamChamber contains all of it &mdash; interactive, spatial, alive.</p>
+
+  <div class="biome-grid">
+
+    <!-- AFRICA -->
+    <div class="biome">
+      <div class="biome-header">
+        <div class="biome-icon bi-africa">&#x1F941;</div>
+        <div><h3>West &amp; Sub-Saharan Africa</h3><div class="bh-region">Rhythmic Heartbeat of Humanity</div></div>
+      </div>
+      <div class="biome-body">
+        <div class="biome-section">
+          <div class="bs-label">Instruments</div>
+          <div class="instrument-chips">
+            <span class="chip chip-gold">Djembe</span><span class="chip chip-gold">Talking Drum</span><span class="chip chip-gold">Kora</span><span class="chip chip-gold">Balafon</span><span class="chip chip-gold">Ngoni</span><span class="chip chip-gold">Dundun</span><span class="chip chip-gold">Mbira</span><span class="chip chip-gold">Kalimba</span><span class="chip chip-gold">Udu</span><span class="chip chip-gold">Shekere</span>
+          </div>
+        </div>
+        <div class="biome-section">
+          <div class="bs-label">Regional Styles</div>
+          <div class="instrument-chips">
+            <span class="chip chip-cyan">Ewe drumming (Ghana)</span><span class="chip chip-cyan">Yoruba b&agrave;t&agrave; (Nigeria)</span><span class="chip chip-cyan">Griot traditions</span><span class="chip chip-cyan">Ethiopian Krar</span>
+          </div>
+        </div>
+        <div class="biome-section">
+          <div class="bs-label">Scales &amp; Structure</div>
+          <div class="instrument-chips">
+            <span class="chip chip-purple">Pentatonic minor</span><span class="chip chip-purple">Hexatonic (Griot)</span><span class="chip chip-purple">Call &amp; Response</span><span class="chip chip-purple">Polyrhythm</span>
+          </div>
+        </div>
+        <div class="biome-section">
+          <div class="bs-label">Healing Properties</div>
+          <p style="font-size:0.82rem;color:var(--muted);line-height:1.6;">Polyrhythms induce trance states &middot; Mbira patterns create meditative neural sync &middot; Kora lullabies = emotional grounding &middot; Drumming regulates cortisol</p>
+        </div>
+      </div>
+      <div class="vr-behavior"><strong>VR Behavior:</strong> Drums form a circle around the artist. Walking between them changes rhythmic density. Your body becomes the conductor of the drum village.</div>
+    </div>
+
+    <!-- INDIA -->
+    <div class="biome">
+      <div class="biome-header">
+        <div class="biome-icon bi-india">&#x1FA97;</div>
+        <div><h3>Indian Classical</h3><div class="bh-region">Raga &middot; Tala &middot; Meditation &middot; Devotion</div></div>
+      </div>
+      <div class="biome-body">
+        <div class="biome-section">
+          <div class="bs-label">Instruments</div>
+          <div class="instrument-chips">
+            <span class="chip chip-pink">Sitar</span><span class="chip chip-pink">Tabla</span><span class="chip chip-pink">Tanpura (drone)</span><span class="chip chip-pink">Sarangi</span><span class="chip chip-pink">Bansuri</span><span class="chip chip-pink">Santoor</span><span class="chip chip-pink">Sarod</span><span class="chip chip-pink">Veena</span>
+          </div>
+        </div>
+        <div class="biome-section">
+          <div class="bs-label">Scale System</div>
+          <div class="instrument-chips">
+            <span class="chip chip-purple">Raga (time-mapped)</span><span class="chip chip-purple">Microtonal bends</span><span class="chip chip-purple">Tala cycles</span><span class="chip chip-purple">72 Melakarta modes</span>
+          </div>
+        </div>
+        <div class="biome-section">
+          <div class="bs-label">Healing Properties</div>
+          <p style="font-size:0.82rem;color:var(--muted);line-height:1.6;">Ragas tuned to time of day and emotional state &middot; Tanpura drone = deep meditative alignment &middot; Bansuri induces theta brainwaves &middot; Used in yoga, temple ritual, Ayurvedic healing</p>
+        </div>
+      </div>
+      <div class="vr-behavior"><strong>VR Behavior:</strong> Melodies appear as spiraling ribbons of light. Moving your hands stretches notes into microtonal curves. Breathing controls drone density.</div>
+    </div>
+
+    <!-- EAST ASIA -->
+    <div class="biome">
+      <div class="biome-header">
+        <div class="biome-icon bi-asia">&#x1F3BC;</div>
+        <div><h3>East Asia</h3><div class="bh-region">China &middot; Japan &middot; Korea &middot; Breath &amp; Silence</div></div>
+      </div>
+      <div class="biome-body">
+        <div class="biome-section">
+          <div class="bs-label">Instruments</div>
+          <div class="instrument-chips">
+            <span class="chip chip-cyan">Guzheng</span><span class="chip chip-cyan">Erhu</span><span class="chip chip-cyan">Pipa</span><span class="chip chip-cyan">Dizi</span><span class="chip chip-cyan">Koto</span><span class="chip chip-cyan">Shakuhachi</span><span class="chip chip-cyan">Taiko</span><span class="chip chip-cyan">Gayageum</span><span class="chip chip-cyan">Haegeum</span>
+          </div>
+        </div>
+        <div class="biome-section">
+          <div class="bs-label">Musical DNA</div>
+          <div class="instrument-chips">
+            <span class="chip chip-purple">Pentatonic scales</span><span class="chip chip-purple">Breath phrasing</span><span class="chip chip-purple">Silence as structure</span><span class="chip chip-purple">Ma (negative space)</span>
+          </div>
+        </div>
+        <div class="biome-section">
+          <div class="bs-label">Healing Properties</div>
+          <p style="font-size:0.82rem;color:var(--muted);line-height:1.6;">Shakuhachi produces theta-alpha brainwave states &middot; Silence as healing: activates parasympathetic nervous system &middot; Taiko = full-body rhythmic grounding</p>
+        </div>
+      </div>
+      <div class="vr-behavior"><strong>VR Behavior:</strong> Sound objects move slowly like drifting clouds. Silence becomes a physical element you can touch. Breath directly controls melodic phrasing.</div>
+    </div>
+
+    <!-- MIDDLE EAST -->
+    <div class="biome">
+      <div class="biome-header">
+        <div class="biome-icon bi-me">&#x1F3B5;</div>
+        <div><h3>Middle East &amp; Mediterranean</h3><div class="bh-region">Maqam &middot; Microtone &middot; Sufi Ecstasy</div></div>
+      </div>
+      <div class="biome-body">
+        <div class="biome-section">
+          <div class="bs-label">Instruments</div>
+          <div class="instrument-chips">
+            <span class="chip chip-gold">Oud</span><span class="chip chip-gold">Qanun</span><span class="chip chip-gold">Ney</span><span class="chip chip-gold">Darbuka</span><span class="chip chip-gold">Riqq</span><span class="chip chip-gold">Saz</span><span class="chip chip-gold">Kemence</span><span class="chip chip-gold">Duduk</span><span class="chip chip-gold">Bouzouki</span>
+          </div>
+        </div>
+        <div class="biome-section">
+          <div class="bs-label">Scale Systems</div>
+          <div class="instrument-chips">
+            <span class="chip chip-purple">Maqam (microtonal)</span><span class="chip chip-purple">Hijaz</span><span class="chip chip-purple">Bayati</span><span class="chip chip-purple">Rast</span><span class="chip chip-purple">Quarter-tones</span><span class="chip chip-purple">Taqsim improvisation</span>
+          </div>
+        </div>
+        <div class="biome-section">
+          <div class="bs-label">Healing Properties</div>
+          <p style="font-size:0.82rem;color:var(--muted);line-height:1.6;">Maqam modes scientifically shown to influence nervous system states &middot; Oud plucking patterns = flow induction &middot; Sufi dhikr chant = trance and divine ecstasy &middot; Quarter-tones access emotional nuance unavailable in Western tuning</p>
+        </div>
+      </div>
+      <div class="vr-behavior"><strong>VR Behavior:</strong> Sound flows like desert wind. Notes bend between pitches like mirages on sand. Microtonal gestures unlock quarter-tone emotional layers.</div>
+    </div>
+
+    <!-- EUROPE -->
+    <div class="biome">
+      <div class="biome-header">
+        <div class="biome-icon bi-europe">&#x1F3BB;</div>
+        <div><h3>Europe</h3><div class="bh-region">Celtic &middot; Classical &middot; Balkan &middot; Folk</div></div>
+      </div>
+      <div class="biome-body">
+        <div class="biome-section">
+          <div class="bs-label">Instruments</div>
+          <div class="instrument-chips">
+            <span class="chip chip-purple">Celtic Harp</span><span class="chip chip-purple">Uilleann Pipes</span><span class="chip chip-purple">Fiddle</span><span class="chip chip-purple">Hardanger Fiddle</span><span class="chip chip-purple">Bodhr&agrave;n</span><span class="chip chip-purple">Violin</span><span class="chip chip-purple">Cello</span><span class="chip chip-purple">Organ</span><span class="chip chip-purple">Lute</span>
+          </div>
+        </div>
+        <div class="biome-section">
+          <div class="bs-label">Musical Structures</div>
+          <div class="instrument-chips">
+            <span class="chip chip-cyan">Major/minor diatonic</span><span class="chip chip-cyan">Dorian &amp; Mixolydian</span><span class="chip chip-cyan">Drone harmonies</span><span class="chip chip-cyan">Balkan 7/8 &amp; 9/8</span><span class="chip chip-cyan">Counterpoint</span>
+          </div>
+        </div>
+        <div class="biome-section">
+          <div class="bs-label">Healing Properties</div>
+          <p style="font-size:0.82rem;color:var(--muted);line-height:1.6;">Gregorian chant reduces cortisol and induces alpha states &middot; Lyrical folk patterns create emotional resonance &middot; Polyphony increases cognitive engagement &middot; Celtic lilt rhythms synchronize with heart rate variability</p>
+        </div>
+      </div>
+      <div class="vr-behavior"><strong>VR Behavior:</strong> Melodies appear as braided strands of ancient light like Celtic knots. Walking through strands layers polyphonic textures. Counterpoint becomes spatial architecture.</div>
+    </div>
+
+    <!-- AMERICAS -->
+    <div class="biome">
+      <div class="biome-header">
+        <div class="biome-icon bi-americas">&#x1F3BA;</div>
+        <div><h3>Americas</h3><div class="bh-region">Amazonian &middot; Andean &middot; Indigenous &middot; Jazz &middot; Blues</div></div>
+      </div>
+      <div class="biome-body">
+        <div class="biome-section">
+          <div class="bs-label">Instruments</div>
+          <div class="instrument-chips">
+            <span class="chip chip-green">Pan Flutes</span><span class="chip chip-green">Charango</span><span class="chip chip-green">Cajón</span><span class="chip chip-green">Shamanic Drums</span><span class="chip chip-green">Native Flute</span><span class="chip chip-green">Saxophone</span><span class="chip chip-green">Trumpet</span><span class="chip chip-green">Blues Guitar</span><span class="chip chip-green">Upright Bass</span>
+          </div>
+        </div>
+        <div class="biome-section">
+          <div class="bs-label">Traditions</div>
+          <div class="instrument-chips">
+            <span class="chip chip-cyan">Icaro healing chant</span><span class="chip chip-cyan">Andean pentatonic</span><span class="chip chip-cyan">Blues pentatonic</span><span class="chip chip-cyan">Jazz modal</span><span class="chip chip-cyan">Candombl&eacute;</span>
+          </div>
+        </div>
+        <div class="biome-section">
+          <div class="bs-label">Healing Properties</div>
+          <p style="font-size:0.82rem;color:var(--muted);line-height:1.6;">Icaro chanting = shamanic brainwave entrainment &middot; Native American flute increases HRV and calms beta activity &middot; Jazz improvisation = neural plasticity and creative flow &middot; Afro-Caribbean polyrhythm = emotional catharsis</p>
+        </div>
+      </div>
+      <div class="vr-behavior"><strong>VR Behavior:</strong> VR jungle canopy &mdash; motion triggers wildlife, waterfalls, wind sounds. Jazz club appears at night. Artist becomes part of the ecosystem, instruments emerge from the environment itself.</div>
+    </div>
+
+    <!-- OCEANIA -->
+    <div class="biome">
+      <div class="biome-header">
+        <div class="biome-icon bi-oceania">&#x1F30A;</div>
+        <div><h3>Oceania &amp; Pacific</h3><div class="bh-region">Dreamtime &middot; Songlines &middot; Drone &middot; Ancestral Law</div></div>
+      </div>
+      <div class="biome-body">
+        <div class="biome-section">
+          <div class="bs-label">Instruments</div>
+          <div class="instrument-chips">
+            <span class="chip chip-cyan">Didgeridoo</span><span class="chip chip-cyan">Clapsticks</span><span class="chip chip-cyan">Log Drums</span><span class="chip chip-cyan">Slit Drum</span><span class="chip chip-cyan">Nose Flute</span><span class="chip chip-cyan">Polynesian Chant</span>
+          </div>
+        </div>
+        <div class="biome-section">
+          <div class="bs-label">Cultural Context</div>
+          <p style="font-size:0.82rem;color:var(--muted);line-height:1.6;">Aboriginal Songlines encode geography, history, and spiritual law in music. The didgeridoo&rsquo;s circular breathing creates continuous drone&mdash;a physical state change in listener and performer.</p>
+        </div>
+        <div class="biome-section">
+          <div class="bs-label">Healing Properties</div>
+          <p style="font-size:0.82rem;color:var(--muted);line-height:1.6;">Didgeridoo drone activates delta/theta brainwave states &middot; Used clinically for sleep apnea &middot; Continuous drone = deep meditative grounding &middot; Rhythmic chant = tribal connection and heartbeat sync</p>
+        </div>
+      </div>
+      <div class="vr-behavior"><strong>VR Behavior:</strong> Outback or island biome. Drone instruments vibrate with the artist&rsquo;s heartbeat. The land itself generates sound. Water and wind become musical instruments.</div>
+    </div>
+
+    <!-- CENTRAL ASIA & TIBET -->
+    <div class="biome">
+      <div class="biome-header">
+        <div class="biome-icon bi-india">&#x1FAE7;</div>
+        <div><h3>Tibet &amp; Central Asia</h3><div class="bh-region">Overtone &middot; Meditation &middot; Horse-Head Fiddle</div></div>
+      </div>
+      <div class="biome-body">
+        <div class="biome-section">
+          <div class="bs-label">Instruments</div>
+          <div class="instrument-chips">
+            <span class="chip chip-pink">Singing Bowls</span><span class="chip chip-pink">Gongs</span><span class="chip chip-pink">Dungchen (horns)</span><span class="chip chip-pink">Morin Khuur</span><span class="chip chip-pink">Overtone Singing</span><span class="chip chip-pink">Tumur Khuur</span>
+          </div>
+        </div>
+        <div class="biome-section">
+          <div class="bs-label">Traditions</div>
+          <div class="instrument-chips">
+            <span class="chip chip-cyan">Tibetan throat singing</span><span class="chip chip-cyan">Mongolian khoomei</span><span class="chip chip-cyan">Buddhist chant</span><span class="chip chip-cyan">Meditation ceremony</span>
+          </div>
+        </div>
+        <div class="biome-section">
+          <div class="bs-label">Healing Properties</div>
+          <p style="font-size:0.82rem;color:var(--muted);line-height:1.6;">Singing bowls produce alpha/theta entrainment &middot; Research shows reduced tension, anxiety, and physical pain &middot; Overtone chanting activates multiple harmonics simultaneously &middot; Used for PTSD support, meditation, pain management</p>
+        </div>
+      </div>
+      <div class="vr-behavior"><strong>VR Behavior:</strong> Monastery appears at high altitude. Bowl harmonics become visible light rings. Overtone singing creates nested spheres of resonance you can walk through.</div>
+    </div>
+
+    <!-- INDONESIA & GAMELAN -->
+    <div class="biome">
+      <div class="biome-header">
+        <div class="biome-icon bi-asia">&#x1F4BF;</div>
+        <div><h3>Indonesia &amp; Southeast Asia</h3><div class="bh-region">Gamelan &middot; Cosmic Order &middot; Temple Music</div></div>
+      </div>
+      <div class="biome-body">
+        <div class="biome-section">
+          <div class="bs-label">Instruments</div>
+          <div class="instrument-chips">
+            <span class="chip chip-gold">Gamelan (metallophones)</span><span class="chip chip-gold">Bonang</span><span class="chip chip-gold">Gong Ageng</span><span class="chip chip-gold">Saron</span><span class="chip chip-gold">Kendang</span><span class="chip chip-gold">P&eacute;log tuning</span>
+          </div>
+        </div>
+        <div class="biome-section">
+          <div class="bs-label">Scale Systems</div>
+          <div class="instrument-chips">
+            <span class="chip chip-purple">P&eacute;log (7 tones)</span><span class="chip chip-purple">S&eacute;ndro (5 tones)</span><span class="chip chip-purple">Interlocking patterns</span><span class="chip chip-purple">Cyclic structure</span>
+          </div>
+        </div>
+        <div class="biome-section">
+          <div class="bs-label">Healing Properties</div>
+          <p style="font-size:0.82rem;color:var(--muted);line-height:1.6;">Believed to align mind with cosmic order &middot; Interlocking patterns create sustained flow states &middot; Metallic overtones induce calm alertness (alpha state) &middot; Used in ritual dance and ceremonial healing</p>
+        </div>
+      </div>
+      <div class="vr-behavior"><strong>VR Behavior:</strong> Temple pavilion surrounded by rice fields. Metallophones float at different heights &mdash; physical proximity determines harmonic density. Cyclic patterns self-organize as you move.</div>
+    </div>
+
+    <!-- ELECTRONIC / FUTURE -->
+    <div class="biome">
+      <div class="biome-header">
+        <div class="biome-icon bi-electronic">&#x26A1;</div>
+        <div><h3>Electronic &amp; Global Future</h3><div class="bh-region">Modular &middot; Generative &middot; AI &middot; Living Geometry</div></div>
+      </div>
+      <div class="biome-body">
+        <div class="biome-section">
+          <div class="bs-label">Instruments</div>
+          <div class="instrument-chips">
+            <span class="chip chip-purple">Modular Synths</span><span class="chip chip-purple">Theremin</span><span class="chip chip-purple">Glass Harmonica</span><span class="chip chip-purple">Granular Engines</span><span class="chip chip-purple">AI Voices</span><span class="chip chip-purple">Drum Machines</span><span class="chip chip-purple">Algorithmic Sequencers</span>
+          </div>
+        </div>
+        <div class="biome-section">
+          <div class="bs-label">Experimental Traditions</div>
+          <div class="instrument-chips">
+            <span class="chip chip-cyan">Spectral composition</span><span class="chip chip-cyan">Microtonal electronic</span><span class="chip chip-cyan">Biofeedback music</span><span class="chip chip-cyan">Generative AI audio</span>
+          </div>
+        </div>
+        <div class="biome-section">
+          <div class="bs-label">The Synthesis</div>
+          <p style="font-size:0.82rem;color:var(--muted);line-height:1.6;">Where all traditions converge &middot; Every acoustic family represented electronically &middot; AI translates between cultural DNA layers &middot; Biofeedback integration responds to nervous system in real time</p>
+        </div>
+      </div>
+      <div class="vr-behavior"><strong>VR Behavior:</strong> Sound becomes living geometry. The artist sculpts waveform structures directly. Cultural biomes blend in real time. Every gesture creates cross-cultural musical synthesis.</div>
+    </div>
+
+  </div><!-- end biome-grid -->
+
+  <h3 style="font-size:0.9rem;font-weight:700;margin:3rem 0 1rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;">Global Scale Systems &mdash; The Harmonic Genome of Humanity</h3>
+  <div class="scale-table-wrap">
+    <table class="data">
+      <thead><tr><th>System</th><th>Origin</th><th>Intervals</th><th>Emotional Character</th><th>DreamChamber Use</th></tr></thead>
+      <tbody>
+        <tr><td>Pentatonic</td><td>Universal (Africa, Asia, Americas, Celtic)</td><td>5 tones per octave</td><td>Accessible, emotionally open, universal resonance</td><td>Default exploration scale &mdash; triggers across biomes</td></tr>
+        <tr><td>Raga System</td><td>Indian classical</td><td>72 parent scales + hundreds of derived ragas</td><td>Time-mapped emotional states, spiritual elevation</td><td>AI selects raga by time of day and artist biometric state</td></tr>
+        <tr><td>Maqam System</td><td>Middle East, North Africa, Turkey</td><td>24+ microtones per octave</td><td>Deep emotional nuance, spiritual longing, ecstasy</td><td>Quarter-tone gestures unlock emotional layers unavailable in Western tuning</td></tr>
+        <tr><td>P&eacute;log / S&eacute;ndro</td><td>Indonesian Gamelan</td><td>7 or 5 non-equal tones</td><td>Meditative, ritualistic, cosmic order</td><td>Cyclic spatial patterns self-organize around the artist</td></tr>
+        <tr><td>Diatonic Major/Minor</td><td>Western European</td><td>7 tones, equal temperament</td><td>Full emotional spectrum, narrative clarity</td><td>Foundation layer &mdash; harmonizes with all other biomes</td></tr>
+        <tr><td>Blues Scale</td><td>African-American, cross-cultural fusion</td><td>6 tones + blue notes</td><td>Raw emotion, catharsis, authenticity</td><td>Emotional weight parameter &mdash; unlocks human imperfection layer</td></tr>
+        <tr><td>Just Intonation</td><td>Ancient Greek, Renaissance, Indian</td><td>Pure harmonic ratios</td><td>Deep resonance, physical vibration harmony</td><td>Healing biome tuning &mdash; maximizes acoustic therapeutic effect</td></tr>
+        <tr><td>Microtonal / Spectral</td><td>Contemporary composition</td><td>Any division of the octave</td><td>Expanded emotional vocabulary, alien beauty</td><td>Electronic biome &mdash; AI generates cross-cultural microtonal fusion</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SECTION 02: SONIC HEALING UNIVERSE -->
+<section id="healing">
+  <div class="sec-eye">Section 02 &mdash; Sonic Healing Universe</div>
+  <h2 class="shead">Sound as <span>Neuro-Emotional Technology</span></h2>
+  <p class="slead">Sound healing isn&rsquo;t folklore. There is a growing body of research showing specific frequencies and rhythmic structures can modulate brain state, emotional regulation, and physiological arousal. This is the science behind the DreamChamber&rsquo;s healing architecture.</p>
+
+  <h3 style="font-size:0.9rem;font-weight:700;margin:0 0 1rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;">Layer 1: Brainwave Entrainment Map</h3>
+  <div class="bw-grid">
+    <div class="bw-row">
+      <div class="bw-hz" style="color:#ef4444">&#x03B3;<br><small style="font-size:0.65rem;font-weight:400">30+ Hz</small></div>
+      <div class="bw-state" style="color:#ef4444">Gamma</div>
+      <div class="bw-desc">High-level processing, perception, peak insight, integration of information across brain regions. The frequency of &ldquo;aha&rdquo; moments and transcendent experience.</div>
+      <div class="bw-tools">Tibetan overtone chanting &middot; Intensive meditation bells &middot; Complex polyrhythm &middot; Rapid binaural modulation</div>
+    </div>
+    <div class="bw-row">
+      <div class="bw-hz" style="color:#f59e0b">&#x03B2;<br><small style="font-size:0.65rem;font-weight:400">12&ndash;30 Hz</small></div>
+      <div class="bw-state" style="color:#f59e0b">Beta</div>
+      <div class="bw-desc">Active thought, focus, analytical processing, alertness. Normal waking consciousness for cognitive tasks and intentional creation.</div>
+      <div class="bw-tools">Upbeat rhythms &middot; Jazz improvisation &middot; Active drumming &middot; Fast binaural beats</div>
+    </div>
+    <div class="bw-row">
+      <div class="bw-hz" style="color:#10b981">&#x03B1;<br><small style="font-size:0.65rem;font-weight:400">8&ndash;12 Hz</small></div>
+      <div class="bw-state" style="color:#10b981">Alpha</div>
+      <div class="bw-desc">Calm alertness, creative flow access, relaxed focus. The bridge state between active thinking and deep relaxation. Optimal for creative work.</div>
+      <div class="bw-tools">Alpha binaural beats &middot; Sound baths &middot; Raga drone &middot; Native American flute &middot; Gamelan cycles</div>
+    </div>
+    <div class="bw-row">
+      <div class="bw-hz" style="color:#7c3aed">&#x03B8;<br><small style="font-size:0.65rem;font-weight:400">4&ndash;8 Hz</small></div>
+      <div class="bw-state" style="color:#7c3aed">Theta</div>
+      <div class="bw-desc">Deep relaxation, creativity, flow states, access to unconscious memory. The frequency of shamanic journeying, hypnosis, and deep creative insight.</div>
+      <div class="bw-tools">Shamanic drumming &middot; Icaro chanting &middot; Didgeridoo &middot; Tibetan bowls &middot; Theta binaural beats &middot; Sustained drone</div>
+    </div>
+    <div class="bw-row">
+      <div class="bw-hz" style="color:#06b6d4">&#x03B4;<br><small style="font-size:0.65rem;font-weight:400">0.5&ndash;4 Hz</small></div>
+      <div class="bw-state" style="color:#06b6d4">Delta</div>
+      <div class="bw-desc">Deep rest, restorative sleep, cellular healing, unconscious processing. The foundation of physical restoration. Not for daytime over-use.</div>
+      <div class="bw-tools">Deep gong resonance &middot; Delta entrainment soundscapes &middot; Whale song &middot; Sub-bass drone</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:0.9rem;font-weight:700;margin:2.5rem 0 1rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;">Layer 2: Therapeutic Target Map</h3>
+  <div class="healing-grid">
+    <div class="heal-card"><div class="hc-icon">&#x1F637;</div><div class="hc-condition">Stress &amp; Anxiety</div><div class="hc-modality">Alpha sound baths &middot; Binaural beats &middot; Raga drone</div><div class="hc-evidence">Meta-analyses show anxiety reduction and calming brainwave shifts. Cortisol measurably decreases with consistent exposure. Alpha/theta combinations most effective.</div></div>
+    <div class="heal-card"><div class="hc-icon">&#x1F4A4;</div><div class="hc-condition">Sleep &amp; Rest</div><div class="hc-modality">Delta entrainment &middot; Didgeridoo drone &middot; Tibetan bowls</div><div class="hc-evidence">Shifts toward slower brainwaves improve sleep onset and quality. Used clinically for insomnia. Didgeridoo shown effective for sleep apnea.</div></div>
+    <div class="heal-card"><div class="hc-icon">&#x1FAA7;</div><div class="hc-condition">Trauma &amp; PTSD</div><div class="hc-modality">Rhythmic auditory stimulation &middot; Drumming circles &middot; Guided soundscapes</div><div class="hc-evidence">Sound patterns support regulation alongside traditional therapy. Rhythmic entrainment helps nervous system regulation. Drumming circles used in veteran PTSD programs.</div></div>
+    <div class="heal-card"><div class="hc-icon">&#x1F9E0;</div><div class="hc-condition">Flow &amp; Creativity</div><div class="hc-modality">Theta entrainment &middot; Icaro chanting &middot; Raga improvisation</div><div class="hc-evidence">Theta state is the neurological signature of flow. Sustained drone and rhythmic repetition are cross-cultural technologies for achieving this state consistently.</div></div>
+    <div class="heal-card"><div class="hc-icon">&#x2764;&#xFE0F;</div><div class="hc-condition">Social Bonding</div><div class="hc-modality">Call-and-response &middot; Group drumming &middot; Communal chant</div><div class="hc-evidence">Group music-making releases oxytocin. Synchronized heartbeats observed in choir singers. Cross-cultural evidence of communal music as social bonding technology.</div></div>
+    <div class="heal-card"><div class="hc-icon">&#x1F319;</div><div class="hc-condition">Pain Management</div><div class="hc-modality">Tibetan singing bowls &middot; Music therapy protocols &middot; Distraction + entrainment</div><div class="hc-evidence">Sound meditation shown to reduce physical pain during sessions. Music therapy reduces opioid requirements in post-surgical patients. Mechanism involves endorphin and dopamine release.</div></div>
+  </div>
+
+  <div class="callout green" style="margin-top:2rem;">
+    <div class="c-head">NOIZY Integration Layer</div>
+    <p>The DreamChamber&rsquo;s Flow State Engine monitors breathing, head movement, and tempo interaction in real time. When flow state is detected, the audio engine gradually locks groove and begins self-harmonizing around the artist. The biome adapts to maximize the therapeutic value of the current neurological state.</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SECTION 03: ADAPTIVE ARTIST -->
+<section id="adaptive">
+  <div class="sec-eye">Section 03 &mdash; The Adaptive Artist System</div>
+  <h2 class="shead">AI as <span class="a3">Prosthesis</span> for the Creative Spirit</h2>
+  <p class="slead">Standard platforms assume 10 functional fingers and a perfect 4/4 internal clock. NoizyStudios assumes you have a Vision.</p>
+
+  <div class="adaptive-hero">
+    <div class="ah-eyebrow">The Personal Origin &mdash; Robert Stephen Plowman</div>
+    <div class="ah-title">The Tech Doesn&rsquo;t Make the Art.<br>The Man Who Survived the Water Makes the Art.</div>
+    <p class="ah-body">
+      After a diving accident and living with permanent nerve damage, the &ldquo;interface&rdquo; between the mind and the instrument changes forever.
+      The struggle isn&rsquo;t with the music &mdash; the music is still there, louder than ever.
+      The struggle is with the <em>translation</em>.<br><br>
+      NoizyStudios is the first platform where AI <em>cares</em> about the creator.
+      Not AI as a tool. AI as a prosthesis for the creative spirit.<br><br>
+      Instead of quantizing &mdash; which kills the soul &mdash; NoizyStudios&rsquo;s Neural Smoothing layer
+      <strong>interprets the intent of velocity and timing</strong>, filtering out the &ldquo;noise&rdquo; of the injury
+      while keeping the <strong>human-ness</strong> of the phrasing.
+    </p>
+    <div class="ah-quote">
+      &ldquo;The tech just gives the hands back.&rdquo; &mdash; The NoizyStudios Philosophy
+    </div>
+  </div>
+
+  <h3 style="font-size:0.9rem;font-weight:700;margin:0 0 1.5rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;">Nerve-to-Note Signal Pipeline</h3>
+  <div class="nerve-pipeline">
+    <div class="nv-step"><div class="nv-num"><div class="nv-circle">1</div></div><div class="nv-body"><h4>Multi-Modal Sensor Input</h4><p>Hand tracking, eye-tracking, breath mic, EMG muscle sensors, head movement, body posture. Meta Quest captures all inputs via OpenXR. External: Myo/BioAmp EMG, EEG headbands, MIDI controllers.</p></div></div>
+    <div class="nv-step"><div class="nv-num"><div class="nv-circle c2">2</div></div><div class="nv-body"><h4>Intent Detection</h4><p>Raw signals converted to &ldquo;intention vectors.&rdquo; Not what the hand did &mdash; what the hand was <em>trying</em> to do. A tremor due to nerve damage is interpreted as a grace note, not an error.</p></div></div>
+    <div class="nv-step"><div class="nv-num"><div class="nv-circle c3">3</div></div><div class="nv-body"><h4>Neural Smoothing Layer</h4><p>Filters tremor and micro-jitter while maintaining rhythmical integrity. Non-linear quantization preserves phrasing and dynamic human expression. Learns the individual signature of each artist, continuously evolving. Dynamically adjusts for fatigue, pain, and micro-timing variations.</p></div></div>
+    <div class="nv-step"><div class="nv-num"><div class="nv-circle c4">4</div></div><div class="nv-body"><h4>Adaptive Musical Mapping</h4><p>Translates subtle movement into scale selection, rhythm, timbre, spatial positioning. Unconventional inputs (breath, eye gaze, micro-muscle twitches) map to complex musical parameters. Each artist&rsquo;s mapping is fully customizable and evolves with their physical state.</p></div></div>
+    <div class="nv-step"><div class="nv-num"><div class="nv-circle c5">5</div></div><div class="nv-body"><h4>Vulnerability Parameter</h4><p>The killer feature. Dial up &ldquo;Humanity&rdquo; on any sound: timing drift, velocity variance, micro-groove shifts emerge. Not random noise &mdash; a model of how humans actually play when feeling pain, joy, or physical limitation. Music becomes alive again.</p></div></div>
+  </div>
+
+  <div class="callout red" style="margin-top:2rem;">
+    <div class="c-head">The Soul Vault</div>
+    <p>Every artist gets a private model trained on <em>their</em> specific harmonic choices, their unique broken rhythms, and their history. When the AI suggests a chord, it&rsquo;s suggesting something they would have played if their hands didn&rsquo;t have the damage. Not generic AI. <strong>Their AI.</strong></p>
+  </div>
+
+  <div class="callout cyan" style="margin-top:1rem;">
+    <div class="c-head">Proof of Humanity Badge</div>
+    <p>Every track generated on NoizyStudios carries a Digital Thumbprint showing: &ldquo;This was composed by a human mind, assisted by a machine that understands their physical limits.&rdquo; The artist is never erased. They are <strong>amplified</strong>.</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SECTION 04: VR ARCHITECTURE -->
+<section id="vr-arch">
+  <div class="sec-eye">Section 04 &mdash; VR Architecture Stack</div>
+  <h2 class="shead">MetaQuest + Unreal/Unity<br><span>+ FMOD/Wwise</span></h2>
+  <p class="slead">A VR temple for sound creation. Not a DAW. A spatial consciousness instrument. The artist stands inside their music.</p>
+
+  <div class="callout amber">
+    <div class="c-head">The Vision</div>
+    <p>In VR the artist stands inside their music. Instead of tracks on a timeline, they see sound objects floating in space. Each sound = a sphere of energy. Distance = reverb &amp; spatialization. Height = frequency range. Rotation = modulation and movement. The artist literally <strong>sculpts sound with their body</strong>.</p>
+  </div>
+
+  <div class="vr-stack">
+    <div class="vr-layer">
+      <div class="vr-layer-label"><div class="vll-name">VR Interaction Layer</div><div class="vll-tech">Meta Quest &middot; OpenXR</div></div>
+      <div class="vr-layer-body">
+        <h4>Hardware Input Surface</h4>
+        <ul>
+          <li>Hand tracking (finger-level precision) via OpenXR</li>
+          <li>Eye tracking (Quest Pro and future devices)</li>
+          <li>Head movement and body posture capture</li>
+          <li>Breath microphone integration</li>
+          <li>External EMG/EEG sensor bridge (Bluetooth)</li>
+          <li>Traditional MIDI controller pass-through</li>
+        </ul>
+      </div>
+    </div>
+    <div class="vr-layer">
+      <div class="vr-layer-label"><div class="vll-name">Game Engine Layer</div><div class="vll-tech">Unreal Engine 5 or Unity XR Toolkit</div></div>
+      <div class="vr-layer-body">
+        <h4>Visual &amp; Interaction Logic</h4>
+        <ul>
+          <li>Biome rendering: 10+ cultural environments with unique acoustic properties</li>
+          <li>Sound object physics: sphere placement, distance reverb, height-frequency mapping</li>
+          <li>XR Interaction Toolkit: full spatial UI, grab, scale, rotate for sound sculpting</li>
+          <li>Lumen GI: photorealistic lighting matching each cultural biome</li>
+          <li>Nanite: high-detail instrument models, ceremonial environments</li>
+        </ul>
+      </div>
+    </div>
+    <div class="vr-layer">
+      <div class="vr-layer-label"><div class="vll-name">Audio Middleware</div><div class="vll-tech">FMOD Studio or Audiokinetic Wwise</div></div>
+      <div class="vr-layer-body">
+        <h4>Adaptive Spatial Audio Engine</h4>
+        <ul>
+          <li>Spatial audio: full 3D sound positioning with occlusion and reverb zones</li>
+          <li>Adaptive music: state-based transitions between cultural biomes and emotional layers</li>
+          <li>Real-time parameter control: Humanity, Fatigue, Emotion, Chaos, Fragility parameters</li>
+          <li>Procedural audio: generative rhythms and melodies that respond to biometric input</li>
+          <li>Ambisonics: high-order spatial audio for complete sphere-of-sound immersion</li>
+          <li>Cross-biome audio: seamless transitions as artist moves between cultural environments</li>
+        </ul>
+      </div>
+    </div>
+    <div class="vr-layer">
+      <div class="vr-layer-label"><div class="vll-name">Intent Processing Layer</div><div class="vll-tech">Python/C++ + ML Models</div></div>
+      <div class="vr-layer-body">
+        <h4>Neural Smoothing &amp; Musical Intelligence</h4>
+        <ul>
+          <li>Raw sensor data &rarr; motion variance filter &rarr; intention vector &rarr; musical output</li>
+          <li>MIDI generation from non-standard inputs (EMG, breath, eye gaze)</li>
+          <li>Artist model: learns personal harmonic choices, rhythmic feel, timbral preferences</li>
+          <li>Flow state detection: monitors breathing, head movement, tempo interaction</li>
+          <li>Vulnerability Parameter: programmable human imperfection injection</li>
+        </ul>
+      </div>
+    </div>
+    <div class="vr-layer">
+      <div class="vr-layer-label"><div class="vll-name">Collaboration Layer</div><div class="vll-tech">Noizy-Link &middot; Multi-User XR</div></div>
+      <div class="vr-layer-body">
+        <h4>Global VR Studio Network</h4>
+        <ul>
+          <li>Multi-user shared sound spaces: artists merge their biomes in real time</li>
+          <li>AI translator: harmonizes disparate cultural traditions into spatial coherence</li>
+          <li>Voice Actor Digital Twins: HVS-linked presence in shared VR sessions</li>
+          <li>Mentor Model: artist licenses their creative logic to students in the same virtual space</li>
+          <li>Ethical sovereignty: each artist controls their contribution with HVS consent layer</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SECTION 05: RESONANCE PRINCIPLE -->
+<section id="resonance">
+  <div class="sec-eye">Section 05 &mdash; The Resonance Principle</div>
+  <h2 class="shead">Direction as <span class="a3">Frequency Transmission</span></h2>
+  <p class="slead">Great direction isn&rsquo;t control. It&rsquo;s resonance. A director transmits a field of intention, and the performer&rsquo;s nervous system self-organizes around that signal. The first take is almost always the best take.</p>
+
+  <div class="callout">
+    <div class="c-head">The Shamanic Parallel</div>
+    <p>In Amazonian ceremonies, the shaman sings icaros not to control the participant&rsquo;s experience, but to create a <strong>vibrational container</strong>. Inside that container, emotions move, memories surface, insights unfold. The song is a navigation signal for the nervous system. The participant&rsquo;s own psyche does the work. Great directors do exactly this.</p>
+  </div>
+
+  <h3 style="font-size:0.9rem;font-weight:700;margin:2rem 0 1rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;">Creative Transmission Protocol (CTP) &mdash; NOIZYVOX</h3>
+  <div class="ctp-flow">
+    <div class="ctp-step">
+      <div class="ctp-header"><div class="ctp-num" style="background:var(--accent)">1</div><h3>Field Definition &mdash; Director Signal Layer</h3><span class="ctp-tag">The Container</span></div>
+      <div class="ctp-body">
+        <div class="ctp-col"><h4>Components</h4>
+          <div class="ctp-item">Emotional Spectrum: feeling, intensity, energy arc</div>
+          <div class="ctp-item">Imagery Mapping: sensory cues &mdash; colors, textures, shapes</div>
+          <div class="ctp-item">Narrative Intention: story beats, motivations, stakes</div>
+          <div class="ctp-item">Tonality &amp; Rhythm: vocal energy, pacing, breath</div>
+        </div>
+        <div class="ctp-col"><h4>Output</h4>
+          <div class="ctp-item">A single coherent &ldquo;frequency signal&rdquo;</div>
+          <div class="ctp-item">AVA encodes this as multi-dimensional resonance field</div>
+          <div class="ctp-item">Not instruction &mdash; a vibrational container</div>
+        </div>
+      </div>
+    </div>
+    <div class="ctp-step">
+      <div class="ctp-header"><div class="ctp-num" style="background:var(--a2)">2</div><h3>AVA Translation &mdash; Frequency Transmission</h3><span class="ctp-tag">The Amplifier</span></div>
+      <div class="ctp-body">
+        <div class="ctp-col"><h4>What AVA Encodes</h4>
+          <div class="ctp-item">Emotional weighting and intensity map</div>
+          <div class="ctp-item">Vocal cadence &amp; energy signature</div>
+          <div class="ctp-item">Acoustic textures and timbre preferences</div>
+          <div class="ctp-item">Cultural and stylistic context</div>
+        </div>
+        <div class="ctp-col"><h4>What Happens</h4>
+          <div class="ctp-item">Every actor receives the same vibrational container simultaneously</div>
+          <div class="ctp-item">Works across multiple performers, multiple locations</div>
+          <div class="ctp-item">Scales the director&rsquo;s resonance without diluting it</div>
+        </div>
+      </div>
+    </div>
+    <div class="ctp-step">
+      <div class="ctp-header"><div class="ctp-num" style="background:var(--a3);color:#000">3</div><h3>Actor Reception &mdash; Intuition Activation</h3><span class="ctp-tag">The Transmission</span></div>
+      <div class="ctp-body">
+        <div class="ctp-col"><h4>The Mechanism</h4>
+          <div class="ctp-item">Actor enters the field</div>
+          <div class="ctp-item">Nervous system aligns before conscious filtering</div>
+          <div class="ctp-item">First read emerges naturally, whole, unedited</div>
+          <div class="ctp-item">70%+ of first reads are keeper takes</div>
+        </div>
+        <div class="ctp-col"><h4>Why It Works</h4>
+          <div class="ctp-item">Actors don&rsquo;t follow instructions &mdash; they resonate with intention</div>
+          <div class="ctp-item">Later takes often degrade as the analytical brain interferes</div>
+          <div class="ctp-item">First-take authenticity cannot be manufactured</div>
+        </div>
+      </div>
+    </div>
+    <div class="ctp-step">
+      <div class="ctp-header"><div class="ctp-num" style="background:var(--a6)">4</div><h3>NOIZYFISH Rendering &mdash; Sonic DNA Layer</h3><span class="ctp-tag">The Cohesion</span></div>
+      <div class="ctp-body">
+        <div class="ctp-col"><h4>What NOIZYFISH Does</h4>
+          <div class="ctp-item">Captures actor output at full HVS quality spec</div>
+          <div class="ctp-item">Maps performance into director&rsquo;s sonic fingerprint</div>
+          <div class="ctp-item">Ensures multi-actor cohesion across geographies</div>
+          <div class="ctp-item">Like cinematographic color grading &mdash; but for voice</div>
+        </div>
+        <div class="ctp-col"><h4>The Result</h4>
+          <div class="ctp-item">Dozens of actors feel like one creative universe</div>
+          <div class="ctp-item">Cross-language casting preserves emotional frequency</div>
+          <div class="ctp-item">The director&rsquo;s vision travels to every performance</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SECTION 06: 4 CORE SYSTEMS -->
+<section id="four-systems">
+  <div class="sec-eye">Section 06 &mdash; The 4 Core Systems</div>
+  <h2 class="shead">From Music Tool to<br><span>Planetary Music Engine</span></h2>
+  <p class="slead">These four systems together make NOIZY the most advanced music creation platform on Earth. Each one would be revolutionary alone. Together they create something entirely new.</p>
+
+  <div class="core-systems">
+    <div class="cs-card cs1">
+      <div class="cs-num">Core System 01</div>
+      <div class="cs-title">Global Music Genome</div>
+      <div class="cs-desc">The full mapping of humanity&rsquo;s musical DNA. Every instrument family, rhythmic archetype, scale system, and performance tradition accessible as an interactive spatial environment.</div>
+      <div class="cs-features">
+        <div class="cs-feature">10 living cultural biomes in VR</div>
+        <div class="cs-feature">128+ scale systems from every civilization</div>
+        <div class="cs-feature">64 fundamental rhythmic archetypes</div>
+        <div class="cs-feature">Every acoustic family: Membranophone, Aerophone, Chordophone, Idiophone</div>
+        <div class="cs-feature">Artists walk through civilizations of sound, not presets</div>
+      </div>
+    </div>
+    <div class="cs-card cs2">
+      <div class="cs-num">Core System 02</div>
+      <div class="cs-title">Neural Creativity Interface</div>
+      <div class="cs-desc">Transform human intention into musical output while preserving every nuance of expression. The Adaptive Artist system that gives hands back to those who lost them.</div>
+      <div class="cs-features">
+        <div class="cs-feature">Multi-modal sensor input: EMG, EEG, eye, breath, posture</div>
+        <div class="cs-feature">Intent Detection: what the hand was trying to do</div>
+        <div class="cs-feature">Neural Smoothing: jitter becomes grace note, not error</div>
+        <div class="cs-feature">Vulnerability Parameter: human imperfection as music</div>
+        <div class="cs-feature">Soul Vault: each artist&rsquo;s private style model evolves over time</div>
+      </div>
+    </div>
+    <div class="cs-card cs3">
+      <div class="cs-num">Core System 03</div>
+      <div class="cs-title">Collective VR Studios</div>
+      <div class="cs-desc">Global collaboration as immersive, ethical, sovereign experience. Artists from anywhere merge sound spaces in real time. Creative Transmission Protocol operates at planetary scale.</div>
+      <div class="cs-features">
+        <div class="cs-feature">Shared spatial audio rooms across continents</div>
+        <div class="cs-feature">Voice Actor Digital Twins present in VR with HVS consent</div>
+        <div class="cs-feature">Flow-linked synchronization: tempo and harmony align to strongest intention</div>
+        <div class="cs-feature">Noizy-Link: two artists&rsquo; style models merge in real time</div>
+        <div class="cs-feature">Mentor Model: license your creative logic to the next generation</div>
+      </div>
+    </div>
+    <div class="cs-card cs4">
+      <div class="cs-num">Core System 04</div>
+      <div class="cs-title">Planetary Music Archive</div>
+      <div class="cs-desc">Preserve, extend, and animate the entirety of human musical heritage. The Earth as a playable globe of musical history and flow states.</div>
+      <div class="cs-features">
+        <div class="cs-feature">Every musical culture ever recorded, spatialized as biomes</div>
+        <div class="cs-feature">AI-powered style models that learn individual artist phrasing</div>
+        <div class="cs-feature">Dynamic preservation: archive evolves as new traditions emerge</div>
+        <div class="cs-feature">Touch a region on the globe &rarr; instruments awaken</div>
+        <div class="cs-feature">Walk across the globe &rarr; civilizations of sound blend organically</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SECTION 07: HUMANITY RECONNECTION -->
+<section id="humanity">
+  <div class="sec-eye">Section 07 &mdash; Humanity Reconnection Plan</div>
+  <h2 class="shead">The <span class="a3">Champion&rsquo;s Blueprint</span></h2>
+  <p class="slead">Humanity hasn&rsquo;t lost its creative depth. It has only been buried under systems optimized for efficiency and consumption. The DreamChamber is the excavation tool.</p>
+
+  <div class="callout amber">
+    <div class="c-head">The Diagnosis</div>
+    <p>Digital abstraction flattened experience into scrollable moments. Commercial standardization homogenized art. Education abandoned expression for metrics. Urbanization fragmented community. The arts were marginalized. The result: humanity consuming pre-digested culture rather than participating in the full experiment of being alive.</p>
+  </div>
+
+  <div class="phase-row">
+    <div class="pr-num"><div class="pr-circle ph1">1</div></div>
+    <div class="pr-body">
+      <h3>Restore Sensory Depth</h3>
+      <p>Reawaken perception, emotion, and bodily awareness through multi-sensory environments that combine sound, light, movement, and touch. People must stop consuming life and begin <em>experiencing</em> it.</p>
+      <div class="pr-actions">
+        <span class="action-chip">Immersive VR biomes</span>
+        <span class="action-chip">Haptic sound floors</span>
+        <span class="action-chip">Emotion visualization</span>
+        <span class="action-chip">Breath-responsive music</span>
+        <span class="action-chip">Full-body audio</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="phase-row">
+    <div class="pr-num"><div class="pr-circle ph2">2</div></div>
+    <div class="pr-body">
+      <h3>Reintroduce Cultural Variety</h3>
+      <p>Human civilization produced extraordinary diversity. Reconnection requires celebrating that diversity openly &mdash; presenting global traditions side by side, encouraging cross-cultural experiments, highlighting the obscure and forgotten.</p>
+      <div class="pr-actions">
+        <span class="action-chip" style="background:rgba(6,182,212,0.1);border-color:rgba(6,182,212,0.3);color:var(--a2)">Global Music Genome</span>
+        <span class="action-chip" style="background:rgba(6,182,212,0.1);border-color:rgba(6,182,212,0.3);color:var(--a2)">Cross-cultural jam labs</span>
+        <span class="action-chip" style="background:rgba(6,182,212,0.1);border-color:rgba(6,182,212,0.3);color:var(--a2)">Endangered tradition preservation</span>
+        <span class="action-chip" style="background:rgba(6,182,212,0.1);border-color:rgba(6,182,212,0.3);color:var(--a2)">Pan-flute meets balafon</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="phase-row">
+    <div class="pr-num"><div class="pr-circle ph3">3</div></div>
+    <div class="pr-body">
+      <h3>Transform Spectators Into Participants</h3>
+      <p>Participation is what restores emotional engagement. When people create together they experience vulnerability, risk, discovery, and shared achievement. These are essential human experiences that passive consumption cannot provide.</p>
+      <div class="pr-actions">
+        <span class="action-chip" style="background:rgba(245,158,11,0.1);border-color:rgba(245,158,11,0.3);color:var(--a3)">Community music circles</span>
+        <span class="action-chip" style="background:rgba(245,158,11,0.1);border-color:rgba(245,158,11,0.3);color:var(--a3)">Collective VR studios</span>
+        <span class="action-chip" style="background:rgba(245,158,11,0.1);border-color:rgba(245,158,11,0.3);color:var(--a3)">Participatory storytelling</span>
+        <span class="action-chip" style="background:rgba(245,158,11,0.1);border-color:rgba(245,158,11,0.3);color:var(--a3)">Open improvisation</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="phase-row">
+    <div class="pr-num"><div class="pr-circle ph4">4</div></div>
+    <div class="pr-body">
+      <h3>Reintroduce Ritual</h3>
+      <p>Ritual is one of humanity&rsquo;s oldest social technologies. It creates shared emotional space and marks transitions in life. The DreamChamber can design modern rituals that honor ancient wisdom while serving contemporary communities.</p>
+      <div class="pr-actions">
+        <span class="action-chip" style="background:rgba(16,185,129,0.1);border-color:rgba(16,185,129,0.3);color:var(--a4)">Seasonal sound festivals</span>
+        <span class="action-chip" style="background:rgba(16,185,129,0.1);border-color:rgba(16,185,129,0.3);color:var(--a4)">Grief &amp; celebration rituals</span>
+        <span class="action-chip" style="background:rgba(16,185,129,0.1);border-color:rgba(16,185,129,0.3);color:var(--a4)">Life-cycle soundscapes</span>
+        <span class="action-chip" style="background:rgba(16,185,129,0.1);border-color:rgba(16,185,129,0.3);color:var(--a4)">Community reflection circles</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="phase-row">
+    <div class="pr-num"><div class="pr-circle ph5">5</div></div>
+    <div class="pr-body">
+      <h3>Technology as Amplifier</h3>
+      <p>AI, VR, and AR are creative prosthetics &mdash; not substitutes. NOIZYVOX amplifies resonance. DreamChamber maps human sonic DNA. NOIZYFISH maintains aesthetic cohesion. The human is always the lead instrument. The machine gives the hands back.</p>
+      <div class="pr-actions">
+        <span class="action-chip" style="background:rgba(236,72,153,0.1);border-color:rgba(236,72,153,0.3);color:var(--a6)">NOIZYVOX scaling</span>
+        <span class="action-chip" style="background:rgba(236,72,153,0.1);border-color:rgba(236,72,153,0.3);color:var(--a6)">Biofeedback adaptive music</span>
+        <span class="action-chip" style="background:rgba(236,72,153,0.1);border-color:rgba(236,72,153,0.3);color:var(--a6)">Neural creativity interface</span>
+        <span class="action-chip" style="background:rgba(236,72,153,0.1);border-color:rgba(236,72,153,0.3);color:var(--a6)">Adaptive prosthetics</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="phase-row">
+    <div class="pr-num"><div class="pr-circle ph6">6</div></div>
+    <div class="pr-body">
+      <h3>Rebuild Creative Communities</h3>
+      <p>Large platforms connect millions but rarely create deep relationships. Meaningful cultural ecosystems thrive in smaller, intentional communities. Mentorship, cross-generational collaboration, and cultural stewardship are the engine of sustained creativity.</p>
+      <div class="pr-actions">
+        <span class="action-chip" style="background:rgba(139,92,246,0.1);border-color:rgba(139,92,246,0.3);color:var(--a7)">Mentorship networks</span>
+        <span class="action-chip" style="background:rgba(139,92,246,0.1);border-color:rgba(139,92,246,0.3);color:var(--a7)">Cultural stewardship</span>
+        <span class="action-chip" style="background:rgba(139,92,246,0.1);border-color:rgba(139,92,246,0.3);color:var(--a7)">Endangered art protection</span>
+        <span class="action-chip" style="background:rgba(139,92,246,0.1);border-color:rgba(139,92,246,0.3);color:var(--a7)">Cross-generational labs</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section>
+  <div class="closing">
+    <h2>The DreamChamber<br>Is Not a DAW.</h2>
+    <p class="big-quote">&ldquo;A creator enters. They lift their hand. A Tibetan bowl rings. They step forward. West African drums awaken. They turn slowly. A string orchestra rises. Above them float the melodies of India. Around them swirl the rhythms of Brazil. The entire planet becomes an instrument. Not owned. Not exploited. <strong>Played with wonder.</strong>&rdquo;</p>
+    <p>The machine is not the musician. The human is. The machine simply opens the door to the sound of the Earth itself.</p>
+    <div class="stat-row">
+      <div class="stat"><div class="val">10</div><div class="lbl">Living Biomes</div></div>
+      <div class="stat"><div class="val">128+</div><div class="lbl">Scale Systems</div></div>
+      <div class="stat"><div class="val">64</div><div class="lbl">Rhythmic Archetypes</div></div>
+      <div class="stat"><div class="val">5</div><div class="lbl">Brainwave States</div></div>
+      <div class="stat"><div class="val">4</div><div class="lbl">Core Systems</div></div>
+      <div class="stat"><div class="val">&#x221E;</div><div class="lbl">Human Expression</div></div>
+    </div>
+    <div style="margin-top:2.5rem;font-size:0.82rem;color:var(--muted);">
+      NOIZY Universe &middot; DreamChamber &middot; NoizyStudios &middot; NOIZYVOX &middot; NOIZYFISH<br>
+      Robert Stephen Plowman &mdash; The man who survived the water.
+    </div>
+  </div>
+</section>
+
+</main>
+<script>
+// Animated starfield + galaxy effect
+const canvas = document.getElementById('bg');
+const ctx = canvas.getContext('2d');
+let stars = [], nebula = [];
+function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+function init(){
+  stars=[];nebula=[];
+  for(let i=0;i<300;i++){stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.4,a:Math.random()*0.7+0.1,s:Math.random()*0.12+0.01,t:Math.random()*Math.PI*2,c:Math.random()<0.3?'220,160,255':'180,220,255'});}
+  for(let i=0;i<5;i++){nebula.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*200+100,a:0.025+Math.random()*0.02,c:Math.random()<0.5?'124,58,237':'245,158,11'});}
+}
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  nebula.forEach(n=>{
+    const g=ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,n.r);
+    g.addColorStop(0,`rgba(${n.c},${n.a})`);g.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
+  });
+  stars.forEach(s=>{
+    s.t+=0.007;const a=s.a*(0.7+0.3*Math.sin(s.t));
+    ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(${s.c},${a})`;ctx.fill();
+    s.y-=s.s;if(s.y<-2){s.y=canvas.height+2;s.x=Math.random()*canvas.width;}
+  });
+  requestAnimationFrame(draw);
+}
+window.addEventListener('resize',()=>{resize();init();});
+resize();init();draw();
+
+// Nav active tracking
+const secs=document.querySelectorAll('section[id]');
+const links=document.querySelectorAll('nav a');
+new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('active'));const l=document.querySelector(`nav a[href="#${e.target.id}"]`);if(l)l.classList.add('active');}});},{threshold:0.25}).observe
+secs.forEach(s=>{new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('active'));const l=document.querySelector(`nav a[href="#${e.target.id}"]`);if(l)l.classList.add('active');}});},{threshold:0.25}).observe(s);});
+</script>
+</body>
+</html>

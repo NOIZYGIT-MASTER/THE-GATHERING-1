@@ -1,0 +1,25 @@
+<root>
+    <CtrlImageViewStyle name="StarStyle" noMouseOverEvent="true" optBorder="false" optBackground="false" optMouseHandle="true" optHQResizing="true" colBorder="[r:255 g:255 b:255 a:255]" />
+    <CtrlPanelStyle name="InspectorPanelStyle" optSmartTile="true" colBorder="[r:243 g:246 b:249 a:0]" colFill="[r:243 g:246 b:249 a:0]" intSmartTileEdgeSize="20" intRoundedRectRadius="0">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlImageViewStyle name="BlankImageStyle" optHQResizing="true" colBorder="[r:160 g:160 b:160 a:255]" colBackground="[r:176 g:176 b:176 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlImageViewStyle>
+    <CtrlListBoxStyle name="TransparentBoxStyle" colHighlight="[r:150 g:150 b:150 a:0]" colBorder="[r:207 g:210 b:212 a:255]" colFill="[r:243 g:246 b:249 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlListBoxStyle>
+    <CtrlListBoxStyle name="MixInfoListBoxStyle" colHighlight="[r:150 g:150 b:150 a:0]" colBorder="[r:160 g:160 b:160 a:255]" colFill="[r:176 g:176 b:176 a:255]">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlListBoxStyle>
+    <CtrlPanel name="CtrlPanel" style="InspectorPanelStyle" rect="[x:0 y:0 w:200 h:440]" id="0">
+        <CtrlLabel name="KitPieceName" rect="[x:8 y:0 w:196 h:18]" id="0" text="Kit Piece Name" />
+        <CtrlImageView name="KitPieceRatingStar1" style="StarStyle" rect="[x:84 y:17 w:16 h:16]" id="0" />
+        <CtrlImageView name="KitPieceRatingStar2" style="StarStyle" rect="[x:106 y:17 w:16 h:16]" id="0" />
+        <CtrlImageView name="KitPieceRatingStar3" style="StarStyle" rect="[x:128 y:17 w:16 h:16]" id="0" />
+        <CtrlImageView name="KitPieceRatingStar4" style="StarStyle" rect="[x:150 y:17 w:16 h:16]" id="0" />
+        <CtrlImageView name="KitPieceRatingStar5" style="StarStyle" rect="[x:172 y:17 w:16 h:16]" id="0" />
+        <CtrlImageView name="KitPiecePhoto" style="CtrlImageViewStyleChooser" rect="[x:10 y:34 w:178 h:148]" id="0" />
+        <CtrlListBox name="MixInfoBox" style="TransparentBoxStyleChooser" rect="[x:10 y:185 w:178 h:151]" id="100000" />
+    </CtrlPanel>
+</root>

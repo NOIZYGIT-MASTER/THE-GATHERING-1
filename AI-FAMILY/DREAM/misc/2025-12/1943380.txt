@@ -1,0 +1,23 @@
+<root>
+    <CtrlPanelStyle name="LargeStyle" colBorder="[r:107 g:107 b:107 a:255]" colBorderAlt="[r:107 g:107 b:107 a:255]" colFill="[r:0 g:0 b:0 a:255]" intSmartTileEdgeSize="20" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlImageViewStyle name="KitPieceViewStyle" optBorder="false" optBackground="false" optMouseHandle="true" optHQResizing="true" colBackground="[r:150 g:150 b:150 a:255]" intRoundedRectRadius="0">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlImageViewStyle>
+    <CtrlPanelStyle name="ClickPanelStyle" colBorder="[r:0 g:0 b:0 a:0]" colBorderAlt="[r:0 g:0 b:0 a:0]" colFill="[r:255 g:255 b:255 a:0]" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="14" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlPanel name="KitPieceChooserLargePanel" style="LargeStyle" rect="[x:0 y:0 w:232 h:160]" id="0">
+        <CtrlPanel name="ClickPanel" style="ClickPanelStyle" rect="[x:0 y:0 w:232 h:160]" id="100000" />
+        <CtrlLabel name="NameLabel" style="BFD2LabelCentered14" rect="[x:2 y:3 w:228 h:20]" id="1" text="Name Label" />
+        <CtrlImageView name="KitPieceImage" style="KitPieceViewStyle" rect="[x:56 y:32 w:120 h:100]" id="2" />
+        <CtrlImageView name="StarView1" style="BFD2StarStyle" rect="[x:67 y:138 w:16 h:16]" id="3" />
+        <CtrlImageView name="StarView2" style="BFD2StarStyle" rect="[x:89 y:138 w:16 h:16]" id="4" />
+        <CtrlImageView name="StarView3" style="BFD2StarStyle" rect="[x:111 y:138 w:16 h:16]" id="5" />
+        <CtrlImageView name="StarView4" style="BFD2StarStyle" rect="[x:133 y:138 w:16 h:16]" id="6" />
+        <CtrlImageView name="StarView5" style="BFD2StarStyle" rect="[x:155 y:138 w:16 h:16]" id="7" />
+        <CtrlButton name="GoToDemoPackButton" style="NoRecessedButtonMomentary" rect="[x:111 y:32 w:100 h:21]" id="100000" zorder="2" text="Show/Buy..." />
+        <CtrlImageView name="DemoImage" style="BrowserDemoImageStyle" rect="[x:18 y:35 w:45 h:15]" id="2" zorder="2" />
+    </CtrlPanel>
+</root>

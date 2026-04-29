@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIZY MIND'S EYE — VR Without the Visuals</title>
+<style>
+:root {
+  --gold:#f4a228; --violet:#8b5cf6; --cyan:#06b6d4; --rose:#f43f5e;
+  --emerald:#10b981; --indigo:#6366f1; --orange:#fb923c; --pink:#ec4899;
+  --lime:#a3e635; --bg:#020208; --surface:rgba(255,255,255,0.04);
+  --border:rgba(255,255,255,0.08);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:#e2e8f0; font-family:'Segoe UI',system-ui,sans-serif; overflow-x:hidden; }
+#cosmos { position:fixed; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; }
+
+nav { position:sticky; top:0; z-index:100; background:rgba(2,2,8,0.95); backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border); padding:0 2rem; display:flex; gap:0; overflow-x:auto; }
+nav a { color:#94a3b8; text-decoration:none; font-size:0.72rem; font-weight:600; letter-spacing:0.05em;
+  text-transform:uppercase; padding:1rem 0.9rem; white-space:nowrap; border-bottom:2px solid transparent;
+  transition:all 0.2s; }
+nav a:hover, nav a.active { color:#fff; border-bottom-color:var(--cyan); }
+
+/* HERO */
+.hero { position:relative; z-index:1; min-height:100vh; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; text-align:center; padding:4rem 2rem; }
+.hero-badge { background:linear-gradient(135deg,var(--violet),var(--emerald)); color:#fff;
+  font-size:0.7rem; font-weight:800; letter-spacing:0.15em; text-transform:uppercase;
+  padding:0.45rem 1.4rem; border-radius:100px; margin-bottom:2rem; display:inline-block; }
+.hero h1 { font-size:clamp(3rem,9vw,7rem); font-weight:900; line-height:1.0;
+  background:linear-gradient(135deg,#fff 0%,var(--cyan) 40%,var(--violet) 80%,var(--gold) 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  margin-bottom:1rem; letter-spacing:-0.02em; }
+.hero-tagline { font-size:clamp(1.2rem,3vw,2rem); font-weight:300; color:#94a3b8;
+  margin-bottom:0.8rem; letter-spacing:0.05em; font-style:italic; }
+.hero-sub { font-size:1.05rem; color:#64748b; max-width:700px; line-height:1.8; margin-bottom:3rem; }
+.hero-stats { display:flex; gap:1.5rem; flex-wrap:wrap; justify-content:center; margin-bottom:2rem; }
+.hs { background:var(--surface); border:1px solid var(--border); border-radius:14px;
+  padding:1.1rem 1.6rem; text-align:center; }
+.hs-n { font-size:1.9rem; font-weight:900;
+  background:linear-gradient(135deg,var(--cyan),var(--violet));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.hs-l { font-size:0.66rem; color:#64748b; text-transform:uppercase; letter-spacing:0.08em; margin-top:0.2rem; }
+.origin-quote { max-width:750px; background:rgba(139,92,246,0.08); border:1px solid rgba(139,92,246,0.2);
+  border-radius:16px; padding:1.8rem 2rem; text-align:center; margin-top:1rem; }
+.origin-quote p { font-size:1.05rem; color:#e2e8f0; line-height:1.7; font-style:italic; }
+.origin-quote .attribution { font-size:0.75rem; color:#8b5cf6; font-weight:700; margin-top:0.8rem;
+  text-transform:uppercase; letter-spacing:0.1em; font-style:normal; }
+
+/* SECTIONS */
+section { position:relative; z-index:1; padding:5rem 2rem; max-width:1400px; margin:0 auto; }
+.sh { text-align:center; margin-bottom:3.5rem; }
+.sb { display:inline-block; font-size:0.7rem; font-weight:800; letter-spacing:0.12em;
+  text-transform:uppercase; padding:0.35rem 1rem; border-radius:100px; margin-bottom:1rem; }
+.sh h2 { font-size:clamp(1.8rem,4vw,2.8rem); font-weight:800; margin-bottom:1rem; }
+.sh p { color:#94a3b8; font-size:1rem; max-width:680px; margin:0 auto; line-height:1.7; }
+
+/* THE PROBLEM */
+.problem-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center; }
+.problem-bad { background:rgba(244,67,94,0.05); border:1px solid rgba(244,67,94,0.2);
+  border-radius:20px; padding:2rem; }
+.problem-good { background:rgba(16,185,129,0.05); border:1px solid rgba(16,185,129,0.2);
+  border-radius:20px; padding:2rem; }
+.pb-label { font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em;
+  margin-bottom:1rem; }
+.pb-example { font-size:0.9rem; line-height:1.7; font-style:italic; padding:1rem;
+  border-radius:10px; margin-bottom:0.8rem; }
+.pb-note { font-size:0.78rem; color:#64748b; margin-top:0.8rem; }
+
+/* THE VISION CARDS */
+.vision-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.5rem; }
+.vision-card { background:var(--surface); border:1px solid var(--border); border-radius:20px;
+  padding:2rem; border-top:3px solid var(--vc-color); position:relative; overflow:hidden; }
+.vision-card::after { content:''; position:absolute; bottom:-20px; right:-20px; width:80px; height:80px;
+  border-radius:50%; background:radial-gradient(circle, var(--vc-color), transparent);
+  opacity:0.1; }
+.vc-icon { font-size:2.2rem; margin-bottom:1rem; }
+.vc-title { font-size:1.05rem; font-weight:800; color:#fff; margin-bottom:0.4rem; }
+.vc-sub { font-size:0.7rem; font-weight:700; color:var(--vc-color); text-transform:uppercase;
+  letter-spacing:0.08em; margin-bottom:1rem; }
+.vc-body { font-size:0.83rem; color:#94a3b8; line-height:1.65; }
+
+/* ADAPTIVE PROFILE */
+.adapt-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1.2rem; }
+.adapt-card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:1.5rem; }
+.adapt-signal { font-size:0.75rem; font-weight:700; color:var(--ac-color); text-transform:uppercase;
+  letter-spacing:0.08em; margin-bottom:0.4rem; }
+.adapt-quote { font-size:0.9rem; color:#fff; font-style:italic; margin-bottom:0.6rem; }
+.adapt-response { font-size:0.78rem; color:#94a3b8; line-height:1.5; }
+.adapt-arrow { color:var(--ac-color); font-size:0.7rem; font-weight:700; margin: 0.4rem 0;
+  text-transform:uppercase; letter-spacing:0.06em; }
+
+/* MUSICAL PALETTE */
+.palette-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:1.2rem; }
+.palette-card { background:var(--surface); border:1px solid var(--border); border-radius:16px;
+  padding:1.4rem; border-left:3px solid var(--pc-color); }
+.pc-scene { font-size:0.7rem; font-weight:800; color:var(--pc-color); text-transform:uppercase;
+  letter-spacing:0.08em; margin-bottom:0.4rem; }
+.pc-description { font-size:0.88rem; color:#e2e8f0; font-style:italic; margin-bottom:0.8rem;
+  line-height:1.5; }
+.pc-music { font-size:0.75rem; color:#94a3b8; line-height:1.5; }
+.pc-music span { color:var(--pc-color); font-weight:600; }
+
+/* AD COMPARISON */
+.ad-before-after { display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-bottom:2rem; }
+
+/* USE CASES */
+.use-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:1.5rem; }
+.use-card { background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:1.8rem; }
+.use-icon { font-size:2rem; margin-bottom:0.8rem; }
+.use-title { font-size:1.05rem; font-weight:800; color:#fff; margin-bottom:0.4rem; }
+.use-audience { font-size:0.7rem; font-weight:700; color:var(--uc-color); text-transform:uppercase;
+  letter-spacing:0.08em; margin-bottom:1rem; }
+.use-body { font-size:0.82rem; color:#94a3b8; line-height:1.6; }
+.use-feature { background:rgba(0,0,0,0.3); border-radius:8px; padding:0.5rem 0.8rem;
+  font-size:0.75rem; color:#e2e8f0; margin-top:0.8rem; }
+.use-feature span { color:var(--uc-color); font-weight:700; }
+
+/* TECH STACK */
+.tech-layers { display:flex; flex-direction:column; gap:1rem; }
+.tech-layer { display:grid; grid-template-columns:200px 1fr 180px; gap:1.5rem; align-items:center;
+  background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:1.2rem 1.5rem; }
+.tl-name { font-size:0.85rem; font-weight:800; color:#fff; }
+.tl-sub { font-size:0.68rem; color:#64748b; margin-top:0.2rem; }
+.tl-desc { font-size:0.8rem; color:#94a3b8; line-height:1.5; }
+.tl-tag { background:rgba(139,92,246,0.15); color:#8b5cf6; font-size:0.68rem; font-weight:700;
+  text-transform:uppercase; letter-spacing:0.06em; padding:0.3rem 0.8rem; border-radius:6px;
+  text-align:center; }
+
+/* ROADMAP */
+.roadmap { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1.5rem; }
+.rm-card { background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:1.8rem; }
+.rm-phase { font-size:0.68rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em;
+  color:var(--rm-color); margin-bottom:0.4rem; }
+.rm-title { font-size:1.1rem; font-weight:800; color:#fff; margin-bottom:0.3rem; }
+.rm-time { font-size:0.72rem; color:#64748b; margin-bottom:1rem; }
+.rm-items { list-style:none; }
+.rm-items li { font-size:0.8rem; color:#94a3b8; padding:0.3rem 0; padding-left:1rem; position:relative;
+  line-height:1.4; }
+.rm-items li::before { content:'→'; position:absolute; left:0; color:var(--rm-color); font-size:0.7rem; }
+
+/* MANIFESTO */
+.manifesto { background:linear-gradient(135deg,rgba(6,182,212,0.06),rgba(139,92,246,0.08));
+  border:1px solid rgba(6,182,212,0.15); border-radius:28px; padding:4rem; text-align:center; }
+.mf-title { font-size:clamp(1.5rem,4vw,2.5rem); font-weight:900; color:#fff; line-height:1.2;
+  margin-bottom:2rem; }
+.mf-body { font-size:1.05rem; color:#94a3b8; line-height:1.8; max-width:800px; margin:0 auto 2rem; }
+.mf-body em { color:#e2e8f0; font-style:normal; }
+.mf-close { font-size:1.3rem; font-weight:800; color:#fff; max-width:700px; margin:0 auto; line-height:1.5; }
+.mf-close span { background:linear-gradient(135deg,var(--cyan),var(--violet));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+
+@media(max-width:768px) {
+  .problem-grid, .ad-before-after, .tech-layer { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+<canvas id="cosmos"></canvas>
+
+<nav id="main-nav">
+  <a href="#hero">Mind's Eye</a>
+  <a href="#problem">The Problem</a>
+  <a href="#vision">The Vision</a>
+  <a href="#adaptive">Adaptive AI</a>
+  <a href="#palette">Musical Palette</a>
+  <a href="#usecases">Who It Serves</a>
+  <a href="#tech">Tech Stack</a>
+  <a href="#roadmap">Roadmap</a>
+  <a href="#manifesto">Manifesto</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="hero">
+  <div class="hero-badge">NOIZY Empire — New Vertical Discovery — March 2026</div>
+  <h1>MIND'S EYE</h1>
+  <div class="hero-tagline">by NOIZY.AI</div>
+  <div class="hero-sub">VR without the visuals. The world's first adaptive, musically-intelligent audio description system — painting vivid cinematic pictures for the mind, personalized to every listener, powered by every musical element inside the NOIZY universe.</div>
+  <div class="hero-stats">
+    <div class="hs"><div class="hs-n">1.3B</div><div class="hs-l">People with disabilities</div></div>
+    <div class="hs"><div class="hs-n">253M</div><div class="hs-l">Blind or visually impaired</div></div>
+    <div class="hs"><div class="hs-n">∞</div><div class="hs-l">Current AD quality</div></div>
+    <div class="hs"><div class="hs-n">0</div><div class="hs-l">Personalized AD solutions</div></div>
+  </div>
+  <div class="origin-quote">
+    <p>"We are going to paint a beautiful, beautiful picture for the mind of the disabled — for every single thing we work on with audio. It's like VR without the visuals. And oh my gosh, I think this is going to be the most... this is the second coolest thing we've invented together."</p>
+    <div class="attribution">— Rob Plowman, Founder, NOIZY Empire — March 20, 2026</div>
+  </div>
+</div>
+
+<!-- THE PROBLEM -->
+<section id="problem">
+  <div class="sh">
+    <div class="sb" style="background:rgba(244,67,94,0.15);color:#f43f5e;">The Problem We're Solving</div>
+    <h2 style="color:#fff;">Current Audio Description Is Broken</h2>
+    <p>The technology exists. The will does not. Current AD is flat, clinical, poorly written, robotically delivered, and completely identical for every listener regardless of their preferences, context, or needs. It insults the intelligence and imagination of the people it claims to serve.</p>
+  </div>
+  <div class="problem-grid">
+    <div class="problem-bad">
+      <div class="pb-label" style="color:#f43f5e;">❌ Current State — What Rob Heard</div>
+      <div class="pb-example" style="background:rgba(244,67,94,0.08);color:#94a3b8;">
+        "A man walks into a room. He sits down. There is a table. Another person enters. They speak."
+      </div>
+      <div class="pb-example" style="background:rgba(244,67,94,0.08);color:#94a3b8;">
+        "The scene shows a city street at night. Cars drive by. A woman is standing near a building."
+      </div>
+      <div class="pb-note">Generic. Emotionless. No atmosphere. No context. No personalization. The same for everyone. Worse than nothing because it suggests this is what you deserve.</div>
+    </div>
+    <div class="problem-good">
+      <div class="pb-label" style="color:#10b981;">✅ MIND'S EYE — What We Will Build</div>
+      <div class="pb-example" style="background:rgba(16,185,129,0.08);color:#e2e8f0;">
+        "The door opens slowly — you can hear the weight of what's about to happen in the pause before he enters. The room is warm and dim, familiar furniture casting long shadows. He lowers himself into the chair the way a man does when he's been carrying something too long. Across the table, she hasn't looked up yet."
+      </div>
+      <div class="pb-note" style="color:#10b981;">Cinematic. Emotional. Intelligent. Atmospheric. Infused with sonic texture. And learned to your exact preferred level of detail.</div>
+    </div>
+  </div>
+
+  <div style="margin-top:2.5rem;background:rgba(244,162,40,0.06);border:1px solid rgba(244,162,40,0.15);border-radius:16px;padding:2rem;">
+    <h3 style="color:#f4a228;font-size:1.1rem;font-weight:800;margin-bottom:1rem;">What Rob Heard on AMI Radio — The Complaint List That Started Everything</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;">
+      <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:1rem;font-size:0.8rem;color:#94a3b8;line-height:1.5;">
+        <strong style="color:#f4a228;">Too generic</strong> — AD describes what's visible without conveying what it <em style="color:#e2e8f0;">means</em>. Tone, tension, and subtext are completely absent.
+      </div>
+      <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:1rem;font-size:0.8rem;color:#94a3b8;line-height:1.5;">
+        <strong style="color:#f4a228;">Robotic delivery</strong> — Monotone voice reads descriptions with no emotional intelligence. The voice cannot match the mood of the scene.
+      </div>
+      <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:1rem;font-size:0.8rem;color:#94a3b8;line-height:1.5;">
+        <strong style="color:#f4a228;">One size fits all</strong> — A cinephile and a casual viewer get identical descriptions. A child and an adult get the same words. No adaptation, ever.
+      </div>
+      <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:1rem;font-size:0.8rem;color:#94a3b8;line-height:1.5;">
+        <strong style="color:#f4a228;">Talks too much or too little</strong> — No way to tell the system "I want more atmosphere" or "just give me the essentials." Fixed verbosity forever.
+      </div>
+      <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:1rem;font-size:0.8rem;color:#94a3b8;line-height:1.5;">
+        <strong style="color:#f4a228;">No sonic atmosphere</strong> — Pure dry narration. No musical texture underneath. No spatial audio. No sensory immersion whatsoever.
+      </div>
+      <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:1rem;font-size:0.8rem;color:#94a3b8;line-height:1.5;">
+        <strong style="color:#f4a228;">Disrupts the experience</strong> — Descriptions feel bolted on, interrupting the emotional flow rather than weaving into it seamlessly.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE VISION -->
+<section id="vision">
+  <div class="sh">
+    <div class="sb" style="background:rgba(6,182,212,0.15);color:#06b6d4;">The MIND'S EYE Vision</div>
+    <h2 style="color:#fff;">Six Core Pillars</h2>
+    <p>Not an app. Not a feature. A complete reinvention of how the world's 1.3 billion disabled people experience media, learning, culture, and daily life through sound.</p>
+  </div>
+  <div class="vision-grid">
+
+    <div class="vision-card" style="--vc-color:#06b6d4;">
+      <div class="vc-icon">🎨</div>
+      <div class="vc-title">Cinematic Language Engine</div>
+      <div class="vc-sub">Vivid Pictoral Narration</div>
+      <div class="vc-body">Every description is written like a great novelist describing a scene — not a stage direction. Emotional subtext, atmospheric detail, spatial awareness, and sensory richness. The listener doesn't just know what's happening. They feel where they are.</div>
+    </div>
+
+    <div class="vision-card" style="--vc-color:#8b5cf6;">
+      <div class="vc-icon">🧠</div>
+      <div class="vc-title">Adaptive Preference Learning</div>
+      <div class="vc-sub">The System That Remembers You</div>
+      <div class="vc-body">Every interaction shapes the experience. "Speak a little less." "Tell me more about the faces." "I prefer shorter." "I want to know the colors." The system builds a deep preference profile over time and never forgets. Your settings travel with you across every piece of content.</div>
+    </div>
+
+    <div class="vision-card" style="--vc-color:#f4a228;">
+      <div class="vc-icon">🎵</div>
+      <div class="vc-title">NOIZY Musical Palette</div>
+      <div class="vc-sub">NOIZYFISH Emotional Color Engine</div>
+      <div class="vc-body">Every description is sonically painted using the full NOIZY.AI music library — Rob's music, NOIZYFISH's emotional frequencies, custom DreamChamber textures. A tense scene has low strings under the narration. A joyful moment has bright harmonics. The music never overwhelms — it whispers beneath the words.</div>
+    </div>
+
+    <div class="vision-card" style="--vc-color:#10b981;">
+      <div class="vc-icon">🌐</div>
+      <div class="vc-title">Universal Accessibility</div>
+      <div class="vc-sub">Every Disability. Every Context.</div>
+      <div class="vc-body">Not just for blind users. MIND'S EYE serves visually impaired, cognitive disabilities, learning differences, ADHD, autism spectrum, deafblind users (tactile adaptation), and situational disabilities (driving, dark environments). One platform. Every human who needs a richer audio experience.</div>
+    </div>
+
+    <div class="vision-card" style="--vc-color:#ec4899;">
+      <div class="vc-icon">🔊</div>
+      <div class="vc-title">Spatial Audio Architecture</div>
+      <div class="vc-sub">3D Sound Placement</div>
+      <div class="vc-body">HRTF-processed binaural audio places the narrator in specific spatial positions. Description of what's on screen LEFT comes from the left ear. Action happening above comes from above. The entire sound field becomes a navigable map of the visual scene — without a single pixel.</div>
+    </div>
+
+    <div class="vision-card" style="--vc-color:#f43f5e;">
+      <div class="vc-icon">⚡</div>
+      <div class="vc-title">Real-Time Generation</div>
+      <div class="vc-sub">Live Video, Live Events, Live World</div>
+      <div class="vc-body">MIND'S EYE doesn't just work on pre-produced content. It works live — sports, concerts, news, video calls, AR overlays of the real world. Point your phone at anything and MIND'S EYE describes it in your personal voice, with your personal depth, in real time.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ADAPTIVE AI -->
+<section id="adaptive">
+  <div class="sh">
+    <div class="sb" style="background:rgba(139,92,246,0.15);color:#8b5cf6;">The Adaptive Intelligence Layer</div>
+    <h2 style="color:#fff;">It Learns Exactly How You Want to Experience the World</h2>
+    <p>Every user signal — explicit or implicit — updates the listener's personal profile. The system never asks you to repeat yourself. Every session, it knows you better than the last.</p>
+  </div>
+  <div class="adapt-grid">
+
+    <div class="adapt-card" style="--ac-color:#06b6d4;">
+      <div class="adapt-signal" style="color:#06b6d4;">User Signal: Verbosity Preference</div>
+      <div class="adapt-quote">"Could you speak just a little less? I want more music."</div>
+      <div class="adapt-arrow">→ MIND'S EYE LEARNS:</div>
+      <div class="adapt-response">Reduces narration density by 30%. Expands musical emotional underlayer. Keeps essential action cues. Applies permanently to all future sessions until updated.</div>
+    </div>
+
+    <div class="adapt-card" style="--ac-color:#f4a228;">
+      <div class="adapt-signal" style="color:#f4a228;">User Signal: Detail Depth</div>
+      <div class="adapt-quote">"I want to know everything. Tell me the colors, the faces, the room."</div>
+      <div class="adapt-arrow">→ MIND'S EYE LEARNS:</div>
+      <div class="adapt-response">Activates maximum sensory detail mode. Includes color, texture, facial expression, spatial layout, background details. Extends description time for complex scenes.</div>
+    </div>
+
+    <div class="adapt-card" style="--ac-color:#10b981;">
+      <div class="adapt-signal" style="color:#10b981;">User Signal: Pacing</div>
+      <div class="adapt-quote">"I miss some things — can you slow down a bit?"</div>
+      <div class="adapt-arrow">→ MIND'S EYE LEARNS:</div>
+      <div class="adapt-response">Increases pause duration between action descriptions. Prioritizes scene transitions with extra beat. Optional "catch me up" mode available at any moment.</div>
+    </div>
+
+    <div class="adapt-card" style="--ac-color:#ec4899;">
+      <div class="adapt-signal" style="color:#ec4899;">User Signal: Voice Preference</div>
+      <div class="adapt-quote">"Can the narrator sound warmer? Like a friend, not an announcer."</div>
+      <div class="adapt-arrow">→ MIND'S EYE LEARNS:</div>
+      <div class="adapt-response">Switches to intimate conversational register. Lower vocal register, slight informal cadence. First-person language where appropriate. NOIZY.AI voice identity fully customizable.</div>
+    </div>
+
+    <div class="adapt-card" style="--ac-color:#8b5cf6;">
+      <div class="adapt-signal" style="color:#8b5cf6;">User Signal: Content Type</div>
+      <div class="adapt-quote">"I know this sport already — just tell me what I can't hear."</div>
+      <div class="adapt-arrow">→ MIND'S EYE LEARNS:</div>
+      <div class="adapt-response">Context-specific knowledge profile. Expert mode for familiar domains — skip the basics, describe only the visual-only information the user cannot infer from audio alone.</div>
+    </div>
+
+    <div class="adapt-card" style="--ac-color:#f43f5e;">
+      <div class="adapt-signal" style="color:#f43f5e;">Implicit Signal: Listening Behavior</div>
+      <div class="adapt-quote">[User frequently rewinds when descriptions overlap dialogue]</div>
+      <div class="adapt-arrow">→ MIND'S EYE LEARNS:</div>
+      <div class="adapt-response">Automatically reduces description density during dialogue-heavy scenes. Repositions descriptions to natural pauses. No user instruction needed — behavior is the signal.</div>
+    </div>
+
+    <div class="adapt-card" style="--ac-color:#fb923c;">
+      <div class="adapt-signal" style="color:#fb923c;">User Signal: Emotional Depth</div>
+      <div class="adapt-quote">"Tell me how the characters are feeling, not just what they're doing."</div>
+      <div class="adapt-arrow">→ MIND'S EYE LEARNS:</div>
+      <div class="adapt-response">Activates emotional subtext layer. Facial expression interpretation, body language reading, relational tension description. Prioritizes psychological and emotional over physical description.</div>
+    </div>
+
+    <div class="adapt-card" style="--ac-color:#a3e635;">
+      <div class="adapt-signal" style="color:#a3e635;">User Signal: Music Level</div>
+      <div class="adapt-quote">"The music is perfect. More of that during the quiet scenes."</div>
+      <div class="adapt-arrow">→ MIND'S EYE LEARNS:</div>
+      <div class="adapt-response">Expands NOIZYFISH emotional underscoring in quiet/dialogue scenes. Maps scene mood to musical palette. Volume, density, and emotional tone all dynamically adjusted to preference.</div>
+    </div>
+
+  </div>
+
+  <div style="margin-top:3rem;background:rgba(139,92,246,0.06);border:1px solid rgba(139,92,246,0.15);border-radius:20px;padding:2.5rem;text-align:center;">
+    <h3 style="color:#fff;font-size:1.3rem;font-weight:800;margin-bottom:1rem;">The Preference Profile — What Gets Stored</h3>
+    <p style="color:#94a3b8;font-size:0.88rem;max-width:700px;margin:0 auto 2rem;line-height:1.7;">Every listener develops a living profile over time. This is the blueprint that makes MIND'S EYE feel like a trusted companion — not a tool.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;text-align:left;">
+      <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:1rem;font-size:0.78rem;color:#94a3b8;">
+        <div style="color:#8b5cf6;font-weight:700;margin-bottom:0.3rem;">Verbosity Level</div>
+        Minimal → Moderate → Rich → Exhaustive (0–100 scale, per content type)
+      </div>
+      <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:1rem;font-size:0.78rem;color:#94a3b8;">
+        <div style="color:#06b6d4;font-weight:700;margin-bottom:0.3rem;">Music Integration</div>
+        None → Subtle → Moderate → Immersive (independent of narration level)
+      </div>
+      <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:1rem;font-size:0.78rem;color:#94a3b8;">
+        <div style="color:#10b981;font-weight:700;margin-bottom:0.3rem;">Focus Priority</div>
+        Physical / Emotional / Spatial / Relational / All (ranked preference)
+      </div>
+      <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:1rem;font-size:0.78rem;color:#94a3b8;">
+        <div style="color:#f4a228;font-weight:700;margin-bottom:0.3rem;">Voice Character</div>
+        Clinical → Warm → Intimate → Conversational (tone register)
+      </div>
+      <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:1rem;font-size:0.78rem;color:#94a3b8;">
+        <div style="color:#ec4899;font-weight:700;margin-bottom:0.3rem;">Pacing</div>
+        Fast / Normal / Slow + behavior-based auto-calibration
+      </div>
+      <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:1rem;font-size:0.78rem;color:#94a3b8;">
+        <div style="color:#f43f5e;font-weight:700;margin-bottom:0.3rem;">Domain Expertise</div>
+        Beginner / Intermediate / Expert per genre (sports, film, news, etc.)
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MUSICAL PALETTE -->
+<section id="palette">
+  <div class="sh">
+    <div class="sb" style="background:rgba(244,162,40,0.15);color:#f4a228;">The NOIZY Musical Palette</div>
+    <h2 style="color:#fff;">Every Scene Gets Its Sonic Truth</h2>
+    <p>MIND'S EYE doesn't just narrate. It scores. Using every musical element inside NOIZY.AI — Rob's music, NOIZYFISH's emotional frequency mapping, and the DreamChamber sonic palette — each scene is painted with the sound it deserves.</p>
+  </div>
+  <div class="palette-grid">
+
+    <div class="palette-card" style="--pc-color:#f43f5e;">
+      <div class="pc-scene">Scene Type: Tension / Danger</div>
+      <div class="pc-description">"The hallway stretches ahead in near darkness. Something has changed in the air — you can hear it before anything happens."</div>
+      <div class="pc-music"><span>Musical Layer:</span> Low cello drone 40–80 Hz. Slow heartbeat polyrhythm. Minor 2nd harmonic tension. Spatial: sound compressed to center (claustrophobia). Volume: very low beneath narration.</div>
+    </div>
+
+    <div class="palette-card" style="--pc-color:#10b981;">
+      <div class="pc-scene">Scene Type: Joy / Celebration</div>
+      <div class="pc-description">"The room erupts. People moving in every direction, faces open with it — the kind of happiness that fills a space and makes it feel larger than it is."</div>
+      <div class="pc-music"><span>Musical Layer:</span> 528 Hz bright harmonic. 5:4 playful polyrhythm. Major pentatonic lift. Spatial: wide stereo, full room feel. 100–120 BPM underlying pulse.</div>
+    </div>
+
+    <div class="palette-card" style="--pc-color:#6366f1;">
+      <div class="pc-scene">Scene Type: Loss / Grief</div>
+      <div class="pc-description">"She doesn't move for a long moment. The room is very still around her — the kind of still that happens when something has just changed permanently."</div>
+      <div class="pc-music"><span>Musical Layer:</span> 396 Hz Solfeggio. Descending minor phrase, unresolved. 55 BPM. Cello with space between notes. Reverb: long (cathedral). Almost silence with emotional texture.</div>
+    </div>
+
+    <div class="palette-card" style="--pc-color:#ec4899;">
+      <div class="pc-scene">Scene Type: Love / Intimacy</div>
+      <div class="pc-description">"They're very close now — closer than they've been before. Something has shifted that neither of them named but both of them felt."</div>
+      <div class="pc-music"><span>Musical Layer:</span> 639 Hz. Breathy vocal harmonics 100–300 Hz (vagus activation). 65 BPM lullaby rhythm. Binaural: narration spatially near, intimate. Warmth in the bass register.</div>
+    </div>
+
+    <div class="palette-card" style="--pc-color:#f4a228;">
+      <div class="pc-scene">Scene Type: Wonder / Discovery</div>
+      <div class="pc-description">"Whatever this is — it wasn't here before. The way the light is catching it, the way everyone has gone quiet. Something important is happening."</div>
+      <div class="pc-music"><span>Musical Layer:</span> Rising melodic arc that doesn't resolve. Suspended harmonics. 85–100 BPM. Lydian mode. Gentle reverb expansion. Alpha-range binaural underneath.</div>
+    </div>
+
+    <div class="palette-card" style="--pc-color:#8b5cf6;">
+      <div class="pc-scene">Scene Type: Transcendence / Awe</div>
+      <div class="pc-description">"This is too large to take in all at once. The scale of it — you'd have to stand there a long time before the full weight of it lands."</div>
+      <div class="pc-music"><span>Musical Layer:</span> 963 Hz + 40 Hz gamma. Vast reverb tail (8+ seconds). Nested fractal polyrhythm. Spatial: full 360°, sounds arriving from all directions. Near silence underneath everything.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHO IT SERVES -->
+<section id="usecases">
+  <div class="sh">
+    <div class="sb" style="background:rgba(16,185,129,0.15);color:#10b981;">Who MIND'S EYE Serves</div>
+    <h2 style="color:#fff;">Every Human Who Needs a Richer Audio World</h2>
+    <p>This is not a niche product. 1.3 billion people have disabilities. And every sighted person sometimes needs audio-only — driving, exercising, working. MIND'S EYE serves everyone.</p>
+  </div>
+  <div class="use-grid">
+
+    <div class="use-card" style="--uc-color:#8b5cf6;">
+      <div class="use-icon">👁️</div>
+      <div class="use-title">Blind & Visually Impaired</div>
+      <div class="use-audience" style="color:#8b5cf6;">Primary Audience — 253M globally</div>
+      <div class="use-body">Film, TV, streaming, live sports, concerts, museums, art galleries, public spaces. Full cinematic audio description that paints every visual element in rich, emotional, personalized language. The world they've been underserved by for decades.</div>
+      <div class="use-feature"><span>Key feature:</span> Real-time visual world description via phone camera</div>
+    </div>
+
+    <div class="use-card" style="--uc-color:#06b6d4;">
+      <div class="use-icon">🧩</div>
+      <div class="use-title">Autism Spectrum</div>
+      <div class="use-audience" style="color:#06b6d4;">Sensory Processing & Social Cue Support</div>
+      <div class="use-body">Gentle, predictable audio descriptions that help make sense of complex social scenes in film and real life. Explicit emotional and social cue narration ("she's uncomfortable but hiding it"). Sensory-safe audio design — no unexpected loud sounds or tonal surprises.</div>
+      <div class="use-feature"><span>Key feature:</span> Social-emotional subtext layer — explains what neurotypical viewers assume</div>
+    </div>
+
+    <div class="use-card" style="--uc-color:#f4a228;">
+      <div class="use-icon">📚</div>
+      <div class="use-title">Learning & Cognitive Differences</div>
+      <div class="use-audience" style="color:#f4a228;">ADHD, Dyslexia, Processing Differences</div>
+      <div class="use-body">Educational content transformed into rich audio narratives. Complex visual information (charts, diagrams, text on screen) described with clarity and context. Paced to the individual — slower or faster based on processing need. Reduces visual overload entirely.</div>
+      <div class="use-feature"><span>Key feature:</span> Educational visual-to-audio converter for STEM and visual learning</div>
+    </div>
+
+    <div class="use-card" style="--uc-color:#ec4899;">
+      <div class="use-icon">👴</div>
+      <div class="use-title">Age-Related Vision Loss</div>
+      <div class="use-audience" style="color:#ec4899;">200M+ with macular degeneration globally</div>
+      <div class="use-body">Warm, patient, deeply respectful audio companion for seniors experiencing vision loss. Familiar voice characters. Connection to the cultural and media they love. No condescension — the same rich content, the same quality, the same dignity as any other audience.</div>
+      <div class="use-feature"><span>Key feature:</span> Grandparent mode — patient, warm, conversational, never rushed</div>
+    </div>
+
+    <div class="use-card" style="--uc-color:#10b981;">
+      <div class="use-icon">🚗</div>
+      <div class="use-title">Situational Audio-Only</div>
+      <div class="use-audience" style="color:#10b981;">Driving, Exercise, Eyes-Busy Moments</div>
+      <div class="use-body">Anyone watching content while their eyes are occupied. Driving. Working out. Cooking. Eyes-free mode of any visual content — news, YouTube, sports, social media — converted to rich, personalized audio description in real time.</div>
+      <div class="use-feature"><span>Key feature:</span> One-tap eyes-free mode for any content on any platform</div>
+    </div>
+
+    <div class="use-card" style="--uc-color:#f43f5e;">
+      <div class="use-icon">🤟</div>
+      <div class="use-title">Deafblind</div>
+      <div class="use-audience" style="color:#f43f5e;">Tactile & Bone Conduction Adaptation</div>
+      <div class="use-body">MIND'S EYE's sonic design is built for bone conduction and haptic translation. Low-frequency musical underlayers are felt, not just heard. Braille display integration for text elements. The most underserved community in media accessibility — finally served.</div>
+      <div class="use-feature"><span>Key feature:</span> Haptic rhythm sync — music felt through body, not just heard</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section id="tech">
+  <div class="sh">
+    <div class="sb" style="background:rgba(99,102,241,0.15);color:#6366f1;">Technology Architecture</div>
+    <h2 style="color:#fff;">What Powers MIND'S EYE</h2>
+    <p>Every layer of the NOIZY.AI technology stack comes together in MIND'S EYE — the most sophisticated audio accessibility system ever built.</p>
+  </div>
+  <div class="tech-layers">
+    <div class="tech-layer">
+      <div><div class="tl-name">Vision AI Layer</div><div class="tl-sub">Scene Understanding</div></div>
+      <div class="tl-desc">Real-time computer vision analyzes video frames for objects, faces, expressions, text, spatial relationships, lighting, and emotional tone. Outputs structured scene description data 24 times per second. Works on live and pre-recorded content.</div>
+      <div class="tl-tag">Core Engine</div>
+    </div>
+    <div class="tech-layer">
+      <div><div class="tl-name">Cinematic Language Model</div><div class="tl-sub">Description Generation</div></div>
+      <div class="tl-desc">Fine-tuned on great literary description, screenplay writing, and expert audio description. Converts vision AI output into rich, emotionally intelligent, context-aware narration. Applies the user's personal preference profile to every sentence generated.</div>
+      <div class="tl-tag">NOIZY.AI Core</div>
+    </div>
+    <div class="tech-layer">
+      <div><div class="tl-name">NOIZYFISH Integration</div><div class="tl-sub">Emotional Music Mapping</div></div>
+      <div class="tl-desc">NOIZYFISH's emotional color engine maps the detected scene mood to the corresponding musical palette from Rob's library and the DreamChamber sound system. Generates the real-time musical underscoring layer with correct frequencies, tempo, and spatial design.</div>
+      <div class="tl-tag">NOIZY Exclusive</div>
+    </div>
+    <div class="tech-layer">
+      <div><div class="tl-name">NOIZY.AI Voice Engine</div><div class="tl-sub">HVS — Human Voice Signature</div></div>
+      <div class="tl-desc">The HVS system delivers narration in a fully customizable voice character. Warm, clinical, intimate, conversational, energetic — all selectable and learned. Natural prosody that matches scene pacing. Emotional register that mirrors content mood. Never robotic.</div>
+      <div class="tl-tag">HVS Protocol</div>
+    </div>
+    <div class="tech-layer">
+      <div><div class="tl-name">Spatial Audio Engine</div><div class="tl-sub">HRTF 3D Processing</div></div>
+      <div class="tl-desc">HRTF-processed binaural audio places narration and music in the correct 3D position relative to the scene. Action on screen-left arrives from the left ear. Spatial sound design creates a full navigable audio map of every visual scene.</div>
+      <div class="tl-tag">Spatial Layer</div>
+    </div>
+    <div class="tech-layer">
+      <div><div class="tl-name">Adaptive Profile Engine</div><div class="tl-sub">AVA — Preference Intelligence</div></div>
+      <div class="tl-desc">AVA manages the living user preference profile — tracking every explicit instruction, every implicit behavioral signal, and updating the system in real time. Profiles sync across devices and content platforms. User never loses their settings. Ever.</div>
+      <div class="tl-tag">AVA Core</div>
+    </div>
+    <div class="tech-layer">
+      <div><div class="tl-name">Platform Integration Layer</div><div class="tl-sub">API + Browser + Mobile</div></div>
+      <div class="tl-desc">Works as a browser extension (any streaming platform), a mobile SDK (any app), an API for platform partners, and a standalone app for real-world visual description. Integrates with Apple accessibility stack, Android accessibility services, and all major streaming platforms.</div>
+      <div class="tl-tag">Distribution</div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="sh">
+    <div class="sb" style="background:rgba(244,162,40,0.15);color:#f4a228;">Launch Roadmap</div>
+    <h2 style="color:#fff;">From Vision to Reality</h2>
+    <p>Built on the NOIZY.AI foundation already in development. MIND'S EYE accelerates the most important vertical in the NOIZY Empire.</p>
+  </div>
+  <div class="roadmap">
+    <div class="rm-card" style="--rm-color:#10b981;">
+      <div class="rm-phase" style="color:#10b981;">Phase 1</div>
+      <div class="rm-title">Foundation</div>
+      <div class="rm-time">Months 1–3</div>
+      <ul class="rm-items">
+        <li>Vision AI scene analysis pipeline</li>
+        <li>Cinematic language model fine-tuning</li>
+        <li>NOIZYFISH emotional mapping integration</li>
+        <li>Basic preference profile (verbosity, voice)</li>
+        <li>Browser extension beta — any streaming video</li>
+        <li>Blind community advisory board assembled</li>
+      </ul>
+    </div>
+    <div class="rm-card" style="--rm-color:#06b6d4;">
+      <div class="rm-phase" style="color:#06b6d4;">Phase 2</div>
+      <div class="rm-title">Intelligence</div>
+      <div class="rm-time">Months 4–6</div>
+      <ul class="rm-items">
+        <li>Full adaptive profile engine live</li>
+        <li>Spatial audio (HRTF) narration positioning</li>
+        <li>Musical underscoring — full NOIZY palette</li>
+        <li>Real-time camera description (mobile)</li>
+        <li>Disability community beta — 1,000 users</li>
+        <li>VSI partnership exploration</li>
+      </ul>
+    </div>
+    <div class="rm-card" style="--rm-color:#8b5cf6;">
+      <div class="rm-phase" style="color:#8b5cf6;">Phase 3</div>
+      <div class="rm-title">Platform</div>
+      <div class="rm-time">Months 7–12</div>
+      <ul class="rm-items">
+        <li>Streaming platform API partnerships</li>
+        <li>Educational platform integrations</li>
+        <li>Live sports & events real-time AD</li>
+        <li>Deafblind haptic adaptation layer</li>
+        <li>Autism social-cue narration mode</li>
+        <li>10,000 active users — research publication</li>
+      </ul>
+    </div>
+    <div class="rm-card" style="--rm-color:#f4a228;">
+      <div class="rm-phase" style="color:#f4a228;">Phase 4</div>
+      <div class="rm-title">Scale</div>
+      <div class="rm-time">Year 2+</div>
+      <ul class="rm-items">
+        <li>AR real-world description glasses integration</li>
+        <li>Multi-language cinematic description</li>
+        <li>Broadcaster licensing for live television</li>
+        <li>Accessibility mandate compliance tool for studios</li>
+        <li>NOIZY MIND'S EYE Award for best AD content</li>
+        <li>The standard for audio description globally</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section id="manifesto">
+  <div class="manifesto">
+    <div class="mf-title">Every Human Deserves to Experience<br>the Full Richness of the World.</div>
+    <div class="mf-body">
+      <p>The current state of audio description is a symptom of a deeper failure: the assumption that people with disabilities will accept less. That a flat, clinical, robotically-delivered description is "good enough" for someone who can't see the screen. That personalisation is a luxury, not a right.</p><br>
+      <p>NOIZY MIND'S EYE says: <em>no.</em></p><br>
+      <p>You deserve the same cinematic richness as any sighted viewer. You deserve a voice that has learned you — that knows you want more atmosphere, or shorter sentences, or emotional subtext, or just the essential facts. You deserve music beneath the words that tells you the truth about the scene before the words even arrive. You deserve to feel like the content was made <em>for you.</em></p><br>
+      <p>This is what Rob heard on AMI radio and couldn't stop thinking about. A disabled person describing how inadequate audio description was — and the gap between what exists and what was possible. That gap is where NOIZY MIND'S EYE lives.</p>
+    </div>
+    <div class="mf-close">
+      <span>VR without the visuals.</span><br>
+      The full richness of the world — through sound.<br>
+      <span>For every human who needs it.</span>
+    </div>
+  </div>
+</section>
+
+<script>
+const canvas = document.getElementById('cosmos');
+const ctx = canvas.getContext('2d');
+let W, H, stars = [];
+function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+function initStars() {
+  stars = [];
+  const hues = [200,260,170,300,40,180];
+  for (let i = 0; i < 280; i++) {
+    stars.push({ x: Math.random()*W, y: Math.random()*H,
+      r: Math.random()*1.7+0.2, hue: hues[Math.floor(Math.random()*hues.length)],
+      speed: Math.random()*0.12+0.015, tw: Math.random()*Math.PI*2 });
+  }
+}
+function draw() {
+  ctx.clearRect(0,0,W,H);
+  [[0.1,0.25,340,200,0.06],[0.85,0.7,300,260,0.06],[0.5,0.5,400,170,0.04],[0.7,0.1,260,300,0.05]].forEach(n => {
+    const g = ctx.createRadialGradient(n[0]*W,n[1]*H,0,n[0]*W,n[1]*H,n[2]);
+    g.addColorStop(0,`hsla(${n[3]},65%,40%,${n[4]})`); g.addColorStop(1,'transparent');
+    ctx.fillStyle=g; ctx.beginPath(); ctx.arc(n[0]*W,n[1]*H,n[2],0,Math.PI*2); ctx.fill();
+  });
+  stars.forEach(s => {
+    s.tw += 0.016; const op = 0.3 + Math.sin(s.tw)*0.45;
+    ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle = `hsla(${s.hue},80%,88%,${op})`; ctx.fill();
+    s.y -= s.speed; if (s.y<-2) { s.y=H+2; s.x=Math.random()*W; }
+  });
+  requestAnimationFrame(draw);
+}
+window.addEventListener('resize',()=>{resize();initStars();});
+resize(); initStars(); draw();
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) {
+    document.querySelectorAll('nav a').forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#'+e.target.id);
+    });
+  }});
+}, {threshold:0.2});
+document.querySelectorAll('[id]').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

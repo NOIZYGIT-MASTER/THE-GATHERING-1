@@ -1,0 +1,110 @@
+<root>
+    <CtrlIndicatorStyle name="audioStreamStyle" noDefaultDrawing="true" optAnimate="false">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlIndicatorStyle>
+    <CtrlIndicatorStyle name="midiIndicatorStyle" noDefaultDrawing="true">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlIndicatorStyle>
+    <CtrlSliderStyle name="cpuMeterStyle" optHistogram="true" imBackingStrip="cpuLED_off.tga" imAltBackingStrip="cpuLED_on.tga" snapSteps="0" fineScale="0.05" intRoundedRectRadiusFrame="0" intRoundedRectRadiusKnob="0" knobOffset="2" incDecButtonMode="off">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlSliderStyle>
+    <CtrlButtonStyle name="trans_back" noDefaultDrawing="true" optSendOnMouseDown="true" activeAreaRect="[x:8 y:8 w:31 h:27]" imDown="trans_back_on.tga">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="trans_stop" noDefaultDrawing="true" optMomentary="false" optSendOnMouseDown="true" activeAreaRect="[x:8 y:8 w:31 h:27]" imDown="trans_stop_on.tga">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="trans_play" noDefaultDrawing="true" optMomentary="false" optSendOnMouseDown="true" activeAreaRect="[x:8 y:8 w:31 h:27]" imDown="trans_play_on.tga">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="trans_rec" noDefaultDrawing="true" optMomentary="false" optSendOnMouseDown="true">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="trans_panic" noDefaultDrawing="true" optSendOnMouseDown="true" activeAreaRect="[x:9 y:8 w:32 h:27]" imDown="Panic_on.tga">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="VFCButtonStyle" noDefaultDrawing="true" optDrawText="true" colFillOn="[r:0 g:0 b:0 a:0]" colFillOff="[r:0 g:0 b:0 a:0]" colTextOn="[r:185 g:185 b:185 a:0]" colTextOff="[r:228 g:228 b:228 a:0]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlPanelStyle name="TransportBarStyle" noDefaultDrawing="true" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlButtonStyle name="MIDILogButton">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="trans_loop" optMomentary="false">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="fx_power" noDefaultDrawing="true" optMomentary="false" activeAreaRect="[x:8 y:8 w:40 h:35]" imDown="status_fx_on.tga">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlPanelStyle name="StatusPanelStyle" imBackground="main_status_panel.tga" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlTextBoxStyle name="ContextInfoStyle" noDefaultDrawing="true" centeredText="true" optSmartTile="true" intRoundedRectRadius="0" textOffset="[x:0 y:0]" colBackground="[r:162 g:162 b:162 a:255]" colText="[r:250 g:250 b:250 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlTextBoxStyle>
+    <CtrlTextBoxStyle name="TimeSigContextInfoStyle" noDefaultDrawing="true" centeredText="true" optSmartTile="true" intRoundedRectRadius="0" textOffset="[x:0 y:0]" colBackground="[r:162 g:162 b:162 a:255]" colText="[r:250 g:250 b:250 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlTextBoxStyle>
+    <CtrlTextBoxStyle name="TempoContextInfoStyle" noDefaultDrawing="true" centeredText="true" optEditable="true" dragable="true" optSmartTile="true" intRoundedRectRadius="0" textOffset="[x:0 y:0]" colBackground="[r:162 g:162 b:162 a:255]" colText="[r:250 g:250 b:250 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlTextBoxStyle>
+    <CtrlLabelStyle name="memUseStyle" centeredText="true" colText="[r:64 g:64 b:64 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlIndicatorStyle name="BeatLight" activeAreaRect="[x:12 y:12 w:12 h:12]" imOff="com_blue_LED_off.tga" imOn="com_blue_LED_on.tga" />
+    <CtrlLabelStyle name="StatusLabelStyle" colText="[r:100 g:100 b:100 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlIndicatorStyle name="MIDIIndicator" activeAreaRect="[x:12 y:12 w:12 h:12]" imOff="com_red_LED_off.tga" imOn="com_red_LED_on.tga">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlIndicatorStyle>
+    <CtrlTextBoxStyle name="DasInfoStyle" noDefaultDrawing="true" centeredText="true" optSmartTile="true" intRoundedRectRadius="0" textOffset="[x:0 y:0]" colBackground="[r:162 g:162 b:162 a:255]" colText="[r:250 g:250 b:250 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlTextBoxStyle>
+    <CtrlImageViewStyle name="StatusRecRingImageViewStyle" noDefaultDrawing="true" optBorder="false" intRoundedRectRadius="0">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlImageViewStyle>
+    <CtrlButtonStyle name="StatusLearn" optMomentary="false" optDrawText="true" activeAreaRect="[x:8 y:8 w:40 h:35]" imDown="Learn_on.tga" colBorder="[r:0 g:0 b:0 a:0]" colFillOn="[r:0 g:0 b:0 a:0]" colFillOff="[r:255 g:255 b:255 a:0]" colTextOn="[r:205 g:0 b:0 a:255]" colTextOff="[r:105 g:105 b:105 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="StatusBounce" optMomentary="false" optDrawText="true" activeAreaRect="[x:8 y:8 w:40 h:35]" imDown="Bounce_on.tga" colBorder="[r:0 g:0 b:0 a:0]" colFillOn="[r:0 g:0 b:0 a:0]" colFillOff="[r:255 g:255 b:255 a:0]" colTextOn="[r:205 g:0 b:0 a:255]" colTextOff="[r:105 g:105 b:105 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="ShowJukeBox" imDown="jukebox_down.png" imUp="jukebox_up.png">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlIndicatorStyle name="Record" imOn="record_down.png" imOff="record_up.png">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlIndicatorStyle>
+    <CtrlPanel name="contextPanel" style="StatusPanelStyle" rect="[x:0 y:0 w:959 h:48]" id="0">
+        <CtrlPanel name="transportBar" style="TransportBarStyle" rect="[x:556 y:-2 w:124 h:51]" id="100004">
+            <CtrlButton name="trans_back" style="trans_back" rect="[x:4 y:3 w:50 h:45]" id="100004" text="|&lt;&lt;" />
+            <CtrlButton name="trans_stop" style="trans_stop" rect="[x:37 y:3 w:50 h:45]" id="100004" text="[ ]" />
+            <CtrlButton name="trans_play" style="trans_play" rect="[x:70 y:3 w:50 h:45]" id="100004" text="|&gt;" />
+        </CtrlPanel>
+        <CtrlButton name="FXPower" style="fx_power" rect="[x:254 y:1 w:50 h:45]" id="100001" />
+        <CtrlButton name="LearnMode" style="StatusLearn" rect="[x:287 y:1 w:50 h:45]" id="100003" displayName="Offline bounce mode" />
+        <CtrlButton name="BounceMode" style="StatusBounce" rect="[x:320 y:1 w:50 h:45]" id="100000" displayName="Learn mode" />
+        <CtrlButton name="trans_panic" style="trans_panic" rect="[x:677 y:1 w:52 h:47]" id="100004" displayName="Panic! (Stop all audio playback)" />
+        <CtrlButton name="ShowJukeBox" style="ShowJukeBox" rect="[x:735 y:4 w:18 h:18]" id="100000" displayName="Show JukeBox" />
+        <CtrlKnob name="PluginVolume" style="BFD2KnobMediumLightAmountArc" rect="[x:7 y:5 w:35 h:35]" id="100000" />
+        <CtrlIndicator name="ShowRecord" style="Record" rect="[x:764 y:7 w:15 h:15]" id="100000" displayName="Show JukeBox" />
+        <CtrlLabel name="memUse" style="memUseStyle" rect="[x:510 y:8 w:38 h:11]" id="100001" text="0 MB" />
+        <CtrlIndicator name="BeatLight" style="BeatLight" rect="[x:795 y:8 w:14 h:14]" id="100000" displayName="Beat light" />
+        <CtrlSlider name="CpuLoadMeter" style="cpuMeterStyle" rect="[x:380 y:9 w:128 h:10]" id="100000" displayName="CPU meter" />
+        <CtrlKnob name="bleed" style="BFD2KnobMediumLight" rect="[x:57 y:10 w:32 h:32]" id="100000" />
+        <CtrlKnob name="tuning" style="BFD2KnobMediumLight" rect="[x:98 y:10 w:32 h:32]" id="100000" />
+        <CtrlKnob name="dynamics" style="BFD2KnobMediumLight" rect="[x:139 y:10 w:32 h:32]" id="100000" />
+        <CtrlKnob name="humanizeVelocity" style="BFD2KnobMediumLight" rect="[x:180 y:10 w:32 h:32]" id="100000" />
+        <CtrlKnob name="V2A" style="BFD2KnobMediumLight" rect="[x:221 y:10 w:32 h:32]" id="100000" />
+        <CtrlValueBox name="tempo" style="TempoContextInfoStyle" rect="[x:800 y:23 w:43 h:14]" id="100001" />
+        <CtrlTextBox name="timeSig" style="TimeSigContextInfoStyle" rect="[x:853 y:23 w:42 h:14]" id="100001" />
+        <CtrlTextBox name="songTime" style="ContextInfoStyle" rect="[x:905 y:23 w:42 h:14]" id="100001" />
+        <CtrlTextBox name="contextInfo" style="DasInfoStyle" rect="[x:381 y:24 w:165 h:11]" id="100002" displayName="Context info" />
+        <CtrlIndicator name="audioStreamIndicator" style="BeatLight" rect="[x:737 y:25 w:14 h:14]" id="100000" displayName="Audio stream indicator" />
+        <CtrlIndicator name="midiInIndicator" style="MIDIIndicator" rect="[x:765 y:25 w:14 h:14]" id="100000" displayName="MIDI message indicator" />
+        <CtrlButton name="runtime" style="VFCButtonStyle" rect="[x:453 y:39 w:23 h:10]" id="100003" displayName=" " text="VFC" />
+    </CtrlPanel>
+</root>

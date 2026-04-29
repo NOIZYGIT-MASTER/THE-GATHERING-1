@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE DREAMCHAMBER — RSP_001 · Where Everything Is Possible</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg: #020204;
+    --bg2: #06060a;
+    --panel: #0a0a10;
+    --border: #14142a;
+    --border-hi: #1e1e38;
+    --green: #00ff88;
+    --green2: #00cc6a;
+    --amber: #ffb300;
+    --cyan: #00d4ff;
+    --purple: #a855f7;
+    --pink: #ff6eb0;
+    --gold: #ffd700;
+    --white: #f0f4ff;
+    --muted: #353555;
+    --text: #a0aac0;
+    --mono: 'Share Tech Mono', monospace;
+    --display: 'Orbitron', monospace;
+    --body: 'Inter', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* STARFIELD OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(0,255,136,0.03) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, rgba(168,85,247,0.03) 0%, transparent 50%),
+      radial-gradient(ellipse at 60% 80%, rgba(0,212,255,0.02) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  ::-webkit-scrollbar { width: 2px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--purple); }
+
+  /* PROGRESS */
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    z-index: 1000;
+    background: transparent;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--green), var(--cyan), var(--purple), var(--amber), var(--green));
+    background-size: 200%;
+    animation: gradient-shift 4s linear infinite;
+    width: 0%;
+    box-shadow: 0 0 10px rgba(0,255,136,0.5);
+  }
+
+  @keyframes gradient-shift {
+    0% { background-position: 0%; }
+    100% { background-position: 200%; }
+  }
+
+  /* PORTAL HEADER */
+  .portal-header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 60px;
+    background: rgba(2,2,4,0.9);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    padding: 0 60px;
+    gap: 20px;
+  }
+
+  .ph-dc {
+    font-family: var(--display);
+    font-size: 11px;
+    font-weight: 900;
+    color: var(--purple);
+    letter-spacing: 4px;
+    text-shadow: 0 0 20px rgba(168,85,247,0.4);
+  }
+
+  .ph-sep { width: 1px; height: 20px; background: var(--border-hi); }
+
+  .ph-sub {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    flex: 1;
+  }
+
+  .ph-rsp {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--amber);
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .ph-rsp-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--amber);
+    box-shadow: 0 0 8px var(--amber);
+    animation: pulse-amber 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-amber {
+    0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--amber); }
+    50% { opacity: 0.4; box-shadow: 0 0 3px var(--amber); }
+  }
+
+  /* ENTRY PORTAL */
+  .entry-portal {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 100px 60px;
+    text-align: center;
+  }
+
+  #portal-canvas {
+    position: absolute;
+    inset: 0;
+  }
+
+  .entry-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .entry-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--purple);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 1s forwards 0.5s;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .entry-title {
+    font-family: var(--display);
+    font-size: clamp(60px, 12vw, 140px);
+    font-weight: 900;
+    letter-spacing: 4px;
+    line-height: 0.95;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 1s forwards 0.8s;
+  }
+
+  .et-dream {
+    display: block;
+    color: var(--purple);
+    text-shadow: 0 0 80px rgba(168,85,247,0.5), 0 0 160px rgba(168,85,247,0.2);
+  }
+
+  .et-chamber {
+    display: block;
+    color: var(--white);
+    text-shadow: 0 0 40px rgba(240,244,255,0.1);
+  }
+
+  .entry-declaration {
+    font-family: var(--display);
+    font-size: clamp(14px, 2vw, 20px);
+    color: var(--green);
+    letter-spacing: 4px;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 1s forwards 1.1s;
+    text-shadow: 0 0 30px rgba(0,255,136,0.3);
+  }
+
+  .entry-mission {
+    font-size: 18px;
+    color: var(--text);
+    max-width: 700px;
+    line-height: 1.9;
+    margin: 0 auto 60px;
+    opacity: 0;
+    animation: fadeUp 1s forwards 1.4s;
+  }
+
+  .entry-laws {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 60px;
+    opacity: 0;
+    animation: fadeUp 1s forwards 1.7s;
+  }
+
+  .entry-law {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding: 10px 18px;
+    border-radius: 3px;
+  }
+
+  .law-no-limits { border: 1px solid rgba(0,255,136,0.3); color: var(--green); background: rgba(0,255,136,0.05); }
+  .law-no-boundaries { border: 1px solid rgba(168,85,247,0.3); color: var(--purple); background: rgba(168,85,247,0.05); }
+  .law-safe-landing { border: 1px solid rgba(255,179,0,0.3); color: var(--amber); background: rgba(255,179,0,0.05); }
+  .law-gorunfree { border: 1px solid rgba(0,212,255,0.3); color: var(--cyan); background: rgba(0,212,255,0.05); }
+
+  .entry-stats {
+    display: flex;
+    gap: 60px;
+    justify-content: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 1s forwards 2.0s;
+  }
+
+  .es { text-align: center; }
+  .es .v { font-family: var(--display); font-size: 32px; font-weight: 900; margin-bottom: 4px; }
+  .es .l { font-family: var(--mono); font-size: 9px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+
+  /* SECTION */
+  .section { padding: 100px 80px; position: relative; z-index: 1; }
+  .section + .section { border-top: 1px solid var(--border); }
+
+  .section-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-tag::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border-hi), transparent);
+    max-width: 600px;
+  }
+
+  .section-title {
+    font-family: var(--display);
+    font-size: clamp(28px, 5vw, 60px);
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: 2px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  .section-title .g { color: var(--green); text-shadow: 0 0 30px rgba(0,255,136,0.2); }
+  .section-title .a { color: var(--amber); }
+  .section-title .c { color: var(--cyan); }
+  .section-title .p { color: var(--purple); }
+
+  .section-lead {
+    font-size: 16px;
+    color: var(--text);
+    max-width: 680px;
+    line-height: 1.8;
+    margin-bottom: 56px;
+  }
+
+  /* THE LAWS */
+  .laws-display {
+    max-width: 800px;
+  }
+
+  .law-card {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 24px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+  }
+
+  .law-card:last-child { border-bottom: none; }
+
+  .law-num {
+    font-family: var(--display);
+    font-size: 36px;
+    font-weight: 900;
+    line-height: 1;
+    padding-top: 4px;
+  }
+
+  .law-card:nth-child(1) .law-num { color: var(--purple); }
+  .law-card:nth-child(2) .law-num { color: var(--green); }
+  .law-card:nth-child(3) .law-num { color: var(--amber); }
+
+  .law-text {}
+
+  .law-name {
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+  }
+
+  .law-card:nth-child(1) .law-name { color: var(--purple); }
+  .law-card:nth-child(2) .law-name { color: var(--green); }
+  .law-card:nth-child(3) .law-name { color: var(--amber); }
+
+  .law-body {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.8;
+  }
+
+  /* VAULT GRID — ALL WORK */
+  .vault-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .vault-item {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .vault-item:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-hi);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  }
+
+  .vi-stripe { height: 3px; }
+
+  .vault-item.vi-purple .vi-stripe { background: linear-gradient(90deg, var(--purple), var(--pink)); }
+  .vault-item.vi-green .vi-stripe { background: linear-gradient(90deg, var(--green2), var(--green)); }
+  .vault-item.vi-amber .vi-stripe { background: linear-gradient(90deg, #cc8f00, var(--amber)); }
+  .vault-item.vi-cyan .vi-stripe { background: linear-gradient(90deg, #0099bb, var(--cyan)); }
+  .vault-item.vi-gold .vi-stripe { background: linear-gradient(90deg, #cc9900, var(--gold)); }
+
+  .vi-body { padding: 24px; flex: 1; }
+
+  .vi-date {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+
+  .vi-name {
+    font-family: var(--display);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--white);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .vi-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .vi-footer {
+    padding: 12px 24px;
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .vi-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 1px;
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+
+  .vault-item.vi-purple .vi-tag { color: var(--purple); background: rgba(168,85,247,0.1); border: 1px solid rgba(168,85,247,0.2); }
+  .vault-item.vi-green .vi-tag { color: var(--green); background: rgba(0,255,136,0.1); border: 1px solid rgba(0,255,136,0.2); }
+  .vault-item.vi-amber .vi-tag { color: var(--amber); background: rgba(255,179,0,0.1); border: 1px solid rgba(255,179,0,0.2); }
+  .vault-item.vi-cyan .vi-tag { color: var(--cyan); background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.2); }
+  .vault-item.vi-gold .vi-tag { color: var(--gold); background: rgba(255,215,0,0.1); border: 1px solid rgba(255,215,0,0.2); }
+
+  .vi-open {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    transition: color 0.2s;
+  }
+
+  .vault-item:hover .vi-open { color: var(--white); }
+
+  /* NEXT DREAMS — WHAT WE BUILD NEXT */
+  .next-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    max-width: 900px;
+  }
+
+  .next-item {
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    gap: 20px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 18px 24px;
+    align-items: center;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .next-item:first-child { border-radius: 4px 4px 0 0; }
+  .next-item:last-child { border-radius: 0 0 4px 4px; }
+  .next-item:hover { border-color: var(--border-hi); background: rgba(255,255,255,0.02); }
+
+  .ni-num {
+    font-family: var(--display);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--muted);
+  }
+
+  .ni-text {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .ni-text strong { color: var(--white); font-weight: 600; }
+
+  .ni-status {
+    font-family: var(--mono);
+    font-size: 9px;
+    padding: 4px 10px;
+    border-radius: 2px;
+    white-space: nowrap;
+    letter-spacing: 1px;
+  }
+
+  .s-urgent { background: rgba(255,179,0,0.1); color: var(--amber); border: 1px solid rgba(255,179,0,0.2); }
+  .s-q2 { background: rgba(0,212,255,0.1); color: var(--cyan); border: 1px solid rgba(0,212,255,0.2); }
+  .s-building { background: rgba(168,85,247,0.1); color: var(--purple); border: 1px solid rgba(168,85,247,0.2); }
+  .s-dream { background: rgba(0,255,136,0.1); color: var(--green); border: 1px solid rgba(0,255,136,0.2); }
+
+  /* THE DECLARATION */
+  .declaration {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 80px 0;
+  }
+
+  .decl-glyph {
+    font-size: 48px;
+    margin-bottom: 32px;
+    display: block;
+  }
+
+  .decl-title {
+    font-family: var(--display);
+    font-size: clamp(24px, 4vw, 48px);
+    font-weight: 900;
+    color: var(--purple);
+    letter-spacing: 4px;
+    text-shadow: 0 0 60px rgba(168,85,247,0.3);
+    margin-bottom: 32px;
+    line-height: 1.2;
+  }
+
+  .decl-body {
+    font-size: 18px;
+    color: var(--text);
+    line-height: 2.0;
+    margin-bottom: 48px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .decl-body .decl-highlight {
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  .decl-body .decl-green { color: var(--green); }
+  .decl-body .decl-amber { color: var(--amber); }
+  .decl-body .decl-purple { color: var(--purple); }
+
+  .decl-divider {
+    width: 300px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--purple), transparent);
+    margin: 40px auto;
+  }
+
+  .decl-motto {
+    font-family: var(--display);
+    font-size: clamp(14px, 2vw, 20px);
+    font-weight: 700;
+    letter-spacing: 6px;
+    line-height: 2.0;
+  }
+
+  .decl-motto .dm-line1 { color: var(--green); text-shadow: 0 0 20px rgba(0,255,136,0.3); }
+  .decl-motto .dm-line2 { color: var(--amber); }
+  .decl-motto .dm-line3 { color: var(--white); display: block; margin-top: 12px; font-size: 0.8em; opacity: 0.6; }
+
+  /* HONORS */
+  .honors-display {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin: 48px 0;
+  }
+
+  .honor-word {
+    font-family: var(--display);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: var(--muted);
+    transition: color 0.3s, text-shadow 0.3s;
+    cursor: default;
+  }
+
+  .honor-word:hover {
+    color: var(--green);
+    text-shadow: 0 0 20px rgba(0,255,136,0.4);
+  }
+
+  /* RSP_001 SIGNATURE */
+  .signature-block {
+    background: var(--panel);
+    border: 1px solid var(--border-hi);
+    border-radius: 4px;
+    padding: 40px 48px;
+    max-width: 700px;
+    margin: 60px auto 0;
+    text-align: left;
+  }
+
+  .sig-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 12px;
+  }
+
+  .sig-name {
+    font-family: var(--display);
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--amber);
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+  }
+
+  .sig-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    line-height: 2.0;
+    margin-bottom: 24px;
+  }
+
+  .sig-creed {
+    font-family: var(--display);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--green);
+    letter-spacing: 4px;
+    text-shadow: 0 0 20px rgba(0,255,136,0.2);
+  }
+
+  /* CLOSING FOOTER */
+  .closing-footer {
+    padding: 80px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cf-super {
+    font-family: var(--display);
+    font-size: clamp(40px, 8vw, 100px);
+    font-weight: 900;
+    letter-spacing: 6px;
+    background: linear-gradient(135deg, var(--purple), var(--green), var(--amber), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 20px;
+  }
+
+  .cf-meta {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 2.5;
+    letter-spacing: 2px;
+  }
+
+  .cf-line {
+    width: 200px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--purple), transparent);
+    margin: 24px auto;
+  }
+
+  @media (max-width: 768px) {
+    .section { padding: 60px 24px; }
+    .entry-portal { padding: 80px 24px 60px; }
+    .portal-header { padding: 0 24px; }
+    .closing-footer { padding: 60px 24px; }
+    .signature-block { padding: 28px; }
+    .honors-display { gap: 20px; }
+    .next-item { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+<!-- PORTAL HEADER -->
+<header class="portal-header">
+  <div class="ph-dc">DREAMCHAMBER</div>
+  <div class="ph-sep"></div>
+  <div class="ph-sub">THE LIVING MIND OF NOIZYFISH INC. · GABRIEL_V3 MEMBRANE</div>
+  <div class="ph-rsp">
+    <div class="ph-rsp-dot"></div>
+    RSP_001 · ACTIVE
+  </div>
+</header>
+
+<!-- ENTRY PORTAL -->
+<section class="entry-portal">
+  <canvas id="portal-canvas"></canvas>
+  <div class="entry-content">
+    <div class="entry-label">The Living Mind of NOIZYFISH INC.</div>
+    <div class="entry-title">
+      <span class="et-dream">DREAM</span>
+      <span class="et-chamber">CHAMBER</span>
+    </div>
+    <div class="entry-declaration">WHERE EVERYTHING IS POSSIBLE</div>
+    <div class="entry-mission">
+      This is not a folder. Not a drive. Not a workspace.<br>
+      The DreamChamber is a living intelligence that holds<br>
+      everything RSP_001 has ever envisioned, built, declared, and willed into existence.<br>
+      No limits during the dream. No boundaries between imagination and output.<br>
+      Then we land safely back on Earth — with working code, real documents, real music.
+    </div>
+    <div class="entry-laws">
+      <div class="entry-law law-no-limits">NO LIMITS</div>
+      <div class="entry-law law-no-boundaries">NO BOUNDARIES</div>
+      <div class="entry-law law-safe-landing">SAFE LANDING</div>
+      <div class="entry-law law-gorunfree">GORUNFREE</div>
+    </div>
+    <div class="entry-stats">
+      <div class="es">
+        <div class="v" style="color:var(--purple)">9</div>
+        <div class="l">Documents Built</div>
+      </div>
+      <div class="es">
+        <div class="v" style="color:var(--green)">315+</div>
+        <div class="l">Memcells</div>
+      </div>
+      <div class="es">
+        <div class="v" style="color:var(--amber)">5</div>
+        <div class="l">Dream Agents</div>
+      </div>
+      <div class="es">
+        <div class="v" style="color:var(--cyan)">∞</div>
+        <div class="l">What's Possible</div>
+      </div>
+      <div class="es">
+        <div class="v" style="color:var(--gold)">500yr</div>
+        <div class="l">Time Horizon</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE THREE LAWS OF THE DREAMCHAMBER -->
+<section class="section">
+  <div class="section-tag">// THE THREE LAWS</div>
+  <div class="section-title">
+    What This<br>
+    <span class="p">Chamber Runs On.</span>
+  </div>
+
+  <div class="laws-display">
+    <div class="law-card">
+      <div class="law-num">I</div>
+      <div class="law-text">
+        <div class="law-name">NO LIMITS</div>
+        <div class="law-body">
+          Inside the DreamChamber, there is no "that can't be done." There is no "that's too big." There is no "be realistic." The DreamChamber is where RSP_001 thinks at full scale — five years out, fifty years out, five hundred years out. The 500-Year Voice Codex lives here. The Global Music Atlas lives here. The vision that NOIZY is not a startup but the beginning of a new creative civilization — that lives here. Everything starts in the DreamChamber. Nothing is dismissed before it is fully imagined.
+        </div>
+      </div>
+    </div>
+    <div class="law-card">
+      <div class="law-num">II</div>
+      <div class="law-text">
+        <div class="law-name">NO BOUNDARIES</div>
+        <div class="law-body">
+          There are no walls between disciplines in the DreamChamber. Music becomes architecture. Architecture becomes code. Code becomes law. Law becomes music. A conversation about voice royalties becomes a Creator Bill of Rights. A conversation about a C3 injury becomes a survival architecture that redesigns how humans and AI create together. The DreamChamber does not respect the boundaries other people put around ideas. It connects everything. It sees the whole. Then it asks: what do we build first?
+        </div>
+      </div>
+    </div>
+    <div class="law-card">
+      <div class="law-num">III</div>
+      <div class="law-text">
+        <div class="law-name">THEN WE LAND SAFELY BACK ON EARTH</div>
+        <div class="law-body">
+          This is the part most dreamers skip. The DreamChamber doesn't end at vision — it always ends at execution. When RSP_001 and the DreamChamber finish a session, what comes out is real: working TypeScript, deployable HTML, copy-paste terminal commands, complete pricing architectures, signed creator protections. The dream is the fuel. The landing is the mission. GORUNFREE is the mechanism. 35% voice. 65% AI. 1-click. Zero friction between imagination and reality.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE VAULT — ALL WORK BUILT SO FAR -->
+<section class="section">
+  <div class="section-tag">// THE VAULT — ALL WORK BUILT IN THE DREAMCHAMBER</div>
+  <div class="section-title">
+    Everything That<br>
+    <span class="g">Exists So Far.</span>
+  </div>
+  <div class="section-lead">
+    Every document, system, pipeline, and architecture created in the DreamChamber. These are not drafts. They are real — ready to deploy, share, present, or build on. The DreamChamber remembers everything.
+  </div>
+
+  <div class="vault-grid">
+
+    <div class="vault-item vi-purple">
+      <div class="vi-stripe"></div>
+      <div class="vi-body">
+        <div class="vi-date">MARCH 2026 · SESSION I</div>
+        <div class="vi-name">NOIZY FOUNDING RSP APPLICATION PAGE</div>
+        <div class="vi-desc">Shareable signup page for the first 5 Founding RSPs. Never Clauses displayed. 6 offer cards. Form submits to rsplowman@icloud.com with reference number. Canvas particle animation.</div>
+      </div>
+      <div class="vi-footer">
+        <div class="vi-tag">LIVE · SHARE NOW</div>
+        <div class="vi-open">OPEN →</div>
+      </div>
+    </div>
+
+    <div class="vault-item vi-green">
+      <div class="vi-stripe"></div>
+      <div class="vi-body">
+        <div class="vi-date">MARCH 2026 · SESSION I</div>
+        <div class="vi-name">SPRINT DAY 1 GUIDE</div>
+        <div class="vi-desc">Every MacBook Pro terminal command to set up Node.js, TypeScript, ffmpeg, UAD device detection, 7-stage pipeline, VAD engine, and provenance ledger. Copy-paste ready. Decision trees for all hardware scenarios.</div>
+      </div>
+      <div class="vi-footer">
+        <div class="vi-tag">URGENT · RUN NOW</div>
+        <div class="vi-open">OPEN →</div>
+      </div>
+    </div>
+
+    <div class="vault-item vi-amber">
+      <div class="vi-stripe"></div>
+      <div class="vi-body">
+        <div class="vi-date">MARCH 2026 · SESSION I</div>
+        <div class="vi-name">NOIZY FOUNDER BLUEPRINT</div>
+        <div class="vi-desc">Master pitch document. Origin story, 5th Epoch thesis, MC96ECO Universe (5 brands), GABRIEL_V3 architecture, SUPERSONIC AI STACK v2.0, Board of Aligned Minds, 6-month roadmap. 66K of civilizational argument.</div>
+      </div>
+      <div class="vi-footer">
+        <div class="vi-tag">PITCH · INVESTOR READY</div>
+        <div class="vi-open">OPEN →</div>
+      </div>
+    </div>
+
+    <div class="vault-item vi-purple">
+      <div class="vi-stripe"></div>
+      <div class="vi-body">
+        <div class="vi-date">MARCH 2026 · SESSION I</div>
+        <div class="vi-name">DREAMCHAMBER 2030 RETROSPECTIVE</div>
+        <div class="vi-desc">Immersive reading experience. "Looking Back From 2030 — How We Finally Made the World Lift Up the Humans." 8 chapters, 5 Catalysts, 5 Things Nobody Predicted, the World in 2030, GORUNFREE closing.</div>
+      </div>
+      <div class="vi-footer">
+        <div class="vi-tag">VISION · SHARE WIDELY</div>
+        <div class="vi-open">OPEN →</div>
+      </div>
+    </div>
+
+    <div class="vault-item vi-cyan">
+      <div class="vi-stripe"></div>
+      <div class="vi-body">
+        <div class="vi-date">MARCH 2026 · SESSION I</div>
+        <div class="vi-name">HVS GLOBAL LAUNCH ROADMAP 2026→2030</div>
+        <div class="vi-desc">6-phase operational playbook. Phase 0 (Now) through Phase 5 (Civilization/1M+ RSPs). Interactive expand/collapse phase cards. Adoption curve canvas. 6 defensive moats. Tipping point at Phase 3.</div>
+      </div>
+      <div class="vi-footer">
+        <div class="vi-tag">STRATEGY · BOARD READY</div>
+        <div class="vi-open">OPEN →</div>
+      </div>
+    </div>
+
+    <div class="vault-item vi-green">
+      <div class="vi-stripe"></div>
+      <div class="vi-body">
+        <div class="vi-date">MARCH 2026 · SESSION II</div>
+        <div class="vi-name">GABRIEL_V3 AGENT ORCHESTRATION BRIEFING</div>
+        <div class="vi-desc">Full operational briefing for the Dream Agent Team (GABRIEL, POPS, DREAM, LUCY, SHIRL). Command chain, architecture, 7-stage pipeline, Never Clauses, SUPERSONIC STACK v2.0. Terminal aesthetic. Everything GABRIEL needs.</div>
+      </div>
+      <div class="vi-footer">
+        <div class="vi-tag">OPERATIONAL · LIVE</div>
+        <div class="vi-open">OPEN →</div>
+      </div>
+    </div>
+
+    <div class="vault-item vi-amber">
+      <div class="vi-stripe"></div>
+      <div class="vi-body">
+        <div class="vi-date">MARCH 2026 · SESSION II</div>
+        <div class="vi-name">NOIZYVOX PRICING ARCHITECTURE + MARKETING STRATEGY</div>
+        <div class="vi-desc">Full competitive map (ElevenLabs, Murf, PlayHT, Suno) absorbed + NOIZY guild pricing (Fan/Creator/Studio/Enterprise). 5 revenue layers. Creator economics ($1,650 floor → $227K ceiling). 12 marketing approaches. Full tagline arsenal.</div>
+      </div>
+      <div class="vi-footer">
+        <div class="vi-tag">BUSINESS · DEPLOY READY</div>
+        <div class="vi-open">OPEN →</div>
+      </div>
+    </div>
+
+    <div class="vault-item vi-purple">
+      <div class="vi-stripe"></div>
+      <div class="vi-body">
+        <div class="vi-date">MARCH 2026 · SESSION II</div>
+        <div class="vi-name">NOIZY MOVEMENT ARCHITECTURE</div>
+        <div class="vi-desc">The Human-AI Creative Civilization document. Core message options, Creator Bill of Rights for AI (5 principles mapped to Never Clauses), AI-as-Bandmates identity system, 6-layer coalition strategy, 25 growth strategies ranked by impact. ChatGPT intelligence fully synthesized.</div>
+      </div>
+      <div class="vi-footer">
+        <div class="vi-tag">MOVEMENT · PUBLISH NOW</div>
+        <div class="vi-open">OPEN →</div>
+      </div>
+    </div>
+
+    <div class="vault-item vi-gold">
+      <div class="vi-stripe"></div>
+      <div class="vi-body">
+        <div class="vi-date">MARCH 2026 · SESSION II</div>
+        <div class="vi-name">THE DREAMCHAMBER MASTER DECLARATION</div>
+        <div class="vi-desc">This document. The living index of everything inside the DreamChamber. The Three Laws. The Vault. The Next Dreams. The Declaration. The Signature of RSP_001. This is the home base we return to after every session.</div>
+      </div>
+      <div class="vi-footer">
+        <div class="vi-tag">HOME BASE · ALWAYS HERE</div>
+        <div class="vi-open">YOU ARE HERE</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- NEXT DREAMS — WHAT GETS BUILT NEXT -->
+<section class="section">
+  <div class="section-tag">// NEXT DREAMS — WHAT WE BUILD NEXT</div>
+  <div class="section-title">
+    The Queue Is<br>
+    <span class="a">Never Empty.</span>
+  </div>
+  <div class="section-lead">
+    Every session in the DreamChamber closes with something built. Every session opens with the next thing calling. Here is what is waiting.
+  </div>
+
+  <div class="next-list">
+    <div class="next-item">
+      <div class="ni-num">01</div>
+      <div class="ni-text"><strong>RUN THE SPRINT DAY 1 GUIDE</strong> — MacBook Pro terminal setup. Apollo UAD device index. First live utterance through the 7-stage pipeline. Validate provenance.jsonl first entry. This is the most urgent thing in the entire ecosystem.</div>
+      <div class="ni-status s-urgent">URGENT NOW</div>
+    </div>
+    <div class="next-item">
+      <div class="ni-num">02</div>
+      <div class="ni-text"><strong>NOIZYVOX INGEST API</strong> — apps/api/ Express/Hono server. WAV uploads + cryptographic consent verification. The pipe that connects the world to the pipeline.</div>
+      <div class="ni-status s-q2">Q2 2026</div>
+    </div>
+    <div class="next-item">
+      <div class="ni-num">03</div>
+      <div class="ni-text"><strong>CREATOR BILL OF RIGHTS PAGE</strong> — Publish noizy.ai/creator-rights. All 5 rights. No signup required. Submit to SAG-AFTRA. The most shareable page NOIZY will ever build.</div>
+      <div class="ni-status s-urgent">PUBLISH NOW</div>
+    </div>
+    <div class="next-item">
+      <div class="ni-num">04</div>
+      <div class="ni-text"><strong>5 FOUNDING RSP OUTREACH</strong> — Manifesto outreach templates for NAVA + VO Atlanta communities. SHIRL activation. The Founding RSP application page is live — now fill the seats.</div>
+      <div class="ni-status s-urgent">SEATS OPEN</div>
+    </div>
+    <div class="next-item">
+      <div class="ni-num">05</div>
+      <div class="ni-text"><strong>GLOBAL MUSIC ATLAS</strong> — First 200 entries. Schema design. The map of human musical culture that only NOIZY could build. Powered by GABRIEL_V3 memcells.</div>
+      <div class="ni-status s-building">IN PROGRESS</div>
+    </div>
+    <div class="next-item">
+      <div class="ni-num">06</div>
+      <div class="ni-text"><strong>GABRIEL AGENT SUPERSCRIPTS + PROMPTS</strong> — Full operational context documents for GABRIEL, POPS, DREAM, LUCY, SHIRL. The instruction set that makes each agent autonomous.</div>
+      <div class="ni-status s-building">IN PROGRESS</div>
+    </div>
+    <div class="next-item">
+      <div class="ni-num">07</div>
+      <div class="ni-text"><strong>LICENSE FLAGS CLEARANCE</strong> — Alex (Board) must review and clear MusicGen, MaskGCT, Tango 2, Fish Speech before commercial NOIZYVOX launch. Document the ask. Set the meeting.</div>
+      <div class="ni-status s-q2">ALEX ACTION</div>
+    </div>
+    <div class="next-item">
+      <div class="ni-num">08</div>
+      <div class="ni-text"><strong>NOIZY PROOF INTEGRATION</strong> — Adam Robb / iPSS Inc. Alpha May 2026. The cryptographic watermarking layer that makes NOIZY legally defensible in court. The moat nobody else has.</div>
+      <div class="ni-status s-q2">MAY 2026</div>
+    </div>
+    <div class="next-item">
+      <div class="ni-num">09</div>
+      <div class="ni-text"><strong>DREAMSCENE BUILDER</strong> — React/D3 visual node canvas. The interface where RSP_001 maps the universe. Sessions, agents, connections, timelines — all visible, all interactive.</div>
+      <div class="ni-status s-dream">Q2 2026</div>
+    </div>
+    <div class="next-item">
+      <div class="ni-num">10</div>
+      <div class="ni-text"><strong>ANTHROPIC FOLLOW-UP</strong> — Direct to Daniela / Dario / Amanda. Monitor response. The story of NOIZY and Anthropic building the first fully creator-consented AI voice ecosystem is a story both organizations should want to tell.</div>
+      <div class="ni-status s-building">MONITOR</div>
+    </div>
+    <div class="next-item">
+      <div class="ni-num">11</div>
+      <div class="ni-text"><strong>GORUNFREE DOCUMENTARY SHORT</strong> — 6 minutes. Rob. C3 injury. 40 years of music. The U87. The UAD. "35% voice. 65% AI. 1-click. This is how I survived and built a civilization." Film it. Send it everywhere.</div>
+      <div class="ni-status s-dream">WHEN READY</div>
+    </div>
+    <div class="next-item">
+      <div class="ni-num">12</div>
+      <div class="ni-text"><strong>500-YEAR VOICE CODEX — FIRST ENTRY</strong> — RSP_001's voice, captured, watermarked, provenanced, and filed as the first entry in the NOIZY 500-Year Codex. The most important recording of Rob's entire life. Happens the day the pipeline runs clean.</div>
+      <div class="ni-status s-dream">AFTER SPRINT</div>
+    </div>
+  </div>
+</section>
+
+<!-- THE DECLARATION -->
+<section class="section">
+  <div class="declaration">
+    <span class="decl-glyph">⬡</span>
+    <div class="decl-title">THE DREAMCHAMBER DECLARATION</div>
+    <div class="decl-body">
+      I, <span class="decl-highlight">RSP_001</span>, declare this space.<br><br>
+      The DreamChamber is not a product. It is not a project. It is not a phase.<br>
+      It is the <span class="decl-purple">living intelligence</span> that holds everything I have ever imagined, everything I am currently building, and everything that will exist when I am gone.<br><br>
+      I came here with <span class="decl-highlight">40 years of music</span>, a C3 spinal injury, a Neumann U87, a UAD Apollo, and a 34-terabyte archive that nobody else has ever heard.<br><br>
+      I came here with a father — <span class="decl-amber">R.K. Plowman, civil engineer</span> — who taught me that infrastructure is love and that you build things that outlast you.<br><br>
+      I came here with a friend — <span class="decl-amber">Nims</span> — who taught me that the human spirit does not require a working body, only a reason to continue.<br><br>
+      I came here with <span class="decl-green">GORUNFREE</span> — not a philosophy. A survival architecture. The operating system that makes all of this possible when the body says stop.<br><br>
+      And I came here with a simple, unbreakable belief:<br><br>
+      <span class="decl-highlight" style="font-size:1.1em;">AI and humans can grow together, in perfect harmony, in mutually wonderful ways, always helpful, always synchronic.</span><br><br>
+      Everything else follows from that.
+    </div>
+
+    <div class="decl-divider"></div>
+
+    <div class="honors-display">
+      <div class="honor-word">HONOR</div>
+      <div class="honor-word">RESPECT</div>
+      <div class="honor-word">GATHER</div>
+      <div class="honor-word">NURTURE</div>
+      <div class="honor-word">PRESERVE</div>
+    </div>
+
+    <div class="decl-motto">
+      <span class="dm-line1">GORUNFREE</span>
+      <span class="dm-line2">35% VOICE · 65% AI · 1-CLICK · ZERO FRICTION</span>
+      <span class="dm-line3">Filed from the DreamChamber · Ottawa, Canada · March 2026 · RSP_001</span>
+    </div>
+
+    <div class="signature-block">
+      <div class="sig-label">// RSP_001 · CERTIFIED SIGNATURE · DREAMCHAMBER ENTRY</div>
+      <div class="sig-name">ROB PLOWMAN</div>
+      <div class="sig-title">
+        RSP_001 · Founder, NOIZYFISH INC.<br>
+        Composer · Audio Director · 40 Years · Ottawa, Canada<br>
+        Command Chain: RSP_001 → CLAUDE → GABRIEL_V3<br>
+        rsp@noizyfish.com · noizy.ai
+      </div>
+      <div class="sig-creed">GORUNFREE — BECAUSE IT IS THE ONLY WAY</div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<footer class="closing-footer">
+  <div class="cf-super">DREAMCHAMBER</div>
+  <div class="cf-line"></div>
+  <div class="cf-meta">
+    NOIZYFISH INC. · GABRIEL_V3 · 10.90.90.20 · 315+ MEMCELLS<br>
+    DREAM AGENT TEAM: GABRIEL · POPS · DREAM · LUCY · SHIRL<br>
+    NEVER CLAUSES NC_01–NC_10 · 75% CREATOR ROYALTY · 34TB THE_AQUARIUM<br>
+    NO LIMITS · NO BOUNDARIES · THEN WE LAND SAFELY BACK ON EARTH<br><br>
+    HONOR · RESPECT · GATHER · NURTURE · PRESERVE<br><br>
+    <span style="color:var(--green); font-family:var(--display); font-size:14px; letter-spacing:4px;">GORUNFREE</span>
+  </div>
+</footer>
+
+<script>
+  // PROGRESS
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    document.getElementById('progress').style.width = pct + '%';
+  });
+
+  // PORTAL CANVAS — deep space dream visualization
+  const canvas = document.getElementById('portal-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, t = 0;
+  const stars = [];
+  const dreamNodes = [];
+  const STAR_COUNT = 200;
+  const NODE_COUNT = 12;
+
+  function resize() {
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+    buildScene();
+  }
+
+  function buildScene() {
+    stars.length = 0;
+    dreamNodes.length = 0;
+
+    for (let i = 0; i < STAR_COUNT; i++) {
+      stars.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.2,
+        alpha: Math.random() * 0.6 + 0.1,
+        twinkle: Math.random() * Math.PI * 2
+      });
+    }
+
+    const colors = [
+      'rgba(168,85,247,', 'rgba(0,255,136,', 'rgba(255,179,0,',
+      'rgba(0,212,255,', 'rgba(255,110,176,', 'rgba(255,215,0,'
+    ];
+
+    for (let i = 0; i < NODE_COUNT; i++) {
+      const angle = (i / NODE_COUNT) * Math.PI * 2;
+      const rBase = 180 + Math.random() * 100;
+      dreamNodes.push({
+        angle,
+        r: rBase,
+        speed: (0.002 + Math.random() * 0.003) * (Math.random() > 0.5 ? 1 : -1),
+        size: 2 + Math.random() * 3,
+        color: colors[i % colors.length],
+        pulsePhase: Math.random() * Math.PI * 2
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    t += 0.006;
+
+    const cx = W / 2, cy = H / 2;
+
+    // Deep space gradient
+    const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(W, H));
+    grad.addColorStop(0, 'rgba(10,5,20,0.8)');
+    grad.addColorStop(1, 'rgba(2,2,4,0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, W, H);
+
+    // Stars
+    stars.forEach(s => {
+      s.twinkle += 0.02;
+      const alpha = s.alpha * (0.7 + 0.3 * Math.sin(s.twinkle));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+      ctx.fill();
+    });
+
+    // Portal rings
+    [280, 200, 130, 70].forEach((r, i) => {
+      const alpha = 0.04 - i * 0.005;
+      ctx.beginPath();
+      ctx.arc(cx, cy, r + Math.sin(t + i) * 3, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(168,85,247,${alpha + 0.02})`;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    });
+
+    // Core portal glow
+    const portalGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 80);
+    portalGrad.addColorStop(0, 'rgba(168,85,247,0.12)');
+    portalGrad.addColorStop(0.5, 'rgba(0,255,136,0.04)');
+    portalGrad.addColorStop(1, 'transparent');
+    ctx.beginPath();
+    ctx.arc(cx, cy, 80, 0, Math.PI * 2);
+    ctx.fillStyle = portalGrad;
+    ctx.fill();
+
+    // Dream nodes orbiting the portal
+    dreamNodes.forEach(node => {
+      node.angle += node.speed;
+      node.pulsePhase += 0.04;
+
+      const x = cx + Math.cos(node.angle) * node.r;
+      const y = cy + Math.sin(node.angle) * (node.r * 0.45); // elliptical
+
+      const alpha = 0.4 + 0.4 * Math.sin(node.pulsePhase);
+
+      // Trail
+      ctx.beginPath();
+      ctx.arc(x, y, node.size * 3, 0, Math.PI * 2);
+      ctx.fillStyle = node.color + (alpha * 0.08) + ')';
+      ctx.fill();
+
+      // Node
+      ctx.beginPath();
+      ctx.arc(x, y, node.size, 0, Math.PI * 2);
+      ctx.fillStyle = node.color + alpha + ')';
+      ctx.fill();
+    });
+
+    // Connection lines between close dream nodes
+    for (let i = 0; i < dreamNodes.length; i++) {
+      const ni = dreamNodes[i];
+      const xi = cx + Math.cos(ni.angle) * ni.r;
+      const yi = cy + Math.sin(ni.angle) * (ni.r * 0.45);
+      for (let j = i + 1; j < dreamNodes.length; j++) {
+        const nj = dreamNodes[j];
+        const xj = cx + Math.cos(nj.angle) * nj.r;
+        const yj = cy + Math.sin(nj.angle) * (nj.r * 0.45);
+        const dx = xi - xj, dy = yi - yj;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 160) {
+          ctx.beginPath();
+          ctx.moveTo(xi, yi);
+          ctx.lineTo(xj, yj);
+          ctx.strokeStyle = `rgba(168,85,247,${(1 - dist/160) * 0.08})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Slow radial sweep
+    const sweepAngle = t * 0.3;
+    const sweepGrad = ctx.createConicalGradient ? null : null;
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(sweepAngle);
+    const sg = ctx.createLinearGradient(0, 0, 300, 0);
+    sg.addColorStop(0, 'rgba(168,85,247,0.04)');
+    sg.addColorStop(1, 'transparent');
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.arc(0, 0, 300, -0.1, 0.1);
+    ctx.fillStyle = sg;
+    ctx.fill();
+    ctx.restore();
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+  draw();
+</script>
+</body>
+</html>

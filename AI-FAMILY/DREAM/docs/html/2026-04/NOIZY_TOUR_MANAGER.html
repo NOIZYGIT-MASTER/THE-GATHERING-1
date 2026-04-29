@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIZY Tour Manager — Interactive Workbench</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --deep:#0A0E17;--mid:#111827;--panel:#151D2E;--panel2:#1B2337;
+  --signal:#00D4FF;--nerve:#E8A87C;--restore:#00FFB3;
+  --pulse:#FF4D6D;--soul:#B185DB;--gold:#D4A017;
+  --white:#F1F5F9;--silver:#94A3B8;--mgray:#4A5568;
+  --font-d:'Cormorant Garamond',Georgia,serif;
+  --font-m:'IBM Plex Mono','Courier New',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--deep);color:var(--white);font-family:var(--font-d);line-height:1.6;min-height:100vh}
+body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px)}
+button{font-family:inherit;color:inherit;background:none;border:none;cursor:pointer}
+input,textarea,select{font-family:var(--font-m);background:var(--panel2);color:var(--white);border:1px solid rgba(255,255,255,0.1);border-radius:4px;padding:8px 12px;font-size:13px}
+input:focus,textarea:focus,select:focus{outline:1px solid var(--gold);border-color:var(--gold)}
+
+/* Header */
+header{padding:28px 40px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.logo{font-size:22px;font-weight:700;letter-spacing:0.15em}
+.logo span{color:var(--gold)}
+.subtitle{font-family:var(--font-m);font-size:11px;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;margin-top:4px}
+.date{font-family:var(--font-m);font-size:11px;color:var(--mgray)}
+.tools{display:flex;gap:8px}
+.tool-btn{font-family:var(--font-m);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;padding:8px 14px;border:1px solid rgba(255,255,255,0.12);border-radius:4px;color:var(--silver);transition:all 0.15s}
+.tool-btn:hover{border-color:var(--gold);color:var(--gold)}
+.tool-btn.primary{border-color:var(--gold);color:var(--gold);background:rgba(212,160,23,0.06)}
+.tool-btn.primary:hover{background:rgba(212,160,23,0.15)}
+
+/* Main */
+main{max-width:1400px;margin:0 auto;padding:32px 40px 80px}
+
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:32px}
+@media(max-width:900px){.stats{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:500px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--panel);border:1px solid rgba(255,255,255,0.06);border-radius:6px;padding:18px;text-align:center}
+.stat-val{font-size:28px;font-weight:700;margin-bottom:4px;line-height:1}
+.stat-label{font-family:var(--font-m);font-size:9px;letter-spacing:0.2em;color:var(--silver);text-transform:uppercase;margin-top:6px}
+
+/* Controls bar */
+.controls{background:var(--panel);border:1px solid rgba(255,255,255,0.06);border-radius:6px;padding:16px 20px;margin-bottom:24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.controls-group{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.controls-label{font-family:var(--font-m);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--silver)}
+.pill{font-family:var(--font-m);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;padding:6px 12px;border-radius:3px;border:1px solid rgba(255,255,255,0.1);color:var(--silver);cursor:pointer;transition:all 0.15s;user-select:none}
+.pill:hover{border-color:var(--gold);color:var(--gold)}
+.pill.active{background:rgba(212,160,23,0.15);border-color:var(--gold);color:var(--gold)}
+.search{flex:1;min-width:200px}
+.search input{width:100%}
+
+/* Cases */
+.cases{display:flex;flex-direction:column;gap:10px}
+.case{background:var(--panel);border:1px solid rgba(255,255,255,0.06);border-radius:6px;overflow:hidden;transition:border-color 0.15s}
+.case.focused{border-color:var(--gold)}
+.case-header{display:grid;grid-template-columns:auto 1fr auto auto auto;align-items:center;gap:14px;padding:14px 20px;cursor:pointer;transition:background 0.1s}
+.case-header:hover{background:rgba(255,255,255,0.02)}
+.case-id{font-family:var(--font-m);font-size:10px;letter-spacing:0.15em;color:var(--mgray);min-width:36px}
+.case-title{font-size:17px;font-weight:400;line-height:1.3}
+.case-area{font-family:var(--font-m);font-size:9px;letter-spacing:0.2em;text-transform:uppercase;padding:3px 9px;border-radius:3px}
+.area-infra{background:rgba(0,212,255,0.1);color:var(--signal)}
+.area-brand{background:rgba(181,133,219,0.1);color:var(--soul)}
+.area-deck{background:rgba(232,168,124,0.1);color:var(--nerve)}
+.area-legal{background:rgba(212,160,23,0.1);color:var(--gold)}
+.area-ops{background:rgba(0,255,179,0.08);color:var(--restore)}
+.case-status{font-family:var(--font-m);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;padding:5px 12px;border-radius:3px;cursor:pointer;transition:opacity 0.15s}
+.case-status:hover{opacity:0.75}
+.status-done{background:rgba(0,255,179,0.12);color:var(--restore);border:1px solid rgba(0,255,179,0.3)}
+.status-progress{background:rgba(212,160,23,0.12);color:var(--gold);border:1px solid rgba(212,160,23,0.3)}
+.status-pending{background:rgba(148,163,184,0.08);color:var(--silver);border:1px solid rgba(148,163,184,0.2)}
+.status-blocked{background:rgba(255,77,109,0.12);color:var(--pulse);border:1px solid rgba(255,77,109,0.3)}
+.case-priority{font-family:var(--font-m);font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--mgray)}
+.pri-critical{color:var(--pulse)}
+.pri-high{color:var(--gold)}
+.pri-med{color:var(--signal)}
+.pri-low{color:var(--silver)}
+
+.case-body{padding:0 20px 18px 64px;display:none;border-top:1px solid rgba(255,255,255,0.04);padding-top:16px;margin-top:2px}
+.case.open .case-body{display:block}
+.case-section-title{font-family:var(--font-m);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--silver);margin:12px 0 6px}
+.case-section-title:first-child{margin-top:0}
+.case-notes{font-size:14px;color:var(--white);line-height:1.6;margin-bottom:8px;white-space:pre-wrap}
+.case-notes-edit{width:100%;min-height:70px;font-size:13px;line-height:1.5}
+.artifacts{display:flex;flex-direction:column;gap:4px}
+.artifact{font-family:var(--font-m);font-size:12px;color:var(--signal);text-decoration:none;padding:4px 0}
+.artifact:hover{color:var(--gold);text-decoration:underline}
+.artifact-missing{color:var(--mgray);font-style:italic}
+.next-step{font-size:14px;color:var(--nerve);padding:8px 12px;background:rgba(232,168,124,0.06);border-left:2px solid var(--nerve);margin-top:6px}
+
+.case-footer{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.case-footer button{font-family:var(--font-m);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;padding:5px 10px;border:1px solid rgba(255,255,255,0.1);border-radius:3px;color:var(--silver);transition:all 0.15s}
+.case-footer button:hover{border-color:var(--gold);color:var(--gold)}
+.case-footer button.danger:hover{border-color:var(--pulse);color:var(--pulse)}
+
+/* Modal */
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:10000;padding:20px}
+.modal-backdrop.open{display:flex}
+.modal{background:var(--panel);border:1px solid var(--gold);border-radius:8px;padding:28px;max-width:520px;width:100%;max-height:90vh;overflow-y:auto}
+.modal h3{font-size:22px;font-weight:300;color:var(--gold);margin-bottom:18px}
+.modal-field{margin-bottom:14px}
+.modal-field label{display:block;font-family:var(--font-m);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--silver);margin-bottom:5px}
+.modal-field input,.modal-field select,.modal-field textarea{width:100%}
+.modal-field textarea{min-height:70px;resize:vertical}
+.modal-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px}
+
+/* Empty state */
+.empty{text-align:center;padding:60px 20px;color:var(--silver);font-size:16px}
+
+/* Footer */
+.foot{margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.06);font-family:var(--font-m);font-size:10px;letter-spacing:0.15em;color:var(--mgray);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo">NOIZY <span>TOUR MANAGER</span></div>
+    <div class="subtitle">Interactive workbench · open cases · upgrades in flight</div>
+  </div>
+  <div style="text-align:right">
+    <div class="date" id="timestamp">—</div>
+    <div class="tools" style="margin-top:10px">
+      <button class="tool-btn primary" onclick="openAddModal()">＋ Case</button>
+      <button class="tool-btn" onclick="exportJSON()">Export</button>
+      <button class="tool-btn" onclick="document.getElementById('import-file').click()">Import</button>
+      <button class="tool-btn" onclick="if(confirm('Reset to defaults? This erases local changes.'))resetAll()">Reset</button>
+      <input id="import-file" type="file" accept=".json" style="display:none" onchange="importJSON(event)">
+    </div>
+  </div>
+</header>
+
+<main>
+
+<div class="stats" id="stats"></div>
+
+<div class="controls">
+  <div class="controls-group">
+    <span class="controls-label">Area</span>
+    <span class="pill active" data-filter="area" data-value="all">All</span>
+    <span class="pill" data-filter="area" data-value="infra">Infra</span>
+    <span class="pill" data-filter="area" data-value="brand">Brand</span>
+    <span class="pill" data-filter="area" data-value="deck">Deck</span>
+    <span class="pill" data-filter="area" data-value="legal">Legal</span>
+    <span class="pill" data-filter="area" data-value="ops">Ops</span>
+  </div>
+  <div class="controls-group">
+    <span class="controls-label">Status</span>
+    <span class="pill active" data-filter="status" data-value="all">All</span>
+    <span class="pill" data-filter="status" data-value="open">Open</span>
+    <span class="pill" data-filter="status" data-value="done">Done</span>
+  </div>
+  <div class="search">
+    <input type="text" id="search" placeholder="Search title, notes, or artifact…">
+  </div>
+</div>
+
+<div class="cases" id="cases"></div>
+<div class="empty" id="empty" style="display:none">No cases match the current filters.</div>
+
+<div class="foot">
+  <span>Saved locally in your browser · Export for backup · NOIZY Tour Manager v1.0</span>
+  <span id="counts">— cases</span>
+</div>
+</main>
+
+<!-- Add / Edit modal -->
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal">
+    <h3 id="modal-title">Add case</h3>
+    <input type="hidden" id="m-id">
+    <div class="modal-field">
+      <label>Title</label>
+      <input type="text" id="m-title" placeholder="Short, concrete">
+    </div>
+    <div class="modal-row">
+      <div class="modal-field">
+        <label>Area</label>
+        <select id="m-area">
+          <option value="infra">Infra</option>
+          <option value="brand">Brand</option>
+          <option value="deck">Deck</option>
+          <option value="legal">Legal</option>
+          <option value="ops">Ops</option>
+        </select>
+      </div>
+      <div class="modal-field">
+        <label>Priority</label>
+        <select id="m-priority">
+          <option value="critical">Critical</option>
+          <option value="high">High</option>
+          <option value="med" selected>Med</option>
+          <option value="low">Low</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-field">
+      <label>Status</label>
+      <select id="m-status">
+        <option value="pending" selected>Pending</option>
+        <option value="progress">In progress</option>
+        <option value="blocked">Blocked</option>
+        <option value="done">Done</option>
+      </select>
+    </div>
+    <div class="modal-field">
+      <label>Notes</label>
+      <textarea id="m-notes" placeholder="What is this, what decisions were locked, what's the state"></textarea>
+    </div>
+    <div class="modal-field">
+      <label>Next step</label>
+      <input type="text" id="m-next" placeholder="The single next concrete action">
+    </div>
+    <div class="modal-field">
+      <label>Artifacts (one per line, format: label || computer://path)</label>
+      <textarea id="m-artifacts" placeholder="Speaker notes || computer:///sessions/quirky-vibrant-carson/mnt/CLAUDE TODAY/..."></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="tool-btn" onclick="closeModal()">Cancel</button>
+      <button class="tool-btn primary" onclick="saveModal()">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Default case list (this session's work) ──────────────────
+const DEFAULTS = [
+  {
+    id:'C001', title:'Rings · Matrix · Roadmap — deck validation + walkthrough',
+    area:'deck', priority:'med', status:'done',
+    notes:'Three slides locked with zero conflicts. Footer line ties the governance architecture into one sentence. Speaker notes (3–4 min at 140 wpm) and a Figma single-page composition spec both produced.',
+    next:'Hand Figma spec to a designer; use speaker notes in the next investor/partner call.',
+    artifacts:[
+      {label:'Speaker notes', href:'computer:///sessions/quirky-vibrant-carson/mnt/CLAUDE TODAY/NOIZY_RINGS_MATRIX_ROADMAP_speaker_notes.md'},
+      {label:'Figma layout spec', href:'computer:///sessions/quirky-vibrant-carson/mnt/CLAUDE TODAY/NOIZY_RINGS_MATRIX_ROADMAP_figma_spec.md'}
+    ]
+  },
+  {
+    id:'C002', title:'DSP DB Visualizer server setup — hardened v2',
+    area:'infra', priority:'high', status:'done',
+    notes:'v1 sudoers had two real risks: sudo pm2 wildcard escalation, and sudo npm ci allowing dep lifecycle scripts to run as root. v2 collapses sudoers to a single narrow rule (systemctl reload nginx), runs PM2 and npm as the deploy user, adds strict mode, OS guard, idempotent SSH key handling with shape validation, and an env file placeholder at 0640 root:deploy.',
+    next:'Deploy to the target host; run harden-sshd.sh once key-based login is verified.',
+    artifacts:[
+      {label:'server-setup.sh (hardened)', href:'computer:///sessions/quirky-vibrant-carson/mnt/CLAUDE TODAY/server-setup.sh'},
+      {label:'harden-sshd.sh (companion)', href:'computer:///sessions/quirky-vibrant-carson/mnt/CLAUDE TODAY/harden-sshd.sh'}
+    ]
+  },
+  {
+    id:'C003', title:'Cloudflare live-state survey vs. March 19 dashboard',
+    area:'infra', priority:'high', status:'done',
+    notes:'Account: Fishmusicinc (only one). Workers: still 1 (deploy), still Hello World stub from 2025-12-02, unchanged for four months. D1: dropped from 11 to 6; new manifest_db / catalogue_db / consent_db (today) + integration-events (3 days ago) + rebuilt agent-memory + gabriel_db — all six have 0 tables. KV: down to 17, reorganized around per-brand cache pattern (six brand caches confirming the canonical six). R2: still not enabled.',
+    next:'Use the KV naming pattern as the source-of-truth brand list. Build the router next.',
+    artifacts:[
+      {label:'MC96ECO Cloudflare Cleanup dashboard', href:'computer:///sessions/quirky-vibrant-carson/mnt/CLAUDE TODAY/00_COMMAND_CENTER/MC96ECO_CLOUDFLARE_CLEANUP.html'}
+    ]
+  },
+  {
+    id:'C004', title:'Six-brand canon locked — subs to noizy.ai with mixed slugs',
+    area:'brand', priority:'critical', status:'done',
+    notes:'Six brands: NOIZYFISH, NOIZYVOX, NOIZYKIDZ (with Z), NOIZYLAB, THE WISDOM PROJECT, THE AQUARIUM. All render as subdomains of noizy.ai. Mixed slug style: NOIZY-prefixed brands use full slugs (noizyfish.noizy.ai, noizykidz.noizy.ai, noizyvox.noizy.ai, noizylab.noizy.ai). The Wisdom Project and The Aquarium use short slugs (wisdom.noizy.ai, aquarium.noizy.ai). Both .com domains already in Cloudflare.',
+    next:'Router code wires these hostnames directly. DNS plan follows.',
+    artifacts:[]
+  },
+  {
+    id:'C005', title:'NOIZY Naming Law — 5-file install package',
+    area:'legal', priority:'critical', status:'done',
+    notes:'Pre-commit hook + GitHub Actions CI guard + law doc + brand-tokens dictionary + README. Regex verified: catches every tested violation pattern — lowercase, mixed-case, and all-caps brand tokens misspelled with an S; zero false positives on legitimate English "noisy" (e.g. "high-signal, not noisy"). Includes audited emergency bypass (NOIZY_LAW_BYPASS=1 + commit trailer) so historical archival does not fight the guard.',
+    next:'Install per repo: copy files into .githooks and .github/workflows, chmod +x the hook, set core.hooksPath.',
+    artifacts:[
+      {label:'pre-commit hook', href:'computer:///sessions/quirky-vibrant-carson/mnt/CLAUDE TODAY/10_INFRASTRUCTURE/noizy-naming-law/pre-commit'},
+      {label:'GitHub Actions workflow', href:'computer:///sessions/quirky-vibrant-carson/mnt/CLAUDE TODAY/10_INFRASTRUCTURE/noizy-naming-law/noizy-spelling.yml'},
+      {label:'NOIZY-NAMING-LAW.md', href:'computer:///sessions/quirky-vibrant-carson/mnt/CLAUDE TODAY/10_INFRASTRUCTURE/noizy-naming-law/NOIZY-NAMING-LAW.md'},
+      {label:'NOIZY-BRAND-TOKENS.md', href:'computer:///sessions/quirky-vibrant-carson/mnt/CLAUDE TODAY/10_INFRASTRUCTURE/noizy-naming-law/NOIZY-BRAND-TOKENS.md'},
+      {label:'README (install)', href:'computer:///sessions/quirky-vibrant-carson/mnt/CLAUDE TODAY/10_INFRASTRUCTURE/noizy-naming-law/README.md'}
+    ]
+  },
+  {
+    id:'C006', title:'NOIZYKIDZ KV (with Z) — created via MCP, no-Z queued for retirement',
+    area:'infra', priority:'high', status:'done',
+    notes:'Created noizy-cache-noizykidz via Cloudflare MCP on 2026-04-16. ID: 942782f36aa44e4698240b7c211fded3. The no-Z namespace (noizy-cache-noizykids) is legacy; queue for deletion after any dependent worker or PWA cuts over to the with-Z binding. KV names are immutable so this was a new-create + switch-over migration.',
+    next:'When a brand PWA or Worker starts using NOIZYKIDZ_KV, bind to 942782f36aa44e4698240b7c211fded3. Delete the no-Z KV only after traffic has cut over.',
+    artifacts:[]
+  },
+  {
+    id:'C007', title:'HEAVEN — edge API gateway for NOIZY.AI (shipped, one click from live)',
+    area:'infra', priority:'critical', status:'progress',
+    notes:'HEAVEN is the Cloudflare Worker serving noizy.ai. Real code (373 lines) replaces the signup stub. Public API over gospel, doctrine, agents, empire. Internal tables (memcells, consent_log, ops, observations, system_failures, vox_talent) stay server-side. wrangler.toml parses clean with AGENT_MEMORY D1 + SIGNUPS KV bindings. SIGNUPS KV (f173a7af5ed74daf8c65d38e042e0b48) created via MCP. Three deploy paths documented: GitHub Actions (iPad-viable), terminal (Mac), Dashboard paste (browser-only).',
+    next:'Deploy via chosen path. iPad route: push to GitHub, Actions runs wrangler deploy automatically. Mac route: cd heaven && npx wrangler deploy. Verify: curl https://noizy.ai/health returns ok:true, db.connected:true.',
+    artifacts:[
+      {label:'HEAVEN worker.js (real API gateway)', href:'computer:///sessions/quirky-vibrant-carson/mnt/CLAUDE TODAY/10_INFRASTRUCTURE/cloudflare-workers/heaven/worker.js'},
+      {label:'wrangler.toml (D1 + KV bindings)', href:'computer:///sessions/quirky-vibrant-carson/mnt/CLAUDE TODAY/10_INFRASTRUCTURE/cloudflare-workers/heaven/wrangler.toml'},
+      {label:'GitHub Actions deploy workflow', href:'computer:///sessions/quirky-vibrant-carson/mnt/CLAUDE TODAY/10_INFRASTRUCTURE/cloudflare-workers/heaven/.github/workflows/deploy-worker.yml'},
+      {label:'DEPLOY_HEAVEN.md (all three paths)', href:'computer:///sessions/quirky-vibrant-carson/mnt/CLAUDE TODAY/10_INFRASTRUCTURE/cloudflare-workers/heaven/DEPLOY_HEAVEN.md'}
+    ]
+  },
+  {
+    id:'C008', title:'R2 enable — required for NOIZYVOX voice assets',
+    area:'infra', priority:'med', status:'blocked',
+    notes:'Still disabled in the account. MCP returns 403: "Please enable R2 through the Cloudflare Dashboard." This is a manual click-through step, not scriptable. Not a blocker for the holding scaffold (no assets yet) — but a blocker for anything NOIZYVOX beyond holding.',
+    next:'One-time: open Cloudflare Dashboard → R2 → Enable. Then the first bucket: noizyvox-voice-models (private).',
+    artifacts:[]
+  },
+  {
+    id:'C009', title:'GoDaddy escape — domain transfers in progress',
+    area:'ops', priority:'high', status:'progress',
+    notes:'Per March 19 dashboard: 5 domains total, 2 still at GoDaddy (noizyfish.com, noizylab.com), 6 GoDaddy accounts to close. 13 migration milestones, 0 complete as of March 19. State as of April 16 not yet re-verified — the dashboard needs a refresh pass.',
+    next:'Re-verify current state of godaddy-escape-tracker D1 if it still exists; otherwise rebuild the milestone list and attack the transfer queue.',
+    artifacts:[]
+  },
+  {
+    id:'C010', title:'PPTX remediation — S-misspelled brand tokens in two decks',
+    area:'deck', priority:'med', status:'pending',
+    notes:'Confirmed violations in two decks: (1) Presentation 1.pptx on slides 3 & 19 contains a legacy product-name variant; (2) NOIZYWORLD - THE ECOSYSTEM.pptx contains five brand tokens misspelled in the family listing (noizy.ai, noizyvox, noizyfish, noizykidz, noizylab — all mis-tokenized with an S). Fix map is canonical in NOIZY-NAMING-LAW.md. The pptx skill is available for programmatic replacement.',
+    next:'Invoke the pptx skill; apply replacement map; save corrected versions alongside originals with _v2 suffix; update the naming law remediation queue.',
+    artifacts:[]
+  },
+  {
+    id:'C011', title:'Legacy Worker dedup — heaven/ vs noizy-ai-landing/',
+    area:'infra', priority:'low', status:'pending',
+    notes:'Both folders contain the same 80-line signup landing worker (2535 bytes each). heaven/DEPLOY_ME.md describes a completely different router (HEAVEN17 with 15+ endpoints) but the actual code is the signup worker. Documentation has drifted from code. Harmless but confusing; worth consolidating once the new holding router ships.',
+    next:'After C007 ships, delete the redundant folder (keep one as the archival reference) and update any docs that still mention HEAVEN17 as if deployed.',
+    artifacts:[
+      {label:'heaven/', href:'computer:///sessions/quirky-vibrant-carson/mnt/CLAUDE TODAY/10_INFRASTRUCTURE/cloudflare-workers/heaven/'},
+      {label:'noizy-ai-landing/', href:'computer:///sessions/quirky-vibrant-carson/mnt/CLAUDE TODAY/10_INFRASTRUCTURE/cloudflare-workers/noizy-ai-landing/'}
+    ]
+  },
+  {
+    id:'C012', title:'D1 schemas — manifest_db, catalogue_db, consent_db',
+    area:'infra', priority:'med', status:'pending',
+    notes:'All three created today (2026-04-16). All have 0 tables. These are the governance layer: manifest (what exists), catalogue (what we publish), consent (what we are allowed to do). Schemas not yet defined.',
+    next:'Draft schema for each. Consent_db is the highest priority — it is the audit spine for the entire brand-autonomy-bounded-by-GABRIEL line in the Rings deck.',
+    artifacts:[]
+  },
+  {
+    id:'C013', title:'DNS plan — six subdomains + six apex domains',
+    area:'infra', priority:'high', status:'pending',
+    notes:'Needs: AAAA 100:: for noizy.ai apex + each subdomain, all proxied. For brands with their own domain (noizyfish.com, noizylab.ca, noizyvox.com, noizykidz.com, thewisdomproject.com, theaquarium.com): AAAA 100:: proxied, pointing all hostname traffic at the holding Worker. Worker reads url.hostname to switch. Downstream of C007.',
+    next:'Draft DNS record table as part of the C007 deliverable; apply via dashboard (or Cloudflare MCP once the tool supports DNS records).',
+    artifacts:[]
+  },
+  {
+    id:'C014', title:'Agent-memory D1 — real schema discovered (brain was live all along)',
+    area:'infra', priority:'high', status:'done',
+    notes:'The Cloudflare MCP metadata reported num_tables:0 for agent-memory, but the actual database has 12 populated tables / 138 rows. Real tables: memcells (25), agent_registry (8), doctrine_lines (24), gospel_deal (12), system_failures (12), gabriel_commands (10), ops_platforms (10), noizy_empire (9), dreed_registry (9), lucy_observations (9), ops_accounts (9), vox_talent_profiles (1), consent_log (0). This is the real GABRIEL brain — canonical schema already in production. No new schema was created; all subsequent code (HEAVEN worker, NOIZY MCP) was rewritten to read the actual tables.',
+    next:'Treat the live schema as canonical. Any new table must go through explicit CREATE TABLE review.',
+    artifacts:[]
+  },
+  {
+    id:'C015', title:'NOIZY MCP v0.1 — self-hosted MCP server for AI clients',
+    area:'infra', priority:'critical', status:'done',
+    notes:'Node.js / stdio MCP server exposing 12 tools over the real agent-memory D1 via the Cloudflare REST API. 10 read tools (gospel, doctrine, agents, memcells, empire_status, sql_select) + 2 write tools (memcell upsert, consent_log append). Write tools annotated destructiveHint:false / idempotentHint for client-side confirmation prompts. SQL tool is gated to SELECT/WITH only, rejects write verbs and multi-statement queries before they reach D1. Includes README, Claude Desktop install guide, and .env.example with correct account + database IDs pre-filled.',
+    next:'npm install in the noizy-mcp folder, create a Cloudflare API token (D1:Edit on Fishmusicinc), paste config into claude_desktop_config.json, restart Claude Desktop. 5 minutes to working MCP.',
+    artifacts:[
+      {label:'package.json', href:'computer:///sessions/quirky-vibrant-carson/mnt/CLAUDE TODAY/10_INFRASTRUCTURE/noizy-mcp/package.json'},
+      {label:'src/index.js (server + 12 tools)', href:'computer:///sessions/quirky-vibrant-carson/mnt/CLAUDE TODAY/10_INFRASTRUCTURE/noizy-mcp/src/index.js'},
+      {label:'src/cloudflare.js (D1 REST client)', href:'computer:///sessions/quirky-vibrant-carson/mnt/CLAUDE TODAY/10_INFRASTRUCTURE/noizy-mcp/src/cloudflare.js'},
+      {label:'README.md', href:'computer:///sessions/quirky-vibrant-carson/mnt/CLAUDE TODAY/10_INFRASTRUCTURE/noizy-mcp/README.md'},
+      {label:'INSTALL_CLAUDE_DESKTOP.md', href:'computer:///sessions/quirky-vibrant-carson/mnt/CLAUDE TODAY/10_INFRASTRUCTURE/noizy-mcp/INSTALL_CLAUDE_DESKTOP.md'},
+      {label:'.env.example', href:'computer:///sessions/quirky-vibrant-carson/mnt/CLAUDE TODAY/10_INFRASTRUCTURE/noizy-mcp/.env.example'}
+    ]
+  },
+  {
+    id:'C016', title:'NOIZY MCP v0.2 — Cloudflare Worker (remote MCP, iPad-viable, shipped)',
+    area:'infra', priority:'critical', status:'progress',
+    notes:'Remote MCP server at mcp.noizy.ai. Same 12 tools as v0.1, but running as a Cloudflare Worker with native env.AGENT_MEMORY D1 binding (no REST round-trip) and hand-rolled JSON-RPC 2.0 over HTTP (zero npm deps). Bearer auth on /mcp (MCP_AUTH_TOKEN secret, constant-time compare). Unauthenticated /health for monitoring. HTML landing page at / shows connection instructions. Observability enabled in wrangler.toml so every tool call is audited. Batch JSON-RPC supported.',
+    next:'1) cd noizy-mcp-worker; 2) npx wrangler secret put MCP_AUTH_TOKEN (paste 48+ char random string); 3) npx wrangler deploy; 4) add mcp.noizy.ai AAAA 100:: proxied in Cloudflare DNS; 5) update Claude Desktop config with the url and Bearer header from README.',
+    artifacts:[
+      {label:'noizy-mcp-worker/worker.js', href:'computer:///sessions/quirky-vibrant-carson/mnt/CLAUDE TODAY/10_INFRASTRUCTURE/cloudflare-workers/noizy-mcp-worker/worker.js'},
+      {label:'wrangler.toml (D1 + route + observability)', href:'computer:///sessions/quirky-vibrant-carson/mnt/CLAUDE TODAY/10_INFRASTRUCTURE/cloudflare-workers/noizy-mcp-worker/wrangler.toml'},
+      {label:'README.md (deploy + connect)', href:'computer:///sessions/quirky-vibrant-carson/mnt/CLAUDE TODAY/10_INFRASTRUCTURE/cloudflare-workers/noizy-mcp-worker/README.md'},
+      {label:'GitHub Actions deploy workflow', href:'computer:///sessions/quirky-vibrant-carson/mnt/CLAUDE TODAY/10_INFRASTRUCTURE/cloudflare-workers/noizy-mcp-worker/.github/workflows/deploy-mcp-worker.yml'}
+    ]
+  },
+  {
+    id:'C017', title:'HEAVEN live deploy — final click',
+    area:'infra', priority:'critical', status:'pending',
+    notes:'All artifacts for HEAVEN are written, parsed, and ready. The only thing left is the actual deploy, which requires either (a) a Mac terminal with wrangler, (b) pushing to GitHub and letting Actions run, or (c) pasting into the Cloudflare Dashboard. All three paths are documented in DEPLOY_HEAVEN.md. Until this ships, noizy.ai still serves Hello World.',
+    next:'Pick one of the three paths in DEPLOY_HEAVEN.md and execute it. Verify with curl https://noizy.ai/health.',
+    artifacts:[
+      {label:'DEPLOY_HEAVEN.md (three paths)', href:'computer:///sessions/quirky-vibrant-carson/mnt/CLAUDE TODAY/10_INFRASTRUCTURE/cloudflare-workers/heaven/DEPLOY_HEAVEN.md'}
+    ]
+  }
+];
+
+// ── State ────────────────────────────────────────────────────
+const LS_KEY = 'noizy-tour-manager-v1';
+let state = loadState();
+let filters = {area:'all', status:'all', q:''};
+let editingId = null;
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem(LS_KEY);
+    if(!raw) return {cases: JSON.parse(JSON.stringify(DEFAULTS))};
+    const parsed = JSON.parse(raw);
+    if(!parsed.cases) return {cases: JSON.parse(JSON.stringify(DEFAULTS))};
+    return parsed;
+  }catch(e){
+    return {cases: JSON.parse(JSON.stringify(DEFAULTS))};
+  }
+}
+function saveState(){ localStorage.setItem(LS_KEY, JSON.stringify(state)); }
+
+// ── Rendering ────────────────────────────────────────────────
+function render(){
+  renderStats();
+  renderCases();
+  updateTimestamp();
+}
+function renderStats(){
+  const c = state.cases;
+  const total = c.length;
+  const done = c.filter(x=>x.status==='done').length;
+  const progress = c.filter(x=>x.status==='progress').length;
+  const blocked = c.filter(x=>x.status==='blocked').length;
+  const critical = c.filter(x=>x.priority==='critical' && x.status!=='done').length;
+  const pending = c.filter(x=>x.status==='pending').length;
+  document.getElementById('stats').innerHTML = `
+    <div class="stat"><div class="stat-val" style="color:var(--white)">${total}</div><div class="stat-label">Total</div></div>
+    <div class="stat"><div class="stat-val" style="color:var(--silver)">${pending}</div><div class="stat-label">Pending</div></div>
+    <div class="stat"><div class="stat-val" style="color:var(--gold)">${progress}</div><div class="stat-label">In Progress</div></div>
+    <div class="stat"><div class="stat-val" style="color:var(--pulse)">${blocked}</div><div class="stat-label">Blocked</div></div>
+    <div class="stat"><div class="stat-val" style="color:var(--restore)">${done}</div><div class="stat-label">Done</div></div>
+    <div class="stat"><div class="stat-val" style="color:var(--pulse)">${critical}</div><div class="stat-label">Critical Open</div></div>
+  `;
+}
+function renderCases(){
+  const list = document.getElementById('cases');
+  const empty = document.getElementById('empty');
+  const filtered = state.cases.filter(filterCase);
+  list.innerHTML = filtered.map(renderCase).join('');
+  empty.style.display = filtered.length ? 'none' : 'block';
+  document.getElementById('counts').textContent = `${filtered.length} of ${state.cases.length} cases`;
+}
+function filterCase(c){
+  if(filters.area !== 'all' && c.area !== filters.area) return false;
+  if(filters.status === 'open' && c.status === 'done') return false;
+  if(filters.status === 'done' && c.status !== 'done') return false;
+  if(filters.q){
+    const q = filters.q.toLowerCase();
+    const hay = (c.title + ' ' + (c.notes||'') + ' ' + (c.next||'') + ' ' + (c.artifacts||[]).map(a=>a.label).join(' ')).toLowerCase();
+    if(!hay.includes(q)) return false;
+  }
+  return true;
+}
+function renderCase(c){
+  const statusLabel = {done:'Done', progress:'In Progress', pending:'Pending', blocked:'Blocked'}[c.status] || c.status;
+  const artifactsHTML = (c.artifacts && c.artifacts.length)
+    ? c.artifacts.map(a => a.href
+        ? `<a class="artifact" href="${escapeAttr(a.href)}">${escapeHTML(a.label)}</a>`
+        : `<span class="artifact artifact-missing">${escapeHTML(a.label)} · (no link)</span>`
+      ).join('')
+    : '<span class="artifact artifact-missing">— no artifacts yet —</span>';
+  return `
+    <div class="case" id="case-${c.id}" data-id="${c.id}">
+      <div class="case-header" onclick="toggleCase('${c.id}')">
+        <span class="case-id">${c.id}</span>
+        <span class="case-title">${escapeHTML(c.title)}</span>
+        <span class="case-area area-${c.area}">${c.area}</span>
+        <span class="case-status status-${c.status}" onclick="event.stopPropagation();cycleStatus('${c.id}')">${statusLabel}</span>
+        <span class="case-priority pri-${c.priority}">${c.priority}</span>
+      </div>
+      <div class="case-body">
+        ${c.notes ? `<div class="case-section-title">Notes</div><div class="case-notes">${escapeHTML(c.notes)}</div>` : ''}
+        ${c.next ? `<div class="case-section-title">Next step</div><div class="next-step">${escapeHTML(c.next)}</div>` : ''}
+        <div class="case-section-title">Artifacts</div>
+        <div class="artifacts">${artifactsHTML}</div>
+        <div class="case-footer">
+          <button onclick="editCase('${c.id}')">Edit</button>
+          <button onclick="cycleStatus('${c.id}')">Advance status</button>
+          <button class="danger" onclick="deleteCase('${c.id}')">Delete</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+function escapeHTML(s){ return (s||'').replace(/[&<>\"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function escapeAttr(s){ return escapeHTML(s); }
+
+// ── Interactions ─────────────────────────────────────────────
+function toggleCase(id){
+  const el = document.getElementById('case-'+id);
+  if(el) el.classList.toggle('open');
+}
+function cycleStatus(id){
+  const order = ['pending','progress','blocked','done'];
+  const c = state.cases.find(x=>x.id===id);
+  if(!c) return;
+  c.status = order[(order.indexOf(c.status)+1) % order.length];
+  saveState(); render();
+  const el = document.getElementById('case-'+id); if(el) el.classList.add('open');
+}
+function deleteCase(id){
+  const c = state.cases.find(x=>x.id===id);
+  if(!c) return;
+  if(!confirm(`Delete case "${c.title}"?`)) return;
+  state.cases = state.cases.filter(x=>x.id!==id);
+  saveState(); render();
+}
+function editCase(id){
+  const c = state.cases.find(x=>x.id===id);
+  if(!c) return;
+  editingId = id;
+  document.getElementById('modal-title').textContent = 'Edit case · ' + c.id;
+  document.getElementById('m-id').value = c.id;
+  document.getElementById('m-title').value = c.title || '';
+  document.getElementById('m-area').value = c.area || 'infra';
+  document.getElementById('m-priority').value = c.priority || 'med';
+  document.getElementById('m-status').value = c.status || 'pending';
+  document.getElementById('m-notes').value = c.notes || '';
+  document.getElementById('m-next').value = c.next || '';
+  document.getElementById('m-artifacts').value = (c.artifacts||[]).map(a => `${a.label} || ${a.href||''}`).join('\n');
+  document.getElementById('modal-backdrop').classList.add('open');
+}
+function openAddModal(){
+  editingId = null;
+  document.getElementById('modal-title').textContent = 'Add case';
+  document.getElementById('m-id').value = '';
+  document.getElementById('m-title').value = '';
+  document.getElementById('m-area').value = 'infra';
+  document.getElementById('m-priority').value = 'med';
+  document.getElementById('m-status').value = 'pending';
+  document.getElementById('m-notes').value = '';
+  document.getElementById('m-next').value = '';
+  document.getElementById('m-artifacts').value = '';
+  document.getElementById('modal-backdrop').classList.add('open');
+  setTimeout(()=>document.getElementById('m-title').focus(), 50);
+}
+function closeModal(){ document.getElementById('modal-backdrop').classList.remove('open'); editingId = null; }
+function saveModal(){
+  const title = document.getElementById('m-title').value.trim();
+  if(!title){ alert('Title required'); return; }
+  const artifactsRaw = document.getElementById('m-artifacts').value.trim();
+  const artifacts = artifactsRaw ? artifactsRaw.split('\n').map(line => {
+    const parts = line.split('||').map(s=>s.trim());
+    return {label: parts[0] || line.trim(), href: parts[1] || ''};
+  }).filter(a=>a.label) : [];
+  const rec = {
+    title,
+    area: document.getElementById('m-area').value,
+    priority: document.getElementById('m-priority').value,
+    status: document.getElementById('m-status').value,
+    notes: document.getElementById('m-notes').value.trim(),
+    next: document.getElementById('m-next').value.trim(),
+    artifacts
+  };
+  if(editingId){
+    const c = state.cases.find(x=>x.id===editingId);
+    if(c) Object.assign(c, rec);
+  } else {
+    rec.id = nextCaseId();
+    state.cases.push(rec);
+  }
+  saveState(); render(); closeModal();
+}
+function nextCaseId(){
+  const nums = state.cases.map(c => parseInt((c.id||'').replace(/\D/g,''),10)).filter(n=>!isNaN(n));
+  const next = (Math.max(0, ...nums) + 1).toString().padStart(3,'0');
+  return 'C' + next;
+}
+
+// ── Export / import / reset ──────────────────────────────────
+function exportJSON(){
+  const blob = new Blob([JSON.stringify(state, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const ts = new Date().toISOString().replace(/[:.]/g,'-').slice(0,19);
+  a.href = url; a.download = `noizy-tour-manager-${ts}.json`;
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+}
+function importJSON(ev){
+  const f = ev.target.files[0]; if(!f) return;
+  const r = new FileReader();
+  r.onload = e => {
+    try{
+      const data = JSON.parse(e.target.result);
+      if(!data.cases || !Array.isArray(data.cases)) throw new Error('Missing cases array');
+      if(!confirm(`Import ${data.cases.length} cases? This replaces current state.`)) return;
+      state = data; saveState(); render();
+    }catch(err){ alert('Import failed: ' + err.message); }
+  };
+  r.readAsText(f);
+  ev.target.value = '';
+}
+function resetAll(){
+  state = {cases: JSON.parse(JSON.stringify(DEFAULTS))};
+  saveState(); render();
+}
+
+// ── Filter pills ─────────────────────────────────────────────
+document.querySelectorAll('.pill[data-filter]').forEach(pill => {
+  pill.addEventListener('click', () => {
+    const f = pill.dataset.filter, v = pill.dataset.value;
+    document.querySelectorAll(`.pill[data-filter="${f}"]`).forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+    filters[f] = v;
+    renderCases();
+  });
+});
+document.getElementById('search').addEventListener('input', e => {
+  filters.q = e.target.value.trim();
+  renderCases();
+});
+document.getElementById('modal-backdrop').addEventListener('click', e => {
+  if(e.target.id === 'modal-backdrop') closeModal();
+});
+
+// ── Timestamp ────────────────────────────────────────────────
+function updateTimestamp(){
+  const d = new Date();
+  const opts = {year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'};
+  document.getElementById('timestamp').textContent = d.toLocaleString('en-US', opts) + ' · Robert Stephen Plowman';
+}
+
+// ── Deep-link: #case-C007 scrolls and opens ──────────────────
+window.addEventListener('load', () => {
+  render();
+  if(location.hash.startsWith('#case-')){
+    const el = document.querySelector(location.hash);
+    if(el){ el.classList.add('open', 'focused'); el.scrollIntoView({behavior:'smooth', block:'start'}); }
+  }
+});
+</script>
+</body>
+</html>

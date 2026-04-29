@@ -1,0 +1,29 @@
+<root>
+    <CtrlButtonStyle name="GrooveTimelineButtonStyle" optMomentary="false" imDown="..\com_blue_LED_on.tga" imUp="..\com_blue_LED_off.tga">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlPanelStyle name="GrooveSongPanelStyle1" noDefaultDrawing="true" intSmartTileEdgeSize="5" intRoundedRectRadius="0">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlButtonStyle name="GrooveSongToolsButtonStyle">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="GrooveSongZoomInButtonStyle" imDown="gl_zoom_in_down.tga" imUp="gl_zoom_in_up.tga">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="GrooveSongZoomOutButtonStyle" imDown="gl_zoom_out_down.tga" imUp="gl_zoom_out_up.tga">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlLabelStyle name="GrooveSongLabelStyle1" colText="[r:200 g:200 b:200 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlLabelStyle name="CtrlLabelStyle1" />
+    <CtrlLabelStyle name="SongAutoPlayLabelStyle" centeredText="true">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlPanel name="main_panel" style="GrooveSongPanelStyle1" rect="[x:0 y:0 w:923 h:58]" id="0">
+        <CtrlPanel name="TimelinePanel" style="BFD2InvisiblePanel" rect="[x:0 y:0 w:923 h:59]" id="100000" />
+        <CtrlButton name="ZoomInButton" style="GrooveSongZoomInButtonStyle" rect="[x:889 y:44 w:17 h:15]" id="100000" zorder="2" />
+        <CtrlButton name="ZoomOutButton" style="GrooveSongZoomOutButtonStyle" rect="[x:906 y:44 w:17 h:15]" id="100000" zorder="2" />
+    </CtrlPanel>
+</root>

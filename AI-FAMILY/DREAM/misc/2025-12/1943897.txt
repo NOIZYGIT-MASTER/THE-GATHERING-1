@@ -1,0 +1,16 @@
+<root>
+    <CtrlPanelStyle name="InspectorPanelStyle" optSmartTile="true" colBorder="[r:243 g:246 b:249 a:0]" colFill="[r:243 g:246 b:249 a:0]" intSmartTileEdgeSize="0">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlImageViewStyle name="BlankImageStyle" optBackground="false" colBackground="[r:128 g:128 b:128 a:0]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlImageViewStyle>
+    <CtrlListBoxStyle name="MapInfoListBoxStyle" colHighlight="[r:150 g:150 b:150 a:0]" colFill="[r:255 g:255 b:255 a:0]">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlListBoxStyle>
+    <CtrlPanel name="CtrlPanel" style="InspectorPanelStyle" rect="[x:0 y:0 w:200 h:440]" id="0">
+        <CtrlLabel name="KitPieceName" rect="[x:8 y:0 w:196 h:18]" id="0" text="Kit Piece Name" />
+        <CtrlImageView name="KitPiecePhoto" style="BlankImageStyle" rect="[x:10 y:34 w:178 h:148]" id="0" />
+        <CtrlListBox name="MapInfoListBox" style="MapInfoListBoxStyle" rect="[x:10 y:193 w:178 h:200]" id="100000" />
+    </CtrlPanel>
+</root>

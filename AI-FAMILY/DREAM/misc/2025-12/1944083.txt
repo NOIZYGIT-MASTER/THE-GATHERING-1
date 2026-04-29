@@ -1,0 +1,51 @@
+<root>
+    <CtrlPanel style="MixerFXPanel" rect="[x:46 y:65 w:228 h:228]" id="0">
+        <CtrlPanel name="MixerFXTitlePanel" rect="[x:0 y:0 w:228 h:50]" id="0" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:172 y:68 w:12 h:10]" id="100000" text="75" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:151 y:76 w:10 h:10]" id="100000" text="50" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:191 y:76 w:15 h:10]" id="100000" text="100" />
+        <CtrlPanel style="MixerFXLargeKnobNotches" rect="[x:19 y:77 w:58 h:58]" id="0">
+            <CtrlKnob name="Delay_Time" style="MixerFXKnobLarge" rect="[x:3 y:3 w:53 h:53]" id="1002" />
+        </CtrlPanel>
+        <CtrlPanel style="MixerFXLargeKnobNotches" rect="[x:154 y:77 w:58 h:58]" id="0">
+            <CtrlKnob name="Delay_Feedback" style="MixerFXKnobLarge" rect="[x:3 y:3 w:53 h:53]" id="1002" />
+        </CtrlPanel>
+        <CtrlComboBox name="Delay_Sync" style="MixerFXCombo" rect="[x:84 y:79 w:51 h:15]" id="1001" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:145 y:94 w:10 h:10]" id="100000" text="25" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:198 y:94 w:14 h:10]" id="100000" text="125" />
+        <CtrlLabel style="MixerFXLabelDarkCentered" rect="[x:85 y:95 w:49 h:12]" id="2001" text="Sync" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:154 y:112 w:7 h:10]" id="100000" text="0" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:192 y:112 w:15 h:10]" id="100000" text="150" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:12 y:115 w:19 h:10]" id="100000" text="Short" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:53 y:115 w:19 h:10]" id="100000" text="Long" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:172 y:117 w:9 h:10]" id="100000" text="%" />
+        <CtrlButton name="Delay_SumInput" style="MixerFXButton" rect="[x:102 y:123 w:15 h:15]" id="1004" />
+        <CtrlLabel style="MixerFXLabelDarkCentered" rect="[x:138 y:125 w:74 h:14]" id="2002" text="Feedback" />
+        <CtrlLabel style="MixerFXLabelDarkCentered" rect="[x:17 y:126 w:48 h:11]" id="2000" text="Time" />
+        <CtrlLabel style="MixerFXLabelDarkCentered" rect="[x:80 y:139 w:63 h:15]" id="2004" text="Sum Input" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:39 y:157 w:7 h:10]" id="100000" text="0" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:145 y:157 w:14 h:10]" id="100000" text="300" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:193 y:157 w:14 h:10]" id="100000" text="300" />
+        <CtrlPanel name="CtrlPanel" style="MixerFXMiniKnobNotches" rect="[x:25 y:165 w:32 h:32]" id="100000">
+            <CtrlKnob name="Delay_Swing" style="MixerFXKnobSmall" rect="[x:5 y:4 w:29 h:29]" id="1003" />
+        </CtrlPanel>
+        <CtrlPanel name="CtrlPanel" style="MixerFXMiniKnobNotches" rect="[x:136 y:165 w:32 h:32]" id="100000">
+            <CtrlKnob name="Delay_LowCut" style="MixerFXKnobSmall" rect="[x:5 y:4 w:29 h:29]" id="1005" />
+        </CtrlPanel>
+        <CtrlPanel name="CtrlPanel" style="MixerFXMiniKnobNotches" rect="[x:184 y:165 w:32 h:32]" id="100000">
+            <CtrlKnob name="Delay_HighCut" style="MixerFXKnobSmall" rect="[x:5 y:4 w:29 h:29]" id="1006" />
+        </CtrlPanel>
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:15 y:191 w:19 h:10]" id="100000" text="-100" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:52 y:191 w:19 h:10]" id="100000" text="+100" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:138 y:192 w:7 h:10]" id="100000" text="1" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:148 y:192 w:11 h:10]" id="100000" text="Hz" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:162 y:192 w:18 h:10]" id="100000" text="100k" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:186 y:192 w:7 h:10]" id="100000" text="1" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:210 y:192 w:19 h:10]" id="100000" text="100k" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:196 y:193 w:11 h:10]" id="100000" text="Hz" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:38 y:194 w:9 h:10]" id="100000" text="%" />
+        <CtrlLabel style="MixerFXLabelDarkCentered" rect="[x:12 y:202 w:59 h:15]" id="2003" text="Swing" />
+        <CtrlLabel style="MixerFXLabelDarkCentered" rect="[x:127 y:202 w:48 h:15]" id="2005" text="LowCut" />
+        <CtrlLabel style="MixerFXLabelDarkCentered" rect="[x:176 y:202 w:48 h:15]" id="2006" text="HighCut" />
+    </CtrlPanel>
+</root>

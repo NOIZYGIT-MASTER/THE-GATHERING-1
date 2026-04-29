@@ -1,0 +1,21 @@
+<root>
+    <CtrlPanelStyle name="BrowserFilterPanelStyle1" noDefaultDrawing="true" colBorder="[r:0 g:0 b:0 a:0]" colBorderAlt="[r:0 g:0 b:0 a:0]" colFill="[r:151 g:151 b:151 a:255]" intSmartTileEdgeSize="0" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlTextBoxStyle name="GrooveFilterTextBoxtStyle1" intRoundedRectRadius="0" textOffset="[x:0 y:0]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlTextBoxStyle>
+    <CtrlListBoxStyle name="BrowserFilterListBoxStyle1" noDefaultDrawing="true" optNoBackFill="true" colText="[r:255 g:255 b:255 a:255]" colHighlight="[r:64 g:72 b:84 a:255]" intRoundedRectRadius="0" intLineSpacing="13">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlListBoxStyle>
+    <CtrlTextBoxStyle name="GrooveSearchCombo" noDefaultDrawing="true" intRoundedRectRadius="0" textOffset="[x:0 y:0]" colText="[r:250 g:250 b:250 a:255]">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlTextBoxStyle>
+    <CtrlSliderStyle name="BFD2PerfGrooveFilterSlider" snapSteps="0" fineScale="0.05" intRoundedRectRadiusFrame="0" intRoundedRectRadiusKnob="0" knobOffset="2" incDecButtonMode="off">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlSliderStyle>
+    <CtrlPanel name="main_panel" style="BrowserFilterPanelStyle1" rect="[x:0 y:0 w:134 h:88]" id="0">
+        <CtrlComboBox name="SearchComboBox" style="GrooveSearchCombo" rect="[x:0 y:0 w:134 h:16]" id="100000" displayName="Select field to search" />
+        <CtrlListBox name="ValueListBox" overloadClass="BFD2GrooveFilterListBox" style="BrowserFilterListBoxStyle1" rect="[x:0 y:16 w:131 h:72]" id="100000" displayName="Select value from list to filter" />
+    </CtrlPanel>
+</root>

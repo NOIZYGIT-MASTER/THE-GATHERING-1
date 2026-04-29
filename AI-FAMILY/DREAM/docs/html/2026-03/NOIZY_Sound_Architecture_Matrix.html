@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIZY Sound Architecture Matrix — The Neuro-Sonic Engine</title>
+<style>
+:root {
+  --gold:#f4a228; --violet:#8b5cf6; --cyan:#06b6d4; --rose:#f43f5e;
+  --emerald:#10b981; --indigo:#6366f1; --orange:#fb923c; --pink:#ec4899;
+  --lime:#a3e635; --bg:#020208; --surface:rgba(255,255,255,0.04);
+  --border:rgba(255,255,255,0.08);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:#e2e8f0; font-family:'Segoe UI',system-ui,sans-serif; overflow-x:hidden; }
+#cosmos { position:fixed; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; }
+nav { position:sticky; top:0; z-index:100; background:rgba(2,2,8,0.94); backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border); padding:0 2rem; display:flex; gap:0; overflow-x:auto; }
+nav a { color:#94a3b8; text-decoration:none; font-size:0.72rem; font-weight:600; letter-spacing:0.05em;
+  text-transform:uppercase; padding:1rem 0.9rem; white-space:nowrap; border-bottom:2px solid transparent;
+  transition:all 0.2s; }
+nav a:hover, nav a.active { color:#fff; border-bottom-color:var(--cyan); }
+
+/* HERO */
+.hero { position:relative; z-index:1; min-height:100vh; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; text-align:center; padding:4rem 2rem; }
+.hero-badge { background:linear-gradient(135deg,var(--cyan),var(--violet)); color:#fff;
+  font-size:0.7rem; font-weight:800; letter-spacing:0.15em; text-transform:uppercase;
+  padding:0.4rem 1.4rem; border-radius:100px; margin-bottom:2rem; display:inline-block; }
+.hero h1 { font-size:clamp(2.5rem,7vw,5rem); font-weight:900; line-height:1.05;
+  background:linear-gradient(135deg,var(--cyan) 0%,var(--violet) 35%,var(--gold) 70%,var(--rose) 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  margin-bottom:1.5rem; }
+.hero-sub { font-size:1.1rem; color:#94a3b8; max-width:750px; line-height:1.7; margin-bottom:3rem; }
+.hero-stats { display:flex; gap:1.5rem; flex-wrap:wrap; justify-content:center; }
+.hs { background:var(--surface); border:1px solid var(--border); border-radius:14px;
+  padding:1rem 1.5rem; text-align:center; }
+.hs-n { font-size:1.8rem; font-weight:900;
+  background:linear-gradient(135deg,var(--cyan),var(--violet));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.hs-l { font-size:0.68rem; color:#64748b; text-transform:uppercase; letter-spacing:0.08em; margin-top:0.2rem; }
+
+/* SECTIONS */
+section { position:relative; z-index:1; padding:5rem 2rem; max-width:1400px; margin:0 auto; }
+.sh { text-align:center; margin-bottom:3.5rem; }
+.sb { display:inline-block; font-size:0.7rem; font-weight:800; letter-spacing:0.12em;
+  text-transform:uppercase; padding:0.35rem 1rem; border-radius:100px; margin-bottom:1rem; }
+.sh h2 { font-size:clamp(1.8rem,4vw,2.8rem); font-weight:800; margin-bottom:1rem; }
+.sh p { color:#94a3b8; font-size:1rem; max-width:680px; margin:0 auto; line-height:1.7; }
+
+/* SCIENCE CARDS */
+.sci-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:1.5rem; }
+.sci-card { background:var(--surface); border:1px solid var(--border); border-radius:20px;
+  padding:2rem; border-left:4px solid var(--sc-color); }
+.sci-icon { font-size:2.2rem; margin-bottom:1rem; }
+.sci-card h3 { font-size:1.1rem; font-weight:800; color:#fff; margin-bottom:0.3rem; }
+.sci-subtitle { font-size:0.7rem; font-weight:700; color:var(--sc-color); text-transform:uppercase;
+  letter-spacing:0.08em; margin-bottom:1rem; }
+.sci-card p { font-size:0.83rem; color:#94a3b8; line-height:1.65; margin-bottom:0.8rem; }
+.sci-mech { background:rgba(0,0,0,0.3); border-radius:10px; padding:0.9rem; }
+.sci-mech-title { font-size:0.65rem; color:var(--sc-color); text-transform:uppercase;
+  letter-spacing:0.08em; font-weight:700; margin-bottom:0.5rem; }
+.sci-list { list-style:none; }
+.sci-list li { font-size:0.8rem; color:#94a3b8; padding:0.25rem 0; padding-left:1rem; position:relative; line-height:1.5; }
+.sci-list li::before { content:'→'; position:absolute; left:0; color:var(--sc-color); font-size:0.7rem; }
+
+/* COMPARISON TABLE */
+.comp-table { width:100%; border-collapse:collapse; font-size:0.83rem; border-radius:16px; overflow:hidden; }
+.comp-table thead tr { background:rgba(255,255,255,0.06); }
+.comp-table th { text-align:left; padding:1rem 1.2rem; color:#94a3b8; font-weight:700;
+  text-transform:uppercase; font-size:0.68rem; letter-spacing:0.08em;
+  border-bottom:1px solid var(--border); }
+.comp-table td { padding:0.95rem 1.2rem; border-bottom:1px solid rgba(255,255,255,0.04); }
+.comp-table tr:hover { background:rgba(255,255,255,0.02); }
+.state-badge { display:inline-block; padding:0.2rem 0.6rem; border-radius:6px;
+  font-size:0.68rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; }
+
+/* TRIGGER GRID */
+.tg-table { width:100%; border-collapse:collapse; font-size:0.82rem; }
+.tg-table th { text-align:left; padding:0.9rem 1rem; background:rgba(255,255,255,0.04);
+  color:#94a3b8; font-weight:700; font-size:0.67rem; text-transform:uppercase;
+  letter-spacing:0.08em; border-bottom:1px solid var(--border); }
+.tg-table td { padding:0.85rem 1rem; border-bottom:1px solid rgba(255,255,255,0.04);
+  vertical-align:top; line-height:1.5; }
+.tg-table tr:nth-child(even) { background:rgba(255,255,255,0.015); }
+.tg-trigger { font-weight:700; }
+.tg-arrow { color:#64748b; font-size:0.75rem; }
+
+/* LAYERING STACKS */
+.ls-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:2rem; }
+.ls-card { border-radius:20px; padding:2rem; }
+.ls-num { font-size:0.7rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase;
+  margin-bottom:0.4rem; }
+.ls-title { font-size:1.4rem; font-weight:900; color:#fff; margin-bottom:1.5rem; }
+.ls-step { background:rgba(0,0,0,0.35); border-radius:10px; padding:0.9rem 1rem; margin-bottom:0.8rem; }
+.ls-step-num { font-size:0.62rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.3rem; }
+.ls-step p { font-size:0.82rem; color:#94a3b8; line-height:1.5; }
+.ls-target { font-size:0.78rem; font-weight:700; margin-top:1rem; padding:0.6rem 1rem;
+  border-radius:8px; background:rgba(0,0,0,0.3); }
+
+/* EMOTION CARDS */
+.em-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1.5rem; }
+.em-card { background:var(--surface); border:1px solid var(--border); border-radius:18px;
+  padding:1.5rem; border-top:3px solid var(--em-color); }
+.em-state { font-size:1.8rem; margin-bottom:0.6rem; }
+.em-name { font-size:1.05rem; font-weight:800; color:var(--em-color); margin-bottom:0.3rem; }
+.em-desc { font-size:0.78rem; color:#94a3b8; line-height:1.5; margin-bottom:1rem; }
+.em-recipe { font-size:0.75rem; }
+.em-recipe-label { color:#64748b; text-transform:uppercase; letter-spacing:0.06em; font-weight:700;
+  font-size:0.62rem; margin-bottom:0.3rem; }
+.em-recipe p { color:#e2e8f0; margin-bottom:0.2rem; }
+
+/* INNOVATION TABLE */
+.inn-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.2rem; }
+.inn-card { background:var(--surface); border:1px solid var(--border); border-radius:14px;
+  padding:1.3rem; display:flex; gap:1rem; align-items:flex-start; }
+.inn-num { font-size:1.5rem; font-weight:900; color:var(--violet); min-width:2rem; }
+.inn-body {}
+.inn-title { font-size:0.9rem; font-weight:800; color:#fff; margin-bottom:0.3rem; }
+.inn-desc { font-size:0.78rem; color:#94a3b8; line-height:1.5; }
+
+/* MANIFESTO BLOCK */
+.manifesto { background:linear-gradient(135deg,rgba(139,92,246,0.08),rgba(6,182,212,0.06));
+  border:1px solid rgba(139,92,246,0.2); border-radius:24px; padding:3.5rem;
+  text-align:center; position:relative; overflow:hidden; }
+.manifesto::before { content:''; position:absolute; top:-50px; right:-50px; width:300px; height:300px;
+  background:radial-gradient(circle,rgba(139,92,246,0.12),transparent);
+  border-radius:50%; }
+.manifesto-quote { font-size:clamp(1.2rem,2.5vw,1.6rem); font-weight:700; color:#fff;
+  line-height:1.5; max-width:800px; margin:0 auto; }
+.manifesto-quote em { color:var(--cyan); font-style:normal; }
+</style>
+</head>
+<body>
+<canvas id="cosmos"></canvas>
+
+<nav id="main-nav">
+  <a href="#hero">Matrix</a>
+  <a href="#lullaby">Lullaby Science</a>
+  <a href="#asmr">ASMR Triggers</a>
+  <a href="#states">States Compared</a>
+  <a href="#history">Ancient Healing</a>
+  <a href="#grid">Trigger Grid</a>
+  <a href="#layering">Layering Stacks</a>
+  <a href="#emotions">Emotion Maps</a>
+  <a href="#tech">Technology</a>
+  <a href="#research">Innovation</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="hero">
+  <div class="hero-badge">NOIZY Sound Architecture Matrix — The Neuro-Sonic Engine</div>
+  <h1>NEURO-ALCHEMY<br>THROUGH SOUND</h1>
+  <p class="hero-sub">The complete manual for engineering human emotional states through precision sound layering. ASMR + lullabies + cultural healing chants + brainwave entrainment + neurotransmitter targeting. This is not music theory. This is mind science applied through art.</p>
+  <div class="hero-stats">
+    <div class="hs"><div class="hs-n">8</div><div class="hs-l">Trigger Types Mapped</div></div>
+    <div class="hs"><div class="hs-n">5</div><div class="hs-l">Neurochemical Targets</div></div>
+    <div class="hs"><div class="hs-n">3</div><div class="hs-l">Layering Stacks</div></div>
+    <div class="hs"><div class="hs-n">7</div><div class="hs-l">Emotional States</div></div>
+    <div class="hs"><div class="hs-n">6</div><div class="hs-l">Research Frontiers</div></div>
+  </div>
+</div>
+
+<!-- LULLABY SCIENCE -->
+<section id="lullaby">
+  <div class="sh">
+    <div class="sb" style="background:rgba(236,72,153,0.15);color:#ec4899;">Neuroscience Deep Dive</div>
+    <h2 style="color:#fff;">Why Lullabies Work Across Every Culture on Earth</h2>
+    <p>Key Insight: Lullabies are universally effective because they exploit fundamental brain circuits for safety, bonding, and arousal regulation — circuits that predate spoken language by millions of years.</p>
+  </div>
+  <div class="sci-grid">
+
+    <div class="sci-card" style="--sc-color:#ec4899;">
+      <div class="sci-icon">💤</div>
+      <h3>The Safety Signal Mechanism</h3>
+      <div class="sci-subtitle">Tempo, Rhythm & Predictability</div>
+      <p>50–80 BPM matches the resting human heart rate. The auditory cortex processes this rhythm and the limbic system compares it to known-safe biological signatures. <strong style="color:#fff;">Predictability = safety.</strong> When the brain can predict what's coming next in a rhythm, it reduces threat-scanning and drops into parasympathetic mode.</p>
+      <div class="sci-mech">
+        <div class="sci-mech-title">Active Mechanisms</div>
+        <ul class="sci-list">
+          <li>Slow tempo → matches resting HRV → cardiovascular mirroring</li>
+          <li>Soft timbre → no high-amplitude transients → amygdala stays calm</li>
+          <li>Repetition → reinforced expectation → dopamine micro-reward for "correct" prediction</li>
+          <li>Rising/falling contour → mimics infant-directed speech prosody (motherese)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sci-card" style="--sc-color:#06b6d4;">
+      <div class="sci-icon">🧠</div>
+      <h3>The Neural Pathway Map</h3>
+      <div class="sci-subtitle">What's Happening Inside the Brain</div>
+      <p>Every lullaby activates a specific neural cascade. Understanding this cascade is the blueprint for engineering any calming sound experience — whether for an infant, a trauma survivor, or a DreamChamber participant.</p>
+      <div class="sci-mech">
+        <div class="sci-mech-title">Neural Cascade</div>
+        <ul class="sci-list">
+          <li>Auditory cortex (A1/A2): Processes melody, rhythm, timbre features</li>
+          <li>Amygdala: Detects threat vs. safety — soft, predictable sounds = LOW activation</li>
+          <li>Nucleus accumbens: Mild dopamine reward for melodic resolution</li>
+          <li>Hypothalamus: Oxytocin release triggered by warm vocal tones 100–300 Hz</li>
+          <li>Mirror neurons: Internal mimicry of vocal patterns → emotional resonance</li>
+          <li>Brainstem: Direct cardiac and respiratory rate modulation via auditory-vagal pathway</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sci-card" style="--sc-color:#f4a228;">
+      <div class="sci-icon">🌍</div>
+      <h3>Cross-Cultural Evidence</h3>
+      <div class="sci-subtitle">Universal Human Design, Not Invention</div>
+      <p>Studies across Africa, Europe, Asia, and the Americas reveal virtually identical structural features in lullabies from completely unconnected cultures. This convergence is not coincidence — it is evidence of hard-wired neural design.</p>
+      <div class="sci-mech">
+        <div class="sci-mech-title">Universal Features Found Across All Cultures</div>
+        <ul class="sci-list">
+          <li>Slow tempo (50–80 BPM range) — universal</li>
+          <li>Descending melodic contour — universal</li>
+          <li>Simple, repetitive structure — universal</li>
+          <li>Emotionally warm, soft delivery — universal</li>
+          <li>Vocable or meaningless syllables acceptable — universal</li>
+          <li>Sung vs. spoken — consistently more effective — universal</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sci-card" style="--sc-color:#10b981;">
+      <div class="sci-icon">🎤</div>
+      <h3>The Oxytocin-Vocal Pathway</h3>
+      <div class="sci-subtitle">Why the Human Voice is the Master Instrument</div>
+      <p>The human vocal fundamental frequency (100–300 Hz) directly stimulates the vagus nerve via bone conduction and air conduction simultaneously. The vagus nerve is the primary parasympathetic highway — it controls heart rate, digestion, and immune function. Singing to someone is direct physiological healing.</p>
+      <div class="sci-mech">
+        <div class="sci-mech-title">DreamChamber Application</div>
+        <ul class="sci-list">
+          <li>Male vocals 100–150 Hz → deep vagal activation → profound calm</li>
+          <li>Female vocals 200–300 Hz → attachment circuit activation → oxytocin</li>
+          <li>Group unison → social coherence → collective oxytocin elevation</li>
+          <li>Live singing outperforms recorded — proximity + breath cues add somatic signals</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ASMR -->
+<section id="asmr">
+  <div class="sh">
+    <div class="sb" style="background:rgba(6,182,212,0.15);color:#06b6d4;">Acoustic Trigger Science</div>
+    <h2 style="color:#fff;">ASMR: The Science of the Tingle</h2>
+    <p>ASMR (Autonomous Sensory Meridian Response) isn't just a YouTube phenomenon — it's a neurological reality that the DreamChamber can engineer with precision. These are its exact parameters.</p>
+  </div>
+  <div style="overflow-x:auto;border-radius:16px;border:1px solid var(--border);margin-bottom:3rem;">
+    <table class="tg-table">
+      <thead><tr>
+        <th>Acoustic Feature</th>
+        <th>Neural Effect</th>
+        <th>Subjective Response</th>
+        <th>DreamChamber Technique</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td class="tg-trigger" style="color:#06b6d4;">Whispered or soft speech</td>
+          <td>Activates social attention circuits; parasympathetic tone increases; amygdala deactivates</td>
+          <td>Feeling of calm, being cared for, profound relaxation</td>
+          <td>ASMR vocalist track binaural-spatialized at ear level, 15–25 cm simulated proximity</td>
+        </tr>
+        <tr>
+          <td class="tg-trigger" style="color:#8b5cf6;">High-freq consonants (t, k, s, sh)</td>
+          <td>Sensory salience in temporal/parietal cortex; tingle via unexpected high-freq spike in soft context</td>
+          <td>Scalp and neck tingling; goosebump precursor</td>
+          <td>Precision-EQ'd ASMR mic to boost 8–12 kHz range; randomize consonant timing</td>
+        </tr>
+        <tr>
+          <td class="tg-trigger" style="color:#f4a228;">Repetitive tapping (500ms intervals)</td>
+          <td>Predictable micro-rhythm entrains attentional system; theta entrainment at slow tap rates</td>
+          <td>Focused attention without cognitive load; flow-like absorption</td>
+          <td>Dedicated ASMR percussion channel; randomize timbre (wood, glass, fabric) for novelty</td>
+        </tr>
+        <tr>
+          <td class="tg-trigger" style="color:#10b981;">Slow, detail-focused sounds</td>
+          <td>Encourages attentional absorption akin to meditation; prefrontal quiets; DMN activity decreases</td>
+          <td>Meditative focus; sense of time slowing; calm presence</td>
+          <td>Page turn library, fabric slide, hair brush — 3D spatialized, timed to session arc</td>
+        </tr>
+        <tr>
+          <td class="tg-trigger" style="color:#ec4899;">Binaural spatialization</td>
+          <td>3D proximity cues activate social neural circuits; "person nearby" signal → parasympathetic</td>
+          <td>Deep intimacy; not-alone feeling; profound safety</td>
+          <td>HRTF-processed voice tracks with slow spatial movement (30–60 sec full sweep)</td>
+        </tr>
+        <tr>
+          <td class="tg-trigger" style="color:#fb923c;">Effleurage / brushing sounds</td>
+          <td>Mirror neuron activation for touch; nucleus accumbens mild dopamine; social grooming circuit</td>
+          <td>Warmth, sensation of gentle touch, euphoric calm</td>
+          <td>Soft brush mic contact sounds in ASMR layer; synchronized to haptic vest for multimodal</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="background:rgba(6,182,212,0.06);border:1px solid rgba(6,182,212,0.15);border-radius:20px;padding:2rem;">
+    <h3 style="color:#fff;font-size:1.1rem;font-weight:800;margin-bottom:1rem;">The Neurobiology of ASMR</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;">
+      <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:1rem;">
+        <div style="font-size:0.72rem;font-weight:800;color:#06b6d4;margin-bottom:0.3rem;">Autonomic Nervous System</div>
+        <div style="font-size:0.78rem;color:#94a3b8;line-height:1.5;">Lowers heart rate, decreases respiratory rate, increases skin conductance. Full parasympathetic activation — the rest-and-digest mode.</div>
+      </div>
+      <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:1rem;">
+        <div style="font-size:0.72rem;font-weight:800;color:#8b5cf6;margin-bottom:0.3rem;">Reward System</div>
+        <div style="font-size:0.78rem;color:#94a3b8;line-height:1.5;">Nucleus accumbens activation confirmed in fMRI studies. Similar to dopaminergic response to music or social grooming — pleasure without alertness.</div>
+      </div>
+      <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:1rem;">
+        <div style="font-size:0.72rem;font-weight:800;color:#10b981;margin-bottom:0.3rem;">Sensory Cortices</div>
+        <div style="font-size:0.78rem;color:#94a3b8;line-height:1.5;">Temporal and parietal cortices process subtle tactile-like sound cues. ASMR sounds literally feel like touch to the brain's sensory processing circuits.</div>
+      </div>
+      <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:1rem;">
+        <div style="font-size:0.72rem;font-weight:800;color:#f4a228;margin-bottom:0.3rem;">Social Grooming Theory</div>
+        <div style="font-size:0.78rem;color:#94a3b8;line-height:1.5;">The leading theory: ASMR mimics the auditory cues of social grooming (gentle touch, close proximity, quiet attention). The brain reads it as "I am safe and cared for."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATES COMPARED -->
+<section id="states">
+  <div class="sh">
+    <div class="sb" style="background:rgba(244,67,94,0.15);color:#f43f5e;">Neural State Comparison</div>
+    <h2 style="color:#fff;">Chills vs. ASMR vs. Trance — Three Distinct Pathways</h2>
+    <p>These three altered states are often confused — but they involve completely different neural circuits, different neurochemicals, and different subjective experiences. The DreamChamber can engineer all three, separately or in sequence.</p>
+  </div>
+  <div style="overflow-x:auto;border-radius:16px;border:1px solid var(--border);margin-bottom:3rem;">
+    <table class="comp-table">
+      <thead><tr>
+        <th>State</th>
+        <th>Primary Trigger</th>
+        <th>Neural Pathway</th>
+        <th>Neurochemicals</th>
+        <th>Duration</th>
+        <th>Subjective Experience</th>
+        <th>DreamChamber Design</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="state-badge" style="background:rgba(244,67,94,0.2);color:#f43f5e;">Musical Chills / Frisson</span></td>
+          <td style="color:#e2e8f0;">Unexpected harmonic event — sudden key change, crescendo, emotional peak, held note</td>
+          <td style="color:#94a3b8;">Dopaminergic reward circuit: amygdala → nucleus accumbens → prefrontal cortex</td>
+          <td style="color:#94a3b8;">Dopamine surge, endorphin release, mild adrenaline</td>
+          <td style="color:#94a3b8;">Seconds — intense and brief</td>
+          <td style="color:#94a3b8;">Goosebumps, full-body electrical wave, euphoria, tears possible</td>
+          <td style="color:#06b6d4;font-size:0.78rem;">Strategic harmonic surprises every 7–12 minutes at key arc moments. Build tension 90 sec, release suddenly.</td>
+        </tr>
+        <tr>
+          <td><span class="state-badge" style="background:rgba(6,182,212,0.2);color:#06b6d4;">ASMR</span></td>
+          <td style="color:#e2e8f0;">Soft, repetitive, intimate sounds — whispers, taps, brushing. Personal attention cues.</td>
+          <td style="color:#94a3b8;">Parasympathetic activation via auditory cortex → vagus nerve → cardiovascular</td>
+          <td style="color:#94a3b8;">Oxytocin, mild dopamine, endorphins, GABA</td>
+          <td style="color:#94a3b8;">Minutes to hours — sustained plateau</td>
+          <td style="color:#94a3b8;">Scalp/neck tingling, calm euphoria, warmth, focused relaxation, sense of being cared for</td>
+          <td style="color:#06b6d4;font-size:0.78rem;">Continuous ASMR layer beneath main music. Binaural spatialized. Randomized trigger timing to prevent habituation.</td>
+        </tr>
+        <tr>
+          <td><span class="state-badge" style="background:rgba(139,92,246,0.2);color:#8b5cf6;">Trance State</span></td>
+          <td style="color:#e2e8f0;">Repetitive rhythmic stimuli sustained 15–30+ minutes, especially 4–7 Hz entrainment</td>
+          <td style="color:#94a3b8;">Theta wave entrainment via FFR: auditory cortex → hippocampus → DMN suppression</td>
+          <td style="color:#94a3b8;">Serotonin, melatonin, DMT-like endogenous compounds, oxytocin (group)</td>
+          <td style="color:#94a3b8;">20–120 minutes of maintained altered state</td>
+          <td style="color:#94a3b8;">Timelessness, ego softening, inner imagery, profound calm or ecstasy, unity feeling</td>
+          <td style="color:#06b6d4;font-size:0.78rem;">Minimum 20-min theta entrainment before deepening. Consistent 4–7 Hz binaural under all music.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:20px;padding:2rem;">
+    <h3 style="color:#fff;font-weight:800;font-size:1.1rem;margin-bottom:1.5rem;">Combination Sequencing — The DreamChamber Arc</h3>
+    <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+      <div style="background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2);border-radius:12px;padding:1rem 1.5rem;text-align:center;flex:1;min-width:150px;">
+        <div style="font-size:0.7rem;color:#06b6d4;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Phase 1</div>
+        <div style="font-size:0.9rem;color:#fff;font-weight:800;margin:0.3rem 0;">ASMR Entry</div>
+        <div style="font-size:0.72rem;color:#64748b;">0–20 min sustained calm</div>
+      </div>
+      <div style="color:#64748b;font-size:1.2rem;">→</div>
+      <div style="background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.2);border-radius:12px;padding:1rem 1.5rem;text-align:center;flex:1;min-width:150px;">
+        <div style="font-size:0.7rem;color:#8b5cf6;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Phase 2</div>
+        <div style="font-size:0.9rem;color:#fff;font-weight:800;margin:0.3rem 0;">Trance Build</div>
+        <div style="font-size:0.72rem;color:#64748b;">20–60 min theta entrainment</div>
+      </div>
+      <div style="color:#64748b;font-size:1.2rem;">→</div>
+      <div style="background:rgba(244,67,94,0.1);border:1px solid rgba(244,67,94,0.2);border-radius:12px;padding:1rem 1.5rem;text-align:center;flex:1;min-width:150px;">
+        <div style="font-size:0.7rem;color:#f43f5e;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Phase 3</div>
+        <div style="font-size:0.9rem;color:#fff;font-weight:800;margin:0.3rem 0;">Frisson Peak</div>
+        <div style="font-size:0.72rem;color:#64748b;">Strategic chills moments</div>
+      </div>
+      <div style="color:#64748b;font-size:1.2rem;">→</div>
+      <div style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);border-radius:12px;padding:1rem 1.5rem;text-align:center;flex:1;min-width:150px;">
+        <div style="font-size:0.7rem;color:#10b981;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Phase 4</div>
+        <div style="font-size:0.9rem;color:#fff;font-weight:800;margin:0.3rem 0;">ASMR Return</div>
+        <div style="font-size:0.72rem;color:#64748b;">Integration, lullaby landing</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ANCIENT HEALING -->
+<section id="history">
+  <div class="sh">
+    <div class="sb" style="background:rgba(244,162,40,0.15);color:#f4a228;">40,000 Years of Evidence</div>
+    <h2 style="color:#fff;">Ancient Sound Healing — Studied by Modern Science</h2>
+    <p>Every culture independently discovered the same truth. Modern neuroscience is only now explaining why it worked. The ancient practitioners weren't practicing magic — they were practicing empirical neurochemistry without the vocabulary.</p>
+  </div>
+  <div class="sci-grid">
+
+    <div class="sci-card" style="--sc-color:#f4a228;">
+      <div class="sci-icon">🥁</div>
+      <h3>Indigenous Rhythmic Drumming</h3>
+      <div class="sci-subtitle">Africa, Americas, Australia — Universal</div>
+      <p>Monotonous rhythmic drumming at 4–7 Hz (perceived rhythm, not actual BPM) entrains theta brainwaves through the Frequency Following Response — a hard-wired neurological mechanism. This is measurable on EEG. Shamans were empiricists.</p>
+      <div class="sci-mech">
+        <div class="sci-mech-title">Modern Science Confirms</div>
+        <ul class="sci-list">
+          <li>EEG theta entrainment at 4–7 Hz after 15–20 minutes sustained drumming</li>
+          <li>Cortisol reduction measured post-group drumming session</li>
+          <li>Oxytocin elevation in group drumming participants</li>
+          <li>Immune function (NK cell activity) elevated after drumming circles</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sci-card" style="--sc-color:#8b5cf6;">
+      <div class="sci-icon">🎵</div>
+      <h3>Chanting & Overtone Singing</h3>
+      <div class="sci-subtitle">Tibetan, Mongolian, Vedic, Native American</div>
+      <p>Overtone chanting produces multiple simultaneous frequency layers. The vocal fundamental sits in the vagal activation range (100–300 Hz) while overtones extend to 4,000 Hz — spanning virtually the entire emotionally relevant acoustic spectrum in a single human voice.</p>
+      <div class="sci-mech">
+        <div class="sci-mech-title">Modern Science Confirms</div>
+        <ul class="sci-list">
+          <li>Heart rate variability improvements in chanting meditation studies</li>
+          <li>GABA release linked to sustained vocal resonance practices</li>
+          <li>Group chanting creates measurable neural phase synchrony between participants</li>
+          <li>Slow chanting (6 breaths/min) optimal for HRV coherence — matches 0.1 Hz Mayer wave</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sci-card" style="--sc-color:#06b6d4;">
+      <div class="sci-icon">🔔</div>
+      <h3>Solfeggio Frequencies & Tibetan Bowls</h3>
+      <div class="sci-subtitle">Himalayan Region — 2,800+ years</div>
+      <p>The long sustain of Tibetan singing bowls (30–60 seconds per strike) creates sustained acoustic environments where natural binaural beat interference patterns form between multiple bowls without headphones. The entire room becomes a binaural field.</p>
+      <div class="sci-mech">
+        <div class="sci-mech-title">Modern Science Confirms</div>
+        <ul class="sci-list">
+          <li>Blood pressure and heart rate reduction in Tibetan bowl sound bath studies</li>
+          <li>Cortisol reduction measured after 60-minute sound bath sessions</li>
+          <li>Theta wave entrainment confirmed via EEG in deep bowl meditation</li>
+          <li>Pain perception reduction via endorphin release</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sci-card" style="--sc-color:#10b981;">
+      <div class="sci-icon">🏥</div>
+      <h3>Modern Music Therapy Science</h3>
+      <div class="sci-subtitle">Hospital, Elder Care, Psychiatric — Evidence Base</div>
+      <p>Music therapy is now a recognized clinical discipline with thousands of peer-reviewed studies. What was once dismissed as "folk practice" is now standard in major hospitals, cancer treatment centers, dementia care, and NICU units worldwide.</p>
+      <div class="sci-mech">
+        <div class="sci-mech-title">Clinical Evidence</div>
+        <ul class="sci-list">
+          <li>Anxiety reduction: consistent across surgical, ICU, and oncology settings</li>
+          <li>Pain management: music reduces opioid requirements post-surgery</li>
+          <li>NICU: premature infants gain weight faster with music therapy</li>
+          <li>Dementia: music memory preserved when verbal memory is gone (different neural system)</li>
+          <li>Stroke rehab: rhythmic auditory stimulation improves gait and motor function</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TRIGGER GRID -->
+<section id="grid">
+  <div class="sh">
+    <div class="sb" style="background:rgba(163,230,53,0.15);color:#a3e635;">The Master Matrix</div>
+    <h2 style="color:#fff;">Hyper-Sonic Trigger Grid: Sound → Brain → Body</h2>
+    <p>Every trigger type mapped to its brainwave target, neurochemical release, emotional/physical response, and historical cultural origin. This is the blueprint for the DreamChamber sound design.</p>
+  </div>
+  <div style="overflow-x:auto;border-radius:16px;border:1px solid var(--border);">
+    <table class="tg-table">
+      <thead><tr>
+        <th>Trigger Type</th>
+        <th>Target Brainwaves</th>
+        <th>Neurochemicals Released</th>
+        <th>Emotional / Physical Response</th>
+        <th>Historical / Cultural Lineage</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:#06b6d4;">Whispered voice / motherese</strong></td>
+          <td style="color:#e2e8f0;">Alpha ↑ (8–12 Hz), Theta ↑ (4–8 Hz)</td>
+          <td style="color:#e2e8f0;">Oxytocin ↑, Cortisol ↓, mild Dopamine</td>
+          <td style="color:#94a3b8;">Deep relaxation, intimacy, profound safety, "being held"</td>
+          <td style="color:#64748b;">Universal lullabies, Sufi zikr whispering, indigenous motherese</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#f4a228;">Slow repetitive drumming (4–7 Hz)</strong></td>
+          <td style="color:#e2e8f0;">Theta ↑ dominant (4–7 Hz)</td>
+          <td style="color:#e2e8f0;">Endorphins ↑, Dopamine ↑, Cortisol ↓</td>
+          <td style="color:#94a3b8;">Trance, meditative absorption, time dissolution, inner vision</td>
+          <td style="color:#64748b;">West African trance drumming, Siberian shamanism, Native American peyote</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#10b981;">High-freq consonants (t, k, s, sh)</strong></td>
+          <td style="color:#e2e8f0;">Beta ↑ attention (13–20 Hz)</td>
+          <td style="color:#e2e8f0;">Norepinephrine ↑, mild Dopamine</td>
+          <td style="color:#94a3b8;">Sharp focus, scalp tingle, ASMR, attentional absorption</td>
+          <td style="color:#64748b;">Modern ASMR, Buddhist prayer bead counting, mantric consonants</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#ec4899;">Soft brushing / effleurage sounds</strong></td>
+          <td style="color:#e2e8f0;">Alpha ↑ (8–12 Hz)</td>
+          <td style="color:#e2e8f0;">Oxytocin ↑, Endorphins ↑, GABA ↑</td>
+          <td style="color:#94a3b8;">Parasympathetic activation, warmth, ASMR tingling, grooming pleasure</td>
+          <td style="color:#64748b;">Traditional healing touch, lullaby accompaniment, Ayurvedic massage sounds</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#8b5cf6;">Harmonic overtones / chanting</strong></td>
+          <td style="color:#e2e8f0;">Delta ↑ (0.5–4 Hz), Theta ↑</td>
+          <td style="color:#e2e8f0;">Serotonin ↑, Melatonin ↑, GABA ↑</td>
+          <td style="color:#94a3b8;">Deep relaxation, emotional release, trance, inner vision</td>
+          <td style="color:#64748b;">Tibetan singing bowls, Gregorian chant, Vedic raga, Tuvan throat singing</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#f43f5e;">Crescendo + tension/release</strong></td>
+          <td style="color:#e2e8f0;">Gamma ↑ burst (30–100 Hz)</td>
+          <td style="color:#e2e8f0;">Dopamine surge, Endorphin rush, Adrenaline</td>
+          <td style="color:#94a3b8;">Musical chills (frisson), euphoria, full-body electrical wave, tears</td>
+          <td style="color:#64748b;">Classical music peaks, Nusrat Fateh Ali Khan, West African highlife crescendos</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#fb923c;">Binaural spatial movement (HRTF)</strong></td>
+          <td style="color:#e2e8f0;">Alpha-Theta by beat frequency</td>
+          <td style="color:#e2e8f0;">State-dependent; Oxytocin (proximity cue)</td>
+          <td style="color:#94a3b8;">"Someone nearby" — social safety, intimacy, profound non-aloneness</td>
+          <td style="color:#64748b;">Modern ASMR 3D, Aboriginal acoustic landscapes, cave ceremony acoustics</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#a3e635;">Group synchrony / call-response</strong></td>
+          <td style="color:#e2e8f0;">Cross-participant phase locking: Delta + Theta</td>
+          <td style="color:#e2e8f0;">Oxytocin ↑↑↑, Endorphins ↑↑, Serotonin ↑</td>
+          <td style="color:#94a3b8;">Social bonding, belonging, tribal coherence, collective joy, safety in numbers</td>
+          <td style="color:#64748b;">Every group ceremony on Earth — singing, drumming, chanting together</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- LAYERING STACKS -->
+<section id="layering">
+  <div class="sh">
+    <div class="sb" style="background:rgba(99,102,241,0.15);color:#6366f1;">Precision Layering Protocols</div>
+    <h2 style="color:#fff;">Three Master Layering Stacks</h2>
+    <p>The magic is not in a single trigger — it is in precision layering. Voice + rhythm + harmonics + tactile feedback = sculpting brainwaves and emotions like a living instrument.</p>
+  </div>
+  <div class="ls-grid">
+
+    <div class="ls-card" style="background:rgba(6,182,212,0.06);border:1px solid rgba(6,182,212,0.2);">
+      <div class="ls-num" style="color:#06b6d4;">Stack 01</div>
+      <div class="ls-title">Relaxation / Healing</div>
+      <div class="ls-step">
+        <div class="ls-step-num" style="color:#06b6d4;">Base Layer — Foundation</div>
+        <p>Soft drone 40–80 Hz + slow harmonic overtones. 174 Hz Solfeggio base. Delta binaural beat 1–3 Hz embedded at -18dB below threshold of conscious awareness. No percussion. Full stereo width.</p>
+      </div>
+      <div class="ls-step">
+        <div class="ls-step-num" style="color:#8b5cf6;">Secondary — Whisper Layer</div>
+        <p>Whispered personal attention or gentle narrative. Binaural-spatialized — voice moves slowly from left ear to right over 30 seconds. Proximity cue constant: "someone caring is always near."</p>
+      </div>
+      <div class="ls-step">
+        <div class="ls-step-num" style="color:#10b981;">ASMR Micro-Triggers</div>
+        <p>Gentle tapping (500ms intervals), soft page turns, fabric brushing. High-freq consonants (s, sh, t) embedded in whisper track. Spatialized at ear level. Randomized every 45–90 seconds to prevent habituation.</p>
+      </div>
+      <div class="ls-step">
+        <div class="ls-step-num" style="color:#f4a228;">Haptic + Sensory Sync</div>
+        <p>Floor vibration at drone frequency. ASMR triggers synchronized to haptic vest micro-pulse. Lavender diffusion at entry whisper. 28–30°C ambient. Weighted blanket option for maximum vagal activation.</p>
+      </div>
+      <div class="ls-target" style="color:#06b6d4;">TARGET: Cortisol ↓, Full parasympathetic, Alpha-Delta, profound calm, healing state</div>
+    </div>
+
+    <div class="ls-card" style="background:rgba(99,102,241,0.06);border:1px solid rgba(99,102,241,0.2);">
+      <div class="ls-num" style="color:#6366f1;">Stack 02</div>
+      <div class="ls-title">Focus / Creative Flow</div>
+      <div class="ls-step">
+        <div class="ls-step-num" style="color:#6366f1;">Base Layer — Engine</div>
+        <p>Medium tempo 90–110 BPM rhythmic percussion (no cymbals — predictable and low-surprise). 5:4 polyrhythm ratio for gentle cognitive engagement. Alpha binaural beat 10–12 Hz embedded.</p>
+      </div>
+      <div class="ls-step">
+        <div class="ls-step-num" style="color:#8b5cf6;">Secondary — Melodic Architecture</div>
+        <p>Crisp harmonic background in Dorian mode (bright minor — neither too dark nor too light for focus). Subtle repeating melodic motif — 4 bars, slight variation every 16. Never fully resolves — keeps prefrontal engaged.</p>
+      </div>
+      <div class="ls-step">
+        <div class="ls-step-num" style="color:#10b981;">ASMR Micro-Triggers</div>
+        <p>Small randomized ASMR noises every 45–90 seconds: high-frequency clicks, keyboard taps, paper sounds. Randomness critical — prevents habituation, maintains norepinephrine-driven attentional engagement.</p>
+      </div>
+      <div class="ls-step">
+        <div class="ls-step-num" style="color:#f4a228;">Cognitive Priming</div>
+        <p>Optional low-volume whispered intention-setting at session start. Citrus + eucalyptus diffusion (alertness). 22–24°C cool air. Motion-responsive spatialization via HRV biofeedback.</p>
+      </div>
+      <div class="ls-target" style="color:#6366f1;">TARGET: Beta-Alpha edge (10–18 Hz), Dopamine sustained flow, prefrontal activation</div>
+    </div>
+
+    <div class="ls-card" style="background:rgba(139,92,246,0.06);border:1px solid rgba(139,92,246,0.2);">
+      <div class="ls-num" style="color:#8b5cf6;">Stack 03</div>
+      <div class="ls-title">Trance / Hypnosis / Ecstasy</div>
+      <div class="ls-step">
+        <div class="ls-step-num" style="color:#8b5cf6;">Base Layer — The Theta Engine</div>
+        <p>Theta-range sustained drumming OR binaural beats (200 Hz left / 205 Hz right = 5 Hz theta). MUST sustain minimum 20 continuous minutes for full entrainment. No interruption.</p>
+      </div>
+      <div class="ls-step">
+        <div class="ls-step-num" style="color:#f43f5e;">Secondary — The Harmonic Field</div>
+        <p>Chanting or vocal drones in Lydian mode (the "floating" scale — dreamy, spacious). Tibetan bowls at 396, 528, 639 Hz simultaneously. Human vocal humming 100–300 Hz for continuous vagus nerve stimulation.</p>
+      </div>
+      <div class="ls-step">
+        <div class="ls-step-num" style="color:#06b6d4;">ASMR Micro-Triggers</div>
+        <p>Ultra-slow effleurage / brushing (2–4 Hz rhythm). Mouth sounds (lips parting, gentle exhale). Binaural spatial sweep: 60 seconds ear-to-ear. Mimics hypnagogic (falling-asleep) auditory field — deepens trance entry.</p>
+      </div>
+      <div class="ls-step">
+        <div class="ls-step-num" style="color:#f4a228;">Emotional Arc Design</div>
+        <p>Controlled narrative: tension → release → joy → surrender → deep release. Dynamic curve: 20 min build → orchestral peak → 10 min slow descent. Mandatory 15-min integration tail. No abrupt endings. Ever.</p>
+      </div>
+      <div class="ls-target" style="color:#8b5cf6;">TARGET: Theta sustained, DMN suppression, ego dissolution, unity consciousness, ecstasy</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EMOTIONS -->
+<section id="emotions">
+  <div class="sh">
+    <div class="sb" style="background:rgba(244,162,40,0.15);color:#f4a228;">Emotional Spectrum Mapping</div>
+    <h2 style="color:#fff;">Painting the Full Emotional Spectrum Through Sound</h2>
+    <p>Every human emotional state has a corresponding sonic recipe. The DreamChamber doesn't play music at people — it guides them through a precisely engineered emotional journey.</p>
+  </div>
+  <div class="em-grid">
+    <div class="em-card" style="--em-color:#f4a228;">
+      <div class="em-state">✨</div>
+      <div class="em-name">Joy / Pure Happiness</div>
+      <div class="em-desc">Major harmonics, playful rhythmic asymmetry, rising melodic surprises. The music sounds like it's smiling.</div>
+      <div class="em-recipe">
+        <div class="em-recipe-label">Sonic Recipe</div>
+        <p>Key: Major pentatonic</p><p>BPM: 100–120</p><p>Binaural: Alpha 10 Hz</p>
+        <p>Polyrhythm: 5:4 dancing</p><p>Freq: 528 Hz core</p><p>ASMR: Playful taps, giggle-like sounds</p>
+      </div>
+    </div>
+    <div class="em-card" style="--em-color:#ec4899;">
+      <div class="em-state">💗</div>
+      <div class="em-name">Love / Intimacy</div>
+      <div class="em-desc">Whispered voice, heart-like rhythms, close proximity cues, tactile synchrony. The music breathes with you.</div>
+      <div class="em-recipe">
+        <div class="em-recipe-label">Sonic Recipe</div>
+        <p>Key: Major 9th, rubato</p><p>BPM: 65–80</p><p>Binaural: Alpha 8 Hz</p>
+        <p>Rhythm: 3:2 lullaby heartbeat</p><p>Freq: 639 Hz</p><p>ASMR: Breath sounds, soft touch</p>
+      </div>
+    </div>
+    <div class="em-card" style="--em-color:#6366f1;">
+      <div class="em-state">🌙</div>
+      <div class="em-name">Sadness / Catharsis</div>
+      <div class="em-desc">Minor intervals, slow tempo, descending phrases that pause before resolving. Space for the feeling to exist.</div>
+      <div class="em-recipe">
+        <div class="em-recipe-label">Sonic Recipe</div>
+        <p>Key: Natural minor, 6th emphasis</p><p>BPM: 50–68</p><p>Binaural: Theta 5 Hz</p>
+        <p>Rhythm: 3:2 slow, lots of rest</p><p>Freq: 396 Hz</p><p>ASMR: None — space is the trigger</p>
+      </div>
+    </div>
+    <div class="em-card" style="--em-color:#06b6d4;">
+      <div class="em-state">🏠</div>
+      <div class="em-name">Kindness / Comfort</div>
+      <div class="em-desc">Soft effleurage, maternal melody contour, warm bass frequencies, consonant resolution. Safe arrival.</div>
+      <div class="em-recipe">
+        <div class="em-recipe-label">Sonic Recipe</div>
+        <p>Key: Ionian, full tonic resolution</p><p>BPM: 60–75</p><p>Binaural: Alpha 9 Hz</p>
+        <p>Rhythm: 4:3 steady</p><p>Freq: 174–285 Hz</p><p>ASMR: Brushing, gentle tapping</p>
+      </div>
+    </div>
+    <div class="em-card" style="--em-color:#f43f5e;">
+      <div class="em-state">⚡</div>
+      <div class="em-name">Arousal / Sensory Peak</div>
+      <div class="em-desc">Crescendo with strategic unpredictability, full-body bass engagement, harmonic surprise targeting frisson.</div>
+      <div class="em-recipe">
+        <div class="em-recipe-label">Sonic Recipe</div>
+        <p>Key: Augmented, tritone tension</p><p>BPM: 130–160</p><p>Binaural: Beta-Gamma</p>
+        <p>Rhythm: 7:5 syncopated</p><p>Freq: 852 Hz + 40 Hz sub</p><p>ASMR: Sudden silence before peak</p>
+      </div>
+    </div>
+    <div class="em-card" style="--em-color:#8b5cf6;">
+      <div class="em-state">🌌</div>
+      <div class="em-name">Awe / The Sublime</div>
+      <div class="em-desc">Vast reverb, frequency clusters beyond normal harmonic series, slow swells. Too big to comprehend — beautiful.</div>
+      <div class="em-recipe">
+        <div class="em-recipe-label">Sonic Recipe</div>
+        <p>Key: Lydian, quarter-tone glides</p><p>BPM: 40–55</p><p>Binaural: Theta-Gamma blend</p>
+        <p>Rhythm: Nested 5:3:2 fractal</p><p>Freq: 963 Hz + 40 Hz gamma</p><p>ASMR: Deep space ambient</p>
+      </div>
+    </div>
+    <div class="em-card" style="--em-color:#10b981;">
+      <div class="em-state">💪</div>
+      <div class="em-name">Empowerment / Sovereignty</div>
+      <div class="em-desc">Deep bass foundation, open power 5ths, assertive rhythmic attack. The music stands in its own truth — you do too.</div>
+      <div class="em-recipe">
+        <div class="em-recipe-label">Sonic Recipe</div>
+        <p>Key: Dorian, power 5ths (no 3rd)</p><p>BPM: 100–128</p><p>Binaural: Beta 15–20 Hz</p>
+        <p>Rhythm: 4:3 driving</p><p>Freq: 285 Hz</p><p>ASMR: Deep bass taps (haptic sync)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNOLOGY -->
+<section id="tech">
+  <div class="sh">
+    <div class="sb" style="background:rgba(251,146,60,0.15);color:#fb923c;">Technology Integration</div>
+    <h2 style="color:#fff;">The DreamChamber Technology Stack</h2>
+    <p>The neuroscience is proven. The cultural traditions are proven. Now the technology makes it all real, responsive, and scalable to any human being on Earth.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:1.8rem;border-top:3px solid #fb923c;">
+      <div style="font-size:1.8rem;margin-bottom:0.8rem;">🧤</div>
+      <div style="font-size:1rem;font-weight:800;color:#fb923c;margin-bottom:0.6rem;">Haptic Contact Glove / Suit</div>
+      <div style="font-size:0.82rem;color:#94a3b8;line-height:1.6;">Every tactile/effleurage sound trigger synchronized to vibration pattern in haptic wearable. The ASMR brushing sound and the physical brushing sensation arrive simultaneously. Brain cannot distinguish — multimodal amplification of effect.</div>
+      <div style="margin-top:1rem;font-size:0.75rem;color:#64748b;">Actuators: 40–200 Hz vibrational range | Latency: &lt;20ms sync with audio</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:1.8rem;border-top:3px solid #8b5cf6;">
+      <div style="font-size:1.8rem;margin-bottom:0.8rem;">🎧</div>
+      <div style="font-size:1rem;font-weight:800;color:#8b5cf6;margin-bottom:0.6rem;">Binaural / Spatial Audio (HRTF)</div>
+      <div style="font-size:0.82rem;color:#94a3b8;line-height:1.6;">HRTF (Head-Related Transfer Function) processing creates individualized 3D sound fields. AVA manages real-time spatial positioning — sounds move through 360° space around the participant, creating proximity cues that the social brain reads as reality.</div>
+      <div style="margin-top:1rem;font-size:0.75rem;color:#64748b;">Personalized HRTF via ear geometry scan | Full Ambisonics support | &lt;5ms latency</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:1.8rem;border-top:3px solid #10b981;">
+      <div style="font-size:1.8rem;margin-bottom:0.8rem;">🤖</div>
+      <div style="font-size:1rem;font-weight:800;color:#10b981;margin-bottom:0.6rem;">AVA Adaptive Sequencing</div>
+      <div style="font-size:0.82rem;color:#94a3b8;line-height:1.6;">AVA analyzes continuous biofeedback (HRV, breathing rate, GSR, EEG) and dynamically adjusts which triggers are layered, at what intensity, and in what spatial position. The music is always responding to the listener's actual neurological state — not a preset.</div>
+      <div style="margin-top:1rem;font-size:0.75rem;color:#64748b;">Real-time biofeedback integration | 100ms adaptation loop | NOIZYFISH emotional color engine</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:1.8rem;border-top:3px solid #f4a228;">
+      <div style="font-size:1.8rem;margin-bottom:0.8rem;">🔬</div>
+      <div style="font-size:1rem;font-weight:800;color:#f4a228;margin-bottom:0.6rem;">EEG-to-Music Mapping</div>
+      <div style="font-size:0.82rem;color:#94a3b8;line-height:1.6;">Non-invasive EEG headset feeds brainwave data to AVA. When alpha waves are detected, ASMR layer intensifies. When theta is achieved, the trance protocol deepens. When gamma spikes signal peak, frisson-targeting harmonic sequence is queued.</div>
+      <div style="margin-top:1rem;font-size:0.75rem;color:#64748b;">5-electrode consumer EEG | Alpha/Theta/Gamma detection | 250ms response time</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:1.8rem;border-top:3px solid #06b6d4;">
+      <div style="font-size:1.8rem;margin-bottom:0.8rem;">🌡️</div>
+      <div style="font-size:1rem;font-weight:800;color:#06b6d4;margin-bottom:0.6rem;">Environmental Control System</div>
+      <div style="font-size:0.82rem;color:#94a3b8;line-height:1.6;">Temperature, humidity, airflow, lighting, and scent diffusion all controlled by AVA and synchronized to the sonic arc. Lavender diffusion at ASMR onset. Temperature drop at focus stack entry. Warm amber light at love/oxytocin protocols.</div>
+      <div style="margin-top:1rem;font-size:0.75rem;color:#64748b;">IoT environmental control | &lt;1°C temperature precision | HVAC-integrated scent delivery</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:1.8rem;border-top:3px solid #ec4899;">
+      <div style="font-size:1.8rem;margin-bottom:0.8rem;">👥</div>
+      <div style="font-size:1rem;font-weight:800;color:#ec4899;margin-bottom:0.6rem;">Collective Biofeedback Aggregation</div>
+      <div style="font-size:0.82rem;color:#94a3b8;line-height:1.6;">In group DreamChamber sessions, anonymized biometric data from all participants is aggregated into a "room emotional state" indicator. AVA adapts the collective sonic field based on the group's average state — the room plays itself.</div>
+      <div style="margin-top:1rem;font-size:0.75rem;color:#64748b;">Privacy-first aggregation | No individual data stored | Group coherence optimization</div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH INNOVATION -->
+<section id="research">
+  <div class="sh">
+    <div class="sb" style="background:rgba(163,230,53,0.15);color:#a3e635;">Research Frontiers</div>
+    <h2 style="color:#fff;">6 Innovation Directions</h2>
+    <p>These are not hypothetical — these are the research programs that will make NOIZY the most scientifically grounded sound experience company in the world.</p>
+  </div>
+  <div class="inn-grid">
+    <div class="inn-card">
+      <div class="inn-num">01</div>
+      <div class="inn-body">
+        <div class="inn-title">Neurochemical Precision Mapping</div>
+        <div class="inn-desc">Correlate specific ASMR/lullaby/music trigger combinations to measurable dopamine, serotonin, oxytocin, and cortisol changes via salivary biomarkers and fMRI. Build the first comprehensive sound-to-neurochemistry database.</div>
+      </div>
+    </div>
+    <div class="inn-card">
+      <div class="inn-num">02</div>
+      <div class="inn-body">
+        <div class="inn-title">Cross-Cultural Synthesis Sequences</div>
+        <div class="inn-desc">Integrate indigenous chants, lullabies, and modern ASMR into scientifically validated hybrid sequences. Document which cross-cultural combinations create amplified neurological effects beyond any single tradition.</div>
+      </div>
+    </div>
+    <div class="inn-card">
+      <div class="inn-num">03</div>
+      <div class="inn-body">
+        <div class="inn-title">Multi-Layer Trigger Stacking Science</div>
+        <div class="inn-desc">Rigorous study of which combinations of simultaneous triggers (ASMR + lullaby + binaural + haptic) produce synergistic vs. interfering effects. Build the evidence base for the layering protocols.</div>
+      </div>
+    </div>
+    <div class="inn-card">
+      <div class="inn-num">04</div>
+      <div class="inn-body">
+        <div class="inn-title">Full-Body Haptic Integration Research</div>
+        <div class="inn-desc">Study how full-body vibrotactile feedback combined with auditory triggers enhances or modifies neurochemical and brainwave responses. Does physical resonance at specific frequencies amplify euphoria? Measure it.</div>
+      </div>
+    </div>
+    <div class="inn-card">
+      <div class="inn-num">05</div>
+      <div class="inn-body">
+        <div class="inn-title">Hypnotic Safety Protocol Development</div>
+        <div class="inn-desc">Develop and clinically validate sequences that induce theta trance states responsibly, with documented safety profiles for Autism, PTSD, anxiety, and healthy populations. Partnership with VSI and clinical music therapy organizations.</div>
+      </div>
+    </div>
+    <div class="inn-card">
+      <div class="inn-num">06</div>
+      <div class="inn-body">
+        <div class="inn-title">Emotional Spectrum Composition Library</div>
+        <div class="inn-desc">Curate and validate a library of compositions that reliably guide listeners through specific emotional arcs: Joy, Love, Catharsis, Transcendence, Healing. Each arc scientifically validated via biometric outcome measurement.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="manifesto" style="margin-top:4rem;">
+    <p class="manifesto-quote">The real magic is in <em>precision layering</em> — voice + rhythm + harmonics + tactile feedback. You are literally <em>sculpting brainwaves and emotions</em> like a living instrument. This is <em>neuro-alchemy applied through sound</em>. And we are giving it freely to every human being who needs it. <em>HAPPY MUSIC FOR HAPPY PEOPLE.</em> And so much more than that.</p>
+  </div>
+</section>
+
+<script>
+const canvas = document.getElementById('cosmos');
+const ctx = canvas.getContext('2d');
+let W, H, stars = [];
+function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+function initStars() {
+  stars = [];
+  const hues = [200,260,300,180,40,340];
+  for (let i = 0; i < 260; i++) {
+    stars.push({ x: Math.random()*W, y: Math.random()*H,
+      r: Math.random()*1.6+0.2, hue: hues[Math.floor(Math.random()*hues.length)],
+      speed: Math.random()*0.12+0.02, tw: Math.random()*Math.PI*2 });
+  }
+}
+function draw() {
+  ctx.clearRect(0,0,W,H);
+  [[0.1,0.2,320,230,0.06],[0.8,0.8,280,190,0.05],[0.5,0.45,360,210,0.04],[0.75,0.2,240,270,0.05]].forEach(n => {
+    const g = ctx.createRadialGradient(n[0]*W,n[1]*H,0,n[0]*W,n[1]*H,n[2]);
+    g.addColorStop(0,`hsla(${n[3]},65%,40%,${n[4]})`); g.addColorStop(1,'transparent');
+    ctx.fillStyle=g; ctx.beginPath(); ctx.arc(n[0]*W,n[1]*H,n[2],0,Math.PI*2); ctx.fill();
+  });
+  stars.forEach(s => {
+    s.tw += 0.016; const op = 0.35 + Math.sin(s.tw)*0.4;
+    ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle = `hsla(${s.hue},80%,85%,${op})`; ctx.fill();
+    s.y -= s.speed; if (s.y<-2) { s.y=H+2; s.x=Math.random()*W; }
+  });
+  requestAnimationFrame(draw);
+}
+window.addEventListener('resize',()=>{resize();initStars();});
+resize(); initStars(); draw();
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) {
+    document.querySelectorAll('nav a').forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#'+e.target.id);
+    });
+  }});
+}, {threshold:0.25});
+document.querySelectorAll('[id]').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIZY MUSIC WORLD & MUSEUM — The Living Breathing Time Capsule</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Bebas+Neue&display=swap');
+
+  :root {
+    --void: #020408;
+    --deep: #060b12;
+    --panel: #0a1018;
+    --border: #151f30;
+    --border-glow: #1e2e48;
+    --green: #00ff88;
+    --green-dim: rgba(0,255,136,0.12);
+    --gold: #f5c842;
+    --gold-dim: rgba(245,200,66,0.12);
+    --amber: #ff9a3c;
+    --rose: #ff6b8a;
+    --violet: #a78bfa;
+    --cyan: #22d3ee;
+    --text: #c4d4ec;
+    --text-dim: #5a7090;
+    --text-bright: #eaf2ff;
+    --serif: 'Playfair Display', Georgia, serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── SONIC CANVAS ─── */
+  #sonic-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  /* ─── CHAPTER NAV ─── */
+  .chapter-nav {
+    position: fixed;
+    right: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .ch-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,255,136,0.3);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+  }
+
+  .ch-dot:hover,
+  .ch-dot.active {
+    background: var(--green);
+    border-color: var(--green);
+    box-shadow: 0 0 12px rgba(0,255,136,0.5);
+  }
+
+  .ch-dot .ch-tip {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--panel);
+    border: 1px solid var(--border-glow);
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: var(--text-dim);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    letter-spacing: 0.12em;
+  }
+
+  .ch-dot:hover .ch-tip { opacity: 1; }
+
+  /* ─── MAIN ─── */
+  main {
+    position: relative;
+    z-index: 10;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 40px 120px;
+  }
+
+  /* ─── HERO ─── */
+  #ch-cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 80px 0;
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .hero-eyebrow span {
+    color: var(--green);
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(40px, 7vw, 80px);
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--text-bright);
+    margin-bottom: 20px;
+  }
+
+  .hero-title .accent {
+    color: var(--gold);
+    font-style: italic;
+    display: block;
+  }
+
+  .hero-sub {
+    font-family: var(--serif);
+    font-size: clamp(16px, 2.2vw, 22px);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text-dim);
+    margin-bottom: 40px;
+    line-height: 1.6;
+    max-width: 680px;
+  }
+
+  .hero-declare {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--green);
+    letter-spacing: 0.2em;
+    background: rgba(0,255,136,0.06);
+    border: 1px solid rgba(0,255,136,0.2);
+    border-radius: 4px;
+    padding: 10px 24px;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .hero-scroll span {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 0.2em;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--text-dim), transparent);
+    animation: scroll-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scroll-pulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 0.8; transform: scaleY(1.2); }
+  }
+
+  /* ─── CHAPTER STRUCTURE ─── */
+  .chapter {
+    padding: 100px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .chapter-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .chapter-num::before {
+    content: '';
+    width: 28px; height: 1px;
+    background: var(--green);
+  }
+
+  .chapter-num .cn-tag {
+    color: var(--green);
+  }
+
+  .chapter-title {
+    font-family: var(--serif);
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 700;
+    color: var(--text-bright);
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+
+  .chapter-title .it {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .chapter-lead {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-style: italic;
+    color: var(--text-dim);
+    line-height: 1.65;
+    margin: 20px 0 40px;
+    padding-left: 20px;
+    border-left: 2px solid rgba(245,200,66,0.3);
+  }
+
+  /* ─── PROSE ─── */
+  .prose {
+    font-size: 16px;
+    line-height: 1.85;
+    color: var(--text);
+    max-width: 720px;
+  }
+
+  .prose p {
+    margin-bottom: 20px;
+  }
+
+  .prose p:last-child { margin-bottom: 0; }
+
+  .prose strong {
+    color: var(--text-bright);
+    font-weight: 600;
+  }
+
+  .prose em {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .prose .g {
+    color: var(--green);
+    font-weight: 600;
+  }
+
+  /* ─── THE THREE LAWS OF THE MUSEUM ─── */
+  .laws-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin: 40px 0;
+  }
+
+  .law-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+
+  .law-card:hover { border-color: var(--border-glow); }
+
+  .law-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+  }
+
+  .law-card.living::before { background: linear-gradient(90deg, var(--green), transparent); }
+  .law-card.breathing::before { background: linear-gradient(90deg, var(--amber), transparent); }
+  .law-card.capsule::before { background: linear-gradient(90deg, var(--violet), transparent); }
+
+  .law-icon {
+    font-size: 28px;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .law-word {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .law-card.living .law-word { color: var(--green); }
+  .law-card.breathing .law-word { color: var(--amber); }
+  .law-card.capsule .law-word { color: var(--violet); }
+
+  .law-card p {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--text-dim);
+  }
+
+  /* ─── EXPERIENCE ROOMS ─── */
+  .rooms-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin: 40px 0;
+  }
+
+  .room {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: default;
+    transition: border-color 0.25s;
+  }
+
+  .room:hover { border-color: var(--border-glow); }
+
+  .room-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 24px;
+  }
+
+  .room-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    width: 28px;
+    flex-shrink: 0;
+  }
+
+  .room-icon { font-size: 22px; }
+
+  .room-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-bright);
+    flex: 1;
+  }
+
+  .room-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    padding: 3px 9px;
+    border-radius: 3px;
+    letter-spacing: 0.15em;
+  }
+
+  .room.g .room-tag { background: var(--green-dim); color: var(--green); border: 1px solid rgba(0,255,136,0.2); }
+  .room.gold .room-tag { background: var(--gold-dim); color: var(--gold); border: 1px solid rgba(245,200,66,0.2); }
+  .room.violet .room-tag { background: rgba(167,139,250,0.1); color: var(--violet); border: 1px solid rgba(167,139,250,0.2); }
+  .room.cyan .room-tag { background: rgba(34,211,238,0.1); color: var(--cyan); border: 1px solid rgba(34,211,238,0.2); }
+  .room.rose .room-tag { background: rgba(255,107,138,0.1); color: var(--rose); border: 1px solid rgba(255,107,138,0.2); }
+  .room.amber .room-tag { background: rgba(255,154,60,0.1); color: var(--amber); border: 1px solid rgba(255,154,60,0.2); }
+
+  .room-desc {
+    padding: 0 24px 20px 72px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text-dim);
+  }
+
+  .room-desc strong {
+    color: var(--text);
+  }
+
+  /* ─── TIME CAPSULE ARCHITECTURE ─── */
+  .capsule-layers {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 40px 0;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .capsule-layer {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 22px 28px;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+
+  .capsule-layer:last-child { border-bottom: none; }
+  .capsule-layer:hover { background: rgba(255,255,255,0.015); }
+
+  .cl-depth {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 900;
+    font-style: italic;
+    opacity: 0.15;
+    color: var(--gold);
+    flex-shrink: 0;
+    width: 44px;
+    line-height: 1;
+    margin-top: 2px;
+  }
+
+  .cl-content h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 6px;
+    letter-spacing: 0.04em;
+  }
+
+  .cl-content p {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--text-dim);
+  }
+
+  .cl-content p strong {
+    color: var(--text);
+  }
+
+  .cl-badge {
+    margin-left: auto;
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    padding: 3px 9px;
+    border-radius: 3px;
+    letter-spacing: 0.12em;
+    white-space: nowrap;
+    flex-shrink: 0;
+    align-self: flex-start;
+    margin-top: 3px;
+    color: var(--green);
+    background: var(--green-dim);
+    border: 1px solid rgba(0,255,136,0.2);
+  }
+
+  /* ─── VOICE ESTATE BRIDGE ─── */
+  .estate-bridge {
+    background: linear-gradient(135deg, rgba(167,139,250,0.06), rgba(0,255,136,0.04));
+    border: 1px solid rgba(167,139,250,0.2);
+    border-radius: 12px;
+    padding: 36px 40px;
+    margin: 40px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .estate-bridge::before {
+    content: '500';
+    position: absolute;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 200px;
+    color: rgba(167,139,250,0.04);
+    top: -20px;
+    right: -10px;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .estate-bridge h3 {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--violet);
+    margin-bottom: 16px;
+  }
+
+  .estate-bridge p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--text);
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+  }
+
+  .estate-bridge p strong {
+    color: var(--text-bright);
+  }
+
+  .estate-bridge p .g { color: var(--green); font-weight: 600; }
+  .estate-bridge p .v { color: var(--violet); font-weight: 600; }
+
+  /* ─── THE BATH ─── */
+  .bath-declaration {
+    text-align: center;
+    padding: 60px 0;
+  }
+
+  .bath-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .bath-quote {
+    font-family: var(--serif);
+    font-size: clamp(20px, 3.5vw, 34px);
+    font-weight: 700;
+    font-style: italic;
+    color: var(--text-bright);
+    line-height: 1.45;
+    margin-bottom: 24px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .bath-quote em { color: var(--gold); font-style: normal; }
+  .bath-quote .g { color: var(--green); }
+
+  .bath-attribution {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.2em;
+  }
+
+  /* ─── CONNECTION MAP ─── */
+  .connection-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 40px 0;
+  }
+
+  .conn-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .conn-card:hover {
+    border-color: var(--border-glow);
+    transform: translateY(-2px);
+  }
+
+  .conn-card .cc-icon { font-size: 26px; margin-bottom: 10px; display: block; }
+
+  .conn-card h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 6px;
+  }
+
+  .conn-card p {
+    font-size: 11px;
+    line-height: 1.55;
+    color: var(--text-dim);
+  }
+
+  /* ─── DECLARATION FINAL ─── */
+  .final-declaration {
+    text-align: center;
+    padding: 80px 0 40px;
+    border-top: 1px solid var(--border);
+    margin-top: 60px;
+  }
+
+  .fd-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.3em;
+    margin-bottom: 32px;
+  }
+
+  .fd-title {
+    font-family: var(--serif);
+    font-size: clamp(26px, 4.5vw, 52px);
+    font-weight: 900;
+    color: var(--text-bright);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .fd-title .gold { color: var(--gold); font-style: italic; }
+
+  .fd-body {
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--text);
+    max-width: 640px;
+    margin: 0 auto 40px;
+  }
+
+  .fd-body strong { color: var(--text-bright); }
+  .fd-body .g { color: var(--green); font-weight: 600; }
+
+  .fd-sig {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.2em;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .fd-sig .grf {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    color: var(--green);
+    letter-spacing: 0.25em;
+    margin-top: 12px;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .laws-grid { grid-template-columns: 1fr; }
+    .connection-grid { grid-template-columns: 1fr 1fr; }
+    main { padding: 0 24px 80px; }
+    .chapter-nav { display: none; }
+  }
+
+  @media (max-width: 480px) {
+    .connection-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--void); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<canvas id="sonic-canvas"></canvas>
+
+<!-- Chapter Nav -->
+<nav class="chapter-nav">
+  <div class="ch-dot active" onclick="scrollTo(0,0)"><span class="ch-tip">ENTRANCE</span></div>
+  <div class="ch-dot" onclick="document.getElementById('ch-declaration').scrollIntoView({behavior:'smooth'})"><span class="ch-tip">DECLARATION</span></div>
+  <div class="ch-dot" onclick="document.getElementById('ch-rooms').scrollIntoView({behavior:'smooth'})"><span class="ch-tip">THE ROOMS</span></div>
+  <div class="ch-dot" onclick="document.getElementById('ch-capsule').scrollIntoView({behavior:'smooth'})"><span class="ch-tip">TIME CAPSULE</span></div>
+  <div class="ch-dot" onclick="document.getElementById('ch-estate').scrollIntoView({behavior:'smooth'})"><span class="ch-tip">VOICE ESTATE</span></div>
+  <div class="ch-dot" onclick="document.getElementById('ch-connections').scrollIntoView({behavior:'smooth'})"><span class="ch-tip">CONNECTIONS</span></div>
+  <div class="ch-dot" onclick="document.getElementById('ch-bath').scrollIntoView({behavior:'smooth'})"><span class="ch-tip">THE BATH</span></div>
+  <div class="ch-dot" onclick="document.getElementById('ch-final').scrollIntoView({behavior:'smooth'})"><span class="ch-tip">CLOSING</span></div>
+</nav>
+
+<main>
+
+  <!-- ─── COVER ─── -->
+  <section id="ch-cover">
+    <p class="hero-eyebrow">NOIZYFISH INC. · DREAMCHAMBER VISION · RSP_001 · <span>GORUNFREE</span></p>
+    <h1 class="hero-title">
+      NOIZY<br>MUSIC WORLD<br>
+      <span class="accent">& Museum</span>
+    </h1>
+    <p class="hero-sub">
+      A living, breathing time capsule of human creative expression —<br>
+      where voices are preserved, music breathes, and every visitor<br>
+      is invited to bathe in art, sound, and human connection.
+    </p>
+    <div class="hero-declare">DREAMCHAMBER VISION · MARCH 2026 · RSP_001</div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>ENTER</span>
+    </div>
+  </section>
+
+
+  <!-- ─── CH 1: DECLARATION ─── -->
+  <section class="chapter" id="ch-declaration">
+    <div class="chapter-num"><span class="cn-tag">I</span> · DECLARATION</div>
+    <h2 class="chapter-title">The World Needed a <span class="it">Different Kind</span> of Museum</h2>
+    <p class="chapter-lead">
+      "Every other platform is a factory. NOIZY is a museum. One sends your work into the void. The other holds it, honors it, and makes it available to every human who needs to feel something."
+    </p>
+
+    <div class="prose">
+      <p>
+        The museums of the world hold paintings behind glass. They hold instruments in cases.
+        They hold manuscripts in sealed rooms with controlled humidity.
+        They hold the work of humans who are gone, preserved against the decay of time —
+        but <strong>silent. Static. Untouchable.</strong>
+      </p>
+      <p>
+        The NOIZY Music World & Museum is built on a different law.
+        The art here does not go behind glass. <em>It breathes.</em>
+        The voices here are not archived in a database no one visits.
+        <strong>They play.</strong> The compositions here are not locked behind a paywall
+        and fragmented across streaming platforms. <em>They surround you.</em>
+      </p>
+      <p>
+        This is not a museum you visit once and leave. This is a living place —
+        one that grows every time a new RSP adds their voice, every time a new
+        composition is watermarked into the Provenance Ledger, every time a child
+        in the NOIZYKIDZ program creates their first haptic sound.
+      </p>
+      <p>
+        And it is a time capsule — because the 500-Year Voice Codex means that
+        <strong>what is placed here today is held here forever.</strong>
+        Your grandchildren will come here. Their grandchildren will come here.
+        The voice of RSP_001, recorded in Ottawa in 2026, will be here in 2126,
+        <span class="g">cryptographically intact, legally protected, governed by your wishes.</span>
+      </p>
+    </div>
+
+    <div class="laws-grid">
+      <div class="law-card living">
+        <span class="law-icon">🌱</span>
+        <div class="law-word">Living</div>
+        <p>Every new RSP voice session, every new composition, every new NOIZYKIDZ creation adds to the museum in real time. It grows. It never stops growing.</p>
+      </div>
+      <div class="law-card breathing">
+        <span class="law-icon">🌊</span>
+        <div class="law-word">Breathing</div>
+        <p>The sounds are active. The voices play. Sonic environments shift and move. You don't observe the museum — you are surrounded by it. It breathes with you.</p>
+      </div>
+      <div class="law-card capsule">
+        <span class="law-icon">⏳</span>
+        <div class="law-word">Time Capsule</div>
+        <p>Built on the 500-Year Voice Codex. Every utterance has a cryptographic consent key, a watermark, and a provenance record. What goes in stays in — protected forever.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── CH 2: THE ROOMS ─── -->
+  <section class="chapter" id="ch-rooms">
+    <div class="chapter-num"><span class="cn-tag">II</span> · THE ROOMS</div>
+    <h2 class="chapter-title">Where People Come to <span class="it">Bathe</span></h2>
+    <p class="chapter-lead">
+      "You don't navigate the NOIZY Music World. You wander it. You find a room that speaks to you today. Tomorrow you find a different one."
+    </p>
+
+    <div class="rooms-list">
+
+      <div class="room g">
+        <div class="room-header">
+          <span class="room-num">01</span>
+          <span class="room-icon">🎙️</span>
+          <span class="room-name">The Voice Gallery</span>
+          <span class="room-tag">ALWAYS OPEN</span>
+        </div>
+        <div class="room-desc">
+          The living archive of every RSP voice. You enter and hear the human voices of the NOIZY community — spoken word, vocal performance, narration, song.
+          <strong>Every voice is labeled with the RSP who created it, the date, the consent key, and the creative intent.</strong>
+          You can search by voice type, emotion, language, region. You can find a voice that sounds like your grandmother. You can find a voice that sounds like no one you've ever heard.
+          The Voice Gallery never closes. It is always adding new voices. It breathes.
+        </div>
+      </div>
+
+      <div class="room gold">
+        <div class="room-header">
+          <span class="room-num">02</span>
+          <span class="room-icon">🎵</span>
+          <span class="room-name">The Composition Hall</span>
+          <span class="room-tag">34TB AQUARIUM</span>
+        </div>
+        <div class="room-desc">
+          The sonic archive of THE_AQUARIUM — 34 terabytes of Fish Music Inc. compositions, plus every piece created in the NOIZY ecosystem.
+          <strong>Full spatial audio. Ambient playback. Deep listening mode.</strong>
+          No shuffle algorithms. No recommendations engineered for engagement. Just music, available to be heard, organized by mood, texture, era, and emotional landscape.
+          The Composition Hall is where you go when you need to disappear into something larger than your current moment.
+        </div>
+      </div>
+
+      <div class="room violet">
+        <div class="room-header">
+          <span class="room-num">03</span>
+          <span class="room-icon">✨</span>
+          <span class="room-name">The Codex Chamber</span>
+          <span class="room-tag">500-YEAR VAULT</span>
+        </div>
+        <div class="room-desc">
+          The heart of the time capsule. The 500-Year Voice Codex made visible and experiential.
+          <strong>Walk through the lineage of human voice preservation — from spoken memory to wax cylinder to digital to cryptographic estate.</strong>
+          See the provenance records. See the cryptographic consent keys. See the watermarks. Understand, viscerally, what it means that a voice can live for 500 years.
+          RSP_001's founding entry is here. It will be here when neither of us are.
+        </div>
+      </div>
+
+      <div class="room cyan">
+        <div class="room-header">
+          <span class="room-num">04</span>
+          <span class="room-icon">🫀</span>
+          <span class="room-name">The Healing Rooms</span>
+          <span class="room-tag">HEALTH ACCESS</span>
+        </div>
+        <div class="room-desc">
+          Music and voice as medicine. Curated sonic environments developed in partnership with the NOIZY Health track and Dr. Brien Benoit's Health Canada connections.
+          <strong>Therapeutic sound environments. Haptic music from NOIZYKIDZ. Voice therapy tools. Sonic palliative care.</strong>
+          The Healing Rooms are where the $500B loneliness economy becomes a human experience.
+          Where someone with a spinal injury, or a child who cannot hear in the traditional sense, can still feel music in their body. This room exists because of GORUNFREE.
+        </div>
+      </div>
+
+      <div class="room amber">
+        <div class="room-header">
+          <span class="room-num">05</span>
+          <span class="room-icon">🌍</span>
+          <span class="room-name">The Atlas Floor</span>
+          <span class="room-tag">GLOBAL MUSIC ATLAS</span>
+        </div>
+        <div class="room-desc">
+          The Global Music Atlas made immersive. A sonic map of the world — every musical tradition, every regional voice, every cultural sound archive that NOIZY holds.
+          <strong>Click a country. Hear its voices. Hear its instruments. Hear its silence.</strong>
+          First 200 entries — currently in design. Ultimately: every inhabited place on Earth represented by the voices of its people, not the algorithms of a streaming platform.
+        </div>
+      </div>
+
+      <div class="room rose">
+        <div class="room-header">
+          <span class="room-num">06</span>
+          <span class="room-icon">🌱</span>
+          <span class="room-name">The NOIZYKIDZ Wing</span>
+          <span class="room-tag">NEXT GENERATION</span>
+        </div>
+        <div class="room-desc">
+          The children's wing of the museum. Where the youngest creators — children who have never touched a traditional instrument, children who experience music through vibration and haptics — leave their mark.
+          <strong>Every NOIZYKIDZ creation is a museum exhibit.</strong>
+          A drawing made with sound. A first spoken word turned into a waveform displayed on the wall.
+          The NOIZYKIDZ Wing is the museum's loudest argument: that every human being, regardless of ability, has a creative voice worth preserving.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ─── CH 3: TIME CAPSULE ARCHITECTURE ─── -->
+  <section class="chapter" id="ch-capsule">
+    <div class="chapter-num"><span class="cn-tag">III</span> · ARCHITECTURE</div>
+    <h2 class="chapter-title">How the <span class="it">Capsule</span> Works</h2>
+    <p class="chapter-lead">
+      "A time capsule that nobody can open without permission is not a time capsule — it's a vault. Ours is open to the world and locked to extraction. That's the difference."
+    </p>
+
+    <div class="prose" style="margin-bottom: 32px;">
+      <p>
+        The Museum is not a frontend layer draped over a conventional database.
+        Every artifact in the NOIZY Music World is held in a seven-layer provenance architecture —
+        the same pipeline that protects every RSP voice session. <strong>The Museum and the infrastructure are the same thing.</strong>
+        One is the public face. One is the foundation. They cannot be separated.
+      </p>
+    </div>
+
+    <div class="capsule-layers">
+      <div class="capsule-layer">
+        <div class="cl-depth">1</div>
+        <div class="cl-content">
+          <h4>Cryptographic Consent Layer</h4>
+          <p>Every artifact enters the museum through Stage 1 of the 7-Stage Pipeline.
+          <strong>No voice, composition, or creation can be displayed, played, or accessed without a valid consent key.</strong>
+          Format: <code style="color:var(--green);font-size:11px">NOIZY-[ACTOR]-CONSENT-[16hex]-AVA-[DOMAIN]-[JURISDICTION]-[DATE]</code></p>
+        </div>
+        <div class="cl-badge">NC_01 ENFORCED</div>
+      </div>
+      <div class="capsule-layer">
+        <div class="cl-depth">2</div>
+        <div class="cl-content">
+          <h4>NOIZY PROOF Watermark</h4>
+          <p>Every artifact carries a <strong>WM_{8hex} watermark</strong> — SHA-256 of actorId + utteranceId + sessionId + consentKey + timestamp.
+          This watermark is how the Museum knows that what it holds is authentic, unmodified, and attributable to the human who created it.</p>
+        </div>
+        <div class="cl-badge">NC_10 ENFORCED</div>
+      </div>
+      <div class="capsule-layer">
+        <div class="cl-depth">3</div>
+        <div class="cl-content">
+          <h4>Provenance Ledger (provenance.jsonl)</h4>
+          <p>The Museum's living record. <strong>Every exhibit has a provenance entry.</strong>
+          Date of creation. Creator identity. Consent status. Royalty allocation. Usage history.
+          The ledger cannot be deleted. It can only be appended.</p>
+        </div>
+        <div class="cl-badge">IMMUTABLE</div>
+      </div>
+      <div class="capsule-layer">
+        <div class="cl-depth">4</div>
+        <div class="cl-content">
+          <h4>75% Creator Royalty — Museum Edition</h4>
+          <p>When a museum exhibit generates revenue — through fan subscriptions, enterprise licensing, sync placement, or therapeutic use — <strong>75% flows to the creator automatically.</strong>
+          Hardcoded at the D1 database layer. Not a policy. Not adjustable by terms of service.</p>
+        </div>
+        <div class="cl-badge">NC_02 · D1 HARDCODED</div>
+      </div>
+      <div class="capsule-layer">
+        <div class="cl-depth">5</div>
+        <div class="cl-content">
+          <h4>Voice Estate Designation</h4>
+          <p>Every RSP voice in the Museum is also a Voice Estate entry.
+          <strong>The creator designates governance terms: who can use the voice, in what contexts, for how long, and what happens after they are gone.</strong>
+          These terms are inherited by the estate and enforced by NC_09.</p>
+        </div>
+        <div class="cl-badge">NC_09 · 500YR CODEX</div>
+      </div>
+      <div class="capsule-layer">
+        <div class="cl-depth">6</div>
+        <div class="cl-content">
+          <h4>GABRIEL_V3 Memory Architecture</h4>
+          <p>The Museum is held in GABRIEL's 315+ memcells and 11 D1 databases.
+          <strong>It does not degrade. It does not lose context. It does not forget.</strong>
+          GABRIEL is the museum's curator, archivist, and living intelligence — running at 10.90.90.20, always on.</p>
+        </div>
+        <div class="cl-badge">10.90.90.20</div>
+      </div>
+      <div class="capsule-layer">
+        <div class="cl-depth">7</div>
+        <div class="cl-content">
+          <h4>The 500-Year Covenant</h4>
+          <p>Not a technical layer — a philosophical one. <strong>Every artifact in the NOIZY Music World carries an implicit covenant with the future.</strong>
+          We are building a Museum that must still be standing, still running, still honoring its creators, in the year 2526.
+          Every architectural decision is made with that in mind.</p>
+        </div>
+        <div class="cl-badge">500-YEAR CODEX</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── CH 4: VOICE ESTATE BRIDGE ─── -->
+  <section class="chapter" id="ch-estate">
+    <div class="chapter-num"><span class="cn-tag">IV</span> · VOICE ESTATE</div>
+    <h2 class="chapter-title">The Museum <span class="it">Is</span> the Estate</h2>
+    <p class="chapter-lead">
+      "The Louvre doesn't own the Mona Lisa. It holds it on behalf of the world, governed by France. The NOIZY Music World holds your voice on behalf of your estate, governed by you."
+    </p>
+
+    <div class="prose">
+      <p>
+        In every other AI platform, when you create something with your voice,
+        the platform owns the infrastructure and you own nothing you can prove.
+        <strong>Your voice trains their models. Their valuation goes up. Your payout is a percentage of $0.003 per stream.</strong>
+      </p>
+      <p>
+        In the NOIZY Music World, your voice is an exhibit.
+        It has a provenance record, a watermark, a consent key, and a royalty allocation.
+        <em>It has an owner: you.</em> It has a governance document: your Voice Estate.
+        It has a duration: 500 years.
+      </p>
+    </div>
+
+    <div class="estate-bridge">
+      <h3>The 500-Year Voice Codex — Museum Edition</h3>
+      <p>
+        The Codex is the Museum's founding document.
+        <strong>RSP_001 is the first entry.</strong> Rob Plowman. Ottawa. 2026.
+        The voice of a composer and audio director with a C3 spinal injury who decided
+        that if the world was going to change, it was going to change in a direction that
+        <span class="g">lifts up the humans</span> — not extracts from them.
+        <br><br>
+        That founding voice will be in the Museum in 2036. In 2060. In 2126.
+        Every RSP who joins NOIZY becomes a Codex entry.
+        Every voice becomes a <span class="v">perpetual, inheritable, cryptographically governed creative asset</span>.
+        <br><br>
+        <strong>The Museum is how the Codex becomes real to the world.</strong>
+        You don't explain a 500-Year Voice Codex at a pitch meeting.
+        You walk someone into the NOIZY Music World and let them stand in it.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ─── CH 5: CONNECTIONS ─── -->
+  <section class="chapter" id="ch-connections">
+    <div class="chapter-num"><span class="cn-tag">V</span> · CONNECTIONS</div>
+    <h2 class="chapter-title">Everything <span class="it">Converges</span> Here</h2>
+    <p class="chapter-lead">
+      "The Museum is not separate from the NOIZY ecosystem. It is where all of it becomes visible, experiential, and human."
+    </p>
+
+    <div class="connection-grid">
+      <div class="conn-card">
+        <span class="cc-icon">🌊</span>
+        <h4>THE_AQUARIUM</h4>
+        <p>34TB of Fish Music compositions. The Museum's Composition Hall is its public entrance. Every track watermarked, provenance-recorded, royalty-active.</p>
+      </div>
+      <div class="conn-card">
+        <span class="cc-icon">🎙️</span>
+        <h4>NOIZYVOX</h4>
+        <p>A.I.V.A. synthesis outputs. When an RSP uses NOIZYVOX, the resulting work can become a Museum exhibit — attributed, protected, earning.</p>
+      </div>
+      <div class="conn-card">
+        <span class="cc-icon">🧒</span>
+        <h4>NOIZYKIDZ</h4>
+        <p>Every haptic composition, every first sound, every child's creation has a wing in the Museum. The youngest voices are preserved with the same rigor as the oldest.</p>
+      </div>
+      <div class="conn-card">
+        <span class="cc-icon">🔬</span>
+        <h4>NOIZYLAB</h4>
+        <p>The $89 instrument repair service feeds into the Museum's acoustic heritage layer. Repaired instruments, their owners, their stories — held in the Atlas.</p>
+      </div>
+      <div class="conn-card">
+        <span class="cc-icon">🏥</span>
+        <h4>Health Access</h4>
+        <p>The Healing Rooms are co-developed with Dr. Brien Benoit and Health Canada. Clinical voice therapy. Therapeutic sonic environments. Music as medicine.</p>
+      </div>
+      <div class="conn-card">
+        <span class="cc-icon">🌍</span>
+        <h4>Global Music Atlas</h4>
+        <p>The Atlas Floor. Every musical tradition, every regional voice. First 200 entries in design. Eventually: the entire inhabited world, heard in its own voice.</p>
+      </div>
+      <div class="conn-card">
+        <span class="cc-icon">🔐</span>
+        <h4>NOIZY PROOF</h4>
+        <p>Adam Robb / iPSS Inc. Alpha May 2026. Every Museum exhibit is NOIZY PROOF verified. The watermark is the Museum's authentication system.</p>
+      </div>
+      <div class="conn-card">
+        <span class="cc-icon">🤖</span>
+        <h4>GABRIEL_V3</h4>
+        <p>The Museum's curator and archivist. 315+ memcells. Living intelligence at 10.90.90.20. GABRIEL remembers everything the Museum holds.</p>
+      </div>
+      <div class="conn-card">
+        <span class="cc-icon">🧬</span>
+        <h4>The 2036 Vision</h4>
+        <p>In the Great Rebalancing, the NOIZY Music World was cited at the Ottawa Accord as proof that a different infrastructure was possible. The Museum was the evidence.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── CH 6: THE BATH ─── -->
+  <section class="chapter" id="ch-bath">
+    <div class="chapter-num"><span class="cn-tag">VI</span> · THE BATH</div>
+    <h2 class="chapter-title"><span class="it">Bathing</span> in Art, Music & Sounds</h2>
+
+    <div class="prose" style="margin-bottom: 40px;">
+      <p>
+        Rob said it perfectly: <strong>"I want people to <em>bathe</em> in the art and the music and the sounds."</strong>
+        Not consume. Not engage. Not interact. <em>Bathe.</em>
+      </p>
+      <p>
+        The word matters. When you bathe in something, you are surrounded by it.
+        It covers you. It changes your temperature. It makes you feel clean, or warm, or alive.
+        You don't consume a bath — <strong>the bath holds you.</strong>
+      </p>
+      <p>
+        Every other music platform was designed for <span class="g">active consumption</span> —
+        find a song, play it, skip it, add it to a playlist. The model is transactional.
+        You are the customer. The music is the product.
+      </p>
+      <p>
+        The NOIZY Music World is designed for <span class="g">passive immersion</span>.
+        You open a room and let it surround you. You don't have to choose.
+        You don't have to decide. The museum breathes, and you breathe with it.
+        For someone managing chronic pain, managing a disability, managing the weight of being human —
+        <strong>this is not a luxury. This is access to something that heals.</strong>
+      </p>
+    </div>
+
+    <div class="bath-declaration">
+      <div class="bath-label">The NOIZY Music World Promise</div>
+      <div class="bath-quote">
+        "Come in. <em>Sit down.</em> Let the voices of <span class="g">ten thousand creators</span> surround you. You don't have to do anything. The music was made for you. The voices were preserved for you. <em>Bathe in it.</em> This is what human creativity sounds like when it is held with care."
+      </div>
+      <div class="bath-attribution">NOIZY MUSIC WORLD & MUSEUM · NOIZY.AI · RSP_001 VISION</div>
+    </div>
+  </section>
+
+
+  <!-- ─── FINAL DECLARATION ─── -->
+  <div class="final-declaration" id="ch-final">
+    <div class="fd-eyebrow">RSP_001 · DREAMCHAMBER DECLARATION · NOIZYFISH INC.</div>
+    <div class="fd-title">
+      The Museum Is<br><span class="gold">Already Open</span><br>In the DreamChamber
+    </div>
+    <div class="fd-body">
+      The NOIZY Music World & Museum exists in the DreamChamber today —
+      fully realized in vision, ready to be built in code.
+      It is not a feature. It is not a product. It is the
+      <strong>reason the infrastructure exists.</strong>
+      <br><br>
+      Every Never Clause, every cryptographic consent key, every provenance record,
+      every 75% royalty paid — all of it exists so that the Museum has something real to hold.
+      So that when a person comes here in 2026, or 2036, or 2126,
+      they find <span class="g">human voices, preserved with dignity,
+      breathing with life, available to everyone who needs to feel something.</span>
+      <br><br>
+      That is the NOIZY Music World.
+      That is what we are building.
+      <strong>No limits. No boundaries. Safe landing.</strong>
+    </div>
+    <div class="fd-sig">
+      <span>ROB PLOWMAN · RSP_001</span>
+      <span>NOIZYFISH INC. · OTTAWA · 2026</span>
+      <span>DREAMCHAMBER · GABRIEL_V3 · 10.90.90.20</span>
+      <span class="grf">GORUNFREE — BECAUSE IT IS THE ONLY WAY</span>
+    </div>
+  </div>
+
+</main>
+
+<script>
+// ─── SONIC CANVAS ───
+const canvas = document.getElementById('sonic-canvas');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+// Stars
+const STARS = Array.from({length: 200}, () => ({
+  x: Math.random() * 2000,
+  y: Math.random() * 2000,
+  r: Math.random() * 1.2 + 0.2,
+  op: Math.random() * 0.4 + 0.05
+}));
+
+// Sonic rings
+const RINGS = Array.from({length: 6}, (_, i) => ({
+  cx: 0.5 + (Math.random()-0.5)*0.4,
+  cy: 0.3 + i*0.12,
+  r: 60 + i*40,
+  maxR: 180 + i*80,
+  speed: 0.3 + Math.random()*0.4,
+  op: 0.06 + Math.random()*0.06,
+  color: ['#00ff88','#f5c842','#a78bfa','#22d3ee','#ff9a3c','#00ff88'][i]
+}));
+
+// Floating voice nodes
+const NODES = Array.from({length: 14}, () => ({
+  x: Math.random() * window.innerWidth,
+  y: Math.random() * window.innerHeight,
+  vx: (Math.random()-0.5)*0.2,
+  vy: (Math.random()-0.5)*0.2,
+  r: Math.random()*3 + 1.5,
+  op: Math.random()*0.3+0.1,
+  color: ['#00ff88','#f5c842','#a78bfa','#22d3ee'][Math.floor(Math.random()*4)]
+}));
+
+let t = 0;
+
+function draw() {
+  const W = canvas.width, H = canvas.height;
+  ctx.clearRect(0,0,W,H);
+
+  // Stars
+  STARS.forEach(s => {
+    const sx = s.x % W;
+    const sy = s.y % H;
+    ctx.beginPath();
+    ctx.arc(sx, sy, s.r, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(180,210,255,${s.op})`;
+    ctx.fill();
+  });
+
+  // Nebula patches
+  const patches = [
+    {x:0.15, y:0.25, r:200, c:'rgba(167,139,250,0.03)'},
+    {x:0.8, y:0.6, r:180, c:'rgba(0,255,136,0.025)'},
+    {x:0.5, y:0.85, r:150, c:'rgba(245,200,66,0.02)'},
+  ];
+  patches.forEach(p => {
+    const g = ctx.createRadialGradient(W*p.x, H*p.y, 0, W*p.x, H*p.y, p.r);
+    g.addColorStop(0, p.c);
+    g.addColorStop(1, 'transparent');
+    ctx.fillStyle = g;
+    ctx.fillRect(0,0,W,H);
+  });
+
+  // Sonic expansion rings
+  RINGS.forEach(ring => {
+    const x = ring.cx * W;
+    const y = ring.cy * H;
+    const phase = (t * ring.speed * 0.01) % 1;
+    const r = ring.r + (ring.maxR - ring.r) * phase;
+    const alpha = ring.op * (1 - phase);
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI*2);
+    ctx.strokeStyle = ring.color;
+    ctx.globalAlpha = alpha;
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+  });
+
+  // Soft waveform
+  ctx.beginPath();
+  ctx.strokeStyle = 'rgba(0,255,136,0.04)';
+  ctx.lineWidth = 1.5;
+  for (let x=0; x<W; x+=2) {
+    const y = H*0.92 + Math.sin(x*0.007 + t*0.008)*25 + Math.sin(x*0.018 + t*0.014)*12;
+    x===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  }
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.strokeStyle = 'rgba(245,200,66,0.03)';
+  for (let x=0; x<W; x+=2) {
+    const y = H*0.06 + Math.sin(x*0.009 + t*0.006 + 2)*20;
+    x===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  }
+  ctx.stroke();
+
+  // Voice nodes
+  NODES.forEach(n => {
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
+    ctx.globalAlpha = n.op + Math.sin(t*0.03)*0.06;
+    ctx.fillStyle = n.color;
+    ctx.fill();
+    ctx.globalAlpha = 1;
+    n.x += n.vx; n.y += n.vy;
+    if (n.x<0||n.x>W) n.vx*=-1;
+    if (n.y<0||n.y>H) n.vy*=-1;
+  });
+
+  t++;
+  requestAnimationFrame(draw);
+}
+draw();
+
+// ─── Chapter nav active state ───
+const sections = document.querySelectorAll('[id^="ch-"]');
+const dots = document.querySelectorAll('.ch-dot');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      const idx = Array.from(sections).indexOf(document.getElementById(id));
+      dots.forEach((d,i) => d.classList.toggle('active', i === idx));
+    }
+  });
+}, { threshold: 0.3 });
+
+sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

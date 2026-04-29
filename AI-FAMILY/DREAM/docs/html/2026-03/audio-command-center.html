@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audio Command Center — Robert Stephen Plowman</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface2: #1a1a26;
+    --border: #2a2a3a;
+    --text: #e4e4ef;
+    --text-dim: #8888a0;
+    --accent: #6366f1;
+    --accent-glow: rgba(99, 102, 241, 0.3);
+    --green: #22c55e;
+    --green-glow: rgba(34, 197, 94, 0.3);
+    --red: #ef4444;
+    --red-glow: rgba(239, 68, 68, 0.3);
+    --yellow: #eab308;
+    --cyan: #06b6d4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 2rem;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .header h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, #6366f1, #06b6d4, #22c55e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+  }
+
+  .header .subtitle {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    font-weight: 400;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.75rem;
+    transition: all 0.2s ease;
+  }
+
+  .card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 30px var(--accent-glow);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .card-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+
+  .card-icon.red { background: var(--red-glow); }
+  .card-icon.green { background: var(--green-glow); }
+  .card-icon.blue { background: var(--accent-glow); }
+  .card-icon.cyan { background: rgba(6, 182, 212, 0.2); }
+
+  .card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .card-desc {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+  }
+
+  .shortcut-list {
+    list-style: none;
+  }
+
+  .shortcut-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+  }
+
+  .shortcut-list li:last-child { border-bottom: none; }
+
+  .shortcut-label { color: var(--text); }
+
+  .kbd {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.2rem 0.55rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--cyan);
+    white-space: nowrap;
+  }
+
+  .cmd-block {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-top: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    line-height: 1.7;
+    overflow-x: auto;
+  }
+
+  .cmd-block .comment { color: var(--text-dim); }
+  .cmd-block .command { color: var(--green); }
+  .cmd-block .flag { color: var(--cyan); }
+
+  .device-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .device-card:last-child { margin-bottom: 0; }
+
+  .device-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .device-role {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 0.4rem;
+  }
+
+  .device-role.primary { background: var(--green-glow); color: var(--green); }
+  .device-role.secondary { background: var(--accent-glow); color: #818cf8; }
+
+  .device-detail {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .setup-steps {
+    counter-reset: step;
+    list-style: none;
+  }
+
+  .setup-steps li {
+    counter-increment: step;
+    position: relative;
+    padding: 0.5rem 0 0.5rem 2.2rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--text);
+  }
+
+  .setup-steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0.45rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: var(--accent-glow);
+    color: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .highlight { color: var(--cyan); font-weight: 500; }
+
+  .full-width {
+    grid-column: 1 / -1;
+  }
+
+  .file-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .file-item {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem;
+  }
+
+  .file-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--green);
+    margin-bottom: 0.3rem;
+  }
+
+  .file-desc {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+
+  .status-bar {
+    max-width: 1200px;
+    margin: 2rem auto 0;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Audio Command Center</h1>
+  <div class="subtitle">M2 Ultra &middot; Robert Stephen Plowman &middot; Full Audio Control Toolkit</div>
+</div>
+
+<div class="grid">
+
+  <!-- DEVICE MAP -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon cyan">&#127908;</div>
+      <div>
+        <div class="card-title">Device Map</div>
+        <div class="card-desc">Hardwired to M2 Ultra</div>
+      </div>
+    </div>
+
+    <div class="device-card">
+      <div class="device-role primary">Primary Mic</div>
+      <div class="device-name">Logitech USB 1080p Camera</div>
+      <div class="device-detail">Connection: USB direct to M2 Ultra<br>Role: Default input, clock source for aggregate device</div>
+    </div>
+
+    <div class="device-card">
+      <div class="device-role secondary">Secondary Mic</div>
+      <div class="device-name">iPad 12.9" (2nd Gen)</div>
+      <div class="device-detail">Connection: USB/Lightning hardwired to M2 Ultra<br>Role: Secondary input via Continuity Camera, drift correction enabled</div>
+    </div>
+  </div>
+
+  <!-- KEYBOARD SHORTCUTS -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon blue">&#9000;</div>
+      <div>
+        <div class="card-title">Global Shortcuts</div>
+        <div class="card-desc">Hammerspoon — works in any app</div>
+      </div>
+    </div>
+
+    <ul class="shortcut-list">
+      <li>
+        <span class="shortcut-label">Mute All Mics</span>
+        <span class="kbd">&#8984; &#8679; M</span>
+      </li>
+      <li>
+        <span class="shortcut-label">Unmute (75%)</span>
+        <span class="kbd">&#8984; &#8679; U</span>
+      </li>
+      <li>
+        <span class="shortcut-label">Switch → Logitech</span>
+        <span class="kbd">&#8984; &#8679; 1</span>
+      </li>
+      <li>
+        <span class="shortcut-label">Switch → iPad</span>
+        <span class="kbd">&#8984; &#8679; 2</span>
+      </li>
+      <li>
+        <span class="shortcut-label">Boot Mode</span>
+        <span class="kbd">&#8984; &#8679; 0</span>
+      </li>
+      <li>
+        <span class="shortcut-label">Show Status</span>
+        <span class="kbd">&#8984; &#8679; S</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- TERMINAL COMMANDS -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon green">&#9654;</div>
+      <div>
+        <div class="card-title">Terminal Commands</div>
+        <div class="card-desc">audio-control.sh quick reference</div>
+      </div>
+    </div>
+
+    <div class="cmd-block">
+      <span class="comment"># First-time setup</span><br>
+      <span class="command">./audio-control.sh</span> <span class="flag">--setup</span><br><br>
+      <span class="comment"># Daily operations</span><br>
+      <span class="command">./audio-control.sh</span> <span class="flag">--boot</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># mute + Logitech</span><br>
+      <span class="command">./audio-control.sh</span> <span class="flag">--mute-all</span>&nbsp;&nbsp;<span class="comment"># kill all mics</span><br>
+      <span class="command">./audio-control.sh</span> <span class="flag">--logitech</span>&nbsp;&nbsp;<span class="comment"># go live: Logitech</span><br>
+      <span class="command">./audio-control.sh</span> <span class="flag">--ipad</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># go live: iPad</span><br>
+      <span class="command">./audio-control.sh</span> <span class="flag">--unmute 75</span>&nbsp;<span class="comment"># unmute to 75%</span><br>
+      <span class="command">./audio-control.sh</span> <span class="flag">--status</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># full status</span><br>
+      <span class="command">./audio-control.sh</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># interactive menu</span>
+    </div>
+  </div>
+
+  <!-- SETUP CHECKLIST -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon red">&#9881;</div>
+      <div>
+        <div class="card-title">Setup Checklist</div>
+        <div class="card-desc">One-time configuration on M2 Ultra</div>
+      </div>
+    </div>
+
+    <ol class="setup-steps">
+      <li>Install Homebrew (if not already installed)</li>
+      <li>Run <span class="highlight">brew install switchaudio-osx</span></li>
+      <li>Run <span class="highlight">brew install --cask hammerspoon</span></li>
+      <li>Copy <span class="highlight">hammerspoon-init.lua</span> → <span class="highlight">~/.hammerspoon/init.lua</span></li>
+      <li>Copy <span class="highlight">audio-control.sh</span> to your preferred location</li>
+      <li>Run <span class="highlight">chmod +x audio-control.sh</span></li>
+      <li>Run <span class="highlight">./audio-control.sh --setup</span> (installs login agent)</li>
+      <li>Run <span class="highlight">./create-aggregate-device.sh</span> to combine both mics</li>
+      <li>Open Hammerspoon → Reload Config</li>
+      <li>Test: <span class="highlight">Cmd+Shift+S</span> should show status overlay</li>
+    </ol>
+  </div>
+
+  <!-- FILES DELIVERED -->
+  <div class="card full-width">
+    <div class="card-header">
+      <div class="card-icon cyan">&#128230;</div>
+      <div>
+        <div class="card-title">Delivered Files</div>
+        <div class="card-desc">Your complete audio control toolkit</div>
+      </div>
+    </div>
+
+    <div class="file-list">
+      <div class="file-item">
+        <div class="file-name">audio-control.sh</div>
+        <div class="file-desc">428-line interactive audio manager. CLI and menu mode. Mute/unmute/switch devices. Auto-mute on login via Launch Agent.</div>
+      </div>
+      <div class="file-item">
+        <div class="file-name">hammerspoon-init.lua</div>
+        <div class="file-desc">Global keyboard shortcuts. Cmd+Shift+M/U/1/2/0/S. Menu bar mic indicator. Device connect/disconnect alerts.</div>
+      </div>
+      <div class="file-item">
+        <div class="file-name">create-aggregate-device.sh</div>
+        <div class="file-desc">Guided Aggregate Audio Device creator. Combines Logitech + iPad into "RSP Studio Input". Opens Audio MIDI Setup with step-by-step instructions.</div>
+      </div>
+      <div class="file-item">
+        <div class="file-name">audio-command-center.html</div>
+        <div class="file-desc">This reference dashboard. Your cheat sheet for every command, shortcut, and setup step. Open in any browser.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="status-bar">
+  Audio Command Center &middot; Built for Robert Stephen Plowman &middot; M2 Ultra &middot; All mics muted by default &middot; Nothing goes live without your say
+</div>
+
+</body>
+</html>

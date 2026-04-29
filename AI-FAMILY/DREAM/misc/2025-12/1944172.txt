@@ -1,0 +1,56 @@
+<root>
+    <CtrlPanel style="MixerFXPanel" rect="[x:84 y:23 w:228 h:228]" id="0">
+        <CtrlPanel name="MixerFXTitlePanel" rect="[x:0 y:0 w:228 h:50]" id="0" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:31 y:56 w:7 h:10]" id="100000" text="0" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:192 y:56 w:12 h:10]" id="100000" text="0.6" />
+        <CtrlMeter name="Filter Mod_display_EnvOut" style="MixerFXMeter_FilterMod" rect="[x:64 y:59 w:100 h:60]" id="100000" />
+        <CtrlPanel style="MixerFXLargeKnobNotches" rect="[x:11 y:64 w:58 h:58]" id="0">
+            <CtrlKnob name="Filter Mod_Pitch" style="MixerFXKnobLarge" rect="[x:3 y:3 w:53 h:53]" id="1002" />
+        </CtrlPanel>
+        <CtrlPanel style="MixerFXLargeKnobNotches" rect="[x:175 y:64 w:58 h:58]" id="0">
+            <CtrlKnob name="Filter Mod_Res" style="MixerFXKnobLarge" rect="[x:3 y:3 w:53 h:53]" id="1003" />
+        </CtrlPanel>
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:13 y:101 w:8 h:10]" id="100000" text="-6" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:45 y:101 w:11 h:10]" id="100000" text="+6" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:178 y:101 w:7 h:10]" id="100000" text="0" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:210 y:101 w:12 h:10]" id="100000" text="1.2" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:27 y:104 w:15 h:10]" id="100000" text="Oct" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:188 y:109 w:19 h:15]" id="2003" text="Res" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:22 y:111 w:28 h:15]" id="2002" text="Pitch" />
+        <CtrlPanel name="CtrlPanel" style="MixerFXMiniKnobNotches" rect="[x:60 y:123 w:32 h:32]" id="100000">
+            <CtrlKnob name="Filter Mod_Attack" style="MixerFXKnobSmall" rect="[x:5 y:4 w:29 h:29]" id="1005" />
+        </CtrlPanel>
+        <CtrlPanel name="CtrlPanel" style="MixerFXMiniKnobNotches" rect="[x:138 y:123 w:32 h:32]" id="100000">
+            <CtrlKnob name="Filter Mod_Release" style="MixerFXKnobSmall" rect="[x:5 y:4 w:29 h:29]" id="1006" />
+        </CtrlPanel>
+        <CtrlSlider name="Filter Mod_Drive" style="MixerFXHistogramV" rect="[x:16 y:127 w:15 h:70]" id="1000" />
+        <CtrlSlider name="Filter Mod_OutDrive" style="MixerFXHistogramV" rect="[x:197 y:127 w:15 h:70]" id="1005" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:58 y:148 w:8 h:10]" id="100000" text=".1" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:88 y:148 w:11 h:10]" id="100000" text="1s" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:138 y:148 w:7 h:10]" id="100000" text="1" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:166 y:148 w:14 h:10]" id="100000" text="10s" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:62 y:154 w:34 h:10]" id="2005" text="Attack" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:137 y:155 w:40 h:10]" id="2006" text="Release" />
+        <CtrlComboBox name="Filter Mod_Mode" style="MixerFXCombo" rect="[x:88 y:167 w:50 h:14]" id="1001" />
+        <CtrlPanel name="CtrlPanel" style="MixerFXMiniKnobNotches" rect="[x:42 y:168 w:32 h:32]" id="100000">
+            <CtrlKnob name="Filter Mod_FMDepth" style="MixerFXKnobSmall" rect="[x:5 y:4 w:29 h:29]" id="1001" />
+        </CtrlPanel>
+        <CtrlPanel name="CtrlPanel" style="MixerFXMiniKnobNotches" rect="[x:154 y:168 w:32 h:32]" id="100000">
+            <CtrlKnob name="Filter Mod_EnvDepth" style="MixerFXKnobSmall" rect="[x:5 y:4 w:29 h:29]" id="1009" />
+        </CtrlPanel>
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:101 y:181 w:28 h:15]" id="2001" text="Mode" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:42 y:194 w:7 h:10]" id="100000" text="0" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:69 y:194 w:14 h:10]" id="100000" text="100" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:144 y:194 w:16 h:10]" id="100000" text="-100" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:179 y:194 w:17 h:10]" id="100000" text="+100" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:19 y:197 w:12 h:15]" id="2000" text="In" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:50 y:197 w:17 h:15]" id="2008" text="FM" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:161 y:197 w:19 h:15]" id="2009" text="Env" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:197 y:197 w:19 h:15]" id="2004" text="Out" />
+        <CtrlImageView name="dcamLogo" style="MixerFXLogoDCAM" rect="[x:90 y:200 w:46 h:16]" id="100000" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:13 y:206 w:26 h:15]" id="2000" text="Drive" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:45 y:206 w:29 h:15]" id="2008" text="Depth" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:157 y:206 w:29 h:15]" id="2009" text="Depth" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:194 y:206 w:27 h:15]" id="2004" text="Drive" />
+    </CtrlPanel>
+</root>

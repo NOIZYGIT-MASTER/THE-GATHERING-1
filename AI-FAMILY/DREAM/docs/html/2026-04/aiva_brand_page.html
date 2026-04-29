@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A.I.V.A. — Artificially Intelligent Voice Acting | NOIZYVOX</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#EF9F27;--black:#060608;--ink:#0D0D0F;--surface:#141416;--border:#222228;--text:#F0EDE8;--muted:#888780;--dim:#444441;--teal:#1D9E75;--coral:#D85A30}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--black);color:var(--text);font-family:'Syne',sans-serif;overflow-x:hidden}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:grid;place-items:center;text-align:center;padding:6rem 2rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,rgba(239,159,39,0.08) 0%,transparent 55%)}
+.aiva-wordmark{font-family:'DM Serif Display',serif;font-size:clamp(80px,14vw,180px);line-height:0.85;letter-spacing:-6px;margin-bottom:2rem;position:relative}
+.aiva-a{color:var(--gold)}
+.aiva-dot{color:var(--gold);font-size:0.4em;vertical-align:middle}
+.aiva-sub{font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:3rem}
+.aiva-sub strong{color:var(--gold)}
+.aiva-tagline{font-family:'DM Serif Display',serif;font-size:clamp(20px,3vw,32px);color:var(--text);max-width:700px;margin:0 auto 3rem;line-height:1.2;letter-spacing:-0.5px}
+.aiva-tagline em{color:var(--gold);font-style:italic}
+.hero-badges{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:3rem}
+.badge{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:8px 16px;border:1px solid;border-radius:0}
+.b-gold{border-color:var(--gold);color:var(--gold)}
+.b-teal{border-color:var(--teal);color:var(--teal)}
+.b-muted{border-color:var(--dim);color:var(--muted)}
+.cta-primary{background:var(--gold);color:var(--black);font-family:'Syne',sans-serif;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:18px 44px;border:none;cursor:pointer;transition:background .15s;display:inline-block;text-decoration:none}
+.cta-primary:hover{background:#FAC775}
+
+/* ── WHAT IS AIVA ── */
+.what-section{display:grid;grid-template-columns:1fr 1fr;min-height:80vh}
+.what-left{background:var(--gold);padding:5rem 4rem;display:flex;flex-direction:column;justify-content:center}
+.what-left h2{font-family:'DM Serif Display',serif;font-size:clamp(32px,4vw,52px);color:var(--black);letter-spacing:-1px;line-height:1.05;margin-bottom:1.5rem}
+.what-left p{font-size:15px;color:rgba(0,0,0,0.65);line-height:1.8;margin-bottom:1rem}
+.what-right{background:var(--surface);padding:5rem 4rem;display:flex;flex-direction:column;justify-content:center;border-left:1px solid var(--border)}
+.mono-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem}
+.def-block{margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--border)}
+.def-block:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.def-term{font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px}
+.def-text{font-size:13px;color:var(--muted);line-height:1.6}
+.def-text code{font-family:'Space Mono',monospace;font-size:11px;background:var(--ink);padding:1px 6px;border-radius:2px;color:var(--gold)}
+
+/* ── HOW AIVA WORKS ── */
+.flow-section{padding:6rem 3rem;background:var(--ink)}
+.flow-section h2{font-family:'DM Serif Display',serif;font-size:clamp(28px,4vw,48px);text-align:center;margin-bottom:4rem;letter-spacing:-1px}
+.flow{display:flex;align-items:flex-start;gap:0;overflow-x:auto;padding-bottom:1rem}
+.flow-step{flex:1;min-width:160px;text-align:center;position:relative;padding:0 1rem}
+.flow-step::after{content:'→';position:absolute;right:-14px;top:28px;color:var(--gold);font-size:18px;font-family:'Space Mono',monospace}
+.flow-step:last-child::after{display:none}
+.step-circle{width:56px;height:56px;border-radius:50%;background:var(--surface);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-family:'DM Serif Display',serif;font-size:20px;color:var(--gold)}
+.step-name{font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px}
+.step-desc{font-size:11px;color:var(--muted);line-height:1.5;font-family:'Space Mono',monospace}
+
+/* ── USE CASES ── */
+.use-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1px;background:var(--border);border:1px solid var(--border)}
+.use-card{background:var(--ink);padding:2rem;transition:background .2s;cursor:default}
+.use-card:hover{background:var(--surface)}
+.use-icon{font-size:24px;margin-bottom:12px}
+.use-title{font-size:14px;font-weight:700;color:var(--gold);margin-bottom:8px}
+.use-desc{font-size:12px;color:var(--muted);line-height:1.6}
+.use-tag{display:inline-block;font-family:'Space Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;margin-top:10px;border:1px solid var(--dim);color:var(--muted)}
+.use-tag.allowed{border-color:var(--teal);color:var(--teal)}
+.use-tag.ncp{border-color:var(--gold);color:var(--gold)}
+
+/* ── PROTECTION ── */
+.protection{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border)}
+.protect-card{background:var(--ink);padding:2.5rem;display:flex;gap:16px}
+.protect-icon{width:40px;height:40px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px;border:1px solid var(--border)}
+.protect-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px}
+.protect-desc{font-size:12px;color:var(--muted);line-height:1.5}
+
+/* ── TICKER ── */
+.ticker{background:var(--black);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:10px 0;overflow:hidden;white-space:nowrap}
+.ticker-inner{display:inline-flex;gap:3rem;animation:scroll 24s linear infinite}
+.ticker-inner span{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold)}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── CTA ── */
+.final-cta{background:var(--gold);padding:7rem 3rem;text-align:center}
+.final-cta h2{font-family:'DM Serif Display',serif;font-size:clamp(32px,5vw,64px);color:var(--black);letter-spacing:-2px;margin-bottom:1rem}
+.final-cta p{color:rgba(0,0,0,0.6);font-size:16px;margin-bottom:3rem;max-width:500px;margin-left:auto;margin-right:auto}
+
+footer{background:var(--black);border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-family:'DM Serif Display',serif;font-size:16px;color:var(--gold)}
+.footer-links{display:flex;gap:2rem}
+.footer-links a{font-size:10px;font-family:'Space Mono',monospace;color:var(--muted);text-decoration:none;letter-spacing:.08em;transition:color .2s}
+.footer-links a:hover{color:var(--text)}
+.footer-copy{font-size:10px;font-family:'Space Mono',monospace;color:var(--dim)}
+
+@media(max-width:768px){
+  .what-section{grid-template-columns:1fr}.protection{grid-template-columns:1fr}
+  .what-left,.what-right{padding:3rem 1.5rem}
+  .flow{flex-direction:column;align-items:center}.flow-step::after{content:'↓';right:auto;top:auto;bottom:-20px;left:50%;transform:translateX(-50%)}
+  .flow-section,.final-cta{padding:4rem 1.5rem}
+  footer{padding:2rem 1.5rem;flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="aiva-wordmark">
+      <span class="aiva-a">A</span><span class="aiva-dot">.</span><span class="aiva-a">I</span><span class="aiva-dot">.</span><span class="aiva-a">V</span><span class="aiva-dot">.</span><span class="aiva-a">A</span><span class="aiva-dot">.</span>
+    </div>
+    <div class="aiva-sub"><strong>Artificially Intelligent</strong> Voice Acting</div>
+    <div class="aiva-tagline">AI does the scale.<br><em>You keep the sovereignty.</em></div>
+    <div class="hero-badges">
+      <div class="badge b-gold">75/25 Guaranteed</div>
+      <div class="badge b-teal">NCP v1.0 Protected</div>
+      <div class="badge b-gold">Voice Estate Included</div>
+      <div class="badge b-muted">GABRIEL Enforced</div>
+    </div>
+    <a href="#join" class="cta-primary">Apply to A.I.V.A. Guild →</a>
+  </div>
+</section>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>A.I.V.A.</span><span>·</span><span>Your Voice · Your Rules · Your 75%</span><span>·</span>
+    <span>AI Does the Scale</span><span>·</span><span>You Keep the Sovereignty</span><span>·</span>
+    <span>NCP v1.0 — Consent-as-Code</span><span>·</span><span>GABRIEL Pays Automatically</span><span>·</span>
+    <span>A.I.V.A.</span><span>·</span><span>Your Voice · Your Rules · Your 75%</span><span>·</span>
+    <span>AI Does the Scale</span><span>·</span><span>You Keep the Sovereignty</span><span>·</span>
+    <span>NCP v1.0 — Consent-as-Code</span><span>·</span><span>GABRIEL Pays Automatically</span><span>·</span>
+  </div>
+</div>
+
+<!-- WHAT IS AIVA -->
+<div class="what-section">
+  <div class="what-left">
+    <h2>AI amplifies your voice.<br>It doesn't own it.</h2>
+    <p>A.I.V.A. is the commercial layer of NOIZYVOX. You record your Voice DNA once — the phoneme matrix, emotional ranges, character archetypes. A.I.V.A. uses cleared AI models to deliver your voice at scale, in 17 languages, for every permitted use case.</p>
+    <p>The AI works. You earn. GABRIEL enforces the 75/25 split automatically. Your voice estate grows every time A.I.V.A. speaks on your behalf.</p>
+  </div>
+  <div class="what-right">
+    <div class="mono-label">What A.I.V.A. Is — Exactly</div>
+    <div class="def-block">
+      <div class="def-term">Cleared AI Models Only</div>
+      <div class="def-text">XTTS v2 · RVC · Librosa · pedalboard — all Apache 2.0 / cleared for commercial use. <code>MusicGen</code> and <code>MaskGCT</code> BLOCKED pending board review. No ambiguity. No surprises.</div>
+    </div>
+    <div class="def-block">
+      <div class="def-term">Consent Before Synthesis</div>
+      <div class="def-text">Every A.I.V.A. output maps to a specific permitted use case in your NCP v1.0 consent record. GABRIEL checks the consent table before synthesis. No match = BLOCK. Not "pending review." BLOCK.</div>
+    </div>
+    <div class="def-block">
+      <div class="def-term">NOIZY PROOF on Every File</div>
+      <div class="def-text">Every A.I.V.A. output carries a C2PA provenance stamp. The original artist, the consent ID, the timestamp — unfakeable, permanent, inheritable.</div>
+    </div>
+    <div class="def-block">
+      <div class="def-term">17 Languages. One Voice Estate.</div>
+      <div class="def-text">Your voice in English, French, Spanish, Japanese — still your voice. Still your 75%. Still your estate. GABRIEL routes royalties to your account in every market.</div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="flow-section">
+  <h2>How A.I.V.A. Works</h2>
+  <div class="flow">
+    <div class="flow-step">
+      <div class="step-circle">1</div>
+      <div class="step-name">Record Voice DNA</div>
+      <div class="step-desc">U87 · 48kHz/32-bit<br>Phoneme matrix<br>5 emotions · 3 archetypes</div>
+    </div>
+    <div class="flow-step">
+      <div class="step-circle">2</div>
+      <div class="step-name">Sign NCP v1.0</div>
+      <div class="step-desc">Lock every<br>permitted use case<br>before synthesis</div>
+    </div>
+    <div class="flow-step">
+      <div class="step-circle">3</div>
+      <div class="step-name">GABRIEL Trains</div>
+      <div class="step-desc">XTTS v2 + RVC<br>Voice model built<br>from your DNA</div>
+    </div>
+    <div class="flow-step">
+      <div class="step-circle">4</div>
+      <div class="step-name">Client Requests</div>
+      <div class="step-desc">GABRIEL checks NCP<br>Consent match → GO<br>No match → BLOCK</div>
+    </div>
+    <div class="flow-step">
+      <div class="step-circle">5</div>
+      <div class="step-name">PROOF Stamped</div>
+      <div class="step-desc">C2PA provenance<br>on every output<br>file, forever</div>
+    </div>
+    <div class="flow-step">
+      <div class="step-circle">6</div>
+      <div class="step-name">75% Lands</div>
+      <div class="step-desc">Stripe auto-pays<br>No invoice needed<br>Estate grows</div>
+    </div>
+  </div>
+</div>
+
+<!-- USE CASES -->
+<div style="padding:6rem 3rem;background:var(--black)">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="mono-label" style="margin-bottom:2rem">Permitted Use Cases — Defined by You in NCP v1.0</div>
+    <div class="use-grid">
+      <div class="use-card">
+        <div class="use-icon">📺</div>
+        <div class="use-title">Commercial Advertising</div>
+        <div class="use-desc">Brand campaigns, radio spots, digital ads. You specify which brands, categories, and markets you'll permit. Regional exclusives available.</div>
+        <div class="use-tag ncp">NCP controlled</div>
+      </div>
+      <div class="use-card">
+        <div class="use-icon">🎮</div>
+        <div class="use-title">Video Games</div>
+        <div class="use-desc">Character voices, narration, ambient dialogue. M-rating gating available. Violence thresholds you set. Console, mobile, PC — each a separate consent flag.</div>
+        <div class="use-tag ncp">NCP controlled</div>
+      </div>
+      <div class="use-card">
+        <div class="use-icon">📚</div>
+        <div class="use-title">Audiobooks + Narration</div>
+        <div class="use-desc">Long-form narration, educational content, documentary. Genre restrictions available — permit literary fiction but block horror, for example.</div>
+        <div class="use-tag allowed">Common approval</div>
+      </div>
+      <div class="use-card">
+        <div class="use-icon">🌐</div>
+        <div class="use-title">17-Language Synthesis</div>
+        <div class="use-desc">Your voice, synthesized in English, French, Spanish, Mandarin, Japanese, Korean, and 11 more. Per-language consent flags. Separate royalty per market.</div>
+        <div class="use-tag ncp">NCP controlled</div>
+      </div>
+      <div class="use-card">
+        <div class="use-icon">🤖</div>
+        <div class="use-title">AI Products + Assistants</div>
+        <div class="use-desc">Smart speakers, AI companions, customer service. Highest royalty tier. Full disclosure to end users required. NOIZY PROOF embedded in deployment.</div>
+        <div class="use-tag ncp">NCP controlled</div>
+      </div>
+      <div class="use-card">
+        <div class="use-icon">🏛️</div>
+        <div class="use-title">Posthumous Use</div>
+        <div class="use-desc">Your estate rules apply exactly as written. Georgia May — or your beneficiary — controls activation. GABRIEL enforces. No family can be surprised.</div>
+        <div class="use-tag ncp">Estate governed</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROTECTION LAYER -->
+<div style="padding:6rem 3rem;background:var(--ink)">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="mono-label" style="margin-bottom:2rem">What A.I.V.A. Protects You From</div>
+    <div class="protection">
+      <div class="protect-card">
+        <div class="protect-icon">🚫</div>
+        <div>
+          <div class="protect-title">Harvest Without Consent</div>
+          <div class="protect-desc">GABRIEL returns BLOCK, not "we'll look into it." If a use case isn't in your NCP record, synthesis never starts.</div>
+        </div>
+      </div>
+      <div class="protect-card">
+        <div class="protect-icon">💰</div>
+        <div>
+          <div class="protect-title">Sub-75% Splits</div>
+          <div class="protect-desc">The 75/25 Plowman Standard is written into GABRIEL's code. No contract renegotiation. No "promotional" rate. 75% is the floor, not the target.</div>
+        </div>
+      </div>
+      <div class="protect-card">
+        <div class="protect-icon">👻</div>
+        <div>
+          <div class="protect-title">Ghost Synthesis</div>
+          <div class="protect-desc">Every A.I.V.A. output carries NOIZY PROOF — C2PA provenance that identifies the original artist, the consent record, and the synthesis timestamp.</div>
+        </div>
+      </div>
+      <div class="protect-card">
+        <div class="protect-icon">🔮</div>
+        <div>
+          <div class="protect-title">Unconsented Posthumous Use</div>
+          <div class="protect-desc">Voice Estate rules are locked at creation. Your beneficiary has full authority. GABRIEL won't activate posthumous synthesis without estate authorization.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL CTA -->
+<div id="join" class="final-cta">
+  <h2>Your voice is<br>infrastructure.</h2>
+  <p>A.I.V.A. treats it that way. Apply to the guild. Record your Voice DNA. Let GABRIEL do the scale work. Keep 75%.</p>
+  <a href="/vox#signup" class="cta-primary">Apply to the Guild →</a>
+</div>
+
+<footer>
+  <div class="footer-logo">A.I.V.A.</div>
+  <div class="footer-links">
+    <a href="/vox">NOIZYVOX</a>
+    <a href="https://noizy.ai">NOIZY Empire</a>
+    <a href="/gospel">Gospel Deal</a>
+    <a href="/consent">NCP v1.0</a>
+  </div>
+  <div class="footer-copy">© 2026 NOIZY Empire · A.I.V.A. is a NOIZYVOX program · rsp@noizy.ai</div>
+</footer>
+
+</body>
+</html>

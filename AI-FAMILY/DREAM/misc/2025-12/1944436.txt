@@ -1,0 +1,88 @@
+<root>
+    <CtrlListBoxStyle name="DataFoundPathListBoxStyle" optNotEditable="true" optNoSelection="true" colText="[r:32 g:32 b:32 a:255]" colBorder="[r:0 g:0 b:0 a:0]" colFill="[r:0 g:0 b:0 a:0]" intRoundedRectRadius="0" intLineSpacing="13">
+        <VFont name="font" vSize="13" fontName="Tahoma" />
+    </CtrlListBoxStyle>
+    <CtrlPanelStyle name="ContentSlightShadedPanel" colBorder="[r:0 g:0 b:0 a:0]" colBorderAlt="[r:0 g:0 b:0 a:0]" colFill="[r:0 g:0 b:0 a:10]" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="15" fontName="Tahoma" />
+    </CtrlPanelStyle>
+    <CtrlButtonStyle name="SummaryCarouselButtonStyle" optMomentary="false">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlPanelStyle name="BFD3FaintOutlineFilled" colBorder="[r:0 g:0 b:0 a:0]" colBorderAlt="[r:0 g:0 b:0 a:0]" colFill="[r:0 g:0 b:0 a:0]" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1" />
+    <CtrlPanelStyle name="BFD3FaintOutlineSelected" colBorder="[r:0 g:0 b:0 a:0]" colBorderAlt="[r:0 g:0 b:0 a:0]" colFill="[r:95 g:194 b:222 a:32]" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1" />
+    <CtrlImageViewStyle name="PrefsWarningImageViewStyle" optBorder="false" intRoundedRectRadius="0" />
+    <CtrlButtonStyle name="DemoDownloadButtonStyle" noDefaultDrawing="true" optDrawText="true" imIconDown="cloud.png" imIconUp="cloud.png" imDisabled="cloud_disabled.png" colTextOn="[r:61 g:61 b:61 a:255]" colTextOff="[r:61 g:61 b:61 a:255]" colTextDisabled="[r:110 g:110 b:110 a:255]">
+        <VFont name="font" vSize="10" fontName="Tahoma" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="DemoDeleteButtonStyle" noDefaultDrawing="true" optDrawText="true" imDown="trash.png" imUp="trash.png" colTextOn="[r:61 g:61 b:61 a:255]" colTextOff="[r:61 g:61 b:61 a:255]" colTextDisabled="[r:110 g:110 b:110 a:255]">
+        <VFont name="font" vSize="10" fontName="Tahoma" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="DemoDownloadDisabledButtonStyle" noDefaultDrawing="true" optDrawText="true" imIconUp="cloud_disabled.png" colTextOn="[r:61 g:61 b:61 a:255]" colTextOff="[r:61 g:61 b:61 a:255]" colTextDisabled="[r:110 g:110 b:110 a:255]">
+        <VFont name="font" vSize="10" fontName="Tahoma" />
+    </CtrlButtonStyle>
+    <CtrlImageViewStyle name="DemoPackImageViewStyle" optBorder="false" optBackground="false" optHQResizing="true" optResizeContractOnly="true" colBorder="[r:0 g:0 b:0 a:0]" colBackground="[r:128 g:128 b:128 a:255]" intRoundedRectRadius="0">
+        <VFont name="font" vSize="12" fontName="Tahoma" />
+    </CtrlImageViewStyle>
+    <CtrlLabelStyle name="DemoPanelHighlightHeadingLabelStyle" colText="[r:171 g:171 b:171 a:255]">
+        <VFont name="font" vSize="14" fontName="Tahoma" />
+    </CtrlLabelStyle>
+    <CtrlListBoxStyle name="DemoPanelHighlightsListBoxStyle" optNotEditable="true" optNoSelection="true" colText="[r:171 g:171 b:171 a:255]" colBorder="[r:0 g:0 b:0 a:0]" colFill="[r:0 g:0 b:0 a:0]" intRoundedRectRadius="0" intLineSpacing="16">
+        <VFont name="font" vSize="12" fontName="Tahoma" />
+    </CtrlListBoxStyle>
+    <CtrlListBoxStyle name="DemoPackTextListBoxStyle" optNotEditable="true" optNoSelection="true" colText="[r:32 g:32 b:32 a:255]" colBorder="[r:0 g:0 b:0 a:0]" colFill="[r:0 g:0 b:0 a:0]" intRoundedRectRadius="0" intLineSpacing="16">
+        <VFont name="font" vSize="12" fontName="Tahoma" />
+    </CtrlListBoxStyle>
+    <CtrlButtonStyle name="PrefsInfoButtonStyle" noDefaultDrawing="true" optMomentary="false" imDown="Info_Large.png" imUp="Info_Large.png">
+        <VFont name="font" vSize="12" fontName="Tahoma" />
+    </CtrlButtonStyle>
+    <CtrlPanel name="FoundPathsLine" style="BFD2InvisiblePanel" rect="[x:0 y:0 w:910 h:500]" id="0">
+        <CtrlImageView name="PackImageSmall" style="DemoPackImageViewStyle" rect="[x:25 y:4 w:50 h:50]" id="100000" />
+        <CtrlImageView name="PackImage" style="DemoPackImageViewStyle" rect="[x:26 y:8 w:271 h:50]" id="100000" />
+        <CtrlPanel name="OperationsPanelDownloaded" style="BFD2InvisiblePanel" rect="[x:719 y:10 w:150 h:54]" id="0">
+            <CtrlButton name="DeleteButton" style="DemoDeleteButtonStyle" rect="[x:57 y:4 w:32 h:32]" id="100000" displayName="Remove DemoPack" />
+            <CtrlLabel name="DiskSizeLabel2" style="BFDEcoStandardBlackCentered" rect="[x:15 y:33 w:120 h:18]" id="100000" zorder="2" text="0 MB" />
+        </CtrlPanel>
+        <CtrlPanel name="OperationsPanelDownloading" style="BFD2InvisiblePanel" rect="[x:719 y:10 w:150 h:46]" id="0">
+            <CtrlButton name="PauseButton" style="InAppPauseResumeButtonStyle" rect="[x:105 y:4 w:20 h:20]" id="100000" displayName="Pause download" zorder="2" text="Ps" />
+            <CtrlButton name="StopButton" style="InAppStopButtonStyle" rect="[x:123 y:4 w:20 h:20]" id="100000" displayName="Stop download" zorder="2" text="St" />
+            <VProgressBar name="ProgressBar" style="BFDEcoProgressBar" rect="[x:4 y:6 w:100 h:15]" id="100001" zorder="2" />
+            <CtrlLabel name="TimeLeftLabel" style="BFDEcoStandardBlack" rect="[x:4 y:24 w:100 h:18]" id="100000" zorder="2" text="0:00 left" />
+        </CtrlPanel>
+        <CtrlPanel name="OperationsPanelNotDownloaded" style="BFD2InvisiblePanel" rect="[x:719 y:10 w:150 h:64]" id="0">
+            <CtrlButton name="DownloadButton" style="DemoDownloadButtonStyle" rect="[x:59 y:4 w:32 h:32]" id="100000" displayName="Download DemoPack" />
+            <CtrlLabel name="DownloadSizeLabel" style="BFDEcoStandardBlackCentered" rect="[x:15 y:33 w:120 h:18]" id="100000" text="0 MB" />
+            <CtrlLabel name="ErrorLabel" style="BFDEcoStandardBlackCentered" rect="[x:15 y:46 w:120 h:18]" id="100000" zorder="2" text="Error" />
+        </CtrlPanel>
+        <CtrlButton name="EnabledButton" style="BFD2TickBoxButtonStyle" rect="[x:5 y:12 w:18 h:15]" id="100000" displayName="Activate/Deactivate DemoPacks in Browser" />
+        <CtrlLabel name="NameLabel" style="BFD2Label14Black" rect="[x:330 y:10 w:300 h:24]" id="100000" text="Pack Name" />
+        <CtrlButton name="ExpandButton" style="PrefsInfoButtonStyle" rect="[x:882 y:29 w:28 h:28]" id="100000" displayName="Show more info for expansion" text="Info" />
+        <CtrlListBox name="HeadingListBox" style="DemoPackTextListBoxStyle" rect="[x:326 y:38 w:340 h:40]" id="100000" />
+        <CtrlPanel name="ExpandedPanel" style="BFD2InvisiblePanel" rect="[x:4 y:73 w:902 h:370]" id="0">
+            <CtrlListBox name="SubHeadingListBox" style="DemoPackTextListBoxStyle" rect="[x:19 y:4 w:636 h:75]" id="100000" />
+            <CtrlPanel name="HighlightsAndLimitationsPanel" style="BFD2DarkVectorPanel" rect="[x:663 y:4 w:239 h:350]" id="100000">
+                <CtrlPanel name="HighlightsPanel" style="BFD2InvisiblePanel" rect="[x:15 y:11 w:308 h:144]" id="0">
+                    <CtrlLabel name="CtrlLabel" style="DemoPanelHighlightHeadingLabelStyle" rect="[x:4 y:4 w:162 h:24]" id="100001" text="Highlights" />
+                    <CtrlListBox name="HighlightsListBox" style="DemoPanelHighlightsListBoxStyle" rect="[x:4 y:40 w:200 h:100]" id="100000" />
+                </CtrlPanel>
+                <CtrlPanel name="LimitationsPanel" style="BFD2InvisiblePanel" rect="[x:15 y:163 w:308 h:144]" id="0">
+                    <CtrlLabel name="CtrlLabel" style="DemoPanelHighlightHeadingLabelStyle" rect="[x:4 y:4 w:162 h:24]" id="100001" text="DemoPack Limitations" />
+                    <CtrlListBox name="LimitationsListBox" style="DemoPanelHighlightsListBoxStyle" rect="[x:4 y:40 w:200 h:100]" id="100000" />
+                </CtrlPanel>
+                <CtrlPanel name="CarouselPanel" style="BFD2InvisiblePanel" rect="[x:63 y:266 w:126 h:74]" id="100000" />
+            </CtrlPanel>
+            <CtrlPanel name="SectionsPanel" style="BFD2InvisiblePanel" rect="[x:8 y:85 w:654 h:241]" id="0">
+                <CtrlPanel name="BuyButtonsPanel" style="BFD2InvisiblePanel" rect="[x:201 y:0 w:326 h:46]" id="0">
+                    <CtrlButton name="PriceButton" style="RecessedButtonMomentaryMultiLine" rect="[x:0 y:0 w:100 h:40]" id="100000" displayName="Click to open web browser to buy expansion" text="Buy £0" />
+                    <CtrlButton name="WebPageButton" style="RecessedButtonMomentary" rect="[x:112 y:0 w:100 h:40]" id="100000" displayName="Click to open expansion&apos;s web page" text="Web Page" />
+                    <CtrlButton name="PromoButton" style="RecessedButtonMomentary" rect="[x:225 y:0 w:100 h:40]" id="100000" displayName="Click to show special offer for this expansion" text="Promo Available!" />
+                </CtrlPanel>
+                <CtrlPanel name="SectionPanel" style="BFD2InvisiblePanel" rect="[x:8 y:50 w:638 h:133]" id="0">
+                    <CtrlListBox name="DescListBox" style="DemoPackTextListBoxStyle" rect="[x:4 y:4 w:430 h:125]" id="100000" />
+                    <CtrlImageView name="SectionImage" style="DemoPackImageViewStyle" rect="[x:438 y:4 w:200 h:125]" id="100000" />
+                </CtrlPanel>
+            </CtrlPanel>
+            <CtrlButton name="CarouselTemplateButton" style="SummaryCarouselButtonStyle" rect="[x:854 y:358 w:24 h:24]" id="100001" />
+        </CtrlPanel>
+        <CtrlPanel name="BarrierLine" rect="[x:10 y:494 w:1114 h:1]" id="1000000" />
+    </CtrlPanel>
+</root>

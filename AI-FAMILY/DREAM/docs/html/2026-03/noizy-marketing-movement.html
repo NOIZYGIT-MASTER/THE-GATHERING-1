@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIZY Marketing Movement — The Creator Sovereignty Campaign</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,900&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Bebas+Neue&display=swap');
+
+  :root {
+    --void:    #010206;
+    --deep:    #030810;
+    --panel:   #070e1a;
+    --card:    #0a1220;
+    --border:  #101e30;
+    --glow:    #1a2e48;
+    --gold:    #e8c84a;
+    --gold2:   #f5dc80;
+    --gold-d:  rgba(232,200,74,0.08);
+    --green:   #00e87a;
+    --green-d: rgba(0,232,122,0.07);
+    --violet:  #b794f4;
+    --violet-d:rgba(183,148,244,0.08);
+    --amber:   #f6a63c;
+    --rose:    #f687b3;
+    --cyan:    #67e8f9;
+    --red:     #ff4466;
+    --red-d:   rgba(255,68,102,0.08);
+    --text:    #b8cce4;
+    --dim:     #3e5570;
+    --bright:  #e8f2ff;
+    --serif:   'Playfair Display', Georgia, serif;
+    --mono:    'Space Mono', monospace;
+    --sans:    'Space Grotesk', sans-serif;
+    --bebas:   'Bebas Neue', sans-serif;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--text);
+    font-family: var(--serif);
+    overflow-x: hidden;
+  }
+
+  /* ─── PULSE CANVAS ─── */
+  #pulse-canvas {
+    position: fixed;
+    inset: 0; z-index: 0;
+    pointer-events: none;
+    opacity: 0.35;
+  }
+
+  /* ─── SIDEBAR ─── */
+  .sidebar {
+    position: fixed;
+    left: 0; top: 0; bottom: 0;
+    width: 240px;
+    background: rgba(1,2,6,0.94);
+    border-right: 1px solid var(--border);
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    padding: 28px 0;
+    backdrop-filter: blur(12px);
+    overflow-y: auto;
+  }
+
+  .sb-logo {
+    padding: 0 20px 22px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 14px;
+  }
+
+  .sb-logo .sb-brand {
+    font-family: var(--bebas);
+    font-size: 22px;
+    color: var(--gold);
+    letter-spacing: 0.18em;
+    display: block;
+  }
+
+  .sb-logo .sb-sub {
+    font-family: var(--mono);
+    font-size: 8px;
+    color: var(--dim);
+    letter-spacing: 0.2em;
+    margin-top: 3px;
+    display: block;
+  }
+
+  .sb-section {
+    padding: 0 20px;
+    margin-bottom: 8px;
+  }
+
+  .sb-section-label {
+    font-family: var(--mono);
+    font-size: 7px;
+    color: var(--dim);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 10px 0 7px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 5px;
+  }
+
+  .sb-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+    margin-bottom: 1px;
+  }
+
+  .sb-link:hover { background: rgba(232,200,74,0.06); }
+  .sb-link.active { background: var(--gold-d); border-left: 2px solid var(--gold); padding-left: 6px; }
+
+  .sb-link .sb-num {
+    font-family: var(--mono);
+    font-size: 8px;
+    color: var(--dim);
+    width: 18px;
+    flex-shrink: 0;
+  }
+
+  .sb-link .sb-text {
+    font-family: var(--sans);
+    font-size: 11px;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .sb-link.active .sb-text { color: var(--gold); }
+
+  .sb-footer {
+    margin-top: auto;
+    padding: 16px 20px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .sb-grf {
+    font-family: var(--bebas);
+    font-size: 13px;
+    color: var(--green);
+    letter-spacing: 0.2em;
+  }
+
+  .sb-rsp {
+    font-family: var(--mono);
+    font-size: 8px;
+    color: var(--dim);
+    letter-spacing: 0.15em;
+    margin-top: 4px;
+  }
+
+  /* ─── MAIN ─── */
+  .content {
+    margin-left: 240px;
+    position: relative;
+    z-index: 10;
+    max-width: 900px;
+    padding: 0 52px 140px;
+  }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 0;
+  }
+
+  .hero-doc {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--dim);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+
+  .hero-title {
+    font-family: var(--bebas);
+    font-size: clamp(60px, 10vw, 130px);
+    color: var(--bright);
+    letter-spacing: 0.05em;
+    line-height: 0.9;
+    margin-bottom: 6px;
+  }
+
+  .hero-title .hl { color: var(--gold); }
+  .hero-title .hr { color: var(--red); }
+  .hero-title .hg { color: var(--green); }
+
+  .hero-subtitle {
+    font-family: var(--serif);
+    font-size: clamp(16px, 2.2vw, 22px);
+    font-style: italic;
+    color: var(--dim);
+    line-height: 1.65;
+    max-width: 560px;
+    margin: 24px 0 44px;
+  }
+
+  .hero-stat-bar {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .hstat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .hstat-num {
+    font-family: var(--bebas);
+    font-size: 42px;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    line-height: 1;
+  }
+
+  .hstat-lbl {
+    font-family: var(--mono);
+    font-size: 8px;
+    color: var(--dim);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .hstat.green .hstat-num { color: var(--green); }
+  .hstat.red .hstat-num { color: var(--red); }
+  .hstat.violet .hstat-num { color: var(--violet); }
+
+  /* ─── RULE ─── */
+  .rule { width: 60px; height: 2px; background: linear-gradient(90deg, var(--gold), transparent); margin: 60px 0 0; }
+  .rule.r { background: linear-gradient(90deg, var(--red), transparent); }
+  .rule.g { background: linear-gradient(90deg, var(--green), transparent); }
+
+  /* ─── SECTIONS ─── */
+  .section {
+    padding: 80px 0 40px;
+    border-top: 1px solid var(--border);
+  }
+
+  .sec-eye {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--dim);
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .sec-eye::before { content:''; width:20px; height:1px; background: var(--gold); }
+  .sec-eye .r { color: var(--red); }
+  .sec-eye .g { color: var(--green); }
+  .sec-eye .y { color: var(--gold); }
+  .sec-eye .v { color: var(--violet); }
+
+  .sec-title {
+    font-family: var(--serif);
+    font-size: clamp(26px, 4.5vw, 52px);
+    font-weight: 900;
+    color: var(--bright);
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+
+  .sec-title .it { font-style: italic; color: var(--gold); }
+  .sec-title .r  { color: var(--red); }
+  .sec-title .g  { color: var(--green); }
+  .sec-title .v  { color: var(--violet); }
+
+  .sec-lead {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-style: italic;
+    color: var(--dim);
+    line-height: 1.75;
+    margin: 18px 0 40px;
+    padding-left: 18px;
+    border-left: 2px solid rgba(232,200,74,0.2);
+    max-width: 640px;
+  }
+
+  /* ─── PROSE ─── */
+  .prose {
+    font-size: 16px;
+    line-height: 1.9;
+    color: var(--text);
+    max-width: 680px;
+  }
+
+  .prose p { margin-bottom: 20px; }
+  .prose strong { color: var(--bright); font-weight: 700; }
+  .prose em { color: var(--gold); font-style: italic; }
+  .prose .r { color: var(--red); }
+  .prose .g { color: var(--green); }
+  .prose .v { color: var(--violet); }
+
+  /* ─── MANIFESTO BLOCK ─── */
+  .manifesto {
+    background: var(--red-d);
+    border: 1px solid rgba(255,68,102,0.18);
+    border-left: 4px solid var(--red);
+    border-radius: 8px;
+    padding: 32px 36px;
+    margin: 40px 0;
+    max-width: 700px;
+  }
+
+  .manifesto .mf-label {
+    font-family: var(--mono);
+    font-size: 8px;
+    color: var(--red);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .manifesto .mf-text {
+    font-family: var(--serif);
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-style: italic;
+    color: var(--bright);
+    line-height: 1.55;
+    font-weight: 700;
+  }
+
+  .manifesto .mf-text em { color: var(--gold); font-style: normal; }
+  .manifesto .mf-text .r { color: var(--red); }
+  .manifesto .mf-text .g { color: var(--green); }
+
+  /* ─── MESSAGE CORE ─── */
+  .msg-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 32px 0;
+    max-width: 760px;
+  }
+
+  @media (max-width: 700px) { .msg-grid { grid-template-columns: 1fr; } }
+
+  .msg-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    transition: border-color 0.2s;
+  }
+
+  .msg-card:hover { border-color: var(--glow); }
+  .msg-card.primary { border-color: rgba(232,200,74,0.25); }
+
+  .msg-tier {
+    font-family: var(--mono);
+    font-size: 7px;
+    color: var(--dim);
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .msg-headline {
+    font-family: var(--bebas);
+    font-size: 22px;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+    line-height: 1.1;
+  }
+
+  .msg-card.red .msg-headline { color: var(--red); }
+  .msg-card.green .msg-headline { color: var(--green); }
+  .msg-card.violet .msg-headline { color: var(--violet); }
+
+  .msg-body {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.65;
+  }
+
+  /* ─── STRATEGY GRID ─── */
+  .strategy-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 820px;
+    margin: 32px 0;
+  }
+
+  .strat {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+
+  .strat:first-child { border-top: 1px solid var(--border); }
+  .strat:hover { background: rgba(255,255,255,0.02); }
+
+  .strat-num {
+    font-family: var(--bebas);
+    font-size: 32px;
+    color: var(--border);
+    width: 64px;
+    flex-shrink: 0;
+    padding: 20px 0 20px 4px;
+    line-height: 1;
+    transition: color 0.2s;
+  }
+
+  .strat:hover .strat-num { color: var(--gold); }
+
+  .strat-body {
+    padding: 20px 20px 20px 0;
+    flex: 1;
+  }
+
+  .strat-tag {
+    font-family: var(--mono);
+    font-size: 7px;
+    color: var(--dim);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .strat-title {
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--bright);
+    margin-bottom: 8px;
+  }
+
+  .strat-desc {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .strat-cta {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--green);
+    margin-top: 8px;
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── PRESSURE CAMPAIGN ─── */
+  .pressure-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    max-width: 820px;
+    margin: 32px 0;
+  }
+
+  @media (max-width: 700px) { .pressure-grid { grid-template-columns: 1fr; } }
+
+  .pc-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 22px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pc-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+
+  .pc-card.red::before { background: var(--red); }
+  .pc-card.gold::before { background: var(--gold); }
+  .pc-card.green::before { background: var(--green); }
+  .pc-card.violet::before { background: var(--violet); }
+  .pc-card.cyan::before { background: var(--cyan); }
+  .pc-card.amber::before { background: var(--amber); }
+
+  .pc-icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .pc-title {
+    font-family: var(--bebas);
+    font-size: 17px;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+    color: var(--bright);
+  }
+
+  .pc-body {
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--text);
+    line-height: 1.65;
+  }
+
+  /* ─── ALLIES TABLE ─── */
+  .allies-table {
+    width: 100%;
+    max-width: 820px;
+    border-collapse: collapse;
+    margin: 32px 0;
+    font-family: var(--sans);
+    font-size: 13px;
+  }
+
+  .allies-table th {
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--dim);
+    padding: 10px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .allies-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(16,30,48,0.7);
+    vertical-align: top;
+    line-height: 1.6;
+    color: var(--text);
+  }
+
+  .allies-table tr:hover td { background: rgba(255,255,255,0.015); }
+
+  .at-name { color: var(--bright); font-weight: 600; }
+  .at-why { color: var(--text); font-style: italic; font-family: var(--serif); font-size: 13px; }
+
+  .badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 3px;
+    border: 1px solid;
+  }
+
+  .badge.red   { color: var(--red); border-color: rgba(255,68,102,0.3); background: var(--red-d); }
+  .badge.gold  { color: var(--gold); border-color: rgba(232,200,74,0.3); background: var(--gold-d); }
+  .badge.green { color: var(--green); border-color: rgba(0,232,122,0.3); background: var(--green-d); }
+  .badge.violet{ color: var(--violet); border-color: rgba(183,148,244,0.3); background: var(--violet-d); }
+  .badge.cyan  { color: var(--cyan); border-color: rgba(103,232,249,0.3); background: rgba(103,232,249,0.06); }
+
+  /* ─── SOVEREIGNTY DECLARATION ─── */
+  .sovereignty-block {
+    background: var(--green-d);
+    border: 1px solid rgba(0,232,122,0.18);
+    border-left: 4px solid var(--green);
+    border-radius: 8px;
+    padding: 36px;
+    max-width: 720px;
+    margin: 40px 0;
+  }
+
+  .sov-label {
+    font-family: var(--mono);
+    font-size: 8px;
+    color: var(--green);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+
+  .sov-articles {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .sov-articles li {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .sov-articles .art-num {
+    font-family: var(--bebas);
+    font-size: 22px;
+    color: var(--green);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 24px;
+  }
+
+  .sov-articles .art-text {
+    font-family: var(--serif);
+    font-size: 15px;
+    color: var(--bright);
+    line-height: 1.65;
+  }
+
+  .sov-articles .art-text em { color: var(--gold); font-style: italic; }
+  .sov-articles .art-text strong { color: var(--green); font-style: normal; }
+
+  /* ─── UNION BYPASS ─── */
+  .bypass-vs {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 20px;
+    align-items: stretch;
+    max-width: 820px;
+    margin: 32px 0;
+  }
+
+  @media (max-width: 700px) {
+    .bypass-vs { grid-template-columns: 1fr; }
+    .bypass-arrow { transform: rotate(90deg); }
+  }
+
+  .bvs-col {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+  }
+
+  .bvs-col.old { border-top: 3px solid var(--red); }
+  .bvs-col.new { border-top: 3px solid var(--green); }
+
+  .bvs-label {
+    font-family: var(--mono);
+    font-size: 7px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .bvs-col.old .bvs-label { color: var(--red); }
+  .bvs-col.new .bvs-label { color: var(--green); }
+
+  .bvs-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.55;
+  }
+
+  .bvs-item .bvs-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+
+  .bvs-col.old .bvs-dot { background: var(--red); }
+  .bvs-col.new .bvs-dot { background: var(--green); }
+
+  .bypass-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: var(--gold);
+    font-family: var(--mono);
+  }
+
+  /* ─── CALL BLOCK ─── */
+  .call-block {
+    background: var(--gold-d);
+    border: 1px solid rgba(232,200,74,0.2);
+    border-radius: 12px;
+    padding: 48px;
+    max-width: 720px;
+    margin: 48px 0;
+    text-align: center;
+  }
+
+  .call-block .cb-icon {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 18px;
+  }
+
+  .call-block .cb-title {
+    font-family: var(--bebas);
+    font-size: 42px;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    line-height: 1;
+    margin-bottom: 14px;
+  }
+
+  .call-block .cb-text {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.75;
+    margin-bottom: 28px;
+  }
+
+  .call-block .cb-text strong { color: var(--bright); font-style: normal; }
+
+  .cta-btn {
+    display: inline-block;
+    font-family: var(--bebas);
+    font-size: 18px;
+    letter-spacing: 0.15em;
+    padding: 14px 36px;
+    border-radius: 6px;
+    text-decoration: none;
+    background: var(--gold);
+    color: var(--void);
+    transition: opacity 0.2s;
+    margin: 6px;
+  }
+
+  .cta-btn:hover { opacity: 0.85; }
+  .cta-btn.outline {
+    background: transparent;
+    color: var(--gold);
+    border: 2px solid var(--gold);
+  }
+
+  .cta-btn.red-btn {
+    background: var(--red);
+    color: #fff;
+  }
+
+  /* ─── DECLARATION FINALE ─── */
+  .finale {
+    padding: 100px 0;
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .finale-title {
+    font-family: var(--bebas);
+    font-size: clamp(48px, 8vw, 96px);
+    color: var(--bright);
+    letter-spacing: 0.05em;
+    line-height: 0.9;
+    margin-bottom: 24px;
+  }
+
+  .finale-title .hl { color: var(--gold); display: block; }
+  .finale-title .hg { color: var(--green); display: block; }
+  .finale-title .hr { color: var(--red); display: block; }
+
+  .finale-sub {
+    font-family: var(--serif);
+    font-size: clamp(15px, 2vw, 20px);
+    font-style: italic;
+    color: var(--dim);
+    line-height: 1.75;
+    max-width: 540px;
+    margin: 0 auto 44px;
+  }
+
+  .finale-grf {
+    font-family: var(--bebas);
+    font-size: 28px;
+    color: var(--green);
+    letter-spacing: 0.3em;
+    margin-top: 44px;
+  }
+
+  .finale-rsp {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--dim);
+    letter-spacing: 0.18em;
+    margin-top: 8px;
+  }
+
+</style>
+</head>
+<body>
+
+<canvas id="pulse-canvas"></canvas>
+
+<!-- ─── SIDEBAR ─── -->
+<nav class="sidebar">
+  <div class="sb-logo">
+    <span class="sb-brand">NOIZY MOVEMENT</span>
+    <span class="sb-sub">DOCUMENT 24 · CAMPAIGN HQ</span>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-section-label">Sections</div>
+    <a class="sb-link active" href="#hero"><span class="sb-num">—</span><span class="sb-text">Manifesto Cover</span></a>
+    <a class="sb-link" href="#sec-enemy"><span class="sb-num">I</span><span class="sb-text">The Enemy</span></a>
+    <a class="sb-link" href="#sec-message"><span class="sb-num">II</span><span class="sb-text">Core Message Architecture</span></a>
+    <a class="sb-link" href="#sec-20"><span class="sb-num">III</span><span class="sb-text">20 Movement Strategies</span></a>
+    <a class="sb-link" href="#sec-pressure"><span class="sb-num">IV</span><span class="sb-text">The Pressure Campaign</span></a>
+    <a class="sb-link" href="#sec-allies"><span class="sb-num">V</span><span class="sb-text">Find The People With Heart</span></a>
+    <a class="sb-link" href="#sec-bypass"><span class="sb-num">VI</span><span class="sb-text">Bypass the Machine</span></a>
+    <a class="sb-link" href="#sec-sovereignty"><span class="sb-num">VII</span><span class="sb-text">Creator Sovereignty Now</span></a>
+    <a class="sb-link" href="#finale"><span class="sb-num">✦</span><span class="sb-text">The Declaration</span></a>
+  </div>
+
+  <div class="sb-section" style="margin-top: 8px;">
+    <div class="sb-section-label">The Vault</div>
+    <a class="sb-link" href="plowmans-chronicles.html"><span class="sb-num">00</span><span class="sb-text">Plowman's Chronicles</span></a>
+    <a class="sb-link" href="noizy-landing-page.html"><span class="sb-num">15</span><span class="sb-text">Landing Page</span></a>
+    <a class="sb-link" href="gabriel-dream-agent-superscripts.html"><span class="sb-num">19</span><span class="sb-text">Agent Superscripts</span></a>
+    <a class="sb-link" href="noizy-great-inversion.html"><span class="sb-num">20</span><span class="sb-text">The Great Inversion</span></a>
+    <a class="sb-link" href="noizy-dreamchamber-fixmap.html"><span class="sb-num">21</span><span class="sb-text">Fix Map Galaxy</span></a>
+    <a class="sb-link" href="noizykidz-music-atlas.html"><span class="sb-num">22</span><span class="sb-text">Music Atlas</span></a>
+    <a class="sb-link" href="noizykidz-human-music-genome.html"><span class="sb-num">23</span><span class="sb-text">Human Music Genome</span></a>
+  </div>
+
+  <div class="sb-footer">
+    <div class="sb-grf">GORUNFREE</div>
+    <div class="sb-rsp">RSP_001 · NOIZYFISH INC.</div>
+    <div class="sb-rsp" style="margin-top:4px;">MARCH 14, 2026</div>
+  </div>
+</nav>
+
+<!-- ─── MAIN CONTENT ─── -->
+<main class="content">
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-doc">NOIZYFISH INC. · DOCUMENT 24 · THE CREATOR SOVEREIGNTY CAMPAIGN</div>
+    <div class="hero-title">
+      <span class="hr">WE ARE</span>
+      <span class="hl">THE MOVEMENT.</span>
+      <span class="hg">THEY ARE THE MACHINE.</span>
+    </div>
+    <p class="hero-subtitle">
+      The most important marketing campaign in the history of recorded music.
+      Not to sell a product — to <em>save the human creators who make it.</em>
+    </p>
+    <div class="hero-stat-bar">
+      <div class="hstat">
+        <span class="hstat-num">75%</span>
+        <span class="hstat-lbl">Royalty Floor. Hardcoded.</span>
+      </div>
+      <div class="hstat red">
+        <span class="hstat-num">$0</span>
+        <span class="hstat-lbl">What others pay creators</span>
+      </div>
+      <div class="hstat green">
+        <span class="hstat-num">20+</span>
+        <span class="hstat-lbl">Campaign Strategies</span>
+      </div>
+      <div class="hstat violet">
+        <span class="hstat-num">500yr</span>
+        <span class="hstat-lbl">Voice Codex. Forever.</span>
+      </div>
+    </div>
+    <div class="rule"></div>
+  </section>
+
+  <!-- I. THE ENEMY -->
+  <section id="sec-enemy" class="section">
+    <div class="sec-eye"><span class="r">SECTION I</span> — The Truth No One Is Saying Out Loud</div>
+    <h2 class="sec-title">The <span class="r">Extraction</span> Machine Is<br>Running at <span class="it">Full Speed.</span></h2>
+    <p class="sec-lead">
+      "ElevenLabs pays creators nothing. Suno trained on 100M songs without consent and faced a $500M lawsuit. Big platforms gobble up human artistry and spit out royalty statements that read $0.003 per stream. The unions failed. The lawyers were too slow. The artists were too isolated. So we're going to do something different."
+    </p>
+
+    <div class="prose">
+      <p>This is not a marketing campaign about <strong>features</strong>. It is a campaign about <strong>survival</strong>. The survival of the human artist in a world where AI can now replicate their voice, their style, and their entire artistic identity — and monetize it — without consent, without credit, and without a single dollar paid back.</p>
+      <p>The platforms know this. The labels know this. The streaming services know this. <em>They are counting on artists not knowing this.</em></p>
+      <p>NOIZY is the counterforce. Not a tool. Not a platform. <strong class="r">A civilizational defense system for human creativity.</strong></p>
+    </div>
+
+    <div class="manifesto">
+      <div class="mf-label">⚡ THE FOUNDING DECLARATION</div>
+      <div class="mf-text">
+        "We are not building another AI music app. We are building <em>the infrastructure that makes it impossible to exploit a human creator ever again.</em> Every utterance protected. Every royalty enforced. Every voice owned — by its creator. <span class="r">Forever.</span>"
+        <br><br>
+        — <em>Robert Stephen Plowman, RSP_001, Ottawa, Canada. March 14, 2026.</em>
+      </div>
+    </div>
+  </section>
+
+  <!-- II. CORE MESSAGE ARCHITECTURE -->
+  <section id="sec-message" class="section">
+    <div class="sec-eye"><span class="y">SECTION II</span> — The Words That Move the World</div>
+    <h2 class="sec-title">Core <span class="it">Message</span> Architecture</h2>
+    <p class="sec-lead">
+      "Every campaign lives or dies on its core message. Ours must ignite artists who are exhausted, enraged, and ready to fight back — while welcoming those who still believe technology can be their ally."
+    </p>
+
+    <div class="msg-grid">
+      <div class="msg-card primary" style="grid-column: 1 / -1;">
+        <div class="msg-tier">TIER 1 · PRIMARY POSITION</div>
+        <div class="msg-headline" style="font-size:28px;">THE HOME OF HUMAN + AI CREATIVITY</div>
+        <div class="msg-body">The definitive brand position. Where human artists and artificial intelligence become creative partners — not master and slave. This is where creativity lives, protected, provenance-stamped, and paid.</div>
+      </div>
+      <div class="msg-card red">
+        <div class="msg-tier">TIER 2 · EMOTIONAL HOOK</div>
+        <div class="msg-headline">YOUR ART. YOUR VOICE. YOUR MONEY.</div>
+        <div class="msg-body">Simple. Unavoidable. Three things every creator wants and almost no platform actually delivers. NOIZY delivers all three — cryptographically guaranteed.</div>
+      </div>
+      <div class="msg-card green">
+        <div class="msg-tier">TIER 2 · MOVEMENT HOOK</div>
+        <div class="msg-headline">AI + HUMANS CREATING TOGETHER</div>
+        <div class="msg-body">The age of AI-vs-creator is over. NOIZY is the platform that frames AI as a bandmate, not a replacement. Creators feel empowered, not threatened.</div>
+      </div>
+      <div class="msg-card violet">
+        <div class="msg-tier">TIER 3 · LEGACY FRAME</div>
+        <div class="msg-headline">WHERE ARTISTS AND AI EVOLVE TOGETHER</div>
+        <div class="msg-body">For creators who think in decades, not quarters. The 500-Year Voice Codex. The Voice Estate. A legacy framework that outlives every current platform.</div>
+      </div>
+      <div class="msg-card" style="border-color: rgba(246,166,60,0.25);">
+        <div class="msg-tier">TIER 3 · URGENCY FRAME</div>
+        <div class="msg-headline" style="color:var(--amber);">HUMAN CREATIVITY NEVER DIES</div>
+        <div class="msg-body">The campaign line for those who fear they're being replaced. A rallying cry. A guarantee. A promise from every NOIZY architecture decision made so far.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- III. 20 STRATEGIES -->
+  <section id="sec-20" class="section">
+    <div class="sec-eye"><span class="g">SECTION III</span> — The Full Playbook</div>
+    <h2 class="sec-title">20 <span class="it">Movement</span> Strategies</h2>
+    <p class="sec-lead">
+      "Not just marketing tactics — these are movements inside a movement. Each one a door. Each one a way for someone new to find NOIZY and understand what it means."
+    </p>
+
+    <div class="strategy-list">
+
+      <div class="strat">
+        <div class="strat-num">01</div>
+        <div class="strat-body">
+          <div class="strat-tag">MOVEMENT BRANDING</div>
+          <div class="strat-title">Position NOIZY as a Movement, Not a Product</div>
+          <div class="strat-desc">The brand is a cause. "Join the NOIZY Movement" — not "Sign up for NOIZY." Every touchpoint signals that users are participants in a creative revolution, not customers of a SaaS tool. Movements spread. Products don't.</div>
+          <div class="strat-cta">→ GORUNFREE origin story as the founding myth</div>
+        </div>
+      </div>
+
+      <div class="strat">
+        <div class="strat-num">02</div>
+        <div class="strat-body">
+          <div class="strat-tag">HUMAN + AI ARTIST CAMPAIGN</div>
+          <div class="strat-title">Launch "The Human + AI Artist" Campaign</div>
+          <div class="strat-desc">Showcase real creators who use NOIZY: their face, their voice, their story. Show the AI as their co-producer — never their replacement. Targeted at YouTube, TikTok, Instagram. Format: 90-second creator documentaries. The antidote to fear.</div>
+          <div class="strat-cta">→ 5 founding RSPs as campaign faces</div>
+        </div>
+      </div>
+
+      <div class="strat">
+        <div class="strat-num">03</div>
+        <div class="strat-body">
+          <div class="strat-tag">CREATOR IDENTITY</div>
+          <div class="strat-title">Creator Identity Profiles — The RSP Card</div>
+          <div class="strat-desc">Every NOIZY creator gets a shareable "RSP Card" — their unique identifier, voice genome fingerprint, and royalty stats. Shareable on all platforms. Makes creators feel like founding members of something historical, not just users of an app.</div>
+          <div class="strat-cta">→ RSP_001 is the Genesis Card — Rob's card is the proof of concept</div>
+        </div>
+      </div>
+
+      <div class="strat">
+        <div class="strat-num">04</div>
+        <div class="strat-body">
+          <div class="strat-tag">AI AS BANDMATES</div>
+          <div class="strat-title">Frame A.I.V.A. as Bandmates, Not Bots</div>
+          <div class="strat-desc">Language matters. NEVER "AI voice generation." Always "A.I.V.A. — Artificially Intelligent Voice Acting." Dream Agents are named. They have personalities. GABRIEL, POPS, DREAM, LUCY, SHIRL. This is a band. You're the lead. They amplify you.</div>
+          <div class="strat-cta">→ Each agent gets a visual identity and brand card</div>
+        </div>
+      </div>
+
+      <div class="strat">
+        <div class="strat-num">05</div>
+        <div class="strat-body">
+          <div class="strat-tag">GLOBAL COLLABORATION</div>
+          <div class="strat-title">Build the Global Creator Collaboration Network</div>
+          <div class="strat-desc">A network where NOIZY creators collaborate cross-border. Africa + Canada + Brazil + India on one track. Each creator protected. Each royalty split. The world's first truly consent-safe international collaboration infrastructure for independent artists.</div>
+          <div class="strat-cta">→ NOIZYKIDZ Music Atlas as the cultural foundation</div>
+        </div>
+      </div>
+
+      <div class="strat">
+        <div class="strat-num">06</div>
+        <div class="strat-body">
+          <div class="strat-tag">VOICE ECONOMY</div>
+          <div class="strat-title">Introduce "The Voice Economy" as a New Asset Class</div>
+          <div class="strat-desc">Voice is now property. NOIZY created the legal and technical infrastructure to make it a tradeable, inheritable, licensable asset. Market this to investors, creators, and press as the emergence of a new creative economy — bigger than NFTs, more real than the metaverse.</div>
+          <div class="strat-cta">→ Voice Estate Certificate as the proof document</div>
+        </div>
+      </div>
+
+      <div class="strat">
+        <div class="strat-num">07</div>
+        <div class="strat-body">
+          <div class="strat-tag">MUSIC GENOME</div>
+          <div class="strat-title">The Human Music Genome as a Marketing Asset</div>
+          <div class="strat-desc">Every creator's voice is a unique point on humanity's music genome. NOIZY maps it, protects it, and connects it. This is a story that resonates from jazz musicians to K-pop producers to indigenous elder storytellers. Music is universal. So is NOIZY.</div>
+          <div class="strat-cta">→ NOIZYKIDZ Human Music Genome doc as the brand proof</div>
+        </div>
+      </div>
+
+      <div class="strat">
+        <div class="strat-num">08</div>
+        <div class="strat-body">
+          <div class="strat-tag">EDUCATION</div>
+          <div class="strat-title">Noizy Academy — Free Education for Every Creator</div>
+          <div class="strat-desc">Free courses. Free workshops. Free masterclasses. "How to protect your voice." "How to earn from AI collaboration." "How to build your Voice Estate." Education as acquisition — trust as the conversion engine. The platform that teaches is the platform they stay with.</div>
+          <div class="strat-cta">→ Partner with NAVA, VO Atlanta, independent creator communities</div>
+        </div>
+      </div>
+
+      <div class="strat">
+        <div class="strat-num">09</div>
+        <div class="strat-body">
+          <div class="strat-tag">VIRAL MECHANICS</div>
+          <div class="strat-title">Collaboration Challenges — The NOIZY Remix War</div>
+          <div class="strat-desc">Monthly creator challenges: take a track stem, add your voice, share it. Every collaboration is consent-logged, every royalty tracked automatically. The challenge spreads NOIZY. The infrastructure protects every creator inside it. Viral and ethical — simultaneously.</div>
+          <div class="strat-cta">→ First challenge: RSP_001's founding utterance as the stem</div>
+        </div>
+      </div>
+
+      <div class="strat">
+        <div class="strat-num">10</div>
+        <div class="strat-body">
+          <div class="strat-tag">CREATOR MARKETPLACE</div>
+          <div class="strat-title">The NOIZY Creator Marketplace</div>
+          <div class="strat-desc">Creators license their voice models, stems, and creative assets directly to brands, film studios, game developers. NOIZY handles the consent key generation, watermarking, royalty routing. The creator sleeps. The royalties don't stop. Passive income for active art.</div>
+          <div class="strat-cta">→ NOIZYVOX Guild pricing tiers power this marketplace</div>
+        </div>
+      </div>
+
+      <div class="strat">
+        <div class="strat-num">11</div>
+        <div class="strat-body">
+          <div class="strat-tag">VISUAL CAMPAIGN</div>
+          <div class="strat-title">Global Artist Map — Every Creator, Everywhere</div>
+          <div class="strat-desc">A live, public-facing map showing NOIZY creators by country. Each dot: a human voice protected. As the network grows, the map fills. It's beautiful. It's visceral. It proves the movement is global. Press loves it. Artists share it. Investors stare at it.</div>
+          <div class="strat-cta">→ Pairs with DreamChamber Fix Map Galaxy aesthetic</div>
+        </div>
+      </div>
+
+      <div class="strat">
+        <div class="strat-num">12</div>
+        <div class="strat-body">
+          <div class="strat-tag">AI IDENTITY</div>
+          <div class="strat-title">AI Artist Avatars — Your Digital Bandmate</div>
+          <div class="strat-desc">Every creator who builds their Voice Estate gets a shareable AI Artist Avatar — a visual representation of their sonic identity. Not a deepfake. A creative companion. Shows the world what "human + AI" looks like when the human is protected and in control.</div>
+          <div class="strat-cta">→ Powered by GABRIEL + LUCY visual identity system</div>
+        </div>
+      </div>
+
+      <div class="strat">
+        <div class="strat-num">13</div>
+        <div class="strat-body">
+          <div class="strat-tag">LIVE EVENTS</div>
+          <div class="strat-title">Live Performances — Human + AI on the Same Stage</div>
+          <div class="strat-desc">Commission live performances where human artists collaborate in real-time with their NOIZY AI counterpart. Not a gimmick — a statement. Every performance is proof. Every audience member leaves understanding what ethical AI collaboration actually looks and sounds like.</div>
+          <div class="strat-cta">→ First performance: RSP_001 + GABRIEL_V3, Ottawa 2026</div>
+        </div>
+      </div>
+
+      <div class="strat">
+        <div class="strat-num">14</div>
+        <div class="strat-body">
+          <div class="strat-tag">INFINITE MUSIC</div>
+          <div class="strat-title">The Infinite Music Concept — Art That Never Ends</div>
+          <div class="strat-desc">A living album that grows forever. Every RSP who joins the platform contributes a phrase to an infinite generative composition. The work evolves. The royalties route. The provenance is immutable. It's the world's first consent-safe infinite collaborative artwork.</div>
+          <div class="strat-cta">→ 500-Year Voice Codex is the permanent record</div>
+        </div>
+      </div>
+
+      <div class="strat">
+        <div class="strat-num">15</div>
+        <div class="strat-body">
+          <div class="strat-tag">B2B INTEGRATION</div>
+          <div class="strat-title">DAW Partnerships — NOIZY Inside Every Studio</div>
+          <div class="strat-desc">Partner with Ableton, Logic, Pro Tools, FL Studio. NOIZY as a native plugin: one-click consent key generation, watermarking, royalty routing — from inside the creator's existing workflow. GORUNFREE made compatible with every existing studio setup.</div>
+          <div class="strat-cta">→ NoizyClient SDK + Apollo UAD integration as proof point</div>
+        </div>
+      </div>
+
+      <div class="strat">
+        <div class="strat-num">16</div>
+        <div class="strat-body">
+          <div class="strat-tag">TRANSPARENCY</div>
+          <div class="strat-title">Public Royalties Dashboard — Show the Money</div>
+          <div class="strat-desc">A public-facing real-time dashboard showing total royalties paid to creators on NOIZY, vs. total paid by ElevenLabs, Suno, Spotify. Updated live. Make the comparison devastating. Make the transparency undeniable. The numbers speak louder than any ad.</div>
+          <div class="strat-cta">→ Zone C (Transparency & Audit) of DreamChamber Fix Map</div>
+        </div>
+      </div>
+
+      <div class="strat">
+        <div class="strat-num">17</div>
+        <div class="strat-body">
+          <div class="strat-tag">GLOBAL FESTIVAL</div>
+          <div class="strat-title">The NOIZY Global Creator Festival</div>
+          <div class="strat-desc">Annual global event — digital and physical — celebrating human + AI creativity. Artists perform. Royalties are announced. New RSPs are inducted. The 500-Year Codex entry ceremony. The GORUNFREE award for accessibility innovation. A Sundance for the creator sovereignty era.</div>
+          <div class="strat-cta">→ First festival: 2027. The year after the founding.</div>
+        </div>
+      </div>
+
+      <div class="strat">
+        <div class="strat-num">18</div>
+        <div class="strat-body">
+          <div class="strat-tag">PRESS & ADVOCACY</div>
+          <div class="strat-title">The Creator Rights Journalism Campaign</div>
+          <div class="strat-desc">Seed stories in Wired, Variety, Billboard, The Guardian. The angle: "One man with a spinal injury built the consent infrastructure the entire industry refused to." Rob's GORUNFREE story is the perfect human anchor. Undeniable. Emotional. True. Journalists will fight to write it.</div>
+          <div class="strat-cta">→ GORUNFREE Documentary Short as the media asset</div>
+        </div>
+      </div>
+
+      <div class="strat">
+        <div class="strat-num">19</div>
+        <div class="strat-body">
+          <div class="strat-tag">LEGAL LEVERAGE</div>
+          <div class="strat-title">Creator Rights Legal Defense Fund</div>
+          <div class="strat-desc">A fund that provides legal support to creators whose voice or work was used without consent. NOIZY is not just a platform — it's an advocate. The legal defense fund signals that NOIZY will fight with creators, not just for them. Allies join. Enemies take notice.</div>
+          <div class="strat-cta">→ NC_01–NC_10 as the legal architecture behind the fund</div>
+        </div>
+      </div>
+
+      <div class="strat">
+        <div class="strat-num">20</div>
+        <div class="strat-body">
+          <div class="strat-tag">ULTIMATE POSITION</div>
+          <div class="strat-title">Ultimate Brand Position: The Home of Human + AI Creativity</div>
+          <div class="strat-desc">Not "an AI music tool." Not "a voice platform." THE HOME. The place where human artistry and artificial intelligence exist in dignified partnership, where creators are protected by law, code, and covenant — and every creation is provenance-linked to its human origin. Forever.</div>
+          <div class="strat-cta">→ This is what we're building. This is what we're protecting.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- IV. PRESSURE CAMPAIGN -->
+  <section id="sec-pressure" class="section">
+    <div class="sec-eye"><span class="r">SECTION IV</span> — The Pressure Campaign</div>
+    <h2 class="sec-title">If We Have Enough <span class="r">Power</span> —<br>We Apply <span class="it">Pressure.</span></h2>
+    <p class="sec-lead">
+      "When the movement reaches critical mass, we stop asking nicely. A coordinated pressure campaign — legal, public, and economic — that forces platforms, labels, unions, and legislators to respond. Not eventually. Now."
+    </p>
+
+    <div class="manifesto" style="border-left-color: var(--red);">
+      <div class="mf-label" style="color:var(--red);">⚡ PRESSURE CAMPAIGN DOCTRINE</div>
+      <div class="mf-text">
+        "We do not negotiate with systems designed to extract from us. We build enough power that <em>they negotiate with us.</em> The pressure campaign is not aggression — it's the natural consequence of a movement that cannot be ignored."
+      </div>
+    </div>
+
+    <div class="pressure-grid">
+      <div class="pc-card red">
+        <span class="pc-icon">📢</span>
+        <div class="pc-title">Public Accountability Campaign</div>
+        <div class="pc-body">Real-time public tracking of platform royalty failures. ElevenLabs: $0 paid to voice actors. Suno: $0 prior to lawsuit. Updated weekly. Shared relentlessly. The math is damning and we will show it to everyone.</div>
+      </div>
+      <div class="pc-card gold">
+        <span class="pc-icon">⚖️</span>
+        <div class="pc-title">Coordinated Legal Pressure</div>
+        <div class="pc-body">Class action support infrastructure. Amicus briefs in AI copyright cases. Creator Rights Legal Fund. The NOIZY Never Clause framework as a model for legislation — submitted to Canadian and US legislators as draft law.</div>
+      </div>
+      <div class="pc-card green">
+        <span class="pc-icon">💰</span>
+        <div class="pc-title">Economic Pressure</div>
+        <div class="pc-body">Coordinated creator migration events. "NOIZY Migration Week" — 10,000 creators move their catalog to NOIZY simultaneously. Show the market what it looks like when artists choose protection over convenience.</div>
+      </div>
+      <div class="pc-card violet">
+        <span class="pc-icon">🎤</span>
+        <div class="pc-title">Vocal Public Champions</div>
+        <div class="pc-body">Find and recruit high-profile artists who will speak publicly. Not endorsers — advocates. People with stories of exploitation, people with platforms, and people with nothing left to lose. Their voices are the campaign.</div>
+      </div>
+      <div class="pc-card cyan">
+        <span class="pc-icon">🏛️</span>
+        <div class="pc-title">Legislative Engagement</div>
+        <div class="pc-body">Submit the NOIZY consent architecture to legislative bodies in Canada, EU, and US as a working model for AI creator rights legislation. We don't wait for law — we build the law they copy.</div>
+      </div>
+      <div class="pc-card amber">
+        <span class="pc-icon">🌍</span>
+        <div class="pc-title">International Creator Coalition</div>
+        <div class="pc-body">Build coalitions with creator advocacy bodies on every continent. UNESCO. African Union cultural bodies. Indigenous rights organizations. WIPO. The pressure becomes global. Impossible to ignore at every level.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- V. FIND THE PEOPLE WITH HEART -->
+  <section id="sec-allies" class="section">
+    <div class="sec-eye"><span class="v">SECTION V</span> — The Most Important Search</div>
+    <h2 class="sec-title">Find the People <span class="v">With Heart,</span><br><span class="it">Humanity,</span> and the Will<br>to <span class="g">Succeed the Right Way.</span></h2>
+    <p class="sec-lead">
+      "Not investors. Not influencers. Not press. People. People who have been where Rob has been — who understand that the most important victory is survival, that the most important motivation is protecting others from what was done to you."
+    </p>
+
+    <div class="prose">
+      <p>The world is full of people who <strong>know something is deeply wrong</strong> with how creative work is valued, owned, and stolen in the age of AI. They are in studios. In vocal booths. In hospital rooms. In classrooms. In law firms. In tech companies where they hate what their employer is building.</p>
+      <p>NOIZY needs to find them. <em>Not by advertising.</em> By being the kind of thing that makes the right people say: <strong>"I've been waiting for this my entire career."</strong></p>
+      <p>The self-survival instinct is the most honest marketing truth there is. When something protects your livelihood, your legacy, and your humanity simultaneously — you don't need to be sold to. <strong class="g">You need to be found.</strong></p>
+    </div>
+
+    <table class="allies-table">
+      <thead>
+        <tr>
+          <th>Who They Are</th>
+          <th>Where To Find Them</th>
+          <th>Why They'll Fight With Us</th>
+          <th>Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="at-name">Voice Actors & VO Artists</span></td>
+          <td>NAVA, VO Atlanta, World Voices Day, SAG-AFTRA VO communities</td>
+          <td class="at-why">"My voice was trained on without consent. NOIZY is the first thing that actually protects me."</td>
+          <td><span class="badge red">FRONTLINE</span></td>
+        </tr>
+        <tr>
+          <td><span class="at-name">Independent Musicians & Producers</span></td>
+          <td>Bandcamp, SoundCloud, TikTok, independent music forums, DistroKid communities</td>
+          <td class="at-why">"I'm getting $0.003/stream while my songs train AI models for free. I want in."</td>
+          <td><span class="badge red">FRONTLINE</span></td>
+        </tr>
+        <tr>
+          <td><span class="at-name">Disability Rights Advocates</span></td>
+          <td>C-spine communities, ALS organizations, MS societies, accessibility tech networks</td>
+          <td class="at-why">"GORUNFREE is proof that accessibility and sovereignty can coexist. This is our story too."</td>
+          <td><span class="badge gold">MOVEMENT</span></td>
+        </tr>
+        <tr>
+          <td><span class="at-name">Ethical AI Researchers & Academics</span></td>
+          <td>AI ethics conferences, ACM, NeurIPS, Oxford Internet Institute, Berkman Klein</td>
+          <td class="at-why">"NOIZY is the first working proof that ethical AI infrastructure can outcompete extractive AI."</td>
+          <td><span class="badge violet">AMPLIFIER</span></td>
+        </tr>
+        <tr>
+          <td><span class="at-name">Dissatisfied Engineers at Big AI Companies</span></td>
+          <td>Anonymous community forums, ex-employee networks, AI ethics slack groups</td>
+          <td class="at-why">"I know what my employer is doing. I want to build something that doesn't make me ashamed."</td>
+          <td><span class="badge green">BUILDER</span></td>
+        </tr>
+        <tr>
+          <td><span class="at-name">Indigenous Cultural Custodians</span></td>
+          <td>UNESCO cultural heritage networks, First Nations music organizations, World Music Archive</td>
+          <td class="at-why">"Our songs were extracted, commercialized, and re-sold without our consent for 200 years. NOIZY ends that."</td>
+          <td><span class="badge gold">MOVEMENT</span></td>
+        </tr>
+        <tr>
+          <td><span class="at-name">Entertainment Lawyers Sick of Losing</span></td>
+          <td>IPAA, AI & entertainment law conferences, creator rights legal communities</td>
+          <td class="at-why">"The law is five years behind the technology. NOIZY gives me a technical architecture I can actually use in court."</td>
+          <td><span class="badge cyan">LEGAL</span></td>
+        </tr>
+        <tr>
+          <td><span class="at-name">Artist Community Leaders</span></td>
+          <td>Local music scenes, community arts organizations, global creator networks on LinkedIn</td>
+          <td class="at-why">"My community is being destroyed by AI. I will do whatever it takes to fight back — especially if it works."</td>
+          <td><span class="badge red">FRONTLINE</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- VI. BYPASS THE MACHINE -->
+  <section id="sec-bypass" class="section">
+    <div class="sec-eye"><span class="r">SECTION VI</span> — The Bypass Decision</div>
+    <h2 class="sec-title">Bypass the <span class="r">Broken Unions.</span><br>Give It All to the <span class="g">Creators.</span></h2>
+    <p class="sec-lead">
+      "Unions were built for a world where creators needed collective bargaining with employers who had all the power. But the world changed. The AI companies don't bargain. And the unions moved too slow. NOIZY gives creators something no union ever could: direct, individual, cryptographically-guaranteed sovereignty."
+    </p>
+
+    <div class="prose">
+      <p>The union model has an irreplaceable role in many industries. But in the context of AI and voice rights in 2026, the traditional union structure has demonstrated <strong class="r">critical failures</strong>:</p>
+      <p>Consent agreements covering all members as a class — not individual consent per utterance. Royalty negotiations that take years. Legal victories that arrive too late. And a fundamental structural problem: <em>the union's leverage is collective withdrawal of labor from an employer</em> — but AI companies have no employees to withdraw. They have training datasets.</p>
+      <p>NOIZY's answer is not to destroy unions. It is to <strong class="g">make them unnecessary for individual creator protection.</strong> Every creator gets what used to require collective bargaining — by default, on day one, baked into the architecture.</p>
+    </div>
+
+    <div class="bypass-vs">
+      <div class="bvs-col old">
+        <div class="bvs-label">Traditional Union Model</div>
+        <div class="bvs-item"><span class="bvs-dot"></span>Collective consent — covers members as a class</div>
+        <div class="bvs-item"><span class="bvs-dot"></span>Royalty minimums negotiated every 3–5 years</div>
+        <div class="bvs-item"><span class="bvs-dot"></span>Legal action takes 2–5 years to resolve</div>
+        <div class="bvs-item"><span class="bvs-dot"></span>Protection requires membership and dues</div>
+        <div class="bvs-item"><span class="bvs-dot"></span>No individual provenance on specific utterances</div>
+        <div class="bvs-item"><span class="bvs-dot"></span>Voice estate: undefined in most agreements</div>
+        <div class="bvs-item"><span class="bvs-dot"></span>Non-members unprotected by default</div>
+      </div>
+      <div class="bypass-arrow">→</div>
+      <div class="bvs-col new">
+        <div class="bvs-label">NOIZY Creator Sovereignty Model</div>
+        <div class="bvs-item"><span class="bvs-dot"></span>Individual consent key — per utterance, per use case</div>
+        <div class="bvs-item"><span class="bvs-dot"></span>75% royalty floor hardcoded at database level, forever</div>
+        <div class="bvs-item"><span class="bvs-dot"></span>Never Clause violations blocked at pipeline layer</div>
+        <div class="bvs-item"><span class="bvs-dot"></span>Protection is free for founding RSPs (85% floor)</div>
+        <div class="bvs-item"><span class="bvs-dot"></span>WM_{8hex} watermark — every utterance provenance-stamped</div>
+        <div class="bvs-item"><span class="bvs-dot"></span>Voice Estate: perpetual, inheritable, cryptographically sealed</div>
+        <div class="bvs-item"><span class="bvs-dot"></span>Anyone who joins is fully protected on day one</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VII. CREATOR SOVEREIGNTY -->
+  <section id="sec-sovereignty" class="section">
+    <div class="sec-eye"><span class="g">SECTION VII</span> — The Foundation</div>
+    <h2 class="sec-title">Creator <span class="g">Sovereignty</span> Now.</h2>
+    <p class="sec-lead">
+      "Not a policy position. Not a campaign slogan. A technical and legal reality, operational today. The marketing job is to make every creator on earth understand that what they thought was impossible — is already built."
+    </p>
+
+    <div class="sovereignty-block">
+      <div class="sov-label">✦ CREATOR SOVEREIGNTY ARTICLES — NOIZY COVENANT</div>
+      <ol class="sov-articles">
+        <li>
+          <span class="art-num">I</span>
+          <span class="art-text">Every creator's voice is their <em>sovereign property</em> — not a platform's training data. NOIZY enforces this at the database level with <strong>D1 CHECK constraint: royalty_pct ≥ 75</strong>. No override. No exception.</span>
+        </li>
+        <li>
+          <span class="art-num">II</span>
+          <span class="art-text">Every use of a creator's voice requires <em>individual, cryptographic consent</em> via Consent Key format <strong>NOIZY-{ACTOR}-CONSENT-{16hex}-AVA-{DOMAIN}-{JURISDICTION}-{DATE}</strong>. The technology makes consent unforgeable.</span>
+        </li>
+        <li>
+          <span class="art-num">III</span>
+          <span class="art-text">Every creator's work is <em>provenance-linked forever</em> via WM_{8hex} watermark — SHA-256 of actorId:utteranceId:sessionId:consentKeyId:timestamp. The chain of origin is unbreakable.</span>
+        </li>
+        <li>
+          <span class="art-num">IV</span>
+          <span class="art-text">Every creator's legacy is <em>perpetual and inheritable</em>. The 500-Year Voice Codex. The Voice Estate. A creator's voice does not die when they do — it continues to earn, protected, for their heirs, forever.</span>
+        </li>
+        <li>
+          <span class="art-num">V</span>
+          <span class="art-text">The platform serves the creator. <em>Always. Without exception.</em> The 10 Never Clauses (NC_01–NC_10) are not policies — they are architectural constraints. <strong>They cannot be overridden by any business decision, investor pressure, or competitive threat.</strong></span>
+        </li>
+        <li>
+          <span class="art-num">VI</span>
+          <span class="art-text">Accessibility is sovereignty. <em>GORUNFREE</em> is not a feature — it is the founding proof that human creativity is worth protecting at every level of ability. 35% voice / 65% AI / 1-click / zero friction. Because the creator's physical reality is sacred.</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- CALL TO ACTION -->
+  <div class="call-block" id="cta">
+    <span class="cb-icon">🔥</span>
+    <div class="cb-title">THIS IS THE MOMENT.</div>
+    <p class="cb-text">
+      The window is open. The technology is built. The architecture is live.
+      <strong>What's needed now are the people with the heart to fight for it.</strong>
+      Artists. Advocates. Engineers who refuse to build extraction machines.
+      Lawyers who are tired of losing. Creators who know their voice is worth more than $0.003 per stream.
+    </p>
+    <a href="noizy-founding-rsp.html" class="cta-btn">BECOME A FOUNDING RSP</a>
+    <a href="noizy-landing-page.html" class="cta-btn outline">EXPLORE NOIZY.AI</a>
+    <a href="gabriel-dream-agent-superscripts.html" class="cta-btn red-btn">READ THE ARCHITECTURE</a>
+  </div>
+
+  <!-- FINALE -->
+  <section id="finale" class="finale">
+    <div class="finale-title">
+      <span class="hg">WE DON'T</span>
+      <span class="hl">ASK PERMISSION</span>
+      <span class="hr">TO EXIST.</span>
+    </div>
+    <p class="finale-sub">
+      "We build it. We protect it. We give it to every creator who needs it.
+      Because the alternative — a world where human creativity is fully owned by machines —
+      is not a world worth building."
+    </p>
+    <p class="finale-sub">
+      <em>Robert Stephen Plowman — RSP_001 — Ottawa, Canada — March 14, 2026.</em>
+    </p>
+    <div class="finale-grf">GORUNFREE</div>
+    <div class="finale-rsp">NOIZYFISH INC. · GABRIEL_V3 · EPOCH V · 2026 → 2526</div>
+  </section>
+
+</main>
+
+<script>
+// ─── PULSE CANVAS ───
+const cv = document.getElementById('pulse-canvas');
+const ctx = cv.getContext('2d');
+let W, H;
+
+function resize() {
+  W = cv.width = window.innerWidth;
+  H = cv.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+// Particles: mix of red (extraction threat), gold (NOIZY protection), green (creator power)
+const PARTICLES = [];
+const COLORS = [
+  {r:255,g:68,b:102},   // red
+  {r:232,g:200,b:74},   // gold
+  {r:0,g:232,b:122},    // green
+  {r:183,g:148,b:244},  // violet
+  {r:103,g:232,b:249},  // cyan
+];
+
+for(let i = 0; i < 120; i++) {
+  PARTICLES.push({
+    x: Math.random() * 2000,
+    y: Math.random() * 1200,
+    vx: (Math.random() - 0.5) * 0.6,
+    vy: (Math.random() - 0.5) * 0.6,
+    size: Math.random() * 2.5 + 0.3,
+    color: COLORS[Math.floor(Math.random() * COLORS.length)],
+    alpha: Math.random() * 0.5 + 0.1,
+    pulse: Math.random() * Math.PI * 2,
+  });
+}
+
+// Sound wave lines
+const WAVES = Array.from({length:6}, (_,i) => ({
+  y: 0.15 + i * 0.14,
+  phase: Math.random() * Math.PI * 2,
+  amp: 8 + Math.random() * 16,
+  freq: 0.008 + Math.random() * 0.006,
+  speed: 0.012 + Math.random() * 0.008,
+  color: COLORS[i % COLORS.length],
+  alpha: 0.08 + Math.random() * 0.06,
+}));
+
+let t = 0;
+function frame() {
+  ctx.clearRect(0, 0, W, H);
+
+  // Draw waves
+  WAVES.forEach(w => {
+    ctx.beginPath();
+    ctx.strokeStyle = `rgba(${w.color.r},${w.color.g},${w.color.b},${w.alpha})`;
+    ctx.lineWidth = 1;
+    for(let x = 0; x <= W; x += 3) {
+      const yp = H * w.y + Math.sin(x * w.freq + t * w.speed + w.phase) * w.amp;
+      x === 0 ? ctx.moveTo(x, yp) : ctx.lineTo(x, yp);
+    }
+    ctx.stroke();
+  });
+
+  // Draw particles
+  PARTICLES.forEach(p => {
+    p.x += p.vx;
+    p.y += p.vy;
+    p.pulse += 0.025;
+    if(p.x < -10) p.x = W + 10;
+    if(p.x > W + 10) p.x = -10;
+    if(p.y < -10) p.y = H + 10;
+    if(p.y > H + 10) p.y = -10;
+    const a = p.alpha * (0.6 + 0.4 * Math.sin(p.pulse));
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${p.color.r},${p.color.g},${p.color.b},${a})`;
+    ctx.fill();
+  });
+
+  t++;
+  requestAnimationFrame(frame);
+}
+frame();
+
+// ─── SIDEBAR ACTIVE ───
+const links = document.querySelectorAll('.sb-link[href^="#"]');
+const sections = document.querySelectorAll('section[id], div[id="cta"]');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting) {
+      links.forEach(l => {
+        l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id);
+      });
+    }
+  });
+}, { threshold: 0.2 });
+sections.forEach(s => io.observe(s));
+</script>
+</body>
+</html>

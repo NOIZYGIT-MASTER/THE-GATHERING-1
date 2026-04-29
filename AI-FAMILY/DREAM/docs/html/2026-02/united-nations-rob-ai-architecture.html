@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes">
+<title>United Nations of Rob & AI — Architecture</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --apple-gray: #1d1d1f;
+    --apple-blue: #0071e3;
+    --teams-purple: #6264A7;
+    --slack-purple: #4A154B;
+    --slack-green: #2EB67D;
+    --discord-blue: #5865F2;
+    --google-blue: #4285F4;
+    --google-red: #EA4335;
+    --google-yellow: #FBBC04;
+    --google-green: #34A853;
+    --gemma-teal: #00BFA5;
+    --bg-dark: #0a0a0f;
+    --bg-card: rgba(255,255,255,0.04);
+    --border: rgba(255,255,255,0.08);
+    --glow: rgba(0,113,227,0.15);
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-dark);
+    color: #f5f5f7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .bg-grid {
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse at 20% 50%, rgba(98,100,167,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, rgba(88,101,242,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 80%, rgba(0,191,165,0.06) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+  }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--gemma-teal), var(--apple-blue));
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+
+  .header h1 {
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 900;
+    letter-spacing: -1px;
+    background: linear-gradient(135deg, #fff 0%, #a0a0b0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.15;
+  }
+
+  .header p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 10px;
+    font-weight: 400;
+  }
+
+  /* FLOW DIAGRAM */
+  .flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-items: center;
+    margin-bottom: 48px;
+  }
+
+  .platform-card {
+    width: 100%;
+    max-width: 560px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px 28px;
+    position: relative;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .platform-card:active {
+    transform: scale(0.98);
+  }
+
+  .platform-card .icon-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 12px;
+  }
+
+  .platform-card .icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  .platform-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .platform-card .subtitle {
+    font-size: 12px;
+    font-weight: 500;
+    opacity: 0.5;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .platform-card .desc {
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .platform-card .features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+
+  .platform-card .features span {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.7);
+  }
+
+  /* Specific colors */
+  .card-apple { border-color: rgba(255,255,255,0.12); }
+  .card-apple .icon { background: linear-gradient(135deg, #555, #333); color: #fff; }
+  .card-apple:hover, .card-apple:active { box-shadow: 0 0 40px rgba(255,255,255,0.05); }
+
+  .card-teams { border-color: rgba(98,100,167,0.25); }
+  .card-teams .icon { background: linear-gradient(135deg, var(--teams-purple), #7B83EB); color: #fff; }
+  .card-teams:hover { box-shadow: 0 0 40px rgba(98,100,167,0.1); }
+
+  .card-slack { border-color: rgba(74,21,75,0.3); }
+  .card-slack .icon { background: linear-gradient(135deg, var(--slack-purple), #611f69); color: #fff; }
+  .card-slack:hover { box-shadow: 0 0 40px rgba(74,21,75,0.1); }
+
+  .card-discord { border-color: rgba(88,101,242,0.25); }
+  .card-discord .icon { background: linear-gradient(135deg, var(--discord-blue), #7289DA); color: #fff; }
+  .card-discord:hover { box-shadow: 0 0 40px rgba(88,101,242,0.1); }
+
+  .card-google { border-color: rgba(66,133,244,0.25); }
+  .card-google .icon { background: linear-gradient(135deg, var(--google-blue), var(--google-green)); color: #fff; }
+  .card-google:hover { box-shadow: 0 0 40px rgba(66,133,244,0.1); }
+
+  /* CONNECTOR ARROWS */
+  .connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 0;
+    position: relative;
+  }
+
+  .connector .line {
+    width: 2px;
+    height: 28px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+  }
+
+  .connector .arrow-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    padding: 4px 12px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .connector .line2 {
+    width: 2px;
+    height: 28px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.05), rgba(255,255,255,0.15));
+  }
+
+  /* GEMMA AI CENTER */
+  .gemma-section {
+    max-width: 560px;
+    width: 100%;
+    margin: 0 auto 48px;
+    background: linear-gradient(135deg, rgba(0,191,165,0.08), rgba(0,113,227,0.06));
+    border: 1px solid rgba(0,191,165,0.2);
+    border-radius: 24px;
+    padding: 32px 28px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gemma-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(0,191,165,0.06) 0%, transparent 60%);
+    animation: pulse 4s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 1; }
+  }
+
+  .gemma-section > * { position: relative; z-index: 1; }
+
+  .gemma-section .gemma-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0,191,165,0.15);
+    border: 1px solid rgba(0,191,165,0.3);
+    padding: 6px 16px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gemma-teal);
+    margin-bottom: 14px;
+  }
+
+  .gemma-section h2 {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+
+  .gemma-section p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.6;
+    max-width: 440px;
+    margin: 0 auto 20px;
+  }
+
+  .gemma-capabilities {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .gemma-capabilities .cap {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(0,191,165,0.12);
+    border-radius: 12px;
+    padding: 14px;
+    text-align: left;
+  }
+
+  .cap .cap-title {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: var(--gemma-teal);
+  }
+
+  .cap .cap-desc {
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.5;
+  }
+
+  /* DEVICE TARGETS */
+  .devices {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+
+  .device {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px 28px;
+    text-align: center;
+    min-width: 200px;
+    flex: 1;
+    max-width: 260px;
+  }
+
+  .device .device-icon {
+    font-size: 32px;
+    margin-bottom: 8px;
+  }
+
+  .device h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .device p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+  }
+
+  /* DATA FLOW TABLE */
+  .flow-table {
+    max-width: 560px;
+    width: 100%;
+    margin: 0 auto;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .flow-table-header {
+    padding: 20px 24px 12px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .flow-row {
+    display: flex;
+    align-items: center;
+    padding: 14px 24px;
+    border-top: 1px solid var(--border);
+    gap: 14px;
+  }
+
+  .flow-row .flow-from, .flow-row .flow-to {
+    font-size: 13px;
+    font-weight: 600;
+    flex: 1;
+  }
+
+  .flow-row .flow-arrow {
+    font-size: 11px;
+    color: var(--gemma-teal);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .flow-row .flow-type {
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    flex: 1;
+    text-align: right;
+  }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.25);
+  }
+
+  .footer .version {
+    font-size: 11px;
+    color: rgba(255,255,255,0.15);
+    margin-top: 4px;
+  }
+
+  /* iPad + iPhone responsive */
+  @media (max-width: 430px) {
+    .container { padding: 24px 16px 40px; }
+    .platform-card { padding: 20px; }
+    .gemma-capabilities { grid-template-columns: 1fr; }
+    .devices { flex-direction: column; align-items: center; }
+  }
+
+  @media (min-width: 1024px) {
+    .container { padding: 60px 40px 80px; }
+  }
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="badge">Architecture v1.0</div>
+    <h1>United Nations of Rob & AI</h1>
+    <p>Cross-Platform Integration Pipeline — Apple → Teams → Slack → Discord → Google</p>
+  </div>
+
+  <!-- TARGET DEVICES -->
+  <div class="devices">
+    <div class="device">
+      <div class="device-icon">📱</div>
+      <h4>iPhone 15 Pro Max</h4>
+      <p>Mobile command center<br>On-the-go execution</p>
+    </div>
+    <div class="device">
+      <div class="device-icon">📲</div>
+      <h4>iPad 12.9"</h4>
+      <p>Full dashboard view<br>Multi-platform control</p>
+    </div>
+  </div>
+
+  <!-- PLATFORM FLOW -->
+  <div class="flow">
+
+    <!-- APPLE -->
+    <div class="platform-card card-apple">
+      <div class="icon-row">
+        <div class="icon">&#63743;</div>
+        <div>
+          <h3>Apple Ecosystem</h3>
+          <div class="subtitle">Origin Layer</div>
+        </div>
+      </div>
+      <div class="desc">iPad 12.9" + iPhone 15 Pro Max as primary control surfaces. iCloud sync, Shortcuts automation, Siri triggers, Calendar & Reminders as task inputs.</div>
+      <div class="features">
+        <span>iCloud Sync</span>
+        <span>Shortcuts</span>
+        <span>Siri Triggers</span>
+        <span>Calendar</span>
+        <span>Focus Modes</span>
+      </div>
+    </div>
+
+    <div class="connector">
+      <div class="line"></div>
+      <div class="arrow-label">▼ Push Events</div>
+      <div class="line2"></div>
+    </div>
+
+    <!-- TEAMS -->
+    <div class="platform-card card-teams">
+      <div class="icon-row">
+        <div class="icon">T</div>
+        <div>
+          <h3>Microsoft Teams</h3>
+          <div class="subtitle">Community Hub</div>
+        </div>
+      </div>
+      <div class="desc">Central community hub for the United Nations of Rob & AI. Teams channels for structured collaboration, meetings, and file sharing with enterprise-grade security.</div>
+      <div class="features">
+        <span>Community</span>
+        <span>Channels</span>
+        <span>Meetings</span>
+        <span>Power Automate</span>
+        <span>Copilot</span>
+      </div>
+    </div>
+
+    <div class="connector">
+      <div class="line"></div>
+      <div class="arrow-label">▼ Webhooks / API</div>
+      <div class="line2"></div>
+    </div>
+
+    <!-- SLACK -->
+    <div class="platform-card card-slack">
+      <div class="icon-row">
+        <div class="icon">S</div>
+        <div>
+          <h3>Slack</h3>
+          <div class="subtitle">Workspace Operations</div>
+        </div>
+      </div>
+      <div class="desc">Real-time workspace communication. Slack bots handle task routing, notifications, and AI-powered thread summaries. Integrated with 2,600+ apps.</div>
+      <div class="features">
+        <span>Bots</span>
+        <span>Workflows</span>
+        <span>Canvases</span>
+        <span>Huddles</span>
+        <span>App Directory</span>
+      </div>
+    </div>
+
+    <div class="connector">
+      <div class="line"></div>
+      <div class="arrow-label">▼ Bridge Bot</div>
+      <div class="line2"></div>
+    </div>
+
+    <!-- DISCORD -->
+    <div class="platform-card card-discord">
+      <div class="icon-row">
+        <div class="icon">D</div>
+        <div>
+          <h3>Discord</h3>
+          <div class="subtitle">Public Community</div>
+        </div>
+      </div>
+      <div class="desc">Public-facing community engagement. Discord server with role-based access, voice channels, forums, and bot-powered moderation + AI assistance.</div>
+      <div class="features">
+        <span>Servers</span>
+        <span>Forums</span>
+        <span>Voice/Stage</span>
+        <span>Bots</span>
+        <span>Roles</span>
+      </div>
+    </div>
+
+    <div class="connector">
+      <div class="line"></div>
+      <div class="arrow-label">▼ Sync & Publish</div>
+      <div class="line2"></div>
+    </div>
+
+    <!-- GOOGLE -->
+    <div class="platform-card card-google">
+      <div class="icon-row">
+        <div class="icon">G</div>
+        <div>
+          <h3>Google Business</h3>
+          <div class="subtitle">Execution & Output Layer</div>
+        </div>
+      </div>
+      <div class="desc">Business-facing execution layer. Google Workspace for docs, sheets, calendar. Google Business Profile for customer interactions. Analytics for measurement.</div>
+      <div class="features">
+        <span>Workspace</span>
+        <span>Business Profile</span>
+        <span>Analytics</span>
+        <span>Ads</span>
+        <span>Cloud</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- GEMMA AI CENTER -->
+  <div class="gemma-section">
+    <div class="gemma-badge">
+      <span>◆</span> AI Orchestration Engine
+    </div>
+    <h2>Gemma — Tuned for Execution</h2>
+    <p>Fine-tuned Google Gemma model operating as the central nervous system, routing signals between all platforms and executing decisions autonomously.</p>
+    <div class="gemma-capabilities">
+      <div class="cap">
+        <div class="cap-title">Message Routing</div>
+        <div class="cap-desc">Auto-routes content to the right platform based on audience + intent</div>
+      </div>
+      <div class="cap">
+        <div class="cap-title">Format Translation</div>
+        <div class="cap-desc">Adapts tone, format & structure per platform norms</div>
+      </div>
+      <div class="cap">
+        <div class="cap-title">Task Execution</div>
+        <div class="cap-desc">Triggers workflows, creates events, posts updates autonomously</div>
+      </div>
+      <div class="cap">
+        <div class="cap-title">Unified Memory</div>
+        <div class="cap-desc">Cross-platform context — knows what was said everywhere</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DATA FLOWS -->
+  <div class="flow-table">
+    <div class="flow-table-header">Data Flow Matrix</div>
+    <div class="flow-row">
+      <div class="flow-from">Apple Shortcuts</div>
+      <div class="flow-arrow">→ Gemma →</div>
+      <div class="flow-to">Teams Channel</div>
+      <div class="flow-type">Event trigger</div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-from">Teams Thread</div>
+      <div class="flow-arrow">→ Gemma →</div>
+      <div class="flow-to">Slack Post</div>
+      <div class="flow-type">Cross-post</div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-from">Slack Canvas</div>
+      <div class="flow-arrow">→ Gemma →</div>
+      <div class="flow-to">Discord Forum</div>
+      <div class="flow-type">Publish</div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-from">Discord Feedback</div>
+      <div class="flow-arrow">→ Gemma →</div>
+      <div class="flow-to">Google Sheets</div>
+      <div class="flow-type">Analytics</div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-from">Google Calendar</div>
+      <div class="flow-arrow">→ Gemma →</div>
+      <div class="flow-to">All Platforms</div>
+      <div class="flow-type">Broadcast</div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-from">Any Platform</div>
+      <div class="flow-arrow">→ Gemma →</div>
+      <div class="flow-to">Apple Device</div>
+      <div class="flow-type">Push notification</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>United Nations of Rob & AI — Build the Dreams of Tomorrow</p>
+    <div class="version">Architecture v1.0 · Feb 2026 · Optimized for iPad 12.9" & iPhone 15 Pro Max</div>
+  </div>
+
+</div>
+</body>
+</html>

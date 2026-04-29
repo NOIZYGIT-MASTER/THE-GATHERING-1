@@ -124,3 +124,19 @@ gabriel/vault/artifacts/manifests/FISHNET_MANIFEST.json
 *.json.bak
 **/*MANIFEST*.json
 MC96/
+
+# === SECRET-LEAK GUARDRAILS (added 2026-04-29 after secret-scan block) ===
+# Vendor IDE configs that bake plaintext API keys.
+# NEVER commit these — keys belong in .env.secrets / wrangler secret put / Keychain.
+**/NOIZYBEAST.json
+**/gitmind*.json
+**/local_*.json
+**/.env
+**/.env.*
+!**/.env.example
+**/credentials.json
+**/secrets.json
+**/*.pem
+**/*.key
+**/id_rsa*
+**/id_ed25519*

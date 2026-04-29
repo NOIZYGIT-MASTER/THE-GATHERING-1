@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIZY Cloud Architecture — Infrastructure Design</title>
+<style>
+  :root {
+    --purple: #7C3AED;
+    --purple-light: #A78BFA;
+    --cyan: #0891B2;
+    --cyan-light: #22D3EE;
+    --green: #059669;
+    --green-light: #34D399;
+    --orange: #EA580C;
+    --orange-light: #FB923C;
+    --red: #DC2626;
+    --red-light: #FCA5A5;
+    --yellow: #CA8A04;
+    --dark: #0F0A1E;
+    --navy: #1E1B4B;
+    --gray: #6B7280;
+    --white: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--dark);
+    color: #E2E8F0;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    background: rgba(15,10,30,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(124,58,237,0.25);
+    z-index: 100;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+
+  .nav-brand { font-size: 12px; font-weight: 700; color: var(--purple-light); letter-spacing: 2px; }
+
+  .nav-links { display: flex; gap: 20px; }
+  .nav-links a {
+    color: #64748B;
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--purple-light); }
+
+  /* HERO */
+  .hero {
+    padding: 80px 40px 60px;
+    text-align: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(234,88,12,0.12);
+    border: 1px solid rgba(234,88,12,0.35);
+    color: var(--orange-light);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+    font-weight: 700;
+  }
+
+  .hero h1 {
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: -2px;
+    line-height: 1.05;
+    margin-bottom: 16px;
+  }
+
+  .hero h1 span { color: var(--purple-light); }
+
+  .hero-lead {
+    font-size: 17px;
+    color: #94A3B8;
+    max-width: 680px;
+    margin: 0 auto 40px;
+    line-height: 1.8;
+  }
+
+  .verdict-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(124,58,237,0.2);
+    border: 1px solid rgba(124,58,237,0.3);
+    border-radius: 12px;
+    overflow: hidden;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .verdict-item {
+    background: rgba(15,10,30,0.9);
+    padding: 24px;
+    text-align: center;
+  }
+
+  .verdict-tool { font-size: 11px; letter-spacing: 2px; color: var(--gray); font-weight: 700; margin-bottom: 6px; }
+  .verdict-role { font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+  .verdict-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 10px;
+    letter-spacing: 1px;
+  }
+
+  .tag-green { background: rgba(5,150,105,0.2); color: var(--green-light); }
+  .tag-blue { background: rgba(8,145,178,0.2); color: var(--cyan-light); }
+  .tag-red { background: rgba(220,38,38,0.2); color: var(--red-light); }
+  .tag-orange { background: rgba(234,88,12,0.2); color: var(--orange-light); }
+  .tag-purple { background: rgba(124,58,237,0.2); color: var(--purple-light); }
+  .tag-yellow { background: rgba(202,138,4,0.2); color: #FDE047; }
+
+  /* CONTENT SECTIONS */
+  .content { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+
+  .section { padding: 80px 0 40px; }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--purple-light);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-size: clamp(28px, 3.5vw, 42px);
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+    line-height: 1.1;
+  }
+
+  .section-title span { color: var(--purple-light); }
+
+  .section-lead {
+    font-size: 16px;
+    color: #94A3B8;
+    max-width: 720px;
+    margin-bottom: 40px;
+    line-height: 1.8;
+  }
+
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(124,58,237,0.3), transparent);
+    margin: 0;
+  }
+
+  /* COMPARISON TABLE */
+  .comp-table-wrap { overflow-x: auto; margin-bottom: 32px; }
+
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .comp-table thead tr {
+    background: var(--navy);
+  }
+
+  .comp-table th {
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    border: 1px solid rgba(124,58,237,0.2);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .comp-table th:first-child { min-width: 220px; }
+
+  .comp-table td {
+    padding: 11px 16px;
+    border: 1px solid rgba(255,255,255,0.05);
+    color: #CBD5E1;
+    vertical-align: middle;
+  }
+
+  .comp-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+  .comp-table tr:hover td { background: rgba(124,58,237,0.05); }
+
+  .comp-table .feature-name {
+    font-weight: 600;
+    color: #E2E8F0;
+    font-size: 13px;
+  }
+
+  .comp-table .category-row td {
+    background: rgba(30,27,75,0.6);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    font-weight: 700;
+    padding: 8px 16px;
+    border-top: 1px solid rgba(124,58,237,0.2);
+  }
+
+  .good { color: var(--green-light); font-weight: 600; }
+  .warn { color: var(--yellow); font-weight: 600; }
+  .bad { color: var(--red-light); font-weight: 600; }
+  .neutral { color: #94A3B8; }
+  .strong { color: var(--cyan-light); font-weight: 700; }
+
+  /* LAYER STACK */
+  .layer-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .layer-card {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .layer-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+  }
+
+  .layer-card.user .layer-header { background: rgba(8,145,178,0.12); border-bottom: 1px solid rgba(8,145,178,0.2); }
+  .layer-card.workflow .layer-header { background: rgba(124,58,237,0.12); border-bottom: 1px solid rgba(124,58,237,0.2); }
+  .layer-card.infra .layer-header { background: rgba(234,88,12,0.12); border-bottom: 1px solid rgba(234,88,12,0.2); }
+  .layer-card.cloud .layer-header { background: rgba(5,150,105,0.12); border-bottom: 1px solid rgba(5,150,105,0.2); }
+
+  .layer-num {
+    font-size: 22px;
+    font-weight: 900;
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .layer-card.user .layer-num { background: rgba(8,145,178,0.2); color: var(--cyan-light); }
+  .layer-card.workflow .layer-num { background: rgba(124,58,237,0.2); color: var(--purple-light); }
+  .layer-card.infra .layer-num { background: rgba(234,88,12,0.2); color: var(--orange-light); }
+  .layer-card.cloud .layer-num { background: rgba(5,150,105,0.2); color: var(--green-light); }
+
+  .layer-meta .lm-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--gray);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+
+  .layer-meta .lm-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .layer-tool-badge {
+    margin-left: auto;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .layer-card.user .layer-tool-badge { background: rgba(8,145,178,0.2); color: var(--cyan-light); border: 1px solid rgba(8,145,178,0.3); }
+  .layer-card.workflow .layer-tool-badge { background: rgba(124,58,237,0.2); color: var(--purple-light); border: 1px solid rgba(124,58,237,0.3); }
+  .layer-card.infra .layer-tool-badge { background: rgba(234,88,12,0.2); color: var(--orange-light); border: 1px solid rgba(234,88,12,0.3); }
+  .layer-card.cloud .layer-tool-badge { background: rgba(5,150,105,0.2); color: var(--green-light); border: 1px solid rgba(5,150,105,0.3); }
+
+  .layer-body {
+    padding: 20px 24px;
+    background: rgba(255,255,255,0.02);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .layer-body-col h4 {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gray);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .layer-body-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .layer-body-col ul li {
+    font-size: 13px;
+    color: #CBD5E1;
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .layer-body-col ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--gray);
+    font-size: 11px;
+    top: 2px;
+  }
+
+  .breaks-if-removed {
+    grid-column: 1 / -1;
+    background: rgba(220,38,38,0.06);
+    border: 1px solid rgba(220,38,38,0.2);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #FCA5A5;
+  }
+
+  .breaks-if-removed strong { color: #F87171; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; display: block; margin-bottom: 4px; }
+
+  /* HONEST LIMITS */
+  .limits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+
+  .limit-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .limit-header {
+    padding: 16px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--white);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .limit-card.gdrive .limit-header { background: rgba(8,145,178,0.08); }
+  .limit-card.mduck .limit-header { background: rgba(124,58,237,0.08); }
+  .limit-card.rclone .limit-header { background: rgba(234,88,12,0.08); }
+
+  .limit-list {
+    list-style: none;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .limit-list li {
+    font-size: 13px;
+    color: #94A3B8;
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .limit-list li::before {
+    content: '⚠';
+    position: absolute;
+    left: 0;
+    font-size: 11px;
+    color: var(--yellow);
+  }
+
+  .limit-list .critical { color: #FCA5A5; }
+  .limit-list .critical::before { color: var(--red-light); content: '✕'; }
+
+  /* ARCHITECTURE DIAGRAM */
+  .arch-diagram {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 40px;
+    margin-bottom: 40px;
+  }
+
+  .arch-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .arch-node {
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+    position: relative;
+  }
+
+  .arch-node.creator { background: rgba(8,145,178,0.1); border: 1px solid rgba(8,145,178,0.25); }
+  .arch-node.edge { background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.25); }
+  .arch-node.storage { background: rgba(5,150,105,0.1); border: 1px solid rgba(5,150,105,0.25); }
+  .arch-node.consent { background: rgba(202,138,4,0.1); border: 1px solid rgba(202,138,4,0.25); }
+  .arch-node.ai { background: rgba(234,88,12,0.1); border: 1px solid rgba(234,88,12,0.25); }
+  .arch-node.cdn { background: rgba(219,39,119,0.1); border: 1px solid rgba(219,39,119,0.25); }
+
+  .arch-node .node-icon { font-size: 24px; margin-bottom: 6px; }
+  .arch-node .node-name { font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 2px; }
+  .arch-node .node-tool { font-size: 11px; color: var(--gray); }
+
+  .arch-arrow {
+    text-align: center;
+    color: var(--purple-light);
+    font-size: 20px;
+    margin: 4px 0;
+    opacity: 0.5;
+  }
+
+  .arch-label {
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    font-weight: 700;
+    margin-bottom: 8px;
+    margin-top: 4px;
+  }
+
+  /* UPGRADE PATH */
+  .upgrade-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+
+  .upgrade-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 24px;
+    transition: border-color 0.2s;
+  }
+
+  .upgrade-card:hover { border-color: rgba(124,58,237,0.4); }
+
+  .upgrade-phase {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .upgrade-title { font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 12px; }
+  .upgrade-desc { font-size: 13px; color: #94A3B8; line-height: 1.7; margin-bottom: 12px; }
+
+  .upgrade-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tech-pill {
+    background: rgba(124,58,237,0.15);
+    border: 1px solid rgba(124,58,237,0.25);
+    color: var(--purple-light);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 6px;
+  }
+
+  /* CALLOUT */
+  .callout {
+    background: rgba(124,58,237,0.07);
+    border: 1px solid rgba(124,58,237,0.25);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 32px;
+  }
+
+  .callout-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .callout-text { font-size: 14px; color: #CBD5E1; line-height: 1.8; }
+  .callout-text strong { color: var(--white); }
+
+  .callout.red { background: rgba(220,38,38,0.06); border-color: rgba(220,38,38,0.25); }
+  .callout.red .callout-label { color: #F87171; }
+  .callout.green { background: rgba(5,150,105,0.06); border-color: rgba(5,150,105,0.25); }
+  .callout.green .callout-label { color: var(--green-light); }
+  .callout.orange { background: rgba(234,88,12,0.06); border-color: rgba(234,88,12,0.25); }
+  .callout.orange .callout-label { color: var(--orange-light); }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 60px 40px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    color: var(--gray);
+    font-size: 13px;
+  }
+
+  .footer strong { color: var(--purple-light); }
+
+  @media (max-width: 768px) {
+    nav .nav-links { display: none; }
+    .content { padding: 0 20px; }
+    .verdict-strip { grid-template-columns: 1fr; }
+    .limits-grid { grid-template-columns: 1fr; }
+    .layer-body { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">NOIZY · CLOUD ARCHITECTURE</div>
+  <div class="nav-links">
+    <a href="#comparison">Comparison</a>
+    <a href="#stack">Stack Design</a>
+    <a href="#limits">Limits</a>
+    <a href="#architecture">Architecture</a>
+    <a href="#upgrades">Upgrades</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">Senior Infrastructure Architect · Systems Design · MC96ECO</div>
+  <h1>NOIZY <span>Cloud Architecture</span></h1>
+  <p class="hero-lead">
+    This is not a tool comparison. This is the cloud backbone design for a next-generation
+    creative and AI economy — sovereign, consent-locked, and built to serve millions of creators
+    without duplicating a single byte they didn't ask to move.
+  </p>
+  <div class="verdict-strip">
+    <div class="verdict-item">
+      <div class="verdict-tool">Google Drive Desktop</div>
+      <div class="verdict-role">Collaboration Layer</div>
+      <div class="verdict-tag tag-blue">TEAM ONBOARDING</div>
+    </div>
+    <div class="verdict-item">
+      <div class="verdict-tool">Mountain Duck</div>
+      <div class="verdict-role">Creator Workflow Layer</div>
+      <div class="verdict-tag tag-purple">DAILY CREATIVE USE</div>
+    </div>
+    <div class="verdict-item">
+      <div class="verdict-tool">rclone / RcloneView</div>
+      <div class="verdict-role">Infrastructure Layer</div>
+      <div class="verdict-tag tag-orange">AUTOMATION BACKBONE</div>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- SECTION 1: EXPANDED COMPARISON -->
+<div class="divider"></div>
+<div class="section" id="comparison">
+  <div class="section-label">Section 01 · Reality-Checked Analysis</div>
+  <h2 class="section-title">Expanded <span>Tool Comparison</span></h2>
+  <p class="section-lead">
+    The standard comparison misses the categories that actually matter for a platform
+    handling voice assets, AI training data, and consent-tracked creative output at scale.
+    Here is the full picture.
+  </p>
+
+  <div class="comp-table-wrap">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Feature / Capability</th>
+          <th>Google Drive Desktop</th>
+          <th>Mountain Duck</th>
+          <th>rclone / RcloneView</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- CORE -->
+        <tr class="category-row"><td colspan="4">Core Design Philosophy</td></tr>
+        <tr>
+          <td class="feature-name">Primary purpose</td>
+          <td class="neutral">Sync-first, consumer</td>
+          <td class="neutral">Mount-first, creative pro</td>
+          <td class="strong">Control-first, architect</td>
+        </tr>
+        <tr>
+          <td class="feature-name">Local storage model</td>
+          <td class="warn">Sync or stream (bandwidth risk)</td>
+          <td class="good">Pure mount, no full sync</td>
+          <td class="good">Mount + sync + direct transfer</td>
+        </tr>
+        <tr>
+          <td class="feature-name">Cloud provider support</td>
+          <td class="bad">Google Drive only</td>
+          <td class="good">S3, Drive, Dropbox, Azure, R2, 40+</td>
+          <td class="strong">70+ providers (broadest in class)</td>
+        </tr>
+        <tr>
+          <td class="feature-name">Finder / Disk integration</td>
+          <td class="strong">Native, seamless, Apple-grade</td>
+          <td class="good">Native virtual disk, excellent</td>
+          <td class="warn">FUSE mount — functional, slightly less native</td>
+        </tr>
+
+        <!-- PERFORMANCE -->
+        <tr class="category-row"><td colspan="4">Performance Under Load (Audio / AI Dataset Scale)</td></tr>
+        <tr>
+          <td class="feature-name">Large file handling (1GB+ audio)</td>
+          <td class="warn">Sync model creates overhead; 750GB/day download cap</td>
+          <td class="good">Streams without local copy — excellent for large assets</td>
+          <td class="good">Direct transfer, no overhead; designed for large data pipelines</td>
+        </tr>
+        <tr>
+          <td class="feature-name">Concurrent access (studio sessions)</td>
+          <td class="warn">Sync conflicts possible; Google API rate limits</td>
+          <td class="good">Per-session mount — clean isolation</td>
+          <td class="good">Configurable parallelism (--transfers flag)</td>
+        </tr>
+        <tr>
+          <td class="feature-name">AI training dataset workflows</td>
+          <td class="bad">Not designed for this; API limits will hit fast</td>
+          <td class="warn">Works but no batch automation; manual workflow</td>
+          <td class="strong">Built for this — batch ops, scheduling, cloud-to-cloud, filtering</td>
+        </tr>
+        <tr>
+          <td class="feature-name">Cloud-to-cloud transfer (no local)</td>
+          <td class="bad">Not supported</td>
+          <td class="bad">Not supported</td>
+          <td class="strong">Native — move between any two providers without touching local disk</td>
+        </tr>
+
+        <!-- AUTOMATION -->
+        <tr class="category-row"><td colspan="4">Automation + Orchestration</td></tr>
+        <tr>
+          <td class="feature-name">Scheduled jobs / sync rules</td>
+          <td class="bad">None</td>
+          <td class="bad">None</td>
+          <td class="strong">Full scheduler, conditional rules, cron-style triggers</td>
+        </tr>
+        <tr>
+          <td class="feature-name">Scripting / CLI integration</td>
+          <td class="bad">Never</td>
+          <td class="bad">Never (GUI only)</td>
+          <td class="strong">rclone CLI is the backbone — full bash/Python integration</td>
+        </tr>
+        <tr>
+          <td class="feature-name">Compare / deduplicate</td>
+          <td class="bad">None</td>
+          <td class="bad">None</td>
+          <td class="strong">rclone check, dedupe — critical for consent vault integrity</td>
+        </tr>
+        <tr>
+          <td class="feature-name">Bandwidth throttling</td>
+          <td class="bad">None</td>
+          <td class="warn">Limited</td>
+          <td class="strong">Per-transfer rate limits, time-of-day rules</td>
+        </tr>
+
+        <!-- SECURITY -->
+        <tr class="category-row"><td colspan="4">Security + Consent Architecture</td></tr>
+        <tr>
+          <td class="feature-name">Encryption model</td>
+          <td class="warn">Google-managed server-side only</td>
+          <td class="good">Client-side via Cryptomator integration</td>
+          <td class="strong">rclone crypt — E2E encryption, key stays local, zero trust</td>
+        </tr>
+        <tr>
+          <td class="feature-name">Zero-knowledge possible?</td>
+          <td class="bad">No — Google sees all</td>
+          <td class="good">Yes, via Cryptomator</td>
+          <td class="strong">Yes, natively — rclone crypt is built for this</td>
+        </tr>
+        <tr>
+          <td class="feature-name">Audit trail / access log</td>
+          <td class="warn">Google admin console only</td>
+          <td class="warn">Limited logging</td>
+          <td class="strong">Full --log-file support; pipe to HVS audit system</td>
+        </tr>
+        <tr>
+          <td class="feature-name">Suitable for HVS consent vault</td>
+          <td class="bad">No</td>
+          <td class="warn">Partial — good access, no audit pipe</td>
+          <td class="strong">Yes — encryption + logging + audit = HVS-compatible backbone</td>
+        </tr>
+
+        <!-- SCALE -->
+        <tr class="category-row"><td colspan="4">Scale Ceiling (Honest Assessment)</td></tr>
+        <tr>
+          <td class="feature-name">Millions of creators?</td>
+          <td class="bad">Google API limits become a wall</td>
+          <td class="bad">Desktop tool — not multi-tenant at server scale</td>
+          <td class="warn">rclone CLI scales; RcloneView GUI does not. Must run rclone headless at scale.</td>
+        </tr>
+        <tr>
+          <td class="feature-name">Cost at scale</td>
+          <td class="warn">Google Workspace pricing adds up fast</td>
+          <td class="warn">Per-seat license model</td>
+          <td class="strong">rclone is free; storage cost depends on backend (Cloudflare R2 = cheapest)</td>
+        </tr>
+        <tr>
+          <td class="feature-name">Honest use ceiling</td>
+          <td class="neutral">Small teams, non-technical users</td>
+          <td class="neutral">Individual creative professionals</td>
+          <td class="neutral">Platform infrastructure layer — but needs headless rclone at scale, not GUI</td>
+        </tr>
+
+        <!-- NOIZY FIT -->
+        <tr class="category-row"><td colspan="4">NOIZY Ecosystem Fit</td></tr>
+        <tr>
+          <td class="feature-name">Actor onboarding experience</td>
+          <td class="good">Best UX for non-technical users</td>
+          <td class="good">Excellent for DAW workflows</td>
+          <td class="warn">Requires technical confidence; use CLI not GUI for actors</td>
+        </tr>
+        <tr>
+          <td class="feature-name">AVA live voice mount (real-time)</td>
+          <td class="bad">Not suited</td>
+          <td class="strong">Best in class — virtual disk, instant access, no download</td>
+          <td class="warn">Functional but higher latency via FUSE</td>
+        </tr>
+        <tr>
+          <td class="feature-name">Royalty ledger backup / sync</td>
+          <td class="warn">Possible but no automation</td>
+          <td class="warn">Possible but no automation</td>
+          <td class="strong">Ideal — schedule nightly encrypted sync of SQLite ledger to R2</td>
+        </tr>
+        <tr>
+          <td class="feature-name">M2 Ultra SuperStack integration</td>
+          <td class="warn">Via Google Drive API</td>
+          <td class="good">Via virtual disk mount, DAW-native</td>
+          <td class="strong">Via headless rclone daemon — full programmatic control from Python MCPs</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- SECTION 2: THREE-LAYER STACK -->
+<div class="divider"></div>
+<div class="section" id="stack">
+  <div class="section-label">Section 02 · System Design</div>
+  <h2 class="section-title">The Three-Layer <span>NOIZY Stack</span></h2>
+  <p class="section-lead">
+    These tools are not competitors. They are three layers of the same architecture.
+    Remove any one of them and something specific breaks. The key is knowing which tool
+    lives at which layer — and never asking one to do the job of another.
+  </p>
+
+  <div class="layer-stack">
+
+    <div class="layer-card user">
+      <div class="layer-header">
+        <div class="layer-num">01</div>
+        <div class="layer-meta">
+          <div class="lm-label">Layer One · Creator Facing</div>
+          <div class="lm-title">User Access Layer</div>
+        </div>
+        <div class="layer-tool-badge">Mountain Duck + Google Drive</div>
+      </div>
+      <div class="layer-body">
+        <div class="layer-body-col">
+          <h4>What lives here</h4>
+          <ul>
+            <li>Mountain Duck: virtual disk mount in actor's DAW or editor</li>
+            <li>Google Drive Desktop: team docs, non-technical collaborators, onboarding materials</li>
+            <li>AVA's voice suggestion access — pulls from Vault via Mountain Duck mount</li>
+            <li>Session files, project assets, recording captures</li>
+          </ul>
+        </div>
+        <div class="layer-body-col">
+          <h4>Why this combination</h4>
+          <ul>
+            <li>Mountain Duck is invisible inside the DAW — creator just sees a disk</li>
+            <li>Google Drive handles human collaboration docs without any friction</li>
+            <li>Zero downloads for large voice assets — Mountain Duck streams in place</li>
+            <li>Non-technical actors never touch a terminal or config file</li>
+          </ul>
+        </div>
+        <div class="breaks-if-removed">
+          <strong>⚠ Breaks if removed</strong>
+          If Mountain Duck is removed, actors need to manually download every voice asset before use. The AVA "instant access" promise collapses. Latency enters the creative workflow. Trust in the platform drops immediately.
+        </div>
+      </div>
+    </div>
+
+    <div class="layer-card workflow">
+      <div class="layer-header">
+        <div class="layer-num">02</div>
+        <div class="layer-meta">
+          <div class="lm-label">Layer Two · Editing &amp; Production</div>
+          <div class="lm-title">Workflow Layer</div>
+        </div>
+        <div class="layer-tool-badge">Mountain Duck + rclone CLI</div>
+      </div>
+      <div class="layer-body">
+        <div class="layer-body-col">
+          <h4>What lives here</h4>
+          <ul>
+            <li>Mountain Duck: live editing of voice stems and session files in DAW</li>
+            <li>rclone: automated versioning of completed sessions to primary storage</li>
+            <li>Collaboration contract file distribution — rclone pushes signed contracts to R2</li>
+            <li>Quality gate output routing — post-librosa validation, rclone moves to delivery bucket</li>
+          </ul>
+        </div>
+        <div class="layer-body-col">
+          <h4>Why this combination</h4>
+          <ul>
+            <li>Mountain Duck handles the in-session experience (native feel, low friction)</li>
+            <li>rclone handles the post-session automation (no human involvement required)</li>
+            <li>Separates the creative act from the logistics act — neither tool tries to do both</li>
+            <li>rclone dedupe keeps the Vault clean — no duplicate consent keys</li>
+          </ul>
+        </div>
+        <div class="breaks-if-removed">
+          <strong>⚠ Breaks if removed</strong>
+          If rclone is removed from the workflow layer, post-session versioning becomes manual. Quality gate outputs pile up locally on the M2 Ultra. The Royalty Ledger backup falls behind. The automated pipeline stalls.
+        </div>
+      </div>
+    </div>
+
+    <div class="layer-card infra">
+      <div class="layer-header">
+        <div class="layer-num">03</div>
+        <div class="layer-meta">
+          <div class="lm-label">Layer Three · Platform Backbone</div>
+          <div class="lm-title">Infrastructure Layer</div>
+        </div>
+        <div class="layer-tool-badge">rclone headless daemon</div>
+      </div>
+      <div class="layer-body">
+        <div class="layer-body-col">
+          <h4>What lives here</h4>
+          <ul>
+            <li>rclone daemon: continuous routing of assets between M2 Ultra and Cloudflare R2</li>
+            <li>Encrypted nightly backup of SQLite Royalty Ledger (rclone crypt + R2)</li>
+            <li>AI training dataset pipeline: rclone filters + transfers approved training batches</li>
+            <li>HVS Vault integrity checks: rclone check verifies no tampering between snapshots</li>
+            <li>VSI partnership delivery: rclone pushes licensed output bundles to partner buckets</li>
+          </ul>
+        </div>
+        <div class="layer-body-col">
+          <h4>Why rclone (not RcloneView) at this layer</h4>
+          <ul>
+            <li>RcloneView GUI is for single-machine power users — not server-side automation</li>
+            <li>headless rclone runs as a daemon, called from Python MCPs directly</li>
+            <li>Full bash/Python scripting: the DreamChamber MCP can trigger rclone operations via subprocess</li>
+            <li>No GUI dependency = no process management complexity on M2 Ultra</li>
+          </ul>
+        </div>
+        <div class="breaks-if-removed">
+          <strong>⚠ Breaks if removed</strong>
+          If the rclone daemon is removed, the entire automated pipeline requires human intervention at every step. AI training batches don't move. Ledger backups fail silently. Partner delivery stalls. The platform becomes a creative tool, not infrastructure.
+        </div>
+      </div>
+    </div>
+
+    <div class="layer-card cloud">
+      <div class="layer-header">
+        <div class="layer-num">04</div>
+        <div class="layer-meta">
+          <div class="lm-label">Layer Four · Sovereign Object Storage</div>
+          <div class="lm-title">Storage Backend</div>
+        </div>
+        <div class="layer-tool-badge">Cloudflare R2 (Primary)</div>
+      </div>
+      <div class="layer-body">
+        <div class="layer-body-col">
+          <h4>Why Cloudflare R2, not S3</h4>
+          <ul>
+            <li>Zero egress fees — every byte served to creators is free outbound</li>
+            <li>S3-compatible API — rclone supports it natively, Mountain Duck mounts it</li>
+            <li>Global CDN via Cloudflare Workers — sub-50ms voice asset delivery anywhere</li>
+            <li>GDPR-compliant jurisdictional storage — critical for HVS consent architecture</li>
+          </ul>
+        </div>
+        <div class="layer-body-col">
+          <h4>Storage structure</h4>
+          <ul>
+            <li>r2://noizy-vault/ — consent keys + actor voice models (encrypted)</li>
+            <li>r2://noizy-delivery/ — licensed output files (quality-certified, 48kHz)</li>
+            <li>r2://noizy-ledger/ — encrypted Royalty Ledger backups (append-only)</li>
+            <li>r2://noizy-training/ — approved AI training batches (consent-scoped)</li>
+          </ul>
+        </div>
+        <div class="breaks-if-removed">
+          <strong>⚠ At scale, M2 Ultra local storage is not the primary backend</strong>
+          The M2 Ultra is the processing hub and consent authority. R2 is the distributed storage layer. rclone moves data between them. Mountain Duck mounts R2 buckets for creator access. This is the production architecture.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION 3: HONEST LIMITS -->
+<div class="divider"></div>
+<div class="section" id="limits">
+  <div class="section-label">Section 03 · Brutally Honest</div>
+  <h2 class="section-title">Where Every Tool <span>Fails at Scale</span></h2>
+  <p class="section-lead">
+    Every tool in this stack has a ceiling. Knowing exactly where that ceiling is — before you hit it
+    with a production workload — is the difference between a resilient architecture and a 3am incident.
+  </p>
+
+  <div class="limits-grid">
+    <div class="limit-card gdrive">
+      <div class="limit-header">🟦 Google Drive Desktop</div>
+      <ul class="limit-list">
+        <li>750GB per-day download cap — one busy AI training run hits this</li>
+        <li class="critical">Google API rate limits will throttle at millions of creator files</li>
+        <li>No cloud-to-cloud transfer — everything routes through local machine</li>
+        <li>Sync conflicts on simultaneous edits — no merge strategy for audio</li>
+        <li class="critical">Google terms allow scanning content — incompatible with HVS consent model</li>
+        <li>Cannot be scripted or automated via MCP — no programmatic control</li>
+      </ul>
+    </div>
+    <div class="limit-card mduck">
+      <div class="limit-header">🟣 Mountain Duck</div>
+      <ul class="limit-list">
+        <li>Per-seat desktop license — not designed for server-side multi-tenant use</li>
+        <li>No automation or scheduling — purely manual workflow tool</li>
+        <li>Connection instability on spotty networks — kills active DAW sessions</li>
+        <li class="critical">Cannot orchestrate AI pipelines — there is no API or CLI</li>
+        <li>Cache management under heavy load requires manual intervention</li>
+        <li>Cannot handle cloud-to-cloud operations (partner delivery, multi-region)</li>
+      </ul>
+    </div>
+    <div class="limit-card rclone">
+      <div class="limit-header">🟠 rclone / RcloneView</div>
+      <ul class="limit-list">
+        <li>FUSE mount latency — not as responsive as Mountain Duck for live editing</li>
+        <li class="critical">RcloneView GUI does not scale — use headless rclone daemon in production</li>
+        <li>macFUSE dependency — kernel extension, can conflict with macOS updates</li>
+        <li>Learning curve for non-technical users — never expose to creators directly</li>
+        <li>Single-machine orchestration ceiling — needs distributed task queue above it at millions-scale</li>
+        <li>Error handling requires monitoring — silent failures possible without --log-file</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout red">
+    <div class="callout-label">⚠ The Real Scale Ceiling</div>
+    <div class="callout-text">
+      All three tools are <strong>desktop-class tools</strong>. They are excellent for the current phase — M2 Ultra, local SuperStack, early creator base.
+      At millions of concurrent creators, the infrastructure layer needs to graduate to:
+      <strong>rclone running headless as a microservice</strong>, orchestrated by a task queue (Celery / Redis),
+      backed by Cloudflare R2 with Workers KV for consent metadata.
+      This is not a problem for Day 1. It is a problem for Year 2. Build the rclone daemon layer now
+      so the graduation is seamless.
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 4: FULL ARCHITECTURE -->
+<div class="divider"></div>
+<div class="section" id="architecture">
+  <div class="section-label">Section 04 · Production Design</div>
+  <h2 class="section-title">The NOIZY Production <span>Architecture</span></h2>
+  <p class="section-lead">
+    This is the actual system. Not a tool comparison. Not a feature matrix.
+    This is how every component connects to deliver a voice from a creator's consent key
+    to a studio's DAW with full provenance, zero unnecessary duplication, and 75% royalty guaranteed.
+  </p>
+
+  <div class="arch-diagram">
+    <div class="arch-label">CREATOR TIER</div>
+    <div class="arch-row">
+      <div class="arch-node creator">
+        <div class="node-icon">🎤</div>
+        <div class="node-name">Actor / Creator</div>
+        <div class="node-tool">Google Drive (onboarding) → Mountain Duck (DAW access)</div>
+      </div>
+      <div class="arch-node creator">
+        <div class="node-icon">🎬</div>
+        <div class="node-name">Studio / Client</div>
+        <div class="node-tool">NOIZYVOX web → AVA brief submission → contract approval</div>
+      </div>
+      <div class="arch-node creator">
+        <div class="node-icon">📱</div>
+        <div class="node-name">Mobile (AVA push)</div>
+        <div class="node-tool">Cast notifications → deal approval → royalty tracking</div>
+      </div>
+    </div>
+    <div class="arch-arrow">↓ Mountain Duck live mount · AVA real-time suggestions ↓</div>
+
+    <div class="arch-label">EDGE PROCESSING TIER (M2 Ultra)</div>
+    <div class="arch-row">
+      <div class="arch-node edge">
+        <div class="node-icon">🧠</div>
+        <div class="node-name">DreamChamber MCP</div>
+        <div class="node-tool">Intake gateway · routes all briefs and uploads</div>
+      </div>
+      <div class="arch-node edge">
+        <div class="node-icon">🔐</div>
+        <div class="node-name">Vault MCP</div>
+        <div class="node-tool">HMAC-SHA256 consent · HVS identity verification</div>
+      </div>
+      <div class="arch-node edge">
+        <div class="node-icon">⚡</div>
+        <div class="node-name">VoxEngine MCP</div>
+        <div class="node-tool">Kokoro-82M synthesis · librosa quality gate · output routing</div>
+      </div>
+      <div class="arch-node edge">
+        <div class="node-icon">📊</div>
+        <div class="node-name">rclone daemon</div>
+        <div class="node-tool">Automated routing · R2 sync · ledger backup · partner delivery</div>
+      </div>
+    </div>
+    <div class="arch-arrow">↓ rclone encrypted transfer · consent-scoped · HVS-certified ↓</div>
+
+    <div class="arch-label">CONSENT + IDENTITY TIER</div>
+    <div class="arch-row">
+      <div class="arch-node consent">
+        <div class="node-icon">🛡</div>
+        <div class="node-name">r2://noizy-vault/</div>
+        <div class="node-tool">Actor voice models · consent keys · rclone crypt encrypted</div>
+      </div>
+      <div class="arch-node consent">
+        <div class="node-icon">📋</div>
+        <div class="node-name">r2://noizy-ledger/</div>
+        <div class="node-tool">Royalty Ledger backups · append-only · tamper-evident</div>
+      </div>
+      <div class="arch-node consent">
+        <div class="node-icon">✅</div>
+        <div class="node-name">r2://noizy-delivery/</div>
+        <div class="node-tool">Licensed outputs · HVS-certified · 48kHz quality stamp</div>
+      </div>
+    </div>
+    <div class="arch-arrow">↓ Cloudflare CDN global delivery · zero egress cost ↓</div>
+
+    <div class="arch-label">AI PIPELINE TIER</div>
+    <div class="arch-row">
+      <div class="arch-node ai">
+        <div class="node-icon">🤖</div>
+        <div class="node-name">r2://noizy-training/</div>
+        <div class="node-tool">Consent-scoped training batches · rclone filter rules · NOIZYLAB access only</div>
+      </div>
+      <div class="arch-node ai">
+        <div class="node-icon">🌐</div>
+        <div class="node-name">Wisdom MCP (RAG)</div>
+        <div class="node-tool">Pulls from approved R2 datasets · never raw Vault access</div>
+      </div>
+      <div class="arch-node ai">
+        <div class="node-icon">📡</div>
+        <div class="node-name">VSI / Partner Buckets</div>
+        <div class="node-tool">rclone pushes licensed bundles · HVS cert travels with output</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout green">
+    <div class="callout-label">✓ Why This Architecture Works</div>
+    <div class="callout-text">
+      Every layer has a single responsibility. Creators never touch infrastructure.
+      The rclone daemon never touches consent keys directly — the Vault MCP owns that.
+      Cloudflare R2 means <strong>zero egress cost on delivery</strong>, which matters enormously at scale.
+      The HVS certificate travels with every output file — provenance is never separated from the asset.
+      The Royalty Ledger is backed up nightly in encrypted form to a bucket that is append-only by IAM policy.
+      <strong>The wheel cannot be tampered with. The 75% cannot be retroactively adjusted.</strong>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 5: UPGRADES -->
+<div class="divider"></div>
+<div class="section" id="upgrades">
+  <div class="section-label">Section 05 · Evolution Path</div>
+  <h2 class="section-title">Upgrade <span>Architecture</span></h2>
+  <p class="section-lead">
+    The current stack is correct for Day 1 through approximately 10,000 active creators.
+    Each upgrade phase is triggered by a specific scale signal — not by a calendar date.
+    Here is when to upgrade, what to add, and what to replace.
+  </p>
+
+  <div class="upgrade-grid">
+
+    <div class="upgrade-card">
+      <div class="upgrade-phase">PHASE 1 · NOW → 10K Creators</div>
+      <div class="upgrade-title">Current Stack — Valid and Correct</div>
+      <div class="upgrade-desc">M2 Ultra running rclone daemon, Mountain Duck for creator access, Cloudflare R2 as storage backend. All MCPs calling headless rclone via Python subprocess. Google Drive for team collaboration only. RcloneView GUI for debugging only — never in the critical path.</div>
+      <div class="upgrade-tech">
+        <span class="tech-pill">rclone daemon</span>
+        <span class="tech-pill">Mountain Duck</span>
+        <span class="tech-pill">Cloudflare R2</span>
+        <span class="tech-pill">FastMCP (Python)</span>
+      </div>
+    </div>
+
+    <div class="upgrade-card">
+      <div class="upgrade-phase">PHASE 2 · 10K → 100K Creators</div>
+      <div class="upgrade-title">Add Task Queue + Monitoring</div>
+      <div class="upgrade-desc">rclone operations move from synchronous MCP calls to an async task queue (Celery + Redis). This prevents long-running transfers from blocking the MCP response loop. Add rclone log shipping to a monitoring dashboard. Vault MCP gets a read replica for consent verification at scale.</div>
+      <div class="upgrade-tech">
+        <span class="tech-pill">Celery + Redis</span>
+        <span class="tech-pill">rclone --log-file</span>
+        <span class="tech-pill">Grafana (rclone metrics)</span>
+        <span class="tech-pill">R2 read replica</span>
+      </div>
+    </div>
+
+    <div class="upgrade-card">
+      <div class="upgrade-phase">PHASE 3 · 100K → 1M Creators</div>
+      <div class="upgrade-title">Distributed rclone + CDN Caching</div>
+      <div class="upgrade-desc">Single M2 Ultra is no longer the sole processing hub. rclone runs as a distributed microservice across multiple nodes. Cloudflare Workers KV stores consent metadata for sub-millisecond verification at edge. Mountain Duck remains creator-facing; rclone headless handles all automation at this scale.</div>
+      <div class="upgrade-tech">
+        <span class="tech-pill">rclone microservice</span>
+        <span class="tech-pill">Cloudflare Workers KV</span>
+        <span class="tech-pill">Multi-node M2</span>
+        <span class="tech-pill">Cloudflare Cache Rules</span>
+      </div>
+    </div>
+
+    <div class="upgrade-card">
+      <div class="upgrade-phase">PHASE 4 · 1M+ Creators · Global</div>
+      <div class="upgrade-title">HVS Protocol as Global Infrastructure</div>
+      <div class="upgrade-desc">rclone is no longer enough for cloud-to-cloud at global scale. The NOIZY infrastructure layer graduates to a dedicated storage orchestration service that implements the HVS protocol natively. VSI and other partners integrate via HVS SDK, not rclone configurations. The standard runs everywhere.</div>
+      <div class="upgrade-tech">
+        <span class="tech-pill">HVS SDK</span>
+        <span class="tech-pill">Multi-region R2</span>
+        <span class="tech-pill">NOIZY Storage Service</span>
+        <span class="tech-pill">Global CDN mesh</span>
+      </div>
+    </div>
+
+    <div class="upgrade-card">
+      <div class="upgrade-phase">CACHING · Any Phase</div>
+      <div class="upgrade-title">Voice Asset Caching Layer</div>
+      <div class="upgrade-desc">Frequently accessed voice models (the top 1% of actors by casting volume) are pre-warmed in Cloudflare Cache. AVA's predictive casting engine feeds cache pre-warming decisions — if AVA predicts high demand for a voice this week, it's already at edge before the requests arrive.</div>
+      <div class="upgrade-tech">
+        <span class="tech-pill">Cloudflare Cache</span>
+        <span class="tech-pill">AVA predictive signal</span>
+        <span class="tech-pill">R2 → CDN warm</span>
+      </div>
+    </div>
+
+    <div class="upgrade-card">
+      <div class="upgrade-phase">AUTONOMY · Year 2+</div>
+      <div class="upgrade-title">Autonomous Storage Decisions</div>
+      <div class="upgrade-desc">AVA's intelligence layer extends to storage decisions. Based on licensing demand patterns, AVA's Autonomous Deal Engine tells the storage layer where to replicate, what to pre-warm, and when to archive cold assets. The Ferris wheel generates its own storage optimisation signals.</div>
+      <div class="upgrade-tech">
+        <span class="tech-pill">AVA Deal Engine signals</span>
+        <span class="tech-pill">rclone move rules</span>
+        <span class="tech-pill">R2 lifecycle policies</span>
+        <span class="tech-pill">Wisdom MCP patterns</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="callout orange">
+    <div class="callout-label">Strategic Insight — The Hidden Moat</div>
+    <div class="callout-text">
+      Every competitor's storage architecture is generic. AWS S3 with egress fees.
+      Google Drive with content scanning. No consent awareness. No HVS certificates.
+      No 75% royalty enforcement at the storage layer.
+      <strong>NOIZY's storage architecture IS the product differentiator at scale</strong> —
+      not just the creative tools that sit on top of it.
+      When HVS becomes a protocol standard, the companies that want to be HVS-compliant
+      will build their storage layers around NOIZY's rclone + R2 + consent model.
+      You are not just building storage. You are defining what ethical AI voice storage looks like.
+    </div>
+  </div>
+
+</div>
+
+</div><!-- /content -->
+
+<div class="footer">
+  <strong>NOIZY Cloud Architecture</strong> · MC96ECO Universe · Infrastructure Design v1.0<br>
+  Sovereign by design. Consent-locked by architecture. The wheel turns on encrypted ground.
+</div>
+
+<script>
+// Smooth nav scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const el = document.querySelector(a.getAttribute('href'));
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+// Highlight active nav link on scroll
+const sections = document.querySelectorAll('[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + current ? 'var(--purple-light)' : '';
+  });
+});
+</script>
+
+</body>
+</html>

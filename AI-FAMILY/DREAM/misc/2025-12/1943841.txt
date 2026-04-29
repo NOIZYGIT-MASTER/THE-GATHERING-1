@@ -1,0 +1,131 @@
+<?xml version="1.0" standalone="yes"?>
+<object class="NSIBObjectData">
+  <string name="targetFramework">IBCarbonFramework</string>
+  <object name="rootObject" class="NSCustomObject" id="1">
+    <string name="customClass">NSApplication</string>
+  </object>
+  <array count="13" name="allObjects">
+    <object class="IBCarbonWindow" id="256">
+      <string name="windowRect">324 598 514 1272 </string>
+      <string name="title">Splash</string>
+      <object name="rootControl" class="IBCarbonRootControl" id="257">
+        <string name="bounds">0 0 190 674 </string>
+        <array count="1" name="subviews">
+          <object class="IBCarbonPicture" id="258">
+            <string name="bounds">0 0 131 573 </string>
+            <int name="contentResID">2</int>
+          </object>
+        </array>
+      </object>
+      <boolean name="isResizable">FALSE</boolean>
+      <int name="carbonWindowClass">11</int>
+      <int name="themeBrush">-2</int>
+      <int name="windowPosition">1</int>
+      <boolean name="hideOnSuspend">TRUE</boolean>
+    </object>
+    <reference idRef="257"/>
+    <reference idRef="258"/>
+    <object class="IBCarbonWindow" id="259">
+      <string name="windowRect">572 349 1199 1227 </string>
+      <string name="title">FXpansionApp</string>
+      <object name="rootControl" class="IBCarbonRootControl" id="260">
+        <string name="bounds">0 0 627 878 </string>
+      </object>
+      <boolean name="hasCollapseBox">FALSE</boolean>
+      <boolean name="hasHorizontalZoom">FALSE</boolean>
+      <boolean name="isResizable">FALSE</boolean>
+      <boolean name="hasVerticalZoom">FALSE</boolean>
+    </object>
+    <reference idRef="260"/>
+    <object class="IBCarbonMenu" id="261">
+      <string name="title">main</string>
+      <string name="name">_NSMainMenu</string>
+    </object>
+    <object class="IBCarbonWindow" id="264">
+      <string name="windowRect">197 147 357 631 </string>
+      <string name="title">Authorization</string>
+      <object name="rootControl" class="IBCarbonRootControl" id="265">
+        <string name="bounds">0 0 160 484 </string>
+        <array count="5" name="subviews">
+          <object class="IBCarbonEditText" id="268">
+            <string name="bounds">79 23 95 461 </string>
+            <ostype name="controlSignature">txtf</ostype>
+            <int name="controlID">666</int>
+            <ostype name="command">txtf</ostype>
+          </object>
+          <object class="IBCarbonButton" id="270">
+            <string name="bounds">120 330 140 464 </string>
+            <ostype name="controlSignature">canc</ostype>
+            <int name="controlID">665</int>
+            <string name="title">Cancel</string>
+            <ostype name="command">canc</ostype>
+          </object>
+          <object class="IBCarbonButton" id="267">
+            <string name="bounds">120 192 140 318 </string>
+            <ostype name="controlSignature">fcok</ostype>
+            <int name="controlID">664</int>
+            <string name="title">OK</string>
+            <ostype name="command">fcok</ostype>
+            <int name="buttonType">1</int>
+          </object>
+          <object class="IBCarbonStaticText" id="269">
+            <string name="bounds">37 20 69 464 </string>
+            <ostype name="controlSignature">mesg</ostype>
+            <int name="controlID">667</int>
+            <string name="title">Message</string>
+          </object>
+          <object class="IBCarbonStaticText" id="266">
+            <string name="bounds">17 20 34 464 </string>
+            <ostype name="controlSignature">capt</ostype>
+            <int name="controlID">668</int>
+            <int name="fontStyle">4</int>
+            <string name="title">Caption</string>
+          </object>
+        </array>
+      </object>
+      <boolean name="hasCloseBox">FALSE</boolean>
+      <boolean name="hasCollapseBox">FALSE</boolean>
+      <boolean name="hasHorizontalZoom">FALSE</boolean>
+      <boolean name="isResizable">FALSE</boolean>
+      <boolean name="hasVerticalZoom">FALSE</boolean>
+      <int name="carbonWindowClass">5</int>
+      <int name="themeBrush">1</int>
+      <int name="windowPosition">1</int>
+      <boolean name="hideOnSuspend">TRUE</boolean>
+    </object>
+    <reference idRef="265"/>
+    <reference idRef="266"/>
+    <reference idRef="267"/>
+    <reference idRef="268"/>
+    <reference idRef="269"/>
+    <reference idRef="270"/>
+  </array>
+  <array count="13" name="allParents">
+    <reference idRef="1"/>
+    <reference idRef="256"/>
+    <reference idRef="257"/>
+    <reference idRef="1"/>
+    <reference idRef="259"/>
+    <reference idRef="1"/>
+    <reference idRef="1"/>
+    <reference idRef="264"/>
+    <reference idRef="265"/>
+    <reference idRef="265"/>
+    <reference idRef="265"/>
+    <reference idRef="265"/>
+    <reference idRef="265"/>
+  </array>
+  <dictionary count="5" name="nameTable">
+    <string>Files Owner</string>
+    <reference idRef="1"/>
+    <string>MainWindow</string>
+    <reference idRef="259"/>
+    <string>MenuBar</string>
+    <reference idRef="261"/>
+    <string>SplashWindow</string>
+    <reference idRef="256"/>
+    <string>VPopupDialog_TextEntryWindow</string>
+    <reference idRef="264"/>
+  </dictionary>
+  <unsigned_int name="nextObjectID">271</unsigned_int>
+</object>

@@ -1,0 +1,15 @@
+<root>
+    <CtrlPanel style="MixerFXPanel" rect="[x:0 y:0 w:228 h:228]" id="0">
+        <CtrlPanel name="MixerFXTitlePanel" rect="[x:0 y:0 w:228 h:50]" id="0" />
+        <CtrlLabel style="MixerFXLabel" rect="[x:108 y:85 w:9 h:15]" id="2000" text="0" />
+        <CtrlLabel style="MixerFXLabel" rect="[x:73 y:97 w:18 h:15]" id="2000" text="-10" />
+        <CtrlLabel style="MixerFXLabel" rect="[x:134 y:97 w:21 h:15]" id="2000" text="+7" />
+        <CtrlPanel name="CtrlPanel" style="MixerFXIndicatorPanel" rect="[x:80 y:101 w:63 h:54]" id="100000" />
+        <CtrlLabel style="MixerFXLabel" rect="[x:64 y:124 w:18 h:15]" id="2000" text="-28" />
+        <CtrlLabel style="MixerFXLabel" rect="[x:143 y:124 w:21 h:15]" id="2000" text="+13" />
+        <CtrlLabel style="MixerFXLabel" rect="[x:73 y:152 w:17 h:15]" id="2000" text="-oo" />
+        <CtrlLabel style="MixerFXLabel" rect="[x:133 y:152 w:21 h:15]" id="2000" text="+18" />
+        <CtrlLabel style="MixerFXLabel" rect="[x:107 y:161 w:19 h:15]" id="2000" text="dB" />
+        <CtrlKnob name="Gain_Amp" style="MixerFXKnobLarge" rect="[x:93 y:114 w:53 h:53]" id="1000" zorder="2" />
+    </CtrlPanel>
+</root>

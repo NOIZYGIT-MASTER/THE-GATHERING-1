@@ -1,0 +1,13 @@
+<root>
+    <CtrlPanelStyle name="KitOptionsStyle" noDefaultDrawing="true" intSmartTileEdgeSize="5" intRoundedRectRadius="0">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlButtonStyle name="LoadButtonSlotStyle2" optMomentary="false" optDrawText="true" imDown="..\Mixer\mixer_LED_on.tga" imUp="..\Mixer\mixer_LED_off.tga" colTextOn="[r:0 g:0 b:0 a:255]" colTextOff="[r:255 g:255 b:255 a:255]">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlLabelStyle name="OptionsKitLabelStyleeee">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlPanel name="CtrlPanel" style="KitOptionsStyle" rect="[x:94 y:178 w:247 h:40]" id="0">
+    </CtrlPanel>
+</root>

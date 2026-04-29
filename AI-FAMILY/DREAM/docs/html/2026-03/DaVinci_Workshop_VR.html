@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Da Vinci Workshop — The Plowman's Chronicles</title>
+  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+  <style>
+    body { margin: 0; background: #1A0F00; overflow: hidden; }
+    #overlay {
+      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+      color: #D4890A; font-family: Georgia, serif; font-size: 13px; font-style: italic;
+      background: rgba(26,15,0,0.88); padding: 10px 22px; border-radius: 4px;
+      border: 1px solid #8B691444; z-index: 999; text-align: center;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+<div id="overlay">The Da Vinci Workshop &nbsp;·&nbsp; The Plowman's Chronicles &nbsp;·&nbsp; Hand tracking enabled</div>
+
+<a-scene
+  background="color: #1A0F00"
+  fog="type: exponential; color: #1A0F00; density: 0.04"
+  renderer="antialias: true; colorManagement: true"
+  loading-screen="backgroundColor: #1A0F00; dotsColor: #D4890A"
+  vr-mode-ui="enterVRButton: #enterVRBtn">
+
+  <!-- ── LIGHTING: warm candlelight ────────────────────────────── -->
+  <a-light type="ambient"  color="#3D2200" intensity="3"></a-light>
+  <!-- Main warm overhead light -->
+  <a-light type="point" color="#FF8C00" intensity="1.8" position="0 3.5 0"   decay="2" distance="12"
+    animation="property: intensity; from: 1.5; to: 2.1; dir: alternate; loop: true; dur: 1800; easing: easeInOutSine"></a-light>
+  <!-- Candle clusters -->
+  <a-light type="point" color="#FFA500" intensity="1.2" position="-2 1.2 -3" decay="2" distance="6"
+    animation="property: intensity; from: 0.8; to: 1.5; dir: alternate; loop: true; dur: 1200; easing: easeInOutSine"></a-light>
+  <a-light type="point" color="#FF7000" intensity="1.0" position="2.5 1.2 -2.5" decay="2" distance="5"
+    animation="property: intensity; from: 0.7; to: 1.3; dir: alternate; loop: true; dur: 900; easing: easeInOutSine"></a-light>
+  <a-light type="point" color="#FFB347" intensity="0.8" position="0 1.0 2" decay="2" distance="5"
+    animation="property: intensity; from: 0.6; to: 1.1; dir: alternate; loop: true; dur: 1500; easing: easeInOutSine"></a-light>
+  <!-- Window light (cool blue-white from Florence outside) -->
+  <a-light type="point" color="#C8D8E8" intensity="0.5" position="-4 2.5 -5" decay="2" distance="10"></a-light>
+
+  <!-- ── FLOOR: wooden planks ───────────────────────────────────── -->
+  <a-plane position="0 -0.01 0" rotation="-90 0 0" width="14" height="14"
+    material="color: #5C3A1E; roughness: 0.95; metalness: 0.02"></a-plane>
+  <!-- Plank lines (dark strips) -->
+  <a-plane position="-2 0 0"  rotation="-90 0 0" width="0.04" height="14" material="color: #3A2010; shader: flat; opacity: 0.7; transparent: true"></a-plane>
+  <a-plane position="-0.5 0 0" rotation="-90 0 0" width="0.04" height="14" material="color: #3A2010; shader: flat; opacity: 0.7; transparent: true"></a-plane>
+  <a-plane position="1 0 0"   rotation="-90 0 0" width="0.04" height="14" material="color: #3A2010; shader: flat; opacity: 0.7; transparent: true"></a-plane>
+  <a-plane position="2.5 0 0" rotation="-90 0 0" width="0.04" height="14" material="color: #3A2010; shader: flat; opacity: 0.7; transparent: true"></a-plane>
+
+  <!-- ── CEILING ─────────────────────────────────────────────────── -->
+  <a-plane position="0 4.5 0" rotation="90 0 0" width="14" height="14"
+    material="color: #2A1A08; roughness: 1"></a-plane>
+  <!-- Ceiling beams -->
+  <a-box position="-3 4.2 0" width="0.2" height="0.3" depth="14" material="color: #3D2408; roughness: 0.98"></a-box>
+  <a-box position="0  4.2 0" width="0.2" height="0.3" depth="14" material="color: #3D2408; roughness: 0.98"></a-box>
+  <a-box position="3  4.2 0" width="0.2" height="0.3" depth="14" material="color: #3D2408; roughness: 0.98"></a-box>
+  <!-- Cross beams -->
+  <a-box position="0 4.2 -4" width="14" height="0.2" depth="0.2" material="color: #3D2408; roughness: 0.98"></a-box>
+  <a-box position="0 4.2  0" width="14" height="0.2" depth="0.2" material="color: #3D2408; roughness: 0.98"></a-box>
+  <a-box position="0 4.2  4" width="14" height="0.2" depth="0.2" material="color: #3D2408; roughness: 0.98"></a-box>
+
+  <!-- ── WALLS ──────────────────────────────────────────────────── -->
+  <!-- Back wall (front of workshop) -->
+  <a-plane position="0 2.2 -7" rotation="0 0 0" width="14" height="4.4"
+    material="color: #7A6A5A; roughness: 1"></a-plane>
+  <!-- Left wall -->
+  <a-plane position="-7 2.2 0" rotation="0 90 0" width="14" height="4.4"
+    material="color: #6E5E50; roughness: 1"></a-plane>
+  <!-- Right wall -->
+  <a-plane position="7 2.2 0" rotation="0 -90 0" width="14" height="4.4"
+    material="color: #6E5E50; roughness: 1"></a-plane>
+  <!-- Behind player (entrance) -->
+  <a-plane position="0 2.2 7" rotation="0 180 0" width="14" height="4.4"
+    material="color: #6E5E50; roughness: 1"></a-plane>
+
+  <!-- ── WINDOWS (back wall): Florence outside ─────────────────── -->
+  <!-- Window 1 -->
+  <a-entity position="-2.5 2.8 -6.96">
+    <a-plane width="1.4" height="2" material="color: #A8C4D8; opacity: 0.55; transparent: true; shader: flat"></a-plane>
+    <!-- Window glow -->
+    <a-plane width="1.6" height="2.2" position="0 0 -0.02" material="color: #D4B870; opacity: 0.15; transparent: true; shader: flat"></a-plane>
+    <!-- Cross bar -->
+    <a-box width="1.4" height="0.05" depth="0.05" position="0 0 0.03" material="color: #4A3010; roughness: 1"></a-box>
+    <a-box width="0.05" height="2" depth="0.05" position="0 0 0.03" material="color: #4A3010; roughness: 1"></a-box>
+  </a-entity>
+  <!-- Window 2 -->
+  <a-entity position="2.5 2.8 -6.96">
+    <a-plane width="1.4" height="2" material="color: #A8C4D8; opacity: 0.55; transparent: true; shader: flat"></a-plane>
+    <a-plane width="1.6" height="2.2" position="0 0 -0.02" material="color: #D4B870; opacity: 0.15; transparent: true; shader: flat"></a-plane>
+    <a-box width="1.4" height="0.05" depth="0.05" position="0 0 0.03" material="color: #4A3010; roughness: 1"></a-box>
+    <a-box width="0.05" height="2" depth="0.05" position="0 0 0.03" material="color: #4A3010; roughness: 1"></a-box>
+  </a-entity>
+
+  <!-- ── MAIN WORKBENCH ──────────────────────────────────────────── -->
+  <a-entity position="0 0 -4">
+    <!-- Bench top -->
+    <a-box width="4.5" height="0.12" depth="1.2" position="0 0.9 0"
+      material="color: #6B4423; roughness: 0.95; metalness: 0.02"></a-box>
+    <!-- Bench legs -->
+    <a-box width="0.1" height="0.9" depth="0.1" position="-2.1 0.45 0.5"  material="color: #5C3A1E; roughness: 1"></a-box>
+    <a-box width="0.1" height="0.9" depth="0.1" position="2.1 0.45 0.5"   material="color: #5C3A1E; roughness: 1"></a-box>
+    <a-box width="0.1" height="0.9" depth="0.1" position="-2.1 0.45 -0.5" material="color: #5C3A1E; roughness: 1"></a-box>
+    <a-box width="0.1" height="0.9" depth="0.1" position="2.1 0.45 -0.5"  material="color: #5C3A1E; roughness: 1"></a-box>
+  </a-entity>
+
+  <!-- ── PARCHMENT SCROLLS ON WORKBENCH (The Chronicles) ─────────── -->
+  <!-- Open parchment: Chapter 1 -->
+  <a-entity position="-1.2 0.97 -4">
+    <a-plane width="0.7" height="0.9" rotation="-90 10 0"
+      material="color: #F5E6C8; roughness: 0.9; opacity: 0.95; transparent: true"></a-plane>
+    <a-text value="Chapter 1&#10;The Stage & The Agent&#10;Toronto · The Music&#10;Fish Music Inc.&#10;1996"
+      position="0 0.01 -0.05" rotation="-90 10 0" align="center" color="#3A2010"
+      width="1.2" font="exo2bold"></a-text>
+  </a-entity>
+  <!-- Open parchment: Chapter 2 -->
+  <a-entity position="0 0.97 -4">
+    <a-plane width="0.7" height="0.9" rotation="-90 -5 0"
+      material="color: #F0DDB8; roughness: 0.9; opacity: 0.95; transparent: true"></a-plane>
+    <a-text value="Chapter 2&#10;Fuel Industries&#10;Ottawa · 2005-2019&#10;Audio Director&#10;14 Years"
+      position="0 0.01 -0.05" rotation="-90 -5 0" align="center" color="#3A2010"
+      width="1.2" font="exo2bold"></a-text>
+  </a-entity>
+  <!-- Rolled scroll -->
+  <a-entity position="1.2 0.98 -3.9">
+    <a-cylinder radius="0.05" height="0.7" rotation="0 0 90"
+      material="color: #E8D4A0; roughness: 0.9"></a-cylinder>
+    <a-cylinder radius="0.052" height="0.05" rotation="0 0 90" position="-0.37 0 0"
+      material="color: #C8B478; roughness: 0.9"></a-cylinder>
+    <a-cylinder radius="0.052" height="0.05" rotation="0 0 90" position="0.37 0 0"
+      material="color: #C8B478; roughness: 0.9"></a-cylinder>
+  </a-entity>
+  <!-- Ink well -->
+  <a-entity position="1.8 0.97 -4">
+    <a-cylinder radius="0.06" height="0.12" material="color: #1A0F00; metalness: 0.6; roughness: 0.3"></a-cylinder>
+    <a-sphere radius="0.065" position="0 0.06 0" material="color: #1A0F00; metalness: 0.6"></a-sphere>
+  </a-entity>
+  <!-- Quill -->
+  <a-entity position="1.6 1.0 -3.8" rotation="0 0 -20">
+    <a-cylinder radius="0.01" height="0.4" material="color: #F5E6C8; roughness: 0.9"></a-cylinder>
+  </a-entity>
+
+  <!-- ── SIDE WORKBENCH (tools / recording gear) ──────────────────── -->
+  <a-entity position="-5.5 0 0">
+    <a-box width="1.2" height="0.12" depth="2.5" position="0 0.85 0"
+      material="color: #6B4423; roughness: 0.95"></a-box>
+    <a-box width="0.1" height="0.85" depth="0.1" position="-0.5 0.42 -1.1" material="color: #5C3A1E; roughness: 1"></a-box>
+    <a-box width="0.1" height="0.85" depth="0.1" position="0.5 0.42 -1.1"  material="color: #5C3A1E; roughness: 1"></a-box>
+    <a-box width="0.1" height="0.85" depth="0.1" position="-0.5 0.42 1.1"  material="color: #5C3A1E; roughness: 1"></a-box>
+    <a-box width="0.1" height="0.85" depth="0.1" position="0.5 0.42 1.1"   material="color: #5C3A1E; roughness: 1"></a-box>
+  </a-entity>
+
+  <!-- ── MICROPHONE (U87 stand on side bench) ──────────────────────── -->
+  <a-entity position="-5.5 0.97 -0.5">
+    <!-- Stand base -->
+    <a-cylinder radius="0.12" height="0.03" material="color: #8B8680; metalness: 0.7; roughness: 0.3"></a-cylinder>
+    <!-- Stand pole -->
+    <a-cylinder radius="0.02" height="1.0" position="0 0.5 0" material="color: #8B8680; metalness: 0.8; roughness: 0.2"></a-cylinder>
+    <!-- Mic body (U87 capsule shape) -->
+    <a-cylinder radius="0.04" height="0.18" position="0 1.05 0"
+      material="color: #C0C0C0; metalness: 0.9; roughness: 0.1"></a-cylinder>
+    <a-sphere radius="0.05" position="0 1.17 0" material="color: #A8A8A8; metalness: 0.9"></a-sphere>
+    <a-text value="U87 · RSP_001" position="0.2 1.1 0" align="left" color="#D4890A" width="1.5" font="exo2bold"></a-text>
+  </a-entity>
+
+  <!-- ── CANDLES ────────────────────────────────────────────────────── -->
+  <!-- Candle cluster on main bench left -->
+  <a-entity position="-1.8 0.97 -3.6">
+    <a-cylinder radius="0.03" height="0.2" material="color: #F5E6C8; roughness: 0.8"></a-cylinder>
+    <a-sphere radius="0.025" position="0 0.12 0"
+      material="color: #FFAA00; emissive: #FF8800; emissiveIntensity: 1.5; shader: flat"
+      animation="property: material.emissiveIntensity; from: 1.0; to: 2.0; dir: alternate; loop: true; dur: 400; easing: easeInOutSine"></a-sphere>
+  </a-entity>
+  <a-entity position="-1.65 0.97 -3.7">
+    <a-cylinder radius="0.025" height="0.15" material="color: #F5E6C8; roughness: 0.8"></a-cylinder>
+    <a-sphere radius="0.022" position="0 0.09 0"
+      material="color: #FFAA00; emissive: #FF8800; emissiveIntensity: 1.2; shader: flat"
+      animation="property: material.emissiveIntensity; from: 0.8; to: 1.8; dir: alternate; loop: true; dur: 600; easing: easeInOutSine"></a-sphere>
+  </a-entity>
+  <!-- Candle on side bench -->
+  <a-entity position="-5.5 0.97 0.5">
+    <a-cylinder radius="0.035" height="0.25" material="color: #E8DCC0; roughness: 0.8"></a-cylinder>
+    <a-sphere radius="0.03" position="0 0.14 0"
+      material="color: #FFC040; emissive: #FF8800; emissiveIntensity: 1.5; shader: flat"
+      animation="property: material.emissiveIntensity; from: 1.0; to: 2.2; dir: alternate; loop: true; dur: 700; easing: easeInOutSine"></a-sphere>
+  </a-entity>
+
+  <!-- ── BOOKSHELF ON LEFT WALL ─────────────────────────────────────── -->
+  <a-entity position="-6.8 1.5 -3">
+    <!-- Shelf -->
+    <a-box width="0.2" height="3" depth="1.5" position="0 0 0" material="color: #5C3A1E; roughness: 0.97"></a-box>
+    <!-- Books (colored blocks) -->
+    <a-box width="0.06" height="0.4" depth="0.2" position="0.12 0.8 0.2"   material="color: #8B2020; roughness: 0.8"></a-box>
+    <a-box width="0.06" height="0.35" depth="0.2" position="0.12 0.78 0.0" material="color: #20508B; roughness: 0.8"></a-box>
+    <a-box width="0.06" height="0.45" depth="0.2" position="0.12 0.82 -0.2" material="color: #208B50; roughness: 0.8"></a-box>
+    <a-box width="0.06" height="0.38" depth="0.2" position="0.12 0.79 -0.4" material="color: #8B6820; roughness: 0.8"></a-box>
+    <a-box width="0.06" height="0.42" depth="0.2" position="0.12 0.21 0.3"  material="color: #5C208B; roughness: 0.8"></a-box>
+    <a-box width="0.06" height="0.36" depth="0.2" position="0.12 0.18 0.1"  material="color: #8B4020; roughness: 0.8"></a-box>
+  </a-entity>
+
+  <!-- ── FLOATING CHRONICLES PANEL (center, eye level) ─────────────── -->
+  <a-entity position="0 2.0 -5.5"
+    animation="property: position; from: 0 2.0 -5.5; to: 0 2.15 -5.5; dir: alternate; loop: true; dur: 4000; easing: easeInOutSine">
+    <a-plane width="4.5" height="1.8" material="color: #F5E6C8; opacity: 0.9; transparent: true; roughness: 0.9"></a-plane>
+    <a-text value="THE PLOWMAN'S CHRONICLES" position="0 0.6 0.02" align="center" color="#5C3A1E" width="5.5" font="exo2bold"></a-text>
+    <a-text value="My Year With Claude" position="0 0.2 0.02" align="center" color="#7B3F00" width="4" font="exo2bold"></a-text>
+    <a-text value="Rob Plowman · RSP_001 · MC96ECO Universe · 2026" position="0 -0.2 0.02" align="center" color="#8B7B6B" width="3.5" font="exo2bold"></a-text>
+    <a-text value='"What is so funny about Peace, Love and Understanding?"' position="0 -0.6 0.02" align="center" color="#A0522D" width="4.5" font="exo2bold"></a-text>
+  </a-entity>
+
+  <!-- ── SUSPENDED TOOLS FROM CEILING ──────────────────────────────── -->
+  <!-- Hanging lantern center -->
+  <a-entity position="0 3.8 -2">
+    <a-box width="0.08" height="0.08" depth="0.08" material="color: #5C3A1E; roughness: 0.9"></a-box>
+    <a-cylinder radius="0.12" height="0.3" position="0 -0.2 0" material="color: #8B6914; metalness: 0.7; roughness: 0.4; opacity: 0.6; transparent: true"></a-cylinder>
+    <a-sphere radius="0.07" position="0 -0.2 0" material="color: #FFA500; emissive: #FF6600; emissiveIntensity: 2; shader: flat"
+      animation="property: material.emissiveIntensity; from: 1.5; to: 2.5; dir: alternate; loop: true; dur: 800; easing: easeInOutSine"></a-sphere>
+    <!-- Chain -->
+    <a-cylinder radius="0.005" height="0.5" position="0 0.25 0" material="color: #5C5050; metalness: 0.8; roughness: 0.4"></a-cylinder>
+  </a-entity>
+
+  <!-- ── CHAIR ──────────────────────────────────────────────────────── -->
+  <a-entity position="-0.8 0 -2.8">
+    <a-box width="0.5" height="0.08" depth="0.5" position="0 0.5 0" material="color: #6B4423; roughness: 0.95"></a-box>
+    <a-box width="0.06" height="0.5" depth="0.06" position="-0.2 0.25 -0.2" material="color: #5C3A1E; roughness: 1"></a-box>
+    <a-box width="0.06" height="0.5" depth="0.06" position="0.2 0.25 -0.2"  material="color: #5C3A1E; roughness: 1"></a-box>
+    <a-box width="0.06" height="0.5" depth="0.06" position="-0.2 0.25 0.2"  material="color: #5C3A1E; roughness: 1"></a-box>
+    <a-box width="0.06" height="0.5" depth="0.06" position="0.2 0.25 0.2"   material="color: #5C3A1E; roughness: 1"></a-box>
+    <!-- Back rest -->
+    <a-box width="0.5" height="0.7" depth="0.06" position="0 0.85 -0.2" material="color: #6B4423; roughness: 0.95"></a-box>
+  </a-entity>
+
+  <!-- ── CAMERA & HAND TRACKING ─────────────────────────────────── -->
+  <a-entity id="rig" position="0 0 1.5">
+    <a-camera look-controls wasd-controls="acceleration: 8">
+      <a-cursor
+        fuse="false"
+        color="#D4890A"
+        opacity="0.7"
+        geometry="primitive: ring; radiusInner: 0.008; radiusOuter: 0.013"
+        material="color: #D4890A; shader: flat">
+      </a-cursor>
+    </a-camera>
+  </a-entity>
+  <a-entity hand-tracking-controls="hand: left;  modelStyle: lowPoly; modelColor: #D4890A"></a-entity>
+  <a-entity hand-tracking-controls="hand: right; modelStyle: lowPoly; modelColor: #F5E6C8"></a-entity>
+
+</a-scene>
+
+<button id="enterVRBtn" style="
+  position: fixed; bottom: 60px; right: 24px;
+  background: #7B3F00; color: #F5E6C8;
+  border: 1px solid #D4890A; border-radius: 6px;
+  padding: 14px 28px; font-size: 15px;
+  font-family: Georgia, serif; font-style: italic;
+  cursor: pointer; z-index: 999;
+  box-shadow: 0 0 20px #D4890A44; letter-spacing: 0.05em;">
+  Enter The Workshop
+</button>
+
+</body>
+</html>

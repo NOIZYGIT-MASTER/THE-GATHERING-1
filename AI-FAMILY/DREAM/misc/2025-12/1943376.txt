@@ -1,0 +1,34 @@
+<root>
+    <CtrlImageViewStyle name="StarStyle" noMouseOverEvent="true" optBorder="false" optBackground="false" optMouseHandle="true" optHQResizing="true" colBorder="[r:255 g:255 b:255 a:255]" intRoundedRectRadius="0" />
+    <CtrlPanelStyle name="KPInspectorPanelStylePiccy2" noDefaultDrawing="true" optSmartTile="true" colBorder="[r:0 g:0 b:0 a:0]" colBorderAlt="[r:0 g:0 b:0 a:0]" colFill="[r:0 g:0 b:0 a:0]" intSmartTileEdgeSize="20" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlImageViewStyle name="BlankImageStyleKPChose" optHQResizing="true" colBorder="[r:160 g:160 b:160 a:255]" colBackground="[r:192 g:192 b:192 a:255]" intRoundedRectRadius="2">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlImageViewStyle>
+    <CtrlListBoxStyle name="TransparentBoxStyle" colHighlight="[r:150 g:150 b:150 a:0]" colBorder="[r:207 g:210 b:212 a:255]" colFill="[r:243 g:246 b:249 a:255]" intRoundedRectRadius="2" intLineSpacing="13">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlListBoxStyle>
+    <CtrlPanelStyle name="ArticBoxStyleKPChoose" colBorder="[r:207 g:210 b:212 a:255]" colBorderAlt="[r:207 g:210 b:212 a:255]" colFill="[r:243 g:246 b:249 a:255]" intSmartTileEdgeSize="5" intRoundedRectRadius="2" intBorderWidth="1">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlLabelStyle name="MyLabelStyle">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlListBoxStyle name="TransparentBoxStyleKPChoose" colHighlight="[r:205 g:205 b:205 a:0]" colBorder="[r:160 g:160 b:160 a:255]" colFill="[r:176 g:176 b:176 a:255]" intRoundedRectRadius="2" intLineSpacing="13">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlListBoxStyle>
+    <CtrlLabelStyle name="CtrlLabelStyle1" />
+    <CtrlPanel name="KPInspectorPanelBack" style="KPInspectorPanelStylePiccy2" rect="[x:0 y:0 w:200 h:450]" id="0">
+        <CtrlLabel name="KitPieceName" rect="[x:8 y:0 w:185 h:16]" id="0" text="Kit Piece Name" />
+        <CtrlImageView name="KitPieceRatingStar1" style="StarStyle" rect="[x:83 y:16 w:16 h:16]" id="0" />
+        <CtrlImageView name="KitPieceRatingStar2" style="StarStyle" rect="[x:105 y:16 w:16 h:16]" id="0" />
+        <CtrlImageView name="KitPieceRatingStar3" style="StarStyle" rect="[x:127 y:16 w:16 h:16]" id="0" />
+        <CtrlImageView name="KitPieceRatingStar4" style="StarStyle" rect="[x:149 y:16 w:16 h:16]" id="0" />
+        <CtrlImageView name="KitPieceRatingStar5" style="StarStyle" rect="[x:171 y:16 w:16 h:16]" id="0" />
+        <CtrlImageView name="KitPiecePhoto" style="BlankImageStyleKPChose" rect="[x:8 y:32 w:184 h:150]" id="0" />
+        <CtrlPanel name="ArticulationsListBox" style="ArticBoxStyleKPChoose" rect="[x:8 y:186 w:184 h:102]" id="0" />
+        <CtrlListBox name="MfrListBox" style="TransparentBoxStyleKPChoose" rect="[x:8 y:292 w:184 h:93]" id="100001" />
+        <CtrlListBox name="ShippedInfoBox" style="TransparentBoxStyleKPChoose" rect="[x:8 y:389 w:184 h:46]" id="0" />
+    </CtrlPanel>
+</root>

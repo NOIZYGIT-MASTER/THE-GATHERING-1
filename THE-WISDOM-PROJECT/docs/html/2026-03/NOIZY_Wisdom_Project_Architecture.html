@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIZY — Wisdom Project Architecture</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --deep:    #050D14;
+    --abyss:   #030A10;
+    --mid:     #0D1B26;
+    --nerve:   #E8A87C;
+    --pulse:   #FF4D6D;
+    --signal:  #00D4FF;
+    --water:   #023E8A;
+    --restore: #00FFB3;
+    --soul:    #B185DB;
+    --gold:    #F59E0B;
+    --white:   #FFFFFF;
+    --silver:  #94A3B8;
+    --lgray:   #F7F7F7;
+    --lsoul:   #EDE4F7;
+    --lgreen:  #D6F5EC;
+    --lgold:   #FEF3C7;
+    --lwater:  #DCE9F5;
+    --lpulse:  #FFE4E9;
+    --lnerve:  #FDF3EC;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--abyss);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── HEADER ─────────────────────────────────────────────────── */
+  .header {
+    background: var(--deep);
+    border-bottom: 1px solid rgba(177,133,219,0.2);
+    padding: 40px 60px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(177,133,219,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-eyebrow {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
+    color: var(--soul); text-transform: uppercase; margin-bottom: 10px;
+  }
+  .header-title {
+    font-size: clamp(28px, 4vw, 44px); font-weight: 900; letter-spacing: -0.02em;
+    color: var(--white); line-height: 1.1; margin-bottom: 10px;
+  }
+  .header-title span { color: var(--restore); }
+  .header-sub {
+    font-size: 14px; color: var(--silver); max-width: 620px; line-height: 1.6;
+  }
+  .header-badge {
+    position: absolute; right: 60px; top: 50%; transform: translateY(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+  }
+  .header-badge .motif {
+    font-size: 32px; color: var(--soul); opacity: 0.4; letter-spacing: 8px;
+  }
+  .header-badge .label {
+    font-size: 9px; font-weight: 700; letter-spacing: 0.25em;
+    color: var(--soul); opacity: 0.5; text-transform: uppercase;
+  }
+
+  /* ─── MAIN LAYOUT ─────────────────────────────────────────────── */
+  .canvas {
+    padding: 48px 60px 80px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  /* ─── SECTION LABELS ──────────────────────────────────────────── */
+  .section-eyebrow {
+    font-size: 9px; font-weight: 700; letter-spacing: 0.22em;
+    text-transform: uppercase; margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-eyebrow::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, currentColor 0%, transparent 100%);
+    opacity: 0.3;
+  }
+
+  /* ─── FOUR PRINCIPLES ROW ─────────────────────────────────────── */
+  .principles-row {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+    margin-bottom: 40px;
+  }
+  .principle-card {
+    border-radius: 10px; padding: 20px 18px; position: relative; overflow: hidden;
+    display: flex; flex-direction: column; gap: 12px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .principle-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  }
+  .principle-card.soul   { background: rgba(177,133,219,0.07); }
+  .principle-card.soul::before { background: var(--soul); }
+  .principle-card.restore { background: rgba(0,255,179,0.05); }
+  .principle-card.restore::before { background: var(--restore); }
+  .principle-card.gold   { background: rgba(245,158,11,0.06); }
+  .principle-card.gold::before { background: var(--gold); }
+  .principle-card.nerve  { background: rgba(232,168,124,0.07); }
+  .principle-card.nerve::before { background: var(--nerve); }
+
+  .pc-badge {
+    width: 36px; height: 36px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center; font-size: 16px;
+  }
+  .soul .pc-badge   { background: rgba(177,133,219,0.15); }
+  .restore .pc-badge { background: rgba(0,255,179,0.1); }
+  .gold .pc-badge   { background: rgba(245,158,11,0.12); }
+  .nerve .pc-badge  { background: rgba(232,168,124,0.12); }
+
+  .pc-num {
+    font-size: 9px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase;
+    opacity: 0.5; margin-bottom: 2px;
+  }
+  .pc-title { font-size: 12px; font-weight: 700; line-height: 1.3; }
+  .pc-body  { font-size: 11px; color: var(--silver); line-height: 1.5; }
+
+  /* ─── ARCHITECTURE STACK ──────────────────────────────────────── */
+  .arch-wrapper { position: relative; margin-bottom: 40px; }
+
+  .layer-card {
+    border-radius: 12px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.07);
+    margin-bottom: 0;
+    position: relative;
+  }
+  .layer-header {
+    display: flex; align-items: center; gap: 0; min-height: 72px;
+  }
+  .layer-badge {
+    width: 72px; min-height: 72px; flex-shrink: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 2px;
+  }
+  .layer-letter {
+    font-size: 30px; font-weight: 900; letter-spacing: -0.02em; line-height: 1;
+  }
+  .layer-label {
+    font-size: 7px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.6;
+  }
+  .layer-title-block {
+    padding: 16px 24px; flex: 1; border-left: 1px solid rgba(255,255,255,0.06);
+  }
+  .layer-title {
+    font-size: 14px; font-weight: 800; margin-bottom: 3px;
+  }
+  .layer-subtitle { font-size: 11px; opacity: 0.55; }
+
+  .layer-body { padding: 0 24px 20px 96px; }
+  .layer-items { display: flex; flex-wrap: wrap; gap: 8px; padding-bottom: 4px; }
+  .layer-tag {
+    font-size: 10px; font-weight: 600; padding: 5px 12px; border-radius: 20px;
+    white-space: nowrap;
+  }
+  .layer-notes {
+    margin-top: 10px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  }
+  .layer-note {
+    border-radius: 8px; padding: 12px 14px;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  .layer-note-title { font-size: 10px; font-weight: 700; margin-bottom: 4px; }
+  .layer-note-body  { font-size: 10px; color: var(--silver); line-height: 1.5; }
+
+  /* LAYER COLORS */
+  .layer-a .layer-badge  { background: rgba(177,133,219,0.12); color: var(--soul); }
+  .layer-a .layer-title-block { background: rgba(177,133,219,0.05); }
+  .layer-a .layer-note   { background: rgba(177,133,219,0.05); }
+  .layer-a .layer-note-title { color: var(--soul); }
+  .layer-a .layer-tag    { background: rgba(177,133,219,0.12); color: var(--soul); }
+
+  .layer-b .layer-badge  { background: rgba(0,255,179,0.08); color: var(--restore); }
+  .layer-b .layer-title-block { background: rgba(0,255,179,0.04); }
+  .layer-b .layer-note   { background: rgba(0,255,179,0.04); }
+  .layer-b .layer-note-title { color: var(--restore); }
+  .layer-b .layer-tag    { background: rgba(0,255,179,0.1); color: var(--restore); }
+
+  .layer-c .layer-badge  { background: rgba(0,212,255,0.08); color: var(--signal); }
+  .layer-c .layer-title-block { background: rgba(0,212,255,0.04); }
+  .layer-c .layer-note   { background: rgba(2,62,138,0.25); }
+  .layer-c .layer-note-title { color: var(--signal); }
+  .layer-c .layer-tag    { background: rgba(0,212,255,0.1); color: var(--signal); }
+
+  /* ─── FLOW ARROWS ─────────────────────────────────────────────── */
+  .flow-connector {
+    display: flex; align-items: center; justify-content: center;
+    height: 44px; position: relative; z-index: 2;
+  }
+  .flow-line {
+    width: 1px; height: 44px; background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%);
+    position: absolute; left: 50%; transform: translateX(-50%);
+  }
+  .flow-arrow-wrapper {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--mid); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px; padding: 6px 14px; position: relative; z-index: 2;
+  }
+  .flow-arrow-icon { font-size: 12px; }
+  .flow-arrow-text { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+  .flow-consent { color: var(--soul); border-color: rgba(177,133,219,0.2); }
+  .flow-consent .flow-arrow-icon { color: var(--soul); }
+  .flow-value { color: var(--restore); border-color: rgba(0,255,179,0.2); }
+  .flow-value .flow-arrow-icon { color: var(--restore); }
+
+  /* ─── TWO-COLUMN ROW: NOIZYVOX + GOVERNANCE ──────────────────── */
+  .two-col-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    margin-top: 40px;
+  }
+
+  /* NOIZYVOX PANEL */
+  .noizyvox-panel {
+    border-radius: 12px; overflow: hidden;
+    border: 1px solid rgba(0,212,255,0.15);
+    background: linear-gradient(135deg, rgba(0,212,255,0.04) 0%, rgba(2,62,138,0.08) 100%);
+  }
+  .nvx-header {
+    padding: 18px 22px 14px;
+    border-bottom: 1px solid rgba(0,212,255,0.1);
+    display: flex; align-items: center; gap: 14px;
+  }
+  .nvx-icon {
+    width: 42px; height: 42px; border-radius: 10px;
+    background: rgba(0,212,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .nvx-title { font-size: 14px; font-weight: 800; color: var(--signal); margin-bottom: 2px; }
+  .nvx-sub   { font-size: 10px; color: var(--silver); }
+  .nvx-body  { padding: 16px 22px 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .nvx-feature {
+    background: rgba(0,212,255,0.05); border-radius: 8px; padding: 12px 14px;
+    border: 1px solid rgba(0,212,255,0.08);
+  }
+  .nvx-feat-icon { font-size: 14px; margin-bottom: 6px; }
+  .nvx-feat-title { font-size: 10px; font-weight: 700; color: var(--signal); margin-bottom: 4px; }
+  .nvx-feat-body  { font-size: 10px; color: var(--silver); line-height: 1.5; }
+
+  /* GOVERNANCE PANEL */
+  .gov-panel {
+    border-radius: 12px; overflow: hidden;
+    border: 1px solid rgba(245,158,11,0.15);
+    background: rgba(245,158,11,0.03);
+  }
+  .gov-header {
+    padding: 18px 22px 14px;
+    border-bottom: 1px solid rgba(245,158,11,0.1);
+    display: flex; align-items: center; gap: 14px;
+  }
+  .gov-icon {
+    width: 42px; height: 42px; border-radius: 10px;
+    background: rgba(245,158,11,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .gov-title { font-size: 14px; font-weight: 800; color: var(--gold); margin-bottom: 2px; }
+  .gov-sub   { font-size: 10px; color: var(--silver); }
+  .gov-body  { padding: 16px 22px 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .gov-pillar {
+    background: rgba(245,158,11,0.05); border-radius: 8px; padding: 12px 14px;
+    border: 1px solid rgba(245,158,11,0.08);
+  }
+  .gov-pillar-icon  { font-size: 14px; margin-bottom: 6px; }
+  .gov-pillar-title { font-size: 10px; font-weight: 700; color: var(--gold); margin-bottom: 4px; }
+  .gov-pillar-body  { font-size: 10px; color: var(--silver); line-height: 1.5; }
+
+  /* ─── SONIC MAPPING STRIP ─────────────────────────────────────── */
+  .sonic-row {
+    margin-top: 40px;
+  }
+  .sonic-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+  }
+  .sonic-card {
+    border-radius: 10px; padding: 18px 20px;
+    border: 1px solid rgba(255,255,255,0.06);
+    position: relative; overflow: hidden;
+  }
+  .sonic-card::after {
+    content: attr(data-glyph);
+    position: absolute; bottom: -10px; right: 8px;
+    font-size: 56px; opacity: 0.05; pointer-events: none; line-height: 1;
+  }
+  .sonic-card.gold-t   { background: rgba(245,158,11,0.05); border-color: rgba(245,158,11,0.12); }
+  .sonic-card.soul-t   { background: rgba(177,133,219,0.05); border-color: rgba(177,133,219,0.12); }
+  .sonic-card.green-t  { background: rgba(0,255,179,0.04); border-color: rgba(0,255,179,0.1); }
+  .sc-icon   { font-size: 22px; margin-bottom: 10px; }
+  .sc-title  { font-size: 12px; font-weight: 700; margin-bottom: 6px; }
+  .sc-body   { font-size: 11px; color: var(--silver); line-height: 1.55; }
+  .gold-t  .sc-title { color: var(--gold); }
+  .soul-t  .sc-title { color: var(--soul); }
+  .green-t .sc-title { color: var(--restore); }
+
+  /* ─── VISION STRIP ────────────────────────────────────────────── */
+  .vision-strip {
+    margin-top: 40px;
+    border-radius: 12px; overflow: hidden;
+    background: linear-gradient(135deg, rgba(177,133,219,0.06) 0%, rgba(0,255,179,0.04) 50%, rgba(0,212,255,0.04) 100%);
+    border: 1px solid rgba(177,133,219,0.12);
+    padding: 30px 40px;
+    display: flex; align-items: center; gap: 32px;
+    position: relative;
+  }
+  .vision-strip::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 40% 80% at 10% 50%, rgba(177,133,219,0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .vision-glyph { font-size: 48px; flex-shrink: 0; }
+  .vision-content { flex: 1; }
+  .vision-eyebrow { font-size: 9px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: var(--restore); margin-bottom: 8px; }
+  .vision-text { font-size: 15px; font-weight: 600; line-height: 1.55; color: var(--white); max-width: 700px; }
+  .vision-text em { color: var(--soul); font-style: normal; }
+  .vision-pill {
+    flex-shrink: 0; background: rgba(0,255,179,0.1); border: 1px solid rgba(0,255,179,0.2);
+    border-radius: 20px; padding: 10px 20px; text-align: center;
+  }
+  .vp-label { font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--restore); margin-bottom: 4px; }
+  .vp-value { font-size: 18px; font-weight: 900; color: var(--white); }
+
+  /* ─── FLOW DIAGRAM LEGEND ─────────────────────────────────────── */
+  .legend-bar {
+    margin-top: 32px;
+    display: flex; align-items: center; justify-content: center; gap: 28px;
+    padding: 14px 24px;
+    background: rgba(255,255,255,0.02); border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.05);
+    flex-wrap: wrap;
+  }
+  .legend-item { display: flex; align-items: center; gap: 8px; }
+  .legend-dot  { width: 8px; height: 8px; border-radius: 50%; }
+  .legend-label { font-size: 10px; color: var(--silver); font-weight: 500; }
+
+  /* ─── VALUE RETURN CALLOUT ─────────────────────────────────────── */
+  .return-strip {
+    margin-top: 24px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+  }
+  .return-card {
+    border-radius: 10px; padding: 16px 18px;
+    display: flex; align-items: flex-start; gap: 12px;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  .rc-icon { font-size: 22px; flex-shrink: 0; padding-top: 2px; }
+  .rc-title { font-size: 11px; font-weight: 700; margin-bottom: 4px; }
+  .rc-body  { font-size: 10px; color: var(--silver); line-height: 1.5; }
+  .return-card.pulse-r  { background: rgba(255,77,109,0.05); border-color: rgba(255,77,109,0.12); }
+  .return-card.pulse-r .rc-title { color: var(--pulse); }
+  .return-card.restore-r { background: rgba(0,255,179,0.04); border-color: rgba(0,255,179,0.1); }
+  .return-card.restore-r .rc-title { color: var(--restore); }
+  .return-card.soul-r   { background: rgba(177,133,219,0.05); border-color: rgba(177,133,219,0.12); }
+  .return-card.soul-r .rc-title { color: var(--soul); }
+
+  /* ─── FOOTER ──────────────────────────────────────────────────── */
+  .footer {
+    margin-top: 60px; padding: 24px 60px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-logo { font-size: 11px; font-weight: 800; letter-spacing: 0.12em; color: var(--soul); opacity: 0.6; }
+  .footer-note { font-size: 10px; color: var(--silver); opacity: 0.4; }
+
+  /* ─── RESPONSIVE ──────────────────────────────────────────────── */
+  @media (max-width: 900px) {
+    .canvas { padding: 28px 20px 60px; }
+    .header { padding: 28px 20px; }
+    .header-badge { display: none; }
+    .principles-row { grid-template-columns: 1fr 1fr; }
+    .two-col-row { grid-template-columns: 1fr; }
+    .sonic-grid { grid-template-columns: 1fr; }
+    .layer-notes { grid-template-columns: 1fr; }
+    .return-strip { grid-template-columns: 1fr; }
+    .nvx-body, .gov-body { grid-template-columns: 1fr; }
+    .footer { flex-direction: column; gap: 8px; text-align: center; padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════
+     HEADER
+═══════════════════════════════════════════════════════ -->
+<div class="header">
+  <div class="header-eyebrow">NOIZY.AI — Indigenous Wisdom Project</div>
+  <h1 class="header-title">The <span>Wisdom Project</span><br>Architecture</h1>
+  <p class="header-sub">A three-layer framework for preserving, engaging, and ethically amplifying Indigenous knowledge — consent-locked, community-governed, and powered by NOIZYVOX.</p>
+  <div class="header-badge">
+    <div class="motif">✦ ✦ ✦</div>
+    <div class="label">Master Blueprint</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     MAIN CANVAS
+═══════════════════════════════════════════════════════ -->
+<div class="canvas">
+
+  <!-- FOUR GUIDING PRINCIPLES -->
+  <div class="section-eyebrow" style="color:var(--soul)">Guiding Principles</div>
+  <div class="principles-row">
+
+    <div class="principle-card soul">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="pc-badge">🛡️</div>
+        <div>
+          <div class="pc-num">Principle I</div>
+          <div class="pc-title" style="color:var(--soul)">Consent &amp; Sovereignty</div>
+        </div>
+      </div>
+      <div class="pc-body">Communities hold ultimate authority over their knowledge. Nothing is digitized, shared, or monetized without informed, ongoing consent.</div>
+    </div>
+
+    <div class="principle-card restore">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="pc-badge">📚</div>
+        <div>
+          <div class="pc-num">Principle II</div>
+          <div class="pc-title" style="color:var(--restore)">Full Context Preservation</div>
+        </div>
+      </div>
+      <div class="pc-body">Cultural knowledge is preserved with its full ceremonial, ecological, and linguistic context — not extracted or decontextualized.</div>
+    </div>
+
+    <div class="principle-card gold">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="pc-badge">🌱</div>
+        <div>
+          <div class="pc-num">Principle III</div>
+          <div class="pc-title" style="color:var(--gold)">Ethical Amplification</div>
+        </div>
+      </div>
+      <div class="pc-body">Amplification only happens when communities choose it. Revenue, credit, and attribution always flow back to the knowledge source.</div>
+    </div>
+
+    <div class="principle-card nerve">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="pc-badge">🤝</div>
+        <div>
+          <div class="pc-num">Principle IV</div>
+          <div class="pc-title" style="color:var(--nerve)">Cultural Respect</div>
+        </div>
+      </div>
+      <div class="pc-body">Engagement is approached with cultural humility. Sacred knowledge that communities wish to keep private remains private, always.</div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       STRUCTURAL ARCHITECTURE — THREE LAYERS
+  ═══════════════════════════════════════════════════════ -->
+  <div class="section-eyebrow" style="color:var(--signal);margin-top:8px">Structural Architecture — Knowledge Flow</div>
+
+  <div class="arch-wrapper">
+
+    <!-- LAYER A -->
+    <div class="layer-card layer-a">
+      <div class="layer-header">
+        <div class="layer-badge">
+          <div class="layer-letter">A</div>
+          <div class="layer-label">Source</div>
+        </div>
+        <div class="layer-title-block">
+          <div class="layer-title" style="color:var(--soul)">Indigenous Knowledge Layer</div>
+          <div class="layer-subtitle">The living source — communities, elders, and knowledge keepers</div>
+        </div>
+      </div>
+      <div class="layer-body">
+        <div class="layer-items">
+          <span class="layer-tag">🎵 Songs &amp; Chants</span>
+          <span class="layer-tag">🌿 Healing Ceremonies</span>
+          <span class="layer-tag">🗺️ Oral Histories</span>
+          <span class="layer-tag">🥁 Sonic Rituals</span>
+          <span class="layer-tag">🌏 Songlines</span>
+          <span class="layer-tag">📖 Traditional Knowledge</span>
+        </div>
+        <div class="layer-notes">
+          <div class="layer-note">
+            <div class="layer-note-title">Community Elders</div>
+            <div class="layer-note-body">Primary knowledge holders who direct what is preserved and what remains private</div>
+          </div>
+          <div class="layer-note">
+            <div class="layer-note-title">Consent Gateway</div>
+            <div class="layer-note-body">All knowledge access requires explicit, documented community consent before any recording begins</div>
+          </div>
+          <div class="layer-note">
+            <div class="layer-note-title">Cultural Context</div>
+            <div class="layer-note-body">Ceremonial, ecological, and linguistic context preserved alongside every sonic artifact</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FLOW: CONSENT DOWN -->
+    <div class="flow-connector">
+      <div class="flow-line"></div>
+      <div class="flow-arrow-wrapper flow-consent">
+        <span class="flow-arrow-icon">↓</span>
+        <span class="flow-arrow-text">Consent-Locked Access flows downward</span>
+      </div>
+    </div>
+
+    <!-- LAYER B -->
+    <div class="layer-card layer-b">
+      <div class="layer-header">
+        <div class="layer-badge">
+          <div class="layer-letter">B</div>
+          <div class="layer-label">Preserve</div>
+        </div>
+        <div class="layer-title-block">
+          <div class="layer-title" style="color:var(--restore)">Preservation &amp; Engagement Layer</div>
+          <div class="layer-subtitle">Digitization, archiving, and community-led engagement</div>
+        </div>
+      </div>
+      <div class="layer-body">
+        <div class="layer-items">
+          <span class="layer-tag">🔒 Consent-Locked Vault</span>
+          <span class="layer-tag">🎙️ High-Fidelity Recording</span>
+          <span class="layer-tag">📡 Digital Archiving</span>
+          <span class="layer-tag">🏛️ Cultural Database</span>
+          <span class="layer-tag">🎓 Educational Programs</span>
+          <span class="layer-tag">🤝 Community Workshops</span>
+        </div>
+        <div class="layer-notes">
+          <div class="layer-note">
+            <div class="layer-note-title">DreamChamber</div>
+            <div class="layer-note-body">Immersive listening environment that presents knowledge in its full sonic and ceremonial context</div>
+          </div>
+          <div class="layer-note">
+            <div class="layer-note-title">Wisdom Keeper Module</div>
+            <div class="layer-note-body">Dr. Benoit partnership — highest-stakes proof of consent-locked knowledge preservation</div>
+          </div>
+          <div class="layer-note">
+            <div class="layer-note-title">Living Archive</div>
+            <div class="layer-note-body">Not a museum — an active, community-curated digital home that grows with the community</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FLOW: VALUE UP + AMPLIFICATION DOWN -->
+    <div class="flow-connector" style="height:52px">
+      <div class="flow-line"></div>
+      <div style="display:flex;flex-direction:column;gap:6px;align-items:center;position:relative;z-index:2">
+        <div class="flow-arrow-wrapper flow-value" style="font-size:9px">
+          <span class="flow-arrow-icon">↑</span>
+          <span class="flow-arrow-text">Revenue &amp; Attribution flows back to source</span>
+        </div>
+        <div class="flow-arrow-wrapper flow-consent" style="font-size:9px">
+          <span class="flow-arrow-icon">↓</span>
+          <span class="flow-arrow-text">Ethical Amplification (community-approved only)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LAYER C -->
+    <div class="layer-card layer-c">
+      <div class="layer-header">
+        <div class="layer-badge">
+          <div class="layer-letter">C</div>
+          <div class="layer-label">Amplify</div>
+        </div>
+        <div class="layer-title-block">
+          <div class="layer-title" style="color:var(--signal)">Amplification &amp; Ethical Sharing Layer</div>
+          <div class="layer-subtitle">NOIZYVOX-powered distribution — only with explicit community approval</div>
+        </div>
+      </div>
+      <div class="layer-body">
+        <div class="layer-items">
+          <span class="layer-tag">🎵 NOIZYVOX Streaming</span>
+          <span class="layer-tag">🧠 Neuroscience Research</span>
+          <span class="layer-tag">🏥 Therapeutic Licensing</span>
+          <span class="layer-tag">🎬 Media &amp; Documentary</span>
+          <span class="layer-tag">📱 Cultural Education Apps</span>
+          <span class="layer-tag">🌐 Global Awareness</span>
+        </div>
+        <div class="layer-notes">
+          <div class="layer-note">
+            <div class="layer-note-title">75% Perpetual Royalty</div>
+            <div class="layer-note-body">Communities retain 75% of all revenue generated — frequency belongs to its source, permanently</div>
+          </div>
+          <div class="layer-note">
+            <div class="layer-note-title">Attribution First</div>
+            <div class="layer-note-body">Every shared artifact carries permanent cultural attribution — the community is always named and honored</div>
+          </div>
+          <div class="layer-note">
+            <div class="layer-note-title">Revocable Access</div>
+            <div class="layer-note-body">Communities can withdraw consent at any time — amplification gates close and content returns to the vault</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- VALUE RETURN CALLOUTS -->
+  <div class="return-strip">
+    <div class="return-card pulse-r">
+      <div class="rc-icon">💎</div>
+      <div>
+        <div class="rc-title">75% Perpetual Royalty</div>
+        <div class="rc-body">All commercial use of community knowledge returns the majority of value directly to the knowledge source. Always. Forever.</div>
+      </div>
+    </div>
+    <div class="return-card restore-r">
+      <div class="rc-icon">🔐</div>
+      <div>
+        <div class="rc-title">Consent-Locked Vault</div>
+        <div class="rc-body">Every piece of knowledge lives behind a community-controlled consent gate. No consent = no access. No exceptions. No workarounds.</div>
+      </div>
+    </div>
+    <div class="return-card soul-r">
+      <div class="rc-icon">🔄</div>
+      <div>
+        <div class="rc-title">Revocable at Will</div>
+        <div class="rc-body">Communities can withdraw amplification consent at any moment. The system honours that withdrawal immediately and completely.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       NOIZYVOX + GOVERNANCE
+  ═══════════════════════════════════════════════════════ -->
+  <div class="two-col-row">
+
+    <!-- NOIZYVOX PANEL -->
+    <div class="noizyvox-panel">
+      <div class="nvx-header">
+        <div class="nvx-icon">🎙️</div>
+        <div>
+          <div class="nvx-title">NOIZYVOX Integration</div>
+          <div class="nvx-sub">The voice delivery system connecting wisdom to the world — ethically</div>
+        </div>
+      </div>
+      <div class="nvx-body">
+        <div class="nvx-feature">
+          <div class="nvx-feat-icon">🎵</div>
+          <div class="nvx-feat-title">Sonic Delivery</div>
+          <div class="nvx-feat-body">Streams community-approved audio with full cultural context metadata attached</div>
+        </div>
+        <div class="nvx-feature">
+          <div class="nvx-feat-icon">🔬</div>
+          <div class="nvx-feat-title">Research Pipeline</div>
+          <div class="nvx-feat-body">Feeds consent-approved recordings to neuroscience partners — anonymized, attributed</div>
+        </div>
+        <div class="nvx-feature">
+          <div class="nvx-feat-icon">🧠</div>
+          <div class="nvx-feat-title">AVA Processing</div>
+          <div class="nvx-feat-body">AI-assisted voice analysis that honors the shaman principle — first instinct preserved</div>
+        </div>
+        <div class="nvx-feature">
+          <div class="nvx-feat-icon">🌊</div>
+          <div class="nvx-feat-title">DreamChamber</div>
+          <div class="nvx-feat-body">Immersive listening experiences that present sonic knowledge in ceremonial context</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GOVERNANCE PANEL -->
+    <div class="gov-panel">
+      <div class="gov-header">
+        <div class="gov-icon">🏛️</div>
+        <div>
+          <div class="gov-title">Community Governance Council</div>
+          <div class="gov-sub">Four pillars of community stewardship and decision-making authority</div>
+        </div>
+      </div>
+      <div class="gov-body">
+        <div class="gov-pillar">
+          <div class="gov-pillar-icon">👑</div>
+          <div class="gov-pillar-title">Elder Authority</div>
+          <div class="gov-pillar-body">Elders and knowledge keepers hold final decision-making power over all preservation and sharing</div>
+        </div>
+        <div class="gov-pillar">
+          <div class="gov-pillar-icon">📋</div>
+          <div class="gov-pillar-title">Consent Oversight</div>
+          <div class="gov-pillar-body">Community-appointed council reviews and approves all consent requests before any knowledge access</div>
+        </div>
+        <div class="gov-pillar">
+          <div class="gov-pillar-icon">💰</div>
+          <div class="gov-pillar-title">Revenue Governance</div>
+          <div class="gov-pillar-body">Community controls how the 75% royalty stream is allocated — reinvestment, education, preservation</div>
+        </div>
+        <div class="gov-pillar">
+          <div class="gov-pillar-icon">🛑</div>
+          <div class="gov-pillar-title">Revocation Rights</div>
+          <div class="gov-pillar-body">Any elder or council member can initiate consent withdrawal — takes effect immediately, no delays</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       SONIC & RITUAL MAPPING
+  ═══════════════════════════════════════════════════════ -->
+  <div class="sonic-row">
+    <div class="section-eyebrow" style="color:var(--gold);margin-bottom:20px">Sonic &amp; Ritual Mapping — What We Preserve</div>
+    <div class="sonic-grid">
+
+      <div class="sonic-card gold-t" data-glyph="♩">
+        <div class="sc-icon">🎶</div>
+        <div class="sc-title">Healing Soundscapes</div>
+        <div class="sc-body">Icaros, singing bowls, griots, songlines — preserved with full ceremonial context, not extracted as ambient tracks. The healing is in the transmission, not just the frequency.</div>
+      </div>
+
+      <div class="sonic-card soul-t" data-glyph="◉">
+        <div class="sc-icon">🥁</div>
+        <div class="sc-title">Rhythmic &amp; Trance Protocols</div>
+        <div class="sc-body">Drumming sequences, repetitive chant structures, and trance-induction rhythms — mapped with their intended ceremonial function and documented alongside elder explanation.</div>
+      </div>
+
+      <div class="sonic-card green-t" data-glyph="🌿">
+        <div class="sc-icon">🌿</div>
+        <div class="sc-title">Ecological Sound Traditions</div>
+        <div class="sc-body">Songlines, land-specific chants, and place-based sonic rituals — preserved in relation to the land they belong to, honoring the inseparability of sound and place.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       VISION STRIP
+  ═══════════════════════════════════════════════════════ -->
+  <div class="vision-strip">
+    <div class="vision-glyph">✦</div>
+    <div class="vision-content">
+      <div class="vision-eyebrow">The Outcome Vision</div>
+      <div class="vision-text">A world where <em>Indigenous communities</em> are empowered to share their wisdom on their own terms — protected by consent, honoured by attribution, enriched by ethical amplification — while <em>global audiences</em> access healing sonic traditions that have guided human consciousness for millennia.</div>
+    </div>
+    <div class="vision-pill">
+      <div class="vp-label">Royalty Return</div>
+      <div class="vp-value">75%</div>
+    </div>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend-bar">
+    <div class="legend-item">
+      <div class="legend-dot" style="background:var(--soul)"></div>
+      <span class="legend-label">Layer A — Indigenous Knowledge (Source)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:var(--restore)"></div>
+      <span class="legend-label">Layer B — Preservation &amp; Engagement</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:var(--signal)"></div>
+      <span class="legend-label">Layer C — Ethical Amplification</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:var(--gold)"></div>
+      <span class="legend-label">Governance Council</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:var(--pulse)"></div>
+      <span class="legend-label">Value Return Flow (↑ to Source)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:var(--nerve)"></div>
+      <span class="legend-label">NOIZYVOX Integration</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-logo">NOIZY.AI — WISDOM PROJECT</div>
+  <div class="footer-note">Indigenous Preservation Blueprint · Master Architecture · Confidential</div>
+</div>
+
+</body>
+</html>

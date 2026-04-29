@@ -1,0 +1,35 @@
+name = "gabriel"
+main = "src/index.ts"
+compatibility_date = "2026-04-01"
+compatibility_flags = ["nodejs_compat"]
+
+# account_id set via CLOUDFLARE_ACCOUNT_ID env or `wrangler login` — intentionally
+# not hardcoded so the same config can target either CF account during reconciliation.
+
+[vars]
+TEAM_DOMAIN = "REPLACE_ME.cloudflareaccess.com"
+APP_AUD = "REPLACE_ME"                          # Access Application Audience tag
+CF_ACCOUNT_ID = "2446d788cc4280f5ea22a9948410c355"  # Fishmusicinc — reconcile Phase 0 before changing
+WARRANT_PUBLIC_KEY = "REPLACE_ME_BASE64_ED25519"    # author's hardware-token public key
+
+# --- Route ---
+[[routes]]
+pattern = "gabriel.noizy.ai/*"
+zone_name = "noizy.ai"
+
+# --- Durable Object: the GABRIEL Brain ---
+[[durable_objects.bindings]]
+name = "BRAIN"
+class_name = "GabrielBrain"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["GabrielBrain"]
+
+# --- Secrets (set via `wrangler secret put`):
+#   TOKEN_ACCOUNT_ADMIN_READ   — Phase 1
+#   TOKEN_WORKERS_DEPLOY       — Phase 2
+#   TOKEN_STORAGE              — Phase 2
+#   TOKEN_DNS                  — Phase 2
+#   TOKEN_SECURITY             — Phase 2
+#   TOKEN_OBSERVABILITY        — Phase 2

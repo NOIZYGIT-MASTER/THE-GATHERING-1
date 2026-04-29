@@ -1,0 +1,47 @@
+<root>
+    <CtrlPanelStyle name="MixerWindowStyle" colBorder="[r:200 g:200 b:200 a:255]" colFill="[r:220 g:220 b:220 a:255]" intSmartTileEdgeSize="5" intRoundedRectRadius="0">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="BlackPanel" optSmartTile="true" colFill="[r:55 g:55 b:55 a:255]" intSmartTileEdgeSize="40" intRoundedRectRadius="0">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="MixerFXPanelStyle" noDefaultDrawing="true" optSmartTile="true" colFill="[r:230 g:233 b:236 a:255]" intSmartTileEdgeSize="50" intRoundedRectRadius="0">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlScrollViewStyle name="KitPanelStyle" noDefaultDrawing="true" alwaysHideVSlider="true" alwaysHideHSlider="true" colFill="[r:0 g:0 b:0 a:255]" intSmartTileEdgeSize="5" intRoundedRectRadius="0" />
+    <CtrlScrollViewStyle name="MixerChannelsPanelStyle" noDefaultDrawing="true" alwaysHideVSlider="true" alwaysHideHSlider="true" colBorder="[r:0 g:0 b:0 a:0]" colFill="[r:0 g:0 b:0 a:0]" intSmartTileEdgeSize="5" intRoundedRectRadius="0">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlScrollViewStyle>
+    <CtrlTabPanelStyle name="MixerTabPanel" noDefaultDrawing="true" tabHeight="14">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlTabPanelStyle>
+    <CtrlPanelStyle name="KitBackPanelStyle" imBackground="..\kit_background.tga" intSmartTileEdgeSize="5" intRoundedRectRadius="0" />
+    <CtrlPanelStyle name="MixerBackPanelStyle" intSmartTileEdgeSize="5" intRoundedRectRadius="0" />
+    <CtrlPanelStyle name="MixerLeftEdge" imBackground="MixerLeftEdge.tga" intSmartTileEdgeSize="5" intRoundedRectRadius="0">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="MixerRightEdge" imBackground="MixerRightEdge.tga" intSmartTileEdgeSize="5" intRoundedRectRadius="0">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="MixerTopEdge" imBackground="MixerTopEdge.tga" intSmartTileEdgeSize="5" intRoundedRectRadius="0">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="MixerBottomEdge" imBackground="MixerBottomEdge.tga" intSmartTileEdgeSize="5" intRoundedRectRadius="0">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="CtrlPanelStyle3" intSmartTileEdgeSize="5" intRoundedRectRadius="0">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlPanel name="MixerWindow" overloadClass="MixerWindow" style="MixerWindowStyle" rect="[x:0 y:0 w:959 h:594]" id="0">
+        <CtrlPanel name="KitBackPanel" style="KitBackPanelStyle" rect="[x:0 y:0 w:959 h:301]" id="100000">
+            <CtrlPanel name="TheKitViewPanel" style="KitPanelStyle" rect="[x:0 y:0 w:959 h:297]" id="100000" />
+        </CtrlPanel>
+        <CtrlPanel name="MixerBackPanel" style="MixerBackPanelStyle" rect="[x:0 y:299 w:959 h:292]" id="100000">
+            <CtrlPanel name="MixerLeftEdge" style="MixerLeftEdge" rect="[x:0 y:0 w:12 h:292]" id="100004" />
+            <CtrlPanel name="MixerTopEdge" style="MixerTopEdge" rect="[x:12 y:0 w:935 h:6]" id="100002" />
+            <CtrlPanel name="MixerRightEdge" style="MixerRightEdge" rect="[x:947 y:0 w:12 h:294]" id="100001" />
+            <CtrlPanel name="MixerBottomEdge" style="MixerBottomEdge" rect="[x:12 y:288 w:937 h:4]" id="100003" />
+        </CtrlPanel>
+        <CtrlScrollView name="MixerChannelsPanel" style="MixerChannelsPanelStyle" rect="[x:12 y:305 w:935 h:284]" id="100000" />
+    </CtrlPanel>
+</root>

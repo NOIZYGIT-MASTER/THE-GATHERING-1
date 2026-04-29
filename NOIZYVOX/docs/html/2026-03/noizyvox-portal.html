@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIZYVOX — The Human Voice Protocol</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════
+   ROOT & RESET
+═══════════════════════════════════════════════════════ */
+:root {
+  --void:    #030305;
+  --deep:    #07070d;
+  --panel:   #0d0d16;
+  --well:    #11111c;
+  --border:  #1a1a2a;
+  --muted:   #252535;
+  --dim:     #5a5a78;
+  --body:    #a8a4bc;
+  --cream:   #e4e0d6;
+  --amber:   #c49a38;
+  --amber2:  #e0b84a;
+  --cyan:    #2aa4be;
+  --cyan2:   #3dccd8;
+  --red:     #c23028;
+  --green:   #3a9a5a;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;font-size:15px;}
+body{
+  background:var(--void);
+  color:var(--body);
+  font-family:'Inter',sans-serif;
+  font-weight:300;
+  line-height:1.75;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none;}
+button{cursor:pointer;border:none;background:none;font:inherit;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-thumb{background:var(--muted);}
+
+/* ═══════════════════════════════════════════════════════
+   TOP NAV
+═══════════════════════════════════════════════════════ */
+#top-nav{
+  position:fixed;top:0;left:0;right:0;
+  height:54px;
+  background:rgba(3,3,5,0.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 40px;
+  z-index:1000;
+}
+.nav-brand{
+  font-family:'Cormorant Garamond',serif;
+  font-size:20px;font-style:italic;letter-spacing:0.3em;
+  color:var(--cream);
+}
+.nav-brand span{color:var(--amber);font-style:normal;}
+.nav-links{display:flex;gap:2px;}
+.nav-links a{
+  padding:7px 14px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--dim);
+  border-radius:2px;
+  transition:color .2s,background .2s;
+}
+.nav-links a:hover,.nav-links a.active{
+  color:var(--amber);background:rgba(196,154,56,0.08);
+}
+.nav-cta{
+  padding:8px 20px;
+  background:var(--amber);
+  color:var(--void);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;letter-spacing:0.15em;text-transform:uppercase;
+  font-weight:500;
+  transition:background .2s;
+}
+.nav-cta:hover{background:var(--amber2);}
+
+/* ═══════════════════════════════════════════════════════
+   SHARED COMPONENTS
+═══════════════════════════════════════════════════════ */
+.section-wrap{padding:100px 80px;max-width:1200px;margin:0 auto;}
+.section-tag{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:12px;
+}
+.section-tag.cyan{color:var(--cyan);}
+h2.serif{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(32px,4vw,52px);
+  font-weight:300;font-style:italic;
+  color:var(--cream);letter-spacing:0.06em;
+  margin-bottom:20px;line-height:1.1;
+}
+.lead{
+  font-size:15px;color:var(--body);
+  max-width:600px;margin-bottom:48px;
+  line-height:1.8;
+}
+.divider{border:none;border-top:1px solid var(--border);margin:60px 0;}
+
+/* pullquote */
+.pq{
+  border-left:2px solid var(--amber);
+  padding:16px 24px;margin:32px 0;
+  background:rgba(196,154,56,0.04);
+}
+.pq p{
+  font-family:'Cormorant Garamond',serif;
+  font-size:19px;font-style:italic;
+  color:var(--cream);line-height:1.6;margin:0;
+}
+
+/* pill badge */
+.badge{
+  display:inline-block;
+  padding:3px 10px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px;letter-spacing:0.15em;text-transform:uppercase;
+  border:1px solid var(--border);color:var(--dim);
+  border-radius:2px;
+}
+.badge.amber{border-color:rgba(196,154,56,0.4);color:var(--amber);}
+.badge.cyan{border-color:rgba(42,164,190,0.4);color:var(--cyan);}
+.badge.green{border-color:rgba(58,154,90,0.4);color:var(--green);}
+
+/* ═══════════════════════════════════════════════════════
+   01 — HOME
+═══════════════════════════════════════════════════════ */
+#home{
+  position:relative;
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  justify-content:center;
+  overflow:hidden;
+}
+#hero-canvas{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+}
+.hero-content{
+  position:relative;z-index:2;
+  padding:0 80px;
+  max-width:900px;
+}
+.hero-eyebrow{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;letter-spacing:0.35em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:24px;
+}
+.hero-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(60px,9vw,120px);
+  font-weight:300;line-height:0.9;letter-spacing:0.06em;
+  color:var(--cream);margin-bottom:8px;
+}
+.hero-title em{
+  font-style:italic;color:var(--amber);
+}
+.hero-sub{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(18px,2.5vw,26px);
+  font-style:italic;color:var(--dim);
+  letter-spacing:0.1em;margin-bottom:40px;
+}
+.hero-body{
+  font-size:14px;color:var(--body);
+  max-width:520px;margin-bottom:48px;
+  line-height:1.9;
+}
+.hero-ctas{display:flex;gap:12px;align-items:center;}
+.btn-primary{
+  padding:12px 32px;
+  background:var(--amber);
+  color:var(--void);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;letter-spacing:0.2em;text-transform:uppercase;font-weight:500;
+  transition:background .2s,transform .1s;
+}
+.btn-primary:hover{background:var(--amber2);transform:translateY(-1px);}
+.btn-secondary{
+  padding:12px 32px;
+  border:1px solid var(--border);
+  color:var(--dim);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;letter-spacing:0.2em;text-transform:uppercase;
+  transition:border-color .2s,color .2s;
+}
+.btn-secondary:hover{border-color:var(--cyan);color:var(--cyan);}
+
+/* stat strip */
+.stat-strip{
+  position:absolute;bottom:0;left:0;right:0;
+  display:flex;
+  border-top:1px solid var(--border);
+  background:rgba(7,7,13,0.85);
+  backdrop-filter:blur(8px);
+  z-index:2;
+}
+.stat-cell{
+  flex:1;
+  padding:20px 32px;
+  border-right:1px solid var(--border);
+  display:flex;flex-direction:column;gap:4px;
+}
+.stat-cell:last-child{border-right:none;}
+.stat-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:32px;font-style:italic;
+  color:var(--amber);line-height:1;
+}
+.stat-num.cyan{color:var(--cyan);}
+.stat-label{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--dim);
+}
+
+/* ═══════════════════════════════════════════════════════
+   02 — GUILD
+═══════════════════════════════════════════════════════ */
+#guild{background:var(--deep);}
+
+.features-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+  margin-bottom:60px;
+}
+.feature-card{
+  background:var(--panel);
+  padding:32px 28px;
+  transition:background .2s;
+}
+.feature-card:hover{background:var(--well);}
+.feature-icon{
+  font-size:22px;margin-bottom:16px;
+  display:block;
+}
+.feature-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:20px;font-style:italic;
+  color:var(--cream);letter-spacing:0.06em;
+  margin-bottom:6px;
+}
+.feature-tag{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:12px;display:block;
+}
+.feature-card p{font-size:12px;color:var(--dim);line-height:1.7;}
+
+/* Never Clauses */
+.nc-block{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-top:2px solid var(--red);
+}
+.nc-header{
+  padding:20px 28px 16px;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:16px;
+}
+.nc-header h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;font-style:italic;
+  color:var(--cream);letter-spacing:0.08em;
+}
+.nc-constitution{
+  padding:8px 0;
+}
+.nc-row{
+  display:flex;align-items:center;gap:20px;
+  padding:14px 28px;
+  border-bottom:1px solid var(--border);
+  transition:background .15s;
+}
+.nc-row:last-child{border-bottom:none;}
+.nc-row:hover{background:rgba(194,48,40,0.04);}
+.nc-x{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;color:var(--red);
+  width:16px;flex-shrink:0;
+}
+.nc-code{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;letter-spacing:0.05em;color:var(--body);
+  flex:1;
+}
+.nc-desc{
+  font-size:11px;color:var(--dim);
+  text-align:right;min-width:200px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   03 — PORTAL (DASHBOARD)
+═══════════════════════════════════════════════════════ */
+#portal{background:var(--void);}
+
+.portal-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:32px;
+}
+.actor-id-badge{
+  display:flex;align-items:center;gap:12px;
+  padding:10px 18px;
+  background:var(--panel);
+  border:1px solid var(--border);
+}
+.actor-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 6px var(--green);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{
+  0%,100%{opacity:1;} 50%{opacity:0.4;}
+}
+.actor-handle{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;letter-spacing:0.12em;color:var(--cream);
+}
+
+/* Tabs */
+.tab-nav{
+  display:flex;
+  border-bottom:1px solid var(--border);
+  margin-bottom:36px;gap:0;
+}
+.tab-btn{
+  padding:12px 24px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--dim);
+  border-bottom:2px solid transparent;
+  transition:color .2s,border-color .2s;
+  margin-bottom:-1px;
+}
+.tab-btn:hover{color:var(--body);}
+.tab-btn.active{color:var(--amber);border-bottom-color:var(--amber);}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+/* Overview tab */
+.overview-grid{
+  display:grid;grid-template-columns:1fr 1fr 1fr 1fr;
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);
+  margin-bottom:32px;
+}
+.ov-stat{
+  background:var(--panel);
+  padding:24px 20px;
+}
+.ov-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:34px;font-style:italic;color:var(--amber);
+  line-height:1;margin-bottom:6px;
+}
+.ov-num.cyan{color:var(--cyan);}
+.ov-lbl{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--dim);
+}
+
+/* Activity bars */
+.activity-section{margin-bottom:32px;}
+.activity-title{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--dim);margin-bottom:16px;
+}
+.bar-chart{display:flex;align-items:flex-end;gap:6px;height:80px;}
+.bar{
+  flex:1;
+  background:rgba(196,154,56,0.15);
+  border-top:2px solid var(--amber);
+  border-radius:1px 1px 0 0;
+  transition:background .2s;
+  position:relative;
+}
+.bar:hover{background:rgba(196,154,56,0.3);}
+.bar.cyan{background:rgba(42,164,190,0.15);border-top-color:var(--cyan);}
+.bar.cyan:hover{background:rgba(42,164,190,0.3);}
+.bar-labels{display:flex;gap:6px;margin-top:8px;}
+.bar-lbl{
+  flex:1;text-align:center;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:8px;color:var(--dim);letter-spacing:0.1em;
+}
+
+/* AVA tab */
+.ava-layout{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.ava-card{
+  background:var(--panel);border:1px solid var(--border);
+  padding:28px;
+}
+.ava-card h4{
+  font-family:'Cormorant Garamond',serif;
+  font-size:18px;font-style:italic;color:var(--cream);
+  margin-bottom:4px;
+}
+.ava-card .ava-sub{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:20px;display:block;
+}
+.ava-waveform{
+  height:48px;display:flex;align-items:center;gap:2px;
+  margin-bottom:20px;
+}
+.wv-bar{
+  width:3px;border-radius:2px;
+  background:var(--amber);opacity:0.7;
+  animation:wvAnim 1.2s ease-in-out infinite alternate;
+}
+@keyframes wvAnim{from{transform:scaleY(1);}to{transform:scaleY(0.2);}}
+.emotion-grid{display:flex;flex-direction:column;gap:10px;}
+.emotion-row{display:flex;align-items:center;gap:12px;}
+.emotion-name{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--dim);width:80px;flex-shrink:0;
+}
+.emotion-track{
+  flex:1;height:3px;background:var(--muted);border-radius:2px;
+  position:relative;cursor:pointer;
+}
+.emotion-fill{
+  height:100%;border-radius:2px;
+  background:linear-gradient(90deg,var(--amber),var(--cyan));
+  transition:width .3s;
+}
+.emotion-val{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px;color:var(--dim);width:28px;text-align:right;
+}
+.consent-key{
+  background:var(--void);
+  border:1px solid var(--border);
+  padding:14px 16px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;letter-spacing:0.08em;
+  color:var(--cyan);
+  word-break:break-all;line-height:1.6;
+  margin-bottom:12px;
+}
+.key-row{display:flex;gap:8px;align-items:center;}
+.key-status{
+  padding:4px 10px;
+  border:1px solid rgba(58,154,90,0.4);
+  color:var(--green);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px;letter-spacing:0.15em;text-transform:uppercase;
+}
+
+/* Royalties tab */
+.royalty-controls{
+  display:flex;gap:12px;margin-bottom:20px;align-items:center;
+}
+.r-select{
+  background:var(--panel);
+  border:1px solid var(--border);
+  color:var(--body);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;letter-spacing:0.1em;
+  padding:8px 14px;
+  outline:none;cursor:pointer;
+}
+.r-select:focus{border-color:var(--amber);}
+.royalty-table{width:100%;border-collapse:collapse;}
+.royalty-table th{
+  padding:10px 16px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--dim);text-align:left;
+  border-bottom:1px solid var(--border);
+}
+.royalty-table td{
+  padding:12px 16px;
+  font-size:12px;color:var(--body);
+  border-bottom:1px solid var(--border);
+}
+.royalty-table tr:hover td{background:var(--panel);}
+.td-amount{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;color:var(--amber);font-weight:500;
+}
+.td-hash{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;color:var(--dim);
+}
+
+/* Onboarding tab */
+.onboard-steps{
+  display:flex;gap:0;margin-bottom:40px;
+  border:1px solid var(--border);
+  overflow:hidden;
+}
+.ob-step{
+  flex:1;padding:20px 16px;text-align:center;
+  background:var(--panel);
+  border-right:1px solid var(--border);
+  position:relative;
+}
+.ob-step:last-child{border-right:none;}
+.ob-step.done{background:rgba(58,154,90,0.06);}
+.ob-step.active{background:rgba(196,154,56,0.06);border-top:2px solid var(--amber);}
+.ob-num{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:18px;font-weight:500;
+  color:var(--muted);margin-bottom:6px;
+}
+.ob-step.done .ob-num{color:var(--green);}
+.ob-step.active .ob-num{color:var(--amber);}
+.ob-name{
+  font-size:11px;color:var(--dim);letter-spacing:0.05em;
+}
+.ob-step.done .ob-name{color:var(--body);}
+.ob-step.active .ob-name{color:var(--cream);}
+.ob-check{
+  position:absolute;top:10px;right:10px;
+  font-size:12px;color:var(--green);
+}
+.ob-details{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-left:3px solid var(--amber);
+  padding:24px 28px;
+}
+.ob-details h4{
+  font-family:'Cormorant Garamond',serif;
+  font-size:20px;font-style:italic;color:var(--cream);
+  margin-bottom:12px;
+}
+.ob-details p{font-size:13px;color:var(--body);}
+
+/* ═══════════════════════════════════════════════════════
+   04 — VAULT
+═══════════════════════════════════════════════════════ */
+#vault{background:var(--deep);}
+
+.vault-layout{display:grid;grid-template-columns:1fr 1fr;gap:48px;}
+
+.protocol-layers{
+  display:flex;flex-direction:column;gap:1px;
+  background:var(--border);border:1px solid var(--border);
+}
+.p-layer{
+  background:var(--panel);
+  padding:20px 24px;
+  display:flex;gap:20px;align-items:flex-start;
+  transition:background .15s;
+}
+.p-layer:hover{background:var(--well);}
+.p-layer-num{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:18px;font-weight:500;
+  color:var(--border);
+  width:28px;flex-shrink:0;line-height:1;margin-top:2px;
+}
+.p-layer:hover .p-layer-num{color:var(--cyan);}
+.p-layer-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:17px;font-style:italic;color:var(--cream);
+  margin-bottom:4px;
+}
+.p-layer-desc{font-size:11px;color:var(--dim);line-height:1.6;}
+
+/* consent flow */
+.flow-diagram{
+  display:flex;flex-direction:column;gap:0;
+  border:1px solid var(--border);
+}
+.flow-step{
+  padding:18px 22px;
+  border-bottom:1px solid var(--border);
+  position:relative;
+}
+.flow-step:last-child{border-bottom:none;}
+.flow-step-num{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:6px;
+}
+.flow-step-title{
+  font-size:13px;color:var(--cream);margin-bottom:4px;
+  font-weight:400;
+}
+.flow-step-desc{font-size:11px;color:var(--dim);}
+.flow-arrow{
+  text-align:center;padding:8px;
+  color:var(--border);font-size:16px;
+  border-bottom:1px solid var(--border);
+}
+
+/* ═══════════════════════════════════════════════════════
+   05 — PROTOCOL
+═══════════════════════════════════════════════════════ */
+#protocol{background:var(--void);}
+
+.stack-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);
+  margin-bottom:48px;
+}
+.stack-card{
+  background:var(--panel);padding:24px 20px;
+  transition:background .15s;
+}
+.stack-card:hover{background:var(--well);}
+.stack-name{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;font-weight:500;color:var(--cream);
+  margin-bottom:4px;
+}
+.stack-type{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:10px;display:block;
+}
+.stack-card p{font-size:11px;color:var(--dim);line-height:1.6;}
+
+.repo-tree{
+  background:var(--panel);border:1px solid var(--border);
+  border-left:3px solid var(--cyan);
+  padding:24px 28px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;line-height:2;color:var(--body);
+  overflow-x:auto;
+}
+.tree-dir{color:var(--cyan);}
+.tree-file{color:var(--dim);}
+.tree-comment{color:var(--muted);}
+
+/* ═══════════════════════════════════════════════════════
+   06 — JOIN
+═══════════════════════════════════════════════════════ */
+#join{background:var(--deep);}
+
+.join-layout{
+  display:grid;grid-template-columns:1fr 1fr;gap:64px;
+  align-items:start;
+}
+.join-form-wrap{
+  background:var(--panel);border:1px solid var(--border);
+}
+.join-steps-nav{
+  display:flex;border-bottom:1px solid var(--border);
+}
+.js-step{
+  flex:1;padding:14px 12px;text-align:center;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--dim);border-bottom:2px solid transparent;margin-bottom:-1px;
+  transition:color .2s,border-color .2s;
+}
+.js-step.active{color:var(--amber);border-bottom-color:var(--amber);}
+.js-step.done{color:var(--green);}
+.join-form-body{padding:32px 28px;}
+.form-group{margin-bottom:20px;}
+.form-label{
+  display:block;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--dim);margin-bottom:8px;
+}
+.form-input{
+  width:100%;
+  background:var(--void);
+  border:1px solid var(--border);
+  color:var(--body);
+  font-family:'IBM Plex Mono',monospace;font-size:12px;
+  padding:10px 14px;outline:none;
+  transition:border-color .2s;
+}
+.form-input:focus{border-color:var(--amber);}
+.form-input::placeholder{color:var(--muted);}
+.form-row{display:flex;gap:12px;}
+.form-row .form-group{flex:1;}
+.btn-form{
+  width:100%;padding:12px;
+  background:var(--amber);color:var(--void);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;letter-spacing:0.2em;text-transform:uppercase;font-weight:500;
+  margin-top:8px;transition:background .2s;
+}
+.btn-form:hover{background:var(--amber2);}
+
+/* NC agreement in join */
+.nc-agree{
+  background:var(--void);
+  border:1px solid var(--border);
+  padding:16px;margin-bottom:20px;
+  max-height:220px;overflow-y:auto;
+}
+.nc-agree-item{
+  display:flex;align-items:center;gap:12px;
+  padding:8px 0;border-bottom:1px solid var(--border);
+}
+.nc-agree-item:last-child{border-bottom:none;}
+.nc-chk{
+  width:14px;height:14px;
+  border:1px solid var(--border);
+  background:rgba(58,154,90,0.15);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--green);font-size:9px;flex-shrink:0;
+}
+.nc-agree-text{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;letter-spacing:0.05em;color:var(--dim);
+}
+
+/* join aside */
+.join-aside{}
+.join-aside h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:28px;font-style:italic;color:var(--cream);
+  margin-bottom:16px;
+}
+.join-aside p{font-size:13px;color:var(--body);margin-bottom:20px;line-height:1.8;}
+.join-aside ul{list-style:none;}
+.join-aside li{
+  padding:9px 0 9px 20px;
+  border-bottom:1px solid var(--border);
+  font-size:12px;color:var(--body);
+  position:relative;
+}
+.join-aside li::before{
+  content:'→';position:absolute;left:0;color:var(--amber);
+}
+
+/* confirmation */
+.confirmation-block{
+  text-align:center;padding:48px 28px;
+  display:none;
+}
+.confirmation-block.show{display:block;}
+.confirm-icon{font-size:48px;margin-bottom:16px;}
+.confirm-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:28px;font-style:italic;color:var(--cream);
+  margin-bottom:12px;
+}
+.confirm-id{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:18px;font-weight:500;color:var(--amber);
+  letter-spacing:0.2em;margin-bottom:12px;
+}
+.confirm-desc{font-size:13px;color:var(--body);}
+
+/* ═══════════════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════════════ */
+footer{
+  background:var(--deep);
+  border-top:1px solid var(--border);
+  padding:32px 80px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.footer-brand{
+  font-family:'Cormorant Garamond',serif;
+  font-size:16px;font-style:italic;
+  color:var(--dim);letter-spacing:0.15em;
+}
+.footer-meta{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--muted);text-align:right;line-height:1.8;
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════
+     TOP NAV
+══════════════════════════════════════════════════════ -->
+<nav id="top-nav">
+  <div class="nav-brand">NOIZY<span>VOX</span></div>
+  <div class="nav-links">
+    <a href="#home" class="active">Home</a>
+    <a href="#guild">Guild</a>
+    <a href="#portal">Portal</a>
+    <a href="#vault">Vault</a>
+    <a href="#protocol">Protocol</a>
+    <a href="#join">Join</a>
+  </div>
+  <a href="#join" class="nav-cta">Join the Guild</a>
+</nav>
+
+
+<!-- ══════════════════════════════════════════════════════
+     01 — HOME
+══════════════════════════════════════════════════════ -->
+<section id="home">
+  <canvas id="hero-canvas"></canvas>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Human Voice Protocol · Est. 2026 · Ottawa, Canada 🍁</div>
+    <h1 class="hero-title">NOIZY<br><em>VOX</em></h1>
+    <div class="hero-sub">Your voice. Your LLM. Your legacy.</div>
+    <p class="hero-body">
+      The world's first human-owned AI voice ecosystem. Professional voice actors own their LLM profiles, earn perpetual royalties on every output, and pass their voice as generational wealth to their families. Forever. No exceptions. Not for any acquisition, merger, or corporate event.
+    </p>
+    <div class="hero-ctas">
+      <a href="#join" class="btn-primary">Join the Guild</a>
+      <a href="#guild" class="btn-secondary">Explore the Protocol →</a>
+    </div>
+  </div>
+
+  <div class="stat-strip">
+    <div class="stat-cell">
+      <div class="stat-num">75%</div>
+      <div class="stat-label">Actor royalty share</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num cyan">∞</div>
+      <div class="stat-label">Royalty duration</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">10</div>
+      <div class="stat-label">Never Clauses</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num cyan">0</div>
+      <div class="stat-label">Voices without consent</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">Estate generations</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════
+     02 — GUILD
+══════════════════════════════════════════════════════ -->
+<section id="guild">
+  <div class="section-wrap">
+    <div class="section-tag">02 — The Guild</div>
+    <h2 class="serif">What Every Actor Owns</h2>
+    <p class="lead">Six rights. Not features. Not perks. Rights — baked into the constitutional architecture of the platform, enforced at the protocol level.</p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <span class="feature-icon">◉</span>
+        <div class="feature-title">Own Your Profile</div>
+        <span class="feature-tag">LLM Ownership</span>
+        <p>Your LLM voice profile belongs to you. Not the platform. Not the client. You. Every weight, every nuance, every parameter — permanently in your name.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">∞</span>
+        <div class="feature-title">Perpetual Royalties</div>
+        <span class="feature-tag">75% to Actor</span>
+        <p>Every single output. Every deployment. Every use. You earn 75% — scaling from 50/50 at entry. No ceiling. No expiry. The money flows as long as your voice is used.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">⟳</span>
+        <div class="feature-title">Voice Estate</div>
+        <span class="feature-tag">Generational Wealth</span>
+        <p>Your AVA Farm, royalty stream, and consent keys pass to your heirs upon your passing — automatically, without a platform decision, in perpetuity across generations.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">⊗</span>
+        <div class="feature-title">Never Clauses</div>
+        <span class="feature-tag">Constitutional Law</span>
+        <p>Ten immutable rules protecting your voice and identity. No platform update, no acquisition, no terms-of-service revision can override them. Ever.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">◫</span>
+        <div class="feature-title">AVA Farm</div>
+        <span class="feature-tag">Character Collection</span>
+        <p>Build a collection of AVA characters — different registers, accents, emotional ranges, languages. Each one governed by your Never Clauses. Your full creative range, protected.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">⊘</span>
+        <div class="feature-title">Voice of Refusal</div>
+        <span class="feature-tag">Final Say</span>
+        <p>When a request violates your Never Clauses, the system speaks in your voice — human, polite, final. Every denial logs immutably. Your reputation, your decision, your word.</p>
+      </div>
+    </div>
+
+    <!-- NEVER CLAUSES CONSTITUTION -->
+    <div class="nc-block">
+      <div class="nc-header">
+        <div>
+          <div class="section-tag" style="margin:0 0 4px">Constitutional Law</div>
+          <h3>The Ten Never Clauses</h3>
+        </div>
+        <span class="badge amber">Immutable · Cannot be amended</span>
+      </div>
+      <div class="nc-constitution">
+        <div class="nc-row">
+          <span class="nc-x">✕</span>
+          <span class="nc-code">NO_VOICE_EXPORT_WITHOUT_CONSENT_KEY</span>
+          <span class="nc-desc">Your voice never leaves without you</span>
+        </div>
+        <div class="nc-row">
+          <span class="nc-x">✕</span>
+          <span class="nc-code">NO_MODEL_TRAINING_OUTSIDE_APPROVED_SCOPE</span>
+          <span class="nc-desc">Your profile stays within your terms</span>
+        </div>
+        <div class="nc-row">
+          <span class="nc-x">✕</span>
+          <span class="nc-code">NO_IDENTITY_IMPERSONATION</span>
+          <span class="nc-desc">No one else can be you</span>
+        </div>
+        <div class="nc-row">
+          <span class="nc-x">✕</span>
+          <span class="nc-code">NO_SUBLICENSING</span>
+          <span class="nc-desc">Your voice cannot be resold</span>
+        </div>
+        <div class="nc-row">
+          <span class="nc-x">✕</span>
+          <span class="nc-code">NO_NSFW</span>
+          <span class="nc-desc">Absolute protection of dignity</span>
+        </div>
+        <div class="nc-row">
+          <span class="nc-x">✕</span>
+          <span class="nc-code">NO_POLITICAL_PERSUASION</span>
+          <span class="nc-desc">Your voice cannot manipulate</span>
+        </div>
+        <div class="nc-row">
+          <span class="nc-x">✕</span>
+          <span class="nc-code">NO_MEDICAL_ADVICE</span>
+          <span class="nc-desc">Protection from liability</span>
+        </div>
+        <div class="nc-row">
+          <span class="nc-x">✕</span>
+          <span class="nc-code">NO_ESTATE_DISSOLUTION_WITHOUT_HEIR_CONSENT</span>
+          <span class="nc-desc">Your family's inheritance is untouchable</span>
+        </div>
+        <div class="nc-row">
+          <span class="nc-x">✕</span>
+          <span class="nc-code">NO_ACQUISITION_VOIDS_ESTATE_RIGHTS</span>
+          <span class="nc-desc">No corporate event breaks the chain</span>
+        </div>
+        <div class="nc-row">
+          <span class="nc-x">✕</span>
+          <span class="nc-code">NO_PLATFORM_CHANGE_BREAKS_PERPETUAL_ROYALTY_CHAIN</span>
+          <span class="nc-desc">The money flows no matter what</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════
+     03 — PORTAL
+══════════════════════════════════════════════════════ -->
+<section id="portal">
+  <div class="section-wrap">
+    <div class="section-tag cyan">03 — Artist Portal</div>
+    <div class="portal-header">
+      <h2 class="serif" style="margin:0">Your Dashboard</h2>
+      <div class="actor-id-badge">
+        <div class="actor-dot"></div>
+        <span class="actor-handle">RSP_001 · R.S. Plowman · Ottawa 🍁</span>
+        <span class="badge green" style="margin-left:8px">Active</span>
+      </div>
+    </div>
+
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="switchTab('overview',this)">Overview</button>
+      <button class="tab-btn" onclick="switchTab('myava',this)">My AVA</button>
+      <button class="tab-btn" onclick="switchTab('royalties',this)">Royalties</button>
+      <button class="tab-btn" onclick="switchTab('onboarding',this)">Onboarding</button>
+    </div>
+
+    <!-- TAB: OVERVIEW -->
+    <div id="tab-overview" class="tab-panel active">
+      <div class="overview-grid">
+        <div class="ov-stat">
+          <div class="ov-num">$14,283</div>
+          <div class="ov-lbl">Total Earned</div>
+        </div>
+        <div class="ov-stat">
+          <div class="ov-num cyan">$2,341</div>
+          <div class="ov-lbl">This Month</div>
+        </div>
+        <div class="ov-stat">
+          <div class="ov-num">3</div>
+          <div class="ov-lbl">Active AVAs</div>
+        </div>
+        <div class="ov-stat">
+          <div class="ov-num cyan">847</div>
+          <div class="ov-lbl">Outputs This Week</div>
+        </div>
+      </div>
+
+      <div class="activity-section">
+        <div class="activity-title">Daily Output Volume — Last 14 Days</div>
+        <div class="bar-chart" id="bar-chart-outputs"></div>
+        <div class="bar-labels" id="bar-labels-outputs"></div>
+      </div>
+
+      <div class="activity-section">
+        <div class="activity-title">Daily Earnings (USD) — Last 14 Days</div>
+        <div class="bar-chart" id="bar-chart-earn"></div>
+        <div class="bar-labels" id="bar-labels-earn"></div>
+      </div>
+
+      <div class="pq">
+        <p>"What's the one tool you carry with you everywhere you go? Your hands and your voice. So why not make your voice the most powerful instrument you have?" — R.S. Plowman, RSP_001</p>
+      </div>
+    </div>
+
+    <!-- TAB: MY AVA -->
+    <div id="tab-myava" class="tab-panel">
+      <div class="ava-layout">
+        <div>
+          <div class="ava-card" style="margin-bottom:20px">
+            <h4>Rob.AVA — The Narrator</h4>
+            <span class="ava-sub">AVA_001 · Primary · Full Range</span>
+            <div class="ava-waveform" id="ava-waveform"></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
+              <span class="badge amber">Warm</span>
+              <span class="badge amber">Authoritative</span>
+              <span class="badge cyan">Contemplative</span>
+              <span class="badge cyan">Hopeful</span>
+              <span class="badge">EN · FR · bilingual</span>
+            </div>
+            <div style="display:flex;gap:8px">
+              <span class="badge green">Active</span>
+              <span class="badge">Consent Key: Verified</span>
+            </div>
+          </div>
+          <div class="ava-card">
+            <h4>Rob.AVA — The Director</h4>
+            <span class="ava-sub">AVA_002 · Secondary · High Register</span>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
+              <span class="badge amber">Precise</span>
+              <span class="badge cyan">Commanding</span>
+              <span class="badge">EN</span>
+            </div>
+            <span class="badge green">Active</span>
+          </div>
+        </div>
+        <div>
+          <div class="ava-card" style="margin-bottom:20px">
+            <h4>Emotional Spectrum</h4>
+            <span class="ava-sub">Rob.AVA — The Narrator</span>
+            <div class="emotion-grid">
+              <div class="emotion-row">
+                <span class="emotion-name">Warmth</span>
+                <div class="emotion-track"><div class="emotion-fill" style="width:88%"></div></div>
+                <span class="emotion-val">88%</span>
+              </div>
+              <div class="emotion-row">
+                <span class="emotion-name">Authority</span>
+                <div class="emotion-track"><div class="emotion-fill" style="width:72%"></div></div>
+                <span class="emotion-val">72%</span>
+              </div>
+              <div class="emotion-row">
+                <span class="emotion-name">Contemplative</span>
+                <div class="emotion-track"><div class="emotion-fill" style="width:64%"></div></div>
+                <span class="emotion-val">64%</span>
+              </div>
+              <div class="emotion-row">
+                <span class="emotion-name">Hopeful</span>
+                <div class="emotion-track"><div class="emotion-fill" style="width:76%"></div></div>
+                <span class="emotion-val">76%</span>
+              </div>
+              <div class="emotion-row">
+                <span class="emotion-name">Gravitas</span>
+                <div class="emotion-track"><div class="emotion-fill" style="width:55%"></div></div>
+                <span class="emotion-val">55%</span>
+              </div>
+              <div class="emotion-row">
+                <span class="emotion-name">Lightness</span>
+                <div class="emotion-track"><div class="emotion-fill" style="width:42%"></div></div>
+                <span class="emotion-val">42%</span>
+              </div>
+            </div>
+          </div>
+          <div class="ava-card">
+            <h4>Consent Key</h4>
+            <span class="ava-sub">RSP_001 · Rob.AVA — The Narrator</span>
+            <div class="consent-key">NOIZY-RSP001-CONSENT-7a4f2b8e9d3c1f6a<br>-AVA001-NARR-CA-ON-2026-03-13<br>-SIGN:4e8f2b7a9c3d1e6f0b5a2c8d4e7f1b</div>
+            <div class="key-row">
+              <span class="key-status">✓ Verified</span>
+              <span class="key-status">✓ Estate Bound</span>
+              <span class="key-status">✓ Never Clauses Active</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: ROYALTIES -->
+    <div id="tab-royalties" class="tab-panel">
+      <div class="royalty-controls">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.12em;color:var(--dim);text-transform:uppercase">Filter:</span>
+        <select class="r-select" onchange="filterRoyalties(this.value)">
+          <option value="all">All AVAs</option>
+          <option value="ava001">Rob.AVA — The Narrator</option>
+          <option value="ava002">Rob.AVA — The Director</option>
+        </select>
+        <select class="r-select">
+          <option>All Time</option>
+          <option>This Month</option>
+          <option>Last 7 Days</option>
+        </select>
+        <span class="badge amber" style="margin-left:auto">Total: $14,283.47</span>
+      </div>
+      <table class="royalty-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>AVA</th>
+            <th>Client Domain</th>
+            <th>Outputs</th>
+            <th>Your Share (75%)</th>
+            <th>TX Hash</th>
+          </tr>
+        </thead>
+        <tbody id="royalty-tbody">
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TAB: ONBOARDING -->
+    <div id="tab-onboarding" class="tab-panel">
+      <div class="onboard-steps">
+        <div class="ob-step done">
+          <div class="ob-num">01</div>
+          <div class="ob-name">Identity Verified</div>
+          <span class="ob-check">✓</span>
+        </div>
+        <div class="ob-step done">
+          <div class="ob-num">02</div>
+          <div class="ob-name">Never Clauses Signed</div>
+          <span class="ob-check">✓</span>
+        </div>
+        <div class="ob-step done">
+          <div class="ob-num">03</div>
+          <div class="ob-name">First AVA Created</div>
+          <span class="ob-check">✓</span>
+        </div>
+        <div class="ob-step done">
+          <div class="ob-num">04</div>
+          <div class="ob-name">Consent Key Issued</div>
+          <span class="ob-check">✓</span>
+        </div>
+        <div class="ob-step active">
+          <div class="ob-num">05</div>
+          <div class="ob-name">Voice Estate Setup</div>
+        </div>
+        <div class="ob-step">
+          <div class="ob-num">06</div>
+          <div class="ob-name">Go Live</div>
+        </div>
+      </div>
+      <div class="ob-details">
+        <h4>Step 5 — Voice Estate Setup</h4>
+        <p>You're almost there, RSP_001. The final step before going live is designating your Voice Estate Beneficiaries — the people who will inherit your AVA Farm, royalty stream, and consent keys. This is the permanent record that protects your family regardless of what happens with the platform. Once set, only you and your designated beneficiaries can modify this.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════
+     04 — VAULT
+══════════════════════════════════════════════════════ -->
+<section id="vault">
+  <div class="section-wrap">
+    <div class="section-tag">04 — The Vault</div>
+    <h2 class="serif">Consent Architecture</h2>
+    <p class="lead">Five protocol layers. Zero voice without consent. Every generation traced, watermarked, and logged forever.</p>
+
+    <div class="vault-layout">
+      <div>
+        <div class="section-tag" style="margin-bottom:12px">Five Protocol Layers</div>
+        <div class="protocol-layers">
+          <div class="p-layer">
+            <div class="p-layer-num">01</div>
+            <div>
+              <div class="p-layer-name">Identity Layer</div>
+              <div class="p-layer-desc">Actor authentication, AVA ownership verification. Cryptographic proof that the voice profile belongs to the registered actor.</div>
+            </div>
+          </div>
+          <div class="p-layer">
+            <div class="p-layer-num">02</div>
+            <div>
+              <div class="p-layer-name">Consent Layer</div>
+              <div class="p-layer-desc">Consent key validation. Every generation request checked against the actor's issued key before a single byte is synthesized.</div>
+            </div>
+          </div>
+          <div class="p-layer">
+            <div class="p-layer-num">03</div>
+            <div>
+              <div class="p-layer-name">Never Clause Layer</div>
+              <div class="p-layer-desc">Constitutional rule enforcement. Ten immutable rules evaluated against every input and output. Violations trigger Voice of Refusal.</div>
+            </div>
+          </div>
+          <div class="p-layer">
+            <div class="p-layer-num">04</div>
+            <div>
+              <div class="p-layer-name">Generation Layer</div>
+              <div class="p-layer-desc">RAG-augmented synthesis pipeline. Context retrieved from approved sources only. Output generated against actor's voice profile.</div>
+            </div>
+          </div>
+          <div class="p-layer">
+            <div class="p-layer-num">05</div>
+            <div>
+              <div class="p-layer-name">Provenance Layer</div>
+              <div class="p-layer-desc">Immutable watermark applied. Transaction written to audit ledger. Royalty attributed and queued for distribution. Forever.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-tag" style="margin-bottom:12px">Consent Flow</div>
+        <div class="flow-diagram">
+          <div class="flow-step">
+            <div class="flow-step-num">Request Received</div>
+            <div class="flow-step-title">Client sends synthesis request + consent key</div>
+            <div class="flow-step-desc">Request arrives at the NOIZYVOX API with client credentials and the actor's consent key reference.</div>
+          </div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">
+            <div class="flow-step-num">Identity Verified</div>
+            <div class="flow-step-title">Consent key validated against actor registry</div>
+            <div class="flow-step-desc">Cryptographic verification that the consent key is valid, unexpired, and matches the requested AVA.</div>
+          </div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">
+            <div class="flow-step-num">Never Clauses Checked</div>
+            <div class="flow-step-title">All 10 clauses evaluated against request content</div>
+            <div class="flow-step-desc">If any clause is violated, Voice of Refusal fires. Log written. Actor notified. Request terminated.</div>
+          </div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">
+            <div class="flow-step-num">Generation</div>
+            <div class="flow-step-title">RAG pipeline produces output from approved context</div>
+            <div class="flow-step-desc">Voice synthesized using actor's profile, within approved domain and language scope only.</div>
+          </div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">
+            <div class="flow-step-num">Watermark + Log</div>
+            <div class="flow-step-title">Output watermarked · ledger written · royalty queued</div>
+            <div class="flow-step-desc">Actor's 75% royalty attributed immediately. Provenance record immutably appended. Output delivered.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════
+     05 — PROTOCOL
+══════════════════════════════════════════════════════ -->
+<section id="protocol">
+  <div class="section-wrap">
+    <div class="section-tag cyan">05 — Protocol</div>
+    <h2 class="serif">The Stack</h2>
+    <p class="lead">TypeScript-first. Local-sovereign. Cloud-augmented. Built to run on the M2 Ultra and scale to the world.</p>
+
+    <div class="stack-grid">
+      <div class="stack-card">
+        <div class="stack-name">TypeScript</div>
+        <span class="stack-type">Language · First Class</span>
+        <p>Everything is TypeScript. Every service, every schema, every SDK. Type safety as a form of trust.</p>
+      </div>
+      <div class="stack-card">
+        <div class="stack-name">Node.js LTS</div>
+        <span class="stack-type">Runtime</span>
+        <p>Long-term stable. Production-grade. The foundation that runs on both the M2 Ultra and cloud infrastructure.</p>
+      </div>
+      <div class="stack-card">
+        <div class="stack-name">Apple M2 Ultra</div>
+        <span class="stack-type">Primary Hardware</span>
+        <p>GABRIEL's home. Local inference, local sovereignty. Agents run here. The cloud augments — it doesn't control.</p>
+      </div>
+      <div class="stack-card">
+        <div class="stack-name">UAD + Neumann U87</div>
+        <span class="stack-type">Voice Input Node</span>
+        <p>MacBook Pro. UAD interface. Neumann U87 condenser. The physical node where Rob.AVA begins — a real microphone, a real voice.</p>
+      </div>
+      <div class="stack-card">
+        <div class="stack-name">Claude / Anthropic</div>
+        <span class="stack-type">AI Partner</span>
+        <p>Primary AI layer. The ethical partner. The only AI company building the infrastructure that makes NOIZYVOX possible.</p>
+      </div>
+      <div class="stack-card">
+        <div class="stack-name">HTML5 Canvas → React</div>
+        <span class="stack-type">Web · Current → Next</span>
+        <p>Present: Canvas animations, HTML5. Next: React with full TypeScript component library. The web evolves with the platform.</p>
+      </div>
+    </div>
+
+    <div class="section-tag" style="margin-bottom:16px">Live Repository Structure</div>
+    <div class="repo-tree"><span class="tree-dir">noizy-platform/</span>
+├── <span class="tree-dir">apps/</span>
+│   ├── <span class="tree-dir">actor-portal/</span>         <span class="tree-comment"># Onboarding, AVA Farm, Royalties dashboard</span>
+│   ├── <span class="tree-dir">studio-console/</span>       <span class="tree-comment"># Developer + studio usage interface</span>
+│   └── <span class="tree-dir">admin-governance/</span>     <span class="tree-comment"># Trust, audit, dispute resolution</span>
+│
+├── <span class="tree-dir">services/</span>
+│   ├── <span class="tree-dir">identity/</span>             <span class="tree-comment"># Actor + AVA identity management</span>
+│   ├── <span class="tree-dir">consent/</span>              <span class="tree-comment"># Cryptographic consent key service</span>
+│   ├── <span class="tree-dir">voice-engine/</span>         <span class="tree-comment"># NOIZYVOX voice synthesis core</span>
+│   ├── <span class="tree-dir">voice-node/</span>           <span class="tree-comment"># MacBook Pro / UAD / U87 capture service</span>
+│   ├── <span class="tree-dir">rag-runtime/</span>          <span class="tree-comment"># Safe generation pipeline</span>
+│   ├── <span class="tree-dir">licensing/</span>            <span class="tree-comment"># Collaboration contracts + payouts</span>
+│   └── <span class="tree-dir">provenance/</span>           <span class="tree-comment"># Watermark + immutable audit ledger</span>
+│
+├── <span class="tree-dir">packages/</span>
+│   ├── <span class="tree-dir">schemas/</span>              <span class="tree-comment"># Actor, AVA, VoiceEstate, Contract types</span>
+│   ├── <span class="tree-dir">never-clauses/</span>        <span class="tree-comment"># The 10 constitutional rules</span>
+│   ├── <span class="tree-dir">refusal-engine/</span>       <span class="tree-comment"># Voice of Refusal</span>
+│   └── <span class="tree-dir">sdk/</span>                  <span class="tree-comment"># Public developer SDK</span>
+│
+├── <span class="tree-dir">infra/</span>
+│   ├── <span class="tree-dir">terraform/</span>
+│   ├── <span class="tree-dir">kubernetes/</span>
+│   └── <span class="tree-dir">ci-cd/</span>
+│
+└── <span class="tree-dir">docs/</span>
+    ├── <span class="tree-file">architecture.md</span>
+    ├── <span class="tree-file">threat-model.md</span>
+    ├── <span class="tree-file">actor-charter.md</span>
+    ├── <span class="tree-file">voice-estate-trust.md</span>     <span class="tree-comment"># The firewall clause</span>
+    └── <span class="tree-file">compliance.md</span></div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════
+     06 — JOIN
+══════════════════════════════════════════════════════ -->
+<section id="join">
+  <div class="section-wrap">
+    <div class="section-tag">06 — Join</div>
+    <h2 class="serif">Join the Guild</h2>
+
+    <div class="join-layout">
+      <div>
+        <div class="join-form-wrap">
+          <div class="join-steps-nav">
+            <div class="js-step done" id="js1">01 Identity</div>
+            <div class="js-step active" id="js2">02 Never Clauses</div>
+            <div class="js-step" id="js3">03 Confirmation</div>
+          </div>
+
+          <!-- Step 1: Identity -->
+          <div id="join-step-1" class="join-form-body" style="display:none">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Legal Name</label>
+                <input class="form-input" placeholder="Your full legal name" id="f-name">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Stage Name (optional)</label>
+                <input class="form-input" placeholder="How you're known">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input class="form-input" type="email" placeholder="your@email.com">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Location</label>
+                <input class="form-input" placeholder="City, Province/State">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Primary Language</label>
+                <input class="form-input" placeholder="English, French...">
+              </div>
+            </div>
+            <button class="btn-form" onclick="advanceJoin(2)">Continue to Never Clauses →</button>
+          </div>
+
+          <!-- Step 2: Never Clauses -->
+          <div id="join-step-2" class="join-form-body">
+            <p style="font-size:12px;color:var(--body);margin-bottom:16px;line-height:1.8">
+              These are the Ten Never Clauses — your constitutional rights and obligations as a NOIZYVOX Guild member. By joining, you agree they are immutable. No platform update, acquisition, or request can override them.
+            </p>
+            <div class="nc-agree">
+              <div class="nc-agree-item"><div class="nc-chk">✓</div><span class="nc-agree-text">NO_VOICE_EXPORT_WITHOUT_CONSENT_KEY</span></div>
+              <div class="nc-agree-item"><div class="nc-chk">✓</div><span class="nc-agree-text">NO_MODEL_TRAINING_OUTSIDE_APPROVED_SCOPE</span></div>
+              <div class="nc-agree-item"><div class="nc-chk">✓</div><span class="nc-agree-text">NO_IDENTITY_IMPERSONATION</span></div>
+              <div class="nc-agree-item"><div class="nc-chk">✓</div><span class="nc-agree-text">NO_SUBLICENSING</span></div>
+              <div class="nc-agree-item"><div class="nc-chk">✓</div><span class="nc-agree-text">NO_NSFW</span></div>
+              <div class="nc-agree-item"><div class="nc-chk">✓</div><span class="nc-agree-text">NO_POLITICAL_PERSUASION</span></div>
+              <div class="nc-agree-item"><div class="nc-chk">✓</div><span class="nc-agree-text">NO_MEDICAL_ADVICE</span></div>
+              <div class="nc-agree-item"><div class="nc-chk">✓</div><span class="nc-agree-text">NO_ESTATE_DISSOLUTION_WITHOUT_HEIR_CONSENT</span></div>
+              <div class="nc-agree-item"><div class="nc-chk">✓</div><span class="nc-agree-text">NO_ACQUISITION_VOIDS_ESTATE_RIGHTS</span></div>
+              <div class="nc-agree-item"><div class="nc-chk">✓</div><span class="nc-agree-text">NO_PLATFORM_CHANGE_BREAKS_PERPETUAL_ROYALTY_CHAIN</span></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Your Name (signature)</label>
+              <input class="form-input" placeholder="Type your legal name to sign" id="f-sign">
+            </div>
+            <button class="btn-form" onclick="advanceJoin(3)">I Agree — Issue My Consent Key →</button>
+          </div>
+
+          <!-- Step 3: Confirmation -->
+          <div id="join-step-3" class="confirmation-block">
+            <div class="confirm-icon">◉</div>
+            <div class="confirm-title">Welcome to the Guild</div>
+            <div class="confirm-id" id="confirm-id">NVX_—</div>
+            <p class="confirm-desc">Your consent key is being generated. Your AVA Farm is ready to populate. Your Voice Estate is ready to designate. You are now part of the first human-owned AI voice ecosystem in history.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="join-aside">
+        <h3>Why join NOIZYVOX?</h3>
+        <p>You built your voice across a career. It's an instrument — refined, practiced, irreplaceable. The question isn't whether AI will use voices like yours. It already is. The question is whether you own it when it does.</p>
+        <ul>
+          <li>Your LLM voice profile is permanently yours</li>
+          <li>75% of every royalty goes directly to you</li>
+          <li>Your family inherits your voice estate — perpetually</li>
+          <li>No platform event can break that chain</li>
+          <li>Ten Never Clauses protect you constitutionally</li>
+          <li>Your Voice of Refusal speaks in your own words</li>
+          <li>The audit ledger remembers every use, forever</li>
+          <li>You are RSP_002, RSP_003... — not a data point</li>
+        </ul>
+
+        <div class="pq" style="margin-top:32px">
+          <p>"I don't pitch. I build. I cure. I heal. I make people happy."<br>— R.S. Plowman, RSP_001</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-brand">NOIZYVOX — The Human Voice Protocol</div>
+  <div class="footer-meta">
+    Founded by R.S. Plowman · Ottawa, Ontario, Canada 🍁<br>
+    Fish Music Inc. · 2026 · RSP_001
+  </div>
+</footer>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════════════════════ -->
+<script>
+/* ── NAV ACTIVE STATE ─────────────────────────── */
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 100) current = s.id;
+  });
+  navLinks.forEach(l => {
+    l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+  });
+});
+
+/* ── HERO CANVAS ──────────────────────────────── */
+const canvas = document.getElementById('hero-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [], time = 0;
+
+function resize() {
+  W = canvas.width = canvas.offsetWidth;
+  H = canvas.height = canvas.offsetHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+// Particles
+for (let i = 0; i < 80; i++) {
+  particles.push({
+    x: Math.random() * 2000,
+    y: Math.random() * 2000,
+    r: Math.random() * 1.2 + 0.3,
+    vx: (Math.random() - 0.5) * 0.2,
+    vy: (Math.random() - 0.5) * 0.2,
+    a: Math.random() * 0.4 + 0.05,
+  });
+}
+
+function drawFrame() {
+  time += 0.008;
+  ctx.clearRect(0, 0, W, H);
+
+  // Deep space gradient
+  const bg = ctx.createLinearGradient(0, 0, 0, H);
+  bg.addColorStop(0, '#030305');
+  bg.addColorStop(1, '#070710');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, W, H);
+
+  // Particles
+  particles.forEach(p => {
+    p.x += p.vx; p.y += p.vy;
+    if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+    if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+    ctx.beginPath();
+    ctx.arc(p.x % W, p.y % H, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(196,154,56,${p.a})`;
+    ctx.fill();
+  });
+
+  // Waveform bars
+  const numBars = 64;
+  const barW = W / numBars;
+  for (let i = 0; i < numBars; i++) {
+    const x = i * barW;
+    const wave1 = Math.sin(i * 0.18 + time * 2.1) * 0.5 + 0.5;
+    const wave2 = Math.sin(i * 0.09 + time * 1.3) * 0.3;
+    const wave3 = Math.sin(i * 0.34 + time * 3.0) * 0.2;
+    const amp = (wave1 + wave2 + wave3) * 60 + 8;
+    const cy = H * 0.68;
+
+    ctx.beginPath();
+    ctx.rect(x + 1, cy - amp, barW - 2, amp * 2);
+    const alpha = 0.08 + wave1 * 0.12;
+    ctx.fillStyle = `rgba(196,154,56,${alpha})`;
+    ctx.fill();
+  }
+
+  // Glow line
+  ctx.beginPath();
+  ctx.moveTo(0, H * 0.68);
+  for (let x = 0; x <= W; x += 4) {
+    const y = H * 0.68 + Math.sin(x * 0.015 + time * 1.8) * 18 + Math.sin(x * 0.03 + time * 2.8) * 8;
+    ctx.lineTo(x, y);
+  }
+  ctx.strokeStyle = 'rgba(196,154,56,0.15)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // Cyan secondary line
+  ctx.beginPath();
+  ctx.moveTo(0, H * 0.72);
+  for (let x = 0; x <= W; x += 4) {
+    const y = H * 0.72 + Math.sin(x * 0.012 - time * 1.4) * 12 + Math.sin(x * 0.025 - time * 2.2) * 6;
+    ctx.lineTo(x, y);
+  }
+  ctx.strokeStyle = 'rgba(42,164,190,0.09)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  requestAnimationFrame(drawFrame);
+}
+drawFrame();
+
+/* ── AVA WAVEFORM ─────────────────────────────── */
+const waveform = document.getElementById('ava-waveform');
+const wvBars = 32;
+for (let i = 0; i < wvBars; i++) {
+  const b = document.createElement('div');
+  b.className = 'wv-bar';
+  const h = Math.random() * 32 + 8;
+  b.style.height = h + 'px';
+  b.style.animationDelay = (i * 0.04) + 's';
+  b.style.animationDuration = (0.8 + Math.random() * 0.8) + 's';
+  const isAmber = i % 3 !== 2;
+  b.style.background = isAmber ? 'var(--amber)' : 'var(--cyan)';
+  waveform.appendChild(b);
+}
+
+/* ── BAR CHARTS ───────────────────────────────── */
+const days = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14'];
+const outputData = [420,380,610,520,490,710,650,580,820,740,690,930,847,900];
+const earnData  = [88,72,131,107,98,162,143,127,183,161,148,214,195,210];
+
+function buildBars(containerId, labelId, data, useCyan) {
+  const max = Math.max(...data);
+  const bc = document.getElementById(containerId);
+  const bl = document.getElementById(labelId);
+  if (!bc) return;
+  data.forEach((v, i) => {
+    const b = document.createElement('div');
+    b.className = 'bar' + (useCyan && i % 2 ? ' cyan' : '');
+    b.style.height = Math.round((v / max) * 100) + '%';
+    bc.appendChild(b);
+    const l = document.createElement('div');
+    l.className = 'bar-lbl';
+    l.textContent = days[i];
+    bl.appendChild(l);
+  });
+}
+buildBars('bar-chart-outputs', 'bar-labels-outputs', outputData, false);
+buildBars('bar-chart-earn', 'bar-labels-earn', earnData, true);
+
+/* ── TABS ─────────────────────────────────────── */
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* ── ROYALTY DATA ─────────────────────────────── */
+const royaltyData = [
+  {date:'2026-03-13',ava:'Narrator',domain:'audiobook.platform',outputs:34,amount:'$148.20',hash:'7a4f...2b8e'},
+  {date:'2026-03-12',ava:'Director',domain:'corporate.training',outputs:18,amount:'$81.00',hash:'3c9d...f1a2'},
+  {date:'2026-03-12',ava:'Narrator',domain:'podcast.generator',outputs:52,amount:'$234.00',hash:'8b2e...5c7f'},
+  {date:'2026-03-11',ava:'Narrator',domain:'e-learning.suite',outputs:41,amount:'$184.50',hash:'2f7a...9d3c'},
+  {date:'2026-03-11',ava:'Director',domain:'corporate.training',outputs:23,amount:'$103.50',hash:'6e1b...4a8f'},
+  {date:'2026-03-10',ava:'Narrator',domain:'audiobook.platform',outputs:67,amount:'$301.50',hash:'9c4d...2e7b'},
+  {date:'2026-03-10',ava:'Narrator',domain:'podcast.generator',outputs:29,amount:'$130.50',hash:'1a8f...6c3d'},
+  {date:'2026-03-09',ava:'Director',domain:'broadcast.media',outputs:15,amount:'$67.50',hash:'5d2c...9b1e'},
+];
+
+function renderRoyalties(filter) {
+  const tbody = document.getElementById('royalty-tbody');
+  tbody.innerHTML = '';
+  royaltyData
+    .filter(r => filter === 'all' || (filter === 'ava001' && r.ava === 'Narrator') || (filter === 'ava002' && r.ava === 'Director'))
+    .forEach(r => {
+      tbody.innerHTML += `<tr>
+        <td>${r.date}</td>
+        <td>Rob.AVA — The ${r.ava}</td>
+        <td>${r.domain}</td>
+        <td>${r.outputs}</td>
+        <td class="td-amount">${r.amount}</td>
+        <td class="td-hash">${r.hash}</td>
+      </tr>`;
+    });
+}
+function filterRoyalties(v) { renderRoyalties(v); }
+renderRoyalties('all');
+
+/* ── JOIN FORM ────────────────────────────────── */
+function advanceJoin(step) {
+  document.querySelectorAll('[id^=join-step-]').forEach(el => el.style.display = 'none');
+  document.querySelectorAll('[id^=js]').forEach(el => {
+    el.classList.remove('active','done');
+  });
+
+  if (step === 2) {
+    document.getElementById('join-step-2').style.display = 'block';
+    document.getElementById('js1').classList.add('done');
+    document.getElementById('js2').classList.add('active');
+  } else if (step === 3) {
+    const sign = document.getElementById('f-sign');
+    const name = sign ? sign.value.trim() : '';
+    document.getElementById('join-step-3').style.display = 'block';
+    document.getElementById('join-step-3').classList.add('show');
+    document.getElementById('js1').classList.add('done');
+    document.getElementById('js2').classList.add('done');
+    document.getElementById('js3').classList.add('active');
+    // Generate actor ID
+    const num = Math.floor(Math.random() * 899) + 2;
+    document.getElementById('confirm-id').textContent = `NVX_${String(num).padStart(3,'0')}`;
+  }
+}
+// Start on step 2 (step 1 is pre-filled for demo)
+document.getElementById('join-step-1').style.display = 'none';
+document.getElementById('join-step-2').style.display = 'block';
+</script>
+</body>
+</html>

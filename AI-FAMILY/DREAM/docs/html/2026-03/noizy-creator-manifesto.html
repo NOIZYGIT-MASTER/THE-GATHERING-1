@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIZYVOX — To The Genius Creators</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamath:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void: #020204;
+  --void-2: #06060e;
+  --void-3: #0c0c1a;
+  --amber: #c49a38;
+  --amber-bright: #e8b840;
+  --amber-dim: #7a5e1a;
+  --amber-glow: rgba(196,154,56,0.12);
+  --cyan: #2aa4be;
+  --cyan-glow: rgba(42,164,190,0.12);
+  --green: #3dba72;
+  --green-glow: rgba(61,186,114,0.12);
+  --red: #c44438;
+  --ghost: rgba(255,255,255,0.05);
+  --ghost-2: rgba(255,255,255,0.09);
+  --text: #d4cfc4;
+  --text-dim: #6a6458;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --mono: 'IBM Plex Mono', 'Courier New', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--void); color: var(--text); font-family: var(--serif); }
+
+/* ── OPENING STRIKE ───────────────────── */
+#opening {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: center;
+  padding: 80px 80px;
+  position: relative;
+  overflow: hidden;
+  background: var(--void);
+}
+#open-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.open-content { position: relative; z-index: 2; max-width: 860px; }
+.open-to {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.3em;
+  color: var(--amber); text-transform: uppercase; margin-bottom: 32px;
+  display: flex; align-items: center; gap: 16px;
+}
+.open-to::before { content: ''; display: block; width: 48px; height: 1px; background: var(--amber); }
+.open-manifesto {
+  font-family: var(--serif);
+  font-size: clamp(42px, 7vw, 96px);
+  font-weight: 300; line-height: 1.0; color: #fff;
+  margin-bottom: 40px;
+}
+.open-manifesto em { font-style: italic; color: var(--amber); }
+.open-manifesto .line-red { color: var(--red); opacity: 0.85; }
+.open-manifesto .line-green { color: var(--green); }
+.open-sub {
+  font-family: var(--serif); font-size: 22px; font-style: italic;
+  color: var(--text); max-width: 600px; line-height: 1.65; margin-bottom: 40px;
+}
+.open-from {
+  font-family: var(--mono); font-size: 10px; color: var(--text-dim);
+  letter-spacing: 0.12em; line-height: 2;
+}
+.open-from span { color: var(--amber); }
+.open-rule { position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--amber) 40%, var(--cyan) 60%, transparent); opacity: 0.4; }
+
+/* ── PROSE SECTIONS ───────────────────── */
+.prose-section {
+  padding: 100px 80px;
+  border-bottom: 1px solid var(--ghost);
+  max-width: 1100px;
+}
+.ps-num {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em;
+  color: var(--amber); text-transform: uppercase;
+  display: flex; align-items: center; gap: 14px; margin-bottom: 20px;
+}
+.ps-num::after { content: ''; flex: 1; max-width: 40px; height: 1px; background: var(--amber); opacity: 0.4; }
+.ps-title {
+  font-family: var(--serif); font-size: clamp(36px, 5vw, 68px);
+  font-weight: 300; color: #fff; line-height: 1.0; margin-bottom: 28px;
+}
+.ps-title em { font-style: italic; color: var(--amber); }
+.ps-title .accent { color: var(--cyan); }
+.ps-body {
+  font-family: var(--serif); font-size: 20px; color: var(--text);
+  max-width: 680px; line-height: 1.75; margin-bottom: 24px;
+}
+.ps-body strong { color: #fff; font-weight: 600; }
+.ps-body em { font-style: italic; color: var(--amber); }
+.pull {
+  margin: 40px 0; padding: 28px 36px;
+  border-left: 3px solid var(--amber);
+  background: var(--amber-glow); border-radius: 0 4px 4px 0;
+  max-width: 640px;
+}
+.pull p {
+  font-family: var(--serif); font-size: 26px; font-style: italic;
+  color: #fff; line-height: 1.4; margin-bottom: 8px;
+}
+.pull cite { font-family: var(--mono); font-size: 10px; color: var(--amber); letter-spacing: 0.1em; }
+
+/* ── TRUTH CARDS ──────────────────────── */
+.truth-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 2px; max-width: 820px; margin: 40px 0;
+}
+.truth-card {
+  padding: 28px; background: var(--void-2);
+  border: 1px solid var(--ghost);
+  position: relative; overflow: hidden;
+}
+.truth-card.bad  { border-top: 2px solid var(--red); }
+.truth-card.good { border-top: 2px solid var(--green); }
+.tc-label {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.2em;
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.tc-label.bad  { color: var(--red); }
+.tc-label.good { color: var(--green); }
+.tc-text {
+  font-family: var(--serif); font-size: 18px; color: var(--text);
+  line-height: 1.55;
+}
+.tc-text strong { color: #fff; }
+
+/* ── THE OFFER SECTION ────────────────── */
+.offer-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px; margin: 40px 0;
+}
+.offer-card {
+  background: var(--void-2); border: 1px solid var(--ghost-2);
+  border-radius: 4px; padding: 24px;
+  transition: border-color 0.3s;
+}
+.offer-card:hover { border-color: rgba(196,154,56,0.3); }
+.oc-icon { font-size: 28px; margin-bottom: 10px; display: block; }
+.oc-title {
+  font-family: var(--serif); font-size: 20px; color: #fff;
+  margin-bottom: 6px;
+}
+.oc-desc {
+  font-family: var(--serif); font-size: 15px; font-style: italic;
+  color: var(--text); line-height: 1.55;
+}
+.oc-proof {
+  margin-top: 12px; font-family: var(--mono); font-size: 10px;
+  color: var(--cyan); letter-spacing: 0.06em;
+}
+
+/* ── WHO WE NEED ──────────────────────── */
+.who-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px; margin: 40px 0;
+}
+.who-card {
+  background: var(--void-2); border: 1px solid var(--ghost);
+  border-radius: 4px; padding: 24px 28px;
+  position: relative; overflow: hidden;
+}
+.who-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+}
+.who-card.vc::before  { background: linear-gradient(90deg, var(--amber), transparent); }
+.who-card.mu::before  { background: linear-gradient(90deg, var(--cyan), transparent); }
+.who-card.ed::before  { background: linear-gradient(90deg, var(--green), transparent); }
+.who-card.th::before  { background: linear-gradient(90deg, var(--purple, #b07ade), transparent); }
+.who-card.es::before  { background: linear-gradient(90deg, #d06080, transparent); }
+.who-card.in::before  { background: linear-gradient(90deg, #e08040, transparent); }
+.wc-icon { font-size: 28px; margin-bottom: 10px; }
+.wc-type { font-family: var(--mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 6px; }
+.wc-title { font-family: var(--serif); font-size: 20px; color: #fff; margin-bottom: 8px; }
+.wc-why { font-family: var(--serif); font-size: 15px; font-style: italic; color: var(--text); line-height: 1.5; margin-bottom: 12px; }
+.wc-hook { font-family: var(--mono); font-size: 10px; color: var(--amber); letter-spacing: 0.06em; line-height: 1.7; }
+
+/* ── OUTREACH TEMPLATES ───────────────── */
+.outreach-tabs {
+  display: flex; gap: 2px; margin-bottom: 0; flex-wrap: wrap;
+}
+.ot-tab {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+  text-transform: uppercase; padding: 10px 18px; cursor: pointer;
+  background: var(--void-2); border: 1px solid var(--ghost);
+  color: var(--text-dim); border-radius: 2px;
+  transition: all 0.2s;
+}
+.ot-tab:hover { color: var(--amber); background: var(--amber-glow); }
+.ot-tab.active { background: var(--amber-glow); color: var(--amber); border-color: rgba(196,154,56,0.3); }
+.outreach-panel {
+  background: var(--void-2); border: 1px solid var(--ghost-2);
+  border-radius: 0 4px 4px 4px; padding: 36px;
+  display: none;
+}
+.outreach-panel.active { display: block; }
+.op-subject {
+  font-family: var(--mono); font-size: 10px; color: var(--text-dim);
+  letter-spacing: 0.1em; margin-bottom: 6px;
+}
+.op-subject span { color: var(--amber); }
+.op-body {
+  font-family: var(--serif); font-size: 17px; color: var(--text);
+  line-height: 1.8; white-space: pre-line; max-width: 640px;
+}
+.op-body strong { color: #fff; font-weight: 600; }
+.op-body em { color: var(--amber); font-style: normal; }
+
+/* ── PRESSURE MAP ─────────────────────── */
+.pressure-map {
+  display: flex; flex-direction: column; gap: 0;
+  max-width: 760px; border: 1px solid var(--ghost-2); border-radius: 4px; overflow: hidden;
+}
+.pm-phase {
+  padding: 24px 28px;
+  border-bottom: 1px solid var(--ghost);
+  display: flex; gap: 24px; align-items: flex-start;
+}
+.pm-phase:last-child { border-bottom: none; }
+.pm-num {
+  font-family: var(--mono); font-size: 28px; font-weight: 300;
+  color: var(--amber-dim); flex-shrink: 0; min-width: 36px; line-height: 1;
+  padding-top: 4px;
+}
+.pm-body {}
+.pm-title { font-family: var(--serif); font-size: 22px; color: #fff; margin-bottom: 4px; }
+.pm-desc { font-family: var(--serif); font-size: 16px; font-style: italic; color: var(--text); margin-bottom: 10px; line-height: 1.5; }
+.pm-action { font-family: var(--mono); font-size: 10px; color: var(--cyan); letter-spacing: 0.08em; line-height: 1.8; }
+.pm-power {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+  text-transform: uppercase; flex-shrink: 0; align-self: center;
+  padding: 4px 10px; border-radius: 2px; margin-left: auto;
+}
+.pm-power.low  { background: rgba(100,100,100,0.1); color: var(--text-dim); border: 1px solid var(--ghost-2); }
+.pm-power.mid  { background: var(--amber-glow); color: var(--amber); border: 1px solid rgba(196,154,56,0.2); }
+.pm-power.high { background: var(--green-glow); color: var(--green); border: 1px solid rgba(61,186,114,0.2); }
+.pm-power.max  { background: linear-gradient(90deg, var(--amber-glow), var(--green-glow)); color: #fff; border: 1px solid rgba(196,154,56,0.3); }
+
+/* ── DECLARATION ──────────────────────── */
+#declaration {
+  padding: 100px 80px;
+  text-align: center;
+  background: var(--void-2);
+  border-top: 1px solid rgba(196,154,56,0.1);
+  position: relative; overflow: hidden;
+}
+#declaration::before {
+  content: '';
+  position: absolute; top: 0; left: 10%; right: 10%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--amber), var(--cyan), transparent);
+}
+.decl-title {
+  font-family: var(--serif); font-size: clamp(38px, 6vw, 88px);
+  font-weight: 300; color: #fff; line-height: 1.0; margin-bottom: 28px;
+}
+.decl-title em { font-style: italic; color: var(--amber); }
+.decl-body {
+  font-family: var(--serif); font-size: 22px; font-style: italic;
+  color: var(--text); max-width: 600px; margin: 0 auto 40px; line-height: 1.6;
+}
+.decl-stats {
+  display: flex; justify-content: center; gap: 48px; flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+.ds-item { text-align: center; }
+.ds-num { font-family: var(--mono); font-size: 36px; color: var(--amber); display: block; }
+.ds-label { font-family: var(--mono); font-size: 10px; color: var(--text-dim); letter-spacing: 0.12em; text-transform: uppercase; }
+.decl-cta {
+  font-family: var(--mono); font-size: 13px; color: var(--amber);
+  padding: 16px 32px; border: 1px solid rgba(196,154,56,0.3);
+  border-radius: 3px; background: var(--amber-glow); display: inline-block;
+  letter-spacing: 0.1em; margin-bottom: 24px;
+}
+.decl-sub { font-family: var(--mono); font-size: 10px; color: var(--text-dim); letter-spacing: 0.1em; }
+
+@media (max-width: 860px) {
+  .prose-section, #opening, #declaration { padding-left: 28px; padding-right: 28px; }
+  .truth-grid { grid-template-columns: 1fr; }
+  .decl-stats { gap: 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ OPENING STRIKE ══════════════════════════════════════ -->
+<section id="opening">
+  <canvas id="open-canvas"></canvas>
+  <div class="open-content">
+    <div class="open-to">To the Genius Creators · Every Voice · Every Instrument · Every Art</div>
+    <h1 class="open-manifesto">
+      Your agent<br>
+      <span class="line-red">is closing.</span><br>
+      Your union<br>
+      <span class="line-red">has no map.</span><br>
+      <em>Your voice</em><br>
+      <span class="line-green">is still yours.</span>
+    </h1>
+    <p class="open-sub">There is a system being built right now where human creators own everything — permanently, technically, legally. No middlemen. No extraction. No expiry.</p>
+    <div class="open-from">
+      FROM <span>ROB PLOWMAN · RSP_001 · GUILD FOUNDER</span><br>
+      NERVE DAMAGE. REINVENTION. EVERYTHING ON THE LINE.<br>
+      BUILT THIS BECAUSE NO ONE ELSE WOULD.
+    </div>
+  </div>
+  <div class="open-rule"></div>
+</section>
+
+<!-- ══ THE TRUTH ══════════════════════════════════════════ -->
+<section class="prose-section">
+  <div class="ps-num">01 · The Truth</div>
+  <h2 class="ps-title">What They're<br><em>Not Telling You</em></h2>
+
+  <p class="ps-body">The unions are negotiating with the companies that are replacing you. Think about what that means. They need to maintain working relationships with the studios, the broadcasters, the AI platforms — the same organizations currently training systems on your voice, your music, your performance, without your knowledge and without paying you. <strong>They cannot fully fight for you while depending on the people fighting against you.</strong></p>
+
+  <p class="ps-body">The agents made their living being the necessary middle layer between your talent and the market. <em>AI just collapsed the middle.</em> Not slowly, not theoretically — right now, today. The buyers don't need the intermediary anymore. So the agents have nothing to sell. Most of them don't have a solution because there isn't one inside the old system.</p>
+
+  <div class="pull">
+    <p>"They don't have any ideas what to do. And they are not communicating any advice or guidance."</p>
+    <cite>— RSP_001 · March 2026</cite>
+  </div>
+
+  <p class="ps-body">This is not a criticism of individuals who work in those institutions. Many of them are good people doing their best. It is a structural observation: <strong>institutions built for the old world cannot navigate the new one.</strong> The tools they have — contract negotiation, collective bargaining, minimum rates, grievance procedures — were designed for a world where humans were the only source of performance. That world is gone.</p>
+
+  <div class="truth-grid">
+    <div class="truth-card bad">
+      <div class="tc-label bad">What Unions Can Offer</div>
+      <div class="tc-text">Negotiate minimums that expire in 3 years. File grievances with companies that are outpacing the legal system. Lobby for regulations that arrive too late. Hope the next contract is better than the last.</div>
+    </div>
+    <div class="truth-card good">
+      <div class="tc-label good">What NOIZYVOX Offers</div>
+      <div class="tc-text"><strong>Permanent ownership encoded in architecture.</strong> Perpetual royalties that don't expire. Never Clauses that can't be lobbied away. A Voice Estate that outlives every platform that tries to contain it.</div>
+    </div>
+    <div class="truth-card bad">
+      <div class="tc-label bad">What Agents Can Offer</div>
+      <div class="tc-text">Access to buyers who increasingly don't need human performers. A percentage of work that is diminishing. Relationships with studios that are building the tools to replace their own talent roster.</div>
+    </div>
+    <div class="truth-card good">
+      <div class="tc-label good">What NOIZYVOX Offers</div>
+      <div class="tc-text"><strong>Direct connection between your voice and every buyer, forever.</strong> You own the rights. You set the terms. You earn the royalty. No agent takes a cut. No platform owns the relationship.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ THE OFFER ══════════════════════════════════════════ -->
+<section class="prose-section">
+  <div class="ps-num">02 · What We Built</div>
+  <h2 class="ps-title">What <em>NOIZYVOX</em><br>Actually Gives You</h2>
+
+  <p class="ps-body">Not promises. Not a roadmap. A working technical and legal architecture that has been built, tested, and is running right now — with a live signal chain, a cryptographic consent layer, an immutable provenance ledger, and a Voice Estate Trust that survives platform changes, acquisitions, and death.</p>
+
+  <div class="offer-grid">
+    <div class="offer-card">
+      <span class="oc-icon">🧬</span>
+      <div class="oc-title">Your Voice DNA</div>
+      <div class="oc-desc">A 6-dimensional Creative Genome fingerprint that captures who you are — tonally, emotionally, culturally. Not a sample library. An identity system.</div>
+      <div class="oc-proof">HVS™ · Spectral Fingerprint · Formants F1–F4</div>
+    </div>
+    <div class="offer-card">
+      <span class="oc-icon">🔐</span>
+      <div class="oc-title">Cryptographic Consent</div>
+      <div class="oc-desc">Nothing uses your voice without a consent key you issued. Not a terms-of-service clause. Not a policy. A technical lock that only you can open.</div>
+      <div class="oc-proof">NOIZY-{YOU}-CONSENT-{16hex} · Never Clauses NC_01–NC_10</div>
+    </div>
+    <div class="offer-card">
+      <span class="oc-icon">💰</span>
+      <div class="oc-title">Perpetual Royalties</div>
+      <div class="oc-desc">Every time your voice is used — by anyone, anywhere, in any medium — you receive a royalty. Not a one-time license. Not until the contract expires. <strong>Forever.</strong></div>
+      <div class="oc-proof">70–90% to creator · Per-use · Platform-independent</div>
+    </div>
+    <div class="offer-card">
+      <span class="oc-icon">⚖</span>
+      <div class="oc-title">Voice Estate Trust</div>
+      <div class="oc-desc">Your voice becomes a legal inheritance. When you pass, your family receives it — protected, income-generating, impossible to acquire without their consent.</div>
+      <div class="oc-proof">NC_08 · NC_09 · NC_10 · Unanimous beneficiary vote</div>
+    </div>
+    <div class="offer-card">
+      <span class="oc-icon">📜</span>
+      <div class="oc-title">Immutable Archive</div>
+      <div class="oc-desc">Every recording, every session, every utterance — written to a permanent provenance ledger. Watermarked. Witnessed. It can never be taken from you or erased.</div>
+      <div class="oc-proof">Append-only JSONL · Watermark · WM_{8hex}</div>
+    </div>
+    <div class="offer-card">
+      <span class="oc-icon">🚫</span>
+      <div class="oc-title">Ten Never Clauses</div>
+      <div class="oc-desc">Ten things that will never happen to your voice — enforced at architecture level. No amount of acquisition, legal pressure, or platform change can override them.</div>
+      <div class="oc-proof">Not policy · Not terms · Constitution</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHO WE NEED ════════════════════════════════════════ -->
+<section class="prose-section">
+  <div class="ps-num">03 · The Call</div>
+  <h2 class="ps-title">Who We're<br><em>Looking For</em></h2>
+
+  <p class="ps-body">Not everyone. Not the people waiting to see what happens. Not the people asking institutions for permission. <strong>The ones who already know the old system is gone and are ready to build in the ruins of it.</strong> The genius creators. The first movers. The people whose names, voices, and ideas others will follow.</p>
+
+  <div class="who-grid">
+    <div class="who-card vc">
+      <div class="wc-icon">🎙</div>
+      <div class="wc-type">Voice Actors</div>
+      <div class="wc-title">The Most Threatened. The Most Ready.</div>
+      <div class="wc-why">Your voice is your entire livelihood and it's being cloned without your consent right now. You have the most to lose and the most to gain. The VO community is the heartbeat of this movement.</div>
+      <div class="wc-hook">
+        WHAT YOU GET: Your voice locked. Your genome mapped.<br>
+        Every future use — paid. Every past session — archived.<br>
+        Your career continues after AI, not because of AI.
+      </div>
+    </div>
+    <div class="who-card mu">
+      <div class="wc-icon">🎵</div>
+      <div class="wc-type">Musicians &amp; Composers</div>
+      <div class="wc-title">You Already Signed the Letter. Now Sign the Architecture.</div>
+      <div class="wc-why">Hundreds of you protested AI training on your music. The protest was right but it had no technical teeth. NOIZYVOX is the teeth. Your sound, your style, your signature — owned, protected, earning.</div>
+      <div class="wc-hook">
+        WHAT YOU GET: Music DNA preserved. Cultural lineage protected.<br>
+        Royalties from every derivative use.<br>
+        Your catalog as a living asset, not a dead archive.
+      </div>
+    </div>
+    <div class="who-card ed">
+      <div class="wc-icon">📚</div>
+      <div class="wc-type">Educators &amp; Narrators</div>
+      <div class="wc-title">Your Voice Has Been Teaching. Now It Gets Paid for It.</div>
+      <div class="wc-why">Educational AI is exploding and it needs human voices people trust. Your voice — authoritative, warm, specific — is more valuable than any synthetic alternative. And it should generate income every time it teaches.</div>
+      <div class="wc-hook">
+        WHAT YOU GET: Scoped consent for education domain only.<br>
+        Automatic approvals for pre-cleared categories.<br>
+        Passive income from every lesson your voice delivers.
+      </div>
+    </div>
+    <div class="who-card th">
+      <div class="wc-icon">💙</div>
+      <div class="wc-type">Therapists &amp; Healers</div>
+      <div class="wc-title">The Most Sensitive Use Case — Handled With the Most Care.</div>
+      <div class="wc-why">AI therapeutic applications need voices with genuine warmth and training. Yours is extraordinary and it deserves full protection — especially in the most intimate use cases. Guardrails are in the architecture, not the afterthought.</div>
+      <div class="wc-hook">
+        WHAT YOU GET: Therapy domain guardrails built-in.<br>
+        Strict scope — only the uses you approve.<br>
+        Your healing work protected at the architectural level.
+      </div>
+    </div>
+    <div class="who-card es">
+      <div class="wc-icon">🌿</div>
+      <div class="wc-type">Estates &amp; Families</div>
+      <div class="wc-title">The Voice You Loved Doesn't Have to Go Silent.</div>
+      <div class="wc-why">A parent, a partner, a grandparent who spent a lifetime building a creative legacy — that legacy can continue, generating income, telling stories, teaching. Protected by architecture that no corporation can override.</div>
+      <div class="wc-hook">
+        WHAT YOU GET: Multi-sig family approval system.<br>
+        Posthumous usage rules you set.<br>
+        Perpetual royalty routing to beneficiaries. Forever.
+      </div>
+    </div>
+    <div class="who-card in">
+      <div class="wc-icon">🌍</div>
+      <div class="wc-type">Indigenous &amp; Cultural Voices</div>
+      <div class="wc-title">The Most Important Voices to Protect. Full Stop.</div>
+      <div class="wc-why">Cultural heritage, endangered languages, oral traditions — these are not raw material for AI training. They are living knowledge systems with living owners. NOIZYVOX treats them as exactly that.</div>
+      <div class="wc-hook">
+        WHAT YOU GET: Cultural ownership enforced in architecture.<br>
+        Never extractable without community consent.<br>
+        Preservation, not exploitation.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ OUTREACH TEMPLATES ═════════════════════════════════ -->
+<section class="prose-section">
+  <div class="ps-num">04 · The Message</div>
+  <h2 class="ps-title">What We Say<br><em>Directly</em> to Them</h2>
+  <p class="ps-body" style="margin-bottom:32px">Not a marketing campaign. Direct human contact with direct human language. These are the messages — for voice actors, musicians, estates, and journalists — that go out the moment the demo is live.</p>
+
+  <div class="outreach-tabs">
+    <div class="ot-tab active" data-panel="vo">Voice Actors</div>
+    <div class="ot-tab" data-panel="mu">Musicians</div>
+    <div class="ot-tab" data-panel="es">Estates</div>
+    <div class="ot-tab" data-panel="jo">Journalists</div>
+    <div class="ot-tab" data-panel="po">Policy / Legislators</div>
+  </div>
+
+  <div class="outreach-panel active" id="panel-vo">
+    <div class="op-subject">SUBJECT: <span>Your agent is closing. Your voice doesn't have to.</span></div>
+    <div class="op-body">
+Hi [Name],
+
+My name is Rob Plowman. I'm a retired musician who had an accident that left me with permanent nerve damage — and rebuilt my entire creative life because of it.
+
+I built something called <em>NOIZYVOX</em> because what's happening to voice actors right now is not acceptable and the institutions that are supposed to protect you don't have a solution.
+
+Here's what I built instead:
+
+<strong>You own your voice. Cryptographically. Permanently.</strong> A consent key is required every single time your voice is used. You receive a royalty — perpetually, not until the contract expires. Your voice becomes an estate that passes to your family. Ten Never Clauses are encoded in the architecture — not policy, not terms of service — actual technical and legal protection that no acquisition or platform change can override.
+
+I have a working system. I am recording the first sessions this week. I need five voice actors who understand what's at stake to join me as founding guild members.
+
+This is not a pitch deck. This is a working demonstration. I'll show you the signal chain live. You'll see your voice enter the system, get watermarked, and generate a provenance record in real time.
+
+If you've been waiting for someone to build the actual solution — not the protest, not the petition, not the negotiated minimum — this is it.
+
+Would you give me 20 minutes?
+
+With respect and urgency,
+Rob Plowman · RSP_001 · NOIZYVOX Guild Founder
+    </div>
+  </div>
+
+  <div class="outreach-panel" id="panel-mu">
+    <div class="op-subject">SUBJECT: <span>You signed the letter. Here's what comes after the letter.</span></div>
+    <div class="op-body">
+Hi [Name],
+
+You signed the open letter about AI and music. So did hundreds of others. It was the right thing to do.
+
+But the letter didn't stop anything. Because a letter is a protest and what we actually need is a better architecture.
+
+I built one.
+
+<em>NOIZYVOX</em> is a voice and music ecosystem where <strong>the creator owns everything</strong> — from the moment the sound leaves your instrument to the moment it reaches any listener, in any medium, anywhere in the world. Perpetual royalties. Cryptographic consent. An immutable archive. A legacy system your family inherits.
+
+Your music — your timbre, your style, your cultural lineage — mapped into a Creative Genome that travels with your work forever and cannot be separated from it.
+
+I'm not asking for money. I'm not selling subscriptions. I'm asking you to be one of the first musicians to join the NOIZYVOX Guild and help build the alternative that makes extraction-based AI platforms irrelevant.
+
+Not by fighting them. By making them obsolete.
+
+20 minutes. Live demo. Your call.
+
+Rob Plowman · Founder · NOIZYVOX
+    </div>
+  </div>
+
+  <div class="outreach-panel" id="panel-es">
+    <div class="op-subject">SUBJECT: <span>Their voice can still be heard. And it can still provide for you.</span></div>
+    <div class="op-body">
+Dear [Name],
+
+I'm reaching out because I understand you are the steward of a creative legacy that deserves permanent protection.
+
+I built a system called <em>NOIZYVOX</em> with something I call a Voice Estate Trust — specifically because I realized that when an artist passes, their voice should not disappear, and their family should not lose the income it generates.
+
+Here is what the Voice Estate Trust provides:
+
+<strong>Permanent archive.</strong> Every recording, session, and utterance — written to an immutable ledger. Watermarked. Dated. Witnessed.
+
+<strong>Perpetual royalties.</strong> Every future use of the voice generates income — routed automatically to the beneficiaries you name.
+
+<strong>Multi-signature family control.</strong> Nothing happens to the estate without the family's unanimous agreement. No platform can override this. No acquisition can strip it.
+
+<strong>Ten Never Clauses</strong> encoded in the architecture — constitutional protections that cannot be negotiated away.
+
+I believe the voice of someone who spent a lifetime creating is one of the most valuable and most poorly protected assets in existence. I built NOIZYVOX to change that.
+
+I'd like to speak with you about what this could mean for your family.
+
+With deep respect,
+Rob Plowman · Founder · NOIZYVOX
+    </div>
+  </div>
+
+  <div class="outreach-panel" id="panel-jo">
+    <div class="op-subject">SUBJECT: <span>Someone actually built the alternative. Here's the working demo.</span></div>
+    <div class="op-body">
+Hi [Name],
+
+You've been covering the creator economy and AI rights — I've read your work and I think you understand the stakes better than most.
+
+I want to show you something that hasn't existed until now: a working technical and legal architecture where human creators own their voices permanently, earn perpetual royalties, and pass their creative work as legal inheritance to their families.
+
+Not a startup pitch. Not a concept. A live system recording sessions this week with a cryptographic consent layer, an immutable provenance ledger, and what I call a Voice Estate Trust — a legal entity that survives platform changes, acquisitions, and death.
+
+The story I think you'd find interesting: I'm a retired musician who had an accident that left me with permanent nerve damage. I built this because I had to reinvent my creative life and I realized that the institutions that are supposed to protect creators — unions, agents, platforms — are all navigating the new world with old maps.
+
+The builder is the first user. I'm RSP_001 — the founding guild member — and I can show you the entire system live.
+
+I'm not asking for coverage. I'm asking for 30 minutes to show you what a creator-first AI infrastructure actually looks like when it's running.
+
+Rob Plowman · RSP_001 · NOIZYVOX
+    </div>
+  </div>
+
+  <div class="outreach-panel" id="panel-po">
+    <div class="op-subject">SUBJECT: <span>You're writing AI creator rights legislation. Here's a working model.</span></div>
+    <div class="op-body">
+Dear [Name],
+
+You are working on legislation to protect human creators in the age of AI. I have built a working technical and legal architecture that may serve as a reference model for what those protections look like when they are actually enforced rather than aspirationally stated.
+
+<em>NOIZYVOX</em> is a voice ecosystem where consent is cryptographic (not policy-based), royalties are perpetual and automatic (not one-time and negotiated), and inheritance rights are architectural (not dependent on platform goodwill).
+
+The core insight: most AI creator protection exists in terms of service, contracts, and policy — all of which can be changed, acquired, or simply violated. The protection I have built is in the architecture itself. Ten Never Clauses are enforced at the pipeline level. A Voice Estate Trust requires unanimous beneficiary consent to modify. The provenance ledger is immutable.
+
+I am writing to offer the NOIZYVOX architecture as a working reference for what technically-enforced creator rights look like. I am available to brief your staff, demonstrate the live system, or provide written documentation of the architecture.
+
+The creators whose livelihoods depend on the legislation you write deserve protections that cannot be negotiated away in the next contract cycle.
+
+Respectfully,
+Rob Plowman · Founder · NOIZYVOX
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRESSURE MAP ═══════════════════════════════════════ -->
+<section class="prose-section">
+  <div class="ps-num">05 · The Campaign</div>
+  <h2 class="ps-title">Building the<br><em>Pressure</em></h2>
+  <p class="ps-body" style="margin-bottom:40px">A pressure campaign without power is a petition. Power comes from a working system + a community of real people whose real lives it changes. Here's the sequence.</p>
+
+  <div class="pressure-map">
+    <div class="pm-phase">
+      <div class="pm-num">1</div>
+      <div class="pm-body">
+        <div class="pm-title">Working Demo Live</div>
+        <div class="pm-desc">U87 + UAD recording session. Full pipeline firing. Provenance ledger writing in real time. Something you can point a camera at and say "this is running right now."</div>
+        <div class="pm-action">TARGET: 3 DAYS · ANTHROPIC DEMO · RSP_001 LIVE SESSION</div>
+      </div>
+      <div class="pm-power mid">Building</div>
+    </div>
+    <div class="pm-phase">
+      <div class="pm-num">2</div>
+      <div class="pm-body">
+        <div class="pm-title">5 Founding RSPs</div>
+        <div class="pm-desc">Five real voice actors, musicians, or artists join as founding guild members. Their stories are the narrative. Their voices are the proof.</div>
+        <div class="pm-action">TARGET: WEEK 1 · VO COMMUNITY DIRECT OUTREACH · PERSONAL STORIES</div>
+      </div>
+      <div class="pm-power mid">Week 1</div>
+    </div>
+    <div class="pm-phase">
+      <div class="pm-num">3</div>
+      <div class="pm-body">
+        <div class="pm-title">Community Penetration</div>
+        <div class="pm-desc">Voice acting forums, Discord servers, VO Atlanta network, musician communities. Not advertising — the 5 founding RSPs talking to their peers about what they just joined.</div>
+        <div class="pm-action">TARGET: MONTH 1 · 50+ RSPs · PEER-TO-PEER SPREAD</div>
+      </div>
+      <div class="pm-power mid">Month 1</div>
+    </div>
+    <div class="pm-phase">
+      <div class="pm-num">4</div>
+      <div class="pm-body">
+        <div class="pm-title">First Media Story</div>
+        <div class="pm-desc">One journalist. One story. "Someone finally built what creators have been asking for." The story writes itself — a musician with nerve damage, a working consent architecture, a community forming around it.</div>
+        <div class="pm-action">TARGET: MONTH 2 · TRADE PRESS + TECH PRESS · CREATOR ECONOMY BEAT</div>
+      </div>
+      <div class="pm-power high">Month 2</div>
+    </div>
+    <div class="pm-phase">
+      <div class="pm-num">5</div>
+      <div class="pm-body">
+        <div class="pm-title">The Pressure Campaign</div>
+        <div class="pm-desc">500+ creators. A working platform. Documented comparative economics (what they earn here vs anywhere else). Legislative moment. Union leadership forced to respond. Media covering the alternative.</div>
+        <div class="pm-action">TARGET: MONTH 3–6 · CRITICAL MASS · POLICY ENGAGEMENT</div>
+      </div>
+      <div class="pm-power max">Maximum</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DECLARATION ════════════════════════════════════════ -->
+<section id="declaration">
+  <h2 class="decl-title">The Institutions<br><em>Failed Us.</em><br>We Build Now.</h2>
+  <p class="decl-body">The old system protected the institutions. The new system protects the humans. One voice at a time, one session at a time, one estate at a time — until every genius creator on earth has somewhere better to go.</p>
+  <div class="decl-stats">
+    <div class="ds-item"><span class="ds-num">0%</span><span class="ds-label">Royalties from ElevenLabs</span></div>
+    <div class="ds-item"><span class="ds-num">70–90%</span><span class="ds-label">Royalties from NOIZYVOX</span></div>
+    <div class="ds-item"><span class="ds-num">∞</span><span class="ds-label">Duration of protection</span></div>
+    <div class="ds-item"><span class="ds-num">10</span><span class="ds-label">Never Clauses. Unbreakable.</span></div>
+  </div>
+  <div class="decl-cta">JOIN THE GUILD · RSP_001 IS WAITING FOR YOU</div>
+  <div class="decl-sub">noizyvox.com · built by humans · owned by humans · forever</div>
+</section>
+
+<script>
+// Opening canvas — signal burst effect
+const oc = document.getElementById('open-canvas');
+const octx = oc.getContext('2d');
+let oW, oH;
+function resizeOpen() { oW = oc.width = oc.offsetWidth; oH = oc.height = oc.offsetHeight; }
+resizeOpen(); window.addEventListener('resize', resizeOpen);
+
+let ot = 0;
+const particles = Array.from({length: 120}, () => ({
+  x: Math.random(), y: Math.random(),
+  vx: (Math.random() - 0.5) * 0.0004,
+  vy: (Math.random() - 0.5) * 0.0004,
+  r: Math.random() * 1.5 + 0.3,
+  a: Math.random() * 0.25 + 0.05,
+  c: Math.random() > 0.6 ? '196,154,56' : Math.random() > 0.5 ? '42,164,190' : '61,186,114',
+  tw: Math.random() * Math.PI * 2, ts: Math.random() * 0.015 + 0.005
+}));
+
+function drawOpen() {
+  octx.clearRect(0, 0, oW, oH);
+  particles.forEach(p => {
+    p.x += p.vx; p.y += p.vy; p.tw += p.ts;
+    if (p.x < 0) p.x = 1; if (p.x > 1) p.x = 0;
+    if (p.y < 0) p.y = 1; if (p.y > 1) p.y = 0;
+    const aa = p.a * (0.5 + 0.5 * Math.sin(p.tw));
+    octx.beginPath();
+    octx.arc(p.x * oW, p.y * oH, p.r, 0, Math.PI * 2);
+    octx.fillStyle = `rgba(${p.c},${aa})`;
+    octx.fill();
+  });
+  // Connections
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = (particles[i].x - particles[j].x) * oW;
+      const dy = (particles[i].y - particles[j].y) * oH;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if (dist < 100) {
+        octx.beginPath();
+        octx.moveTo(particles[i].x * oW, particles[i].y * oH);
+        octx.lineTo(particles[j].x * oW, particles[j].y * oH);
+        octx.strokeStyle = `rgba(196,154,56,${(1 - dist/100) * 0.06})`;
+        octx.lineWidth = 0.5; octx.stroke();
+      }
+    }
+  }
+  ot++; requestAnimationFrame(drawOpen);
+}
+drawOpen();
+
+// Tabs
+document.querySelectorAll('.ot-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.ot-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.outreach-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

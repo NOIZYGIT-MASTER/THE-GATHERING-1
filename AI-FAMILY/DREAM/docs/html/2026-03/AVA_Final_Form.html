@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AVA FINAL FORM — MC96ECO Universe</title>
+<style>
+  :root {
+    --bg:#050508;--bg2:#0c0c14;--bg3:#12121e;--panel:#16162a;--border:#2a2a4a;
+    --accent:#7c3aed;--accent2:#06b6d4;--accent3:#f59e0b;--accent4:#10b981;
+    --accent5:#ef4444;--accent6:#ec4899;--text:#e8e8f0;--muted:#8888aa;
+    --gold:#f59e0b;--font:'Segoe UI',system-ui,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:var(--font);overflow-x:hidden;}
+  #stars{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(5,5,8,0.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 2rem;height:56px;gap:0;overflow-x:auto;}
+  nav a{color:var(--muted);text-decoration:none;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;padding:0 0.9rem;height:56px;display:flex;align-items:center;border-bottom:2px solid transparent;white-space:nowrap;transition:all 0.2s;}
+  nav a:hover,nav a.active{color:var(--accent);border-bottom-color:var(--accent);}
+  .nav-brand{color:var(--text);font-weight:700;font-size:0.85rem;margin-right:1.5rem;letter-spacing:0.05em;white-space:nowrap;}
+  main{position:relative;z-index:1;padding-top:56px;}
+  section{padding:5rem 2rem;max-width:1100px;margin:0 auto;}
+  .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;padding:56px 2rem 4rem;max-width:100%;}
+  .hero-eyebrow{font-size:0.72rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem;display:flex;align-items:center;gap:0.75rem;}
+  .hero-eyebrow::before,.hero-eyebrow::after{content:'';display:block;width:40px;height:1px;background:var(--accent);}
+  h1.hero-title{font-size:clamp(2.8rem,6vw,5.5rem);font-weight:900;line-height:1.0;letter-spacing:-0.02em;margin-bottom:1.5rem;}
+  .hero-title span{color:var(--accent);}
+  .hero-sub{font-size:1.15rem;color:var(--muted);max-width:640px;line-height:1.7;margin-bottom:3rem;}
+  .hero-verdict{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;width:100%;max-width:900px;}
+  .verdict-item{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:1.2rem;text-align:left;}
+  .verdict-item .v-num{font-size:1.8rem;font-weight:900;color:var(--accent);}
+  .verdict-item .v-label{font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-top:0.25rem;}
+  .verdict-item .v-desc{font-size:0.82rem;color:var(--text);margin-top:0.5rem;line-height:1.5;}
+  .sec-eyebrow{font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;}
+  h2.sec-title{font-size:clamp(2rem,4vw,3rem);font-weight:900;line-height:1.1;margin-bottom:1rem;}
+  h2.sec-title span{color:var(--accent);}
+  .sec-lead{color:var(--muted);font-size:1.05rem;line-height:1.7;max-width:700px;margin-bottom:3rem;}
+  .divider{border:none;border-top:1px solid var(--border);margin:0;}
+  .card-grid{display:grid;gap:1.5rem;}
+  .card-grid.cols2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr));}
+  .card-grid.cols3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr));}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:1.75rem;position:relative;overflow:hidden;transition:border-color 0.2s,transform 0.2s;}
+  .card:hover{border-color:var(--accent);transform:translateY(-2px);}
+  .card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));}
+  .card.c-cyan::before{background:linear-gradient(90deg,var(--accent2),var(--accent4));}
+  .card.c-amber::before{background:linear-gradient(90deg,var(--accent3),var(--accent6));}
+  .card.c-green::before{background:linear-gradient(90deg,var(--accent4),var(--accent2));}
+  .card.c-red::before{background:linear-gradient(90deg,var(--accent5),var(--accent6));}
+  .card.c-pink::before{background:linear-gradient(90deg,var(--accent6),var(--accent));}
+  .card-num{font-size:0.68rem;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.5rem;}
+  .card-title{font-size:1.1rem;font-weight:700;margin-bottom:0.75rem;}
+  .card-body{font-size:0.875rem;color:var(--muted);line-height:1.7;}
+  .layer-cards{display:flex;flex-direction:column;gap:1rem;}
+  .layer-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;display:grid;grid-template-columns:80px 1fr 1fr;gap:0;overflow:hidden;transition:border-color 0.2s;}
+  .layer-card:hover{border-color:var(--accent);}
+  .lc-num{display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:900;color:var(--accent);background:rgba(124,58,237,0.08);border-right:1px solid var(--border);}
+  .lc-body{padding:1.25rem;border-right:1px solid var(--border);}
+  .lc-body .lc-name{font-weight:700;font-size:0.95rem;margin-bottom:0.4rem;}
+  .lc-body .lc-desc{font-size:0.82rem;color:var(--muted);line-height:1.6;}
+  .lc-traits{padding:1.25rem;}
+  .lc-traits .lc-label{font-size:0.68rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);margin-bottom:0.5rem;}
+  .trait-chip{display:inline-block;background:rgba(124,58,237,0.15);border:1px solid rgba(124,58,237,0.3);color:var(--accent);font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:4px;margin:0.2rem 0.2rem 0 0;}
+  .dna-vector{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:1.75rem;margin-top:2rem;}
+  .dna-vector h3{font-size:0.9rem;font-weight:700;margin-bottom:1.25rem;}
+  .dna-bars{display:flex;flex-direction:column;gap:0.75rem;}
+  .dna-bar-row{display:flex;align-items:center;gap:1rem;}
+  .dna-bar-label{font-size:0.78rem;color:var(--muted);width:120px;flex-shrink:0;}
+  .dna-bar-track{flex:1;height:8px;background:rgba(255,255,255,0.06);border-radius:4px;overflow:hidden;}
+  .dna-bar-fill{height:100%;border-radius:4px;}
+  .uri-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:1.5rem;}
+  .uri-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:1.5rem;text-align:center;}
+  .uri-card .uri-score{font-size:2.5rem;font-weight:900;line-height:1;}
+  .uri-card .uri-name{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);margin-top:0.5rem;}
+  .uri-card .uri-desc{font-size:0.8rem;color:var(--muted);margin-top:0.5rem;line-height:1.5;}
+  .uri-formula{background:rgba(124,58,237,0.08);border:1px solid rgba(124,58,237,0.25);border-radius:10px;padding:1.5rem;margin-top:1.5rem;text-align:center;}
+  .uri-formula .eq-label{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);margin-bottom:0.75rem;}
+  .uri-formula .eq{color:var(--accent);font-size:1.2rem;font-weight:700;}
+  .uri-formula .eq span{color:var(--text);}
+  .pipeline{display:flex;flex-direction:column;gap:0;margin-top:2rem;}
+  .pipe-step{display:grid;grid-template-columns:60px 1fr;gap:0;position:relative;}
+  .pipe-step::after{content:'';position:absolute;left:29px;top:52px;width:2px;height:calc(100% - 20px);background:var(--border);}
+  .pipe-step:last-child::after{display:none;}
+  .pipe-num{display:flex;align-items:flex-start;justify-content:center;padding-top:0.85rem;}
+  .pipe-circle{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;z-index:1;position:relative;background:var(--accent);color:white;}
+  .pipe-circle.c2{background:var(--accent2);}
+  .pipe-circle.c3{background:var(--accent3);color:#000;}
+  .pipe-circle.c4{background:var(--accent4);}
+  .pipe-circle.c5{background:var(--accent6);}
+  .pipe-circle.c6{background:var(--accent5);}
+  .pipe-body{padding:0.75rem 0 1.5rem 0.5rem;}
+  .pipe-body h4{font-size:0.95rem;font-weight:700;margin-bottom:0.35rem;}
+  .pipe-body p{font-size:0.85rem;color:var(--muted);line-height:1.6;}
+  .pipe-tag{display:inline-block;font-size:0.68rem;padding:0.15rem 0.5rem;border-radius:4px;margin-top:0.5rem;text-transform:uppercase;letter-spacing:0.1em;}
+  .live{background:rgba(16,185,129,0.15);color:var(--accent4);border:1px solid rgba(16,185,129,0.3);}
+  .ai{background:rgba(124,58,237,0.15);color:var(--accent);border:1px solid rgba(124,58,237,0.3);}
+  .hybrid{background:rgba(6,182,212,0.15);color:var(--accent2);border:1px solid rgba(6,182,212,0.3);}
+  .consent{background:rgba(245,158,11,0.15);color:var(--accent3);border:1px solid rgba(245,158,11,0.3);}
+  .revenue{background:rgba(236,72,153,0.15);color:var(--accent6);border:1px solid rgba(236,72,153,0.3);}
+  .descendants-hero{background:linear-gradient(135deg,rgba(124,58,237,0.12),rgba(6,182,212,0.08));border:1px solid var(--border);border-radius:18px;padding:2.5rem;margin-bottom:2rem;position:relative;overflow:hidden;}
+  .descendants-hero h3{font-size:1.4rem;font-weight:800;margin-bottom:0.75rem;}
+  .descendants-hero p{font-size:0.95rem;color:var(--muted);line-height:1.75;max-width:640px;}
+  .d-quote{margin-top:1.5rem;padding:1rem 1.5rem;border-left:3px solid var(--accent);background:rgba(124,58,237,0.06);border-radius:0 8px 8px 0;font-size:0.9rem;color:var(--text);font-style:italic;line-height:1.7;}
+  .asset-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:1.5rem;}
+  .asset-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:1.25rem;text-align:center;}
+  .asset-card .asset-icon{font-size:1.75rem;margin-bottom:0.5rem;}
+  .asset-card .asset-name{font-size:0.85rem;font-weight:700;margin-bottom:0.35rem;}
+  .asset-card .asset-desc{font-size:0.78rem;color:var(--muted);line-height:1.5;}
+  .phase-stack{display:flex;flex-direction:column;gap:1.25rem;margin-top:1.5rem;}
+  .phase-card{background:var(--bg3);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color 0.2s;}
+  .phase-card:hover{border-color:var(--accent);}
+  .phase-header{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);}
+  .phase-badge{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.9rem;font-weight:800;flex-shrink:0;color:white;}
+  .ph1{background:linear-gradient(135deg,#7c3aed,#9d4edd);}
+  .ph2{background:linear-gradient(135deg,#06b6d4,#0891b2);}
+  .ph3{background:linear-gradient(135deg,#f59e0b,#d97706);}
+  .ph4{background:linear-gradient(135deg,#10b981,#059669);}
+  .ph5{background:linear-gradient(135deg,#ef4444,#dc2626);}
+  .phase-header h3{font-size:1rem;font-weight:700;flex:1;}
+  .phase-header .phase-tag{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);}
+  .phase-body{padding:1.25rem 1.5rem;display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+  .phase-col h4{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);margin-bottom:0.6rem;}
+  .phase-item{font-size:0.82rem;color:var(--text);padding:0.25rem 0;border-bottom:1px solid rgba(255,255,255,0.04);line-height:1.5;display:flex;align-items:flex-start;gap:0.5rem;}
+  .phase-item::before{content:'→';color:var(--accent);font-size:0.75rem;flex-shrink:0;margin-top:1px;}
+  .comp-callout{background:linear-gradient(135deg,rgba(124,58,237,0.1),rgba(6,182,212,0.06));border:1px solid rgba(124,58,237,0.35);border-radius:16px;padding:2.5rem;margin:3rem 0;text-align:center;}
+  .comp-callout .cc-label{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--accent);margin-bottom:1rem;}
+  .comp-callout h3{font-size:1.6rem;font-weight:900;margin-bottom:1rem;line-height:1.3;}
+  .comp-callout p{font-size:0.95rem;color:var(--muted);max-width:620px;margin:0 auto;line-height:1.7;}
+  .studio-flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--border);border-radius:14px;overflow:hidden;margin-top:1.5rem;}
+  .sf-step{background:var(--bg3);padding:1.5rem 1rem;text-align:center;}
+  .sf-icon{font-size:1.5rem;margin-bottom:0.5rem;}
+  .sf-num{font-size:0.65rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);margin-bottom:0.35rem;}
+  .sf-name{font-size:0.85rem;font-weight:700;margin-bottom:0.35rem;}
+  .sf-desc{font-size:0.75rem;color:var(--muted);line-height:1.5;}
+  .closing{background:linear-gradient(135deg,rgba(124,58,237,0.08),rgba(6,182,212,0.04));border:1px solid var(--border);border-radius:18px;padding:3.5rem 2.5rem;text-align:center;margin-top:2rem;}
+  .closing h2{font-size:2rem;font-weight:900;margin-bottom:1rem;}
+  .closing p{font-size:1rem;color:var(--muted);max-width:600px;margin:0 auto 2rem;line-height:1.7;}
+  .metric-row{display:flex;flex-wrap:wrap;justify-content:center;gap:2rem;}
+  .metric{text-align:center;}
+  .metric .m-val{font-size:2rem;font-weight:900;color:var(--accent);}
+  .metric .m-label{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);margin-top:0.25rem;}
+  .data-table{width:100%;border-collapse:collapse;margin-top:1.5rem;font-size:0.875rem;}
+  .data-table th{background:var(--bg3);color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;font-size:0.7rem;padding:0.75rem 1rem;text-align:left;border-bottom:1px solid var(--border);}
+  .data-table td{padding:0.85rem 1rem;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--text);vertical-align:top;}
+  .data-table tr:hover td{background:rgba(255,255,255,0.02);}
+  .pill{display:inline-block;font-size:0.7rem;padding:0.2rem 0.65rem;border-radius:20px;font-weight:600;}
+  .pill.a{background:rgba(124,58,237,0.2);color:var(--accent);border:1px solid rgba(124,58,237,0.35);}
+  .pill.b{background:rgba(6,182,212,0.15);color:var(--accent2);border:1px solid rgba(6,182,212,0.3);}
+  .pill.c{background:rgba(245,158,11,0.15);color:var(--accent3);border:1px solid rgba(245,158,11,0.3);}
+  .pill.d{background:rgba(16,185,129,0.15);color:var(--accent4);border:1px solid rgba(16,185,129,0.3);}
+  .callout{border-left:3px solid var(--accent);background:rgba(124,58,237,0.07);border-radius:0 10px 10px 0;padding:1.25rem 1.5rem;margin:1.5rem 0;}
+  .callout.amber{border-left-color:var(--accent3);background:rgba(245,158,11,0.07);}
+  .callout.cyan{border-left-color:var(--accent2);background:rgba(6,182,212,0.07);}
+  .callout.green{border-left-color:var(--accent4);background:rgba(16,185,129,0.07);}
+  .callout .c-head{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);margin-bottom:0.5rem;}
+  .callout p{font-size:0.9rem;line-height:1.7;}
+  @media(max-width:700px){.layer-card{grid-template-columns:50px 1fr}.lc-traits{display:none}.phase-body{grid-template-columns:1fr}nav{padding:0 1rem}section{padding:3.5rem 1.25rem}}
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+<nav>
+  <span class="nav-brand">AVA &middot; FINAL FORM</span>
+  <a href="#voice-dna">Voice DNA</a>
+  <a href="#voice-graph">Voice Graph</a>
+  <a href="#reputation">Reputation</a>
+  <a href="#live-performance">Live Performance</a>
+  <a href="#descendants">Descendants</a>
+  <a href="#studios">Studios</a>
+  <a href="#adoption">Adoption</a>
+</nav>
+<main>
+
+<div class="hero">
+  <div class="hero-eyebrow">MC96ECO Universe &middot; AVA Intelligence Architecture</div>
+  <h1 class="hero-title">AVA<br><span>Final Form</span></h1>
+  <p class="hero-sub">The complete intelligence layer. Voice DNA. Global Voice Graph. Reputation Engine. Live Performance. The Descendants Model. Autonomous Studios. Adoption Strategy. Built to be the infrastructure the industry must plug into.</p>
+  <div class="hero-verdict">
+    <div class="verdict-item"><div class="v-num">7</div><div class="v-label">System Layers</div><div class="v-desc">Each one defensible. Together, unstoppable.</div></div>
+    <div class="verdict-item"><div class="v-num">5</div><div class="v-label">Voice DNA Layers</div><div class="v-desc">Atomic trait decomposition &mdash; Tone &middot; Emotion &middot; Delivery &middot; Texture &middot; Style</div></div>
+    <div class="verdict-item"><div class="v-num">75%</div><div class="v-label">Creator Perpetual</div><div class="v-desc">Constitutional. Cryptographic. Non-negotiable.</div></div>
+    <div class="verdict-item"><div class="v-num">&infin;</div><div class="v-label">Living Assets</div><div class="v-desc">The Descendants Model &mdash; voice as perpetual revenue engine</div></div>
+  </div>
+</div>
+
+<section id="voice-dna">
+  <div class="sec-eyebrow">Section 01 &mdash; Voice DNA Engine</div>
+  <h2 class="sec-title">Breaking Voices Into<br><span>Atomic Intelligence</span></h2>
+  <p class="sec-lead">Every voice is a composite of reusable atomic traits. The Voice DNA Engine deconstructs each recorded voice into a multi-dimensional vector enabling precision matching, style transfer, hybrid voice creation, and consent-scoped trait licensing.</p>
+  <div class="callout amber"><div class="c-head">The Insight</div><p>You don't need to license an entire voice. You can license a trait. An actor's <em>warmth texture</em> for a children's audiobook. A performer's <em>tension delivery style</em> for a thriller trailer. This is how Voice DNA creates markets that never existed before.</p></div>
+  <div class="layer-cards">
+    <div class="layer-card">
+      <div class="lc-num">T1</div>
+      <div class="lc-body"><div class="lc-name">Tone Layer</div><div class="lc-desc">Fundamental pitch character &mdash; warmth, brightness, depth, resonance, nasality, breathiness. The acoustic identity fingerprint of a voice at rest.</div></div>
+      <div class="lc-traits"><div class="lc-label">Atomic Traits</div><span class="trait-chip">Warmth</span><span class="trait-chip">Brightness</span><span class="trait-chip">Depth</span><span class="trait-chip">Resonance</span><span class="trait-chip">Breathiness</span><span class="trait-chip">Nasality</span></div>
+    </div>
+    <div class="layer-card">
+      <div class="lc-num">T2</div>
+      <div class="lc-body"><div class="lc-name">Emotion Layer</div><div class="lc-desc">The emotional signature &mdash; how this voice conveys joy, authority, vulnerability, tension, comfort, urgency. The affective fingerprint.</div></div>
+      <div class="lc-traits"><div class="lc-label">Atomic Traits</div><span class="trait-chip">Joy</span><span class="trait-chip">Authority</span><span class="trait-chip">Vulnerability</span><span class="trait-chip">Tension</span><span class="trait-chip">Comfort</span><span class="trait-chip">Urgency</span></div>
+    </div>
+    <div class="layer-card">
+      <div class="lc-num">T3</div>
+      <div class="lc-body"><div class="lc-name">Delivery Layer</div><div class="lc-desc">Pacing, rhythm, articulation patterns, emphasis style, pause architecture. The performance intelligence encoded in how words are shaped and timed.</div></div>
+      <div class="lc-traits"><div class="lc-label">Atomic Traits</div><span class="trait-chip">Pacing</span><span class="trait-chip">Rhythm</span><span class="trait-chip">Articulation</span><span class="trait-chip">Emphasis</span><span class="trait-chip">Pause Arch.</span><span class="trait-chip">Cadence</span></div>
+    </div>
+    <div class="layer-card">
+      <div class="lc-num">T4</div>
+      <div class="lc-body"><div class="lc-name">Texture Layer</div><div class="lc-desc">Surface quality &mdash; grain, smoothness, rasp, silk, grit. The tactile dimension of voice that makes some sounds feel physically different.</div></div>
+      <div class="lc-traits"><div class="lc-label">Atomic Traits</div><span class="trait-chip">Grain</span><span class="trait-chip">Smoothness</span><span class="trait-chip">Rasp</span><span class="trait-chip">Silk</span><span class="trait-chip">Grit</span><span class="trait-chip">Velvet</span></div>
+    </div>
+    <div class="layer-card">
+      <div class="lc-num">T5</div>
+      <div class="lc-body"><div class="lc-name">Style Layer</div><div class="lc-desc">Genre intelligence &mdash; cinematic, conversational, corporate, theatrical, intimate, documentary. The contextual performance mode the voice defaults to.</div></div>
+      <div class="lc-traits"><div class="lc-label">Atomic Traits</div><span class="trait-chip">Cinematic</span><span class="trait-chip">Conversational</span><span class="trait-chip">Theatrical</span><span class="trait-chip">Intimate</span><span class="trait-chip">Documentary</span><span class="trait-chip">Commercial</span></div>
+    </div>
+  </div>
+  <div class="dna-vector">
+    <h3>Voice DNA Vector &mdash; Multi-Dimensional Fingerprint</h3>
+    <div class="dna-bars">
+      <div class="dna-bar-row"><div class="dna-bar-label">Warmth</div><div class="dna-bar-track"><div class="dna-bar-fill" style="width:82%;background:linear-gradient(90deg,#7c3aed,#a78bfa)"></div></div></div>
+      <div class="dna-bar-row"><div class="dna-bar-label">Authority</div><div class="dna-bar-track"><div class="dna-bar-fill" style="width:67%;background:linear-gradient(90deg,#06b6d4,#22d3ee)"></div></div></div>
+      <div class="dna-bar-row"><div class="dna-bar-label">Cinematic</div><div class="dna-bar-track"><div class="dna-bar-fill" style="width:91%;background:linear-gradient(90deg,#f59e0b,#fbbf24)"></div></div></div>
+      <div class="dna-bar-row"><div class="dna-bar-label">Texture: Silk</div><div class="dna-bar-track"><div class="dna-bar-fill" style="width:55%;background:linear-gradient(90deg,#10b981,#34d399)"></div></div></div>
+      <div class="dna-bar-row"><div class="dna-bar-label">Pacing: Slow</div><div class="dna-bar-track"><div class="dna-bar-fill" style="width:38%;background:linear-gradient(90deg,#ec4899,#f472b6)"></div></div></div>
+    </div>
+    <div style="margin-top:1rem;font-size:0.78rem;color:var(--muted);">&#8594; Each vector stored in HVS+ Vault &middot; Consent-scoped per trait &middot; Licensable independently</div>
+  </div>
+  <div class="callout cyan" style="margin-top:2rem;"><div class="c-head">Consent-Scoped Trait Licensing</div><p>An actor can license their <em>warmth</em> trait for children's content but lock their <em>authority</em> trait. They can permit their <em>cinematic delivery</em> for film trailers but block pharmaceutical ads. Granular. Constitutional. Enforced by HMAC-SHA256.</p></div>
+</section>
+
+<hr class="divider">
+
+<section id="voice-graph">
+  <div class="sec-eyebrow">Section 02 &mdash; Global Voice Graph</div>
+  <h2 class="sec-title">The Living Map of<br><span>Every Voice on Earth</span></h2>
+  <p class="sec-lead">A real-time knowledge graph where every node is a voice identity, every edge is a relationship, and every signal is market intelligence. The Global Voice Graph makes AVA's casting decisions smarter with every performance, every search, every hire.</p>
+  <div class="card-grid cols3">
+    <div class="card"><div class="card-num">Node Type A</div><div class="card-title">Creator HVS Identity</div><div class="card-body">Every consented human voice in the vault &mdash; DNA vector, URI score, availability, deal profile, performance history, genre tags.</div></div>
+    <div class="card c-cyan"><div class="card-num">Node Type B</div><div class="card-title">AI Voice Models</div><div class="card-body">Trained models with provenance chain. HVS-linked to origin consent. Capability map. Limitation flags. Active licensing status.</div></div>
+    <div class="card c-amber"><div class="card-num">Node Type C</div><div class="card-title">Hybrid Voice Instances</div><div class="card-body">Performance-layer blends &mdash; human + AI. Real-time compositions that inherit both consent chains and generate distributed royalties.</div></div>
+  </div>
+  <h3 style="font-size:0.9rem;font-weight:700;margin:2rem 0 1rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;">Edge Types &mdash; Relationship Intelligence</h3>
+  <table class="data-table">
+    <thead><tr><th>Edge Type</th><th>What It Maps</th><th>Signal Use</th><th>Update Freq</th></tr></thead>
+    <tbody>
+      <tr><td><span class="pill a">Style Similarity</span></td><td>Acoustic + tonal overlap between voices</td><td>Substitution pool for casting</td><td>Real-time on vault ingest</td></tr>
+      <tr><td><span class="pill b">Genre Overlap</span></td><td>Shared booking categories and format experience</td><td>Market segment mapping</td><td>Weekly re-score</td></tr>
+      <tr><td><span class="pill c">Collaboration History</span></td><td>Voices that have worked on same project</td><td>Ensemble casting intelligence</td><td>Post-project event</td></tr>
+      <tr><td><span class="pill d">Substitution Potential</span></td><td>Economic interchangeability score</td><td>Price discovery + negotiation</td><td>Daily market signal update</td></tr>
+      <tr><td><span class="pill a">Demand Trajectory</span></td><td>Search velocity and booking trend</td><td>Surge pricing + creator alerts</td><td>Hourly</td></tr>
+    </tbody>
+  </table>
+  <h3 style="font-size:0.9rem;font-weight:700;margin:2rem 0 1rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;">Three Signal Layers</h3>
+  <div class="card-grid cols3">
+    <div class="card c-pink"><div class="card-num">Signal Layer 1</div><div class="card-title">Style Signal</div><div class="card-body">Acoustic similarity clustering. Which voices occupy the same tonal space. Who can substitute, complement, or contrast for optimal casting.</div></div>
+    <div class="card c-amber"><div class="card-num">Signal Layer 2</div><div class="card-title">Demand Signal</div><div class="card-body">Search queries, booking velocity, waitlist depth, genre heat maps. The market's real-time appetite for specific voice profiles.</div></div>
+    <div class="card c-green"><div class="card-num">Signal Layer 3</div><div class="card-title">Economic Signal</div><div class="card-body">Completed deal values, royalty flows, licensing rates, price trends. The financial intelligence that makes AVA's deal engine market-accurate.</div></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="reputation">
+  <div class="sec-eyebrow">Section 03 &mdash; Reputation Engine</div>
+  <h2 class="sec-title">URI &mdash; The Credit Score<br><span>for Creative Work</span></h2>
+  <p class="sec-lead">The Unified Reputation Index (URI) is how trust scales. Every creator, every AI model, every voice asset has a URI score &mdash; dynamic, transparent, recoverable. The system that makes AVA's autonomous decisions trustworthy.</p>
+  <div class="uri-formula"><div class="eq-label">URI Formula</div><div class="eq">URI <span>= Performance Score + Demand Score + Value Score + Trust Score</span></div></div>
+  <div class="uri-grid">
+    <div class="uri-card"><div class="uri-score" style="color:var(--accent)">P</div><div class="uri-name">Performance Score</div><div class="uri-desc">Delivery consistency, quality floor compliance (48kHz/16-bit), client satisfaction, revision rate, on-time delivery.</div></div>
+    <div class="uri-card"><div class="uri-score" style="color:var(--accent2)">D</div><div class="uri-name">Demand Score</div><div class="uri-desc">Search frequency, booking velocity, waitlist depth, re-hire rate. How much the market wants this voice right now.</div></div>
+    <div class="uri-card"><div class="uri-score" style="color:var(--accent3)">V</div><div class="uri-name">Value Score</div><div class="uri-desc">Revenue generated, royalty accumulation, licensing deal size, economic contribution to ecosystem.</div></div>
+    <div class="uri-card"><div class="uri-score" style="color:var(--accent4)">T</div><div class="uri-name">Trust Score</div><div class="uri-desc">HVS consent compliance, Never Clause history, dispute record, transparency flags. The ethical layer.</div></div>
+  </div>
+  <div class="callout green" style="margin-top:2rem;"><div class="c-head">Fairness Controls</div><p>URI cannot be gamed by volume alone. A creator with 500 bookings but one consent violation takes a Trust Score hit that overrides the volume advantage. The system rewards sustainable, ethical performance &mdash; not extraction.</p></div>
+  <h3 style="font-size:0.9rem;font-weight:700;margin:2rem 0 1rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;">Recovery Pathways</h3>
+  <div class="card-grid cols3">
+    <div class="card"><div class="card-num">Recovery Type A</div><div class="card-title">Quality Recovery</div><div class="card-body">Performance Score drops from missed delivery. Recovery: 5 consecutive on-spec deliveries. Score restores with 30-day decay curve.</div></div>
+    <div class="card c-cyan"><div class="card-num">Recovery Type B</div><div class="card-title">Trust Recovery</div><div class="card-body">Trust Score drop from consent dispute. Recovery: dispute resolution + consent re-certification + 90-day compliance window.</div></div>
+    <div class="card c-amber"><div class="card-num">Recovery Type C</div><div class="card-title">Demand Recovery</div><div class="card-body">Demand Score drops when market shifts. Recovery: genre expansion, new sample sets, Voice DNA diversification.</div></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="live-performance">
+  <div class="sec-eyebrow">Section 04 &mdash; Live Performance Layer</div>
+  <h2 class="sec-title">Real-Time Human + AI<br><span>Voice Blending</span></h2>
+  <p class="sec-lead">The moment a human speaks, AVA is listening. Enhancing. Optionally blending. The Live Performance Layer is a zero-latency pipeline that makes the human voice the permanent center &mdash; with AI as an instrument, not a replacement.</p>
+  <div class="callout"><div class="c-head">Design Principle</div><p>The human is always the lead instrument. AI is the orchestra. The performer controls what blend they want &mdash; from 100% raw human to an AI-enhanced hybrid &mdash; in real time, with a full consent event logged at every decision point.</p></div>
+  <div class="pipeline">
+    <div class="pipe-step"><div class="pipe-num"><div class="pipe-circle">1</div></div><div class="pipe-body"><h4>Real-Time Capture</h4><p>48kHz/16-bit floor minimum. Whisper STT running in parallel for intent analysis. Latency target: sub-50ms capture to processing pipeline entry.</p><span class="pipe-tag live">LIVE INPUT</span></div></div>
+    <div class="pipe-step"><div class="pipe-num"><div class="pipe-circle c2">2</div></div><div class="pipe-body"><h4>Voice Enhancement Engine</h4><p>Noise gate, dynamic processing, room correction, breath normalization &mdash; applied in real time. Output is performance-ready before any AI layer touches it.</p><span class="pipe-tag hybrid">ENHANCEMENT</span></div></div>
+    <div class="pipe-step"><div class="pipe-num"><div class="pipe-circle c3">3</div></div><div class="pipe-body"><h4>DNA Trait Analysis</h4><p>Live session analyzed against Voice DNA Engine &mdash; Tone, Emotion, Delivery, Texture, Style layers scored in real time. Performance fingerprint generated.</p><span class="pipe-tag ai">AI ANALYSIS</span></div></div>
+    <div class="pipe-step"><div class="pipe-num"><div class="pipe-circle c4">4</div></div><div class="pipe-body"><h4>AI Voice Injection (Optional)</h4><p>Performer chooses blend ratio: emotion layer augmentation, texture transfer, style amplification, or full hybrid synthesis. Every injection requires active consent token.</p><span class="pipe-tag consent">CONSENT-GATED</span></div></div>
+    <div class="pipe-step"><div class="pipe-num"><div class="pipe-circle c5">5</div></div><div class="pipe-body"><h4>Hybrid Control Interface</h4><p>Performer adjusts emotion intensity, tone warmth, delivery pace in real time via DAW plugin or mobile surface. The voice becomes an instrument they play.</p><span class="pipe-tag hybrid">HYBRID CONTROL</span></div></div>
+    <div class="pipe-step"><div class="pipe-num"><div class="pipe-circle c6">6</div></div><div class="pipe-body"><h4>Output + Royalty Event</h4><p>Final audio delivered at spec. Royalty event logged to SQLite Ledger. HVS-05 fires. 75% perpetual protocol executes. Provenance chain updated.</p><span class="pipe-tag revenue">ROYALTY EVENT</span></div></div>
+  </div>
+  <div class="callout cyan" style="margin-top:2rem;"><div class="c-head">Zero-Latency Architecture</div><p>Edge compute + smart asset caching + pre-mounted HVS vault segments. The system pre-fetches the most likely AI layers based on the performer's current session context. The goal: the AI layer feels like an instrument you're playing, not a tool you're waiting for.</p></div>
+</section>
+
+<hr class="divider">
+
+<section id="descendants">
+  <div class="sec-eyebrow">Section 05 &mdash; The Descendants Model</div>
+  <h2 class="sec-title">Actor-Owned Voice LLMs as<br><span>Living Digital Assets</span></h2>
+  <p class="sec-lead">The Descendants Model is the convergence of HVS consent architecture and premium AI voice synthesis &mdash; creating a new class of digital asset that generates performances, royalties, and licensing revenue while the actor sleeps.</p>
+  <div class="descendants-hero">
+    <h3>What Is a Descendant?</h3>
+    <p>A Descendant is an actor-owned, premium voice LLM &mdash; a high-fidelity, ethically trained AI replica that functions as a living digital asset. It generates performances, accumulates royalties, and expands licensing opportunities while preserving complete provenance, attribution, and creative control.</p>
+    <p style="margin-top:1rem;">Unlike a simple voice clone, a Descendant carries the actor's full Voice DNA vector, their consent architecture, their deal profile, their URI score, and their HVS cryptographic identity. It is not a copy &mdash; it is an extension of a human creative career.</p>
+    <div class="d-quote">"HVS is a consent-first, cryptographically verifiable identity layer for the human voice. Paired with the Descendants model, it extends this ownership into actor-owned, premium voice LLMs &mdash; high-fidelity, ethically trained AI replicas that function as living digital assets, generating performances, royalties, and licensing opportunities while preserving provenance, attribution, and creative control."</div>
+  </div>
+  <div class="asset-grid">
+    <div class="asset-card"><div class="asset-icon">&#x1F9EC;</div><div class="asset-name">Voice DNA Inheritance</div><div class="asset-desc">The Descendant inherits the actor's full multi-dimensional DNA vector. Every performance is genetically linked to the original creator.</div></div>
+    <div class="asset-card"><div class="asset-icon">&#x1F510;</div><div class="asset-name">Cryptographic Provenance</div><div class="asset-desc">HMAC-SHA256 consent chain runs from original recording through every Descendant performance. Provenance is permanent and public.</div></div>
+    <div class="asset-card"><div class="asset-icon">&#x1F4B0;</div><div class="asset-name">Perpetual Revenue Engine</div><div class="asset-desc">Each Descendant performance fires a royalty event. The 75% perpetual protocol applies. Revenue accumulates continuously, autonomously.</div></div>
+    <div class="asset-card"><div class="asset-icon">&#x2699;&#xFE0F;</div><div class="asset-name">Autonomous Deployment</div><div class="asset-desc">Actor sets deal profile once. Descendant negotiates within parameters, accepts or declines projects, delivers audio &mdash; without manual involvement.</div></div>
+    <div class="asset-card"><div class="asset-icon">&#x1F3DB;&#xFE0F;</div><div class="asset-name">Creator Control Layer</div><div class="asset-desc">Actor can pause, modify, or revoke any Descendant at any time. Full consent sovereignty. The asset serves the creator &mdash; never the reverse.</div></div>
+    <div class="asset-card"><div class="asset-icon">&#x1F4C8;</div><div class="asset-name">Appreciating Asset</div><div class="asset-desc">URI score, performance history, and demand signals improve the Descendant's market value over time. The longer it performs, the more valuable it becomes.</div></div>
+  </div>
+  <h3 style="font-size:0.9rem;font-weight:700;margin:2rem 0 1rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;">HVS &times; Descendants Architecture</h3>
+  <table class="data-table">
+    <thead><tr><th>HVS Layer</th><th>Descendant Function</th><th>Enforcement</th></tr></thead>
+    <tbody>
+      <tr><td>HVS-01 Identity</td><td>Links Descendant to origin actor &mdash; permanent, unbreakable attribution</td><td>HMAC-SHA256 identity chain</td></tr>
+      <tr><td>HVS-02 Consent</td><td>Scope of Descendant's deployment &mdash; genres, formats, platforms, exclusions</td><td>Cryptographic consent key</td></tr>
+      <tr><td>HVS-03 Quality</td><td>Quality floor enforced on every Descendant output &mdash; validated by librosa</td><td>48kHz/16-bit never clause</td></tr>
+      <tr><td>HVS-04 Provenance</td><td>Every performance timestamped, linked to consent, immutable audit trail</td><td>SQLite Ledger + hash chain</td></tr>
+      <tr><td>HVS-05 Economic</td><td>75% perpetual fires on every royalty event &mdash; automatic, non-overridable</td><td>Constitutional protocol</td></tr>
+      <tr><td>HVS-06 Interoperability</td><td>Descendant can operate across any platform that accepts HVS token</td><td>Permission Passport standard</td></tr>
+    </tbody>
+  </table>
+  <div class="comp-callout">
+    <div class="cc-label">The Competitive Insight</div>
+    <h3>The winning move is not to fight ElevenLabs.<br>Build the layer they have to plug into.</h3>
+    <p>When regulation arrives &mdash; and it will &mdash; the industry needs an ethical infrastructure layer. HVS + 75% perpetual + consent architecture = the standard the industry must adopt. Not because we marketed it. Because creators demanded it, regulators required it, and studios couldn't afford not to have it.</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="studios">
+  <div class="sec-eyebrow">Section 06 &mdash; Autonomous Creative Studios</div>
+  <h2 class="sec-title">Full Productions Run<br><span>by AVA</span></h2>
+  <p class="sec-lead">Not a tool. Not an assistant. A production studio that wakes up when the brief arrives and delivers when the work is done. The Autonomous Creative Studio is AVA operating at full capacity &mdash; script to final audio, with zero human friction required.</p>
+  <div class="studio-flow">
+    <div class="sf-step"><div class="sf-icon">&#x1F4CB;</div><div class="sf-num">Phase 01</div><div class="sf-name">Script Intelligence</div><div class="sf-desc">Brief ingested. Script analyzed for tone, genre, emotional arc, character count, format requirements.</div></div>
+    <div class="sf-step"><div class="sf-icon">&#x1F3AD;</div><div class="sf-num">Phase 02</div><div class="sf-name">Casting Automation</div><div class="sf-desc">Voice Graph queried. DNA matching executed. Top 5 candidates surfaced per role with URI scores and availability.</div></div>
+    <div class="sf-step"><div class="sf-icon">&#x1F91D;</div><div class="sf-num">Phase 03</div><div class="sf-name">Deal Execution</div><div class="sf-desc">AVA negotiates within creator's Deal Profile. Contract auto-generates. 75% split locked. Both parties notified.</div></div>
+    <div class="sf-step"><div class="sf-icon">&#x1F399;&#xFE0F;</div><div class="sf-num">Phase 04</div><div class="sf-name">Voice Production</div><div class="sf-desc">Human performs via Live Layer or Descendant deploys autonomously. 48kHz floor validated. Delivery confirmed.</div></div>
+    <div class="sf-step"><div class="sf-icon">&#x1F39B;&#xFE0F;</div><div class="sf-num">Phase 05</div><div class="sf-name">Audio Engineering</div><div class="sf-desc">Post-processing, mixing, mastering, format delivery &mdash; automated to spec. Quality validation via librosa.</div></div>
+    <div class="sf-step"><div class="sf-icon">&#x1F4B8;</div><div class="sf-num">Phase 06</div><div class="sf-name">Revenue Distribution</div><div class="sf-desc">Royalty events fire. SQLite Ledger updated. Creator receives 75%. Provenance chain sealed. Project archived.</div></div>
+  </div>
+  <div class="callout" style="margin-top:2rem;"><div class="c-head">Self-Improving Loop</div><p>Every completed production feeds back into the Voice Graph, DNA Engine, and Reputation scores. The more the studio runs, the better its casting intelligence becomes. AVA doesn't just execute &mdash; it learns which combinations produce outcomes that clients return for.</p></div>
+  <div class="card-grid cols2" style="margin-top:1.5rem;">
+    <div class="card c-green"><div class="card-num">Studio Capability</div><div class="card-title">What AVA Runs End-to-End</div><div class="card-body">Audiobooks &middot; Podcast production &middot; Film/TV VO &middot; Game NPC casting &middot; Commercial ad audio &middot; Audioguides &middot; E-learning narration &middot; Documentary narration &middot; Brand voice deployment &middot; Multilingual localization (VSI pipeline)</div></div>
+    <div class="card c-red"><div class="card-num">Constitutional Limits</div><div class="card-title">What AVA Never Does</div><div class="card-body">Never synthesizes without recorded consent &middot; Never bypasses the 75% split &middot; Never delivers below 48kHz/16-bit &middot; Never stores audio outside HVS-linked consent scope &middot; Never creates content without an active deal profile</div></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="adoption">
+  <div class="sec-eyebrow">Section 07 &mdash; Adoption Strategy Engine</div>
+  <h2 class="sec-title">Technology Starts the System.<br><span>Adoption Makes It Unstoppable.</span></h2>
+  <p class="sec-lead">Five phases. Each one creates conditions for the next. By Phase 5, HVS is not a competitive advantage &mdash; it's the infrastructure. The industry doesn't adopt it because we sold it. They adopt it because they can't afford not to.</p>
+  <div class="phase-stack">
+    <div class="phase-card">
+      <div class="phase-header"><div class="phase-badge ph1">1</div><h3>Creator Dominance &mdash; Supply-Side Lock-In</h3><span class="phase-tag">Months 1&ndash;6</span></div>
+      <div class="phase-body">
+        <div class="phase-col"><h4>Mechanism</h4><div class="phase-item">Instant value: creator uploads once, earns passively forever</div><div class="phase-item">Dopamine loop: URI score, royalty notifications, vault growth</div><div class="phase-item">75% perpetual as the recruitment story that spreads virally</div><div class="phase-item">Descendants Model: career extension that requires zero extra work</div></div>
+        <div class="phase-col"><h4>Lock-In Dynamic</h4><div class="phase-item">Creator's DNA vector, URI score, deal history live in HVS &mdash; non-portable</div><div class="phase-item">Switching cost rises with every completed deal</div><div class="phase-item">Target: 10,000 verified voices in vault before Phase 2</div></div>
+      </div>
+    </div>
+    <div class="phase-card">
+      <div class="phase-header"><div class="phase-badge ph2">2</div><h3>Studio Integration &mdash; Demand-Side Scale</h3><span class="phase-tag">Months 6&ndash;18</span></div>
+      <div class="phase-body">
+        <div class="phase-col"><h4>Mechanism</h4><div class="phase-item">10&times; faster casting than any current workflow</div><div class="phase-item">Zero-risk licensing: consent architecture = no compliance exposure</div><div class="phase-item">DAW plugin: AVA inside Pro Tools, Logic, Reaper</div><div class="phase-item">VSI partnership: 80+ languages, instant international casting</div></div>
+        <div class="phase-col"><h4>Lock-In Dynamic</h4><div class="phase-item">Studios build workflows around AVA's API &mdash; switching is expensive</div><div class="phase-item">HVS consent records become required for studio legal teams</div><div class="phase-item">Target: 50 studios on retainer contracts</div></div>
+      </div>
+    </div>
+    <div class="phase-card">
+      <div class="phase-header"><div class="phase-badge ph3">3</div><h3>AI Company Integration &mdash; Infrastructure Lock-In</h3><span class="phase-tag">Months 12&ndash;24</span></div>
+      <div class="phase-body">
+        <div class="phase-col"><h4>Mechanism</h4><div class="phase-item">HVS as the compliance layer AI companies need for regulation</div><div class="phase-item">Better training data: provenance-verified, ethically sourced</div><div class="phase-item">HVS API license: competitors must pay to be ethical</div><div class="phase-item">ElevenLabs, PlayHT, etc. need our consent stack when regulations hit</div></div>
+        <div class="phase-col"><h4>Lock-In Dynamic</h4><div class="phase-item">The standard becomes required infrastructure, not optional</div><div class="phase-item">Protocol licensing revenue from every AI voice company</div><div class="phase-item">Target: 3 major AI voice companies signed to HVS API</div></div>
+      </div>
+    </div>
+    <div class="phase-card">
+      <div class="phase-header"><div class="phase-badge ph4">4</div><h3>Network Effect Ignition</h3><span class="phase-tag">Month 18+</span></div>
+      <div class="phase-body">
+        <div class="phase-col"><h4>Mechanism</h4><div class="phase-item">Cross-side effects: more creators &rarr; better casting &rarr; more studios &rarr; more demand &rarr; more creators</div><div class="phase-item">Data compounding: Voice Graph intelligence grows with every booking</div><div class="phase-item">Intelligence compounding: AVA's casting gets better faster than any competitor can match</div></div>
+        <div class="phase-col"><h4>Lock-In Dynamic</h4><div class="phase-item">The network advantage is structural &mdash; can't be replicated without the network</div><div class="phase-item">URI score history = irreplaceable reputation asset for every creator</div><div class="phase-item">Target: self-sustaining flywheel requiring no marketing spend</div></div>
+      </div>
+    </div>
+    <div class="phase-card">
+      <div class="phase-header"><div class="phase-badge ph5">5</div><h3>Standardization &mdash; Inevitability</h3><span class="phase-tag">Year 3+</span></div>
+      <div class="phase-body">
+        <div class="phase-col"><h4>Mechanism</h4><div class="phase-item">HVS API + SDK: open standard that extends our moat</div><div class="phase-item">Industry partnerships: SAG-AFTRA, major studios, streaming platforms</div><div class="phase-item">Creator demand: talent won't work with platforms that don't honor HVS</div><div class="phase-item">Regulatory alignment: HVS = the consent framework regulators point to</div></div>
+        <div class="phase-col"><h4>The Endgame</h4><div class="phase-item">HVS is not NOIZY's feature &mdash; it is the industry's infrastructure</div><div class="phase-item">Every voice transaction in the world generates a protocol fee</div><div class="phase-item">Target: HVS referenced in international AI voice regulation</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="closing">
+    <h2>AVA Final Form &mdash; <span style="color:var(--accent)">Complete</span></h2>
+    <p>Seven layers. One system. The infrastructure the voice industry was always going to need &mdash; built before they knew they needed it. Every creator protected. Every performance provenance-stamped. Every royalty paid at 75%, forever.</p>
+    <div class="metric-row">
+      <div class="metric"><div class="m-val">7</div><div class="m-label">System Layers</div></div>
+      <div class="metric"><div class="m-val">5</div><div class="m-label">DNA Trait Layers</div></div>
+      <div class="metric"><div class="m-val">6</div><div class="m-label">HVS Protocol Layers</div></div>
+      <div class="metric"><div class="m-val">75%</div><div class="m-label">Perpetual Creator Split</div></div>
+      <div class="metric"><div class="m-val">5</div><div class="m-label">Adoption Phases</div></div>
+      <div class="metric"><div class="m-val">&infin;</div><div class="m-label">Descendant Revenue</div></div>
+    </div>
+    <div style="margin-top:2rem;font-size:0.82rem;color:var(--muted);">MC96ECO Universe &middot; NOIZY.AI &middot; HVS Protocol &middot; The Descendants Model<br>Build the layer others plug into.</div>
+  </div>
+</section>
+
+</main>
+<script>
+const canvas=document.getElementById('stars');const ctx=canvas.getContext('2d');let stars=[];
+function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+function initStars(){stars=[];for(let i=0;i<200;i++){stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.2,alpha:Math.random()*0.6+0.1,speed:Math.random()*0.15+0.02,twinkle:Math.random()*Math.PI*2});}}
+function drawStars(){ctx.clearRect(0,0,canvas.width,canvas.height);stars.forEach(s=>{s.twinkle+=0.008;const a=s.alpha*(0.7+0.3*Math.sin(s.twinkle));ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(180,160,255,${a})`;ctx.fill();s.y-=s.speed;if(s.y<-2){s.y=canvas.height+2;s.x=Math.random()*canvas.width;}});requestAnimationFrame(drawStars);}
+window.addEventListener('resize',()=>{resize();initStars();});resize();initStars();drawStars();
+const sections=document.querySelectorAll('section[id]');const navLinks=document.querySelectorAll('nav a');
+const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){navLinks.forEach(l=>l.classList.remove('active'));const link=document.querySelector(`nav a[href="#${e.target.id}"]`);if(link)link.classList.add('active');}});},{threshold:0.3});
+sections.forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>

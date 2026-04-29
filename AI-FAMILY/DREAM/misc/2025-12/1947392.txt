@@ -1,0 +1,64 @@
+<root>
+    <BFD2KitInfo name="kit_info" info_path="/Users/michaelbugh/Desktop/Eco Drumkits/DLX/DLX Kit I.eco_kit" info_photo="DLX Kit I.tga" info_name="DLX Kit I" info_rating="3" SourceEngine="BFD Eco">
+        <VString name="kit_text" string="" />
+        <VString name="kit_user_text" string="" />
+        <VString name="kit_slot_0">DLX Clubdate/Kick Rubber</VString>
+        <VString name="kit_slot_1">DLX Bison/Snare Piccolo</VString>
+        <VString name="kit_slot_2">DLX Zildjian/Hihat 15 New Beat</VString>
+        <VString name="kit_slot_3">DLX Yamaha/Tom Floor</VString>
+        <VString name="kit_slot_4">DLX VistaLite/Tom Mid</VString>
+        <VString name="kit_slot_5">DLX Clubdate/Tom Hi</VString>
+        <VString name="kit_slot_6">DLX Zildjian/Crash 16A</VString>
+        <VString name="kit_slot_7" string="" />
+        <VString name="kit_slot_8">Zildjian/Ride Flat 22</VString>
+        <VString name="kit_slot_9" string="" />
+        <VString name="kit_slot_10" string="" />
+        <VString name="kit_slot_11" string="" />
+    </BFD2KitInfo>
+    <BFD2Kit name="kit_meta_info" SourceEngine="BFD Eco" masterDynamics="0.5" kit_size="12">
+        <BFD2KitPiece name="kp_slot_0" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" gainOH="0.8" gainRM="0.8" gainPZM="0.8" tune="0.305" dyn="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" amb1Dest="OH" amb2Dest="Room" amb3Dest="Room" mute="false" solo="false" micBlend="0.16" chokeGroup="0">
+            <BFD2Artic name="artic_0_Hit" v2d="0.5" v2p="0.5" v2a="0.75" aTrim="0.5" velVar="0.5" artic_name="Hit" artic_load_state="false" />
+            <BFD2Artic name="artic_1_NoSnare" v2d="0.5" v2p="0.5" v2a="0.75" aTrim="0.5" velVar="0.5" artic_name="NoSnare" artic_load_state="false" />
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_1" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" gainOH="0.8" gainRM="0.8" gainPZM="0.8" tune="0.5" dyn="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" amb1Dest="OH" amb2Dest="Room" amb3Dest="Room" mute="false" solo="false" micBlend="0.5" chokeGroup="1">
+            <BFD2Artic name="artic_0_Hit" v2d="0.5" v2p="0.5" v2a="0.75" aTrim="0.5" velVar="0.5" artic_name="Hit" artic_load_state="false" />
+            <BFD2Artic name="artic_1_Drag" v2d="0.5" v2p="0.5" v2a="0.75" aTrim="0.5" velVar="0.5" artic_name="Drag" artic_load_state="false" />
+            <BFD2Artic name="artic_2_Flam" v2d="0.5" v2p="0.5" v2a="0.75" aTrim="0.5" velVar="0.5" artic_name="Flam" artic_load_state="false" />
+            <BFD2Artic name="artic_3_Rim" v2d="0.5" v2p="0.5" v2a="0.75" aTrim="0.5" velVar="0.5" artic_name="Rim" artic_load_state="false" />
+            <BFD2Artic name="artic_4_SS" v2d="0.5" v2p="0.5" v2a="0.75" aTrim="0.5" velVar="0.5" artic_name="SS" artic_load_state="false" />
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_2" pan="0.65" trim="0.8" dampAmt="0" dampFreq="500" gainOH="0.8" gainRM="0.8" gainPZM="0.8" tune="0.5" dyn="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" amb1Dest="OH" amb2Dest="Room" amb3Dest="Room" mute="false" solo="false" micBlend="0.5" chokeGroup="2">
+            <BFD2Artic name="artic_0_OpenT" v2d="0.5" v2p="0.5" v2a="0.75" aTrim="0.5" velVar="0.5" artic_name="OpenT" artic_load_state="false" />
+            <BFD2Artic name="artic_2_ThreeqT" v2d="0.5" v2p="0.5" v2a="0.75" aTrim="0.5" velVar="0.5" artic_name="ThreeqT" artic_load_state="false" />
+            <BFD2Artic name="artic_3_ThreeqS" v2d="0.5" v2p="0.5" v2a="0.75" aTrim="0.5" velVar="0.5" artic_name="ThreeqS" artic_load_state="false" />
+            <BFD2Artic name="artic_4_HalfT" v2d="0.5" v2p="0.5" v2a="0.75" aTrim="0.5" velVar="0.5" artic_name="HalfT" artic_load_state="false" />
+            <BFD2Artic name="artic_5_HalfS" v2d="0.5" v2p="0.5" v2a="0.75" aTrim="0.5" velVar="0.5" artic_name="HalfS" artic_load_state="false" />
+            <BFD2Artic name="artic_6_QuarterT" v2d="0.5" v2p="0.5" v2a="0.75" aTrim="0.5" velVar="0.5" artic_name="QuarterT" artic_load_state="false" />
+            <BFD2Artic name="artic_7_QuarterS" v2d="0.5" v2p="0.5" v2a="0.75" aTrim="0.5" velVar="0.5" artic_name="QuarterS" artic_load_state="false" />
+            <BFD2Artic name="artic_8_ClosedT" v2d="0.5" v2p="0.5" v2a="0.75" aTrim="0.5" velVar="0.5" artic_name="ClosedT" artic_load_state="false" />
+            <BFD2Artic name="artic_9_ClosedS" v2d="0.5" v2p="0.5" v2a="0.75" aTrim="0.5" velVar="0.5" artic_name="ClosedS" artic_load_state="false" />
+            <BFD2Artic name="artic_10_Pedal" v2d="0.5" v2p="0.5" v2a="0.75" aTrim="0.5" velVar="0.5" artic_name="Pedal" artic_load_state="false" />
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_3" pan="0.2" trim="0.8" dampAmt="0" dampFreq="500" gainOH="0.8" gainRM="0.8" gainPZM="0.8" tune="0.5" dyn="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" amb1Dest="OH" amb2Dest="Room" amb3Dest="Room" mute="false" solo="false" micBlend="0.5" chokeGroup="3">
+            <BFD2Artic name="artic_0_Hit" v2d="0.5" v2p="0.5" v2a="0.75" aTrim="0.5" velVar="0.5" artic_name="Hit" artic_load_state="false" />
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_4" pan="0.4" trim="0.8" dampAmt="0" dampFreq="500" gainOH="0.8" gainRM="0.8" gainPZM="0.8" tune="0.5" dyn="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" amb1Dest="OH" amb2Dest="Room" amb3Dest="Room" mute="false" solo="false" micBlend="0.5" chokeGroup="4">
+            <BFD2Artic name="artic_0_Hit" v2d="0.5" v2p="0.5" v2a="0.75" aTrim="0.5" velVar="0.5" artic_name="Hit" artic_load_state="false" />
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_5" pan="0.6" trim="0.8" dampAmt="0" dampFreq="500" gainOH="0.8" gainRM="0.8" gainPZM="0.8" tune="0.5" dyn="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" amb1Dest="OH" amb2Dest="Room" amb3Dest="Room" mute="false" solo="false" micBlend="0.5" chokeGroup="5">
+            <BFD2Artic name="artic_0_Hit" v2d="0.5" v2p="0.5" v2a="0.75" aTrim="0.5" velVar="0.5" artic_name="Hit" artic_load_state="false" />
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_6" pan="0.7" trim="0.8" dampAmt="0" dampFreq="500" gainOH="0.8" gainRM="0.8" gainPZM="0.8" tune="0.5" dyn="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" amb1Dest="OH" amb2Dest="Room" amb3Dest="Room" mute="false" solo="false" micBlend="0.5" chokeGroup="6">
+            <BFD2Artic name="artic_0_Hit" v2d="0.5" v2p="0.5" v2a="0.75" aTrim="0.5" velVar="0.5" artic_name="Hit" artic_load_state="false" />
+            <BFD2Artic name="artic_2_Edge" v2d="0.5" v2p="0.5" v2a="0.75" aTrim="0.5" velVar="0.5" artic_name="Edge" artic_load_state="false" />
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_7" pan="0.45" trim="0.8" dampAmt="0" dampFreq="500" gainOH="0.8" gainRM="0.8" gainPZM="0.8" tune="0.5" dyn="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" amb1Dest="OH" amb2Dest="Room" amb3Dest="Room" mute="false" solo="false" micBlend="0.5" chokeGroup="7" />
+        <BFD2KitPiece name="kp_slot_8" pan="0.15" trim="0.8" dampAmt="0" dampFreq="500" gainOH="0.8" gainRM="0.8" gainPZM="0.8" tune="0.5" dyn="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" amb1Dest="OH" amb2Dest="Room" amb3Dest="Room" mute="false" solo="false" micBlend="0.5" chokeGroup="8">
+            <BFD2Artic name="artic_0_Hit" v2d="0.5" v2p="0.5" v2a="0.75" aTrim="0.5" velVar="0.5" artic_name="Hit" artic_load_state="false" />
+            <BFD2Artic name="artic_2_Edge" v2d="0.5" v2p="0.5" v2a="0.75" aTrim="0.5" velVar="0.5" artic_name="Edge" artic_load_state="false" />
+        </BFD2KitPiece>
+        <BFD2KitPiece name="kp_slot_9" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" gainOH="0.8" gainRM="0.8" gainPZM="0.8" tune="0.5" dyn="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" mute="false" solo="false" micBlend="0.5" chokeGroup="9" />
+        <BFD2KitPiece name="kp_slot_10" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" gainOH="0.8" gainRM="0.8" gainPZM="0.8" tune="0.5" dyn="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" mute="false" solo="false" micBlend="0.5" chokeGroup="10" />
+        <BFD2KitPiece name="kp_slot_11" pan="0.5" trim="0.8" dampAmt="0" dampFreq="500" gainOH="0.8" gainRM="0.8" gainPZM="0.8" tune="0.5" dyn="0.5" flip_amb="false" kick_bl_lvl="1" snre_bl_lvl="1" kick_bl_dst="2" snre_bl_dst="2" mute="false" solo="false" micBlend="0.5" chokeGroup="11" />
+    </BFD2Kit>
+</root>

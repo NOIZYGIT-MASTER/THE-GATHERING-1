@@ -1,0 +1,3083 @@
+{
+  "info": {
+    "name": "GABRIEL-RSP",
+    "_postman_id": "gabriel-rsp-noizy-ai-2026",
+    "description": "GABRIEL — Local Genius Claude for RSP / NOIZY.AI\nFull 8-layer agentic control center.\nDiscord Voice In → GABRIEL Brain → Slack + Cloudflare → MC96ECO Universe\n\nEnvironment: GABRIEL-ENV\nDaily Spend Cap: $5.00 USD\nModel Stack: claude-haiku-4-5 (API) + qwen3:14b (local)\nHardware: Apple M2 Ultra | Network: Rogers Fiber",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "00 Health",
+      "item": [
+        {
+          "name": "GABRIEL Health Check",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{gabriel_base_url}}/health",
+              "host": [
+                "{{gabriel_base_url}}/health"
+              ]
+            },
+            "description": "Check GABRIEL server is alive"
+          }
+        },
+        {
+          "name": "GABRIEL Version",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{gabriel_base_url}}/version",
+              "host": [
+                "{{gabriel_base_url}}/version"
+              ]
+            },
+            "description": "Get version, model stack, uptime"
+          }
+        },
+        {
+          "name": "GABRIEL Status Full",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{gabriel_base_url}}/status",
+              "host": [
+                "{{gabriel_base_url}}/status"
+              ]
+            },
+            "description": "Full system status: memory, daily cost, active models"
+          }
+        },
+        {
+          "name": "GABRIEL Reset Daily Cost",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{gabriel_base_url}}/admin/reset-cost",
+              "host": [
+                "{{gabriel_base_url}}/admin/reset-cost"
+              ]
+            },
+            "description": "Reset daily cost counter at midnight UTC",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"confirm\":true}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Ollama Local Health",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{ollama_base_url}}/api/tags",
+              "host": [
+                "{{ollama_base_url}}/api/tags"
+              ]
+            },
+            "description": "Check local Ollama running + list models"
+          }
+        },
+        {
+          "name": "n8n Workflow Health",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{n8n_base_url}}/healthz",
+              "host": [
+                "{{n8n_base_url}}/healthz"
+              ]
+            },
+            "description": "Check n8n orchestration engine"
+          }
+        }
+      ]
+    },
+    {
+      "name": "01 GABRIEL Core",
+      "item": [
+        {
+          "name": "Chat — Local qwen3:14b",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{ollama_base_url}}/api/chat",
+              "host": [
+                "{{ollama_base_url}}/api/chat"
+              ]
+            },
+            "description": "GABRIEL primary free brain — local qwen3:14b",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"model\":\"qwen3:14b\",\"stream\":false,\"messages\":[{\"role\":\"user\",\"content\":\"{{gabriel_user_message}}\"}]}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Chat — Claude Extended Thinking",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.anthropic.com/v1/messages",
+              "host": [
+                "https://api.anthropic.com/v1/messages"
+              ]
+            },
+            "description": "Claude API with extended thinking — for complex RSP tasks",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"{{gabriel_claude_model}}\",\n  \"max_tokens\": 16000,\n  \"thinking\": {\n    \"type\": \"enabled\",\n    \"budget_tokens\": 8000\n  },\n  \"system\": \"{{gabriel_system_prompt}}\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"{{gabriel_user_message}}\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Chat — deepseek-r1 Deep Reason",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{ollama_base_url}}/api/chat",
+              "host": [
+                "{{ollama_base_url}}/api/chat"
+              ]
+            },
+            "description": "Local deepseek-r1:14b — analytical deep reasoning",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"model\":\"deepseek-r1:14b\",\"stream\":false,\"messages\":[{\"role\":\"user\",\"content\":\"{{gabriel_user_message}}\"}]}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GABRIEL Route Decision",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{gabriel_base_url}}/route",
+              "host": [
+                "{{gabriel_base_url}}/route"
+              ]
+            },
+            "description": "Smart router — local vs API decision engine",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"message\":\"{{gabriel_user_message}}\",\"prefer_local\":true,\"complexity_threshold\":0.7}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Memory Store",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{gabriel_base_url}}/memory/store",
+              "host": [
+                "{{gabriel_base_url}}/memory/store"
+              ]
+            },
+            "description": "Store fact in ChromaDB persistent memory",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"key\":\"{{memory_key}}\",\"value\":\"{{memory_value}}\",\"tags\":[\"rsp\",\"noizy-ai\"],\"ttl\":86400}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Memory Recall",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{gabriel_base_url}}/memory/recall",
+              "host": [
+                "{{gabriel_base_url}}/memory/recall"
+              ]
+            },
+            "description": "Semantic recall from GABRIEL memory",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"query\":\"{{gabriel_user_message}}\",\"top_k\":5,\"threshold\":0.7}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Embedding — nomic-embed-text",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{ollama_base_url}}/api/embeddings",
+              "host": [
+                "{{ollama_base_url}}/api/embeddings"
+              ]
+            },
+            "description": "Local embeddings for memory/search",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"model\":\"nomic-embed-text\",\"prompt\":\"{{gabriel_user_message}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GABRIEL Think (Extended)",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.anthropic.com/v1/messages",
+              "host": [
+                "https://api.anthropic.com/v1/messages"
+              ]
+            },
+            "description": "Force extended thinking for highest-complexity decisions",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"{{gabriel_claude_model}}\",\n  \"max_tokens\": 16000,\n  \"thinking\": {\n    \"type\": \"enabled\",\n    \"budget_tokens\": 8000\n  },\n  \"system\": \"{{gabriel_system_prompt}}\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Think deeply: {{gabriel_user_message}}\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "02 Voice In",
+      "item": [
+        {
+          "name": "Discord Voice — Start Session",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{gabriel_base_url}}/voice/start",
+              "host": [
+                "{{gabriel_base_url}}/voice/start"
+              ]
+            },
+            "description": "Connect GABRIEL to Discord voice channel",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"guild_id\":\"{{discord_guild_id}}\",\"channel_id\":\"{{discord_voice_channel_id}}\",\"user_id\":\"{{discord_user_id}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Discord Voice — Stop Session",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{gabriel_base_url}}/voice/stop",
+              "host": [
+                "{{gabriel_base_url}}/voice/stop"
+              ]
+            },
+            "description": "Disconnect GABRIEL from Discord voice",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"guild_id\":\"{{discord_guild_id}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Transcribe — Whisper STT",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{gabriel_base_url}}/voice/transcribe",
+              "host": [
+                "{{gabriel_base_url}}/voice/transcribe"
+              ]
+            },
+            "description": "Transcribe voice audio via OpenAI Whisper",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"audio_url\":\"{{audio_file_url}}\",\"model\":\"whisper-1\",\"language\":\"en\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Voice → GABRIEL Pipeline",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{gabriel_base_url}}/voice/pipeline",
+              "host": [
+                "{{gabriel_base_url}}/voice/pipeline"
+              ]
+            },
+            "description": "Full pipeline: Discord → Whisper → GABRIEL → Slack",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"guild_id\":\"{{discord_guild_id}}\",\"channel_id\":\"{{discord_voice_channel_id}}\",\"auto_respond\":true,\"output_to_slack\":true}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Discord Bot Status",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{gabriel_base_url}}/voice/status",
+              "host": [
+                "{{gabriel_base_url}}/voice/status"
+              ]
+            },
+            "description": "Discord bot connection + active voice sessions"
+          }
+        },
+        {
+          "name": "TTS — Voice Response",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{gabriel_base_url}}/voice/speak",
+              "host": [
+                "{{gabriel_base_url}}/voice/speak"
+              ]
+            },
+            "description": "GABRIEL speaks back in Discord voice channel",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"text\":\"{{gabriel_response_text}}\",\"voice\":\"onyx\",\"model\":\"tts-1\",\"output_channel\":\"{{discord_voice_channel_id}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "03 Brain n8n",
+      "item": [
+        {
+          "name": "n8n — GABRIEL Signal Router",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{n8n_gabriel_webhook_url}}",
+              "host": [
+                "{{n8n_gabriel_webhook_url}}"
+              ]
+            },
+            "description": "Send signal to n8n GABRIEL Signal Router workflow",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"source\":\"postman\",\"message\":\"{{gabriel_user_message}}\",\"user\":\"RSP\",\"priority\":\"high\",\"context\":\"{{gabriel_context}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "n8n — Trigger NOIZY.AI Workflow",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{n8n_base_url}}/webhook/noizy-ai",
+              "host": [
+                "{{n8n_base_url}}/webhook/noizy-ai"
+              ]
+            },
+            "description": "Trigger NOIZY.AI workflow in n8n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"workflow\":\"{{workflow_name}}\",\"payload\":\"{{workflow_payload}}\",\"triggered_by\":\"GABRIEL\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "n8n — List Active Workflows",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{n8n_base_url}}/api/v1/workflows?active=true",
+              "host": [
+                "{{n8n_base_url}}/api/v1/workflows?active=true"
+              ]
+            },
+            "description": "List all active n8n workflows"
+          }
+        },
+        {
+          "name": "n8n — Get Workflow Status",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{n8n_base_url}}/api/v1/workflows/{{n8n_workflow_id}}",
+              "host": [
+                "{{n8n_base_url}}/api/v1/workflows/{{n8n_workflow_id}}"
+              ]
+            },
+            "description": "Get specific n8n workflow status"
+          }
+        },
+        {
+          "name": "n8n — Execute Workflow",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{n8n_base_url}}/api/v1/workflows/{{n8n_workflow_id}}/run",
+              "host": [
+                "{{n8n_base_url}}/api/v1/workflows/{{n8n_workflow_id}}/run"
+              ]
+            },
+            "description": "Manually execute n8n workflow",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"runData\":{},\"startNodes\":[],\"destinationNode\":\"\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "n8n — Get Executions",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{n8n_base_url}}/api/v1/executions?limit=20&workflowId={{n8n_workflow_id}}",
+              "host": [
+                "{{n8n_base_url}}/api/v1/executions?limit=20&workflowId={{n8n_workflow_id}}"
+              ]
+            },
+            "description": "Recent workflow execution logs"
+          }
+        },
+        {
+          "name": "n8n — Daily Report Trigger",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{n8n_base_url}}/webhook/gabriel-daily-report",
+              "host": [
+                "{{n8n_base_url}}/webhook/gabriel-daily-report"
+              ]
+            },
+            "description": "Trigger daily GABRIEL status report to RSP Slack",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"date\":\"{{$isoTimestamp}}\",\"daily_cost\":\"{{gabriel_daily_cost}}\",\"model_stack\":\"claude-haiku-4-5 + qwen3:14b\",\"status\":\"operational\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "04 Slack Out",
+      "item": [
+        {
+          "name": "Slack — GABRIEL Message to RSP",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{slack_gabriel_webhook_url}}",
+              "host": [
+                "{{slack_gabriel_webhook_url}}"
+              ]
+            },
+            "description": "Send GABRIEL response to RSP Slack channel",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"text\":\"🧠 GABRIEL: {{gabriel_response_text}}\",\"username\":\"GABRIEL\",\"icon_emoji\":\":robot_face:\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Slack — Daily Cost Report",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{slack_gabriel_webhook_url}}",
+              "host": [
+                "{{slack_gabriel_webhook_url}}"
+              ]
+            },
+            "description": "Daily cost and status report to RSP Slack",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"text\":\"📊 *GABRIEL Daily Report*\\n• Daily Spend: ${{gabriel_daily_cost}}\\n• Status: Operational\\n• Primary Model: qwen3:14b (local)\\n• API Model: claude-haiku-4-5\\n• Uptime: {{gabriel_uptime}}\",\"username\":\"GABRIEL\",\"icon_emoji\":\":bar_chart:\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Slack — Cost Alert",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{slack_gabriel_webhook_url}}",
+              "host": [
+                "{{slack_gabriel_webhook_url}}"
+              ]
+            },
+            "description": "Alert when daily API spend approaches $5 limit",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"text\":\"⚠️ *GABRIEL COST ALERT*\\nDaily spend approaching limit: ${{gabriel_daily_cost}} / $5.00\\nSwitching to local-only mode.\",\"username\":\"GABRIEL\",\"icon_emoji\":\":warning:\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Slack — Task Complete",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{slack_gabriel_webhook_url}}",
+              "host": [
+                "{{slack_gabriel_webhook_url}}"
+              ]
+            },
+            "description": "Notify RSP when GABRIEL completes a task",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"text\":\"✅ *GABRIEL Task Complete*\\nTask: {{task_name}}\\nResult: {{task_result}}\\nDuration: {{task_duration}}ms\",\"username\":\"GABRIEL\",\"icon_emoji\":\":white_check_mark:\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Slack — Post File/Artifact",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "https://slack.com/api/files.upload",
+              "host": [
+                "https://slack.com/api/files.upload"
+              ]
+            },
+            "description": "Upload GABRIEL output file to Slack",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"channels\":\"{{slack_channel_id}}\",\"content\":\"{{file_content}}\",\"filename\":\"{{filename}}\",\"filetype\":\"text\",\"title\":\"GABRIEL Output: {{task_name}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Slack — Get Channel Info",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "https://slack.com/api/conversations.info?channel={{slack_channel_id}}",
+              "host": [
+                "https://slack.com/api/conversations.info?channel={{slack_channel_id}}"
+              ]
+            },
+            "description": "Get Slack channel details for GABRIEL routing"
+          }
+        }
+      ]
+    },
+    {
+      "name": "05 Cloudflare",
+      "item": [
+        {
+          "name": "CF — Tunnel Status",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.cloudflare.com/client/v4/accounts/{{cf_account_id}}/tunnels/{{cf_tunnel_id}}",
+              "host": [
+                "https://api.cloudflare.com/client/v4/accounts/{{cf_account_id}}/tunnels/{{cf_tunnel_id}}"
+              ]
+            },
+            "description": "Check gabriel.noizy.ai Cloudflare tunnel status"
+          }
+        },
+        {
+          "name": "CF — List Tunnels",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.cloudflare.com/client/v4/accounts/{{cf_account_id}}/tunnels",
+              "host": [
+                "https://api.cloudflare.com/client/v4/accounts/{{cf_account_id}}/tunnels"
+              ]
+            },
+            "description": "List all Cloudflare tunnels for RSPNOIZY account"
+          }
+        },
+        {
+          "name": "CF — Tunnel Connections",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.cloudflare.com/client/v4/accounts/{{cf_account_id}}/tunnels/{{cf_tunnel_id}}/connections",
+              "host": [
+                "https://api.cloudflare.com/client/v4/accounts/{{cf_account_id}}/tunnels/{{cf_tunnel_id}}/connections"
+              ]
+            },
+            "description": "Active connections through GABRIEL tunnel"
+          }
+        },
+        {
+          "name": "CF — Workers AI Fallback",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.cloudflare.com/client/v4/accounts/{{cf_account_id}}/ai/run/@cf/meta/llama-3-8b-instruct",
+              "host": [
+                "https://api.cloudflare.com/client/v4/accounts/{{cf_account_id}}/ai/run/@cf/meta/llama-3-8b-instruct"
+              ]
+            },
+            "description": "FREE fallback inference via Cloudflare Workers AI",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"messages\":[{\"role\":\"user\",\"content\":\"{{gabriel_user_message}}\"}]}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "CF — DNS Records",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.cloudflare.com/client/v4/zones/{{cf_zone_id}}/dns_records?name=gabriel.noizy.ai",
+              "host": [
+                "https://api.cloudflare.com/client/v4/zones/{{cf_zone_id}}/dns_records?name=gabriel.noizy.ai"
+              ]
+            },
+            "description": "Check DNS records for gabriel.noizy.ai"
+          }
+        },
+        {
+          "name": "CF — Purge Cache",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.cloudflare.com/client/v4/zones/{{cf_zone_id}}/purge_cache",
+              "host": [
+                "https://api.cloudflare.com/client/v4/zones/{{cf_zone_id}}/purge_cache"
+              ]
+            },
+            "description": "Purge Cloudflare cache for gabriel.noizy.ai edge",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"purge_everything\":true}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "06 MC96ECO Universe Out",
+      "item": [
+        {
+          "name": "MC96ECO — Dispatch Signal",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{mc96eco_webhook_url}}",
+              "host": [
+                "{{mc96eco_webhook_url}}"
+              ]
+            },
+            "description": "Send GABRIEL output to MC96ECO Universe — primary dispatch",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"source\":\"GABRIEL\",\"type\":\"signal\",\"payload\":\"{{gabriel_response_text}}\",\"metadata\":{\"model\":\"{{gabriel_active_model}}\",\"cost\":\"{{gabriel_last_call_cost}}\",\"timestamp\":\"{{$isoTimestamp}}\"},\"auth\":\"{{mc96eco_secret}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "MC96ECO — Creative Output",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{mc96eco_webhook_url}}",
+              "host": [
+                "{{mc96eco_webhook_url}}"
+              ]
+            },
+            "description": "Route creative output from GABRIEL to MC96ECO",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"source\":\"GABRIEL\",\"type\":\"creative\",\"payload\":\"{{creative_output}}\",\"project\":\"{{mc96eco_project_id}}\",\"tags\":[\"rsp\",\"noizy-ai\",\"gabriel\"],\"auth\":\"{{mc96eco_secret}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "MC96ECO — Music Signal",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{mc96eco_webhook_url}}",
+              "host": [
+                "{{mc96eco_webhook_url}}"
+              ]
+            },
+            "description": "Music generation signal from GABRIEL to MC96ECO",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"source\":\"GABRIEL\",\"type\":\"music\",\"bpm\":\"{{bpm}}\",\"key\":\"{{musical_key}}\",\"mood\":\"{{mood}}\",\"lyrics_prompt\":\"{{gabriel_user_message}}\",\"auth\":\"{{mc96eco_secret}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "MC96ECO — Vision Output",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{mc96eco_webhook_url}}",
+              "host": [
+                "{{mc96eco_webhook_url}}"
+              ]
+            },
+            "description": "Image/vision generation output to MC96ECO Universe",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"source\":\"GABRIEL\",\"type\":\"vision\",\"prompt\":\"{{image_prompt}}\",\"style\":\"{{art_style}}\",\"resolution\":\"1024x1024\",\"auth\":\"{{mc96eco_secret}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "MC96ECO — Status Ping",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{mc96eco_base_url}}/status",
+              "host": [
+                "{{mc96eco_base_url}}/status"
+              ]
+            },
+            "description": "Check MC96ECO Universe API availability"
+          }
+        },
+        {
+          "name": "MC96ECO — Get Universe State",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{mc96eco_base_url}}/state",
+              "host": [
+                "{{mc96eco_base_url}}/state"
+              ]
+            },
+            "description": "Current MC96ECO Universe state for GABRIEL context"
+          }
+        }
+      ]
+    },
+    {
+      "name": "07 Rogers Network",
+      "item": [
+        {
+          "name": "Rogers — Modem Status",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "http://192.168.0.1/status",
+              "host": [
+                "http://192.168.0.1/status"
+              ]
+            },
+            "description": "Rogers modem admin — connection status (local network only)"
+          }
+        },
+        {
+          "name": "Network — Latency Test",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{gabriel_base_url}}/network/speedtest",
+              "host": [
+                "{{gabriel_base_url}}/network/speedtest"
+              ]
+            },
+            "description": "Latency test from M2 Ultra to Anthropic API",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"target\":\"api.anthropic.com\",\"type\":\"latency\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Network — MTU Check",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{gabriel_base_url}}/network/mtu",
+              "host": [
+                "{{gabriel_base_url}}/network/mtu"
+              ]
+            },
+            "description": "Check MTU settings on Rogers connection (optimal: 1500)"
+          }
+        },
+        {
+          "name": "Network — QoS Status",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{gabriel_base_url}}/network/qos",
+              "host": [
+                "{{gabriel_base_url}}/network/qos"
+              ]
+            },
+            "description": "Check QoS — GABRIEL traffic should be highest priority"
+          }
+        },
+        {
+          "name": "Network — DNS Benchmark",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{gabriel_base_url}}/network/dns-benchmark",
+              "host": [
+                "{{gabriel_base_url}}/network/dns-benchmark"
+              ]
+            },
+            "description": "Benchmark DNS resolvers for Rogers connection",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"servers\":[\"1.1.1.1\",\"8.8.8.8\",\"9.9.9.9\"],\"target\":\"api.anthropic.com\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Network — TCP Tuning Status",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('request_start_time', Date.now());",
+                  "let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');",
+                  "const lim=parseFloat(pm.environment.get('gabriel_daily_limit')||'5.00');",
+                  "if(d>=lim)throw new Error('[GABRIEL] DAILY LIMIT $'+lim+' REACHED');",
+                  "console.log('[GABRIEL] Daily: $'+d.toFixed(4)+' / $'+lim);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const dur=Date.now()-parseInt(pm.globals.get('request_start_time'));",
+                  "pm.test('Status 2xx',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.test('Response<30s',()=>pm.expect(dur).to.be.below(30000));",
+                  "try{const b=pm.response.json();if(b.usage){const c=((b.usage.input_tokens||0)*0.000001)+((b.usage.output_tokens||0)*0.000005);let d=parseFloat(pm.globals.get('gabriel_daily_cost')||'0');d+=c;pm.globals.set('gabriel_daily_cost',d.toFixed(6));console.log('[COST]+$'+c.toFixed(6)+' Total:$'+d.toFixed(4));}}catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Gabriel-Request-ID",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{gabriel_api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{gabriel_base_url}}/network/tcp-status",
+              "host": [
+                "{{gabriel_base_url}}/network/tcp-status"
+              ]
+            },
+            "description": "Check TCP BBR and buffer settings for max Rogers throughput"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+name = "lucy-worker"
+main = "src/worker.ts"
+compatibility_date = "2026-04-15"
+compatibility_flags = ["nodejs_compat"]
+
+# Public vars (not secrets). Secrets go via `wrangler secret put`.
+[vars]
+ALLOWED_ORIGIN = "https://lucy.noizy.ai"
+CLAUDE_MODEL   = "claude-haiku-4-5-20251001"
+CONTEXT_TURNS  = "12"                         # how many prior messages to send Claude
+
+# D1 binding. After `wrangler d1 info agent-memory-783205` returns the real
+# UUID, paste it into database_id. Do NOT commit a real UUID if this repo
+# goes public — Cloudflare treats it as semi-sensitive.
+[[d1_databases]]
+binding       = "AGENT_MEMORY"
+database_name = "agent-memory-783205"
+database_id   = "REPLACE_WITH_UUID_FROM_WRANGLER_D1_INFO"
+
+# ------------------------------------------------------------
+# SECRETS required (set via `wrangler secret put <NAME>`):
+#   ANTHROPIC_API_KEY   — for /api/chat -> Claude
+#   LUCY_SHARED_SECRET  — required in x-lucy-auth header on every POST
+# ------------------------------------------------------------

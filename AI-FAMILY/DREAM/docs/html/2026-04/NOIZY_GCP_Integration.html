@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIZY Empire — GCP Integration Map</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#EF9F27;--black:#060608;--ink:#0D0D0F;--surface:#141416;--border:#2A2A2E;--text:#F0EDE8;--muted:#888780;--dim:#444441;--green:#1D9E75;--red:#E24B4A;--blue:#378ADD;--teal:#1D9E75}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--ink);color:var(--text);font-family:'Syne',sans-serif;padding:2rem;max-width:1000px;margin:0 auto}
+.hdr{border-bottom:2px solid var(--gold);padding-bottom:1.5rem;margin-bottom:2rem}
+.project-id{font-family:'Space Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.1em;margin-bottom:6px}
+h1{font-size:24px;font-weight:800;letter-spacing:-0.5px;margin-bottom:4px}
+.meta{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted)}
+.section{margin-bottom:2rem}
+.shdr{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);padding:5px 0;border-bottom:1px solid var(--border);margin-bottom:1rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px}
+.card.priority{border-color:var(--gold)}
+.card.live{border-color:var(--green)}
+.card-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.icon{font-size:18px}
+.card-title{font-size:13px;font-weight:700;color:var(--text)}
+.card-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.card-body{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:8px}
+.badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border-radius:10px;margin-right:4px}
+.b-live{background:rgba(29,158,117,.15);color:var(--green);border:1px solid var(--green)}
+.b-enable{background:rgba(239,159,39,.15);color:var(--gold);border:1px solid var(--gold)}
+.b-browser{background:rgba(55,138,221,.15);color:var(--blue);border:1px solid var(--blue)}
+.b-shell{background:rgba(239,159,39,.08);color:var(--muted);border:1px solid var(--dim)}
+code{font-family:'Space Mono',monospace;font-size:10px;background:var(--ink);padding:1px 6px;border-radius:3px;color:var(--gold)}
+.cmd-block{background:var(--black);border:1px solid var(--border);border-radius:6px;padding:12px;font-family:'Space Mono',monospace;font-size:11px;color:var(--text);line-height:2;margin-top:8px;overflow-x:auto}
+.cmd-block .comment{color:var(--dim)}
+.step{display:flex;gap:8px;margin-bottom:8px;align-items:flex-start}
+.step-n{background:var(--gold);color:var(--black);border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;margin-top:2px}
+.step-t{font-size:12px;color:var(--muted);line-height:1.5}
+.gemini-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(66,133,244,.15);border:1px solid #4285F4;border-radius:6px;padding:4px 10px;font-size:11px;font-family:'Space Mono',monospace;color:#4285F4;font-weight:700}
+.service-table{width:100%;border-collapse:collapse;font-size:12px}
+.service-table th{text-align:left;padding:7px 10px;color:var(--muted);border-bottom:1px solid var(--border);font-size:10px;text-transform:uppercase;letter-spacing:.05em;font-weight:500}
+.service-table td{padding:7px 10px;border-bottom:1px solid var(--surface);vertical-align:top}
+.service-table td:first-child{color:var(--text);font-weight:600}
+.service-table tr:hover td{background:var(--surface)}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="project-id">GCP PROJECT: gen-lang-client-0531202734 · REGION: us-central1</div>
+  <h1>🌐 NOIZY Empire — Google Cloud Integration</h1>
+  <div class="meta">RSP_001 · Robert Stephen Plowman · 2026-04-13 · GORUNFREE</div>
+</div>
+
+<!-- PROJECT IDENTITY -->
+<div class="section">
+  <div class="shdr">What This Project Is</div>
+  <div style="background:var(--surface);border:1px solid var(--gold);border-radius:8px;padding:16px;font-size:13px;line-height:1.8;color:var(--muted)">
+    <span class="gemini-badge">✦ Gemini API</span>&nbsp;&nbsp;
+    <code>gen-lang-client-</code> prefix = auto-created by <strong style="color:var(--text)">Google AI Studio</strong> when you accessed Gemini API.<br><br>
+    This means: <strong style="color:var(--gold)">Gemini API is already enabled and linked to your Google account.</strong> You have access to Gemini 2.0 Flash (native audio input), Gemini 2.5 Pro, and Gemma 3 via Vertex AI.<br><br>
+    <strong style="color:var(--text)">NOIZY relevance:</strong> Feed Voice Army WAV files directly to Gemini 2.0 Flash for phoneme verification, emotional range scoring, and Voice DNA annotation — no local GPU required.
+  </div>
+</div>
+
+<!-- STEP 1: CLOUD SHELL ACTIVATION -->
+<div class="section">
+  <div class="shdr">Step 1 — Run in Cloud Shell (you're already there)</div>
+  <div class="card priority">
+    <div class="card-head"><div class="icon">⚡</div><div><div class="card-title">NOIZY_GCP_SETUP.sh — paste and run</div><div class="card-sub">Cloud Shell terminal · ~2 min</div></div></div>
+    <div class="card-body">Download and run the setup script. Enables all APIs, creates buckets, Secret Manager secrets, Artifact Registry, and GABRIEL service account.</div>
+    <div class="cmd-block">
+<span class="comment"># In Cloud Shell — paste this one line:</span>
+curl -sL https://raw.githubusercontent.com/rsplowman/noizy/main/gcp/NOIZY_GCP_SETUP.sh | bash
+
+<span class="comment"># OR — upload NOIZY_GCP_SETUP.sh from your downloads</span>
+<span class="comment"># then: chmod +x NOIZY_GCP_SETUP.sh && bash NOIZY_GCP_SETUP.sh</span>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES MAP -->
+<div class="section">
+  <div class="shdr">Full GCP Service Map — NOIZY Stack</div>
+  <table class="service-table">
+    <tr><th>Service</th><th>NOIZY Purpose</th><th>Status</th><th>Priority</th></tr>
+    <tr>
+      <td>Gemini API (gen. lang.)</td>
+      <td>Voice Army phoneme verification · emotional range scoring · Voice DNA annotation from WAV files — native audio input, no GPU needed</td>
+      <td><span class="badge b-live">LIVE</span></td>
+      <td>🔴 Use NOW</td>
+    </tr>
+    <tr>
+      <td>Vertex AI</td>
+      <td>Train RSP_001 Voice DNA model (XTTS v2 fine-tune) · future: managed Gemma 3 inference endpoint to replace local GOD GPU</td>
+      <td><span class="badge b-enable">ENABLE</span></td>
+      <td>🟡 This week</td>
+    </tr>
+    <tr>
+      <td>Speech-to-Text v2</td>
+      <td>Transcribe Voice Army recordings for phoneme coverage verification · feed back to D1 vox_talent_profiles · 17 language models available</td>
+      <td><span class="badge b-enable">ENABLE</span></td>
+      <td>🟡 This week</td>
+    </tr>
+    <tr>
+      <td>Text-to-Speech (WaveNet)</td>
+      <td>Fallback synthesis for A.I.V.A. when XTTS v2 / RVC not available · 30+ languages · WaveNet Studio quality</td>
+      <td><span class="badge b-enable">ENABLE</span></td>
+      <td>🟢 Later</td>
+    </tr>
+    <tr>
+      <td>Cloud Run</td>
+      <td>Host Voice Bridge HTTP MCP server (noizy-voice-bridge-http lane in opencode.json) · GABRIEL API endpoint · n8n webhooks</td>
+      <td><span class="badge b-enable">ENABLE</span></td>
+      <td>🟡 Deploy after HEAVEN</td>
+    </tr>
+    <tr>
+      <td>Cloud Storage</td>
+      <td>AQUARIUM mirror (34TB · 100yr retention · write-only constitutional rule) · RSP_001 Voice DNA training data · Empire audit logs</td>
+      <td><span class="badge b-enable">ENABLE</span></td>
+      <td>🔴 Create NOW</td>
+    </tr>
+    <tr>
+      <td>Secret Manager</td>
+      <td>Store all NOIZY tokens centrally: CF_API_TOKEN, STRIPE_SECRET_KEY, ANTHROPIC_API_KEY, GITHUB_PAT, GEMINI_API_KEY — all accessed by GABRIEL service account</td>
+      <td><span class="badge b-enable">ENABLE</span></td>
+      <td>🔴 Create NOW</td>
+    </tr>
+    <tr>
+      <td>Cloud Build + Artifact Registry</td>
+      <td>CI/CD for Voice Bridge containers · GABRIEL Docker image builds · deploy to Cloud Run on git push</td>
+      <td><span class="badge b-enable">ENABLE</span></td>
+      <td>🟡 This week</td>
+    </tr>
+    <tr>
+      <td>Cloud Functions</td>
+      <td>Trigger n8n workflows from GCS events (e.g., new Voice Army WAV uploaded → auto-analyze → D1 write)</td>
+      <td><span class="badge b-enable">ENABLE</span></td>
+      <td>🟢 Later</td>
+    </tr>
+    <tr>
+      <td>YouTube Data API v3</td>
+      <td>NOIZY Empire YouTube channel management · WISDOM PROJECT video upload automation · analytics → GABRIEL reporting</td>
+      <td><span class="badge b-enable">ENABLE</span></td>
+      <td>🟢 After NOIZYVOX launch</td>
+    </tr>
+    <tr>
+      <td>Cloud Monitoring + Logging</td>
+      <td>NOIZYNET health monitoring · HEAVEN Worker error tracking · D1 write failure alerts → Slack via n8n</td>
+      <td><span class="badge b-enable">ENABLE</span></td>
+      <td>🟡 This week</td>
+    </tr>
+  </table>
+</div>
+
+<!-- GEMINI VOICE ARMY INTEGRATION -->
+<div class="section">
+  <div class="shdr">Gemini API — Voice Army Integration (Use TODAY)</div>
+  <div class="grid">
+    <div class="card priority">
+      <div class="card-head"><div class="icon">🎙️</div><div><div class="card-title">Phoneme Verification</div><div class="card-sub">Feed WAV → Gemini 2.0 Flash → phoneme coverage report</div></div></div>
+      <div class="card-body">After each Voice Army take, upload WAV to GCS then call Gemini to verify phoneme coverage matrix. No GPU. No Python environment setup.</div>
+      <div class="cmd-block">
+<span class="comment"># After recording — run in Cloud Shell</span>
+gsutil cp ~/Downloads/RSP_001_MENTOR_WARM_T1_20260413.wav \
+  gs://noizy-vertex-rsp001-voice-dna/sessions/2026-04-13/
+
+<span class="comment"># Then verify with Gemini (Python)</span>
+python3 &lt;&lt;'EOF'
+import google.generativeai as genai, pathlib
+genai.configure(api_key="YOUR_GEMINI_API_KEY")
+model = genai.GenerativeModel("gemini-2.0-flash")
+audio = pathlib.Path("/tmp/take.wav").read_bytes()
+resp = model.generate_content([
+  "Analyze this voice recording. Report: 1) phoneme coverage (which IPA phonemes are present), 2) emotional range detected, 3) voice quality notes, 4) languages detectable. Be specific and technical.",
+  {"mime_type": "audio/wav", "data": audio}
+])
+print(resp.text)
+EOF
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head"><div class="icon">🌐</div><div><div class="card-title">17-Language Scoring</div><div class="card-sub">Gemini scores accent authenticity per language</div></div></div>
+      <div class="card-body">For each non-English Voice Army take, Gemini 2.0 Flash verifies accent authenticity and IPA coverage for XTTS v2 training data quality.</div>
+      <div class="cmd-block">
+<span class="comment"># Get GEMINI_API_KEY from:</span>
+<span class="comment"># console.cloud.google.com → APIs & Services</span>
+<span class="comment"># → Credentials → Create API Key</span>
+<span class="comment"># → Restrict to: Generative Language API</span>
+<span class="comment"># → Add to Secret Manager: GEMINI_API_KEY</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head"><div class="icon">🤖</div><div><div class="card-title">GABRIEL ↔ Gemini Bridge</div><div class="card-sub">Gemini as GABRIEL's audio intelligence layer</div></div></div>
+      <div class="card-body">GABRIEL Worker calls Gemini API for audio analysis tasks. Replaces local Librosa for cloud-scale analysis while Librosa stays on GOD for offline/sovereignty-first ops.</div>
+      <div class="cmd-block">
+<span class="comment"># Add to HEAVEN Worker environment (wrangler.toml)</span>
+[vars]
+GEMINI_API_KEY = "" <span class="comment"># set via wrangler secret</span>
+GCP_PROJECT = "gen-lang-client-0531202734"
+VERTEX_BUCKET = "noizy-vertex-rsp001-voice-dna"
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECRET MANAGER SETUP -->
+<div class="section">
+  <div class="shdr">Step 2 — Set Real Secret Values (Browser)</div>
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px">
+    <div style="font-size:12px;color:var(--muted);margin-bottom:12px">After NOIZY_GCP_SETUP.sh runs, secrets exist but have placeholder values. Set real values here:</div>
+    <div style="font-family:'Space Mono',monospace;font-size:11px;line-height:2.2">
+      <span style="color:var(--gold)">console.cloud.google.com</span> → Secret Manager → click each secret → New Version → paste real value<br>
+      <br>
+      <span style="color:var(--text)">ANTHROPIC_API_KEY</span> &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--muted)">← console.anthropic.com → API Keys</span><br>
+      <span style="color:var(--text)">GEMINI_API_KEY</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--muted)">← GCP → APIs & Services → Credentials → Create</span><br>
+      <span style="color:var(--text)">CF_API_TOKEN</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--muted)">← dash.cloudflare.com → My Profile → API Tokens</span><br>
+      <span style="color:var(--text)">STRIPE_SECRET_KEY</span> &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--muted)">← dashboard.stripe.com → Developers → API keys</span><br>
+      <span style="color:var(--text)">GITHUB_PAT</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--muted)">← github.com → Settings → Developer settings → PAT</span><br>
+      <span style="color:var(--text)">NOIZY_MCP_AUTH_TOKEN</span> <span style="color:var(--muted)">← Cloud Shell: openssl rand -hex 32</span><br>
+      <span style="color:var(--text)">NOIZY_VOICE_AUTH_TOKEN</span><span style="color:var(--muted)">← Cloud Shell: openssl rand -hex 32</span><br>
+    </div>
+  </div>
+</div>
+
+<!-- AQUARIUM BACKUP -->
+<div class="section">
+  <div class="shdr">AQUARIUM Mirror — Constitutional Backup (34TB)</div>
+  <div class="card">
+    <div class="card-head"><div class="icon">🌊</div><div><div class="card-title">gs://noizy-aquarium-mirror-rsp001</div><div class="card-sub">100yr retention · write-only · versioning ON · NEVER --delete</div></div></div>
+    <div class="card-body">The AQUARIUM (34TB catalog) gets mirrored to GCS for off-site backup. Cost: ~$0.02/GB/mo = ~$680/mo. Compare vs. keeping nothing — Georgia May needs this to still exist in 100 years.</div>
+    <div class="cmd-block">
+<span class="comment"># Initial sync from GOD (run in terminal on GOD — takes hours)</span>
+<span class="comment"># NEVER use --delete. AQUARIUM is write-only. Constitutional.</span>
+gsutil -m rsync -r -x "\.DS_Store$|Thumbs\.db$" \
+  "/Volumes/AQUARIUM/" \
+  gs://noizy-aquarium-mirror-rsp001/
+
+<span class="comment"># n8n MC96 Daily Backup workflow triggers this nightly</span>
+<span class="comment"># Node: Execute Command → above rsync command</span>
+<span class="comment"># Trigger: Cron → 0 2 * * * (2am daily)</span>
+    </div>
+  </div>
+</div>
+
+<!-- BILLING ALERT -->
+<div class="section">
+  <div class="shdr">Step 3 — Set Billing Alert (Browser · 2 minutes)</div>
+  <div style="background:var(--surface);border:1px solid var(--red);border-radius:8px;padding:16px">
+    <div style="font-size:13px;font-weight:700;color:var(--red);margin-bottom:8px">⚠️ DO THIS BEFORE ANYTHING ELSE COSTS MONEY</div>
+    <div class="step"><div class="step-n">1</div><div class="step-t">console.cloud.google.com → Billing → Budgets & Alerts</div></div>
+    <div class="step"><div class="step-n">2</div><div class="step-t">Create Budget → Budget amount: $50 CAD/month</div></div>
+    <div class="step"><div class="step-n">3</div><div class="step-t">Alert thresholds: 50%, 90%, 100% → email to rsp@noizy.ai</div></div>
+    <div class="step"><div class="step-n">4</div><div class="step-t">Link Pub/Sub topic → n8n webhook → Slack #noizy-alerts notification</div></div>
+    <div style="margin-top:10px;font-size:11px;color:var(--muted);font-family:'Space Mono',monospace">
+      Note: Gemini API has a generous free tier (Flash: 1M tokens/day free).<br>
+      AQUARIUM 34TB mirror = ~$680/mo — decide if R2 (Cloudflare, free egress) is better first.
+    </div>
+  </div>
+</div>
+
+<div style="border-top:1px solid var(--border);margin-top:2rem;padding-top:1rem;font-family:'Space Mono',monospace;font-size:11px;color:var(--dim)">
+  NOIZY Empire · GCP: gen-lang-client-0531202734 · RSP_001 · rsp@noizy.ai · 2026-04-13
+</div>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<root>
+    <CtrlMenuItemStyle name="menu_style" seperator_selection="true" sub_menu_selection="true" selection_colour="[r:255 g:255 b:0 a:255]" accessories_colour="[r:0 g:0 b:255 a:255]" />
+    <CtrlPanelStyle name="ChooserPanelStyle" colFill="[r:255 g:255 b:255 a:200]" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="7" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlTextBoxStyle name="SearchBoxStyle" optEditable="true" optSingleClickEdit="true" optSmartTile="true" imBackground="..\com_sunken_box_horizontal.tga" intRoundedRectRadius="0" textOffset="[x:0 y:0]" colBackground="[r:29 g:29 b:29 a:255]" colText="[r:255 g:255 b:255 a:255]" colTextSelected="[r:255 g:255 b:255 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlTextBoxStyle>
+    <CtrlButtonStyle name="FastSearchStyleButton" imDown="..\GrooveLib\gl_search_button_down.tga" imUp="..\GrooveLib\gl_search_button_up.tga">
+        <VFont name="font" vSize="7" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlScrollViewStyle name="CtrlScrollViewStyle1" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1" />
+    <CtrlButtonStyle name="ChooserLatchingButtonStyle" optMomentary="false" optDrawText="true" optSmartTile="true" colFillOn="[r:237 g:236 b:201 a:255]" colFillOff="[r:221 g:221 b:218 a:255]" colTextOn="[r:0 g:0 b:0 a:255]">
+        <VFont name="font" vSize="7" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlTextBoxStyle name="ChooserComboStyle" optSmartTile="true" imBackground="..\com_sunken_box_horizontal.tga" intRoundedRectRadius="0" textOffset="[x:0 y:0]" colBackground="[r:29 g:29 b:29 a:255]" colText="[r:255 g:255 b:255 a:255]" colTextSelected="[r:255 g:255 b:255 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlTextBoxStyle>
+    <CtrlButtonStyle name="RemoveButtonStyle" imDown="..\Build\del_icon_down.tga" imUp="..\Build\del_icon_up.tga">
+        <VFont name="font" vSize="7" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlPanelStyle name="BrowserPanelStyle1" colBorder="[r:160 g:160 b:160 a:255]" colBorderAlt="[r:160 g:160 b:160 a:255]" colFill="[r:192 g:192 b:192 a:255]" intSmartTileEdgeSize="122" intRoundedRectRadius="4" intBorderWidth="1">
+        <VFont name="font" vSize="7" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="ChooserOuterPanelStyle" colFill="[r:0 g:0 b:0 a:255]" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="7" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlScrollViewStyle name="CtrlScrollViewStyle2" alwaysShowVSlider="true" alwaysHideHSlider="true" colFill="[r:0 g:0 b:0 a:255]" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="7" fontName="Arial" />
+    </CtrlScrollViewStyle>
+    <CtrlPanelStyle name="ChooserInnerPanelStyle" colBorder="[r:0 g:0 b:0 a:0]" colBorderAlt="[r:0 g:0 b:0 a:0]" colFill="[r:149 g:149 b:149 a:0]" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="7" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlButtonStyle name="CtrlButtonStyleBrowser" optDrawText="true" colFillOff="[r:75 g:75 b:75 a:255]">
+        <VFont name="font" vSize="7" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlLabelStyle name="LabelStyleChooser">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlLabelStyle name="MainLabelStyleChooser">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlPanelStyle name="CtrlPanelStyle1" colFill="[r:0 g:0 b:0 a:255]" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="9" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlButtonStyle name="DiskLoadButtonStyle" imDown="..\main_load_on.tga" imUp="..\main_load_off.tga">
+        <VFont name="font" vSize="9" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlPanel name="ChooserPanel" style="CtrlPanelStyle1" rect="[x:0 y:0 w:708 h:546]" id="0">
+        <CtrlPanel name="CtrlPanel" style="DefaultPanelLight" rect="[x:2 y:2 w:704 h:542]" id="100000">
+            <CtrlPanel name="DemoFilterPanel" style="BFD2InvisiblePanel" rect="[x:190 y:8 w:130 h:38]" id="0">
+                <CtrlLabel name="CtrlLabel" style="LabelStyleChooser" rect="[x:2 y:4 w:90 h:12]" id="100000" zorder="2" text="Packs" />
+                <CtrlComboBox name="ChooserDemoCombo" style="ChooserComboStyle" rect="[x:2 y:18 w:125 h:16]" id="100006" zorder="2" />
+            </CtrlPanel>
+            <CtrlPanel name="KitPieceExtrasPanel" style="BFD2InvisiblePanel" rect="[x:317 y:8 w:94 h:38]" id="0">
+                <CtrlLabel name="ChooserExtraLabel" style="LabelStyleChooser" rect="[x:4 y:4 w:90 h:12]" id="100001" zorder="2" text="Type" />
+                <CtrlComboBox name="ChooserExtraCombo" style="ChooserComboStyle" rect="[x:4 y:18 w:87 h:16]" id="100006" zorder="2" />
+            </CtrlPanel>
+            <CtrlButton name="DiskLoadButton" style="DiskLoadButtonStyle" rect="[x:435 y:17 w:32 h:32]" id="100000" displayName="Click to load a file from disk" />
+            <CtrlButton name="FastSearchButton" style="FastSearchStyleButton" rect="[x:467 y:22 w:20 h:20]" id="100000" displayName="Click to choose a quick search term" text="O-" />
+            <CtrlButton name="RemoveButton" style="RemoveButtonStyle" rect="[x:417 y:26 w:15 h:15]" id="100000" displayName="Click to delete the selected item" />
+            <CtrlLabel name="CtrlLabel" style="LabelStyleChooser" rect="[x:10 y:12 w:90 h:12]" id="100000" zorder="2" text="View Size" />
+            <CtrlLabel name="SortingLabel" style="LabelStyleChooser" rect="[x:101 y:12 w:90 h:12]" id="100001" zorder="2" text="Sorting" />
+            <CtrlLabel name="CtrlLabel" style="LabelStyleChooser" rect="[x:494 y:12 w:50 h:14]" id="100002" zorder="2" text="Search" />
+            <CtrlComboBox name="ChooserViewSizeCombo" style="ChooserComboStyle" rect="[x:10 y:26 w:87 h:16]" id="100004" displayName="Click to set the size that you view items at" zorder="2" />
+            <CtrlComboBox name="ChooserSortCombo" style="ChooserComboStyle" rect="[x:101 y:26 w:87 h:16]" id="100005" displayName="Click to choose a sorting algorithm" zorder="2" />
+            <CtrlSearchTextBox name="ChooserSearchBox" style="SearchBoxStyle" rect="[x:494 y:26 w:155 h:16]" id="100003" displayName="Enter a search term here" zorder="2" />
+            <CtrlButton name="ChooserHelpButton" style="BFD2SmallHelpButtonStyle" rect="[x:652 y:26 w:15 h:15]" id="100002" displayName="Click to launch Chooser help" zorder="2" text="?" />
+            <CtrlButton name="ChooserPinButton" style="BFD2OptionButtonStyle" rect="[x:674 y:26 w:15 h:15]" id="100001" displayName="Click to lock the Chooser open" zorder="2" text="O" />
+            <CtrlLabel name="ChooserBaseLabel" style="MainLabelStyleChooser" rect="[x:11 y:497 w:470 h:40]" id="100011" displayName="CtrlLabel" zorder="2" text="Slot / Kit Info Label" />
+            <CtrlButton name="ChooserLoadButton" style="RecessedLongButtonMomentary" rect="[x:634 y:497 w:60 h:34]" id="100010" displayName="Click to load the selected item" zorder="2" text="Load" />
+            <CtrlButton name="DrumShopButton" style="RecessedLongButtonMomentary" rect="[x:494 y:497 w:72 h:34]" id="100009" displayName="Click to show DemoPacks" zorder="3" text="DemoPacks" />
+            <CtrlButton name="ChooserCloseButton" style="RecessedLongButtonMomentary" rect="[x:570 y:497 w:60 h:34]" id="100009" displayName="Click to close this Chooser" zorder="3" text="Cancel" />
+            <CtrlScrollView name="ChooserScrollView" style="CtrlScrollViewStyle2" rect="[x:10 y:50 w:477 h:440]" id="100000" zorder="4" />
+            <CtrlPanel name="ChooserInspectorPanel" style="BrowserPanelStyle1" rect="[x:494 y:51 w:200 h:440]" id="100013" zorder="4" />
+        </CtrlPanel>
+    </CtrlPanel>
+</root>

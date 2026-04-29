@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIZYVOX — The Human Voice Platform</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --purple: #7C3AED;
+    --purple-light: #A78BFA;
+    --purple-dark: #4C1D95;
+    --cyan: #06B6D4;
+    --dark: #0A0514;
+    --dark-2: #130D24;
+    --gray: #9CA3AF;
+    --light: #F5F3FF;
+  }
+
+  body {
+    background: var(--dark);
+    color: #E5E7EB;
+    font-family: 'Inter', -apple-system, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 80px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(124,58,237,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    margin-bottom: 28px;
+    opacity: 0.9;
+  }
+
+  .hero h1 {
+    font-size: clamp(52px, 8vw, 96px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -3px;
+    margin-bottom: 16px;
+  }
+
+  .hero h1 .brand {
+    background: linear-gradient(135deg, #A78BFA 0%, #7C3AED 40%, #06B6D4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-weight: 400;
+    color: #9CA3AF;
+    max-width: 640px;
+    margin: 24px auto 48px;
+    line-height: 1.5;
+  }
+
+  .hero-sub strong {
+    color: #E5E7EB;
+    font-weight: 600;
+  }
+
+  .hero-divider {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(to right, var(--purple), var(--cyan));
+    margin: 0 auto 48px;
+    border-radius: 2px;
+  }
+
+  .stat-row {
+    display: flex;
+    gap: 60px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-size: 40px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #A78BFA, #06B6D4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-top: 4px;
+  }
+
+  /* ── SECTION ── */
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 100px 40px;
+  }
+
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+    margin-bottom: 24px;
+  }
+
+  .section-body {
+    font-size: 18px;
+    color: #9CA3AF;
+    max-width: 640px;
+    line-height: 1.7;
+  }
+
+  .section-body strong { color: #E5E7EB; font-weight: 600; }
+
+  /* ── THE PROBLEM ── */
+  .problem-section {
+    background: linear-gradient(to bottom, transparent, rgba(124,58,237,0.04), transparent);
+    padding: 100px 0;
+  }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 60px;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .problem-card {
+    background: rgba(255,255,255,0.03);
+    padding: 40px;
+  }
+
+  .problem-card.bad {
+    border-left: 3px solid #EF4444;
+  }
+
+  .problem-card.good {
+    border-left: 3px solid var(--purple);
+    background: rgba(124,58,237,0.06);
+  }
+
+  .problem-card .card-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  .problem-card.bad .card-label { color: #EF4444; }
+  .problem-card.good .card-label { color: var(--purple-light); }
+
+  .problem-card h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+
+  .problem-card p {
+    font-size: 16px;
+    color: #9CA3AF;
+    line-height: 1.6;
+  }
+
+  /* ── JOURNEY STEPS ── */
+  .journey-section { padding: 100px 40px; }
+
+  .journey-header {
+    max-width: 1100px;
+    margin: 0 auto 80px;
+  }
+
+  .steps-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .steps-line {
+    position: absolute;
+    left: 39px;
+    top: 20px;
+    bottom: 20px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--purple), var(--cyan), var(--purple));
+    opacity: 0.3;
+  }
+
+  .step {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 64px;
+    align-items: flex-start;
+  }
+
+  .step:last-child { margin-bottom: 0; }
+
+  .step-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    border: 2px solid rgba(124,58,237,0.4);
+    background: var(--dark-2);
+  }
+
+  .step-content {
+    flex: 1;
+    padding-top: 16px;
+  }
+
+  .step-num {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .step-title {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 12px;
+  }
+
+  .step-body {
+    font-size: 17px;
+    color: #9CA3AF;
+    line-height: 1.7;
+    max-width: 600px;
+  }
+
+  .step-body strong { color: #E5E7EB; }
+
+  .step-callout {
+    margin-top: 20px;
+    padding: 20px 24px;
+    background: rgba(124,58,237,0.08);
+    border-left: 3px solid var(--purple-light);
+    border-radius: 0 8px 8px 0;
+    font-size: 16px;
+    color: #C4B5FD;
+    font-style: italic;
+    max-width: 580px;
+  }
+
+  /* ── BRIEF DEMO ── */
+  .brief-demo {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(124,58,237,0.2);
+    border-radius: 16px;
+    padding: 32px;
+    margin-top: 20px;
+    max-width: 580px;
+  }
+
+  .brief-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  .brief-text {
+    font-size: 20px;
+    font-style: italic;
+    color: #E5E7EB;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+
+  .brief-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 22px;
+    background: var(--purple-light);
+    margin-left: 2px;
+    vertical-align: middle;
+    animation: blink 1s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* Match cards */
+  .match-cards {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    max-width: 580px;
+    flex-wrap: wrap;
+  }
+
+  .match-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(124,58,237,0.25);
+    border-radius: 12px;
+    padding: 16px 20px;
+    flex: 1;
+    min-width: 160px;
+  }
+
+  .match-card.selected {
+    border-color: var(--purple);
+    background: rgba(124,58,237,0.12);
+  }
+
+  .match-name {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .match-detail {
+    font-size: 12px;
+    color: var(--gray);
+  }
+
+  .match-badge {
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    font-weight: 600;
+    margin-top: 8px;
+  }
+
+  /* ── THE ETHICS ── */
+  .ethics-section {
+    background: var(--dark-2);
+    padding: 100px 0;
+  }
+
+  .ethics-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .ethics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+  }
+
+  .ethics-card {
+    padding: 40px;
+    background: rgba(255,255,255,0.02);
+  }
+
+  .ethics-card:first-child { border-radius: 16px 0 0 16px; }
+  .ethics-card:last-child { border-radius: 0 16px 16px 0; }
+
+  .ethics-icon {
+    font-size: 36px;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .ethics-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: -0.3px;
+  }
+
+  .ethics-body {
+    font-size: 15px;
+    color: #9CA3AF;
+    line-height: 1.6;
+  }
+
+  /* ── QUALITY BAR ── */
+  .quality-section { padding: 100px 40px; }
+
+  .quality-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .quality-spec {
+    margin-top: 40px;
+  }
+
+  .spec-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .spec-row:last-child { border-bottom: none; }
+
+  .spec-label { font-size: 14px; color: var(--gray); letter-spacing: 1px; }
+
+  .spec-value {
+    font-size: 20px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #A78BFA, #06B6D4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .quality-visual {
+    text-align: center;
+  }
+
+  .quality-badge {
+    display: inline-block;
+    padding: 32px 48px;
+    border: 2px solid rgba(124,58,237,0.4);
+    border-radius: 20px;
+    background: rgba(124,58,237,0.08);
+  }
+
+  .quality-main {
+    font-size: 56px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #A78BFA, #06B6D4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+
+  .quality-sub {
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-top: 8px;
+  }
+
+  .quality-floor {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    margin-top: 16px;
+    font-weight: 600;
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    text-align: center;
+    padding: 120px 40px;
+    background: linear-gradient(to bottom, transparent, rgba(124,58,237,0.06), transparent);
+    position: relative;
+  }
+
+  .cta-quote {
+    font-size: clamp(24px, 3vw, 38px);
+    font-weight: 700;
+    max-width: 780px;
+    margin: 0 auto 40px;
+    line-height: 1.3;
+    letter-spacing: -1px;
+    color: #E5E7EB;
+  }
+
+  .cta-quote em {
+    background: linear-gradient(135deg, #A78BFA, #7C3AED, #06B6D4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-style: normal;
+  }
+
+  .cta-attr {
+    font-size: 14px;
+    color: var(--gray);
+    letter-spacing: 1px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .footer-brand {
+    font-size: 20px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #A78BFA, #06B6D4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .footer-tag {
+    font-size: 12px;
+    color: var(--gray);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .problem-grid, .ethics-grid, .quality-inner { grid-template-columns: 1fr; }
+    .steps-line { display: none; }
+    .step { flex-direction: column; }
+    footer { flex-direction: column; gap: 16px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">MC96ECO Universe — NOIZY.AI</div>
+  <h1><span class="brand">NOIZYVOX</span></h1>
+  <div class="hero-divider"></div>
+  <p class="hero-sub">
+    The world's first <strong>human voice casting platform</strong> powered by AI.<br>
+    Not synthetic. Not a simulation. <strong>Real people. Real performances. Real ownership.</strong>
+  </p>
+  <div class="stat-row">
+    <div class="stat">
+      <span class="stat-num">75%</span>
+      <span class="stat-label">Perpetual Royalties</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">48k</span>
+      <span class="stat-label">Hz Quality Floor</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">∞</span>
+      <span class="stat-label">Actor Ownership</span>
+    </div>
+  </div>
+</div>
+
+<!-- THE PROBLEM -->
+<div class="problem-section">
+  <section>
+    <div class="section-eyebrow">The Problem We're Solving</div>
+    <h2 class="section-title">The voice AI industry<br>is built on stolen trust.</h2>
+    <p class="section-body">
+      Every major synthetic voice platform extracts value from voice actors without consent, without credit, and without compensation. <strong>NOIZYVOX is built on the exact opposite principle.</strong>
+    </p>
+    <div class="problem-grid" style="margin-top:60px;">
+      <div class="problem-card bad">
+        <div class="card-label">❌ The Old Way</div>
+        <h3>Synthetic & Extractive</h3>
+        <p>Train on actors' voices without consent. Generate unlimited synthetic output. Pay the actor nothing. Own everything. Call it innovation.</p>
+      </div>
+      <div class="problem-card good">
+        <div class="card-label">✓ The NOIZYVOX Way</div>
+        <h3>Human & Sovereign</h3>
+        <p>Every voice is a real human being who consented, owns their performance, and earns 75% of every dollar generated — forever. We amplify human talent. We don't replace it.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- THE JOURNEY -->
+<div class="journey-section">
+  <div class="journey-header">
+    <div class="section-eyebrow">The Client Journey</div>
+    <h2 class="section-title">From brief to broadcast<br>in five steps.</h2>
+    <p class="section-body">
+      AVA is not a voice generator. AVA is a <strong>casting director</strong> — the most sophisticated one in the world, available 24 hours a day, with access to the entire Consent-Locked Human Voice Roster.
+    </p>
+  </div>
+
+  <div class="steps-container">
+    <div class="steps-line"></div>
+
+    <!-- Step 1 -->
+    <div class="step">
+      <div class="step-icon">🎬</div>
+      <div class="step-content">
+        <div class="step-num">Step 01</div>
+        <h3 class="step-title">You arrive with a vision.</h3>
+        <p class="step-body">
+          A game studio. An audiobook publisher. A commercial director. A podcast creator. You have a project and you need a voice. You know what you're looking for — but you don't know who yet.
+        </p>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step">
+      <div class="step-icon">🤝</div>
+      <div class="step-content">
+        <div class="step-num">Step 02</div>
+        <h3 class="step-title">You meet AVA.</h3>
+        <p class="step-body">
+          AVA is NOIZYVOX's AI casting director. You describe what you need in plain language — as detailed or as loose as you want. AVA listens, understands, and goes to work.
+        </p>
+        <div class="brief-demo">
+          <div class="brief-label">Your Creative Brief</div>
+          <div class="brief-text">"A weathered detective. Fifty-five. New York accent. World-weary but sharp. The kind of voice that's seen everything twice and is still paying attention."<span class="brief-cursor"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step">
+      <div class="step-icon">🔍</div>
+      <div class="step-content">
+        <div class="step-num">Step 03</div>
+        <h3 class="step-title">AVA casts from the Human Voice Roster.</h3>
+        <p class="step-body">
+          AVA searches the <strong>Consent-Locked Vault</strong> — a curated roster of real, trained human actors who've prepared specific archetypes, emotional ranges, and character types. Not a database of samples. A roster of artists.
+        </p>
+        <p class="step-body" style="margin-top:12px;">
+          AVA surfaces three to five authentic human performances that match your brief. You listen. You feel the difference. You understand why no algorithm will ever replicate what a human being brings to a character.
+        </p>
+        <div class="match-cards">
+          <div class="match-card selected">
+            <div class="match-name">James R.</div>
+            <div class="match-detail">Character · Noir · Drama</div>
+            <div class="match-badge">★ Best Match</div>
+          </div>
+          <div class="match-card">
+            <div class="match-name">Marcus T.</div>
+            <div class="match-detail">Thriller · Action · Authority</div>
+            <div class="match-badge">Strong Match</div>
+          </div>
+          <div class="match-card">
+            <div class="match-name">David C.</div>
+            <div class="match-detail">Drama · Period · Character</div>
+            <div class="match-badge">Strong Match</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="step">
+      <div class="step-icon">🎙️</div>
+      <div class="step-content">
+        <div class="step-num">Step 04</div>
+        <h3 class="step-title">True collaboration begins.</h3>
+        <p class="step-body">
+          You select your actor. A <strong>Collaboration Contract</strong> is generated automatically — consent-locked, royalty-structured, immutable. The actor receives upfront payment and proper credit.
+        </p>
+        <p class="step-body" style="margin-top:12px;">
+          Then the real work starts. Real direction. Real iteration. Real artistry. The kind of nuance, humanity, and depth that no synthetic model has ever produced — because it cannot. A human being gives a character a soul.
+        </p>
+        <div class="step-callout">
+          "You're not licensing a voice. You're collaborating with an artist."
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="step">
+      <div class="step-icon">♾️</div>
+      <div class="step-content">
+        <div class="step-num">Step 05</div>
+        <h3 class="step-title">The Ferris wheel keeps spinning.</h3>
+        <p class="step-body">
+          Your project ships. Every time the performance generates revenue, <strong>75% flows back to the actor — in perpetuity</strong>. Not a session fee and goodbye. A permanent partnership. The actor's voice continues to earn because the actor's performance continues to have value.
+        </p>
+        <p class="step-body" style="margin-top:12px;">
+          The Consent-Locked Vault records everything. The Provenance Ledger is immutable. The actor's ownership cannot be revoked, reassigned, or diluted. Ever.
+        </p>
+        <div class="step-callout">
+          This is not a transaction. This is how a living creative economy works.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ETHICS -->
+<div class="ethics-section">
+  <div class="ethics-inner">
+    <div class="section-eyebrow">The Constitutional Guarantee</div>
+    <h2 class="section-title">The Never Clauses.<br>Non-negotiable. Always.</h2>
+    <p class="section-body">These are not policies. They are the constitutional law of the NOIZYVOX universe. If they ever change, the entire governance architecture must recompile. That is how trust is kept.</p>
+    <div class="ethics-grid">
+      <div class="ethics-card">
+        <span class="ethics-icon">🔐</span>
+        <h3 class="ethics-title">No voice without consent.</h3>
+        <p class="ethics-body">No voice leaves the platform without a valid cryptographic consent key from the actor who owns it. Not ever. Not for any reason.</p>
+      </div>
+      <div class="ethics-card">
+        <span class="ethics-icon">🎯</span>
+        <h3 class="ethics-title">No identity impersonation.</h3>
+        <p class="ethics-body">AVA does not clone, copy, or simulate any voice without explicit, documented, ongoing consent. Full stop.</p>
+      </div>
+      <div class="ethics-card">
+        <span class="ethics-icon">💰</span>
+        <h3 class="ethics-title">75% perpetual. Always.</h3>
+        <p class="ethics-body">The royalty split is written into the consent key architecture. It cannot be changed without the actor's explicit agreement. It does not expire.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUALITY -->
+<div class="quality-section">
+  <div class="quality-inner">
+    <div>
+      <div class="section-eyebrow">The Quality Standard</div>
+      <h2 class="section-title">48kHz / 16-bit.<br>The floor. Not the ceiling.</h2>
+      <p class="section-body">
+        Every voice. Every output. Every format. <strong>Broadcast standard is the constitutional minimum.</strong> Not a premium feature. Not an upgrade tier. The default. Because a human performance deserves to be heard the way it was given.
+      </p>
+      <div class="quality-spec">
+        <div class="spec-row">
+          <span class="spec-label">Sample Rate</span>
+          <span class="spec-value">48,000 Hz</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Bit Depth</span>
+          <span class="spec-value">16-bit minimum</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Standard</span>
+          <span class="spec-value">Broadcast</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Exceptions</span>
+          <span class="spec-value">None. Ever.</span>
+        </div>
+      </div>
+    </div>
+    <div class="quality-visual">
+      <div class="quality-badge">
+        <div class="quality-main">48k</div>
+        <div class="quality-sub">Hz · 16-bit · Broadcast</div>
+        <div class="quality-floor">Constitutional Quality Floor</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <blockquote class="cta-quote">
+    <em>"Life is not a dress rehearsal."</em><br>
+    Every human voice matters.<br>Every performance deserves to last.
+  </blockquote>
+  <p class="cta-attr">— The founding philosophy of NOIZY.AI</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand">NOIZYVOX</div>
+    <div style="font-size:12px; color:#6B7280; margin-top:4px;">Part of the MC96ECO Universe</div>
+  </div>
+  <div class="footer-tag">NOIZY.AI · NOIZYVOX · NOIZYKIDZ · NOIZYLAB · NOIZYFISH</div>
+  <div style="font-size:12px; color:#6B7280; text-align:right;">Sovereign Voice Infrastructure<br>Confidential v0.1 — March 2026</div>
+</footer>
+
+</body>
+</html>

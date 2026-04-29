@@ -1,0 +1,22 @@
+<root>
+    <CtrlPanelStyle name="BuildPanelStyle" intSmartTileEdgeSize="5" intRoundedRectRadius="0">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlScrollViewStyle name="InspectorScrollStyle" intSmartTileEdgeSize="5" intRoundedRectRadius="0" />
+    <CtrlTextBoxStyle name="NumKitPieceStyle">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlTextBoxStyle>
+    <CtrlPanelStyle name="RightSideBarPanelStyle" imBackground="..\main_right_bar.tga" colFill="[r:0 g:0 b:0 a:255]" intSmartTileEdgeSize="5" intRoundedRectRadius="0">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlPanel name="Build" style="BuildPanelStyle" rect="[x:0 y:0 w:960 h:540]" id="0">
+        <CtrlPanel name="KitBuildWindow" rect="[x:36 y:0 w:702 h:540]" id="100001" />
+        <CtrlScrollView name="InspectorScrollView" rect="[x:738 y:0 w:210 h:360]" id="100002" />
+        <CtrlPanel name="SideBarPanel" style="RightSideBarPanelStyle" rect="[x:948 y:0 w:12 h:540]" id="100000" />
+        <CtrlPanel name="MiniMixer" rect="[x:738 y:360 w:210 h:180]" id="100000" />
+        <CtrlPanel name="topShadow" style="BFD2TopShadow" rect="[x:37 y:0 w:701 h:10]" id="100001" zorder="10" />
+        <CtrlPanel name="leftShadow" style="BFD2LeftShadow" rect="[x:37 y:0 w:10 h:540]" id="100000" zorder="10" />
+        <CtrlPanel name="rightShadow" style="BFD2RightShadow" rect="[x:728 y:0 w:10 h:540]" id="100001" zorder="10" />
+        <CtrlPanel name="TheToolPanel" rect="[x:0 y:0 w:37 h:540]" id="100000" zorder="1000" />
+    </CtrlPanel>
+</root>

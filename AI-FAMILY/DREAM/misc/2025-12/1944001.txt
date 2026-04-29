@@ -1,0 +1,26 @@
+<root>
+    <CtrlPanel style="MixerFXPanel" rect="[x:0 y:0 w:228 h:228]" id="0">
+        <CtrlPanel name="MixerFXTitlePanel" rect="[x:0 y:0 w:228 h:50]" id="0" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:48 y:58 w:12 h:12]" id="100000" text="2.5" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:171 y:59 w:11 h:12]" id="100000" text="50" />
+        <CtrlPanel name="CtrlPanel" style="MixerFXIndicatorPanel" rect="[x:21 y:68 w:63 h:54]" id="100001" />
+        <CtrlPanel name="CtrlPanel" style="MixerFXIndicatorPanel" rect="[x:143 y:68 w:63 h:54]" id="100001" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:109 y:115 w:11 h:12]" id="100000" text="50" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:25 y:120 w:6 h:12]" id="100000" text="0" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:48 y:120 w:12 h:12]" id="100000" text="Hz" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:76 y:120 w:7 h:12]" id="100000" text="5" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:171 y:120 w:9 h:12]" id="100000" text="%" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:196 y:120 w:15 h:12]" id="100000" text="100" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:146 y:121 w:7 h:12]" id="100000" text="0" />
+        <CtrlPanel name="CtrlPanel" style="MixerFXIndicatorPanel" rect="[x:82 y:124 w:63 h:54]" id="100001" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:42 y:127 w:21 h:15]" id="2000" text="Freq" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:162 y:127 w:29 h:15]" id="2002" text="Depth" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:86 y:176 w:7 h:12]" id="100000" text="0" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:110 y:176 w:9 h:12]" id="100000" text="%" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:134 y:176 w:15 h:12]" id="100000" text="100" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:99 y:183 w:33 h:15]" id="2001" text="Spread" />
+        <CtrlKnob name="Chorus_Freq" style="MixerFXKnobLarge" rect="[x:34 y:82 w:53 h:53]" id="1000" zorder="2" />
+        <CtrlKnob name="Chorus_Depth" style="MixerFXKnobLarge" rect="[x:156 y:82 w:53 h:53]" id="1002" zorder="2" />
+        <CtrlKnob name="Chorus_Spread" style="MixerFXKnobLarge" rect="[x:95 y:138 w:53 h:53]" id="1001" zorder="2" />
+    </CtrlPanel>
+</root>

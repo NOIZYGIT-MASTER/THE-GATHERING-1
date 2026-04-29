@@ -1,0 +1,52 @@
+<root>
+    <CtrlPanelStyle name="ScanPanelStyle2" optSmartTile="true" colBorder="[r:255 g:0 b:0 a:255]" colFill="[r:0 g:0 b:0 a:255]" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="2">
+        <VFont name="font" vSize="14" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlLabelStyle name="ScanProgressLabelStyle1" centeredText="true">
+        <VFont name="font" vSize="22" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlTextBoxStyle name="PrefsScanStyle" intRoundedRectRadius="0" textOffset="[x:0 y:0]" colBackground="[r:255 g:255 b:255 a:0]" colBorder="[r:0 g:0 b:0 a:0]">
+        <VFont name="font" vSize="14" fontName="Arial" />
+    </CtrlTextBoxStyle>
+    <CtrlButtonStyle name="CtrlButtonStyleScanPanel" optDrawText="true" colFillOff="[r:75 g:75 b:75 a:255]">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlPanelStyle name="JukeBoxTitleBar" colBorder="[r:128 g:128 b:128 a:16]" colFill="[r:0 g:0 b:40 a:24]" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="12" fontName="Tahoma" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="JukeboxGroup" colBorder="[r:180 g:180 b:180 a:255]" colFill="[r:0 g:0 b:0 a:0]" intSmartTileEdgeSize="5" intRoundedRectRadius="5" intBorderWidth="1">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlPanel name="main_panel" style="ScanPanelStyle2" rect="[x:0 y:0 w:702 h:392]" id="0">
+        <CtrlPanel name="inner_panel" style="DefaultPanelLight" rect="[x:2 y:2 w:698 h:388]" id="0">
+            <CtrlAudioBufferView name="AudioBufferView" style="BFDEcoAudioBufferView" rect="[x:9 y:10 w:680 h:122]" id="100001" />
+            <CtrlPanel name="CtrlPanel" style="MixerFXLargeKnobNotches" rect="[x:636 y:137 w:58 h:58]" id="100000">
+                <CtrlKnob name="Volume" style="MixerFXKnobLarge" rect="[x:3 y:3 w:53 h:53]" id="100000" displayName="Volume" />
+                <CtrlLabel style="MixerFXUnitsLabel" rect="[x:17 y:41 w:15 h:12]" id="100000" text="dB" />
+            </CtrlPanel>
+            <CtrlButton name="Rewind" style="RecessedButtonMomentary" rect="[x:227 y:139 w:60 h:30]" id="100001" text="Rwd" />
+            <CtrlButton name="Play" style="RecessedButtonMomentary" rect="[x:291 y:139 w:92 h:30]" id="100001" text="Play" />
+            <CtrlButton name="Pause" style="RecessedButtonMomentary" rect="[x:387 y:139 w:60 h:30]" id="100001" text="Pause" />
+            <CtrlButton name="Loop" style="RecessedButtonLatching" rect="[x:467 y:139 w:60 h:30]" id="100001" text="Loop" />
+            <CtrlButton name="Choose" style="RecessedButtonMomentary" rect="[x:11 y:140 w:60 h:30]" id="100001" text="Browse" />
+            <CtrlLabel style="MixerFXUnitsLabel" rect="[x:681 y:152 w:15 h:12]" id="100000" text="0" />
+            <CtrlLabel name="CtrlLabel" style="MixerFXUnitsLabel" rect="[x:630 y:171 w:15 h:12]" id="100000" text="-00" />
+            <CtrlLabel style="MixerFXUnitsLabel" rect="[x:672 y:171 w:15 h:12]" id="100000" text="+6" />
+            <CtrlButton name="MoveUp" style="RecessedButtonMomentary" rect="[x:11 y:176 w:60 h:30]" id="100001" text="Up" />
+            <CtrlTableView name="PlayList" style="BFDEcoTableStyle" rect="[x:80 y:176 w:538 h:198]" id="100000" />
+            <CtrlLabel name="CtrlLabel" style="BFDEcoStandardBlackCentered" rect="[x:633 y:189 w:50 h:14]" id="100001" text="Volume" />
+            <CtrlLabel style="BFDEcoStandardBlackCentered" rect="[x:642 y:204 w:37 h:18]" id="100000" text="Snap:" />
+            <CtrlButton name="MoveDown" style="RecessedButtonMomentary" rect="[x:11 y:210 w:60 h:30]" id="100001" text="Down" />
+            <CtrlComboBox name="SnapMode" style="BFD2Combo" rect="[x:626 y:219 w:62 h:20]" id="100003" />
+            <CtrlButton name="Next" style="RecessedButtonMomentary" rect="[x:11 y:244 w:60 h:30]" id="100001" text="Next" />
+            <CtrlButton name="Prev" style="RecessedButtonMomentary" rect="[x:11 y:278 w:60 h:30]" id="100001" text="Prev" />
+            <CtrlPanel name="CtrlPanel" style="JukeboxGroup" rect="[x:622 y:288 w:70 h:86]" id="100000">
+                <CtrlLabel style="BFDEcoStandardBlackCentered" rect="[x:16 y:0 w:37 h:18]" id="100000" text="Playlist" />
+                <CtrlButton name="Load" style="RecessedButtonMomentary" rect="[x:5 y:19 w:60 h:30]" id="100001" text="Load" />
+                <CtrlButton name="Save" style="RecessedButtonMomentary" rect="[x:5 y:51 w:60 h:30]" id="100001" text="Save" />
+            </CtrlPanel>
+            <CtrlButton name="Remove" style="RecessedButtonMomentary" rect="[x:10 y:311 w:60 h:30]" id="100001" text="Clear" />
+            <CtrlButton name="ClearList" style="RecessedButtonMomentary" rect="[x:10 y:345 w:60 h:30]" id="100001" text="Clear All" />
+        </CtrlPanel>
+    </CtrlPanel>
+</root>

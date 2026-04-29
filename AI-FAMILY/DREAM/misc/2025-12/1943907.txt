@@ -1,0 +1,67 @@
+<root>
+    <CtrlButtonStyle name="ClearLogButtonStyle" imDown="..\Build\del_icon_down.tga" imUp="..\Build\del_icon_up.tga">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="SaveLogButtonStyle">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlPanelStyle name="MidiPanelStyle1" noDefaultDrawing="true" imBackground="mm_bfd2perf_background.tga" colFill="[r:0 g:0 b:0 a:255]" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlListBoxStyle name="MidiLogListStyle" noDefaultDrawing="true" colText="[r:255 g:255 b:255 a:255]" colHighlight="[r:0 g:0 b:0 a:0]" colBorder="[r:120 g:120 b:120 a:255]" colFill="[r:230 g:230 b:230 a:255]" intRoundedRectRadius="0" intLineSpacing="13">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlListBoxStyle>
+    <CtrlPanelStyle name="LogPanelStyle" optSmartTile="true" colBorder="[r:0 g:0 b:0 a:0]" colBorderAlt="[r:0 g:0 b:0 a:0]" colFill="[r:105 g:105 b:105 a:255]" intSmartTileEdgeSize="20" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlTextBoxStyle name="MidimapCombo" noDefaultDrawing="true" optNoBackground="true" intRoundedRectRadius="0" textOffset="[x:0 y:0]" colText="[r:255 g:255 b:255 a:255]">
+        <VFont name="font" vSize="22" fontName="Arial" />
+    </CtrlTextBoxStyle>
+    <CtrlTextBoxStyle name="KeyMapTextBox" optEditable="true" optSmartTile="true" imBackground="..\SongInfoTextBox.tga" intRoundedRectRadius="0" textOffset="[x:0 y:0]" colBackground="[r:29 g:29 b:29 a:255]" colText="[r:255 g:255 b:255 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlTextBoxStyle>
+    <CtrlTextBoxStyle name="KeyMapTextBoxHilight" optEditable="true" optSmartTile="true" imBackground="..\SongInfoTextBox_highlight.tga" intRoundedRectRadius="0" textOffset="[x:0 y:0]" colBackground="[r:29 g:29 b:29 a:255]" colText="[r:255 g:255 b:255 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlTextBoxStyle>
+    <CtrlLabelStyle name="BFD2Label14BlackCopy0">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlPanel name="CtrlPanel" style="MidiPanelStyle1" rect="[x:0 y:0 w:936 h:593]" id="0">
+        <CtrlLabel name="CtrlLabel" style="BFD2LabelLargeDarkGrey" rect="[x:355 y:5 w:90 h:34]" id="100000" text="Key Map" />
+        <CtrlComboBox name="KeymapCombo" style="MidimapCombo" rect="[x:22 y:10 w:206 h:22]" id="100000" displayName="MIDI map chooser" />
+        <CtrlPanel name="LogPanel" style="BFD2InvisiblePanel" rect="[x:3 y:40 w:242 h:255]" id="100000">
+            <CtrlLabel name="CtrlLabel" style="BFDEcoStandardBlack" rect="[x:15 y:10 w:55 h:16]" id="100000" text="MIDI Log" />
+            <CtrlButton name="ClearLogButton" style="ClearLogButtonStyle" rect="[x:164 y:10 w:15 h:15]" id="100000" displayName="Clear log" />
+            <CtrlLabel name="CtrlLabel" style="BFDEcoStandardBlackCentered" rect="[x:182 y:10 w:53 h:15]" id="100004" text="Clear log" />
+            <CtrlListBox name="MidiLogBox" style="MidiLogListStyle" rect="[x:18 y:37 w:207 h:192]" id="100006" />
+        </CtrlPanel>
+        <CtrlPanel name="MidiArticPanel" style="BFD2InvisiblePanel" rect="[x:479 y:40 w:178 h:242]" id="100005">
+            <CtrlPanel name="CtrlPanel" style="BFD2InvisiblePanel" rect="[x:17 y:38 w:147 h:189]" id="100000" />
+        </CtrlPanel>
+        <CtrlPanel name="HihatOptionsPanel" style="BFD2InvisiblePanel" rect="[x:247 y:41 w:228 h:241]" id="100003">
+            <CtrlLabel style="BFDEcoStandardBlack" rect="[x:8 y:35 w:86 h:16]" id="100001" text="Hihat Options" />
+            <CtrlPanel name="VariableSlider" style="BFD2InvisiblePanel" rect="[x:106 y:37 w:105 h:190]" id="100006" displayName="Hihat variable zone control" />
+            <CtrlLabel style="BFDEcoStandardBlack" rect="[x:24 y:57 w:70 h:16]" id="100001" text="Auto pedal" />
+            <CtrlButton name="HihatAutoPedal" style="MixerFXButton" rect="[x:7 y:58 w:15 h:15]" id="100006" displayName="Auto pedal" />
+            <CtrlLabel style="BFDEcoStandardBlack" rect="[x:24 y:75 w:75 h:16]" id="100001" text="Auto splash" />
+            <CtrlButton name="HihatAutoSplash" style="MixerFXButton" rect="[x:7 y:76 w:15 h:15]" id="100006" displayName="Auto splash" />
+            <CtrlLabel style="BFDEcoStandardBlack" rect="[x:24 y:93 w:87 h:16]" id="100001" text="Variable mode" />
+            <CtrlButton name="AllHihatsVariable" style="MixerFXButton" rect="[x:7 y:94 w:15 h:15]" id="100006" displayName="Hihat variable mode" />
+            <CtrlTextBox name="HihatCC" style="BFD2TextBox" rect="[x:7 y:118 w:37 h:16]" id="100000" displayName="Hihat pedal MIDI CC" />
+            <CtrlLabel style="BFDEcoStandardBlack" rect="[x:47 y:120 w:55 h:13]" id="100002" text="Pedal CC" />
+        </CtrlPanel>
+        <CtrlValueBox name="VelHi" style="BFD2TextBoxEditableDraggable" rect="[x:671 y:48 w:37 h:16]" id="100000" displayName="Velocity Range High" />
+        <CtrlPanel name="MIDIKeyboardPanel" style="LogPanelStyle" rect="[x:718 y:49 w:205 h:525]" id="100004" />
+        <CtrlLabel style="BFDEcoStandardBlackCentered" rect="[x:671 y:64 w:37 h:13]" id="100002" text="Vel Hi" />
+        <CtrlValueBox name="VelLo" style="BFD2TextBoxEditableDraggable" rect="[x:671 y:88 w:37 h:16]" id="100000" displayName="Velocity Range Low" />
+        <CtrlLabel style="BFDEcoStandardBlackCentered" rect="[x:671 y:104 w:37 h:13]" id="100002" text="Vel Lo" />
+        <CtrlValueBox name="VelCurve" overloadClass="BFD2MidiMapCurve" style="BFD2TextBoxDraggable" rect="[x:671 y:128 w:37 h:37]" id="100000" displayName="Velocity Curve" />
+        <CtrlLabel style="BFDEcoStandardBlackCentered" rect="[x:669 y:165 w:37 h:13]" id="100002" text="Curve" />
+        <CtrlButton name="KeySelect" style="MixerFXButton" rect="[x:680 y:186 w:15 h:15]" id="100006" displayName="Auto pedal" />
+        <CtrlLabel name="KeySelectLabel" style="BFDEcoStandardBlackCentered" rect="[x:657 y:203 w:60 h:13]" id="100002" text="Key Select" />
+        <CtrlPanel name="MapLeftShadow" style="BFD2RightShadow" rect="[x:651 y:297 w:10 h:296]" id="100001" />
+        <CtrlButton name="Close" style="RecessedButtonMomentary" rect="[x:612 y:4 w:45 h:34]" id="100011" zorder="2" text="Close" />
+        <CtrlComboBox name="OctaveNamingScheme" style="BFD2Combo" rect="[x:254 y:50 w:42 h:15]" id="100000" displayName="Octave numbering scheme" zorder="10" />
+        <CtrlLabel style="BFDEcoStandardBlack" rect="[x:299 y:50 w:158 h:16]" id="100001" zorder="10" text="Octave numbering scheme" />
+    </CtrlPanel>
+</root>

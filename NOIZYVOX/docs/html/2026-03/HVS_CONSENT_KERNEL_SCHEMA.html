@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HVS Consent Kernel v1 — Schema &amp; Validation</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg: #0A0E17;
+  --panel: #0F1420;
+  --card: #141926;
+  --hover: #1A2030;
+  --amber: #D4A017;
+  --amber-dim: rgba(212,160,23,0.12);
+  --amber-glow: rgba(212,160,23,0.25);
+  --teal: #0D9488;
+  --teal-dim: rgba(13,148,136,0.12);
+  --red: #FF4D6D;
+  --red-dim: rgba(255,77,109,0.1);
+  --green: #00FFB3;
+  --green-dim: rgba(0,255,179,0.1);
+  --blue: #3B82F6;
+  --purple: #A855F7;
+  --text: #E2E8F0;
+  --dim: #64748B;
+  --muted: #475569;
+  --border: rgba(212,160,23,0.1);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'IBM Plex Mono', monospace;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+body::after {
+  content:'';
+  position:fixed;
+  inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(212,160,23,0.015) 2px,rgba(212,160,23,0.015) 4px);
+  pointer-events:none;
+  z-index:1000;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem;
+  font-weight: 300;
+  color: var(--amber);
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5rem;
+}
+
+.header .sub {
+  font-size: 0.85rem;
+  color: var(--dim);
+  letter-spacing: 0.08em;
+}
+
+.header .version {
+  display: inline-block;
+  margin-top: 0.8rem;
+  padding: 0.3rem 1rem;
+  background: var(--amber-dim);
+  border: 1px solid rgba(212,160,23,0.3);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: var(--amber);
+  letter-spacing: 0.1em;
+}
+
+.north-star {
+  text-align: center;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, rgba(13,148,136,0.08), rgba(212,160,23,0.08));
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 3rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: var(--text);
+  letter-spacing: 0.05em;
+  font-style: italic;
+}
+
+.section {
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--amber);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.08em;
+}
+
+.section-desc {
+  color: var(--dim);
+  font-size: 0.82rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+/* Primitives grid */
+.primitives {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.prim-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: border-color 0.3s;
+}
+
+.prim-card:hover {
+  border-color: rgba(212,160,23,0.3);
+}
+
+.prim-number {
+  font-size: 0.65rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5rem;
+}
+
+.prim-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  color: var(--amber);
+  margin-bottom: 0.5rem;
+}
+
+.prim-desc {
+  font-size: 0.78rem;
+  color: var(--dim);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.prim-fields {
+  font-size: 0.72rem;
+  color: var(--text);
+  line-height: 1.8;
+}
+
+.prim-fields .field {
+  padding: 0.2rem 0;
+}
+
+.field-name {
+  color: var(--teal);
+  font-weight: 500;
+}
+
+.field-type {
+  color: var(--muted);
+  font-size: 0.65rem;
+}
+
+.field-req {
+  display: inline-block;
+  padding: 0.1rem 0.4rem;
+  background: var(--red-dim);
+  color: var(--red);
+  font-size: 0.55rem;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.field-opt {
+  display: inline-block;
+  padding: 0.1rem 0.4rem;
+  background: rgba(59,130,246,0.1);
+  color: var(--blue);
+  font-size: 0.55rem;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* JSON Schema block */
+.schema-block {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.schema-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1.2rem;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+}
+
+.schema-label {
+  font-size: 0.72rem;
+  color: var(--amber);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.schema-copy {
+  padding: 0.3rem 0.8rem;
+  background: var(--amber-dim);
+  border: 1px solid rgba(212,160,23,0.2);
+  border-radius: 4px;
+  color: var(--amber);
+  font-size: 0.65rem;
+  cursor: pointer;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.schema-copy:hover {
+  background: rgba(212,160,23,0.2);
+}
+
+.schema-body {
+  padding: 1.2rem;
+  overflow-x: auto;
+}
+
+.schema-body pre {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  line-height: 1.7;
+  color: var(--text);
+  white-space: pre;
+  tab-size: 2;
+}
+
+.json-key { color: var(--teal); }
+.json-str { color: var(--amber); }
+.json-num { color: var(--green); }
+.json-bool { color: var(--purple); }
+.json-null { color: var(--muted); }
+
+/* Validation rules */
+.rules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.2rem;
+}
+
+.rule-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.rule-id {
+  font-size: 0.6rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.3rem;
+}
+
+.rule-name {
+  font-size: 0.9rem;
+  color: var(--text);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.rule-desc {
+  font-size: 0.75rem;
+  color: var(--dim);
+  line-height: 1.6;
+  margin-bottom: 0.8rem;
+}
+
+.rule-severity {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.sev-block { background: var(--red-dim); color: var(--red); }
+.sev-warn { background: rgba(212,160,23,0.12); color: var(--amber); }
+.sev-info { background: rgba(59,130,246,0.1); color: var(--blue); }
+
+/* Rights Ledger */
+.ledger-section {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.ledger-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  color: var(--teal);
+  margin-bottom: 0.8rem;
+}
+
+.ledger-props {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.8rem;
+}
+
+.ledger-prop {
+  padding: 0.8rem;
+  background: var(--panel);
+  border-radius: 6px;
+}
+
+.ledger-prop-name {
+  font-size: 0.65rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.3rem;
+}
+
+.ledger-prop-val {
+  font-size: 0.82rem;
+  color: var(--text);
+}
+
+/* Flow diagram */
+.flow-section {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.flow-chain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.flow-node {
+  padding: 0.6rem 1.2rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.75rem;
+}
+
+.flow-node.fn-action { border-color: rgba(212,160,23,0.3); color: var(--amber); }
+.flow-node.fn-check { border-color: rgba(13,148,136,0.3); color: var(--teal); }
+.flow-node.fn-write { border-color: rgba(0,255,179,0.3); color: var(--green); }
+.flow-node.fn-block { border-color: rgba(255,77,109,0.3); color: var(--red); }
+
+.flow-arrow {
+  color: var(--muted);
+  font-size: 1.2rem;
+}
+
+/* Sample manifest */
+.manifest-note {
+  text-align: center;
+  color: var(--dim);
+  font-size: 0.75rem;
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding-top: 2rem;
+  margin-top: 3rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+}
+
+.footer .sig {
+  color: var(--amber);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  body { padding: 1rem; }
+  .header h1 { font-size: 1.8rem; }
+  .primitives { grid-template-columns: 1fr; }
+  .rules-grid { grid-template-columns: 1fr; }
+  .flow-chain { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>HVS CONSENT KERNEL</h1>
+  <div class="sub">HUMAN VOICE SYMPHONY &mdash; THE CONSENT LAYER THAT PROTECTS EVERY DESCENDANT</div>
+  <div class="version">SCHEMA v1.0 &mdash; MARCH 2026 &mdash; NOIZYVOX</div>
+</div>
+
+<div class="north-star">
+  "No voice is synthesized, licensed, or distributed without an explicit, verifiable, revocable consent manifest attached at the point of creation."
+</div>
+
+<!-- ═══ FOUR PRIMITIVES ═══ -->
+<div class="section">
+  <div class="section-title">Four Primitives</div>
+  <div class="section-desc">
+    The Consent Kernel is composed of exactly four primitives. Every operation in the HVS pipeline &mdash; voice model creation,
+    Descendant synthesis, licensing, distribution, and payment &mdash; requires all four to be present and valid.
+    No primitive can be omitted. No primitive can be overridden by a licensee.
+  </div>
+
+  <div class="primitives">
+    <div class="prim-card">
+      <div class="prim-number">Primitive 01</div>
+      <div class="prim-name">Identity Asset</div>
+      <div class="prim-desc">
+        The immutable record that ties a voice model to its human origin. Establishes provenance,
+        links to the artist's verified identity, and anchors all downstream rights.
+      </div>
+      <div class="prim-fields">
+        <div class="field"><span class="field-name">artist_id</span> <span class="field-type">string</span> <span class="field-req">required</span> &mdash; Unique artist identifier (e.g. RSP_001)</div>
+        <div class="field"><span class="field-name">legal_name</span> <span class="field-type">string</span> <span class="field-req">required</span> &mdash; Full legal name of voice owner</div>
+        <div class="field"><span class="field-name">voice_model_id</span> <span class="field-type">string</span> <span class="field-req">required</span> &mdash; UUID of the registered voice model</div>
+        <div class="field"><span class="field-name">registration_date</span> <span class="field-type">ISO 8601</span> <span class="field-req">required</span> &mdash; Date model was registered</div>
+        <div class="field"><span class="field-name">jurisdiction</span> <span class="field-type">string</span> <span class="field-req">required</span> &mdash; Governing legal jurisdiction</div>
+        <div class="field"><span class="field-name">union_affiliations</span> <span class="field-type">string[]</span> <span class="field-opt">optional</span> &mdash; SAG-AFTRA, ACTRA, Equity, etc.</div>
+        <div class="field"><span class="field-name">watermark_hash</span> <span class="field-type">string</span> <span class="field-req">required</span> &mdash; SHA-256 of embedded voice DNA watermark</div>
+      </div>
+    </div>
+
+    <div class="prim-card">
+      <div class="prim-number">Primitive 02</div>
+      <div class="prim-name">License Policy</div>
+      <div class="prim-desc">
+        The rules governing how a Descendant may be used. Defines permitted categories,
+        duration, territory, exclusivity, and the seven Never Clauses that cannot be overridden.
+      </div>
+      <div class="prim-fields">
+        <div class="field"><span class="field-name">license_id</span> <span class="field-type">string</span> <span class="field-req">required</span> &mdash; Unique license instance ID</div>
+        <div class="field"><span class="field-name">tier</span> <span class="field-type">enum</span> <span class="field-req">required</span> &mdash; community | standard | premium</div>
+        <div class="field"><span class="field-name">permitted_uses</span> <span class="field-type">string[]</span> <span class="field-req">required</span> &mdash; Allowed content categories</div>
+        <div class="field"><span class="field-name">never_clauses</span> <span class="field-type">string[]</span> <span class="field-req">required</span> &mdash; 7 creative vetoes (immutable)</div>
+        <div class="field"><span class="field-name">territory</span> <span class="field-type">string[]</span> <span class="field-req">required</span> &mdash; Geographic scope</div>
+        <div class="field"><span class="field-name">duration_days</span> <span class="field-type">integer</span> <span class="field-req">required</span> &mdash; License term in days</div>
+        <div class="field"><span class="field-name">exclusivity</span> <span class="field-type">boolean</span> <span class="field-opt">optional</span> &mdash; Exclusive use grant (Premium only)</div>
+        <div class="field"><span class="field-name">auto_renew</span> <span class="field-type">boolean</span> <span class="field-opt">optional</span> &mdash; Auto-renewal flag</div>
+      </div>
+    </div>
+
+    <div class="prim-card">
+      <div class="prim-number">Primitive 03</div>
+      <div class="prim-name">Revenue Policy</div>
+      <div class="prim-desc">
+        The economics engine. Enforces the 75/25 split, calculates union contribution from the
+        artist's share based on Tracked &amp; Stacked profile data, and ensures artist cost is always $0.
+      </div>
+      <div class="prim-fields">
+        <div class="field"><span class="field-name">artist_pct</span> <span class="field-type">integer</span> <span class="field-req">required</span> &mdash; Always 75 (artist's gross share)</div>
+        <div class="field"><span class="field-name">platform_pct</span> <span class="field-type">integer</span> <span class="field-req">required</span> &mdash; Always 25 (NOIZY.AI hosting)</div>
+        <div class="field"><span class="field-name">union_contribution_pct</span> <span class="field-type">number</span> <span class="field-req">required</span> &mdash; 2-10% from artist's 75% based on tier</div>
+        <div class="field"><span class="field-name">artist_net_pct</span> <span class="field-type">number</span> <span class="field-req">required</span> &mdash; Calculated: 75 minus union_contribution_pct</div>
+        <div class="field"><span class="field-name">artist_upfront_cost</span> <span class="field-type">integer</span> <span class="field-req">required</span> &mdash; Always 0. Artist never pays.</div>
+        <div class="field"><span class="field-name">licensee_pays</span> <span class="field-type">boolean</span> <span class="field-req">required</span> &mdash; Always true. All fees are licensee-facing.</div>
+        <div class="field"><span class="field-name">residual_schedule</span> <span class="field-type">string</span> <span class="field-opt">optional</span> &mdash; 13-week cycle for broadcast tier</div>
+        <div class="field"><span class="field-name">payment_trigger</span> <span class="field-type">enum</span> <span class="field-req">required</span> &mdash; on_generation | on_license | on_distribution</div>
+      </div>
+    </div>
+
+    <div class="prim-card">
+      <div class="prim-number">Primitive 04</div>
+      <div class="prim-name">Revocation Policy</div>
+      <div class="prim-desc">
+        The kill switch. Artist can revoke consent at any time, for any reason, at zero cost to them.
+        Revocation fee ($1,000) is charged to the licensee, not the artist. The artist never pays to say no.
+      </div>
+      <div class="prim-fields">
+        <div class="field"><span class="field-name">revocation_available</span> <span class="field-type">boolean</span> <span class="field-req">required</span> &mdash; Always true</div>
+        <div class="field"><span class="field-name">revocation_cost_to_artist</span> <span class="field-type">integer</span> <span class="field-req">required</span> &mdash; Always 0</div>
+        <div class="field"><span class="field-name">revocation_fee_licensee</span> <span class="field-type">integer</span> <span class="field-req">required</span> &mdash; $1,000 processing fee</div>
+        <div class="field"><span class="field-name">grace_period_hours</span> <span class="field-type">integer</span> <span class="field-req">required</span> &mdash; Hours after revocation before full halt</div>
+        <div class="field"><span class="field-name">posthumous_policy</span> <span class="field-type">enum</span> <span class="field-opt">optional</span> &mdash; halt_all | beneficiary_decides | continue_limited</div>
+        <div class="field"><span class="field-name">beneficiary_ids</span> <span class="field-type">string[]</span> <span class="field-opt">optional</span> &mdash; Designated heirs for posthumous decisions</div>
+        <div class="field"><span class="field-name">emergency_halt</span> <span class="field-type">boolean</span> <span class="field-req">required</span> &mdash; Instant suspension, no grace period</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CONSENT VALIDATION FLOW ═══ -->
+<div class="section">
+  <div class="section-title">Consent Validation Flow</div>
+  <div class="section-desc">
+    Every synthesis request passes through this validation chain before a single audio sample is generated.
+    If any step fails, the request is blocked and a ledger entry is written recording the rejection.
+  </div>
+
+  <div class="flow-section">
+    <div class="flow-chain">
+      <div class="flow-node fn-action">Synthesis Request</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-node fn-check">Identity Verified?</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-node fn-check">License Valid?</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-node fn-check">Never Clauses Clear?</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-node fn-check">Revenue Policy Attached?</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-node fn-check">Kill Switch Inactive?</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-node fn-write">Ledger Entry Written</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-node fn-action">Synthesis Proceeds</div>
+    </div>
+    <div style="margin-top: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+      <div class="flow-node fn-block">ANY FAIL &rarr; BLOCKED + REJECTION LOGGED</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ JSON SCHEMA ═══ -->
+<div class="section">
+  <div class="section-title">Consent Manifest JSON Schema</div>
+  <div class="section-desc">
+    This is the machine-readable schema that every consent manifest must validate against.
+    Manifests are attached to every Descendant at the moment of creation and travel with the audio through the entire pipeline.
+  </div>
+
+  <div class="schema-block">
+    <div class="schema-header">
+      <span class="schema-label">consent_manifest.schema.json</span>
+      <button class="schema-copy" onclick="navigator.clipboard.writeText(document.getElementById('schema-json').textContent).then(()=>this.textContent='COPIED').catch(()=>this.textContent='FAILED')">COPY</button>
+    </div>
+    <div class="schema-body">
+<pre id="schema-json">{
+  <span class="json-key">"$schema"</span>: <span class="json-str">"https://json-schema.org/draft/2020-12/schema"</span>,
+  <span class="json-key">"$id"</span>: <span class="json-str">"https://noizyvox.com/schemas/consent-manifest/v1"</span>,
+  <span class="json-key">"title"</span>: <span class="json-str">"HVS Consent Manifest"</span>,
+  <span class="json-key">"description"</span>: <span class="json-str">"Consent manifest for Human Voice Symphony Descendant synthesis"</span>,
+  <span class="json-key">"type"</span>: <span class="json-str">"object"</span>,
+  <span class="json-key">"required"</span>: [<span class="json-str">"manifest_version"</span>, <span class="json-str">"identity"</span>, <span class="json-str">"license"</span>, <span class="json-str">"revenue"</span>, <span class="json-str">"revocation"</span>, <span class="json-str">"created_at"</span>, <span class="json-str">"hash"</span>],
+  <span class="json-key">"properties"</span>: {
+    <span class="json-key">"manifest_version"</span>: {
+      <span class="json-key">"type"</span>: <span class="json-str">"string"</span>,
+      <span class="json-key">"const"</span>: <span class="json-str">"1.0"</span>
+    },
+    <span class="json-key">"identity"</span>: {
+      <span class="json-key">"type"</span>: <span class="json-str">"object"</span>,
+      <span class="json-key">"required"</span>: [<span class="json-str">"artist_id"</span>, <span class="json-str">"legal_name"</span>, <span class="json-str">"voice_model_id"</span>, <span class="json-str">"registration_date"</span>, <span class="json-str">"jurisdiction"</span>, <span class="json-str">"watermark_hash"</span>],
+      <span class="json-key">"properties"</span>: {
+        <span class="json-key">"artist_id"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"string"</span>, <span class="json-key">"pattern"</span>: <span class="json-str">"^[A-Z]{2,10}_[0-9]{3}$"</span> },
+        <span class="json-key">"legal_name"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"string"</span>, <span class="json-key">"minLength"</span>: <span class="json-num">3</span> },
+        <span class="json-key">"voice_model_id"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"string"</span>, <span class="json-key">"format"</span>: <span class="json-str">"uuid"</span> },
+        <span class="json-key">"registration_date"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"string"</span>, <span class="json-key">"format"</span>: <span class="json-str">"date-time"</span> },
+        <span class="json-key">"jurisdiction"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"string"</span> },
+        <span class="json-key">"union_affiliations"</span>: {
+          <span class="json-key">"type"</span>: <span class="json-str">"array"</span>,
+          <span class="json-key">"items"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"string"</span>, <span class="json-key">"enum"</span>: [<span class="json-str">"SAG-AFTRA"</span>, <span class="json-str">"ACTRA"</span>, <span class="json-str">"EQUITY_UK"</span>, <span class="json-str">"MEAA"</span>, <span class="json-str">"OTHER"</span>] }
+        },
+        <span class="json-key">"watermark_hash"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"string"</span>, <span class="json-key">"pattern"</span>: <span class="json-str">"^[a-f0-9]{64}$"</span> }
+      }
+    },
+    <span class="json-key">"license"</span>: {
+      <span class="json-key">"type"</span>: <span class="json-str">"object"</span>,
+      <span class="json-key">"required"</span>: [<span class="json-str">"license_id"</span>, <span class="json-str">"tier"</span>, <span class="json-str">"permitted_uses"</span>, <span class="json-str">"never_clauses"</span>, <span class="json-str">"territory"</span>, <span class="json-str">"duration_days"</span>],
+      <span class="json-key">"properties"</span>: {
+        <span class="json-key">"license_id"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"string"</span>, <span class="json-key">"format"</span>: <span class="json-str">"uuid"</span> },
+        <span class="json-key">"tier"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"string"</span>, <span class="json-key">"enum"</span>: [<span class="json-str">"community"</span>, <span class="json-str">"standard"</span>, <span class="json-str">"premium"</span>] },
+        <span class="json-key">"permitted_uses"</span>: {
+          <span class="json-key">"type"</span>: <span class="json-str">"array"</span>,
+          <span class="json-key">"items"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"string"</span> },
+          <span class="json-key">"minItems"</span>: <span class="json-num">1</span>
+        },
+        <span class="json-key">"never_clauses"</span>: {
+          <span class="json-key">"type"</span>: <span class="json-str">"array"</span>,
+          <span class="json-key">"items"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"string"</span>, <span class="json-key">"enum"</span>: [<span class="json-str">"political"</span>, <span class="json-str">"nsfw"</span>, <span class="json-str">"hate_speech"</span>, <span class="json-str">"impersonation"</span>, <span class="json-str">"weapons"</span>, <span class="json-str">"medical"</span>, <span class="json-str">"sublicensing"</span>] },
+          <span class="json-key">"minItems"</span>: <span class="json-num">7</span>,
+          <span class="json-key">"maxItems"</span>: <span class="json-num">7</span>
+        },
+        <span class="json-key">"territory"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"array"</span>, <span class="json-key">"items"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"string"</span> } },
+        <span class="json-key">"duration_days"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"integer"</span>, <span class="json-key">"minimum"</span>: <span class="json-num">1</span>, <span class="json-key">"maximum"</span>: <span class="json-num">3650</span> },
+        <span class="json-key">"exclusivity"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"boolean"</span>, <span class="json-key">"default"</span>: <span class="json-bool">false</span> },
+        <span class="json-key">"auto_renew"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"boolean"</span>, <span class="json-key">"default"</span>: <span class="json-bool">false</span> }
+      }
+    },
+    <span class="json-key">"revenue"</span>: {
+      <span class="json-key">"type"</span>: <span class="json-str">"object"</span>,
+      <span class="json-key">"required"</span>: [<span class="json-str">"artist_pct"</span>, <span class="json-str">"platform_pct"</span>, <span class="json-str">"union_contribution_pct"</span>, <span class="json-str">"artist_net_pct"</span>, <span class="json-str">"artist_upfront_cost"</span>, <span class="json-str">"licensee_pays"</span>, <span class="json-str">"payment_trigger"</span>],
+      <span class="json-key">"properties"</span>: {
+        <span class="json-key">"artist_pct"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"integer"</span>, <span class="json-key">"const"</span>: <span class="json-num">75</span> },
+        <span class="json-key">"platform_pct"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"integer"</span>, <span class="json-key">"const"</span>: <span class="json-num">25</span> },
+        <span class="json-key">"union_contribution_pct"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"number"</span>, <span class="json-key">"minimum"</span>: <span class="json-num">2</span>, <span class="json-key">"maximum"</span>: <span class="json-num">10</span> },
+        <span class="json-key">"artist_net_pct"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"number"</span>, <span class="json-key">"minimum"</span>: <span class="json-num">65</span>, <span class="json-key">"maximum"</span>: <span class="json-num">73</span> },
+        <span class="json-key">"artist_upfront_cost"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"integer"</span>, <span class="json-key">"const"</span>: <span class="json-num">0</span> },
+        <span class="json-key">"licensee_pays"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"boolean"</span>, <span class="json-key">"const"</span>: <span class="json-bool">true</span> },
+        <span class="json-key">"residual_schedule"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"string"</span> },
+        <span class="json-key">"payment_trigger"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"string"</span>, <span class="json-key">"enum"</span>: [<span class="json-str">"on_generation"</span>, <span class="json-str">"on_license"</span>, <span class="json-str">"on_distribution"</span>] }
+      }
+    },
+    <span class="json-key">"revocation"</span>: {
+      <span class="json-key">"type"</span>: <span class="json-str">"object"</span>,
+      <span class="json-key">"required"</span>: [<span class="json-str">"revocation_available"</span>, <span class="json-str">"revocation_cost_to_artist"</span>, <span class="json-str">"revocation_fee_licensee"</span>, <span class="json-str">"grace_period_hours"</span>, <span class="json-str">"emergency_halt"</span>],
+      <span class="json-key">"properties"</span>: {
+        <span class="json-key">"revocation_available"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"boolean"</span>, <span class="json-key">"const"</span>: <span class="json-bool">true</span> },
+        <span class="json-key">"revocation_cost_to_artist"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"integer"</span>, <span class="json-key">"const"</span>: <span class="json-num">0</span> },
+        <span class="json-key">"revocation_fee_licensee"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"integer"</span>, <span class="json-key">"minimum"</span>: <span class="json-num">100000</span> },
+        <span class="json-key">"grace_period_hours"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"integer"</span>, <span class="json-key">"minimum"</span>: <span class="json-num">0</span>, <span class="json-key">"maximum"</span>: <span class="json-num">72</span> },
+        <span class="json-key">"posthumous_policy"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"string"</span>, <span class="json-key">"enum"</span>: [<span class="json-str">"halt_all"</span>, <span class="json-str">"beneficiary_decides"</span>, <span class="json-str">"continue_limited"</span>] },
+        <span class="json-key">"beneficiary_ids"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"array"</span>, <span class="json-key">"items"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"string"</span> } },
+        <span class="json-key">"emergency_halt"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"boolean"</span> }
+      }
+    },
+    <span class="json-key">"created_at"</span>: { <span class="json-key">"type"</span>: <span class="json-str">"string"</span>, <span class="json-key">"format"</span>: <span class="json-str">"date-time"</span> },
+    <span class="json-key">"hash"</span>: {
+      <span class="json-key">"type"</span>: <span class="json-str">"string"</span>,
+      <span class="json-key">"description"</span>: <span class="json-str">"SHA-256 of the canonical JSON (excluding this field)"</span>,
+      <span class="json-key">"pattern"</span>: <span class="json-str">"^[a-f0-9]{64}$"</span>
+    }
+  },
+  <span class="json-key">"additionalProperties"</span>: <span class="json-bool">false</span>
+}</pre>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SAMPLE MANIFEST ═══ -->
+<div class="section">
+  <div class="section-title">Sample Manifest &mdash; RSP_001 Founding Descendant</div>
+
+  <div class="schema-block">
+    <div class="schema-header">
+      <span class="schema-label">RSP_001_alpha_manifest.json</span>
+      <button class="schema-copy" onclick="navigator.clipboard.writeText(document.getElementById('sample-json').textContent).then(()=>this.textContent='COPIED').catch(()=>this.textContent='FAILED')">COPY</button>
+    </div>
+    <div class="schema-body">
+<pre id="sample-json">{
+  <span class="json-key">"manifest_version"</span>: <span class="json-str">"1.0"</span>,
+  <span class="json-key">"identity"</span>: {
+    <span class="json-key">"artist_id"</span>: <span class="json-str">"RSP_001"</span>,
+    <span class="json-key">"legal_name"</span>: <span class="json-str">"Robert Stephen Plowman"</span>,
+    <span class="json-key">"voice_model_id"</span>: <span class="json-str">"a1b2c3d4-e5f6-7890-abcd-ef1234567890"</span>,
+    <span class="json-key">"registration_date"</span>: <span class="json-str">"2026-03-19T00:00:00Z"</span>,
+    <span class="json-key">"jurisdiction"</span>: <span class="json-str">"Canada (Ontario)"</span>,
+    <span class="json-key">"union_affiliations"</span>: [<span class="json-str">"ACTRA"</span>],
+    <span class="json-key">"watermark_hash"</span>: <span class="json-str">"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"</span>
+  },
+  <span class="json-key">"license"</span>: {
+    <span class="json-key">"license_id"</span>: <span class="json-str">"f47ac10b-58cc-4372-a567-0e02b2c3d479"</span>,
+    <span class="json-key">"tier"</span>: <span class="json-str">"standard"</span>,
+    <span class="json-key">"permitted_uses"</span>: [<span class="json-str">"narration"</span>, <span class="json-str">"audiobook"</span>, <span class="json-str">"corporate_video"</span>],
+    <span class="json-key">"never_clauses"</span>: [<span class="json-str">"political"</span>, <span class="json-str">"nsfw"</span>, <span class="json-str">"hate_speech"</span>, <span class="json-str">"impersonation"</span>, <span class="json-str">"weapons"</span>, <span class="json-str">"medical"</span>, <span class="json-str">"sublicensing"</span>],
+    <span class="json-key">"territory"</span>: [<span class="json-str">"CA"</span>, <span class="json-str">"US"</span>],
+    <span class="json-key">"duration_days"</span>: <span class="json-num">180</span>,
+    <span class="json-key">"exclusivity"</span>: <span class="json-bool">false</span>,
+    <span class="json-key">"auto_renew"</span>: <span class="json-bool">false</span>
+  },
+  <span class="json-key">"revenue"</span>: {
+    <span class="json-key">"artist_pct"</span>: <span class="json-num">75</span>,
+    <span class="json-key">"platform_pct"</span>: <span class="json-num">25</span>,
+    <span class="json-key">"union_contribution_pct"</span>: <span class="json-num">10</span>,
+    <span class="json-key">"artist_net_pct"</span>: <span class="json-num">65</span>,
+    <span class="json-key">"artist_upfront_cost"</span>: <span class="json-num">0</span>,
+    <span class="json-key">"licensee_pays"</span>: <span class="json-bool">true</span>,
+    <span class="json-key">"residual_schedule"</span>: <span class="json-str">"13_week_cycle"</span>,
+    <span class="json-key">"payment_trigger"</span>: <span class="json-str">"on_generation"</span>
+  },
+  <span class="json-key">"revocation"</span>: {
+    <span class="json-key">"revocation_available"</span>: <span class="json-bool">true</span>,
+    <span class="json-key">"revocation_cost_to_artist"</span>: <span class="json-num">0</span>,
+    <span class="json-key">"revocation_fee_licensee"</span>: <span class="json-num">100000</span>,
+    <span class="json-key">"grace_period_hours"</span>: <span class="json-num">24</span>,
+    <span class="json-key">"posthumous_policy"</span>: <span class="json-str">"beneficiary_decides"</span>,
+    <span class="json-key">"beneficiary_ids"</span>: [],
+    <span class="json-key">"emergency_halt"</span>: <span class="json-bool">true</span>
+  },
+  <span class="json-key">"created_at"</span>: <span class="json-str">"2026-03-19T12:00:00Z"</span>,
+  <span class="json-key">"hash"</span>: <span class="json-str">"a7ffc6f8bf1ed76651c14756a061d662f580ff4de43b49fa82d80a4b80f8434a"</span>
+}</pre>
+    </div>
+  </div>
+  <div class="manifest-note">Note: revocation_fee_licensee is in cents (100000 = $1,000.00). Hash is computed over the canonical JSON before the hash field is inserted.</div>
+</div>
+
+<!-- ═══ VALIDATION RULES ═══ -->
+<div class="section">
+  <div class="section-title">Validation Rules</div>
+  <div class="section-desc">
+    These rules are enforced at the Consent Kernel level. A manifest that fails any BLOCK-severity rule
+    is rejected and the synthesis request is denied. WARN-severity rules generate alerts but do not block.
+  </div>
+
+  <div class="rules-grid">
+    <div class="rule-card">
+      <div class="rule-id">CK-V001</div>
+      <div class="rule-name">Never Clauses Completeness</div>
+      <div class="rule-desc">All 7 never clauses must be present in every manifest. No partial enforcement. A manifest missing even one clause is invalid.</div>
+      <div class="rule-severity sev-block">BLOCK</div>
+    </div>
+
+    <div class="rule-card">
+      <div class="rule-id">CK-V002</div>
+      <div class="rule-name">Identity-Model Binding</div>
+      <div class="rule-desc">The artist_id must match a verified artist in the registry. The voice_model_id must be registered to that artist. Cross-identity synthesis is impossible.</div>
+      <div class="rule-severity sev-block">BLOCK</div>
+    </div>
+
+    <div class="rule-card">
+      <div class="rule-id">CK-V003</div>
+      <div class="rule-name">Revenue Invariants</div>
+      <div class="rule-desc">artist_pct must equal 75. platform_pct must equal 25. artist_upfront_cost must equal 0. licensee_pays must be true. Any deviation is schema-enforced invalid.</div>
+      <div class="rule-severity sev-block">BLOCK</div>
+    </div>
+
+    <div class="rule-card">
+      <div class="rule-id">CK-V004</div>
+      <div class="rule-name">Union Contribution Range</div>
+      <div class="rule-desc">union_contribution_pct must fall between 2 and 10 inclusive. Must match the tier calculated from the artist's Tracked &amp; Stacked profile data.</div>
+      <div class="rule-severity sev-block">BLOCK</div>
+    </div>
+
+    <div class="rule-card">
+      <div class="rule-id">CK-V005</div>
+      <div class="rule-name">Artist Net Calculation</div>
+      <div class="rule-desc">artist_net_pct must exactly equal (75 - union_contribution_pct). Any arithmetic mismatch invalidates the manifest.</div>
+      <div class="rule-severity sev-block">BLOCK</div>
+    </div>
+
+    <div class="rule-card">
+      <div class="rule-id">CK-V006</div>
+      <div class="rule-name">Kill Switch Availability</div>
+      <div class="rule-desc">revocation_available must always be true. revocation_cost_to_artist must always be 0. The artist's right to say no is non-negotiable.</div>
+      <div class="rule-severity sev-block">BLOCK</div>
+    </div>
+
+    <div class="rule-card">
+      <div class="rule-id">CK-V007</div>
+      <div class="rule-name">Hash Integrity</div>
+      <div class="rule-desc">The hash field must match the SHA-256 of the canonical JSON (with hash field excluded). Any tampering invalidates the manifest and triggers an audit event.</div>
+      <div class="rule-severity sev-block">BLOCK</div>
+    </div>
+
+    <div class="rule-card">
+      <div class="rule-id">CK-V008</div>
+      <div class="rule-name">License Duration Bounds</div>
+      <div class="rule-desc">Duration must be between 1 and 3,650 days (10 years max). Community tier capped at 365 days. Standard capped at 730. Premium negotiable up to 3,650.</div>
+      <div class="rule-severity sev-block">BLOCK</div>
+    </div>
+
+    <div class="rule-card">
+      <div class="rule-id">CK-V009</div>
+      <div class="rule-name">Watermark Presence</div>
+      <div class="rule-desc">watermark_hash must be a valid 64-character hex string (SHA-256). This ensures provenance tracking is embedded before synthesis begins.</div>
+      <div class="rule-severity sev-block">BLOCK</div>
+    </div>
+
+    <div class="rule-card">
+      <div class="rule-id">CK-V010</div>
+      <div class="rule-name">Posthumous Policy Required</div>
+      <div class="rule-desc">If the artist has Legacy Vault enabled, posthumous_policy and beneficiary_ids must be present. Warns if Legacy Vault is active but no beneficiaries designated.</div>
+      <div class="rule-severity sev-warn">WARN</div>
+    </div>
+
+    <div class="rule-card">
+      <div class="rule-id">CK-V011</div>
+      <div class="rule-name">Exclusivity-Tier Alignment</div>
+      <div class="rule-desc">Exclusivity can only be true for Premium tier. Community and Standard licenses cannot be exclusive. Prevents low-tier exclusivity lock-ins.</div>
+      <div class="rule-severity sev-block">BLOCK</div>
+    </div>
+
+    <div class="rule-card">
+      <div class="rule-id">CK-V012</div>
+      <div class="rule-name">Emergency Stop Override</div>
+      <div class="rule-desc">If GABRIEL's emergency stop is active, ALL manifests are rejected regardless of validity. System-wide halt overrides individual consent.</div>
+      <div class="rule-severity sev-block">BLOCK</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ RIGHTS LEDGER ═══ -->
+<div class="section">
+  <div class="section-title">Rights Ledger &mdash; Append-Only Record</div>
+  <div class="section-desc">
+    Every consent event — grant, synthesis, distribution, revocation, rejection — is written to the Rights Ledger.
+    The ledger is append-only: no record can be modified or deleted. Each entry includes a cryptographic hash
+    that chains to the previous entry, creating a tamper-evident audit trail.
+  </div>
+
+  <div class="ledger-section">
+    <div class="ledger-title">Ledger Entry Schema</div>
+    <div class="ledger-props">
+      <div class="ledger-prop">
+        <div class="ledger-prop-name">Entry ID</div>
+        <div class="ledger-prop-val">Auto-incrementing, immutable</div>
+      </div>
+      <div class="ledger-prop">
+        <div class="ledger-prop-name">Event Type</div>
+        <div class="ledger-prop-val">consent_granted | synthesis_executed | license_activated | distribution_logged | revocation_triggered | synthesis_rejected | emergency_halt</div>
+      </div>
+      <div class="ledger-prop">
+        <div class="ledger-prop-name">Artist ID</div>
+        <div class="ledger-prop-val">Links to Identity Asset</div>
+      </div>
+      <div class="ledger-prop">
+        <div class="ledger-prop-name">Manifest Hash</div>
+        <div class="ledger-prop-val">SHA-256 of the consent manifest at time of event</div>
+      </div>
+      <div class="ledger-prop">
+        <div class="ledger-prop-name">Previous Hash</div>
+        <div class="ledger-prop-val">SHA-256 of previous ledger entry (chain integrity)</div>
+      </div>
+      <div class="ledger-prop">
+        <div class="ledger-prop-name">Timestamp</div>
+        <div class="ledger-prop-val">ISO 8601, UTC, millisecond precision</div>
+      </div>
+      <div class="ledger-prop">
+        <div class="ledger-prop-name">Actor</div>
+        <div class="ledger-prop-val">Who triggered the event: artist | licensee | system | gabriel</div>
+      </div>
+      <div class="ledger-prop">
+        <div class="ledger-prop-name">Metadata</div>
+        <div class="ledger-prop-val">JSON blob with event-specific data (amounts, rejection reasons, etc.)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ledger-section">
+    <div class="ledger-title">Storage: D1 Table &mdash; rights_ledger</div>
+    <div class="ledger-props">
+      <div class="ledger-prop">
+        <div class="ledger-prop-name">Database</div>
+        <div class="ledger-prop-val">noizyvox-consent (D1)</div>
+      </div>
+      <div class="ledger-prop">
+        <div class="ledger-prop-name">Write Mode</div>
+        <div class="ledger-prop-val">INSERT only. No UPDATE. No DELETE.</div>
+      </div>
+      <div class="ledger-prop">
+        <div class="ledger-prop-name">Chain Integrity</div>
+        <div class="ledger-prop-val">Each entry hashes the previous entry's hash + current data</div>
+      </div>
+      <div class="ledger-prop">
+        <div class="ledger-prop-name">Union Access</div>
+        <div class="ledger-prop-val">Read-only export API. Tamper-evident reports.</div>
+      </div>
+      <div class="ledger-prop">
+        <div class="ledger-prop-name">Dispute Window</div>
+        <div class="ledger-prop-val">Any ledger entry can be flagged for dispute within 90 days</div>
+      </div>
+      <div class="ledger-prop">
+        <div class="ledger-prop-name">Backup</div>
+        <div class="ledger-prop-val">Daily snapshot to KV (GABRIEL_KV). R2 cold archive when enabled.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  NOIZYVOX &mdash; CONSENT KERNEL v1.0 &mdash; MARCH 2026
+  <div class="sig">Designed for the Human Voice Symphony by Robert Stephen Plowman</div>
+</div>
+
+</body>
+</html>

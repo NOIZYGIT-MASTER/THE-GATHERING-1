@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MC96ECO — SUBSCRIPTION KILL LIST</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --amber: #D4A017; --teal: #0D9488; --deep: #0A0E17; --surface: #111827;
+    --card: #1F2937; --text: #E5E7EB; --dim: #6B7280; --green: #10B981;
+    --red: #EF4444; --blue: #3B82F6; --purple: #8B5CF6; --orange: #F59E0B;
+  }
+  body { font-family: 'IBM Plex Mono', monospace; background: var(--deep); color: var(--text); min-height: 100vh; }
+  .header { text-align: center; padding: 30px 20px; border-bottom: 1px solid rgba(239,68,68,0.3); }
+  .header h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.5em; color: var(--red); letter-spacing: 3px; }
+  .header .sub { color: var(--dim); font-size: 0.85em; margin-top: 8px; }
+  
+  .savings-banner {
+    text-align: center; padding: 25px; margin: 20px auto; max-width: 900px;
+    background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(13,148,136,0.1));
+    border: 1px solid rgba(16,185,129,0.3); border-radius: 12px;
+  }
+  .savings-banner .big { font-family: 'Cormorant Garamond', serif; font-size: 3em; color: var(--green); font-weight: 700; }
+  .savings-banner .label { color: var(--teal); font-size: 0.85em; letter-spacing: 1px; }
+  
+  .wave { max-width: 1100px; margin: 0 auto; padding: 20px; }
+  .wave h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.6em; margin: 30px 0 15px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .wave h2.red { color: var(--red); }
+  .wave h2.orange { color: var(--orange); }
+  .wave h2.blue { color: var(--blue); }
+  .wave h2.green { color: var(--green); }
+  
+  .kill-card {
+    background: var(--card); border-radius: 10px; padding: 16px 20px;
+    margin: 10px 0; border-left: 4px solid var(--red);
+    display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center;
+  }
+  .kill-card.consolidate { border-left-color: var(--orange); }
+  .kill-card.evaluate { border-left-color: var(--blue); }
+  .kill-card.keep { border-left-color: var(--green); }
+  
+  .kill-card .info h4 { font-size: 1em; color: var(--text); margin-bottom: 4px; }
+  .kill-card .info .provider { font-size: 0.75em; color: var(--dim); }
+  .kill-card .info .reason { font-size: 0.8em; color: var(--teal); margin-top: 6px; }
+  .kill-card .info .how { font-size: 0.75em; color: var(--dim); margin-top: 6px; line-height: 1.5; }
+  .kill-card .info .how a { color: var(--amber); text-decoration: none; }
+  .kill-card .info .how a:hover { text-decoration: underline; }
+  
+  .kill-card .cost { text-align: right; }
+  .kill-card .cost .amount { font-size: 1.4em; font-weight: 500; }
+  .kill-card .cost .amount.saved { color: var(--red); text-decoration: line-through; }
+  .kill-card .cost .period { font-size: 0.7em; color: var(--dim); }
+  
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.7em; letter-spacing: 0.5px; }
+  .tag.kill { background: rgba(239,68,68,0.15); color: var(--red); }
+  .tag.merge { background: rgba(245,158,11,0.15); color: var(--orange); }
+  .tag.check { background: rgba(59,130,246,0.15); color: var(--blue); }
+  .tag.safe { background: rgba(16,185,129,0.15); color: var(--green); }
+  
+  .totals { max-width: 1100px; margin: 30px auto; padding: 20px; }
+  .totals table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+  .totals td, .totals th { padding: 10px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .totals th { color: var(--amber); font-family: 'Cormorant Garamond', serif; font-size: 1.1em; }
+  .totals .total-row td { color: var(--green); font-weight: 500; font-size: 1.1em; border-top: 2px solid var(--green); }
+  
+  .footer { text-align: center; padding: 30px; color: var(--dim); font-size: 0.75em; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 40px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>SUBSCRIPTION KILL LIST</h1>
+  <div class="sub">MC96ECO Universe | Robert Stephen Plowman | March 19, 2026</div>
+</div>
+
+<div class="savings-banner">
+  <div class="label">TOTAL POTENTIAL MONTHLY SAVINGS</div>
+  <div class="big">$1,039 CAD/month</div>
+  <div class="label">$12,468 CAD/year back in your pocket</div>
+</div>
+
+<!-- ===== WAVE 1: KILL TODAY — CLAUDE REPLACES ===== -->
+<div class="wave">
+<h2 class="red">WAVE 1: CANCEL TODAY — Claude Directly Replaces ($392/mo)</h2>
+
+<div class="kill-card">
+  <div class="info">
+    <h4>Coursera <span class="tag kill">CANCEL</span></h4>
+    <div class="provider">Coursera</div>
+    <div class="reason">Claude teaches interactively with YOUR codebase, YOUR projects. Infinite curriculum.</div>
+    <div class="how">How: <a href="https://www.coursera.org/my-purchases" target="_blank">coursera.org/my-purchases</a> → Subscriptions → Cancel</div>
+  </div>
+  <div class="cost"><div class="amount saved">$50</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card">
+  <div class="info">
+    <h4>Grammarly Premium <span class="tag kill">CANCEL</span></h4>
+    <div class="provider">Grammarly</div>
+    <div class="reason">Claude writes, edits, proofreads, and rewrites better than Grammarly — in YOUR voice.</div>
+    <div class="how">How: <a href="https://account.grammarly.com/subscription" target="_blank">account.grammarly.com/subscription</a> → Cancel Subscription</div>
+  </div>
+  <div class="cost"><div class="amount saved">$40</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card">
+  <div class="info">
+    <h4>Zapier <span class="tag kill">CANCEL</span></h4>
+    <div class="provider">Zapier</div>
+    <div class="reason">Cloudflare Workers (FREE tier) + Claude Code handles all automation.</div>
+    <div class="how">How: <a href="https://zapier.com/app/settings/billing" target="_blank">zapier.com/app/settings/billing</a> → Manage Plan → Downgrade to Free</div>
+  </div>
+  <div class="cost"><div class="amount saved">$40</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card">
+  <div class="info">
+    <h4>Codecademy <span class="tag kill">CANCEL</span></h4>
+    <div class="provider">Codecademy</div>
+    <div class="reason">Claude teaches code in real-time, on your actual projects, not toy exercises.</div>
+    <div class="how">How: <a href="https://www.codecademy.com/account/billing" target="_blank">codecademy.com/account/billing</a> → Cancel Plan</div>
+  </div>
+  <div class="cost"><div class="amount saved">$35</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card">
+  <div class="info">
+    <h4>ChatGPT Plus <span class="tag kill">CANCEL</span></h4>
+    <div class="provider">OpenAI</div>
+    <div class="reason">Claude Max is your PRIMARY AI. ChatGPT is redundant.</div>
+    <div class="how">How: <a href="https://chat.openai.com/" target="_blank">chat.openai.com</a> → Settings → Subscription → Cancel Plan</div>
+  </div>
+  <div class="cost"><div class="amount saved">$27</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card">
+  <div class="info">
+    <h4>Perplexity Pro <span class="tag kill">CANCEL</span></h4>
+    <div class="provider">Perplexity</div>
+    <div class="reason">Claude has built-in web search. You're using it RIGHT NOW.</div>
+    <div class="how">How: <a href="https://www.perplexity.ai/settings/subscription" target="_blank">perplexity.ai/settings/subscription</a> → Cancel</div>
+  </div>
+  <div class="cost"><div class="amount saved">$27</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card">
+  <div class="info">
+    <h4>GitHub Copilot <span class="tag kill">CANCEL</span></h4>
+    <div class="provider">GitHub</div>
+    <div class="reason">Cursor Pro handles all AI code completion. Copilot is redundant.</div>
+    <div class="how">How: <a href="https://github.com/settings/billing/summary" target="_blank">github.com/settings/billing</a> → Copilot → Cancel</div>
+  </div>
+  <div class="cost"><div class="amount saved">$26</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card">
+  <div class="info">
+    <h4>Squarespace <span class="tag kill">CANCEL</span></h4>
+    <div class="provider">Squarespace</div>
+    <div class="reason">Cloudflare Pages is FREE. Claude builds your sites.</div>
+    <div class="how">How: <a href="https://account.squarespace.com/settings/billing" target="_blank">account.squarespace.com/settings/billing</a> → Cancel</div>
+  </div>
+  <div class="cost"><div class="amount saved">$20</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card">
+  <div class="info">
+    <h4>Canva Pro <span class="tag kill">CANCEL</span></h4>
+    <div class="provider">Canva</div>
+    <div class="reason">Claude Cowork mode + Canva free tier + your Figma handles design.</div>
+    <div class="how">How: <a href="https://www.canva.com/settings/billing" target="_blank">canva.com/settings/billing</a> → Cancel Subscription</div>
+  </div>
+  <div class="cost"><div class="amount saved">$17</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card">
+  <div class="info">
+    <h4>MasterClass <span class="tag kill">CANCEL</span></h4>
+    <div class="provider">MasterClass</div>
+    <div class="reason">When did you last open it? YouTube + Claude = unlimited learning.</div>
+    <div class="how">How: <a href="https://www.masterclass.com/account/subscriptions" target="_blank">masterclass.com/account/subscriptions</a> → Cancel</div>
+  </div>
+  <div class="cost"><div class="amount saved">$17</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card">
+  <div class="info">
+    <h4>Wix <span class="tag kill">CANCEL</span></h4>
+    <div class="provider">Wix</div>
+    <div class="reason">Cloudflare Pages. FREE. You already have the Cloudflare account.</div>
+    <div class="how">How: <a href="https://manage.wix.com/account/subscriptions" target="_blank">manage.wix.com/account/subscriptions</a> → Cancel</div>
+  </div>
+  <div class="cost"><div class="amount saved">$17</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card">
+  <div class="info">
+    <h4>Spotify Premium <span class="tag kill">CANCEL</span></h4>
+    <div class="provider">Spotify</div>
+    <div class="reason">Apple Music is INCLUDED in your Apple One Premier ($45). You're double-paying.</div>
+    <div class="how">How: <a href="https://www.spotify.com/account/subscription/" target="_blank">spotify.com/account/subscription</a> → Cancel Plan</div>
+  </div>
+  <div class="cost"><div class="amount saved">$15</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card">
+  <div class="info">
+    <h4>Norton 360 <span class="tag kill">CANCEL</span></h4>
+    <div class="provider">NortonLifeLock</div>
+    <div class="reason">Mac has XProtect + Gatekeeper + FileVault built in. Norton is unnecessary.</div>
+    <div class="how">How: <a href="https://my.norton.com/extspa/subscriptions" target="_blank">my.norton.com/subscriptions</a> → Turn Off Auto-Renew. WARNING: Norton makes cancellation hard — may need to call 1-800-927-3991</div>
+  </div>
+  <div class="cost"><div class="amount saved">$15</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card">
+  <div class="info">
+    <h4>Loom <span class="tag kill">CANCEL</span></h4>
+    <div class="provider">Loom</div>
+    <div class="reason">QuickTime screen recording is FREE on every Mac. Cmd+Shift+5.</div>
+    <div class="how">How: <a href="https://www.loom.com/account" target="_blank">loom.com/account</a> → Billing → Cancel</div>
+  </div>
+  <div class="cost"><div class="amount saved">$15</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card">
+  <div class="info">
+    <h4>Skillshare <span class="tag kill">CANCEL</span></h4>
+    <div class="provider">Skillshare</div>
+    <div class="reason">YouTube is free. Claude teaches anything Skillshare does, personalized.</div>
+    <div class="how">How: <a href="https://www.skillshare.com/settings/payments" target="_blank">skillshare.com/settings/payments</a> → Cancel Membership</div>
+  </div>
+  <div class="cost"><div class="amount saved">$14</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card">
+  <div class="info">
+    <h4>Calendly <span class="tag kill">CANCEL</span></h4>
+    <div class="provider">Calendly</div>
+    <div class="reason">Apple Calendar + Google Calendar handle scheduling. Free.</div>
+    <div class="how">How: <a href="https://calendly.com/app/admin/billing" target="_blank">calendly.com/app/admin/billing</a> → Downgrade to Free</div>
+  </div>
+  <div class="cost"><div class="amount saved">$12</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card">
+  <div class="info">
+    <h4>Evernote <span class="tag kill">CANCEL</span></h4>
+    <div class="provider">Evernote</div>
+    <div class="reason">Apple Notes + Claude memory + NOIZYANTHROPIC repo. Evernote is dead tech.</div>
+    <div class="how">How: <a href="https://www.evernote.com/BillingSettings.action" target="_blank">evernote.com/BillingSettings</a> → Downgrade</div>
+  </div>
+  <div class="cost"><div class="amount saved">$11</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card">
+  <div class="info">
+    <h4>WordPress.com <span class="tag kill">CANCEL</span></h4>
+    <div class="provider">Automattic</div>
+    <div class="reason">Third website builder. Cloudflare Pages is FREE.</div>
+    <div class="how">How: <a href="https://wordpress.com/me/purchases" target="_blank">wordpress.com/me/purchases</a> → Cancel</div>
+  </div>
+  <div class="cost"><div class="amount saved">$10</div><div class="period">/month</div></div>
+</div>
+
+<!-- ===== WAVE 2: CONSOLIDATE ===== -->
+<h2 class="orange">WAVE 2: CONSOLIDATE — Pick One, Kill the Rest ($99/mo)</h2>
+
+<div class="kill-card consolidate">
+  <div class="info">
+    <h4>3 Password Managers: 1Password + Dashlane + LastPass <span class="tag merge">CANCEL ALL 3</span></h4>
+    <div class="provider">AgileBits / Dashlane / LogMeIn</div>
+    <div class="reason">Apple Keychain + Passkeys is FREE, built into every Apple device, and more secure.</div>
+    <div class="how">
+      How: <a href="https://my.1password.com/settings/billing" target="_blank">1Password billing</a> → Cancel<br>
+      <a href="https://app.dashlane.com/account-settings/subscription" target="_blank">Dashlane subscription</a> → Cancel<br>
+      <a href="https://lastpass.com/support_admin.php" target="_blank">LastPass admin</a> → Cancel<br>
+      FIRST: Export all passwords from each to Apple Keychain before canceling.
+    </div>
+  </div>
+  <div class="cost"><div class="amount saved">$19</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card consolidate">
+  <div class="info">
+    <h4>2 VPNs: ExpressVPN + NordVPN <span class="tag merge">CANCEL BOTH</span></h4>
+    <div class="provider">ExpressVPN / Nord Security</div>
+    <div class="reason">Apple iCloud Private Relay is included in Apple One Premier. If you need more, keep ONE.</div>
+    <div class="how">
+      How: <a href="https://www.expressvpn.com/subscriptions" target="_blank">ExpressVPN subscriptions</a> → Turn off auto-renew<br>
+      <a href="https://my.nordaccount.com/dashboard/nordvpn/" target="_blank">NordVPN dashboard</a> → Cancel auto-renewal
+    </div>
+  </div>
+  <div class="cost"><div class="amount saved">$18</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card consolidate">
+  <div class="info">
+    <h4>2 Cloud Storage: Dropbox Plus + Google One <span class="tag merge">CANCEL BOTH</span></h4>
+    <div class="provider">Dropbox / Google</div>
+    <div class="reason">iCloud 2TB is in Apple One Premier. Cloudflare R2 for production files.</div>
+    <div class="how">
+      How: <a href="https://www.dropbox.com/account/plan" target="_blank">Dropbox plan</a> → Downgrade to Basic<br>
+      <a href="https://one.google.com/about/plans" target="_blank">Google One plans</a> → Downgrade<br>
+      FIRST: Move any files from Dropbox/Google Drive to iCloud Drive.
+    </div>
+  </div>
+  <div class="cost"><div class="amount saved">$20</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card consolidate">
+  <div class="info">
+    <h4>2 Accounting: QuickBooks + FreshBooks <span class="tag merge">KEEP 1 OR USE WAVE</span></h4>
+    <div class="provider">Intuit / FreshBooks</div>
+    <div class="reason">You only need ONE. Wave Accounting is FREE for Canadian businesses. Or keep QuickBooks.</div>
+    <div class="how">
+      How: Pick one. Cancel the other.<br>
+      <a href="https://my.freshbooks.com/#/settings/billing" target="_blank">FreshBooks billing</a> → Cancel<br>
+      OR <a href="https://app.qbo.intuit.com/app/subscriptions" target="_blank">QuickBooks subscriptions</a> → Cancel<br>
+      Consider: <a href="https://www.waveapps.com" target="_blank">Wave (FREE)</a> — Canadian-made, free invoicing + accounting
+    </div>
+  </div>
+  <div class="cost"><div class="amount saved">$17</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card consolidate">
+  <div class="info">
+    <h4>2 Backup: Backblaze + iDrive <span class="tag merge">KEEP 1</span></h4>
+    <div class="provider">Backblaze / iDrive</div>
+    <div class="reason">One backup service is enough. Keep Backblaze ($9), cut iDrive.</div>
+    <div class="how">How: <a href="https://www.idrive.com/idrive/pro/profile" target="_blank">iDrive profile</a> → Cancel</div>
+  </div>
+  <div class="cost"><div class="amount saved">$8</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card consolidate">
+  <div class="info">
+    <h4>Notion Plus <span class="tag merge">DOWNGRADE TO FREE</span></h4>
+    <div class="provider">Notion</div>
+    <div class="reason">NOIZYANTHROPIC repo + Claude memory is your knowledge system now. Notion free tier works.</div>
+    <div class="how">How: <a href="https://www.notion.so/my-account" target="_blank">notion.so/my-account</a> → Plans → Downgrade to Free</div>
+  </div>
+  <div class="cost"><div class="amount saved">$14</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card consolidate">
+  <div class="info">
+    <h4>Zoom Pro <span class="tag merge">DOWNGRADE TO FREE</span></h4>
+    <div class="provider">Zoom</div>
+    <div class="reason">FaceTime is free. Google Meet is free. Zoom free tier gives 40-min meetings.</div>
+    <div class="how">How: <a href="https://zoom.us/billing" target="_blank">zoom.us/billing</a> → Cancel Subscription</div>
+  </div>
+  <div class="cost"><div class="amount saved">$20</div><div class="period">/month</div></div>
+</div>
+
+<!-- ===== WAVE 3: MIGRATE ===== -->
+<h2 class="blue">WAVE 3: MIGRATE — Move to Cloudflare ($50/mo)</h2>
+
+<div class="kill-card evaluate">
+  <div class="info">
+    <h4>GoDaddy Domains <span class="tag check">MIGRATE</span></h4>
+    <div class="provider">GoDaddy → Cloudflare Registrar</div>
+    <div class="reason">You wrote this yourself: "ESCAPE TO CLOUDFLARE!" Cloudflare charges AT COST for domains — no markup.</div>
+    <div class="how">
+      How: This takes ~7 days per domain.<br>
+      1. Log into <a href="https://dcc.godaddy.com/domains" target="_blank">GoDaddy domains</a><br>
+      2. Unlock each domain + get auth/EPP codes<br>
+      3. In <a href="https://dash.cloudflare.com" target="_blank">Cloudflare Dashboard</a> → Registrar → Transfer<br>
+      4. Enter auth codes, pay at-cost renewal<br>
+      5. Approve transfer via email confirmation<br>
+      You have a `godaddy-escape-tracker` D1 database ready for this. You planned this.
+    </div>
+  </div>
+  <div class="cost"><div class="amount saved">$50</div><div class="period">/month</div></div>
+</div>
+
+<!-- ===== WAVE 4: EVALUATE ===== -->
+<h2 class="blue">WAVE 4: CHECK THESE — Are You Actually Using Them? ($498/mo potential)</h2>
+
+<div class="kill-card evaluate">
+  <div class="info">
+    <h4>Adobe Creative Cloud <span class="tag check">CHECK</span></h4>
+    <div class="provider">Adobe — $80/mo</div>
+    <div class="reason">This is your SECOND biggest subscription. If you're only using Photoshop + Illustrator, buy Affinity Photo 2 + Affinity Designer 2 ($170 ONE-TIME, lifetime license). Saves $960/year.</div>
+    <div class="how">How: <a href="https://account.adobe.com/plans" target="_blank">account.adobe.com/plans</a> → Cancel. WARNING: Adobe charges early termination fees — check your contract date.</div>
+  </div>
+  <div class="cost"><div class="amount">$80</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card evaluate">
+  <div class="info">
+    <h4>Native Instruments 360 Pro <span class="tag check">CHECK IF ACTIVE</span></h4>
+    <div class="provider">Native Instruments — $68/mo</div>
+    <div class="reason">Your THIRD biggest subscription. Are you using Kontakt, Massive, Reaktor regularly? If not, this is $816/year.</div>
+    <div class="how">How: <a href="https://www.native-instruments.com/en/my-account/my-subscriptions/" target="_blank">NI My Subscriptions</a> → Cancel if not actively producing</div>
+  </div>
+  <div class="cost"><div class="amount">$68</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card evaluate">
+  <div class="info">
+    <h4>WSJ <span class="tag check">CHECK</span></h4>
+    <div class="provider">Dow Jones — $45/mo</div>
+    <div class="reason">$540/year for a newspaper. Claude can summarize financial news. Do you read it daily?</div>
+    <div class="how">How: <a href="https://customercenter.wsj.com/subscription" target="_blank">WSJ Customer Center</a> → Cancel</div>
+  </div>
+  <div class="cost"><div class="amount">$45</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card evaluate">
+  <div class="info">
+    <h4>Midjourney <span class="tag check">CHECK</span></h4>
+    <div class="provider">Midjourney — $40/mo</div>
+    <div class="reason">Claude can generate images through Cowork mode. Evaluate if you need Midjourney specifically.</div>
+    <div class="how">How: <a href="https://www.midjourney.com/account" target="_blank">midjourney.com/account</a> → Manage Subscription → Cancel</div>
+  </div>
+  <div class="cost"><div class="amount">$40</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card evaluate">
+  <div class="info">
+    <h4>LinkedIn Premium <span class="tag check">CHECK</span></h4>
+    <div class="provider">LinkedIn — $40/mo</div>
+    <div class="reason">Are you getting meetings or deals from LinkedIn Premium features? If not, cut it.</div>
+    <div class="how">How: <a href="https://www.linkedin.com/mypreferences/d/manage-premium" target="_blank">LinkedIn Manage Premium</a> → Cancel</div>
+  </div>
+  <div class="cost"><div class="amount">$40</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card evaluate">
+  <div class="info">
+    <h4>Shopify <span class="tag check">CHECK</span></h4>
+    <div class="provider">Shopify — $40/mo</div>
+    <div class="reason">Do you have an active store with sales? If it's dormant, pause or cancel.</div>
+    <div class="how">How: <a href="https://admin.shopify.com/store" target="_blank">Shopify Admin</a> → Settings → Plan → Pause or Deactivate</div>
+  </div>
+  <div class="cost"><div class="amount">$40</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card evaluate">
+  <div class="info">
+    <h4>ElevenLabs <span class="tag check">IRONIC</span></h4>
+    <div class="provider">ElevenLabs — $30/mo</div>
+    <div class="reason">You're building a COMPETITOR. Evaluate whether you need their service or can use their API at lower cost. Or build Gabriel instead.</div>
+    <div class="how">How: <a href="https://elevenlabs.io/subscription" target="_blank">elevenlabs.io/subscription</a> → Manage → Cancel or downgrade to Free</div>
+  </div>
+  <div class="cost"><div class="amount">$30</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card evaluate">
+  <div class="info">
+    <h4>iZotope MPS <span class="tag check">CHECK IF ACTIVE</span></h4>
+    <div class="provider">iZotope/NI — $30/mo</div>
+    <div class="reason">May overlap with NI 360 Pro (same parent company). Check if this is a separate charge.</div>
+    <div class="how">How: Check through <a href="https://www.izotope.com/en/account" target="_blank">iZotope account</a> or NI dashboard</div>
+  </div>
+  <div class="cost"><div class="amount">$30</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card evaluate">
+  <div class="info">
+    <h4>Streaming Bundle: Netflix + Crave + Disney+ + Paramount+ + YouTube Premium</h4>
+    <div class="provider">Various — total $78/mo</div>
+    <div class="reason">Apple TV+ is included in Apple One Premier. Do you need 5 more streaming services? Pick 1-2 max.</div>
+    <div class="how">Cancel from each service's account settings. Keep the 1-2 you actually watch.</div>
+  </div>
+  <div class="cost"><div class="amount">$78</div><div class="period">/month</div></div>
+</div>
+
+<div class="kill-card evaluate">
+  <div class="info">
+    <h4>Delivery Apps: DoorDash + Instacart + Uber One + Skip</h4>
+    <div class="provider">Various — total $44/mo</div>
+    <div class="reason">$528/year on delivery passes. Pick ONE or go cold turkey. Cook more.</div>
+    <div class="how">Cancel from each app's subscription settings.</div>
+  </div>
+  <div class="cost"><div class="amount">$44</div><div class="period">/month</div></div>
+</div>
+
+</div>
+
+<!-- ===== TOTALS ===== -->
+<div class="totals">
+<table>
+<tr><th colspan="3" style="font-size:1.4em; padding-bottom:15px;">SAVINGS SUMMARY</th></tr>
+<tr><td>Wave 1 — Cancel Today (Claude replaces)</td><td>18 services</td><td style="color:var(--red);">-$392/mo</td></tr>
+<tr><td>Wave 2 — Consolidate (pick one, kill rest)</td><td>12 → 3 services</td><td style="color:var(--orange);">-$99/mo</td></tr>
+<tr><td>Wave 3 — Migrate (GoDaddy → Cloudflare)</td><td>1 migration</td><td style="color:var(--blue);">-$50/mo</td></tr>
+<tr><td>Wave 4 — Evaluate (check if using)</td><td>15+ services</td><td style="color:var(--blue);">-$498/mo potential</td></tr>
+<tr class="total-row"><td><strong>CONSERVATIVE TOTAL (Waves 1-3)</strong></td><td><strong>31 services cut</strong></td><td><strong>-$541/mo (-$6,492/yr)</strong></td></tr>
+<tr class="total-row"><td><strong>AGGRESSIVE TOTAL (All Waves)</strong></td><td><strong>45+ services cut</strong></td><td><strong>-$1,039/mo (-$12,468/yr)</strong></td></tr>
+</table>
+</div>
+
+<div class="savings-banner" style="margin-top:30px;">
+  <div class="label">AFTER RATIONALIZATION — THE CLAUDE-FIRST STACK</div>
+  <div class="big" style="font-size:2em;">$261 — $520 CAD/month</div>
+  <div class="label">Down from $1,560/month | That's your first employee's salary saved.</div>
+</div>
+
+<div class="footer">
+  MC96ECO Universe | NOIZYANTHROPIC Enterprise Repo | Robert Stephen Plowman | 2026<br>
+  "Peace, love, and understanding are not slogans — they are design goals."
+</div>
+
+</body>
+</html>

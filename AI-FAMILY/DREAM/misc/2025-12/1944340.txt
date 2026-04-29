@@ -1,0 +1,88 @@
+<root>
+    <CtrlPanelStyle name="ChanStripStyle" noDefaultDrawing="true" imBackground="mixer_fader_base_complex.tga" colFill="[r:46 g:46 b:46 a:255]" intSmartTileEdgeSize="5" intRoundedRectRadius="0">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlButtonStyle name="MixerStripSoloStyle" optMomentary="false" imDown="..\com_solo_button_on.tga" imUp="..\com_solo_button_off.tga">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="MixerStripSoloIsolateStyle" optMomentary="false" imDown="solo_isolate_off.tga" imUp="solo_isolate_off.tga">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="MixerStripRecArmStyle" optMomentary="false" imDown="..\com_rec_button_on.tga" imUp="..\com_rec_button_off.tga">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="MixerStripMuteStyle" optMomentary="false" imDown="..\com_mute_button_on.tga" imUp="..\com_mute_button_off.tga">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlFaderStyle name="MixerChanStripFaderStyle" noDefaultDrawing="true" optFlipDirection="true" optNoClickOutsideKnobMove="true" activeAreaRect="[x:0 y:2 w:18 h:124]" imKnobOff="mixer_fader_head.tga" imKnobOn="mixer_fader_head.tga" snapSteps="0" fineScale="0.05" incDecButtonMode="off" faderHeadSize="0">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlFaderStyle>
+    <CtrlButtonStyle name="PhaseInvertStyle" optMomentary="false" imDown="mixer_phase_down.tga" imUp="mixer_phase_up.tga">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlPanelStyle name="FaderPanelStyle" noDefaultDrawing="true" colBorder="[r:215 g:215 b:215 a:255]" colFill="[r:215 g:215 b:215 a:255]" intSmartTileEdgeSize="5" intRoundedRectRadius="0">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlSliderStyle name="MixerChan_Pan_Style" noDefaultDrawing="true" imKnobOff="mixer_pan_knob.tga" imKnobOn="mixer_pan_knob.tga" imBackingStrip="mixer_pan_base.tga" snapSteps="0" fineScale="0.05" incDecButtonMode="off">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlSliderStyle>
+    <CtrlPanelStyle name="ColourBarStyle" noDefaultDrawing="true" imBackground="mixer_strip_top_shadow.tga" intSmartTileEdgeSize="5" intRoundedRectRadius="0">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlButtonStyle name="MonoStereoSwitchStyle" optMomentary="false" imDown="monoStereo_stereo.tga" imUp="monoStereo_mono.tga">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlKnobStyle name="MixerStripTrimKnob" activeAreaRect="[x:1 y:1 w:8 h:8]" imKnobNormal="..\inspector knob light.tga">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlKnobStyle>
+    <CtrlPanelStyle name="MixerStripEffectsPanelStyle" noDefaultDrawing="true" colBorder="[r:50 g:50 b:50 a:255]" colFill="[r:47 g:47 b:47 a:255]" intSmartTileEdgeSize="5" intRoundedRectRadius="0">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="MixerStripSendsPanelStyle" noDefaultDrawing="true" colFill="[r:47 g:47 b:47 a:255]" intSmartTileEdgeSize="5" intRoundedRectRadius="0">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlButtonStyle name="MixerStripPowerButton" optMomentary="false" imDown="mixer_strip_power_on.tga" imUp="mixer_strip_power_off.tga">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="MixerStripMenuButton" optSendOnMouseDown="true" imDown="mixer_strip_menu_on.tga" imUp="mixer_strip_menu_off.tga">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlPanel name="MixerStrip" style="ChanStripStyle" rect="[x:32 y:19 w:55 h:302]" id="0">
+        <CtrlPanel name="topShadow" style="ColourBarStyle" rect="[x:0 y:0 w:55 h:8]" id="100000" />
+        <CtrlPanel name="effectsPanel" style="MixerStripEffectsPanelStyle" rect="[x:0 y:23 w:55 h:64]" id="0">
+            <CtrlButton name="FXPower1" style="MixerStripPowerButton" rect="[x:0 y:0 w:10 h:16]" id="100000" displayName="Effect 1 on/off" />
+            <CtrlPanel name="effect1" style="MixerStripFXPanel" rect="[x:10 y:0 w:45 h:16]" id="100000" displayName="Effect 1" />
+            <CtrlButton name="FXPower2" style="MixerStripPowerButton" rect="[x:0 y:16 w:10 h:16]" id="100000" displayName="Effect 2 on/off" />
+            <CtrlPanel name="effect2" style="MixerStripFXPanel" rect="[x:10 y:16 w:45 h:16]" id="100000" displayName="Effect 2" />
+            <CtrlButton name="FXPower3" style="MixerStripPowerButton" rect="[x:0 y:32 w:10 h:16]" id="100000" displayName="Effect 3 on/off" />
+            <CtrlPanel name="effect3" style="MixerStripFXPanel" rect="[x:10 y:32 w:45 h:16]" id="100000" displayName="Effect 3" />
+            <CtrlButton name="FXPower4" style="MixerStripPowerButton" rect="[x:0 y:48 w:10 h:16]" id="100000" displayName="Effect 4 on/off" />
+            <CtrlPanel name="effect4" style="MixerStripFXPanel" rect="[x:10 y:48 w:45 h:16]" id="100000" displayName="Effect 4" />
+        </CtrlPanel>
+        <CtrlPanel name="sendsPanel" style="MixerStripSendsPanelStyle" rect="[x:0 y:87 w:55 h:64]" id="100001">
+            <CtrlPanel name="send1" style="MixerStripSendPanel" rect="[x:0 y:0 w:55 h:16]" id="100000" displayName="Send 1" />
+            <CtrlPanel name="send2" style="MixerStripSendPanel" rect="[x:0 y:16 w:55 h:16]" id="100000" displayName="Send 2" />
+            <CtrlPanel name="send3" style="MixerStripSendPanel" rect="[x:0 y:32 w:55 h:16]" id="100000" displayName="Send 3" />
+            <CtrlPanel name="send4" style="MixerStripSendPanel" rect="[x:0 y:48 w:55 h:16]" id="100000" displayName="Send 4" />
+        </CtrlPanel>
+        <CtrlPanel name="faderPanel" style="FaderPanelStyle" rect="[x:0 y:151 w:55 h:136]" id="0">
+            <CtrlSlider name="pan" style="MixerChan_Pan_Style" rect="[x:1 y:0 w:53 h:8]" id="100000" displayName="Pan" />
+            <CtrlFader name="fader" style="MixerChanStripFaderStyle" rect="[x:20 y:8 w:27 h:136]" id="0" displayName="Fader" />
+            <CtrlButton name="menuButton" style="MixerMenuButton" rect="[x:2 y:10 w:15 h:15]" id="100000" displayName="Channel Menu" />
+            <CtrlLevelStrip name="levelMeterLeft" style="MixerLevelMeterStyle" rect="[x:40 y:24 w:4 h:96]" id="100000" />
+            <CtrlLevelStrip name="levelMeterMono" style="MixerLevelMeterStyle" rect="[x:43 y:24 w:4 h:96]" id="100000" />
+            <CtrlLevelStrip name="levelMeterRight" style="MixerLevelMeterStyle" rect="[x:46 y:24 w:4 h:96]" id="100000" />
+            <CtrlSlider name="inputMainLevelMeter" style="MixerLevelMeterStyle" rect="[x:13 y:26 w:4 h:14]" id="100000" />
+            <CtrlKnob name="inputMainTrim" style="MixerStripTrimKnob" rect="[x:1 y:28 w:14 h:14]" id="100005" displayName="Main input trim" />
+            <CtrlSlider name="inputSideLevelMeter" style="MixerLevelMeterStyle" rect="[x:13 y:47 w:4 h:14]" id="100000" />
+            <CtrlKnob name="inputSideTrim" style="MixerStripTrimKnob" rect="[x:1 y:49 w:14 h:14]" id="100005" displayName="Sidechain input trim" />
+            <CtrlButton name="Phase invert" style="PhaseInvertStyle" rect="[x:3 y:71 w:15 h:15]" id="0" displayName="Phase invert" />
+            <CtrlButton name="recArm" style="MixerStripRecArmStyle" rect="[x:3 y:87 w:15 h:15]" id="0" displayName="Rec arm" />
+            <CtrlButton name="mute" style="MixerStripMuteStyle" rect="[x:3 y:103 w:15 h:15]" id="0" displayName="Mute" />
+            <CtrlButton name="solo" style="MixerStripSoloStyle" rect="[x:3 y:119 w:15 h:15]" id="0" displayName="Solo" />
+            <CtrlButton name="monoStereo" style="MonoStereoSwitchStyle" rect="[x:37 y:119 w:15 h:15]" id="100000" displayName="Mono/Stereo" text="M/S" />
+        </CtrlPanel>
+        <CtrlComboBox name="output" style="MixerStripTextBox_NotEditable" rect="[x:2 y:286 w:51 h:14]" id="0" displayName="Output selector" />
+        <CtrlTextBox name="nameBox" style="MixerStripTextBox" rect="[x:2 y:9 w:51 h:14]" id="100002" displayName="Channel name" zorder="2" />
+    </CtrlPanel>
+</root>

@@ -1,0 +1,84 @@
+<root>
+    <CtrlButtonStyle name="MixerFXActive" optMomentary="false" imDown="effects_square_LED_power_on.tga" imUp="effects_square_LED_power_off.tga">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlLabelStyle name="MixerFXTitle" colText="[r:200 g:200 b:200 a:255]">
+        <VFont name="font" vSize="12" fontName="Arial" weight="bold" />
+    </CtrlLabelStyle>
+    <CtrlLabelStyle name="MixerFXLabelDark" colText="[r:200 g:200 b:200 a:255]">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlLabelStyle name="MixerFXUnitsLabel" colText="[r:128 g:128 b:128 a:255]">
+        <VFont name="font" vSize="8" fontName="Arial" />
+    </CtrlLabelStyle>    
+    <CtrlLabelStyle name="MixerFXLabel" colText="[r:200 g:200 b:200 a:255]">
+        <VFont name="font" vSize="11" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlPanelStyle name="MixerFXPanel" imBackground="effects_gain_background.tga" intSmartTileEdgeSize="5">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlPlotStyle name="MixerFXPlot" imBackground="Graph.tga" colBorder="[r:128 g:0 b:128 a:0]" colFill="[r:0 g:0 b:0 a:255]" intSmartTileEdgeSize="5" lineWidth="3" colLine="[r:0 g:0 b:0 a:255]">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPlotStyle>
+    <CtrlPlotStyle name="MixerFXCompPlot" imBackground="effects_comp_meter.tga" colBorder="[r:128 g:0 b:128 a:0]" colFill="[r:0 g:0 b:0 a:255]" intSmartTileEdgeSize="5" lineWidth="3" colLine="[r:0 g:0 b:0 a:255]" plotRectInset="5" >
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPlotStyle>
+    <CtrlKnobStyle name="MixerFXKnobSmall" imKnobNormal="../com_medium_knob_light.tga" optStripInverted="true" activeAreaRect="[x:0 y:0 w:20 h:20]">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlKnobStyle>
+    <CtrlKnobStyle name="MixerFXKnobVerySmall" imKnobNormal="../com_small_knob_light.tga" optStripInverted="true" activeAreaRect="[x:0 y:0 w:17 h:17]">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlKnobStyle>
+    <CtrlKnobStyle name="MixerFXKnobSmall_5step" imKnobNormal="../com_medium_knob_light.tga" optStripInverted="true" optRotarySwitch="true" rotarySwitchPositionCount="5" activeAreaRect="[x:0 y:0 w:20 h:20]">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlKnobStyle>
+    <CtrlKnobStyle name="MixerFXKnobSmall_6step" imKnobNormal="../com_medium_knob_light.tga" optStripInverted="true" optRotarySwitch="true" rotarySwitchPositionCount="6" activeAreaRect="[x:0 y:0 w:20 h:20]">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlKnobStyle>
+    <CtrlKnobStyle name="MixerFXKnobLarge" optStripInverted="true" imKnobNormal="effects_large_knob.tga" activeAreaRect="[x:0 y:0 w:37 h:37]">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlKnobStyle>
+    <CtrlKnobStyle name="MixerFXKnobLarge_3step" optStripInverted="true" imKnobNormal="effects_large_knob.tga" optRotarySwitch="true" rotarySwitchPositionCount="3" activeAreaRect="[x:0 y:0 w:37 h:37]">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlKnobStyle>
+    <CtrlButtonStyle name="MixerFXButton" optMomentary="false" imDown="effects_square_LED_cropped_on.tga" imUp="effects_square_LED_cropped_off.tga">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlButtonStyle name="MixerFXButtonLED" optMomentary="false" imDown="mixer_LED_on.tga" imUp="mixer_LED_off.tga">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlPanelStyle name="MixerFXIndicatorPanel" colBorder="[r:0 g:0 b:0 a:0]" colFill="[r:255 g:0 b:255 a:0]" imBackground="effects_dial_indicators.tga" intSmartTileEdgeSize="5">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>    
+    <CtrlImageViewStyle name="MixerFXLogoDCAM" noDefaultDrawing="true" optBorder="false" imBackground="dcam_white_15h.tga" />
+    <CtrlSliderStyle name="MixerFXHistogramV" optFlipDirection="true" optHistogram="true" optScaleKnob="true" snapSteps="0" fineScale="0.05" incDecButtonMode="off" colBorder="[r:82 g:82 b:82 a:255]"  colSlider="[r:126 g:142 b:155 a:255]" colFill="[r:32 g:32 b:32 a:255]" >
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlSliderStyle>
+    <CtrlButtonStyle  name="MixerFXButtonMenu"   optMomentary="true" optDrawText="false" imDown="effects_list_LED_power_on.tga" imUp="effects_list_LED_power_off.tga" />
+    <CtrlButtonStyle  name="MixerFXPresetStateA" optMomentary="false" optDrawText="false" imDown="effects_A_button_on.tga" imUp="effects_A_button_off.tga" />
+    <CtrlButtonStyle  name="MixerFXPresetStateB" optMomentary="false" optDrawText="false" imDown="effects_B_button_on.tga" imUp="effects_B_button_off.tga" />
+    <CtrlButtonStyle  name="MixerFXPresetPrev"   optMomentary="true" optDrawText="false" imDown="effects_prev_button_on.tga" imUp="effects_prev_button_off.tga"  />
+    <CtrlButtonStyle  name="MixerFXPresetNext"   optMomentary="true" optDrawText="false" imDown="effects_next_button_on.tga" imUp="effects_next_button_off.tga" />
+    <CtrlTextBoxStyle name="MixerFXPresetCombo"  optSmartTile="true" imBackground="../screen_background.tga" colTextHighlight="[r:200 g:200 b:200 a:255]" colText="[r:200 g:200 b:200 a:255]" colBackground="[r:29 g:29 b:29 a:255]" colHighlight="[r:200 g:200 b:255 a:255]">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlTextBoxStyle>
+    <CtrlTextBoxStyle name="MixerFXPresetComboDirty"  optSmartTile="true" imBackground="../screen_background.tga" colTextHighlight="[r:200 g:200 b:200 a:255]" colText="[r:200 g:200 b:200 a:255]" colBackground="[r:29 g:29 b:29 a:255]" colHighlight="[r:200 g:200 b:255 a:255]">
+        <VFont name="font" vSize="12" fontName="Arial" weight="bold"/>
+    </CtrlTextBoxStyle>
+    <CtrlTextBoxStyle name="MixerFXCombo"  optSmartTile="true" imBackground="../screen_background.tga" colTextHighlight="[r:200 g:200 b:200 a:255]" colText="[r:200 g:200 b:200 a:255]" colBackground="[r:29 g:29 b:29 a:255]" colHighlight="[r:200 g:200 b:255 a:255]">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlTextBoxStyle>
+
+    <CtrlSliderStyle name="MixerFXLevelMeter" optFlipDirection="true" optHistogram="true" optScaleKnob="true" imBackingStrip="..\levelLED_off.tga" imAltBackingStrip="..\levelLED_small.tga" snapSteps="0" fineScale="0.05" incDecButtonMode="off">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlSliderStyle>
+
+    <CtrlMeterStyle name="MixerFXMeter" imBackground="effects_vu_meter.tga" pivotX="0.5" pivotY="1.10" angleStart="135" angleSize="90" radius="0.95">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlMeterStyle>    
+    <CtrlMeterStyle name="MixerFXMeterFilterMod" imBackground="effects_vu_meter.tga" min="-4.0" max="4.0" pivotX="0.5" pivotY="1.10" angleStart="135" angleSize="90" radius="0.95">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlMeterStyle>    
+        
+    <CtrlPanel name="test" rect="[x:0 y:0 w:100 h:100]"/>
+</root>

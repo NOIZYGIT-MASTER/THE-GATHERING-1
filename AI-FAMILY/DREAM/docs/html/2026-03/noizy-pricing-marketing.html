@@ -1,0 +1,1807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIZY.AI — Pricing Architecture + Marketing Strategy 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg: #050508;
+    --bg2: #090a0f;
+    --panel: #0e0f16;
+    --panel2: #13141e;
+    --border: #1a1c28;
+    --border-hi: #252840;
+    --green: #00ff88;
+    --green2: #00cc6a;
+    --green-bg: rgba(0,255,136,0.05);
+    --amber: #ffb300;
+    --amber2: #e09e00;
+    --amber-bg: rgba(255,179,0,0.05);
+    --cyan: #00d4ff;
+    --cyan-bg: rgba(0,212,255,0.05);
+    --purple: #a855f7;
+    --purple-bg: rgba(168,85,247,0.05);
+    --red: #ff3355;
+    --pink: #ff6eb0;
+    --white: #edf0f5;
+    --muted: #454860;
+    --text: #b8c0d0;
+    --mono: 'Share Tech Mono', monospace;
+    --display: 'Orbitron', monospace;
+    --body: 'Inter', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,255,136,0.008) 3px, rgba(0,255,136,0.008) 6px);
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--green2); }
+
+  /* NAV */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 56px;
+    background: rgba(5,5,8,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 48px;
+    gap: 40px;
+    z-index: 100;
+  }
+
+  .nav-brand {
+    font-family: var(--display);
+    font-size: 14px;
+    font-weight: 900;
+    color: var(--green);
+    letter-spacing: 3px;
+    text-shadow: 0 0 20px rgba(0,255,136,0.3);
+    white-space: nowrap;
+    margin-right: 8px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    flex: 1;
+  }
+
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--green); }
+
+  .nav-badge {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--amber);
+    background: rgba(255,179,0,0.08);
+    border: 1px solid rgba(255,179,0,0.2);
+    padding: 4px 12px;
+    border-radius: 2px;
+    letter-spacing: 2px;
+    white-space: nowrap;
+  }
+
+  .progress-bar {
+    position: fixed;
+    top: 56px; left: 0; right: 0;
+    height: 2px;
+    background: var(--border);
+    z-index: 101;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--green), var(--cyan), var(--purple));
+    width: 0%;
+    box-shadow: 0 0 8px var(--green);
+  }
+
+  /* SECTIONS */
+  .section { padding: 100px 80px; }
+  .section + .section { border-top: 1px solid var(--border); }
+
+  .section-eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-eyebrow::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border-hi), transparent);
+    max-width: 400px;
+  }
+
+  .section-title {
+    font-family: var(--display);
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: 2px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  .section-title span.hl-green { color: var(--green); text-shadow: 0 0 30px rgba(0,255,136,0.3); }
+  .section-title span.hl-amber { color: var(--amber); text-shadow: 0 0 30px rgba(255,179,0,0.3); }
+  .section-title span.hl-cyan { color: var(--cyan); }
+  .section-title span.hl-purple { color: var(--purple); }
+
+  .section-lead {
+    font-size: 17px;
+    color: var(--text);
+    max-width: 700px;
+    line-height: 1.8;
+    margin-bottom: 56px;
+  }
+
+  /* HERO */
+  .hero {
+    padding-top: 180px;
+    padding-bottom: 120px;
+    padding-left: 80px;
+    padding-right: 80px;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  #hero-canvas {
+    position: absolute;
+    inset: 0;
+    opacity: 0.4;
+  }
+
+  .hero-content { position: relative; z-index: 2; }
+
+  .hero-kicker {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--green);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-kicker::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--green);
+    box-shadow: 0 0 8px var(--green);
+  }
+
+  .hero-title {
+    font-family: var(--display);
+    font-size: clamp(40px, 7vw, 96px);
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: 2px;
+    margin-bottom: 32px;
+  }
+
+  .hero-title .line1 { color: var(--white); }
+  .hero-title .line2 { color: var(--green); text-shadow: 0 0 60px rgba(0,255,136,0.3); }
+  .hero-title .line3 { color: var(--amber); text-shadow: 0 0 40px rgba(255,179,0,0.2); }
+
+  .hero-desc {
+    font-size: 18px;
+    color: var(--text);
+    max-width: 640px;
+    line-height: 1.8;
+    margin-bottom: 48px;
+  }
+
+  .hero-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 60px;
+  }
+
+  .hero-pill {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding: 8px 16px;
+    border-radius: 3px;
+  }
+
+  .pill-outline-green { border: 1px solid rgba(0,255,136,0.3); color: var(--green); background: rgba(0,255,136,0.05); }
+  .pill-outline-amber { border: 1px solid rgba(255,179,0,0.3); color: var(--amber); background: rgba(255,179,0,0.05); }
+  .pill-outline-cyan { border: 1px solid rgba(0,212,255,0.3); color: var(--cyan); background: rgba(0,212,255,0.05); }
+  .pill-outline-purple { border: 1px solid rgba(168,85,247,0.3); color: var(--purple); background: rgba(168,85,247,0.05); }
+
+  .hero-big-stat {
+    display: flex;
+    gap: 60px;
+    flex-wrap: wrap;
+  }
+
+  .hbs { display: flex; flex-direction: column; gap: 4px; }
+  .hbs .v { font-family: var(--display); font-size: 36px; font-weight: 900; }
+  .hbs .l { font-family: var(--mono); font-size: 9px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+
+  /* HARMONY MANIFESTO */
+  .harmony-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    max-width: 1000px;
+    margin-bottom: 60px;
+  }
+
+  .harmony-cell {
+    padding: 32px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .harmony-cell::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    transition: opacity 0.3s;
+  }
+
+  .harmony-cell:hover::before { opacity: 0.08; }
+
+  .harmony-cell.hc-green { background: var(--green-bg); border: 1px solid rgba(0,255,136,0.15); }
+  .harmony-cell.hc-green::before { background: var(--green); }
+
+  .harmony-cell.hc-amber { background: var(--amber-bg); border: 1px solid rgba(255,179,0,0.15); }
+  .harmony-cell.hc-amber::before { background: var(--amber); }
+
+  .harmony-cell.hc-cyan { background: var(--cyan-bg); border: 1px solid rgba(0,212,255,0.15); }
+  .harmony-cell.hc-cyan::before { background: var(--cyan); }
+
+  .harmony-cell.hc-purple { background: var(--purple-bg); border: 1px solid rgba(168,85,247,0.15); }
+  .harmony-cell.hc-purple::before { background: var(--purple); }
+
+  .hc-glyph {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+
+  .hc-title {
+    font-family: var(--display);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+
+  .harmony-cell.hc-green .hc-title { color: var(--green); }
+  .harmony-cell.hc-amber .hc-title { color: var(--amber); }
+  .harmony-cell.hc-cyan .hc-title { color: var(--cyan); }
+  .harmony-cell.hc-purple .hc-title { color: var(--purple); }
+
+  .hc-body { font-size: 14px; color: var(--text); line-height: 1.7; }
+
+  /* COMPETITOR TABLE */
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 32px;
+  }
+
+  .comp-table thead {
+    background: var(--panel2);
+  }
+
+  .comp-table th {
+    padding: 14px 20px;
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+    border-bottom: 1px solid var(--border-hi);
+  }
+
+  .comp-table td {
+    padding: 13px 20px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    vertical-align: middle;
+  }
+
+  .comp-table tr:last-child td { border-bottom: none; }
+
+  .comp-table tr.noizy-row td {
+    background: rgba(0,255,136,0.04);
+    border-bottom: 1px solid rgba(0,255,136,0.15);
+    border-top: 1px solid rgba(0,255,136,0.15);
+  }
+
+  .comp-table tr:not(.noizy-row):hover td { background: rgba(255,255,255,0.015); }
+
+  .comp-table .brand { font-weight: 600; color: var(--white); }
+  .comp-table .noizy-row .brand { color: var(--green); font-family: var(--display); letter-spacing: 1px; font-size: 14px; }
+  .comp-table .price { font-family: var(--mono); color: var(--amber); font-size: 12px; }
+  .comp-table .royalty-bad { color: var(--red); font-family: var(--mono); font-size: 11px; }
+  .comp-table .royalty-good { color: var(--green); font-family: var(--mono); font-size: 12px; font-weight: 600; }
+  .comp-table .protection { font-size: 12px; }
+
+  .comp-wrap {
+    background: var(--panel);
+    border: 1px solid var(--border-hi);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  /* INSIGHT BOX */
+  .insight-box {
+    background: rgba(0,255,136,0.04);
+    border: 1px solid rgba(0,255,136,0.2);
+    border-left: 3px solid var(--green);
+    padding: 24px 28px;
+    border-radius: 0 4px 4px 0;
+    margin-bottom: 40px;
+    max-width: 900px;
+  }
+
+  .insight-box .ib-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--green);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .insight-box .ib-text {
+    font-size: 18px;
+    color: var(--white);
+    line-height: 1.6;
+    font-weight: 500;
+  }
+
+  .insight-box .ib-sub {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 10px;
+    line-height: 1.6;
+  }
+
+  /* GUILD PRICING CARDS */
+  .guild-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .guild-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  }
+
+  .guild-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+
+  .guild-card.featured {
+    border-color: rgba(0,255,136,0.4);
+    box-shadow: 0 0 40px rgba(0,255,136,0.08);
+  }
+
+  .guild-card.featured:hover {
+    border-color: rgba(0,255,136,0.6);
+  }
+
+  .gc-tier-bar {
+    height: 3px;
+  }
+
+  .guild-card.fan-tier .gc-tier-bar { background: linear-gradient(90deg, #555, #888); }
+  .guild-card.creator-tier .gc-tier-bar { background: linear-gradient(90deg, var(--green2), var(--green)); }
+  .guild-card.pro-tier .gc-tier-bar { background: linear-gradient(90deg, var(--cyan), var(--green)); }
+  .guild-card.studio-tier .gc-tier-bar { background: linear-gradient(90deg, var(--amber2), var(--amber)); }
+  .guild-card.enterprise-tier .gc-tier-bar { background: linear-gradient(90deg, var(--purple), var(--pink)); }
+
+  .gc-header {
+    padding: 24px 24px 16px;
+  }
+
+  .gc-guild {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .gc-name {
+    font-family: var(--display);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+
+  .guild-card.fan-tier .gc-name { color: var(--text); }
+  .guild-card.creator-tier .gc-name { color: var(--green); }
+  .guild-card.pro-tier .gc-name { color: var(--cyan); }
+  .guild-card.studio-tier .gc-name { color: var(--amber); }
+  .guild-card.enterprise-tier .gc-name { color: var(--purple); }
+
+  .gc-price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-bottom: 4px;
+  }
+
+  .gc-price .amount {
+    font-family: var(--display);
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--white);
+  }
+
+  .gc-price .period {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .gc-price-note {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    margin-bottom: 0;
+  }
+
+  .gc-body {
+    padding: 16px 24px 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .gc-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .gc-features li {
+    font-size: 13px;
+    color: var(--text);
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.4;
+  }
+
+  .gc-features li::before {
+    position: absolute;
+    left: 0;
+    font-size: 11px;
+  }
+
+  .guild-card.fan-tier .gc-features li::before { content: '○'; color: var(--muted); }
+  .guild-card.creator-tier .gc-features li::before { content: '●'; color: var(--green); }
+  .guild-card.pro-tier .gc-features li::before { content: '◆'; color: var(--cyan); }
+  .guild-card.studio-tier .gc-features li::before { content: '★'; color: var(--amber); }
+  .guild-card.enterprise-tier .gc-features li::before { content: '◉'; color: var(--purple); }
+
+  .gc-royalty {
+    background: rgba(0,255,136,0.06);
+    border: 1px solid rgba(0,255,136,0.2);
+    padding: 10px 14px;
+    border-radius: 3px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--green);
+    text-align: center;
+  }
+
+  .guild-card.fan-tier .gc-royalty {
+    background: rgba(255,255,255,0.03);
+    border-color: var(--border);
+    color: var(--muted);
+  }
+
+  /* REVENUE ENGINE */
+  .revenue-layers {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    max-width: 900px;
+    margin-bottom: 40px;
+  }
+
+  .rev-layer {
+    display: grid;
+    grid-template-columns: 80px 200px 1fr 140px;
+    align-items: center;
+    gap: 24px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 20px 24px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .rev-layer:first-child { border-radius: 4px 4px 0 0; }
+  .rev-layer:last-child { border-radius: 0 0 4px 4px; }
+  .rev-layer:hover { border-color: var(--border-hi); background: rgba(255,255,255,0.02); }
+
+  .rev-layer.l1 { border-left: 3px solid var(--green); }
+  .rev-layer.l2 { border-left: 3px solid var(--cyan); }
+  .rev-layer.l3 { border-left: 3px solid var(--amber); }
+  .rev-layer.l4 { border-left: 3px solid var(--purple); }
+  .rev-layer.l5 { border-left: 3px solid var(--pink); }
+
+  .rev-layer .rl-num {
+    font-family: var(--display);
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--muted);
+  }
+
+  .rev-layer .rl-name {
+    font-family: var(--display);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .rev-layer.l1 .rl-name { color: var(--green); }
+  .rev-layer.l2 .rl-name { color: var(--cyan); }
+  .rev-layer.l3 .rl-name { color: var(--amber); }
+  .rev-layer.l4 .rl-name { color: var(--purple); }
+  .rev-layer.l5 .rl-name { color: var(--pink); }
+
+  .rev-layer .rl-items {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .rev-layer .rl-range {
+    font-family: var(--display);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--white);
+    text-align: right;
+  }
+
+  /* MARKETING STRATEGY */
+  .mkt-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+
+  .mkt-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 28px 32px;
+    transition: border-color 0.2s;
+  }
+
+  .mkt-card:hover { border-color: var(--border-hi); }
+
+  .mkt-card .mc-num {
+    font-family: var(--display);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+
+  .mkt-card .mc-title {
+    font-family: var(--display);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+
+  .mkt-card .mc-body {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  .mkt-card .mc-tagline {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+    line-height: 1.5;
+  }
+
+  .mkt-card.mc-green .mc-title { color: var(--green); }
+  .mkt-card.mc-amber .mc-title { color: var(--amber); }
+  .mkt-card.mc-cyan .mc-title { color: var(--cyan); }
+  .mkt-card.mc-purple .mc-title { color: var(--purple); }
+  .mkt-card.mc-pink .mc-title { color: var(--pink); }
+  .mkt-card.mc-green2 .mc-title { color: #88ffcc; }
+
+  /* TAGLINE WALL */
+  .tagline-wall {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    max-width: 900px;
+    margin-bottom: 48px;
+  }
+
+  .tagline-row {
+    display: flex;
+    gap: 1px;
+  }
+
+  .tagline-item {
+    flex: 1;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 20px 24px;
+    transition: background 0.2s, border-color 0.2s;
+    cursor: default;
+  }
+
+  .tagline-item:hover {
+    background: var(--panel2);
+    border-color: var(--border-hi);
+  }
+
+  .tagline-item .ti-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .tagline-item .ti-line {
+    font-family: var(--display);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: 1px;
+  }
+
+  .tagline-item.ti-green .ti-line { color: var(--green); }
+  .tagline-item.ti-amber .ti-line { color: var(--amber); }
+  .tagline-item.ti-cyan .ti-line { color: var(--cyan); }
+  .tagline-item.ti-purple .ti-line { color: var(--purple); }
+  .tagline-item.ti-white .ti-line { color: var(--white); }
+  .tagline-item.ti-pink .ti-line { color: var(--pink); }
+
+  /* CREATOR ECONOMICS */
+  .econ-table {
+    width: 100%;
+    border-collapse: collapse;
+    max-width: 800px;
+  }
+
+  .econ-table th {
+    padding: 12px 20px;
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: var(--panel2);
+    border-bottom: 1px solid var(--border-hi);
+  }
+
+  .econ-table td {
+    padding: 12px 20px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .econ-table tr:last-child td { border-bottom: none; }
+  .econ-table .activity { color: var(--white); font-weight: 500; }
+  .econ-table .floor { font-family: var(--mono); color: var(--muted); font-size: 12px; }
+  .econ-table .ceiling { font-family: var(--mono); color: var(--green); font-size: 12px; font-weight: 600; }
+  .econ-table .royalty { font-family: var(--mono); color: var(--amber); font-size: 12px; }
+
+  .econ-wrap {
+    background: var(--panel);
+    border: 1px solid var(--border-hi);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+
+  /* KILLER DIFFERENTIATORS */
+  .diff-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    max-width: 900px;
+    margin-bottom: 48px;
+  }
+
+  .diff-cell {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 24px;
+  }
+
+  .diff-cell .dc-vs {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .diff-cell .dc-them {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--red);
+    margin-bottom: 6px;
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .diff-cell .dc-them::before { content: '✗'; position: absolute; left: 0; }
+
+  .diff-cell .dc-noizy {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--green);
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .diff-cell .dc-noizy::before { content: '✓'; position: absolute; left: 0; }
+
+  /* CLOSING */
+  .closing {
+    text-align: center;
+    padding: 120px 80px;
+    border-top: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .closing::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(ellipse, rgba(0,255,136,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .closing-content { position: relative; z-index: 1; }
+
+  .closing-super {
+    font-family: var(--display);
+    font-size: clamp(48px, 8vw, 120px);
+    font-weight: 900;
+    color: var(--green);
+    letter-spacing: 8px;
+    text-shadow: 0 0 80px rgba(0,255,136,0.3);
+    margin-bottom: 16px;
+  }
+
+  .closing-tagline {
+    font-family: var(--display);
+    font-size: clamp(16px, 2vw, 24px);
+    color: var(--amber);
+    letter-spacing: 4px;
+    margin-bottom: 40px;
+    opacity: 0.8;
+  }
+
+  .closing-sub {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 2.2;
+    letter-spacing: 2px;
+  }
+
+  .closing-honors {
+    font-family: var(--display);
+    font-size: 14px;
+    color: var(--green2);
+    letter-spacing: 6px;
+    margin: 32px 0;
+    opacity: 0.7;
+  }
+
+  /* UTILITY */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .spacer-sm { height: 24px; }
+  .spacer-md { height: 48px; }
+
+  @media (max-width: 1100px) {
+    .section { padding: 80px 40px; }
+    .hero { padding: 160px 40px 100px; }
+    .diff-grid { grid-template-columns: 1fr 1fr; }
+    .rev-layer { grid-template-columns: 60px 160px 1fr 120px; }
+  }
+
+  @media (max-width: 768px) {
+    .section { padding: 60px 24px; }
+    .hero { padding: 120px 24px 80px; }
+    .harmony-grid, .mkt-grid, .two-col { grid-template-columns: 1fr; }
+    .diff-grid { grid-template-columns: 1fr; }
+    .rev-layer { grid-template-columns: 1fr; gap: 8px; }
+    .rev-layer .rl-range { text-align: left; }
+    .nav { padding: 0 24px; gap: 20px; }
+    .nav-links { display: none; }
+    .closing { padding: 80px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">NOIZY.AI</div>
+  <div class="nav-links">
+    <a href="#manifesto">Manifesto</a>
+    <a href="#market">Market</a>
+    <a href="#guilds">Guilds</a>
+    <a href="#revenue">Revenue</a>
+    <a href="#marketing">Marketing</a>
+    <a href="#taglines">Taglines</a>
+    <a href="#economics">Economics</a>
+  </div>
+  <div class="nav-badge">PRICING + STRATEGY 2026</div>
+</nav>
+
+<div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+<!-- HERO -->
+<section class="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-kicker">NOIZYFISH INC. · PRICING + MARKETING ARCHITECTURE · 2026</div>
+    <div class="hero-title">
+      <div class="line1">AI & HUMANS</div>
+      <div class="line2">IN PERFECT</div>
+      <div class="line3">HARMONY.</div>
+    </div>
+    <div class="hero-desc">
+      Every competitor charges for compute. NOIZY charges for participation.
+      Every competitor extracts from creators. NOIZY pays them 75%.
+      Every competitor rents you access to your own voice. NOIZY builds you a Voice Estate that lasts 500 years.
+    </div>
+    <div class="hero-pills">
+      <div class="hero-pill pill-outline-green">75% CREATOR ROYALTY — ALWAYS</div>
+      <div class="hero-pill pill-outline-amber">A.I.V.A. · NOT "AI VOICE"</div>
+      <div class="hero-pill pill-outline-cyan">VOICE ESTATE = PERPETUAL ASSET</div>
+      <div class="hero-pill pill-outline-purple">10 NEVER CLAUSES · CONSTITUTIONAL</div>
+    </div>
+    <div class="hero-big-stat">
+      <div class="hbs">
+        <div class="v" style="color:var(--green)">$0</div>
+        <div class="l">To Join</div>
+      </div>
+      <div class="hbs">
+        <div class="v" style="color:var(--amber)">75%</div>
+        <div class="l">Creator Royalty</div>
+      </div>
+      <div class="hbs">
+        <div class="v" style="color:var(--cyan)">∞</div>
+        <div class="l">Duration</div>
+      </div>
+      <div class="hbs">
+        <div class="v" style="color:var(--purple)">500yr</div>
+        <div class="l">Voice Codex</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO — HARMONY -->
+<section class="section" id="manifesto">
+  <div class="section-eyebrow">// THE HARMONY DOCTRINE</div>
+  <div class="section-title">
+    <span class="hl-green">AI & Humans</span><br>
+    Growing in Mutually<br>
+    <span class="hl-amber">Wonderful Ways.</span>
+  </div>
+  <div class="section-lead">
+    The AI industry made a choice: treat human creativity as raw material.
+    NOIZY made the opposite choice. Here are the four pillars of the harmony doctrine that drive every pricing, product, and marketing decision we make.
+  </div>
+
+  <div class="harmony-grid">
+    <div class="harmony-cell hc-green">
+      <div class="hc-glyph">🤝</div>
+      <div class="hc-title">SYNCHRONIC GROWTH</div>
+      <div class="hc-body">When AI gets better, creators earn more — not less. Every training improvement in the NOIZYVOX engine translates directly to higher royalty values for the RSPs who built it. AI and humans grow together, in the same direction, at the same time. Always.</div>
+    </div>
+    <div class="harmony-cell hc-amber">
+      <div class="hc-glyph">🏛️</div>
+      <div class="hc-title">CONSENT AS INFRASTRUCTURE</div>
+      <div class="hc-body">Other platforms hide consent in 47-page terms of service. NOIZY encodes consent at the infrastructure layer. Before a single waveform is processed, consent is cryptographically confirmed. This isn't a feature — it's the foundation everything else is built on.</div>
+    </div>
+    <div class="harmony-cell hc-cyan">
+      <div class="hc-glyph">♾️</div>
+      <div class="hc-title">PERPETUAL CREATIVE ASSET</div>
+      <div class="hc-body">A human voice is not a subscription. It's not compute time. It's not a SaaS metric. A human voice is a creative estate — a generational asset that should grow in value over time, survive its creator, and pass to their heirs. NOIZY builds Voice Estates, not accounts.</div>
+    </div>
+    <div class="harmony-cell hc-purple">
+      <div class="hc-glyph">🛡️</div>
+      <div class="hc-title">HELPFULNESS AS REVENUE</div>
+      <div class="hc-body">Every product NOIZY builds must answer one question: does this genuinely help a human? NOIZYKIDZ gives children with disabilities access to music. NOIZYVOX gives professional voice actors a living royalty. LIFELUV gives life back to those who've lost it. Helpfulness is the business model.</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKET REALITY -->
+<section class="section" id="market">
+  <div class="section-eyebrow">// COMPETITIVE LANDSCAPE · MARKET REALITY 2026</div>
+  <div class="section-title">
+    What Everyone Else<br>
+    <span class="hl-amber">Is Charging.</span>
+  </div>
+  <div class="section-lead">
+    The market is underpriced because VCs are subsidizing it. This window is temporary.
+    The next wave will be about distribution + creator economics, not generation. NOIZY is already there.
+  </div>
+
+  <div class="insight-box">
+    <div class="ib-label">// KEY MARKET INSIGHT — ABSORBED FROM COMPETITIVE ANALYSIS</div>
+    <div class="ib-text">"AI tools are 100–1000× cheaper than human production. The next wave platforms will monetize distribution + creator markets — not generation."</div>
+    <div class="ib-sub">
+      AI Voice: $0.05–0.10 per minute generated · AI Music: $0.02–0.30 per song · Human voice actor: $100–500/hr · Music licensing: $50–1,000+<br>
+      Venture capital is currently subsidizing the gap. The window to establish creator-owned infrastructure is NOW.
+    </div>
+  </div>
+
+  <div class="comp-wrap">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Platform</th>
+          <th>Best Plan</th>
+          <th>Creator Royalty</th>
+          <th>Voice Ownership</th>
+          <th>Consent Layer</th>
+          <th>Asset Duration</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="brand">ElevenLabs</td>
+          <td class="price">$99/mo → $1,320/mo</td>
+          <td class="royalty-bad">~0% (pay for access)</td>
+          <td class="protection">Platform retains rights</td>
+          <td class="protection">ToS only</td>
+          <td class="protection">Active subscription</td>
+        </tr>
+        <tr>
+          <td class="brand">Murf AI</td>
+          <td class="price">$19–$66/mo</td>
+          <td class="royalty-bad">0%</td>
+          <td class="protection">No voice estate</td>
+          <td class="protection">ToS only</td>
+          <td class="protection">Active subscription</td>
+        </tr>
+        <tr>
+          <td class="brand">PlayHT</td>
+          <td class="price">$39–$99/mo</td>
+          <td class="royalty-bad">0%</td>
+          <td class="protection">No cloning rights</td>
+          <td class="protection">ToS only</td>
+          <td class="protection">Active subscription</td>
+        </tr>
+        <tr>
+          <td class="brand">Suno</td>
+          <td class="price">$10–$30/mo</td>
+          <td class="royalty-bad">0%</td>
+          <td class="protection">No human voice</td>
+          <td class="protection">None (generative)</td>
+          <td class="protection">Active subscription</td>
+        </tr>
+        <tr>
+          <td class="brand">Cameo</td>
+          <td class="price">Platform fee: 25%</td>
+          <td class="royalty-bad">75% (talent only, no AI)</td>
+          <td class="protection">No AI layer</td>
+          <td class="protection">Manual</td>
+          <td class="protection">Active listing</td>
+        </tr>
+        <tr>
+          <td class="brand">Replica Studios</td>
+          <td class="price">$0.006/word API</td>
+          <td class="royalty-bad">Rev share (small %)</td>
+          <td class="protection">Platform retains</td>
+          <td class="protection">Contract only</td>
+          <td class="protection">Active contract</td>
+        </tr>
+        <tr class="noizy-row">
+          <td class="brand">NOIZYVOX · NOIZY.AI ✦</td>
+          <td class="price">$0 join · tiered access</td>
+          <td class="royalty-good">75% ALWAYS · HARDCODED</td>
+          <td class="protection" style="color:var(--green)">Voice Estate · Perpetual</td>
+          <td class="protection" style="color:var(--green)">Cryptographic · NC_01</td>
+          <td class="protection" style="color:var(--green)">∞ · Inheritable · 500yr</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- GUILD PRICING -->
+<section class="section" id="guilds">
+  <div class="section-eyebrow">// GUILD-BASED PRICING · HUMAN COMMITMENT ARCHITECTURE</div>
+  <div class="section-title">
+    Every Human<br>
+    <span class="hl-green">Commitment Level</span><br>
+    Accounted For.
+  </div>
+  <div class="section-lead">
+    NOIZY doesn't have "users." It has guild members — each with a different level of commitment to the ecosystem, each earning proportionally. Fans. Creators. Professionals. Studios. Enterprises. All aligned. All growing together.
+  </div>
+
+  <!-- FAN GUILD -->
+  <div style="margin-bottom:12px; font-family:var(--mono); font-size:10px; color:var(--muted); letter-spacing:3px; text-transform:uppercase;">// DEMAND SIDE — FAN GUILD</div>
+  <div class="guild-grid" style="margin-bottom:40px;">
+    <div class="guild-card fan-tier">
+      <div class="gc-tier-bar"></div>
+      <div class="gc-header">
+        <div class="gc-guild">Fan Guild · Listener</div>
+        <div class="gc-name">FREE CITIZEN</div>
+        <div class="gc-price">
+          <div class="amount">$0</div>
+          <div class="period">/ always</div>
+        </div>
+        <div class="gc-price-note">No credit card. No expiry.</div>
+      </div>
+      <div class="gc-body">
+        <ul class="gc-features">
+          <li>Access to public Voice Packs</li>
+          <li>Sample A.I.V.A. demos</li>
+          <li>NOIZY community access</li>
+          <li>Basic voice interactions (limited)</li>
+        </ul>
+        <div class="gc-royalty">No royalties earned at this tier</div>
+      </div>
+    </div>
+    <div class="guild-card fan-tier">
+      <div class="gc-tier-bar"></div>
+      <div class="gc-header">
+        <div class="gc-guild">Fan Guild · Supporter</div>
+        <div class="gc-name">SUPPORTER</div>
+        <div class="gc-price">
+          <div class="amount">$5</div>
+          <div class="period">/ month</div>
+        </div>
+        <div class="gc-price-note">Monthly · Cancel anytime</div>
+      </div>
+      <div class="gc-body">
+        <ul class="gc-features">
+          <li>Fan voice AI interactions (50/mo)</li>
+          <li>Exclusive Voice Packs</li>
+          <li>Creator direct messages</li>
+          <li>Early access to new A.I.V.A. voices</li>
+        </ul>
+        <div class="gc-royalty">Interaction fees flow to Creator: 75%</div>
+      </div>
+    </div>
+    <div class="guild-card fan-tier">
+      <div class="gc-tier-bar"></div>
+      <div class="gc-header">
+        <div class="gc-guild">Fan Guild · Patron</div>
+        <div class="gc-name">PATRON</div>
+        <div class="gc-price">
+          <div class="amount">$10</div>
+          <div class="period">/ month</div>
+        </div>
+        <div class="gc-price-note">Monthly · Cancel anytime</div>
+      </div>
+      <div class="gc-body">
+        <ul class="gc-features">
+          <li>Unlimited fan interactions</li>
+          <li>Custom voice experience builds</li>
+          <li>Voice skin packs</li>
+          <li>Priority creator access</li>
+          <li>Community recognition badge</li>
+        </ul>
+        <div class="gc-royalty">All fees flow to Creator: 75%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CREATOR GUILD -->
+  <div style="margin-bottom:12px; font-family:var(--mono); font-size:10px; color:var(--muted); letter-spacing:3px; text-transform:uppercase;">// SUPPLY SIDE — CREATOR GUILD (RSP TIERS)</div>
+  <div class="guild-grid">
+    <div class="guild-card creator-tier featured">
+      <div class="gc-tier-bar"></div>
+      <div class="gc-header">
+        <div class="gc-guild">Creator Guild · RSP</div>
+        <div class="gc-name">FOUNDING RSP</div>
+        <div class="gc-price">
+          <div class="amount">$0</div>
+          <div class="period">/ forever</div>
+        </div>
+        <div class="gc-price-note">5 seats only · Currently open</div>
+      </div>
+      <div class="gc-body">
+        <ul class="gc-features">
+          <li>Voice DNA session (U87 · UAD chain)</li>
+          <li>Cryptographic consent key (lifetime)</li>
+          <li>Voice Estate (inherited · 500yr Codex)</li>
+          <li>NOIZY PROOF watermark (May 2026)</li>
+          <li>All 10 Never Clauses protection</li>
+          <li>Founding status · RSP_002–006</li>
+          <li>Direct line to RSP_001</li>
+        </ul>
+        <div class="gc-royalty">85% ROYALTY · FOUNDING LOCKED · FOREVER</div>
+      </div>
+    </div>
+    <div class="guild-card creator-tier">
+      <div class="gc-tier-bar"></div>
+      <div class="gc-header">
+        <div class="gc-guild">Creator Guild · RSP</div>
+        <div class="gc-name">CREATOR</div>
+        <div class="gc-price">
+          <div class="amount">$10</div>
+          <div class="period">/ month</div>
+        </div>
+        <div class="gc-price-note">Indie artists · Voice actors</div>
+      </div>
+      <div class="gc-body">
+        <ul class="gc-features">
+          <li>Voice DNA session included</li>
+          <li>Monetizable A.I.V.A. voice</li>
+          <li>Fan interaction economy</li>
+          <li>Basic analytics dashboard</li>
+          <li>NOIZY community access</li>
+          <li>10 Never Clauses protection</li>
+        </ul>
+        <div class="gc-royalty">75% ROYALTY · ALL REVENUE STREAMS</div>
+      </div>
+    </div>
+    <div class="guild-card pro-tier">
+      <div class="gc-tier-bar"></div>
+      <div class="gc-header">
+        <div class="gc-guild">Creator Guild · Pro</div>
+        <div class="gc-name">PRO VOICE</div>
+        <div class="gc-price">
+          <div class="amount">$29</div>
+          <div class="period">/ month</div>
+        </div>
+        <div class="gc-price-note">Podcasters · Narrators · VO pros</div>
+      </div>
+      <div class="gc-body">
+        <ul class="gc-features">
+          <li>Priority A.I.V.A. synthesis queue</li>
+          <li>Multi-domain deployment</li>
+          <li>Advanced Voice Estate controls</li>
+          <li>Royalty analytics + reporting</li>
+          <li>Commercial licensing tools</li>
+          <li>API access (2K calls/mo)</li>
+        </ul>
+        <div class="gc-royalty">75% ROYALTY · COMMERCIAL RIGHTS INCLUDED</div>
+      </div>
+    </div>
+    <div class="guild-card studio-tier">
+      <div class="gc-tier-bar"></div>
+      <div class="gc-header">
+        <div class="gc-guild">Creator Guild · Studio</div>
+        <div class="gc-name">STUDIO</div>
+        <div class="gc-price">
+          <div class="amount">$99</div>
+          <div class="period">/ month</div>
+        </div>
+        <div class="gc-price-note">Production teams · Small labels</div>
+      </div>
+      <div class="gc-body">
+        <ul class="gc-features">
+          <li>Up to 5 Voice Estates managed</li>
+          <li>SUPERSONIC stack access</li>
+          <li>Batch A.I.V.A. synthesis</li>
+          <li>White-label voice licensing</li>
+          <li>Dedicated provenance dashboard</li>
+          <li>API access (20K calls/mo)</li>
+        </ul>
+        <div class="gc-royalty">75% ROYALTY · EACH MANAGED ARTIST PROTECTED</div>
+      </div>
+    </div>
+    <div class="guild-card studio-tier">
+      <div class="gc-tier-bar"></div>
+      <div class="gc-header">
+        <div class="gc-guild">Creator Guild · Label</div>
+        <div class="gc-name">LABEL</div>
+        <div class="gc-price">
+          <div class="amount">$399</div>
+          <div class="period">/ month</div>
+        </div>
+        <div class="gc-price-note">Music companies · Networks</div>
+      </div>
+      <div class="gc-body">
+        <ul class="gc-features">
+          <li>Unlimited Voice Estate management</li>
+          <li>Priority SUPERSONIC stack SLA</li>
+          <li>Custom consent key schemas</li>
+          <li>Bulk watermarking (NOIZY PROOF)</li>
+          <li>Dedicated account manager</li>
+          <li>API access (200K calls/mo)</li>
+        </ul>
+        <div class="gc-royalty">75% ROYALTY · EVERY ARTIST · NO EXCEPTIONS</div>
+      </div>
+    </div>
+    <div class="guild-card enterprise-tier">
+      <div class="gc-tier-bar"></div>
+      <div class="gc-header">
+        <div class="gc-guild">Enterprise</div>
+        <div class="gc-name">ENTERPRISE</div>
+        <div class="gc-price">
+          <div class="amount">Custom</div>
+          <div class="period"></div>
+        </div>
+        <div class="gc-price-note">Game studios · Film/TV · Assistants</div>
+      </div>
+      <div class="gc-body">
+        <ul class="gc-features">
+          <li>Game studio: $499/mo base</li>
+          <li>Film/TV production: $2K+/mo</li>
+          <li>Voice assistant integration: rev share</li>
+          <li>Custom Never Clause addenda</li>
+          <li>Dedicated Cloudflare routing</li>
+          <li>SLA + legal clearance (Alex/Board)</li>
+        </ul>
+        <div class="gc-royalty">75% ROYALTY · ACTOR PROTECTED IN ALL CONTEXTS</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVENUE ENGINE -->
+<section class="section" id="revenue">
+  <div class="section-eyebrow">// THE NOIZY SUPER-ENGINE · 5 REVENUE LAYERS</div>
+  <div class="section-title">
+    Not a Tool.<br>
+    <span class="hl-green">A Creator Economy.</span>
+  </div>
+  <div class="section-lead">
+    Competitors sell compute minutes. NOIZY builds five interlocking revenue layers where every transaction makes the ecosystem stronger, every creator earns more, and every fan contributes meaningfully to the creators they love.
+  </div>
+
+  <div class="revenue-layers">
+    <div class="rev-layer l1">
+      <div class="rl-num">01</div>
+      <div class="rl-name">AI TOOLS</div>
+      <div class="rl-items">
+        Music generation (NOIZYAI) · Voice synthesis (NOIZYVOX)<br>
+        Remix + stems · Sound design · Batch production
+      </div>
+      <div class="rl-range">$10–$399<br><span style="font-size:10px; color:var(--muted);">per seat/mo</span></div>
+    </div>
+    <div class="rev-layer l2">
+      <div class="rl-num">02</div>
+      <div class="rl-name">CREATOR MARKETPLACE</div>
+      <div class="rl-items">
+        Voice licensing · Stems · Samples · Custom voice builds<br>
+        White-label A.I.V.A. deployment · Commercial sync licensing
+      </div>
+      <div class="rl-range">$200–$20K<br><span style="font-size:10px; color:var(--muted);">per creator/mo</span></div>
+    </div>
+    <div class="rev-layer l3">
+      <div class="rl-num">03</div>
+      <div class="rl-name">FAN ECONOMY</div>
+      <div class="rl-items">
+        Voice interactions (Cameo-style) · Custom songs · Voice skin packs<br>
+        Community memberships · Patron tiers · Live voice events
+      </div>
+      <div class="rl-range">$100–$5K<br><span style="font-size:10px; color:var(--muted);">per creator/mo</span></div>
+    </div>
+    <div class="rev-layer l4">
+      <div class="rl-num">04</div>
+      <div class="rl-name">ENTERPRISE LICENSING</div>
+      <div class="rl-items">
+        Game studios · Film/TV production · Podcast networks<br>
+        Brand voice assistants · Clinical applications (Health Canada pathway)
+      </div>
+      <div class="rl-range">$500–$50K<br><span style="font-size:10px; color:var(--muted);">per enterprise/mo</span></div>
+    </div>
+    <div class="rev-layer l5">
+      <div class="rl-num">05</div>
+      <div class="rl-name">PLATFORM INTEGRATIONS</div>
+      <div class="rl-items">
+        API consent layer for third-party platforms · Royalty distribution rails<br>
+        NOIZY PROOF watermark-as-a-service · HVS consent infrastructure
+      </div>
+      <div class="rl-range">Rev Share<br><span style="font-size:10px; color:var(--muted);">per integration</span></div>
+    </div>
+  </div>
+
+  <div class="insight-box" style="border-color:rgba(255,179,0,0.2); background:rgba(255,179,0,0.03);">
+    <div class="ib-label" style="color:var(--amber);">// THE SPOTIFY + ELEVENLABS + CAMEO + PATREON SYNTHESIS</div>
+    <div class="ib-text" style="color:var(--white);">
+      Spotify owns distribution. ElevenLabs owns synthesis. Cameo owns celebrity voice. Patreon owns creator funding. <span style="color:var(--amber);">NOIZY owns all four simultaneously</span> — and unlike any of them, NOIZY pays creators 75% of everything.
+    </div>
+  </div>
+</section>
+
+<!-- CREATOR ECONOMICS -->
+<section class="section" id="economics">
+  <div class="section-eyebrow">// ESTIMATED CREATOR ECONOMICS PER RSP</div>
+  <div class="section-title">
+    What a NOIZYVOX<br>
+    <span class="hl-amber">Creator Actually Earns.</span>
+  </div>
+  <div class="section-lead">
+    These are conservative projections based on market comparables. A professional voice actor joining NOIZYVOX gains access to revenue streams that didn't exist for any previous generation of voice talent.
+  </div>
+
+  <div class="econ-wrap">
+    <table class="econ-table">
+      <thead>
+        <tr>
+          <th>Revenue Stream</th>
+          <th>Monthly Floor</th>
+          <th>Monthly Ceiling</th>
+          <th>NOIZY Creator Share</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="activity">Fan AI interactions (voice chat, custom messages)</td>
+          <td class="floor">$100</td>
+          <td class="ceiling">$5,000</td>
+          <td class="royalty">75%</td>
+        </tr>
+        <tr>
+          <td class="activity">A.I.V.A. voice licensing (third-party deployments)</td>
+          <td class="floor">$200</td>
+          <td class="ceiling">$20,000</td>
+          <td class="royalty">75%</td>
+        </tr>
+        <tr>
+          <td class="activity">Music licensing (AI-assisted compositions)</td>
+          <td class="floor">$500</td>
+          <td class="ceiling">$50,000</td>
+          <td class="royalty">75%</td>
+        </tr>
+        <tr>
+          <td class="activity">Brand voice work (commercial, enterprise)</td>
+          <td class="floor">$500</td>
+          <td class="ceiling">$50,000</td>
+          <td class="royalty">75%</td>
+        </tr>
+        <tr>
+          <td class="activity">Voice skin packs (downloadable assets)</td>
+          <td class="floor">$50</td>
+          <td class="ceiling">$2,000</td>
+          <td class="royalty">75%</td>
+        </tr>
+        <tr>
+          <td class="activity">Game / film / TV sync licensing</td>
+          <td class="floor">$300</td>
+          <td class="ceiling">$100,000+</td>
+          <td class="royalty">75%</td>
+        </tr>
+        <tr style="background:rgba(0,255,136,0.04);">
+          <td class="activity" style="color:var(--green); font-weight:700;">TOTAL ESTIMATED MONTHLY (ACTIVE RSP)</td>
+          <td class="floor" style="color:var(--text);">$1,650</td>
+          <td class="ceiling" style="font-size:14px; color:var(--green); font-weight:700;">$227,000+</td>
+          <td class="royalty" style="color:var(--green); font-weight:700; font-size:14px;">75% ALWAYS</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- DIFFERENTIATORS -->
+<section class="section">
+  <div class="section-eyebrow">// VS. EVERY COMPETITOR</div>
+  <div class="section-title">
+    The Difference Is<br>
+    <span class="hl-green">Not a Feature.</span><br>
+    It's a Doctrine.
+  </div>
+
+  <div class="diff-grid">
+    <div class="diff-cell">
+      <div class="dc-vs">Model / Economics</div>
+      <div class="dc-them">Charge for compute time</div>
+      <div class="dc-noizy">Charge for participation</div>
+    </div>
+    <div class="diff-cell">
+      <div class="dc-vs">Creator Revenue</div>
+      <div class="dc-them">0% royalty</div>
+      <div class="dc-noizy">75% royalty · hardcoded</div>
+    </div>
+    <div class="diff-cell">
+      <div class="dc-vs">Voice Ownership</div>
+      <div class="dc-them">Platform retains rights</div>
+      <div class="dc-noizy">Creator owns · Voice Estate</div>
+    </div>
+    <div class="diff-cell">
+      <div class="dc-vs">Consent Architecture</div>
+      <div class="dc-them">Buried in 47-page ToS</div>
+      <div class="dc-noizy">Cryptographic · NC_01 enforced</div>
+    </div>
+    <div class="diff-cell">
+      <div class="dc-vs">Duration</div>
+      <div class="dc-them">Active subscription only</div>
+      <div class="dc-noizy">∞ · Inheritable · 500yr Codex</div>
+    </div>
+    <div class="diff-cell">
+      <div class="dc-vs">AI Training</div>
+      <div class="dc-them">Your voice trains their model</div>
+      <div class="dc-noizy">NC_03 — opt-in only · never default</div>
+    </div>
+    <div class="diff-cell">
+      <div class="dc-vs">Political / NSFW</div>
+      <div class="dc-them">Subject to platform policy changes</div>
+      <div class="dc-noizy">NC_06 + NC_07 · permanent · no override</div>
+    </div>
+    <div class="diff-cell">
+      <div class="dc-vs">Ledger / Records</div>
+      <div class="dc-them">No public provenance</div>
+      <div class="dc-noizy">Append-only JSONL · NC_10 · forever</div>
+    </div>
+    <div class="diff-cell">
+      <div class="dc-vs">Mission</div>
+      <div class="dc-them">AI company · humans are data</div>
+      <div class="dc-noizy">Human company · AI is the tool</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKETING STRATEGY -->
+<section class="section" id="marketing">
+  <div class="section-eyebrow">// MARKETING STRATEGY · CHANNELS + APPROACHES</div>
+  <div class="section-title">
+    More Ways to<br>
+    <span class="hl-cyan">Market NOIZY.AI</span>
+  </div>
+  <div class="section-lead">
+    Every marketing channel for NOIZY is rooted in the same truth: we are on the side of creators. Every campaign, every post, every partnership proves it. Here are the 12 highest-leverage marketing approaches for 2026.
+  </div>
+
+  <div class="mkt-grid">
+    <div class="mkt-card mc-green">
+      <div class="mc-num">01</div>
+      <div class="mc-title">THE MANIFESTO TOUR</div>
+      <div class="mc-body">Rob personally presents "Looking Back From 2030" at VO Atlanta, NAVA, and 3 podcasting conferences in Q2 2026. The full DreamChamber 2030 retrospective document travels with him as a leave-behind. Nothing converts better than a true story.</div>
+      <div class="mc-tagline">Channel: Live events · Expected: 10–25 RSPs per event · Cost: Travel + prep time</div>
+    </div>
+    <div class="mkt-card mc-amber">
+      <div class="mc-num">02</div>
+      <div class="mc-title">THE 5 FOUNDING RSP ACTIVATION</div>
+      <div class="mc-body">The 5 Founding RSPs are the most powerful marketing vehicle NOIZY has. When 5 respected voice professionals say "I joined because of the 75% royalty and the Never Clauses" — that message spreads through every VO community without a dollar of ad spend.</div>
+      <div class="mc-tagline">Channel: VO community word-of-mouth · NAVA forum · VO Atlanta board</div>
+    </div>
+    <div class="mkt-card mc-cyan">
+      <div class="mc-num">03</div>
+      <div class="mc-title">NO FAKES ACT ALIGNMENT</div>
+      <div class="mc-body">Position NOIZY as the infrastructure the NO FAKES Act was written for. Every news story about voice cloning without consent is a story about the absence of NOIZY. Create a dedicated page: "What the NO FAKES Act Means for You" — with NOIZY as the answer.</div>
+      <div class="mc-tagline">Channel: PR · Legal community · Creator rights advocacy · Congressional brief</div>
+    </div>
+    <div class="mkt-card mc-purple">
+      <div class="mc-num">04</div>
+      <div class="mc-title">THE ANTHROPIC SETTLEMENT STORY</div>
+      <div class="mc-body">The $1.5B Anthropic settlement ($3K per work) is the proof case. NOIZY should be the first platform that says: "We agree. And we've built the infrastructure so this never happens to your voice." Own the narrative before anyone else does.</div>
+      <div class="mc-tagline">Channel: LinkedIn · Creator newsletters · Legal/IP media · Direct outreach to affected authors</div>
+    </div>
+    <div class="mkt-card mc-pink">
+      <div class="mc-num">05</div>
+      <div class="mc-title">NOIZYKIDZ AS MISSION MAGNET</div>
+      <div class="mc-body">The NOIZYKIDZ story — children with disabilities experiencing music through haptic vests, inspired by Nims — is the most powerful emotional proof that NOIZY is different. Every media outlet that covers disability + technology will cover this. Nims is the face.</div>
+      <div class="mc-tagline">Channel: CBC · BBC · Disability rights media · Healthcare conferences · Dr. Benoit relationships</div>
+    </div>
+    <div class="mkt-card mc-green2">
+      <div class="mc-num">06</div>
+      <div class="mc-title">THE VOICE ESTATE DEMO</div>
+      <div class="mc-body">Build a live demo: "Watch RSP_001 record a phrase. Watch it get watermarked, consented, and ledgered in real time. Watch the provenance record appear immutably." The demo sells itself. Post it. Tweet it. Loop it.</div>
+      <div class="mc-tagline">Channel: Twitter/X · YouTube · LinkedIn · VO forums · TikTok (30-sec cut)</div>
+    </div>
+    <div class="mkt-card mc-amber">
+      <div class="mc-num">07</div>
+      <div class="mc-title">THE 75% ROYALTY BILLBOARD</div>
+      <div class="mc-body">A single stat. Everywhere. "ElevenLabs: 0% royalty to creators. NOIZY: 75%. Hardcoded. Forever." Put it on every comparison page. Every tweet. Every intro slide. The number does all the work.</div>
+      <div class="mc-tagline">Channel: All channels · Primary hook for all paid and organic content</div>
+    </div>
+    <div class="mkt-card mc-cyan">
+      <div class="mc-num">08</div>
+      <div class="mc-title">THE NEVER CLAUSES TRANSPARENCY PAGE</div>
+      <div class="mc-body">Publish all 10 Never Clauses publicly at noizy.ai/never-clauses. Full legal plain-English. No signup required to read them. This one page will be shared more than any other page on the site. It's the proof that NOIZY means what it says.</div>
+      <div class="mc-tagline">Channel: Organic SEO · Creator trust signal · Press backgrounder · Legal transparency report</div>
+    </div>
+    <div class="mkt-card mc-purple">
+      <div class="mc-num">09</div>
+      <div class="mc-title">THE "VOICE IS YOUR ESTATE" CAMPAIGN</div>
+      <div class="mc-body">"You leave your house to your kids. Why not your voice?" A full campaign built around inheritance, legacy, and the 500-Year Voice Codex. Targeted at professional voice actors aged 45+. The most underserved conversation in the entire VO industry.</div>
+      <div class="mc-tagline">Channel: Targeted Facebook/Instagram · VO forums · NAVA newsletter · Podcast sponsorships</div>
+    </div>
+    <div class="mkt-card mc-green">
+      <div class="mc-num">10</div>
+      <div class="mc-title">THE GORUNFREE DOCUMENTARY SHORT</div>
+      <div class="mc-body">A 6-minute documentary: Rob, C3 injury, 40 years of music, the U87, the UAD, the GORUNFREE philosophy. "35% voice. 65% AI. 1-click. No friction." This is not a product demo. It's the founder's origin story — the most compelling marketing asset NOIZY has.</div>
+      <div class="mc-tagline">Channel: YouTube · Festival submissions · Creator conferences · Anthropic shared content</div>
+    </div>
+    <div class="mkt-card mc-pink">
+      <div class="mc-num">11</div>
+      <div class="mc-title">HEALTH CANADA / CLINICAL PATHWAY</div>
+      <div class="mc-body">Dr. Brien Benoit's position opens a pathway to healthcare procurement that no competitor can access. A NOIZYVOX voice therapy application — enabling non-verbal patients to build a custom voice — is a clinical product with government procurement potential and global press coverage.</div>
+      <div class="mc-tagline">Channel: Healthcare conferences · PMPRB · Ottawa Civic · NAI research publication</div>
+    </div>
+    <div class="mkt-card mc-amber">
+      <div class="mc-num">12</div>
+      <div class="mc-title">THE GAME / FILM PIPELINE PLAY</div>
+      <div class="mc-body">Every game studio needs licensed voice. Every film needs voice doubles for ADR. NOIZY's enterprise tier + NOIZY PROOF watermark solves their biggest problem: proving consent when it goes to court. Build a "NOIZY for Games" landing page. Target Unity and Unreal developer communities.</div>
+      <div class="mc-tagline">Channel: GDC · Unreal Marketplace · Unity Asset Store · Film production directories</div>
+    </div>
+  </div>
+</section>
+
+<!-- TAGLINE WALL -->
+<section class="section" id="taglines">
+  <div class="section-eyebrow">// MESSAGING ARSENAL · TAGLINES + CAMPAIGN LINES</div>
+  <div class="section-title">
+    The Words That<br>
+    <span class="hl-amber">Carry the Mission.</span>
+  </div>
+  <div class="section-lead">
+    Every tagline below has been calibrated to the NOIZY harmony doctrine. Use them everywhere — social, press, slides, pitches. They are all true. That's the strongest possible marketing.
+  </div>
+
+  <div class="tagline-wall">
+    <div class="tagline-row">
+      <div class="tagline-item ti-green">
+        <div class="ti-label">Primary Tagline</div>
+        <div class="ti-line">AI & HUMANS IN PERFECT HARMONY.</div>
+      </div>
+      <div class="tagline-item ti-amber">
+        <div class="ti-label">Mission Statement</div>
+        <div class="ti-line">ALWAYS GROWING IN MUTUALLY WONDERFUL WAYS.</div>
+      </div>
+    </div>
+    <div class="tagline-row">
+      <div class="tagline-item ti-cyan">
+        <div class="ti-label">Economic Differentiator</div>
+        <div class="ti-line">75% TO YOU. ALWAYS. FOREVER. HARDCODED.</div>
+      </div>
+      <div class="tagline-item ti-white">
+        <div class="ti-label">Ownership Line</div>
+        <div class="ti-line">YOUR VOICE IS AN ESTATE. NOT A SUBSCRIPTION.</div>
+      </div>
+    </div>
+    <div class="tagline-row">
+      <div class="tagline-item ti-purple">
+        <div class="ti-label">Against Extraction</div>
+        <div class="ti-line">WE DON'T TRAIN ON YOU. WE GROW WITH YOU.</div>
+      </div>
+      <div class="tagline-item ti-green">
+        <div class="ti-label">Consent Line</div>
+        <div class="ti-line">CONSENT IS CODE HERE. NOT A CHECKBOX.</div>
+      </div>
+    </div>
+    <div class="tagline-row">
+      <div class="tagline-item ti-amber">
+        <div class="ti-label">GORUNFREE Line</div>
+        <div class="ti-line">35% VOICE. 65% AI. 1-CLICK. ZERO FRICTION.</div>
+      </div>
+      <div class="tagline-item ti-pink">
+        <div class="ti-label">Legacy Line</div>
+        <div class="ti-line">LEAVE YOUR VOICE TO YOUR CHILDREN'S CHILDREN.</div>
+      </div>
+    </div>
+    <div class="tagline-row">
+      <div class="tagline-item ti-cyan">
+        <div class="ti-label">Mission-First Line</div>
+        <div class="ti-line">EVERY TOOL WE BUILD MUST GENUINELY HELP A HUMAN.</div>
+      </div>
+      <div class="tagline-item ti-white">
+        <div class="ti-label">The Category Line</div>
+        <div class="ti-line">NOT AN AI COMPANY. A HUMAN COMPANY WITH AI TOOLS.</div>
+      </div>
+    </div>
+    <div class="tagline-row">
+      <div class="tagline-item ti-green">
+        <div class="ti-label">The Epoch Line</div>
+        <div class="ti-line">MUSIC REORGANIZED FOUR TIMES. THIS IS THE FIFTH.</div>
+      </div>
+      <div class="tagline-item ti-amber">
+        <div class="ti-label">The Closing Line</div>
+        <div class="ti-line">HONOR. RESPECT. GATHER. NURTURE. PRESERVE.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<footer class="closing">
+  <div class="closing-content">
+    <div class="closing-super">NOIZY.AI</div>
+    <div class="closing-tagline">AI & HUMANS · PERFECT HARMONY · ALWAYS GROWING</div>
+    <div class="closing-honors">HONOR · RESPECT · GATHER · NURTURE · PRESERVE</div>
+    <div class="closing-sub">
+      NOIZYFISH INC. · OTTAWA, CANADA · noizy.ai · rsp@noizyfish.com<br>
+      NOIZYVOX · NOIZYLAB · NOIZYKIDZ · FISH MUSIC INC. · MC96ECO UNIVERSE<br>
+      GABRIEL_V3 · 10.90.90.20 · 315+ MEMCELLS · RSP_001 COMMAND<br>
+      NEVER CLAUSES NC_01–NC_10 · 75% CREATOR ROYALTY · ∞ DURATION<br><br>
+      PRICING + MARKETING ARCHITECTURE v1.0 · MARCH 2026<br>
+    </div>
+    <div style="margin-top:40px;">
+      <div style="font-family:var(--display); font-size:20px; font-weight:900; color:var(--green); letter-spacing:6px; text-shadow:0 0 30px rgba(0,255,136,0.3);">GORUNFREE</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // PROGRESS
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    document.getElementById('progress').style.width = pct + '%';
+  });
+
+  // HERO CANVAS — harmony waves
+  const canvas = document.getElementById('hero-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H;
+  const particles = [];
+  const PCOUNT = 80;
+
+  function resize() {
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+    buildParticles();
+  }
+
+  function buildParticles() {
+    particles.length = 0;
+    for (let i = 0; i < PCOUNT; i++) {
+      particles.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        r: Math.random() * 1.5 + 0.5,
+        color: ['green','amber','cyan','purple'][Math.floor(Math.random()*4)],
+        phase: Math.random() * Math.PI * 2
+      });
+    }
+  }
+
+  const COLORS = {
+    green: 'rgba(0,255,136,',
+    amber: 'rgba(255,179,0,',
+    cyan: 'rgba(0,212,255,',
+    purple: 'rgba(168,85,247,'
+  };
+
+  let t = 0;
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    t += 0.006;
+
+    // Harmony waves — multiple frequencies
+    [
+      { y: 0.3, amp: 40, freq: 0.008, phase: 0, color: 'rgba(0,255,136,0.07)', width: 1 },
+      { y: 0.5, amp: 30, freq: 0.012, phase: 1.5, color: 'rgba(255,179,0,0.05)', width: 1 },
+      { y: 0.7, amp: 50, freq: 0.006, phase: 3.0, color: 'rgba(0,212,255,0.06)', width: 1 },
+      { y: 0.85, amp: 20, freq: 0.018, phase: 4.5, color: 'rgba(168,85,247,0.05)', width: 0.5 },
+    ].forEach(wave => {
+      ctx.beginPath();
+      ctx.moveTo(0, H * wave.y);
+      for (let x = 0; x < W; x += 3) {
+        const y = H * wave.y + Math.sin(x * wave.freq + t + wave.phase) * wave.amp;
+        ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = wave.color;
+      ctx.lineWidth = wave.width;
+      ctx.stroke();
+    });
+
+    // Particles with connection lines
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      p.phase += 0.03;
+      if (p.x < 0 || p.x > W) p.vx *= -1;
+      if (p.y < 0 || p.y > H) p.vy *= -1;
+
+      // Connection lines
+      for (let j = i + 1; j < particles.length; j++) {
+        const q = particles[j];
+        const dx = p.x - q.x, dy = p.y - q.y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 100) {
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
+          ctx.strokeStyle = `rgba(255,255,255,${(1 - dist/100) * 0.06})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+
+      const alpha = 0.5 + 0.3 * Math.sin(p.phase);
+      const col = COLORS[p.color];
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r * 3, 0, Math.PI * 2);
+      ctx.fillStyle = col + (alpha * 0.15) + ')';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = col + alpha + ')';
+      ctx.fill();
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+  draw();
+</script>
+</body>
+</html>

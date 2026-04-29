@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOIZY DreamChamber — MC96ECO Universe</title>
+  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+  <style>
+    body { margin: 0; background: #050D14; overflow: hidden; }
+    #overlay {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      color: #00D4FF; font-family: 'Courier New', monospace; font-size: 13px;
+      background: rgba(5,13,20,0.85); padding: 10px 20px; border-radius: 6px;
+      border: 1px solid #00D4FF33; z-index: 999; text-align: center;
+      letter-spacing: 0.08em; pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+<div id="overlay">MC96ECO DREAMCHAMBER &nbsp;·&nbsp; WASD / look to navigate &nbsp;·&nbsp; Hand tracking enabled on Quest 2</div>
+
+<a-scene
+  background="color: #020810"
+  fog="type: exponential; color: #020810; density: 0.018"
+  renderer="antialias: true; colorManagement: true"
+  loading-screen="backgroundColor: #020810; dotsColor: #00D4FF"
+  vr-mode-ui="enterVRButton: #enterVRBtn">
+
+  <!-- ── LIGHTING ─────────────────────────────────────────── -->
+  <a-light type="ambient"    color="#0D1B26" intensity="2.5"></a-light>
+  <a-light type="point" color="#00D4FF" intensity="2.0" position="0 8 0"    decay="2" distance="40"></a-light>
+  <a-light type="point" color="#B185DB" intensity="1.2" position="-5 4 -4"  decay="2" distance="25"></a-light>
+  <a-light type="point" color="#FF4D6D" intensity="0.9" position="5 4 -4"   decay="2" distance="20"></a-light>
+  <a-light type="point" color="#00FFB3" intensity="0.7" position="0 2 5"    decay="2" distance="18"></a-light>
+  <a-light type="point" color="#F59E0B" intensity="0.5" position="-6 2 0"   decay="2" distance="15"></a-light>
+
+  <!-- ── FLOOR ──────────────────────────────────────────────── -->
+  <a-cylinder position="0 -1.6 0" radius="11" height="0.06"
+    material="color: #0D1B26; metalness: 0.97; roughness: 0.03; opacity: 0.75; transparent: true">
+  </a-cylinder>
+  <a-torus position="0 -1.55 0" radius="3"  radius-tubular="0.01" rotation="-90 0 0"
+    material="color: #00D4FF; emissive: #00D4FF; emissiveIntensity: 0.5; opacity: 0.3; transparent: true"></a-torus>
+  <a-torus position="0 -1.55 0" radius="6"  radius-tubular="0.01" rotation="-90 0 0"
+    material="color: #00D4FF; emissive: #00D4FF; emissiveIntensity: 0.3; opacity: 0.18; transparent: true"></a-torus>
+  <a-torus position="0 -1.55 0" radius="10" radius-tubular="0.01" rotation="-90 0 0"
+    material="color: #00D4FF; emissive: #00D4FF; emissiveIntensity: 0.15; opacity: 0.1; transparent: true"></a-torus>
+  <!-- RSP_001 spot -->
+  <a-cylinder position="0 -1.54 0" radius="0.55" height="0.03"
+    material="color: #F59E0B; emissive: #F59E0B; emissiveIntensity: 0.8; opacity: 0.9; transparent: true"
+    animation="property: material.emissiveIntensity; from: 0.4; to: 1.2; dir: alternate; loop: true; dur: 1800">
+  </a-cylinder>
+  <a-text value="RSP_001" position="0 -1.3 0" align="center" color="#F59E0B"
+    width="2.2" rotation="-90 0 0"></a-text>
+
+  <!-- ── TITLE ──────────────────────────────────────────────── -->
+  <a-entity position="0 4.5 -9">
+    <a-text value="MC96ECO UNIVERSE" align="center" color="#FFFFFF"   width="12" font="exo2bold"
+      animation="property: material.opacity; from: 0.4; to: 1; dir: alternate; loop: true; dur: 5000"></a-text>
+    <a-text value="THE DREAMCHAMBER"  position="0 -0.7 0" align="center" color="#B185DB" width="9"  font="exo2bold"></a-text>
+    <a-text value="Where Everything Begins."  position="0 -1.3 0" align="center" color="#94A3B8" width="7"  font="exo2bold"></a-text>
+  </a-entity>
+
+  <!-- ── NODE MACRO: each platform lives in its own entity ──── -->
+
+  <!-- ① NOIZYVOX — SIGNAL BLUE — front-left -->
+  <a-entity position="-4.5 0.8 -5.5"
+    animation="property: position; from: -4.5 0.8 -5.5; to: -4.5 1.5 -5.5; dir: alternate; loop: true; dur: 3200; easing: easeInOutSine">
+    <a-icosahedron radius="0.7"
+      material="color: #00D4FF; emissive: #00D4FF; emissiveIntensity: 0.4; metalness: 0.85; roughness: 0.1"
+      animation="property: rotation; to: 0 360 0; loop: true; dur: 8000; easing: linear"></a-icosahedron>
+    <a-torus radius="0.95" radius-tubular="0.018" rotation="90 0 0"
+      material="color: #00D4FF; emissive: #00D4FF; emissiveIntensity: 1; opacity: 0.55; transparent: true"
+      animation="property: rotation; to: 90 360 0; loop: true; dur: 5000; easing: linear"></a-torus>
+    <a-text value="NOIZYVOX"                    position="0 1.2 0" align="center" color="#00D4FF" width="3.8" font="exo2bold"></a-text>
+    <a-text value="Voice · Performance · Identity" position="0 0.8 0" align="center" color="#94A3B8" width="3.2" font="exo2bold"></a-text>
+  </a-entity>
+
+  <!-- ② NOIZYLAB — RESTORE GREEN — front-right -->
+  <a-entity position="4.5 0.8 -5.5"
+    animation="property: position; from: 4.5 0.8 -5.5; to: 4.5 1.6 -5.5; dir: alternate; loop: true; dur: 3700; easing: easeInOutSine">
+    <a-icosahedron radius="0.7"
+      material="color: #00FFB3; emissive: #00FFB3; emissiveIntensity: 0.4; metalness: 0.85; roughness: 0.1"
+      animation="property: rotation; to: 0 -360 0; loop: true; dur: 9000; easing: linear"></a-icosahedron>
+    <a-torus radius="0.95" radius-tubular="0.018" rotation="90 0 0"
+      material="color: #00FFB3; emissive: #00FFB3; emissiveIntensity: 1; opacity: 0.55; transparent: true"
+      animation="property: rotation; to: 90 -360 0; loop: true; dur: 6000; easing: linear"></a-torus>
+    <a-text value="NOIZYLAB"                       position="0 1.2 0" align="center" color="#00FFB3" width="3.8" font="exo2bold"></a-text>
+    <a-text value="Research · Science · Discovery" position="0 0.8 0" align="center" color="#94A3B8" width="3.2" font="exo2bold"></a-text>
+  </a-entity>
+
+  <!-- ③ NOIZYKIDZ — GOLD — left -->
+  <a-entity position="-6.8 0.8 0"
+    animation="property: position; from: -6.8 0.8 0; to: -6.8 1.7 0; dir: alternate; loop: true; dur: 4100; easing: easeInOutSine">
+    <a-icosahedron radius="0.7"
+      material="color: #F59E0B; emissive: #F59E0B; emissiveIntensity: 0.4; metalness: 0.85; roughness: 0.1"
+      animation="property: rotation; to: 360 0 360; loop: true; dur: 7000; easing: linear"></a-icosahedron>
+    <a-torus radius="0.95" radius-tubular="0.018" rotation="90 0 0"
+      material="color: #F59E0B; emissive: #F59E0B; emissiveIntensity: 1; opacity: 0.55; transparent: true"
+      animation="property: rotation; to: 90 360 0; loop: true; dur: 4500; easing: linear"></a-torus>
+    <a-text value="NOIZYKIDZ"           position="0 1.2 0" align="center" color="#F59E0B" width="3.8" font="exo2bold"></a-text>
+    <a-text value="Future · Wonder · Play" position="0 0.8 0" align="center" color="#94A3B8" width="3.2" font="exo2bold"></a-text>
+  </a-entity>
+
+  <!-- ④ LIFELUV — PULSE RED — right -->
+  <a-entity position="6.8 0.8 0"
+    animation="property: position; from: 6.8 0.8 0; to: 6.8 1.4 0; dir: alternate; loop: true; dur: 2800; easing: easeInOutSine">
+    <a-icosahedron radius="0.7"
+      material="color: #FF4D6D; emissive: #FF4D6D; emissiveIntensity: 0.4; metalness: 0.85; roughness: 0.1"
+      animation="property: rotation; to: 0 360 180; loop: true; dur: 10000; easing: linear"></a-icosahedron>
+    <a-torus radius="0.95" radius-tubular="0.018" rotation="90 0 0"
+      material="color: #FF4D6D; emissive: #FF4D6D; emissiveIntensity: 1; opacity: 0.55; transparent: true"
+      animation="property: rotation; to: 90 -360 0; loop: true; dur: 7000; easing: linear"></a-torus>
+    <a-text value="LIFELUV"                   position="0 1.2 0" align="center" color="#FF4D6D" width="3.8" font="exo2bold"></a-text>
+    <a-text value="Love · Connection · Human" position="0 0.8 0" align="center" color="#94A3B8" width="3.2" font="exo2bold"></a-text>
+  </a-entity>
+
+  <!-- ⑤ DREAMCHAMBER — SOUL PURPLE — apex/above -->
+  <a-entity position="0 6.5 -4"
+    animation="property: position; from: 0 6.5 -4; to: 0 7.4 -4; dir: alternate; loop: true; dur: 5000; easing: easeInOutSine">
+    <a-dodecahedron radius="1.1"
+      material="color: #B185DB; emissive: #B185DB; emissiveIntensity: 0.55; metalness: 0.92; roughness: 0.05"
+      animation="property: rotation; to: 360 360 0; loop: true; dur: 15000; easing: linear"
+      animation__pulse="property: material.emissiveIntensity; from: 0.3; to: 0.9; dir: alternate; loop: true; dur: 2500">
+    </a-dodecahedron>
+    <a-torus radius="1.7" radius-tubular="0.028" rotation="45 0 0"
+      material="color: #B185DB; emissive: #B185DB; emissiveIntensity: 0.9; opacity: 0.5; transparent: true"
+      animation="property: rotation; to: 45 360 0; loop: true; dur: 6000; easing: linear"></a-torus>
+    <a-torus radius="1.7" radius-tubular="0.028" rotation="-45 0 0"
+      material="color: #B185DB; emissive: #B185DB; emissiveIntensity: 0.9; opacity: 0.5; transparent: true"
+      animation="property: rotation; to: -45 -360 0; loop: true; dur: 8000; easing: linear"></a-torus>
+    <a-torus radius="1.7" radius-tubular="0.028" rotation="0 0 0"
+      material="color: #B185DB; emissive: #B185DB; emissiveIntensity: 0.9; opacity: 0.4; transparent: true"
+      animation="property: rotation; to: 0 0 360; loop: true; dur: 10000; easing: linear"></a-torus>
+    <a-text value="DREAMCHAMBER"        position="0 1.9 0" align="center" color="#B185DB" width="6" font="exo2bold"></a-text>
+    <a-text value="Where Everything Begins." position="0 1.3 0" align="center" color="#94A3B8" width="4.5" font="exo2bold"></a-text>
+  </a-entity>
+
+  <!-- ⑥ NOIZY.ai — NERVE ORANGE — behind, intelligence layer -->
+  <a-entity position="0 0.8 5.5"
+    animation="property: position; from: 0 0.8 5.5; to: 0 1.6 5.5; dir: alternate; loop: true; dur: 3500; easing: easeInOutSine">
+    <a-icosahedron radius="0.7"
+      material="color: #E8A87C; emissive: #E8A87C; emissiveIntensity: 0.4; metalness: 0.85; roughness: 0.1"
+      animation="property: rotation; to: -360 360 0; loop: true; dur: 8500; easing: linear"></a-icosahedron>
+    <a-torus radius="0.95" radius-tubular="0.018" rotation="90 0 0"
+      material="color: #E8A87C; emissive: #E8A87C; emissiveIntensity: 1; opacity: 0.55; transparent: true"
+      animation="property: rotation; to: 90 360 0; loop: true; dur: 5500; easing: linear"></a-torus>
+    <a-text value="NOIZY.ai"                 position="0 1.2 0" align="center" color="#E8A87C" width="3.8" font="exo2bold"></a-text>
+    <a-text value="The Intelligence Layer." position="0 0.8 0" align="center" color="#94A3B8" width="3.2" font="exo2bold"></a-text>
+  </a-entity>
+
+  <!-- ── ENERGY BEAMS from each node up to DreamChamber apex ── -->
+  <a-entity line="start: -4.5 1.5 -5.5; end: 0 7 -4; color: #00D4FF; opacity: 0.18"></a-entity>
+  <a-entity line="start: 4.5 1.5 -5.5;  end: 0 7 -4; color: #00FFB3; opacity: 0.18"></a-entity>
+  <a-entity line="start: -6.8 1.5 0;    end: 0 7 -4; color: #F59E0B; opacity: 0.18"></a-entity>
+  <a-entity line="start: 6.8 1.5 0;     end: 0 7 -4; color: #FF4D6D; opacity: 0.18"></a-entity>
+  <a-entity line="start: 0 1.5 5.5;     end: 0 7 -4; color: #E8A87C; opacity: 0.18"></a-entity>
+
+  <!-- ── QUOTE PANEL ─────────────────────────────────────────── -->
+  <a-entity position="0 1.6 -9.5">
+    <a-plane width="11" height="2.8"
+      material="color: #0D1B26; opacity: 0.65; transparent: true; side: double"></a-plane>
+    <a-text value="What is so funny about Peace, Love and Understanding?" 
+      position="0 0.7 0.05" align="center" color="#E8A87C" width="7.5" font="exo2bold" wrap-count="40"></a-text>
+    <a-text value="— Nick Lowe" 
+      position="0 0.05 0.05" align="center" color="#94A3B8" width="4.5" font="exo2bold"></a-text>
+    <a-text value="MC96ECO is the answer." 
+      position="0 -0.55 0.05" align="center" color="#FFFFFF" width="5.5" font="exo2bold"></a-text>
+  </a-entity>
+
+  <!-- ── STAR FIELD (generated by script below) ───────────────── -->
+  <a-entity id="stars"></a-entity>
+
+  <!-- ── CAMERA & HAND TRACKING ─────────────────────────────── -->
+  <a-entity id="rig" position="0 0 2">
+    <a-camera look-controls wasd-controls="acceleration: 12">
+      <a-cursor
+        fuse="false"
+        color="#00D4FF"
+        opacity="0.75"
+        geometry="primitive: ring; radiusInner: 0.008; radiusOuter: 0.013"
+        material="color: #00D4FF; shader: flat">
+      </a-cursor>
+    </a-camera>
+  </a-entity>
+
+  <!-- Meta Quest 2 hand tracking -->
+  <a-entity hand-tracking-controls="hand: left;  modelStyle: lowPoly; modelColor: #00D4FF"></a-entity>
+  <a-entity hand-tracking-controls="hand: right; modelStyle: lowPoly; modelColor: #00FFB3"></a-entity>
+
+</a-scene>
+
+<!-- Enter VR button (styled) -->
+<button id="enterVRBtn" style="
+  position: fixed; bottom: 70px; right: 24px;
+  background: #B185DB; color: #050D14;
+  border: none; border-radius: 8px;
+  padding: 14px 28px; font-size: 15px;
+  font-family: 'Courier New', monospace;
+  font-weight: bold; letter-spacing: 0.08em;
+  cursor: pointer; z-index: 999;
+  box-shadow: 0 0 20px #B185DB88;">
+  ENTER DREAMCHAMBER
+</button>
+
+<script>
+  // ── PROCEDURAL STAR FIELD ─────────────────────────────────────
+  document.querySelector('a-scene').addEventListener('loaded', function () {
+    const container = document.getElementById('stars');
+    const NOIZY_COLORS = ['#FFFFFF','#FFFFFF','#FFFFFF','#00D4FF','#B185DB','#E8A87C'];
+
+    for (let i = 0; i < 400; i++) {
+      const s = document.createElement('a-sphere');
+      const r     = 45 + Math.random() * 80;
+      const theta = Math.random() * Math.PI * 2;
+      const phi   = Math.random() * Math.PI;
+      const x     = r * Math.sin(phi) * Math.cos(theta);
+      const y     = r * Math.sin(phi) * Math.sin(theta);
+      const z     = r * Math.cos(phi);
+      const size  = 0.025 + Math.random() * 0.13;
+      const color = NOIZY_COLORS[Math.floor(Math.random() * NOIZY_COLORS.length)];
+
+      s.setAttribute('position', x + ' ' + y + ' ' + z);
+      s.setAttribute('radius', size.toFixed(3));
+      s.setAttribute('segments-height', '3');
+      s.setAttribute('segments-width',  '3');
+      s.setAttribute('material',
+        'color:' + color + '; emissive:' + color + '; emissiveIntensity: 1; shader: flat');
+
+      // Randomly twinkle ~1-in-8 stars
+      if (Math.random() < 0.125) {
+        const dur = (1800 + Math.random() * 4500).toFixed(0);
+        s.setAttribute('animation',
+          'property: material.emissiveIntensity; from: 0.2; to: 1.8; dir: alternate; loop: true; dur: ' + dur + '; easing: easeInOutSine');
+      }
+      container.appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

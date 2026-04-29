@@ -1,0 +1,14 @@
+<root>
+    <CtrlMenuItemStyle name="menu_style" seperator_selection="true" sub_menu_selection="true" selection_colour="[r:255 g:255 b:0 a:255]" accessories_colour="[r:0 g:0 b:255 a:255]" />
+    <CtrlPanelStyle name="BFD2PerfGrooveLibrarian" imBackground="gl_bfd2perf_background.tga" colFill="[r:200 g:200 b:200 a:200]" intSmartTileEdgeSize="5" intRoundedRectRadius="0">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="GrooveTimeLine" noDefaultDrawing="true" colFill="[r:190 g:190 b:190 a:255]" intSmartTileEdgeSize="5" intRoundedRectRadius="0">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlPanel name="BFD2PerfGrooveLibrarian" style="BFD2PerfGrooveLibrarian" rect="[x:0 y:0 w:935 h:297]" id="0">
+        <CtrlPanel name="GrooveBrowser" style="BFD2InvisiblePanel" rect="[x:0 y:0 w:935 h:234]" id="100001" />
+        <CtrlPanel name="EditorPanel" style="GrooveTimeLine" rect="[x:0 y:227 w:912 h:35]" id="100002" />
+        <CtrlPanel name="GrooveSongPanel" style="GrooveTimeLine" rect="[x:6 y:232 w:923 h:58]" id="100002" />
+    </CtrlPanel>
+</root>

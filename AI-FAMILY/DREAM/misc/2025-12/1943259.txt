@@ -1,0 +1,45 @@
+<root>
+    <CtrlPanelStyle name="MidiLearnPanelStyle" colBorder="[r:0 g:0 b:0 a:0]" colFill="[r:149 g:149 b:149 a:0]" intSmartTileEdgeSize="5" intRoundedRectRadius="0">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="MidiLearnOuterPanelStyle" colFill="[r:0 g:0 b:0 a:255]" intSmartTileEdgeSize="5" intRoundedRectRadius="0">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlButtonStyle name="MidiLearnButtonStyle" optDrawText="true" colFillOff="[r:75 g:75 b:75 a:255]">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlLabelStyle name="MidiLearnBigLabelStyle">
+        <VFont name="font" vSize="50" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlLabelStyle name="MidiLearnArticulationStyle" colText="[r:107 g:107 b:107 a:255]">
+        <VFont name="font" vSize="50" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlButtonStyle name="MidiLearnLatchingStyle" optMomentary="false" imDown="..\Preferences\prefcheck_down.tga" imUp="..\Preferences\prefcheck_up.tga" colBorder="[r:0 g:0 b:0 a:0]" colFillOn="[r:192 g:192 b:192 a:180]" colFillOff="[r:255 g:255 b:255 a:180]">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlLabelStyle name="SmallMidiLabelStyle" rightAlignText="true">
+        <VFont name="font" vSize="14" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlImageViewStyle name="MidiLearnKitPieceViewStyle" optBackground="false" optHQResizing="true" colBorder="[r:107 g:107 b:107 a:255]" colBackground="[r:128 g:128 b:128 a:0]">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlImageViewStyle>
+    <CtrlLabelStyle name="KitPieceStringLabelStyle">
+        <VFont name="font" vSize="14" fontName="Arial" />
+    </CtrlLabelStyle>
+    <CtrlPanel name="MidiLearnOuterPanel" style="DefaultPanelLight" rect="[x:62 y:107 w:768 h:236]" id="0">
+        <CtrlPanel name="MidiLearnPanel" style="MidiLearnPanelStyle" rect="[x:4 y:3 w:760 h:230]" id="0" zorder="1000">
+            <CtrlImageView name="MidiLearnKitPieceView" style="MidiLearnKitPieceViewStyle" rect="[x:3 y:5 w:180 h:150]" id="100001" displayName="CtrlImageView" />
+            <CtrlLabel name="MidiLearnInstructionLabel" style="MidiLearnBigLabelStyle" rect="[x:187 y:5 w:570 h:50]" id="100006" displayName="CtrlLabel" text="Please play the MIDI note for" />
+            <CtrlLabel name="MidiLearnArticulationLabel" style="MidiLearnArticulationStyle" rect="[x:187 y:55 w:570 h:50]" id="100007" displayName="CtrlLabel" text="ARTICULATION TYPE" />
+            <CtrlLabel name="MidiLearnCounterLabel" style="MidiLearnBigLabelStyle" rect="[x:187 y:105 w:570 h:50]" id="100008" displayName="CtrlLabel" text="Accepting in X seconds" />
+            <CtrlButton name="MidiLearnNextSlotButton" style="MidiLearnLatchingStyle" rect="[x:739 y:156 w:15 h:15]" id="100009" displayName="CtrlButton" text="Next Slot" />
+            <CtrlLabel name="EnableNextLabel" style="SmallMidiLabelStyle" rect="[x:615 y:157 w:120 h:15]" id="100010" displayName="CtrlLabel" text="Next slot mode" />
+            <CtrlLabel name="MidiLearnKitPieceString" style="KitPieceStringLabelStyle" rect="[x:3 y:159 w:500 h:30]" id="100002" text="Slot 1 (Kit Piece Details)" />
+            <CtrlButton name="MidiLearnWaitButton" style="MidiLearnLatchingStyle" rect="[x:739 y:175 w:15 h:15]" id="100005" displayName="CtrlButton" text="Wait" />
+            <CtrlLabel name="EnableWaitModeLabel" style="SmallMidiLabelStyle" rect="[x:615 y:176 w:120 h:15]" id="100011" displayName="CtrlLabel" text="Wait for MIDI input" />
+            <CtrlButton name="MidiLearnCancelButton" style="BFD2ShinyTextButtonMomentary" rect="[x:570 y:194 w:60 h:29]" id="100004" text="Cancel" />
+            <CtrlButton name="MidiLearnPreviousButton" style="BFD2ShinyTextButtonMomentary" rect="[x:632 y:194 w:60 h:29]" id="100000" displayName="CtrlButton" text="Previous" />
+            <CtrlButton name="MidiLearnNextButton" style="BFD2ShinyTextButtonMomentary" rect="[x:694 y:194 w:60 h:29]" id="100003" displayName="CtrlButton" text="Next" />
+        </CtrlPanel>
+    </CtrlPanel>
+</root>

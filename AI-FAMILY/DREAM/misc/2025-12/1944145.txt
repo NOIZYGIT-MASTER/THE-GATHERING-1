@@ -1,0 +1,38 @@
+<root>
+    <CtrlPanel style="MixerFXPanel" rect="[x:16 y:0 w:228 h:228]" id="0">
+        <CtrlPanel name="MixerFXTitlePanel" rect="[x:0 y:0 w:228 h:50]" id="400" />
+        <CtrlMeter name="EnvShaper_display_Meter" style="MixerFXMeter_AttackArchitect" rect="[x:65 y:59 w:100 h:60]" id="100000" />
+        <CtrlPanel style="MixerFXLargeKnobNotches" rect="[x:12 y:64 w:58 h:58]" id="0">
+            <CtrlKnob name="EnvShaper_Sensitivity" style="MixerFXKnobLarge" rect="[x:3 y:3 w:53 h:53]" id="1001" />
+        </CtrlPanel>
+        <CtrlButton name="EnvShaper_Linked" style="MixerFXButton" rect="[x:189 y:90 w:15 h:15]" id="1007" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:12 y:100 w:7 h:10]" id="2008" text="0" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:50 y:100 w:13 h:10]" id="2008" text="100" />
+        <CtrlLabel style="MixerFXLabelDarkCentered" rect="[x:183 y:105 w:28 h:12]" id="2008" text="Link" />
+        <CtrlLabel style="MixerFXLabelDarkCentered" rect="[x:0 y:107 w:65 h:15]" id="2003" text="Sensitivity" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:32 y:124 w:11 h:10]" id="2008" text="0" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:110 y:124 w:11 h:10]" id="2008" text="0" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:188 y:124 w:11 h:10]" id="2008" text="0" />
+        <CtrlPanel style="MixerFXLargeKnobNotches" rect="[x:12 y:136 w:58 h:58]" id="0">
+            <CtrlKnob name="EnvShaper_Attack" style="MixerFXKnobLarge" rect="[x:3 y:3 w:53 h:53]" id="1001" />
+        </CtrlPanel>
+        <CtrlPanel style="MixerFXLargeKnobNotches" rect="[x:90 y:136 w:58 h:58]" id="0">
+            <CtrlKnob name="EnvShaper_Sustain" style="MixerFXKnobLarge" rect="[x:3 y:3 w:53 h:53]" id="1001" />
+        </CtrlPanel>
+        <CtrlPanel style="MixerFXLargeKnobNotches" rect="[x:168 y:136 w:58 h:58]" id="0">
+            <CtrlKnob name="EnvShaper_Gain" style="MixerFXKnobLarge" rect="[x:3 y:3 w:53 h:53]" id="1001" />
+        </CtrlPanel>
+        <CtrlLabel style="TinyHzLabel" rect="[x:7 y:172 w:13 h:10]" id="2008" text="-15" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:50 y:172 w:13 h:10]" id="2008" text="+15" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:85 y:172 w:13 h:10]" id="2008" text="-24" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:129 y:172 w:15 h:10]" id="2008" text="+24" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:162 y:172 w:13 h:10]" id="2008" text="-12" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:207 y:172 w:16 h:10]" id="2008" text="+12" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:28 y:178 w:11 h:10]" id="2008" text="dB" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:106 y:178 w:11 h:10]" id="2008" text="dB" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:184 y:178 w:11 h:10]" id="2008" text="dB" />
+        <CtrlLabel style="MixerFXLabelDarkCentered" rect="[x:9 y:187 w:48 h:15]" id="2001" text="Attack" />
+        <CtrlLabel style="MixerFXLabelDarkCentered" rect="[x:86 y:187 w:51 h:15]" id="2002" text="Sustain" />
+        <CtrlLabel style="MixerFXLabelDarkCentered" rect="[x:164 y:187 w:50 h:15]" id="2003" text="Gain" />
+    </CtrlPanel>
+</root>

@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HVS — Human Voice Signature · The Global Guild Architecture</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0e0e0c;
+  --paper: #f7f4ee;
+  --paper2: #efebe2;
+  --gold: #b8912a;
+  --gold-pale: #f0d98a;
+  --teal: #1a7a68;
+  --teal-pale: #d4f0ea;
+  --red: #b02e22;
+  --red-pale: #f5dbd8;
+  --purple: #4a2e7a;
+  --purple-pale: #e8e0f5;
+  --slate: #4a4a44;
+  --rule: #d6d0c4;
+  --mono: 'DM Mono', monospace;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+/* ── MASTHEAD ── */
+.masthead {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 64px 72px 56px;
+  position: relative;
+  overflow: hidden;
+}
+
+.masthead::after {
+  content: 'HVS';
+  position: absolute;
+  right: -20px;
+  top: -40px;
+  font-family: var(--serif);
+  font-size: 260px;
+  color: rgba(255,255,255,0.03);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.mast-eyebrow {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-pale);
+  margin-bottom: 24px;
+}
+
+.mast-title {
+  font-family: var(--serif);
+  font-size: clamp(48px, 7vw, 88px);
+  line-height: 1.0;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.mast-title span { color: var(--gold-pale); }
+
+.mast-sub {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(20px, 2.5vw, 28px);
+  color: rgba(247,244,238,0.65);
+  margin-bottom: 48px;
+}
+
+.mast-declaration {
+  max-width: 680px;
+  font-size: 16px;
+  color: rgba(247,244,238,0.8);
+  line-height: 1.7;
+  font-weight: 300;
+  border-left: 3px solid var(--gold-pale);
+  padding-left: 24px;
+}
+
+.mast-declaration strong {
+  color: var(--paper);
+  font-weight: 500;
+}
+
+.mast-meta {
+  margin-top: 48px;
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.meta-item {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(247,244,238,0.4);
+}
+
+.meta-item strong {
+  display: block;
+  color: rgba(247,244,238,0.8);
+  font-size: 13px;
+  letter-spacing: 0;
+  text-transform: none;
+  margin-bottom: 3px;
+}
+
+/* ── SECTION CONTAINERS ── */
+.section {
+  padding: 64px 72px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.section.alt { background: var(--paper2); }
+.section.dark { background: var(--ink); color: var(--paper); }
+
+.section-eyebrow {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 16px;
+}
+
+.dark .section-eyebrow { color: var(--gold-pale); }
+
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(28px, 4vw, 46px);
+  line-height: 1.15;
+  margin-bottom: 40px;
+  max-width: 720px;
+}
+
+.section-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.dark .section-title em { color: var(--gold-pale); }
+
+/* ── FIVE PILLARS ── */
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2px;
+  background: var(--rule);
+  margin-top: 40px;
+}
+
+@media (max-width: 900px) {
+  .pillars { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 500px) {
+  .pillars { grid-template-columns: 1fr; }
+}
+
+.pillar {
+  background: var(--paper);
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pillar-num {
+  font-family: var(--serif);
+  font-size: 36px;
+  color: var(--gold);
+  opacity: 0.4;
+  line-height: 1;
+}
+
+.pillar-icon {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+.pillar-name {
+  font-family: var(--serif);
+  font-size: 20px;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.pillar-desc {
+  font-size: 13px;
+  color: var(--slate);
+  line-height: 1.6;
+}
+
+.pillar-tag {
+  margin-top: auto;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  padding: 4px 10px;
+  background: var(--teal-pale);
+  color: var(--teal);
+  display: inline-block;
+  width: fit-content;
+}
+
+/* ── ARCHITECTURE LAYERS ── */
+.layers {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: var(--rule);
+}
+
+.layer {
+  display: grid;
+  grid-template-columns: 180px 1fr 200px;
+  gap: 2px;
+  background: var(--rule);
+}
+
+@media (max-width: 700px) {
+  .layer { grid-template-columns: 1fr; }
+  .layer-badge { padding: 12px 20px; justify-content: flex-start; }
+}
+
+.layer-badge {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 24px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.layer-badge-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+}
+
+.badge-num {
+  font-family: var(--serif);
+  font-size: 28px;
+  color: var(--gold-pale);
+  opacity: 0.5;
+  line-height: 1;
+}
+
+.badge-name {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(247,244,238,0.6);
+}
+
+.layer-main {
+  background: var(--paper2);
+  padding: 24px 28px;
+}
+
+.layer-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.layer-body {
+  font-size: 13.5px;
+  color: var(--slate);
+  line-height: 1.65;
+}
+
+.layer-body strong { color: var(--ink); }
+
+.layer-status {
+  background: var(--paper);
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+}
+
+.status-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+.status-value {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--teal);
+  font-weight: 500;
+}
+
+.status-value.built { color: var(--teal); }
+.status-value.ready { color: var(--gold); }
+.status-value.planned { color: var(--slate); }
+
+/* ── NEVER CLAUSES ── */
+.never-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2px;
+  background: var(--rule);
+  margin-top: 40px;
+}
+
+.never-card {
+  background: var(--red-pale);
+  padding: 28px 24px;
+  border-top: 3px solid var(--red);
+}
+
+.never-id {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--red);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.never-rule {
+  font-family: var(--serif);
+  font-size: 17px;
+  color: var(--ink);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.never-why {
+  font-size: 12.5px;
+  color: var(--slate);
+  line-height: 1.6;
+}
+
+/* ── ONBOARDING FLOW ── */
+.flow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0;
+  background: var(--rule);
+  margin-top: 40px;
+  position: relative;
+}
+
+.flow-step {
+  background: var(--paper);
+  padding: 32px 24px;
+  position: relative;
+}
+
+.flow-step:not(:last-child)::after {
+  content: '→';
+  position: absolute;
+  right: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: var(--gold);
+  z-index: 2;
+  background: var(--paper);
+  padding: 4px;
+}
+
+.step-num {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.step-title {
+  font-family: var(--serif);
+  font-size: 18px;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.step-desc {
+  font-size: 12.5px;
+  color: var(--slate);
+  line-height: 1.6;
+}
+
+.step-tech {
+  margin-top: 14px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--teal);
+  letter-spacing: 0.08em;
+}
+
+/* ── LICENSING TIERS ── */
+.tiers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2px;
+  background: var(--rule);
+  margin-top: 40px;
+}
+
+.tier {
+  background: var(--paper2);
+  padding: 28px 24px;
+}
+
+.tier-type {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.tier-type.use { color: var(--teal); }
+.tier-type.collective { color: var(--purple); }
+.tier-type.estate { color: var(--gold); }
+.tier-type.therapeutic { color: var(--red); }
+
+.tier-name {
+  font-family: var(--serif);
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.tier-split {
+  font-family: var(--serif);
+  font-size: 36px;
+  font-style: italic;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.tier-desc {
+  font-size: 12.5px;
+  color: var(--slate);
+  line-height: 1.6;
+}
+
+.tier-market {
+  margin-top: 16px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--slate);
+  text-transform: uppercase;
+}
+
+/* ── GOVERNANCE ── */
+.gov-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--rule);
+  margin-top: 40px;
+}
+
+@media (max-width: 700px) { .gov-grid { grid-template-columns: 1fr; } }
+
+.gov-card {
+  background: var(--paper);
+  padding: 32px 28px;
+}
+
+.gov-card.highlight { background: var(--purple-pale); }
+
+.gov-role {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--purple);
+  margin-bottom: 12px;
+}
+
+.gov-name {
+  font-family: var(--serif);
+  font-size: 22px;
+  margin-bottom: 14px;
+  line-height: 1.2;
+}
+
+.gov-body {
+  font-size: 13px;
+  color: var(--slate);
+  line-height: 1.65;
+}
+
+.gov-body strong { color: var(--ink); }
+
+/* ── COMPETITIVE POSITION ── */
+.comp-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 40px;
+  font-size: 13px;
+}
+
+.comp-table th {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 14px 20px;
+  text-align: left;
+  border-bottom: 2px solid var(--rule);
+  color: var(--slate);
+}
+
+.comp-table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+
+.comp-table tr:last-child td { border-bottom: none; }
+
+.comp-table tr.hvs-row td {
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 500;
+}
+
+.comp-table tr.hvs-row td:first-child {
+  font-family: var(--serif);
+  font-size: 16px;
+  color: var(--gold-pale);
+}
+
+.check { color: var(--teal); font-weight: 700; }
+.cross { color: var(--red); opacity: 0.5; }
+.partial { color: var(--gold); }
+
+/* ── MARKET NUMBERS ── */
+.numbers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 2px;
+  background: var(--rule);
+  margin-top: 40px;
+}
+
+.num-cell {
+  background: var(--paper2);
+  padding: 24px 20px;
+  text-align: center;
+}
+
+.num-big {
+  font-family: var(--serif);
+  font-size: 40px;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.num-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--slate);
+  line-height: 1.6;
+}
+
+/* ── TIMELINE ── */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: var(--rule);
+  margin-top: 40px;
+}
+
+.tl-row {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 2px;
+  background: var(--rule);
+}
+
+.tl-year {
+  background: var(--ink);
+  color: var(--gold-pale);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif);
+  font-size: 22px;
+  padding: 20px;
+}
+
+.tl-content {
+  background: var(--paper);
+  padding: 20px 28px;
+}
+
+.tl-phase {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 8px;
+}
+
+.tl-items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tl-items li {
+  font-size: 13px;
+  color: var(--slate);
+  padding-left: 16px;
+  position: relative;
+}
+
+.tl-items li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.tl-items li strong { color: var(--ink); }
+
+/* ── COLOPHON ── */
+.colophon {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 64px 72px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: end;
+}
+
+@media (max-width: 700px) { .colophon { grid-template-columns: 1fr; } }
+
+.colophon-text {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(18px, 2.5vw, 26px);
+  line-height: 1.55;
+  color: rgba(247,244,238,0.85);
+}
+
+.colophon-text strong {
+  font-style: normal;
+  color: var(--gold-pale);
+}
+
+.colophon-right {
+  text-align: right;
+}
+
+.wordmark {
+  font-family: var(--serif);
+  font-size: clamp(52px, 8vw, 88px);
+  line-height: 1;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.wordmark .hvs { color: var(--gold-pale); }
+.wordmark .dot { color: rgba(247,244,238,0.2); }
+
+.colophon-meta {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: rgba(247,244,238,0.35);
+  line-height: 2;
+}
+
+@media (max-width: 600px) {
+  .masthead, .section, .colophon {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .masthead::after { display: none; }
+  .flow-step:not(:last-child)::after { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="mast-eyebrow">NOIZY.ai · Architecture Document · v1.0 · March 14, 2026</div>
+  <h1 class="mast-title">Human Voice<br><span>Signature</span></h1>
+  <p class="mast-sub">The Global Guild of Artists</p>
+  <div class="mast-declaration">
+    <strong>HVS is not a product. It is not a feature. It is not a platform.</strong>
+    It is the consent layer that the entire AI creative economy is being forced toward — and will be required to use.
+    It is the infrastructure that makes every human voice traceable, consent-locked, and monetizable for the lifetime of its owner and beyond.
+    <strong>Every voice is sovereign. Every voice is an asset. Every voice is irreplaceable.</strong>
+  </div>
+  <div class="mast-meta">
+    <div class="meta-item">
+      <strong>RSP_001</strong>
+      Rob Plowman · Founder
+    </div>
+    <div class="meta-item">
+      <strong>Fish Music Inc.</strong>
+      Est. 1996 · Ottawa
+    </div>
+    <div class="meta-item">
+      <strong>NOIZY.ai</strong>
+      The Platform That Lifts the Humans
+    </div>
+    <div class="meta-item">
+      <strong>HVS v1.0</strong>
+      Filed March 14, 2026
+    </div>
+  </div>
+</div>
+
+<!-- WHY HVS EXISTS NOW -->
+<div class="section alt">
+  <div class="section-eyebrow">The moment we are in</div>
+  <h2 class="section-title">Four forces have converged to make HVS<br><em>the only viable infrastructure</em></h2>
+  <div class="numbers">
+    <div class="num-cell">
+      <div class="num-big">$20.7B</div>
+      <div class="num-label">AI voice market<br>by 2031</div>
+    </div>
+    <div class="num-cell">
+      <div class="num-big">$1.5B</div>
+      <div class="num-label">Anthropic settlement<br>$3K per work</div>
+    </div>
+    <div class="num-cell">
+      <div class="num-big">113</div>
+      <div class="num-label">Radio stations that fired<br>their VOs in Jul 2025</div>
+    </div>
+    <div class="num-cell">
+      <div class="num-big">0</div>
+      <div class="num-label">Platforms with full<br>5-layer consent stack</div>
+    </div>
+    <div class="num-cell">
+      <div class="num-big">10yr</div>
+      <div class="num-label">NO FAKES Act<br>max license duration</div>
+    </div>
+    <div class="num-cell">
+      <div class="num-big">Aug<br>2026</div>
+      <div class="num-label">EU AI Act full<br>enforcement begins</div>
+    </div>
+  </div>
+</div>
+
+<!-- FIVE PILLARS -->
+<div class="section">
+  <div class="section-eyebrow">Core architecture</div>
+  <h2 class="section-title">Five pillars.<br><em>One sovereign identity.</em></h2>
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-num">I</div>
+      <div class="pillar-icon">Voice Estate</div>
+      <div class="pillar-name">Identity &amp; Ownership</div>
+      <div class="pillar-desc">Every artist owns a digital identity: voice samples, stems, AI models, estate planning. Transferable. Inheritable. Permanent. The voice outlives the body.</div>
+      <div class="pillar-tag">Built — GABRIEL_V3</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">II</div>
+      <div class="pillar-icon">Consent Ledger</div>
+      <div class="pillar-name">Cryptographic Consent</div>
+      <div class="pillar-desc">Immutable, cryptographically verified consent for every use. Written. Signed. Timestamped. Revocable at any time. No perpetual license. No proxy consent. No label override.</div>
+      <div class="pillar-tag">Building — NCP v1.0</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">III</div>
+      <div class="pillar-icon">Cultural Intelligence</div>
+      <div class="pillar-name">Emotional &amp; Cultural Layer</div>
+      <div class="pillar-desc">Metadata tagging: emotional tone, linguistic nuance, regional adaptation, neuroacoustic mapping. This is what makes culturally intelligent voice irreplaceable by commodity AI.</div>
+      <div class="pillar-tag">Roadmap — NAI + Dr. Benoit</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">IV</div>
+      <div class="pillar-icon">Royalty Protocol</div>
+      <div class="pillar-name">75/25 — Same Day</div>
+      <div class="pillar-desc">Per-use royalty. Smart contract enforced. No tiers. No intermediaries. No 18-month streaming lag. Same day. Direct. Verifiable. The dashboard that goes viral.</div>
+      <div class="pillar-tag">Built — Stripe live</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">V</div>
+      <div class="pillar-icon">Guild Governance</div>
+      <div class="pillar-name">Artist-Sovereign Control</div>
+      <div class="pillar-desc">Democratic oversight. Artists ratify protocol updates. No corporate capture. Disputes resolved by the guild. The rules are owned by the people the rules protect.</div>
+      <div class="pillar-tag">Architecting — Board of Minds</div>
+    </div>
+  </div>
+</div>
+
+<!-- TECHNICAL LAYERS -->
+<div class="section alt">
+  <div class="section-eyebrow">Technical architecture</div>
+  <h2 class="section-title">The five-layer<br><em>consent stack</em></h2>
+  <div class="layers">
+
+    <div class="layer">
+      <div class="layer-badge">
+        <div class="layer-badge-inner">
+          <div class="badge-num">L1</div>
+          <div class="badge-name">Identity</div>
+        </div>
+      </div>
+      <div class="layer-main">
+        <div class="layer-title">Voice Estate Architecture</div>
+        <div class="layer-body">
+          Each HVS member receives a cryptographically signed <strong>Voice Identity Record (VIR)</strong> — a permanent, portable, transferable container for all voice assets. Contains: raw voice samples, trained model weights, consent history, estate designation, neuroacoustic profile, cultural metadata tags, and provenance chain.
+          Built on GABRIEL_V3 external memory system. Stored across D1 + KV + HEAVEN Worker on Cloudflare. RSP_001 is the first VIR ever created.
+        </div>
+      </div>
+      <div class="layer-status">
+        <div class="status-label">Status</div>
+        <div class="status-value built">✓ Built — RSP_001 live</div>
+        <div class="status-label">NOIZY reference</div>
+        <div class="status-value">GABRIEL_V3 · THE_AQUARIUM</div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-badge">
+        <div class="layer-badge-inner">
+          <div class="badge-num">L2</div>
+          <div class="badge-name">Consent</div>
+        </div>
+      </div>
+      <div class="layer-main">
+        <div class="layer-title">NOIZY Consent Protocol (NCP)</div>
+        <div class="layer-body">
+          Every use of an HVS voice requires a <strong>Consent Transaction Record (CTR)</strong> — a signed, timestamped, scoped permission specifying: who, what, how long, which uses, which territories, revocation terms. No CTR = no generation. No CTR = no licensing. No CTR = no training.
+          NCP is published as an open protocol. Any platform integrating HVS data must implement NCP at the API level. Consent cannot be proxied, assigned, or inherited by a label. Only the artist signs.
+        </div>
+      </div>
+      <div class="layer-status">
+        <div class="status-label">Status</div>
+        <div class="status-value ready">⬡ Building — NCP v1.0</div>
+        <div class="status-label">Legal anchor</div>
+        <div class="status-value">NO FAKES Act · EU AI Act</div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-badge">
+        <div class="layer-badge-inner">
+          <div class="badge-num">L3</div>
+          <div class="badge-name">Provenance</div>
+        </div>
+      </div>
+      <div class="layer-main">
+        <div class="layer-title">NOIZY PROOF + C2PA</div>
+        <div class="layer-body">
+          Every generated audio output receives a <strong>Voice Provenance Certificate (VPC)</strong> — an inaudible cryptographic watermark linking the output back to its VIR consent chain. C2PA-aligned. Blockchain-anchored. MerkleSpeech-grade 99.9% verification rate.
+          NOIZY PROOF provides both attestation (this was licensed) and detection (this was not licensed). The only platform offering both. Adam Robb + iPSS partnership delivers the detection engine.
+        </div>
+      </div>
+      <div class="layer-status">
+        <div class="status-label">Status</div>
+        <div class="status-value ready">⬡ Partner engaged</div>
+        <div class="status-label">Partner</div>
+        <div class="status-value">Adam Robb · iPSS</div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-badge">
+        <div class="layer-badge-inner">
+          <div class="badge-num">L4</div>
+          <div class="badge-name">Royalties</div>
+        </div>
+      </div>
+      <div class="layer-main">
+        <div class="layer-title">75/25 Royalty Engine</div>
+        <div class="layer-body">
+          Every licensed use of an HVS voice triggers a <strong>Royalty Event</strong> — 75% to artist, 25% to guild operations, same-day settlement via Stripe. Smart contract ready for on-chain deployment.
+          Per-use, not flat rate. Scales from a single NPC line in an indie game to a full global campaign. The artist's dashboard shows every use, every payment, every licensee — in real time. This is the dashboard that will go viral.
+        </div>
+      </div>
+      <div class="layer-status">
+        <div class="status-label">Status</div>
+        <div class="status-value built">✓ Built — Stripe live</div>
+        <div class="status-label">Account</div>
+        <div class="status-value">acct_1S7kf5B1WYNnCLY0</div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-badge">
+        <div class="layer-badge-inner">
+          <div class="badge-num">L5</div>
+          <div class="badge-name">Agent</div>
+        </div>
+      </div>
+      <div class="layer-main">
+        <div class="layer-title">GABRIEL Executor — Personal AI Fiduciary</div>
+        <div class="layer-body">
+          Every HVS member has access to a <strong>Voice Agent</strong> — an AI system that monitors the consent ledger, flags unlicensed use, auto-negotiates renewal terms, triggers royalty collection, and executes estate provisions on behalf of the artist or their heirs.
+          GABRIEL is the first personal AI fiduciary for a voice artist's digital estate. RSP_001 is the first human on earth with this architecture deployed. LIFELUV is the companion interface. This layer is what makes HVS self-executing rather than dependent on human enforcement.
+        </div>
+      </div>
+      <div class="layer-status">
+        <div class="status-label">Status</div>
+        <div class="status-value built">✓ Architecture built</div>
+        <div class="status-label">Reference</div>
+        <div class="status-value">GABRIEL_V3 · LIFELUV</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- NEVER CLAUSES -->
+<div class="section dark">
+  <div class="section-eyebrow">Constitutional law</div>
+  <h2 class="section-title">The Never Clauses.<br><em>Immutable. Non-negotiable.</em></h2>
+  <p style="color:rgba(247,244,238,0.6); font-size:14px; max-width:580px; margin-bottom:0;">These are not configuration options. They are not default settings. If any of these clauses change, the entire consent ledger must recompile its governance hashes. This is how trust is maintained.</p>
+  <div class="never-grid">
+    <div class="never-card">
+      <div class="never-id">NC-001</div>
+      <div class="never-rule">No voice export without a signed Consent Transaction Record</div>
+      <div class="never-why">A voice cannot leave the HVS system without explicit, written, scoped consent from the artist. Not implied. Not legacy. Not label-assigned. Artist-signed.</div>
+    </div>
+    <div class="never-card">
+      <div class="never-id">NC-002</div>
+      <div class="never-rule">No AI training outside the approved use scope</div>
+      <div class="never-why">Consent for one use does not imply consent for training. Game NPC consent does not include model training. Every scope is explicit. Every scope is bounded.</div>
+    </div>
+    <div class="never-card">
+      <div class="never-id">NC-003</div>
+      <div class="never-rule">No identity impersonation — living or deceased</div>
+      <div class="never-why">A licensed voice cannot be used to impersonate the artist in contexts they did not consent to. The voice and the person are not separable assets.</div>
+    </div>
+    <div class="never-card">
+      <div class="never-id">NC-004</div>
+      <div class="never-rule">No sublicensing without artist ratification</div>
+      <div class="never-why">A licensee cannot grant another party access to the voice. Every downstream use requires a new CTR. No cascade licensing. No label proxying.</div>
+    </div>
+    <div class="never-card">
+      <div class="never-id">NC-005</div>
+      <div class="never-rule">No perpetual, irrevocable, royalty-free license — ever</div>
+      <div class="never-why">The clause that burned ElevenLabs in 2025 cannot exist in HVS. Maximum license duration is 10 years per the NO FAKES Act. All licenses are revocable.</div>
+    </div>
+    <div class="never-card">
+      <div class="never-id">NC-006</div>
+      <div class="never-rule">No deployment in political advertising, medical advice, or non-consensual intimate content</div>
+      <div class="never-why">Three categories are unconditionally prohibited regardless of consent offered. These protect the artist from uses that could harm their reputation, health, or dignity.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ONBOARDING FLOW -->
+<div class="section">
+  <div class="section-eyebrow">Creator journey</div>
+  <h2 class="section-title">Onboarding flow.<br><em>Voice in. Guild member.</em></h2>
+  <div class="flow">
+    <div class="flow-step">
+      <div class="step-num">Step 01</div>
+      <div class="step-title">Identity Verification</div>
+      <div class="step-desc">Liveness check confirms the artist is a real, living human. Voice sample recorded in a controlled session. Legal name, jurisdiction, and estate designation captured.</div>
+      <div class="step-tech">XTTS v2 + Librosa · On-camera consent</div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">Step 02</div>
+      <div class="step-title">Voice Estate Creation</div>
+      <div class="step-desc">VIR generated. Voice model trained under RSP_001 pipeline: Librosa → XTTS v2 → RVC → pedalboard → Gemma2. Model locked to artist's consent key. Immutable.</div>
+      <div class="step-tech">Operation Voice Army pipeline</div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">Step 03</div>
+      <div class="step-title">Consent Configuration</div>
+      <div class="step-desc">Artist defines their Never Clauses — what they will and won't allow. Sets default license terms, royalty preferences, and territory scopes. All revocable at any time.</div>
+      <div class="step-tech">NCP protocol · Cloudflare KV</div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">Step 04</div>
+      <div class="step-title">Cultural Profiling</div>
+      <div class="step-desc">Emotional spectrum mapping. Linguistic nuance tagging. Neuroacoustic frequency analysis. Regional and cultural resonance metadata. This is the premium differentiation layer.</div>
+      <div class="step-tech">NAI layer · Dr. Benoit protocol</div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">Step 05</div>
+      <div class="step-title">Guild Activation</div>
+      <div class="step-desc">Artist is live in the HVS registry. GABRIEL agent deployed. Royalty dashboard active. Voice available for licensed use. Estate provisions set. Guild governance rights granted.</div>
+      <div class="step-tech">GABRIEL executor · Stripe live</div>
+    </div>
+  </div>
+</div>
+
+<!-- LICENSING TIERS -->
+<div class="section alt">
+  <div class="section-eyebrow">Revenue architecture</div>
+  <h2 class="section-title">Four licensing pathways.<br><em>All consent-first. All artist-sovereign.</em></h2>
+  <div class="tiers">
+    <div class="tier">
+      <div class="tier-type use">Per-Use Licensing</div>
+      <div class="tier-name">Individual Voice Use</div>
+      <div class="tier-split">75/25</div>
+      <div class="tier-desc">Single licensed use: NPC dialogue, game character, narration, ad campaign. Scoped, bounded, timestamped. Every use triggers a royalty event. Same day payment.</div>
+      <div class="tier-market">Market: Gaming · Advertising · Film</div>
+    </div>
+    <div class="tier">
+      <div class="tier-type collective">Collective Dataset</div>
+      <div class="tier-name">Creator Data Union</div>
+      <div class="tier-split">70/20/10</div>
+      <div class="tier-desc">AI companies license the HVS collective dataset under guild terms. 70% to contributing artists, 20% to guild operations, 10% to impact programs (NOIZYKIDZ, NAI). Collective leverage no individual has alone.</div>
+      <div class="tier-market">Market: AI Training · Foundation Models</div>
+    </div>
+    <div class="tier">
+      <div class="tier-type estate">Voice Estate</div>
+      <div class="tier-name">Lifetime + Legacy</div>
+      <div class="tier-split">75/25</div>
+      <div class="tier-desc">Artist earns during their lifetime. Estate earns 70 years post-death per NO FAKES Act. Heirs designated. Estate lawyer-ready documentation. The voice as a financial instrument alongside real estate and pension funds.</div>
+      <div class="tier-market">Market: Legacy Catalogs · Estate Planning</div>
+    </div>
+    <div class="tier">
+      <div class="tier-type therapeutic">Impact Deployment</div>
+      <div class="tier-name">Therapeutic &amp; Educational</div>
+      <div class="tier-split">Zero Cost</div>
+      <div class="tier-desc">Voices deployed for NOIZYKIDZ, NAI clinical programs, autism support, and elder care are provided at zero cost to families. Funded by the 10% collective impact allocation. No ads. No data. No commercialization. Exactly as promised.</div>
+      <div class="tier-market">Market: Healthcare · Education · Inclusion</div>
+    </div>
+  </div>
+</div>
+
+<!-- COMPETITIVE POSITION -->
+<div class="section">
+  <div class="section-eyebrow">Market position</div>
+  <h2 class="section-title">HVS vs. the field.<br><em>No one has all six.</em></h2>
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>Platform</th>
+        <th>Artist split</th>
+        <th>Revocable consent</th>
+        <th>No perpetual license</th>
+        <th>Provenance + detection</th>
+        <th>Voice Estate</th>
+        <th>Guild governance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="hvs-row">
+        <td>HVS / NOIZYVOX</td>
+        <td><span class="check">75%</span></td>
+        <td><span class="check">✓ Always</span></td>
+        <td><span class="check">✓ Never</span></td>
+        <td><span class="check">✓ NOIZY PROOF</span></td>
+        <td><span class="check">✓ Built</span></td>
+        <td><span class="check">✓ Guild</span></td>
+      </tr>
+      <tr>
+        <td>ElevenLabs</td>
+        <td>$0.03/1K chars</td>
+        <td><span class="partial">~ Post-ToS-firestorm</span></td>
+        <td><span class="cross">✗ 2025 ToS violated</span></td>
+        <td><span class="partial">~ Usage tracking only</span></td>
+        <td><span class="cross">✗</span></td>
+        <td><span class="cross">✗</span></td>
+      </tr>
+      <tr>
+        <td>Replica Studios</td>
+        <td>Undisclosed</td>
+        <td><span class="partial">~ SAG-AFTRA terms</span></td>
+        <td><span class="partial">~ Partial</span></td>
+        <td><span class="cross">✗</span></td>
+        <td><span class="cross">✗</span></td>
+        <td><span class="cross">✗</span></td>
+      </tr>
+      <tr>
+        <td>SAG-AFTRA / Deals</td>
+        <td>Negotiated per deal</td>
+        <td><span class="partial">~ Strike clause only</span></td>
+        <td><span class="partial">~ Partially</span></td>
+        <td><span class="cross">✗</span></td>
+        <td><span class="cross">✗</span></td>
+        <td><span class="partial">~ Union structure</span></td>
+      </tr>
+      <tr>
+        <td>Major Labels</td>
+        <td>15–18% standard</td>
+        <td><span class="cross">✗ Label proxies consent</span></td>
+        <td><span class="cross">✗ Perpetual masters</span></td>
+        <td><span class="cross">✗</span></td>
+        <td><span class="cross">✗</span></td>
+        <td><span class="cross">✗ Corporate capture</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- GOVERNANCE -->
+<div class="section alt">
+  <div class="section-eyebrow">Guild governance</div>
+  <h2 class="section-title">Who holds the keys.<br><em>Always the artist.</em></h2>
+  <div class="gov-grid">
+    <div class="gov-card highlight">
+      <div class="gov-role">Founding Seat</div>
+      <div class="gov-name">RSP_001 — Rob Plowman</div>
+      <div class="gov-body">
+        The first HVS member. The living proof of concept. 40 years of professional voice work. Ed Edd n Eddy. Dragon Tales. Johnny Test. Transformers. The Barbie films. C3 spinal injury — the GORUNFREE philosophy built into every design decision.
+        <strong>RSP_001 is not a demo. It is the north star. Every artist who joins the guild should be able to say: if it works for Rob, it works for me.</strong>
+      </div>
+    </div>
+    <div class="gov-card">
+      <div class="gov-role">Scientific Seat</div>
+      <div class="gov-name">Dr. Brien G. Benoit</div>
+      <div class="gov-body">
+        Neurosurgeon. Clinical policy expert. AI Professor of Neuro-Acoustics. Anchors the NAI (Neuro-Acoustic Intelligence) research pillar. Validates the therapeutic audio claims that give HVS moral weight beyond the music industry.
+        <strong>When hospitals require consent architecture as a procurement standard, Dr. Benoit's research is why.</strong>
+      </div>
+    </div>
+    <div class="gov-card">
+      <div class="gov-role">Enterprise Seat</div>
+      <div class="gov-name">Alex — Capital + Enterprise</div>
+      <div class="gov-body">
+        Board member. Enterprise deployment and capital strategy. The bridge between guild-first architecture and institutional adoption.
+        <strong>Enterprise clients don't adopt consent infrastructure because they believe in it. They adopt it because Alex makes the ROI case undeniable.</strong>
+      </div>
+    </div>
+    <div class="gov-card">
+      <div class="gov-role">Provenance Seat</div>
+      <div class="gov-name">Adam Robb — iPSS</div>
+      <div class="gov-body">
+        Watermarking and deepfake detection partner. C2PA-aligned. The technical guarantor of NOIZY PROOF.
+        <strong>When a court or regulator asks "how do you know this voice was licensed?" — Adam Robb's technology is the answer.</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXECUTION TIMELINE -->
+<div class="section">
+  <div class="section-eyebrow">Execution sequence</div>
+  <h2 class="section-title">2026 → 2030.<br><em>Phase by phase.</em></h2>
+  <div class="timeline">
+    <div class="tl-row">
+      <div class="tl-year">2026</div>
+      <div class="tl-content">
+        <div class="tl-phase">Foundation · Now</div>
+        <ul class="tl-items">
+          <li><strong>NOIZY.ai temp home page</strong> + NOIZYVOX portal live. A.I.V.A. branding rollout.</li>
+          <li><strong>RSP_001 Voice Army pipeline</strong> operational: Librosa → XTTS v2 → RVC → pedalboard → Gemma2. First 10 AAA voice clones under HVS.</li>
+          <li><strong>NCP v1.0 published</strong> as open protocol. First public documentation. HVS registry opens.</li>
+          <li><strong>VSI Group outreach</strong> via Sarah Goff. Grayson Music / Tom Westin gaming conversation. NRC IRAP $100M application filed.</li>
+          <li><strong>NOIZY PROOF + Adam Robb/iPSS</strong>: first C2PA-aligned audio certification deployed.</li>
+          <li><strong>EU AI Act enforcement begins August 2026.</strong> NOIZY PROOF becomes the compliance answer for platforms.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-year">2027</div>
+      <div class="tl-content">
+        <div class="tl-phase">Scale · 100 Artists</div>
+        <ul class="tl-items">
+          <li><strong>Voice Army at 100 artists.</strong> HVS collective dataset becomes licensable. Creator Data Union operational.</li>
+          <li><strong>First indie game studio NPC deal</strong> under HVS consent chain. Living Score first deployment.</li>
+          <li><strong>First public royalty dashboard</strong> goes live. The viral moment. Real-time 75/25 visible. The architecture that changes the conversation.</li>
+          <li><strong>Dr. Benoit NAI clinical research</strong> MOU. First peer-reviewed neuroacoustic study under NOIZY methodology.</li>
+          <li><strong>NOIZYKIDZ first clinical pilot</strong> in Ottawa school — haptic + bone conduction + consent-locked therapeutic audio.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-year">2028</div>
+      <div class="tl-content">
+        <div class="tl-phase">Infrastructure · Required</div>
+        <ul class="tl-items">
+          <li><strong>NCP becomes load-bearing infrastructure.</strong> Enterprise clients require verified consent chain. Non-compliance is criminal exposure under NO FAKES Act.</li>
+          <li><strong>Voice Estate as financial instrument.</strong> Estate lawyers recommending HVS. First institutional adoption.</li>
+          <li><strong>Bone conduction commodity hardware</strong> under $40. NOIZYKIDZ expands to 5 countries.</li>
+          <li><strong>HVS at 1,000+ artists.</strong> The Creator Data Union has leverage that no label can match.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-year">2030</div>
+      <div class="tl-content">
+        <div class="tl-phase">The DreamChamber · What Was Promised</div>
+        <ul class="tl-items">
+          <li><strong>The consent layer is infrastructure.</strong> Every major AI platform integrates HVS verification as mandatory architecture.</li>
+          <li><strong>The Voice Estate is a standard financial instrument.</strong> Alongside real estate and pension funds in every estate planning practice.</li>
+          <li><strong>Cultural intelligence is the luxury market.</strong> Generic AI voices are commodity. HVS voices are irreplaceable.</li>
+          <li><strong>The children got their platform.</strong> 12 countries. Zero ads. Exactly what was promised.</li>
+          <li><strong>The DreamChamber became a real place.</strong> Artists, therapists, engineers, game designers, filmmakers, parents. Building together. Earning together. Preserving together.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COLOPHON -->
+<div class="colophon">
+  <div class="colophon-text">
+    "We didn't change the greedy people. We made consent <strong>non-negotiable infrastructure</strong>, and then the greedy people had no choice but to work within it."
+    <br><br>
+    The labels didn't become ethical. They became <strong>legally exposed.</strong>
+    The AI platforms didn't develop consciences. They decided <strong>consent was cheaper than litigation.</strong>
+    <br><br>
+    <strong>Artists who refused to accept the terms. Artists who built different terms. Artists who made the different terms better — more ethical, more functional, more valuable — than the extractive terms.</strong>
+  </div>
+  <div class="colophon-right">
+    <div class="wordmark">
+      <span class="hvs">HVS</span><span class="dot">.</span>
+    </div>
+    <div class="colophon-meta">
+      Human Voice Signature<br>
+      The Global Guild of Artists<br>
+      NOIZY.ai · Fish Music Inc. Est. 1996<br>
+      RSP_001 · Ottawa · March 14, 2026<br>
+      Honor · Respect · Gather · Nurture · Preserve<br>
+      <br>
+      GORUNFREE
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+<root>
+    <CtrlPanelStyle name="CtrlPanelStyleProgOptions" noDefaultDrawing="true" colBorder="[r:0 g:0 b:0 a:0]" colFill="[r:255 g:255 b:255 a:0]" intSmartTileEdgeSize="5" intRoundedRectRadius="0">
+        <VFont name="font" vSize="7" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlPanel name="CtrlPanel" style="CtrlPanelStyleProgOptions" rect="[x:99 y:197 w:520 h:46]" id="0">
+        <CtrlButton name="ImportBFD1Preset" rect="[x:493 y:31 w:10 h:10]" id="100000" displayName="Click to load a BFD1 Program" text="Load BFD1" />
+    </CtrlPanel>
+</root>

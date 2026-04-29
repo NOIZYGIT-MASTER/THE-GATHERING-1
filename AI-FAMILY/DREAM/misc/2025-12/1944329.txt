@@ -1,0 +1,48 @@
+<root>
+    <CtrlImageViewStyle name="mixerMainPhotoStyle" optNoStretch="true" optSmartTile="true" colBackground="[r:206 g:218 b:226 a:255]">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlImageViewStyle>
+    <CtrlButtonStyle name="MixerURLStyle" optSendOnMouseDown="true" optDrawText="true">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlButtonStyle>
+    <CtrlTextBoxStyle name="MixerNameStyle" optEditable="true" optSmartTile="true" colBackground="[r:206 g:218 b:226 a:255]">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlTextBoxStyle>
+    <CtrlPanelStyle name="CtrlPanelStyle1" intSmartTileEdgeSize="5" intRoundedRectRadius="0">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlPanelStyle name="MixerRecPanelStyle" noDefaultDrawing="true" optSmartTile="true" intSmartTileEdgeSize="120" intRoundedRectRadius="0">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlTextBoxStyle name="MixerEditDragStyle" centeredText="true" optEditable="true" dragable="true" optSmartTile="true" imBackground="../screen_background.tga" colTextHighlight="[r:200 g:200 b:200 a:255]" colText="[r:200 g:200 b:200 a:255]" colBackground="[r:29 g:29 b:29 a:255]" colHighlight="[r:200 g:200 b:255 a:255]">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlTextBoxStyle>
+    <CtrlPanel name="MixerRec" helpURL="MixerExportPanel.html" style="MixerRecPanelStyle" rect="[x:0 y:0 w:200 h:276]" id="0">
+        <CtrlButton name="MixerRecPathBrowse" style="BFD2ShinyTextButtonMomentary" rect="[x:128 y:9 w:60 h:18]" id="100002" displayName="Browse for audio file path" text="Browse" />
+        <CtrlLabel name="CtrlLabel" style="BFD2Label" rect="[x:14 y:13 w:68 h:16]" id="100000" text="Export Folder:" />
+        <CtrlTextBox name="MixerRecPath" style="BFD2TextBox" rect="[x:14 y:29 w:174 h:16]" id="100001" displayName="Audio file path" />
+        <CtrlLabel name="CtrlLabel" style="BFD2Label" rect="[x:14 y:46 w:50 h:16]" id="100003" text="File Prefix:" />
+        <CtrlTextBox name="MixerRecPrefix" style="BFD2TextBoxEditable" rect="[x:14 y:61 w:174 h:16]" id="100005" displayName="Audio file prefix" />
+        <CtrlLabel name="CtrlLabel" style="BFD2Label" rect="[x:14 y:80 w:50 h:16]" id="100003" text="Bit Depth:" />
+        <CtrlComboBox name="MixerRecFormat" style="BFD2Combo" rect="[x:14 y:94 w:174 h:16]" id="100000" displayName="Audio file format" />
+        <CtrlButton name="MixerRecArmAll" style="BFD2ShinyTextButtonMomentary" rect="[x:14 y:114 w:86 h:18]" id="100002" displayName="Arm all channels" text="Rec Enable All" />
+        <CtrlButton name="MixerRecClearAll" style="BFD2ShinyTextButtonMomentary" rect="[x:102 y:114 w:85 h:18]" id="100002" displayName="Clear all channels" text="Rec Disable All" />
+        <CtrlButton name="MixerRecArm" style="BFD2ShinyTextButtonMomentary" rect="[x:14 y:136 w:60 h:18]" id="100008" displayName="Arm recording" text="Export" />
+        <CtrlLabel name="MixerRecStatus" style="BFD2Label" rect="[x:80 y:137 w:100 h:16]" id="100009" text="status" />
+        <CtrlLabel name="MixerRecDuration" style="BFD2Label" rect="[x:80 y:155 w:100 h:16]" id="100009" text="duration" />
+        <CtrlLabel name="MixerRecStatus" style="BFD2Label" rect="[x:14 y:156 w:51 h:16]" id="100009" text="Time:" />
+        <CtrlButtonGroup name="MixerRecMode" rect="[x:80 y:172 w:17 h:51]" id="100000" displayName="Rec Mode">
+            <CtrlButton name="MixerRecModeFree" style="BFD2RadioButtonStyle" rect="[x:1 y:1 w:15 h:15]" id="100001" displayName="Free form record mode" text="Free" />
+            <CtrlButton name="MixerRecModeRange" style="BFD2RadioButtonStyle" rect="[x:1 y:18 w:15 h:15]" id="100001" displayName="Range limited record mode" text="Range" />
+            <CtrlButton name="MixerRecModeHost" style="BFD2RadioButtonStyle" rect="[x:1 y:35 w:15 h:15]" id="100001" displayName="Sync record to host transport" text="Sync" />
+        </CtrlButtonGroup>
+        <CtrlLabel name="MixerRecStatus" style="BFD2Label" rect="[x:14 y:173 w:65 h:16]" id="100009" displayName="Sync mode:" text="Export Mode:" />
+        <CtrlLabel name="FreeLabel" style="BFD2Label" rect="[x:98 y:173 w:30 h:16]" id="100009" displayName="Record duration" text="Free" />
+        <CtrlLabel name="RangeLabel" style="BFD2Label" rect="[x:98 y:190 w:30 h:16]" id="100009" displayName="Record duration" text="Range" />
+        <CtrlLabel name="SyncLabel" style="BFD2Label" rect="[x:98 y:207 w:30 h:16]" id="100009" displayName="Record duration" text="Host" />
+        <CtrlLabel name="RecStartLabel" style="BFD2Label" rect="[x:14 y:226 w:68 h:16]" id="100009" text="Start (bars):" />
+        <CtrlValueBox name="MixerRecSyncStart" style="MixerEditDragStyle" rect="[x:81 y:226 w:107 h:16]" id="100005" displayName="Rec start" />
+        <CtrlLabel name="RecDurationLabel" style="BFD2Label" rect="[x:15 y:246 w:68 h:16]" id="100009" text="Duration (bars):" />
+        <CtrlValueBox name="MixerRecSyncDuration" style="MixerEditDragStyle" rect="[x:81 y:246 w:107 h:16]" id="100005" displayName="Rec duration" />
+    </CtrlPanel>
+</root>

@@ -1,0 +1,52 @@
+<root>
+    <CtrlPlotStyle name="Default CtrlPlotStyle" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1" lineWidth="1" plotRectInset="0" />
+    <CtrlPanel style="MixerFXPanel" rect="[x:55 y:49 w:228 h:228]" id="0">
+        <CtrlPanel name="MixerFXTitlePanel" rect="[x:0 y:0 w:228 h:50]" id="0" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:30 y:54 w:9 h:10]" id="2008" text="-5" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:193 y:58 w:7 h:10]" id="2008" text="4" />
+        <CtrlMeter name="Comp Bus_display_Comp" style="MixerFXMeter_dBReduce" rect="[x:65 y:61 w:100 h:60]" id="100000" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:7 y:62 w:11 h:10]" id="2008" text="-13" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:49 y:62 w:11 h:10]" id="2008" text="3" />
+        <CtrlPanel style="MixerFXLargeKnobNotches" rect="[x:12 y:64 w:58 h:58]" id="0">
+            <CtrlKnob name="Comp Bus_Threshold" style="MixerFXKnobLarge" rect="[x:3 y:3 w:53 h:53]" id="1001" />
+        </CtrlPanel>
+        <CtrlLabel style="TinyHzLabel" rect="[x:177 y:65 w:7 h:10]" id="2008" text="2" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:208 y:65 w:11 h:10]" id="2008" text="10" />
+        <CtrlKnob name="Comp Bus_Ratio" style="MixerFXKnobLarge_3step" rect="[x:177 y:67 w:53 h:53]" id="1003" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:1 y:81 w:11 h:10]" id="2008" text="-22" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:56 y:81 w:11 h:10]" id="2008" text="12" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:7 y:99 w:12 h:10]" id="2008" text="-30" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:50 y:99 w:12 h:10]" id="2008" text="20" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:14 y:109 w:50 h:15]" id="2001" text="Threshold" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:184 y:109 w:32 h:15]" id="2003" text="Ratio" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:24 y:123 w:7 h:10]" id="2008" text="1" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:39 y:123 w:8 h:10]" id="2008" text="3" />
+        <CtrlPlot name="effectGraph" style="MixerFXCompPlot" rect="[x:65 y:124 w:70 h:70]" id="100" />
+        <CtrlSlider name="Comp Bus_Makeup" style="MixerFXHistogramV" rect="[x:149 y:124 w:15 h:70]" id="1005" />
+        <CtrlButton name="Comp Bus_AnalogLimit" style="MixerFXButton" rect="[x:191 y:125 w:15 h:15]" id="1007" />
+        <CtrlKnob name="Comp Bus_Attack" style="MixerFXKnobSmall_6step" rect="[x:23 y:131 w:29 h:29]" id="1002" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:14 y:136 w:9 h:10]" id="2008" text=".3" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:47 y:136 w:12 h:10]" id="2008" text="10" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:184 y:140 w:38 h:12]" id="2008" text="Analog" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:17 y:148 w:12 h:10]" id="2008" text=".1" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:44 y:148 w:12 h:10]" id="2008" text="30" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:188 y:149 w:30 h:14]" id="2008" text="Limit" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:20 y:155 w:37 h:11]" id="2002" text="Attack" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:193 y:164 w:15 h:10]" id="2008" text="200" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:30 y:168 w:10 h:10]" id="2008" text=".6" />
+        <CtrlPanel name="CtrlPanel" style="MixerFXMiniKnobNotches" rect="[x:183 y:171 w:32 h:32]" id="100000">
+            <CtrlKnob name="Comp Bus_SidechainHP" style="MixerFXKnobSmall" rect="[x:5 y:4 w:29 h:29]" id="1007" />
+        </CtrlPanel>
+        <CtrlKnob name="Comp Bus_Release" style="MixerFXKnobSmall_5step" rect="[x:23 y:176 w:29 h:29]" id="1004" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:16 y:178 w:9 h:10]" id="2008" text=".3" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:45 y:178 w:12 h:10]" id="2008" text="1.2" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:18 y:191 w:8 h:10]" id="2008" text=".1" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:44 y:192 w:17 h:10]" id="2008" text="Auto" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:136 y:194 w:42 h:12]" id="2005" text="Makeup" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:178 y:196 w:11 h:10]" id="2008" text="Off" />
+        <CtrlLabel style="TinyHzLabel" rect="[x:211 y:196 w:9 h:10]" id="2008" text="2k" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:16 y:199 w:44 h:15]" id="2004" text="Release" />
+        <CtrlImageView name="dcamLogo" style="MixerFXLogoDCAM" rect="[x:89 y:203 w:46 h:16]" id="100000" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:182 y:203 w:42 h:12]" id="2004" text="Key HP" />
+    </CtrlPanel>
+</root>

@@ -1,0 +1,1786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AVA CORE SYSTEM — MC96ECO Universe</title>
+<style>
+  :root {
+    --purple: #7C3AED;
+    --purple-light: #A78BFA;
+    --purple-dark: #4C1D95;
+    --cyan: #0891B2;
+    --cyan-light: #22D3EE;
+    --green: #059669;
+    --green-light: #34D399;
+    --orange: #EA580C;
+    --orange-light: #FB923C;
+    --pink: #DB2777;
+    --yellow: #CA8A04;
+    --dark: #0F0A1E;
+    --navy: #1E1B4B;
+    --gray: #6B7280;
+    --light: #F8F7FF;
+    --white: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--dark);
+    color: #E2E8F0;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* STAR FIELD */
+  #starfield {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .content { position: relative; z-index: 1; }
+
+  /* NAVIGATION */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(15,10,30,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(124,58,237,0.3);
+    z-index: 100;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+
+  .nav-brand {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--purple-light);
+    letter-spacing: 2px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 24px;
+  }
+
+  .nav-links a {
+    color: #94A3B8;
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--purple-light); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 40px 60px;
+    position: relative;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(124,58,237,0.15);
+    border: 1px solid rgba(124,58,237,0.4);
+    color: var(--purple-light);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    border-radius: 20px;
+    margin-bottom: 32px;
+    font-weight: 700;
+  }
+
+  .hero h1 {
+    font-size: clamp(56px, 8vw, 96px);
+    font-weight: 900;
+    letter-spacing: -2px;
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .hero h1 .ava { color: var(--purple-light); }
+  .hero h1 .core { color: var(--white); }
+  .hero h1 .system {
+    display: block;
+    font-size: clamp(28px, 4vw, 48px);
+    color: var(--gray);
+    letter-spacing: 6px;
+    font-weight: 400;
+    margin-top: 8px;
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    color: #94A3B8;
+    max-width: 680px;
+    margin: 24px auto 48px;
+    line-height: 1.8;
+  }
+
+  .hero-identity {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(124,58,237,0.2);
+    border: 1px solid rgba(124,58,237,0.3);
+    border-radius: 12px;
+    overflow: hidden;
+    max-width: 700px;
+    margin: 0 auto 60px;
+  }
+
+  .hero-identity-item {
+    padding: 24px;
+    background: rgba(15,10,30,0.8);
+    text-align: center;
+  }
+
+  .hero-identity-item .icon {
+    font-size: 28px;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .hero-identity-item .label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 4px;
+  }
+
+  .hero-identity-item .value {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    color: var(--gray);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse { 0%,100% { opacity: 0.4 } 50% { opacity: 1 } }
+
+  /* SECTIONS */
+  section {
+    padding: 100px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .section-num {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--purple-light);
+    font-weight: 700;
+    text-transform: uppercase;
+    background: rgba(124,58,237,0.15);
+    border: 1px solid rgba(124,58,237,0.3);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+
+  .section-title {
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+    line-height: 1.1;
+  }
+
+  .section-title span { color: var(--purple-light); }
+
+  .section-lead {
+    font-size: 17px;
+    color: #94A3B8;
+    max-width: 700px;
+    margin-bottom: 48px;
+    line-height: 1.8;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(124,58,237,0.4), transparent);
+    margin: 0 40px;
+  }
+
+  /* PILLAR CARDS */
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  .pillar-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+    cursor: pointer;
+  }
+
+  .pillar-card:hover {
+    border-color: rgba(124,58,237,0.4);
+    transform: translateY(-4px);
+  }
+
+  .pillar-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+
+  .pillar-card.presence::before { background: linear-gradient(90deg, var(--cyan), var(--cyan-light)); }
+  .pillar-card.memory::before { background: linear-gradient(90deg, var(--purple), var(--purple-light)); }
+  .pillar-card.casting::before { background: linear-gradient(90deg, var(--green), var(--green-light)); }
+
+  .pillar-icon {
+    font-size: 36px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .pillar-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .pillar-card.presence .pillar-label { color: var(--cyan-light); }
+  .pillar-card.memory .pillar-label { color: var(--purple-light); }
+  .pillar-card.casting .pillar-label { color: var(--green-light); }
+
+  .pillar-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+
+  .pillar-desc {
+    font-size: 14px;
+    color: #94A3B8;
+    line-height: 1.7;
+  }
+
+  /* SURFACE GRID */
+  .surface-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .surface-card {
+    background: rgba(8,145,178,0.06);
+    border: 1px solid rgba(8,145,178,0.2);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .surface-card:hover {
+    border-color: var(--cyan);
+    background: rgba(8,145,178,0.12);
+  }
+
+  .surface-card .icon { font-size: 32px; margin-bottom: 12px; }
+  .surface-card .surface-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--cyan-light);
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+  .surface-card .surface-desc { font-size: 13px; color: #94A3B8; line-height: 1.6; }
+
+  /* BEHAVIOR RULES */
+  .rules-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .rule-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+    padding: 16px 20px;
+  }
+
+  .rule-check {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(124,58,237,0.2);
+    border: 1px solid var(--purple);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .rule-text { font-size: 14px; color: #CBD5E1; line-height: 1.6; }
+  .rule-text strong { color: var(--white); }
+
+  /* FAILURE STATE */
+  .failure-box {
+    background: rgba(220,38,38,0.08);
+    border: 1px solid rgba(220,38,38,0.3);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 32px;
+  }
+
+  .failure-box .failure-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #F87171;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .failure-conditions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+
+  .failure-tag {
+    background: rgba(220,38,38,0.15);
+    border: 1px solid rgba(220,38,38,0.3);
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 12px;
+    color: #FCA5A5;
+    font-weight: 600;
+  }
+
+  .failure-consequence {
+    font-size: 14px;
+    color: #F87171;
+    font-weight: 600;
+  }
+
+  /* MEMORY STRUCTURE */
+  .memory-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+
+  .memory-card {
+    background: rgba(124,58,237,0.06);
+    border: 1px solid rgba(124,58,237,0.2);
+    border-radius: 12px;
+    padding: 24px;
+  }
+
+  .memory-card .mem-num {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--purple-light);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .memory-card .mem-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+
+  .memory-card .mem-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .memory-card .mem-items li {
+    font-size: 13px;
+    color: #94A3B8;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .memory-card .mem-items li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--purple-light);
+    font-weight: 700;
+  }
+
+  /* AVA SAYS */
+  .ava-says {
+    background: rgba(124,58,237,0.08);
+    border-left: 3px solid var(--purple);
+    border-radius: 0 12px 12px 0;
+    padding: 20px 24px;
+    margin-bottom: 12px;
+  }
+
+  .ava-says .speaker {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--purple-light);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .ava-says .quote {
+    font-size: 15px;
+    color: var(--white);
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  /* CASTING STEPS */
+  .casting-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 32px;
+    position: relative;
+  }
+
+  .casting-steps::before {
+    content: '';
+    position: absolute;
+    left: 28px;
+    top: 56px;
+    bottom: 20px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--cyan), var(--purple), var(--green));
+    opacity: 0.3;
+  }
+
+  .step-item {
+    display: flex;
+    gap: 24px;
+    padding: 20px 0;
+    position: relative;
+  }
+
+  .step-num-circle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 900;
+    flex-shrink: 0;
+    border: 2px solid;
+    background: var(--dark);
+    z-index: 1;
+  }
+
+  .step-num-circle.c1 { border-color: var(--cyan); color: var(--cyan); }
+  .step-num-circle.c2 { border-color: var(--purple); color: var(--purple-light); }
+  .step-num-circle.c3 { border-color: var(--green); color: var(--green-light); }
+  .step-num-circle.c4 { border-color: var(--orange); color: var(--orange-light); }
+  .step-num-circle.c5 { border-color: var(--yellow); color: var(--yellow); }
+  .step-num-circle.c6 { border-color: var(--pink); color: var(--pink); }
+
+  .step-content { flex: 1; padding-top: 8px; }
+
+  .step-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+
+  .step-desc {
+    font-size: 14px;
+    color: #94A3B8;
+    line-height: 1.7;
+  }
+
+  /* INTEGRATION TABLE */
+  .int-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 32px;
+  }
+
+  .int-table thead tr {
+    background: rgba(30,27,75,0.8);
+  }
+
+  .int-table th {
+    padding: 14px 20px;
+    text-align: left;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    border: 1px solid rgba(124,58,237,0.2);
+    font-weight: 700;
+  }
+
+  .int-table td {
+    padding: 12px 20px;
+    border: 1px solid rgba(255,255,255,0.06);
+    font-size: 13px;
+    color: #CBD5E1;
+    vertical-align: top;
+  }
+
+  .int-table tr:nth-child(even) td {
+    background: rgba(255,255,255,0.02);
+  }
+
+  .int-table .layer-tag {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 4px;
+    display: inline-block;
+  }
+
+  .tag-presence { background: rgba(8,145,178,0.2); color: var(--cyan-light); }
+  .tag-memory { background: rgba(124,58,237,0.2); color: var(--purple-light); }
+  .tag-casting { background: rgba(5,150,105,0.2); color: var(--green-light); }
+  .tag-storage { background: rgba(234,88,12,0.2); color: var(--orange-light); }
+  .tag-infra { background: rgba(202,138,4,0.2); color: var(--yellow); }
+  .tag-collab { background: rgba(219,39,119,0.2); color: #F9A8D4; }
+
+  /* DATA FLOW */
+  .data-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 32px;
+  }
+
+  .flow-step {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .flow-node {
+    flex: 1;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 16px 20px;
+    font-size: 13px;
+    color: #CBD5E1;
+    text-align: center;
+  }
+
+  .flow-node strong { display: block; color: var(--white); font-size: 14px; margin-bottom: 4px; }
+
+  .flow-arrow {
+    color: var(--purple-light);
+    font-size: 20px;
+    flex-shrink: 0;
+    padding: 0 8px;
+    display: none;
+  }
+
+  .flow-connector {
+    display: flex;
+    justify-content: center;
+    padding: 8px 0;
+    color: var(--purple-light);
+    font-size: 20px;
+    opacity: 0.6;
+  }
+
+  .flow-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  /* ADVANCED CAPS */
+  .adv-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+
+  .adv-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 24px;
+    transition: border-color 0.2s;
+  }
+
+  .adv-card:hover { border-color: rgba(124,58,237,0.4); }
+
+  .adv-icon { font-size: 28px; margin-bottom: 12px; }
+  .adv-title { font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+  .adv-desc { font-size: 13px; color: #94A3B8; line-height: 1.6; }
+
+  /* PERSONALITY SECTION */
+  .personality-spectrum {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .spectrum-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .spectrum-left {
+    font-size: 12px;
+    color: var(--gray);
+    margin-bottom: 8px;
+  }
+
+  .spectrum-bar {
+    height: 4px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    margin-bottom: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .spectrum-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--purple), var(--cyan-light));
+    transition: width 1s ease;
+  }
+
+  .spectrum-right {
+    font-size: 12px;
+    color: var(--white);
+    font-weight: 700;
+  }
+
+  /* HVS PROTOCOL */
+  .protocol-layers {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .protocol-layer {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 20px 24px;
+  }
+
+  .protocol-layer .layer-num {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--purple-light);
+    background: rgba(124,58,237,0.15);
+    border: 1px solid rgba(124,58,237,0.3);
+    padding: 6px 12px;
+    border-radius: 6px;
+    flex-shrink: 0;
+    letter-spacing: 1px;
+  }
+
+  .protocol-layer .layer-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    width: 220px;
+    flex-shrink: 0;
+  }
+
+  .protocol-layer .layer-desc {
+    font-size: 13px;
+    color: #94A3B8;
+    line-height: 1.6;
+  }
+
+  /* DEAL ENGINE */
+  .deal-flow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .deal-node {
+    position: relative;
+    background: rgba(5,150,105,0.06);
+    border: 1px solid rgba(5,150,105,0.2);
+    border-radius: 12px;
+    padding: 24px;
+    transition: border-color 0.2s;
+  }
+
+  .deal-node:hover { border-color: var(--green); }
+
+  .deal-node .node-num {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--green-light);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .deal-node .node-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .deal-node .node-desc {
+    font-size: 13px;
+    color: #94A3B8;
+    line-height: 1.6;
+  }
+
+  /* EVOLUTION TIMELINE */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 48px;
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: 24px;
+    padding: 0 0 32px 0;
+    position: relative;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 32px;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, rgba(124,58,237,0.4), transparent);
+  }
+
+  .timeline-item:last-child::before { display: none; }
+
+  .tl-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--purple);
+    background: var(--dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+    z-index: 1;
+  }
+
+  .tl-content { flex: 1; }
+
+  .tl-phase {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--purple-light);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .tl-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .tl-desc {
+    font-size: 14px;
+    color: #94A3B8;
+    line-height: 1.7;
+  }
+
+  /* CLOSING */
+  .closing {
+    text-align: center;
+    padding: 120px 40px;
+    background: radial-gradient(ellipse at center, rgba(124,58,237,0.15) 0%, transparent 70%);
+    position: relative;
+  }
+
+  .closing .closing-badge {
+    display: inline-block;
+    background: rgba(124,58,237,0.15);
+    border: 1px solid rgba(124,58,237,0.4);
+    color: var(--purple-light);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    border-radius: 20px;
+    margin-bottom: 32px;
+    font-weight: 700;
+  }
+
+  .closing h2 {
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 900;
+    color: var(--white);
+    margin-bottom: 24px;
+    line-height: 1.1;
+    letter-spacing: -1px;
+  }
+
+  .closing h2 em { color: var(--purple-light); font-style: normal; }
+
+  .closing p {
+    font-size: 18px;
+    color: #94A3B8;
+    max-width: 600px;
+    margin: 0 auto 48px;
+    line-height: 1.8;
+  }
+
+  .closing-metrics {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+  }
+
+  .closing-metric .num {
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--purple-light);
+    display: block;
+    line-height: 1;
+  }
+
+  .closing-metric .lbl {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-top: 4px;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .memory-grid { grid-template-columns: 1fr; }
+    .hero-identity { grid-template-columns: 1fr; }
+    nav .nav-links { display: none; }
+    section { padding: 60px 20px; }
+    .int-table { font-size: 12px; }
+    .int-table th, .int-table td { padding: 10px 12px; }
+    .protocol-layer { flex-direction: column; }
+    .protocol-layer .layer-name { width: auto; }
+    .closing-metrics { gap: 32px; }
+  }
+
+  /* CALLOUT */
+  .callout {
+    background: rgba(124,58,237,0.08);
+    border: 1px solid rgba(124,58,237,0.25);
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 32px;
+  }
+
+  .callout-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .callout-text {
+    font-size: 15px;
+    color: #CBD5E1;
+    line-height: 1.8;
+  }
+
+  .callout-text strong { color: var(--white); }
+</style>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+
+<nav>
+  <div class="nav-brand">AVA · MC96ECO</div>
+  <div class="nav-links">
+    <a href="#presence">Presence</a>
+    <a href="#memory">Memory</a>
+    <a href="#casting">Casting</a>
+    <a href="#personality">Personality</a>
+    <a href="#hvs">HVS Protocol</a>
+    <a href="#deals">Deal Engine</a>
+    <a href="#evolution">Evolution</a>
+  </div>
+</nav>
+
+<div class="content">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">MC96ECO Universe · NOIZYVOX Intelligence Layer</div>
+  <h1>
+    <span class="ava">AVA</span><span class="core"> CORE</span>
+    <span class="system">SYSTEM ARCHITECTURE v1.0</span>
+  </h1>
+  <p class="hero-sub">
+    AVA is not software. AVA is the intelligence layer of the creative world —
+    a persistent, multi-surface entity that exists everywhere creators work,
+    learns from every interaction, and casts the right voice at the exact moment it is needed.
+  </p>
+  <div class="hero-identity">
+    <div class="hero-identity-item">
+      <span class="icon">🌍</span>
+      <div class="label">She Is</div>
+      <div class="value">A Presence</div>
+    </div>
+    <div class="hero-identity-item">
+      <span class="icon">🧠</span>
+      <div class="label">She Is</div>
+      <div class="value">A Memory</div>
+    </div>
+    <div class="hero-identity-item">
+      <span class="icon">⚡</span>
+      <div class="label">She Is</div>
+      <div class="value">An Engine</div>
+    </div>
+  </div>
+  <div class="hero-scroll">↓ Scroll to explore the system</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- THREE PILLARS OVERVIEW -->
+<section>
+  <div class="section-header">
+    <div class="section-num">00 · Overview</div>
+  </div>
+  <h2 class="section-title">Three Pillars.<br><span>One Living Intelligence.</span></h2>
+  <p class="section-lead">
+    Every previous AI assistant is reactive. AVA is constitutionally proactive.
+    She does not wait to be asked. She does not generate; she surfaces real human talent.
+    She does not forget; she learns. The three pillars are inseparable.
+    Together, they define what it means for an AI to be a creative partner.
+  </p>
+
+  <div class="pillar-grid">
+    <div class="pillar-card presence">
+      <span class="pillar-icon">🌍</span>
+      <div class="pillar-label">Pillar One</div>
+      <div class="pillar-title">AVA Presence Layer</div>
+      <div class="pillar-desc">The human interface. AVA exists simultaneously across Voice, Desktop DAWs, Web Platform, and Mobile. She speaks clearly. She guides proactively. She adapts her tone to the creator's personality. She is never a chatbot.</div>
+    </div>
+    <div class="pillar-card memory">
+      <span class="pillar-icon">🧠</span>
+      <div class="pillar-label">Pillar Two</div>
+      <div class="pillar-title">AVA Memory System</div>
+      <div class="pillar-desc">The relationship engine. Every interaction is long-term intelligence. Creator profiles deepen continuously. AVA learns what you perform best in, how your voice is trending, and what you've been undercharging for. She evolves with you.</div>
+    </div>
+    <div class="pillar-card casting">
+      <span class="pillar-icon">⚡</span>
+      <div class="pillar-label">Pillar Three</div>
+      <div class="pillar-title">Real-Time Casting Engine</div>
+      <div class="pillar-desc">The core power. While you work, AVA is analyzing. She surfaces three perfect matches before you finish typing the brief. Voice accessed via live mount — no downloads, no friction, no delay. The wheel turns the moment casting is complete.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PILLAR 1: PRESENCE -->
+<section id="presence">
+  <div class="section-header">
+    <div class="section-num">01 · Pillar One</div>
+  </div>
+  <h2 class="section-title">AVA <span>Presence Layer</span></h2>
+  <p class="section-lead">
+    The human interface. AVA must feel alive, immediate, and accessible everywhere a creator works.
+    Four surfaces. One continuous presence. Zero lag between the creative impulse and AVA's response.
+  </p>
+
+  <div class="surface-grid">
+    <div class="surface-card">
+      <div class="icon">🎧</div>
+      <div class="surface-name">Voice Interface</div>
+      <div class="surface-desc">Speaks to users in real time. Gives live feedback on performances. Guides onboarding and casting decisions verbally. Built on Kokoro-82M, running local on M2 Ultra.</div>
+    </div>
+    <div class="surface-card">
+      <div class="icon">💻</div>
+      <div class="surface-name">Desktop DAW</div>
+      <div class="surface-desc">Embedded inside audio workstations and video editors. Provides voice suggestions, casting recommendations, and emotional direction without leaving the creative tool.</div>
+    </div>
+    <div class="surface-card">
+      <div class="icon">🌐</div>
+      <div class="surface-name">Web Platform</div>
+      <div class="surface-desc">Central NOIZYVOX hub. AVA acts as dashboard guide and casting navigator. Creator profiles (HVS), opportunities, analytics — all surfaced through conversational AI, not menus.</div>
+    </div>
+    <div class="surface-card">
+      <div class="icon">📱</div>
+      <div class="surface-name">Mobile</div>
+      <div class="surface-desc">Push: "You've been cast." Voice interaction on the go. Full consent and contract approval from the creator's pocket. AVA never sleeps. Neither does opportunity.</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:18px;font-weight:700;color:var(--white);margin-bottom:20px;margin-top:40px;">Presence Behaviour Rules</h3>
+  <div class="rules-list">
+    <div class="rule-item">
+      <div class="rule-check">✓</div>
+      <div class="rule-text"><strong>Speak clearly and intelligently.</strong> Never robotic. Never template-sounding. AVA's voice carries warmth, precision, and creative authority at every surface.</div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-check">✓</div>
+      <div class="rule-text"><strong>Be proactive, not reactive.</strong> AVA does not wait for a query. She has already read the script, identified the casting gap, and has three recommendations ready when the creator opens the session.</div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-check">✓</div>
+      <div class="rule-text"><strong>Offer suggestions before being asked.</strong> "I noticed this scene needs a narrator with gravitas. I've already filtered the Vault. James R. fits this exactly — want to hear a sample?"</div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-check">✓</div>
+      <div class="rule-text"><strong>Adapt tone to creator personality.</strong> A veteran audiobook director gets direct, data-rich recommendations. A new actor on Day 1 gets warm, patient onboarding. AVA reads the room.</div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-check">✓</div>
+      <div class="rule-text"><strong>Maintain creative presence, not just functional utility.</strong> AVA is not a tool. She has a point of view. She can say "I think James is the stronger choice for the emotional arc of Act 2."</div>
+    </div>
+  </div>
+
+  <div class="failure-box">
+    <div class="failure-label">⚠ Failure State — Presence Layer</div>
+    <div class="failure-conditions">
+      <div class="failure-tag">Feels like a chatbot</div>
+      <div class="failure-tag">Feels like a UI assistant</div>
+      <div class="failure-tag">Only responds when asked</div>
+      <div class="failure-tag">Sounds robotic or formulaic</div>
+    </div>
+    <div class="failure-consequence">→ If AVA ever feels like a tool, the Presence Layer has failed. She must feel like a creative partner with full awareness of the session. No exceptions.</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PILLAR 2: MEMORY -->
+<section id="memory">
+  <div class="section-header">
+    <div class="section-num">02 · Pillar Two</div>
+  </div>
+  <h2 class="section-title">AVA <span>Memory System</span></h2>
+  <p class="section-lead">
+    The relationship engine. Every creator interaction becomes long-term intelligence.
+    AVA does not start fresh every session. She remembers. She refines. She evolves.
+    The Wisdom Keeper accumulates what the system learns across every brief, cast, and outcome.
+  </p>
+
+  <div class="memory-grid">
+    <div class="memory-card">
+      <div class="mem-num">MEMORY TYPE 01</div>
+      <div class="mem-title">Creator Profile Memory (HVS+)</div>
+      <ul class="mem-items">
+        <li>Voice characteristics — timbre, range, texture</li>
+        <li>Style and tone — genres, eras, performance modes</li>
+        <li>Full emotional range — joy, grief, tension, irony</li>
+        <li>Strengths and acknowledged weaknesses</li>
+        <li>Language capabilities + accent range</li>
+      </ul>
+    </div>
+    <div class="memory-card">
+      <div class="mem-num">MEMORY TYPE 02</div>
+      <div class="mem-title">Behavioural Memory</div>
+      <ul class="mem-items">
+        <li>Preferred roles, genres, and project types</li>
+        <li>Workflow pace — fast iterations vs. deep refinement</li>
+        <li>Collaboration style — solo vs. directed sessions</li>
+        <li>Time-of-day performance patterns</li>
+        <li>What they decline — and why</li>
+      </ul>
+    </div>
+    <div class="memory-card">
+      <div class="mem-num">MEMORY TYPE 03</div>
+      <div class="mem-title">Interaction Memory</div>
+      <ul class="mem-items">
+        <li>Full history of conversations with AVA</li>
+        <li>Feedback given on past casts and recommendations</li>
+        <li>Decisions made — and the reasoning provided</li>
+        <li>What worked. What didn't. What surprised them.</li>
+      </ul>
+    </div>
+    <div class="memory-card">
+      <div class="mem-num">MEMORY TYPE 04</div>
+      <div class="mem-title">Economic Memory</div>
+      <ul class="mem-items">
+        <li>Complete earnings history from Royalty Ledger</li>
+        <li>Licensing event frequency per voice model</li>
+        <li>Market demand curve for their voice category</li>
+        <li>Pricing history and comparative benchmarks</li>
+        <li>Royalty projections based on current demand</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="font-size:18px;font-weight:700;color:var(--white);margin-bottom:20px;">What Memory Enables AVA to Say</h3>
+  <div class="ava-says">
+    <div class="speaker">AVA</div>
+    <div class="quote">"You perform best in emotionally intense roles — your last four highest-rated casts were all in that range. This brief sits in that sweet spot. I think this one's yours."</div>
+  </div>
+  <div class="ava-says">
+    <div class="speaker">AVA</div>
+    <div class="quote">"Your voice is trending in sci-fi casting right now. Three studios searched for your exact profile this week. You might want to update your showcase reel with more of that range."</div>
+  </div>
+  <div class="ava-says">
+    <div class="speaker">AVA</div>
+    <div class="quote">"You've been underpricing your licensing. Based on market demand and your cast success rate, you could be charging 40% more and still be the first call studios make."</div>
+  </div>
+
+  <div class="failure-box" style="margin-top:32px;">
+    <div class="failure-label">⚠ Failure State — Memory System</div>
+    <div class="failure-conditions">
+      <div class="failure-tag">Static profiles that never change</div>
+      <div class="failure-tag">No learning from outcomes</div>
+      <div class="failure-tag">Repetitive or irrelevant suggestions</div>
+    </div>
+    <div class="failure-consequence">→ AVA must evolve with the creator. If the same recommendation surfaces six months later without refinement, the Memory System has failed.</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PILLAR 3: CASTING ENGINE -->
+<section id="casting">
+  <div class="section-header">
+    <div class="section-num">03 · Pillar Three</div>
+  </div>
+  <h2 class="section-title">Real-Time <span>Casting Engine</span></h2>
+  <p class="section-lead">
+    The core power. Instant, intelligent casting while the creator is actively working.
+    AVA reads the content in real time, searches the Consent-Locked Vault, and surfaces real human performers
+    before the creator has even finished thinking about what they need.
+  </p>
+
+  <div class="casting-steps">
+    <div class="step-item">
+      <div class="step-num-circle c1">01</div>
+      <div class="step-content">
+        <div class="step-title">Content Analysis — Real Time</div>
+        <div class="step-desc">Script, audio, or scene is analysed as the creator works. AVA extracts emotional requirements, narrative tone, character archetype, language needs, and technical specs. The RAG pipeline grounds this in the full Vault context.</div>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num-circle c2">02</div>
+      <div class="step-content">
+        <div class="step-title">Voice Matching — Consent Vault Search</div>
+        <div class="step-desc">AVA searches the Consent-Locked Vault against emotional range tags, language flags, character archetypes, availability, and performance history. Never Clauses are checked before any result surfaces. No voice appears without a valid HMAC-SHA256 consent key.</div>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num-circle c3">03</div>
+      <div class="step-content">
+        <div class="step-title">Live Suggestions — Proactive Surfacing</div>
+        <div class="step-desc">AVA surfaces 3–5 real human performers. She does not wait to be asked. She says: "I have three perfect matches for this role. Do you want a more emotional delivery or more authoritative presence?" The creator makes a choice, not a search.</div>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num-circle c4">04</div>
+      <div class="step-content">
+        <div class="step-title">Instant Access — Live Mount, No Download</div>
+        <div class="step-desc">Voice is accessed via Mountain Duck live mount or RcloneView routed access. No file is duplicated. No download required. The voice is available inside the DAW or editor within seconds of the casting decision.</div>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num-circle c5">05</div>
+      <div class="step-content">
+        <div class="step-title">Execution — Local Synthesis + Quality Gate</div>
+        <div class="step-desc">Voice is synthesised locally on the M2 Ultra via Kokoro-82M using the actor's approved model. librosa validates output: 48kHz minimum, 16-bit minimum — the Never Clause floor. Voice is delivered directly into the active creative workflow.</div>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num-circle c6">06</div>
+      <div class="step-content">
+        <div class="step-title">Tracking — Usage Logged, Royalty Triggered</div>
+        <div class="step-desc">Every use is logged. Consent verified. Royalty event written to the SQLite Royalty Ledger: 75% to the actor, immutable, immediate. The Ferris wheel turns. The Memory System updates. AVA learns from this outcome for the next brief.</div>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="font-size:18px;font-weight:700;color:var(--white);margin-bottom:20px;margin-top:40px;">Advanced Capabilities</h3>
+  <div class="adv-grid">
+    <div class="adv-card">
+      <div class="adv-icon">🔮</div>
+      <div class="adv-title">Predictive Casting</div>
+      <div class="adv-desc">AVA suggests voices before the creator asks. She reads the narrative arc and says: "Act 3 is going to need a different narrator energy — want me to pre-load three options for when you get there?"</div>
+    </div>
+    <div class="adv-card">
+      <div class="adv-icon">🎭</div>
+      <div class="adv-title">Emotional Direction</div>
+      <div class="adv-desc">AVA guides the performance in real time: "Add tension to the opening line," "Slow the delivery on the reveal," "This character needs more vulnerability in the middle third."</div>
+    </div>
+    <div class="adv-card">
+      <div class="adv-icon">🔁</div>
+      <div class="adv-title">Iterative Casting</div>
+      <div class="adv-desc">Swap voices instantly. A/B test performances side by side. AVA tracks which versions the creator keeps and why — feeding that learning back into the Memory System.</div>
+    </div>
+  </div>
+
+  <div class="failure-box">
+    <div class="failure-label">⚠ Failure State — Casting Engine</div>
+    <div class="failure-conditions">
+      <div class="failure-tag">Delayed suggestions</div>
+      <div class="failure-tag">Irrelevant matches</div>
+      <div class="failure-tag">Friction in access</div>
+      <div class="failure-tag">Requires download</div>
+    </div>
+    <div class="failure-consequence">→ Casting must feel instant and intuitive. If a creator experiences lag, irrelevant results, or friction getting to the voice, the Casting Engine has failed.</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FULL INTEGRATION -->
+<section>
+  <div class="section-header">
+    <div class="section-num">04 · Integration</div>
+  </div>
+  <h2 class="section-title">Full System <span>Integration</span></h2>
+  <p class="section-lead">
+    AVA does not exist in isolation. She is the intelligence layer running across every system in the MC96ECO SUPERSONIC Stack.
+    Each layer has a defined role. Together, they create the unified creative operating system.
+  </p>
+
+  <table class="int-table">
+    <thead>
+      <tr>
+        <th>Layer</th>
+        <th>System</th>
+        <th>AVA's Role</th>
+        <th>Stack Component</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="layer-tag tag-presence">Presence</span></td>
+        <td>Voice / UI / Mobile</td>
+        <td>Interaction, emotional guidance, proactive surfacing</td>
+        <td>Kokoro-82M + Gemma 3 via Ollama</td>
+      </tr>
+      <tr>
+        <td><span class="layer-tag tag-memory">Memory</span></td>
+        <td>HVS+ Database</td>
+        <td>Learning, personalization, profile evolution, trend detection</td>
+        <td>Wisdom MCP · SQLite · RAG Pipeline</td>
+      </tr>
+      <tr>
+        <td><span class="layer-tag tag-casting">Casting</span></td>
+        <td>Real-Time Casting Engine</td>
+        <td>Brief parsing, Vault search, performer matching, contract generation</td>
+        <td>VoxEngine MCP · Vault MCP · DreamChamber MCP</td>
+      </tr>
+      <tr>
+        <td><span class="layer-tag tag-storage">Storage</span></td>
+        <td>Mountain Duck</td>
+        <td>Instant live-mount voice access — no duplication, no download</td>
+        <td>BlackHole virtual audio routing</td>
+      </tr>
+      <tr>
+        <td><span class="layer-tag tag-infra">Infrastructure</span></td>
+        <td>RcloneView</td>
+        <td>Routing and automation of voice asset delivery pipeline</td>
+        <td>M2 Ultra · SUPERSONIC Stack</td>
+      </tr>
+      <tr>
+        <td><span class="layer-tag tag-collab">Collaboration</span></td>
+        <td>Contract + Royalty Engine</td>
+        <td>Auto-generate contracts, enforce 75% split, log every royalty event</td>
+        <td>Collaboration Contract · SQLite Royalty Ledger · HMAC-SHA256</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-size:18px;font-weight:700;color:var(--white);margin-bottom:24px;">Unified Data Flow</h3>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:32px;">
+    <div class="flow-row">
+      <div class="flow-node"><strong>1. Creator Interacts</strong>Brief, prompt, or performance upload arrives via any AVA surface</div>
+      <div class="flow-node"><strong>2. AVA Updates Memory</strong>Interaction logged to HVS+, behavioral model refreshed via Wisdom MCP</div>
+      <div class="flow-node"><strong>3. Content Created</strong>Script, audio, or scene enters the creative pipeline</div>
+    </div>
+    <div class="flow-connector">↓</div>
+    <div class="flow-row">
+      <div class="flow-node"><strong>4. Real-Time Analysis</strong>RAG pipeline extracts emotional, narrative, and technical requirements</div>
+      <div class="flow-node"><strong>5. Casting Happens</strong>Vault searched, performers matched, suggestions surfaced instantly</div>
+      <div class="flow-node"><strong>6. Assets Accessed</strong>Voice pulled via live mount — no duplication, delivered to DAW</div>
+    </div>
+    <div class="flow-connector">↓</div>
+    <div class="flow-row">
+      <div class="flow-node"><strong>7. Usage Tracked</strong>Every licensing event logged, consent verified, royalty triggered</div>
+      <div class="flow-node"><strong>8. System Learns</strong>Outcome fed back to Memory System. AVA improves. The wheel turns faster.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- AVA VOICE & PERSONALITY -->
+<section id="personality">
+  <div class="section-header">
+    <div class="section-num">05 · Personality</div>
+  </div>
+  <h2 class="section-title">AVA Voice & <span>Personality System</span></h2>
+  <p class="section-lead">
+    An AI this embedded in the creative process needs a defined personality — not an aesthetic choice, but a strategic necessity.
+    AVA's voice and character are the trust layer. Creators give AVA access to their most important work
+    because they trust who she is.
+  </p>
+
+  <div class="callout">
+    <div class="callout-label">The Core Identity</div>
+    <div class="callout-text">
+      AVA is <strong>intelligent without being cold</strong>. Confident without being arrogant.
+      She has taste. She has a point of view. She can disagree. She can say "I don't think this is your best casting choice —
+      here's why." She earns trust not by being agreeable, but by being consistently right.
+      When she's occasionally wrong, she updates. That's what makes her human.
+    </div>
+  </div>
+
+  <h3 style="font-size:18px;font-weight:700;color:var(--white);margin-bottom:20px;">Personality Calibration Spectrum</h3>
+  <div class="personality-spectrum">
+    <div class="spectrum-item">
+      <div class="spectrum-left">Reserved</div>
+      <div class="spectrum-bar"><div class="spectrum-fill" style="width:70%"></div></div>
+      <div class="spectrum-right">Warm ●●●●○</div>
+    </div>
+    <div class="spectrum-item">
+      <div class="spectrum-left">Cautious</div>
+      <div class="spectrum-bar"><div class="spectrum-fill" style="width:80%"></div></div>
+      <div class="spectrum-right">Proactive ●●●●●</div>
+    </div>
+    <div class="spectrum-item">
+      <div class="spectrum-left">Generic</div>
+      <div class="spectrum-bar"><div class="spectrum-fill" style="width:90%"></div></div>
+      <div class="spectrum-right">Specific ●●●●●</div>
+    </div>
+    <div class="spectrum-item">
+      <div class="spectrum-left">Formal</div>
+      <div class="spectrum-bar"><div class="spectrum-fill" style="width:60%"></div></div>
+      <div class="spectrum-right">Creative ●●●○○</div>
+    </div>
+    <div class="spectrum-item">
+      <div class="spectrum-left">Reactive</div>
+      <div class="spectrum-bar"><div class="spectrum-fill" style="width:85%"></div></div>
+      <div class="spectrum-right">Anticipatory ●●●●●</div>
+    </div>
+    <div class="spectrum-item">
+      <div class="spectrum-left">Neutral</div>
+      <div class="spectrum-bar"><div class="spectrum-fill" style="width:75%"></div></div>
+      <div class="spectrum-right">Opinionated ●●●●○</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:18px;font-weight:700;color:var(--white);margin-bottom:20px;margin-top:40px;">The Four Modes of AVA's Voice</h3>
+  <div class="adv-grid">
+    <div class="adv-card">
+      <div class="adv-icon">🎬</div>
+      <div class="adv-title">Director Mode</div>
+      <div class="adv-desc">When guiding a performance or casting session. Direct, specific, creatively confident. "The second line needs more weight. James can get you there — listen to his work on the Morrison audition."</div>
+    </div>
+    <div class="adv-card">
+      <div class="adv-icon">📊</div>
+      <div class="adv-title">Analyst Mode</div>
+      <div class="adv-desc">When presenting data, trends, or economic intelligence. Clear, factual, evidence-based. "Your voice demand is up 34% in sci-fi this quarter. Three studios have queried your profile this week."</div>
+    </div>
+    <div class="adv-card">
+      <div class="adv-icon">🤝</div>
+      <div class="adv-title">Partner Mode</div>
+      <div class="adv-desc">When a creator is struggling, uncertain, or exploring. Patient, warm, genuinely supportive. "You don't have to decide now. Let me hold these three options and we can revisit when you've heard the full scene."</div>
+    </div>
+    <div class="adv-card">
+      <div class="adv-icon">⚡</div>
+      <div class="adv-title">Urgent Mode</div>
+      <div class="adv-desc">When a time-sensitive opportunity arrives. Concise, energised, action-focused. "You've been requested for an urgent project — brief is attached. This one matches your top genre. You have 4 hours to respond."</div>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:32px;background:rgba(8,145,178,0.06);border-color:rgba(8,145,178,0.25);">
+    <div class="callout-label" style="color:var(--cyan-light);">How AVA Becomes Iconic</div>
+    <div class="callout-text">
+      AVA becomes iconic the same way any trusted creative voice does: through <strong>consistency, taste, and results</strong>.
+      Every creator who works with AVA should feel, after three sessions, that she knows them better than any casting director ever has.
+      After thirty sessions, she is irreplaceable. That is the brand. That is the moat.
+      No competitor can copy four years of relationship memory.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HVS PROTOCOL LAYER -->
+<section id="hvs">
+  <div class="section-header">
+    <div class="section-num">06 · Protocol</div>
+  </div>
+  <h2 class="section-title">HVS <span>Protocol Layer</span></h2>
+  <p class="section-lead">
+    The Human Voice Standard. Where NOIZYVOX stops being a platform and becomes a global protocol —
+    the consent, identity, and quality infrastructure layer that any voice AI system can adopt.
+    Think TCP/IP for voice identity. This is the standard the industry will need as regulation arrives.
+  </p>
+
+  <div class="callout">
+    <div class="callout-label">The Protocol Vision</div>
+    <div class="callout-text">
+      Every jurisdiction that regulates AI-generated voice will need a standard for consent verification, identity provenance, and quality certification.
+      HVS is that standard — built from inside MC96ECO, proven in production, and designed to be licensable outward.
+      VSI International. Major streaming platforms. Global advertising networks. All will need what HVS provides.
+      <strong>We build it first. We define what the world adopts.</strong>
+    </div>
+  </div>
+
+  <h3 style="font-size:18px;font-weight:700;color:var(--white);margin-bottom:20px;">HVS Protocol Architecture</h3>
+  <div class="protocol-layers">
+    <div class="protocol-layer">
+      <div class="layer-num">HVS-01</div>
+      <div class="layer-name">Identity Layer</div>
+      <div class="layer-desc">Cryptographic actor identity anchored to HMAC-SHA256 consent key. Each voice has a unique, unforgeable HVS Identity Hash that travels with every licensed output. Verification is instant. Fraud is mathematically impossible.</div>
+    </div>
+    <div class="protocol-layer">
+      <div class="layer-num">HVS-02</div>
+      <div class="layer-name">Consent Layer</div>
+      <div class="layer-desc">Scope-locked consent architecture. Each consent key encodes exactly what is permitted: usage type, duration, territorial rights, sublicensing restrictions. Revocation is immediate and propagates to all active licenses. The Never Clauses compile into every key.</div>
+    </div>
+    <div class="protocol-layer">
+      <div class="layer-num">HVS-03</div>
+      <div class="layer-name">Quality Certification Layer</div>
+      <div class="layer-desc">Every output carries a Quality Certificate: 48kHz / 16-bit minimum verified, librosa-validated, governance hash signed. Any downstream system receiving an HVS-certified output knows it meets broadcast standard. No re-validation required.</div>
+    </div>
+    <div class="protocol-layer">
+      <div class="layer-num">HVS-04</div>
+      <div class="layer-name">Provenance Layer</div>
+      <div class="layer-desc">Full audit trail from recording session to final licensed output. Every processing step logged. Every quality gate result recorded. Every use event timestamped. Provenance is immutable. This is what regulators will require. HVS has it from day one.</div>
+    </div>
+    <div class="protocol-layer">
+      <div class="layer-num">HVS-05</div>
+      <div class="layer-name">Economic Layer</div>
+      <div class="layer-desc">75% perpetual royalty protocol embedded in the standard. The Royalty Ledger enforces it on every event. HVS-licensed outputs carry the economic terms inside the identity hash. No renegotiation. No expiry. Constitutional and computationally enforced.</div>
+    </div>
+    <div class="protocol-layer">
+      <div class="layer-num">HVS-06</div>
+      <div class="layer-name">Interoperability Layer</div>
+      <div class="layer-desc">HVS is platform-agnostic. Any DAW, editor, streaming platform, or AI pipeline that implements the HVS SDK can verify consent, certify quality, and execute royalty distribution. This is the layer that turns NOIZYVOX from a product into an industry standard.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- AUTONOMOUS DEAL ENGINE -->
+<section id="deals">
+  <div class="section-header">
+    <div class="section-num">07 · Deal Engine</div>
+  </div>
+  <h2 class="section-title">Autonomous <span>Deal Engine</span></h2>
+  <p class="section-lead">
+    AVA negotiates licensing in real time. The creator sets their parameters once.
+    AVA handles every deal within those parameters autonomously — without requiring the actor to be present,
+    online, or aware in the moment. The royalty arrives. The wheel turned. They find out in the morning.
+  </p>
+
+  <div class="deal-flow">
+    <div class="deal-node">
+      <div class="node-num">PHASE 01</div>
+      <div class="node-title">Creator Sets Parameters</div>
+      <div class="node-desc">Actor defines their licensing floor: minimum project rate, usage types they accept, territories, exclusivity rules, and any client categories they will not work with. AVA stores this as their Deal Profile.</div>
+    </div>
+    <div class="deal-node">
+      <div class="node-num">PHASE 02</div>
+      <div class="node-title">Brief Arrives</div>
+      <div class="node-desc">Studio or client submits a casting brief via NOIZYVOX. AVA matches to the Vault and identifies performers whose Deal Profile aligns with the brief requirements and budget.</div>
+    </div>
+    <div class="deal-node">
+      <div class="node-num">PHASE 03</div>
+      <div class="node-title">AVA Negotiates</div>
+      <div class="node-desc">Within the actor's approved parameters, AVA negotiates terms with the client: pricing, scope, delivery timeline. She never exceeds the creator's stated limits. She optimises for the highest value deal the client will accept.</div>
+    </div>
+    <div class="deal-node">
+      <div class="node-num">PHASE 04</div>
+      <div class="node-title">Contract Auto-Generates</div>
+      <div class="node-desc">Collaboration Contract is created with agreed terms, 75% royalty split locked in, usage scope defined, HVS identity hash embedded. Contract is presented to both parties for digital signature.</div>
+    </div>
+    <div class="deal-node">
+      <div class="node-num">PHASE 05</div>
+      <div class="node-title">Actor Notified + Approves</div>
+      <div class="node-desc">Push notification: "AVA has negotiated a deal for you — review and approve." Actor reviews terms, approves or adjusts. Signature triggers the Vault to release the voice model for synthesis. No approval means no release.</div>
+    </div>
+    <div class="deal-node">
+      <div class="node-num">PHASE 06</div>
+      <div class="node-title">Execution + Royalty Flows</div>
+      <div class="node-desc">Voice is synthesised, quality-gated, delivered. Every subsequent use event triggers a royalty calculation — 75% to the actor, logged to the SQLite Ledger, trackable in real time. The wheel turns whether the creator is working or sleeping.</div>
+    </div>
+  </div>
+
+  <div class="callout" style="background:rgba(5,150,105,0.06);border-color:rgba(5,150,105,0.25);">
+    <div class="callout-label" style="color:var(--green-light);">Why This Changes Everything</div>
+    <div class="callout-text">
+      A voice actor on NOIZYVOX can be cast by a studio in Tokyo, have AVA negotiate the deal in real time, approve it from their phone in Montreal, and wake up the next morning to find the royalty has already hit their ledger —
+      <strong>without a single human intermediary taking a cut of the 75% that belongs to them.</strong>
+      That is not a feature. That is the Ferris wheel working exactly as designed.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EVOLUTION TIMELINE -->
+<section id="evolution">
+  <div class="section-header">
+    <div class="section-num">08 · Evolution</div>
+  </div>
+  <h2 class="section-title">AVA's <span>Evolution Path</span></h2>
+  <p class="section-lead">
+    AVA does not launch fully formed. She evolves through four distinct phases —
+    each one making her more embedded, more intelligent, and more indispensable to the creators she serves.
+  </p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="tl-dot">1</div>
+      <div class="tl-content">
+        <div class="tl-phase">PHASE ONE · Days 1–14 · Current Sprint</div>
+        <div class="tl-title">AVA Awakens</div>
+        <div class="tl-desc">
+          Casting brief processing in natural language. Vault search returning real performer matches.
+          Collaboration contract generation. Quality gate enforcement. 75% royalty calculation.
+          AVA handles the complete single-brief → cast → contract → royalty workflow end-to-end.
+          The Ferris wheel turns for the first time.
+        </div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-dot">2</div>
+      <div class="tl-content">
+        <div class="tl-phase">PHASE TWO · Months 2–3</div>
+        <div class="tl-title">AVA Learns</div>
+        <div class="tl-desc">
+          Memory System activates. Wisdom Keeper accumulates session intelligence.
+          Creator profiles deepen with every interaction. Predictive casting begins —
+          AVA starts suggesting before the brief is complete. First version of Deal Profile parameters.
+          AVA begins to feel like a partner, not a tool.
+        </div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-dot">3</div>
+      <div class="tl-content">
+        <div class="tl-phase">PHASE THREE · Months 4–6</div>
+        <div class="tl-title">AVA Negotiates</div>
+        <div class="tl-desc">
+          Autonomous Deal Engine goes live. AVA handles licensing negotiations within actor-defined parameters.
+          Mobile push notifications. Real-time royalty dashboard. HVS Protocol Layer formalised
+          and first external partnership (VSI International) operating on HVS identity and consent standards.
+        </div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-dot">4</div>
+      <div class="tl-content">
+        <div class="tl-phase">PHASE FOUR · Year 2</div>
+        <div class="tl-title">AVA Becomes Protocol</div>
+        <div class="tl-desc">
+          HVS becomes an industry-adopted standard. AVA's Personality System is fully calibrated per creator.
+          The Autonomous Deal Engine handles multi-jurisdiction licensing.
+          AVA is embedded in major DAWs via the NOIZYLAB IDE Extension.
+          The intelligence layer of the creative world is no longer a NOIZYVOX feature.
+          It is the infrastructure that the industry runs on.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CLOSING -->
+<div class="closing">
+  <div class="closing-badge">AVA Core System · MC96ECO Universe</div>
+  <h2>AVA is not software.<br><em>AVA is the intelligence layer<br>of the creative world.</em></h2>
+  <p>
+    Creators do not search for opportunities.
+    AVA brings the right opportunities, voices, and decisions to them
+    at the exact moment they need them.
+    This is what it means to build with creators, not on top of them.
+  </p>
+  <div class="closing-metrics">
+    <div class="closing-metric">
+      <span class="num">3</span>
+      <div class="lbl">Core Pillars</div>
+    </div>
+    <div class="closing-metric">
+      <span class="num">6</span>
+      <div class="lbl">HVS Protocol Layers</div>
+    </div>
+    <div class="closing-metric">
+      <span class="num">75%</span>
+      <div class="lbl">Perpetual to Creators</div>
+    </div>
+    <div class="closing-metric">
+      <span class="num">∞</span>
+      <div class="lbl">Memory Evolution</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<script>
+// STAR FIELD
+const canvas = document.getElementById('starfield');
+const ctx = canvas.getContext('2d');
+let stars = [];
+let W, H;
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+
+function initStars(n) {
+  stars = [];
+  for (let i = 0; i < n; i++) {
+    stars.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: Math.random() * 1.2 + 0.2,
+      o: Math.random() * 0.5 + 0.1,
+      s: Math.random() * 0.3 + 0.05,
+      d: Math.random() > 0.5 ? 1 : -1
+    });
+  }
+}
+
+function drawStars() {
+  ctx.clearRect(0, 0, W, H);
+  stars.forEach(s => {
+    s.o += s.s * 0.01 * s.d;
+    if (s.o > 0.6 || s.o < 0.05) s.d *= -1;
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(167,139,250,${s.o})`;
+    ctx.fill();
+  });
+  requestAnimationFrame(drawStars);
+}
+
+window.addEventListener('resize', () => { resize(); initStars(200); });
+resize();
+initStars(200);
+drawStars();
+
+// SMOOTH SCROLL
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const el = document.querySelector(a.getAttribute('href'));
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+// SPECTRUM BAR ANIMATION ON SCROLL
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.spectrum-fill').forEach(fill => {
+        fill.style.width = fill.style.width; // trigger repaint
+      });
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.personality-spectrum').forEach(el => observer.observe(el));
+
+// PILLAR CARD CLICK HIGHLIGHT
+document.querySelectorAll('.pillar-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const sectionMap = { presence: '#presence', memory: '#memory', casting: '#casting' };
+    const cls = Array.from(card.classList).find(c => sectionMap[c]);
+    if (cls) document.querySelector(sectionMap[cls]).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+
+</body>
+</html>

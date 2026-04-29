@@ -1,0 +1,23 @@
+<root>
+    <CtrlPanelStyle name="XXLStyle" colBorder="[r:107 g:107 b:107 a:255]" colBorderAlt="[r:107 g:107 b:107 a:255]" colFill="[r:0 g:0 b:0 a:255]" intSmartTileEdgeSize="20" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlImageViewStyle name="KitPieceViewStyleXXL" optBorder="false" optBackground="false" optMouseHandle="true" optHQResizing="true" colBorder="[r:150 g:150 b:150 a:255]" colBackground="[r:150 g:150 b:150 a:255]" intRoundedRectRadius="0">
+        <VFont name="font" vSize="12" fontName="Arial" />
+    </CtrlImageViewStyle>
+    <CtrlPanelStyle name="ClickPanelStyle" colBorder="[r:0 g:0 b:0 a:0]" colBorderAlt="[r:0 g:0 b:0 a:0]" colFill="[r:255 g:255 b:255 a:0]" intSmartTileEdgeSize="5" intRoundedRectRadius="0" intBorderWidth="1">
+        <VFont name="font" vSize="14" fontName="Arial" />
+    </CtrlPanelStyle>
+    <CtrlPanel name="KitPieceChooserXXLPanel" style="XXLStyle" rect="[x:0 y:0 w:465 h:175]" id="0">
+        <CtrlPanel name="ClickPanel" style="ClickPanelStyle" rect="[x:0 y:0 w:465 h:175]" id="100000" />
+        <CtrlImageView name="KitPieceImage" style="KitPieceViewStyleXXL" rect="[x:12 y:10 w:178 h:148]" id="2" />
+        <CtrlLabel name="NameLabel" style="BFD2LabelCenteredLarge" rect="[x:205 y:43 w:250 h:20]" id="1" text="Name Label" />
+        <CtrlImageView name="StarView1" style="BFD2StarStyle" rect="[x:246 y:85 w:16 h:16]" id="3" />
+        <CtrlImageView name="StarView2" style="BFD2StarStyle" rect="[x:288 y:85 w:16 h:16]" id="4" />
+        <CtrlImageView name="StarView3" style="BFD2StarStyle" rect="[x:330 y:85 w:16 h:16]" id="5" />
+        <CtrlImageView name="StarView4" style="BFD2StarStyle" rect="[x:372 y:85 w:16 h:16]" id="6" />
+        <CtrlImageView name="StarView5" style="BFD2StarStyle" rect="[x:414 y:85 w:16 h:16]" id="7" />
+        <CtrlButton name="GoToDemoPackButton" style="NoRecessedButtonMomentary" rect="[x:318 y:119 w:100 h:21]" id="100000" zorder="2" text="Show/Buy..." />
+        <CtrlImageView name="DemoImage" style="BrowserDemoImageStyle" rect="[x:257 y:122 w:45 h:15]" id="2" zorder="2" />
+    </CtrlPanel>
+</root>

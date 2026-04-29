@@ -1,0 +1,36 @@
+<root>
+    <CtrlPanel style="MixerFXPanel" rect="[x:68 y:31 w:228 h:228]" id="0">
+        <CtrlPanel name="MixerFXTitlePanel" rect="[x:0 y:0 w:228 h:50]" id="0" />
+        <CtrlButton name="Comp Chan_In" style="MixerFXButton" rect="[x:300 y:0 w:23 h:23]" id="1007" />
+        <CtrlMeter name="Comp Chan_display_Meter" style="MixerFXMeter_dBReduce" rect="[x:65 y:59 w:100 h:60]" id="100000" />
+        <CtrlPanel name="CtrlPanel" style="MixerFXMiniKnobNotches" rect="[x:16 y:72 w:32 h:32]" id="100000">
+            <CtrlKnob name="Comp Chan_Input" style="MixerFXKnobSmall" rect="[x:5 y:4 w:29 h:29]" id="1000" />
+        </CtrlPanel>
+        <CtrlPanel name="CtrlPanel" style="MixerFXMiniKnobNotches" rect="[x:180 y:72 w:32 h:32]" id="100000">
+            <CtrlKnob name="Comp Chan_Output" style="MixerFXKnobSmall" rect="[x:5 y:4 w:29 h:29]" id="1005" />
+        </CtrlPanel>
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:10 y:96 w:13 h:10]" id="100000" text="-20" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:42 y:96 w:17 h:10]" id="100000" text="+40" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:174 y:96 w:14 h:10]" id="100000" text="-40" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:207 y:96 w:17 h:10]" id="100000" text="+20" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:26 y:101 w:12 h:10]" id="100000" text="dB" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:191 y:101 w:12 h:10]" id="100000" text="dB" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:22 y:109 w:30 h:15]" id="2000" text="Input" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:183 y:109 w:37 h:15]" id="2005" text="Output" />
+        <CtrlComboBox name="Comp Chan_Ratio" style="MixerFXCombo" rect="[x:96 y:133 w:35 h:15]" id="1004" />
+        <CtrlPanel style="MixerFXLargeKnobNotches" rect="[x:29 y:134 w:58 h:58]" id="0">
+            <CtrlKnob name="Comp Chan_Attack" style="MixerFXKnobLarge" rect="[x:3 y:3 w:53 h:53]" id="1001" />
+        </CtrlPanel>
+        <CtrlPanel style="MixerFXLargeKnobNotches" rect="[x:158 y:134 w:58 h:58]" id="0">
+            <CtrlKnob name="Comp Chan_Release" style="MixerFXKnobLarge" rect="[x:3 y:3 w:53 h:53]" id="1002" />
+        </CtrlPanel>
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:102 y:148 w:28 h:15]" id="2004" text="Ratio" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:151 y:172 w:20 h:10]" id="100000" text="Fast" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:193 y:172 w:20 h:10]" id="100000" text="Slow" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:22 y:173 w:20 h:10]" id="100000" text="Fast" />
+        <CtrlLabel name="CtrlLabel" style="TinyHzLabel" rect="[x:64 y:173 w:20 h:10]" id="100000" text="Slow" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:35 y:181 w:36 h:15]" id="2001" text="Attack" />
+        <CtrlLabel style="MixerFXLabelDark" rect="[x:163 y:181 w:44 h:15]" id="2002" text="Release" />
+        <CtrlImageView name="dcamLogo" style="MixerFXLogoDCAM" rect="[x:91 y:203 w:46 h:16]" id="100000" />
+    </CtrlPanel>
+</root>

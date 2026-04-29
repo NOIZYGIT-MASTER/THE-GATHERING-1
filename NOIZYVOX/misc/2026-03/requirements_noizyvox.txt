@@ -1,0 +1,36 @@
+# NOIZYVOX Platform — Python Requirements
+# NOIZYFISH INC. · RSP_001 · GABRIEL_V3 · Epoch V · GORUNFREE
+#
+# Install all:
+#   pip install -r requirements_noizyvox.txt
+#
+# Then verify ffmpeg is installed:
+#   macOS:   brew install ffmpeg
+#   Ubuntu:  sudo apt install ffmpeg
+#   Windows: https://ffmpeg.org/download.html  (add to PATH)
+
+# ── Core Web Server ─────────────────────────────────────────────
+flask>=3.0.0
+flask-cors>=4.0.0
+
+# ── Audio Processing ─────────────────────────────────────────────
+librosa>=0.10.0           # Feature extraction, pitch, tempo, MFCC
+soundfile>=0.12.0         # WAV read/write (libsndfile backend)
+noisereduce>=3.0.0        # Noise reduction (stationary + non-stationary)
+scipy>=1.11.0             # Signal processing, WAV fallback writer
+
+# ── Transcription ─────────────────────────────────────────────────
+openai-whisper>=20231117  # STT: tiny/base/small/medium/large models
+
+# ── Mic Capture ───────────────────────────────────────────────────
+sounddevice>=0.4.6        # Cross-platform mic recording (PortAudio)
+
+# ── Core Numerical ────────────────────────────────────────────────
+numpy>=1.24.0
+
+# ── Optional: Audio format decoding (ffmpeg Python bindings) ──────
+# ffmpeg-python>=0.2.0   # Uncomment if you want Python-level ffmpeg control
+
+# ── Dev utilities ─────────────────────────────────────────────────
+# jupyter                # For interactive Librosa exploration
+# matplotlib             # For waveform/spectrogram plots in notebooks

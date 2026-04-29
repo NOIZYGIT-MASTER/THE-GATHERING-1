@@ -1,0 +1,13 @@
+<root>
+    <CtrlListBoxStyle name="TransparentListBoxStyle" optNotEditable="true" optNoSelection="true" colFill="[r:255 g:255 b:255 a:0]" intRoundedRectRadius="0" intLineSpacing="13">
+        <VFont name="font" vSize="10" fontName="Tahoma" />
+    </CtrlListBoxStyle>
+    <CtrlPanel name="CtrlPanel" style="DefaultPanelLight" rect="[x:0 y:0 w:690 h:355]" id="0">
+        <CtrlListBox name="LogListBox" style="TransparentListBoxStyle" rect="[x:5 y:5 w:680 h:300]" id="100000" />
+        <CtrlButton name="ClearButton" style="RecessedButtonMomentary" rect="[x:185 y:315 w:100 h:30]" id="100000" text="Clear" />
+        <CtrlButton name="SaveButton" style="RecessedButtonMomentary" rect="[x:295 y:315 w:100 h:30]" id="100000" text="Save..." />
+        <CtrlButton name="CopyButton" style="RecessedButtonMomentary" rect="[x:405 y:315 w:100 h:30]" id="100000" text="Copy to Clipboard" />
+        <CtrlLabel name="CtrlLabel" rect="[x:564 y:322 w:120 h:16]" id="100001" text="Show Errors Only" />
+        <CtrlButton name="ShowErrorsButton" style="BFD2TickBoxButtonStyle" rect="[x:543 y:323 w:15 h:15]" id="100000" />
+    </CtrlPanel>
+</root>

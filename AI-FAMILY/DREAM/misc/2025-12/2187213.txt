@@ -1,0 +1,193 @@
+# ===================================================================================
+# InstallScript.fxpansion
+#
+# Author : Paul Chana
+# Date   : 07/11/05
+# Note   : This is an example installation script. It shows how to setup a default BFD
+# family installation. 
+#
+# Syntax notes:
+# 
+# Comments - any line that starts with a # is treated as a comment and ignored
+# White space is ignored, as are tabs etc
+#
+# Each document is split in to two parts, head and body.
+# The head of the document stores all of the setup information, such as the product id and they
+# registry paths that are to be dealt with
+# The body stores all the run time information, such as strings, position of controls etc
+#
+# $Id:$
+#
+# ===================================================================================
+<fxpansion_installer_script>
+    <head>
+        # Currently 1000 is the only version. May be changed in future
+        <script_version>1000</script_version>
+        # The product family defines the type of install.
+        # If the family is 'BFD' then the installation will show a kit options window
+        # Otherwise the user gets to choose the install location only window
+        <product_family>BFD</product_family>
+        # The product id
+        <product_id>FXJNF</product_id>
+        # The product version
+        <product_version>100</product_version>
+        # The string that is displayed on the installer window
+        <product_string>BFD Jazz & Funk</product_string>
+        # Windows registry path that serial code is written and read from
+        <product_registry_win>Software\fxpansion\BFD</product_registry_win>
+        # Mac registry path that serial code is written and read from
+        <product_registry_mac>com.FXpansion.BFD</product_registry_mac>
+        # Product key to read from registry location
+        <product_registry_key>productKeyJNF</product_registry_key>
+        # What disk is this
+        <disk_volume>3</disk_volume>
+        # How many disks are there
+        <disk_count>5</disk_count>
+    </head>
+    <body>
+
+        # Install sizes are take from this list dynamically, you can add in as many as you like here
+        # They are organised as follows:
+        # Combo box description
+        # Full description
+        # Size in megabytes -> This is no longer used
+        # Fault tolerance level
+        # Total max number of layers
+        <install_sizes>
+            <size>
+                Small   
+                Small Installation 20 Velocity Layers   
+                3.15
+                5  
+                20
+            </size>
+            <size>
+                Medium  
+                Medium Installation 40 Velocity Layers  
+                3.2
+                10  
+                40
+            </size>
+            <size>
+                Large
+                Large Installation All Velocity Layers  
+                3.25
+                30  
+                127
+            </size>
+        </install_sizes>
+        # Controls should be inside the control block
+        # Each control must have a keyword name (if its not orange, it wont work!)
+        # Additionally each control must have a position
+        <install_controls>
+            # Buttons
+            <control>
+                CancelButton
+                515,367,75,23
+            </control>
+            <control>
+                NextButton
+                435,367,75,23
+            </control>
+            <control>
+                BackButton
+                355,367,75,23
+            </control>
+            <control>
+                DoneButton
+                515,367,75,23
+            </control>
+            <control>
+                AbortButton
+                515,367,75,23
+            </control>
+            <control>
+                InstallBrowserButton
+                376,231,83,24
+            </control>
+            # Progress bars
+            <control>
+                LocalProgressBar
+                20,330,320,20
+            </control>
+            <control>
+                GlobalProgressBar
+                20,368,485,20
+            </control>
+            # Image Ports
+            <control>
+                KitPiecePhotoPort
+                420,97,109,80
+            </control>
+            <control>
+                SlideShowPort
+                20,20,560,295
+            </control>
+            # Edit boxes
+            <control>
+                SerialEditBox
+                165,150,270,20
+            </control>
+            # List boxes
+            <control>
+                WelcomeText
+                150,272,300,70
+            </control>
+            <control>
+                LicenceText
+                102,80,400,230
+            </control>
+            <control>
+                KitPieceInfoText
+                411,180,133,135
+            </control>
+            <control>
+                DoneText
+                100,100,20,20
+            </control>
+            <control>
+                InstallInstructionText
+                147,110,302,90
+            </control>
+            # Combo boxes
+            <control>
+                SizeCombo
+                58,297,100,18
+            </control>
+            # Check boxes
+            <control>
+                LicenceAgreeCheckBox
+                270,321,13,13
+            </control>
+            # Text labels
+            <control>
+                SizeDescription
+                175,317,185,18
+            </control>
+            <control>
+                SizeMBLabel
+                175,331,100,18
+            </control>
+            <control>
+                InstallLocation
+                160,210,224,22
+            </control>
+            <control>
+                KitPieceTable
+                164,110,240,205
+            </control>
+            <control>
+                CurrentFileLabel
+                353,333,220,15
+            </control>
+        </install_controls>
+        # Colours go inside the install_colours block
+        # At present there is just one specifiable colour - this is used for scroll bars 
+        # The progress bars and everything else that needs a specifiable colour...
+        <install_colours>
+            # The install colour is specified as a four digital RGB colour
+            # Each value may range between 0 (none of that component) to 255 (full amount of that colour)
+            127,161,208
+        </install_colours>
+    </body>
+</fxpansion_installer_script>

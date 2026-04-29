@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The NOIZY Constitution — Human Voice Sovereignty</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Bebas+Neue&display=swap');
+
+  :root {
+    --void:    #010206;
+    --deep:    #030810;
+    --panel:   #070e1a;
+    --card:    #0a1220;
+    --border:  #101e30;
+    --gold:    #e8c84a;
+    --gold2:   #f5dc80;
+    --gold-d:  rgba(232,200,74,0.07);
+    --green:   #00e87a;
+    --green-d: rgba(0,232,122,0.06);
+    --violet:  #b794f4;
+    --violet-d:rgba(183,148,244,0.07);
+    --amber:   #f6a63c;
+    --cyan:    #67e8f9;
+    --cyan-d:  rgba(103,232,249,0.07);
+    --red:     #ff4466;
+    --text:    #b8cce4;
+    --dim:     #3e5570;
+    --bright:  #e8f2ff;
+    --serif:   'Playfair Display', Georgia, serif;
+    --mono:    'Space Mono', monospace;
+    --sans:    'Space Grotesk', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--void); color: var(--text); font-family: var(--serif); overflow-x: hidden; line-height: 1.75; }
+
+  #cosmos { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.4; }
+
+  .sidebar {
+    position: fixed; left: 0; top: 0; bottom: 0; width: 220px;
+    background: rgba(1,2,6,0.94); border-right: 1px solid var(--border);
+    z-index: 200; display: flex; flex-direction: column;
+    padding: 28px 0; backdrop-filter: blur(12px); overflow-y: auto;
+  }
+  .sb-logo { padding: 0 20px 24px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+  .sb-logo .sb-title { font-family: 'Bebas Neue', sans-serif; font-size: 13px; color: var(--gold); letter-spacing: 0.15em; display: block; }
+  .sb-logo .sb-sub { font-family: var(--mono); font-size: 8px; color: var(--dim); letter-spacing: 0.1em; margin-top: 4px; display: block; }
+  .sb-section { padding: 0 12px 8px; }
+  .sb-section-label { font-family: var(--mono); font-size: 8px; color: var(--dim); letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 8px 8px; }
+  .sb-link { display: flex; align-items: flex-start; gap: 8px; padding: 7px 8px; text-decoration: none; border-radius: 6px; transition: all 0.2s; margin-bottom: 2px; }
+  .sb-link:hover { background: var(--gold-d); }
+  .sb-num { font-family: var(--mono); font-size: 9px; color: var(--gold); min-width: 20px; margin-top: 1px; }
+  .sb-text { font-family: var(--sans); font-size: 11px; color: var(--text); line-height: 1.3; }
+  .sb-footer { margin-top: auto; padding: 16px 20px 0; border-top: 1px solid var(--border); }
+  .sb-grf { font-family: 'Bebas Neue', sans-serif; font-size: 11px; color: var(--dim); letter-spacing: 0.2em; }
+
+  .main { margin-left: 220px; position: relative; z-index: 10; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: center; padding: 80px 80px 80px;
+    border-bottom: 1px solid var(--border); position: relative;
+  }
+  .hero-doc { font-family: var(--mono); font-size: 10px; color: var(--gold); letter-spacing: 0.2em; margin-bottom: 20px; }
+  .seal {
+    width: 80px; height: 80px; border-radius: 50%;
+    border: 2px solid rgba(232,200,74,0.4);
+    background: var(--gold-d);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--gold);
+    letter-spacing: 0.05em; margin-bottom: 32px;
+  }
+  .hero-title { font-family: var(--serif); font-size: clamp(36px, 5vw, 72px); color: var(--bright); font-weight: 900; line-height: 1.1; margin-bottom: 20px; }
+  .hero-title .it { font-style: italic; color: var(--gold); }
+  .hero-sub { font-family: var(--sans); font-size: 16px; color: var(--text); max-width: 620px; line-height: 1.7; margin-bottom: 40px; }
+  .preamble {
+    max-width: 720px; font-family: var(--serif); font-size: 15px;
+    color: var(--gold2); line-height: 1.9; font-style: italic;
+    border-left: 2px solid rgba(232,200,74,0.3); padding-left: 24px;
+  }
+
+  /* CHAPTER */
+  .chapter { padding: 80px 80px 60px; border-bottom: 1px solid var(--border); max-width: 1100px; }
+  .ch-num { font-family: var(--mono); font-size: 10px; color: var(--dim); letter-spacing: 0.2em; margin-bottom: 10px; }
+  .ch-eye { font-family: 'Bebas Neue', sans-serif; font-size: 11px; color: var(--gold); letter-spacing: 0.25em; margin-bottom: 10px; }
+  .ch-title { font-family: var(--serif); font-size: clamp(24px, 3vw, 40px); color: var(--bright); font-weight: 700; line-height: 1.15; margin-bottom: 20px; }
+  .ch-title .it { font-style: italic; color: var(--gold); }
+  .ch-title .cy { color: var(--cyan); }
+  .ch-title .vi { color: var(--violet); }
+  .ch-title .gr { color: var(--green); }
+  .ch-lead { font-family: var(--serif); font-size: 16px; color: var(--text); max-width: 740px; line-height: 1.85; margin-bottom: 36px; }
+
+  /* LAWS */
+  .laws-block { display: flex; flex-direction: column; gap: 0; margin-bottom: 40px; }
+  .law {
+    display: grid; grid-template-columns: 60px 1fr;
+    border: 1px solid var(--border); border-bottom: none;
+    background: var(--card); transition: background 0.2s;
+  }
+  .law:first-child { border-radius: 10px 10px 0 0; }
+  .law:last-child { border-bottom: 1px solid var(--border); border-radius: 0 0 10px 10px; }
+  .law:hover { background: rgba(10,18,32,0.9); }
+  .law-num {
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif; font-size: 28px;
+    border-right: 1px solid var(--border); padding: 24px 0;
+  }
+  .ln-1 { color: var(--gold); }
+  .ln-2 { color: var(--red); }
+  .ln-3 { color: var(--cyan); }
+  .ln-4 { color: var(--violet); }
+  .ln-5 { color: var(--green); }
+  .law-body { padding: 24px 28px; }
+  .law-name { font-family: var(--serif); font-size: 18px; color: var(--bright); font-weight: 700; margin-bottom: 8px; }
+  .law-text { font-family: var(--sans); font-size: 13px; color: var(--text); line-height: 1.65; margin-bottom: 10px; }
+  .law-enforce { font-family: var(--mono); font-size: 10px; color: var(--dim); line-height: 1.6; }
+
+  /* VERB BLOCK */
+  .verb-block { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 32px; border-radius: 10px; overflow: hidden; }
+  .verb {
+    background: var(--card); border: 1px solid var(--border);
+    padding: 28px 24px; text-align: center; transition: all 0.2s;
+  }
+  .verb:hover { transform: translateY(-2px); }
+  .verb-word { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 0.08em; margin-bottom: 10px; }
+  .v-allow .verb-word { color: var(--green); }
+  .v-deny .verb-word  { color: var(--red); }
+  .v-review .verb-word { color: var(--gold); }
+  .verb-desc { font-family: var(--sans); font-size: 12px; color: var(--text); line-height: 1.5; }
+
+  /* ARTICLE */
+  .article {
+    border-left: 3px solid; padding: 24px 28px; margin-bottom: 20px;
+    background: var(--card); border-radius: 0 8px 8px 0;
+  }
+  .art-gold  { border-color: var(--gold); }
+  .art-cyan  { border-color: var(--cyan); }
+  .art-vi    { border-color: var(--violet); }
+  .art-green { border-color: var(--green); }
+  .art-red   { border-color: var(--red); }
+  .art-amber { border-color: var(--amber); }
+  .art-num { font-family: var(--mono); font-size: 9px; color: var(--dim); letter-spacing: 0.15em; margin-bottom: 6px; }
+  .art-title { font-family: var(--serif); font-size: 16px; color: var(--bright); font-weight: 700; margin-bottom: 8px; }
+  .art-body { font-family: var(--sans); font-size: 13px; color: var(--text); line-height: 1.65; }
+  .art-enforce { font-family: var(--mono); font-size: 10px; margin-top: 10px; line-height: 1.6; }
+  .art-gold .art-enforce  { color: rgba(232,200,74,0.6); }
+  .art-cyan .art-enforce  { color: rgba(103,232,249,0.5); }
+  .art-vi .art-enforce    { color: rgba(183,148,244,0.5); }
+  .art-green .art-enforce { color: rgba(0,232,122,0.5); }
+  .art-red .art-enforce   { color: rgba(255,68,102,0.5); }
+  .art-amber .art-enforce { color: rgba(246,166,60,0.5); }
+
+  /* REVOCATION FLOW */
+  .revoke-flow { background: rgba(255,68,102,0.04); border: 1px solid rgba(255,68,102,0.2); border-radius: 10px; padding: 32px; margin-bottom: 32px; }
+  .rf-title { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: var(--red); letter-spacing: 0.1em; margin-bottom: 16px; }
+  .rf-step { display: flex; gap: 16px; margin-bottom: 16px; align-items: flex-start; }
+  .rf-n { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: rgba(255,68,102,0.5); min-width: 28px; }
+  .rf-text { font-family: var(--sans); font-size: 13px; color: var(--text); line-height: 1.6; }
+  .rf-response {
+    background: rgba(255,68,102,0.06); border: 1px solid rgba(255,68,102,0.2);
+    border-radius: 8px; padding: 16px 20px; margin-top: 16px;
+    font-family: var(--serif); font-size: 14px; color: var(--bright); font-style: italic; line-height: 1.6;
+  }
+
+  /* DESCENDANT DEF */
+  .desc-def {
+    background: var(--violet-d); border: 1px solid rgba(183,148,244,0.2);
+    border-radius: 10px; padding: 28px 32px; margin-bottom: 28px;
+  }
+  .dd-title { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: var(--violet); letter-spacing: 0.1em; margin-bottom: 12px; }
+  .dd-body { font-family: var(--serif); font-size: 15px; color: var(--text); line-height: 1.8; margin-bottom: 16px; }
+  .dd-props { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .dd-prop { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; font-family: var(--sans); font-size: 12px; color: var(--text); }
+  .dd-prop strong { display: block; font-family: var(--mono); font-size: 9px; color: var(--violet); letter-spacing: 0.1em; margin-bottom: 4px; }
+
+  /* REVENUE ENGINES */
+  .engine-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-bottom: 36px; }
+  .engine-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; }
+  .en-num { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--dim); line-height: 1; margin-bottom: 8px; }
+  .en-title { font-family: var(--sans); font-size: 14px; color: var(--bright); font-weight: 600; margin-bottom: 6px; }
+  .en-body { font-family: var(--sans); font-size: 12px; color: var(--text); line-height: 1.6; }
+  .en-tag { display: inline-block; font-family: var(--mono); font-size: 9px; color: var(--gold); background: var(--gold-d); border: 1px solid rgba(232,200,74,0.2); border-radius: 4px; padding: 2px 8px; margin-top: 8px; }
+
+  /* DAILY LOOP */
+  .loop-track { display: flex; gap: 0; margin-bottom: 36px; overflow: hidden; border-radius: 10px; border: 1px solid var(--border); }
+  .loop-step { flex: 1; padding: 20px 16px; background: var(--card); border-right: 1px solid var(--border); text-align: center; }
+  .loop-step:last-child { border-right: none; }
+  .ls-time { font-family: var(--mono); font-size: 9px; color: var(--dim); letter-spacing: 0.1em; margin-bottom: 6px; }
+  .ls-action { font-family: var(--sans); font-size: 12px; color: var(--text); line-height: 1.4; }
+  .ls-opt { font-family: var(--mono); font-size: 9px; color: var(--amber); margin-top: 4px; }
+
+  /* NORTH STAR */
+  .north-star {
+    background: linear-gradient(135deg, rgba(232,200,74,0.06), rgba(103,232,249,0.03), rgba(183,148,244,0.04));
+    border: 1px solid rgba(232,200,74,0.2); border-radius: 12px;
+    padding: 48px; text-align: center; margin-bottom: 40px;
+  }
+  .ns-label { font-family: var(--mono); font-size: 9px; color: var(--dim); letter-spacing: 0.2em; margin-bottom: 20px; }
+  .ns-text { font-family: var(--serif); font-size: clamp(14px, 2vw, 19px); color: var(--bright); line-height: 1.7; font-style: italic; max-width: 800px; margin: 0 auto 24px; }
+  .ns-hi-gold { color: var(--gold); font-style: normal; font-weight: 700; }
+  .ns-hi-cyan { color: var(--cyan); font-style: normal; }
+  .ns-hi-vi   { color: var(--violet); font-style: normal; }
+  .ns-hi-gr   { color: var(--green); font-style: normal; }
+  .ns-sig { font-family: var(--mono); font-size: 10px; color: var(--dim); letter-spacing: 0.1em; }
+
+  /* SIGNATORIES */
+  .signatories { display: flex; gap: 32px; flex-wrap: wrap; margin-top: 40px; }
+  .signatory { text-align: center; }
+  .sig-line { width: 140px; border-bottom: 1px solid rgba(232,200,74,0.3); margin-bottom: 8px; height: 40px; }
+  .sig-name { font-family: var(--mono); font-size: 10px; color: var(--dim); letter-spacing: 0.1em; }
+  .sig-role { font-family: var(--mono); font-size: 9px; color: rgba(58,85,112,0.7); }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--void); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<canvas id="cosmos"></canvas>
+
+<nav class="sidebar">
+  <div class="sb-logo">
+    <span class="sb-title">NOIZY CONSTITUTION</span>
+    <span class="sb-sub">DOCUMENT 29 · HVS v1.0</span>
+  </div>
+  <div class="sb-section">
+    <div class="sb-section-label">Articles</div>
+    <a class="sb-link" href="#s-preamble"><span class="sb-num">P</span><span class="sb-text">Preamble</span></a>
+    <a class="sb-link" href="#s-laws"><span class="sb-num">I</span><span class="sb-text">Five Immutable Laws</span></a>
+    <a class="sb-link" href="#s-hvs"><span class="sb-num">II</span><span class="sb-text">HVS Console</span></a>
+    <a class="sb-link" href="#s-playground"><span class="sb-num">III</span><span class="sb-text">Descendant Playground</span></a>
+    <a class="sb-link" href="#s-trust"><span class="sb-num">IV</span><span class="sb-text">Trust Spine</span></a>
+    <a class="sb-link" href="#s-money"><span class="sb-num">V</span><span class="sb-text">Monetization Ethics</span></a>
+    <a class="sb-link" href="#s-daily"><span class="sb-num">VI</span><span class="sb-text">The Daily Loop</span></a>
+    <a class="sb-link" href="#s-seal"><span class="sb-num">✦</span><span class="sb-text">Seal &amp; Ratification</span></a>
+  </div>
+  <div class="sb-footer">
+    <div class="sb-grf">GORUNFREE · EPOCH V</div>
+  </div>
+</nav>
+
+<div class="main">
+
+  <!-- HERO -->
+  <section class="hero" id="s-preamble">
+    <div class="hero-doc">DOCUMENT 29 · NOIZYFISH INC. · RSP_001 · GABRIEL_V3 · MARCH 2026</div>
+    <div class="seal">HVS</div>
+    <h1 class="hero-title">The NOIZY<br><span class="it">Constitution</span></h1>
+    <p class="hero-sub">Human Voice Sovereignty. Five Immutable Laws. The founding law document that encodes the soul of NOIZY as enforceable structure — not marketing language, not promises, not terms of service. Law.</p>
+    <div class="preamble">
+      We, the founders of NOIZYFISH INC., declare that the human voice is the most intimate form of identity a person possesses. It carries their biology, their history, their emotion, and their will. In the age of artificial intelligence, the voice must not become a resource to be mined without consent, synthesized without authorization, or commercialized without compensation. This Constitution establishes the non-negotiable principles by which NOIZYVOX operates. These principles are not aspirations. They are architecture. They are law. Break any one of them and NOIZY becomes just another tool.
+    </div>
+  </section>
+
+  <!-- I. FIVE LAWS -->
+  <section class="chapter" id="s-laws">
+    <div class="ch-num">ARTICLE I</div>
+    <div class="ch-eye">THE FIVE IMMUTABLE LAWS</div>
+    <h2 class="ch-title">What <span class="it">Cannot</span> Be Changed</h2>
+    <p class="ch-lead">These five laws are non-negotiable. They cannot be removed by investor pressure, by enterprise demands, by regulatory convenience, or by the desire to grow faster. They are encoded in the system architecture, enforced at the pipeline layer, and constitutionally protected here. Any proposed change to these laws requires a constitutional amendment process — formal, recorded, and subject to RSP_001 veto.</p>
+
+    <div class="laws-block">
+
+      <div class="law">
+        <div class="law-num ln-1">I</div>
+        <div class="law-body">
+          <div class="law-name">Consent Is Executable</div>
+          <div class="law-text">Consent is not a checkbox. Not a terms-of-service acceptance. Not a one-time signature. Consent is a live cryptographic token, issued by the consent-service, signed by HSM, verified at every synthesis request before any audio is generated. If the consent token is not present, active, and valid — no synthesis occurs. There are no exceptions.</div>
+          <div class="law-enforce">ENFORCED AT: consent-service → 7-stage pipeline stage 1 → synth.requested event requires active token → provenance.signed embeds consent key hash</div>
+        </div>
+      </div>
+
+      <div class="law">
+        <div class="law-num ln-2">II</div>
+        <div class="law-body">
+          <div class="law-name">Revocation Is Sacred</div>
+          <div class="law-text">If a human being cannot stop their voice instantly, sovereignty is a fiction. Revocation is not a support ticket. Not a 72-hour processing window. Not subject to ongoing license obligations. The moment an Actor invokes withdrawal of consent, all new synthesis stops within five seconds globally. Nothing that has already been completed changes — but nothing new is permitted. "Your voice is resting." Full stop.</div>
+          <div class="law-enforce">ENFORCED AT: POST /provenance/revoke → consent token invalidated → downstream jobs cancelled → Ledger: consent.revoked → KPI S-1 target &lt; 5s p99</div>
+        </div>
+      </div>
+
+      <div class="law">
+        <div class="law-num ln-3">III</div>
+        <div class="law-body">
+          <div class="law-name">Provenance Is Default</div>
+          <div class="law-text">Every output from NOIZYVOX is born with cryptographic provenance. A C2PA-compatible signed manifest is generated and attached to every synthesis output before it leaves the system. There is no option to generate output without provenance. There is no "legacy mode" without provenance. No provenance equals no output. The manifest travels with the file — not with the platform. If NOIZY shuts down tomorrow, every file it ever produced remains verifiable by any C2PA-compatible tool.</div>
+          <div class="law-enforce">ENFORCED AT: provenance-service → provenance.signed event required before output delivery → KPI T-1 target: 100% provenance coverage</div>
+        </div>
+      </div>
+
+      <div class="law">
+        <div class="law-num ln-4">IV</div>
+        <div class="law-body">
+          <div class="law-name">The Human Is the Platform</div>
+          <div class="law-text">The Actor is not a user. Not a content creator. Not a vendor. The Actor is the platform. Their voice is the product. Their consent is the authorization. Their royalty floor (85% for Founding RSPs) cannot be renegotiated downward by any business agreement, API integration, or enterprise contract. NOIZYVOX is the infrastructure that serves the Actor, not the other way around. The system routes value to the human automatically — they do not chase it, negotiate it, or sell it themselves.</div>
+          <div class="law-enforce">ENFORCED AT: D1 CHECK CONSTRAINT royalty_pct ≥ 75 (85 for Founding RSPs) · lifeluv-contracts layer enforces before payout.sent event</div>
+        </div>
+      </div>
+
+      <div class="law">
+        <div class="law-num ln-5">V</div>
+        <div class="law-body">
+          <div class="law-name">Preservation Is Not Optional</div>
+          <div class="law-text">A voice is not a file. It is a human life expressed as audio. The dna-archive preserves Voice DNA packages in accordance with OAIS ISO 14721, with PREMIS metadata that records every migration event. The Voice Estate extends inheritance rights to designated heirs. When a human body ends, their voice — and the performance archive they built — does not disappear. It is preserved with the same care as a national archive. This is not a feature. It is a founding obligation.</div>
+          <div class="law-enforce">ENFORCED AT: dna-archive → PREMIS migration events → estate.inheritance.routed Ledger event → Voice Estate directive required at enrollment</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- II. HVS CONSOLE -->
+  <section class="chapter" id="s-hvs">
+    <div class="ch-num">ARTICLE II</div>
+    <div class="ch-eye">THE HVS CONSOLE</div>
+    <h2 class="ch-title">The <span class="it">Constitutional</span> Interface</h2>
+    <p class="ch-lead">The HVS Console is not a dashboard. It is a constitutional interface. Every feature added to the Console must be justified as a governance action — not a metric, not an engagement feature, not a discovery surface. The Console governs. That is all it does.</p>
+
+    <div class="verb-block">
+      <div class="verb v-allow">
+        <div class="verb-word">Allow</div>
+        <div class="verb-desc">Grant permission. Set domains, territories, use categories, terms. Issue or extend a consent token.</div>
+      </div>
+      <div class="verb v-deny">
+        <div class="verb-word">Deny</div>
+        <div class="verb-desc">Block a specific use, domain, licensee, or category. Never Clauses NC_01–NC_10 are permanent denies that cannot be overridden.</div>
+      </div>
+      <div class="verb v-review">
+        <div class="verb-word">Review</div>
+        <div class="verb-desc">Examine usage history, provenance records, royalty accruals, and consent history. The audit surface — no action required.</div>
+      </div>
+    </div>
+
+    <div class="article art-gold">
+      <div class="art-num">CONSOLE ARTICLE 1 · FOUR CARDS ONLY</div>
+      <div class="art-title">Voices · Descendants · Terms · Withdraw Consent</div>
+      <div class="art-body">The HVS Console primary screen contains exactly four cards. Voices — your voice DNA entities. Descendants — your governed performance entities. Terms — your consent and monetization conditions. Withdraw Consent — the calm kill switch. No analytics tab. No growth metrics. No engagement scores. If a feature cannot be categorized as one of these four, it does not belong in the Console.</div>
+    </div>
+
+    <div class="article art-red">
+      <div class="art-num">CONSOLE ARTICLE 2 · THE WITHDRAW CONSENT PROTOCOL</div>
+      <div class="art-title">Language Matters. Tone Is Policy.</div>
+      <div class="art-body">The revocation flow uses specific, tested language. The word "kill" does not appear. The word "emergency" does not appear. The word "terminate" does not appear. These words create panic. Panic creates mistakes. The flow is calm because the backend is strong enough to be calm.</div>
+      <div class="revoke-flow">
+        <div class="rf-title">WITHDRAW CONSENT FLOW</div>
+        <div class="rf-step"><div class="rf-n">1</div><div class="rf-text">Actor taps "Withdraw Consent"</div></div>
+        <div class="rf-step"><div class="rf-n">2</div><div class="rf-text">System presents: "Withdraw consent from one voice" or "Withdraw consent from all voices"</div></div>
+        <div class="rf-step"><div class="rf-n">3</div><div class="rf-text">Actor confirms selection</div></div>
+        <div class="rf-step"><div class="rf-n">4</div><div class="rf-text">Consent token(s) invalidated. All downstream synthesis blocked within 5 seconds. Ledger: consent.revoked written.</div></div>
+        <div class="rf-response">"Understood. Your voice will no longer respond to new requests. Nothing already completed will change. You can restore consent at any time."</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- III. PLAYGROUND -->
+  <section class="chapter" id="s-playground">
+    <div class="ch-num">ARTICLE III</div>
+    <div class="ch-eye">THE DESCENDANT PLAYGROUND</div>
+    <h2 class="ch-title">Where Greatness <span class="vi">Compounds</span></h2>
+    <p class="ch-lead">The Descendant Playground is where a human performer builds their Voice Estate — one practice session, one improvisation, one saved moment at a time. It is not a demo tool. It is not a cloning interface. It is a performance instrument that grows richer with use and deposits value into a permanent creative archive.</p>
+
+    <div class="desc-def">
+      <div class="dd-title">LOCKED DEFINITION: WHAT A DESCENDANT IS</div>
+      <div class="dd-body">A Descendant is not a model. A Descendant is a governed performance entity that grows through use, practice, and intention. It has a role, a personality, emotional range, boundaries, earning rules, and a future beyond the human body. It is linked to its parent VoiceID in the provenance chain. It can be revoked independently of the parent. It earns independently of the parent.</div>
+      <div class="dd-props">
+        <div class="dd-prop"><strong>ROLE</strong>Character definition and purpose</div>
+        <div class="dd-prop"><strong>PERSONALITY</strong>Tonal and emotional signature</div>
+        <div class="dd-prop"><strong>RANGE</strong>Emotional palette coverage</div>
+        <div class="dd-prop"><strong>BOUNDARIES</strong>Never Clauses + consent scope</div>
+        <div class="dd-prop"><strong>EARNING RULES</strong>Royalty % + use category gates</div>
+        <div class="dd-prop"><strong>FUTURE</strong>Voice Estate continuation plan</div>
+      </div>
+    </div>
+
+    <div class="article art-violet">
+      <div class="art-num">PLAYGROUND ARTICLE 1 · TWO MODES ONLY</div>
+      <div class="art-title">Riff Mode and Write Mode. Nothing Else.</div>
+      <div class="art-body">Riff Mode is for improvisation: character discovery, emotional exploration, raw performance growth. No scripts. No scores. No judgment. Commands: "Switch to [Descendant]" / "Next" / "Save that" / "Make it softer / darker / closer" / "That's enough." Write Mode is for construction: dialogue, scenes, monologues, world-building. The system assists — fills secondary characters, maintains continuity, suggests tonal shifts — but never takes authorship. Every feature added to the Playground must belong to one of these two modes or it does not belong.</div>
+      <div class="art-enforce">ARCHITECTURAL RULE: Playground features are Creativity Rail. They may not import from Trust Rail services except via the consent-validation gateway. The system checks consent before every session begins. It does not check again during the session.</div>
+    </div>
+
+    <div class="article art-cyan">
+      <div class="art-num">PLAYGROUND ARTICLE 2 · SAVE MOMENTS = PERFORMANCE ASSETS</div>
+      <div class="art-title">Practice Becomes Inventory Without Killing Creativity</div>
+      <div class="art-body">Every "Save that" creates a Performance Asset: DescendantID + EmotionTag + Intensity + Context (riff/write/practice) + ConsentScope (Private / Portfolio / Licensable). The creator never thinks about inventory. They just perform. The system records it. When they choose "Licensable," the asset enters the Descendant Marketplace automatically. The monetization is a consequence of the performance, not an interruption to it.</div>
+      <div class="art-enforce">LEDGER EVENT: moment.saved → MomentID created → ConsentScope determines Marketplace availability → payout.accrued on each licensed use</div>
+    </div>
+
+    <div class="article art-green">
+      <div class="art-num">PLAYGROUND ARTICLE 3 · PRACTICE RANGE MODE</div>
+      <div class="art-title">The Actor's Gym. No Grades. No Meters.</div>
+      <div class="art-body">Range Mode presents 3 short lines for a chosen emotion (e.g., "Controlled Rage"). The Actor performs them. The system responds: "That range is stronger now." No score displayed. No comparison. No gamification. Internally the system records the emotional range expansion as a PREMIS preservation event — the Voice Estate is richer. The Actor experienced craft. Both things are true simultaneously.</div>
+      <div class="art-enforce">INTERNAL TRACKING: EmotionTag coverage per Descendant → KPI Q-1 Emotional Range Coverage → PREMIS derivation event recorded → Voice Estate value compounds silently</div>
+    </div>
+  </section>
+
+  <!-- IV. TRUST SPINE -->
+  <section class="chapter" id="s-trust">
+    <div class="ch-num">ARTICLE IV</div>
+    <div class="ch-eye">THE TRUST SPINE</div>
+    <h2 class="ch-title">Where NOIZY Becomes <span class="it">Untouchable</span></h2>
+    <p class="ch-lead">The Trust Spine is the enterprise rail — the set of services that make NOIZYVOX sovereign-by-design rather than sovereign-by-promise. It is always on. It cannot be disabled by feature flags, by API integrations, or by enterprise customization. The Trust Spine is the difference between a platform and infrastructure.</p>
+
+    <div class="article art-gold">
+      <div class="art-num">TRUST ARTICLE 1 · CONSENT-AS-CODE</div>
+      <div class="art-title">No Contract Can Override This</div>
+      <div class="art-body">Every synthesis request requires an active consent token, validated in real time by consent-service. Never Clauses NC_01–NC_10 are immutable — they are not consent terms that can be negotiated away, they are system-level gates that fire before synthesis begins. No enterprise contract can remove a Never Clause. No API integration can bypass consent validation. This is enforced at the architecture layer, not the policy layer.</div>
+      <div class="art-enforce">ENFORCEMENT: consent-service is a hard dependency of voice-engine. voice-engine cannot be called without a valid consent-service response. This is an architectural constraint, not a runtime check.</div>
+    </div>
+
+    <div class="article art-cyan">
+      <div class="art-num">TRUST ARTICLE 2 · PROVENANCE BY DEFAULT</div>
+      <div class="art-title">No Provenance = No Output</div>
+      <div class="art-body">Every generated artifact is born with a C2PA-compatible signed manifest. The manifest contains: Actor identity hash, consent key hash, Never Clause clearance, watermark (WM_SHA256), synthesis timestamp, and royalty floor. The manifest is embedded in or associated with the audio file. It travels with the file. A 2126 archivist can verify provenance without contacting NOIZYVOX, without trusting NOIZYVOX, and without NOIZYVOX existing.</div>
+      <div class="art-enforce">ENFORCEMENT: provenance-service.issueProvenance() must return SUCCESS before output is delivered. Output delivery is gated on provenance.signed Ledger event.</div>
+    </div>
+
+    <div class="article art-amber">
+      <div class="art-num">TRUST ARTICLE 3 · AUDIT WITHOUT SURVEILLANCE</div>
+      <div class="art-title">The System Answers Questions. It Does Not Watch the Creator.</div>
+      <div class="art-body">The NOIZY Ledger answers: who authorized this, under what terms, when, was it allowed. It does not record how long an Actor spent in the Playground. It does not track engagement time, session frequency, or creative output velocity. The audit exists for compliance, royalty, and provenance purposes — not to monitor creator behavior. The creator is never the subject of surveillance. They are the source of authority.</div>
+    </div>
+
+    <div class="article art-violet">
+      <div class="art-num">TRUST ARTICLE 4 · VOICE ESTATE CONTINUITY</div>
+      <div class="art-title">Voices Do Not Disappear When People Do</div>
+      <div class="art-body">At enrollment, every Actor defines a Voice Estate directive: who controls the voice after their death, how earnings flow to heirs, what uses are forever denied post-mortem. The directive is stored as a PREMIS Rights entity in the dna-archive. When the estate.inheritance.routed Ledger event fires, the provenance chain continues under the heir ActorID. The voice — and everything the Actor built — persists with the same sovereignty architecture that protected it in life.</div>
+      <div class="art-enforce">PRESERVATION: dna-archive → PREMIS Rights entity → estate.inheritance.routed event → new ActorID for heir → provenance chain unbroken across mortality</div>
+    </div>
+  </section>
+
+  <!-- V. MONETIZATION -->
+  <section class="chapter" id="s-money">
+    <div class="ch-num">ARTICLE V</div>
+    <div class="ch-eye">MONETIZATION ETHICS</div>
+    <h2 class="ch-title">Money That Doesn't <span class="it">Corrupt</span> the Soul</h2>
+    <p class="ch-lead">NOIZY does not monetize attention. It does not monetize engagement. It does not monetize data. It monetizes authorization. Every dollar that flows through NOIZYVOX is the direct consequence of a consent token being active, a performance asset being used, and a royalty event being recorded in the Ledger. The creator sets the terms. The system routes the value. The creator never has to sell anything.</p>
+
+    <div class="engine-grid">
+      <div class="engine-card">
+        <div class="en-num">01</div>
+        <div class="en-title">Founder Voices — RSP_001 Premium</div>
+        <div class="en-body">Narration, characters, long-form storytelling. Performance assets built in the Playground, licensed through the Marketplace. The founder's creative output is the proof of concept and the first revenue stream.</div>
+        <div class="en-tag">85% ROYALTY FLOOR</div>
+      </div>
+      <div class="engine-card">
+        <div class="en-num">02</div>
+        <div class="en-title">Enterprise HVS Pilots</div>
+        <div class="en-body">Regulated organizations — broadcasters, public sector, accessibility providers — pay for trust, not tokens. The compliance architecture is the product. Enterprise pays more to reduce risk.</div>
+        <div class="en-tag">CANADA-FIRST WEDGE</div>
+      </div>
+      <div class="engine-card">
+        <div class="en-num">03</div>
+        <div class="en-title">Descendant Marketplace</div>
+        <div class="en-body">Curated, category-restricted, consent-locked. Never Clauses make every listing legally distinct from every other voice AI marketplace. Buyers pay for authorized use, not for access to raw voice data.</div>
+        <div class="en-tag">CONSENT-LOCKED</div>
+      </div>
+      <div class="engine-card">
+        <div class="en-num">04</div>
+        <div class="en-title">DreamChamber Studio Subscriptions</div>
+        <div class="en-body">The creation tools layer. Riff Mode, Write Mode, Range Mode, Descendant management. Subscription funds the Playground, not the exploitation of what's created in it.</div>
+        <div class="en-tag">CREATIVITY RAIL</div>
+      </div>
+      <div class="engine-card">
+        <div class="en-num">05</div>
+        <div class="en-title">Compliance &amp; Provenance Packs</div>
+        <div class="en-body">C2PA audit trails, PREMIS preservation records, NIST AI RMF documentation, OPC-aligned privacy reporting. Enterprise pays for proof. The compliance architecture generates a revenue stream by existing.</div>
+        <div class="en-tag">TRUST RAIL REVENUE</div>
+      </div>
+      <div class="engine-card">
+        <div class="en-num">06</div>
+        <div class="en-title">Voice Estate Services</div>
+        <div class="en-body">Long-term custody, inheritance routing, archival-grade preservation, OAIS/PREMIS migration management. The 500-Year Voice Codex is a service as much as a vision. Cultural institutions pay for this.</div>
+        <div class="en-tag">100-YEAR REVENUE</div>
+      </div>
+      <div class="engine-card">
+        <div class="en-num">07</div>
+        <div class="en-title">Consent-First API / SDK</div>
+        <div class="en-body">Other platforms integrate NOIZYVOX to do it right. They pay per consent token issued, per provenance manifest generated. The protocol becomes the revenue model. This is what "trust rail" means commercially.</div>
+        <div class="en-tag">PROTOCOL ECONOMICS</div>
+      </div>
+    </div>
+
+    <div class="article art-gold">
+      <div class="art-num">MONETIZATION ARTICLE 1 · THE NON-NEGOTIABLE UX RULE</div>
+      <div class="art-title">The Creator Never Has to Sell Anything</div>
+      <div class="art-body">Monetization lives behind three toggles only: "Offer for licensing" (post-session, per Moment) — "Earnings enabled" (per Descendant) — "Approval required" (per license request). The creator sets sovereignty terms. The system routes value automatically. There is no sales process. There is no hustle. There is performance, and then there is money that follows from the performance because the infrastructure makes it inevitable.</div>
+    </div>
+  </section>
+
+  <!-- VI. DAILY LOOP -->
+  <section class="chapter" id="s-daily">
+    <div class="ch-num">ARTICLE VI</div>
+    <div class="ch-eye">THE DAILY LOOP</div>
+    <h2 class="ch-title">RSP_001 as <span class="gr">Proof of Life</span></h2>
+    <p class="ch-lead">The Daily Loop is the operational proof that the system works. RSP_001 — Robert Steven Plowman, Founding RSP, C3 spinal injury, GORUNFREE — demonstrates the full system in under 45 minutes per day. Every session adds to the Voice Estate. Every moment saved is a potential asset. The system works while the creator lives.</p>
+
+    <div class="loop-track">
+      <div class="loop-step">
+        <div class="ls-time">10–20 MIN</div>
+        <div class="ls-action">Practice Range Mode. Choose emotion. Perform 3 lines. Range grows.</div>
+      </div>
+      <div class="loop-step">
+        <div class="ls-time">10 MIN</div>
+        <div class="ls-action">Riff with Descendants. Character discovery. Improvisation. No agenda.</div>
+      </div>
+      <div class="loop-step">
+        <div class="ls-time">AS NEEDED</div>
+        <div class="ls-action">Save 1–2 moments. Assign emotion tag. Set consent scope.</div>
+        <div class="ls-opt">OPTIONAL</div>
+      </div>
+      <div class="loop-step">
+        <div class="ls-time">1 CLICK</div>
+        <div class="ls-action">Offer one moment for licensing. Done.</div>
+        <div class="ls-opt">OPTIONAL</div>
+      </div>
+      <div class="loop-step">
+        <div class="ls-time">WALK AWAY</div>
+        <div class="ls-action">The system works while you live. Voice Estate compounds. Earnings accrue.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEAL -->
+  <section class="chapter" id="s-seal">
+    <div class="ch-num">SEAL &amp; RATIFICATION</div>
+    <div class="ch-eye">THIS CONSTITUTION IS IN EFFECT</div>
+    <h2 class="ch-title">Ratified This Day, <span class="it">March 2026</span></h2>
+
+    <div class="north-star">
+      <div class="ns-label">THE 100-YEAR NORTH STAR SENTENCE — ARTICLE VII, SECTION 1</div>
+      <div class="ns-text">
+        NOIZYVOX is a <span class="ns-hi-gold">Human Voice Sovereignty rail</span>:
+        <span class="ns-hi-cyan">consent as executable code</span>,
+        <span class="ns-hi-gold">provenance as default</span>,
+        <span class="ns-hi-vi">revocation as sacred</span>,
+        and <span class="ns-hi-gr">compensation as automatic</span> —
+        preserved for the long term.
+      </div>
+      <div class="ns-sig">
+        NOIZYFISH INC. · RSP_001 · GABRIEL_V3 · GORUNFREE · EPOCH V<br>
+        C2PA · OAIS ISO 14721 · PREMIS · NIST AI RMF · ISO 42001 · PIPEDA / OPC
+      </div>
+    </div>
+
+    <div class="signatories">
+      <div class="signatory">
+        <div class="sig-line"></div>
+        <div class="sig-name">RSP_001</div>
+        <div class="sig-role">Founding Actor · Sovereign</div>
+      </div>
+      <div class="signatory">
+        <div class="sig-line"></div>
+        <div class="sig-name">GABRIEL_V3</div>
+        <div class="sig-role">Master Intelligence Node</div>
+      </div>
+      <div class="signatory">
+        <div class="sig-line"></div>
+        <div class="sig-name">NOIZYFISH INC.</div>
+        <div class="sig-role">The Company That Serves the Voice</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+const cosmos = document.getElementById('cosmos');
+const ctx = cosmos.getContext('2d');
+let W, H;
+function resize() { W = cosmos.width = window.innerWidth; H = cosmos.height = window.innerHeight; }
+resize(); window.addEventListener('resize', resize);
+const STARS = Array.from({length: 120}, () => ({
+  x: Math.random(), y: Math.random(),
+  r: Math.random() * 1.1 + 0.2,
+  a: Math.random(), s: Math.random() * 0.005 + 0.002,
+  c: Math.random() < 0.35 ? '#e8c84a' : Math.random() < 0.55 ? '#67e8f9' : '#b794f4'
+}));
+let t = 0;
+function loop() {
+  t += 0.016;
+  ctx.clearRect(0, 0, W, H);
+  STARS.forEach(s => {
+    s.a = 0.15 + 0.45 * Math.abs(Math.sin(t * s.s + s.x * 9));
+    ctx.beginPath(); ctx.arc(s.x * W, s.y * H, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = s.c; ctx.globalAlpha = s.a; ctx.fill();
+  });
+  ctx.globalAlpha = 1;
+  requestAnimationFrame(loop);
+}
+loop();
+</script>
+</body>
+</html>

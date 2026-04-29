@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>NOIZY — Creator Onboarding</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #14141e;
+    --border: #1e1e2e;
+    --gold: #c9a84c;
+    --gold-dim: #8a7033;
+    --text: #e8e5dd;
+    --text-dim: #8a877f;
+    --accent: #4a9eff;
+    --green: #55c57a;
+    --red: #e05555;
+    --white: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Mobile-first container */
+  .app {
+    max-width: 430px;
+    margin: 0 auto;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  /* Progress bar */
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 430px;
+    width: 100%;
+    height: 4px;
+    background: var(--border);
+    z-index: 100;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--gold);
+    transition: width 0.6s ease;
+    width: 0%;
+  }
+
+  /* Screen system */
+  .screen {
+    display: none;
+    padding: 60px 24px 100px;
+    animation: slideIn 0.4s ease;
+    min-height: 100vh;
+  }
+  .screen.active { display: flex; flex-direction: column; }
+  @keyframes slideIn { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+
+  /* Typography */
+  .screen-label {
+    font-size: 0.7em;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .screen h1 {
+    font-size: 1.8em;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .screen h1 .gold { color: var(--gold); }
+  .screen p {
+    color: var(--text-dim);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    font-size: 0.95em;
+  }
+
+  /* Cards */
+  .info-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .info-card h3 {
+    color: var(--gold);
+    font-size: 0.9em;
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+  }
+  .info-card p { font-size: 0.88em; margin-bottom: 0; }
+
+  /* Consent items */
+  .consent-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .consent-check {
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--gold-dim);
+    border-radius: 6px;
+    flex-shrink: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    margin-top: 2px;
+  }
+  .consent-check.checked {
+    background: var(--gold);
+    border-color: var(--gold);
+  }
+  .consent-check.checked::after {
+    content: '\2713';
+    color: var(--bg);
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .consent-text { flex: 1; }
+  .consent-text strong { color: var(--text); font-size: 0.92em; display: block; margin-bottom: 4px; }
+  .consent-text span { color: var(--text-dim); font-size: 0.82em; line-height: 1.5; }
+
+  /* Never Clauses */
+  .never-clause {
+    background: rgba(224, 85, 85, 0.08);
+    border: 1px solid rgba(224, 85, 85, 0.2);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .never-clause .label {
+    color: var(--red);
+    font-size: 0.72em;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .never-clause p { color: var(--text); font-size: 0.88em; margin-bottom: 0; }
+
+  /* Stats row */
+  .stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .stat-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+  }
+  .stat-box .number {
+    font-size: 1.6em;
+    font-weight: 700;
+    color: var(--gold);
+    display: block;
+  }
+  .stat-box .label {
+    font-size: 0.75em;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+
+  /* Voice recording visual */
+  .voice-capture {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 30px 20px;
+    text-align: center;
+    margin: 20px 0;
+  }
+  .waveform {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    height: 60px;
+    margin: 20px 0;
+  }
+  .waveform .bar {
+    width: 4px;
+    background: var(--gold);
+    border-radius: 2px;
+    animation: pulse 1.2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { height: 8px; opacity: 0.3; }
+    50% { height: 40px; opacity: 1; }
+  }
+  .record-btn {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 3px solid var(--gold);
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    transition: all 0.3s;
+  }
+  .record-btn .inner {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--red);
+    transition: all 0.3s;
+  }
+  .record-btn.recording .inner {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+  }
+
+  /* Navigation */
+  .nav-bottom {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 430px;
+    width: 100%;
+    padding: 16px 24px;
+    background: linear-gradient(transparent, var(--bg) 30%);
+    z-index: 50;
+  }
+  .btn-primary {
+    width: 100%;
+    padding: 16px;
+    background: var(--gold);
+    color: var(--bg);
+    border: none;
+    border-radius: 12px;
+    font-size: 1em;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    transition: all 0.2s;
+  }
+  .btn-primary:hover { background: #d4b35a; }
+  .btn-primary:disabled { opacity: 0.3; cursor: not-allowed; }
+  .btn-secondary {
+    width: 100%;
+    padding: 14px;
+    background: transparent;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-size: 0.9em;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  /* Module badge */
+  .module-badge {
+    display: inline-block;
+    background: rgba(201,168,76,0.12);
+    border: 1px solid rgba(201,168,76,0.25);
+    color: var(--gold);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.72em;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+  }
+
+  /* Timeline steps */
+  .step-list { margin: 16px 0; }
+  .step {
+    display: flex;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 1px solid var(--gold-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.78em;
+    color: var(--gold);
+    flex-shrink: 0;
+    font-weight: 700;
+  }
+  .step-content { flex: 1; }
+  .step-content strong { display: block; font-size: 0.9em; margin-bottom: 4px; }
+  .step-content span { font-size: 0.82em; color: var(--text-dim); }
+
+  /* Divider */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 24px 0;
+  }
+
+  /* Shield icon row */
+  .shield-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin: 16px 0;
+  }
+  .shield-icon {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 8px;
+    text-align: center;
+    font-size: 0.7em;
+    color: var(--text-dim);
+    line-height: 1.4;
+  }
+  .shield-icon .emoji { font-size: 1.6em; display: block; margin-bottom: 6px; }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+  <!-- SCREEN 0: Welcome -->
+  <div class="screen active" id="screen-0">
+    <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+      <div class="screen-label">Welcome to NOIZY</div>
+      <h1>Your Voice Is <span class="gold">Property</span>.</h1>
+      <p>You're about to become a founding member of the first platform that treats your voice as what it is: yours. Not a data point. Not a training sample. Yours.</p>
+      <p>This onboarding takes about 75 minutes. Every minute matters. You'll learn what protects you, how you earn, and why nobody can take this from you.</p>
+
+      <div class="stats-row">
+        <div class="stat-box">
+          <span class="number">75%</span>
+          <div class="label">Your royalty share</div>
+        </div>
+        <div class="stat-box">
+          <span class="number">7</span>
+          <div class="label">Protection shields</div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <h3>The Plowman Standard</h3>
+        <p>Consent as executable code. Not a suggestion, not a EULA, not fine print. Code that runs before any synthesis of your voice ever occurs.</p>
+      </div>
+    </div>
+    <div class="nav-bottom">
+      <button class="btn-primary" onclick="goTo(1)">Begin Your Journey</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 1: Module 1 - Your Voice is Property -->
+  <div class="screen" id="screen-1">
+    <div class="module-badge">Module 1 of 4 — 15 Minutes</div>
+    <div class="screen-label">Understanding</div>
+    <h1>Your Voice Is <span class="gold">Biometric Data</span></h1>
+    <p>Under ISO/IEC 2382, your voice is classified as biometric information — the same category as your fingerprint, your retina scan, your DNA. It is uniquely yours and legally protected.</p>
+
+    <div class="info-card">
+      <h3>How Voice Synthesis Works</h3>
+      <p>AI voice synthesis takes recordings of a human voice, extracts spectral features (pitch, timbre, rhythm, emotional range), and builds a mathematical model that can generate new speech in that voice. Without consent architecture, this model can be used by anyone, anywhere, for anything. NOIZY changes that.</p>
+    </div>
+
+    <div class="info-card">
+      <h3>What Protects You Today</h3>
+      <p>Tennessee ELVIS Act — federal voice protection. Illinois BIPA — class action engine ($1K-$5K per violation, no cap). EU AI Act — 10% annual revenue fines. NO FAKES Act — $150K-$750K per digital replica violation. Plus laws in Japan, South Korea, Australia, Denmark, Canada. NOIZY's architecture creates the compliance artifacts every one of these laws demands.</p>
+    </div>
+
+    <div class="info-card">
+      <h3>Your Jurisdiction</h3>
+      <p>Based on your registration, we'll map every applicable law to your voice profile. When someone uses your voice without consent, we know exactly which laws they're violating — and we enforce all of them simultaneously.</p>
+    </div>
+
+    <div class="nav-bottom">
+      <button class="btn-primary" onclick="goTo(2)">Continue to Consent Model</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 2: Module 2 - The Consent Model -->
+  <div class="screen" id="screen-2">
+    <div class="module-badge">Module 2 of 4 — 20 Minutes</div>
+    <div class="screen-label">Architecture</div>
+    <h1>The <span class="gold">Consent Kernel</span></h1>
+    <p>Every use of your voice passes through HEAVEN17 — our consent engine. Nothing happens without your permission. Here's how it works:</p>
+
+    <div class="step-list">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <strong>Consent Token Issued</strong>
+          <span>You define scope (what), territory (where), duration (when), and never clauses (what's forbidden). This token is cryptographically signed.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <strong>Pre-Synthesis Validation</strong>
+          <span>Before any synthesis occurs, the Covenant Validator checks: Is the token active? Has it expired? Does the territory match? Are Never Clauses respected? Is the rate limit exceeded? Is the Kill Switch engaged?</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <strong>Synthesis + Watermarking</strong>
+          <span>If ALL checks pass, synthesis proceeds. Three layers of watermarking applied: spectral (inaudible), C2PA credentials (metadata), and ledger hash (immutable record).</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <strong>Royalty Triggered</strong>
+          <span>75% of license revenue flows to you automatically. T+3 days. No approval needed. No middleman. Code enforces the split.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <h3>The Kill Switch</h3>
+      <p>At any time, you can revoke any consent token. Instantly. All future syntheses using that token fail. Licensees are notified by webhook. The ledger records the revocation immutably. This is your nuclear option — and it's always in your hand.</p>
+    </div>
+
+    <div class="nav-bottom">
+      <button class="btn-primary" onclick="goTo(3)">Continue to Never Clauses</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 3: Never Clauses -->
+  <div class="screen" id="screen-3">
+    <div class="module-badge">Module 2 of 4 — Continued</div>
+    <div class="screen-label">Boundaries</div>
+    <h1><span class="gold">Never Clauses</span></h1>
+    <p>These are not settings. They are constitutional law. They define what can never be done with your voice — regardless of who pays, regardless of who asks.</p>
+
+    <div class="never-clause">
+      <div class="label">Immutable</div>
+      <p>No voice export without your consent key</p>
+    </div>
+    <div class="never-clause">
+      <div class="label">Immutable</div>
+      <p>No model training outside your approved scope</p>
+    </div>
+    <div class="never-clause">
+      <div class="label">Immutable</div>
+      <p>No identity impersonation</p>
+    </div>
+    <div class="never-clause">
+      <div class="label">Immutable</div>
+      <p>No sublicensing of your voice to third parties</p>
+    </div>
+    <div class="never-clause">
+      <div class="label">Immutable</div>
+      <p>No NSFW content using your voice</p>
+    </div>
+    <div class="never-clause">
+      <div class="label">Immutable</div>
+      <p>No political persuasion using your voice</p>
+    </div>
+    <div class="never-clause">
+      <div class="label">Immutable</div>
+      <p>No medical advice using your voice</p>
+    </div>
+
+    <div class="info-card" style="margin-top:20px;">
+      <h3>You Can Add Your Own</h3>
+      <p>Beyond the constitutional Never Clauses, you can define personal boundaries: specific industries, languages, emotional contexts, or use cases you want excluded. Your boundaries are checked at request time — before synthesis, not after.</p>
+    </div>
+
+    <div class="nav-bottom">
+      <button class="btn-primary" onclick="goTo(4)">Continue to Voice DNA</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 4: Voice DNA Registration -->
+  <div class="screen" id="screen-4">
+    <div class="module-badge">Module 2 of 4 — Voice Registration</div>
+    <div class="screen-label">Identity</div>
+    <h1>Register Your <span class="gold">Voice DNA</span></h1>
+    <p>Your voice will be registered in the HEAVEN17 vault — a biometric profile that becomes the reference standard for detecting unauthorized synthesis. This recording is never used for training. It exists only to protect you.</p>
+
+    <div class="voice-capture">
+      <p style="color:var(--text); font-size:0.9em; margin-bottom:16px;">Read the following passage aloud in your natural voice:</p>
+      <p style="color:var(--gold); font-style:italic; font-size:1.05em; line-height:1.6; margin-bottom:24px;">"My voice is my property. It carries my identity, my history, and my humanity. I am registering it today so that no machine can claim it without my consent. This is the beginning of my protection."</p>
+
+      <div class="waveform" id="waveform" style="display:none;">
+        <div class="bar" style="animation-delay: 0s;"></div>
+        <div class="bar" style="animation-delay: 0.1s;"></div>
+        <div class="bar" style="animation-delay: 0.2s;"></div>
+        <div class="bar" style="animation-delay: 0.15s;"></div>
+        <div class="bar" style="animation-delay: 0.3s;"></div>
+        <div class="bar" style="animation-delay: 0.05s;"></div>
+        <div class="bar" style="animation-delay: 0.25s;"></div>
+        <div class="bar" style="animation-delay: 0.12s;"></div>
+        <div class="bar" style="animation-delay: 0.18s;"></div>
+        <div class="bar" style="animation-delay: 0.08s;"></div>
+        <div class="bar" style="animation-delay: 0.22s;"></div>
+        <div class="bar" style="animation-delay: 0.28s;"></div>
+        <div class="bar" style="animation-delay: 0.14s;"></div>
+        <div class="bar" style="animation-delay: 0.06s;"></div>
+        <div class="bar" style="animation-delay: 0.2s;"></div>
+        <div class="bar" style="animation-delay: 0.1s;"></div>
+        <div class="bar" style="animation-delay: 0.26s;"></div>
+        <div class="bar" style="animation-delay: 0.16s;"></div>
+        <div class="bar" style="animation-delay: 0.04s;"></div>
+        <div class="bar" style="animation-delay: 0.24s;"></div>
+      </div>
+
+      <button class="record-btn" id="recordBtn" onclick="toggleRecord()">
+        <div class="inner"></div>
+      </button>
+      <p style="color:var(--text-dim); font-size:0.78em; margin-top:12px;" id="recordLabel">Tap to begin recording</p>
+    </div>
+
+    <div class="info-card">
+      <h3>What Happens Next</h3>
+      <p>Your voice profile is encrypted (AES-256), stored in the HEAVEN17 vault, and registered with a unique Voice DNA hash. This hash is referenced in every C2PA credential attached to authorized syntheses of your voice. Quarterly re-certification keeps your profile current.</p>
+    </div>
+
+    <div class="nav-bottom">
+      <button class="btn-primary" onclick="goTo(5)">Continue to Enforcement</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 5: Module 3 - Enforcement -->
+  <div class="screen" id="screen-5">
+    <div class="module-badge">Module 3 of 4 — 25 Minutes</div>
+    <div class="screen-label">Defense</div>
+    <h1>Your <span class="gold">Enforcement Playbook</span></h1>
+    <p>If someone uses your voice without consent, here's exactly what happens. Not someday. Not maybe. This is the protocol that activates.</p>
+
+    <div class="step-list">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <strong>Detection (0-24 hours)</strong>
+          <span>Community report, C2PA mismatch detection (automated crawl), or Voice DNA forensic match. Three independent methods — if any one triggers, investigation begins.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <strong>Cease & Desist (24-72 hours)</strong>
+          <span>Multi-jurisdiction letter citing all applicable laws. DMCA takedown notice. Evidence packet: C2PA analysis, Voice DNA match, ledger proof. Platform removal demand: 48-hour deadline.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <strong>Escalation (Days 14-45)</strong>
+          <span>FTC complaint. State attorney general action. SAG-AFTRA filing. EU AI Act audit trigger. Media disclosure for deterrent effect.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <strong>Litigation (Day 45+)</strong>
+          <span>Federal court: Tennessee ELVIS + NO FAKES + BIPA class action. Statutory damages $150K-$750K per violation. You pay nothing — the guild's legal fund covers all costs.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="shield-row">
+      <div class="shield-icon"><span class="emoji">&#x1f6e1;</span>Legal</div>
+      <div class="shield-icon"><span class="emoji">&#x1f512;</span>Technical</div>
+      <div class="shield-icon"><span class="emoji">&#x1f3db;</span>Organizational</div>
+      <div class="shield-icon"><span class="emoji">&#x1f4b0;</span>Financial</div>
+    </div>
+    <div class="shield-row">
+      <div class="shield-icon"><span class="emoji">&#x1f3a8;</span>Cultural</div>
+      <div class="shield-icon"><span class="emoji">&#x1f91d;</span>Relational</div>
+      <div class="shield-icon"><span class="emoji">&#x1f4da;</span>Educational</div>
+      <div class="shield-icon"><span class="emoji">&#x2b50;</span>All Seven</div>
+    </div>
+
+    <div class="nav-bottom">
+      <button class="btn-primary" onclick="goTo(6)">Continue to Governance</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 6: Module 4 - Governance -->
+  <div class="screen" id="screen-6">
+    <div class="module-badge">Module 4 of 4 — 15 Minutes</div>
+    <div class="screen-label">Sovereignty</div>
+    <h1>You <span class="gold">Govern</span> This</h1>
+    <p>NOIZY is not a company that happens to serve artists. It is a guild governed by artists. As a founding member, you have a direct vote in how this platform operates.</p>
+
+    <div class="info-card">
+      <h3>Guild Assembly</h3>
+      <p>All Tier 1 members. Quarterly meetings. One creator, one vote. Votes on constitutional amendments require 66% supermajority. Every vote is published for transparency.</p>
+    </div>
+
+    <div class="info-card">
+      <h3>Creator Council</h3>
+      <p>9 elected seats, 2-year terms. Oversees HEAVEN17 operations, approves union partnerships, selects reward parameters. You can run for a seat.</p>
+    </div>
+
+    <div class="info-card">
+      <h3>Failure-Proof Design</h3>
+      <p>No single person — not even the founder — can unilaterally change royalty splits. If NOIZY is acquired, protections transfer to a WIPO trust. If NOIZY shuts down, your voice DNA vault transfers to SAG-AFTRA custody. Your protection survives the platform.</p>
+    </div>
+
+    <div class="info-card">
+      <h3>Your 75%</h3>
+      <p>75% of all revenue from your voice goes directly to you. T+3 automatic payout. This is not a policy — it is burned into code at the database level. The Creator Council cannot change it without a 75% supermajority of the entire Guild Assembly.</p>
+    </div>
+
+    <div class="nav-bottom">
+      <button class="btn-primary" onclick="goTo(7)">Proceed to Founding Consent</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 7: Founding Consent -->
+  <div class="screen" id="screen-7">
+    <div class="screen-label">Final Step</div>
+    <h1>Your <span class="gold">Founding Consent</span></h1>
+    <p>By completing this onboarding, you are consenting to the following — with full knowledge of your rights, your protections, and your power within this guild.</p>
+
+    <div id="consent-list">
+      <div class="consent-item">
+        <div class="consent-check" onclick="toggleConsent(this)"></div>
+        <div class="consent-text">
+          <strong>I understand my voice is biometric property</strong>
+          <span>Protected under BIPA, ELVIS Act, NO FAKES Act, EU AI Act, and all applicable jurisdictions.</span>
+        </div>
+      </div>
+
+      <div class="consent-item">
+        <div class="consent-check" onclick="toggleConsent(this)"></div>
+        <div class="consent-text">
+          <strong>I consent to Voice DNA registration</strong>
+          <span>My voice profile will be stored in HEAVEN17 for detection and enforcement purposes only. Never for training.</span>
+        </div>
+      </div>
+
+      <div class="consent-item">
+        <div class="consent-check" onclick="toggleConsent(this)"></div>
+        <div class="consent-text">
+          <strong>I accept the Never Clauses</strong>
+          <span>The seven constitutional Never Clauses apply to all uses of my voice. I may add personal boundaries beyond these.</span>
+        </div>
+      </div>
+
+      <div class="consent-item">
+        <div class="consent-check" onclick="toggleConsent(this)"></div>
+        <div class="consent-text">
+          <strong>I accept the 75/25 royalty structure</strong>
+          <span>75% of all revenue from synthesis of my voice flows to me. 25% funds infrastructure, legal defense, and guild operations.</span>
+        </div>
+      </div>
+
+      <div class="consent-item">
+        <div class="consent-check" onclick="toggleConsent(this)"></div>
+        <div class="consent-text">
+          <strong>I understand my Kill Switch authority</strong>
+          <span>I can revoke any consent token at any time, instantly blocking all future syntheses under that token.</span>
+        </div>
+      </div>
+
+      <div class="consent-item">
+        <div class="consent-check" onclick="toggleConsent(this)"></div>
+        <div class="consent-text">
+          <strong>I join the Guild as a Tier 1 Founding Member</strong>
+          <span>With full voting rights in the Guild Assembly, eligibility for Creator Council, and constitutional protections that survive any organizational change.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-bottom">
+      <button class="btn-primary" id="finalBtn" disabled onclick="goTo(8)">Sign Founding Consent</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 8: Welcome Home -->
+  <div class="screen" id="screen-8">
+    <div style="flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center;">
+      <div style="font-size:3em; margin-bottom:20px;">&#x1f3db;</div>
+      <h1 style="font-size:1.6em;">Welcome to the <span class="gold">Cathedral</span></h1>
+      <p style="text-align:center; max-width:340px; margin:0 auto 24px;">You are now a founding member of NOIZY. Your voice is registered. Your rights are protected. Your consent is executable code.</p>
+
+      <div class="stats-row">
+        <div class="stat-box">
+          <span class="number" style="font-size:1.2em;">Tier 1</span>
+          <div class="label">Founding Member</div>
+        </div>
+        <div class="stat-box">
+          <span class="number" style="font-size:1.2em;">Active</span>
+          <div class="label">Voice DNA Status</div>
+        </div>
+      </div>
+
+      <div class="info-card" style="text-align:left;">
+        <h3>What Happens Now</h3>
+        <p>Your Voice DNA profile enters the HEAVEN17 vault. Your consent token is generated. Your enforcement protections are live. Your first royalty payment will arrive T+3 days after your first licensed synthesis.</p>
+      </div>
+
+      <div class="info-card" style="text-align:left;">
+        <h3>The Plowman Standard</h3>
+        <p>"Art becomes indestructible. Not through lawyers. Through code, architecture, through making the creator the permanent owner of their own humanity."</p>
+        <p style="color:var(--gold); font-size:0.82em; margin-top:8px;">— Robert Stephen Plowman, April 5, 2026</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const totalScreens = 9;
+let currentScreen = 0;
+let recording = false;
+
+function goTo(n) {
+  document.getElementById('screen-' + currentScreen).classList.remove('active');
+  currentScreen = n;
+  document.getElementById('screen-' + currentScreen).classList.add('active');
+  document.getElementById('progressFill').style.width = ((n / (totalScreens - 1)) * 100) + '%';
+  window.scrollTo(0, 0);
+}
+
+function toggleConsent(el) {
+  el.classList.toggle('checked');
+  const allChecks = document.querySelectorAll('#consent-list .consent-check');
+  const allChecked = Array.from(allChecks).every(c => c.classList.contains('checked'));
+  document.getElementById('finalBtn').disabled = !allChecked;
+}
+
+function toggleRecord() {
+  const btn = document.getElementById('recordBtn');
+  const waveform = document.getElementById('waveform');
+  const label = document.getElementById('recordLabel');
+  recording = !recording;
+  if (recording) {
+    btn.classList.add('recording');
+    waveform.style.display = 'flex';
+    label.textContent = 'Recording... tap to stop';
+  } else {
+    btn.classList.remove('recording');
+    waveform.style.display = 'none';
+    label.textContent = 'Voice sample captured';
+    label.style.color = 'var(--green)';
+  }
+}
+</script>
+</body>
+</html>

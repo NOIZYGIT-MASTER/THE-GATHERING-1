@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIZYKIDZ — The Human Music Genome</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Bebas+Neue&display=swap');
+
+  :root {
+    --void:   #020008;
+    --deep:   #050012;
+    --panel:  #08001c;
+    --card:   #0b0024;
+    --border: #160038;
+
+    /* Genome strand colors */
+    --g1:  #00e87a; /* Pulse — green */
+    --g2:  #ff9f43; /* Rhythm Layers — orange */
+    --g3:  #e84393; /* Scale Systems — pink */
+    --g4:  #ee5a24; /* Emotional Modes — red-orange */
+    --g5:  #74b9ff; /* Harmonic Stacking — blue */
+    --g6:  #a29bfe; /* Storytelling — violet */
+    --g7:  #00cec9; /* Drone Systems — teal */
+    --g8:  #fdcb6e; /* Improvisation — gold */
+    --g9:  #fd79a8; /* Timbre Sculpting — rose */
+    --g10: #55efc4; /* Ritual Music — mint */
+    --g11: #f687b3; /* Dance Integration — pink */
+    --g12: #67e8f9; /* Collective Participation — cyan */
+
+    --gold:   #e8c84a;
+    --green:  #00e87a;
+    --text:   #a8c8e4;
+    --dim:    #2a3a52;
+    --bright: #eef4ff;
+    --mono:   'Space Mono', monospace;
+    --sans:   'Space Grotesk', sans-serif;
+    --kids:   'Nunito', sans-serif;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--void); color:var(--text); font-family:var(--kids); overflow-x:hidden; }
+
+  /* ─── CANVAS ─── */
+  #dna-canvas { position:fixed; inset:0; z-index:0; pointer-events:none; }
+
+  /* ─── NAV ─── */
+  .nav {
+    position:sticky; top:0; z-index:200;
+    background:rgba(2,0,8,0.95);
+    border-bottom:1px solid var(--border);
+    padding:10px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+    backdrop-filter:blur(10px);
+  }
+
+  .nav-brand {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:18px; letter-spacing:0.15em;
+    display:flex; align-items:center; gap:10px;
+  }
+
+  .nb-n { color:var(--green); }
+  .nb-k { color:var(--gold); }
+  .nb-sub {
+    font-family:var(--mono); font-size:8px; color:var(--dim);
+    letter-spacing:0.15em; margin-left:4px;
+  }
+
+  .nav-links {
+    display:flex; flex-wrap:wrap; gap:4px;
+  }
+
+  .nav-link {
+    font-family:var(--mono); font-size:8px; letter-spacing:0.08em;
+    padding:4px 8px; border-radius:20px;
+    border:1px solid rgba(255,255,255,0.07);
+    color:var(--dim); text-decoration:none;
+    transition:all 0.15s;
+  }
+  .nav-link:hover { color:var(--bright); border-color:rgba(255,255,255,0.2); }
+
+  /* ─── HERO ─── */
+  .hero {
+    padding:80px 40px 60px; text-align:center;
+    border-bottom:1px solid var(--border);
+    position:relative; z-index:10;
+  }
+
+  .hero-badge {
+    font-family:var(--mono); font-size:9px; color:var(--green);
+    letter-spacing:0.4em; margin-bottom:16px;
+  }
+
+  .hero-title {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(44px,9vw,110px);
+    letter-spacing:0.04em; line-height:0.88;
+    margin-bottom:10px;
+  }
+
+  .hero-subtitle {
+    font-family:var(--kids); font-weight:600;
+    font-size:clamp(13px,1.5vw,17px); color:var(--text);
+    max-width:580px; margin:20px auto 32px; line-height:1.7;
+  }
+
+  .hero-stat-row {
+    display:flex; flex-wrap:wrap; gap:10px; justify-content:center;
+  }
+
+  .stat-chip {
+    font-family:var(--kids); font-weight:800;
+    font-size:11px; padding:6px 14px; border-radius:20px;
+    border:1px solid rgba(255,255,255,0.1);
+  }
+
+  /* ─── GENOME SECTION HEADER ─── */
+  .section-header {
+    padding:48px 40px 24px;
+    border-bottom:1px solid var(--border);
+    position:relative; z-index:10;
+  }
+
+  .sh-eyebrow {
+    font-family:var(--mono); font-size:9px; letter-spacing:0.3em;
+    text-transform:uppercase; margin-bottom:8px; opacity:0.6;
+  }
+
+  .sh-title {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(28px,4vw,52px);
+    letter-spacing:0.06em; line-height:1;
+  }
+
+  .sh-sub {
+    font-family:var(--kids); font-weight:600;
+    font-size:14px; color:var(--text);
+    max-width:600px; margin-top:10px; line-height:1.65;
+  }
+
+  /* ─── GENOME GRID ─── */
+  .genome-grid {
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+    gap:14px; padding:32px 40px;
+    border-bottom:1px solid var(--border);
+    position:relative; z-index:10;
+  }
+
+  .genome-card {
+    border-radius:12px; padding:20px;
+    border:1px solid rgba(255,255,255,0.06);
+    background:rgba(255,255,255,0.015);
+    position:relative; overflow:hidden;
+    transition:transform 0.2s, border-color 0.2s;
+  }
+
+  .genome-card:hover { transform:translateY(-2px); }
+
+  .gc-stripe {
+    position:absolute; top:0; left:0; right:0; height:3px;
+  }
+
+  .gc-number {
+    font-family:'Bebas Neue',sans-serif; font-size:48px;
+    position:absolute; top:10px; right:14px;
+    opacity:0.06; line-height:1; letter-spacing:0;
+  }
+
+  .gc-icon   { font-size:32px; margin-bottom:10px; display:block; }
+  .gc-title  { font-family:var(--kids); font-weight:900; font-size:16px; margin-bottom:6px; }
+  .gc-tagline { font-family:var(--mono); font-size:8px; letter-spacing:0.15em; text-transform:uppercase; opacity:0.6; margin-bottom:10px; }
+  .gc-desc   { font-family:var(--kids); font-weight:500; font-size:12px; line-height:1.65; color:var(--text); }
+  .gc-desc strong { color:var(--bright); }
+  .gc-examples {
+    margin-top:10px; display:flex; flex-wrap:wrap; gap:5px;
+  }
+  .gc-ex {
+    font-family:var(--mono); font-size:8px; letter-spacing:0.08em;
+    padding:3px 8px; border-radius:3px; border:1px solid rgba(255,255,255,0.07);
+    color:var(--dim);
+  }
+
+  /* ─── NEUROSCIENCE SECTION ─── */
+  .neuro-section {
+    padding:64px 40px;
+    border-bottom:1px solid var(--border);
+    position:relative; z-index:10;
+  }
+
+  .brain-grid {
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+    gap:12px; margin-top:32px;
+  }
+
+  .brain-card {
+    border-radius:10px; padding:18px;
+    border:1px solid rgba(255,255,255,0.07);
+    background:rgba(255,255,255,0.02);
+  }
+
+  .bc-region { font-family:var(--kids); font-weight:900; font-size:14px; margin-bottom:4px; }
+  .bc-what   { font-family:var(--mono); font-size:8px; color:var(--dim); letter-spacing:0.15em; margin-bottom:8px; text-transform:uppercase; }
+  .bc-desc   { font-family:var(--kids); font-weight:500; font-size:12px; color:var(--text); line-height:1.6; }
+  .bc-desc strong { color:var(--bright); }
+
+  /* ─── WORLD EXPLORER ─── */
+  .worlds-section {
+    padding:64px 40px;
+    border-bottom:1px solid var(--border);
+    position:relative; z-index:10;
+    text-align:center;
+  }
+
+  .worlds-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+    gap:16px; max-width:1100px; margin:32px auto;
+    text-align:left;
+  }
+
+  .world-card {
+    border-radius:14px; padding:24px;
+    border:2px solid rgba(255,255,255,0.08);
+    transition:all 0.25s; cursor:pointer;
+    position:relative; overflow:hidden;
+  }
+
+  .world-card:hover { transform:translateY(-4px) scale(1.01); }
+
+  .wc-planet { font-size:52px; margin-bottom:12px; display:block;
+    filter:drop-shadow(0 0 16px rgba(255,255,255,0.2)); }
+  .wc-name { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:0.1em; margin-bottom:4px; }
+  .wc-origin { font-family:var(--mono); font-size:8px; letter-spacing:0.15em; opacity:0.6; margin-bottom:12px; text-transform:uppercase; }
+  .wc-desc { font-family:var(--kids); font-weight:600; font-size:12px; line-height:1.65; color:var(--text); }
+  .wc-activity {
+    margin-top:14px; padding:10px 12px; border-radius:8px;
+    border:1px solid rgba(255,255,255,0.08);
+    background:rgba(255,255,255,0.03);
+  }
+  .wca-label { font-family:var(--mono); font-size:7px; letter-spacing:0.2em; color:var(--dim); margin-bottom:4px; text-transform:uppercase; }
+  .wca-text  { font-family:var(--kids); font-weight:700; font-size:11px; color:var(--bright); line-height:1.5; }
+
+  /* ─── EVOLUTION TIMELINE ─── */
+  .timeline-section {
+    padding:64px 40px;
+    border-bottom:1px solid var(--border);
+    position:relative; z-index:10;
+  }
+
+  .timeline { position:relative; padding-left:32px; }
+  .timeline::before {
+    content:''; position:absolute; left:8px; top:0; bottom:0;
+    width:2px; background:linear-gradient(to bottom,var(--green),var(--gold),var(--g9),transparent);
+  }
+
+  .tl-item { position:relative; margin-bottom:32px; }
+  .tl-dot {
+    position:absolute; left:-28px; top:4px;
+    width:10px; height:10px; border-radius:50%;
+    border:2px solid var(--void);
+  }
+  .tl-era { font-family:var(--mono); font-size:8px; letter-spacing:0.25em; color:var(--dim); margin-bottom:4px; text-transform:uppercase; }
+  .tl-title { font-family:var(--kids); font-weight:900; font-size:16px; margin-bottom:4px; }
+  .tl-desc { font-family:var(--kids); font-weight:500; font-size:13px; color:var(--text); line-height:1.65; max-width:680px; }
+  .tl-desc strong { color:var(--bright); }
+
+  /* ─── MISSION SECTION ─── */
+  .mission-section {
+    padding:64px 40px;
+    position:relative; z-index:10;
+    text-align:center;
+  }
+
+  .mission-declaration {
+    max-width:680px; margin:0 auto;
+    font-family:var(--kids); font-weight:700;
+    font-size:clamp(15px,2vw,19px);
+    color:var(--bright); line-height:1.7;
+    padding:36px; border-radius:14px;
+    border:1px solid rgba(232,200,74,0.2);
+    background:rgba(232,200,74,0.03);
+  }
+
+  .mission-declaration em { color:var(--gold); font-style:normal; }
+  .mission-declaration .g { color:var(--green); }
+
+  .grf-stamp {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(36px,6vw,72px);
+    color:var(--green); letter-spacing:0.2em;
+    text-shadow:0 0 40px rgba(0,232,122,0.2);
+    margin-top:32px; display:block;
+  }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    padding:28px 40px;
+    border-top:1px solid var(--border);
+    position:relative; z-index:10;
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:10px;
+    font-family:var(--mono); font-size:8px; color:var(--dim); letter-spacing:0.1em;
+  }
+
+  .footer-grf {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:20px; color:var(--green);
+    letter-spacing:0.2em; text-shadow:0 0 15px rgba(0,232,122,0.2);
+  }
+
+  @media (max-width:700px) {
+    .hero { padding:48px 20px 40px; }
+    .genome-grid { padding:20px; grid-template-columns:1fr; }
+    .neuro-section, .worlds-section, .timeline-section, .mission-section { padding:40px 20px; }
+  }
+
+  ::-webkit-scrollbar { width:3px; }
+  ::-webkit-scrollbar-track { background:var(--void); }
+  ::-webkit-scrollbar-thumb { background:var(--border); }
+</style>
+</head>
+<body>
+
+<canvas id="dna-canvas"></canvas>
+
+<!-- ─── NAV ─── -->
+<nav class="nav">
+  <div class="nav-brand">
+    <span class="nb-n">NOIZY</span><span class="nb-k">KIDZ</span>
+    <span class="nb-sub">HUMAN MUSIC GENOME</span>
+  </div>
+  <div class="nav-links">
+    <a class="nav-link" href="#genome">12 SYSTEMS</a>
+    <a class="nav-link" href="#neuroscience">NEUROSCIENCE</a>
+    <a class="nav-link" href="#worlds">WORLD EXPLORER</a>
+    <a class="nav-link" href="#evolution">EVOLUTION</a>
+    <a class="nav-link" href="noizykidz-music-atlas.html">← BACK TO ATLAS</a>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<div class="hero">
+  <div class="hero-badge">NOIZYFISH INC. · NOIZYKIDZ · DOCUMENT 23 · HUMAN MUSIC GENOME</div>
+  <div class="hero-title" style="color:var(--bright)">
+    THE<br>
+    <span style="color:var(--green)">HUMAN</span><br>
+    MUSIC<br>
+    <span style="color:var(--gold)">GENOME</span>
+  </div>
+  <p class="hero-subtitle">
+    Ethnomusicologists have discovered that <strong style="color:var(--bright)">12 universal building blocks</strong>
+    appear in almost every musical tradition on Earth —
+    from the first drumbeat 40,000 years ago to the music made today.
+    This is the complete map of how humans discovered sound.
+  </p>
+  <div class="hero-stat-row">
+    <span class="stat-chip" style="color:var(--green);border-color:rgba(0,232,122,0.3)">12 UNIVERSAL SYSTEMS</span>
+    <span class="stat-chip" style="color:var(--gold);border-color:rgba(232,200,74,0.3)">EVERY CULTURE ON EARTH</span>
+    <span class="stat-chip" style="color:var(--g9);border-color:rgba(246,135,179,0.3)">BUILT FOR EVERY CHILD</span>
+    <span class="stat-chip" style="color:var(--g12);border-color:rgba(103,232,249,0.3)">40,000 YEARS OF DISCOVERY</span>
+  </div>
+</div>
+
+<!-- ─── GENOME SECTION ─── -->
+<div class="section-header" id="genome">
+  <div class="sh-eyebrow" style="color:var(--green)">THE 12 UNIVERSAL SYSTEMS</div>
+  <div class="sh-title" style="color:var(--bright)">The Building Blocks of All Music</div>
+  <div class="sh-sub">Every musical tradition on Earth uses some combination of these 12 elements. Some use all of them. None of them invented them alone — humanity discovered them together, across thousands of years, on every continent.</div>
+</div>
+
+<div class="genome-grid">
+
+  <div class="genome-card" style="border-color:rgba(0,232,122,0.15)">
+    <div class="gc-stripe" style="background:var(--g1)"></div>
+    <div class="gc-number" style="color:var(--g1)">01</div>
+    <span class="gc-icon">💓</span>
+    <div class="gc-title" style="color:var(--g1)">Pulse</div>
+    <div class="gc-tagline">THE HEARTBEAT OF ALL MUSIC</div>
+    <div class="gc-desc">The organizing principle of time in music. <strong>Humans instinctively synchronize to a pulse</strong> — this is why music unites groups, why people clap together, why armies march. The heartbeat is the first pulse any human ever hears, before they're born. Everything else is built on this.</div>
+    <div class="gc-examples">
+      <span class="gc-ex">African drums</span>
+      <span class="gc-ex">Techno kick drum</span>
+      <span class="gc-ex">Heartbeat</span>
+      <span class="gc-ex">Marching band</span>
+    </div>
+  </div>
+
+  <div class="genome-card" style="border-color:rgba(255,159,67,0.15)">
+    <div class="gc-stripe" style="background:var(--g2)"></div>
+    <div class="gc-number" style="color:var(--g2)">02</div>
+    <span class="gc-icon">🥁</span>
+    <div class="gc-title" style="color:var(--g2)">Rhythm Layers</div>
+    <div class="gc-tagline">MULTIPLE RHYTHMS INTERACTING</div>
+    <div class="gc-desc">Multiple rhythms happening simultaneously, each different but all locking together. <strong>West African polyrhythm can layer 3, 4, or 5 different rhythms at once</strong> — each musician hears a different "one." Children naturally enjoy layering rhythms. This is the secret of groove.</div>
+    <div class="gc-examples">
+      <span class="gc-ex">West African polyrhythm</span>
+      <span class="gc-ex">Jazz drumming</span>
+      <span class="gc-ex">Salsa percussion</span>
+    </div>
+  </div>
+
+  <div class="genome-card" style="border-color:rgba(232,67,147,0.15)">
+    <div class="gc-stripe" style="background:var(--g3)"></div>
+    <div class="gc-number" style="color:var(--g3)">03</div>
+    <span class="gc-icon">🎵</span>
+    <div class="gc-title" style="color:var(--g3)">Scale Systems</div>
+    <div class="gc-tagline">HOW CULTURES DIVIDE THE OCTAVE</div>
+    <div class="gc-desc">Every culture found a way to organize pitch into repeating patterns — scales. <strong>Pentatonic (5 notes):</strong> China, Scotland, Africa, Native America. <strong>Heptatonic (7 notes):</strong> Western music. <strong>Microtonal:</strong> Middle East, India. Same octave, infinite ways to divide it.</div>
+    <div class="gc-examples">
+      <span class="gc-ex">Pentatonic</span>
+      <span class="gc-ex">Heptatonic</span>
+      <span class="gc-ex">Maqam</span>
+      <span class="gc-ex">Raga</span>
+      <span class="gc-ex">22 Shrutis</span>
+    </div>
+  </div>
+
+  <div class="genome-card" style="border-color:rgba(238,90,36,0.15)">
+    <div class="gc-stripe" style="background:var(--g4)"></div>
+    <div class="gc-number" style="color:var(--g4)">04</div>
+    <span class="gc-icon">🌈</span>
+    <div class="gc-title" style="color:var(--g4)">Emotional Modes</div>
+    <div class="gc-tagline">MUSIC MAPPED TO FEELING</div>
+    <div class="gc-desc">Many cultures link musical structures directly to specific emotions. Indian ragas map to <strong>nine rasas (emotions), times of day, and seasons.</strong> Greek modes each had a character. Even Western major/minor encodes "happy" and "sad." Music is an emotional language.</div>
+    <div class="gc-examples">
+      <span class="gc-ex">Indian Rasa</span>
+      <span class="gc-ex">Greek Dorian</span>
+      <span class="gc-ex">Major = joy</span>
+      <span class="gc-ex">Minor = longing</span>
+    </div>
+  </div>
+
+  <div class="genome-card" style="border-color:rgba(116,185,255,0.15)">
+    <div class="gc-stripe" style="background:var(--g5)"></div>
+    <div class="gc-number" style="color:var(--g5)">05</div>
+    <span class="gc-icon">🏗️</span>
+    <div class="gc-title" style="color:var(--g5)">Harmonic Stacking</div>
+    <div class="gc-tagline">NOTES BUILDING INTO CHORDS</div>
+    <div class="gc-desc">Western cultures discovered you could <strong>stack notes on top of each other to create chords.</strong> Pythagoras found the mathematical ratios first. Bach mastered the architecture. Every pop song you've ever heard uses this system. Three notes, infinite emotion.</div>
+    <div class="gc-examples">
+      <span class="gc-ex">Major chords</span>
+      <span class="gc-ex">Minor chords</span>
+      <span class="gc-ex">Jazz extensions</span>
+      <span class="gc-ex">Suspended chords</span>
+    </div>
+  </div>
+
+  <div class="genome-card" style="border-color:rgba(162,155,254,0.15)">
+    <div class="gc-stripe" style="background:var(--g6)"></div>
+    <div class="gc-number" style="color:var(--g6)">06</div>
+    <span class="gc-icon">📖</span>
+    <div class="gc-title" style="color:var(--g6)">Storytelling Through Sound</div>
+    <div class="gc-tagline">MUSIC AS NARRATIVE</div>
+    <div class="gc-desc">From West African griots to Wagnerian opera to hip-hop concept albums — <strong>music carries stories.</strong> Wagner invented leitmotifs: musical themes representing characters, so the orchestra could tell you who was coming before they appeared. Music is the oldest narrative technology.</div>
+    <div class="gc-examples">
+      <span class="gc-ex">Griot oral history</span>
+      <span class="gc-ex">Opera narrative</span>
+      <span class="gc-ex">Hip-hop storytelling</span>
+    </div>
+  </div>
+
+  <div class="genome-card" style="border-color:rgba(0,206,201,0.15)">
+    <div class="gc-stripe" style="background:var(--g7)"></div>
+    <div class="gc-number" style="color:var(--g7)">07</div>
+    <span class="gc-icon">🌀</span>
+    <div class="gc-title" style="color:var(--g7)">Drone Systems</div>
+    <div class="gc-tagline">THE SONIC GRAVITY FIELD</div>
+    <div class="gc-desc">A sustained tone that anchors all other music around it. <strong>Indian tanpura, Scottish bagpipes, Australian didgeridoo</strong> — all create a continuous sound that everything else orbits. A drone is musical gravity. It tells your ear where "home" is.</div>
+    <div class="gc-examples">
+      <span class="gc-ex">Indian tanpura</span>
+      <span class="gc-ex">Scottish bagpipes</span>
+      <span class="gc-ex">Didgeridoo</span>
+      <span class="gc-ex">Organ pedal</span>
+    </div>
+  </div>
+
+  <div class="genome-card" style="border-color:rgba(253,203,110,0.15)">
+    <div class="gc-stripe" style="background:var(--g8)"></div>
+    <div class="gc-number" style="color:var(--g8)">08</div>
+    <span class="gc-icon">🎤</span>
+    <div class="gc-title" style="color:var(--g8)">Improvisation</div>
+    <div class="gc-tagline">MUSIC AS LIVING CONVERSATION</div>
+    <div class="gc-desc">Many traditions treat music as <strong>real-time conversation between musicians and with the audience.</strong> Jazz improvisation, Hindustani raga, flamenco guitar dialogue — the musician doesn't perform a composition. They co-create it, live, in the moment. This teaches creative confidence.</div>
+    <div class="gc-examples">
+      <span class="gc-ex">Jazz improv</span>
+      <span class="gc-ex">Hindustani raga</span>
+      <span class="gc-ex">Flamenco</span>
+      <span class="gc-ex">Bluegrass jam</span>
+    </div>
+  </div>
+
+  <div class="genome-card" style="border-color:rgba(253,121,168,0.15)">
+    <div class="gc-stripe" style="background:var(--g9)"></div>
+    <div class="gc-number" style="color:var(--g9)">09</div>
+    <span class="gc-icon">🔊</span>
+    <div class="gc-title" style="color:var(--g9)">Timbre Sculpting</div>
+    <div class="gc-tagline">THE COLOR OF SOUND</div>
+    <div class="gc-desc">The same note played by a violin and a trumpet sounds completely different — that's timbre. <strong>Different cultures shaped their sound textures in radically unique ways:</strong> Mongolian throat singing, blues guitar distortion, modular synthesis, mbira thumb piano. Sound color as music itself.</div>
+    <div class="gc-examples">
+      <span class="gc-ex">Throat singing</span>
+      <span class="gc-ex">Distortion guitar</span>
+      <span class="gc-ex">Synthesis</span>
+      <span class="gc-ex">Mbira tones</span>
+    </div>
+  </div>
+
+  <div class="genome-card" style="border-color:rgba(85,239,196,0.15)">
+    <div class="gc-stripe" style="background:var(--g10)"></div>
+    <div class="gc-number" style="color:var(--g10)">10</div>
+    <span class="gc-icon">🕯️</span>
+    <div class="gc-title" style="color:var(--g10)">Ritual Music</div>
+    <div class="gc-tagline">MUSIC FOR HEALING AND CEREMONY</div>
+    <div class="gc-desc">Music was never just entertainment — it was <strong>technology for transformation.</strong> Tibetan chanting, shamanic drumming, church choirs, Sufi whirling — all use music to alter consciousness, heal community wounds, and connect humans with something larger than themselves.</div>
+    <div class="gc-examples">
+      <span class="gc-ex">Tibetan chant</span>
+      <span class="gc-ex">Shamanic drumming</span>
+      <span class="gc-ex">Gospel choir</span>
+      <span class="gc-ex">Sufi sama</span>
+    </div>
+  </div>
+
+  <div class="genome-card" style="border-color:rgba(246,135,179,0.15)">
+    <div class="gc-stripe" style="background:var(--g11)"></div>
+    <div class="gc-number" style="color:var(--g11)">11</div>
+    <span class="gc-icon">💃</span>
+    <div class="gc-title" style="color:var(--g11)">Dance Integration</div>
+    <div class="gc-tagline">WHEN MUSIC AND BODY ARE ONE</div>
+    <div class="gc-desc">In most musical traditions, music and movement evolved together. Samba, flamenco, hip-hop — <strong>the dance encodes the music theory in the body.</strong> You learn the clave rhythm by feeling it in your feet before understanding it in your mind. The body is the first instrument.</div>
+    <div class="gc-examples">
+      <span class="gc-ex">Samba</span>
+      <span class="gc-ex">Flamenco</span>
+      <span class="gc-ex">Hip-hop</span>
+      <span class="gc-ex">Kathak</span>
+    </div>
+  </div>
+
+  <div class="genome-card" style="border-color:rgba(103,232,249,0.15)">
+    <div class="gc-stripe" style="background:var(--g12)"></div>
+    <div class="gc-number" style="color:var(--g12)">12</div>
+    <span class="gc-icon">👥</span>
+    <div class="gc-title" style="color:var(--g12)">Collective Participation</div>
+    <div class="gc-tagline">MUSIC BECOMES STRONGEST TOGETHER</div>
+    <div class="gc-desc"><strong>Choir singing, drum circles, festival crowds, communal work songs</strong> — music's power multiplies when more people join. Humans evolved to create shared emotional resonance through sound. This is why concerts feel electric. This is why NOIZY is a community, not a platform.</div>
+    <div class="gc-examples">
+      <span class="gc-ex">Choir singing</span>
+      <span class="gc-ex">Drum circles</span>
+      <span class="gc-ex">Festival crowds</span>
+      <span class="gc-ex">Work songs</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ─── NEUROSCIENCE ─── -->
+<div class="neuro-section" id="neuroscience">
+  <div class="section-header" style="padding:0 0 24px;border:none;">
+    <div class="sh-eyebrow" style="color:var(--g9)">THE SCIENCE OF MUSIC IN THE BRAIN</div>
+    <div class="sh-title" style="color:var(--bright)">Why Music Activates Everything</div>
+    <div class="sh-sub">Neuroscience research has discovered something extraordinary: <strong style="color:var(--bright)">music activates almost the entire brain simultaneously.</strong> No other human activity does this. Music may be the most powerful learning tool humans have ever evolved.</div>
+  </div>
+
+  <div class="brain-grid">
+    <div class="brain-card" style="border-color:rgba(255,159,67,0.15)">
+      <div class="bc-region" style="color:var(--g2)">🏃 Motor Cortex</div>
+      <div class="bc-what">MOVEMENT + RHYTHM</div>
+      <div class="bc-desc">When you hear a beat, your <strong>motor cortex activates</strong> before you consciously decide to move. Rhythm doesn't ask permission — it directly commands your body. This is why music makes people dance without thinking.</div>
+    </div>
+    <div class="brain-card" style="border-color:rgba(253,121,168,0.15)">
+      <div class="bc-region" style="color:var(--g9)">💖 Emotional Centers</div>
+      <div class="bc-what">LIMBIC SYSTEM · AMYGDALA</div>
+      <div class="bc-desc">Music triggers the same emotional processing pathways as real human experiences. <strong>A sad melody activates genuine grief.</strong> A triumphant theme activates real courage. Music doesn't simulate emotion — it causes it.</div>
+    </div>
+    <div class="brain-card" style="border-color:rgba(85,239,196,0.15)">
+      <div class="bc-region" style="color:var(--g10)">🧠 Memory Systems</div>
+      <div class="bc-what">HIPPOCAMPUS · LONG-TERM MEMORY</div>
+      <div class="bc-desc"><strong>Music is one of the last cognitive functions to be lost in Alzheimer's disease.</strong> Memories formed with music are encoded more deeply. This is why song helps children learn — and why music connects people with dementia to their past.</div>
+    </div>
+    <div class="brain-card" style="border-color:rgba(162,155,254,0.15)">
+      <div class="bc-region" style="color:var(--g6)">🔍 Pattern Recognition</div>
+      <div class="bc-what">PREFRONTAL CORTEX · PREDICTION</div>
+      <div class="bc-desc">Your brain <strong>constantly predicts what comes next in music</strong> — and gets a dopamine reward when the prediction is right (resolution) and a pleasure spike when it's wrong (surprise). Music is a game your brain plays with itself. Winning feels good.</div>
+    </div>
+    <div class="brain-card" style="border-color:rgba(253,203,110,0.15)">
+      <div class="bc-region" style="color:var(--g8)">✨ Dopamine Release</div>
+      <div class="bc-what">REWARD SYSTEM · CHILLS</div>
+      <div class="bc-desc">The "chills" you feel during music — called frisson — are <strong>caused by actual dopamine release.</strong> Powerful music produces the same neurological response as eating, sex, and social bonding. Music is a basic human pleasure — not a luxury.</div>
+    </div>
+    <div class="brain-card" style="border-color:rgba(103,232,249,0.15)">
+      <div class="bc-region" style="color:var(--g12)">🤝 Social Bonding</div>
+      <div class="bc-what">OXYTOCIN · MIRROR NEURONS</div>
+      <div class="bc-desc">Singing and playing together releases <strong>oxytocin — the bonding hormone.</strong> Mirror neurons fire in sync with other musicians. This is why music creates communities. NOIZY's social architecture is neurologically supported — humans are built to create together.</div>
+    </div>
+  </div>
+
+  <div style="margin-top:28px;padding:24px;border-radius:12px;border:1px solid rgba(0,232,122,0.15);background:rgba(0,232,122,0.03);max-width:700px;">
+    <div style="font-family:var(--mono);font-size:8px;color:var(--dim);letter-spacing:0.25em;margin-bottom:8px;">🧠 THE KEY FINDING</div>
+    <div style="font-family:var(--kids);font-weight:700;font-size:15px;color:var(--bright);line-height:1.7;">
+      "Music may be the single most effective learning tool humans have evolved.
+      When children learn through music, they engage their motor, emotional, memory,
+      pattern recognition, and social systems simultaneously.
+      <span style="color:var(--green)">NOIZYKIDZ puts this knowledge to work.</span>"
+    </div>
+  </div>
+</div>
+
+<!-- ─── WORLD EXPLORER ─── -->
+<div class="worlds-section" id="worlds">
+  <div class="sh-eyebrow" style="color:var(--gold)">NOIZYKIDZ WORLD EXPLORER</div>
+  <div class="sh-title" style="color:var(--bright)">Five Musical Worlds to Explore</div>
+  <div class="sh-sub" style="margin:10px auto 0;max-width:580px;">
+    Instead of boring music lessons, children explore musical worlds — each one rooted in a real cultural tradition, each one built to activate all 12 genome systems through play.
+  </div>
+
+  <div class="worlds-grid">
+
+    <div class="world-card" style="border-color:rgba(255,159,67,0.25);background:rgba(255,159,67,0.03)">
+      <span class="wc-planet">🥁</span>
+      <div class="wc-name" style="color:var(--g2)">RHYTHM PLANET</div>
+      <div class="wc-origin">WEST AFRICA · LATIN AMERICA · ANCIENT EARTH</div>
+      <div class="wc-desc">The heartbeat planet. Children build polyrhythm structures with virtual djembes, congas, and talking drums — experiencing how multiple rhythms lock together into groove before they can name what they're doing.</div>
+      <div class="wc-activity">
+        <div class="wca-label">CORE ACTIVITY</div>
+        <div class="wca-text">Layer three drums. Each has a different rhythm. Find the groove where they all lock. That feeling? That's polyrhythm. That's the foundation of all modern music.</div>
+      </div>
+    </div>
+
+    <div class="world-card" style="border-color:rgba(85,239,196,0.25);background:rgba(85,239,196,0.03)">
+      <span class="wc-planet">🌲</span>
+      <div class="wc-name" style="color:var(--g10)">MELODY FOREST</div>
+      <div class="wc-origin">CHINA · SCOTLAND · NATIVE AMERICA · AFRICA</div>
+      <div class="wc-desc">Five notes. The pentatonic scale. Children discover how the same five notes appear in Chinese guqin, Scottish bagpipes, American blues, and Native American flute — the same musical DNA across four continents, four centuries.</div>
+      <div class="wc-activity">
+        <div class="wca-label">CORE ACTIVITY</div>
+        <div class="wca-text">Play the five black keys on a piano. That's the pentatonic scale. Now hear it played on a guqin, a highland flute, and a blues guitar. Same notes. Different worlds. One universe.</div>
+      </div>
+    </div>
+
+    <div class="world-card" style="border-color:rgba(238,90,36,0.25);background:rgba(238,90,36,0.03)">
+      <span class="wc-planet">☀️</span>
+      <div class="wc-name" style="color:var(--g4)">RAGA SUN TEMPLE</div>
+      <div class="wc-origin">INDIA · 2,000 YEARS OF THEORY</div>
+      <div class="wc-desc">Choose a feeling. Morning calm. Evening excitement. Monsoon longing. Discover the raga that carries that emotion — and improvise with it on a virtual sitar, guided by 2,000 years of Indian classical theory.</div>
+      <div class="wc-activity">
+        <div class="wca-label">CORE ACTIVITY</div>
+        <div class="wca-text">Pick a mood: joyful, mysterious, or peaceful. The temple reveals your raga — the specific notes that ancient Indian musicians discovered carry that emotion. Now play. You're improvising in a 2,000-year tradition.</div>
+      </div>
+    </div>
+
+    <div class="world-card" style="border-color:rgba(116,185,255,0.25);background:rgba(116,185,255,0.03)">
+      <span class="wc-planet">🌌</span>
+      <div class="wc-name" style="color:var(--g5)">HARMONY GALAXY</div>
+      <div class="wc-origin">ANCIENT GREECE · BAROQUE EUROPE · JAZZ</div>
+      <div class="wc-desc">Stack notes. Watch how two notes together create something neither makes alone. Add a third. A chord is born. Now break Pythagoras's rules and create the wild jazz chords Miles Davis used. Harmony is a galaxy with infinite planets to explore.</div>
+      <div class="wc-activity">
+        <div class="wca-label">CORE ACTIVITY</div>
+        <div class="wca-text">Three notes in a row = a major chord (happy). Move one note down one step = minor chord (sad). Add another note on top = seventh chord (tension). Each step changes the emotion. Math + feeling = harmony.</div>
+      </div>
+    </div>
+
+    <div class="world-card" style="border-color:rgba(253,203,110,0.25);background:rgba(253,203,110,0.03)">
+      <span class="wc-planet">⚡</span>
+      <div class="wc-name" style="color:var(--g8)">BEAT LAB</div>
+      <div class="wc-origin">HIP-HOP · ELECTRONIC · AI · THE FUTURE</div>
+      <div class="wc-desc">The most modern world — where all 12 genome systems collide with technology. Children create beats using samples, synthesis, and A.I.V.A. collaboration — all governed by NOIZY's consent and provenance architecture. Every beat made in Beat Lab is owned by the child who made it.</div>
+      <div class="wc-activity">
+        <div class="wca-label">CORE ACTIVITY</div>
+        <div class="wca-text">Sample an African drum. Layer a synth melody from the pentatonic scale. Add a bass line using harmonics from Pythagoras. Your A.I.V.A. partner suggests variations — but you decide what stays. You own your creation. That's NOIZY.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ─── EVOLUTION TIMELINE ─── -->
+<div class="timeline-section" id="evolution">
+  <div class="section-header" style="padding:0 0 32px;border:none;">
+    <div class="sh-eyebrow" style="color:var(--g3)">THE COMPLETE EVOLUTION</div>
+    <div class="sh-title" style="color:var(--bright)">From the First Rock to the 5th Epoch</div>
+    <div class="sh-sub">40,000 years of music in a single timeline. Every tradition building on the last. Nothing lost. All of it alive.</div>
+  </div>
+
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--prehistory, #dfe6e9)"></div>
+      <div class="tl-era">~40,000 BC</div>
+      <div class="tl-title" style="color:#dfe6e9">The First Beat</div>
+      <div class="tl-desc">Bone flutes and drums. Humans discover that organized sound creates emotion, community, and meaning. <strong>The pulse and call-and-response appear simultaneously on every continent.</strong> Music is not invented — it is discovered, everywhere, by everyone.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--africa)"></div>
+      <div class="tl-era">~10,000 BC — ANCIENT AFRICA</div>
+      <div class="tl-title" style="color:var(--africa)">Polyrhythm & the Griot Tradition</div>
+      <div class="tl-desc">West African drumming traditions develop polyrhythm — multiple simultaneous rhythms. <strong>Griots emerge as musical historians</strong> — encoding thousands of years of cultural memory in song. The rhythmic architecture that will eventually power jazz, rock, and hip-hop is born here.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--china)"></div>
+      <div class="tl-era">~3000 BC — ANCIENT CHINA</div>
+      <div class="tl-title" style="color:var(--china)">The Pentatonic Scale & Cosmic Music</div>
+      <div class="tl-desc">Chinese scholars develop the pentatonic scale and link music to cosmic order. <strong>Music becomes a philosophical and political instrument</strong> — emperors believed that proper music maintained social harmony. The guqin becomes the instrument of scholars.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--india)"></div>
+      <div class="tl-era">~2000 BC — ANCIENT INDIA</div>
+      <div class="tl-title" style="color:var(--india)">The Raga System</div>
+      <div class="tl-desc">Indian scholars develop one of the most sophisticated music theory systems in history. <strong>The Sama Veda — composed entirely for singing</strong> — is one of the oldest musical texts. The raga and tala systems emerge, connecting music to emotion, time, and spirituality.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--mideast)"></div>
+      <div class="tl-era">~1000 BC — MIDDLE EAST</div>
+      <div class="tl-title" style="color:var(--mideast)">The Maqam & the Oud</div>
+      <div class="tl-desc">The maqam system develops — <strong>melodic frameworks that use microtones</strong> unavailable in Western scales. The oud — ancestor of the guitar — emerges in ancient Mesopotamia. Medieval Islamic scholars become the world's first musicologists.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--greece)"></div>
+      <div class="tl-era">~500 BC — ANCIENT GREECE</div>
+      <div class="tl-title" style="color:var(--greece)">Music Becomes Mathematics</div>
+      <div class="tl-desc">Pythagoras discovers that harmonic intervals are mathematical ratios. <strong>Aristoxenus writes the first systematic music theory text.</strong> Greek modes (Dorian, Phrygian, Lydian) are codified. The foundation of Western harmonic theory is laid.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--europe)"></div>
+      <div class="tl-era">500–1900 AD — EUROPE</div>
+      <div class="tl-title" style="color:var(--europe)">The Harmonic Skyscraper</div>
+      <div class="tl-desc">Medieval → Baroque → Classical → Romantic. <strong>Musical notation is invented, making music transmissible across centuries.</strong> Bach masters counterpoint, Mozart masters structure, Beethoven masters emotion. The orchestra becomes a 100-instrument living instrument.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--g2)"></div>
+      <div class="tl-era">1900–2000 — AMERICA & THE WORLD</div>
+      <div class="tl-title" style="color:var(--g2)">The Great Convergence</div>
+      <div class="tl-desc">African rhythms meet European harmonies in America, creating Blues → Jazz → Rock → Funk → Hip-Hop. <strong>All of human musical history collides</strong> and produces the most prolifically creative century in music's history. Electronic synthesis makes any sound possible as music.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--gold)"></div>
+      <div class="tl-era">2026 — OTTAWA, CANADA</div>
+      <div class="tl-title" style="color:var(--gold)">The 5th Epoch — Consent Infrastructure</div>
+      <div class="tl-desc"><strong>RSP_001 — Robert Stephen Plowman — founds NOIZYFISH INC.</strong> The Voice Estate and Consent-as-Code architecture ensures that every musical tradition is honored, every creator is sovereign, and the 40,000-year human musical heritage is protected for another 500 years. <span style="color:var(--green)">GORUNFREE.</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ─── MISSION ─── -->
+<div class="mission-section">
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:13px;color:var(--dim);letter-spacing:0.4em;margin-bottom:20px;">NOIZYFISH INC. · NOIZYKIDZ · THE MISSION</div>
+
+  <div class="mission-declaration">
+    Every child on Earth is born with <em>all 12 genome systems</em> already inside them.<br><br>
+    They already feel pulse. They already respond to emotion in sound. They already want to move when they hear a groove. They already want to sing together.<br><br>
+    <span class="g">NOIZYKIDZ doesn't teach music to children.</span><br>
+    NOIZYKIDZ reminds them of what they already know —<br>
+    and connects them to the 40,000 years of humans<br>
+    who felt exactly the same things they feel.<br><br>
+    <em>That is the mission. That is the gift.</em>
+  </div>
+
+  <span class="grf-stamp">GORUNFREE</span>
+
+  <div style="font-family:var(--mono);font-size:8px;color:var(--dim);letter-spacing:0.15em;margin-top:12px;line-height:2;">
+    NOIZYFISH INC. · RSP_001 · OTTAWA · MARCH 2026<br>
+    DOCUMENT 23 · THE PLOWMAN'S CHRONICLES · VAULT<br>
+    SAFE · CREATIVE · NO DATA HARVESTING · EVER<br>
+    VOICE ESTATES PROTECTED FROM BIRTH · NC_09 · NC_10
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div>
+    <div class="footer-grf">GORUNFREE</div>
+    <div style="margin-top:4px;">NOIZYKIDZ · HUMAN MUSIC GENOME · DOCUMENT 23 · NOIZYFISH INC.</div>
+  </div>
+  <div style="text-align:right;">
+    <div style="color:var(--green);">12 UNIVERSAL SYSTEMS · 40,000 YEARS · EVERY CHILD</div>
+    <div style="margin-top:3px;"><a href="noizykidz-music-atlas.html" style="color:var(--dim);text-decoration:none;">← BACK TO GLOBAL MUSIC ATLAS</a></div>
+  </div>
+</div>
+
+<script>
+// ─── DNA HELIX CANVAS ───
+(function(){
+  const c = document.getElementById('dna-canvas');
+  const ctx = c.getContext('2d');
+  let W, H;
+
+  const colors = ['#00e87a','#ff9f43','#e84393','#ee5a24','#74b9ff',
+                  '#a29bfe','#00cec9','#fdcb6e','#fd79a8','#55efc4',
+                  '#f687b3','#67e8f9'];
+
+  function resize(){
+    W = c.width = window.innerWidth;
+    H = c.height = window.innerHeight;
+  }
+
+  let t = 0;
+  function draw(){
+    t += 0.008;
+    ctx.clearRect(0,0,W,H);
+
+    // Stars
+    if(!draw.stars){
+      draw.stars=[];
+      for(let i=0;i<180;i++){
+        draw.stars.push({x:Math.random(),y:Math.random(),r:Math.random()*1.2+0.2,a:Math.random()*0.3+0.05,p:Math.random()*Math.PI*2});
+      }
+    }
+    draw.stars.forEach(s=>{
+      ctx.globalAlpha=s.a*(0.5+0.5*Math.sin(t*0.7+s.p));
+      ctx.fillStyle='#ffffff';
+      ctx.beginPath(); ctx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2); ctx.fill();
+    });
+    ctx.globalAlpha=1;
+
+    // DNA double helix on left side
+    const helixX = 40;
+    const amplitude = 20;
+    const wavelength = 80;
+
+    for(let y=0;y<H+wavelength;y+=2){
+      const phase1 = (y/wavelength)*Math.PI*2 + t*2;
+      const phase2 = phase1 + Math.PI;
+      const x1 = helixX + Math.sin(phase1)*amplitude;
+      const x2 = helixX + Math.sin(phase2)*amplitude;
+      const colorIndex = Math.floor(((y+t*30)%(wavelength*colors.length))/wavelength) % colors.length;
+      const col = colors[colorIndex];
+      const alpha = 0.3 + 0.2*Math.abs(Math.sin(phase1));
+
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = col;
+      ctx.beginPath(); ctx.arc(x1,y,2,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle = colors[(colorIndex+6)%12];
+      ctx.beginPath(); ctx.arc(x2,y,2,0,Math.PI*2); ctx.fill();
+
+      // Cross-links
+      if(Math.round(y)%40 === 0){
+        ctx.strokeStyle = col;
+        ctx.globalAlpha = 0.15;
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(x1,y); ctx.lineTo(x2,y); ctx.stroke();
+      }
+    }
+
+    // DNA on right side (mirrored)
+    const helixX2 = W - 40;
+    for(let y=0;y<H+wavelength;y+=2){
+      const phase1 = (y/wavelength)*Math.PI*2 - t*2;
+      const phase2 = phase1 + Math.PI;
+      const x1 = helixX2 + Math.sin(phase1)*amplitude;
+      const x2 = helixX2 + Math.sin(phase2)*amplitude;
+      const colorIndex = Math.floor(((y+t*30)%(wavelength*colors.length))/wavelength) % colors.length;
+      const col = colors[(colorIndex+3)%12];
+      ctx.globalAlpha = 0.25 + 0.15*Math.abs(Math.sin(phase1));
+      ctx.fillStyle = col;
+      ctx.beginPath(); ctx.arc(x1,y,1.5,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle = colors[(colorIndex+9)%12];
+      ctx.beginPath(); ctx.arc(x2,y,1.5,0,Math.PI*2); ctx.fill();
+    }
+
+    ctx.globalAlpha=1;
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize',resize);
+  resize(); draw();
+})();
+</script>
+
+</body>
+</html>

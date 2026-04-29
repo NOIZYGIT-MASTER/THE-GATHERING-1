@@ -1,0 +1,32 @@
+{
+  "name": "noizy-cb01-router",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-04-17",
+  "workers_dev": false,
+
+  "routes": [
+    { "pattern": "api.noizy.ai/route/*",  "zone_name": "noizy.ai" },
+    { "pattern": "api.noizy.ai/agents/*", "zone_name": "noizy.ai" },
+    { "pattern": "api.noizy.ai/status",   "zone_name": "noizy.ai" }
+  ],
+
+  "kv_namespaces": [
+    { "binding": "KV_CONFIG",    "id": "2a5acde115a54c8c806d0d7780556d73" },
+    { "binding": "FEATURE_FLAGS","id": "bf944d9a307249289565144a569a1de8" }
+  ],
+
+  "d1_databases": [
+    {
+      "binding": "AGENT_MEMORY",
+      "database_name": "agent-memory",
+      "database_id": "b5b58cc9-1f37-4000-adc5-12f9e419662f"
+    }
+  ],
+
+  "vars": {
+    "SERVICE_ROLE": "ROUTER",
+    "AGENT_COUNT": "8"
+  },
+
+  "observability": { "enabled": true }
+}
