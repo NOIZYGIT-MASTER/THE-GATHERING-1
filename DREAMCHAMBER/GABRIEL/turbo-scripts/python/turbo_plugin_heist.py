@@ -17,8 +17,47 @@ TARGET_EXTENSIONS = {
     ".dmg", ".pkg", ".iso", ".zip", ".rar", ".7z"
 }
 
+LOCAL_PLUGIN_VAULT = Path.home() / "NOIZY_AI" / "_MEDIA_VAULT" / "NOIZYLAB_LIBRARIES" / "_PLUGINS"
+
+
+def resolve_media_drive() -> Path | None:
+    """Resolve active media drive without depending on the legacy rp@fishmusicinc.com mount."""
+    env_path = os.environ.get("NOIZY_MEDIA_DRIVE")
+    if env_path:
+        candidate = Path(os.path.expanduser(env_path))
+        if candidate.exists():
+            return candidate
+        print(f"⚠️  NOIZY_MEDIA_DRIVE is set but missing: {candidate}")
+
+    candidates = [
+        Path.home() / "Library/CloudStorage/GoogleDrive-rsplowman@icloud.com/My Drive",
+        Path.home() / "Library/CloudStorage/GoogleDrive-rsp@fishmusicinc.com/My Drive",
+        Path.home() / "Library/CloudStorage/GoogleDrive-rsp@noizy.ai/My Drive",
+    ]
+
+    if os.environ.get("NOIZY_ALLOW_LEGACY_RP_DRIVE") == "1":
+        candidates.append(Path.home() / "Library/CloudStorage/GoogleDrive-rp@fishmusicinc.com/My Drive")
+
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+
+    return None
+
+
+def resolve_vault_root() -> Path:
+    drive = resolve_media_drive()
+    if drive:
+        return drive / "NOIZYLAB_LIBRARIES" / "_PLUGINS"
+    print("⚠️  No active cloud media drive found. Using local plugin vault.")
+    print("   Set NOIZY_MEDIA_DRIVE to override.")
+    print("   Legacy rp@fishmusicinc.com mount is ignored unless NOIZY_ALLOW_LEGACY_RP_DRIVE=1.")
+    return LOCAL_PLUGIN_VAULT
+
+
 # The Vault (Destination)
-VAULT_ROOT = Path(os.path.expanduser("~/Library/CloudStorage/GoogleDrive-rp@fishmusicinc.com/My Drive/NOIZYLAB_LIBRARIES/_PLUGINS"))
+VAULT_ROOT = resolve_vault_root()
+
 
 def scan_for_loot(source_roots):
     print("🕵️‍♂️  SCOUTING FOR LOOT (PLUGINS)...")
@@ -41,6 +80,7 @@ def scan_for_loot(source_roots):
                 
     print(f"💎 FOUND {len(loot)} POTENTIAL ASSETS.")
     return loot
+
 
 def execute_heist(loot):
     if not loot:
@@ -83,6 +123,7 @@ def execute_heist(loot):
     print(f"   Total Value: {size_mb:.1f} MB")
     print("-" * 40)
 
+
 def main():
     # Candidates for source scanning
     # We expect arguments or defaults
@@ -91,9 +132,9 @@ def main():
     if len(sys.argv) > 1:
         sources = sys.argv[1:]
     else:
-        # Default Auto-Scan locations based on previous recon
-        # These will be updated dynamically by the agent if needed
-        base_fish = os.path.expanduser("~/Library/CloudStorage/GoogleDrive-rp@fishmusicinc.com/My Drive")
+        # Default Auto-Scan locations based on current identity map.
+        # Override cloud storage with NOIZY_MEDIA_DRIVE when needed.
+        base_fish = str(resolve_media_drive() or LOCAL_PLUGIN_VAULT.parent)
         base_rsp = os.path.expanduser("~/Library/CloudStorage/GoogleDrive-rsplowman@icloud.com/My Drive")
         sources = [base_fish, base_rsp]
 
@@ -106,3 +147,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

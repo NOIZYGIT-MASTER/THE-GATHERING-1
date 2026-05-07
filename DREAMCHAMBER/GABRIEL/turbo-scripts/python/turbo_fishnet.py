@@ -28,9 +28,40 @@ TARGET_EXTENSIONS = {
 }
 ARCHIVE_ROOT = Path("/Volumes/HP-OMEN/ARCHIVE") # Default if mounted
 LOCAL_ARCHIVE = Path.home() / "NOIZYANTHROPIC" / "NOIZYLAB" / "_ARCHIVE"
+LOCAL_MEDIA_VAULT = Path.home() / "NOIZY_AI" / "_MEDIA_VAULT"
+
+
+def resolve_media_drive() -> Path | None:
+    """Resolve the media drive without depending on the legacy rp@fishmusicinc.com mount."""
+    env_path = os.environ.get("NOIZY_MEDIA_DRIVE")
+    if env_path:
+        candidate = Path(os.path.expanduser(env_path))
+        if candidate.exists():
+            return candidate
+        print(f"⚠️  NOIZY_MEDIA_DRIVE is set but missing: {candidate}")
+
+    candidates = [
+        Path.home() / "Library/CloudStorage/GoogleDrive-rsplowman@icloud.com/My Drive",
+        Path.home() / "Library/CloudStorage/GoogleDrive-rsp@fishmusicinc.com/My Drive",
+        Path.home() / "Library/CloudStorage/GoogleDrive-rsp@noizy.ai/My Drive",
+    ]
+
+    if os.environ.get("NOIZY_ALLOW_LEGACY_RP_DRIVE") == "1":
+        candidates.extend([
+            Path.home() / "Library/CloudStorage/GoogleDrive-rp@fishmusicinc.com/My Drive",
+            Path.home() / "Library/CloudStorage/GoogleDrive-rp@fishmusicinc.com/Shared Drives",
+        ])
+
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+
+    return None
+
 
 def get_size_mb(path):
     return path.stat().st_size / (1024 * 1024)
+
 
 def _scan_one_dir(root_dir):
     """Scan a single directory for big media files."""
@@ -48,6 +79,7 @@ def _scan_one_dir(root_dir):
             except OSError:
                 pass
     return hits
+
 
 def scan_ocean():
     print("🌊 CASTING THE GLOBAL FISHNET (PARALLEL)...")
@@ -70,6 +102,7 @@ def scan_ocean():
     print(f"⚖️  TOTAL WEIGHT: {total_size:.1f} MB")
     print("-" * 40)
     return big_fish
+
 
 def archive_catch(fish_list):
     dest_root = ARCHIVE_ROOT if ARCHIVE_ROOT.exists() else LOCAL_ARCHIVE
@@ -95,6 +128,7 @@ def archive_catch(fish_list):
 
     print("✨ DECK CLEARED.")
 
+
 def install_cron():
     """Installs daily cron job at 4AM."""
     script_path = Path(__file__).resolve()
@@ -116,6 +150,7 @@ def install_cron():
         print("✅ FISHNET SCHEDULED: Daily @ 04:00 AM")
     else:
         print(f"❌ Cron Install Failed: {err}")
+
 
 def main():
     if len(sys.argv) > 1:
@@ -139,15 +174,14 @@ def main():
 
     # Backup Mode
     if "--backup-drive" in sys.argv:
-        # Detected Drive: GoogleDrive-rp@fishmusicinc.com
-        drive_path = Path(os.path.expanduser("~/Library/CloudStorage/GoogleDrive-rp@fishmusicinc.com/My Drive"))
-        if not drive_path.exists():
-             # Fallback to Shared Drives if My Drive missing (Enterprise)
-             drive_path = Path(os.path.expanduser("~/Library/CloudStorage/GoogleDrive-rp@fishmusicinc.com/Shared Drives"))
-        
-        if not drive_path.exists():
-            print(f"❌ DRIVE NOT FOUND AT: {drive_path}")
-            return
+        drive_path = resolve_media_drive()
+        if not drive_path:
+            print("❌ MEDIA DRIVE NOT FOUND.")
+            print("   Set NOIZY_MEDIA_DRIVE to the active vault path, for example:")
+            print("   export NOIZY_MEDIA_DRIVE=\"~/Library/CloudStorage/GoogleDrive-rsplowman@icloud.com/My Drive\"")
+            print("   Legacy rp@fishmusicinc.com mount is ignored unless NOIZY_ALLOW_LEGACY_RP_DRIVE=1.")
+            print(f"   Local fallback available: {LOCAL_MEDIA_VAULT}")
+            drive_path = LOCAL_MEDIA_VAULT
 
         dest = drive_path / "NOIZYLAB_LIBRARIES"
         print(f"♾️  INFINITE BACKUP STARTED.")
@@ -164,6 +198,7 @@ def main():
 
     scan_ocean()
     print("\nOptions: --archive (Move files), --install-cron (Schedule daily), --kontakt-only (Kontakt Analysis), --backup-drive (Google Drive Sync)")
+
 
 def archive_catch_to_drive(fish_list, dest_root):
     dest_root.mkdir(parents=True, exist_ok=True)
@@ -189,3 +224,4 @@ def archive_catch_to_drive(fish_list, dest_root):
 
 if __name__ == "__main__":
     main()
+
