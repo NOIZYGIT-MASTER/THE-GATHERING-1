@@ -4,68 +4,100 @@ turbo_fishnet.py
 The Global Fishnet.
 Scans the universe for Heavy Media ("Big Fish") effectively.
 Daily Catch Protocol.
+
+Identity rule:
+- Canonical FISHMUSICINC contact: rsp@fishmusicinc.com
+- Legacy alias: rp@fishmusicinc.com (audit-only)
+- Legacy GoogleDrive-rp@fishmusicinc.com mount is disabled unless NOIZY_ALLOW_LEGACY_RP_DRIVE=1
 """
-import os
-import sys
-import shutil
+from __future__ import annotations
+
+import argparse
 import datetime
+import json
+import os
+import shutil
 import subprocess
-from pathlib import Path
+import sys
 from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
+from typing import Iterable, Optional
 
 # Configuration
 SEARCH_DIRS = [
     Path.home() / "NOIZYANTHROPIC" / "NOIZYLAB",
-    Path.home() / "Documents/PROJECTS"
+    Path.home() / "Documents" / "PROJECTS",
 ]
 TARGET_EXTENSIONS = {
-    ".nki", ".nkm", ".nkc", ".nicnt", # Kontakt
-    ".nkx", ".ncw",                   # Kontakt Samples
-    ".wav", ".aif", ".aiff", ".flac", # Audio
-    ".mp4", ".mov", ".mkv", ".avi",   # Video
-    ".dmg", ".iso", ".img",           # Disk Images
-    ".logicx", ".zip", ".tar.gz"      # Archives/Projects
+    ".nki", ".nkm", ".nkc", ".nicnt",  # Kontakt
+    ".nkx", ".ncw",                    # Kontakt Samples
+    ".wav", ".aif", ".aiff", ".flac",  # Audio
+    ".mp4", ".mov", ".mkv", ".avi",    # Video
+    ".dmg", ".iso", ".img",            # Disk Images
+    ".logicx", ".zip", ".tar.gz",       # Archives/Projects
 }
-ARCHIVE_ROOT = Path("/Volumes/HP-OMEN/ARCHIVE") # Default if mounted
+ARCHIVE_ROOT = Path("/Volumes/HP-OMEN/ARCHIVE")
 LOCAL_ARCHIVE = Path.home() / "NOIZYANTHROPIC" / "NOIZYLAB" / "_ARCHIVE"
 LOCAL_MEDIA_VAULT = Path.home() / "NOIZY_AI" / "_MEDIA_VAULT"
+RECEIPT_FILE = Path(os.environ.get("NOIZY_RECEIPT_FILE", str(Path.home() / "NOIZY_AI" / "_RECEIPTS" / "fishnet.jsonl")))
 
 
-def resolve_media_drive() -> Path | None:
-    """Resolve the media drive without depending on the legacy rp@fishmusicinc.com mount."""
+def expand(path: str) -> Path:
+    return Path(os.path.expanduser(path))
+
+
+def media_drive_candidates() -> Iterable[Path]:
     env_path = os.environ.get("NOIZY_MEDIA_DRIVE")
     if env_path:
-        candidate = Path(os.path.expanduser(env_path))
-        if candidate.exists():
-            return candidate
-        print(f"⚠️  NOIZY_MEDIA_DRIVE is set but missing: {candidate}")
+        yield expand(env_path)
 
-    candidates = [
-        Path.home() / "Library/CloudStorage/GoogleDrive-rsplowman@icloud.com/My Drive",
-        Path.home() / "Library/CloudStorage/GoogleDrive-rsp@fishmusicinc.com/My Drive",
-        Path.home() / "Library/CloudStorage/GoogleDrive-rsp@noizy.ai/My Drive",
-    ]
+    yield Path.home() / "Library/CloudStorage/GoogleDrive-rsplowman@icloud.com/My Drive"
+    yield Path.home() / "Library/CloudStorage/GoogleDrive-rsp@fishmusicinc.com/My Drive"
+    yield Path.home() / "Library/CloudStorage/GoogleDrive-rsp@noizy.ai/My Drive"
+    yield LOCAL_MEDIA_VAULT
 
     if os.environ.get("NOIZY_ALLOW_LEGACY_RP_DRIVE") == "1":
-        candidates.extend([
-            Path.home() / "Library/CloudStorage/GoogleDrive-rp@fishmusicinc.com/My Drive",
-            Path.home() / "Library/CloudStorage/GoogleDrive-rp@fishmusicinc.com/Shared Drives",
-        ])
+        yield Path.home() / "Library/CloudStorage/GoogleDrive-rp@fishmusicinc.com/My Drive"
+        yield Path.home() / "Library/CloudStorage/GoogleDrive-rp@fishmusicinc.com/Shared Drives"
 
-    for candidate in candidates:
+
+def resolve_media_drive(explicit: Optional[str] = None) -> Path:
+    if explicit:
+        candidate = expand(explicit)
+        if candidate.exists():
+            return candidate
+        print(f"⚠️  Explicit drive path missing, using fallback: {candidate}")
+
+    for candidate in media_drive_candidates():
         if candidate.exists():
             return candidate
 
-    return None
+    LOCAL_MEDIA_VAULT.mkdir(parents=True, exist_ok=True)
+    return LOCAL_MEDIA_VAULT
 
 
-def get_size_mb(path):
+def emit_receipt(action: str, status: str, **extra: object) -> None:
+    RECEIPT_FILE.parent.mkdir(parents=True, exist_ok=True)
+    payload = {
+        "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        "tool": "turbo_fishnet.py",
+        "action": action,
+        "status": status,
+        "canonical_contact": "rsp@fishmusicinc.com",
+        "legacy_alias": "rp@fishmusicinc.com",
+        "legacy_drive_enabled": os.environ.get("NOIZY_ALLOW_LEGACY_RP_DRIVE") == "1",
+        **extra,
+    }
+    with RECEIPT_FILE.open("a", encoding="utf-8") as fh:
+        fh.write(json.dumps(payload, ensure_ascii=False) + "\n")
+
+
+def get_size_mb(path: Path) -> float:
     return path.stat().st_size / (1024 * 1024)
 
 
-def _scan_one_dir(root_dir):
-    """Scan a single directory for big media files."""
-    hits = []
+def _scan_one_dir(root_dir: Path, min_mb: float) -> list[tuple[Path, float]]:
+    hits: list[tuple[Path, float]] = []
     if not root_dir.exists():
         return hits
     for path in root_dir.rglob("*"):
@@ -74,23 +106,24 @@ def _scan_one_dir(root_dir):
                 continue
             try:
                 size = get_size_mb(path)
-                if size > 10:
+                if size > min_mb:
                     hits.append((path, size))
             except OSError:
                 pass
     return hits
 
 
-def scan_ocean():
+def scan_ocean(min_mb: float = 10.0) -> list[tuple[Path, float]]:
     print("🌊 CASTING THE GLOBAL FISHNET (PARALLEL)...")
-    print(f"   Targets: {', '.join(TARGET_EXTENSIONS)}")
-    
-    big_fish = []
-    total_size = 0
-    
-    with ThreadPoolExecutor(max_workers=len(SEARCH_DIRS)) as pool:
-        results = pool.map(_scan_one_dir, SEARCH_DIRS)
-    
+    print(f"   Targets: {', '.join(sorted(TARGET_EXTENSIONS))}")
+    print(f"   Min size: {min_mb:.1f} MB")
+
+    big_fish: list[tuple[Path, float]] = []
+    total_size = 0.0
+
+    with ThreadPoolExecutor(max_workers=max(1, len(SEARCH_DIRS))) as pool:
+        results = pool.map(lambda root: _scan_one_dir(root, min_mb), SEARCH_DIRS)
+
     for hits in results:
         for path, size in hits:
             big_fish.append((path, size))
@@ -101,127 +134,123 @@ def scan_ocean():
     print(f"🦈 TOTAL CATCH: {len(big_fish)} Fish")
     print(f"⚖️  TOTAL WEIGHT: {total_size:.1f} MB")
     print("-" * 40)
+    emit_receipt("scan", "ok", count=len(big_fish), total_mb=round(total_size, 2))
     return big_fish
 
 
-def archive_catch(fish_list):
+def archive_catch(fish_list: list[tuple[Path, float]], dry_run: bool = False) -> None:
     dest_root = ARCHIVE_ROOT if ARCHIVE_ROOT.exists() else LOCAL_ARCHIVE
     dest_root.mkdir(parents=True, exist_ok=True)
-    
+
     print(f"📦 ARCHIVING TO: {dest_root}")
-    
-    for fish, size in fish_list:
-        # Create relative structure in archive
+
+    moved = 0
+    for fish, _size in fish_list:
         try:
             rel_path = fish.relative_to(Path.home())
         except ValueError:
-            rel_path = fish.name
-            
+            rel_path = Path(fish.name)
+
         dest_path = dest_root / rel_path
         dest_path.parent.mkdir(parents=True, exist_ok=True)
-        
+
         print(f"   -> Moving {fish.name}...")
+        if dry_run:
+            continue
         try:
             shutil.move(str(fish), str(dest_path))
-        except Exception as e:
+            moved += 1
+        except Exception as e:  # noqa: BLE001
             print(f"   ❌ FAILED to move {fish.name}: {e}")
 
+    emit_receipt("archive", "ok", moved=moved, dry_run=dry_run, destination=str(dest_root))
     print("✨ DECK CLEARED.")
 
 
-def install_cron():
-    """Installs daily cron job at 4AM."""
+def install_cron() -> None:
     script_path = Path(__file__).resolve()
-    # Cron line: 0 4 * * * /usr/bin/python3 /path/to/script.py --scan >> /path/to/log
     cron_cmd = f"0 4 * * * /usr/bin/python3 {script_path} --scan >> {Path.home()}/NOIZYANTHROPIC/NOIZYLAB/logs/fishnet.log 2>&1"
-    
-    # Check if exists
+
     current_cron = subprocess.run(["crontab", "-l"], capture_output=True, text=True).stdout
     if str(script_path) in current_cron:
         print("✅ Fishnet Cron already active.")
+        emit_receipt("install-cron", "already_active")
         return
 
-    # Add
     new_cron = current_cron + "\n" + cron_cmd + "\n"
     proc = subprocess.Popen(["crontab", "-"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    out, err = proc.communicate(input=new_cron)
-    
+    _out, err = proc.communicate(input=new_cron)
+
     if proc.returncode == 0:
         print("✅ FISHNET SCHEDULED: Daily @ 04:00 AM")
+        emit_receipt("install-cron", "ok")
     else:
         print(f"❌ Cron Install Failed: {err}")
+        emit_receipt("install-cron", "failed", error=err)
 
 
-def main():
-    if len(sys.argv) > 1:
-        if "--archive" in sys.argv:
-            fish = scan_ocean()
-            archive_catch(fish)
-            return
-        if "--install-cron" in sys.argv:
-            install_cron()
-            return
-            
-    # Configuration Updates for Kontakt Mode
-    if "--kontakt-only" in sys.argv:
-        print("🎹 KONTAKT MODE ENGAGED. Scanning for Instruments & Samples...")
-        # Override extensions for Kontakt ecosystem
-        global TARGET_EXTENSIONS
-        TARGET_EXTENSIONS = {
-            ".nki", ".nkm", ".nkc", ".nicnt", # Instruments/Banks
-            ".nkx", ".ncw", ".wav", ".aif"    # Samples (Compressed/Uncompressed)
-        }
-
-    # Backup Mode
-    if "--backup-drive" in sys.argv:
-        drive_path = resolve_media_drive()
-        if not drive_path:
-            print("❌ MEDIA DRIVE NOT FOUND.")
-            print("   Set NOIZY_MEDIA_DRIVE to the active vault path, for example:")
-            print("   export NOIZY_MEDIA_DRIVE=\"~/Library/CloudStorage/GoogleDrive-rsplowman@icloud.com/My Drive\"")
-            print("   Legacy rp@fishmusicinc.com mount is ignored unless NOIZY_ALLOW_LEGACY_RP_DRIVE=1.")
-            print(f"   Local fallback available: {LOCAL_MEDIA_VAULT}")
-            drive_path = LOCAL_MEDIA_VAULT
-
-        dest = drive_path / "NOIZYLAB_LIBRARIES"
-        print(f"♾️  INFINITE BACKUP STARTED.")
-        print(f"   Destination: {dest}")
-        
-        # We start by scanning to find the fish
-        fish_list = scan_ocean()
-        
-        # Then we copy them preserving structure using rsync logic (simulated via python)
-        # Actually, for 100% Sync, rsync is better if we just sync the folders containing them.
-        # But to follow "Fishnet" logic (selective), we copy specific files.
-        archive_catch_to_drive(fish_list, dest)
-        return
-
-    scan_ocean()
-    print("\nOptions: --archive (Move files), --install-cron (Schedule daily), --kontakt-only (Kontakt Analysis), --backup-drive (Google Drive Sync)")
-
-
-def archive_catch_to_drive(fish_list, dest_root):
+def archive_catch_to_drive(fish_list: list[tuple[Path, float]], dest_root: Path, dry_run: bool = False) -> None:
     dest_root.mkdir(parents=True, exist_ok=True)
     count = 0
     for fish, size in fish_list:
         try:
             rel_path = fish.relative_to(Path.home())
         except ValueError:
-            rel_path = fish.name
-        
+            rel_path = Path(fish.name)
+
         target = dest_root / rel_path
         target.parent.mkdir(parents=True, exist_ok=True)
-        
+
         if not target.exists() or target.stat().st_size != fish.stat().st_size:
             print(f"   📤 UPLOADING: {fish.name} ({size:.1f} MB)...")
-            shutil.copy2(str(fish), str(target))
+            if not dry_run:
+                shutil.copy2(str(fish), str(target))
             count += 1
-        else:
-            # print(f"   ✅ SKIPPING: {fish.name} (Already Synced)")
-            pass
-            
-    print(f"✨ BACKUP COMPLETE. {count} Files Uploaded.")
+
+    emit_receipt("backup-drive", "ok", uploaded=count, dry_run=dry_run, destination=str(dest_root))
+    print(f"✨ BACKUP COMPLETE. {count} Files {'Would Upload' if dry_run else 'Uploaded'}.")
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="NOIZY fishnet media scanner/backer-upper")
+    parser.add_argument("--archive", action="store_true", help="move found media into archive")
+    parser.add_argument("--install-cron", action="store_true", help="install daily cron job")
+    parser.add_argument("--kontakt-only", action="store_true", help="scan Kontakt-related formats only")
+    parser.add_argument("--backup-drive", action="store_true", help="copy found media to resolved media drive")
+    parser.add_argument("--drive", help="explicit media drive path for this run")
+    parser.add_argument("--min-mb", type=float, default=10.0, help="minimum file size in MB")
+    parser.add_argument("--dry-run", action="store_true", help="show actions without moving/copying")
+    return parser.parse_args()
+
+
+def main() -> None:
+    global TARGET_EXTENSIONS
+    args = parse_args()
+
+    if args.install_cron:
+        install_cron()
+        return
+
+    if args.kontakt_only:
+        print("🎹 KONTAKT MODE ENGAGED. Scanning for Instruments & Samples...")
+        TARGET_EXTENSIONS = {".nki", ".nkm", ".nkc", ".nicnt", ".nkx", ".ncw", ".wav", ".aif"}
+
+    fish = scan_ocean(min_mb=args.min_mb)
+
+    if args.archive:
+        archive_catch(fish, dry_run=args.dry_run)
+        return
+
+    if args.backup_drive:
+        drive_path = resolve_media_drive(args.drive)
+        dest = drive_path / "NOIZYLAB_LIBRARIES"
+        print("♾️  INFINITE BACKUP STARTED.")
+        print(f"   Destination: {dest}")
+        archive_catch_to_drive(fish, dest, dry_run=args.dry_run)
+        return
+
+    print("\nOptions: --archive, --install-cron, --kontakt-only, --backup-drive, --drive PATH, --min-mb N, --dry-run")
+
 
 if __name__ == "__main__":
     main()
-

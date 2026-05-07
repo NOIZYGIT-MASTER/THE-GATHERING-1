@@ -11,81 +11,110 @@ set -euo pipefail
 # To intentionally allow it for one run:
 #   export NOIZY_ALLOW_LEGACY_RP_DRIVE=1
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=AGENTS/lib/noizy-media-drive.sh
+source "$SCRIPT_DIR/lib/noizy-media-drive.sh"
+
 NOIZYLAB="${NOIZYLAB_ROOT:-/Users/m2ultra/NOIZYLAB}"
-LOCAL_FALLBACK="${HOME}/NOIZY_AI/_MEDIA_VAULT"
+MEDIA_DRIVE="$(noizy_resolve_media_drive)"
+GDRIVE="$MEDIA_DRIVE/NOIZYLAB_MEDIA"
+RECEIPT_DIR="${NOIZY_RECEIPT_DIR:-$HOME/NOIZY_AI/_RECEIPTS}"
+RECEIPT_FILE="$RECEIPT_DIR/media-sync.jsonl"
+RSYNC_FLAGS=(-avh --progress)
 
-resolve_media_drive() {
-  if [[ -n "${NOIZY_MEDIA_DRIVE:-}" ]]; then
-    local expanded="${NOIZY_MEDIA_DRIVE/#\~/$HOME}"
-    if [[ -d "$expanded" ]]; then
-      echo "$expanded"
-      return 0
-    fi
-    echo "⚠️  NOIZY_MEDIA_DRIVE is set but missing: $expanded" >&2
-  fi
+if [[ "${NOIZY_DRY_RUN:-}" == "1" ]]; then
+  RSYNC_FLAGS+=(--dry-run)
+fi
 
-  local candidates=(
-    "$HOME/Library/CloudStorage/GoogleDrive-rsplowman@icloud.com/My Drive"
-    "$HOME/Library/CloudStorage/GoogleDrive-rsp@fishmusicinc.com/My Drive"
-    "$HOME/Library/CloudStorage/GoogleDrive-rsp@noizy.ai/My Drive"
-  )
+mkdir -p "$GDRIVE/Audio" "$GDRIVE/Video" "$NOIZYLAB/media" "$RECEIPT_DIR"
 
-  if [[ "${NOIZY_ALLOW_LEGACY_RP_DRIVE:-}" == "1" ]]; then
-    candidates+=(
-      "$HOME/Library/CloudStorage/GoogleDrive-rp@fishmusicinc.com/My Drive"
-      "$HOME/Library/CloudStorage/GoogleDrive-rp@fishmusicinc.com/Shared Drives"
-    )
-  fi
-
-  for candidate in "${candidates[@]}"; do
-    if [[ -d "$candidate" ]]; then
-      echo "$candidate"
-      return 0
-    fi
-  done
-
-  echo "$LOCAL_FALLBACK"
+emit_receipt() {
+  local action="$1"
+  local status="$2"
+  python3 - <<PY >> "$RECEIPT_FILE"
+import json, os, datetime
+print(json.dumps({
+  "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+  "tool": "AGENTS/sync-media.sh",
+  "action": "$action",
+  "status": "$status",
+  "source": "$NOIZYLAB",
+  "target": "$GDRIVE",
+  "dry_run": os.environ.get("NOIZY_DRY_RUN") == "1",
+  "canonical_contact": "rsp@fishmusicinc.com",
+  "legacy_alias": "rp@fishmusicinc.com",
+  "legacy_drive_enabled": os.environ.get("NOIZY_ALLOW_LEGACY_RP_DRIVE") == "1",
+}, ensure_ascii=False))
+PY
 }
 
-MEDIA_DRIVE="$(resolve_media_drive)"
-GDRIVE="$MEDIA_DRIVE/NOIZYLAB_MEDIA"
+print_header() {
+  echo "🎵 NOIZYLAB Media Sync"
+  echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+  echo "Source: $NOIZYLAB"
+  echo "Target: $GDRIVE"
+  noizy_print_media_identity
+  if [[ "${NOIZY_DRY_RUN:-}" == "1" ]]; then
+    echo "Mode: DRY RUN"
+  fi
+  echo ""
+}
 
-mkdir -p "$GDRIVE/Audio" "$GDRIVE/Video" "$NOIZYLAB/media"
+require_source() {
+  if [[ ! -d "$NOIZYLAB" ]]; then
+    echo "❌ Source missing: $NOIZYLAB" >&2
+    emit_receipt "${1:-unknown}" "source_missing"
+    exit 2
+  fi
+}
 
-echo "🎵 NOIZYLAB Media Sync"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "Source: $NOIZYLAB"
-echo "Target: $GDRIVE"
-echo "Canonical contact: rsp@fishmusicinc.com"
-echo "Legacy alias: rp@fishmusicinc.com audit-only"
-echo ""
+print_header
 
 case "${1:-}" in
   push)
+    require_source push
     echo "📤 Pushing media to active media vault..."
-    rsync -avh --progress --include='*.wav' --include='*.mp3' --include='*.flac' \
+    rsync "${RSYNC_FLAGS[@]}" --include='*.wav' --include='*.mp3' --include='*.flac' \
           --include='*.aif' --include='*.aiff' --include='*.m4a' --include='*.ogg' \
           --include='*/' --exclude='*' "$NOIZYLAB/" "$GDRIVE/Audio/"
-    rsync -avh --progress --include='*.mov' --include='*.mp4' --include='*.avi' \
+    rsync "${RSYNC_FLAGS[@]}" --include='*.mov' --include='*.mp4' --include='*.avi' \
           --include='*.mkv' --include='*.webm' --include='*/' --exclude='*' \
           "$NOIZYLAB/" "$GDRIVE/Video/"
+    emit_receipt push ok
     echo "✅ Media pushed to active media vault"
     ;;
   pull)
     echo "📥 Pulling media from active media vault..."
-    rsync -avh --progress "$GDRIVE/" "$NOIZYLAB/media/"
+    rsync "${RSYNC_FLAGS[@]}" "$GDRIVE/" "$NOIZYLAB/media/"
+    emit_receipt pull ok
     echo "✅ Media pulled from active media vault"
     ;;
   status)
     echo "📊 NOIZYLAB_MEDIA:"
     du -sh "$GDRIVE"/* 2>/dev/null || echo "  (empty or not synced)"
+    emit_receipt status ok
+    ;;
+  doctor)
+    echo "🩺 Media sync doctor"
+    echo "Resolved media drive: $MEDIA_DRIVE"
+    echo "Resolved target: $GDRIVE"
+    echo "Receipt file: $RECEIPT_FILE"
+    echo "Candidates:"
+    noizy_media_candidates | sed 's/^/  - /'
+    emit_receipt doctor ok
     ;;
   *)
-    echo "Usage: $0 {push|pull|status}"
+    echo "Usage: $0 {push|pull|status|doctor}"
     echo ""
     echo "  push   - Send local audio/video to active media vault"
     echo "  pull   - Get audio/video from active media vault"
     echo "  status - Show active media vault stats"
+    echo "  doctor - Show resolved paths and identity state"
+    echo ""
+    echo "Environment:"
+    echo "  NOIZY_MEDIA_DRIVE=/path/to/active/drive"
+    echo "  NOIZY_DRY_RUN=1"
+    echo "  NOIZY_ALLOW_LEGACY_RP_DRIVE=1   # explicit legacy-only escape hatch"
     exit 1
     ;;
 esac
