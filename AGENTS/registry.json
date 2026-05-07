@@ -1,6 +1,11 @@
 {
-  "version": "1.0.0",
-  "updated": "2025-12-20",
+  "version": "1.0.1",
+  "updated": "2026-05-07",
+  "identity": {
+    "fishmusicinc_public_contact": "rsp@fishmusicinc.com",
+    "fishmusicinc_legacy_alias": "rp@fishmusicinc.com",
+    "legacy_alias_status": "audit-only; do not use as canonical mailbox"
+  },
   "agents": [
     {
       "id": "gabriel",
@@ -39,6 +44,15 @@
   },
   "storage": {
     "code": "https://github.com/NOIZYLAB-io/NOIZYLAB",
-    "media": "/Users/m2ultra/Library/CloudStorage/GoogleDrive-rp@fishmusicinc.com/My Drive/NOIZYLAB_MEDIA"
+    "media": "${NOIZY_MEDIA_DRIVE}/NOIZYLAB_MEDIA",
+    "media_resolution_order": [
+      "NOIZY_MEDIA_DRIVE",
+      "~/Library/CloudStorage/GoogleDrive-rsplowman@icloud.com/My Drive",
+      "~/Library/CloudStorage/GoogleDrive-rsp@fishmusicinc.com/My Drive",
+      "~/Library/CloudStorage/GoogleDrive-rsp@noizy.ai/My Drive",
+      "~/NOIZY_AI/_MEDIA_VAULT"
+    ],
+    "legacy_media_mount": "~/Library/CloudStorage/GoogleDrive-rp@fishmusicinc.com/My Drive",
+    "legacy_media_mount_policy": "disabled by default; only use with NOIZY_ALLOW_LEGACY_RP_DRIVE=1"
   }
 }

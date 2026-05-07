@@ -1,6 +1,7 @@
 # MC96ECOUNIVERSE - 100% AUDIT & ACTION PLAN
 ## GABRIEL ALMEIDA - Master System Report
 ### Generated: 2025-12-10
+### Remediated: 2026-05-07
 
 ---
 
@@ -14,7 +15,7 @@
 | Cloudflare R2 | ❌ 0% | Need to enable |
 | GitHub NOIZYLAB-io | ✅ 90% | 9 repos, need security audit |
 | GitHub Noizyfish | ✅ 80% | 3 repos |
-| Azure/MS365 | ❌ 0% | Need login with business account |
+| Azure/MS365 | ❌ 0% | Legacy only; verify before use |
 | Anthropic API | ✅ 100% | Using Claude Code |
 | Domains | ⚠️ 50% | Need DNS audit |
 | Email | ⚠️ 50% | Need SPF/DKIM/DMARC check |
@@ -79,23 +80,23 @@
 
 ---
 
-## 3. AZURE / MS365 - NEEDS SETUP ❌
+## 3. AZURE / MS365 - LEGACY AUDIT ONLY ⚠️
 
 ### Current State
 - Azure CLI: ✅ Installed (v2.81.0)
 - Login Status: ❌ Not authenticated
 
-### Required Accounts
+### Identity rule
 1. **rsplowman@outlook.com** - Personal Microsoft account
-2. **rp@fishmusicinc.com** - Business MS365 account (if exists)
+2. **rp@fishmusicinc.com** - Legacy/audit-only identity; do not treat as canonical mailbox unless explicitly restored
+3. **rsp@fishmusicinc.com** - Current public FISHMUSICINC contact
 
 ### Action Items
-- [ ] Login to Azure with `az login`
-- [ ] Check MS365 subscription status
-- [ ] Enable MFA for all accounts
-- [ ] Configure Conditional Access
-- [ ] Set up Azure Security Center
-- [ ] Review SharePoint/OneDrive security
+- [ ] Verify whether any MS365 tenant still exists before attempting login
+- [ ] If tenant exists, document custody/provider first
+- [ ] Do not restore `rp@fishmusicinc.com` as primary identity
+- [ ] Configure MFA only after custody is confirmed
+- [ ] Review SharePoint/OneDrive security only if tenant exists
 
 ---
 
@@ -103,7 +104,7 @@
 
 ### Known Domains
 - rsplowman.workers.dev (Cloudflare subdomain)
-- fishmusicinc.com (Business?)
+- fishmusicinc.com (FISHMUSICINC)
 - noizylab.com (To acquire?)
 
 ### Action Items
@@ -164,13 +165,13 @@
 - [x] Deploy Worker v4.0
 - [x] Sync GABRIEL to GitHub
 - [x] Create this audit document
-- [ ] Login to Azure
+- [ ] Verify whether Azure/MS365 tenant exists
 - [ ] Check email security
 
 ### This Week
 - [ ] Enable Cloudflare R2
 - [ ] Set up GitHub Actions
-- [ ] Configure MS365 security
+- [ ] Configure confirmed MS365/Google/iCloud security only after custody audit
 - [ ] Audit all DNS records
 - [ ] Sync GABRIEL to HP Omen
 
@@ -195,7 +196,7 @@ cd ~/NOIZYLAB/GABRIEL/workers/noizylab-main && wrangler deploy
 # Sync to GitHub
 cd ~/NOIZYLAB/GABRIEL && git add -A && git commit -m "sync" && git push
 
-# Azure login
+# Azure login only after tenant custody is confirmed
 az login --use-device-code
 
 # Check worker health
