@@ -1,0 +1,216 @@
+{
+  "mcpServers": {
+    "gabriel-mcp": {
+      "command": "node",
+      "args": [
+        "--env-file=/Users/m2ultra/NOIZYANTHROPIC/.env",
+        "/Users/m2ultra/NOIZYANTHROPIC/mcp/gabriel-mcp/index.js"
+      ],
+      "env": {
+        "GABRIEL_PORT": "9777",
+        "HEAVEN_URL": "https://heaven.rsp-5f3.workers.dev",
+        "NOIZY_EMPIRE_ROOT": "/Users/m2ultra/NOIZYANTHROPIC"
+      }
+    },
+    "lucy-mcp": {
+      "command": "node",
+      "args": [
+        "--env-file=/Users/m2ultra/NOIZYANTHROPIC/.env",
+        "/Users/m2ultra/NOIZYANTHROPIC/mcp/lucy-mcp/index.js"
+      ],
+      "env": {
+        "GABRIEL_PORT": "9777",
+        "HEAVEN_URL": "https://heaven.rsp-5f3.workers.dev",
+        "NOIZY_EMPIRE_ROOT": "/Users/m2ultra/NOIZYANTHROPIC"
+      }
+    },
+    "heaven-mcp": {
+      "command": "node",
+      "args": [
+        "--env-file=/Users/m2ultra/NOIZYANTHROPIC/.env",
+        "/Users/m2ultra/NOIZYANTHROPIC/mcp/heaven-mcp/index.js"
+      ],
+      "env": {
+        "HEAVEN_WORKER_URL": "https://heaven.rsp-5f3.workers.dev",
+        "HEAVEN_WORKER_DIR": "/Users/m2ultra/NOIZYANTHROPIC/repos/noizy-heaven",
+        "NOIZY_EMPIRE_ROOT": "/Users/m2ultra/NOIZYANTHROPIC"
+      }
+    },
+    "voice-bridge": {
+      "command": "node",
+      "args": [
+        "--env-file=/Users/m2ultra/NOIZYANTHROPIC/.env",
+        "/Users/m2ultra/NOIZYANTHROPIC/mcp/voice-bridge/voice-bridge-server.mjs"
+      ],
+      "env": {
+        "GABRIEL_PORT": "9777",
+        "NOIZY_EMPIRE_ROOT": "/Users/m2ultra/NOIZYANTHROPIC"
+      }
+    },
+    "engr-keith-mcp": {
+      "command": "node",
+      "args": [
+        "--env-file=/Users/m2ultra/NOIZYANTHROPIC/.env",
+        "/Users/m2ultra/NOIZYANTHROPIC/mcp/engr-keith-mcp/index.js"
+      ],
+      "env": {
+        "HEAVEN_WORKER_URL": "https://heaven.rsp-5f3.workers.dev",
+        "NOIZY_EMPIRE_ROOT": "/Users/m2ultra/NOIZYANTHROPIC"
+      }
+    },
+    "dream-mcp": {
+      "command": "node",
+      "args": [
+        "--env-file=/Users/m2ultra/NOIZYANTHROPIC/.env",
+        "/Users/m2ultra/NOIZYANTHROPIC/mcp/dream-mcp/index.js"
+      ],
+      "env": {
+        "GABRIEL_PORT": "9777",
+        "DREAMCHAMBER_PORT": "7777",
+        "NOIZY_EMPIRE_ROOT": "/Users/m2ultra/NOIZYANTHROPIC"
+      }
+    },
+    "cb01-mcp": {
+      "command": "node",
+      "args": [
+        "--env-file=/Users/m2ultra/NOIZYANTHROPIC/.env",
+        "/Users/m2ultra/NOIZYANTHROPIC/mcp/cb01-mcp/index.js"
+      ],
+      "env": {
+        "HEAVEN_WORKER_URL": "https://heaven.rsp-5f3.workers.dev",
+        "NOIZY_EMPIRE_ROOT": "/Users/m2ultra/NOIZYANTHROPIC"
+      }
+    },
+    "shirley-mcp": {
+      "command": "node",
+      "args": [
+        "--env-file=/Users/m2ultra/NOIZYANTHROPIC/.env",
+        "/Users/m2ultra/NOIZYANTHROPIC/mcp/shirley-mcp/index.js"
+      ],
+      "env": {
+        "NOIZY_EMPIRE_ROOT": "/Users/m2ultra/NOIZYANTHROPIC",
+        "OLLAMA_PORT": "11434"
+      }
+    },
+    "family-mcp": {
+      "command": "node",
+      "args": [
+        "--env-file=/Users/m2ultra/NOIZYANTHROPIC/.env",
+        "/Users/m2ultra/NOIZYANTHROPIC/mcp/family-mcp/index.js"
+      ],
+      "env": {
+        "GABRIEL_PORT": "9777",
+        "HEAVEN_URL": "https://heaven.rsp-5f3.workers.dev",
+        "NOIZY_EMPIRE_ROOT": "/Users/m2ultra/NOIZYANTHROPIC"
+      }
+    },
+    "shortcuts-mcp": {
+      "command": "node",
+      "args": [
+        "--env-file=/Users/m2ultra/NOIZYANTHROPIC/.env",
+        "/Users/m2ultra/NOIZYANTHROPIC/mcp/shortcuts-mcp/dist/index.js"
+      ],
+      "env": {
+        "NOIZY_EMPIRE_ROOT": "/Users/m2ultra/NOIZYANTHROPIC"
+      }
+    },
+    "consent-oracle": {
+      "command": "node",
+      "args": [
+        "--env-file=/Users/m2ultra/NOIZYANTHROPIC/.env",
+        "/Users/m2ultra/NOIZYANTHROPIC/mcp/consent-oracle/src/server.js"
+      ],
+      "env": {
+        "HEAVEN_WORKER_URL": "https://heaven.rsp-5f3.workers.dev",
+        "NOIZY_EMPIRE_ROOT": "/Users/m2ultra/NOIZYANTHROPIC"
+      }
+    },
+    "synthesis-oracle": {
+      "command": "node",
+      "args": [
+        "--env-file=/Users/m2ultra/NOIZYANTHROPIC/.env",
+        "/Users/m2ultra/NOIZYANTHROPIC/mcp/synthesis-oracle/src/server.js"
+      ],
+      "env": {
+        "GABRIEL_PORT": "9777",
+        "NOIZY_EMPIRE_ROOT": "/Users/m2ultra/NOIZYANTHROPIC"
+      }
+    },
+    "audio-mcp": {
+      "command": "python3",
+      "args": [
+        "/Users/m2ultra/NOIZYANTHROPIC/mcp/dreamchamber-audio/server.py"
+      ],
+      "env": {
+        "GABRIEL_PORT": "9777",
+        "NOIZY_EMPIRE_ROOT": "/Users/m2ultra/NOIZYANTHROPIC"
+      }
+    },
+    "gemma3": {
+      "command": "node",
+      "args": [
+        "--env-file=/Users/m2ultra/NOIZYANTHROPIC/.env",
+        "/Users/m2ultra/NOIZYANTHROPIC/mcp/gemma3/server.js"
+      ],
+      "env": {
+        "OLLAMA_URL": "http://localhost:11434",
+        "GEMMA_MODEL": "gemma4:26b",
+        "NOIZYLAB_DIR": "/Users/m2ultra/NOIZYANTHROPIC",
+        "NOIZY_EMPIRE_ROOT": "/Users/m2ultra/NOIZYANTHROPIC"
+      }
+    },
+    "supersonic": {
+      "command": "node",
+      "args": [
+        "--env-file=/Users/m2ultra/NOIZYANTHROPIC/.env",
+        "/Users/m2ultra/NOIZYANTHROPIC/mcp/supersonic/src/index.js"
+      ],
+      "env": {
+        "HEAVEN_WORKER_URL": "https://heaven.rsp-5f3.workers.dev",
+        "NOIZY_EMPIRE_ROOT": "/Users/m2ultra/NOIZYANTHROPIC",
+        "OLLAMA_PORT": "11434"
+      }
+    },
+    "god-local-diag": {
+      "command": "node",
+      "args": [
+        "--env-file=/Users/m2ultra/NOIZYANTHROPIC/.env",
+        "/Users/m2ultra/NOIZYANTHROPIC/mcp/god-local-diag/server.mjs"
+      ],
+      "env": {
+        "GABRIEL_PORT": "9777",
+        "NOIZY_EMPIRE_ROOT": "/Users/m2ultra/NOIZYANTHROPIC"
+      }
+    },
+    "n8n-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "n8n-mcp@latest"
+      ],
+      "env": {
+        "N8N_API_URL": "http://localhost:5678",
+        "N8N_API_KEY": "${N8N_API_KEY}",
+        "MCP_MODE": "stdio",
+        "LOG_LEVEL": "error",
+        "DISABLE_CONSOLE_OUTPUT": "true",
+        "N8N_MCP_TELEMETRY_ENABLED": "false"
+      }
+    },
+    "markitdown": {
+      "command": "markitdown-mcp"
+    },
+    "scrapling": {
+      "command": "scrapling",
+      "args": [
+        "mcp"
+      ]
+    },
+    "mac-apps-mcp": {
+      "command": "node",
+      "args": [
+        "/Users/m2ultra/NOIZYANTHROPIC/mcp/mac-apps-mcp/index.js"
+      ]
+    }
+  }
+}

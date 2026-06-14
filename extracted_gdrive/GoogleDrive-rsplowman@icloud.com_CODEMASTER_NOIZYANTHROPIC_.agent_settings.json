@@ -1,0 +1,108 @@
+{
+  "workspace": {
+    "name": "NOIZYBEAST",
+    "description": "NOIZY Empire Super IDE — GABRIEL-led agent orchestration for consent-native AI development",
+    "version": "1.0.0"
+  },
+  "models": {
+    "primary": {
+      "provider": "anthropic",
+      "model": "claude-opus-4-6",
+      "label": "Opus 4.6 — Primary reasoning"
+    },
+    "local": {
+      "provider": "openai-compatible",
+      "endpoint": "http://localhost:11434/v1",
+      "model": "gemma3",
+      "apiKey": "ollama",
+      "label": "Gemma 3 27B (SHIRLEY) — Local agentic tasks"
+    },
+    "fast": {
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-6",
+      "label": "Sonnet 4.6 — Fast iteration"
+    }
+  },
+  "agents": [
+    {
+      "id": "gabriel",
+      "role": "Lead Orchestrator",
+      "model": "primary",
+      "active": true,
+      "autoStart": true,
+      "startPriority": 1,
+      "critical": true
+    },
+    {
+      "id": "lucy",
+      "role": "Session Organizer",
+      "model": "fast",
+      "active": true,
+      "autoStart": true,
+      "startPriority": 2,
+      "critical": true
+    },
+    {
+      "id": "engr_keith",
+      "role": "Technical Lead",
+      "model": "primary",
+      "active": true,
+      "autoStart": true,
+      "startPriority": 3
+    },
+    {
+      "id": "shirley",
+      "role": "Code & File Manager",
+      "model": "local",
+      "active": true,
+      "autoStart": true,
+      "startPriority": 4
+    },
+    {
+      "id": "cb01",
+      "role": "Ops Runner",
+      "model": "fast",
+      "active": true,
+      "autoStart": true,
+      "startPriority": 5
+    },
+    {
+      "id": "dream",
+      "role": "Visionary",
+      "model": "primary",
+      "active": true,
+      "autoStart": true,
+      "startPriority": 6
+    },
+    {
+      "id": "audio",
+      "role": "Voice Pipeline",
+      "model": "local",
+      "active": true,
+      "autoStart": true,
+      "startPriority": 7
+    }
+  ],
+  "services": {
+    "dreamchamber": "http://localhost:7777",
+    "heaven": "https://heaven.rsp-5f3.workers.dev",
+    "voiceBridge": "http://localhost:8080",
+    "ollama": "http://localhost:11434"
+  },
+  "boot": {
+    "enabled": true,
+    "launchAgent": "com.noizylab.gabriels-kingdom-agents",
+    "bootScript": "/Users/m2ultra/bin/noizy-empire-boot.sh",
+    "autoStart": true,
+    "checkInterval": 300,
+    "healthCheckUrl": "https://heaven.rsp-5f3.workers.dev/health",
+    "services": [
+      "ollama",
+      "redis",
+      "postgresql",
+      "gabriel-mcp",
+      "lucy-mcp",
+      "heaven-mcp"
+    ]
+  }
+}

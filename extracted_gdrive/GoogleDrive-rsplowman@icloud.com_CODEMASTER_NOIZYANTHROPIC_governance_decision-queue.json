@@ -1,0 +1,2790 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-06-02T11:00:10.142Z",
+  "decisions": [
+    {
+      "id": "38df2b88-b2e5-4dff-9494-9b95428d823a",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-04-02T19:58:27.614Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-04-02T19:58:27.614Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "496e7bd8-9c9e-4ffd-b258-d607aefbf70e",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-04-02T20:25:05.714Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-04-02T20:25:05.715Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "b3beb0df-be40-4f48-8031-ca128c0d13e1",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-04-02T20:44:51.837Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-04-02T20:44:51.838Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "29367699-c069-4beb-af2d-694dd527890a",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-04-02T20:54:42.917Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-04-02T20:54:42.918Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "95ba5a23-d03a-409e-9366-c5f9a9e75161",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-04-02T20:54:50.271Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-04-02T20:54:50.271Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "dd4b18d5-b0d1-4f42-afcc-9f90f1e58875",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-04-02T20:58:38.748Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-04-02T20:58:38.748Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "2c41ceac-a75b-4c15-9753-bdad5ae033f3",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-04-02T21:02:23.612Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-04-02T21:02:23.612Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "4aee3242-d404-4fc6-890f-77ab37dff777",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-04-03T08:00:04.010Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-04-03T08:00:04.011Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "f0404369-4e71-4080-8b0b-c76f26a77317",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-04-03T11:00:05.325Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-04-03T11:00:05.327Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "339d8bad-d7a9-4c74-97cd-67c0d96cdf95",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-04-19T08:00:16.443Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-04-19T08:00:16.463Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "0c67d54f-2b46-4674-8448-d846e52dc30e",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-04-19T11:00:24.750Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-04-19T11:00:24.756Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "551660fc-34d6-4296-882f-cc2959859a45",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-04-20T08:00:08.127Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-04-20T08:00:08.132Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "9f79cc6a-370f-40d7-9901-ad8394691ab1",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-04-20T11:00:12.547Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-04-20T11:00:12.554Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "08f4b483-2a9c-478d-99fc-194983466bf6",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-04-21T08:00:02.851Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-04-21T08:00:02.856Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "b969f6ca-d729-4e90-9d03-1b9d330b4d61",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-04-21T11:00:05.279Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-04-21T11:00:05.281Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "fccd93be-0e9f-41e3-90ec-aebce4ab10a4",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-04-22T08:00:03.031Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-04-22T08:00:03.033Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "a7ad857e-f946-432b-a91e-034d39197c4a",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-04-22T11:00:05.079Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-04-22T11:00:05.086Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "bee9f5b5-b8dc-45e6-8e77-5b3de6f4c0b0",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-04-24T08:00:02.113Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-04-24T08:00:02.115Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "d8611995-3ba4-499d-85a8-e3ccdbbea4c0",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-04-24T11:00:04.518Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-04-24T11:00:04.520Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "9b123e4b-870e-47b5-af6d-43b024064d6f",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-04-25T08:00:08.918Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-04-25T08:00:08.924Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "3e959db9-84d3-4eda-8eee-7988c095be66",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-04-25T11:00:05.806Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-04-25T11:00:05.807Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "f05bba32-262c-4a00-9804-890051c1f874",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-04-26T08:00:03.279Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-04-26T08:00:03.282Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "0113ee51-7f20-43ab-8257-5accce66b0ba",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-04-26T11:00:32.363Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-04-26T11:00:32.367Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "56a7c0e0-79bf-4029-bf9a-080e7d9a9ba0",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-04-27T08:00:15.797Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-04-27T08:00:15.805Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "08ebe33a-6bd1-408b-8c9c-0803a64a7637",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-04-27T11:00:48.956Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-04-27T11:00:49.014Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "b2650cad-1f22-41f8-8ea7-4c0d332026c6",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-04-28T08:00:47.190Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-04-28T08:00:47.230Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "c48f54df-9545-46a5-9993-47c0e02730a8",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-04-28T11:00:34.336Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-04-28T11:00:34.342Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "e88173f8-d15d-4c14-bf3e-3dfee90788e5",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-04-29T08:00:26.584Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-04-29T08:00:26.591Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "8d286e5a-a8e6-4a72-b211-53d94f95e5f1",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-04-29T11:02:11.623Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-04-29T11:02:11.774Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "e2e8c2eb-68f0-4cf4-a126-04c0b2fcdb60",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-04-30T08:01:11.904Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-04-30T08:01:12.000Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "926bc1f8-70d6-40b7-8289-54feb086a565",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-04-30T11:00:29.522Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-04-30T11:00:29.528Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "90e682f7-cb42-403d-976f-b29d97782e05",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-01T08:00:03.423Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-01T08:00:03.426Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "ca1844ae-1a54-481d-8d9f-2702dba3d73b",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-01T11:01:42.583Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-01T11:01:42.641Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "52910a42-8ab8-4b7b-9d2f-6a56675f77b5",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-02T08:00:02.348Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-02T08:00:02.352Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "3f2fbb88-ab5b-4d5e-bc21-982a044a3c4c",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-02T11:00:24.417Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-02T11:00:24.420Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "b5a0f505-66bf-4746-bc00-09ad35fa490f",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-03T08:00:02.507Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-03T08:00:02.510Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "09a8e61c-de9c-4fdc-a300-25295a165724",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-03T11:00:03.671Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-03T11:00:03.673Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "30a5c557-f751-4b96-b773-790ae64b2917",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-04T08:00:01.757Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-04T08:00:01.758Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "bed5bd3f-7fb0-4d90-8c2b-877cdc07ce86",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-04T11:00:03.786Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-04T11:00:03.788Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "ed58570e-ddfe-45eb-aa51-772b070617c0",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-05T08:00:02.499Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-05T08:00:02.503Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "4fc152dd-84f4-402a-b0e1-a9b87ea94eaa",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-05T11:00:03.928Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-05T11:00:03.930Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "37c2ee7f-3da3-4a77-acb7-6c0f419d06ef",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-06T08:00:02.476Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-06T08:00:02.478Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "95f0fe83-1585-444e-b996-c46e43d55e78",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-06T11:00:04.541Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-06T11:00:04.544Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "3205cc24-caec-4d29-92f3-0e9ef6a22a0f",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-07T08:00:02.534Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-07T08:00:02.537Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "52e1219f-a625-4654-a70b-95758219e1bd",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-07T11:00:04.726Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-07T11:00:04.728Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "eb201915-7531-4b7a-a6a6-b83b47f3f71d",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-08T08:00:02.035Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-08T08:00:02.037Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "7f123c91-3871-4b9e-9847-92524b835848",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-08T11:00:04.348Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-08T11:00:04.350Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "3adbfdc2-aeff-460d-8e84-edd987f99380",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-09T08:00:02.556Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-09T08:00:02.558Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "bc2ce5d0-a712-4a9f-bac5-df76619cf971",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-09T11:00:05.457Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-09T11:00:05.459Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "e0ec8326-3112-44e7-a814-635970600f09",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-10T08:00:02.682Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-10T08:00:02.685Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "de386c3a-30b5-4164-aa58-c8786d432dbd",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-10T11:00:05.016Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-10T11:00:05.019Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "0e88e018-9d26-4d7c-8cd6-1fcf15a567ee",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-11T08:00:02.067Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-11T08:00:02.069Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "ecb4f5eb-9f05-4253-9fc7-8ebc06d11498",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-11T11:00:04.666Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-11T11:00:04.669Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "ffd20d14-9f87-4541-873b-8b3dc94188ef",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-12T08:00:01.952Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-12T08:00:01.959Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "426f19e8-a39c-4e1b-8100-d9884dc7dd7a",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-12T11:00:05.230Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-12T11:00:05.233Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "bfa2230c-5994-4cf7-a517-b3f3ded29e1a",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-13T08:00:02.516Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-13T08:00:02.520Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "7194bda1-7c00-4d09-9b3e-43878cafa0fc",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-13T11:00:05.217Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-13T11:00:05.221Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "14fa3e51-df75-42db-8379-7b948a53c8ef",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-14T08:00:04.555Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-14T08:00:04.565Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "50ae7597-17a1-4d11-b5c8-67e3758a746c",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-14T11:00:03.957Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-14T11:00:03.961Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "9930e767-4281-4d16-9f52-b49d9cf83544",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-15T08:00:02.825Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-15T08:00:02.832Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "8f06ba04-f0a7-44bb-b421-de1ac5bf31d4",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-15T11:00:08.245Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-15T11:00:08.248Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "5589c4cc-701e-4342-a1a1-9a04909b0a43",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-17T08:00:02.851Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-17T08:00:02.855Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "55ebfc45-e6e6-440c-85ac-c1e76a274b5d",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-17T11:00:05.558Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-17T11:00:05.562Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "42848ec8-35cf-408d-b53e-7c7fb4d8a63d",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-18T08:00:01.376Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-18T08:00:01.380Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "5a102f49-4ec0-40ed-83ba-ba57b6f182ae",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-18T11:00:04.340Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-18T11:00:04.343Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "1b2f2454-0291-4ac3-827e-8908c4c46d11",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-19T08:00:11.023Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-19T08:00:11.030Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "065c439d-83c3-4c9b-9efc-0f29c0223312",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-19T11:00:05.907Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-19T11:00:05.911Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "8fd0ebdd-4f5a-4bba-9aa6-f802e55e4d18",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-20T08:00:01.898Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-20T08:00:01.902Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "c8a00142-a20f-4d8a-a542-d1260b703b16",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-20T11:00:07.219Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-20T11:00:07.223Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "336318d9-04e2-4dbc-9b68-da1d01ada99c",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-21T08:00:02.284Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-21T08:00:02.288Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "338547bc-12ef-4a9a-bd0c-6ee9fa91d533",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-21T11:00:06.236Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-21T11:00:06.240Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "0a45eea6-8159-41a9-a82b-af837ce88f35",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-26T08:00:02.693Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-26T08:00:02.697Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "0d7e0b79-ff2d-4b89-b7d0-1660d3770003",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-26T11:00:07.681Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-26T11:00:07.685Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "515f2745-dd7a-4b9d-89e1-2a1f618a83d5",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-27T08:00:02.081Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-27T08:00:02.085Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "8316af56-cd7a-4ed2-a7a2-203eb59f94d0",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-27T11:00:04.622Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-27T11:00:04.626Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "dbd6d8f0-0dd9-47c3-b18b-2828554198de",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-28T08:00:04.681Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-28T08:00:04.690Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "cbab705a-6c69-439d-b8ec-347bed0938bb",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-28T11:00:09.394Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-28T11:00:09.403Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "af75e2c2-2aa3-40b7-9d9d-b50ee53c23a0",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-29T08:00:07.513Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-29T08:00:07.544Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "5a010995-2675-4b91-9a34-b6b00508af30",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-29T11:00:24.225Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-29T11:00:24.238Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "f22f2f74-dc79-4487-9965-cd19b7e18beb",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-30T08:00:02.725Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-30T08:00:02.729Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "6a5b0c13-a45a-4e25-97e0-49c8a84ee62c",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-30T11:00:06.794Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-30T11:00:06.809Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "78777761-853b-425a-86ba-14db438e498f",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-31T08:00:04.231Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-31T08:00:04.237Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "e9f23265-84fd-41f0-8a7e-de49f85cc37e",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-05-31T11:01:12.772Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-05-31T11:01:12.780Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "a6cf2956-bba1-4afd-8ec6-59864c494577",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-06-01T08:00:04.660Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-06-01T08:00:04.671Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "9bbb8fad-5eb2-4cd5-aac7-2903743c09af",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-06-01T11:00:13.348Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-06-01T11:00:13.357Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "b7558292-3cec-42e2-9ac1-0938d0c76905",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-06-02T08:00:21.470Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-06-02T08:00:21.512Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    },
+    {
+      "id": "275babbb-5aba-4a42-a255-53363dc7a67a",
+      "title": "Schema fork: actor_imprint needs voice_model_id field",
+      "category": "schema_fork",
+      "urgency": "medium",
+      "status": "decided",
+      "blocking": false,
+      "reason": "Voice model selection requires linking actor to specific XTTS model",
+      "context": "Actor protocol v1 has no voice model reference",
+      "options": [
+        {
+          "label": "Add to actor_imprint",
+          "description": "Direct field on imprint",
+          "risk": "low",
+          "reversible": true
+        },
+        {
+          "label": "Separate voice_models table",
+          "description": "Many-to-many relationship",
+          "risk": "medium",
+          "reversible": true
+        }
+      ],
+      "recommendation": "Separate table — actors may have multiple voice models",
+      "raised_by": "claude_code",
+      "raised_at": "2026-06-02T11:00:10.133Z",
+      "gabriel_ingested": false,
+      "decided_by": "Robert Stephen Plowman",
+      "decided_at": "2026-06-02T11:00:10.142Z",
+      "decision": "Separate voice_models table",
+      "decision_rationale": "Actors will have multiple voice models. Many-to-many is correct."
+    }
+  ]
+}

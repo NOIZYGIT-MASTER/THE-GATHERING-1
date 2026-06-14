@@ -1,0 +1,125 @@
+{
+  "beast": "NOIZYBEAST",
+  "version": "1.1.0",
+  "tagline": "The SuperSonic IDE for building all of NOIZY",
+  "_lastVerified": "2026-04-30",
+  "_canonicalTruth": "../../CLAUDE.md and ../../repos/noizy-heaven/wrangler.toml — re-read those if anything in this file disagrees with reality",
+
+  "operator": {
+    "id": "RSP_001",
+    "name": "Robert Stephen Plowman",
+    "email": "rsp@noizy.ai",
+    "_emailPolicy": "Per .claude/rules/contact.md — rsp@noizy.ai is the universal NOIZY contact (effective 2026-03-25). Previous rsp@noizyfish.com retired.",
+    "machine": "GOD.local",
+    "ip": "10.90.90.10",
+    "workflow": "35% voice + 65% AI + 1 click = done"
+  },
+  "philosophy": "GORUNFREE — zero friction between intention and execution",
+  "stack": ["MC96", "Cloudflare", "GABRIEL", "HVS", "NOIZYVOX"],
+
+  "targetDate": "2026-04-17",
+  "_targetDateFrame": {
+    "_meaning": "Original April 17 deadline anchor. The CLI's daysLine() reads this and goes negative gracefully ('N days past 2026-04-17 (post-deadline mode)') so the countdown stays honest after the date. Do NOT reset this to a future date when April 17 passes — the calendar IS the truth, the empire ships in waves not deadlines.",
+    "post": "Heaven v18.0.0 LIVE, 17 MCP servers LIVE, GABRIEL daemon LIVE on :9777, NOIZYBEAST v4.0 COMPILED, n8n + MCP bridge LIVE, NOIZYFISH worker LIVE — the deadline shipped. Continuing into post-deadline build waves."
+  },
+
+  "portals": {
+    "NOIZY.ai":     { "role": "consent-native infrastructure layer",         "status": "live",     "url": "https://heaven.rsp-5f3.workers.dev", "worker": "heaven v18.0.0" },
+    "NOIZYVOX":     { "role": "voice sovereignty + consent capture",         "status": "building", "url": "noizyvox.com",          "worker": "noizyvox" },
+    "NOIZYFISH":    { "role": "888-title catalogue, C2PA stamped, 75/25",    "status": "live",     "url": "noizyfish.com",         "worker": "noizyfish" },
+    "NOIZYKIDZ":    { "role": "Rhythm Root Island, neurodivergent kids",     "status": "building", "url": "noizykidz.com",         "worker": "nk-haptic-archive" },
+    "NOIZYLAB":     { "role": "sonic healing, binaural protocols, AirPlay",  "status": "live",     "url": "rsp-5f3.workers.dev",   "worker": "noizylab" },
+    "WISDOM":       { "role": "elder legacy, 100-year voice archive",        "status": "building", "url": "noizy.ai/wisdom",       "worker": null },
+    "myFAMILY":     { "role": "love in code, consent-native elder care",     "status": "live",     "url": "noizy.ai/family",       "worker": "heaven" },
+    "DREAMCHAMBER": { "role": "AI shell, 11 providers, streaming",           "status": "local",    "url": "GOD.local:7777",        "worker": null }
+  },
+
+  "infrastructure": {
+    "cf_account":     "5f36aa9795348ea681d0b21910dfc82a",
+    "_d1_canonical_source": "Pulled from repos/noizy-heaven/wrangler.toml on 2026-04-30. If those drift, this file lies — re-pull. The legacy d1_gabriel/d1_repairs/d1_noizyai keys below are RETIRED in favor of named keys.",
+    "d1": {
+      "agent-memory":      { "id": "b5b58cc9-1f37-4000-adc5-12f9e419662f", "verified": "2026-04-25", "binding": "DB_MEMORY",   "scope": "GABRIEL agent memory" },
+      "heaven-db":         { "id": "04a826c2-e863-4264-8782-05496c6bb022", "verified": "2026-04-30", "binding": "DB_HEAVEN",   "scope": "Heaven kernel state" },
+      "noizy-prod":        { "id": "cd6cae46-e5cd-42b6-a97a-5d0e576c1c2a", "verified": "2026-04-30", "binding": "DB_PROD",     "scope": "Production consent + ledger" },
+      "aquarium-archive":  { "id": "01212e89-5422-4e45-a03a-f0a54495674e", "verified": "2026-04-30", "binding": "DB_AQUARIUM", "scope": "LUCY's append-only archive" }
+    },
+    "d1_legacy_retired": {
+      "_note": "These IDs appeared in earlier configs but are NOT in the current heaven wrangler.toml. They may refer to deleted DBs, side-experiments, or never-actually-existed values produced by an earlier session. Do not reference. Use the named-key d1 map above.",
+      "d1_gabriel_legacy": "7b813205-fd12-4a23-84a6-ce83bc49ec70",
+      "d1_repairs_legacy": "75bba892-80a8-46f2-a552-610f38bcb36d",
+      "d1_noizyai_legacy": "ebcf576f-51e3-4e3d-829e-219f8fe6001c"
+    },
+    "gabriel_local":   "http://localhost:9777",
+    "_gabriel_port_history": "GABRIEL daemon migrated 7777 -> 9777 in V4 (2026-04-25). DreamChamber now owns :7777. Both run concurrently. CLI was reading :7777 until 2026-04-30 — fixed.",
+    "dreamchamber":    "http://localhost:7777",
+    "gabriel_edge":    "wss://heaven.rsp-5f3.workers.dev/ws",
+    "heaven":          "https://heaven.rsp-5f3.workers.dev",
+    "heaven_version":  "18.0.0",
+    "heaven_repo":     "../../repos/noizy-heaven",
+    "landing":         "https://noizy-landing.rsp-5f3.workers.dev",
+    "voiceBridge":     "http://localhost:8080",
+    "ollama":          "http://localhost:11434"
+  },
+
+  "blockedTools": ["MusicGen", "MaskGCT", "Tango2", "FishSpeech"],
+  "clearedTools": ["XTTS_v2", "RVC", "Librosa", "pedalboard", "mlx-whisper", "Whisper", "Gemma3", "Mistral"],
+
+  "doctrine": {
+    "consent":    "Consent as executable code",
+    "provenance": "Provenance as default",
+    "revocation": "Revocation as sacred",
+    "royalty":    "Compensation as automatic",
+    "standard":   "75/25 — creators always take 75%",
+    "rsp_rate":   "85/15 — RSP_001 founding actor rate",
+    "kidz_trust": "1% irremovable — NOIZYKIDZ trust clause"
+  },
+
+  "commands": {
+    "beast build":    "Scaffold a new NOIZY property or module",
+    "beast status":   "Full empire status snapshot (live, post-deadline countdown)",
+    "beast audit":    "Consent gap + contradiction detection",
+    "beast ship":     "Deploy to Cloudflare",
+    "beast crew":     "Dispatch to specialist agent",
+    "beast memory":   "Show current mission + blockers",
+    "beast scaffold": "Generate: worker | schema | dashboard | portal | flow",
+    "beast verify":   "Check consent + provenance chain",
+    "beast mission":  "Dispatch complex mission to GABRIEL Opus",
+    "beast think":    "Extended thinking via claude-opus-4",
+    "beast morning":  "Daily briefing with status + queue",
+    "beast deploy":   "Deploy HEAVEN to Cloudflare (auto-resolves repo path)",
+    "beast registry": "Show all property statuses"
+  },
+
+  "agents": {
+    "GABRIEL":         { "endpoint": "http://localhost:9777", "role": "Warrior Executor + system bridge + 12-boss orchestrator" },
+    "engr-keith":      { "role": "Architecture & technical engineering" },
+    "dream":           { "role": "Vision, strategy, 5th Epoch planning" },
+    "consent-auditor": { "role": "Never Clauses, Kill Switch, ledger integrity" },
+    "voice-specialist":{ "role": "Audio pipeline, TTS, STT, mlx-whisper" },
+    "cb01":            { "role": "DNS, infrastructure, GoDaddy exit" },
+    "shirley":         { "role": "Code generation, file ops, scaffolding (Gemma 3 27B local)" },
+    "lucy":            { "role": "Archives, AQUARIUM, DAZEFLOW, git custodian" },
+    "shirl":           { "role": "Wellbeing watchdog, burnout protection" },
+    "pops":            { "role": "100-year frame, OAIS/PREMIS legacy thinking" },
+    "test_runner":     { "role": "Smoke tests, CI verification" },
+    "noizyarmy":       { "role": "6-Bee swarm: ARCHITECT, DEBUGGER, TESTER, DOCUMENTER, SECURITY, OPTIMIZER" }
+  },
+
+  "turboScripts": {
+    "T1–T10":         "noizybeast/turbo-scripts/noizybeast-turbo.js",
+    "turbo_pipeline": "tools/CODEMASTER/turbo-scripts/turbo_pipeline.sh  (HEAL→DEDUPE→UNIFY→VERIFY)",
+    "turbo_zap":      "tools/CODEMASTER/turbo-scripts/turbo_zap.sh       (DNS flush + network reset)",
+    "turbo_git_sync": "tools/CODEMASTER/turbo-scripts/turbo_git_sync.sh  (LUCY auto-commit cycle)",
+    "turbo_reset":    "tools/CODEMASTER/turbo-scripts/turbo_reset.sh     (full env reset)",
+    "turbo_mount":    "tools/CODEMASTER/turbo-scripts/turbo_mount_omen.sh (HP-OMEN volume — hardcoded IP, replace before use)",
+    "_canonical": "Per .claude/rules/turbo-scripts.md, the canonical turbos live under tools/CODEMASTER/turbo-scripts/turbo-python/ and apps/noizybeast/turbo-scripts/. Three duplicates exist; do not edit duplicates."
+  },
+
+  "urgentQueue": [
+    { "p": 1, "action": "Verify NOIZYBEAST v4.0 extension installs cleanly via `npm run ext:install`", "type": "TERMINAL", "blocker": false },
+    { "p": 2, "action": "Restart GABRIEL daemon on :9777 if `beast status` shows red ✗",                "type": "TERMINAL", "blocker": false },
+    { "p": 3, "action": "Restart DreamChamber on :7777 if status shows red ✗",                         "type": "TERMINAL", "blocker": false },
+    { "p": 4, "action": "Wire LUCY iPad TestFlight signing (Rob's Xcode session)",                     "type": "BROWSER",  "blocker": true },
+    { "p": 5, "action": "Run weekly heal-the-world audit: `bash ops/healing-audit.sh`",                "type": "TERMINAL", "blocker": false }
+  ]
+}

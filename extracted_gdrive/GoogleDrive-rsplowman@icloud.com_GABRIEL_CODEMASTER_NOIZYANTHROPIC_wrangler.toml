@@ -1,0 +1,84 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# NOIZYLAB — wrangler.toml
+#
+# ⚠️  THIS IS NOT THE CANONICAL CONFIG.
+#
+# The canonical wrangler.toml lives at:
+#   /Users/m2ultra/NOIZYANTHROPIC/repos/noizy-heaven/wrangler.toml
+#
+# All deployments MUST be run from that directory:
+#   cd /Users/m2ultra/NOIZYANTHROPIC/repos/noizy-heaven
+#   npx wrangler deploy
+#
+# This file is kept here ONLY as a workspace reference and for
+# local D1 / KV dev sessions run from NOIZYLAB.
+# DO NOT DEPLOY FROM THIS DIRECTORY — you will get binding errors.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+name               = "heaven"
+main               = "src/index.js"                      # placeholder — real entry is index.ts in noizy-heaven
+compatibility_date = "2026-04-17"
+compatibility_flags = ["nodejs_compat"]
+account_id         = "5f36aa9795348ea681d0b21910dfc82a"  # rsp@noizy.ai account
+
+# ── NOIZY 2036 · Cron Triggers ────────────────────────────────────────────────
+# Hourly self-healing reconciliation — diffs live CF state against
+# NOIZY_2036_STATE (declared in src/index.js) and corrects drift.
+# Runs at the edge globally. Handler: scheduled(event, env, ctx) in index.js.
+[triggers]
+crons = ["0 * * * *"]
+
+# ── D1 (NOIZYLAB local dev sessions only) ─────────────────────────────────────
+[[d1_databases]]
+binding       = "DB_MEMORY"
+database_name = "agent-memory"
+database_id   = "b5b58cc9-1f37-4000-adc5-12f9e419662f"  # LIVE — confirmed via GABRIEL memcell pull 2026-04-16
+
+[[d1_databases]]
+binding       = "DB_REPAIRS"
+database_name = "noizy-prod"
+database_id   = "cd6cae46-e5cd-42b6-a97a-5d0e576c1c2a"
+
+[[d1_databases]]
+binding       = "DB_AQUARIUM"
+database_name = "aquarium-archive"
+database_id   = "01212e89-5422-4e45-a03a-f0a54495674e"
+
+# ── KV (match canonical) ─────────────────────────────────────────────────────
+[[kv_namespaces]]
+binding = "KV_SIGNUPS"
+id      = "4acd9a9ff37646eab03ce6ec4bc6f96d"
+
+[[kv_namespaces]]
+binding = "KV_ROYALTIES"
+id      = "2bc3259db0a74d24a49a2b2d3bbdb425"
+
+[[kv_namespaces]]
+binding = "KV_GUILD"
+id      = "110b27439236453ea5cd39decffa27f0"
+
+[[kv_namespaces]]
+binding = "KV_SESSIONS"
+id      = "fb29b706191d45c88c5c2adce78ecc80"
+
+[[kv_namespaces]]
+binding = "KV_SUBMISSIONS"
+id      = "f86ce2aee05242348ea3a30131ddf910"
+
+[[kv_namespaces]]
+binding = "KV_MEMCELL"
+id      = "2ff8fe9568444b6ca49b852a0f9a91cc"
+
+
+[[kv_namespaces]]
+binding = "FEATURE_FLAGS"
+id      = "88331123208c460eb26cb703d5a38c50"
+
+[[kv_namespaces]]
+binding = "GAP_SOLVER"
+id      = "4941fb7967d14406bad7a252cd3d0a1e"
+
+[vars]
+NOIZY_ENV    = "production"
+NOIZY_VERSION = "18.1.0"
+MESH_ORIGIN  = "https://mesh.noizy.ai"

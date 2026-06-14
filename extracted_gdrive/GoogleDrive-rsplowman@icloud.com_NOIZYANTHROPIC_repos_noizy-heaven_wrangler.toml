@@ -1,0 +1,158 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# HEAVEN — NOIZY Empire API Gateway + NOIZYSTREAM v2 Signaling
+# Constitutional Infrastructure for Human Creativity
+# Author: Robert Stephen Plowman (RSP_001) / MC96ECO
+#
+# ⚡ CANONICAL WRANGLER.TOML — UPDATED 2026-04-17 (v18.1.0)
+#    This is the ONE TRUE CONFIG. Do NOT edit NOIZYLAB/wrangler.toml.
+#    NOIZYLAB/wrangler.toml is a read-only pointer to this file.
+#
+# ACCOUNT: rsp@noizy.ai → account_id 5f36aa9795348ea681d0b21910dfc82a
+# Workers live at: heaven.rsp-5f3.workers.dev
+# Custom domain:   noizy.ai (zone in CF dashboard, same account)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+name                 = "heaven"
+main                 = "src/index.ts"
+compatibility_date   = "2026-04-17"
+compatibility_flags  = ["nodejs_compat"]
+account_id           = "5f36aa9795348ea681d0b21910dfc82a"  # HEAVEN account (noizy.ai)
+workers_dev          = true
+
+# ── Live Route — noizy.ai/* ──────────────────────────────────────────────────
+routes = [
+  { pattern = "noizy.ai/*", zone_name = "noizy.ai" }
+]
+
+# ── Workers AI (Edge Inference) ──────────────────────────────────────────────
+# Models: @cf/meta/llama-3.1-8b-instruct (chat + summarize)
+#         @cf/openai/whisper              (STT transcription)
+#         @cf/stabilityai/stable-diffusion-xl-base-1.0 (image gen)
+[ai]
+binding = "AI"
+
+
+# ── Durable Objects (NOIZYSTREAM v2) ─────────────────────────────────────────
+[durable_objects]
+bindings = [
+  { name = "SIGNALING_ROOMS", class_name = "SignalingRoom" }
+]
+
+[[migrations]]
+tag         = "v1"
+new_classes = ["SignalingRoom"]
+
+# ── D1 Databases ─────────────────────────────────────────────────────────────
+# ⚠️  DEAD / WRONG-ACCOUNT IDs — NEVER USE:
+#     gabriel_db / b5b58cc9-1f37-4000-adc5-12f9e419662f  (NOIZYLAB account, dead)
+#     b5b58cc9-1f37-4000-adc5-12f9e419662f               (stale — superseded 2026-04-16)
+#     f75939d5 / fc0edd97                                 (wrong account)
+# LIVE ID confirmed via Lucy / GABRIEL memcell pull: b5b58cc9-1f37-4000-adc5-12f9e419662f
+
+[[d1_databases]]
+binding       = "DB_MEMORY"
+database_name = "agent-memory"
+database_id   = "b5b58cc9-1f37-4000-adc5-12f9e419662f"  # LIVE — confirmed 2026-04-25 via NOIZYCLAW v0.1 audit
+
+[[d1_databases]]
+binding       = "DB_HEAVEN"
+database_name = "heaven-db"
+database_id   = "04a826c2-e863-4264-8782-05496c6bb022"
+
+[[d1_databases]]
+binding       = "DB_REPAIRS"
+database_name = "noizy-prod"
+database_id   = "cd6cae46-e5cd-42b6-a97a-5d0e576c1c2a"
+
+[[d1_databases]]
+binding       = "DB_AQUARIUM"
+database_name = "aquarium-archive"
+database_id   = "01212e89-5422-4e45-a03a-f0a54495674e"
+
+# ── R2 Object Storage (Voice Vault) ─────────────────────────────────────────
+# Enable at: https://dash.cloudflare.com/5f36aa9795348ea681d0b21910dfc82a/r2
+# If R2 not yet enabled, comment out this block and redeploy after enabling.
+[[r2_buckets]]
+binding            = "VOICE_VAULT"
+bucket_name        = "noizy-voice-vault"
+preview_bucket_name = "noizy-voice-vault-preview"
+
+# ── KV Namespaces ─────────────────────────────────────────────────────────────
+
+[[kv_namespaces]]
+binding = "KV_SIGNUPS"
+id      = "4acd9a9ff37646eab03ce6ec4bc6f96d"
+
+[[kv_namespaces]]
+binding = "KV_ROYALTIES"
+id      = "2bc3259db0a74d24a49a2b2d3bbdb425"
+
+[[kv_namespaces]]
+binding = "KV_GUILD"
+id      = "110b27439236453ea5cd39decffa27f0"
+
+[[kv_namespaces]]
+binding = "KV_SESSIONS"
+id      = "fb29b706191d45c88c5c2adce78ecc80"
+
+[[kv_namespaces]]
+binding = "KV_SUBMISSIONS"
+id      = "f86ce2aee05242348ea3a30131ddf910"
+
+[[kv_namespaces]]
+binding = "KV_MEMCELL"
+id      = "2ff8fe9568444b6ca49b852a0f9a91cc"
+
+# ── Feature Flags KV (Edge Runtime Control) ──────────────────────────────────
+# <1ms runtime behavior changes without deploys
+[[kv_namespaces]]
+binding = "FEATURE_FLAGS"
+id      = "88331123208c460eb26cb703d5a38c50"
+
+# ── Gap Solver KV (GORUNFREE Absence Intelligence) ───────────────────────────
+[[kv_namespaces]]
+binding = "GAP_SOLVER"
+id      = "4941fb7967d14406bad7a252cd3d0a1e"
+
+# ── Environment Variables ─────────────────────────────────────────────────────
+[vars]
+NOIZY_ENV             = "production"
+NOIZY_VERSION         = "18.1.0"
+FOUNDING_ACTOR_FLOOR  = "85"
+STANDARD_ACTOR_FLOOR  = "75"
+VOICE_VAULT_BUCKET    = "noizy-voice-vault"
+MESH_ORIGIN           = "https://mesh.noizy.ai"
+
+# ── Observability ─────────────────────────────────────────────────────────────
+[observability]
+enabled = true
+
+# ── Secrets (set via: wrangler secret put KEY) ────────────────────────────────
+# ANTHROPIC_API_KEY
+# NOIZY_SECRET
+# NOIZY_KEY
+# CF_ACCESS_CLIENT_ID
+# CF_ACCESS_CLIENT_SECRET
+# N8N_WEBHOOK_SECRET
+# N8N_WEBHOOK_URL
+# LINEAR_API_KEY
+# LINEAR_TEAM_ID
+# NOTION_API_KEY
+# NOTION_DB_ID
+# SLACK_WEBHOOK_URL           ← Move 16 (wrangler secret put SLACK_WEBHOOK_URL) — legacy, decommission after Discord verified
+# SLACK_BOT_TOKEN             ← Required for /api/slack/audio downloads (inbound — separate from alert migration)
+# DISCORD_WEBHOOK_URL         ← Move 27 (wrangler secret put DISCORD_WEBHOOK_URL) — Discord-only doctrine 2026-04-27
+
+
+# ── Environments ──────────────────────────────────────────────────────────────
+[env.preview]
+name = "heaven-preview"
+vars = { NOIZY_ENV = "preview", NOIZY_VERSION = "18.1.0", MESH_ORIGIN = "https://mesh.noizy.ai" }
+
+[env.canary]
+name = "heaven-canary"
+vars = { NOIZY_ENV = "canary", NOIZY_VERSION = "18.1.0", MESH_ORIGIN = "https://mesh.noizy.ai" }
+
+[env.production]
+name = "heaven"
+vars = { NOIZY_ENV = "production", NOIZY_VERSION = "18.1.0", MESH_ORIGIN = "https://mesh.noizy.ai" }

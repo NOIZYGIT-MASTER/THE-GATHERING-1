@@ -1,0 +1,112 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx wrangler*)",
+      "Bash(npm *)",
+      "Bash(node *)",
+      "Bash(curl *)",
+      "Bash(bash smoke_test.sh)",
+      "Bash(bash deploy.sh)",
+      "Bash(bash talespin-finder.sh)",
+      "Bash(ls *)",
+      "Bash(cat *)",
+      "Bash(mkdir *)",
+      "Bash(cp *)",
+      "Bash(mv *)",
+      "Bash(git *)",
+      "Bash(jq *)",
+      "Bash(python *)",
+      "Bash(pip *)",
+      "Bash(npx prettier*)",
+      "Bash(npx eslint*)",
+      "Bash(black *)",
+      "Bash(isort *)",
+      "Bash(chmod *)",
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep",
+      "mcp__gabriel*",
+      "mcp__heaven*",
+      "mcp__lucy*",
+      "mcp__dreamchamber_audio*",
+      "mcp__filesystem*",
+      "mcp__memory*",
+      "mcp__cloudflare*",
+      "Bash(jobs -l)",
+      "Bash(ps -p 69476 -o pid,comm,user,etime,stat)",
+      "Bash(plutil -p ~/Library/LaunchAgents/com.noizy.bloat-watch.plist)",
+      "Bash(time bash ~/NOIZYANTHROPIC/ops/status-live2.sh)",
+      "Bash(bash ~/NOIZYANTHROPIC/ops/notify-discord.sh \"test message from status upgrade work\")",
+      "Bash(break)",
+      "Bash(time bash -c ' *)",
+      "Bash(gtimeout 30 bash ~/NOIZYANTHROPIC/ops/status-live2.sh)",
+      "Bash(tee /tmp/dash-output.txt)",
+      "Bash(time gtimeout 30 bash ~/NOIZYANTHROPIC/ops/status-live2.sh)",
+      "Bash(ps -axo command)",
+      "Bash(time gtimeout 20 bash ~/NOIZYANTHROPIC/ops/status-live2.sh)",
+      "Bash(tee /tmp/dash-fast.txt)",
+      "Bash(time bash ~/NOIZYANTHROPIC/ops/disk-pressure.sh)",
+      "Bash(id -u)",
+      "Bash(launchctl bootout *)",
+      "Bash(noizy-disk-pressure)",
+      "Bash(noizy-queue --summary)",
+      "Bash(time noizy-dashboard)",
+      "Bash(noizy-notify \"smoke test from build-everything session\")",
+      "Bash(gtimeout 60 find /Volumes/M2ULTRA -type f)",
+      "Bash(bash ~/NOIZYANTHROPIC/ops/credentials-rotation-reminder.sh)",
+      "Bash(noizy-install-mcp --dry-run)",
+      "Bash(time noizy-empty-dirs /Volumes/JOE --depth 10)",
+      "Bash(pkill -f \"empty-dirs-reaper.sh /Volumes/JOE\")",
+      "Bash(pkill -f \"find /Volumes/JOE.*-empty\")",
+      "Bash(pkill -9 -f \"noizy-empty-dirs\")",
+      "Bash(pkill -9 -f \"empty-dirs-reaper\")",
+      "Bash(pkill -9 -f \"find.*/Volumes/JOE.*empty\")",
+      "Bash(time gtimeout 60 find /Volumes/NOIZYWIN -maxdepth 6 -type d -empty)",
+      "Bash(tee /tmp/nz-empties.txt)"
+    ],
+    "deny": [
+      "Bash(rm -rf /)",
+      "Bash(*DROP TABLE*)",
+      "Bash(*DELETE FROM noizy_ledger*)",
+      "Bash(*cat .env*)",
+      "Bash(*echo $NOIZY_API_KEY*)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/format-and-lint.sh"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/session-start.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/session-stop.sh"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,154 @@
+# NOIZY EMPIRE — GitKraken Workspace
+# MC96ECO Universe — All Brands · One Vision · RSP_001 Sovereign
+# Last updated: 2026-04-29 · Sealed RSP_001
+# 23 repos across 7 zones (per MASTER_REPO_MAP.md)
+# Free tier: public repos visible in GitKraken; private repos via GitHub Desktop
+
+name: NOIZY EMPIRE
+description: "MC96ECO Universe — All Brands · One Vision · RSP_001 Sovereign"
+
+repositories:
+
+  # ── ZONE 1: SOVEREIGN CORE ───────────────────────────────
+  - name: NOIZYANTHROPIC (Core)
+    path: /Users/m2ultra/NOIZYANTHROPIC
+    remote: https://github.com/Noizyfish/NOIZYANTHROPIC.git
+    branch: main
+    label: sovereign
+
+  - name: NOIZYLAB (Symlink → Core)
+    path: /Users/m2ultra/NOIZYLAB
+    remote: https://github.com/Noizyfish/NOIZYLAB.git
+    branch: main
+    label: sovereign
+
+  # ── ZONE 2: GABRIEL INTELLIGENCE LAYER ──────────────────
+  - name: GABRIEL
+    path: /Users/m2ultra/NOIZYANTHROPIC/GABRIEL
+    remote: https://github.com/Noizyfish/GABRIEL.git
+    label: empire
+
+  - name: DreamChamber
+    path: /Users/m2ultra/NOIZYANTHROPIC/DreamChamber
+    remote: https://github.com/Noizyfish/DreamChamber.git
+    label: empire
+
+  # ── ZONE 3: CLOUDFLARE / WORKERS / HEAVEN ───────────────
+  - name: Heaven (CF Worker)
+    path: /Users/m2ultra/NOIZYANTHROPIC/cloudflare/workers/noizy-app
+    remote: https://github.com/Noizyfish/heaven.git
+    label: sovereign
+
+  - name: NOIZY-MCP (CF Worker)
+    path: /Users/m2ultra/NOIZYANTHROPIC/cloudflare/workers/noizy-mcp
+    remote: https://github.com/Noizyfish/noizy-mcp.git
+    label: empire
+
+  - name: NOIZY-Landing (CF Worker)
+    path: /Users/m2ultra/NOIZYANTHROPIC/cloudflare/workers/noizy-landing
+    remote: https://github.com/Noizyfish/noizy-landing.git
+    label: empire
+
+  # ── ZONE 4: BRANDS / PORTALS ────────────────────────────
+  - name: NOIZYFISH
+    path: /Users/m2ultra/NOIZYANTHROPIC/apps/noizyfish
+    remote: https://github.com/Noizyfish/NOIZYFISH.git
+    label: empire
+
+  - name: NOIZYBEAST
+    path: /Users/m2ultra/NOIZYANTHROPIC/apps/noizybeast
+    remote: https://github.com/Noizyfish/NOIZYBEAST.git
+    label: empire
+
+  - name: NOIZY.AI
+    remote: https://github.com/NOIZYLAB-io/NOIZY.ai.git
+    label: empire
+
+  - name: NOIZYKIDZ
+    path: /Users/m2ultra/NOIZYANTHROPIC/apps/noizykidz
+    remote: https://github.com/Noizyfish/noizykidz.git
+    label: empire
+
+  - name: NOIZYVOX
+    path: /Users/m2ultra/NOIZYANTHROPIC/apps/noizyvox
+    remote: https://github.com/Noizyfish/noizyvox.git
+    label: voice-army
+
+  - name: NOIZYLAB.CA (Wisdom)
+    path: /Users/m2ultra/NOIZYANTHROPIC/projects/001_new_learning_ideas
+    remote: https://github.com/Noizyfish/noizylab-ca.git
+    label: empire
+
+  # ── ZONE 5: SWIFT / APPLE SURFACES ──────────────────────
+  - name: swift-library
+    path: /Users/m2ultra/swift-library
+    remote: https://github.com/Noizyfish/swift-library.git
+    branch: main
+    label: empire
+
+  - name: LUCY iPad (Heaven.xcodeproj)
+    path: /Users/m2ultra/NOIZYANTHROPIC/GABRIEL/ios/LUCY
+    remote: https://github.com/Noizyfish/LUCY-iPad.git
+    label: empire
+
+  # ── ZONE 6: INFRA / OPS ─────────────────────────────────
+  - name: MC96 Mission Control
+    remote: https://github.com/Noizyfish/MC96-Mission-Control.git
+    label: sovereign
+
+  - name: AEON
+    path: /Users/m2ultra/NOIZYANTHROPIC/apps/aeon
+    remote: https://github.com/Noizyfish/aeon.git
+    label: empire
+
+  - name: Recovery Spine
+    path: /Users/m2ultra/NOIZYANTHROPIC/infra/recovery
+    remote: https://github.com/Noizyfish/recovery-spine.git
+    label: sovereign
+
+  # ── ZONE 7: MCP SERVERS ─────────────────────────────────
+  - name: MCP Suite (local stdio)
+    path: /Users/m2ultra/NOIZYANTHROPIC/mcp
+    remote: https://github.com/Noizyfish/noizy-mcp-suite.git
+    label: empire
+
+  - name: Consent Oracle MCP
+    path: /Users/m2ultra/NOIZYANTHROPIC/cloudflare/mcp/noizy-consent
+    remote: https://github.com/Noizyfish/consent-oracle.git
+    label: sovereign
+
+  - name: NOIZY Empire MCP (Python)
+    path: /Users/m2ultra/NOIZYANTHROPIC/mcp/noizy-empire
+    remote: https://github.com/Noizyfish/noizy-empire-mcp.git
+    label: empire
+
+  # ── LEGACY / FISH CATALOG ────────────────────────────────
+  - name: FISH Music Catalog
+    path: /Users/m2ultra/NOIZYANTHROPIC/fishmusicinc
+    remote: https://github.com/Noizyfish/fishmusicinc.git
+    label: sovereign
+
+  - name: THE-DREAMCHAMBER (Assets)
+    path: /Users/m2ultra/THE-DREAMCHAMBER
+    remote: https://github.com/Noizyfish/the-dreamchamber-assets.git
+    label: voice-army
+
+labels:
+  - name: empire
+    color: "#C8A84B"
+  - name: sovereign
+    color: "#00FFB2"
+  - name: voice-army
+    color: "#E63946"
+
+# GitLens integration
+gitlens:
+  launchpad: true
+  graph: editor
+  branchVisibility: smart
+  ai_model: "copilot:gpt-4.1"
+
+# NOTE: Private repos show in GitKraken free tier with limited features.
+# Use GitHub Desktop (free, open-source) for full private-repo visual review.
+# Install: https://desktop.github.com
+# GitHub CLI (free): brew install gh && gh auth login

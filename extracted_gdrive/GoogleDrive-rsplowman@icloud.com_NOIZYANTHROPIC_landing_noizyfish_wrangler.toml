@@ -1,0 +1,23 @@
+name = "noizyfish-landing"
+account_id = "5f36aa9795348ea681d0b21910dfc82a"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+workers_dev = true
+
+[[routes]]
+pattern = "noizyfish.com"
+custom_domain = true
+
+[[routes]]
+pattern = "www.noizyfish.com"
+custom_domain = true
+
+# CATALOG_MANIFEST — set as a deploy-time var via deploy.sh.
+# The deploy script reads ops/noizyfish-catalog/manifest-summary.json
+# and pushes it via `wrangler secret put CATALOG_MANIFEST` (or as a
+# bound TEXT var if size < 16KB after summarization).
+# Worker reads env.CATALOG_MANIFEST (JSON-parsed) at request time and
+# falls back to the hardcoded MANIFEST_FALLBACK if absent.
+[vars]
+NOIZY_PHASE = "live"
+DOCTRINE = "rocketfuel"

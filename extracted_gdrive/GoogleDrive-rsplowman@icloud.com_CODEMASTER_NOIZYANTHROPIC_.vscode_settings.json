@@ -1,0 +1,205 @@
+{
+  // NOIZY Empire — VSCode User Settings
+  // Claude Max is your center. Cursor + Windsurf are replaced by Claude Code + Antigravity.
+  // ── Editor ──────────────────────────────────────────────────
+  "editor.fontSize": 13,
+  "editor.fontFamily": "'IBM Plex Mono', 'Menlo', monospace",
+  "editor.tabSize": 3,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.minimap.enabled": false,
+  "editor.renderLineHighlight": "gutter",
+  "editor.smoothScrolling": true,
+  "editor.cursorBlinking": "phase",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.lineHeight": 1.7,
+  "editor.wordWrap": "on",
+  // ── Terminal ─────────────────────────────────────────────────
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.fontSize": 12,
+  "terminal.integrated.fontFamily": "'IBM Plex Mono', monospace",
+  "terminal.integrated.scrollback": 10000,
+  // ── Files ─────────────────────────────────────────────────────
+  "files.autoSave": "onFocusChange",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "**/.wrangler": true
+  },
+  // ── Explorer ─────────────────────────────────────────────────
+  "explorer.compactFolders": false,
+  "explorer.sortOrder": "type",
+  // ── Git ──────────────────────────────────────────────────────
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
+  // ── TypeScript / JS ──────────────────────────────────────────
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  // ── Prettier ─────────────────────────────────────────────────
+  "prettier.singleQuote": true,
+  "prettier.semi": true,
+  "prettier.trailingComma": "es5",
+  "prettier.printWidth": 100,
+  // ── Workbench ─────────────────────────────────────────────────
+  "workbench.colorTheme": "Tomorrow Night Blue",
+  "workbench.iconTheme": "vs-seti",
+  "workbench.startupEditor": "none",
+  "workbench.editor.enablePreview": false,
+  // ── Disable telemetry for all AI editors you're keeping ──────
+  "telemetry.telemetryLevel": "off",
+  // ── Kill Cursor/Windsurf residue ─────────────────────────────
+  // Uninstall: cursor --uninstall or just rm -rf ~/.cursor
+  // Uninstall: windsurf --uninstall or rm -rf ~/.codeium/windsurf
+  // ── MCP servers (Claude Code reads .mcp.json in workspace root)
+  // Your .mcp.json at /Users/m2ultra/NOIZYLAB/.mcp.json is the source of truth.
+  // Claude Code CLI picks this up automatically when you cd to the workspace.
+  // ── Agent & MCP Auto-Load Configuration ─────────────────────
+  "[agent]": {
+    "autoLoad": true,
+    "workspace": "NOIZYBEAST",
+    "agents": [
+      "gabriel",
+      "lucy",
+      "engr_keith",
+      "shirley",
+      "cb01",
+      "dream",
+      "audio"
+    ],
+    "loadOnStartup": true
+  },
+  "[mcp]": {
+    "autoConnect": true,
+    "autoStart": true,
+    "fallbackOnTimeout": true,
+    "health_check_interval": 30
+  },
+  "anthropic.agent.autoStart": true,
+  "anthropic.agent.workspace": "NOIZYBEAST",
+  "anthropic.mcp.autoLoad": true,
+  // ── Recommended extensions (replace Cursor AI features) ──────
+  // Already installed via Antigravity — no additional AI extensions needed.
+  // claude.claude-code — if available as extension
+  // esbenp.prettier-vscode
+  // dbaeumer.vscode-eslint
+  // eamodio.gitlens
+  // pkief.material-icon-theme
+  // github.vscode-github-actions
+  // ── TOML (wrangler.toml) ─────────────────────────────────────
+  "[toml]": {
+    "editor.defaultFormatter": "tamasfe.even-better-toml"
+  },
+  // ── JSON ─────────────────────────────────────────────────────
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // ── Markdown ─────────────────────────────────────────────────
+  "[markdown]": {
+    "editor.wordWrap": "on",
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+  },
+  // ── Python ───────────────────────────────────────────────────
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true
+  },
+  // ── Swift ────────────────────────────────────────────────────
+  "[swift]": {
+    "editor.tabSize": 4
+  },
+  // ── Performance: Search & Watcher Exclusions ─────────────────
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.wrangler": true,
+    "**/_archive": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/.git": true,
+    "**/logs": true,
+    "**/*.log": true
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true,
+    "**/.wrangler/**": true,
+    "**/_archive/**": true,
+    "**/dist/**": true,
+    "**/logs/**": true
+  },
+  // ── Bracket Pair & Guides ────────────────────────────────────
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "editor.stickyScroll.enabled": true,
+  // ── GitHub Actions — Disable remote resolution (offline ok) ──
+  "github-actions.remote-resolution.enabled": false,
+  "github-actions.workflows.pinned.refresh.enabled": false,
+  // ── Claude Max: Kill duplicate AI noise ──────────────────────
+  // Claude Code + Copilot = your AI stack. No Cursor, no Windsurf.
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": true,
+    "markdown": true
+  },
+  // ── ESLint ───────────────────────────────────────────────────
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+    "javascriptreact",
+    "typescriptreact"
+  ],
+  "eslint.useFlatConfig": true,
+  // ── Terminal: Power-user ─────────────────────────────────────
+  "terminal.integrated.enablePersistentSessions": true,
+  "terminal.integrated.tabs.enabled": true,
+  // ── Diff & Merge ─────────────────────────────────────────────
+  "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.renderSideBySide": true,
+  // ── Emmet (HTML/JSX speed) ──────────────────────────────────
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "typescript": "typescriptreact"
+  },
+  // ── Performance: Large Repo Tuning ──────────────────────────
+  "git.autoRepositoryDetection": "openEditors",
+  "explorer.autoReveal": false,
+  "editor.largeFileOptimizations": true,
+  "extensions.autoUpdate": true,
+  // ── YAML (fix GitHub Actions on: parsing) ──────────────────────────────────
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-workflow.json": ".github/workflows/*.yml"
+  },
+  "yaml.keyOrdering": false,
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "chat.mcp.serverSampling": {
+    "NOIZYANTHROPIC/.vscode/mcp.json: synthesis-oracle": {
+      "allowedModels": [
+        "copilot/auto",
+        "copilot/claude-haiku-4.5",
+        "copilot/claude-sonnet-4.6",
+        "copilot/gemini-2.5-pro",
+        "copilot/gemini-3-flash-preview",
+        "copilot/gpt-4o",
+        "copilot/gpt-5.4"
+      ]
+    }
+  },
+  "chat.disableAIFeatures": false,
+  "editor.mouseWheelZoom": true,
+  "editor.formatOnPaste": true,
+  "editor.accessibilitySupport": "on",
+  "editor.allowVariableFontsInAccessibilityMode": true,
+  "editor.autoIndentOnPaste": false,
+  "editor.codeActions.triggerOnFocusChange": true,
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  "azureTerraform.checkTerraformCmd": false
+}

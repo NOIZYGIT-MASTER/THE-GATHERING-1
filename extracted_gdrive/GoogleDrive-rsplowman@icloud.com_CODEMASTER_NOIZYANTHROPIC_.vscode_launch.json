@@ -1,0 +1,287 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Run acorn",
+      "runtimeExecutable": "acorn",
+      "cwd": "${workspaceFolder}",
+      "args": []
+    },
+    {
+      "name": "Heaven Worker (wrangler dev)",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "wrangler",
+        "dev"
+      ],
+      "cwd": "${workspaceFolder}/repos/noizy-heaven",
+      "console": "integratedTerminal",
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
+    },
+    {
+      "name": "Supersonic MCP",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/mcp/supersonic/src/index.js",
+      "console": "integratedTerminal",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "env": {
+        "NODE_ENV": "development"
+      }
+    },
+    {
+      "name": "GABRIEL Daemon (port 9777)",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/apps/GABRIEL/daemon/gabriel-daemon.js",
+      "console": "integratedTerminal",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "env": {
+        "GABRIEL_PORT": "9777"
+      }
+    },
+    {
+      "name": "DreamChamber (port 7777)",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "start"
+      ],
+      "cwd": "${workspaceFolder}/apps/dreamchamber",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Consent Gateway Worker",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "wrangler",
+        "dev"
+      ],
+      "cwd": "${workspaceFolder}/workers/consent-gateway",
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:NOIZYANTHROPIC}/swift-library/che-logic-pro-mcp",
+      "name": "Debug CheLogicProMCP (swift-library/che-logic-pro-mcp)",
+      "target": "CheLogicProMCP",
+      "configuration": "debug",
+      "preLaunchTask": "swift: Build Debug CheLogicProMCP (swift-library/che-logic-pro-mcp)"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:NOIZYANTHROPIC}/swift-library/che-logic-pro-mcp",
+      "name": "Release CheLogicProMCP (swift-library/che-logic-pro-mcp)",
+      "target": "CheLogicProMCP",
+      "configuration": "release",
+      "preLaunchTask": "swift: Build Release CheLogicProMCP (swift-library/che-logic-pro-mcp)"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:NOIZYANTHROPIC}/noizy/apps/noizy-mcp",
+      "name": "Debug noizy-mcp (noizy/apps/noizy-mcp)",
+      "target": "noizy-mcp",
+      "configuration": "debug",
+      "preLaunchTask": "swift: Build Debug noizy-mcp (noizy/apps/noizy-mcp)"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:NOIZYANTHROPIC}/noizy/apps/noizy-mcp",
+      "name": "Release noizy-mcp (noizy/apps/noizy-mcp)",
+      "target": "noizy-mcp",
+      "configuration": "release",
+      "preLaunchTask": "swift: Build Release noizy-mcp (noizy/apps/noizy-mcp)"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:NOIZYANTHROPIC}/openclaw/Swabble",
+      "name": "Debug swabble (openclaw/Swabble)",
+      "target": "swabble",
+      "configuration": "debug",
+      "preLaunchTask": "swift: Build Debug swabble (openclaw/Swabble)"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:NOIZYANTHROPIC}/openclaw/Swabble",
+      "name": "Release swabble (openclaw/Swabble)",
+      "target": "swabble",
+      "configuration": "release",
+      "preLaunchTask": "swift: Build Release swabble (openclaw/Swabble)"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:NOIZYANTHROPIC}/openclaw/apps/macos",
+      "name": "Debug OpenClaw (openclaw/apps/macos)",
+      "target": "OpenClaw",
+      "configuration": "debug",
+      "preLaunchTask": "swift: Build Debug OpenClaw (openclaw/apps/macos)"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:NOIZYANTHROPIC}/openclaw/apps/macos",
+      "name": "Release OpenClaw (openclaw/apps/macos)",
+      "target": "OpenClaw",
+      "configuration": "release",
+      "preLaunchTask": "swift: Build Release OpenClaw (openclaw/apps/macos)"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:NOIZYANTHROPIC}/openclaw/apps/macos",
+      "name": "Debug openclaw-mac (openclaw/apps/macos)",
+      "target": "openclaw-mac",
+      "configuration": "debug",
+      "preLaunchTask": "swift: Build Debug openclaw-mac (openclaw/apps/macos)"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:NOIZYANTHROPIC}/openclaw/apps/macos",
+      "name": "Release openclaw-mac (openclaw/apps/macos)",
+      "target": "openclaw-mac",
+      "configuration": "release",
+      "preLaunchTask": "swift: Build Release openclaw-mac (openclaw/apps/macos)"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:NOIZYANTHROPIC}/openclaw/apps/macos-mlx-tts",
+      "name": "Debug openclaw-mlx-tts (openclaw/apps/macos-mlx-tts)",
+      "target": "openclaw-mlx-tts",
+      "configuration": "debug",
+      "preLaunchTask": "swift: Build Debug openclaw-mlx-tts (openclaw/apps/macos-mlx-tts)"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:NOIZYANTHROPIC}/openclaw/apps/macos-mlx-tts",
+      "name": "Release openclaw-mlx-tts (openclaw/apps/macos-mlx-tts)",
+      "target": "openclaw-mlx-tts",
+      "configuration": "release",
+      "preLaunchTask": "swift: Build Release openclaw-mlx-tts (openclaw/apps/macos-mlx-tts)"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:NOIZYANTHROPIC}/openclaw/openclaw/Swabble",
+      "name": "Debug swabble (openclaw/openclaw/Swabble)",
+      "target": "swabble",
+      "configuration": "debug",
+      "preLaunchTask": "swift: Build Debug swabble (openclaw/openclaw/Swabble)"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:NOIZYANTHROPIC}/openclaw/openclaw/Swabble",
+      "name": "Release swabble (openclaw/openclaw/Swabble)",
+      "target": "swabble",
+      "configuration": "release",
+      "preLaunchTask": "swift: Build Release swabble (openclaw/openclaw/Swabble)"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:NOIZYANTHROPIC}/openclaw/openclaw/apps/macos",
+      "name": "Debug OpenClaw (openclaw/openclaw/apps/macos)",
+      "target": "OpenClaw",
+      "configuration": "debug",
+      "preLaunchTask": "swift: Build Debug OpenClaw (openclaw/openclaw/apps/macos)"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:NOIZYANTHROPIC}/openclaw/openclaw/apps/macos",
+      "name": "Release OpenClaw (openclaw/openclaw/apps/macos)",
+      "target": "OpenClaw",
+      "configuration": "release",
+      "preLaunchTask": "swift: Build Release OpenClaw (openclaw/openclaw/apps/macos)"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:NOIZYANTHROPIC}/openclaw/openclaw/apps/macos",
+      "name": "Debug openclaw-mac (openclaw/openclaw/apps/macos)",
+      "target": "openclaw-mac",
+      "configuration": "debug",
+      "preLaunchTask": "swift: Build Debug openclaw-mac (openclaw/openclaw/apps/macos)"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:NOIZYANTHROPIC}/openclaw/openclaw/apps/macos",
+      "name": "Release openclaw-mac (openclaw/openclaw/apps/macos)",
+      "target": "openclaw-mac",
+      "configuration": "release",
+      "preLaunchTask": "swift: Build Release openclaw-mac (openclaw/openclaw/apps/macos)"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:NOIZYANTHROPIC}/openclaw/openclaw/apps/macos-mlx-tts",
+      "name": "Debug openclaw-mlx-tts (openclaw/openclaw/apps/macos-mlx-tts)",
+      "target": "openclaw-mlx-tts",
+      "configuration": "debug",
+      "preLaunchTask": "swift: Build Debug openclaw-mlx-tts (openclaw/openclaw/apps/macos-mlx-tts)"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:NOIZYANTHROPIC}/openclaw/openclaw/apps/macos-mlx-tts",
+      "name": "Release openclaw-mlx-tts (openclaw/openclaw/apps/macos-mlx-tts)",
+      "target": "openclaw-mlx-tts",
+      "configuration": "release",
+      "preLaunchTask": "swift: Build Release openclaw-mlx-tts (openclaw/openclaw/apps/macos-mlx-tts)"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Full Stack (Heaven + GABRIEL + DreamChamber)",
+      "configurations": [
+        "Heaven Worker (wrangler dev)",
+        "GABRIEL Daemon (port 9777)",
+        "DreamChamber (port 7777)"
+      ]
+    }
+  ]
+}

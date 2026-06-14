@@ -1,4 +1,5 @@
-# Audio/Video - COMPREHENSIVE BLOCK
+# Audio/Video - HARD BLOCK: no audio or video belongs in Git.
+# Audio/video libraries live in OneDrive AUDIO_CORAL or external storage only.
 *.wav
 *.WAV
 *.mp3
@@ -35,8 +36,34 @@
 *.WMA
 *.aac
 *.AAC
+*.caf
+*.CAF
+*.bwf
+*.BWF
+*.wv
+*.WV
+*.snd
+*.SND
+*.sd2
+*.SD2
+*.au
+*.AU
+*.amr
+*.AMR
 *.ac3
 *.dts
+*.3gp
+*.3GP
+*.mxf
+*.MXF
+*.mts
+*.MTS
+*.m2ts
+*.M2TS
+*.vob
+*.VOB
+*.ogv
+*.OGV
 *.nki
 *.nkm
 *.nkc
@@ -73,6 +100,13 @@
 **/Bounces/
 **/Renders/
 **/Exports/
+**/AUDIO_CORAL/
+**/audio_coral/
+**/Audio_Coral/
+**/Video/
+**/Videos/
+**/video/
+**/videos/
 
 # macOS
 .DS_Store

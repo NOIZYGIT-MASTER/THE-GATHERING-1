@@ -1,0 +1,16 @@
+name = "noizy-landing"
+account_id = "5f36aa9795348ea681d0b21910dfc82a"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+workers_dev = true
+
+# www.noizy.ai — Worker owns hostname, auto-manages DNS + SSL
+[[routes]]
+pattern = "www.noizy.ai"
+custom_domain = true
+
+# noizy.ai apex — Route-based binding uses the existing proxied A records
+# (stale records were pointing to CF edge without a Worker bound; Route fixes that)
+[[routes]]
+pattern = "noizy.ai/*"
+zone_name = "noizy.ai"

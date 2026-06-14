@@ -1,0 +1,101 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Health Check (Heaven)",
+			"type": "shell",
+			"command": "curl -s https://heaven.rsp-5f3.workers.dev/health | python3 -m json.tool",
+			"group": "test",
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			}
+		},
+		{
+			"label": "Smoke Tests",
+			"type": "shell",
+			"command": "bash scripts/smoke-test.sh",
+			"group": "test",
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Deploy Readiness",
+			"type": "shell",
+			"command": "bash scripts/deploy-readiness.sh --quick",
+			"group": "test",
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			}
+		},
+		{
+			"label": "Empire Status",
+			"type": "shell",
+			"command": "curl -s https://heaven.rsp-5f3.workers.dev/gabriel | python3 -m json.tool",
+			"group": "test",
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			}
+		},
+		{
+			"label": "Consent Gateway Tests",
+			"type": "shell",
+			"command": "cd workers/consent-gateway && npm test",
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated"
+			},
+			"problemMatcher": [
+				"$tsc"
+			]
+		},
+		{
+			"label": "Deploy Heaven",
+			"type": "shell",
+			"command": "cd repos/noizy-heaven && npx wrangler deploy",
+			"group": "build",
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "D1 Push Schema",
+			"type": "shell",
+			"command": "npx wrangler d1 execute agent-memory --remote --file=db/schemas/schema.sql",
+			"group": "build",
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			}
+		},
+		{
+			"label": "Supersonic MCP Boot Test",
+			"type": "shell",
+			"command": "cd mcp/supersonic && timeout 3 node src/index.js 2>&1 || true",
+			"group": "test",
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			}
+		},
+		{
+			"label": "GOD Fix-All: Start diag server + tunnel",
+			"type": "shell",
+			"command": "bash /Users/m2ultra/NOIZYANTHROPIC/mcp/god-local-diag/fix-all.sh",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
+}
